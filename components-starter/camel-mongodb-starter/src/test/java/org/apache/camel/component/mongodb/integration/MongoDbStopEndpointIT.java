@@ -36,15 +36,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                MongoDbStopEndpointIT.class,
-                MongoDbStopEndpointIT.TestConfiguration.class,
-                AbstractMongoDbITSupport.MongoConfiguration.class
-        },
-        properties = { "mongodb.testDb=test", "mongodb.testCollection=camelTest" }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, MongoDbStopEndpointIT.class,
+        MongoDbStopEndpointIT.TestConfiguration.class,
+        AbstractMongoDbITSupport.MongoConfiguration.class }, properties = { "mongodb.testDb=test",
+                "mongodb.testCollection=camelTest" })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class MongoDbStopEndpointIT extends AbstractMongoDbITSupport {
 

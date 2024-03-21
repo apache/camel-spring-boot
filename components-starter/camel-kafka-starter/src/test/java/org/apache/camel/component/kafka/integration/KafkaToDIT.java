@@ -32,14 +32,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
-                KafkaToDIT.class,
-                KafkaToDIT.TestConfiguration.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
+        KafkaToDIT.class, KafkaToDIT.TestConfiguration.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class KafkaToDIT extends BaseEmbeddedKafkaTestSupport {
 

@@ -28,9 +28,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
-@EnableConfigurationProperties({ApplicationConfiguration.class})
+@EnableConfigurationProperties({ ApplicationConfiguration.class })
 @ConditionalOnProperty(prefix = "camel.k.enabled", name = "enabled", havingValue = "true", matchIfMissing = true)
-@AutoConfigureBefore({CamelAutoConfiguration.class})
+@AutoConfigureBefore({ CamelAutoConfiguration.class })
 public class ApplicationRoutesAutoConfiguration {
 
     @Bean

@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.webhook.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.CamelExecutionException;
 import org.apache.camel.EndpointInject;
@@ -42,32 +40,25 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.AvailablePortFinder;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        WebhookPathTest.class,
-        WebhookPathTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, WebhookPathTest.class,
+        WebhookPathTest.TestConfiguration.class })
 public class WebhookPathTest {
-    
+
     private static int port;
 
-   
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:authors")
     MockEndpoint mock;
-    
+
     @BeforeAll
     public static void initPort() {
         port = AvailablePortFinder.getNextAvailable();
     }
-    
+
     @Bean
     CamelContextConfiguration contextConfiguration() {
         return new CamelContextConfiguration() {
@@ -76,15 +67,15 @@ public class WebhookPathTest {
                 WebhookComponent comp = (WebhookComponent) context.getComponent("webhook");
                 comp.getConfiguration().setWebhookPath("/comp");
             }
+
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here
+                // do nothing here
             }
 
         };
     }
 
-    
     @Bean("wb-delegate-component")
     private TestComponent getTestComponent() {
         return new TestComponent(endpoint -> {
@@ -112,8 +103,6 @@ public class WebhookPathTest {
         assertThrows(CamelExecutionException.class,
                 () -> template.requestBody("netty-http:http://localhost:" + port, "", String.class));
     }
-
-        
 
     // *************************************
     // Config

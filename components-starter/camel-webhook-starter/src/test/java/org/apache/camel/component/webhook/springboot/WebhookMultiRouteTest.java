@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.webhook.springboot;
 
-
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
@@ -39,33 +37,25 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.AvailablePortFinder;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        WebhookMultiRouteTest.class,
-        WebhookMultiRouteTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, WebhookMultiRouteTest.class,
+        WebhookMultiRouteTest.TestConfiguration.class })
 public class WebhookMultiRouteTest {
-    
+
     private static int port;
 
-   
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:authors")
     MockEndpoint mock;
-    
+
     @BeforeAll
     public static void initPort() {
         port = AvailablePortFinder.getNextAvailable();
     }
-    
-    
+
     @Bean("wb-delegate-component")
     private TestComponent getTestComponent() {
         return new TestComponent(endpoint -> {
@@ -78,18 +68,16 @@ public class WebhookMultiRouteTest {
 
     @Test
     public void testMultiRoute() {
-        String result = template.requestBody("netty-http:http://localhost:" + port
-                                             + WebhookConfiguration.computeDefaultPath("wb-delegate://yy"),
-                "", String.class);
+        String result = template.requestBody(
+                "netty-http:http://localhost:" + port + WebhookConfiguration.computeDefaultPath("wb-delegate://yy"), "",
+                String.class);
         assertEquals("uri: webhook", result);
 
-        result = template.requestBody("netty-http:http://localhost:" + port
-                                      + WebhookConfiguration.computeDefaultPath("wb-delegate://xx"),
-                "", String.class);
+        result = template.requestBody(
+                "netty-http:http://localhost:" + port + WebhookConfiguration.computeDefaultPath("wb-delegate://xx"), "",
+                String.class);
         assertEquals("msg: webhook", result);
     }
-
-        
 
     // *************************************
     // Config
@@ -104,15 +92,11 @@ public class WebhookMultiRouteTest {
                 @Override
                 public void configure() throws Exception {
 
-                    restConfiguration()
-                            .host("0.0.0.0")
-                            .port(port);
+                    restConfiguration().host("0.0.0.0").port(port);
 
-                    from("webhook:wb-delegate://yy")
-                            .transform(body().prepend("uri: "));
+                    from("webhook:wb-delegate://yy").transform(body().prepend("uri: "));
 
-                    from("webhook:wb-delegate://xx")
-                            .transform(body().prepend("msg: "));
+                    from("webhook:wb-delegate://xx").transform(body().prepend("msg: "));
 
                 }
             };

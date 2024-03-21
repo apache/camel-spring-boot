@@ -22,9 +22,9 @@ import org.apache.camel.Converter;
 import org.apache.camel.Exchange;
 import org.apache.camel.spi.TypeConverterRegistry;
 
-
 /**
- * Converter added here to overcome issue CAMEL-10060 in integration tests (Needed because some unit tests create new camel contexts from scratch).
+ * Converter added here to overcome issue CAMEL-10060 in integration tests (Needed because some unit tests create new
+ * camel contexts from scratch).
  */
 @Converter
 public final class StaticDummyFallbackConverter {

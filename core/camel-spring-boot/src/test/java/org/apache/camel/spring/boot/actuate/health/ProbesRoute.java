@@ -23,12 +23,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProbesRoute extends RouteBuilder {
 
-	private final int port = AvailablePortFinder.getNextRandomAvailable();
+    private final int port = AvailablePortFinder.getNextRandomAvailable();
 
-	@Override
-	public void configure() throws Exception {
-		from("kafka:topic?brokers=localhost:" + port)
-				.routeId("kafka-route")
-				.to("log:foo");
-	}
+    @Override
+    public void configure() throws Exception {
+        from("kafka:topic?brokers=localhost:" + port).routeId("kafka-route").to("log:foo");
+    }
 }

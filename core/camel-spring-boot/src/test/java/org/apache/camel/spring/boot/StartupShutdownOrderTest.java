@@ -211,7 +211,7 @@ public class StartupShutdownOrderTest {
     @Test
     public void camelContextShouldBeStartedLastAndStoppedFirst() {
         final ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(
-            CamelAutoConfiguration.class, Beans.class);
+                CamelAutoConfiguration.class, Beans.class);
 
         final CamelContext camelContext = context.getBean(CamelContext.class);
         final Map<String, TestState> testStates = context.getBeansOfType(TestState.class);

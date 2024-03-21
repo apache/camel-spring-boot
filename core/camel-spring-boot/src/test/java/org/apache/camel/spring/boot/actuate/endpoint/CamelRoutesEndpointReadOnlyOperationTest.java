@@ -38,10 +38,9 @@ import org.springframework.test.annotation.DirtiesContext;
 @CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootApplication
-@SpringBootTest(
-    classes = {CamelAutoConfiguration.class, CamelRoutesEndpointAutoConfiguration.class, ActuatorTestRoute.class},
-    properties = {"management.endpoints.web.exposure.include=*",
-            "management.endpoint.camelroutes.read-only = true"})
+@SpringBootTest(classes = { CamelAutoConfiguration.class, CamelRoutesEndpointAutoConfiguration.class,
+        ActuatorTestRoute.class }, properties = { "management.endpoints.web.exposure.include=*",
+                "management.endpoint.camelroutes.read-only = true" })
 public class CamelRoutesEndpointReadOnlyOperationTest {
 
     @Autowired
@@ -52,7 +51,8 @@ public class CamelRoutesEndpointReadOnlyOperationTest {
 
     @Test
     public void testWriteOperation() throws Exception {
-        AbstractCamelContext acontext = camelContext.getCamelContextExtension().getContextPlugin(AbstractCamelContext.class);
+        AbstractCamelContext acontext = camelContext.getCamelContextExtension()
+                .getContextPlugin(AbstractCamelContext.class);
         ServiceStatus status = acontext.getRouteStatus("foo-route");
         Assertions.assertTrue(status.isStarted());
         TimeInfo timeInfo = new TimeInfo();

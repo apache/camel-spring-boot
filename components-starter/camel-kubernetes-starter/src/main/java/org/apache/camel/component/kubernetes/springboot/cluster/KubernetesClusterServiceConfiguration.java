@@ -79,8 +79,8 @@ public class KubernetesClusterServiceConfiguration {
     private Long renewDeadlineMillis;
 
     /**
-     * The time between two subsequent attempts to check and acquire the leadership.
-     * It is randomized using the jitter factor.
+     * The time between two subsequent attempts to check and acquire the leadership. It is randomized using the jitter
+     * factor.
      */
     private Long retryPeriodMillis;
 
@@ -88,7 +88,7 @@ public class KubernetesClusterServiceConfiguration {
      * Custom service attributes.
      */
     private Map<String, Object> attributes;
-    
+
     /**
      * Service lookup order/priority.
      */

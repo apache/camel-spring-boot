@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import java.util.concurrent.TimeUnit;
 
 import org.apache.camel.CamelContext;
@@ -29,8 +27,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -38,38 +34,31 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzCronRouteFireNowTest.class,
-        QuartzCronRouteFireNowTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzCronRouteFireNowTest.class,
+        QuartzCronRouteFireNowTest.TestConfiguration.class })
 public class QuartzCronRouteFireNowTest extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint resultEndpoint;
-    
+
     @Test
     public void testQuartzRoute() throws Exception {
-        
+
         resultEndpoint.expectedMinimumMessageCount(1);
         resultEndpoint.message(0).header("triggerName").isEqualTo("daily");
 
         // lets test the receive worked
         resultEndpoint.assertIsSatisfied();
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -84,13 +73,10 @@ public class QuartzCronRouteFireNowTest extends BaseQuartzTest {
                 public void configure() {
                     // daily trigger started a day ago
                     from("quartz://daily?triggerStartDelay=" + TimeUnit.DAYS.toMillis(-1L) + "&cron=0+0+0+*+*+?")
-                            .to("log:quartz")
-                            .to("mock:result");
+                            .to("log:quartz").to("mock:result");
                 }
             };
         }
     }
-    
-   
 
 }

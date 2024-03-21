@@ -22,12 +22,12 @@ import org.apache.camel.component.quartz.QuartzComponent;
 import org.apache.camel.spring.boot.CamelContextConfiguration;
 import org.springframework.context.annotation.Bean;
 
-public class BaseQuartzTest  {
-    
+public class BaseQuartzTest {
+
     static {
         System.setProperty(JmxSystemPropertyKeys.DISABLED, "false");
     }
-    
+
     protected boolean useJmx() {
         return true;
     }
@@ -39,12 +39,12 @@ public class BaseQuartzTest  {
             public void beforeApplicationStart(CamelContext context) {
                 QuartzComponent quartz = context.getComponent("quartz", QuartzComponent.class);
                 quartz.setEnableJmx(useJmx());
-                
+
             }
 
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here
+                // do nothing here
             }
         };
     }

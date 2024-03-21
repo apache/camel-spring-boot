@@ -56,13 +56,8 @@ import static software.amazon.awssdk.services.s3.model.ServerSideEncryption.AES2
 //Based on S3CopyObjectCustomerKeyIT
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                S3CopyObjectCustomerKeyTest.class,
-                S3CopyObjectCustomerKeyTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, S3CopyObjectCustomerKeyTest.class,
+        S3CopyObjectCustomerKeyTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class S3CopyObjectCustomerKeyTest extends BaseS3 {
 
@@ -101,12 +96,8 @@ public class S3CopyObjectCustomerKeyTest extends BaseS3 {
 
             @Override
             public void process(Exchange exchange) {
-                GetObjectRequest getObjectRequest = GetObjectRequest.builder()
-                        .key("test1.txt")
-                        .bucket("mycamel1")
-                        .sseCustomerKey(b64Key)
-                        .sseCustomerAlgorithm(AES256.name())
-                        .sseCustomerKeyMD5(b64KeyMd5)
+                GetObjectRequest getObjectRequest = GetObjectRequest.builder().key("test1.txt").bucket("mycamel1")
+                        .sseCustomerKey(b64Key).sseCustomerAlgorithm(AES256.name()).sseCustomerKeyMD5(b64KeyMd5)
                         .build();
                 exchange.getIn().setHeader(AWS2S3Constants.S3_OPERATION, AWS2S3Operations.getObject);
                 exchange.getIn().setBody(getObjectRequest);
@@ -145,19 +136,19 @@ public class S3CopyObjectCustomerKeyTest extends BaseS3 {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseS3.TestConfiguration {
+    public class TestConfiguration extends BaseS3.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder(S3Client s3Client) {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    String awsEndpoint = "aws2-s3://mycamel?autoCreateBucket=true&useCustomerKey=true&customerKeyId=RAW(" + b64Key
-                            + ")&customerKeyMD5=RAW(" + b64KeyMd5 + ")&customerAlgorithm=" + AES256.name();
+                    String awsEndpoint = "aws2-s3://mycamel?autoCreateBucket=true&useCustomerKey=true&customerKeyId=RAW("
+                            + b64Key + ")&customerKeyMD5=RAW(" + b64KeyMd5 + ")&customerAlgorithm=" + AES256.name();
                     String awsEndpoint1 = "aws2-s3://mycamel1?autoCreateBucket=true&pojoRequest=true";
                     String awsEndpoint2 = "aws2-s3://mycamel1?autoCreateBucket=true";
 
-                    from("direct:putObject").setHeader(AWS2S3Constants.KEY, constant("test.txt")).setBody(constant("Test"))
-                            .to(awsEndpoint);
+                    from("direct:putObject").setHeader(AWS2S3Constants.KEY, constant("test.txt"))
+                            .setBody(constant("Test")).to(awsEndpoint);
 
                     from("direct:copyObject").to(awsEndpoint);
 

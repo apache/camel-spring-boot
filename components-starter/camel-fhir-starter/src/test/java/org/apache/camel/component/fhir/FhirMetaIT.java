@@ -45,24 +45,18 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirMetaIT.class,
-                FhirMetaIT.TestConfiguration.class,
-                DefaultCamelContext.class,
-                FhirServer.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirMetaIT.class, FhirMetaIT.TestConfiguration.class,
+        DefaultCamelContext.class, FhirServer.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class FhirMetaIT extends AbstractFhirTestSupport {
 
     private static final Logger LOG = LoggerFactory.getLogger(FhirMetaIT.class);
-    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirMetaApiMethod.class).getName();
+    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirMetaApiMethod.class)
+            .getName();
 
     @Test
     public void testAdd() throws Exception {
-        //assert no meta
+        // assert no meta
         Meta meta = fhirClient.meta().get(Meta.class).fromResource(this.patient.getIdElement()).execute();
         assertEquals(0, meta.getTag().size());
         Meta inMeta = new Meta();
@@ -82,7 +76,7 @@ public class FhirMetaIT extends AbstractFhirTestSupport {
 
     @Test
     public void testDelete() throws Exception {
-        //assert no meta
+        // assert no meta
         Meta meta = fhirClient.meta().get(Meta.class).fromResource(this.patient.getIdElement()).execute();
         assertEquals(0, meta.getTag().size());
         Meta inMeta = new Meta();
@@ -91,7 +85,7 @@ public class FhirMetaIT extends AbstractFhirTestSupport {
         meta = fhirClient.meta().add().onResource(this.patient.getIdElement()).meta(inMeta).execute();
         assertEquals(1, meta.getTag().size());
 
-        //delete meta
+        // delete meta
         final Map<String, Object> headers = new HashMap<>();
         // parameter type is org.hl7.fhir.instance.model.api.IBaseMetaType
         headers.put("CamelFhir.meta", meta);
@@ -165,24 +159,19 @@ public class FhirMetaIT extends AbstractFhirTestSupport {
                 @Override
                 public void configure() {
                     // test route for add
-                    from("direct://ADD")
-                            .to("fhir://" + PATH_PREFIX + "/add");
+                    from("direct://ADD").to("fhir://" + PATH_PREFIX + "/add");
 
                     // test route for delete
-                    from("direct://DELETE")
-                            .to("fhir://" + PATH_PREFIX + "/delete");
+                    from("direct://DELETE").to("fhir://" + PATH_PREFIX + "/delete");
 
                     // test route for getFromResource
-                    from("direct://GET_FROM_RESOURCE")
-                            .to("fhir://" + PATH_PREFIX + "/getFromResource");
+                    from("direct://GET_FROM_RESOURCE").to("fhir://" + PATH_PREFIX + "/getFromResource");
 
                     // test route for getFromServer
-                    from("direct://GET_FROM_SERVER")
-                            .to("fhir://" + PATH_PREFIX + "/getFromServer?inBody=metaType");
+                    from("direct://GET_FROM_SERVER").to("fhir://" + PATH_PREFIX + "/getFromServer?inBody=metaType");
 
                     // test route for getFromType
-                    from("direct://GET_FROM_TYPE")
-                            .to("fhir://" + PATH_PREFIX + "/getFromType");
+                    from("direct://GET_FROM_TYPE").to("fhir://" + PATH_PREFIX + "/getFromType");
                 }
             };
         }

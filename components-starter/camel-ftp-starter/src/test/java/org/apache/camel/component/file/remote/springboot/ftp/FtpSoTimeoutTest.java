@@ -40,14 +40,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FtpSoTimeoutTest.class,
-                FtpSoTimeoutTest.TestConfiguration.class
-        }
-)
-//Based on FtpSoTimeoutTest
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FtpSoTimeoutTest.class,
+        FtpSoTimeoutTest.TestConfiguration.class })
+// Based on FtpSoTimeoutTest
 public class FtpSoTimeoutTest {
 
     @Autowired
@@ -88,12 +83,13 @@ public class FtpSoTimeoutTest {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseFtp.TestConfiguration {
+    public class TestConfiguration extends BaseFtp.TestConfiguration {
 
         @Bean
         public ServerSocket createServerSocket() throws IOException {
             return new ServerSocket(0);
         }
+
         @Bean
         public RouteBuilder routeBuilder(ServerSocket serverSocket) {
 

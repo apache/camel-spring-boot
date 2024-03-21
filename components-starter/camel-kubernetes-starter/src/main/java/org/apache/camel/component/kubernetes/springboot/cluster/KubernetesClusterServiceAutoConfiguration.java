@@ -45,32 +45,19 @@ public class KubernetesClusterServiceAutoConfiguration {
     public CamelClusterService kubernetesClusterService() throws Exception {
         KubernetesClusterService service = new KubernetesClusterService();
 
-        Optional.ofNullable(configuration.getId())
-                .ifPresent(service::setId);
-        Optional.ofNullable(configuration.getRetryPeriodMillis())
-                .ifPresent(service::setRetryPeriodMillis);
-        Optional.ofNullable(configuration.getOrder())
-                .ifPresent(service::setOrder);
-        Optional.ofNullable(configuration.getAttributes())
-                .ifPresent(service::setAttributes);
-        Optional.ofNullable(configuration.getClusterLabels())
-                .ifPresent(service::setClusterLabels);
-        Optional.ofNullable(configuration.getKubernetesNamespace())
-                .ifPresent(service::setKubernetesNamespace);
-        Optional.ofNullable(configuration.getConfigMapName())
-                .ifPresent(service::setConfigMapName);
-        Optional.ofNullable(configuration.getConnectionTimeoutMillis())
-                .ifPresent(service::setConnectionTimeoutMillis);
-        Optional.ofNullable(configuration.getJitterFactor())
-                .ifPresent(service::setJitterFactor);
-        Optional.ofNullable(configuration.getLeaseDurationMillis())
-                .ifPresent(service::setLeaseDurationMillis);
-        Optional.ofNullable(configuration.getMasterUrl())
-                .ifPresent(service::setMasterUrl);
-        Optional.ofNullable(configuration.getRenewDeadlineMillis())
-                .ifPresent(service::setRenewDeadlineMillis);
-        Optional.ofNullable(configuration.getPodName())
-                .ifPresent(service::setPodName);
+        Optional.ofNullable(configuration.getId()).ifPresent(service::setId);
+        Optional.ofNullable(configuration.getRetryPeriodMillis()).ifPresent(service::setRetryPeriodMillis);
+        Optional.ofNullable(configuration.getOrder()).ifPresent(service::setOrder);
+        Optional.ofNullable(configuration.getAttributes()).ifPresent(service::setAttributes);
+        Optional.ofNullable(configuration.getClusterLabels()).ifPresent(service::setClusterLabels);
+        Optional.ofNullable(configuration.getKubernetesNamespace()).ifPresent(service::setKubernetesNamespace);
+        Optional.ofNullable(configuration.getConfigMapName()).ifPresent(service::setConfigMapName);
+        Optional.ofNullable(configuration.getConnectionTimeoutMillis()).ifPresent(service::setConnectionTimeoutMillis);
+        Optional.ofNullable(configuration.getJitterFactor()).ifPresent(service::setJitterFactor);
+        Optional.ofNullable(configuration.getLeaseDurationMillis()).ifPresent(service::setLeaseDurationMillis);
+        Optional.ofNullable(configuration.getMasterUrl()).ifPresent(service::setMasterUrl);
+        Optional.ofNullable(configuration.getRenewDeadlineMillis()).ifPresent(service::setRenewDeadlineMillis);
+        Optional.ofNullable(configuration.getPodName()).ifPresent(service::setPodName);
 
         return service;
     }

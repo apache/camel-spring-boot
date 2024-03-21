@@ -16,10 +16,8 @@
  */
 package org.apache.camel.component.hl7.springboot.test;
 
-
 import static org.apache.camel.component.hl7.HL7.messageConforms;
 import static org.apache.camel.component.hl7.HL7.messageConformsTo;
-
 
 import org.apache.camel.CamelExecutionException;
 import org.apache.camel.EndpointInject;
@@ -50,40 +48,33 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        MessageValidatorTest.class,
-        MessageValidatorTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, MessageValidatorTest.class,
+        MessageValidatorTest.TestConfiguration.class })
 public class MessageValidatorTest extends HL7TestSupport {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:test1")
     MockEndpoint mock1;
-    
+
     @EndpointInject("mock:test2")
     MockEndpoint mock2;
-    
+
     @EndpointInject("mock:test3")
     MockEndpoint mock3;
-    
+
     @EndpointInject("mock:test4")
     MockEndpoint mock4;
-    
+
     @EndpointInject("mock:test5")
     MockEndpoint mock5;
-    
+
     @EndpointInject("mock:test6")
     MockEndpoint mock6;
-    
+
     static ValidationContext defaultValidationContext;
     static ValidationContext customValidationContext;
     static HapiContext defaultContext;
@@ -101,9 +92,7 @@ public class MessageValidatorTest extends HL7TestSupport {
 
             @Override
             protected void configure() {
-                forVersion(Version.V24)
-                        .message("ADT", "A01")
-                        .terser("PID-8", not(empty()));
+                forVersion(Version.V24).message("ADT", "A01").terser("PID-8", not(empty()));
             }
         };
         customValidationContext = ValidationContextFactory.fromBuilder(builder);
@@ -124,8 +113,7 @@ public class MessageValidatorTest extends HL7TestSupport {
     public void testCustomHapiContext() throws Exception {
         mock5.expectedMessageCount(0);
         Message msg = createADT01Message();
-        assertThrows(CamelExecutionException.class,
-                () -> template.sendBody("direct:test5", msg));
+        assertThrows(CamelExecutionException.class, () -> template.sendBody("direct:test5", msg));
         mock5.assertIsSatisfied();
     }
 
@@ -141,8 +129,7 @@ public class MessageValidatorTest extends HL7TestSupport {
     public void testCustomValidationContext() throws Exception {
         mock2.expectedMessageCount(0);
         Message msg = createADT01Message();
-        assertThrows(CamelExecutionException.class,
-                () -> template.sendBody("direct:test2", msg));
+        assertThrows(CamelExecutionException.class, () -> template.sendBody("direct:test2", msg));
         mock2.assertIsSatisfied();
     }
 
@@ -170,8 +157,7 @@ public class MessageValidatorTest extends HL7TestSupport {
         mock6.expectedMessageCount(0);
         Message msg = createADT01Message();
         msg.setParser(customContext.getPipeParser());
-        assertThrows(CamelExecutionException.class,
-                () -> template.sendBody("direct:test6", msg));
+        assertThrows(CamelExecutionException.class, () -> template.sendBody("direct:test6", msg));
         mock6.assertIsSatisfied();
     }
 
@@ -197,7 +183,7 @@ public class MessageValidatorTest extends HL7TestSupport {
             };
         }
     }
-    
+
     private static Message createADT01Message() throws Exception {
         ADT_A01 adt = new ADT_A01();
         adt.initQuickstart("ADT", "A01", "P");

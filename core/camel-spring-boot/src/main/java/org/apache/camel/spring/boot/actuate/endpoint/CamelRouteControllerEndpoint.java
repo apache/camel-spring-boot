@@ -43,9 +43,7 @@ public class CamelRouteControllerEndpoint {
         RouteController controller = camelContext.getRouteController();
 
         if (controller != null) {
-            return controller.getControlledRoutes().stream()
-                .map(Route::getId)
-                .collect(Collectors.toList());
+            return controller.getControlledRoutes().stream().map(Route::getId).collect(Collectors.toList());
         }
 
         return Collections.emptyList();

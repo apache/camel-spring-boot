@@ -48,16 +48,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        SwiftMxDataFormatTest.class,
-        SwiftMxDataFormatTest.Config.class
-    },
-    properties = {
-        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SwiftMxDataFormatTest.xml"
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SwiftMxDataFormatTest.class,
+        SwiftMxDataFormatTest.Config.class }, properties = {
+                "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SwiftMxDataFormatTest.xml" })
 class SwiftMxDataFormatTest {
 
     @EndpointInject("mock:unmarshal")
@@ -90,7 +83,8 @@ class SwiftMxDataFormatTest {
     void testUnmarshal() throws Exception {
         mockEndpointUnmarshal.expectedMessageCount(1);
 
-        Object result = templateUnmarshal.requestBody(Files.readAllBytes(Paths.get("src/test/resources/mx/message1.xml")));
+        Object result = templateUnmarshal
+                .requestBody(Files.readAllBytes(Paths.get("src/test/resources/mx/message1.xml")));
         assertNotNull(result);
         assertInstanceOf(MxCamt04800103.class, result);
         mockEndpointUnmarshal.assertIsSatisfied();
@@ -100,7 +94,8 @@ class SwiftMxDataFormatTest {
     void testUnmarshalFull() throws Exception {
         mockEndpointUnmarshalFull.expectedMessageCount(1);
 
-        Object result = templateUnmarshalFull.requestBody(Files.readAllBytes(Paths.get("src/test/resources/mx/message3.xml")));
+        Object result = templateUnmarshalFull
+                .requestBody(Files.readAllBytes(Paths.get("src/test/resources/mx/message3.xml")));
         assertNotNull(result);
         assertInstanceOf(MxXsys01100102.class, result);
         mockEndpointUnmarshalFull.assertIsSatisfied();
@@ -110,7 +105,8 @@ class SwiftMxDataFormatTest {
     void testMarshal() throws Exception {
         mockEndpointMarshal.expectedMessageCount(1);
 
-        MxPacs00800107 message = MxPacs00800107.parse(Files.readString(Paths.get("src/test/resources/mx/message2.xml")));
+        MxPacs00800107 message = MxPacs00800107
+                .parse(Files.readString(Paths.get("src/test/resources/mx/message2.xml")));
         Object result = templateMarshal.requestBody(message);
         assertNotNull(result);
         assertInstanceOf(InputStream.class, result);
@@ -123,14 +119,15 @@ class SwiftMxDataFormatTest {
     void testMarshalJson() throws Exception {
         mockEndpointMarshalJson.expectedMessageCount(1);
 
-        MxPacs00800107 message = MxPacs00800107.parse(Files.readString(Paths.get("src/test/resources/mx/message2.xml")));
+        MxPacs00800107 message = MxPacs00800107
+                .parse(Files.readString(Paths.get("src/test/resources/mx/message2.xml")));
         Object result = templateMarshalJson.requestBody(message);
         assertNotNull(result);
         assertInstanceOf(InputStream.class, result);
 
         ObjectMapper mapper = new ObjectMapper();
         assertEquals(mapper.readTree(Files.readString(Paths.get("src/test/resources/mx/message2.json"))),
-            mapper.readTree((InputStream) result));
+                mapper.readTree((InputStream) result));
         mockEndpointMarshalJson.assertIsSatisfied();
     }
 
@@ -138,14 +135,16 @@ class SwiftMxDataFormatTest {
     void testMarshalFull() throws Exception {
         mockEndpointMarshalFull.expectedMessageCount(1);
 
-        MxPacs00800107 message = MxPacs00800107.parse(Files.readString(Paths.get("src/test/resources/mx/message2.xml")));
+        MxPacs00800107 message = MxPacs00800107
+                .parse(Files.readString(Paths.get("src/test/resources/mx/message2.xml")));
         Object result = templateMarshalFull.requestBody(message);
         assertNotNull(result);
         assertInstanceOf(InputStream.class, result);
 
         BufferedReader reader = new BufferedReader(new InputStreamReader((InputStream) result, StandardCharsets.UTF_8));
         String line = reader.readLine();
-        assertFalse(line.contains("<?xml"), String.format("Should not start with the xml header, the first line was %s", line));
+        assertFalse(line.contains("<?xml"),
+                String.format("Should not start with the xml header, the first line was %s", line));
         mockEndpointMarshalFull.assertIsSatisfied();
     }
 
@@ -153,12 +152,12 @@ class SwiftMxDataFormatTest {
     public static class Config {
 
         @Bean
-        public ReadConfiguration readConfig(){
+        public ReadConfiguration readConfig() {
             return new ReadConfiguration();
         }
 
         @Bean
-        public WriteConfiguration writeConfig(){
+        public WriteConfiguration writeConfig() {
             WriteConfiguration configuration = new WriteConfiguration();
             configuration.setIncludeXMLDeclaration(false);
             return configuration;

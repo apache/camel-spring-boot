@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelJcrTest extends AbstractSpringBootTestSupport {
 
@@ -33,9 +32,8 @@ public class CamelJcrTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelJcrTest.class))
-                //.dependency(DependencyResolver.withVersion("org.apache.lucene:lucene-core"))
+        return new ITestConfigBuilder().module(inferModuleName(CamelJcrTest.class))
+                // .dependency(DependencyResolver.withVersion("org.apache.lucene:lucene-core"))
                 // fails but the tests actually pass
                 .build();
     }
@@ -45,6 +43,5 @@ public class CamelJcrTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

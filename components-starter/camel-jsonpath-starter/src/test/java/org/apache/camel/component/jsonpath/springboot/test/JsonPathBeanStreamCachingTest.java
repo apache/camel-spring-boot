@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.ByteArrayInputStream;
 
 import com.jayway.jsonpath.Option;
@@ -29,7 +28,6 @@ import org.apache.camel.jsonpath.JsonPath;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -37,16 +35,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathBeanStreamCachingTest.class,
-        JsonPathBeanStreamCachingTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathBeanStreamCachingTest.class,
+        JsonPathBeanStreamCachingTest.TestConfiguration.class })
 public class JsonPathBeanStreamCachingTest {
 
     @Autowired
@@ -64,7 +56,6 @@ public class JsonPathBeanStreamCachingTest {
 
         mock.assertIsSatisfied();
     }
-    
 
     // *************************************
     // Config
@@ -78,17 +69,15 @@ public class JsonPathBeanStreamCachingTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:start").streamCaching()
-                            .bean(FullNameBean.class).to("mock:result");
+                    from("direct:start").streamCaching().bean(FullNameBean.class).to("mock:result");
                 }
             };
         }
     }
-    
+
     protected static class FullNameBean {
         // middle name is optional
-        public static String getName(
-                @JsonPath("person.firstname") String first,
+        public static String getName(@JsonPath("person.firstname") String first,
                 @JsonPath(value = "person.middlename", options = Option.SUPPRESS_EXCEPTIONS) String middle,
                 @JsonPath("person.lastname") String last) {
             if (middle != null) {

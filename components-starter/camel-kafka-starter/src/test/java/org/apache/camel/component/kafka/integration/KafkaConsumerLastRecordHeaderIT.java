@@ -41,14 +41,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
-                KafkaConsumerLastRecordHeaderIT.class,
-                KafkaConsumerLastRecordHeaderIT.TestConfiguration.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
+        KafkaConsumerLastRecordHeaderIT.class, KafkaConsumerLastRecordHeaderIT.TestConfiguration.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class KafkaConsumerLastRecordHeaderIT extends BaseEmbeddedKafkaTestSupport {
     private static final String TOPIC = "last-record";
@@ -90,7 +84,8 @@ public class KafkaConsumerLastRecordHeaderIT extends BaseEmbeddedKafkaTestSuppor
 
         List<Exchange> exchanges = result.getExchanges();
         for (int i = 0; i < exchanges.size(); i++) {
-            Boolean header = exchanges.get(i).getIn().getHeader(KafkaConstants.LAST_RECORD_BEFORE_COMMIT, Boolean.class);
+            Boolean header = exchanges.get(i).getIn().getHeader(KafkaConstants.LAST_RECORD_BEFORE_COMMIT,
+                    Boolean.class);
             assertNotNull(header, "Header not set for #" + i);
             assertEquals(header, i == exchanges.size() - 1, "Header invalid for #" + i);
             // as long as the partitions count is 1 on topic:
@@ -107,7 +102,8 @@ public class KafkaConsumerLastRecordHeaderIT extends BaseEmbeddedKafkaTestSuppor
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("kafka:" + TOPIC + "?groupId=A&autoOffsetReset=earliest&autoCommitEnable=false").to("mock:result");
+                    from("kafka:" + TOPIC + "?groupId=A&autoOffsetReset=earliest&autoCommitEnable=false")
+                            .to("mock:result");
                 }
             };
         }

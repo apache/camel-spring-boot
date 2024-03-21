@@ -45,18 +45,11 @@ import static org.mockito.Mockito.withSettings;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(
-    classes = {
-        CamelAutoConfigurationTest.TestConfig.class,
-        CamelAutoConfigurationTest.class,
-        RouteConfigWithCamelContextInjected.class },
-    properties = {
-        "camel.springboot.consumerTemplateCacheSize=100",
-        "camel.springboot.jmxEnabled=true",
-        "camel.springboot.name=customName",
-        "camel.springboot.typeConversion=true",
-        "camel.springboot.threadNamePattern=customThreadName #counter#"}
-)
+@SpringBootTest(classes = { CamelAutoConfigurationTest.TestConfig.class, CamelAutoConfigurationTest.class,
+        RouteConfigWithCamelContextInjected.class }, properties = { "camel.springboot.consumerTemplateCacheSize=100",
+                "camel.springboot.jmxEnabled=true", "camel.springboot.name=customName",
+                "camel.springboot.typeConversion=true",
+                "camel.springboot.threadNamePattern=customThreadName #counter#" })
 public class CamelAutoConfigurationTest extends org.junit.jupiter.api.Assertions {
 
     // Collaborators fixtures

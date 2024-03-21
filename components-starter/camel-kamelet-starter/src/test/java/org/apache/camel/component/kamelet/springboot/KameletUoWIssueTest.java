@@ -35,12 +35,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletUoWIssueTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletUoWIssueTest.class, })
 
 public class KameletUoWIssueTest {
 
@@ -73,24 +68,20 @@ public class KameletUoWIssueTest {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                routeTemplate("broker")
-                        .templateParameter("queue")
-                        .from("kamelet:source")
-                        .process(new Processor() {
+                routeTemplate("broker").templateParameter("queue").from("kamelet:source").process(new Processor() {
+                    @Override
+                    public void process(Exchange exchange) {
+                        exchange.getExchangeExtension().addOnCompletion(new SynchronizationAdapter() {
                             @Override
-                            public void process(Exchange exchange) {
-                                exchange.getExchangeExtension().addOnCompletion(new SynchronizationAdapter() {
-                                    @Override
-                                    public void onDone(Exchange exchange) {
-                                        super.onDone(exchange);
-                                        template.sendBody("mock:foo", "Done");
-                                    }
-                                });
+                            public void onDone(Exchange exchange) {
+                                super.onDone(exchange);
+                                template.sendBody("mock:foo", "Done");
                             }
-                        }).to("mock:{{queue}}");
+                        });
+                    }
+                }).to("mock:{{queue}}");
 
-                from("direct:foo")
-                        .to("kamelet:broker?queue=foo");
+                from("direct:foo").to("kamelet:broker?queue=foo");
             }
         };
     }

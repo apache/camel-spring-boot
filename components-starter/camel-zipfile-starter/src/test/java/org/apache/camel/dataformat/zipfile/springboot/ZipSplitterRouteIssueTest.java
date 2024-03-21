@@ -16,8 +16,6 @@
  */
 package org.apache.camel.dataformat.zipfile.springboot;
 
-
-
 import java.io.File;
 
 import org.apache.camel.CamelContext;
@@ -39,38 +37,28 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.junit5.TestSupport;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        ZipSplitterRouteIssueTest.class,
-        ZipSplitterRouteIssueTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ZipSplitterRouteIssueTest.class,
+        ZipSplitterRouteIssueTest.TestConfiguration.class })
 public class ZipSplitterRouteIssueTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
-   
-    
+
     @EndpointInject("mock:entry")
     MockEndpoint mockEntry;
-    
+
     @EndpointInject("mock:errors")
     MockEndpoint mockErrors;
-    
-    
+
     @BeforeEach
     public void setUp() throws Exception {
         TestSupport.deleteDirectory("target/zip");
-              
+
     }
 
     @Test
@@ -89,14 +77,13 @@ public class ZipSplitterRouteIssueTest {
         mockEntry.expectedMessageCount(0);
         mockErrors.expectedMessageCount(1);
 
-        //Send a file which is not exit
+        // Send a file which is not exit
         template.sendBody("direct:decompressFiles", new File("src/test/resources/data"));
 
         mockEntry.assertIsSatisfied();
         mockErrors.assertIsSatisfied();
     }
 
-    
     // *************************************
     // Config
     // *************************************
@@ -111,15 +98,11 @@ public class ZipSplitterRouteIssueTest {
                 public void configure() {
                     errorHandler(deadLetterChannel("mock:errors"));
 
-                    from("direct:decompressFiles")
-                            .split(new ZipSplitter()).streaming().shareUnitOfWork()
-                            .to("log:entry")
-                            .to("mock:entry");
+                    from("direct:decompressFiles").split(new ZipSplitter()).streaming().shareUnitOfWork()
+                            .to("log:entry").to("mock:entry");
                 }
             };
         }
     }
-    
-    
 
 }

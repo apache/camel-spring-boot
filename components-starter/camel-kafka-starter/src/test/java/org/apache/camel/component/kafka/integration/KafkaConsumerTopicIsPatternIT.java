@@ -39,21 +39,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
-                KafkaConsumerTopicIsPatternIT.class,
-                KafkaConsumerTopicIsPatternIT.TestConfiguration.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
+        KafkaConsumerTopicIsPatternIT.class, KafkaConsumerTopicIsPatternIT.TestConfiguration.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class KafkaConsumerTopicIsPatternIT extends BaseEmbeddedKafkaTestSupport {
 
     public static final String TOPIC = "vess123d";
     public static final String TOPIC_PATTERN = "v.*d";
 
-    private final String from = "kafka:" + TOPIC_PATTERN + "?topicIsPattern=true&groupId=group1&autoOffsetReset=earliest"
+    private final String from = "kafka:" + TOPIC_PATTERN
+            + "?topicIsPattern=true&groupId=group1&autoOffsetReset=earliest"
             + "&autoCommitIntervalMs=1000&sessionTimeoutMs=30000&autoCommitEnable=true&interceptorClasses=org.apache.camel.component.kafka.integration.MockConsumerInterceptor";
 
     @EndpointInject("mock:result")
@@ -85,7 +80,8 @@ public class KafkaConsumerTopicIsPatternIT extends BaseEmbeddedKafkaTestSupport 
         to.allMessages().header(KafkaConstants.TOPIC).isEqualTo(TOPIC);
         // The LAST_RECORD_BEFORE_COMMIT header should not be configured on any
         // exchange because autoCommitEnable=true
-        to.expectedHeaderValuesReceivedInAnyOrder(KafkaConstants.LAST_RECORD_BEFORE_COMMIT, null, null, null, null, null);
+        to.expectedHeaderValuesReceivedInAnyOrder(KafkaConstants.LAST_RECORD_BEFORE_COMMIT, null, null, null, null,
+                null);
 
         for (int k = 0; k < 5; k++) {
             String msg = "message-" + k;
@@ -95,8 +91,8 @@ public class KafkaConsumerTopicIsPatternIT extends BaseEmbeddedKafkaTestSupport 
 
         to.assertIsSatisfied(3000);
 
-        assertEquals(5, StreamSupport.stream(MockConsumerInterceptor.recordsCaptured.get(0).records(TOPIC).spliterator(), false)
-                .count());
+        assertEquals(5, StreamSupport
+                .stream(MockConsumerInterceptor.recordsCaptured.get(0).records(TOPIC).spliterator(), false).count());
     }
 
     @Configuration

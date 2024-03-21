@@ -16,7 +16,6 @@
  */
 package org.apache.camel.dataformat.avro.springboot.test;
 
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.CamelException;
 import org.apache.camel.EndpointInject;
@@ -37,29 +36,21 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        AvroMarshalAndUnmarshallXmlTest.class
-    },
-        properties = {
-    "camel.springboot.routes-include-pattern=file:src/test/resources/routes/springDataFormat.xml"}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, AvroMarshalAndUnmarshallXmlTest.class }, properties = {
+        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/springDataFormat.xml" })
 public class AvroMarshalAndUnmarshallXmlTest {
 
     @Autowired
     private CamelContext context;
-    
+
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:reverse")
     MockEndpoint mock;
 
-    
     @Test
     public void testMarshalAndUnmarshalWithDataFormat() throws Exception {
         marshalAndUnmarshal("direct:in", "direct:back");
@@ -81,8 +72,8 @@ public class AvroMarshalAndUnmarshallXmlTest {
             context.addRoutes(new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:unmarshalC").unmarshal().avro(AvroLibrary.ApacheAvro, new CamelException("wrong schema"))
-                            .to("mock:reverse");
+                    from("direct:unmarshalC").unmarshal()
+                            .avro(AvroLibrary.ApacheAvro, new CamelException("wrong schema")).to("mock:reverse");
                 }
             });
             fail("Expect the exception here");
@@ -108,7 +99,7 @@ public class AvroMarshalAndUnmarshallXmlTest {
         assertEquals(input, output);
     }
 
-    @Bean(name = "avro1") 
+    @Bean(name = "avro1")
     AvroDataFormat getAvroDataFormat() {
         AvroDataFormat avroDataFormat = new AvroDataFormat();
         avroDataFormat.setInstanceClassName("org.apache.camel.dataformat.avro.springboot.test.Value");

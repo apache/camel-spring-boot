@@ -51,29 +51,21 @@ import java.util.concurrent.TimeUnit;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SqsOperationsTest.class,
-                SqsOperationsTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SqsOperationsTest.class,
+        SqsOperationsTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
-class SqsOperationsTest extends  BaseSqs {
+class SqsOperationsTest extends BaseSqs {
 
-    private static final String queueName = "Aws2SqsTest_queue_" + RandomStringUtils.randomAlphanumeric(49).toLowerCase(Locale.ROOT);
+    private static final String queueName = "Aws2SqsTest_queue_"
+            + RandomStringUtils.randomAlphanumeric(49).toLowerCase(Locale.ROOT);
 
     private static String queueUrl;
 
     @BeforeAll
-    protected static void setupResources()  {
+    protected static void setupResources() {
         final SqsClient sqsClient = AWSSDKClientUtils.newSQSClient();
         {
-            queueUrl = sqsClient.createQueue(
-                            CreateQueueRequest.builder()
-                                    .queueName(queueName)
-                                    .build())
-                    .queueUrl();
+            queueUrl = sqsClient.createQueue(CreateQueueRequest.builder().queueName(queueName).build()).queueUrl();
         }
     }
 
@@ -89,7 +81,6 @@ class SqsOperationsTest extends  BaseSqs {
         purgeQueue(queueName);
         Assertions.assertNull(receiveMessageFromQueue(queueName, false));
     }
-
 
     @Test
     void simpleInOut() {
@@ -119,37 +110,29 @@ class SqsOperationsTest extends  BaseSqs {
 
     @Test
     void sqsSendBatchMessage() {
-        final List<String> messages = new ArrayList<>(Arrays.asList(
-                "Hello from camel-quarkus",
-                "This is a batch message test",
-                "Let's add few more messages",
-                "Next message will be last",
-                "Goodbye from camel-quarkus"));
+        final List<String> messages = new ArrayList<>(
+                Arrays.asList("Hello from camel-quarkus", "This is a batch message test", "Let's add few more messages",
+                        "Next message will be last", "Goodbye from camel-quarkus"));
         Assertions.assertEquals(messages.size(), sendMessageBatchAndRetrieveSuccessCount(queueName, messages));
     }
 
     // helper methods
 
     private void purgeQueue(String queueName) {
-        producerTemplate.sendBodyAndHeader("aws2-sqs://" + queueName + "?operation=purgeQueue",
-                null,
-                Sqs2Constants.SQS_QUEUE_PREFIX,
-                queueName);
+        producerTemplate.sendBodyAndHeader("aws2-sqs://" + queueName + "?operation=purgeQueue", null,
+                Sqs2Constants.SQS_QUEUE_PREFIX, queueName);
     }
 
     private int sendMessageBatchAndRetrieveSuccessCount(String queueName, List<String> messages) {
-        return producerTemplate.requestBody(
-                "aws2-sqs://" + queueName + "?operation=sendBatchMessage",
-                messages,
+        return producerTemplate.requestBody("aws2-sqs://" + queueName + "?operation=sendBatchMessage", messages,
                 SendMessageBatchResponse.class).successful().size();
     }
 
     private List<String> clientListQueues() {
-        return producerTemplate.requestBody("aws2-sqs://" + queueName + "?operation=listQueues", null, ListQueuesResponse.class)
+        return producerTemplate
+                .requestBody("aws2-sqs://" + queueName + "?operation=listQueues", null, ListQueuesResponse.class)
                 .queueUrls();
     }
-
-
 
     private String receiveReceipt(String queueName) {
         Exchange exchange = consumerTemplate.receive("aws2-sqs://" + queueName, 5000);
@@ -157,31 +140,27 @@ class SqsOperationsTest extends  BaseSqs {
     }
 
     private void awaitMessageWithExpectedContentFromQueue(String expectedContent, String queueName) {
-        Awaitility.await().pollInterval(1, TimeUnit.SECONDS).atMost(10, TimeUnit.SECONDS).until(
-                () -> expectedContent.equals(receiveMessageFromQueue(queueName, true)));
+        Awaitility.await().pollInterval(1, TimeUnit.SECONDS).atMost(10, TimeUnit.SECONDS)
+                .until(() -> expectedContent.equals(receiveMessageFromQueue(queueName, true)));
     }
 
     private void deleteMessageFromQueue(String queueName, String receipt) {
-        producerTemplate.sendBodyAndHeader("aws2-sqs://" + queueName + "?operation=deleteMessage",
-                null,
-                Sqs2Constants.RECEIPT_HANDLE,
-                URLDecoder.decode(receipt, StandardCharsets.UTF_8));
+        producerTemplate.sendBodyAndHeader("aws2-sqs://" + queueName + "?operation=deleteMessage", null,
+                Sqs2Constants.RECEIPT_HANDLE, URLDecoder.decode(receipt, StandardCharsets.UTF_8));
     }
-
 
     // *************************************
     // Config
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseSqs.TestConfiguration {
+    public class TestConfiguration extends BaseSqs.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
-            final String sqsEndpointUri = String
-                    .format("aws2-sqs://%s?messageRetentionPeriod=%s&maximumMessageSize=%s&visibilityTimeout=%s&policy=%s&autoCreateQueue=true",
-                            sharedNameGenerator.getName(),
-                            "1209600", "65536", "60",
-                            "file:src/test/resources/org/apache/camel/component/aws2/sqs/policy.txt");
+            final String sqsEndpointUri = String.format(
+                    "aws2-sqs://%s?messageRetentionPeriod=%s&maximumMessageSize=%s&visibilityTimeout=%s&policy=%s&autoCreateQueue=true",
+                    sharedNameGenerator.getName(), "1209600", "65536", "60",
+                    "file:src/test/resources/org/apache/camel/component/aws2/sqs/policy.txt");
             return new RouteBuilder() {
                 @Override
                 public void configure() {

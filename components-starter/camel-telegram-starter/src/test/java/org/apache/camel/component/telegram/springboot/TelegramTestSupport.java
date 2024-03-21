@@ -42,11 +42,10 @@ public class TelegramTestSupport {
     protected static volatile int port;
 
     protected String chatId;
-    
-    
+
     @Autowired
     protected ProducerTemplate template;
-    
+
     @Autowired
     protected CamelContext context;
 
@@ -58,27 +57,22 @@ public class TelegramTestSupport {
     /**
      * Construct an inline keyboard sample to be used with an OutgoingTextMessage.
      *
-     * @param  message OutgoingTextMessage previously created
-     * @return         OutgoingTextMessage set with an inline keyboard
+     * @param message
+     *            OutgoingTextMessage previously created
+     *
+     * @return OutgoingTextMessage set with an inline keyboard
      */
     public OutgoingTextMessage withInlineKeyboardContainingTwoRows(OutgoingTextMessage message) {
 
-        InlineKeyboardButton buttonOptionOneI = InlineKeyboardButton.builder()
-                .text("Option One - I").build();
+        InlineKeyboardButton buttonOptionOneI = InlineKeyboardButton.builder().text("Option One - I").build();
 
-        InlineKeyboardButton buttonOptionOneII = InlineKeyboardButton.builder()
-                .text("Option One - II").build();
+        InlineKeyboardButton buttonOptionOneII = InlineKeyboardButton.builder().text("Option One - II").build();
 
-        InlineKeyboardButton buttonOptionTwoI = InlineKeyboardButton.builder()
-                .text("Option Two - I").build();
+        InlineKeyboardButton buttonOptionTwoI = InlineKeyboardButton.builder().text("Option Two - I").build();
 
-        ReplyKeyboardMarkup replyMarkup = ReplyKeyboardMarkup.builder()
-                .keyboard()
-                .addRow(Arrays.asList(buttonOptionOneI, buttonOptionOneII))
-                .addRow(Arrays.asList(buttonOptionTwoI))
-                .close()
-                .oneTimeKeyboard(true)
-                .build();
+        ReplyKeyboardMarkup replyMarkup = ReplyKeyboardMarkup.builder().keyboard()
+                .addRow(Arrays.asList(buttonOptionOneI, buttonOptionOneII)).addRow(Arrays.asList(buttonOptionTwoI))
+                .close().oneTimeKeyboard(true).build();
         message.setReplyMarkup(replyMarkup);
 
         return message;
@@ -87,10 +81,14 @@ public class TelegramTestSupport {
     /**
      * Retrieves a response from a JSON file on classpath.
      *
-     * @param  fileName the filename in the classpath
-     * @param  clazz    the target class
-     * @param  <T>      the type of the returned object
-     * @return          the object representation of the JSON file
+     * @param fileName
+     *            the filename in the classpath
+     * @param clazz
+     *            the target class
+     * @param <T>
+     *            the type of the returned object
+     *
+     * @return the object representation of the JSON file
      */
     public static <T> T getJSONResource(String fileName, Class<T> clazz) {
         ObjectMapper mapper = new ObjectMapper();
@@ -102,7 +100,6 @@ public class TelegramTestSupport {
         }
     }
 
-    
     @Bean
     CamelContextConfiguration contextConfiguration() {
         return new CamelContextConfiguration() {
@@ -110,9 +107,10 @@ public class TelegramTestSupport {
             public void beforeApplicationStart(CamelContext context) {
                 configureCamelContext(context);
             }
+
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here
+                // do nothing here
             }
 
         };
@@ -132,8 +130,6 @@ public class TelegramTestSupport {
     protected TelegramApiConfig getTelegramApiConfig() {
         return TelegramApiConfig.mock(port);
     }
-
-    
 
     protected TelegramMockRoutes createMockRoutes() {
         throw new UnsupportedOperationException();

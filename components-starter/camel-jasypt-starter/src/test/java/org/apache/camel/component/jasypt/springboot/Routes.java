@@ -33,26 +33,22 @@ public class Routes {
                 from(START_URI_TEST_ENCRYPTED_PROPS_IN_CC)
                         .routeId("encrypted-properties-route-test-inside-camel-context")
                         .log("test properties decryption inside camel context ...")
-                        .setBody(simple("{{encrypted.password}}"))
-                        .to(MOCK_URI);
+                        .setBody(simple("{{encrypted.password}}")).to(MOCK_URI);
 
                 from(START_URI_TEST_ENCRYPTED_PROPS_OUT_CC)
                         .routeId("encrypted-properties-route-test-outside-camel-context")
                         .log("test properties decryption  outside camel context ...")
-                        .to("bean:encryptedPropertiesBean?method=testEncryptedProperty")
-                        .to(MOCK_URI);
+                        .to("bean:encryptedPropertiesBean?method=testEncryptedProperty").to(MOCK_URI);
 
                 from(START_URI_TEST_UNENCRYPTED_PROPS_IN_CC)
                         .routeId("unencrypted-properties-route-test-inside-camel-context")
                         .log("test unencrypted properties inside camel context ...")
-                        .setBody(simple("{{unencrypted.property}}"))
-                        .to(MOCK_URI);
+                        .setBody(simple("{{unencrypted.property}}")).to(MOCK_URI);
 
                 from(START_URI_TEST_UNENCRYPTED_PROPS_OUT_CC)
                         .routeId("unecrypted-properties-route-test-inside-camel-context")
                         .log("test unencrypted properties outside camel context ...")
-                        .to("bean:encryptedPropertiesBean?method=testUnencryptedProperty")
-                        .to(MOCK_URI);
+                        .to("bean:encryptedPropertiesBean?method=testUnencryptedProperty").to(MOCK_URI);
             }
         };
     }

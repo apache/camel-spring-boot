@@ -34,12 +34,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileValidatorRouteTest.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileValidatorRouteTest.class })
 public class FileValidatorRouteTest extends ContextTestSupport {
 
     @Test
@@ -48,15 +43,14 @@ public class FileValidatorRouteTest extends ContextTestSupport {
         finallyEndpoint.expectedMessageCount(1);
 
         template.sendBodyAndHeader(fileUri(),
-                "<mail xmlns='http://foo.com/bar'><subject>Hey</subject><body>Hello world!</body></mail>", Exchange.FILE_NAME,
-                "valid.xml");
+                "<mail xmlns='http://foo.com/bar'><subject>Hey</subject><body>Hello world!</body></mail>",
+                Exchange.FILE_NAME, "valid.xml");
 
         MockEndpoint.assertIsSatisfied(validEndpoint, invalidEndpoint, finallyEndpoint);
 
         // should be able to delete the file
         oneExchangeDone.matchesWaitTime();
-        assertTrue(FileUtil.deleteFile(testFile("valid.xml").toFile()),
-                "Should be able to delete the file");
+        assertTrue(FileUtil.deleteFile(testFile("valid.xml").toFile()), "Should be able to delete the file");
     }
 
     @Test
@@ -64,15 +58,14 @@ public class FileValidatorRouteTest extends ContextTestSupport {
         invalidEndpoint.expectedMessageCount(1);
         finallyEndpoint.expectedMessageCount(1);
 
-        template.sendBodyAndHeader(fileUri(),
-                "<mail xmlns='http://foo.com/bar'><body>Hello world!</body></mail>", Exchange.FILE_NAME, "invalid.xml");
+        template.sendBodyAndHeader(fileUri(), "<mail xmlns='http://foo.com/bar'><body>Hello world!</body></mail>",
+                Exchange.FILE_NAME, "invalid.xml");
 
         MockEndpoint.assertIsSatisfied(validEndpoint, invalidEndpoint, finallyEndpoint);
 
         // should be able to delete the file
         oneExchangeDone.matchesWaitTime();
-        assertTrue(FileUtil.deleteFile(testFile("invalid.xml").toFile()),
-                "Should be able to delete the file");
+        assertTrue(FileUtil.deleteFile(testFile("invalid.xml").toFile()), "Should be able to delete the file");
     }
 
     @BeforeEach
@@ -94,9 +87,9 @@ public class FileValidatorRouteTest extends ContextTestSupport {
         return new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from(fileUri("?noop=true")).doTry()
-                        .to("validator:org/apache/camel/component/validator/schema.xsd").to("mock:valid")
-                        .doCatch(ValidationException.class).to("mock:invalid").doFinally().to("mock:finally").end();
+                from(fileUri("?noop=true")).doTry().to("validator:org/apache/camel/component/validator/schema.xsd")
+                        .to("mock:valid").doCatch(ValidationException.class).to("mock:invalid").doFinally()
+                        .to("mock:finally").end();
             }
         };
     }

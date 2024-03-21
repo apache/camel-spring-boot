@@ -50,9 +50,10 @@ public abstract class AbstractSpringBootGenerator extends AbstractMojo {
     /**
      * Execute goal.
      *
-     * @throws MojoExecutionException execution of the main class or one of the
-     *                                                        threads it generated failed.
-     * @throws MojoFailureException   something bad happened...
+     * @throws MojoExecutionException
+     *             execution of the main class or one of the threads it generated failed.
+     * @throws MojoFailureException
+     *             something bad happened...
      */
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -120,8 +121,7 @@ public abstract class AbstractSpringBootGenerator extends AbstractMojo {
     protected Map<String, Supplier<String>> getJSonFiles(JarFile componentJar) {
         Artifact mainDep = getMainDep();
         Map<String, Supplier<String>> files;
-        files = componentJar.stream()
-                .filter(je -> je.getName().endsWith(".json"))
+        files = componentJar.stream().filter(je -> je.getName().endsWith(".json"))
                 .collect(Collectors.toMap(je -> "jar:" + mainDep.getFile().toURI().toString() + "!" + je.getName(),
                         je -> cache(() -> loadJson(componentJar, je))));
         return files;
@@ -140,13 +140,9 @@ public abstract class AbstractSpringBootGenerator extends AbstractMojo {
     }
 
     protected List<String> findNames(JarFile componentJar, String dir) {
-        return componentJar.stream()
-                .filter(je -> !je.isDirectory())
-                .map(ZipEntry::getName)
-                .filter(s -> s.startsWith(dir))
-                .map(s -> s.substring(dir.length()))
-                .filter(s -> !s.startsWith(".") && !s.contains("/"))
-                .collect(Collectors.toList());
+        return componentJar.stream().filter(je -> !je.isDirectory()).map(ZipEntry::getName)
+                .filter(s -> s.startsWith(dir)).map(s -> s.substring(dir.length()))
+                .filter(s -> !s.startsWith(".") && !s.contains("/")).collect(Collectors.toList());
     }
 
     protected static String loadJson(JarFile jar, JarEntry je) {
@@ -193,8 +189,7 @@ public abstract class AbstractSpringBootGenerator extends AbstractMojo {
 
     protected String loadJsonOfType(Map<String, Supplier<String>> jsonFiles, String modelName, String type) {
         for (Map.Entry<String, Supplier<String>> entry : jsonFiles.entrySet()) {
-            if (entry.getKey().endsWith("/" + modelName)
-                    || entry.getKey().endsWith("!" + modelName)) {
+            if (entry.getKey().endsWith("/" + modelName) || entry.getKey().endsWith("!" + modelName)) {
                 String json = entry.getValue().get();
                 if (json.contains("\"kind\": \"" + type + "\"")) {
                     return json;

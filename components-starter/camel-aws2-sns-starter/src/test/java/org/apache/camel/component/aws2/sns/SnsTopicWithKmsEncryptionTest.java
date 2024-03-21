@@ -36,13 +36,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 //Based on SnsTopicWithKmsEncryptionManualIT
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SnsTopicWithKmsEncryptionTest.class,
-                SnsTopicWithKmsEncryptionTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SnsTopicWithKmsEncryptionTest.class,
+        SnsTopicWithKmsEncryptionTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class SnsTopicWithKmsEncryptionTest extends BaseSns {
 
@@ -75,7 +70,7 @@ public class SnsTopicWithKmsEncryptionTest extends BaseSns {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseSns.TestConfiguration {
+    public class TestConfiguration extends BaseSns.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
 

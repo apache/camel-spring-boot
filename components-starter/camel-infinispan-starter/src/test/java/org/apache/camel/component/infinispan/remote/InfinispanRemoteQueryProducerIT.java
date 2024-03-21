@@ -58,129 +58,124 @@ import java.util.List;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				InfinispanRemoteQueryProducerIT.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, InfinispanRemoteQueryProducerIT.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class InfinispanRemoteQueryProducerIT extends InfinispanRemoteQueryTestSupport {
 
-	@Bean
-	public InfinispanQueryBuilder noResultQueryBuilder() {
-		return qf -> qf.from(User.class).having("name").like("%abc%").build();
-	}
+    @Bean
+    public InfinispanQueryBuilder noResultQueryBuilder() {
+        return qf -> qf.from(User.class).having("name").like("%abc%").build();
+    }
 
-	@Bean
-	public InfinispanQueryBuilder withResultQueryBuilder() {
-		return qf -> qf.from(User.class).having("name").like("%A").build();
-	}
+    @Bean
+    public InfinispanQueryBuilder withResultQueryBuilder() {
+        return qf -> qf.from(User.class).having("name").like("%A").build();
+    }
 
-	// *****************************
-	//
-	// *****************************
+    // *****************************
+    //
+    // *****************************
 
-	@Test
-	public void producerQueryOperationWithoutQueryBuilder() throws Exception {
-		Exchange request = template.request("direct:start",
-				exchange -> exchange.getIn().setHeader(OPERATION, InfinispanOperation.QUERY));
-		assertNull(request.getException());
+    @Test
+    public void producerQueryOperationWithoutQueryBuilder() throws Exception {
+        Exchange request = template.request("direct:start",
+                exchange -> exchange.getIn().setHeader(OPERATION, InfinispanOperation.QUERY));
+        assertNull(request.getException());
 
-		List<?> queryResult = (List<?>) request.getIn().getBody();
-		assertNull(queryResult);
-	}
+        List<?> queryResult = (List<?>) request.getIn().getBody();
+        assertNull(queryResult);
+    }
 
-	@Test
-	public void producerQueryWithoutResult() {
-		producerQueryWithoutResult("direct:start", noResultQueryBuilder());
-	}
+    @Test
+    public void producerQueryWithoutResult() {
+        producerQueryWithoutResult("direct:start", noResultQueryBuilder());
+    }
 
-	@Test
-	public void producerQueryWithoutResultAndQueryBuilderFromConfig() {
-		producerQueryWithoutResult("direct:noQueryResults", null);
-	}
+    @Test
+    public void producerQueryWithoutResultAndQueryBuilderFromConfig() {
+        producerQueryWithoutResult("direct:noQueryResults", null);
+    }
 
-	private void producerQueryWithoutResult(String endpoint, final InfinispanQueryBuilder builder) {
-		Exchange request = template.request(endpoint, createQueryProcessor(builder));
+    private void producerQueryWithoutResult(String endpoint, final InfinispanQueryBuilder builder) {
+        Exchange request = template.request(endpoint, createQueryProcessor(builder));
 
-		assertNull(request.getException());
+        assertNull(request.getException());
 
-		List<User> queryResult = request.getIn().getBody(List.class);
-		assertNotNull(queryResult);
-		assertEquals(0, queryResult.size());
-	}
+        List<User> queryResult = request.getIn().getBody(List.class);
+        assertNotNull(queryResult);
+        assertEquals(0, queryResult.size());
+    }
 
-	@Test
-	public void producerQueryWithResult() {
-		producerQueryWithResult("direct:start", withResultQueryBuilder());
-	}
+    @Test
+    public void producerQueryWithResult() {
+        producerQueryWithResult("direct:start", withResultQueryBuilder());
+    }
 
-	@Test
-	public void producerQueryWithResultAndQueryBuilderFromConfig() {
-		producerQueryWithResult("direct:queryWithResults", null);
-	}
+    @Test
+    public void producerQueryWithResultAndQueryBuilderFromConfig() {
+        producerQueryWithResult("direct:queryWithResults", null);
+    }
 
-	// *****************************
-	//
-	// *****************************
+    // *****************************
+    //
+    // *****************************
 
-	@BeforeAll
-	protected static void setupResources() throws Exception {
-		String proto = Util.read(InfinispanRemoteTestSupport.class.getResourceAsStream("/sample_bank_account/bank.proto"));
+    @BeforeAll
+    protected static void setupResources() throws Exception {
+        String proto = Util
+                .read(InfinispanRemoteTestSupport.class.getResourceAsStream("/sample_bank_account/bank.proto"));
 
-		BasicCache<Object, Object> cache = getCacheByName(ProtobufMetadataManagerConstants.PROTOBUF_METADATA_CACHE_NAME);
-		cache.put("sample_bank_account/bank.proto", proto);
+        BasicCache<Object, Object> cache = getCacheByName(
+                ProtobufMetadataManagerConstants.PROTOBUF_METADATA_CACHE_NAME);
+        cache.put("sample_bank_account/bank.proto", proto);
 
-		MarshallerRegistration.init(MarshallerUtil.getSerializationContext(cacheContainer));
-		SerializationContext serCtx = MarshallerUtil.getSerializationContext(cacheContainer);
-		serCtx.registerProtoFiles(FileDescriptorSource.fromResources("/sample_bank_account/bank.proto"));
-		serCtx.registerMarshaller(new UserMarshaller());
-		serCtx.registerMarshaller(new GenderMarshaller());
-	}
+        MarshallerRegistration.init(MarshallerUtil.getSerializationContext(cacheContainer));
+        SerializationContext serCtx = MarshallerUtil.getSerializationContext(cacheContainer);
+        serCtx.registerProtoFiles(FileDescriptorSource.fromResources("/sample_bank_account/bank.proto"));
+        serCtx.registerMarshaller(new UserMarshaller());
+        serCtx.registerMarshaller(new GenderMarshaller());
+    }
 
-	@BeforeEach
-	protected void beforeEach() {
-		// cleanup the default test cache before each run
-		getCache().clear();
+    @BeforeEach
+    protected void beforeEach() {
+        // cleanup the default test cache before each run
+        getCache().clear();
 
-		for (final User user : USERS) {
-			getCache().put(createKey(user), user);
-		}
-	}
+        for (final User user : USERS) {
+            getCache().put(createKey(user), user);
+        }
+    }
 
-	@Bean
-	protected RouteBuilder createRouteBuilder() {
-		return new RouteBuilder() {
-			@Override
-			public void configure() {
-				from("direct:start")
-						.toF("infinispan:%s", getCacheName());
-				from("direct:noQueryResults")
-						.toF("infinispan:%s?queryBuilder=#noResultQueryBuilder", getCacheName());
-				from("direct:queryWithResults")
-						.toF("infinispan:%s?queryBuilder=#withResultQueryBuilder", getCacheName());
-			}
-		};
-	}
+    @Bean
+    protected RouteBuilder createRouteBuilder() {
+        return new RouteBuilder() {
+            @Override
+            public void configure() {
+                from("direct:start").toF("infinispan:%s", getCacheName());
+                from("direct:noQueryResults").toF("infinispan:%s?queryBuilder=#noResultQueryBuilder", getCacheName());
+                from("direct:queryWithResults").toF("infinispan:%s?queryBuilder=#withResultQueryBuilder",
+                        getCacheName());
+            }
+        };
+    }
 
-	private void producerQueryWithResult(String endpoint, final InfinispanQueryBuilder builder) {
-		Exchange request = template.request(endpoint, createQueryProcessor(builder));
-		assertNull(request.getException());
+    private void producerQueryWithResult(String endpoint, final InfinispanQueryBuilder builder) {
+        Exchange request = template.request(endpoint, createQueryProcessor(builder));
+        assertNull(request.getException());
 
-		List<User> queryResult = request.getIn().getBody(List.class);
-		assertNotNull(queryResult);
-		assertEquals(2, queryResult.size());
-		assertTrue(hasUser(queryResult, "nameA", "surnameA"));
-		assertTrue(hasUser(queryResult, "nameA", "surnameB"));
-	}
+        List<User> queryResult = request.getIn().getBody(List.class);
+        assertNotNull(queryResult);
+        assertEquals(2, queryResult.size());
+        assertTrue(hasUser(queryResult, "nameA", "surnameA"));
+        assertTrue(hasUser(queryResult, "nameA", "surnameB"));
+    }
 
-	private Processor createQueryProcessor(final InfinispanQueryBuilder builder) {
-		return exchange -> {
-			exchange.getIn().setHeader(OPERATION, InfinispanOperation.QUERY);
-			if (builder != null) {
-				exchange.getIn().setHeader(QUERY_BUILDER, builder);
-			}
-		};
-	}
+    private Processor createQueryProcessor(final InfinispanQueryBuilder builder) {
+        return exchange -> {
+            exchange.getIn().setHeader(OPERATION, InfinispanOperation.QUERY);
+            if (builder != null) {
+                exchange.getIn().setHeader(QUERY_BUILDER, builder);
+            }
+        };
+    }
 }

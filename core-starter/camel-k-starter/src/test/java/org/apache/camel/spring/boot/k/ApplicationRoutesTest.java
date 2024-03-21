@@ -32,51 +32,32 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                ApplicationRoutesAutoConfiguration.class,
-                ApplicationShutdownAutoConfiguration.class,
-                ApplicationRoutesTest.class
-        },
-        properties = {
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ApplicationRoutesAutoConfiguration.class,
+        ApplicationShutdownAutoConfiguration.class, ApplicationRoutesTest.class }, properties = {
                 "camel.main.routes-include-pattern=classpath:camel-k/sources/test-route-001.yaml",
                 // camel-k
                 "camel.k.routes.overrides[0].input.from=direct:r1",
-                "camel.k.routes.overrides[0].input.with=direct:r1override",
-                "camel.k.routes.overrides[1].id=r2invalid",
+                "camel.k.routes.overrides[0].input.with=direct:r1override", "camel.k.routes.overrides[1].id=r2invalid",
                 "camel.k.routes.overrides[1].input.from=direct:r2",
-                "camel.k.routes.overrides[1].input.with=direct:r2override",
-                "camel.k.routes.overrides[2].id=r3",
+                "camel.k.routes.overrides[1].input.with=direct:r2override", "camel.k.routes.overrides[2].id=r3",
                 "camel.k.routes.overrides[2].input.from=direct:r3invalid",
-                "camel.k.routes.overrides[2].input.with=direct:r3override",
-                "camel.k.routes.overrides[3].id=r4",
+                "camel.k.routes.overrides[2].input.with=direct:r3override", "camel.k.routes.overrides[3].id=r4",
                 "camel.k.routes.overrides[3].input.from=direct:r4",
                 "camel.k.routes.overrides[3].input.with=direct:r4override",
-                "camel.k.routes.overrides[4].input.with=direct:r5invalid",
-                "camel.k.routes.overrides[5].id=r5",
-                "camel.k.routes.overrides[5].input.with=direct:r5override"
-        }
-)
+                "camel.k.routes.overrides[4].input.with=direct:r5invalid", "camel.k.routes.overrides[5].id=r5",
+                "camel.k.routes.overrides[5].input.with=direct:r5override" })
 public class ApplicationRoutesTest {
 
     @Autowired
     private CamelContext camelContext;
 
     @ParameterizedTest
-    @CsvSource({
-            "r1,direct://r1override",
-            "r2,direct://r2",
-            "r3,direct://r3",
-            "r4,direct://r4override",
-            "r5,direct://r5override",
-    })
+    @CsvSource({ "r1,direct://r1override", "r2,direct://r2", "r3,direct://r3", "r4,direct://r4override",
+            "r5,direct://r5override", })
     public void testOverrides(String id, String expected) throws Exception {
         Route route = camelContext.getRoute(id);
 
-        assertThat(route.getRouteId())
-                .isEqualTo(id);
-        assertThat(route.getEndpoint().getEndpointUri())
-                .isEqualTo(expected);
+        assertThat(route.getRouteId()).isEqualTo(id);
+        assertThat(route.getEndpoint().getEndpointUri()).isEqualTo(expected);
     }
 }

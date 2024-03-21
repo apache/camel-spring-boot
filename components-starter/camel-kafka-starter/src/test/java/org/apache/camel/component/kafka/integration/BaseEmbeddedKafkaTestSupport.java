@@ -99,7 +99,7 @@ public abstract class BaseEmbeddedKafkaTestSupport {
 
                 @Override
                 public void afterApplicationStart(CamelContext camelContext) {
-                    //do nothing here
+                    // do nothing here
                 }
             };
         }

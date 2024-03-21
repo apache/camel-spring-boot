@@ -16,7 +16,6 @@
  */
 package org.apache.camel.dataformat.zipfile.springboot;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -48,36 +47,26 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.junit5.TestSupport;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        ZipFileSplitAndDeleteTest.class,
-        ZipFileSplitAndDeleteTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ZipFileSplitAndDeleteTest.class,
+        ZipFileSplitAndDeleteTest.TestConfiguration.class })
 public class ZipFileSplitAndDeleteTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
-   
-    
+
     @EndpointInject("mock:end")
     MockEndpoint mockEnd;
-    
-    
+
     @BeforeEach
     public void setUp() throws Exception {
         TestSupport.deleteDirectory("target/testDeleteZipFileWhenUnmarshalWithDataFormat");
         TestSupport.deleteDirectory("target/testDeleteZipFileWhenUnmarshalWithSplitter");
-        
+
     }
 
     @Test
@@ -97,8 +86,8 @@ public class ZipFileSplitAndDeleteTest {
 
     @Test
     public void testDeleteZipFileWhenUnmarshalWithSplitter() throws Exception {
-        NotifyBuilder notify = new NotifyBuilder(context).from("file://target/" + "testDeleteZipFileWhenUnmarshalWithSplitter")
-                .whenDone(1).create();
+        NotifyBuilder notify = new NotifyBuilder(context)
+                .from("file://target/" + "testDeleteZipFileWhenUnmarshalWithSplitter").whenDone(1).create();
         mockEnd.expectedMessageCount(2);
         String zipFile = createZipFile("testDeleteZipFileWhenUnmarshalWithSplitter");
 
@@ -109,7 +98,7 @@ public class ZipFileSplitAndDeleteTest {
         // the original file should have been deleted,
         assertFalse(new File(zipFile).exists(), "File should been deleted");
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -126,22 +115,16 @@ public class ZipFileSplitAndDeleteTest {
                     dataFormat.setUsingIterator(true);
 
                     from("file://target/testDeleteZipFileWhenUnmarshalWithDataFormat?delay=10&delete=true")
-                            .unmarshal(dataFormat)
-                            .split(bodyAs(Iterator.class)).streaming()
-                            .convertBodyTo(String.class)
-                            .to("mock:end")
-                            .end();
+                            .unmarshal(dataFormat).split(bodyAs(Iterator.class)).streaming().convertBodyTo(String.class)
+                            .to("mock:end").end();
 
                     from("file://target/testDeleteZipFileWhenUnmarshalWithSplitter?delay=10&delete=true")
-                            .split(new ZipSplitter()).streaming()
-                            .convertBodyTo(String.class)
-                            .to("mock:end")
-                            .end();
+                            .split(new ZipSplitter()).streaming().convertBodyTo(String.class).to("mock:end").end();
                 }
             };
         }
     }
-    
+
     private String createZipFile(String folder) throws IOException {
         Path source = Paths.get("src/test/resources/data.zip");
         Path target = Paths.get("target" + File.separator + folder + File.separator + "data.zip");

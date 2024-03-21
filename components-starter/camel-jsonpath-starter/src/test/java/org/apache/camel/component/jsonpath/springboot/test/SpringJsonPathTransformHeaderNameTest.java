@@ -16,10 +16,8 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
 import java.util.List;
-
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -34,35 +32,26 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        SpringJsonPathTransformHeaderNameTest.class
-    },
-    properties = {
-        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringJsonPathTransformHeaderNameTest.xml"}
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SpringJsonPathTransformHeaderNameTest.class }, properties = {
+        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringJsonPathTransformHeaderNameTest.xml" }
 
 )
 public class SpringJsonPathTransformHeaderNameTest {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:authors")
     MockEndpoint mock;
 
-    
-    
-
     @Test
     public void testAuthors() throws Exception {
         mock.expectedMessageCount(1);
 
-        template.sendBodyAndHeader("direct:start", "Hello World", "myHeader", new File("src/test/resources/books.json"));
+        template.sendBodyAndHeader("direct:start", "Hello World", "myHeader",
+                new File("src/test/resources/books.json"));
 
         mock.assertIsSatisfied();
 

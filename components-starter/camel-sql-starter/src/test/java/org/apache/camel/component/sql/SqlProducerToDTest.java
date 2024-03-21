@@ -35,14 +35,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SqlProducerToDTest.class,
-                SqlProducerToDTest.TestConfiguration.class,
-                BaseSql.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SqlProducerToDTest.class,
+        SqlProducerToDTest.TestConfiguration.class, BaseSql.TestConfiguration.class })
 public class SqlProducerToDTest extends BaseSql {
 
     @EndpointInject("mock:query")
@@ -81,9 +75,7 @@ public class SqlProducerToDTest extends BaseSql {
                 public void configure() throws Exception {
                     from("direct:query")
                             .setHeader("myQuery", constant("select * from projects where project = :#foo order by id"))
-                            .toD("sql:${header.myQuery}?dataSource=#myDS")
-                            .to("log:query")
-                            .to("mock:query");
+                            .toD("sql:${header.myQuery}?dataSource=#myDS").to("log:query").to("mock:query");
                 }
             };
         }

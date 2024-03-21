@@ -33,18 +33,12 @@ import org.springframework.test.annotation.DirtiesContext;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileConsumerAbsolutePathDefaultMoveTest.class,
-                FileConsumerAbsolutePathDefaultMoveTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileConsumerAbsolutePathDefaultMoveTest.class,
+        FileConsumerAbsolutePathDefaultMoveTest.TestConfiguration.class })
 public class FileConsumerAbsolutePathDefaultMoveTest extends BaseFile {
 
     @EndpointInject("mock:result")
     private MockEndpoint resultEndpoint;
-
 
     @Test
     public void testConsumeFromAbsolutePath() throws Exception {

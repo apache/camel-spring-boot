@@ -16,7 +16,6 @@
  */
 package org.apache.camel.dataformat.zipfile.springboot;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Arrays;
@@ -39,7 +38,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -49,16 +47,10 @@ import org.apache.camel.test.junit5.TestSupport;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.util.IOHelper;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        AggregationStrategyWithPreservationTest.class,
-        AggregationStrategyWithPreservationTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, AggregationStrategyWithPreservationTest.class,
+        AggregationStrategyWithPreservationTest.TestConfiguration.class })
 public class AggregationStrategyWithPreservationTest {
 
     private static final int EXPECTED_NO_FILES = 5;
@@ -66,10 +58,10 @@ public class AggregationStrategyWithPreservationTest {
 
     @Autowired
     ProducerTemplate template;
-    
+
     @EndpointInject("mock:aggregateToZipEntry")
     MockEndpoint mock;
-    
+
     @BeforeEach
     public void setUp() throws Exception {
         TestSupport.deleteDirectory(TEST_DIR);
@@ -77,7 +69,7 @@ public class AggregationStrategyWithPreservationTest {
 
     @Test
     public void testSplitter() throws Exception {
-        
+
         mock.expectedMessageCount(1);
         mock.assertIsSatisfied();
 
@@ -87,9 +79,7 @@ public class AggregationStrategyWithPreservationTest {
 
         File resultFile = files[0];
         Set<String> expectedZipFiles = new HashSet<>(
-                Arrays.asList("another/hello.txt",
-                        "other/greetings.txt",
-                        "chiau.txt", "hi.txt", "hola.txt"));
+                Arrays.asList("another/hello.txt", "other/greetings.txt", "chiau.txt", "hi.txt", "hola.txt"));
         ZipInputStream zin = new ZipInputStream(new FileInputStream(resultFile));
         try {
             int fileCount = 0;
@@ -110,8 +100,6 @@ public class AggregationStrategyWithPreservationTest {
         }
     }
 
-    
-    
     // *************************************
     // Config
     // *************************************
@@ -126,18 +114,12 @@ public class AggregationStrategyWithPreservationTest {
                 public void configure() {
                     // Unzip file and Split it according to FileEntry
                     from("file:src/test/resources/org/apache/camel/aggregate/zipfile/data?delay=1000&noop=true&recursive=true")
-                            .aggregate(new ZipAggregationStrategy(true, true))
-                            .constant(true)
-                            .completionFromBatchConsumer()
-                            .eagerCheckCompletion()
-                            .to("file:" + TEST_DIR)
-                            .to("mock:aggregateToZipEntry")
-                            .log("Done processing zip file: ${header.CamelFileName}");
+                            .aggregate(new ZipAggregationStrategy(true, true)).constant(true)
+                            .completionFromBatchConsumer().eagerCheckCompletion().to("file:" + TEST_DIR)
+                            .to("mock:aggregateToZipEntry").log("Done processing zip file: ${header.CamelFileName}");
                 }
             };
         }
     }
-    
-   
 
 }

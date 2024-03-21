@@ -40,8 +40,10 @@ public class Await {
 
     /**
      *
-     * @param delay The delay in seconds
-     * @param sleepInterval Thread sleep interval in ms
+     * @param delay
+     *            The delay in seconds
+     * @param sleepInterval
+     *            Thread sleep interval in ms
      * @param condition
      */
     public Await(long sleepInterval, long delay, Callable<Boolean> condition) {

@@ -39,14 +39,18 @@ class CamelRuntimeHintsTest {
 
     @Test
     void shouldRegisterHintsForCamelServices() throws Exception {
-        assertThat(RuntimeHintsPredicates.resource().forResource("META-INF/services/org/apache/camel/language/simple")).accepts(hints);
-        assertThat(RuntimeHintsPredicates.reflection().onConstructor(SimpleLanguage.class.getConstructor())).accepts(hints);
+        assertThat(RuntimeHintsPredicates.resource().forResource("META-INF/services/org/apache/camel/language/simple"))
+                .accepts(hints);
+        assertThat(RuntimeHintsPredicates.reflection().onConstructor(SimpleLanguage.class.getConstructor()))
+                .accepts(hints);
         assertThat(RuntimeHintsPredicates.reflection().onMethod(SimpleLanguage.class.getMethod("init"))).accepts(hints);
-        assertThat(RuntimeHintsPredicates.reflection().onMethod(SimpleLanguage.class.getMethod("setCamelContext", CamelContext.class))).accepts(hints);
+        assertThat(RuntimeHintsPredicates.reflection()
+                .onMethod(SimpleLanguage.class.getMethod("setCamelContext", CamelContext.class))).accepts(hints);
     }
 
     @Test
     void shouldRegisterHintsForCamelCatalog() {
-        assertThat(RuntimeHintsPredicates.resource().forResource("org/apache/camel/main/components.properties")).accepts(hints);
+        assertThat(RuntimeHintsPredicates.resource().forResource("org/apache/camel/main/components.properties"))
+                .accepts(hints);
     }
 }

@@ -36,22 +36,16 @@ public class CamelSSLAutoConfigurationTest {
     @Test
     public void checkSSLConfigPropertiesPresent() {
         new ApplicationContextRunner()
-            .withConfiguration(
-                AutoConfigurations.of(
-                        CamelSSLAutoConfiguration.class,
-                        CamelAutoConfiguration.class
-                )
-            )
-            .withPropertyValues(
-                    "camel.ssl.config.cert-alias=web",
-                    "camel.ssl.config.key-managers.key-password=changeit",
-                    "camel.ssl.config.key-managers.key-store.password=changeit",
-                    "camel.ssl.config.key-managers.key-store.type=PKCS12",
-                    "camel.ssl.config.trust-managers.key-store.password=changeit",
-                    "camel.ssl.config.trust-managers.key-store.type=jks"
-            )
-            .run(context -> {
-                    GlobalSSLContextParametersSupplier supplier = context.getBean(GlobalSSLContextParametersSupplier.class);
+                .withConfiguration(AutoConfigurations.of(CamelSSLAutoConfiguration.class, CamelAutoConfiguration.class))
+                .withPropertyValues("camel.ssl.config.cert-alias=web",
+                        "camel.ssl.config.key-managers.key-password=changeit",
+                        "camel.ssl.config.key-managers.key-store.password=changeit",
+                        "camel.ssl.config.key-managers.key-store.type=PKCS12",
+                        "camel.ssl.config.trust-managers.key-store.password=changeit",
+                        "camel.ssl.config.trust-managers.key-store.type=jks")
+                .run(context -> {
+                    GlobalSSLContextParametersSupplier supplier = context
+                            .getBean(GlobalSSLContextParametersSupplier.class);
                     assertThat(context).hasSingleBean(CamelSSLAutoConfiguration.class);
                     assertNotNull(supplier);
                     assertNotNull(supplier.get());
@@ -72,28 +66,18 @@ public class CamelSSLAutoConfigurationTest {
                     // since no camel.ssl properties provided
                     Assertions.assertThrows(NoSuchBeanDefinitionException.class,
                             () -> context.getBean(SSLContextParameters.class));
-                }
-            );
+                });
     }
 
     @Test
     public void checkSSLPropertiesPresent() {
         new ApplicationContextRunner()
-            .withConfiguration(
-                AutoConfigurations.of(
-                        CamelSSLAutoConfiguration.class,
-                        CamelAutoConfiguration.class
-                )
-            )
-            .withPropertyValues(
-                    "camel.ssl.cert-alias=intra",
-                    "camel.ssl.key-managers.key-password=secure",
-                    "camel.ssl.key-managers.key-store.password=secure",
-                    "camel.ssl.key-managers.key-store.type=jks",
-                    "camel.ssl.trust-managers.key-store.password=secure",
-                    "camel.ssl.trust-managers.key-store.type=PKCS12"
-            )
-            .run(context -> {
+                .withConfiguration(AutoConfigurations.of(CamelSSLAutoConfiguration.class, CamelAutoConfiguration.class))
+                .withPropertyValues("camel.ssl.cert-alias=intra", "camel.ssl.key-managers.key-password=secure",
+                        "camel.ssl.key-managers.key-store.password=secure", "camel.ssl.key-managers.key-store.type=jks",
+                        "camel.ssl.trust-managers.key-store.password=secure",
+                        "camel.ssl.trust-managers.key-store.type=PKCS12")
+                .run(context -> {
                     SSLContextParameters contextParams = context.getBean(SSLContextParameters.class);
                     assertNotNull(contextParams);
                     assertEquals("intra", contextParams.getCertAlias());
@@ -113,37 +97,29 @@ public class CamelSSLAutoConfigurationTest {
                     // since no camel.ssl.config properties provided
                     Assertions.assertThrows(NoSuchBeanDefinitionException.class,
                             () -> context.getBean(GlobalSSLContextParametersSupplier.class));
-            });
+                });
     }
 
     @Test
     public void checkSSLAndConfigPropertiesBeanPresent() {
         new ApplicationContextRunner()
-            .withConfiguration(
-                AutoConfigurations.of(
-                        CamelSSLAutoConfiguration.class,
-                        CamelAutoConfiguration.class
-                )
-            )
-            .withPropertyValues(
-                    // camel.ssl.config
-                    "camel.ssl.config.cert-alias=web",
-                    "camel.ssl.config.key-managers.key-password=changeit",
-                    "camel.ssl.config.key-managers.key-store.password=changeit",
-                    "camel.ssl.config.key-managers.key-store.type=PKCS12",
-                    "camel.ssl.config.trust-managers.key-store.password=changeit",
-                    "camel.ssl.config.trust-managers.key-store.type=jks",
-                    // camel.ssl
-                    "camel.ssl.cert-alias=intra",
-                    "camel.ssl.key-managers.key-password=secure",
-                    "camel.ssl.key-managers.key-store.password=secure",
-                    "camel.ssl.key-managers.key-store.type=jks",
-                    "camel.ssl.trust-managers.key-store.password=secure",
-                    "camel.ssl.trust-managers.key-store.type=PKCS12"
-            )
-            .run(context -> {
+                .withConfiguration(AutoConfigurations.of(CamelSSLAutoConfiguration.class, CamelAutoConfiguration.class))
+                .withPropertyValues(
+                        // camel.ssl.config
+                        "camel.ssl.config.cert-alias=web", "camel.ssl.config.key-managers.key-password=changeit",
+                        "camel.ssl.config.key-managers.key-store.password=changeit",
+                        "camel.ssl.config.key-managers.key-store.type=PKCS12",
+                        "camel.ssl.config.trust-managers.key-store.password=changeit",
+                        "camel.ssl.config.trust-managers.key-store.type=jks",
+                        // camel.ssl
+                        "camel.ssl.cert-alias=intra", "camel.ssl.key-managers.key-password=secure",
+                        "camel.ssl.key-managers.key-store.password=secure", "camel.ssl.key-managers.key-store.type=jks",
+                        "camel.ssl.trust-managers.key-store.password=secure",
+                        "camel.ssl.trust-managers.key-store.type=PKCS12")
+                .run(context -> {
                     // bean with camel.ssl.config properties
-                    GlobalSSLContextParametersSupplier supplier = context.getBean(GlobalSSLContextParametersSupplier.class);
+                    GlobalSSLContextParametersSupplier supplier = context
+                            .getBean(GlobalSSLContextParametersSupplier.class);
                     assertThat(context).hasSingleBean(CamelSSLAutoConfiguration.class);
                     assertNotNull(supplier);
                     assertNotNull(supplier.get());
@@ -177,32 +153,26 @@ public class CamelSSLAutoConfigurationTest {
                     assertNotNull(contextParams.getTrustManagers().getKeyStore());
                     assertEquals("secure", contextParams.getTrustManagers().getKeyStore().getPassword());
                     assertEquals("PKCS12", contextParams.getTrustManagers().getKeyStore().getType());
-            });
+                });
     }
 
     @Test
     public void checkSSLPropertiesCopy() {
         new ApplicationContextRunner()
-            .withConfiguration(
-                AutoConfigurations.of(
-                        CamelSSLAutoConfiguration.class,
-                        CamelAutoConfiguration.class
-                )
-            )
-            .withPropertyValues(
-                    // camel.ssl.config
-                    "camel.ssl.config.cert-alias=web",
-                    "camel.ssl.config.key-managers.key-password=changeit",
-                    "camel.ssl.config.key-managers.key-store.password=changeit",
-                    "camel.ssl.config.key-managers.key-store.type=PKCS12",
-                    "camel.ssl.config.trust-managers.key-store.password=changeit",
-                    "camel.ssl.config.trust-managers.key-store.type=jks",
-                    // camel.ssl
-                    "camel.ssl.cert-alias=intra"
-            )
-            .run(context -> {
+                .withConfiguration(AutoConfigurations.of(CamelSSLAutoConfiguration.class, CamelAutoConfiguration.class))
+                .withPropertyValues(
+                        // camel.ssl.config
+                        "camel.ssl.config.cert-alias=web", "camel.ssl.config.key-managers.key-password=changeit",
+                        "camel.ssl.config.key-managers.key-store.password=changeit",
+                        "camel.ssl.config.key-managers.key-store.type=PKCS12",
+                        "camel.ssl.config.trust-managers.key-store.password=changeit",
+                        "camel.ssl.config.trust-managers.key-store.type=jks",
+                        // camel.ssl
+                        "camel.ssl.cert-alias=intra")
+                .run(context -> {
                     // bean with camel.ssl.config properties
-                    GlobalSSLContextParametersSupplier supplier = context.getBean(GlobalSSLContextParametersSupplier.class);
+                    GlobalSSLContextParametersSupplier supplier = context
+                            .getBean(GlobalSSLContextParametersSupplier.class);
                     assertThat(context).hasSingleBean(CamelSSLAutoConfiguration.class);
                     assertNotNull(supplier);
                     assertNotNull(supplier.get());
@@ -237,24 +207,19 @@ public class CamelSSLAutoConfigurationTest {
                     assertNotNull(contextParams.getTrustManagers().getKeyStore());
                     assertEquals("changeit", contextParams.getTrustManagers().getKeyStore().getPassword());
                     assertEquals("jks", contextParams.getTrustManagers().getKeyStore().getType());
-            });
+                });
     }
 
     @Test
     public void checkNoSSLPropertiesPresent() {
         new ApplicationContextRunner()
-            .withConfiguration(
-                AutoConfigurations.of(
-                    CamelSSLAutoConfiguration.class,
-                    CamelAutoConfiguration.class
-                )
-            )
-            .run(context -> {
-                Assertions.assertThrows(NoSuchBeanDefinitionException.class,
-                        () -> context.getBean(SSLContextParameters.class));
+                .withConfiguration(AutoConfigurations.of(CamelSSLAutoConfiguration.class, CamelAutoConfiguration.class))
+                .run(context -> {
+                    Assertions.assertThrows(NoSuchBeanDefinitionException.class,
+                            () -> context.getBean(SSLContextParameters.class));
 
-                Assertions.assertThrows(NoSuchBeanDefinitionException.class,
-                        () -> context.getBean(GlobalSSLContextParametersSupplier.class));
-            });
+                    Assertions.assertThrows(NoSuchBeanDefinitionException.class,
+                            () -> context.getBean(GlobalSSLContextParametersSupplier.class));
+                });
     }
 }

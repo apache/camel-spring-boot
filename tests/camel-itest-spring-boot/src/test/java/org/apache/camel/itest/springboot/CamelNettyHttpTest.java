@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelNettyHttpTest extends AbstractSpringBootTestSupport {
 
@@ -33,10 +32,10 @@ public class CamelNettyHttpTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelNettyHttpTest.class))
-                //.dependency(DependencyResolver.withVersion("org.hibernate.validator:hibernate-validator"))
-                .unitTestExclusionPattern(".*(\\.integration\\..*|IntegrationTest$|BaseNettyTest$|ManagedNettyEndpointTest$|NettyMixedCaseHttpPathTest$|NettyHttpContentTypeTest$)")
+        return new ITestConfigBuilder().module(inferModuleName(CamelNettyHttpTest.class))
+                // .dependency(DependencyResolver.withVersion("org.hibernate.validator:hibernate-validator"))
+                .unitTestExclusionPattern(
+                        ".*(\\.integration\\..*|IntegrationTest$|BaseNettyTest$|ManagedNettyEndpointTest$|NettyMixedCaseHttpPathTest$|NettyHttpContentTypeTest$)")
                 .dependency("org.hibernate.validator:hibernate-validator")
                 // removed JMX check tests and tests that nof fail singularly
                 .build();
@@ -47,6 +46,5 @@ public class CamelNettyHttpTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

@@ -46,14 +46,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                MongoDbConversionsIT.class,
-                MongoDbConversionsIT.TestConfiguration.class,
-                AbstractMongoDbITSupport.MongoConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, MongoDbConversionsIT.class,
+        MongoDbConversionsIT.TestConfiguration.class, AbstractMongoDbITSupport.MongoConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class MongoDbConversionsIT extends AbstractMongoDbITSupport {
 
@@ -65,14 +59,14 @@ public class MongoDbConversionsIT extends AbstractMongoDbITSupport {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:insertMap")
-                            .to("mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert");
-                    from("direct:insertPojo")
-                            .to("mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert");
-                    from("direct:insertJsonString")
-                            .to("mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert");
-                    from("direct:insertJsonStringWriteResultInString")
-                            .to("mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert")
+                    from("direct:insertMap").to(
+                            "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert");
+                    from("direct:insertPojo").to(
+                            "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert");
+                    from("direct:insertJsonString").to(
+                            "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert");
+                    from("direct:insertJsonStringWriteResultInString").to(
+                            "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert")
                             .convertBodyTo(String.class);
                 }
             };
@@ -124,10 +118,9 @@ public class MongoDbConversionsIT extends AbstractMongoDbITSupport {
     public void testInsertJsonInputStream() throws Exception {
         assertEquals(0, testCollection.countDocuments());
         // Object result =
-        template.requestBody("direct:insertJsonString",
-                IOConverter.toInputStream(
-                        "{\"fruits\": [\"apple\", \"banana\"], \"veggie\": \"broccoli\", \"_id\": \"testInsertJsonString\"}\n",
-                        null));
+        template.requestBody("direct:insertJsonString", IOConverter.toInputStream(
+                "{\"fruits\": [\"apple\", \"banana\"], \"veggie\": \"broccoli\", \"_id\": \"testInsertJsonString\"}\n",
+                null));
         Document b = testCollection.find(eq(MONGO_ID, "testInsertJsonString")).first();
         assertNotNull(b, "No record with 'testInsertJsonString' _id");
     }
@@ -135,8 +128,8 @@ public class MongoDbConversionsIT extends AbstractMongoDbITSupport {
     @Test
     public void testInsertJsonInputStreamWithSpaces() throws Exception {
         assertEquals(0, testCollection.countDocuments());
-        template.requestBody("direct:insertJsonString",
-                IOConverter.toInputStream("    {\"test\": [\"test\"], \"_id\": \"testInsertJsonStringWithSpaces\"}\n", null));
+        template.requestBody("direct:insertJsonString", IOConverter
+                .toInputStream("    {\"test\": [\"test\"], \"_id\": \"testInsertJsonStringWithSpaces\"}\n", null));
         Document b = testCollection.find(eq(MONGO_ID, "testInsertJsonStringWithSpaces")).first();
         assertNotNull(b, "No record with 'testInsertJsonStringWithSpaces' _id");
     }

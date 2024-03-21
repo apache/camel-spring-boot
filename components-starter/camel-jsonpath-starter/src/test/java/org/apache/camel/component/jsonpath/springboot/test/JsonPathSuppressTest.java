@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -26,7 +24,6 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -34,27 +31,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathSuppressTest.class,
-        JsonPathSuppressTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathSuppressTest.class,
+        JsonPathSuppressTest.TestConfiguration.class })
 public class JsonPathSuppressTest {
 
     @Autowired
     CamelContext context;
-    
+
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:middle")
     MockEndpoint mockMiddle;
-    
+
     @EndpointInject("mock:other")
     MockEndpoint mockOther;
 
@@ -82,8 +73,6 @@ public class JsonPathSuppressTest {
         MockEndpoint.assertIsSatisfied(context);
     }
 
-    
-
     // *************************************
     // Config
     // *************************************
@@ -96,12 +85,8 @@ public class JsonPathSuppressTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                            .choice()
-                            .when().jsonpath("person.middlename", true)
-                            .to("mock:middle")
-                            .otherwise()
-                            .to("mock:other");
+                    from("direct:start").choice().when().jsonpath("person.middlename", true).to("mock:middle")
+                            .otherwise().to("mock:other");
                 }
             };
         }

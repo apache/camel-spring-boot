@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
 
 import org.apache.camel.EndpointInject;
@@ -25,44 +24,34 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        SpringJsonPathSplitWriteAsStringTest.class
-    },
-    properties = {
-        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringJsonPathSplitWriteAsStringTest.xml"}
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SpringJsonPathSplitWriteAsStringTest.class }, properties = {
+        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringJsonPathSplitWriteAsStringTest.xml" }
 
 )
 public class SpringJsonPathSplitWriteAsStringTest {
 
-
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:line")
     MockEndpoint mock;
 
-    
-    
-
     @Test
     public void testSplitToJSon() throws Exception {
         mock.expectedMessageCount(2);
         // we want the output as JSON string
         mock.allMessages().body().isInstanceOf(String.class);
-        mock.message(0).body().isEqualTo("{\"action\":\"CU\",\"id\":123,\"modifiedTime\":\"2015-07-28T11:40:09.520+02:00\"}");
-        mock.message(1).body().isEqualTo("{\"action\":\"CU\",\"id\":456,\"modifiedTime\":\"2015-07-28T11:42:29.510+02:00\"}");
+        mock.message(0).body()
+                .isEqualTo("{\"action\":\"CU\",\"id\":123,\"modifiedTime\":\"2015-07-28T11:40:09.520+02:00\"}");
+        mock.message(1).body()
+                .isEqualTo("{\"action\":\"CU\",\"id\":456,\"modifiedTime\":\"2015-07-28T11:42:29.510+02:00\"}");
 
         template.sendBody("direct:start", new File("src/test/resources/content.json"));
 

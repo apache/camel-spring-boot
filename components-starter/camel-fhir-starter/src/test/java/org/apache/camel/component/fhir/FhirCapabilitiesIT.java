@@ -44,25 +44,19 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirCapabilitiesIT.class,
-                FhirCapabilitiesIT.TestConfiguration.class,
-                DefaultCamelContext.class,
-                FhirServer.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirCapabilitiesIT.class,
+        FhirCapabilitiesIT.TestConfiguration.class, DefaultCamelContext.class, FhirServer.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class FhirCapabilitiesIT extends AbstractFhirTestSupport {
 
     private static final Logger LOG = LoggerFactory.getLogger(FhirCapabilitiesIT.class);
-    private static final String PATH_PREFIX
-            = FhirApiCollection.getCollection().getApiName(FhirCapabilitiesApiMethod.class).getName();
+    private static final String PATH_PREFIX = FhirApiCollection.getCollection()
+            .getApiName(FhirCapabilitiesApiMethod.class).getName();
 
     @Test
     public void testOfType() throws Exception {
-        org.hl7.fhir.instance.model.api.IBaseConformance result = requestBody("direct://OF_TYPE", CapabilityStatement.class);
+        org.hl7.fhir.instance.model.api.IBaseConformance result = requestBody("direct://OF_TYPE",
+                CapabilityStatement.class);
 
         LOG.debug("ofType: {}", result);
         assertNotNull(result, "ofType result");
@@ -74,8 +68,8 @@ public class FhirCapabilitiesIT extends AbstractFhirTestSupport {
         Map<String, Object> headers = new HashMap<>();
         headers.put(ExtraParameters.ENCODE_JSON.getHeaderName(), Boolean.TRUE);
 
-        org.hl7.fhir.instance.model.api.IBaseConformance result
-                = requestBodyAndHeaders("direct://OF_TYPE", CapabilityStatement.class, headers);
+        org.hl7.fhir.instance.model.api.IBaseConformance result = requestBodyAndHeaders("direct://OF_TYPE",
+                CapabilityStatement.class, headers);
 
         LOG.debug("ofType: {}", result);
         assertNotNull(result, "ofType result");
@@ -90,8 +84,7 @@ public class FhirCapabilitiesIT extends AbstractFhirTestSupport {
                 @Override
                 public void configure() {
                     // test route for ofType
-                    from("direct://OF_TYPE")
-                            .to("fhir://" + PATH_PREFIX + "/ofType?inBody=type&log=true");
+                    from("direct://OF_TYPE").to("fhir://" + PATH_PREFIX + "/ofType?inBody=type&log=true");
                 }
             };
         }

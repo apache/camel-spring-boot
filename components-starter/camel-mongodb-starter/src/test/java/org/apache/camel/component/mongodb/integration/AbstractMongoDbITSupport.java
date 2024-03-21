@@ -55,52 +55,52 @@ import java.util.Properties;
 
 public abstract class AbstractMongoDbITSupport {
 
-	protected static final String SCHEME = "mongodb";
-	@RegisterExtension
-	public static MongoDBService service = MongoDBServiceFactory.createService();
-	protected static MongoClient mongo;
-	protected static MongoDatabase db;
-	protected static MongoCollection<Document> testCollection;
-	protected static MongoCollection<Document> dynamicCollection;
+    protected static final String SCHEME = "mongodb";
+    @RegisterExtension
+    public static MongoDBService service = MongoDBServiceFactory.createService();
+    protected static MongoClient mongo;
+    protected static MongoDatabase db;
+    protected static MongoCollection<Document> testCollection;
+    protected static MongoCollection<Document> dynamicCollection;
 
-	protected static String dbName = "test";
-	protected static String testCollectionName;
-	protected static String dynamicCollectionName;
-	protected ProducerTemplate template;
-	@Autowired
-	protected CamelContext context;
+    protected static String dbName = "test";
+    protected static String testCollectionName;
+    protected static String dynamicCollectionName;
+    protected ProducerTemplate template;
+    @Autowired
+    protected CamelContext context;
 
-	@BeforeAll
-	public static void beforeAll() {
-		mongo = MongoClients.create(service.getReplicaSetUrl());
-		db = mongo.getDatabase(dbName);
-	}
+    @BeforeAll
+    public static void beforeAll() {
+        mongo = MongoClients.create(service.getReplicaSetUrl());
+        db = mongo.getDatabase(dbName);
+    }
 
-	@BeforeEach
-	public void beforeEach() {
-		// Refresh the test collection - drop it and recreate it. We don't do
-		// this for the database because MongoDB would create large
-		// store files each time
-		testCollectionName = "camelTest";
-		testCollection = db.getCollection(testCollectionName, Document.class);
-		testCollection.drop();
-		testCollection = db.getCollection(testCollectionName, Document.class);
+    @BeforeEach
+    public void beforeEach() {
+        // Refresh the test collection - drop it and recreate it. We don't do
+        // this for the database because MongoDB would create large
+        // store files each time
+        testCollectionName = "camelTest";
+        testCollection = db.getCollection(testCollectionName, Document.class);
+        testCollection.drop();
+        testCollection = db.getCollection(testCollectionName, Document.class);
 
-		dynamicCollectionName = testCollectionName.concat("Dynamic");
-		dynamicCollection = db.getCollection(dynamicCollectionName, Document.class);
-		dynamicCollection.drop();
-		dynamicCollection = db.getCollection(dynamicCollectionName, Document.class);
+        dynamicCollectionName = testCollectionName.concat("Dynamic");
+        dynamicCollection = db.getCollection(dynamicCollectionName, Document.class);
+        dynamicCollection.drop();
+        dynamicCollection = db.getCollection(dynamicCollectionName, Document.class);
 
-		template = context.createProducerTemplate();
+        template = context.createProducerTemplate();
 
-		context.getPropertiesComponent().setLocation("classpath:mongodb.test.properties");
-	}
+        context.getPropertiesComponent().setLocation("classpath:mongodb.test.properties");
+    }
 
-	@AfterEach
-	public void tearDown() throws Exception {
-		testCollection.drop();
-		dynamicCollection.drop();
-	}
+    @AfterEach
+    public void tearDown() throws Exception {
+        testCollection.drop();
+        dynamicCollection.drop();
+    }
 
     public static Properties loadAuthProperties() throws IOException {
         Properties properties = new Properties();
@@ -108,80 +108,81 @@ public abstract class AbstractMongoDbITSupport {
         return properties;
     }
 
-	/**
-	 * Useful to simulate the presence of an authenticated user with name {@value #USER} and password {@value #PASSWORD}
-	 */
-	protected void createAuthorizationUser() throws IOException {
-		Properties properties = loadAuthProperties();
-		createAuthorizationUser("admin", properties.getProperty("testusername"), properties.getProperty("testpassword"));
-	}
+    /**
+     * Useful to simulate the presence of an authenticated user with name {@value #USER} and password {@value #PASSWORD}
+     */
+    protected void createAuthorizationUser() throws IOException {
+        Properties properties = loadAuthProperties();
+        createAuthorizationUser("admin", properties.getProperty("testusername"),
+                properties.getProperty("testpassword"));
+    }
 
-	protected void createAuthorizationUser(String database, String user, String password) {
-		MongoDatabase adminDb = mongo.getDatabase("admin");
-		MongoCollection<Document> usersCollection = adminDb.getCollection("system.users");
-		if (usersCollection.countDocuments(new Document("user", user)) == 0) {
-			MongoDatabase db = mongo.getDatabase(database);
-			Map<String, Object> commandArguments = new LinkedHashMap<>();
-			commandArguments.put("createUser", user);
-			commandArguments.put("pwd", password);
-			String[] roles = {"readWrite"};
-			commandArguments.put("roles", roles);
-			BasicDBObject command = new BasicDBObject(commandArguments);
-			db.runCommand(command);
-		}
-	}
+    protected void createAuthorizationUser(String database, String user, String password) {
+        MongoDatabase adminDb = mongo.getDatabase("admin");
+        MongoCollection<Document> usersCollection = adminDb.getCollection("system.users");
+        if (usersCollection.countDocuments(new Document("user", user)) == 0) {
+            MongoDatabase db = mongo.getDatabase(database);
+            Map<String, Object> commandArguments = new LinkedHashMap<>();
+            commandArguments.put("createUser", user);
+            commandArguments.put("pwd", password);
+            String[] roles = { "readWrite" };
+            commandArguments.put("roles", roles);
+            BasicDBObject command = new BasicDBObject(commandArguments);
+            db.runCommand(command);
+        }
+    }
 
-	protected void pumpDataIntoTestCollection() {
-		// there should be 100 of each
-		String[] scientists
-				= {"Einstein", "Darwin", "Copernicus", "Pasteur", "Curie", "Faraday", "Newton", "Bohr", "Galilei", "Maxwell"};
-		for (int i = 1; i <= 1000; i++) {
-			int index = i % scientists.length;
-			Formatter f = new Formatter();
-			String doc
-					= f.format("{\"_id\":\"%d\", \"scientist\":\"%s\", \"fixedField\": \"fixedValue\"}", i, scientists[index])
-					.toString();
-			IOHelper.close(f);
-			testCollection.insertOne(Document.parse(doc));
-		}
-		assertEquals(1000L, testCollection.countDocuments(), "Data pumping of 1000 entries did not complete entirely");
-	}
+    protected void pumpDataIntoTestCollection() {
+        // there should be 100 of each
+        String[] scientists = { "Einstein", "Darwin", "Copernicus", "Pasteur", "Curie", "Faraday", "Newton", "Bohr",
+                "Galilei", "Maxwell" };
+        for (int i = 1; i <= 1000; i++) {
+            int index = i % scientists.length;
+            Formatter f = new Formatter();
+            String doc = f.format("{\"_id\":\"%d\", \"scientist\":\"%s\", \"fixedField\": \"fixedValue\"}", i,
+                    scientists[index]).toString();
+            IOHelper.close(f);
+            testCollection.insertOne(Document.parse(doc));
+        }
+        assertEquals(1000L, testCollection.countDocuments(), "Data pumping of 1000 entries did not complete entirely");
+    }
 
-	protected CamelMongoDbException extractAndAssertCamelMongoDbException(Object result, String message) {
-		assertTrue(result instanceof Throwable, "Result is not an Exception");
-		assertTrue(result instanceof CamelExecutionException, "Result is not an CamelExecutionException");
-		Throwable exc = ((CamelExecutionException) result).getCause();
-		assertTrue(exc instanceof CamelMongoDbException, "Result is not an CamelMongoDbException");
-		CamelMongoDbException camelExc = ObjectHelper.cast(CamelMongoDbException.class, exc);
-		if (message != null) {
-			assertTrue(camelExc.getMessage().contains(message), "CamelMongoDbException doesn't contain desired message string");
-		}
-		return camelExc;
-	}
+    protected CamelMongoDbException extractAndAssertCamelMongoDbException(Object result, String message) {
+        assertTrue(result instanceof Throwable, "Result is not an Exception");
+        assertTrue(result instanceof CamelExecutionException, "Result is not an CamelExecutionException");
+        Throwable exc = ((CamelExecutionException) result).getCause();
+        assertTrue(exc instanceof CamelMongoDbException, "Result is not an CamelMongoDbException");
+        CamelMongoDbException camelExc = ObjectHelper.cast(CamelMongoDbException.class, exc);
+        if (message != null) {
+            assertTrue(camelExc.getMessage().contains(message),
+                    "CamelMongoDbException doesn't contain desired message string");
+        }
+        return camelExc;
+    }
 
-	protected MockEndpoint getMockEndpoint(String endpoint) {
-		return context.getEndpoint(endpoint, MockEndpoint.class);
-	}
+    protected MockEndpoint getMockEndpoint(String endpoint) {
+        return context.getEndpoint(endpoint, MockEndpoint.class);
+    }
 
-	@Configuration
-	public class MongoConfiguration {
+    @Configuration
+    public class MongoConfiguration {
 
-		@Bean
-		public MongoClient mongoClient() {
-			return mongo;
-		}
+        @Bean
+        public MongoClient mongoClient() {
+            return mongo;
+        }
 
-		@Bean
-		public MongoDbComponent mongoDbComponent() {
-			MongoDbComponent component = new MongoDbComponent();
-			component.setMongoConnection(mongo);
+        @Bean
+        public MongoDbComponent mongoDbComponent() {
+            MongoDbComponent component = new MongoDbComponent();
+            component.setMongoConnection(mongo);
 
-			return component;
-		}
+            return component;
+        }
 
-		@PostConstruct
-		public void setUp() {
-			context.getPropertiesComponent().setLocation("classpath:mongodb.test.properties");
-		}
-	}
+        @PostConstruct
+        public void setUp() {
+            context.getPropertiesComponent().setLocation("classpath:mongodb.test.properties");
+        }
+    }
 }

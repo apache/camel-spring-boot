@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
@@ -43,16 +42,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathCharsetTest.class,
-        JsonPathCharsetTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathCharsetTest.class,
+        JsonPathCharsetTest.TestConfiguration.class })
 public class JsonPathCharsetTest {
 
     @Autowired
@@ -143,7 +136,7 @@ public class JsonPathCharsetTest {
             in.setBody(body);
         });
     }
-    
+
     private void sendBody(String endpointUri, final Object body, final Map<String, Object> headers) {
         template.send(endpointUri, exchange -> {
             Message in = exchange.getIn();

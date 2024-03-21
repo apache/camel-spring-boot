@@ -55,13 +55,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 //Based on SnsTopicProducerWithSubscriptionIT
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SnsTopicProducerWithSubscriptionTest.class,
-                SnsTopicProducerWithSubscriptionTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SnsTopicProducerWithSubscriptionTest.class,
+        SnsTopicProducerWithSubscriptionTest.TestConfiguration.class })
 @Disabled("Need to review this later for localstack 2.x upgrade")
 public class SnsTopicProducerWithSubscriptionTest extends BaseSns {
 
@@ -81,11 +76,8 @@ public class SnsTopicProducerWithSubscriptionTest extends BaseSns {
         final int maxNumberOfMessages = 1;
 
         int maxWaitTime = 10;
-        final ReceiveMessageRequest request = ReceiveMessageRequest.builder()
-                .queueUrl(sqsQueueSupplier.get())
-                .waitTimeSeconds(maxWaitTime)
-                .maxNumberOfMessages(maxNumberOfMessages)
-                .build();
+        final ReceiveMessageRequest request = ReceiveMessageRequest.builder().queueUrl(sqsQueueSupplier.get())
+                .waitTimeSeconds(maxWaitTime).maxNumberOfMessages(maxNumberOfMessages).build();
 
         while (true) {
             ReceiveMessageResponse response = client.receiveMessage(request);
@@ -106,8 +98,6 @@ public class SnsTopicProducerWithSubscriptionTest extends BaseSns {
         }
     }
 
-
-
     @Test
     public void sendInOnly() {
         Exchange exchange = producerTemplate.send("direct:start", ExchangePattern.InOnly, new Processor() {
@@ -124,35 +114,33 @@ public class SnsTopicProducerWithSubscriptionTest extends BaseSns {
         assertEquals(1, messages.size(), "Did not receive as many messages as expected");
     }
 
-
     // *************************************
     // Config
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseSns.TestConfiguration {
+    public class TestConfiguration extends BaseSns.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder(Supplier<String> queueSupplier) {
 
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:start")
-                            .toF("aws2-sns://%s?subject=The+subject+message&autoCreateTopic=true&subscribeSNStoSQS=true&queueUrl=%s",
-                                    sharedNameGenerator.getName(), queueSupplier.get());
+                    from("direct:start").toF(
+                            "aws2-sns://%s?subject=The+subject+message&autoCreateTopic=true&subscribeSNStoSQS=true&queueUrl=%s",
+                            sharedNameGenerator.getName(), queueSupplier.get());
                 }
             };
         }
 
         @Bean(value = "sqsQueue")
         public Supplier<String> sqsQueue() {
-            SqsClient client = AWSSDKClientUtils.newSQSClient();;
+            SqsClient client = AWSSDKClientUtils.newSQSClient();
+            ;
 
             String queue = sharedNameGenerator.getName() + "sqs";
 
-            GetQueueUrlRequest getQueueUrlRequest = GetQueueUrlRequest.builder()
-                    .queueName(queue)
-                    .build();
+            GetQueueUrlRequest getQueueUrlRequest = GetQueueUrlRequest.builder().queueName(queue).build();
 
             String sqsQueueUrl;
             try {
@@ -160,9 +148,7 @@ public class SnsTopicProducerWithSubscriptionTest extends BaseSns {
 
                 sqsQueueUrl = getQueueUrlResult.queueUrl();
             } catch (QueueDoesNotExistException e) {
-                CreateQueueRequest createQueueRequest = CreateQueueRequest.builder()
-                        .queueName(queue)
-                        .build();
+                CreateQueueRequest createQueueRequest = CreateQueueRequest.builder().queueName(queue).build();
 
                 sqsQueueUrl = client.createQueue(createQueueRequest).queueUrl();
             }

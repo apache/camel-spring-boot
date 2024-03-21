@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelBindyTest extends AbstractSpringBootTestSupport {
 
@@ -33,9 +32,7 @@ public class CamelBindyTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelBindyTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelBindyTest.class)).build();
     }
 
     @Test
@@ -45,6 +42,5 @@ public class CamelBindyTest extends AbstractSpringBootTestSupport {
         this.runDataformatTest(config, "bindyKvp");
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

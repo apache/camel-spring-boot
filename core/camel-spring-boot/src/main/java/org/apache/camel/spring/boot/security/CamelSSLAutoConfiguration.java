@@ -49,27 +49,22 @@ public class CamelSSLAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     @Conditional(CamelSSLAutoConfiguration.SSLCondition.class)
-    public SSLContextParameters sslContextParameters(CamelContext camelContext, CamelSSLConfigurationProperties properties) {
+    public SSLContextParameters sslContextParameters(CamelContext camelContext,
+            CamelSSLConfigurationProperties properties) {
         // use any camel.ssl.config props
-        SSLContextParameters sslContext = camelContext.getSSLContextParameters() != null ?
-                copyParams(camelContext.getSSLContextParameters()) : new SSLContextParameters();
+        SSLContextParameters sslContext = camelContext.getSSLContextParameters() != null
+                ? copyParams(camelContext.getSSLContextParameters()) : new SSLContextParameters();
 
         // override with any camel.ssl props
-        SSLContextParameters config = new SSLContextBuilder(sslContext)
-                .certAlias(properties.getCertAlias())
-                .cipherSuites(properties.getCipherSuites())
-                .cipherSuitesFilter(properties.getCipherSuitesFilter())
-                .clientParameters(properties.getClientParameters())
-                .keyManagers(properties.getKeyManagers())
-                .provider(properties.getProvider())
-                .secureRandom(properties.getSecureRandom())
+        SSLContextParameters config = new SSLContextBuilder(sslContext).certAlias(properties.getCertAlias())
+                .cipherSuites(properties.getCipherSuites()).cipherSuitesFilter(properties.getCipherSuitesFilter())
+                .clientParameters(properties.getClientParameters()).keyManagers(properties.getKeyManagers())
+                .provider(properties.getProvider()).secureRandom(properties.getSecureRandom())
                 .secureSocketProtocol(properties.getSecureSocketProtocol())
                 .secureSocketProtocols(properties.getSecureSocketProtocols())
                 .secureSocketProtocolsFilter(properties.getSecureSocketProtocolsFilter())
-                .serverParameters(properties.getServerParameters())
-                .sessionTimeout(properties.getSessionTimeout())
-                .trustManager(properties.getTrustManagers())
-                .build();
+                .serverParameters(properties.getServerParameters()).sessionTimeout(properties.getSessionTimeout())
+                .trustManager(properties.getTrustManagers()).build();
 
         return config;
     }
@@ -78,7 +73,8 @@ public class CamelSSLAutoConfiguration {
     @ConditionalOnMissingBean
     @Conditional(CamelSSLAutoConfiguration.SSLConfigCondition.class)
     public GlobalSSLContextParametersSupplier sslContextParametersSupplier(CamelSSLConfigurationProperties properties) {
-        final SSLContextParameters config = properties.getConfig() != null ? properties.getConfig() : new SSLContextParameters();
+        final SSLContextParameters config = properties.getConfig() != null ? properties.getConfig()
+                : new SSLContextParameters();
         return () -> config;
     }
 
@@ -86,7 +82,8 @@ public class CamelSSLAutoConfiguration {
         @Override
         public ConditionOutcome getMatchOutcome(ConditionContext context, AnnotatedTypeMetadata annotatedTypeMetadata) {
             Binder binder = Binder.get(context.getEnvironment());
-            Map<String, Object> sslProperties = binder.bind("camel.ssl", Bindable.mapOf(String.class, Object.class)).orElse(Collections.emptyMap());
+            Map<String, Object> sslProperties = binder.bind("camel.ssl", Bindable.mapOf(String.class, Object.class))
+                    .orElse(Collections.emptyMap());
             sslProperties.remove("config");
             ConditionMessage.Builder message = ConditionMessage.forCondition("camel.ssl");
             if (sslProperties.size() > 0) {
@@ -101,7 +98,9 @@ public class CamelSSLAutoConfiguration {
         @Override
         public ConditionOutcome getMatchOutcome(ConditionContext context, AnnotatedTypeMetadata annotatedTypeMetadata) {
             Binder binder = Binder.get(context.getEnvironment());
-            Map<String, Object> sslProperties = binder.bind("camel.ssl.config", Bindable.mapOf(String.class, Object.class)).orElse(Collections.emptyMap());
+            Map<String, Object> sslProperties = binder
+                    .bind("camel.ssl.config", Bindable.mapOf(String.class, Object.class))
+                    .orElse(Collections.emptyMap());
             ConditionMessage.Builder message = ConditionMessage.forCondition("camel.ssl.config");
             if (!sslProperties.isEmpty()) {
                 return ConditionOutcome.match(message.because("enabled"));

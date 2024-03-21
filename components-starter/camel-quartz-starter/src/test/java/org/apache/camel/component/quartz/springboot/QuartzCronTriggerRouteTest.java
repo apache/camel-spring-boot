@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -39,31 +37,24 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.quartz.JobDetail;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzCronTriggerRouteTest.class,
-        QuartzCronTriggerRouteTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzCronTriggerRouteTest.class,
+        QuartzCronTriggerRouteTest.TestConfiguration.class })
 public class QuartzCronTriggerRouteTest extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint mock;
-    
+
     @Test
     public void testQuartzCronRoute() throws Exception {
-        
+
         mock.expectedMinimumMessageCount(3);
 
         mock.assertIsSatisfied();
@@ -75,7 +66,7 @@ public class QuartzCronTriggerRouteTest extends BaseQuartzTest {
         assertEquals("UTC", job.getJobDataMap().get(QuartzConstants.QUARTZ_TRIGGER_CRON_TIMEZONE));
         assertEquals("0/2 * * * * ?", job.getJobDataMap().get(QuartzConstants.QUARTZ_TRIGGER_CRON_EXPRESSION));
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -93,7 +84,5 @@ public class QuartzCronTriggerRouteTest extends BaseQuartzTest {
             };
         }
     }
-    
-   
 
 }

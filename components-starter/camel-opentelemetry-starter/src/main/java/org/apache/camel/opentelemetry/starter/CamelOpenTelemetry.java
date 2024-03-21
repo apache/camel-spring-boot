@@ -30,5 +30,5 @@ import org.springframework.context.annotation.Import;
 @Documented
 @Inherited
 @Import(OpenTelemetryAutoConfiguration.class)
-public @interface CamelOpenTelemetry{
+public @interface CamelOpenTelemetry {
 }

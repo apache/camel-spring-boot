@@ -34,52 +34,48 @@ import org.slf4j.LoggerFactory;
  * org.apache.camel.component.validator.ValidatorEndpointClearCachedSchemaTest
  */
 public class Handler extends ResourceResolverSupport {
-	private static final Logger LOG = LoggerFactory.getLogger(Handler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Handler.class);
 
-	// wrong  element name will cause the validation to fail
-	private static final String XSD_TEMPLATE_1 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-			"<xsd:schema targetNamespace=\"http://apache.camel.org/test\" " +
-			"            xmlns=\"http://apache.camel.org/test\" " +
-			"            xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">" +
-			"    <xsd:complexType name=\"TestMessage\">" +
-			"        <xsd:sequence>" +
-			"            <xsd:element name=\"Content\" type=\"xsd:string\" />" +
-			"        </xsd:sequence>" +
-			"        <xsd:attribute name=\"attr\" type=\"xsd:string\" default=\"xsd1\"/>" +
-			"    </xsd:complexType>" +
-			"    <xsd:element name=\"TestMessage\" type=\"TestMessage\" />" +
-			"</xsd:schema>";
+    // wrong element name will cause the validation to fail
+    private static final String XSD_TEMPLATE_1 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+            + "<xsd:schema targetNamespace=\"http://apache.camel.org/test\" "
+            + "            xmlns=\"http://apache.camel.org/test\" "
+            + "            xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">"
+            + "    <xsd:complexType name=\"TestMessage\">" + "        <xsd:sequence>"
+            + "            <xsd:element name=\"Content\" type=\"xsd:string\" />" + "        </xsd:sequence>"
+            + "        <xsd:attribute name=\"attr\" type=\"xsd:string\" default=\"xsd1\"/>" + "    </xsd:complexType>"
+            + "    <xsd:element name=\"TestMessage\" type=\"TestMessage\" />" + "</xsd:schema>";
 
-	// correct element name, the validation will be corerct
-	private static final String XSD_TEMPLATE_2 = XSD_TEMPLATE_1.replace("\"Content\"", "\"MessageContent\"");
+    // correct element name, the validation will be corerct
+    private static final String XSD_TEMPLATE_2 = XSD_TEMPLATE_1.replace("\"Content\"", "\"MessageContent\"");
 
-	private final AtomicInteger counter;
+    private final AtomicInteger counter;
 
-	public Handler() {
-		super("pd");
+    public Handler() {
+        super("pd");
 
-		this.counter = new AtomicInteger();
-	}
+        this.counter = new AtomicInteger();
+    }
 
-	@Override
-	protected Resource createResource(String location, String remaining) {
-		return new ResourceSupport("mem", location) {
-			@Override
-			public boolean exists() {
-				return true;
-			}
+    @Override
+    protected Resource createResource(String location, String remaining) {
+        return new ResourceSupport("mem", location) {
+            @Override
+            public boolean exists() {
+                return true;
+            }
 
-			@Override
-			public InputStream getInputStream() throws IOException {
-				if (counter.getAndIncrement() == 0) {
-					LOG.info("resolved XSD1");
-					return new ByteArrayInputStream(XSD_TEMPLATE_1.getBytes(StandardCharsets.UTF_8));
-				} else {
-					LOG.info("resolved XSD2");
+            @Override
+            public InputStream getInputStream() throws IOException {
+                if (counter.getAndIncrement() == 0) {
+                    LOG.info("resolved XSD1");
+                    return new ByteArrayInputStream(XSD_TEMPLATE_1.getBytes(StandardCharsets.UTF_8));
+                } else {
+                    LOG.info("resolved XSD2");
 
-					return new ByteArrayInputStream(XSD_TEMPLATE_2.getBytes(StandardCharsets.UTF_8));
-				}
-			}
-		};
-	}
+                    return new ByteArrayInputStream(XSD_TEMPLATE_2.getBytes(StandardCharsets.UTF_8));
+                }
+            }
+        };
+    }
 }

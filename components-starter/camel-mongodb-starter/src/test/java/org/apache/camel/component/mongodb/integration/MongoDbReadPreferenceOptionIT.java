@@ -34,13 +34,8 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                MongoDbReadPreferenceOptionIT.class,
-                AbstractMongoDbITSupport.MongoConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, MongoDbReadPreferenceOptionIT.class,
+        AbstractMongoDbITSupport.MongoConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class MongoDbReadPreferenceOptionIT extends AbstractMongoDbITSupport {
 
@@ -50,8 +45,7 @@ public class MongoDbReadPreferenceOptionIT extends AbstractMongoDbITSupport {
     public void testInvalidReadPreferenceOptionValue() throws Exception {
         endpoint = createMongoDbEndpoint("mongodb:myDb?database={{mongodb.testDb}}&readPreference=foo");
 
-        Exception ex = assertThrows(IllegalArgumentException.class,
-                () -> endpoint.getReadPreferenceBean());
+        Exception ex = assertThrows(IllegalArgumentException.class, () -> endpoint.getReadPreferenceBean());
 
         assertTrue(ex.getMessage().startsWith("No match for read preference"));
     }

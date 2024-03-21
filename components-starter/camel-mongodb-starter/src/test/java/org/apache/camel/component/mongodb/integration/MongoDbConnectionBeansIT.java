@@ -37,13 +37,8 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                MongoDbConnectionBeansIT.class,
-                AbstractMongoDbITSupport.MongoConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, MongoDbConnectionBeansIT.class,
+        AbstractMongoDbITSupport.MongoConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class MongoDbConnectionBeansIT extends AbstractMongoDbITSupport {
     @Test
@@ -53,7 +48,8 @@ public class MongoDbConnectionBeansIT extends AbstractMongoDbITSupport {
         context.getComponent(SCHEME, MongoDbComponent.class).setMongoConnection(null);
         context.getRegistry().bind("myDb", client);
 
-        MongoDbEndpoint testEndpoint = context.getEndpoint("mongodb:anyName?mongoConnection=#myDb", MongoDbEndpoint.class);
+        MongoDbEndpoint testEndpoint = context.getEndpoint("mongodb:anyName?mongoConnection=#myDb",
+                MongoDbEndpoint.class);
 
         assertNotEquals("myDb", testEndpoint.getConnectionBean());
         assertEquals(client, testEndpoint.getMongoConnection());
@@ -80,7 +76,8 @@ public class MongoDbConnectionBeansIT extends AbstractMongoDbITSupport {
         context.getRegistry().bind("myDb", client1);
         context.getRegistry().bind("myDbS", client2);
 
-        MongoDbEndpoint testEndpoint = context.getEndpoint("mongodb:myDb?mongoConnection=#myDbS", MongoDbEndpoint.class);
+        MongoDbEndpoint testEndpoint = context.getEndpoint("mongodb:myDb?mongoConnection=#myDbS",
+                MongoDbEndpoint.class);
         MongoClient myDbS = context.getRegistry().lookupByNameAndType("myDbS", MongoClient.class);
 
         assertEquals("myDb", testEndpoint.getConnectionBean());

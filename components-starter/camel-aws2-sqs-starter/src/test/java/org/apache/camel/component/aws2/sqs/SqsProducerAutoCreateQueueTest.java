@@ -42,13 +42,8 @@ import java.util.Collection;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SqsProducerAutoCreateQueueTest.class,
-                SqsProducerAutoCreateQueueTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SqsProducerAutoCreateQueueTest.class,
+        SqsProducerAutoCreateQueueTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class SqsProducerAutoCreateQueueTest extends BaseSqs {
 
@@ -91,22 +86,22 @@ public class SqsProducerAutoCreateQueueTest extends BaseSqs {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseSqs.TestConfiguration {
+    public class TestConfiguration extends BaseSqs.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
-            final String sqsEndpointUri = String
-                    .format("aws2-sqs://%s?messageRetentionPeriod=%s&maximumMessageSize=%s&visibilityTimeout=%s&policy=%s&autoCreateQueue=true",
-                            sharedNameGenerator.getName(),
-                            "1209600", "65536", "60",
-                            "file:src/test/resources/org/apache/camel/component/aws2/sqs/policy.txt");
+            final String sqsEndpointUri = String.format(
+                    "aws2-sqs://%s?messageRetentionPeriod=%s&maximumMessageSize=%s&visibilityTimeout=%s&policy=%s&autoCreateQueue=true",
+                    sharedNameGenerator.getName(), "1209600", "65536", "60",
+                    "file:src/test/resources/org/apache/camel/component/aws2/sqs/policy.txt");
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:start").startupOrder(2).setHeader(Sqs2Constants.SQS_OPERATION, constant("sendBatchMessage"))
+                    from("direct:start").startupOrder(2)
+                            .setHeader(Sqs2Constants.SQS_OPERATION, constant("sendBatchMessage"))
                             .toF("aws2-sqs://%s?autoCreateQueue=true", "queue-2001");
 
-                    fromF("aws2-sqs://%s?deleteAfterRead=true&autoCreateQueue=true", "queue-2001")
-                            .startupOrder(1).log("${body}").to("mock:result");
+                    fromF("aws2-sqs://%s?deleteAfterRead=true&autoCreateQueue=true", "queue-2001").startupOrder(1)
+                            .log("${body}").to("mock:result");
                 }
             };
         }

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 
@@ -28,44 +27,33 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        SpringJsonPathCBRTest.class
-    },
-    properties = {
-        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringJsonPathCBTTest.xml"}
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SpringJsonPathCBRTest.class }, properties = {
+        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringJsonPathCBTTest.xml" }
 
 )
 public class SpringJsonPathCBRTest {
 
     @Autowired
     CamelContext context;
-    
+
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:cheap")
     MockEndpoint mockCheap;
-    
+
     @EndpointInject("mock:average")
     MockEndpoint mockAverage;
-    
+
     @EndpointInject("mock:expensive")
     MockEndpoint mockExpensive;
-
-   
-    
-    
 
     @Test
     public void testCheap() throws Exception {
@@ -81,7 +69,7 @@ public class SpringJsonPathCBRTest {
 
     @Test
     public void testAverage() throws Exception {
-        
+
         MockEndpoint.resetMocks(context);
         mockCheap.expectedMessageCount(0);
         mockAverage.expectedMessageCount(1);

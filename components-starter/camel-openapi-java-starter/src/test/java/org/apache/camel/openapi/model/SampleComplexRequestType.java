@@ -23,49 +23,49 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class SampleComplexRequestType extends GenericComplexRequestType<CustomData> {
-	@JsonProperty(required = true)
-	private String requestField1;
-	private String requestField2;
-	private List<String> listOfStrings;
-	private String[] arrayOfString;
-	private Map<String, String> mapOfStrings;
-	private TimeUnit timeUnit;
-	private InnerClass innerClass;
+    @JsonProperty(required = true)
+    private String requestField1;
+    private String requestField2;
+    private List<String> listOfStrings;
+    private String[] arrayOfString;
+    private Map<String, String> mapOfStrings;
+    private TimeUnit timeUnit;
+    private InnerClass innerClass;
 
-	public String getRequestField1() {
-		return requestField1;
-	}
+    public String getRequestField1() {
+        return requestField1;
+    }
 
-	public String getRequestField2() {
-		return requestField2;
-	}
+    public String getRequestField2() {
+        return requestField2;
+    }
 
-	public List<String> getListOfStrings() {
-		return listOfStrings;
-	}
+    public List<String> getListOfStrings() {
+        return listOfStrings;
+    }
 
-	public String[] getArrayOfString() {
-		return arrayOfString;
-	}
+    public String[] getArrayOfString() {
+        return arrayOfString;
+    }
 
-	@JsonProperty(required = true)
-	public Map<String, String> getMapOfStrings() {
-		return mapOfStrings;
-	}
+    @JsonProperty(required = true)
+    public Map<String, String> getMapOfStrings() {
+        return mapOfStrings;
+    }
 
-	public TimeUnit getTimeUnit() {
-		return timeUnit;
-	}
+    public TimeUnit getTimeUnit() {
+        return timeUnit;
+    }
 
-	public InnerClass getInnerClass() {
-		return innerClass;
-	}
+    public InnerClass getInnerClass() {
+        return innerClass;
+    }
 
-	public static class InnerClass {
-		private long longField;
+    public static class InnerClass {
+        private long longField;
 
-		public long getLongField() {
-			return longField;
-		}
-	}
+        public long getLongField() {
+            return longField;
+        }
+    }
 }

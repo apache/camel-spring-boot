@@ -36,20 +36,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractEncryptedPropertiesIvGeneratorAutoDetectionTest {
 
-    protected  final Logger LOG = LoggerFactory.getLogger(this.getClass());
+    protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
     protected static final String SUN_JCE_PROVIDER_NAME = "SunJCE";
     protected static final String BOUNCY_CASTLE_PROVIDER_NAME = "BC";
 
-
     String stringToEncrypt = "A password-cracker walks into a bar. Orders a beer. Then a Beer. Then a BEER. beer. b33r. BeeR. Be3r. bEeR. bE3R. BeEr";
-    //String password = "s0m3R@nD0mP@ssW0rD";
+    // String password = "s0m3R@nD0mP@ssW0rD";
 
     protected String provider;
 
     public static Properties loadAuthProperties() throws IOException {
         Properties properties = new Properties();
-        properties.load(AbstractEncryptedPropertiesIvGeneratorAutoDetectionTest.class.getClassLoader().getResourceAsStream("test.properties"));
+        properties.load(AbstractEncryptedPropertiesIvGeneratorAutoDetectionTest.class.getClassLoader()
+                .getResourceAsStream("test.properties"));
         return properties;
     }
 
@@ -69,7 +69,8 @@ public abstract class AbstractEncryptedPropertiesIvGeneratorAutoDetectionTest {
 
         EnvironmentStringPBEConfig environmentStringPBEConfig = new EnvironmentStringPBEConfig();
         environmentStringPBEConfig.setAlgorithm(algorithm);
-        environmentStringPBEConfig.setIvGenerator(isIVNeeded(algorithm)?new RandomIvGenerator():new NoIvGenerator());
+        environmentStringPBEConfig
+                .setIvGenerator(isIVNeeded(algorithm) ? new RandomIvGenerator() : new NoIvGenerator());
         environmentStringPBEConfig.setSaltGenerator(new RandomSaltGenerator());
         environmentStringPBEConfig.setProviderName(provider);
         environmentStringPBEConfig.setPassword(properties.getProperty("password"));
@@ -83,7 +84,7 @@ public abstract class AbstractEncryptedPropertiesIvGeneratorAutoDetectionTest {
         // Testing Decryption:
         String actualDecriptedString = standardPBEStringEncryptor.decrypt(encrypted);
 
-        //Assertions
+        // Assertions
         assertThat(actualDecriptedString).isEqualTo(stringToEncrypt);
     }
 

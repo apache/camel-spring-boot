@@ -35,13 +35,8 @@ import java.io.File;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                AntPathMatcherGenericFileFilterTest.class,
-                AntPathMatcherGenericFileFilterTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, AntPathMatcherGenericFileFilterTest.class,
+        AntPathMatcherGenericFileFilterTest.TestConfiguration.class })
 public class AntPathMatcherGenericFileFilterTest extends BaseFile {
 
     @EndpointInject("mock:result")
@@ -76,8 +71,7 @@ public class AntPathMatcherGenericFileFilterTest extends BaseFile {
                 public void configure() {
                     from(fileUri(
                             "files/ant-path?initialDelay=0&delay=10&recursive=true&antInclude=**/*.txt&antFilterCaseSensitive=true"))
-                            .convertBodyTo(String.class)
-                            .to("mock:result");
+                                    .convertBodyTo(String.class).to("mock:result");
                 }
             };
         }

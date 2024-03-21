@@ -32,12 +32,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletLocalBeanGroovyTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletLocalBeanGroovyTest.class, })
 
 public class KameletLocalBeanGroovyTest {
 
@@ -45,7 +40,7 @@ public class KameletLocalBeanGroovyTest {
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
-    MockEndpoint mock;   
+    MockEndpoint mock;
 
     @Test
     public void testOne() throws Exception {
@@ -70,15 +65,12 @@ public class KameletLocalBeanGroovyTest {
                 routeTemplate("whereTo")
                         .templateBean("myBar", "groovy",
                                 "def bean = new org.apache.camel.component.kamelet.springboot.MyInjectBar()\n"
-                                                         + "bean.bar = 'Gr8t'\n"
-                                                         + "return bean")
+                                        + "bean.bar = 'Gr8t'\n" + "return bean")
                         .from("kamelet:source")
                         // must use {{myBar}} to refer to the local bean
                         .to("bean:{{myBar}}");
 
-                from("direct:start")
-                        .kamelet("whereTo")
-                        .to("mock:result");
+                from("direct:start").kamelet("whereTo").to("mock:result");
             }
         };
     }

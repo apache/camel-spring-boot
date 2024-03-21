@@ -16,7 +16,6 @@
  */
 package org.apache.camel.dataformat.zipfile.springboot;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -38,7 +37,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -47,37 +45,28 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.junit5.TestSupport;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        ZipFileSplitOneFileTest.class,
-        ZipFileSplitOneFileTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ZipFileSplitOneFileTest.class,
+        ZipFileSplitOneFileTest.TestConfiguration.class })
 public class ZipFileSplitOneFileTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
-   
-    
+
     @EndpointInject("mock:end")
     MockEndpoint mockEnd;
-    
+
     @EndpointInject("mock:input")
     MockEndpoint mockInput;
-    
+
     @BeforeEach
     public void setUp() throws Exception {
         TestSupport.deleteDirectory("target/zip-unmarshal");
-        
+
     }
 
     @Test
@@ -105,22 +94,20 @@ public class ZipFileSplitOneFileTest {
                     zf.setUsingIterator(true);
 
                     from("file://target/zip-unmarshal?noop=true&include=.*zip").to("mock:input").unmarshal(zf)
-                        .split(bodyAs(Iterator.class)).streaming().convertBodyTo(String.class).to("mock:end")
-                        .end();
+                            .split(bodyAs(Iterator.class)).streaming().convertBodyTo(String.class).to("mock:end").end();
                 }
             };
         }
     }
-    
+
     private void createZipFile(String content) throws IOException {
         String basePath = "target" + File.separator + "zip-unmarshal" + File.separator;
         File file = new File(basePath + "test.txt");
         file.getParentFile().mkdirs();
 
-        try (FileWriter fw = new FileWriter(file);
-             FileOutputStream fos = new FileOutputStream(basePath + "test.zip");
-             ZipOutputStream zos = new ZipOutputStream(fos);
-             FileInputStream fis = new FileInputStream(basePath + "test.txt")) {
+        try (FileWriter fw = new FileWriter(file); FileOutputStream fos = new FileOutputStream(basePath + "test.zip");
+                ZipOutputStream zos = new ZipOutputStream(fos);
+                FileInputStream fis = new FileInputStream(basePath + "test.txt")) {
 
             fw.write(content);
             fw.close();

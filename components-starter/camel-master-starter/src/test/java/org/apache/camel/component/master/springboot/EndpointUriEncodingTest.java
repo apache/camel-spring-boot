@@ -41,15 +41,9 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.CamelContext;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        EndpointUriEncodingTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, EndpointUriEncodingTest.class, })
 
 public class EndpointUriEncodingTest {
 

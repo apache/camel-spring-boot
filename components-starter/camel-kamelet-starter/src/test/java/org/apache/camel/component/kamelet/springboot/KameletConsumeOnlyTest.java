@@ -32,15 +32,9 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletConsumeOnlyTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletConsumeOnlyTest.class, })
 
 public class KameletConsumeOnlyTest {
 
@@ -49,8 +43,7 @@ public class KameletConsumeOnlyTest {
 
     @Test
     public void canConsumeFromKamelet() {
-        assertThat(
-                consumer.receiveBody("kamelet:tick", Integer.class)).isEqualTo(1);
+        assertThat(consumer.receiveBody("kamelet:tick", Integer.class)).isEqualTo(1);
     }
 
     // **********************************************
@@ -64,11 +57,8 @@ public class KameletConsumeOnlyTest {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                routeTemplate("tick")
-                        .from("timer:{{routeId}}?repeatCount=1&delay=-1&includeMetadata=true")
-                        .setBody().exchangeProperty(Exchange.TIMER_COUNTER)
-                        .log("Body is ${body}")
-                        .to("kamelet:sink");
+                routeTemplate("tick").from("timer:{{routeId}}?repeatCount=1&delay=-1&includeMetadata=true").setBody()
+                        .exchangeProperty(Exchange.TIMER_COUNTER).log("Body is ${body}").to("kamelet:sink");
             }
         };
     }

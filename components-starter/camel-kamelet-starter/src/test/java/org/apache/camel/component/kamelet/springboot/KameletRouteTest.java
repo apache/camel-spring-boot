@@ -26,7 +26,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.FluentProducerTemplate;
 import org.apache.camel.CamelContext;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -38,12 +37,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletRouteTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletRouteTest.class, })
 
 public class KameletRouteTest {
 
@@ -57,16 +51,14 @@ public class KameletRouteTest {
     public void testSingle() {
         String body = UUID.randomUUID().toString();
 
-        assertThat(
-                fluentTemplate.toF("direct:single").withBody(body).request(String.class)).isEqualTo("a-" + body);
+        assertThat(fluentTemplate.toF("direct:single").withBody(body).request(String.class)).isEqualTo("a-" + body);
     }
 
     @Test
     public void testChain() {
         String body = UUID.randomUUID().toString();
 
-        assertThat(
-                fluentTemplate.toF("direct:chain").withBody(body).request(String.class)).isEqualTo("b-a-" + body);
+        assertThat(fluentTemplate.toF("direct:chain").withBody(body).request(String.class)).isEqualTo("b-a-" + body);
     }
 
     @Test
@@ -74,8 +66,7 @@ public class KameletRouteTest {
         RouteBuilder rb = new RouteBuilder(context) {
             @Override
             public void configure() {
-                from("direct:start")
-                        .to("kamelet:echo/test?prefix=test");
+                from("direct:start").to("kamelet:echo/test?prefix=test");
             }
         };
 
@@ -93,19 +84,12 @@ public class KameletRouteTest {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                routeTemplate("echo")
-                        .templateParameter("prefix")
-                        .from("kamelet:source")
-                        .setBody().simple("{{prefix}}-${body}");
+                routeTemplate("echo").templateParameter("prefix").from("kamelet:source").setBody()
+                        .simple("{{prefix}}-${body}");
 
-                from("direct:single").routeId("test")
-                        .to("kamelet:echo?prefix=a")
-                        .log("${body}");
+                from("direct:single").routeId("test").to("kamelet:echo?prefix=a").log("${body}");
 
-                from("direct:chain")
-                        .to("kamelet:echo/1?prefix=a")
-                        .to("kamelet:echo/2?prefix=b")
-                        .log("${body}");
+                from("direct:chain").to("kamelet:echo/1?prefix=a").to("kamelet:echo/2?prefix=b").log("${body}");
             }
         };
     }

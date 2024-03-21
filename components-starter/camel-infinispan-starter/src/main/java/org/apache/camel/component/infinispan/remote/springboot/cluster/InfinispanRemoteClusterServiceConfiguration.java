@@ -18,7 +18,7 @@ package org.apache.camel.component.infinispan.remote.springboot.cluster;
 
 import org.apache.camel.component.infinispan.remote.cluster.InfinispanRemoteClusterConfiguration;
 import org.infinispan.client.hotrod.RemoteCacheManager;
-import  org.infinispan.client.hotrod.configuration.Configuration;
+import org.infinispan.client.hotrod.configuration.Configuration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Map;

@@ -42,25 +42,11 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(
-    classes = {
-        CamelRestTest.class,
-        CamelRestTest.TestConfiguration.class
-    },
-    properties = {
-        "debug=false",
-        "camel.springboot.routes-include-pattern=false",
-        "camel.rest.enabled=true",
-        "camel.rest.component=dummy-rest",
-        "camel.rest.host=localhost",
-        "camel.rest.data-format-property.prettyPrint=true",
-        "camel.rest.api-property.api.title=My cool API",
-        "camel.rest.api-property.api.version=1.0.0",
-        "camel.rest.api-property.cors=true",
-        "camel.rest.cors-headers.foo=123",
-        "camel.rest.cors-headers.bar=456"
-    }
-)
+@SpringBootTest(classes = { CamelRestTest.class, CamelRestTest.TestConfiguration.class }, properties = { "debug=false",
+        "camel.springboot.routes-include-pattern=false", "camel.rest.enabled=true", "camel.rest.component=dummy-rest",
+        "camel.rest.host=localhost", "camel.rest.data-format-property.prettyPrint=true",
+        "camel.rest.api-property.api.title=My cool API", "camel.rest.api-property.api.version=1.0.0",
+        "camel.rest.api-property.cors=true", "camel.rest.cors-headers.foo=123", "camel.rest.cors-headers.bar=456" })
 public class CamelRestTest {
 
     @Autowired
@@ -97,10 +83,8 @@ public class CamelRestTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    rest("/say/hello")
-                        .get().to("direct:hello");
-                    from("direct:hello")
-                        .transform().constant("Hello World");
+                    rest("/say/hello").get().to("direct:hello");
+                    from("direct:hello").transform().constant("Hello World");
                 }
             };
         }
@@ -122,16 +106,9 @@ public class CamelRestTest {
         }
 
         @Override
-        public Consumer createConsumer(
-            CamelContext camelContext,
-            Processor processor,
-            String verb,
-            String basePath,
-            String uriTemplate,
-            String consumes,
-            String produces,
-            RestConfiguration configuration,
-            Map<String, Object> parameters) throws Exception {
+        public Consumer createConsumer(CamelContext camelContext, Processor processor, String verb, String basePath,
+                String uriTemplate, String consumes, String produces, RestConfiguration configuration,
+                Map<String, Object> parameters) throws Exception {
 
             // just use a seda endpoint for testing purpose
             String id;
@@ -157,12 +134,8 @@ public class CamelRestTest {
         }
 
         @Override
-        public Consumer createApiConsumer(
-            CamelContext camelContext,
-            Processor processor,
-            String contextPath,
-            RestConfiguration configuration,
-            Map<String, Object> parameters) throws Exception {
+        public Consumer createApiConsumer(CamelContext camelContext, Processor processor, String contextPath,
+                RestConfiguration configuration, Map<String, Object> parameters) throws Exception {
 
             // just use a seda endpoint for testing purpose
             String id = ClassicUuidGenerator.generateSanitizedId(contextPath);

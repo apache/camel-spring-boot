@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.gson.springboot;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,32 +37,24 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        GsonMarshalTest.class,
-        GsonMarshalTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, GsonMarshalTest.class,
+        GsonMarshalTest.TestConfiguration.class })
 public class GsonMarshalTest {
 
     @Autowired
     CamelContext context;
-    
+
     @Autowired
     ProducerTemplate template;
 
-    
     @EndpointInject("mock:reverse")
     MockEndpoint mock;
-    
+
     @EndpointInject("mock:reversePojo")
     MockEndpoint mockPojo;
 
-    
     @Test
     public void testMarshalAndUnmarshalMap() throws Exception {
         Map<String, String> in = new HashMap<>();
@@ -87,7 +78,6 @@ public class GsonMarshalTest {
         TestPojo in = new TestPojo();
         in.setName("Camel");
 
-        
         mockPojo.expectedMessageCount(1);
         mockPojo.message(0).body().isInstanceOf(TestPojo.class);
         mockPojo.message(0).body().isEqualTo(in);

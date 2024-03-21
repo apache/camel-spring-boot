@@ -34,9 +34,7 @@ public class ApplicationShutdownCustomizer implements CamelContextCustomizer {
     private final ApplicationContext applicationContext;
     private final ApplicationConfiguration config;
 
-    public ApplicationShutdownCustomizer(
-            ApplicationContext applicationContext,
-            ApplicationConfiguration config) {
+    public ApplicationShutdownCustomizer(ApplicationContext applicationContext, ApplicationConfiguration config) {
 
         this.applicationContext = applicationContext;
         this.config = config;
@@ -45,13 +43,11 @@ public class ApplicationShutdownCustomizer implements CamelContextCustomizer {
     @Override
     public void configure(CamelContext camelContext) {
         if (this.config.getShutdown().getMaxMessages() > 0) {
-            LOGGER.info(
-                    "Configure the JVM to terminate after {} messages and none inflight (strategy: {})",
-                    this.config.getShutdown().getMaxMessages(),
-                    this.config.getShutdown().getStrategy());
+            LOGGER.info("Configure the JVM to terminate after {} messages and none inflight (strategy: {})",
+                    this.config.getShutdown().getMaxMessages(), this.config.getShutdown().getStrategy());
 
-            camelContext.getManagementStrategy().addEventNotifier(
-                    new ShutdownEventHandler(applicationContext, camelContext, config));
+            camelContext.getManagementStrategy()
+                    .addEventNotifier(new ShutdownEventHandler(applicationContext, camelContext, config));
         }
     }
 
@@ -64,9 +60,7 @@ public class ApplicationShutdownCustomizer implements CamelContextCustomizer {
         private final AtomicInteger counter;
         private final AtomicBoolean shutdownStarted;
 
-        ShutdownEventHandler(
-                ApplicationContext applicationContext,
-                CamelContext camelContext,
+        ShutdownEventHandler(ApplicationContext applicationContext, CamelContext camelContext,
                 ApplicationConfiguration config) {
 
             this.applicationContext = applicationContext;
@@ -82,9 +76,7 @@ public class ApplicationShutdownCustomizer implements CamelContextCustomizer {
             final int currentInflight = camelContext.getInflightRepository().size();
 
             LOGGER.debug("CamelEvent received (max: {}, handled: {}, inflight: {})",
-                    config.getShutdown().getMaxMessages(),
-                    currentCounter,
-                    currentInflight);
+                    config.getShutdown().getMaxMessages(), currentCounter, currentInflight);
 
             if (currentCounter < config.getShutdown().getMaxMessages() || currentInflight != 0) {
                 return;
@@ -95,10 +87,10 @@ public class ApplicationShutdownCustomizer implements CamelContextCustomizer {
 
                     try {
                         LOGGER.info("Initiate runtime shutdown (max: {}, handled: {})",
-                                config.getShutdown().getMaxMessages(),
-                                currentCounter);
+                                config.getShutdown().getMaxMessages(), currentCounter);
 
-                        if (config.getShutdown().getStrategy() == ApplicationConfiguration.ShutdownStrategy.APPLICATION) {
+                        if (config.getShutdown()
+                                .getStrategy() == ApplicationConfiguration.ShutdownStrategy.APPLICATION) {
                             SpringApplication.exit(applicationContext, () -> 0);
                         } else {
                             camelContext.shutdown();
@@ -112,7 +104,8 @@ public class ApplicationShutdownCustomizer implements CamelContextCustomizer {
 
         @Override
         public boolean isEnabled(CamelEvent event) {
-            return (event instanceof CamelEvent.ExchangeCompletedEvent || event instanceof CamelEvent.ExchangeFailedEvent);
+            return (event instanceof CamelEvent.ExchangeCompletedEvent
+                    || event instanceof CamelEvent.ExchangeFailedEvent);
         }
     }
 }

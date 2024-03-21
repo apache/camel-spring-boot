@@ -32,12 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        LogListenerDiscoveryTest.MyLogListener.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, LogListenerDiscoveryTest.MyLogListener.class })
 public class LogListenerDiscoveryTest {
     @Autowired
     private CamelContext camelContext;

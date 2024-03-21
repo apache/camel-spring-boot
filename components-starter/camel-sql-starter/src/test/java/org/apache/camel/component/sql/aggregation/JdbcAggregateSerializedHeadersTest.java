@@ -47,14 +47,8 @@ import java.util.concurrent.TimeUnit;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                JdbcAggregateSerializedHeadersTest.class,
-                JdbcAggregateSerializedHeadersTest.TestConfiguration.class,
-                BaseSql.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JdbcAggregateSerializedHeadersTest.class,
+        JdbcAggregateSerializedHeadersTest.TestConfiguration.class, BaseSql.TestConfiguration.class })
 public class JdbcAggregateSerializedHeadersTest extends BaseSql {
 
     private static final Logger LOG = LoggerFactory.getLogger(JdbcAggregateSerializedHeadersTest.class);
@@ -100,8 +94,10 @@ public class JdbcAggregateSerializedHeadersTest extends BaseSql {
         }
 
         @Bean
-        public JdbcAggregationRepository jdbcAggregationRepository(DataSource dataSource, PlatformTransactionManager transactionManager) {
-            JdbcAggregationRepository repo = new JdbcAggregationRepository(transactionManager, "aggregationRepo1", dataSource);
+        public JdbcAggregationRepository jdbcAggregationRepository(DataSource dataSource,
+                PlatformTransactionManager transactionManager) {
+            JdbcAggregationRepository repo = new JdbcAggregationRepository(transactionManager, "aggregationRepo1",
+                    dataSource);
 
             repo.setAllowSerializedHeaders(true);
 
@@ -113,14 +109,9 @@ public class JdbcAggregateSerializedHeadersTest extends BaseSql {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("seda:start?size=" + SIZE)
-                            .to("log:input?groupSize=500")
-                            .aggregate(header("id"), new MyAggregationStrategy())
-                            .aggregationRepository(repo)
-                            .completionSize(SIZE)
-                            .to("log:output?showHeaders=true")
-                            .to("mock:result")
-                            .end();
+                    from("seda:start?size=" + SIZE).to("log:input?groupSize=500")
+                            .aggregate(header("id"), new MyAggregationStrategy()).aggregationRepository(repo)
+                            .completionSize(SIZE).to("log:output?showHeaders=true").to("mock:result").end();
                 }
             };
         }

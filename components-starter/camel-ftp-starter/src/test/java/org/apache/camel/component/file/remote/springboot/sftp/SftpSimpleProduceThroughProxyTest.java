@@ -41,14 +41,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SftpSimpleProduceThroughProxyTest.class,
-                SftpSimpleProduceThroughProxyTest.TestConfiguration.class
-        }
-)
-//Based on SftpSimpleProduceThroughProxyIT
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SftpSimpleProduceThroughProxyTest.class,
+        SftpSimpleProduceThroughProxyTest.TestConfiguration.class })
+// Based on SftpSimpleProduceThroughProxyIT
 public class SftpSimpleProduceThroughProxyTest extends BaseSftp {
 
     private static HttpProxyServer proxyServer;
@@ -56,8 +51,7 @@ public class SftpSimpleProduceThroughProxyTest extends BaseSftp {
 
     @BeforeAll
     public static void setupProxy() {
-        proxyServer = DefaultHttpProxyServer.bootstrap()
-                .withPort(proxyPort)
+        proxyServer = DefaultHttpProxyServer.bootstrap().withPort(proxyPort)
                 .withProxyAuthenticator(new ProxyAuthenticator() {
                     @Override
                     public boolean authenticate(String userName, String password) {
@@ -79,10 +73,8 @@ public class SftpSimpleProduceThroughProxyTest extends BaseSftp {
     @Test
     public void testSftpSimpleProduceThroughProxy() {
         template.sendBodyAndHeader(
-                "sftp://localhost:" + getPort() + "/" + getRootDir()
-                                   + "?username=admin&password=admin&proxy=#proxy",
-                "Hello World", Exchange.FILE_NAME,
-                "hello.txt");
+                "sftp://localhost:" + getPort() + "/" + getRootDir() + "?username=admin&password=admin&proxy=#proxy",
+                "Hello World", Exchange.FILE_NAME, "hello.txt");
 
         File file = ftpFile("hello.txt").toFile();
         assertTrue(file.exists(), "File should exist: " + file);
@@ -93,9 +85,8 @@ public class SftpSimpleProduceThroughProxyTest extends BaseSftp {
     public void testSftpSimpleSubPathProduceThroughProxy() {
         template.sendBodyAndHeader(
                 "sftp://localhost:" + getPort() + "/" + getRootDir()
-                                   + "/mysub?username=admin&password=admin&proxy=#proxy",
-                "Bye World", Exchange.FILE_NAME,
-                "bye.txt");
+                        + "/mysub?username=admin&password=admin&proxy=#proxy",
+                "Bye World", Exchange.FILE_NAME, "bye.txt");
 
         File file = ftpFile("mysub/bye.txt").toFile();
         assertTrue(file.exists(), "File should exist: " + file);
@@ -104,25 +95,22 @@ public class SftpSimpleProduceThroughProxyTest extends BaseSftp {
 
     @Test
     public void testSftpSimpleTwoSubPathProduceThroughProxy() {
-        template.sendBodyAndHeader("sftp://localhost:" + getPort() + "/" + getRootDir()
-                                   + "/mysub/myother?username=admin&password=admin&proxy=#proxy",
-                "Farewell World",
-                Exchange.FILE_NAME, "farewell.txt");
+        template.sendBodyAndHeader(
+                "sftp://localhost:" + getPort() + "/" + getRootDir()
+                        + "/mysub/myother?username=admin&password=admin&proxy=#proxy",
+                "Farewell World", Exchange.FILE_NAME, "farewell.txt");
 
         File file = ftpFile("mysub/myother/farewell.txt").toFile();
         assertTrue(file.exists(), "File should exist: " + file);
         assertEquals("Farewell World", context.getTypeConverter().convertTo(String.class, file));
     }
 
-
-
-
     // *************************************
     // Config
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseFtp.TestConfiguration {
+    public class TestConfiguration extends BaseFtp.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
 

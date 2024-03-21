@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelTwilioTest extends AbstractSpringBootTestSupport {
 
@@ -33,11 +32,9 @@ public class CamelTwilioTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelTwilioTest.class))
+        return new ITestConfigBuilder().module(inferModuleName(CamelTwilioTest.class))
                 .systemProperty("camel.component.twilio.username", "aaa")
-                .systemProperty("camel.component.twilio.password", "bbb")
-                .build();
+                .systemProperty("camel.component.twilio.password", "bbb").build();
     }
 
     @Test

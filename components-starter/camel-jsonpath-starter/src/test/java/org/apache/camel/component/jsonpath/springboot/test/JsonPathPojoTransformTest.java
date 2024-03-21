@@ -16,15 +16,12 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,16 +30,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathPojoTransformTest.class,
-        JsonPathPojoTransformTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathPojoTransformTest.class,
+        JsonPathPojoTransformTest.TestConfiguration.class })
 public class JsonPathPojoTransformTest {
 
     @Autowired
@@ -65,8 +56,6 @@ public class JsonPathPojoTransformTest {
         mock.assertIsSatisfied();
     }
 
-    
-
     // *************************************
     // Config
     // *************************************
@@ -79,9 +68,7 @@ public class JsonPathPojoTransformTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                            .transform().jsonpath("$.type")
-                            .to("mock:type");
+                    from("direct:start").transform().jsonpath("$.type").to("mock:type");
                 }
             };
         }

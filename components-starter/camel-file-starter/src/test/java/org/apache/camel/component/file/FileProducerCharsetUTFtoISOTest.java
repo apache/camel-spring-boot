@@ -32,20 +32,14 @@ import java.nio.file.Files;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 /**
  *
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileProducerCharsetUTFtoISOTest.class,
-                FileProducerCharsetUTFtoISOTest.TestConfiguration.class
-        }
-)
-//Based on FileProducerCharsetUTFtoISOTest
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileProducerCharsetUTFtoISOTest.class,
+        FileProducerCharsetUTFtoISOTest.TestConfiguration.class })
+// Based on FileProducerCharsetUTFtoISOTest
 public class FileProducerCharsetUTFtoISOTest extends BaseFile {
 
     private static final String DATA = "ABC\u00e6";

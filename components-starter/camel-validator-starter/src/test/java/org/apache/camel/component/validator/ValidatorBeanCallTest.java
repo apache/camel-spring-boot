@@ -34,12 +34,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                ValidatorBeanCallTest.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ValidatorBeanCallTest.class })
 public class ValidatorBeanCallTest extends ContextTestSupport {
 
     @Test
@@ -47,10 +42,9 @@ public class ValidatorBeanCallTest extends ContextTestSupport {
         validEndpoint.expectedMessageCount(1);
         invalidEndpoint.expectedMessageCount(0);
 
-        template
-                .sendBody("direct:rootPath",
-                        "<report xmlns='http://foo.com/report' xmlns:rb='http://foo.com/report-base'><author><rb:name>Knuth</rb:name></author><content><rb:chapter><rb:subject></rb:subject>"
-                                             + "<rb:abstract></rb:abstract><rb:body></rb:body></rb:chapter></content></report>");
+        template.sendBody("direct:rootPath",
+                "<report xmlns='http://foo.com/report' xmlns:rb='http://foo.com/report-base'><author><rb:name>Knuth</rb:name></author><content><rb:chapter><rb:subject></rb:subject>"
+                        + "<rb:abstract></rb:abstract><rb:body></rb:body></rb:chapter></content></report>");
 
         MockEndpoint.assertIsSatisfied(validEndpoint, invalidEndpoint);
     }

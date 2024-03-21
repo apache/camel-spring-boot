@@ -21,4 +21,4 @@ import org.apache.camel.component.salesforce.api.dto.AbstractQueryRecordsBase;
 //CHECKSTYLE:OFF
 public class QueryRecordsLine_Item__c extends AbstractQueryRecordsBase<Line_Item__c> {
 }
-//CHECKSTYLE:ON
+// CHECKSTYLE:ON

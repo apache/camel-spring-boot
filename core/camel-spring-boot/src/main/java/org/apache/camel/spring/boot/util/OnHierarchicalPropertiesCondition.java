@@ -34,7 +34,8 @@ import org.springframework.util.MultiValueMap;
 public class OnHierarchicalPropertiesCondition extends SpringBootCondition {
     @Override
     public ConditionOutcome getMatchOutcome(ConditionContext context, AnnotatedTypeMetadata metadata) {
-        MultiValueMap<String, Object> attributes = metadata.getAllAnnotationAttributes(ConditionalOnHierarchicalProperties.class.getName());
+        MultiValueMap<String, Object> attributes = metadata
+                .getAllAnnotationAttributes(ConditionalOnHierarchicalProperties.class.getName());
         List<String> values = new ArrayList<>();
 
         for (AnnotationAttributes attribute : annotationAttributesFromMultiValueMap(attributes)) {
@@ -45,19 +46,19 @@ public class OnHierarchicalPropertiesCondition extends SpringBootCondition {
         }
 
         if (values.isEmpty()) {
-            return ConditionOutcome.match( ConditionMessage.forCondition("no condition").because("no conditions"));
+            return ConditionOutcome.match(ConditionMessage.forCondition("no condition").because("no conditions"));
         }
 
         final ConditionMessage.Builder message = ConditionMessage.forCondition(values.get(0));
         final Environment environment = context.getEnvironment();
 
         return HierarchicalPropertiesEvaluator.evaluate(environment, values)
-            ? ConditionOutcome.match(message.because("enabled"))
-            : ConditionOutcome.noMatch(message.because("not enabled"));
+                ? ConditionOutcome.match(message.because("enabled"))
+                : ConditionOutcome.noMatch(message.because("not enabled"));
     }
 
     private List<AnnotationAttributes> annotationAttributesFromMultiValueMap(
-        MultiValueMap<String, Object> multiValueMap) {
+            MultiValueMap<String, Object> multiValueMap) {
         List<Map<String, Object>> maps = new ArrayList<>();
         multiValueMap.forEach((key, value) -> {
             for (int i = 0; i < value.size(); i++) {

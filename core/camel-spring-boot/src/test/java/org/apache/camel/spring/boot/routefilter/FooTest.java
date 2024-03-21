@@ -27,8 +27,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @CamelSpringBootTest
 @SpringBootApplication()
-@SpringBootTest(classes = FooTest.class,
-    properties = {"camel.springboot.java-routes-exclude-pattern=**/Bar*,**/Drink*"})
+@SpringBootTest(classes = FooTest.class, properties = {
+        "camel.springboot.java-routes-exclude-pattern=**/Bar*,**/Drink*" })
 public class FooTest {
 
     @Autowired

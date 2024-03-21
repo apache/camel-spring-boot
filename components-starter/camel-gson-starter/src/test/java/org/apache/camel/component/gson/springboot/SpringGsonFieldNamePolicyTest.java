@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.gson.springboot;
 
-
 import com.google.gson.FieldNamingPolicy;
 
 import org.apache.camel.ProducerTemplate;
@@ -34,30 +33,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        SpringGsonFieldNamePolicyTest.class
-    },
-    properties = {
-        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringGsonFieldNamePolicyTest.xml"}
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SpringGsonFieldNamePolicyTest.class }, properties = {
+        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringGsonFieldNamePolicyTest.xml" }
 
 )
 public class SpringGsonFieldNamePolicyTest {
 
-    
     @Autowired
     ProducerTemplate template;
 
-    
-  
-    
-    
-    
-    @Bean(name = "gson") 
+    @Bean(name = "gson")
     GsonDataFormat getGsonDataFormat() {
         GsonDataFormat gsonDataformat = new GsonDataFormat();
         gsonDataformat.setUnmarshalTypeName("org.apache.camel.component.gson.springboot.PersonPojo");

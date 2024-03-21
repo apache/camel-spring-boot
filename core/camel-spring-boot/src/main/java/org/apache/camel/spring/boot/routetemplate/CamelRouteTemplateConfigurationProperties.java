@@ -37,5 +37,3 @@ public class CamelRouteTemplateConfigurationProperties {
         this.config = config;
     }
 }
-
-

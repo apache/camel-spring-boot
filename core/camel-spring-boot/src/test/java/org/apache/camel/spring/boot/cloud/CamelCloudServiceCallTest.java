@@ -39,12 +39,8 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 @DirtiesContext
 @CamelSpringBootTest
 @SpringBootApplication
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        CamelCloudServiceCallTest.TestConfiguration.class,
-        CamelCloudServiceCallTest.SpringBootPropertySourceConfig.class
-    }
+@SpringBootTest(classes = { CamelAutoConfiguration.class, CamelCloudServiceCallTest.TestConfiguration.class,
+        CamelCloudServiceCallTest.SpringBootPropertySourceConfig.class }
 
 )
 @Disabled("TODO: Fix me later")
@@ -55,9 +51,9 @@ public class CamelCloudServiceCallTest {
     @Test
     public void testServiceCall() throws Exception {
         Assertions.assertEquals(String.valueOf(SpringBootPropertyUtil.PORT1),
-            template.requestBody("direct:start", null, String.class));
+                template.requestBody("direct:start", null, String.class));
         Assertions.assertEquals(String.valueOf(SpringBootPropertyUtil.PORT3),
-            template.requestBody("direct:start", null, String.class));
+                template.requestBody("direct:start", null, String.class));
     }
 
     // *************************************
@@ -71,41 +67,37 @@ public class CamelCloudServiceCallTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                        .serviceCall("custom-svc-list/hello");
+                    from("direct:start").serviceCall("custom-svc-list/hello");
 
-                    fromF("jetty:http://localhost:%d/hello", SpringBootPropertyUtil.PORT1)
-                        .transform()
-                        .constant(SpringBootPropertyUtil.PORT1);
-                    fromF("jetty:http://localhost:%d/hello", SpringBootPropertyUtil.PORT2)
-                        .transform()
-                        .constant(SpringBootPropertyUtil.PORT2);
-                    fromF("jetty:http://localhost:%d/hello", SpringBootPropertyUtil.PORT3)
-                        .transform()
-                        .constant(SpringBootPropertyUtil.PORT3);
+                    fromF("jetty:http://localhost:%d/hello", SpringBootPropertyUtil.PORT1).transform()
+                            .constant(SpringBootPropertyUtil.PORT1);
+                    fromF("jetty:http://localhost:%d/hello", SpringBootPropertyUtil.PORT2).transform()
+                            .constant(SpringBootPropertyUtil.PORT2);
+                    fromF("jetty:http://localhost:%d/hello", SpringBootPropertyUtil.PORT3).transform()
+                            .constant(SpringBootPropertyUtil.PORT3);
                 }
             };
         }
     }
-    
+
     private static Properties getAllProperties() {
-        
+
         Properties prop = new Properties();
         prop.put("service.name", "custom-svc-list");
         prop.put("camel.cloud.load-balancer.enabled", false);
         prop.put("camel.cloud.service-call.component", "http");
-        prop.put("camel.cloud.service-discovery.services[custom-svc-list]", SpringBootPropertyUtil.getDiscoveryServices());
-        prop.put("camel.cloud.service-filter.blacklist[custom-svc-list]", SpringBootPropertyUtil.getServiceFilterBlacklist());
+        prop.put("camel.cloud.service-discovery.services[custom-svc-list]",
+                SpringBootPropertyUtil.getDiscoveryServices());
+        prop.put("camel.cloud.service-filter.blacklist[custom-svc-list]",
+                SpringBootPropertyUtil.getServiceFilterBlacklist());
         prop.put("debug", false);
         return prop;
     }
-    
-   
-   
+
     // *************************************
     // Config
-    // 
-    
+    //
+
     @Configuration
     public static class SpringBootPropertySourceConfig {
 
@@ -117,11 +109,11 @@ public class CamelCloudServiceCallTest {
         public MutablePropertySources springBootPropertySource() {
 
             MutablePropertySources sources = env.getPropertySources();
-            sources.addFirst(new PropertiesPropertySource("boot-test-property", CamelCloudServiceCallTest.getAllProperties()));
+            sources.addFirst(
+                    new PropertiesPropertySource("boot-test-property", CamelCloudServiceCallTest.getAllProperties()));
             return sources;
 
         }
     }
-    
-   
+
 }

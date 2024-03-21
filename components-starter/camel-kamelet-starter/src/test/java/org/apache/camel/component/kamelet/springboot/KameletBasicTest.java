@@ -36,15 +36,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletBasicTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletBasicTest.class, })
 
 public class KameletBasicTest {
 
@@ -61,20 +55,17 @@ public class KameletBasicTest {
     public void canProduceToKamelet() {
         String body = UUID.randomUUID().toString();
 
-        assertThat(
-                fluentTemplate.toF("kamelet:setBody/test?bodyValue=%s", body).request(String.class)).isEqualTo(body);
+        assertThat(fluentTemplate.toF("kamelet:setBody/test?bodyValue=%s", body).request(String.class)).isEqualTo(body);
     }
 
     @Test
     public void canConsumeFromKamelet() {
-        assertThat(
-                consumer.receiveBody("kamelet:tick", Integer.class)).isEqualTo(1);
+        assertThat(consumer.receiveBody("kamelet:tick", Integer.class)).isEqualTo(1);
     }
 
     @Test
     public void kameletCanBeCreatedWhileContextIsStarting() {
-        assertThat(
-                fluentTemplate.to("direct:templateEmbedded").request(String.class)).isEqualTo("embedded");
+        assertThat(fluentTemplate.to("direct:templateEmbedded").request(String.class)).isEqualTo("embedded");
     }
 
     @Test
@@ -82,12 +73,10 @@ public class KameletBasicTest {
         String body = UUID.randomUUID().toString();
 
         RouteBuilder.addRoutes(context, b -> {
-            b.from("direct:templateAfter")
-                    .toF("kamelet:setBody/test?bodyValue=%s", body);
+            b.from("direct:templateAfter").toF("kamelet:setBody/test?bodyValue=%s", body);
         });
 
-        assertThat(
-                fluentTemplate.to("direct:templateAfter").request(String.class)).isEqualTo(body);
+        assertThat(fluentTemplate.to("direct:templateAfter").request(String.class)).isEqualTo(body);
     }
 
     // **********************************************
@@ -100,18 +89,13 @@ public class KameletBasicTest {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                routeTemplate("setBody")
-                        .templateParameter("bodyValue")
-                        .from("kamelet:source")
-                        .setBody().constant("{{bodyValue}}");
+                routeTemplate("setBody").templateParameter("bodyValue").from("kamelet:source").setBody()
+                        .constant("{{bodyValue}}");
 
-                routeTemplate("tick")
-                        .from("timer:{{routeId}}?repeatCount=1&delay=-1&includeMetadata=true")
-                        .setBody().exchangeProperty(Exchange.TIMER_COUNTER)
-                        .to("kamelet:sink");
+                routeTemplate("tick").from("timer:{{routeId}}?repeatCount=1&delay=-1&includeMetadata=true").setBody()
+                        .exchangeProperty(Exchange.TIMER_COUNTER).to("kamelet:sink");
 
-                from("direct:templateEmbedded")
-                        .toF("kamelet:setBody/embedded?bodyValue=embedded");
+                from("direct:templateEmbedded").toF("kamelet:setBody/embedded?bodyValue=embedded");
             }
         };
     }

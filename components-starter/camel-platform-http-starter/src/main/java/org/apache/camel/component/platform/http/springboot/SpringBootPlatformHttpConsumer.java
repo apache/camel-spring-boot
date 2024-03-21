@@ -52,7 +52,6 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements S
         return (PlatformHttpEndpoint) super.getEndpoint();
     }
 
-
     /**
      * This method is invoked by Spring Boot when invoking Camel via platform-http
      */
@@ -89,10 +88,8 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements S
         // set context path as header
         String httpPath = (String) exchange.getIn().getHeader(Exchange.HTTP_PATH);
         // here we just remove the CamelServletContextPath part from the HTTP_PATH
-        if (contextPath != null
-            && httpPath.startsWith(contextPath)) {
-            exchange.getIn().setHeader(Exchange.HTTP_PATH,
-                    httpPath.substring(contextPath.length()));
+        if (contextPath != null && httpPath.startsWith(contextPath)) {
+            exchange.getIn().setHeader(Exchange.HTTP_PATH, httpPath.substring(contextPath.length()));
         }
 
         // TODO: async with CompletionStage returned to spring boot?
@@ -115,7 +112,8 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements S
         }
     }
 
-    protected void afterProcess(HttpServletResponse response, Exchange exchange, boolean rethrow) throws IOException, ServletException {
+    protected void afterProcess(HttpServletResponse response, Exchange exchange, boolean rethrow)
+            throws IOException, ServletException {
         try {
             // now lets output to the res
             if (LOG.isTraceEnabled()) {

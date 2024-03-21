@@ -36,12 +36,12 @@ public class GcpVaultConfigurationProperties {
      * Define if we want to use the GCP Client Default Instance or not
      */
     private boolean useDefaultInstance;
-    
+
     /**
      * Define the Google Pubsub subscription Name to be used when checking for updates
      */
     private String subscriptionName;
-    
+
     /**
      * Define if we want to refresh the secrets on update
      */
@@ -81,35 +81,35 @@ public class GcpVaultConfigurationProperties {
         this.useDefaultInstance = useDefaultInstance;
     }
 
-	public String getSubscriptionName() {
-		return subscriptionName;
-	}
+    public String getSubscriptionName() {
+        return subscriptionName;
+    }
 
-	public void setSubscriptionName(String subscriptionName) {
-		this.subscriptionName = subscriptionName;
-	}
+    public void setSubscriptionName(String subscriptionName) {
+        this.subscriptionName = subscriptionName;
+    }
 
-	public boolean isRefreshEnabled() {
-		return refreshEnabled;
-	}
+    public boolean isRefreshEnabled() {
+        return refreshEnabled;
+    }
 
-	public void setRefreshEnabled(boolean refreshEnabled) {
-		this.refreshEnabled = refreshEnabled;
-	}
+    public void setRefreshEnabled(boolean refreshEnabled) {
+        this.refreshEnabled = refreshEnabled;
+    }
 
-	public long getRefreshPeriod() {
-		return refreshPeriod;
-	}
+    public long getRefreshPeriod() {
+        return refreshPeriod;
+    }
 
-	public void setRefreshPeriod(long refreshPeriod) {
-		this.refreshPeriod = refreshPeriod;
-	}
+    public void setRefreshPeriod(long refreshPeriod) {
+        this.refreshPeriod = refreshPeriod;
+    }
 
-	public String getSecrets() {
-		return secrets;
-	}
+    public String getSecrets() {
+        return secrets;
+    }
 
-	public void setSecrets(String secrets) {
-		this.secrets = secrets;
-	}
+    public void setSecrets(String secrets) {
+        this.secrets = secrets;
+    }
 }

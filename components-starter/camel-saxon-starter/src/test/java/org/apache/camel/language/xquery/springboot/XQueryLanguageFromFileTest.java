@@ -16,8 +16,6 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
@@ -25,7 +23,6 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,21 +34,15 @@ import org.junit.jupiter.api.Test;
 
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        XQueryLanguageFromFileTest.class,
-        XQueryLanguageFromFileTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, XQueryLanguageFromFileTest.class,
+        XQueryLanguageFromFileTest.TestConfiguration.class })
 public class XQueryLanguageFromFileTest extends FromFileBase {
 
     @Autowired
     private CamelContext context;
-    
+
     @Autowired
     ProducerTemplate template;
 
@@ -60,14 +51,13 @@ public class XQueryLanguageFromFileTest extends FromFileBase {
 
     @EndpointInject("mock:other")
     MockEndpoint other;
-    
+
     @Test
     public void testXQueryFromFile() throws Exception {
-        
+
         mock.expectedMessageCount(1);
         mock.message(0).body(String.class).contains("Hello World");
 
-        
         other.expectedMessageCount(1);
         other.message(0).body(String.class).contains("Bye World");
 
@@ -82,7 +72,6 @@ public class XQueryLanguageFromFileTest extends FromFileBase {
         MockEndpoint.assertIsSatisfied(context);
     }
 
-    
     // *************************************
     // Config
     // *************************************
@@ -95,13 +84,8 @@ public class XQueryLanguageFromFileTest extends FromFileBase {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from(fileUri())
-                            .choice()
-                            .when().xquery("/mail/@from = 'davsclaus@apache.org'")
-                            .convertBodyTo(String.class)
-                            .to("mock:davsclaus")
-                            .otherwise()
-                            .convertBodyTo(String.class)
+                    from(fileUri()).choice().when().xquery("/mail/@from = 'davsclaus@apache.org'")
+                            .convertBodyTo(String.class).to("mock:davsclaus").otherwise().convertBodyTo(String.class)
                             .to("mock:other");
                 }
             };

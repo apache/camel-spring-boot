@@ -52,135 +52,108 @@ import io.swagger.v3.oas.models.OpenAPI;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				ComplexTypesTest.class,
-				ComplexTypesTest.TestConfiguration.class,
-				DummyRestConsumerFactory.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ComplexTypesTest.class,
+        ComplexTypesTest.TestConfiguration.class, DummyRestConsumerFactory.class })
 public class ComplexTypesTest {
-	private static final Logger LOG = LoggerFactory.getLogger(ComplexTypesTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ComplexTypesTest.class);
 
-	@SuppressWarnings("unused")
-	@BindToRegistry("dummy-rest")
-	private final DummyRestConsumerFactory factory = new DummyRestConsumerFactory();
+    @SuppressWarnings("unused")
+    @BindToRegistry("dummy-rest")
+    private final DummyRestConsumerFactory factory = new DummyRestConsumerFactory();
 
-	@Autowired
-	CamelContext context;
+    @Autowired
+    CamelContext context;
 
-	// *************************************
-	// Config
-	// *************************************
+    // *************************************
+    // Config
+    // *************************************
 
-	@Configuration
-	public class TestConfiguration {
+    @Configuration
+    public class TestConfiguration {
 
-		@Bean
-		public RouteBuilder routeBuilder() {
-			return new RouteBuilder() {
+        @Bean
+        public RouteBuilder routeBuilder() {
+            return new RouteBuilder() {
 
-				@Override
-				public void configure() throws Exception {
-					rest().securityDefinitions()
-							.oauth2("global")
-							.accessCode("https://AUTHORIZATION_URL", "https://TOKEN_URL")
-							.withScope("groups", "Required scopes for Camel REST APIs");
+                @Override
+                public void configure() throws Exception {
+                    rest().securityDefinitions().oauth2("global")
+                            .accessCode("https://AUTHORIZATION_URL", "https://TOKEN_URL")
+                            .withScope("groups", "Required scopes for Camel REST APIs");
 
-					rest().post("/complexRequest")
-							.description("Demo complex request type")
-							.type(SampleComplexRequestType.class)
-							.consumes("application/json")
-							.produces("text/plain")
-							.bindingMode(RestBindingMode.json)
-							.responseMessage()
-							.code(200)
-							.message("Receives a complex object as parameter")
-							.endResponseMessage()
-							.outType(SampleComplexResponseType.InnerClass.class)
-							.to("direct:request");
-					from("direct:request")
-							.routeId("complex request type")
-							.log("/complex request invoked");
+                    rest().post("/complexRequest").description("Demo complex request type")
+                            .type(SampleComplexRequestType.class).consumes("application/json").produces("text/plain")
+                            .bindingMode(RestBindingMode.json).responseMessage().code(200)
+                            .message("Receives a complex object as parameter").endResponseMessage()
+                            .outType(SampleComplexResponseType.InnerClass.class).to("direct:request");
+                    from("direct:request").routeId("complex request type").log("/complex request invoked");
 
-					rest().get("/complexResponse")
-							.description("Demo complex response type")
-							.type(SampleComplexRequestType.InnerClass.class)
-							.consumes("application/json")
-							.outType(SampleComplexResponseType.class)
-							.produces("application/json")
-							.bindingMode(RestBindingMode.json)
-							.responseMessage()
-							.code(200)
-							.message("Returns a complex object")
-							.endResponseMessage()
-							.to("direct:response");
+                    rest().get("/complexResponse").description("Demo complex response type")
+                            .type(SampleComplexRequestType.InnerClass.class).consumes("application/json")
+                            .outType(SampleComplexResponseType.class).produces("application/json")
+                            .bindingMode(RestBindingMode.json).responseMessage().code(200)
+                            .message("Returns a complex object").endResponseMessage().to("direct:response");
 
-					from("direct:response")
-							.routeId("complex response type")
-							.log("/complex invoked")
-							.setBody(constant(new SampleComplexResponseType()));
-				}
-			};
-		}
-	}
+                    from("direct:response").routeId("complex response type").log("/complex invoked")
+                            .setBody(constant(new SampleComplexResponseType()));
+                }
+            };
+        }
+    }
 
-	@Test
-	public void testV3SchemaForComplexTypesRequest() throws Exception {
-		checkSchemaGeneration("/complexRequest", "3.0", "V3SchemaForComplexTypesRequest.json");
-	}
+    @Test
+    public void testV3SchemaForComplexTypesRequest() throws Exception {
+        checkSchemaGeneration("/complexRequest", "3.0", "V3SchemaForComplexTypesRequest.json");
+    }
 
-	@Test
-	public void testV3SchemaForComplexTypesResponse() throws Exception {
-		checkSchemaGeneration("/complexResponse", "3.0", "V3SchemaForComplexTypesResponse.json");
-	}
+    @Test
+    public void testV3SchemaForComplexTypesResponse() throws Exception {
+        checkSchemaGeneration("/complexResponse", "3.0", "V3SchemaForComplexTypesResponse.json");
+    }
 
-	private void checkSchemaGeneration(String uri, String apiVersion, String schemaResource) throws Exception {
-		BeanConfig config = getBeanConfig(apiVersion);
+    private void checkSchemaGeneration(String uri, String apiVersion, String schemaResource) throws Exception {
+        BeanConfig config = getBeanConfig(apiVersion);
 
-		List<RestDefinition> rests = ((ModelCamelContext) context).getRestDefinitions().stream()
-				// So we get the security schema and the route schema
-				.filter(def -> def.getVerbs().isEmpty() || def.getVerbs().get(0).getPath().equals(uri))
-				.collect(Collectors.toList());
+        List<RestDefinition> rests = ((ModelCamelContext) context).getRestDefinitions().stream()
+                // So we get the security schema and the route schema
+                .filter(def -> def.getVerbs().isEmpty() || def.getVerbs().get(0).getPath().equals(uri))
+                .collect(Collectors.toList());
 
-		RestOpenApiReader reader = new RestOpenApiReader();
-		OpenAPI openApi = reader.read(context, rests, config, context.getName(), new DefaultClassResolver());
-		assertNotNull(openApi);
-		String json = RestOpenApiSupport.getJsonFromOpenAPIAsString(openApi, config);
+        RestOpenApiReader reader = new RestOpenApiReader();
+        OpenAPI openApi = reader.read(context, rests, config, context.getName(), new DefaultClassResolver());
+        assertNotNull(openApi);
+        String json = RestOpenApiSupport.getJsonFromOpenAPIAsString(openApi, config);
 
-		LOG.info(json);
+        LOG.info(json);
 
-		json = generify(json);
+        json = generify(json);
 
-		InputStream is = getClass().getClassLoader().getResourceAsStream("org/apache/camel/openapi/" + schemaResource);
-		assertNotNull(is);
-		String expected = new BufferedReader(
-				new InputStreamReader(is, StandardCharsets.UTF_8))
-				.lines()
-				.collect(Collectors.joining("\n"));
-		is.close();
+        InputStream is = getClass().getClassLoader().getResourceAsStream("org/apache/camel/openapi/" + schemaResource);
+        assertNotNull(is);
+        String expected = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8)).lines()
+                .collect(Collectors.joining("\n"));
+        is.close();
 
-		assertEquals(expected, json);
-	}
+        assertEquals(expected, json);
+    }
 
-	private BeanConfig getBeanConfig(String apiVersion) {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		config.setTitle("Camel User store");
-		config.setLicense("Apache 2.0");
-		config.setLicenseUrl("https://www.apache.org/licenses/LICENSE-2.0.html");
-		config.setVersion(apiVersion);
-		return config;
-	}
+    private BeanConfig getBeanConfig(String apiVersion) {
+        BeanConfig config = new BeanConfig();
+        config.setHost("localhost:8080");
+        config.setSchemes(new String[] { "http" });
+        config.setBasePath("/api");
+        config.setTitle("Camel User store");
+        config.setLicense("Apache 2.0");
+        config.setLicenseUrl("https://www.apache.org/licenses/LICENSE-2.0.html");
+        config.setVersion(apiVersion);
+        return config;
+    }
 
-	private String generify(String input) {
-		input = input.replaceAll("\"openapi\" : \"3\\..*\",", "\"openapi\" : \"3.x\",");
-		input = input.replaceAll("\"swagger\" : \"2\\..*\",", "\"swagger\" : \"2.x\",");
-		input = input.replaceAll("\"operationId\" : \"verb.*\",", "\"operationId\" : \"verb\",");
-		input = input.replaceAll("\"x-camelContextId\" : \"camel.*\"", "\"x-camelContextId\" : \"camel\"");
-		return input;
-	}
+    private String generify(String input) {
+        input = input.replaceAll("\"openapi\" : \"3\\..*\",", "\"openapi\" : \"3.x\",");
+        input = input.replaceAll("\"swagger\" : \"2\\..*\",", "\"swagger\" : \"2.x\",");
+        input = input.replaceAll("\"operationId\" : \"verb.*\",", "\"operationId\" : \"verb\",");
+        input = input.replaceAll("\"x-camelContextId\" : \"camel.*\"", "\"x-camelContextId\" : \"camel\"");
+        return input;
+    }
 }

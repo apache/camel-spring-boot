@@ -24,7 +24,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @Disabled("It doesn't work with Flink 1.11.0")
 @ExtendWith(ArquillianExtension.class)
 public class CamelFlinkTest extends AbstractSpringBootTestSupport {
@@ -35,9 +34,7 @@ public class CamelFlinkTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelFlinkTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelFlinkTest.class)).build();
     }
 
     @Test
@@ -45,6 +42,5 @@ public class CamelFlinkTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

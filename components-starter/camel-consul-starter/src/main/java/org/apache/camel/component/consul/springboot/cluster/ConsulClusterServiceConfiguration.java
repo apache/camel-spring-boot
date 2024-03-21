@@ -45,7 +45,7 @@ public class ConsulClusterServiceConfiguration extends ConsulClusterConfiguratio
      * Custom service attributes.
      */
     private Map<String, Object> attributes;
-    
+
     /**
      * Service lookup order/priority.
      */
@@ -83,7 +83,6 @@ public class ConsulClusterServiceConfiguration extends ConsulClusterConfiguratio
         this.order = order;
     }
 
-
     //
     // Fields copied from org.apache.camel.component.consul.cluster.ConsulClusterConfiguration
     // to add javadoc which is used by spring-boot-configuration-processor
@@ -109,8 +108,8 @@ public class ConsulClusterServiceConfiguration extends ConsulClusterConfiguratio
      */
     private String rootPath = "/camel";
 
-    // 
-    // Fields copied from 
+    //
+    // Fields copied from
     // org.apache.camel.component.consul.ConsulClientConfiguration
     // ---------------
 
@@ -150,8 +149,7 @@ public class ConsulClusterServiceConfiguration extends ConsulClusterConfiguratio
     private Set<String> tags;
 
     /**
-     * SSL configuration using an
-     * org.apache.camel.support.jsse.SSLContextParameters instance.
+     * SSL configuration using an org.apache.camel.support.jsse.SSLContextParameters instance.
      */
     private SSLContextParameters sslContextParameters;
 
@@ -201,8 +199,7 @@ public class ConsulClusterServiceConfiguration extends ConsulClusterConfiguratio
     private Duration writeTimeout;
 
     /**
-     * Configure if the AgentClient should attempt a ping before returning the
-     * Consul instance
+     * Configure if the AgentClient should attempt a ping before returning the Consul instance
      */
     private boolean pingInstance = true;
 
@@ -221,4 +218,3 @@ public class ConsulClusterServiceConfiguration extends ConsulClusterConfiguratio
      */
     private boolean recursive;
 }
-

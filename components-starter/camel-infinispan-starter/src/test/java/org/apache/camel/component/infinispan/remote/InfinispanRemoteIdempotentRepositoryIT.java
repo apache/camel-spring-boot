@@ -36,61 +36,52 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				InfinispanRemoteIdempotentRepositoryIT.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, InfinispanRemoteIdempotentRepositoryIT.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class InfinispanRemoteIdempotentRepositoryIT extends InfinispanRemoteTestSupport
-		implements InfinispanIdempotentRepositoryTestSupport {
+        implements InfinispanIdempotentRepositoryTestSupport {
 
-	@Autowired
-	private ApplicationContext applicationContext;
+    @Autowired
+    private ApplicationContext applicationContext;
 
-	@Bean
-	@Lazy
-	public IdempotentRepository repo() {
-		InfinispanRemoteIdempotentRepository repo = new InfinispanRemoteIdempotentRepository(getCacheName());
-		repo.setCacheContainer(cacheContainer);
+    @Bean
+    @Lazy
+    public IdempotentRepository repo() {
+        InfinispanRemoteIdempotentRepository repo = new InfinispanRemoteIdempotentRepository(getCacheName());
+        repo.setCacheContainer(cacheContainer);
 
-		return repo;
-	}
+        return repo;
+    }
 
-	@BeforeEach
-	protected void beforeEach() {
-		// cleanup the default test cache before each run
-		getCache().clear();
-	}
+    @BeforeEach
+    protected void beforeEach() {
+        // cleanup the default test cache before each run
+        getCache().clear();
+    }
 
-	@Override
-	public IdempotentRepository getIdempotentRepository() {
-		return applicationContext.getBean(IdempotentRepository.class);
-	}
+    @Override
+    public IdempotentRepository getIdempotentRepository() {
+        return applicationContext.getBean(IdempotentRepository.class);
+    }
 
-	@Override
-	public BasicCache<Object, Object> getCache() {
-		return super.getCache();
-	}
+    @Override
+    public BasicCache<Object, Object> getCache() {
+        return super.getCache();
+    }
 
-	@Override
-	public MockEndpoint getMockEndpoint(String id) {
-		return super.getMockEndpoint(id);
-	}
+    @Override
+    public MockEndpoint getMockEndpoint(String id) {
+        return super.getMockEndpoint(id);
+    }
 
-	@Bean
-	protected RouteBuilder createRouteBuilder() throws Exception {
-		return new RouteBuilder() {
-			@Override
-			public void configure() {
-				from("direct:start")
-						.idempotentConsumer(
-								header("MessageID"),
-								getIdempotentRepository())
-						.skipDuplicate(true)
-						.to("mock:result");
-			}
-		};
-	}
+    @Bean
+    protected RouteBuilder createRouteBuilder() throws Exception {
+        return new RouteBuilder() {
+            @Override
+            public void configure() {
+                from("direct:start").idempotentConsumer(header("MessageID"), getIdempotentRepository())
+                        .skipDuplicate(true).to("mock:result");
+            }
+        };
+    }
 }

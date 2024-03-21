@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelUndertowTest extends AbstractSpringBootTestSupport {
 
@@ -33,12 +32,11 @@ public class CamelUndertowTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelUndertowTest.class))
-                //.dependency(DependencyResolver.withVersion("org.hibernate.validator:hibernate-validator"))
-                .unitTestExclusionPattern(".*(\\.integration\\..*|IntegrationTest$|BaseUndertowTest$|UndertowHttpsSpringTest$)")
-                .dependency("org.hibernate.validator:hibernate-validator")
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelUndertowTest.class))
+                // .dependency(DependencyResolver.withVersion("org.hibernate.validator:hibernate-validator"))
+                .unitTestExclusionPattern(
+                        ".*(\\.integration\\..*|IntegrationTest$|BaseUndertowTest$|UndertowHttpsSpringTest$)")
+                .dependency("org.hibernate.validator:hibernate-validator").build();
     }
 
     @Test
@@ -46,6 +44,5 @@ public class CamelUndertowTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

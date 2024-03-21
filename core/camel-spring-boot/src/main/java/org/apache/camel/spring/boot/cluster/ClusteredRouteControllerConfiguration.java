@@ -30,9 +30,8 @@ public class ClusteredRouteControllerConfiguration {
     private boolean enabled;
 
     /**
-     * Set the amount of time (in millis) the route controller should wait before to start
-     * the routes after the camel context is started or after the route is
-     * initialized if the route is created after the camel context is started.
+     * Set the amount of time (in millis) the route controller should wait before to start the routes after the camel
+     * context is started or after the route is initialized if the route is created after the camel context is started.
      */
     private String initialDelay;
 
@@ -107,9 +106,9 @@ public class ClusteredRouteControllerConfiguration {
         private boolean clustered = true;
 
         /**
-         * Set the amount of time (in millis) the route controller should wait before to start
-         * the routes after the camel context is started or after the route is
-         * initialized if the route is created after the camel context is started.
+         * Set the amount of time (in millis) the route controller should wait before to start the routes after the
+         * camel context is started or after the route is initialized if the route is created after the camel context is
+         * started.
          */
         private String initialDelay;
 

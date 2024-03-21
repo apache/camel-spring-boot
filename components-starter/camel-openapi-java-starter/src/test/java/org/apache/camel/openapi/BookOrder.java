@@ -20,22 +20,22 @@ import java.util.List;
 
 public class BookOrder {
 
-	private String id;
-	private List<LineItem> items;
+    private String id;
+    private List<LineItem> items;
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public List<LineItem> getItems() {
-		return items;
-	}
+    public List<LineItem> getItems() {
+        return items;
+    }
 
-	public void setItems(List<LineItem> items) {
-		this.items = items;
-	}
+    public void setItems(List<LineItem> items) {
+        this.items = items;
+    }
 }

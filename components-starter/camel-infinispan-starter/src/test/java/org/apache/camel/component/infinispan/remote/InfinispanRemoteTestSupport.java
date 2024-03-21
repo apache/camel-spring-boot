@@ -46,113 +46,100 @@ import java.util.Properties;
 @TestMethodOrder(MethodOrderer.MethodName.class)
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class InfinispanRemoteTestSupport {
-	public static final String TEST_CACHE = "mycache";
-	@RegisterExtension
-	public static InfinispanService service = InfinispanServiceFactory.createService();
-	protected static RemoteCacheManager cacheContainer;
+    public static final String TEST_CACHE = "mycache";
+    @RegisterExtension
+    public static InfinispanService service = InfinispanServiceFactory.createService();
+    protected static RemoteCacheManager cacheContainer;
 
-	public static final boolean CLIENT_INTELLIGENCE_BASIC = SystemUtils.IS_OS_MAC || Boolean.parseBoolean(System.getProperty("infinispan.client_intelligence.basic", "false"));
+    public static final boolean CLIENT_INTELLIGENCE_BASIC = SystemUtils.IS_OS_MAC
+            || Boolean.parseBoolean(System.getProperty("infinispan.client_intelligence.basic", "false"));
 
-	@Autowired
-	ProducerTemplate template;
+    @Autowired
+    ProducerTemplate template;
 
-	@Autowired
-	CamelContext context;
+    @Autowired
+    CamelContext context;
 
-	protected BasicCache<Object, Object> getCache() {
-		return getCache(getCacheName());
-	}
+    protected BasicCache<Object, Object> getCache() {
+        return getCache(getCacheName());
+    }
 
-	protected String getCacheName() {
-		return TEST_CACHE;
-	}
+    protected String getCacheName() {
+        return TEST_CACHE;
+    }
 
-	protected MockEndpoint getMockEndpoint(String endpoint) {
-		return context.getEndpoint(endpoint, MockEndpoint.class);
-	}
+    protected MockEndpoint getMockEndpoint(String endpoint) {
+        return context.getEndpoint(endpoint, MockEndpoint.class);
+    }
 
-	public FluentProducerTemplate fluentTemplate() {
-		return context.createFluentProducerTemplate();
-	}
+    public FluentProducerTemplate fluentTemplate() {
+        return context.createFluentProducerTemplate();
+    }
 
-	public CamelContext context() {
-		return context;
-	}
+    public CamelContext context() {
+        return context;
+    }
 
-	public ProducerTemplate template() {
-		return template;
-	}
+    public ProducerTemplate template() {
+        return template;
+    }
 
-	@BeforeAll
-	protected static void setupResourcesAbstract() throws Exception {
-//		LoggerFactory.getLogger(getClass()).info("setupResources");
+    @BeforeAll
+    protected static void setupResourcesAbstract() throws Exception {
+        // LoggerFactory.getLogger(getClass()).info("setupResources");
 
-		cacheContainer = new RemoteCacheManager(getConfiguration().build());
-		cacheContainer.administration()
-				.getOrCreateCache(
-						TEST_CACHE,
-						new org.infinispan.configuration.cache.ConfigurationBuilder()
-								.clustering()
-								.cacheMode(CacheMode.DIST_SYNC).build());
-	}
+        cacheContainer = new RemoteCacheManager(getConfiguration().build());
+        cacheContainer.administration().getOrCreateCache(TEST_CACHE,
+                new org.infinispan.configuration.cache.ConfigurationBuilder().clustering()
+                        .cacheMode(CacheMode.DIST_SYNC).build());
+    }
 
-	@AfterAll
-	protected static void cleanupResourcesAbstract() throws Exception {
-//		LoggerFactory.getLogger(getClass()).info("setupResources");
+    @AfterAll
+    protected static void cleanupResourcesAbstract() throws Exception {
+        // LoggerFactory.getLogger(getClass()).info("setupResources");
 
-		if (cacheContainer != null) {
-			cacheContainer.stop();
-		}
-	}
+        if (cacheContainer != null) {
+            cacheContainer.stop();
+        }
+    }
 
-	protected BasicCache<Object, Object> getCache(String name) {
-		return cacheContainer.getCache(name);
-	}
+    protected BasicCache<Object, Object> getCache(String name) {
+        return cacheContainer.getCache(name);
+    }
 
-	protected static BasicCache<Object, Object> getCacheByName(String name) {
-		return cacheContainer.getCache(name);
-	}
+    protected static BasicCache<Object, Object> getCacheByName(String name) {
+        return cacheContainer.getCache(name);
+    }
 
-	protected static ConfigurationBuilder getConfiguration() {
-		ConfigurationBuilder clientBuilder = new ConfigurationBuilder();
+    protected static ConfigurationBuilder getConfiguration() {
+        ConfigurationBuilder clientBuilder = new ConfigurationBuilder();
 
-		// for default tests, we force return value for all the
-		// operations
-		clientBuilder
-				.forceReturnValues(true);
+        // for default tests, we force return value for all the
+        // operations
+        clientBuilder.forceReturnValues(true);
 
-		// add server from the test infra service
-		clientBuilder
-				.addServer()
-				.host(service.host())
-				.port(service.port());
+        // add server from the test infra service
+        clientBuilder.addServer().host(service.host()).port(service.port());
 
-		// add security info
-		clientBuilder
-				.security()
-				.authentication()
-				.username(service.username())
-				.password(service.password())
-				.serverName("infinispan")
-				.saslMechanism("DIGEST-MD5")
-				.realm("default");
+        // add security info
+        clientBuilder.security().authentication().username(service.username()).password(service.password())
+                .serverName("infinispan").saslMechanism("DIGEST-MD5").realm("default");
 
-		if (CLIENT_INTELLIGENCE_BASIC) {
-			Properties properties = new Properties();
-			properties.put("infinispan.client.hotrod.client_intelligence", "BASIC");
-			clientBuilder.withProperties(properties);
-		}
+        if (CLIENT_INTELLIGENCE_BASIC) {
+            Properties properties = new Properties();
+            properties.put("infinispan.client.hotrod.client_intelligence", "BASIC");
+            clientBuilder.withProperties(properties);
+        }
 
-		clientBuilder.marshaller(new ProtoStreamMarshaller());
+        clientBuilder.marshaller(new ProtoStreamMarshaller());
 
-		return clientBuilder;
-	}
+        return clientBuilder;
+    }
 
-	@Lazy
-	@Bean
-	public ComponentCustomizer infinispanComponentCustomizer() throws Exception {
-		return ComponentCustomizer.forType(
-				InfinispanRemoteComponent.class,
-				component -> component.getConfiguration().setCacheContainer(cacheContainer));
-	}
+    @Lazy
+    @Bean
+    public ComponentCustomizer infinispanComponentCustomizer() throws Exception {
+        return ComponentCustomizer.forType(InfinispanRemoteComponent.class,
+                component -> component.getConfiguration().setCacheContainer(cacheContainer));
+    }
 }

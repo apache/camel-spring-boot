@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Bean;
 
 public class CustomFhirConfiguration {
     @Bean
-    FhirConfiguration createCustomFhirConfiguration(){
+    FhirConfiguration createCustomFhirConfiguration() {
         FhirConfiguration fhirConfiguration = new FhirConfiguration();
         fhirConfiguration.setLog(true);
         fhirConfiguration.setEncoding("JSON");

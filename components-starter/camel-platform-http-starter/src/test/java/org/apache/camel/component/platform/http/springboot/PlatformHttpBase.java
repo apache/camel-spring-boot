@@ -24,20 +24,16 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 
 abstract class PlatformHttpBase {
 
-	@Autowired
-	private TestRestTemplate restTemplate;
+    @Autowired
+    private TestRestTemplate restTemplate;
 
-	@Test
-	public void testGet() {
-		Assertions.assertThat(
-						restTemplate.getForEntity("/myget", String.class).getStatusCodeValue())
-				.isEqualTo(200);
-	}
+    @Test
+    public void testGet() {
+        Assertions.assertThat(restTemplate.getForEntity("/myget", String.class).getStatusCodeValue()).isEqualTo(200);
+    }
 
-	@Test
-	public void testPost() {
-		Assertions.assertThat(
-						restTemplate.postForEntity("/mypost", "test", String.class).getBody())
-				.isEqualTo("TEST");
-	}
+    @Test
+    public void testPost() {
+        Assertions.assertThat(restTemplate.postForEntity("/mypost", "test", String.class).getBody()).isEqualTo("TEST");
+    }
 }

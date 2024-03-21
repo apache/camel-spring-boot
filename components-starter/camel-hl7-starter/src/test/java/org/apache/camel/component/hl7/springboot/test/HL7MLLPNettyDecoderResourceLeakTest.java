@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.hl7.springboot.test;
 
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -43,20 +42,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        HL7MLLPNettyDecoderResourceLeakTest.class,
-        HL7MLLPNettyDecoderResourceLeakTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, HL7MLLPNettyDecoderResourceLeakTest.class,
+        HL7MLLPNettyDecoderResourceLeakTest.TestConfiguration.class })
 public class HL7MLLPNettyDecoderResourceLeakTest extends HL7TestSupport {
 
-    
     @Autowired
     ProducerTemplate template;
 
@@ -79,7 +70,7 @@ public class HL7MLLPNettyDecoderResourceLeakTest extends HL7TestSupport {
     public static void enableNettyResourceLeakDetector() {
         ResourceLeakDetector.setLevel(ResourceLeakDetector.Level.PARANOID);
     }
-    
+
     @Test
     public void testSendHL7Message() throws Exception {
         assertDoesNotThrow(() -> sendHL7Message());
@@ -89,7 +80,8 @@ public class HL7MLLPNettyDecoderResourceLeakTest extends HL7TestSupport {
         String message = "MSH|^~\\&|MYSENDER|MYRECEIVER|MYAPPLICATION||200612211200||QRY^A19|1234|P|2.4";
 
         for (int i = 0; i < 10; i++) {
-            template.sendBody("netty:tcp://127.0.0.1:" + getPort() + "?decoders=#hl7decoder&encoders=#hl7encoder", message);
+            template.sendBody("netty:tcp://127.0.0.1:" + getPort() + "?decoders=#hl7decoder&encoders=#hl7encoder",
+                    message);
         }
     }
 
@@ -116,7 +108,7 @@ public class HL7MLLPNettyDecoderResourceLeakTest extends HL7TestSupport {
             };
         }
     }
-    
+
     @Bean(name = "hl7codec")
     private HL7MLLPCodec addHl7MllpCodec() throws Exception {
         HL7MLLPCodec codec = new HL7MLLPCodec();

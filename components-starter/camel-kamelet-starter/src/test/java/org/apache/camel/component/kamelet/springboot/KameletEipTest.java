@@ -32,13 +32,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletEipTest.class,
-    }
-)
-
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletEipTest.class, })
 
 public class KameletEipTest {
 
@@ -79,13 +73,9 @@ public class KameletEipTest {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                routeTemplate("echo")
-                        .from("kamelet:source")
-                        .setBody(body().append(body()));
+                routeTemplate("echo").from("kamelet:source").setBody(body().append(body()));
 
-                from("direct:start")
-                        .kamelet("echo")
-                        .to("mock:result");
+                from("direct:start").kamelet("echo").to("mock:result");
             }
         };
     }

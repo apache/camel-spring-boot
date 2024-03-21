@@ -47,7 +47,7 @@ import static org.apache.camel.openapi.OpenApiHelper.clearVendorExtensions;
  * Open API auto-configuration.
  */
 @Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties({OpenApiConfiguration.class})
+@EnableConfigurationProperties({ OpenApiConfiguration.class })
 @ConditionalOnBean(type = "org.apache.camel.spring.boot.CamelAutoConfiguration")
 @ConditionalOnProperty(name = "camel.openapi.enabled", matchIfMissing = true)
 @AutoConfigureAfter(name = "org.apache.camel.spring.boot.CamelAutoConfiguration")
@@ -61,7 +61,8 @@ public class OpenApiAutoConfiguration {
     private final OpenAPI openAPI = new OpenAPI();
 
     @Bean
-    CamelContextConfiguration onBeforeStart(GenericApplicationContext ac, CamelContext camelContext, OpenApiConfiguration config) {
+    CamelContextConfiguration onBeforeStart(GenericApplicationContext ac, CamelContext camelContext,
+            OpenApiConfiguration config) {
         return new CamelContextConfiguration() {
             @Override
             public void beforeApplicationStart(CamelContext camelContext) {
@@ -70,7 +71,8 @@ public class OpenApiAutoConfiguration {
                 try {
                     OpenAPI created = createOpenAPI(camelContext);
                     if (created != null) {
-                        LOG.info("OpenAPI ({}) created from Camel Rest-DSL v{} - {}", created.getOpenapi(), created.getInfo().getVersion(), created.getInfo().getTitle());
+                        LOG.info("OpenAPI ({}) created from Camel Rest-DSL v{} - {}", created.getOpenapi(),
+                                created.getInfo().getVersion(), created.getInfo().getTitle());
                         // transfer data to the existing
                         openAPI.setInfo(created.getInfo());
                         openAPI.setOpenapi(created.getOpenapi());
@@ -128,7 +130,7 @@ public class OpenApiAutoConfiguration {
         initOpenApi(bc, info, rc.getApiProperties());
 
         OpenAPI openApi = reader.read(camelContext, rests, bc, null, camelContext.getClassResolver());
-        if (openApi != null){
+        if (openApi != null) {
             if (!rc.isApiVendorExtension()) {
                 clearVendorExtensions(openApi);
             }

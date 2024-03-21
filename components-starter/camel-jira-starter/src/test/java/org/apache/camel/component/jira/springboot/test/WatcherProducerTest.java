@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jira.springboot.test;
 
-
 import static org.apache.camel.component.jira.JiraConstants.ISSUE_KEY;
 import static org.apache.camel.component.jira.JiraConstants.ISSUE_WATCHERS_ADD;
 import static org.apache.camel.component.jira.JiraConstants.ISSUE_WATCHERS_REMOVE;
@@ -69,54 +68,46 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
-
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        WatcherProducerTest.class,
-        WatcherProducerTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, WatcherProducerTest.class,
+        WatcherProducerTest.TestConfiguration.class })
 
 public class WatcherProducerTest {
 
     @Autowired
     private CamelContext camelContext;
-    
 
-    
     @Autowired
     @Produce("direct:start")
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mockResult;
-    
+
     static JiraRestClient jiraClient;
-    
+
     static JiraRestClientFactory jiraRestClientFactory;
-    
+
     static IssueRestClient issueRestClient;
 
     static Issue backendIssue;
-    
+
     static Issue issue;
-    
+
     static List<String> backendwatchers = new ArrayList<>();
-    
+
     @Bean
     CamelContextConfiguration contextConfiguration() {
         return new CamelContextConfiguration() {
             @Override
             public void beforeApplicationStart(CamelContext context) {
-                //get chance to mock camelContext/Registry
+                // get chance to mock camelContext/Registry
                 jiraRestClientFactory = mock(JiraRestClientFactory.class);
                 jiraClient = mock(JiraRestClient.class);
                 issueRestClient = mock(IssueRestClient.class);
-                lenient().when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any())).thenReturn(jiraClient);
+                lenient().when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any()))
+                        .thenReturn(jiraClient);
                 lenient().when(jiraClient.getIssueClient()).thenReturn(issueRestClient);
 
                 backendwatchers.add("user1");
@@ -126,15 +117,15 @@ public class WatcherProducerTest {
                 backendwatchers.add("user5");
                 URI watchersUri = URI.create(TEST_JIRA_URL + "/rest/api/2/backendIssue/" + KEY + "-11/backendwatchers");
                 BasicWatchers initialBasicWatchers = new BasicWatchers(watchersUri, true, backendwatchers.size());
-                backendIssue
-                        = createIssue(11L, "Test backendIssue", KEY + "-" + 11, null, null, null, null, null, initialBasicWatchers);
+                backendIssue = createIssue(11L, "Test backendIssue", KEY + "-" + 11, null, null, null, null, null,
+                        initialBasicWatchers);
                 lenient().when(issueRestClient.addWatcher(any(URI.class), anyString())).then(inv -> {
                     String username = inv.getArgument(1);
                     backendwatchers.add(username);
                     BasicWatchers basicWatchers = new BasicWatchers(watchersUri, true, backendwatchers.size());
                     backendIssue = createIssue(backendIssue.getId(), backendIssue.getSummary(), backendIssue.getKey(),
-                            backendIssue.getIssueType(), backendIssue.getDescription(),
-                            backendIssue.getPriority(), backendIssue.getAssignee(), null, basicWatchers);
+                            backendIssue.getIssueType(), backendIssue.getDescription(), backendIssue.getPriority(),
+                            backendIssue.getAssignee(), null, basicWatchers);
                     return null;
                 });
                 lenient().when(issueRestClient.removeWatcher(any(URI.class), anyString())).then(inv -> {
@@ -142,8 +133,8 @@ public class WatcherProducerTest {
                     backendwatchers.remove(username);
                     BasicWatchers basicWatchers = new BasicWatchers(watchersUri, true, backendwatchers.size());
                     backendIssue = createIssue(backendIssue.getId(), backendIssue.getSummary(), backendIssue.getKey(),
-                            backendIssue.getIssueType(), backendIssue.getDescription(),
-                            backendIssue.getPriority(), backendIssue.getAssignee(), null, basicWatchers);
+                            backendIssue.getIssueType(), backendIssue.getDescription(), backendIssue.getPriority(),
+                            backendIssue.getAssignee(), null, basicWatchers);
                     return null;
                 });
                 lenient().when(issueRestClient.getIssue(anyString())).then(inv -> Promises.promise(backendIssue));
@@ -156,17 +147,17 @@ public class WatcherProducerTest {
                     Watchers watchers = new Watchers(basicWatchers, users);
                     return Promises.promise(watchers);
                 });
-                
+
                 camelContext.getRegistry().bind(JIRA_REST_CLIENT_FACTORY, jiraRestClientFactory);
             }
 
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here                
+                // do nothing here
             }
         };
     }
-    
+
     @Test
     public void addWatchers() throws InterruptedException {
         List<String> watchersToAdd = new ArrayList<>();
@@ -237,28 +228,20 @@ public class WatcherProducerTest {
         mockResult.assertIsSatisfied();
     }
 
-    
     @Configuration
     public class TestConfiguration {
-        
-        
 
         @Bean
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws IOException {
-                    from("direct:start")
-                            .to("jira://watchers?jiraUrl=" + JiraTestConstants.getJiraCredentials())
+                    from("direct:start").to("jira://watchers?jiraUrl=" + JiraTestConstants.getJiraCredentials())
                             .to(mockResult);
                 }
             };
         }
-        
-      
+
     }
-    
-    
-    
-    
+
 }

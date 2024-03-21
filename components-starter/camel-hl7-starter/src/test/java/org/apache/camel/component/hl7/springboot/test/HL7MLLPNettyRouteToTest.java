@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.hl7.springboot.test;
 
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -44,25 +43,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        HL7MLLPNettyRouteToTest.class,
-        HL7MLLPNettyRouteToTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, HL7MLLPNettyRouteToTest.class,
+        HL7MLLPNettyRouteToTest.TestConfiguration.class })
 public class HL7MLLPNettyRouteToTest extends HL7TestSupport {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mock;
-    
+
     @Bean("hl7decoder")
     public HL7MLLPNettyDecoderFactory addDecoder() throws Exception {
 
@@ -81,7 +73,6 @@ public class HL7MLLPNettyRouteToTest extends HL7TestSupport {
         return encoder;
     }
 
-    
     @Test
     public void testSendHL7Message() throws Exception {
         mock.expectedMessageCount(1);
@@ -141,7 +132,8 @@ public class HL7MLLPNettyRouteToTest extends HL7TestSupport {
                 @Override
                 public void configure() throws Exception {
                     from("direct:start")
-                            .to("netty:tcp://127.0.0.1:" + getPort() + "?sync=true&decoders=#hl7decoder&encoders=#hl7encoder")
+                            .to("netty:tcp://127.0.0.1:" + getPort()
+                                    + "?sync=true&decoders=#hl7decoder&encoders=#hl7encoder")
                             // because HL7 message contains a bunch of control chars
                             // then the logger do not log all of the data
                             .log("HL7 message: ${body}").to("mock:result");
@@ -163,7 +155,7 @@ public class HL7MLLPNettyRouteToTest extends HL7TestSupport {
             };
         }
     }
-    
+
     @Bean(name = "hl7codec")
     private HL7MLLPCodec addHl7MllpCodec() throws Exception {
         HL7MLLPCodec codec = new HL7MLLPCodec();

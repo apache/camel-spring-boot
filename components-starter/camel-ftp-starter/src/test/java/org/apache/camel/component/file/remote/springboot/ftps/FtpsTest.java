@@ -30,13 +30,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FtpsTest.class
-        }
-)
-//based on FileToFtpsWithCustomTrustStorePropertiesIT
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FtpsTest.class })
+// based on FileToFtpsWithCustomTrustStorePropertiesIT
 public class FtpsTest extends BaseFtpsClientAuth {
 
     @EndpointInject("mock:result")
@@ -44,8 +39,8 @@ public class FtpsTest extends BaseFtpsClientAuth {
 
     private String getFtpUrl() {
         return "ftps://admin@localhost:" + getPort()
-               + "/tmp1/camel?password=admin&initialDelay=2000&disableSecureDataChannelDefaults=true"
-               + "&securityProtocol=TLSv1.3&implicit=false";
+                + "/tmp1/camel?password=admin&initialDelay=2000&disableSecureDataChannelDefaults=true"
+                + "&securityProtocol=TLSv1.3&implicit=false";
 
     }
 
@@ -67,7 +62,7 @@ public class FtpsTest extends BaseFtpsClientAuth {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseFtp.TestConfiguration {
+    public class TestConfiguration extends BaseFtp.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
 

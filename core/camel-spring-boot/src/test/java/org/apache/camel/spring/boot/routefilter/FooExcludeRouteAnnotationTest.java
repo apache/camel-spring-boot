@@ -29,7 +29,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @CamelSpringBootTest
 @SpringBootApplication()
 @SpringBootTest(classes = FooTest.class)
-@ExcludeRoutes({BarRoute.class, DrinkRoute.class})
+@ExcludeRoutes({ BarRoute.class, DrinkRoute.class })
 public class FooExcludeRouteAnnotationTest {
 
     @Autowired

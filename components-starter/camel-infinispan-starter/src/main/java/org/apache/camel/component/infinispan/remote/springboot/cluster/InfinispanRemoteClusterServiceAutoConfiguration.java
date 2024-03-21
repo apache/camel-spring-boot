@@ -45,12 +45,9 @@ public class InfinispanRemoteClusterServiceAutoConfiguration {
     public CamelClusterService infinispanRemoteClusterService() {
         InfinispanRemoteClusterService service = new InfinispanRemoteClusterService();
 
-        Optional.ofNullable(configuration.getId())
-                .ifPresent(service::setId);
-        Optional.ofNullable(configuration.getOrder())
-                .ifPresent(service::setOrder);
-        Optional.ofNullable(configuration.getAttributes())
-                .ifPresent(service::setAttributes);
+        Optional.ofNullable(configuration.getId()).ifPresent(service::setId);
+        Optional.ofNullable(configuration.getOrder()).ifPresent(service::setOrder);
+        Optional.ofNullable(configuration.getAttributes()).ifPresent(service::setAttributes);
         service.setConfiguration(configuration);
 
         return service;

@@ -24,7 +24,8 @@ public class SpringLocalCliConnector extends LocalCliConnector {
 
     private final AbstractApplicationContext applicationContext;
 
-    public SpringLocalCliConnector(CliConnectorFactory cliConnectorFactory, AbstractApplicationContext applicationContext) {
+    public SpringLocalCliConnector(CliConnectorFactory cliConnectorFactory,
+            AbstractApplicationContext applicationContext) {
         super(cliConnectorFactory);
         this.applicationContext = applicationContext;
     }

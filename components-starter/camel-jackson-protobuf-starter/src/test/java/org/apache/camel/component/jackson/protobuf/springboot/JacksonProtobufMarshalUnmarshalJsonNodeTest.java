@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jackson.protobuf.springboot;
 
-
 import java.io.InputStream;
 import java.io.IOException;
 
@@ -43,39 +42,30 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JacksonProtobufMarshalUnmarshalJsonNodeTest.class,
-        JacksonProtobufMarshalUnmarshalJsonNodeTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JacksonProtobufMarshalUnmarshalJsonNodeTest.class,
+        JacksonProtobufMarshalUnmarshalJsonNodeTest.TestConfiguration.class })
 public class JacksonProtobufMarshalUnmarshalJsonNodeTest {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:serialized")
     MockEndpoint mock1;
-    
+
     @EndpointInject("mock:pojo")
     MockEndpoint mock2;
 
     @Bean("schema-resolver")
     private SchemaResolver getSchemaResolver() throws IOException {
-        String protobufStr = "message Pojo {\n"
-            + " required string text = 1;\n"
-            + "}\n";
+        String protobufStr = "message Pojo {\n" + " required string text = 1;\n" + "}\n";
         ProtobufSchema schema = ProtobufSchemaLoader.std.parse(protobufStr);
         SchemaResolver resolver = ex -> schema;
-        
+
         return resolver;
     }
-    
+
     @Test
     public void testMarshalUnmarshalJsonNode() throws Exception {
         mock1.expectedMessageCount(1);
@@ -101,8 +91,6 @@ public class JacksonProtobufMarshalUnmarshalJsonNodeTest {
         assertEquals(pojo.getText(), back.at("/text").asText());
     }
 
-
-
     // *************************************
     // Config
     // *************************************
@@ -115,13 +103,14 @@ public class JacksonProtobufMarshalUnmarshalJsonNodeTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:serialized").unmarshal().protobuf(ProtobufLibrary.Jackson, JsonNode.class).to("mock:pojo");
+                    from("direct:serialized").unmarshal().protobuf(ProtobufLibrary.Jackson, JsonNode.class)
+                            .to("mock:pojo");
                     from("direct:pojo").marshal().protobuf(ProtobufLibrary.Jackson).to("mock:serialized");
                 }
             };
         }
     }
-    
+
     public static class Pojo {
 
         private String text;
@@ -142,6 +131,4 @@ public class JacksonProtobufMarshalUnmarshalJsonNodeTest {
         }
     }
 
-    
-    
 }

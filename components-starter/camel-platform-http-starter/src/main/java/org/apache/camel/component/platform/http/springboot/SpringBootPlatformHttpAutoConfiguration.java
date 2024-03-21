@@ -27,9 +27,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
 @Configuration(proxyBeanMethods = false)
-@AutoConfigureAfter(name = {
-        "org.apache.camel.component.servlet.springboot.PlatformHttpComponentAutoConfiguration",
-        "org.apache.camel.component.servlet.springboot.PlatformHttpComponentConverter"})
+@AutoConfigureAfter(name = { "org.apache.camel.component.servlet.springboot.PlatformHttpComponentAutoConfiguration",
+        "org.apache.camel.component.servlet.springboot.PlatformHttpComponentConverter" })
 public class SpringBootPlatformHttpAutoConfiguration {
 
     @Autowired
@@ -42,7 +41,7 @@ public class SpringBootPlatformHttpAutoConfiguration {
     }
 
     @Bean
-	@DependsOn("configurePlatformHttpComponent")
+    @DependsOn("configurePlatformHttpComponent")
     public CamelRequestHandlerMapping platformHttpEngineRequestMapping(PlatformHttpEngine engine) {
         PlatformHttpComponent component = camelContext.getComponent("platform-http", PlatformHttpComponent.class);
         CamelRequestHandlerMapping answer = new CamelRequestHandlerMapping(component, engine);

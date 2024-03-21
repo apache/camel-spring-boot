@@ -38,24 +38,17 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.awaitility.Awaitility;
 
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        TelegramConsumerFallbackConversionTest.class,
-        TelegramConsumerFallbackConversionTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, TelegramConsumerFallbackConversionTest.class,
+        TelegramConsumerFallbackConversionTest.TestConfiguration.class })
 public class TelegramConsumerFallbackConversionTest extends TelegramTestSupport {
 
-    
     static TelegramMockRoutes mockRoutes;
-    
+
     @EndpointInject("direct:message")
     protected ProducerTemplate template;
-    
+
     @EndpointInject("mock:telegram")
     private MockEndpoint endpoint;
 
@@ -67,15 +60,12 @@ public class TelegramConsumerFallbackConversionTest extends TelegramTestSupport 
         List<OutgoingTextMessage> msgs = Awaitility.await().atMost(5, TimeUnit.SECONDS)
                 .until(() -> mockRoutes.getMock("sendMessage").getRecordedMessages(),
                         rawMessages -> rawMessages.size() == 1)
-                .stream()
-                .map(message -> (OutgoingTextMessage) message)
-                .collect(Collectors.toList());
+                .stream().map(message -> (OutgoingTextMessage) message).collect(Collectors.toList());
 
         assertEquals(msgs.size(), 1, "List should be of size: " + 1 + " but is: " + msgs.size());
         String text = msgs.get(0).getText();
         assertEquals("wrapped message", text);
     }
-
 
     // *************************************
     // Config
@@ -88,29 +78,23 @@ public class TelegramConsumerFallbackConversionTest extends TelegramTestSupport 
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:message")
-                            .to("telegram:bots?authorizationToken=mock-token&chatId=1234");
+                    from("direct:message").to("telegram:bots?authorizationToken=mock-token&chatId=1234");
                 }
             };
         }
 
     }
-    
+
     @Override
     @Bean
     protected TelegramMockRoutes createMockRoutes() {
-        mockRoutes =
-            new TelegramMockRoutes(port)
-            .addEndpoint(
-                    "sendMessage",
-                    "POST",
-                    OutgoingTextMessage.class,
-                    TelegramTestUtil.stringResource("messages/send-message.json"),
-                    TelegramTestUtil.stringResource("messages/send-message.json"),
-                    TelegramTestUtil.stringResource("messages/send-message.json"));
+        mockRoutes = new TelegramMockRoutes(port).addEndpoint("sendMessage", "POST", OutgoingTextMessage.class,
+                TelegramTestUtil.stringResource("messages/send-message.json"),
+                TelegramTestUtil.stringResource("messages/send-message.json"),
+                TelegramTestUtil.stringResource("messages/send-message.json"));
         return mockRoutes;
     }
-    
+
     private static class BrandNewType {
 
         String message;

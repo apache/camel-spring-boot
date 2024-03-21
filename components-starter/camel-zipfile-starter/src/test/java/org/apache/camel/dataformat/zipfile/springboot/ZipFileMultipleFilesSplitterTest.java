@@ -16,7 +16,6 @@
  */
 package org.apache.camel.dataformat.zipfile.springboot;
 
-
 import java.util.Iterator;
 
 import org.apache.camel.AggregationStrategy;
@@ -31,7 +30,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -39,45 +37,33 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        ZipFileMultipleFilesSplitterTest.class,
-        ZipFileMultipleFilesSplitterTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ZipFileMultipleFilesSplitterTest.class,
+        ZipFileMultipleFilesSplitterTest.TestConfiguration.class })
 public class ZipFileMultipleFilesSplitterTest extends ZipSplitterRouteTest {
 
     static final String PROCESSED_FILES_HEADER_NAME = "processedFiles";
-    
+
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
-   
-    
+
     @EndpointInject("mock:splitResult")
     MockEndpoint splitResult;
-    
-    
+
     @Override
     @Test
     public void testSplitter() throws InterruptedException {
         processZipEntry.expectedBodiesReceivedInAnyOrder("chau", "hi", "hola", "another_chiau", "another_hi");
-        splitResult.expectedBodiesReceivedInAnyOrder("chiau.txt", "hi.txt", "hola.txt", "directoryOne/another_chiau.txt",
-                "directoryOne/another_hi.txt");
+        splitResult.expectedBodiesReceivedInAnyOrder("chiau.txt", "hi.txt", "hola.txt",
+                "directoryOne/another_chiau.txt", "directoryOne/another_hi.txt");
         processZipEntry.assertIsSatisfied();
         splitResult.assertIsSatisfied();
     }
 
-
-    
-    
     // *************************************
     // Config
     // *************************************
@@ -94,29 +80,24 @@ public class ZipFileMultipleFilesSplitterTest extends ZipSplitterRouteTest {
                     ZipFileDataFormat zipFile = new ZipFileDataFormat();
                     zipFile.setUsingIterator(true);
                     from("file:src/test/resources/org/apache/camel/dataformat/zipfile/data/?delay=1000&noop=true")
-                            .unmarshal(zipFile)
-                            .split(bodyAs(Iterator.class))
-                            .streaming()
-                            .aggregationStrategy(updateHeader())
-                            .convertBodyTo(String.class)
-                            .to("mock:processZipEntry")
-                            .end()
-                            .log("Done processing big file: ${header.CamelFileName}")
-                            .setBody().header(PROCESSED_FILES_HEADER_NAME)
-                            .split().body()
-                            .to("mock:splitResult");
+                            .unmarshal(zipFile).split(bodyAs(Iterator.class)).streaming()
+                            .aggregationStrategy(updateHeader()).convertBodyTo(String.class).to("mock:processZipEntry")
+                            .end().log("Done processing big file: ${header.CamelFileName}").setBody()
+                            .header(PROCESSED_FILES_HEADER_NAME).split().body().to("mock:splitResult");
                 }
-                
+
                 private AggregationStrategy updateHeader() {
                     return new AggregationStrategy() {
                         @Override
                         public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
                             if (oldExchange != null) {
-                                String processedFiles = oldExchange.getIn().getHeader(PROCESSED_FILES_HEADER_NAME, String.class);
+                                String processedFiles = oldExchange.getIn().getHeader(PROCESSED_FILES_HEADER_NAME,
+                                        String.class);
                                 if (processedFiles == null) {
                                     processedFiles = oldExchange.getIn().getHeader("zipFileName", String.class);
                                 }
-                                processedFiles = processedFiles + "," + newExchange.getIn().getHeader("zipFileName", String.class);
+                                processedFiles = processedFiles + ","
+                                        + newExchange.getIn().getHeader("zipFileName", String.class);
                                 newExchange.getIn().setHeader(PROCESSED_FILES_HEADER_NAME, processedFiles);
                             }
                             return newExchange;
@@ -127,6 +108,5 @@ public class ZipFileMultipleFilesSplitterTest extends ZipSplitterRouteTest {
             };
         }
     }
-    
-    
+
 }

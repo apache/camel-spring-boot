@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelCryptoTest extends AbstractSpringBootTestSupport {
 
@@ -33,8 +32,7 @@ public class CamelCryptoTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelCryptoTest.class))
+        return new ITestConfigBuilder().module(inferModuleName(CamelCryptoTest.class))
                 .unitTestExclusionPattern(".*(\\.integration\\..*|IntegrationTest$|PGPKeyAccessDataFormatTest$)")
                 .build();
     }
@@ -44,6 +42,5 @@ public class CamelCryptoTest extends AbstractSpringBootTestSupport {
         this.runDataformatTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

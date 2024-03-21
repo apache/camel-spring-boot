@@ -31,12 +31,7 @@ import java.util.Date;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileProducerExpressionTest.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileProducerExpressionTest.class })
 public class FileProducerExpressionTest extends BaseFile {
 
     @Test

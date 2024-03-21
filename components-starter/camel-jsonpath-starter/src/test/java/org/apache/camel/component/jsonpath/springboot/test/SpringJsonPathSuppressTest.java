@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -25,40 +23,30 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        SpringJsonPathSuppressTest.class
-    },
-    properties = {
-        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringJsonPathSuppressTest.xml"}
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SpringJsonPathSuppressTest.class }, properties = {
+        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringJsonPathSuppressTest.xml" }
 
 )
 public class SpringJsonPathSuppressTest {
 
     @Autowired
     private CamelContext context;
-    
+
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:middle")
     MockEndpoint mockMiddle;
-    
+
     @EndpointInject("mock:other")
     MockEndpoint mockOther;
-
-    
-    
 
     @Test
     public void testMiddle() throws Exception {

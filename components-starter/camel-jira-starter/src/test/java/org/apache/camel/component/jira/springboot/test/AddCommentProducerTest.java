@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jira.springboot.test;
 
-
 import static org.apache.camel.component.jira.JiraConstants.ISSUE_KEY;
 import static org.apache.camel.component.jira.JiraConstants.JIRA_REST_CLIENT_FACTORY;
 import static org.apache.camel.component.jira.springboot.test.Utils.createIssueWithComments;
@@ -61,54 +60,46 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
-
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        AddCommentProducerTest.class,
-        AddCommentProducerTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, AddCommentProducerTest.class,
+        AddCommentProducerTest.TestConfiguration.class })
 
 public class AddCommentProducerTest {
 
     @Autowired
     private CamelContext camelContext;
-    
 
-    
     @Autowired
     @Produce("direct:start")
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mockResult;
-    
+
     static JiraRestClient jiraClient;
-    
+
     static JiraRestClientFactory jiraRestClientFactory;
-    
+
     static IssueRestClient issueRestClient;
 
     static Issue backendIssue;
-    
+
     static Issue issue;
-    
+
     static String comment;
-    
+
     @Bean
     CamelContextConfiguration contextConfiguration() {
         return new CamelContextConfiguration() {
             @Override
             public void beforeApplicationStart(CamelContext context) {
-                //get chance to mock camelContext/Registry
+                // get chance to mock camelContext/Registry
                 jiraRestClientFactory = mock(JiraRestClientFactory.class);
                 jiraClient = mock(JiraRestClient.class);
                 issueRestClient = mock(IssueRestClient.class);
-                lenient().when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any())).thenReturn(jiraClient);
+                lenient().when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any()))
+                        .thenReturn(jiraClient);
                 lenient().when(jiraClient.getIssueClient()).thenReturn(issueRestClient);
 
                 when(issueRestClient.addComment(any(), any())).then((Answer<Void>) inv -> {
@@ -122,17 +113,17 @@ public class AddCommentProducerTest {
                 });
                 backendIssue = createIssueWithComments(1, 1);
                 when(issueRestClient.getIssue(any())).then(inv -> Promises.promise(backendIssue));
-                
+
                 camelContext.getRegistry().bind(JIRA_REST_CLIENT_FACTORY, jiraRestClientFactory);
             }
 
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here                
+                // do nothing here
             }
         };
     }
-    
+
     @Test
     public void verifyLastComment() throws InterruptedException {
         template.sendBodyAndHeader(comment, ISSUE_KEY, backendIssue.getKey());
@@ -147,27 +138,21 @@ public class AddCommentProducerTest {
         mockResult.assertIsSatisfied();
     }
 
-    
     @Configuration
     public class TestConfiguration {
-        
+
         @Bean
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws IOException {
                     comment = "A new test comment " + new Date();
-                    from("direct:start")
-                            .to("jira://addComment?jiraUrl=" + JiraTestConstants.getJiraCredentials())
+                    from("direct:start").to("jira://addComment?jiraUrl=" + JiraTestConstants.getJiraCredentials())
                             .to(mockResult);
                 }
             };
         }
-        
-      
+
     }
-    
-    
-    
-    
+
 }

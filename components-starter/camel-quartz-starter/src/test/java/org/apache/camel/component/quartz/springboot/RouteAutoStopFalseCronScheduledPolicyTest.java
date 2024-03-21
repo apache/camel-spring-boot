@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -28,35 +26,25 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        RouteAutoStopFalseCronScheduledPolicyTest.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, RouteAutoStopFalseCronScheduledPolicyTest.class })
 public class RouteAutoStopFalseCronScheduledPolicyTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:foo")
     MockEndpoint mock;
-    
-    
+
     @Test
     public void testCronPolicy() throws Exception {
         // send a message on the seda queue so we have a message to start with
@@ -69,16 +57,11 @@ public class RouteAutoStopFalseCronScheduledPolicyTest {
         context.addRoutes(new RouteBuilder() {
             @Override
             public void configure() {
-                from("seda:foo").routeId("foo").noAutoStartup()
-                        .routePolicy(policy)
-                        .to("mock:foo");
+                from("seda:foo").routeId("foo").noAutoStartup().routePolicy(policy).to("mock:foo");
             }
         });
 
         mock.assertIsSatisfied();
     }
-    
-    
-   
 
 }

@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelAwsBedrockTest extends AbstractSpringBootTestSupport {
 
@@ -33,9 +32,7 @@ public class CamelAwsBedrockTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelAwsBedrockTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelAwsBedrockTest.class)).build();
     }
 
     @Test
@@ -43,9 +40,8 @@ public class CamelAwsBedrockTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(createTestConfig(), "aws-bedrock");
         this.runComponentTest(createTestConfig(), "aws-bedrock-agent");
         this.runComponentTest(createTestConfig(), "aws-bedrock-agent-runtime");
-        
+
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

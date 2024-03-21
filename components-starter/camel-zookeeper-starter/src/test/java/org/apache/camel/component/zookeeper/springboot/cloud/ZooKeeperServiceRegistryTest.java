@@ -52,30 +52,22 @@ public class ZooKeeperServiceRegistryTest {
     private static final int SERVICE_PORT = AvailablePortFinder.getNextAvailable();
 
     @TempDir
-    Path temporaryFolder ;
+    Path temporaryFolder;
 
     @Test
     public void testServiceRegistry() throws Exception {
-        final int zkPort =  AvailablePortFinder.getNextAvailable();
-        final File zkDir =  temporaryFolder.toFile();
+        final int zkPort = AvailablePortFinder.getNextAvailable();
+        final File zkDir = temporaryFolder.toFile();
 
         try (final TestingServer zkServer = new TestingServer(zkPort, zkDir);
-             final ZooKeeperTestClient zkClient = new ZooKeeperTestClient("localhost:" + zkPort)) {
+                final ZooKeeperTestClient zkClient = new ZooKeeperTestClient("localhost:" + zkPort)) {
             zkServer.start();
             zkClient.start();
-            new ApplicationContextRunner()
-                .withUserConfiguration(TestConfiguration.class)
-                .withPropertyValues(
-                    "debug=false",
-                    "spring.main.banner-mode=OFF",
-                    "spring.application.name=" + UUID.randomUUID(),
-                    "camel.cloud.zookeeper.enabled=true",
-                    "camel.cloud.zookeeper.nodes=localhost:" + zkPort,
-                    "camel.cloud.zookeeper.id=" + UUID.randomUUID(),
-                    "camel.cloud.zookeeper.base-path=" + SERVICE_PATH,
-                    "camel.cloud.zookeeper.service-host=localhost")
-                .run(
-                    context -> {
+            new ApplicationContextRunner().withUserConfiguration(TestConfiguration.class).withPropertyValues(
+                    "debug=false", "spring.main.banner-mode=OFF", "spring.application.name=" + UUID.randomUUID(),
+                    "camel.cloud.zookeeper.enabled=true", "camel.cloud.zookeeper.nodes=localhost:" + zkPort,
+                    "camel.cloud.zookeeper.id=" + UUID.randomUUID(), "camel.cloud.zookeeper.base-path=" + SERVICE_PATH,
+                    "camel.cloud.zookeeper.service-host=localhost").run(context -> {
                         assertThat(context).hasSingleBean(CamelContext.class);
                         assertThat(context).hasSingleBean(ServiceRegistry.class);
 
@@ -83,17 +75,12 @@ public class ZooKeeperServiceRegistryTest {
 
                         assertThat(serviceRegistry).isNotNull();
                         serviceRegistry.start();
-                        serviceRegistry.register(
-                            DefaultServiceDefinition.builder()
-                                .withHost(SERVICE_HOST)
-                                .withPort(SERVICE_PORT)
-                                .withName(SERVICE_NAME)
-                                .withId(SERVICE_ID)
-                                .build()
-                        );
+                        serviceRegistry.register(DefaultServiceDefinition.builder().withHost(SERVICE_HOST)
+                                .withPort(SERVICE_PORT).withName(SERVICE_NAME).withId(SERVICE_ID).build());
 
                         try (ServiceDiscovery<MetaData> discovery = zkClient.discovery()) {
-                            final Collection<ServiceInstance<MetaData>> services = discovery.queryForInstances(SERVICE_NAME);
+                            final Collection<ServiceInstance<MetaData>> services = discovery
+                                    .queryForInstances(SERVICE_NAME);
 
                             assertThat(services).hasSize(1);
                             assertThat(services).first().hasFieldOrPropertyWithValue("id", SERVICE_ID);
@@ -101,8 +88,7 @@ public class ZooKeeperServiceRegistryTest {
                             assertThat(services).first().hasFieldOrPropertyWithValue("address", SERVICE_HOST);
                             assertThat(services).first().hasFieldOrPropertyWithValue("port", SERVICE_PORT);
                         }
-                    }
-                );
+                    });
         }
     }
 
@@ -124,15 +110,10 @@ public class ZooKeeperServiceRegistryTest {
         private final ServiceDiscovery<MetaData> discovery;
 
         public ZooKeeperTestClient(String nodes) {
-            curator = CuratorFrameworkFactory.builder()
-                .connectString(nodes)
-                .retryPolicy(new ExponentialBackoffRetry(1000, 3))
-                .build();
-            discovery = ServiceDiscoveryBuilder.builder(MetaData.class)
-                .client(curator)
-                .basePath(SERVICE_PATH)
-                .serializer(new JsonInstanceSerializer<>(MetaData.class))
-                .build();
+            curator = CuratorFrameworkFactory.builder().connectString(nodes)
+                    .retryPolicy(new ExponentialBackoffRetry(1000, 3)).build();
+            discovery = ServiceDiscoveryBuilder.builder(MetaData.class).client(curator).basePath(SERVICE_PATH)
+                    .serializer(new JsonInstanceSerializer<>(MetaData.class)).build();
         }
 
         public ServiceDiscovery<MetaData> discovery() {

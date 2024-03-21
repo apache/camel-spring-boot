@@ -35,11 +35,7 @@ import static org.mockito.Mockito.verify;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(
-    properties = {
-        "camel.main.consumerTemplateCacheSize=100",
-        "camel.main.name=customName"}
-)
+@SpringBootTest(properties = { "camel.main.consumerTemplateCacheSize=100", "camel.main.name=customName" })
 public class CamelAutoConfigurationWithMainPrefixTest {
 
     // Collaborators fixtures

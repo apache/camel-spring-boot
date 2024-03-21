@@ -65,14 +65,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
-                KafkaProducerFullIT.class,
-                KafkaProducerFullIT.TestConfiguration.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
+        KafkaProducerFullIT.class, KafkaProducerFullIT.TestConfiguration.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
 
@@ -104,7 +98,8 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
 
     private final String toPropagatedHeaders = "kafka:" + TOPIC_PROPAGATED_HEADERS + "?requestRequiredAcks=-1";
 
-    private final String toNoRecordSpecificHeaders = "kafka:" + TOPIC_NO_RECORD_SPECIFIC_HEADERS + "?requestRequiredAcks=-1";
+    private final String toNoRecordSpecificHeaders = "kafka:" + TOPIC_NO_RECORD_SPECIFIC_HEADERS
+            + "?requestRequiredAcks=-1";
 
     @Produce("direct:startStrings")
     private ProducerTemplate stringsTemplate;
@@ -156,8 +151,7 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
 
         sendMessagesInRoute(messageInTopic, stringsTemplate, "IT test message", KafkaConstants.PARTITION_KEY, "0");
         sendMessagesInRoute(messageInOtherTopic, stringsTemplate, "IT test message in other topic",
-                KafkaConstants.PARTITION_KEY, "0", KafkaConstants.TOPIC,
-                TOPIC_STRINGS_IN_HEADER);
+                KafkaConstants.PARTITION_KEY, "0", KafkaConstants.TOPIC, TOPIC_STRINGS_IN_HEADER);
 
         createKafkaMessageConsumer(stringsConsumerConn, TOPIC_STRINGS, TOPIC_STRINGS_IN_HEADER, messagesLatch);
 
@@ -170,8 +164,8 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
         assertEquals(15, exchangeList.size(), "Fifteen Exchanges are expected");
         for (Exchange exchange : exchangeList) {
             @SuppressWarnings("unchecked")
-            List<RecordMetadata> recordMetaData1
-                    = (List<RecordMetadata>) (exchange.getIn().getHeader(KafkaConstants.KAFKA_RECORD_META));
+            List<RecordMetadata> recordMetaData1 = (List<RecordMetadata>) (exchange.getIn()
+                    .getHeader(KafkaConstants.KAFKA_RECORD_META));
             assertEquals(1, recordMetaData1.size(), "One RecordMetadata is expected.");
             assertTrue(recordMetaData1.get(0).offset() >= 0, "Offset is positive");
             assertTrue(recordMetaData1.get(0).topic().startsWith("test"), "Topic Name start with 'test'");
@@ -187,8 +181,7 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
 
         sendMessagesInRoute(messageInTopic, stringsTemplate2, "IT test message", (String[]) null);
         sendMessagesInRoute(messageInOtherTopic, stringsTemplate2, "IT test message in other topic",
-                KafkaConstants.PARTITION_KEY, "0", KafkaConstants.TOPIC,
-                TOPIC_STRINGS_IN_HEADER);
+                KafkaConstants.PARTITION_KEY, "0", KafkaConstants.TOPIC, TOPIC_STRINGS_IN_HEADER);
 
         createKafkaMessageConsumer(stringsConsumerConn, TOPIC_STRINGS, TOPIC_STRINGS_IN_HEADER, messagesLatch);
 
@@ -201,8 +194,8 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
         assertEquals(15, exchangeList.size(), "Fifteen Exchanges are expected");
         for (Exchange exchange : exchangeList) {
             @SuppressWarnings("unchecked")
-            List<RecordMetadata> recordMetaData1
-                    = (List<RecordMetadata>) (exchange.getIn().getHeader(KafkaConstants.KAFKA_RECORD_META));
+            List<RecordMetadata> recordMetaData1 = (List<RecordMetadata>) (exchange.getIn()
+                    .getHeader(KafkaConstants.KAFKA_RECORD_META));
             assertEquals(1, recordMetaData1.size(), "One RecordMetadata is expected.");
             assertTrue(recordMetaData1.get(0).offset() >= 0, "Offset is positive");
             assertTrue(recordMetaData1.get(0).topic().startsWith("test"), "Topic Name start with 'test'");
@@ -218,8 +211,7 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
 
         sendMessagesInRoute(messageInTopic, interceptedTemplate, "IT test message", KafkaConstants.PARTITION_KEY, "0");
         sendMessagesInRoute(messageInOtherTopic, interceptedTemplate, "IT test message in other topic",
-                KafkaConstants.PARTITION_KEY, "0", KafkaConstants.TOPIC,
-                TOPIC_STRINGS_IN_HEADER);
+                KafkaConstants.PARTITION_KEY, "0", KafkaConstants.TOPIC, TOPIC_STRINGS_IN_HEADER);
         createKafkaMessageConsumer(stringsConsumerConn, TOPIC_INTERCEPTED, TOPIC_STRINGS_IN_HEADER, messagesLatch);
 
         boolean allMessagesReceived = messagesLatch.await(200, TimeUnit.MILLISECONDS);
@@ -260,7 +252,8 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
         assertEquals(2, exchangeList.size(), "Two Exchanges are expected");
         Exchange e1 = exchangeList.get(0);
         @SuppressWarnings("unchecked")
-        List<RecordMetadata> recordMetaData1 = (List<RecordMetadata>) (e1.getIn().getHeader(KafkaConstants.KAFKA_RECORD_META));
+        List<RecordMetadata> recordMetaData1 = (List<RecordMetadata>) (e1.getIn()
+                .getHeader(KafkaConstants.KAFKA_RECORD_META));
         assertEquals(10, recordMetaData1.size(), "Ten RecordMetadata is expected.");
         for (RecordMetadata recordMeta : recordMetaData1) {
             assertTrue(recordMeta.offset() >= 0, "Offset is positive");
@@ -268,7 +261,8 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
         }
         Exchange e2 = exchangeList.get(1);
         @SuppressWarnings("unchecked")
-        List<RecordMetadata> recordMetaData2 = (List<RecordMetadata>) (e2.getIn().getHeader(KafkaConstants.KAFKA_RECORD_META));
+        List<RecordMetadata> recordMetaData2 = (List<RecordMetadata>) (e2.getIn()
+                .getHeader(KafkaConstants.KAFKA_RECORD_META));
         assertEquals(5, recordMetaData2.size(), "Five RecordMetadata is expected.");
         for (RecordMetadata recordMeta : recordMetaData2) {
             assertTrue(recordMeta.offset() >= 0, "Offset is positive");
@@ -290,7 +284,8 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
         Map<String, Object> otherTopicHeaders = new HashMap<>();
         otherTopicHeaders.put(KafkaConstants.PARTITION_KEY, "0".getBytes());
         otherTopicHeaders.put(KafkaConstants.TOPIC, TOPIC_BYTES_IN_HEADER);
-        sendMessagesInRoute(messageInOtherTopic, bytesTemplate, "IT test message in other topic".getBytes(), otherTopicHeaders);
+        sendMessagesInRoute(messageInOtherTopic, bytesTemplate, "IT test message in other topic".getBytes(),
+                otherTopicHeaders);
 
         createKafkaBytesMessageConsumer(bytesConsumerConn, TOPIC_BYTES, TOPIC_BYTES_IN_HEADER, messagesLatch);
 
@@ -303,8 +298,8 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
         assertEquals(15, exchangeList.size(), "Fifteen Exchanges are expected");
         for (Exchange exchange : exchangeList) {
             @SuppressWarnings("unchecked")
-            List<RecordMetadata> recordMetaData1
-                    = (List<RecordMetadata>) (exchange.getIn().getHeader(KafkaConstants.KAFKA_RECORD_META));
+            List<RecordMetadata> recordMetaData1 = (List<RecordMetadata>) (exchange.getIn()
+                    .getHeader(KafkaConstants.KAFKA_RECORD_META));
             assertEquals(1, recordMetaData1.size(), "One RecordMetadata is expected.");
             assertTrue(recordMetaData1.get(0).offset() >= 0, "Offset is positive");
             assertTrue(recordMetaData1.get(0).topic().startsWith("test"), "Topic Name start with 'test'");
@@ -346,8 +341,8 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
         CountDownLatch messagesLatch = new CountDownLatch(1);
         propagatedHeadersTemplate.sendBodyAndHeaders("Some test message", camelHeaders);
 
-        List<ConsumerRecord<String, String>> records = pollForRecords(createStringKafkaConsumer("propagatedHeaderConsumer"),
-                TOPIC_PROPAGATED_HEADERS, messagesLatch);
+        List<ConsumerRecord<String, String>> records = pollForRecords(
+                createStringKafkaConsumer("propagatedHeaderConsumer"), TOPIC_PROPAGATED_HEADERS, messagesLatch);
         boolean allMessagesReceived = messagesLatch.await(10_000, TimeUnit.MILLISECONDS);
 
         assertTrue(allMessagesReceived,
@@ -388,7 +383,8 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
         noRecordSpecificHeadersTemplate.sendBodyAndHeaders("Some test message", camelHeaders);
 
         List<ConsumerRecord<String, String>> records = pollForRecords(
-                createStringKafkaConsumer("noRecordSpecificHeadersConsumer"), TOPIC_NO_RECORD_SPECIFIC_HEADERS, messagesLatch);
+                createStringKafkaConsumer("noRecordSpecificHeadersConsumer"), TOPIC_NO_RECORD_SPECIFIC_HEADERS,
+                messagesLatch);
         boolean allMessagesReceived = messagesLatch.await(10_000, TimeUnit.MILLISECONDS);
 
         assertTrue(allMessagesReceived,
@@ -403,15 +399,15 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
 
     @Test
     public void headerFilterStrategyCouldBeOverridden() {
-        KafkaEndpoint kafkaEndpoint
-                = context.getEndpoint("kafka:TOPIC_PROPAGATED_HEADERS?headerFilterStrategy=#myStrategy", KafkaEndpoint.class);
+        KafkaEndpoint kafkaEndpoint = context
+                .getEndpoint("kafka:TOPIC_PROPAGATED_HEADERS?headerFilterStrategy=#myStrategy", KafkaEndpoint.class);
         assertIsInstanceOf(MyHeaderFilterStrategy.class, kafkaEndpoint.getConfiguration().getHeaderFilterStrategy());
     }
 
     @Test
     public void headerSerializerCouldBeOverridden() {
-        KafkaEndpoint kafkaEndpoint = context
-                .getEndpoint("kafka:TOPIC_PROPAGATED_HEADERS?headerSerializer=#myHeaderSerializer", KafkaEndpoint.class);
+        KafkaEndpoint kafkaEndpoint = context.getEndpoint(
+                "kafka:TOPIC_PROPAGATED_HEADERS?headerSerializer=#myHeaderSerializer", KafkaEndpoint.class);
         assertIsInstanceOf(MyKafkaHeadersSerializer.class, kafkaEndpoint.getConfiguration().getHeaderSerializer());
     }
 
@@ -438,19 +434,19 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
         }
 
         @Bean("myStrategy")
-        public MyHeaderFilterStrategy createMyHeaderFilterStrategy(){
+        public MyHeaderFilterStrategy createMyHeaderFilterStrategy() {
             return new MyHeaderFilterStrategy();
         }
 
         @Bean("myHeaderSerializer")
-        public MyKafkaHeadersSerializer createMyKafkaHeadersSerializer(){
+        public MyKafkaHeadersSerializer createMyKafkaHeadersSerializer() {
             return new MyKafkaHeadersSerializer();
         }
     }
 
     private byte[] getHeaderValue(String headerKey, Headers headers) {
-        Header foundHeader = StreamSupport.stream(headers.spliterator(), false).filter(header -> header.key().equals(headerKey))
-                .findFirst().orElse(null);
+        Header foundHeader = StreamSupport.stream(headers.spliterator(), false)
+                .filter(header -> header.key().equals(headerKey)).findFirst().orElse(null);
         assertNotNull(foundHeader, "Header should be sent");
         return foundHeader.value();
     }
@@ -458,7 +454,8 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
     private static KafkaConsumer<String, String> createStringKafkaConsumer(final String groupId) {
         Properties stringsProps = new Properties();
 
-        stringsProps.put(org.apache.kafka.clients.consumer.ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, getBootstrapServers());
+        stringsProps.put(org.apache.kafka.clients.consumer.ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
+                getBootstrapServers());
         stringsProps.put(org.apache.kafka.clients.consumer.ConsumerConfig.GROUP_ID_CONFIG, groupId);
         stringsProps.put(org.apache.kafka.clients.consumer.ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true");
         stringsProps.put(org.apache.kafka.clients.consumer.ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
@@ -475,7 +472,8 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
     private static KafkaConsumer<byte[], byte[]> createByteKafkaConsumer(final String groupId) {
         Properties stringsProps = new Properties();
 
-        stringsProps.put(org.apache.kafka.clients.consumer.ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, getBootstrapServers());
+        stringsProps.put(org.apache.kafka.clients.consumer.ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
+                getBootstrapServers());
         stringsProps.put(org.apache.kafka.clients.consumer.ConsumerConfig.GROUP_ID_CONFIG, groupId);
         stringsProps.put(org.apache.kafka.clients.consumer.ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true");
         stringsProps.put(org.apache.kafka.clients.consumer.ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
@@ -489,8 +487,8 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
         return new KafkaConsumer<>(stringsProps);
     }
 
-    private List<ConsumerRecord<String, String>> pollForRecords(
-            KafkaConsumer<String, String> consumerConn, String topic, CountDownLatch messagesLatch) {
+    private List<ConsumerRecord<String, String>> pollForRecords(KafkaConsumer<String, String> consumerConn,
+            String topic, CountDownLatch messagesLatch) {
 
         List<ConsumerRecord<String, String>> consumedRecords = new ArrayList<>();
         consumerConn.subscribe(Collections.singletonList(topic));
@@ -507,8 +505,8 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
         return consumedRecords;
     }
 
-    private void createKafkaMessageConsumer(
-            KafkaConsumer<String, String> consumerConn, String topic, String topicInHeader, CountDownLatch messagesLatch) {
+    private void createKafkaMessageConsumer(KafkaConsumer<String, String> consumerConn, String topic,
+            String topicInHeader, CountDownLatch messagesLatch) {
 
         consumerConn.subscribe(Arrays.asList(topic, topicInHeader));
         boolean run = true;
@@ -525,8 +523,8 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
 
     }
 
-    private void createKafkaBytesMessageConsumer(
-            KafkaConsumer<byte[], byte[]> consumerConn, String topic, String topicInHeader, CountDownLatch messagesLatch) {
+    private void createKafkaBytesMessageConsumer(KafkaConsumer<byte[], byte[]> consumerConn, String topic,
+            String topicInHeader, CountDownLatch messagesLatch) {
 
         consumerConn.subscribe(Arrays.asList(topic, topicInHeader));
         boolean run = true;
@@ -543,7 +541,8 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
 
     }
 
-    private void sendMessagesInRoute(int messages, ProducerTemplate template, Object bodyOther, String... headersWithValue) {
+    private void sendMessagesInRoute(int messages, ProducerTemplate template, Object bodyOther,
+            String... headersWithValue) {
         Map<String, Object> headerMap = new HashMap<>();
         if (headersWithValue != null) {
             for (int i = 0; i < headersWithValue.length; i = i + 2) {
@@ -553,7 +552,8 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
         sendMessagesInRoute(messages, template, bodyOther, headerMap);
     }
 
-    private void sendMessagesInRoute(int messages, ProducerTemplate template, Object bodyOther, Map<String, Object> headerMap) {
+    private void sendMessagesInRoute(int messages, ProducerTemplate template, Object bodyOther,
+            Map<String, Object> headerMap) {
         for (int k = 0; k < messages; k++) {
             template.sendBodyAndHeaders(bodyOther, headerMap);
         }

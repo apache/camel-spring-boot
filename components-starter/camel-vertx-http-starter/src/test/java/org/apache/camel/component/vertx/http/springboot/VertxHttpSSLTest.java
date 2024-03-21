@@ -41,25 +41,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                VertxHttpSSLTest.TestConfiguration.class
-        },
-        properties = {
-                "debug=false",
-                // camel.ssl.config
-                "camel.ssl.config.cert-alias=web",
-                "camel.ssl.config.key-managers.key-password=changeit",
-                "camel.ssl.config.key-managers.key-store.resource=/keystore.p12",
-                "camel.ssl.config.key-managers.key-store.password=changeit",
-                "camel.ssl.config.key-managers.key-store.type=PKCS12",
-                // camel.ssl
-                "camel.ssl.trust-managers.key-store.resource=/cacerts",
-                "camel.ssl.trust-managers.key-store.password=changeit",
-                "camel.ssl.trust-managers.key-store.type=jks"
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, VertxHttpSSLTest.TestConfiguration.class }, properties = {
+        "debug=false",
+        // camel.ssl.config
+        "camel.ssl.config.cert-alias=web", "camel.ssl.config.key-managers.key-password=changeit",
+        "camel.ssl.config.key-managers.key-store.resource=/keystore.p12",
+        "camel.ssl.config.key-managers.key-store.password=changeit",
+        "camel.ssl.config.key-managers.key-store.type=PKCS12",
+        // camel.ssl
+        "camel.ssl.trust-managers.key-store.resource=/cacerts", "camel.ssl.trust-managers.key-store.password=changeit",
+        "camel.ssl.trust-managers.key-store.type=jks" })
 public class VertxHttpSSLTest {
 
     private static int port;
@@ -75,9 +66,9 @@ public class VertxHttpSSLTest {
     @Test
     void testConsumeAsSecureClient() throws Exception {
         ProducerTemplate template = camelContext.createProducerTemplate();
-        String result
-                = template.requestBody("vertx-http:https://localhost:" + port + "?sslContextParameters=#clientSSLParameters",
-                null, String.class);
+        String result = template.requestBody(
+                "vertx-http:https://localhost:" + port + "?sslContextParameters=#clientSSLParameters", null,
+                String.class);
         assertEquals("Hello World", result);
     }
 

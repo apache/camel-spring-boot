@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.gson.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -34,40 +32,32 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        SpringGsonJsonDataFormatTest.class
-    },
-    properties = {
-        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringGsonJsonDataFormatTest.xml"}
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SpringGsonJsonDataFormatTest.class }, properties = {
+        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringGsonJsonDataFormatTest.xml" }
 
 )
 public class SpringGsonJsonDataFormatTest {
 
     @Autowired
     private CamelContext context;
-    
+
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:reversePojo")
     MockEndpoint mock;
-    
-  
-    
-    @Bean(name = "pretty") 
+
+    @Bean(name = "pretty")
     GsonDataFormat getPrettyGsonDataFormat() {
         GsonDataFormat gsonDataformat = new GsonDataFormat();
         gsonDataformat.setPrettyPrint(true);
         gsonDataformat.setUnmarshalTypeName("org.apache.camel.component.gson.springboot.TestPojo");
         return gsonDataformat;
     }
-    
-    @Bean(name = "gson") 
+
+    @Bean(name = "gson")
     GsonDataFormat getGsonDataFormat() {
         GsonDataFormat gsonDataformat = new GsonDataFormat();
         gsonDataformat.setUnmarshalTypeName("org.apache.camel.component.gson.springboot.TestPojo");
@@ -104,9 +94,7 @@ public class SpringGsonJsonDataFormatTest {
 
         Object marshalled = template.requestBody("direct:inPretty", in);
         String marshalledAsString = context.getTypeConverter().convertTo(String.class, marshalled);
-        String expected = "{\n"
-                          + "  \"name\": \"Camel\""
-                          + "\n}";
+        String expected = "{\n" + "  \"name\": \"Camel\"" + "\n}";
         assertEquals(expected, marshalledAsString);
 
         template.sendBody("direct:backPretty", marshalled);

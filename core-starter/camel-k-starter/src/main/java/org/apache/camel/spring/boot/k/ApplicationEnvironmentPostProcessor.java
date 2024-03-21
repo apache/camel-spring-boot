@@ -57,16 +57,15 @@ public class ApplicationEnvironmentPostProcessor implements EnvironmentPostProce
         // explicit disable looking up configmap and secret using the KubernetesClient
         sysProperties.put(ConfigMapPropertiesFunction.CLIENT_ENABLED, "false");
 
-        environment.getPropertySources().addLast(
-                new PropertiesPropertySource("camel-k-sys", sysProperties));
-        environment.getPropertySources().addLast(
-                new PropertiesPropertySource("camel-k-app", loadApplicationProperties()));
-        environment.getPropertySources().addLast(
-                new PropertiesPropertySource("camel-k-usr-configmap", loadConfigMapUserProperties()));
-        environment.getPropertySources().addLast(
-                new PropertiesPropertySource("camel-k-usr-secrets", loadSecretsProperties()));
-        environment.getPropertySources().addLast(
-                new PropertiesPropertySource("camel-k-servicebindings", loadServiceBindingsProperties()));
+        environment.getPropertySources().addLast(new PropertiesPropertySource("camel-k-sys", sysProperties));
+        environment.getPropertySources()
+                .addLast(new PropertiesPropertySource("camel-k-app", loadApplicationProperties()));
+        environment.getPropertySources()
+                .addLast(new PropertiesPropertySource("camel-k-usr-configmap", loadConfigMapUserProperties()));
+        environment.getPropertySources()
+                .addLast(new PropertiesPropertySource("camel-k-usr-secrets", loadSecretsProperties()));
+        environment.getPropertySources()
+                .addLast(new PropertiesPropertySource("camel-k-servicebindings", loadServiceBindingsProperties()));
 
     }
 
@@ -86,7 +85,6 @@ public class ApplicationEnvironmentPostProcessor implements EnvironmentPostProce
             return properties;
         }
 
-
         try {
             Path confPath = Paths.get(conf);
             if (Files.exists(confPath) && !Files.isDirectory(confPath)) {
@@ -102,32 +100,25 @@ public class ApplicationEnvironmentPostProcessor implements EnvironmentPostProce
     }
 
     private static Properties loadConfigMapUserProperties() {
-        return loadUserProperties(
-                ApplicationConstants.PROPERTY_CAMEL_K_MOUNT_PATH_CONFIGMAPS,
-                ApplicationConstants.ENV_CAMEL_K_MOUNT_PATH_CONFIGMAPS,
-                ApplicationConstants.PATH_CONFIGMAPS);
+        return loadUserProperties(ApplicationConstants.PROPERTY_CAMEL_K_MOUNT_PATH_CONFIGMAPS,
+                ApplicationConstants.ENV_CAMEL_K_MOUNT_PATH_CONFIGMAPS, ApplicationConstants.PATH_CONFIGMAPS);
     }
 
     private static Properties loadSecretsProperties() {
-        return loadUserProperties(
-                ApplicationConstants.PROPERTY_CAMEL_K_MOUNT_PATH_SECRETS,
-                ApplicationConstants.ENV_CAMEL_K_MOUNT_PATH_SECRETS,
-                ApplicationConstants.PATH_SECRETS);
+        return loadUserProperties(ApplicationConstants.PROPERTY_CAMEL_K_MOUNT_PATH_SECRETS,
+                ApplicationConstants.ENV_CAMEL_K_MOUNT_PATH_SECRETS, ApplicationConstants.PATH_SECRETS);
     }
 
     private static Properties loadServiceBindingsProperties() {
-        return loadUserProperties(
-                ApplicationConstants.PROPERTY_CAMEL_K_MOUNT_PATH_SERVICEBINDINGS,
-                ApplicationConstants.ENV_CAMEL_K_MOUNT_PATH_SERVICEBINDINGS,
-                ApplicationConstants.PATH_SERVICEBINDINGS);
+        return loadUserProperties(ApplicationConstants.PROPERTY_CAMEL_K_MOUNT_PATH_SERVICEBINDINGS,
+                ApplicationConstants.ENV_CAMEL_K_MOUNT_PATH_SERVICEBINDINGS, ApplicationConstants.PATH_SERVICEBINDINGS);
     }
 
     private static Properties loadUserProperties(String property, String env, String subpath) {
         String path = System.getProperty(property, System.getenv(env));
 
         if (path == null) {
-            String conf = System.getProperty(
-                    ApplicationConstants.PROPERTY_CAMEL_K_CONF_D,
+            String conf = System.getProperty(ApplicationConstants.PROPERTY_CAMEL_K_CONF_D,
                     System.getenv(ApplicationConstants.ENV_CAMEL_K_CONF_D));
 
             if (conf != null) {
@@ -178,9 +169,7 @@ public class ApplicationEnvironmentPostProcessor implements EnvironmentPostProce
                     }
                 } else {
                     try {
-                        properties.put(
-                                file.getFileName().toString(),
-                                Files.readString(file, StandardCharsets.UTF_8));
+                        properties.put(file.getFileName().toString(), Files.readString(file, StandardCharsets.UTF_8));
                     } catch (MalformedInputException mie) {
                         // Just skip if it is not a UTF-8 encoded file (ie a binary)
                         LOGGER.info("Cannot transform {} into UTF-8 text, skipping.", file);

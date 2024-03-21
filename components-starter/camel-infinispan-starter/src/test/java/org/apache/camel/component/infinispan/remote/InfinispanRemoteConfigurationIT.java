@@ -42,83 +42,71 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				InfinispanRemoteConfigurationIT.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, InfinispanRemoteConfigurationIT.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class InfinispanRemoteConfigurationIT {
-	@RegisterExtension
-	static InfinispanService service = InfinispanServiceFactory.createService();
+    @RegisterExtension
+    static InfinispanService service = InfinispanServiceFactory.createService();
 
-	@Test
-	public void remoteCacheWithoutProperties() throws Exception {
-		InfinispanRemoteConfiguration configuration = new InfinispanRemoteConfiguration();
-		configuration.setHosts(service.host() + ":" + service.port());
-		configuration.setSecure(true);
-		configuration.setUsername(service.username());
-		configuration.setPassword(service.password());
-		configuration.setSecurityServerName("infinispan");
-		configuration.setSaslMechanism("DIGEST-MD5");
-		configuration.setSecurityRealm("default");
-		if (CLIENT_INTELLIGENCE_BASIC) {
-			configuration.addConfigurationProperty(
-					"infinispan.client.hotrod.client_intelligence", "BASIC");
-		}
+    @Test
+    public void remoteCacheWithoutProperties() throws Exception {
+        InfinispanRemoteConfiguration configuration = new InfinispanRemoteConfiguration();
+        configuration.setHosts(service.host() + ":" + service.port());
+        configuration.setSecure(true);
+        configuration.setUsername(service.username());
+        configuration.setPassword(service.password());
+        configuration.setSecurityServerName("infinispan");
+        configuration.setSaslMechanism("DIGEST-MD5");
+        configuration.setSecurityRealm("default");
+        if (CLIENT_INTELLIGENCE_BASIC) {
+            configuration.addConfigurationProperty("infinispan.client.hotrod.client_intelligence", "BASIC");
+        }
 
-		try (InfinispanRemoteManager manager = new InfinispanRemoteManager(configuration)) {
-			manager.start();
-			manager.getCacheContainer().administration()
-					.getOrCreateCache(
-							"misc_cache",
-							new org.infinispan.configuration.cache.ConfigurationBuilder()
-									.clustering()
-									.cacheMode(CacheMode.DIST_SYNC).build());
+        try (InfinispanRemoteManager manager = new InfinispanRemoteManager(configuration)) {
+            manager.start();
+            manager.getCacheContainer().administration().getOrCreateCache("misc_cache",
+                    new org.infinispan.configuration.cache.ConfigurationBuilder().clustering()
+                            .cacheMode(CacheMode.DIST_SYNC).build());
 
-			BasicCache<Object, Object> cache = manager.getCache("misc_cache");
-			assertNotNull(cache);
-			assertTrue(cache instanceof RemoteCache);
+            BasicCache<Object, Object> cache = manager.getCache("misc_cache");
+            assertNotNull(cache);
+            assertTrue(cache instanceof RemoteCache);
 
-			String key = UUID.randomUUID().toString();
-			assertNull(cache.put(key, "val1"));
-			assertNull(cache.put(key, "val2"));
-		}
-	}
+            String key = UUID.randomUUID().toString();
+            assertNull(cache.put(key, "val1"));
+            assertNull(cache.put(key, "val2"));
+        }
+    }
 
-	@Test
-	public void remoteCacheWithProperties() throws Exception {
-		InfinispanRemoteConfiguration configuration = new InfinispanRemoteConfiguration();
-		configuration.setHosts(service.host() + ":" + service.port());
-		configuration.setSecure(true);
-		configuration.setUsername(service.username());
-		configuration.setPassword(service.password());
-		configuration.setSecurityServerName("infinispan");
-		configuration.setSaslMechanism("DIGEST-MD5");
-		configuration.setSecurityRealm("default");
-		if (SystemUtils.IS_OS_MAC) {
-			configuration.setConfigurationUri("infinispan/client-mac.properties");
-		} else {
-			configuration.setConfigurationUri("infinispan/client.properties");
-		}
+    @Test
+    public void remoteCacheWithProperties() throws Exception {
+        InfinispanRemoteConfiguration configuration = new InfinispanRemoteConfiguration();
+        configuration.setHosts(service.host() + ":" + service.port());
+        configuration.setSecure(true);
+        configuration.setUsername(service.username());
+        configuration.setPassword(service.password());
+        configuration.setSecurityServerName("infinispan");
+        configuration.setSaslMechanism("DIGEST-MD5");
+        configuration.setSecurityRealm("default");
+        if (SystemUtils.IS_OS_MAC) {
+            configuration.setConfigurationUri("infinispan/client-mac.properties");
+        } else {
+            configuration.setConfigurationUri("infinispan/client.properties");
+        }
 
-		try (InfinispanRemoteManager manager = new InfinispanRemoteManager(configuration)) {
-			manager.start();
-			manager.getCacheContainer().administration()
-					.getOrCreateCache(
-							"misc_cache",
-							new org.infinispan.configuration.cache.ConfigurationBuilder()
-									.clustering()
-									.cacheMode(CacheMode.DIST_SYNC).build());
+        try (InfinispanRemoteManager manager = new InfinispanRemoteManager(configuration)) {
+            manager.start();
+            manager.getCacheContainer().administration().getOrCreateCache("misc_cache",
+                    new org.infinispan.configuration.cache.ConfigurationBuilder().clustering()
+                            .cacheMode(CacheMode.DIST_SYNC).build());
 
-			BasicCache<Object, Object> cache = manager.getCache("misc_cache");
-			assertNotNull(cache);
-			assertTrue(cache instanceof RemoteCache);
+            BasicCache<Object, Object> cache = manager.getCache("misc_cache");
+            assertNotNull(cache);
+            assertTrue(cache instanceof RemoteCache);
 
-			String key = UUID.randomUUID().toString();
-			assertNull(cache.put(key, "val1"));
-			assertNotNull(cache.put(key, "val2"));
-		}
-	}
+            String key = UUID.randomUUID().toString();
+            assertNull(cache.put(key, "val1"));
+            assertNotNull(cache.put(key, "val2"));
+        }
+    }
 }

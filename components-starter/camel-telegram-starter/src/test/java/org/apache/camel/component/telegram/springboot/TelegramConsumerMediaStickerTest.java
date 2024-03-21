@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.telegram.springboot;
 
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
@@ -39,21 +38,14 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        TelegramConsumerMediaStickerTest.class,
-        TelegramConsumerMediaStickerTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, TelegramConsumerMediaStickerTest.class,
+        TelegramConsumerMediaStickerTest.TestConfiguration.class })
 public class TelegramConsumerMediaStickerTest extends TelegramTestSupport {
 
-    
     static TelegramMockRoutes mockRoutes;
-    
+
     @EndpointInject("mock:telegram")
     private MockEndpoint endpoint;
 
@@ -86,7 +78,6 @@ public class TelegramConsumerMediaStickerTest extends TelegramTestSupport {
 
     }
 
-
     // *************************************
     // Config
     // *************************************
@@ -98,25 +89,19 @@ public class TelegramConsumerMediaStickerTest extends TelegramTestSupport {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("telegram:bots?authorizationToken=mock-token")
-                            .to("mock:telegram");
+                    from("telegram:bots?authorizationToken=mock-token").to("mock:telegram");
                 }
             };
         }
 
     }
-    
+
     @Override
     @Bean
     protected TelegramMockRoutes createMockRoutes() {
-        mockRoutes =
-            new TelegramMockRoutes(port)
-            .addEndpoint(
-                    "getUpdates",
-                    "GET",
-                    String.class,
-                    TelegramTestUtil.stringResource("messages/updates-media-sticker.json"),
-                    TelegramTestUtil.stringResource("messages/updates-empty.json"));
+        mockRoutes = new TelegramMockRoutes(port).addEndpoint("getUpdates", "GET", String.class,
+                TelegramTestUtil.stringResource("messages/updates-media-sticker.json"),
+                TelegramTestUtil.stringResource("messages/updates-empty.json"));
         return mockRoutes;
     }
 }

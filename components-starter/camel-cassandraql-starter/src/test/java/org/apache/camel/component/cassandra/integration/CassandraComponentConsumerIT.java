@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.cassandra.integration;
 
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -41,34 +40,27 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        CassandraComponentConsumerIT.class,
-        CassandraComponentConsumerIT.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, CassandraComponentConsumerIT.class,
+        CassandraComponentConsumerIT.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class CassandraComponentConsumerIT extends BaseCassandra {
 
     static final String CQL = "select login, first_name, last_name from camel_user";
-    
+
     @EndpointInject("mock:resultAll")
     MockEndpoint mock;
-    
+
     @EndpointInject("mock:resultUnprepared")
     MockEndpoint mockResulutUnprepared;
 
     @EndpointInject("mock:resultOne")
     MockEndpoint mockResulutOne;
-   
 
     @Test
     public void testConsumeAll() throws Exception {
-        
+
         mock.expectedMinimumMessageCount(1);
         mock.whenAnyExchangeReceived(new Processor() {
             @Override
@@ -83,7 +75,7 @@ public class CassandraComponentConsumerIT extends BaseCassandra {
 
     @Test
     public void testConsumeUnprepared() throws Exception {
-        
+
         mockResulutUnprepared.expectedMinimumMessageCount(1);
         mockResulutUnprepared.whenAnyExchangeReceived(new Processor() {
             @Override
@@ -98,7 +90,7 @@ public class CassandraComponentConsumerIT extends BaseCassandra {
 
     @Test
     public void testConsumeOne() throws Exception {
-        
+
         mockResulutOne.expectedMinimumMessageCount(1);
         mockResulutOne.whenAnyExchangeReceived(new Processor() {
             @Override
@@ -127,8 +119,8 @@ public class CassandraComponentConsumerIT extends BaseCassandra {
                     from(String.format("cql://%s/%s?cql=%s", getUrl(), KEYSPACE_NAME, CQL)).to("mock:resultAll");
                     from(String.format("cql://%s/%s?cql=%s&prepareStatements=false", getUrl(), KEYSPACE_NAME, CQL))
                             .to("mock:resultUnprepared");
-                    from(String.format("cql://%s/%s?cql=%s&resultSetConversionStrategy=ONE", getUrl(), KEYSPACE_NAME, CQL))
-                            .to("mock:resultOne");
+                    from(String.format("cql://%s/%s?cql=%s&resultSetConversionStrategy=ONE", getUrl(), KEYSPACE_NAME,
+                            CQL)).to("mock:resultOne");
                 }
             };
         }

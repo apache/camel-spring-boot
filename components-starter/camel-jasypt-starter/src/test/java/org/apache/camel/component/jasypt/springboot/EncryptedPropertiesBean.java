@@ -39,7 +39,6 @@ public class EncryptedPropertiesBean {
     @Value("${unencrypted.property}")
     private String unencryptedPassword;
 
-
     public void testEncryptedProperty(Exchange exchange) {
         LOG.info("test properties decryption outside camel context: test.password        = {}", encryptedPassword);
         exchange.getIn().setBody(encryptedPassword);

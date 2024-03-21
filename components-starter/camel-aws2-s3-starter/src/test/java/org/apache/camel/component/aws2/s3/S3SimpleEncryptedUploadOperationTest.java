@@ -41,13 +41,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 //Based on S3SimpleEncryptedUploadOperationIT
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                S3SimpleEncryptedUploadOperationTest.class,
-                S3SimpleEncryptedUploadOperationTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, S3SimpleEncryptedUploadOperationTest.class,
+        S3SimpleEncryptedUploadOperationTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class S3SimpleEncryptedUploadOperationTest extends BaseS3 {
 
@@ -103,14 +98,15 @@ public class S3SimpleEncryptedUploadOperationTest extends BaseS3 {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseS3.TestConfiguration {
+    public class TestConfiguration extends BaseS3.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder(S3Client s3Client) {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    String key = AWSSDKClientUtils.newKMSClient().createKey(CreateKeyRequest.builder().description("Test_key").build())
-                            .keyMetadata().keyId();
+                    String key = AWSSDKClientUtils.newKMSClient()
+                            .createKey(CreateKeyRequest.builder().description("Test_key").build()).keyMetadata()
+                            .keyId();
                     String awsEndpoint = "aws2-s3://mycamel?autoCreateBucket=true&useAwsKMS=true&awsKMSKeyId=" + key;
 
                     from("direct:putObject").to(awsEndpoint);

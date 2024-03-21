@@ -32,9 +32,8 @@ public class CamelResilience4jTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelResilience4jTest.class))
-                .unitTestExclusionPattern(".*(\\.integration\\..*|IntegrationTest$|BlueprintResilienceRouteOkTest$|BlueprintResilienceRouteFallbackTest$)")
+        return new ITestConfigBuilder().module(inferModuleName(CamelResilience4jTest.class)).unitTestExclusionPattern(
+                ".*(\\.integration\\..*|IntegrationTest$|BlueprintResilienceRouteOkTest$|BlueprintResilienceRouteFallbackTest$)")
                 .build();
     }
 

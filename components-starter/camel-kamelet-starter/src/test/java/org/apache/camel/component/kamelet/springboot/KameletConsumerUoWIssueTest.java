@@ -35,15 +35,9 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletConsumerUoWIssueTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletConsumerUoWIssueTest.class, })
 
 public class KameletConsumerUoWIssueTest {
 
@@ -76,10 +70,8 @@ public class KameletConsumerUoWIssueTest {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                routeTemplate("tick")
-                        .from("timer:tick?repeatCount=1&delay=-1&includeMetadata=true")
-                        .setBody().exchangeProperty(Exchange.TIMER_COUNTER)
-                        .process(new Processor() {
+                routeTemplate("tick").from("timer:tick?repeatCount=1&delay=-1&includeMetadata=true").setBody()
+                        .exchangeProperty(Exchange.TIMER_COUNTER).process(new Processor() {
                             @Override
                             public void process(Exchange exchange) {
                                 exchange.getExchangeExtension().addOnCompletion(new SynchronizationAdapter() {
@@ -92,8 +84,7 @@ public class KameletConsumerUoWIssueTest {
                             }
                         }).to("kamelet:sink");
 
-                from("kamelet:tick").noAutoStartup().routeId("tick")
-                        .to("mock:foo");
+                from("kamelet:tick").noAutoStartup().routeId("tick").to("mock:foo");
             }
         };
     }

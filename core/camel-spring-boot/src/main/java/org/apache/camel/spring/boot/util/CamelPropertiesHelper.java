@@ -38,17 +38,14 @@ public final class CamelPropertiesHelper {
     private CamelPropertiesHelper() {
     }
 
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings({ "unchecked" })
     public static void copyProperties(CamelContext camelContext, Object source, Object target) {
         ObjectHelper.notNull(camelContext, "camel context");
         ObjectHelper.notNull(source, "source");
         ObjectHelper.notNull(target, "target");
 
-        CamelPropertiesHelper.setCamelProperties(
-            camelContext,
-            target,
-            source instanceof Map ? (Map)source : getNonNullProperties(camelContext, source),
-            false);
+        CamelPropertiesHelper.setCamelProperties(camelContext, target,
+                source instanceof Map ? (Map) source : getNonNullProperties(camelContext, source), false);
     }
 
     /**
@@ -56,31 +53,48 @@ public final class CamelPropertiesHelper {
      * <p/>
      * This method uses {@link PropertyBindingSupport} and therefore offers its capabilities such as:
      * <ul>
-     *     <li>property placeholders - Keys and values using Camels property placeholder will be resolved</li>
-     *     <li>nested - Properties can be nested using the dot syntax (OGNL and builder pattern using with as prefix), eg foo.bar=123</li>
-     *     <li>map</li> - Properties can lookup in Map's using map syntax, eg foo[bar] where foo is the name of the property that is a Map instance, and bar is the name of the key.</li>
-     *     <li>list</li> - Properties can refer or add to in List's using list syntax, eg foo[0] where foo is the name of the property that is a
-     *                     List instance, and 0 is the index. To refer to the last element, then use last as key.</li>
+     * <li>property placeholders - Keys and values using Camels property placeholder will be resolved</li>
+     * <li>nested - Properties can be nested using the dot syntax (OGNL and builder pattern using with as prefix), eg
+     * foo.bar=123</li>
+     * <li>map</li> - Properties can lookup in Map's using map syntax, eg foo[bar] where foo is the name of the property
+     * that is a Map instance, and bar is the name of the key.</li>
+     * <li>list</li> - Properties can refer or add to in List's using list syntax, eg foo[0] where foo is the name of
+     * the property that is a List instance, and 0 is the index. To refer to the last element, then use last as
+     * key.</li>
      * </ul>
      * This implementation sets the properties using the following algorithm in the given order:
      * <ul>
-     *     <li>reference by bean id - Values can refer to other beans in the registry by prefixing with with # or #bean: eg #myBean or #bean:myBean</li>
-     *     <li>reference by type - Values can refer to singleton beans by their type in the registry by prefixing with #type: syntax, eg #type:com.foo.MyClassType</li>
-     *     <li>autowire by type - Values can refer to singleton beans by auto wiring by setting the value to #autowired</li>
-     *     <li>reference new class - Values can refer to creating new beans by their class name by prefixing with #class, eg #class:com.foo.MyClassType</li>
-     *     <li>value as lookup - The value is used as-is (eg like #value) to lookup in the Registry if there is a bean then its set on the target</li>
+     * <li>reference by bean id - Values can refer to other beans in the registry by prefixing with with # or #bean: eg
+     * #myBean or #bean:myBean</li>
+     * <li>reference by type - Values can refer to singleton beans by their type in the registry by prefixing with
+     * #type: syntax, eg #type:com.foo.MyClassType</li>
+     * <li>autowire by type - Values can refer to singleton beans by auto wiring by setting the value to #autowired</li>
+     * <li>reference new class - Values can refer to creating new beans by their class name by prefixing with #class, eg
+     * #class:com.foo.MyClassType</li>
+     * <li>value as lookup - The value is used as-is (eg like #value) to lookup in the Registry if there is a bean then
+     * its set on the target</li>
      * </ul>
-     * When an option has been set on the target bean, then its removed from the given properties map. If all the options has been set, then the map will be empty.
-     * The implementation ignores case for the property keys.
+     * When an option has been set on the target bean, then its removed from the given properties map. If all the
+     * options has been set, then the map will be empty. The implementation ignores case for the property keys.
      *
-     * @param context        the CamelContext
-     * @param target         the target bean
-     * @param properties     the properties
-     * @param failIfNotSet   whether to fail if an option either does not exists on the target bean or if the option cannot be due no suitable setter methods with the given type
+     * @param context
+     *            the CamelContext
+     * @param target
+     *            the target bean
+     * @param properties
+     *            the properties
+     * @param failIfNotSet
+     *            whether to fail if an option either does not exists on the target bean or if the option cannot be due
+     *            no suitable setter methods with the given type
+     *
      * @return <tt>true</tt> if at least one option was configured
-     * @throws IllegalArgumentException is thrown if an option cannot be configured on the bean because there is no suitable setter method and failOnNoSet is true.
+     *
+     * @throws IllegalArgumentException
+     *             is thrown if an option cannot be configured on the bean because there is no suitable setter method
+     *             and failOnNoSet is true.
      */
-    public static boolean setCamelProperties(CamelContext context, Object target, Map<String, Object> properties, boolean failIfNotSet) {
+    public static boolean setCamelProperties(CamelContext context, Object target, Map<String, Object> properties,
+            boolean failIfNotSet) {
         ObjectHelper.notNull(context, "context");
         ObjectHelper.notNull(target, "target");
         ObjectHelper.notNull(properties, "properties");
@@ -101,12 +115,11 @@ public final class CamelPropertiesHelper {
             String stringValue = value != null ? value.toString() : null;
             boolean hit = false;
             try {
-                hit = PropertyBindingSupport.build()
-                        .withConfigurer(configurer)
-                        .withIgnoreCase(true)
-                        .bind(context, target, name, value);
+                hit = PropertyBindingSupport.build().withConfigurer(configurer).withIgnoreCase(true).bind(context,
+                        target, name, value);
             } catch (PropertyBindingException e) {
-                // no we could not and this would be thrown if we attempted to set a value on a property which we cannot do type conversion as
+                // no we could not and this would be thrown if we attempted to set a value on a property which we cannot
+                // do type conversion as
                 // then maybe the value refers to a spring bean in the registry so try this
                 if (stringValue != null) {
                     if (stringValue.startsWith("#")) {
@@ -124,8 +137,9 @@ public final class CamelPropertiesHelper {
                 rc = true;
             } else if (failIfNotSet) {
                 throw new IllegalArgumentException("Cannot configure option [" + name + "] with value [" + stringValue
-                    + "] as the bean class [" + ObjectHelper.classCanonicalName(target)
-                    + "] has no suitable setter method, or not possible to lookup a bean with the id [" + stringValue + "] in Spring Boot registry");
+                        + "] as the bean class [" + ObjectHelper.classCanonicalName(target)
+                        + "] has no suitable setter method, or not possible to lookup a bean with the id ["
+                        + stringValue + "] in Spring Boot registry");
             }
         }
 
@@ -135,8 +149,11 @@ public final class CamelPropertiesHelper {
     /**
      * Gets all the non-null properties from the given object,
      *
-     * @param camelContext the camel context
-     * @param target       the object
+     * @param camelContext
+     *            the camel context
+     * @param target
+     *            the object
+     *
      * @return the properties (non-null only)
      */
     public static Map<String, Object> getNonNullProperties(CamelContext camelContext, Object target) {

@@ -29,13 +29,11 @@ public class ApplicationConfiguration {
      */
     private boolean enabled;
 
-
     @NestedConfigurationProperty
     private final ShutdownProperties shutdown = new ShutdownProperties();
 
     @NestedConfigurationProperty
     private final RoutesProperties routes = new RoutesProperties();
-
 
     public boolean isEnabled() {
         return enabled;
@@ -100,12 +98,10 @@ public class ApplicationConfiguration {
     }
 
     public enum ShutdownStrategy {
-        APPLICATION,
-        CAMEL
+        APPLICATION, CAMEL
     }
 
-
-    public static class  RouteOverride {
+    public static class RouteOverride {
         /**
          * Identifies the route to be amended.
          */

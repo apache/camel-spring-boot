@@ -36,8 +36,8 @@ import org.jboss.shrinkwrap.impl.base.io.IOUtil;
 import org.jboss.shrinkwrap.impl.base.path.PathUtil;
 
 /**
- * A spring-boot compatible on-demand input stream.
- * It does not compress jar entries for spring-boot nested jar structure compatibility.
+ * A spring-boot compatible on-demand input stream. It does not compress jar entries for spring-boot nested jar
+ * structure compatibility.
  */
 public class SpringBootZipOnDemandInputStream extends InputStream {
 
@@ -181,6 +181,7 @@ public class SpringBootZipOnDemandInputStream extends InputStream {
      * Start entry in stream.
      *
      * @param path
+     *
      * @throws IOException
      */
     private void startAsset(final String path, long size, long crc32) throws IOException {
@@ -196,7 +197,6 @@ public class SpringBootZipOnDemandInputStream extends InputStream {
         closeEntry(outputStream);
     }
 
-
     protected ZipOutputStream createOutputStream(final OutputStream outputStream) {
         ZipOutputStream stream = new ZipOutputStream(outputStream);
         stream.setMethod(ZipEntry.STORED);
@@ -204,13 +204,12 @@ public class SpringBootZipOnDemandInputStream extends InputStream {
         return stream;
     }
 
-
     protected void closeEntry(final ZipOutputStream outputStream) throws IOException {
         outputStream.closeEntry();
     }
 
-
-    protected void putNextEntry(final ZipOutputStream outputStream, final String context, long size, long crc32) throws IOException {
+    protected void putNextEntry(final ZipOutputStream outputStream, final String context, long size, long crc32)
+            throws IOException {
 
         ZipEntry entry = new ZipEntry(context);
         entry.setMethod(ZipEntry.STORED);
@@ -219,6 +218,5 @@ public class SpringBootZipOnDemandInputStream extends InputStream {
 
         outputStream.putNextEntry(entry);
     }
-
 
 }

@@ -35,21 +35,14 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
-                KafkaConsumerBatchSizeIT.class,
-                KafkaConsumerBatchSizeIT.TestConfiguration.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
+        KafkaConsumerBatchSizeIT.class, KafkaConsumerBatchSizeIT.TestConfiguration.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class KafkaConsumerBatchSizeIT extends BaseEmbeddedKafkaTestSupport {
 
     public static final String TOPIC = "test-batch";
 
     private final String from = "kafka:" + TOPIC + "?autoOffsetReset=earliest&autoCommitEnable=false&consumersCount=1";
-
 
     @EndpointInject("mock:result")
     private MockEndpoint to;

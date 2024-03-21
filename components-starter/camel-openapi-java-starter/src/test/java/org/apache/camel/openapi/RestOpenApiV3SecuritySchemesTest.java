@@ -37,107 +37,87 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
-
 import io.swagger.v3.core.util.Json;
 import io.swagger.v3.oas.models.OpenAPI;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				RestOpenApiV3SecuritySchemesTest.class,
-				RestOpenApiV3SecuritySchemesTest.TestConfiguration.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, RestOpenApiV3SecuritySchemesTest.class,
+        RestOpenApiV3SecuritySchemesTest.TestConfiguration.class })
 public class RestOpenApiV3SecuritySchemesTest {
 
-	private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
-	@Autowired
-	CamelContext context;
+    @Autowired
+    CamelContext context;
 
-	@Configuration
-	public class TestConfiguration {
+    @Configuration
+    public class TestConfiguration {
 
-		@Bean
-		public RouteBuilder routeBuilder() {
-			return new RouteBuilder() {
+        @Bean
+        public RouteBuilder routeBuilder() {
+            return new RouteBuilder() {
 
-				@Override
-				public void configure() throws Exception {
-					rest()
-							.securityDefinitions()
-							.oauth2("petstore_auth_implicit")// OAuth implicit
-							.authorizationUrl("https://petstore.swagger.io/oauth/dialog")
-							.refreshUrl("https://petstore.swagger.io/oauth/refresh")
-							.end()
-							.oauth2("oauth_password")
-							.flow("password")
-							.tokenUrl("https://petstore.swagger.io/oauth/token")
-							.end()
-							.oauth2("oauth2_accessCode")// OAuth access code
-							.authorizationUrl("https://petstore.swagger.io/oauth/dialog")
-							.tokenUrl("https://petstore.swagger.io/oauth/token")
-							.end()
-							.apiKey("api_key_header")
-							.withHeader("myHeader")
-							.end()
-							.apiKey("api_key_query")
-							.withQuery("myQuery")
-							.end()
-							.apiKey("api_key_cookie", "API Key using cookie")
-							.withCookie("myCookie")
-							.end()
-							.openIdConnect("openIdConnect_auth", "https://petstore.swagger.io/openidconnect")
-							.mutualTLS("mutualTLS_auth")
-							.end();
-				}
-			};
-		}
-	}
+                @Override
+                public void configure() throws Exception {
+                    rest().securityDefinitions().oauth2("petstore_auth_implicit")// OAuth implicit
+                            .authorizationUrl("https://petstore.swagger.io/oauth/dialog")
+                            .refreshUrl("https://petstore.swagger.io/oauth/refresh").end().oauth2("oauth_password")
+                            .flow("password").tokenUrl("https://petstore.swagger.io/oauth/token").end()
+                            .oauth2("oauth2_accessCode")// OAuth access code
+                            .authorizationUrl("https://petstore.swagger.io/oauth/dialog")
+                            .tokenUrl("https://petstore.swagger.io/oauth/token").end().apiKey("api_key_header")
+                            .withHeader("myHeader").end().apiKey("api_key_query").withQuery("myQuery").end()
+                            .apiKey("api_key_cookie", "API Key using cookie").withCookie("myCookie").end()
+                            .openIdConnect("openIdConnect_auth", "https://petstore.swagger.io/openidconnect")
+                            .mutualTLS("mutualTLS_auth").end();
+                }
+            };
+        }
+    }
 
-	@Test
-	public void testSecuritySchemesV3() throws Exception {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		config.setTitle("Camel User store");
-		config.setLicense("Apache 2.0");
-		config.setLicenseUrl("https://www.apache.org/licenses/LICENSE-2.0.html");
+    @Test
+    public void testSecuritySchemesV3() throws Exception {
+        BeanConfig config = new BeanConfig();
+        config.setHost("localhost:8080");
+        config.setSchemes(new String[] { "http" });
+        config.setBasePath("/api");
+        config.setTitle("Camel User store");
+        config.setLicense("Apache 2.0");
+        config.setLicenseUrl("https://www.apache.org/licenses/LICENSE-2.0.html");
 
-		RestOpenApiReader reader = new RestOpenApiReader();
-		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
-				new DefaultClassResolver());
-		assertNotNull(openApi);
+        RestOpenApiReader reader = new RestOpenApiReader();
+        OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config,
+                context.getName(), new DefaultClassResolver());
+        assertNotNull(openApi);
 
-		String json = Json.pretty(openApi);
+        String json = Json.pretty(openApi);
 
-		log.info(json);
+        log.info(json);
 
-		json = json.replace("\n", " ").replaceAll("\\s+", " ");
+        json = json.replace("\n", " ").replaceAll("\\s+", " ");
 
-		assertTrue(json.contains(
-		        "\"petstore_auth_implicit\" : { \"type\" : \"oauth2\", \"flows\" : { \"implicit\" : { \"authorizationUrl\" : " +
-		                "\"https://petstore.swagger.io/oauth/dialog\", \"refreshUrl\" : " +
-		        "\"https://petstore.swagger.io/oauth/refresh\" } } }"));
-		assertTrue(
-		        json.contains("\"oauth_password\" : { \"type\" : \"oauth2\", \"flows\" : { \"password\" : { \"tokenUrl\" : " +
-		                "\"https://petstore.swagger.io/oauth/token\" } } }"));
-		assertTrue(json.contains(
-		        "\"oauth2_accessCode\" : { \"type\" : \"oauth2\", \"flows\" : { \"authorizationCode\" : { \"authorizationUrl\" : "
-		                + "\"https://petstore.swagger.io/oauth/dialog\", \"tokenUrl\" : " +
-		        "\"https://petstore.swagger.io/oauth/token\" } } }"));
-		assertTrue(
-		        json.contains("\"api_key_header\" : { \"type\" : \"apiKey\", \"name\" : \"myHeader\", \"in\" : \"header\" }"));
-		assertTrue(json.contains("\"api_key_query\" : { \"type\" : \"apiKey\", \"name\" : \"myQuery\", \"in\" : \"query\" }"));
-		assertTrue(json.contains("\"api_key_cookie\" : { \"type\" : \"apiKey\", \"description\" : \"API Key using cookie\", " +
-		        "\"name\" : \"myCookie\", \"in\" : \"cookie\" }"));
-		assertTrue(
-		        json.contains("\"openIdConnect_auth\" : { \"type\" : \"openIdConnect\", \"openIdConnectUrl\" : " +
-		                "\"https://petstore.swagger.io/openidconnect\" }"));
-		assertTrue(json.contains("\"mutualTLS_auth\" : { \"type\" : \"mutualTLS\" }"));
-	}
+        assertTrue(json.contains(
+                "\"petstore_auth_implicit\" : { \"type\" : \"oauth2\", \"flows\" : { \"implicit\" : { \"authorizationUrl\" : "
+                        + "\"https://petstore.swagger.io/oauth/dialog\", \"refreshUrl\" : "
+                        + "\"https://petstore.swagger.io/oauth/refresh\" } } }"));
+        assertTrue(json
+                .contains("\"oauth_password\" : { \"type\" : \"oauth2\", \"flows\" : { \"password\" : { \"tokenUrl\" : "
+                        + "\"https://petstore.swagger.io/oauth/token\" } } }"));
+        assertTrue(json.contains(
+                "\"oauth2_accessCode\" : { \"type\" : \"oauth2\", \"flows\" : { \"authorizationCode\" : { \"authorizationUrl\" : "
+                        + "\"https://petstore.swagger.io/oauth/dialog\", \"tokenUrl\" : "
+                        + "\"https://petstore.swagger.io/oauth/token\" } } }"));
+        assertTrue(json.contains(
+                "\"api_key_header\" : { \"type\" : \"apiKey\", \"name\" : \"myHeader\", \"in\" : \"header\" }"));
+        assertTrue(json
+                .contains("\"api_key_query\" : { \"type\" : \"apiKey\", \"name\" : \"myQuery\", \"in\" : \"query\" }"));
+        assertTrue(json
+                .contains("\"api_key_cookie\" : { \"type\" : \"apiKey\", \"description\" : \"API Key using cookie\", "
+                        + "\"name\" : \"myCookie\", \"in\" : \"cookie\" }"));
+        assertTrue(json.contains("\"openIdConnect_auth\" : { \"type\" : \"openIdConnect\", \"openIdConnectUrl\" : "
+                + "\"https://petstore.swagger.io/openidconnect\" }"));
+        assertTrue(json.contains("\"mutualTLS_auth\" : { \"type\" : \"mutualTLS\" }"));
+    }
 
 }

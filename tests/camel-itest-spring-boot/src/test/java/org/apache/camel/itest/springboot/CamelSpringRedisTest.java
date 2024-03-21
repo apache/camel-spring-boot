@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelSpringRedisTest extends AbstractSpringBootTestSupport {
 
@@ -33,9 +32,8 @@ public class CamelSpringRedisTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelSpringRedisTest.class))
-                //.dependency(DependencyResolver.withVersion("org.springframework.data:spring-data-redis"))
+        return new ITestConfigBuilder().module(inferModuleName(CamelSpringRedisTest.class))
+                // .dependency(DependencyResolver.withVersion("org.springframework.data:spring-data-redis"))
                 .build();
     }
 
@@ -44,6 +42,5 @@ public class CamelSpringRedisTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

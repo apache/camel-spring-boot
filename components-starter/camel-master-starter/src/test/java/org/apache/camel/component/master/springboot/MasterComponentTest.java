@@ -43,20 +43,14 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        MasterComponentTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, MasterComponentTest.class, })
 
 public class MasterComponentTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(MasterComponentTest.class);
-    private static final List<String> INSTANCES
-            = IntStream.range(0, 3).mapToObj(Integer::toString).collect(Collectors.toList());
+    private static final List<String> INSTANCES = IntStream.range(0, 3).mapToObj(Integer::toString)
+            .collect(Collectors.toList());
     private static final List<String> RESULTS = new ArrayList<>();
     private static final ScheduledExecutorService SCHEDULER = Executors.newScheduledThreadPool(INSTANCES.size());
     private static final CountDownLatch LATCH = new CountDownLatch(INSTANCES.size());
@@ -96,9 +90,7 @@ public class MasterComponentTest {
             context.addRoutes(new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("master:ns:timer:test?delay=1000&period=1000")
-                            .routeId("route-" + id)
-                            .log("From ${routeId}")
+                    from("master:ns:timer:test?delay=1000&period=1000").routeId("route-" + id).log("From ${routeId}")
                             .process(e -> contextLatch.countDown());
                 }
             });

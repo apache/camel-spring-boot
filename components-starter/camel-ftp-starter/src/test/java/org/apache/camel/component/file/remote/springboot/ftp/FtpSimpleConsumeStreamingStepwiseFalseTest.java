@@ -36,13 +36,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FtpSimpleConsumeStreamingStepwiseFalseTest.class,
-                FtpSimpleConsumeStreamingStepwiseFalseTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FtpSimpleConsumeStreamingStepwiseFalseTest.class,
+        FtpSimpleConsumeStreamingStepwiseFalseTest.TestConfiguration.class })
 public class FtpSimpleConsumeStreamingStepwiseFalseTest extends BaseFtp {
 
     @EndpointInject("mock:result")
@@ -80,17 +75,16 @@ public class FtpSimpleConsumeStreamingStepwiseFalseTest extends BaseFtp {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseFtp.TestConfiguration {
+    public class TestConfiguration extends BaseFtp.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
 
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("ftp://localhost:" + getPort() 
+                    from("ftp://localhost:" + getPort()
                             + "/tmp/mytemp?username=admin&password=admin&delay=10000&disconnect=true&streamDownload=true&stepwise="
-                            + isStepwise())
-                            .to("mock:result");
+                            + isStepwise()).to("mock:result");
                 }
             };
         }

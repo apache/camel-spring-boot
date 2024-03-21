@@ -39,8 +39,8 @@ import org.w3c.dom.NodeList;
 import static org.apache.camel.itest.springboot.util.LocationUtils.camelRoot;
 
 /**
- * Resolves the currently used version of a library. Useful to run unit tests directly from the IDE, without passing additional parameters.
- * It resolves properties present in spring-boot and camel parent.
+ * Resolves the currently used version of a library. Useful to run unit tests directly from the IDE, without passing
+ * additional parameters. It resolves properties present in spring-boot and camel parent.
  */
 public final class DependencyResolver {
 
@@ -112,7 +112,6 @@ public final class DependencyResolver {
     public static String resolveCamelProperty(String property) {
         return resolveProperty(camelRoot("pom.xml"), property, 0);
     }
-
 
     private static String resolveProperty(File pom, String property, int depth) {
         try {

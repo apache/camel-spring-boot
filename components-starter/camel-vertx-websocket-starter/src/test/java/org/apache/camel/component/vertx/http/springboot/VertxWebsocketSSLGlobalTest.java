@@ -40,26 +40,17 @@ import org.springframework.test.annotation.DirtiesContext;
 @CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                VertxWebsocketSSLGlobalTest.TestConfiguration.class
-        },
-        properties = {
-                "debug=false",
+@SpringBootTest(classes = { CamelAutoConfiguration.class,
+        VertxWebsocketSSLGlobalTest.TestConfiguration.class }, properties = { "debug=false",
                 "camel.component.vertx-websocket.use-global-ssl-context-parameters=true",
                 // camel.ssl.config
-                "camel.ssl.config.cert-alias=web",
-                "camel.ssl.config.key-managers.key-password=changeit",
+                "camel.ssl.config.cert-alias=web", "camel.ssl.config.key-managers.key-password=changeit",
                 "camel.ssl.config.key-managers.key-store.resource=/keystore.p12",
                 "camel.ssl.config.key-managers.key-store.password=changeit",
                 "camel.ssl.config.key-managers.key-store.type=PKCS12",
                 // camel.ssl
                 "camel.ssl.trust-managers.key-store.resource=/cacerts",
-                "camel.ssl.trust-managers.key-store.password=changeit",
-                "camel.ssl.trust-managers.key-store.type=jks"
-        }
-)
+                "camel.ssl.trust-managers.key-store.password=changeit", "camel.ssl.trust-managers.key-store.type=jks" })
 public class VertxWebsocketSSLGlobalTest {
     private static int port;
 
@@ -102,9 +93,7 @@ public class VertxWebsocketSSLGlobalTest {
                     from("direct:start")
                             .toF("vertx-websocket:localhost:%d/echo?sslContextParameters=#clientSSLParameters", port);
 
-                    fromF("vertx-websocket:localhost:%d/echo", port)
-                            .setBody(simple("Hello ${body}"))
-                            .to("mock:result");
+                    fromF("vertx-websocket:localhost:%d/echo", port).setBody(simple("Hello ${body}")).to("mock:result");
                 }
             };
         }

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
 
 import org.apache.camel.EndpointInject;
@@ -28,7 +27,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -36,16 +34,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathExchangePropertyTest.class,
-        JsonPathExchangePropertyTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathExchangePropertyTest.class,
+        JsonPathExchangePropertyTest.TestConfiguration.class })
 public class JsonPathExchangePropertyTest {
 
     @Autowired
@@ -79,10 +71,8 @@ public class JsonPathExchangePropertyTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                            .setProperty("foo").jsonpath("$.store.bicycle.color", String.class)
-                            .log("${exchangeProperty.foo}")
-                            .to("mock:color");
+                    from("direct:start").setProperty("foo").jsonpath("$.store.bicycle.color", String.class)
+                            .log("${exchangeProperty.foo}").to("mock:color");
                 }
             };
         }

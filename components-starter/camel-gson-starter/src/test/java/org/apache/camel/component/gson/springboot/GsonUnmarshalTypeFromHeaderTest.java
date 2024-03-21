@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.gson.springboot;
 
-
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.gson.GsonConstants;
@@ -34,31 +33,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        GsonUnmarshalTypeFromHeaderTest.class,
-        GsonUnmarshalTypeFromHeaderTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, GsonUnmarshalTypeFromHeaderTest.class,
+        GsonUnmarshalTypeFromHeaderTest.TestConfiguration.class })
 public class GsonUnmarshalTypeFromHeaderTest {
 
-    
     @Autowired
     ProducerTemplate template;
 
-    
-
-    
     @Test
     public void testUnmarshalTypeFromHeader() {
         String body = "{\"name\":\"my-name\"}";
         String unmarshallType = "org.apache.camel.component.gson.springboot.TestPojo";
-        TestPojo pojo = template.requestBodyAndHeader("direct:unmarshalTypeFromHeader", body, GsonConstants.UNMARSHAL_TYPE,
-                unmarshallType, TestPojo.class);
+        TestPojo pojo = template.requestBodyAndHeader("direct:unmarshalTypeFromHeader", body,
+                GsonConstants.UNMARSHAL_TYPE, unmarshallType, TestPojo.class);
         assertNotNull(pojo);
         assertEquals("my-name", pojo.getName());
     }

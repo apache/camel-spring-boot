@@ -32,9 +32,7 @@ public class CamelAs2Test extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelAs2Test.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelAs2Test.class)).build();
     }
 
     @Test

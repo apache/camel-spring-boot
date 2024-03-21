@@ -39,58 +39,51 @@ public class CamelSSLConfigurationProperties {
     private SSLContextParameters config = new SSLContextParameters();
 
     /**
-     * The optional key manager configuration for creating the
-     * KeyManager used in constructing an SSLContext.
+     * The optional key manager configuration for creating the KeyManager used in constructing an SSLContext.
      */
     private KeyManagersParameters keyManagers;
 
     /**
-     * The optional trust manager configuration for creating the
-     * TrustManager used in constructing an SSLContext.
+     * The optional trust manager configuration for creating the TrustManager used in constructing an SSLContext.
      */
     private TrustManagersParameters trustManagers;
 
     /**
-     * The optional secure random configuration options to use for constructing
-     * the SecureRandom used in the creation of an SSLContext.
+     * The optional secure random configuration options to use for constructing the SecureRandom used in the creation of
+     * an SSLContext.
      */
     private SecureRandomParameters secureRandom;
 
     /**
-     * The optional configuration options to be applied purely to the client side settings
-     * of the SSLContext. Settings specified here override any duplicate settings
-     * provided at the overall level by this class. These parameters apply to
-     * SSLSocketFactory and SSLEngine produced by the SSLContext
-     * produced from this class as well as to the SSLContext itself.
+     * The optional configuration options to be applied purely to the client side settings of the SSLContext. Settings
+     * specified here override any duplicate settings provided at the overall level by this class. These parameters
+     * apply to SSLSocketFactory and SSLEngine produced by the SSLContext produced from this class as well as to the
+     * SSLContext itself.
      */
     private SSLContextClientParameters clientParameters;
 
     /**
-     * The optional configuration options to be applied purely to the server side settings
-     * of the SSLContext. Settings specified here override any duplicate settings
-     * provided at the overall level by this class. These parameters apply to
-     * SSLServerSocketFactory and SSLEngine produced by the SSLContext
-     * produced from this class as well as to the SSLContext itself.
+     * The optional configuration options to be applied purely to the server side settings of the SSLContext. Settings
+     * specified here override any duplicate settings provided at the overall level by this class. These parameters
+     * apply to SSLServerSocketFactory and SSLEngine produced by the SSLContext produced from this class as well as to
+     * the SSLContext itself.
      */
     private SSLContextServerParameters serverParameters;
 
     /**
-     * The optional provider identifier for the JSSE implementation to use when
-     * constructing an SSLContext.
+     * The optional provider identifier for the JSSE implementation to use when constructing an SSLContext.
      */
     private String provider;
 
     /**
-     * The optional protocol for the secure sockets created by the SSLContext
-     * represented by this instance's configuration. See Appendix A in the
-     * Java Secure Socket Extension Reference Guide for information about
-     * standard protocol names.
+     * The optional protocol for the secure sockets created by the SSLContext represented by this instance's
+     * configuration. See Appendix A in the Java Secure Socket Extension Reference Guide for information about standard
+     * protocol names.
      */
     private String secureSocketProtocol;
 
     /**
-     * An optional certificate alias to use. This is useful when the keystore has multiple
-     * certificates.
+     * An optional certificate alias to use. This is useful when the keystore has multiple certificates.
      */
     private String certAlias;
 

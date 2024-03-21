@@ -28,23 +28,22 @@ import java.util.Map;
 
 public class DummyRestConsumerFactory implements RestConsumerFactory {
 
-	@Override
-	public Consumer createConsumer(
-			CamelContext camelContext, Processor processor, String verb, String basePath, String uriTemplate,
-			String consumes, String produces, RestConfiguration configuration, Map<String, Object> parameters)
-			throws Exception {
-		// just use a seda endpoint for testing purpose
-		String id;
-		if (uriTemplate != null) {
-			id = ClassicUuidGenerator.generateSanitizedId(basePath + uriTemplate);
-		} else {
-			id = ClassicUuidGenerator.generateSanitizedId(basePath);
-		}
-		// remove leading dash as we add that ourselves
-		if (id.startsWith("-")) {
-			id = id.substring(1);
-		}
-		SedaEndpoint seda = camelContext.getEndpoint("seda:" + verb + "-" + id, SedaEndpoint.class);
-		return seda.createConsumer(processor);
-	}
+    @Override
+    public Consumer createConsumer(CamelContext camelContext, Processor processor, String verb, String basePath,
+            String uriTemplate, String consumes, String produces, RestConfiguration configuration,
+            Map<String, Object> parameters) throws Exception {
+        // just use a seda endpoint for testing purpose
+        String id;
+        if (uriTemplate != null) {
+            id = ClassicUuidGenerator.generateSanitizedId(basePath + uriTemplate);
+        } else {
+            id = ClassicUuidGenerator.generateSanitizedId(basePath);
+        }
+        // remove leading dash as we add that ourselves
+        if (id.startsWith("-")) {
+            id = id.substring(1);
+        }
+        SedaEndpoint seda = camelContext.getEndpoint("seda:" + verb + "-" + id, SedaEndpoint.class);
+        return seda.createConsumer(processor);
+    }
 }

@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelGoogleSheetsTest extends AbstractSpringBootTestSupport {
 
@@ -33,9 +32,7 @@ public class CamelGoogleSheetsTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelGoogleSheetsTest.class))
-                .unitTestExpectedNumber(0)
+        return new ITestConfigBuilder().module(inferModuleName(CamelGoogleSheetsTest.class)).unitTestExpectedNumber(0)
                 .build();
     }
 
@@ -45,6 +42,5 @@ public class CamelGoogleSheetsTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config, "google-sheets-stream");
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

@@ -48,14 +48,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SqlTransactedRouteTest.class,
-                SqlTransactedRouteTest.TestConfiguration.class,
-                BaseSql.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SqlTransactedRouteTest.class,
+        SqlTransactedRouteTest.TestConfiguration.class, BaseSql.TestConfiguration.class })
 public class SqlTransactedRouteTest extends BaseSql {
 
     private JdbcTemplate jdbc;
@@ -77,8 +71,8 @@ public class SqlTransactedRouteTest extends BaseSql {
 
     @Test
     public void testCommit() throws Exception {
-        Exchange exchange = template.send(startEndpoint, e ->
-            e.getIn().setHeader(SqlConstants.SQL_QUERY, "insert into customer values('cust1','cmueller')")
+        Exchange exchange = template.send(startEndpoint,
+                e -> e.getIn().setHeader(SqlConstants.SQL_QUERY, "insert into customer values('cust1','cmueller')")
 
         );
 
@@ -126,7 +120,8 @@ public class SqlTransactedRouteTest extends BaseSql {
         }
 
         @Bean(name = "required")
-        public SpringTransactionPolicy requiredTransactionPolicy(PlatformTransactionManager platformTransactionManager) {
+        public SpringTransactionPolicy requiredTransactionPolicy(
+                PlatformTransactionManager platformTransactionManager) {
             SpringTransactionPolicy txPolicy = new SpringTransactionPolicy();
             txPolicy.setTransactionManager(platformTransactionManager);
             txPolicy.setPropagationBehaviorName("PROPAGATION_REQUIRED");
@@ -143,17 +138,11 @@ public class SqlTransactedRouteTest extends BaseSql {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start").routeId("commit")
-                            .transacted("required")
-                            .to(sqlEndpoint)
-                            .process(e -> e.getIn().setHeader(SqlConstants.SQL_QUERY,
-                                            "insert into customer values('cust2','muellerc')")
-                            )
+                    from("direct:start").routeId("commit").transacted("required").to(sqlEndpoint).process(e -> e.getIn()
+                            .setHeader(SqlConstants.SQL_QUERY, "insert into customer values('cust2','muellerc')"))
                             .to(sqlEndpoint);
 
-                    from("direct:start2").routeId("rollback2")
-                            .transacted("required")
-                            .to(sqlEndpoint)
+                    from("direct:start2").routeId("rollback2").transacted("required").to(sqlEndpoint)
                             .process(new Processor() {
                                 @Override
                                 public void process(Exchange exchange) throws Exception {

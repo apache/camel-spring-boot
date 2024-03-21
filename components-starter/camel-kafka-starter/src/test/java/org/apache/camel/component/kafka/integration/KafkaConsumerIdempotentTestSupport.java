@@ -33,8 +33,8 @@ public abstract class KafkaConsumerIdempotentTestSupport extends BaseEmbeddedKaf
 
     protected void doSend(int size, String topic) {
         Properties props = getDefaultProperties();
-        org.apache.kafka.clients.producer.KafkaProducer<String, String> producer
-                = new org.apache.kafka.clients.producer.KafkaProducer<>(props);
+        org.apache.kafka.clients.producer.KafkaProducer<String, String> producer = new org.apache.kafka.clients.producer.KafkaProducer<>(
+                props);
 
         try {
             for (int k = 0; k < size; k++) {

@@ -38,7 +38,7 @@ public class JAXBSubstitutions {
 final class SubstituteRuntimeInlineAnnotationReader {
 
     @Alias
-    private Map<Class<? extends Annotation>,Map<Package,Annotation>> packageCache;
+    private Map<Class<? extends Annotation>, Map<Package, Annotation>> packageCache;
 
     @Substitute
     public <A extends Annotation> A getFieldAnnotation(Class<A> annotation, Field field, Locatable srcPos) {
@@ -53,7 +53,8 @@ final class SubstituteRuntimeInlineAnnotationReader {
     @Substitute
     public <A extends Annotation> A getClassAnnotation(Class<A> a, Class clazz, Locatable srcPos) {
         A ann = ((Class<?>) clazz).getAnnotation(a);
-        return (ann != null && ann.annotationType() == XmlSeeAlso.class) ? LocatableAnnotation.create(ann, srcPos) : ann;
+        return (ann != null && ann.annotationType() == XmlSeeAlso.class) ? LocatableAnnotation.create(ann, srcPos)
+                : ann;
     }
 
     @Substitute
@@ -68,9 +69,9 @@ final class SubstituteRuntimeInlineAnnotationReader {
 
     @Substitute
     public <A extends Annotation> A getMethodParameterAnnotation(Class<A> annotation, Method method, int paramIndex,
-                                                                 Locatable srcPos) {
+            Locatable srcPos) {
         Annotation[] pa = method.getParameterAnnotations()[paramIndex];
-        for(Annotation a : pa) {
+        for (Annotation a : pa) {
             if (a.annotationType() == annotation)
                 return (A) a;
         }

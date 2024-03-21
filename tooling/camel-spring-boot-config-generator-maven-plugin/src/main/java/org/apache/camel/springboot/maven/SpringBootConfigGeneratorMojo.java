@@ -88,7 +88,7 @@ public class SpringBootConfigGeneratorMojo extends AbstractMojo {
                         defaultValue = field.getLiteralInitializer();
                     }
                     String description = "";
-                    int idx =  classFile.indexOf("public void " + mth.getName());
+                    int idx = classFile.indexOf("public void " + mth.getName());
                     if (idx > 0) {
                         String str = classFile.substring(0, idx);
                         idx = str.lastIndexOf("/**");
@@ -117,7 +117,8 @@ public class SpringBootConfigGeneratorMojo extends AbstractMojo {
     protected String velocity(String templatePath, Map<String, Object> ctx) {
         Properties props = new Properties();
         props.setProperty("resource.loaders", "file");
-        props.setProperty("resource.loader.file.class", "org.apache.velocity.runtime.resource.loader.FileResourceLoader");
+        props.setProperty("resource.loader.file.class",
+                "org.apache.velocity.runtime.resource.loader.FileResourceLoader");
         props.setProperty("resource.loader.file.path", "");
         RuntimeInstance velocity = new RuntimeInstance();
         velocity.init(props);
@@ -145,7 +146,6 @@ public class SpringBootConfigGeneratorMojo extends AbstractMojo {
         return result.toString();
     }
 
-
     public static class Option {
 
         private final String fieldName;
@@ -167,15 +167,12 @@ public class SpringBootConfigGeneratorMojo extends AbstractMojo {
         }
 
         public String getGetterName() {
-            return (javaType.equals("boolean") ? "is" : "get")
-                    + fieldName.substring(0, 1).toUpperCase(Locale.ROOT)
+            return (javaType.equals("boolean") ? "is" : "get") + fieldName.substring(0, 1).toUpperCase(Locale.ROOT)
                     + fieldName.substring(1);
         }
 
         public String getSetterName() {
-            return "set"
-                    + fieldName.substring(0, 1).toUpperCase(Locale.ROOT)
-                    + fieldName.substring(1);
+            return "set" + fieldName.substring(0, 1).toUpperCase(Locale.ROOT) + fieldName.substring(1);
         }
 
         public String getPropName() {

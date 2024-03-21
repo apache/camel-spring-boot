@@ -31,9 +31,8 @@ import org.springframework.test.annotation.DirtiesContext;
 @CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootApplication
-@SpringBootTest(
-    classes = {CamelAutoConfiguration.class, CamelHealthCheckAutoConfiguration.class, MyCamelRoute.class},
-    properties = {"camel.springboot.java-routes-include-pattern=**/MyCamelRoute*"})
+@SpringBootTest(classes = { CamelAutoConfiguration.class, CamelHealthCheckAutoConfiguration.class,
+        MyCamelRoute.class }, properties = { "camel.springboot.java-routes-include-pattern=**/MyCamelRoute*" })
 public class CamelHealthTest {
 
     @Autowired

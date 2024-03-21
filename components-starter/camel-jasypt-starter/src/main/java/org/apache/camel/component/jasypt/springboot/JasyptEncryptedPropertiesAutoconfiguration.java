@@ -52,15 +52,14 @@ import static org.springframework.boot.context.properties.source.ConfigurationPr
 import static org.springframework.core.ResolvableType.forClass;
 import static org.springframework.core.annotation.AnnotationUtils.findAnnotation;
 
-
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(name = "camel.component.jasypt.enabled", matchIfMissing = true)
 @AutoConfigureBefore(CamelAutoConfiguration.class)
 public class JasyptEncryptedPropertiesAutoconfiguration {
 
-
     @Bean
-    public JasyptEncryptedPropertiesConfiguration JasyptEncryptedPropertiesAutoconfiguration(final ConfigurableEnvironment environment) {
+    public JasyptEncryptedPropertiesConfiguration JasyptEncryptedPropertiesAutoconfiguration(
+            final ConfigurableEnvironment environment) {
         JasyptEncryptedPropertiesConfiguration config = new JasyptEncryptedPropertiesConfiguration();
         final BindHandler handler = new IgnoreErrorsBindHandler(BindHandler.DEFAULT);
         final MutablePropertySources propertySources = environment.getPropertySources();
@@ -69,8 +68,9 @@ public class JasyptEncryptedPropertiesAutoconfiguration {
         ConversionService conversionService = ApplicationConversionService.getSharedInstance();
         final Binder binder = new Binder(configurationPropertySources, propertyResolver, conversionService);
         final ResolvableType type = forClass(JasyptEncryptedPropertiesConfiguration.class);
-        final Annotation annotation = findAnnotation(JasyptEncryptedPropertiesConfiguration.class, ConfigurationProperties.class);
-        final Annotation[] annotations = new Annotation[]{annotation};
+        final Annotation annotation = findAnnotation(JasyptEncryptedPropertiesConfiguration.class,
+                ConfigurationProperties.class);
+        final Annotation[] annotations = new Annotation[] { annotation };
         final Bindable<?> target = Bindable.of(type).withExistingValue(config).withAnnotations(annotations);
         binder.bind(PREFIX, target, handler);
         return config;
@@ -78,7 +78,8 @@ public class JasyptEncryptedPropertiesAutoconfiguration {
 
     @Bean
     @ConditionalOnMissingBean(EnvironmentStringPBEConfig.class)
-    public EnvironmentStringPBEConfig environmentVariablesConfiguration(JasyptEncryptedPropertiesConfiguration configuration) {
+    public EnvironmentStringPBEConfig environmentVariablesConfiguration(
+            JasyptEncryptedPropertiesConfiguration configuration) {
         EnvironmentStringPBEConfig environmentStringPBEConfig = new EnvironmentStringPBEConfig();
         environmentStringPBEConfig.setAlgorithm(configuration.getAlgorithm());
         environmentStringPBEConfig.setIvGenerator(getIVGenerator(configuration));
@@ -102,11 +103,12 @@ public class JasyptEncryptedPropertiesAutoconfiguration {
     }
 
     /*
-        This bean override the default org.apache.camel.spring.boot.SpringPropertiesParser
-        and allow the use of encrypted properties inside the camel context.
+     * This bean override the default org.apache.camel.spring.boot.SpringPropertiesParser and allow the use of encrypted
+     * properties inside the camel context.
      */
     @Bean
-    public PropertiesParser encryptedPropertiesParser(PropertyResolver propertyResolver, StringEncryptor stringEncryptor) {
+    public PropertiesParser encryptedPropertiesParser(PropertyResolver propertyResolver,
+            StringEncryptor stringEncryptor) {
         return new JasyptSpringEncryptedPropertiesParser(propertyResolver, stringEncryptor);
     }
 
@@ -117,7 +119,7 @@ public class JasyptEncryptedPropertiesAutoconfiguration {
             return saltGenerator;
         }
 
-        return configuration.getRandomSaltGeneratorAlgorithm() != null ?
-            new RandomSaltGenerator(configuration.getRandomSaltGeneratorAlgorithm()) : new RandomSaltGenerator();
+        return configuration.getRandomSaltGeneratorAlgorithm() != null
+                ? new RandomSaltGenerator(configuration.getRandomSaltGeneratorAlgorithm()) : new RandomSaltGenerator();
     }
 }

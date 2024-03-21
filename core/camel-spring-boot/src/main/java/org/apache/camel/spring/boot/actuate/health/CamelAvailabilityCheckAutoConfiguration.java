@@ -28,21 +28,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
-@AutoConfigureAfter({CamelAutoConfiguration.class, ApplicationAvailabilityAutoConfiguration.class})
+@AutoConfigureAfter({ CamelAutoConfiguration.class, ApplicationAvailabilityAutoConfiguration.class })
 @ConditionalOnBean(CamelAutoConfiguration.class)
 public class CamelAvailabilityCheckAutoConfiguration {
 
-	@Bean
-	public CamelLivenessStateHealthIndicator camelLivenessStateHealthIndicator(
-			ApplicationAvailability applicationAvailability,
-			CamelContext camelContext) {
-		return new CamelLivenessStateHealthIndicator(applicationAvailability, camelContext);
-	}
+    @Bean
+    public CamelLivenessStateHealthIndicator camelLivenessStateHealthIndicator(
+            ApplicationAvailability applicationAvailability, CamelContext camelContext) {
+        return new CamelLivenessStateHealthIndicator(applicationAvailability, camelContext);
+    }
 
-	@Bean
-	public CamelReadinessStateHealthIndicator camelReadinessStateHealthIndicator(
-			ApplicationAvailability applicationAvailability,
-			CamelContext camelContext) {
-		return new CamelReadinessStateHealthIndicator(applicationAvailability, camelContext);
-	}
+    @Bean
+    public CamelReadinessStateHealthIndicator camelReadinessStateHealthIndicator(
+            ApplicationAvailability applicationAvailability, CamelContext camelContext) {
+        return new CamelReadinessStateHealthIndicator(applicationAvailability, camelContext);
+    }
 }

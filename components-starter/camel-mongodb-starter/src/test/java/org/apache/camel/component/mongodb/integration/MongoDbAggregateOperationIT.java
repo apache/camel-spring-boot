@@ -42,14 +42,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                MongoDbAggregateOperationIT.class,
-                AbstractMongoDbITSupport.MongoConfiguration.class,
-                MongoDbAggregateOperationIT.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, MongoDbAggregateOperationIT.class,
+        AbstractMongoDbITSupport.MongoConfiguration.class, MongoDbAggregateOperationIT.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class MongoDbAggregateOperationIT extends AbstractMongoDbITSupport {
 
@@ -61,10 +55,10 @@ public class MongoDbAggregateOperationIT extends AbstractMongoDbITSupport {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:aggregate")
-                            .to("mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=aggregate");
-                    from("direct:aggregateDBCursor")
-                            .to("mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=aggregate&dynamicity=true&outputType=MongoIterable")
+                    from("direct:aggregate").to(
+                            "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=aggregate");
+                    from("direct:aggregateDBCursor").to(
+                            "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=aggregate&dynamicity=true&outputType=MongoIterable")
                             .to("mock:resultAggregateDBCursor");
                 }
             };
@@ -78,10 +72,9 @@ public class MongoDbAggregateOperationIT extends AbstractMongoDbITSupport {
         pumpDataIntoTestCollection();
 
         // result sorted by _id
-        Object result = template
-                .requestBody("direct:aggregate",
-                        "[{ $match : {$or : [{\"scientist\" : \"Darwin\"},{\"scientist\" : \"Einstein\"}]}},"
-                                                 + "{ $group: { _id: \"$scientist\", count: { $sum: 1 }} },{ $sort : { _id : 1}} ]");
+        Object result = template.requestBody("direct:aggregate",
+                "[{ $match : {$or : [{\"scientist\" : \"Darwin\"},{\"scientist\" : \"Einstein\"}]}},"
+                        + "{ $group: { _id: \"$scientist\", count: { $sum: 1 }} },{ $sort : { _id : 1}} ]");
 
         assertTrue(result instanceof List, "Result is not of type List");
 
@@ -101,9 +94,8 @@ public class MongoDbAggregateOperationIT extends AbstractMongoDbITSupport {
         assertEquals(0, testCollection.countDocuments());
         pumpDataIntoTestCollection();
 
-        Object result = template
-                .requestBody("direct:aggregateDBCursor",
-                        "[{ $match : {$or : [{\"scientist\" : \"Darwin\"},{\"scientist\" : \"Einstein\"}]}}]");
+        Object result = template.requestBody("direct:aggregateDBCursor",
+                "[{ $match : {$or : [{\"scientist\" : \"Darwin\"},{\"scientist\" : \"Einstein\"}]}}]");
 
         assertTrue(result instanceof MongoIterable, "Result is not of type DBCursor");
 
@@ -129,9 +121,8 @@ public class MongoDbAggregateOperationIT extends AbstractMongoDbITSupport {
         options.put(MongoDbConstants.BATCH_SIZE, 10);
         options.put(MongoDbConstants.ALLOW_DISK_USE, true);
 
-        Object result = template
-                .requestBodyAndHeaders("direct:aggregateDBCursor",
-                        "[{ $match : {$or : [{\"scientist\" : \"Darwin\"},{\"scientist\" : \"Einstein\"}]}}]", options);
+        Object result = template.requestBodyAndHeaders("direct:aggregateDBCursor",
+                "[{ $match : {$or : [{\"scientist\" : \"Darwin\"},{\"scientist\" : \"Einstein\"}]}}]", options);
 
         assertTrue(result instanceof MongoIterable, "Result is not of type DBCursor");
 

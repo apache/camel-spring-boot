@@ -56,13 +56,8 @@ import static org.awaitility.Awaitility.await;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                Ddb2StreamTest.class,
-                Ddb2StreamTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, Ddb2StreamTest.class,
+        Ddb2StreamTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 class Ddb2StreamTest extends BaseDdb2 {
 
@@ -83,30 +78,19 @@ class Ddb2StreamTest extends BaseDdb2 {
     protected static void cleanupResources() {
         DynamoDbClient ddbClient = AWSSDKClientUtils.newDynamoDBClient();
 
-        DeleteTableRequest deleteTableRequest = DeleteTableRequest.builder()
-                .tableName(tableName)
-                .build();
+        DeleteTableRequest deleteTableRequest = DeleteTableRequest.builder().tableName(tableName).build();
         ddbClient.deleteTable(deleteTableRequest);
     }
 
     private static CreateTableRequest.Builder createTableRequest(String tableName, String keyColumn) {
         CreateTableRequest.Builder builder = CreateTableRequest.builder()
-                .attributeDefinitions(AttributeDefinition.builder()
-                        .attributeName(keyColumn)
-                        .attributeType(ScalarAttributeType.S)
-                        .build())
-                .keySchema(KeySchemaElement.builder()
-                        .attributeName(keyColumn)
-                        .keyType(KeyType.HASH)
-                        .build())
-                .provisionedThroughput(ProvisionedThroughput.builder()
-                        .readCapacityUnits(10L)
-                        .writeCapacityUnits(10L)
-                        .build())
-                .streamSpecification(StreamSpecification.builder()
-                    .streamEnabled(true)
-                    .streamViewType(StreamViewType.NEW_AND_OLD_IMAGES)
-                    .build());
+                .attributeDefinitions(AttributeDefinition.builder().attributeName(keyColumn)
+                        .attributeType(ScalarAttributeType.S).build())
+                .keySchema(KeySchemaElement.builder().attributeName(keyColumn).keyType(KeyType.HASH).build())
+                .provisionedThroughput(
+                        ProvisionedThroughput.builder().readCapacityUnits(10L).writeCapacityUnits(10L).build())
+                .streamSpecification(StreamSpecification.builder().streamEnabled(true)
+                        .streamViewType(StreamViewType.NEW_AND_OLD_IMAGES).build());
 
         return builder.tableName(tableName);
     }
@@ -115,14 +99,15 @@ class Ddb2StreamTest extends BaseDdb2 {
     public void stream() throws InterruptedException {
         final String key1 = "key-" + UUID.randomUUID().toString().replace("-", "");
         final String msg1 = "val" + UUID.randomUUID().toString().replace("-", "");
-        
-        //try periodically receive stream event. We do not know, when the consumer is started, therefore we try it several times
-        //if one event is returned, stream consumer works
+
+        // try periodically receive stream event. We do not know, when the consumer is started, therefore we try it
+        // several times
+        // if one event is returned, stream consumer works
         await().pollInterval(2, TimeUnit.SECONDS).atMost(30, TimeUnit.SECONDS).until(() -> {
             boolean res = !resultEndpoint.getReceivedExchanges().isEmpty();
-            if(!res) {
+            if (!res) {
                 resultEndpoint.reset();
-                //insert new item for the test
+                // insert new item for the test
                 insertItem(key1, msg1);
             }
             return res;
@@ -132,24 +117,16 @@ class Ddb2StreamTest extends BaseDdb2 {
     private void insertItem(String key1, String msg1) {
         final Map<String, AttributeValue> item = new HashMap<>() {
             {
-                put("key", AttributeValue.builder()
-                        .s(key1).build());
-                put("value", AttributeValue.builder()
-                        .s(msg1).build());
+                put("key", AttributeValue.builder().s(key1).build());
+                put("value", AttributeValue.builder().s(msg1).build());
             }
         };
 
-        template.sendBodyAndHeaders(
-                "aws2-ddb://" + tableName + "?operation=" + Ddb2Operations.PutItem,
-                null,
+        template.sendBodyAndHeaders("aws2-ddb://" + tableName + "?operation=" + Ddb2Operations.PutItem, null,
                 new HashMap<>() {
                     {
-                        put(
-                                Ddb2Constants.CONSISTENT_READ,
-                                true);
-                        put(
-                                Ddb2Constants.ITEM,
-                                item);
+                        put(Ddb2Constants.CONSISTENT_READ, true);
+                        put(Ddb2Constants.ITEM, item);
                     }
                 });
     }
@@ -159,7 +136,7 @@ class Ddb2StreamTest extends BaseDdb2 {
     // *************************************
 
     @Configuration
-    public class TestConfiguration  extends BaseDdb2.TestConfiguration{
+    public class TestConfiguration extends BaseDdb2.TestConfiguration {
 
         @Bean
         public RouteBuilder routeBuilder() {
@@ -167,22 +144,22 @@ class Ddb2StreamTest extends BaseDdb2 {
 
                 @Override
                 public void configure() {
-                    //{aws.secret.key=secretkey, aws.region=us-east-1, aws.access.key=accesskey, aws.host=localhost:49242, aws.protocol=http}
-                    String auth = service.getConnectionProperties().entrySet().stream()
-                            .map(e1 -> {
-                                switch (String.valueOf(e1.getKey())) {
-                                    case "aws.secret.key":
-                                        return "secretKey=" + e1.getValue();
-                                    case "aws.region":
-                                        return "region=" + e1.getValue();
-                                    case "aws.access.key":
-                                        return "accessKey=" + e1.getValue();
-                                    case "aws.host":
-                                        return "overrideEndpoint=true&uriEndpointOverride=http://" + e1.getValue();
-                                    default: return "";
-                                }})
-                            .filter(e -> !"".equals(e))
-                            .collect(Collectors.joining("&"));
+                    // {aws.secret.key=secretkey, aws.region=us-east-1, aws.access.key=accesskey,
+                    // aws.host=localhost:49242, aws.protocol=http}
+                    String auth = service.getConnectionProperties().entrySet().stream().map(e1 -> {
+                        switch (String.valueOf(e1.getKey())) {
+                        case "aws.secret.key":
+                            return "secretKey=" + e1.getValue();
+                        case "aws.region":
+                            return "region=" + e1.getValue();
+                        case "aws.access.key":
+                            return "accessKey=" + e1.getValue();
+                        case "aws.host":
+                            return "overrideEndpoint=true&uriEndpointOverride=http://" + e1.getValue();
+                        default:
+                            return "";
+                        }
+                    }).filter(e -> !"".equals(e)).collect(Collectors.joining("&"));
 
                     from("aws2-ddbstream://" + tableName + "?" + auth).to("mock:result");
                 }

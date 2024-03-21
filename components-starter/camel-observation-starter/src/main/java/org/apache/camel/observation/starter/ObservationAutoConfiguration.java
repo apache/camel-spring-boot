@@ -31,30 +31,31 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
-@AutoConfigureAfter(value = {org.springframework.boot.actuate.autoconfigure.observation.ObservationAutoConfiguration.class, MicrometerTracingAutoConfiguration.class})
+@AutoConfigureAfter(value = {
+        org.springframework.boot.actuate.autoconfigure.observation.ObservationAutoConfiguration.class,
+        MicrometerTracingAutoConfiguration.class })
 @EnableConfigurationProperties(ObservationConfigurationProperties.class)
 @ConditionalOnProperty(value = "camel.observation.enabled", matchIfMissing = true)
 public class ObservationAutoConfiguration {
 
-	@Bean(initMethod = "", destroyMethod = "")
-	// Camel handles the lifecycle of this bean
-	@ConditionalOnMissingBean(MicrometerObservationTracer.class)
-	MicrometerObservationTracer micrometerObservationTracer(CamelContext camelContext,
-			ObservationConfigurationProperties config,
-			ObjectProvider<Tracer> tracer,
-			ObjectProvider<ObservationRegistry> observationRegistry) {
-		MicrometerObservationTracer micrometerObservationTracer = new MicrometerObservationTracer();
-		tracer.ifAvailable(micrometerObservationTracer::setTracer);
-		observationRegistry.ifAvailable(micrometerObservationTracer::setObservationRegistry);
+    @Bean(initMethod = "", destroyMethod = "")
+    // Camel handles the lifecycle of this bean
+    @ConditionalOnMissingBean(MicrometerObservationTracer.class)
+    MicrometerObservationTracer micrometerObservationTracer(CamelContext camelContext,
+            ObservationConfigurationProperties config, ObjectProvider<Tracer> tracer,
+            ObjectProvider<ObservationRegistry> observationRegistry) {
+        MicrometerObservationTracer micrometerObservationTracer = new MicrometerObservationTracer();
+        tracer.ifAvailable(micrometerObservationTracer::setTracer);
+        observationRegistry.ifAvailable(micrometerObservationTracer::setObservationRegistry);
 
-		if (config.getExcludePatterns() != null) {
-			micrometerObservationTracer.setExcludePatterns(config.getExcludePatterns());
-		}
-		if (config.getEncoding() != null) {
-			micrometerObservationTracer.setEncoding(config.getEncoding().booleanValue());
-		}
-		micrometerObservationTracer.init(camelContext);
+        if (config.getExcludePatterns() != null) {
+            micrometerObservationTracer.setExcludePatterns(config.getExcludePatterns());
+        }
+        if (config.getEncoding() != null) {
+            micrometerObservationTracer.setEncoding(config.getEncoding().booleanValue());
+        }
+        micrometerObservationTracer.init(camelContext);
 
-		return micrometerObservationTracer;
-	}
+        return micrometerObservationTracer;
+    }
 }

@@ -34,59 +34,53 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				InfinispanRemoteConsumerIT.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, InfinispanRemoteConsumerIT.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class InfinispanRemoteConsumerIT extends InfinispanRemoteTestSupport implements InfinispanConsumerTestSupport {
-	@Test
-	public void consumerReceivedEventNotifications() throws Exception {
-		MockEndpoint mock = getMockEndpoint("mock:result");
-		mock.expectedMessageCount(1);
-		mock.expectedHeaderReceived(InfinispanConstants.EVENT_TYPE, "CLIENT_CACHE_ENTRY_CREATED");
+    @Test
+    public void consumerReceivedEventNotifications() throws Exception {
+        MockEndpoint mock = getMockEndpoint("mock:result");
+        mock.expectedMessageCount(1);
+        mock.expectedHeaderReceived(InfinispanConstants.EVENT_TYPE, "CLIENT_CACHE_ENTRY_CREATED");
 
-		getCache().put(InfinispanConsumerTestSupport.KEY_ONE, InfinispanConsumerTestSupport.VALUE_ONE);
-		getCache().put(InfinispanConsumerTestSupport.KEY_ONE, InfinispanConsumerTestSupport.VALUE_TWO);
+        getCache().put(InfinispanConsumerTestSupport.KEY_ONE, InfinispanConsumerTestSupport.VALUE_ONE);
+        getCache().put(InfinispanConsumerTestSupport.KEY_ONE, InfinispanConsumerTestSupport.VALUE_TWO);
 
-		mock.assertIsSatisfied();
-	}
+        mock.assertIsSatisfied();
+    }
 
-	// *****************************
-	//
-	// *****************************
+    // *****************************
+    //
+    // *****************************
 
-	@BeforeEach
-	protected void beforeEach() {
-		// cleanup the default test cache before each run
-		getCache().clear();
-	}
+    @BeforeEach
+    protected void beforeEach() {
+        // cleanup the default test cache before each run
+        getCache().clear();
+    }
 
-	@Override
-	public BasicCache<Object, Object> getCache() {
-		return super.getCache();
-	}
+    @Override
+    public BasicCache<Object, Object> getCache() {
+        return super.getCache();
+    }
 
-	@Override
-	public BasicCache<Object, Object> getCache(String name) {
-		return super.getCache(name);
-	}
+    @Override
+    public BasicCache<Object, Object> getCache(String name) {
+        return super.getCache(name);
+    }
 
-	@Override
-	public MockEndpoint getMockEndpoint(String id) {
-		return super.getMockEndpoint(id);
-	}
+    @Override
+    public MockEndpoint getMockEndpoint(String id) {
+        return super.getMockEndpoint(id);
+    }
 
-	@Bean
-	protected RouteBuilder createRouteBuilder() throws Exception {
-		return new RouteBuilder() {
-			@Override
-			public void configure() {
-				fromF("infinispan:%s?eventTypes=CLIENT_CACHE_ENTRY_CREATED", getCacheName())
-						.to("mock:result");
-			}
-		};
-	}
+    @Bean
+    protected RouteBuilder createRouteBuilder() throws Exception {
+        return new RouteBuilder() {
+            @Override
+            public void configure() {
+                fromF("infinispan:%s?eventTypes=CLIENT_CACHE_ENTRY_CREATED", getCacheName()).to("mock:result");
+            }
+        };
+    }
 }

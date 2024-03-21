@@ -30,14 +30,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.mockito.Mockito.when;
 
-
 @ExtendWith(MockitoExtension.class)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                KafkaConsumerTest.class,
-        }
-)
+@SpringBootTest(classes = { KafkaConsumerTest.class, })
 public class KafkaConsumerTest {
 
     @Mock

@@ -52,13 +52,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                Ddb2QueryTest.class,
-                Ddb2QueryTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, Ddb2QueryTest.class, Ddb2QueryTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class Ddb2QueryTest extends BaseDdb2 {
 
@@ -72,43 +66,28 @@ public class Ddb2QueryTest extends BaseDdb2 {
     private final String notRetrieveValue = "ignore";
 
     @BeforeAll
-    protected static void setupResources()  {
+    protected static void setupResources() {
         DynamoDbClient ddbClient = AWSSDKClientUtils.newDynamoDBClient();
 
-        CreateTableRequest createTableRequest = CreateTableRequest.builder()
-                .tableName(tableName)
-                .keySchema(
-                        KeySchemaElement.builder()
-                                .attributeName(attributeName)
-                                .keyType(KeyType.HASH)
-                                .build(),
-                        KeySchemaElement.builder()
-                                .attributeName(secondaryAttributeName)
-                                .keyType(KeyType.RANGE)
+        CreateTableRequest createTableRequest = CreateTableRequest.builder().tableName(tableName)
+                .keySchema(KeySchemaElement.builder().attributeName(attributeName).keyType(KeyType.HASH).build(),
+                        KeySchemaElement.builder().attributeName(secondaryAttributeName).keyType(KeyType.RANGE).build())
+                .attributeDefinitions(
+                        AttributeDefinition.builder().attributeType(ScalarAttributeType.S)
+                                .attributeName(secondaryAttributeName).build(),
+                        AttributeDefinition.builder().attributeType(ScalarAttributeType.S).attributeName(attributeName)
                                 .build())
-                .attributeDefinitions(AttributeDefinition.builder()
-                                .attributeType(ScalarAttributeType.S)
-                                .attributeName(secondaryAttributeName)
-                                .build(),
-                        AttributeDefinition.builder()
-                                .attributeType(ScalarAttributeType.S)
-                                .attributeName(attributeName)
-                                .build())
-                .provisionedThroughput(ProvisionedThroughput.builder()
-                        .readCapacityUnits(5L)
-                        .writeCapacityUnits(5L)
-                        .build())
+                .provisionedThroughput(
+                        ProvisionedThroughput.builder().readCapacityUnits(5L).writeCapacityUnits(5L).build())
                 .build();
         ddbClient.createTable(createTableRequest);
     }
 
     @AfterAll
-    protected static void cleanupResources()  {
+    protected static void cleanupResources() {
         DynamoDbClient ddbClient = AWSSDKClientUtils.newDynamoDBClient();
 
-        DeleteTableRequest deleteTableRequest = DeleteTableRequest.builder()
-                .tableName(tableName)
-                .build();
+        DeleteTableRequest deleteTableRequest = DeleteTableRequest.builder().tableName(tableName).build();
         ddbClient.deleteTable(deleteTableRequest);
     }
 
@@ -125,10 +104,8 @@ public class Ddb2QueryTest extends BaseDdb2 {
             e.getIn().setHeader(Ddb2Constants.OPERATION, Ddb2Operations.Query);
             e.getIn().setHeader(Ddb2Constants.CONSISTENT_READ, true);
             Map<String, Condition> keyConditions = new HashMap<>();
-            keyConditions.put(attributeName, Condition.builder().comparisonOperator(
-                    ComparisonOperator.EQ.toString())
-                    .attributeValueList(AttributeValue.builder().s(retrieveValue).build())
-                    .build());
+            keyConditions.put(attributeName, Condition.builder().comparisonOperator(ComparisonOperator.EQ.toString())
+                    .attributeValueList(AttributeValue.builder().s(retrieveValue).build()).build());
             e.getIn().setHeader(Ddb2Constants.KEY_CONDITIONS, keyConditions);
         });
 
@@ -150,7 +127,6 @@ public class Ddb2QueryTest extends BaseDdb2 {
         });
     }
 
-
     // *************************************
     // Config
     // *************************************
@@ -162,8 +138,7 @@ public class Ddb2QueryTest extends BaseDdb2 {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:start").to(
-                            "aws2-ddb://" + tableName);
+                    from("direct:start").to("aws2-ddb://" + tableName);
                 }
             };
         }

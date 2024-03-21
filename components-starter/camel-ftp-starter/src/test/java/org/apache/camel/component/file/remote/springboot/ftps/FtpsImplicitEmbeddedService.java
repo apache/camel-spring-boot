@@ -94,7 +94,8 @@ public class FtpsImplicitEmbeddedService extends FtpEmbeddedService {
             String name = System.getProperty("os.name");
             String message = e.getMessage();
 
-            LOG.warn("SunX509 is not available on this platform [{}] Testing is skipped! Real cause: {}", name, message, e);
+            LOG.warn("SunX509 is not available on this platform [{}] Testing is skipped! Real cause: {}", name, message,
+                    e);
             return false;
         }
     }

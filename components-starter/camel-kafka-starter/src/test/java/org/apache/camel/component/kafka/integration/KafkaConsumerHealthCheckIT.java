@@ -61,14 +61,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
-                KafkaConsumerHealthCheckIT.class,
-                KafkaConsumerHealthCheckIT.TestConfiguration.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
+        KafkaConsumerHealthCheckIT.class, KafkaConsumerHealthCheckIT.TestConfiguration.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class KafkaConsumerHealthCheckIT extends BaseEmbeddedKafkaTestSupport {
     public static final String TOPIC = "test-health";
@@ -121,7 +115,7 @@ public class KafkaConsumerHealthCheckIT extends BaseEmbeddedKafkaTestSupport {
 
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here
+                // do nothing here
             }
         };
     }
@@ -148,7 +142,8 @@ public class KafkaConsumerHealthCheckIT extends BaseEmbeddedKafkaTestSupport {
         to.expectedBodiesReceivedInAnyOrder("message-0", "message-1", "message-2", "message-3", "message-4");
         // The LAST_RECORD_BEFORE_COMMIT header should not be configured on any
         // exchange because autoCommitEnable=true
-        to.expectedHeaderValuesReceivedInAnyOrder(KafkaConstants.LAST_RECORD_BEFORE_COMMIT, null, null, null, null, null);
+        to.expectedHeaderValuesReceivedInAnyOrder(KafkaConstants.LAST_RECORD_BEFORE_COMMIT, null, null, null, null,
+                null);
         to.expectedHeaderReceived(propagatedHeaderKey, propagatedHeaderValue);
 
         for (int k = 0; k < 5; k++) {
@@ -161,8 +156,8 @@ public class KafkaConsumerHealthCheckIT extends BaseEmbeddedKafkaTestSupport {
 
         to.assertIsSatisfied(3000);
 
-        assertEquals(5, StreamSupport.stream(MockConsumerInterceptor.recordsCaptured.get(0).records(TOPIC).spliterator(), false)
-                .count());
+        assertEquals(5, StreamSupport
+                .stream(MockConsumerInterceptor.recordsCaptured.get(0).records(TOPIC).spliterator(), false).count());
 
         Map<String, Object> headers = to.getExchanges().get(0).getIn().getHeaders();
         assertFalse(headers.containsKey(skippedHeaderKey), "Should not receive skipped header");
@@ -178,8 +173,8 @@ public class KafkaConsumerHealthCheckIT extends BaseEmbeddedKafkaTestSupport {
         // but health-check readiness should NOT be ready
         Awaitility.await().atMost(20, TimeUnit.SECONDS).untilAsserted(() -> {
             Collection<HealthCheck.Result> res2 = HealthCheckHelper.invoke(context);
-            Optional<HealthCheck.Result> down
-                    = res2.stream().filter(r -> r.getState().equals(HealthCheck.State.DOWN)).findFirst();
+            Optional<HealthCheck.Result> down = res2.stream().filter(r -> r.getState().equals(HealthCheck.State.DOWN))
+                    .findFirst();
             Assertions.assertTrue(down.isPresent());
             String msg = down.get().getMessage().get();
             Assertions.assertTrue(msg.contains("KafkaConsumer is not ready"));
@@ -196,14 +191,15 @@ public class KafkaConsumerHealthCheckIT extends BaseEmbeddedKafkaTestSupport {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from(from).process(exchange -> LOG.trace("Captured on the processor: {}", exchange.getMessage().getBody()))
+                    from(from).process(
+                            exchange -> LOG.trace("Captured on the processor: {}", exchange.getMessage().getBody()))
                             .routeId("test-health-it").to(to);
                 }
             };
         }
 
         @Bean("myHeaderDeserializer")
-        public MyKafkaHeaderDeserializer createMyKafkaHeaderDeserializer(){
+        public MyKafkaHeaderDeserializer createMyKafkaHeaderDeserializer() {
             return new MyKafkaHeaderDeserializer();
         }
     }

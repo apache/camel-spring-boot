@@ -32,9 +32,8 @@ public class CamelCassandraqlTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelCassandraqlTest.class))
-                .unitTestExclusionPattern(".*(\\.integration\\..*|IntegrationTest$|CassandraComponentProducerTest$|CassandraComponentBeanRefTest$|CassandraComponentConsumerTest$)")
+        return new ITestConfigBuilder().module(inferModuleName(CamelCassandraqlTest.class)).unitTestExclusionPattern(
+                ".*(\\.integration\\..*|IntegrationTest$|CassandraComponentProducerTest$|CassandraComponentBeanRefTest$|CassandraComponentConsumerTest$)")
                 .build();
     }
 
@@ -43,6 +42,5 @@ public class CamelCassandraqlTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config, "cql");
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

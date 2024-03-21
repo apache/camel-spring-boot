@@ -45,7 +45,7 @@ public class DefaultCamelContext {
 
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here
+                // do nothing here
             }
         };
     }

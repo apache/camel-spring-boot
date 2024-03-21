@@ -28,32 +28,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DnsServiceDiscoveryTest {
     @Test
     public void testServiceDiscoveryDisabled() {
-        new ApplicationContextRunner()
-            .withUserConfiguration(TestConfiguration.class)
-            .withPropertyValues(
-                "spring.main.banner-mode=off",
-                "camel.cloud.dns.service-discovery.enabled=false")
-            .run(
-                context -> {
+        new ApplicationContextRunner().withUserConfiguration(TestConfiguration.class)
+                .withPropertyValues("spring.main.banner-mode=off", "camel.cloud.dns.service-discovery.enabled=false")
+                .run(context -> {
                     assertThat(context).doesNotHaveBean(DnsServiceCallServiceDiscoveryConfigurationProperties.class);
                     assertThat(context).getBeans(ServiceDiscovery.class).doesNotContainKeys("dns-service-discovery");
-                }
-            );
+                });
     }
 
     @Test
     public void testServiceDiscoveryEnabled() {
-        new ApplicationContextRunner()
-            .withUserConfiguration(TestConfiguration.class)
-            .withPropertyValues(
-                "spring.main.banner-mode=off",
-                "camel.cloud.dns.service-discovery.enabled=true")
-            .run(
-                context -> {
+        new ApplicationContextRunner().withUserConfiguration(TestConfiguration.class)
+                .withPropertyValues("spring.main.banner-mode=off", "camel.cloud.dns.service-discovery.enabled=true")
+                .run(context -> {
                     assertThat(context).hasSingleBean(DnsServiceCallServiceDiscoveryConfigurationProperties.class);
                     assertThat(context).getBeans(ServiceDiscovery.class).containsKeys("dns-service-discovery");
-                }
-            );
+                });
     }
 
     @EnableAutoConfiguration

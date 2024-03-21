@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -27,8 +25,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -36,37 +32,30 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzCronRoute2Test.class,
-        QuartzCronRoute2Test.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzCronRoute2Test.class,
+        QuartzCronRoute2Test.TestConfiguration.class })
 public class QuartzCronRoute2Test extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint resultEndpoint;
-    
+
     @Test
     public void testCronQuartzRoute() throws Exception {
-        
+
         resultEndpoint.expectedMinimumMessageCount(1);
 
         // lets test the receive worked
         resultEndpoint.assertIsSatisfied();
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -79,13 +68,10 @@ public class QuartzCronRoute2Test extends BaseQuartzTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("cron://myName?schedule=0/1 * * * * ?")
-                            .to("mock:result");
+                    from("cron://myName?schedule=0/1 * * * * ?").to("mock:result");
                 }
             };
         }
     }
-    
-   
 
 }

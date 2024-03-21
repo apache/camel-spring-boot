@@ -35,13 +35,8 @@ import org.springframework.test.annotation.DirtiesContext;
 //Based on S3ConsumerIT
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                S3BatchConsumerTest.class,
-                S3BatchConsumerTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, S3BatchConsumerTest.class,
+        S3BatchConsumerTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class S3BatchConsumerTest extends BaseS3 {
 
@@ -84,15 +79,15 @@ public class S3BatchConsumerTest extends BaseS3 {
         final Exchange exchange1 = result.getExchanges().get(0);
         Assertions.assertEquals(0, exchange1.getProperty(ExchangePropertyKey.BATCH_INDEX));
         Assertions.assertEquals(2, exchange1.getProperty(ExchangePropertyKey.BATCH_SIZE));
-        Assertions.assertFalse((Boolean)exchange1.getProperty(ExchangePropertyKey.BATCH_COMPLETE));
+        Assertions.assertFalse((Boolean) exchange1.getProperty(ExchangePropertyKey.BATCH_COMPLETE));
         final Exchange exchange2 = result.getExchanges().get(1);
         Assertions.assertEquals(1, exchange2.getProperty(ExchangePropertyKey.BATCH_INDEX));
         Assertions.assertEquals(2, exchange2.getProperty(ExchangePropertyKey.BATCH_SIZE));
-        Assertions.assertTrue((Boolean)exchange2.getProperty(ExchangePropertyKey.BATCH_COMPLETE));
+        Assertions.assertTrue((Boolean) exchange2.getProperty(ExchangePropertyKey.BATCH_COMPLETE));
         final Exchange exchange3 = result.getExchanges().get(2);
         Assertions.assertEquals(0, exchange3.getProperty(ExchangePropertyKey.BATCH_INDEX));
-        Assertions.assertEquals(1 , exchange3.getProperty(ExchangePropertyKey.BATCH_SIZE));
-        Assertions.assertTrue((Boolean)exchange3.getProperty(ExchangePropertyKey.BATCH_COMPLETE));
+        Assertions.assertEquals(1, exchange3.getProperty(ExchangePropertyKey.BATCH_SIZE));
+        Assertions.assertTrue((Boolean) exchange3.getProperty(ExchangePropertyKey.BATCH_COMPLETE));
     }
 
     // *************************************
@@ -100,10 +95,10 @@ public class S3BatchConsumerTest extends BaseS3 {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseS3.TestConfiguration {
+    public class TestConfiguration extends BaseS3.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
-            final  String awsEndpoint = "aws2-s3://mycamel?autoCreateBucket=true&maxMessagesPerPoll=2";
+            final String awsEndpoint = "aws2-s3://mycamel?autoCreateBucket=true&maxMessagesPerPoll=2";
 
             return new RouteBuilder() {
                 @Override

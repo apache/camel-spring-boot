@@ -47,15 +47,10 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        HttpComponentTimeoutConverter.class,
-        CamelAutoConfiguration.class,
+@SpringBootTest(classes = { HttpComponentTimeoutConverter.class, CamelAutoConfiguration.class,
         HttpComponentAutoConfiguration.class,
-        HttpComponentTimeoutConverterTest.TestConfiguration.class
-    },
-    properties = {"camel.component.http.so-timeout = 30000"}
-)
+        HttpComponentTimeoutConverterTest.TestConfiguration.class }, properties = {
+                "camel.component.http.so-timeout = 30000" })
 class HttpComponentTimeoutConverterTest {
 
     @Autowired
@@ -70,15 +65,15 @@ class HttpComponentTimeoutConverterTest {
 
     @BeforeAll
     public static void setUp() throws Exception {
-        localServer = ServerBootstrap.bootstrap()
-            .register("/checkSoTimeout", (request, response, ctx) -> {
-                response.setCode(HttpStatus.SC_OK);
-                assertNotNull(currentContext);
-                response.setEntity(new StringEntity(String.valueOf(currentContext.getComponent("http", HttpComponent.class).getSoTimeout().toSeconds()), StandardCharsets.US_ASCII));
-            })
-            .create();
+        localServer = ServerBootstrap.bootstrap().register("/checkSoTimeout", (request, response, ctx) -> {
+            response.setCode(HttpStatus.SC_OK);
+            assertNotNull(currentContext);
+            response.setEntity(new StringEntity(
+                    String.valueOf(currentContext.getComponent("http", HttpComponent.class).getSoTimeout().toSeconds()),
+                    StandardCharsets.US_ASCII));
+        }).create();
         localServer.start();
-    
+
         baseUrl = "http://localhost:" + localServer.getLocalPort();
     }
 
@@ -96,14 +91,14 @@ class HttpComponentTimeoutConverterTest {
 
     @Test
     void checkSoTimeout() {
-        Exchange exchange = template.request("direct:checkSoTimeout", exchange1 -> {});
+        Exchange exchange = template.request("direct:checkSoTimeout", exchange1 -> {
+        });
         assertNotNull(exchange);
         assertNull(exchange.getException());
         Message out = exchange.getMessage();
         assertNotNull(out);
         assertEquals("30", out.getBody(String.class));
     }
-
 
     // *************************************
     // Config

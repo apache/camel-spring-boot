@@ -34,18 +34,19 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Conditional;
 
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
-@EnableConfigurationProperties({CamelMetricsConfiguration.class})
-@AutoConfigureAfter({CamelAutoConfiguration.class})
+@EnableConfigurationProperties({ CamelMetricsConfiguration.class })
+@AutoConfigureAfter({ CamelAutoConfiguration.class })
 public class CamelMetricsAutoConfiguration {
 
-    public CamelMetricsAutoConfiguration(
-            CamelContext camelContext, CamelMetricsConfiguration configuration, MeterRegistry meterRegistry) {
+    public CamelMetricsAutoConfiguration(CamelContext camelContext, CamelMetricsConfiguration configuration,
+            MeterRegistry meterRegistry) {
         if (meterRegistry != null) {
             configureMicrometer(camelContext, configuration, meterRegistry);
         }
     }
 
-    private void configureMicrometer(CamelContext camelContext, CamelMetricsConfiguration configuration, MeterRegistry meterRegistry) {
+    private void configureMicrometer(CamelContext camelContext, CamelMetricsConfiguration configuration,
+            MeterRegistry meterRegistry) {
         if (configuration.isEnableRoutePolicy()) {
             MicrometerRoutePolicyFactory factory = new MicrometerRoutePolicyFactory();
             factory.setMeterRegistry(meterRegistry);

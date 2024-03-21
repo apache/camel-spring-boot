@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.webhook.springboot;
 
-
 import java.util.Arrays;
 
 import org.apache.camel.CamelExecutionException;
@@ -42,32 +41,25 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.AvailablePortFinder;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        WebhookHttpBindingTest.class,
-        WebhookHttpBindingTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, WebhookHttpBindingTest.class,
+        WebhookHttpBindingTest.TestConfiguration.class })
 public class WebhookHttpBindingTest {
-    
+
     private static int port;
 
-   
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:authors")
     MockEndpoint mock;
-    
+
     @BeforeAll
     public static void initPort() {
         port = AvailablePortFinder.getNextAvailable();
     }
-    
+
     @Bean("wb-delegate-component")
     private TestComponent getTestComponent() {
         return new TestComponent(endpoint -> {
@@ -81,25 +73,23 @@ public class WebhookHttpBindingTest {
 
     @Test
     public void testWrapper() {
-        String result = template.requestBody("netty-http:http://localhost:" + port
-                                             + WebhookConfiguration.computeDefaultPath("wb-delegate://xx"),
-                "", String.class);
+        String result = template.requestBody(
+                "netty-http:http://localhost:" + port + WebhookConfiguration.computeDefaultPath("wb-delegate://xx"), "",
+                String.class);
         assertEquals("msg: webhook", result);
 
-        result = template.requestBodyAndHeader("netty-http:http://localhost:" + port
-                                               + WebhookConfiguration.computeDefaultPath("wb-delegate://xx"),
-                "", Exchange.HTTP_METHOD, "PUT", String.class);
+        result = template.requestBodyAndHeader(
+                "netty-http:http://localhost:" + port + WebhookConfiguration.computeDefaultPath("wb-delegate://xx"), "",
+                Exchange.HTTP_METHOD, "PUT", String.class);
         assertEquals("msg: webhook", result);
     }
 
     @Test
     public void testGetError() {
         assertThrows(CamelExecutionException.class,
-                () -> template.requestBodyAndHeader("netty-http:http://localhost:" + port, "",
-                        Exchange.HTTP_METHOD, "GET", String.class));
+                () -> template.requestBodyAndHeader("netty-http:http://localhost:" + port, "", Exchange.HTTP_METHOD,
+                        "GET", String.class));
     }
-
-        
 
     // *************************************
     // Config
@@ -114,12 +104,9 @@ public class WebhookHttpBindingTest {
                 @Override
                 public void configure() throws Exception {
 
-                    restConfiguration()
-                            .host("0.0.0.0")
-                            .port(port);
+                    restConfiguration().host("0.0.0.0").port(port);
 
-                    from("webhook:wb-delegate://xx")
-                            .transform(body().prepend("msg: "));
+                    from("webhook:wb-delegate://xx").transform(body().prepend("msg: "));
 
                 }
             };

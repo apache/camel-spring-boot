@@ -97,6 +97,7 @@ public class AwsVaultConfigurationProperties {
     public void setDefaultCredentialsProvider(boolean defaultCredentialsProvider) {
         this.defaultCredentialsProvider = defaultCredentialsProvider;
     }
+
     public boolean isProfileCredentialsProvider() {
         return profileCredentialsProvider;
     }

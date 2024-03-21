@@ -35,8 +35,8 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
 /**
- * An implementation of the {@code org.apache.camel.spi.PackageScanResourceResolver} that is able to
- * scan spring-boot fat jars to find resources contained also in nested jars.
+ * An implementation of the {@code org.apache.camel.spi.PackageScanResourceResolver} that is able to scan spring-boot
+ * fat jars to find resources contained also in nested jars.
  */
 public class FatJarPackageScanResourceResolver extends DefaultPackageScanResourceResolver {
     private static final Logger LOG = LoggerFactory.getLogger(FatJarPackageScanResourceResolver.class);
@@ -49,11 +49,11 @@ public class FatJarPackageScanResourceResolver extends DefaultPackageScanResourc
 
     @Override
     protected List<String> doLoadImplementationsInJar(String packageName, InputStream stream, String urlPath) {
-        return doLoadImplementationsInJar(packageName,  stream, urlPath, true, true);
+        return doLoadImplementationsInJar(packageName, stream, urlPath, true, true);
     }
 
     protected List<String> doLoadImplementationsInJar(String packageName, InputStream stream, String urlPath,
-                                                      boolean inspectNestedJars, boolean closeStream) {
+            boolean inspectNestedJars, boolean closeStream) {
         List<String> entries = new ArrayList<>();
 
         JarInputStream jarStream = null;
@@ -66,7 +66,8 @@ public class FatJarPackageScanResourceResolver extends DefaultPackageScanResourc
                 if (inspectNestedJars && !entry.isDirectory() && isSpringBootNestedJar(name)) {
                     String nestedUrl = urlPath + "!/" + name;
                     LOG.trace("Inspecting nested jar: {}", nestedUrl);
-                    List<String> nestedEntries = doLoadImplementationsInJar(packageName, jarStream, nestedUrl, false, false);
+                    List<String> nestedEntries = doLoadImplementationsInJar(packageName, jarStream, nestedUrl, false,
+                            false);
                     entries.addAll(nestedEntries);
                 } else if (!entry.isDirectory() && !name.endsWith(".class")) {
                     name = cleanupSpringBootClassName(name);
@@ -77,7 +78,8 @@ public class FatJarPackageScanResourceResolver extends DefaultPackageScanResourc
                 }
             }
         } catch (IOException ioe) {
-            LOG.warn("Cannot search jar file '" + urlPath + " due to an IOException: " + ioe.getMessage() + ". This exception is ignored.", ioe);
+            LOG.warn("Cannot search jar file '" + urlPath + " due to an IOException: " + ioe.getMessage()
+                    + ". This exception is ignored.", ioe);
         } finally {
             if (closeStream) {
                 // stream is left open when scanning nested jars, otherwise the fat jar stream gets closed
@@ -116,7 +118,8 @@ public class FatJarPackageScanResourceResolver extends DefaultPackageScanResourc
 
     private boolean isSpringBootNestedJar(String name) {
         // Supporting both versions of the packaging model
-        return name.endsWith(".jar") && (name.startsWith(SPRING_BOOT_CLASSIC_LIB_ROOT) || name.startsWith(SPRING_BOOT_BOOT_INF_LIB_ROOT) || name.startsWith(SPRING_BOOT_WEB_INF_LIB_ROOT));
+        return name.endsWith(".jar") && (name.startsWith(SPRING_BOOT_CLASSIC_LIB_ROOT)
+                || name.startsWith(SPRING_BOOT_BOOT_INF_LIB_ROOT) || name.startsWith(SPRING_BOOT_WEB_INF_LIB_ROOT));
     }
 
     private String cleanupSpringBootClassName(String name) {

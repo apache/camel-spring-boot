@@ -217,55 +217,77 @@ public class Document extends AbstractDescribedSObjectBase {
         final List<SObjectField> fields1 = new ArrayList<>();
         description.setFields(fields1);
 
-        final SObjectField sObjectField1 = createField("Id", "Document ID", "id", "tns:ID", 18, false, false, false, false, false, false, true);
+        final SObjectField sObjectField1 = createField("Id", "Document ID", "id", "tns:ID", 18, false, false, false,
+                false, false, false, true);
         fields1.add(sObjectField1);
-        final SObjectField sObjectField2 = createField("FolderId", "Folder ID", "reference", "tns:ID", 18, false, false, false, false, false, false, false);
+        final SObjectField sObjectField2 = createField("FolderId", "Folder ID", "reference", "tns:ID", 18, false, false,
+                false, false, false, false, false);
         fields1.add(sObjectField2);
-        final SObjectField sObjectField3 = createField("IsDeleted", "Deleted", "boolean", "xsd:boolean", 0, false, false, false, false, false, false, false);
+        final SObjectField sObjectField3 = createField("IsDeleted", "Deleted", "boolean", "xsd:boolean", 0, false,
+                false, false, false, false, false, false);
         fields1.add(sObjectField3);
-        final SObjectField sObjectField4 = createField("Name", "Document Name", "string", "xsd:string", 255, false, false, true, false, false, false, true);
+        final SObjectField sObjectField4 = createField("Name", "Document Name", "string", "xsd:string", 255, false,
+                false, true, false, false, false, true);
         fields1.add(sObjectField4);
-        final SObjectField sObjectField5 = createField("DeveloperName", "Document Unique Name", "string", "xsd:string", 80, false, false, false, false, false, false, false);
+        final SObjectField sObjectField5 = createField("DeveloperName", "Document Unique Name", "string", "xsd:string",
+                80, false, false, false, false, false, false, false);
         fields1.add(sObjectField5);
-        final SObjectField sObjectField6 = createField("NamespacePrefix", "Namespace Prefix", "string", "xsd:string", 15, false, true, false, false, false, false, false);
+        final SObjectField sObjectField6 = createField("NamespacePrefix", "Namespace Prefix", "string", "xsd:string",
+                15, false, true, false, false, false, false, false);
         fields1.add(sObjectField6);
-        final SObjectField sObjectField7 = createField("ContentType", "MIME Type", "string", "xsd:string", 120, false, true, false, false, false, false, false);
+        final SObjectField sObjectField7 = createField("ContentType", "MIME Type", "string", "xsd:string", 120, false,
+                true, false, false, false, false, false);
         fields1.add(sObjectField7);
-        final SObjectField sObjectField8 = createField("Type", "File Extension", "string", "xsd:string", 40, false, true, false, false, false, false, false);
+        final SObjectField sObjectField8 = createField("Type", "File Extension", "string", "xsd:string", 40, false,
+                true, false, false, false, false, false);
         fields1.add(sObjectField8);
-        final SObjectField sObjectField9 = createField("IsPublic", "Externally Available", "boolean", "xsd:boolean", 0, false, false, false, false, false, false, false);
+        final SObjectField sObjectField9 = createField("IsPublic", "Externally Available", "boolean", "xsd:boolean", 0,
+                false, false, false, false, false, false, false);
         fields1.add(sObjectField9);
-        final SObjectField sObjectField10 = createField("BodyLength", "Body Length", "int", "xsd:int", 0, false, false, false, false, false, false, false);
+        final SObjectField sObjectField10 = createField("BodyLength", "Body Length", "int", "xsd:int", 0, false, false,
+                false, false, false, false, false);
         fields1.add(sObjectField10);
-        final SObjectField sObjectField11 = createField("Body", "Body", "base64", "xsd:base64Binary", 0, false, true, false, false, false, false, false);
+        final SObjectField sObjectField11 = createField("Body", "Body", "base64", "xsd:base64Binary", 0, false, true,
+                false, false, false, false, false);
         fields1.add(sObjectField11);
-        final SObjectField sObjectField12 = createField("Url", "Url", "string", "xsd:string", 255, false, true, false, false, false, false, false);
+        final SObjectField sObjectField12 = createField("Url", "Url", "string", "xsd:string", 255, false, true, false,
+                false, false, false, false);
         fields1.add(sObjectField12);
-        final SObjectField sObjectField13 = createField("Description", "Description", "textarea", "xsd:string", 255, false, true, false, false, false, false, false);
+        final SObjectField sObjectField13 = createField("Description", "Description", "textarea", "xsd:string", 255,
+                false, true, false, false, false, false, false);
         fields1.add(sObjectField13);
-        final SObjectField sObjectField14 = createField("Keywords", "Keywords", "string", "xsd:string", 255, false, true, false, false, false, false, false);
+        final SObjectField sObjectField14 = createField("Keywords", "Keywords", "string", "xsd:string", 255, false,
+                true, false, false, false, false, false);
         fields1.add(sObjectField14);
-        final SObjectField sObjectField15 = createField("IsInternalUseOnly", "Internal Use Only", "boolean", "xsd:boolean", 0, false, false, false, false, false, false, false);
+        final SObjectField sObjectField15 = createField("IsInternalUseOnly", "Internal Use Only", "boolean",
+                "xsd:boolean", 0, false, false, false, false, false, false, false);
         fields1.add(sObjectField15);
-        final SObjectField sObjectField16 = createField("AuthorId", "Author ID", "reference", "tns:ID", 18, false, false, false, false, false, false, false);
+        final SObjectField sObjectField16 = createField("AuthorId", "Author ID", "reference", "tns:ID", 18, false,
+                false, false, false, false, false, false);
         fields1.add(sObjectField16);
-        final SObjectField sObjectField17 = createField("CreatedDate", "Created Date", "datetime", "xsd:dateTime", 0, false, false, false, false, false, false, false);
+        final SObjectField sObjectField17 = createField("CreatedDate", "Created Date", "datetime", "xsd:dateTime", 0,
+                false, false, false, false, false, false, false);
         fields1.add(sObjectField17);
-        final SObjectField sObjectField18 = createField("CreatedById", "Created By ID", "reference", "tns:ID", 18, false, false, false, false, false, false, false);
+        final SObjectField sObjectField18 = createField("CreatedById", "Created By ID", "reference", "tns:ID", 18,
+                false, false, false, false, false, false, false);
         fields1.add(sObjectField18);
-        final SObjectField sObjectField19 = createField("LastModifiedDate", "Last Modified Date", "datetime", "xsd:dateTime", 0, false, false, false, false, false, false, false);
+        final SObjectField sObjectField19 = createField("LastModifiedDate", "Last Modified Date", "datetime",
+                "xsd:dateTime", 0, false, false, false, false, false, false, false);
         fields1.add(sObjectField19);
-        final SObjectField sObjectField20 = createField("LastModifiedById", "Last Modified By ID", "reference", "tns:ID", 18, false, false, false, false, false, false, false);
+        final SObjectField sObjectField20 = createField("LastModifiedById", "Last Modified By ID", "reference",
+                "tns:ID", 18, false, false, false, false, false, false, false);
         fields1.add(sObjectField20);
-        final SObjectField sObjectField21 = createField("SystemModstamp", "System Modstamp", "datetime", "xsd:dateTime", 0, false, false, false, false, false, false, false);
+        final SObjectField sObjectField21 = createField("SystemModstamp", "System Modstamp", "datetime", "xsd:dateTime",
+                0, false, false, false, false, false, false, false);
         fields1.add(sObjectField21);
-        final SObjectField sObjectField22 = createField("IsBodySearchable", "Document Content Searchable", "boolean", "xsd:boolean", 0, false, false, false, false, false, false,
-                                                        false);
+        final SObjectField sObjectField22 = createField("IsBodySearchable", "Document Content Searchable", "boolean",
+                "xsd:boolean", 0, false, false, false, false, false, false, false);
         fields1.add(sObjectField22);
-        final SObjectField sObjectField23 = createField("LastViewedDate", "Last Viewed Date", "datetime", "xsd:dateTime", 0, false, true, false, false, false, false, false);
+        final SObjectField sObjectField23 = createField("LastViewedDate", "Last Viewed Date", "datetime",
+                "xsd:dateTime", 0, false, true, false, false, false, false, false);
         fields1.add(sObjectField23);
-        final SObjectField sObjectField24 = createField("LastReferencedDate", "Last Referenced Date", "datetime", "xsd:dateTime", 0, false, true, false, false, false, false,
-                                                        false);
+        final SObjectField sObjectField24 = createField("LastReferencedDate", "Last Referenced Date", "datetime",
+                "xsd:dateTime", 0, false, true, false, false, false, false, false);
         fields1.add(sObjectField24);
 
         description.setLabel("Document");
@@ -273,7 +295,8 @@ public class Document extends AbstractDescribedSObjectBase {
         description.setName("Document");
 
         final SObjectDescriptionUrls sObjectDescriptionUrls1 = new SObjectDescriptionUrls();
-        sObjectDescriptionUrls1.setDefaultValues("/services/data/v45.0/sobjects/Document/defaultValues?recordTypeId&fields");
+        sObjectDescriptionUrls1
+                .setDefaultValues("/services/data/v45.0/sobjects/Document/defaultValues?recordTypeId&fields");
         sObjectDescriptionUrls1.setDescribe("/services/data/v45.0/sobjects/Document/describe");
         sObjectDescriptionUrls1.setRowTemplate("/services/data/v45.0/sobjects/Document/{ID}");
         sObjectDescriptionUrls1.setSobject("/services/data/v45.0/sobjects/Document");
@@ -283,4 +306,4 @@ public class Document extends AbstractDescribedSObjectBase {
     }
 }
 
-//CHECKSTYLE:ON
+// CHECKSTYLE:ON

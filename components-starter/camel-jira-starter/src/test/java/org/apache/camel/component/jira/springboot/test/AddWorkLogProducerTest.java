@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jira.springboot.test;
 
-
 import static org.apache.camel.component.jira.JiraConstants.ISSUE_KEY;
 import static org.apache.camel.component.jira.JiraConstants.JIRA_REST_CLIENT_FACTORY;
 import static org.apache.camel.component.jira.JiraConstants.MINUTES_SPENT;
@@ -72,51 +71,42 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.mockito.stubbing.Answer;
 
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        AddWorkLogProducerTest.class,
-        AddWorkLogProducerTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, AddWorkLogProducerTest.class,
+        AddWorkLogProducerTest.TestConfiguration.class })
 
 public class AddWorkLogProducerTest {
 
     @Autowired
     private CamelContext camelContext;
-    
 
-    
     @Autowired
     @Produce("direct:start")
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mockResult;
-    
+
     static JiraRestClient jiraClient;
-    
+
     static JiraRestClientFactory jiraRestClientFactory;
-    
+
     static IssueRestClient issueRestClient;
 
     static Issue backendIssue;
-    
-    
-    
+
     @Bean
     CamelContextConfiguration contextConfiguration() {
         return new CamelContextConfiguration() {
             @Override
             public void beforeApplicationStart(CamelContext context) {
-                //get chance to mock camelContext/Registry
+                // get chance to mock camelContext/Registry
                 jiraRestClientFactory = mock(JiraRestClientFactory.class);
                 jiraClient = mock(JiraRestClient.class);
                 issueRestClient = mock(IssueRestClient.class);
-                lenient().when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any())).thenReturn(jiraClient);
+                lenient().when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any()))
+                        .thenReturn(jiraClient);
                 lenient().when(jiraClient.getIssueClient()).thenReturn(issueRestClient);
 
                 backendIssue = createIssueWithComments(1, 1);
@@ -126,11 +116,11 @@ public class AddWorkLogProducerTest {
 
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here                
+                // do nothing here
             }
         };
     }
-    
+
     @Test
     public void testAddWorkLog() throws InterruptedException {
         int minutesSpent = 10;
@@ -139,13 +129,12 @@ public class AddWorkLogProducerTest {
         headers.put(MINUTES_SPENT, minutesSpent);
         String comment = "A new test comment " + new Date();
 
-        when(issueRestClient.addWorklog(any(URI.class), any(WorklogInput.class)))
-                .then((Answer<Void>) inv -> {
-                    Collection<Worklog> workLogs = new ArrayList<>();
-                    workLogs.add(newWorkLog(backendIssue.getId(), minutesSpent, comment));
-                    backendIssue = createIssueWithWorkLogs(backendIssue.getId(), workLogs);
-                    return null;
-                });
+        when(issueRestClient.addWorklog(any(URI.class), any(WorklogInput.class))).then((Answer<Void>) inv -> {
+            Collection<Worklog> workLogs = new ArrayList<>();
+            workLogs.add(newWorkLog(backendIssue.getId(), minutesSpent, comment));
+            backendIssue = createIssueWithWorkLogs(backendIssue.getId(), workLogs);
+            return null;
+        });
 
         template.sendBodyAndHeaders(comment, headers);
 
@@ -155,7 +144,7 @@ public class AddWorkLogProducerTest {
         verify(issueRestClient).getIssue(backendIssue.getKey());
         verify(issueRestClient).addWorklog(eq(backendIssue.getWorklogUri()), any(WorklogInput.class));
     }
-    
+
     @Test
     public void testAddWorkLogMissingIssueKey() throws InterruptedException {
         int minutesSpent = 3;
@@ -180,7 +169,7 @@ public class AddWorkLogProducerTest {
 
     @Test
     public void testAddWorkLogMissingMinutesSpent() throws InterruptedException {
-        
+
         Map<String, Object> headers = new HashMap<>();
         headers.put(ISSUE_KEY, backendIssue.getKey());
         String comment = "A new test comment " + new Date();
@@ -192,7 +181,7 @@ public class AddWorkLogProducerTest {
             IllegalArgumentException cause = assertInstanceOf(IllegalArgumentException.class, e.getCause());
             assertTrue(cause.getMessage().contains(MINUTES_SPENT));
         }
-        
+
         mockResult.reset();
         mockResult.expectedMessageCount(0);
         mockResult.assertIsSatisfied();
@@ -223,28 +212,20 @@ public class AddWorkLogProducerTest {
         verify(issueRestClient, never()).addWorklog(any(URI.class), any(WorklogInput.class));
     }
 
-    
     @Configuration
     public class TestConfiguration {
-        
-        
 
         @Bean
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                    .to("jira://addWorkLog?jiraUrl=" + JiraTestConstants.getJiraCredentials())
-                    .to(mockResult);
+                    from("direct:start").to("jira://addWorkLog?jiraUrl=" + JiraTestConstants.getJiraCredentials())
+                            .to(mockResult);
                 }
             };
         }
-        
-      
+
     }
-    
-    
-    
-    
+
 }

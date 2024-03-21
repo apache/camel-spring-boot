@@ -30,13 +30,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileToFtpsImplicitSSLWithClientAuthTest.class
-        }
-)
-//Based on FileToFtpsImplicitSSLWithClientAuthIT
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileToFtpsImplicitSSLWithClientAuthTest.class })
+// Based on FileToFtpsImplicitSSLWithClientAuthIT
 public class FileToFtpsImplicitSSLWithClientAuthTest extends BaseFtpsImplicitClientAuth {
 
     @EndpointInject("mock:result")
@@ -44,9 +39,9 @@ public class FileToFtpsImplicitSSLWithClientAuthTest extends BaseFtpsImplicitCli
 
     protected String getFtpUrl() {
         return "ftps://admin@localhost:" + getPort()
-               + "/tmp2/camel?password=admin&initialDelay=2000&disableSecureDataChannelDefaults=true"
-               + "&securityProtocol=TLSv1.3&implicit=true&ftpClient.keyStore.file=./src/test/resources/server.jks&ftpClient.keyStore.type=JKS"
-               + "&ftpClient.keyStore.algorithm=SunX509&ftpClient.keyStore.password=password&ftpClient.keyStore.keyPassword=password&delete=true";
+                + "/tmp2/camel?password=admin&initialDelay=2000&disableSecureDataChannelDefaults=true"
+                + "&securityProtocol=TLSv1.3&implicit=true&ftpClient.keyStore.file=./src/test/resources/server.jks&ftpClient.keyStore.type=JKS"
+                + "&ftpClient.keyStore.algorithm=SunX509&ftpClient.keyStore.password=password&ftpClient.keyStore.keyPassword=password&delete=true";
     }
 
     @Test
@@ -67,7 +62,7 @@ public class FileToFtpsImplicitSSLWithClientAuthTest extends BaseFtpsImplicitCli
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseFtp.TestConfiguration {
+    public class TestConfiguration extends BaseFtp.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
 

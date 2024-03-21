@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.hl7.springboot.test;
 
-
-
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.hl7.HL7MLLPCodec;
@@ -32,7 +30,6 @@ import ca.uhn.hl7v2.model.v24.segment.MSA;
 import ca.uhn.hl7v2.model.v24.segment.MSH;
 import ca.uhn.hl7v2.model.v24.segment.QRD;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -40,25 +37,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        HL7MLLPCodecTest.class,
-        HL7MLLPCodecTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, HL7MLLPCodecTest.class,
+        HL7MLLPCodecTest.TestConfiguration.class })
 public class HL7MLLPCodecTest extends HL7TestSupport {
 
-    
     @Autowired
     ProducerTemplate template;
 
-
-
-    
     @Test
     public void testSendHL7Message() throws Exception {
         // START SNIPPET: e2
@@ -70,8 +57,8 @@ public class HL7MLLPCodecTest extends HL7TestSupport {
         in.append("\n");
         in.append(line2);
 
-        String out = template.requestBody("mina:tcp://127.0.0.1:" + getPort() + "?sync=true&codec=#hl7codec", in.toString(),
-                String.class);
+        String out = template.requestBody("mina:tcp://127.0.0.1:" + getPort() + "?sync=true&codec=#hl7codec",
+                in.toString(), String.class);
         // END SNIPPET: e2
 
         String[] lines = out.split("\r");
@@ -102,7 +89,6 @@ public class HL7MLLPCodecTest extends HL7TestSupport {
     }
     // END SNIPPET: e3
 
-
     // *************************************
     // Config
     // *************************************
@@ -129,7 +115,7 @@ public class HL7MLLPCodecTest extends HL7TestSupport {
             };
         }
     }
-    
+
     @Bean(name = "hl7codec")
     private HL7MLLPCodec addHl7MllpCodec() throws Exception {
         HL7MLLPCodec codec = new HL7MLLPCodec();

@@ -36,15 +36,9 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
-
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletDiscoveryTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletDiscoveryTest.class, })
 
 public class KameletDiscoveryTest {
 
@@ -56,8 +50,7 @@ public class KameletDiscoveryTest {
 
     @Test
     public void kameletCanBeDiscovered() throws Exception {
-        context.getRegistry().bind(
-                DefaultRoutesLoader.ROUTES_LOADER_KEY_PREFIX + "kamelet.yaml",
+        context.getRegistry().bind(DefaultRoutesLoader.ROUTES_LOADER_KEY_PREFIX + "kamelet.yaml",
                 new RoutesBuilderLoaderSupport() {
                     @Override
                     public String getSupportedExtension() {
@@ -69,9 +62,7 @@ public class KameletDiscoveryTest {
                         return new RouteBuilder() {
                             @Override
                             public void configure() {
-                                routeTemplate("mySetBody")
-                                        .from("kamelet:source")
-                                        .setBody().constant("discovered");
+                                routeTemplate("mySetBody").from("kamelet:source").setBody().constant("discovered");
 
                             }
                         };
@@ -80,8 +71,7 @@ public class KameletDiscoveryTest {
         context.addRoutes(new RouteBuilder() {
             @Override
             public void configure() {
-                from("direct:discovery")
-                        .toF("kamelet:mySetBody");
+                from("direct:discovery").toF("kamelet:mySetBody");
             }
         });
 
@@ -90,13 +80,13 @@ public class KameletDiscoveryTest {
 
     @Test
     public void kameletNotFound() {
-        context.getRegistry().bind(
-                DefaultRoutesLoader.ROUTES_LOADER_KEY_PREFIX + "kamelet.yaml",
+        context.getRegistry().bind(DefaultRoutesLoader.ROUTES_LOADER_KEY_PREFIX + "kamelet.yaml",
                 new RoutesBuilderLoaderSupport() {
                     @Override
                     public String getSupportedExtension() {
                         return "kamelet.yaml";
                     }
+
                     @Bean
                     public RoutesBuilder loadRoutesBuilder(Resource resource) {
                         return new RouteBuilder() {
@@ -109,13 +99,11 @@ public class KameletDiscoveryTest {
         RouteBuilder builder = new RouteBuilder() {
             @Override
             public void configure() {
-                from("direct:discovery")
-                        .toF("kamelet:mySetBody");
+                from("direct:discovery").toF("kamelet:mySetBody");
             }
         };
 
-        assertThatThrownBy(() -> context.addRoutes(builder))
-                .isInstanceOf(FailedToCreateRouteException.class)
+        assertThatThrownBy(() -> context.addRoutes(builder)).isInstanceOf(FailedToCreateRouteException.class)
                 .hasRootCauseMessage("Cannot find RouteTemplate with id mySetBody");
     }
 }

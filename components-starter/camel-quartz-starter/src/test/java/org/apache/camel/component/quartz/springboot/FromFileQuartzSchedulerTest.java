@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import java.io.File;
 
 import org.apache.camel.CamelContext;
@@ -30,8 +28,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -40,37 +36,30 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.util.FileUtil;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        FromFileQuartzSchedulerTest.class,
-        FromFileQuartzSchedulerTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FromFileQuartzSchedulerTest.class,
+        FromFileQuartzSchedulerTest.TestConfiguration.class })
 public class FromFileQuartzSchedulerTest extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint resultEndpoint;
-    
+
     @BeforeEach
     public void setUp() throws Exception {
         FileUtil.removeDir(new File("target/inbox"));
-        
+
     }
 
     @Test
     public void testQuartzRoute() throws Exception {
-        
+
         resultEndpoint.expectedMessageCount(2);
 
         template.sendBody("file:target/inbox", "Hello World");
@@ -79,7 +68,6 @@ public class FromFileQuartzSchedulerTest extends BaseQuartzTest {
         resultEndpoint.assertIsSatisfied();
     }
 
-    
     // *************************************
     // Config
     // *************************************
@@ -93,13 +81,10 @@ public class FromFileQuartzSchedulerTest extends BaseQuartzTest {
                 @Override
                 public void configure() {
                     from("file:target/inbox?scheduler=quartz&scheduler.trigger.misfireInstruction=2&scheduler.cron=0/2+*+*+*+*+?")
-                            .routeId("myRoute")
-                            .to("mock:result");
+                            .routeId("myRoute").to("mock:result");
                 }
             };
         }
     }
-    
-   
 
 }

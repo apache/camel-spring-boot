@@ -24,13 +24,12 @@ public final class SpringBootPropertyUtil {
     public static final int PORT2 = AvailablePortFinder.getNextAvailable();
     public static final int PORT3 = AvailablePortFinder.getNextAvailable();
     public static final String HOSTNAME = "localhost:";
-    
+
     private SpringBootPropertyUtil() {
 
     }
 
-    
-    public static  String getDiscoveryServices() {    
+    public static String getDiscoveryServices() {
 
         StringBuffer dservice = new StringBuffer();
         dservice.append(HOSTNAME);

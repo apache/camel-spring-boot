@@ -33,14 +33,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SqlProducerUpdateHeadersTest.class,
-                SqlProducerUpdateHeadersTest.TestConfiguration.class,
-                BaseSql.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SqlProducerUpdateHeadersTest.class,
+        SqlProducerUpdateHeadersTest.TestConfiguration.class, BaseSql.TestConfiguration.class })
 public class SqlProducerUpdateHeadersTest extends BaseSql {
 
     @EndpointInject("mock:update")

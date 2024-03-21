@@ -33,14 +33,15 @@ import org.springframework.context.support.AbstractApplicationContext;
 
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(name = "camel.cli.enabled", matchIfMissing = true)
-@AutoConfigureBefore(name = "org.apache.camel.spring.boot.CamelAutoConfiguration") // configure early to have Camel CLI during startup
-@EnableConfigurationProperties({CliConnectorConfiguration.class})
+@AutoConfigureBefore(name = "org.apache.camel.spring.boot.CamelAutoConfiguration") // configure early to have Camel CLI
+                                                                                   // during startup
+@EnableConfigurationProperties({ CliConnectorConfiguration.class })
 public class CliConnectorAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(CliConnectorFactory.class)
     public CliConnectorFactory cliConnectorFactory(AbstractApplicationContext applicationContext,
-                                                   CliConnectorConfiguration config) {
+            CliConnectorConfiguration config) {
 
         CliConnectorFactory answer = new SpringCliConnectorFactory(applicationContext);
         answer.setEnabled(config.getEnabled());

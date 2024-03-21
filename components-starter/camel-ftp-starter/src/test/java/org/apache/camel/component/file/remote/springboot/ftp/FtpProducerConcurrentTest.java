@@ -31,14 +31,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FtpProducerConcurrentTest.class,
-                FtpProducerConcurrentTest.TestConfiguration.class
-        }
-)
-//Based on FtpProducerConcurrentIT
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FtpProducerConcurrentTest.class,
+        FtpProducerConcurrentTest.TestConfiguration.class })
+// Based on FtpProducerConcurrentIT
 public class FtpProducerConcurrentTest extends BaseFtp {
 
     @EndpointInject("mock:result")
@@ -79,13 +74,12 @@ public class FtpProducerConcurrentTest extends BaseFtp {
         executor.shutdownNow();
     }
 
-
     // *************************************
     // Config
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseFtp.TestConfiguration {
+    public class TestConfiguration extends BaseFtp.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
 

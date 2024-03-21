@@ -29,8 +29,8 @@ import org.apache.camel.catalog.RuntimeProvider;
 import org.apache.camel.catalog.impl.CatalogHelper;
 
 /**
- * A Spring Boot based {@link RuntimeProvider} which only includes the supported Camel components, data formats, and languages
- * which can be installed in Spring Boot using the starter dependencies.
+ * A Spring Boot based {@link RuntimeProvider} which only includes the supported Camel components, data formats, and
+ * languages which can be installed in Spring Boot using the starter dependencies.
  */
 public class SpringBootRuntimeProvider implements RuntimeProvider {
 

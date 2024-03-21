@@ -73,7 +73,8 @@ public class DnsCloudAutoConfiguration {
         if (beanFactory != null) {
             Map<String, Object> parameters = new HashMap<>();
 
-            for (Map.Entry<String, DnsServiceCallServiceDiscoveryConfigurationCommon> entry : configuration.getConfigurations().entrySet()) {
+            for (Map.Entry<String, DnsServiceCallServiceDiscoveryConfigurationCommon> entry : configuration
+                    .getConfigurations().entrySet()) {
                 // clean up params
                 parameters.clear();
 
@@ -99,10 +100,7 @@ public class DnsCloudAutoConfiguration {
 
     public static class Condition extends GroupCondition {
         public Condition() {
-            super(
-                "camel.cloud.dns",
-                "camel.cloud.dns.service-discovery"
-            );
+            super("camel.cloud.dns", "camel.cloud.dns.service-discovery");
         }
     }
 }

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.hl7.springboot.test;
 
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -44,26 +43,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        HL7MLLPNettyCodecStandAndEndBytesTest.class,
-        HL7MLLPNettyCodecStandAndEndBytesTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, HL7MLLPNettyCodecStandAndEndBytesTest.class,
+        HL7MLLPNettyCodecStandAndEndBytesTest.TestConfiguration.class })
 public class HL7MLLPNettyCodecStandAndEndBytesTest extends HL7TestSupport {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mock;
 
-    
     @Bean("hl7decoder")
     public HL7MLLPNettyDecoderFactory addDecoder() throws Exception {
 
@@ -89,7 +80,7 @@ public class HL7MLLPNettyCodecStandAndEndBytesTest extends HL7TestSupport {
         encoder.setConvertLFtoCR(false);
         return encoder;
     }
-    
+
     @Test
     public void testSendHL7Message() throws Exception {
         String line1 = "MSH|^~\\&|MYSENDER|MYRECEIVER|MYAPPLICATION||200612211200||QRY^A19|1234|P|2.4";
@@ -101,8 +92,8 @@ public class HL7MLLPNettyCodecStandAndEndBytesTest extends HL7TestSupport {
         in.append(line2);
 
         String out = template.requestBody(
-                "netty:tcp://127.0.0.1:" + getPort() + "?sync=true&decoders=#hl7decoder&encoders=#hl7encoder", in.toString(),
-                String.class);
+                "netty:tcp://127.0.0.1:" + getPort() + "?sync=true&decoders=#hl7decoder&encoders=#hl7encoder",
+                in.toString(), String.class);
 
         String[] lines = out.split("\r");
         assertEquals("MSH|^~\\&|MYSENDER||||200701011539||ADR^A19||||123", lines[0]);
@@ -133,7 +124,6 @@ public class HL7MLLPNettyCodecStandAndEndBytesTest extends HL7TestSupport {
         return adr;
     }
 
-
     // *************************************
     // Config
     // *************************************
@@ -163,7 +153,7 @@ public class HL7MLLPNettyCodecStandAndEndBytesTest extends HL7TestSupport {
             };
         }
     }
-    
+
     @Bean(name = "hl7codec")
     private HL7MLLPCodec addHl7MllpCodec() throws Exception {
         HL7MLLPCodec codec = new HL7MLLPCodec();

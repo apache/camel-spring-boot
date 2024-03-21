@@ -41,16 +41,10 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                Ddb2DeleteItemTest.class,
-                Ddb2DeleteItemTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, Ddb2DeleteItemTest.class,
+        Ddb2DeleteItemTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class Ddb2DeleteItemTest extends BaseDdb2 {
 
@@ -109,10 +103,9 @@ public class Ddb2DeleteItemTest extends BaseDdb2 {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:start").to(
-                            "aws2-ddb://" + tableName + "?keyAttributeName=" + attributeName + "&keyAttributeType=" + KeyType.HASH
-                                    + "&keyScalarType=" + ScalarAttributeType.S
-                                    + "&readCapacity=1&writeCapacity=1");
+                    from("direct:start").to("aws2-ddb://" + tableName + "?keyAttributeName=" + attributeName
+                            + "&keyAttributeType=" + KeyType.HASH + "&keyScalarType=" + ScalarAttributeType.S
+                            + "&readCapacity=1&writeCapacity=1");
                 }
             };
         }

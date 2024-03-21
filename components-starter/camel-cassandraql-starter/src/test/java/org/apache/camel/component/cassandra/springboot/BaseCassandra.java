@@ -35,10 +35,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
 public class BaseCassandra {
-    
+
     @Autowired
     protected CamelContext context;
-    
+
     @Autowired
     protected ProducerTemplate template;
 
@@ -53,16 +53,14 @@ public class BaseCassandra {
     static {
         service = new CassandraLocalContainerService();
 
-        service.getContainer()
-                .withInitScript("initScript.cql")
-                .withNetworkAliases("cassandra");
-        
+        service.getContainer().withInitScript("initScript.cql").withNetworkAliases("cassandra");
+
     }
 
     @BeforeEach
     public void beforeEach() throws Exception {
-        executeScript("BasicDataSet.cql");      
-        
+        executeScript("BasicDataSet.cql");
+
     }
 
     public void executeScript(String pathToScript) throws IOException {
@@ -81,7 +79,7 @@ public class BaseCassandra {
 
     @AfterEach
     protected void doPostTearDown() throws Exception {
-        
+
         try {
             if (session != null) {
                 session.close();
@@ -94,12 +92,9 @@ public class BaseCassandra {
 
     public CqlSession getSession() {
         if (session == null) {
-            InetSocketAddress endpoint
-                    = new InetSocketAddress(service.getCassandraHost(), service.getCQL3Port());
-            //create a new session
-            session = CqlSession.builder()
-                    .withLocalDatacenter(DATACENTER_NAME)
-                    .withKeyspace(KEYSPACE_NAME)
+            InetSocketAddress endpoint = new InetSocketAddress(service.getCassandraHost(), service.getCQL3Port());
+            // create a new session
+            session = CqlSession.builder().withLocalDatacenter(DATACENTER_NAME).withKeyspace(KEYSPACE_NAME)
                     .withConfigLoader(DriverConfigLoader.programmaticBuilder()
                             .withDuration(DefaultDriverOption.REQUEST_TIMEOUT, Duration.ofSeconds(5)).build())
                     .addContactPoint(endpoint).build();

@@ -38,14 +38,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SqlConsumerDynamicParameterTest.class,
-                SqlConsumerDynamicParameterTest.TestConfiguration.class,
-                BaseSql.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SqlConsumerDynamicParameterTest.class,
+        SqlConsumerDynamicParameterTest.TestConfiguration.class, BaseSql.TestConfiguration.class })
 public class SqlConsumerDynamicParameterTest extends BaseSql {
 
     @EndpointInject("mock:result")
@@ -105,8 +99,7 @@ public class SqlConsumerDynamicParameterTest extends BaseSql {
                 @Override
                 public void configure() throws Exception {
                     from("sql:select * from projects where id = :#${bean:myIdGenerator.nextId}?initialDelay=0&delay=50")
-                            .routeId("foo").noAutoStartup()
-                            .to("mock:result");
+                            .routeId("foo").noAutoStartup().to("mock:result");
                 }
             };
         }

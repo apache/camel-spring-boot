@@ -30,7 +30,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 @CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootApplication
-@SpringBootTest(classes = {CamelAutoConfiguration.class, CamelInfoAutoConfiguration.class})
+@SpringBootTest(classes = { CamelAutoConfiguration.class, CamelInfoAutoConfiguration.class })
 public class CamelInfoTest {
 
     @Autowired

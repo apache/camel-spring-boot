@@ -26,7 +26,8 @@ import org.apache.curator.framework.CuratorFramework;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.cloud.zookeeper")
-public class ZooKeeperServiceRegistryConfiguration extends org.apache.camel.component.zookeeper.cloud.ZooKeeperServiceRegistryConfiguration {
+public class ZooKeeperServiceRegistryConfiguration
+        extends org.apache.camel.component.zookeeper.cloud.ZooKeeperServiceRegistryConfiguration {
 
     /**
      * Sets if the zookeeper service registry should be enabled or not, default is false.
@@ -42,7 +43,7 @@ public class ZooKeeperServiceRegistryConfiguration extends org.apache.camel.comp
      * Custom service attributes.
      */
     private Map<String, Object> attributes;
-    
+
     /**
      * Service lookup order/priority.
      */
@@ -86,14 +87,12 @@ public class ZooKeeperServiceRegistryConfiguration extends org.apache.camel.comp
     // to generate descritpions for inherited properties
     // ------------------------------------------
     /**
-     * Should we remove all the registered services know by this registry on stop ? 
-     * Default is true.
+     * Should we remove all the registered services know by this registry on stop ? Default is true.
      */
     private boolean deregisterServicesOnStop = true;
 
     /**
-     * Should we override the service host if given ? 
-     * Default is true.
+     * Should we override the service host if given ? Default is true.
      */
     private boolean overrideServiceHost = true;
 
@@ -123,8 +122,7 @@ public class ZooKeeperServiceRegistryConfiguration extends org.apache.camel.comp
     private long reconnectBaseSleepTime;
 
     /**
-     * ReconnectBaseSleepTime TimeUnit.
-     * Default is TimeUnit.MILLISECONDS.
+     * ReconnectBaseSleepTime TimeUnit. Default is TimeUnit.MILLISECONDS.
      */
     private TimeUnit reconnectBaseSleepTimeUnit = TimeUnit.MILLISECONDS;
 
@@ -134,27 +132,24 @@ public class ZooKeeperServiceRegistryConfiguration extends org.apache.camel.comp
     private int reconnectMaxRetries = 3;
 
     /**
-     * Max time to sleep on each retry.
-     * Default is Integer.MAX_VALUE.
+     * Max time to sleep on each retry. Default is Integer.MAX_VALUE.
      */
     private long reconnectMaxSleepTime = Integer.MAX_VALUE;
-    
+
     /**
-     * ReconnectMaxSleepTimeUnit TimeUnit.
-     * Default is TimeUnit.MILLISECONDS.
+     * ReconnectMaxSleepTimeUnit TimeUnit. Default is TimeUnit.MILLISECONDS.
      */
     private TimeUnit reconnectMaxSleepTimeUnit = TimeUnit.MILLISECONDS;
-    
+
     /**
      * Session timeout.
      */
     private long sessionTimeout = 60000;
 
     /**
-     * Session timeout TimeUnit.
-     * Default is TimeUnit.MILLISECONDS.
+     * Session timeout TimeUnit. Default is TimeUnit.MILLISECONDS.
      */
-    private TimeUnit sessionTimeoutUnit =  TimeUnit.MILLISECONDS;
+    private TimeUnit sessionTimeoutUnit = TimeUnit.MILLISECONDS;
 
     /**
      * Connection timeout.
@@ -162,22 +157,20 @@ public class ZooKeeperServiceRegistryConfiguration extends org.apache.camel.comp
     private long connectionTimeout = 15000;
 
     /**
-     * Connection timeout TimeUnit.
-     * Default is TimeUnit.MILLISECONDS.
+     * Connection timeout TimeUnit. Default is TimeUnit.MILLISECONDS.
      */
     private TimeUnit connectionTimeoutUnit = TimeUnit.MILLISECONDS;
-    
+
     /**
      * Time to wait during close to join background threads.
      */
     private long maxCloseWait = 1000;
-    
+
     /**
-     * MaxCloseWait TimeUnit.
-     * Default is TimeUnit.MILLISECONDS.
+     * MaxCloseWait TimeUnit. Default is TimeUnit.MILLISECONDS.
      */
     private TimeUnit maxCloseWaitUnit = TimeUnit.MILLISECONDS;
-    
+
     /**
      * Zookeeper CuratorFramework-style client.
      */
@@ -188,7 +181,7 @@ public class ZooKeeperServiceRegistryConfiguration extends org.apache.camel.comp
      */
     private List<AuthInfo> authInfoList;
 
-    /** 
+    /**
      * Retry policy to use.
      */
     private RetryPolicy retryPolicy;

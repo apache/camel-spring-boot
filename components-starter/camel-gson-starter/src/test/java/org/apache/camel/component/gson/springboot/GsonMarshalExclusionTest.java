@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.gson.springboot;
 
-
 import java.util.Arrays;
 
 import com.google.gson.ExclusionStrategy;
@@ -41,37 +40,29 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        GsonMarshalExclusionTest.class,
-        GsonMarshalExclusionTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, GsonMarshalExclusionTest.class,
+        GsonMarshalExclusionTest.TestConfiguration.class })
 public class GsonMarshalExclusionTest {
 
     @Autowired
     CamelContext context;
-    
+
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:reversePojoExcludeWeight")
     MockEndpoint mockWeight;
-    
+
     @EndpointInject("mock:reversePojoExcludeAge")
     MockEndpoint mockAge;
 
-    
     @Test
     public void testMarshalAndUnmarshalPojoWithExclusion() throws Exception {
 
         TestPojoExclusion in = new TestPojoExclusion();
 
-        
         mockWeight.expectedMessageCount(1);
         mockWeight.message(0).body().isInstanceOf(TestPojoExclusion.class);
         mockWeight.message(0).body().isEqualTo(in);
@@ -86,7 +77,7 @@ public class GsonMarshalExclusionTest {
 
         mockWeight.assertIsSatisfied();
     }
-    
+
     @Test
     public void testMarshalAndUnmarshalPojoWithAnotherExclusion() throws Exception {
 
@@ -106,7 +97,7 @@ public class GsonMarshalExclusionTest {
 
         mockAge.assertIsSatisfied();
     }
-    
+
     /**
      * Strategy to exclude {@link ExcludeWeight} annotated fields
      */
@@ -123,7 +114,7 @@ public class GsonMarshalExclusionTest {
         }
     }
 
-    //START SNIPPET: strategy
+    // START SNIPPET: strategy
     /**
      * Strategy to exclude {@link ExcludeAge} annotated fields
      */
@@ -139,7 +130,7 @@ public class GsonMarshalExclusionTest {
             return false;
         }
     }
-    //END SNIPPET: strategy
+    // END SNIPPET: strategy
 
     // *************************************
     // Config
@@ -155,15 +146,18 @@ public class GsonMarshalExclusionTest {
                 public void configure() {
 
                     GsonDataFormat weightExclusionFormat = new GsonDataFormat(TestPojoExclusion.class);
-                    weightExclusionFormat.setExclusionStrategies(Arrays.<ExclusionStrategy> asList(new WeightExclusionStrategy()));
+                    weightExclusionFormat
+                            .setExclusionStrategies(Arrays.<ExclusionStrategy> asList(new WeightExclusionStrategy()));
                     from("direct:inPojoExcludeWeight").marshal(weightExclusionFormat);
-                    from("direct:backPojoExcludeWeight").unmarshal(weightExclusionFormat).to("mock:reversePojoExcludeWeight");
+                    from("direct:backPojoExcludeWeight").unmarshal(weightExclusionFormat)
+                            .to("mock:reversePojoExcludeWeight");
 
-                    //START SNIPPET: format
+                    // START SNIPPET: format
                     GsonDataFormat ageExclusionFormat = new GsonDataFormat(TestPojoExclusion.class);
-                    ageExclusionFormat.setExclusionStrategies(Arrays.<ExclusionStrategy> asList(new AgeExclusionStrategy()));
+                    ageExclusionFormat
+                            .setExclusionStrategies(Arrays.<ExclusionStrategy> asList(new AgeExclusionStrategy()));
                     from("direct:inPojoExcludeAge").marshal(ageExclusionFormat);
-                    //END SNIPPET: format
+                    // END SNIPPET: format
                     from("direct:backPojoExcludeAge").unmarshal(ageExclusionFormat).to("mock:reversePojoExcludeAge");
                 }
             };

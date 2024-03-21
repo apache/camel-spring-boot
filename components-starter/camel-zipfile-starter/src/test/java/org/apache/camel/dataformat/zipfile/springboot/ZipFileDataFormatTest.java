@@ -16,7 +16,6 @@
  */
 package org.apache.camel.dataformat.zipfile.springboot;
 
-
 import static org.apache.camel.Exchange.FILE_NAME;
 import static org.apache.camel.test.junit5.TestSupport.assertIsInstanceOf;
 import static org.apache.camel.test.junit5.TestSupport.deleteDirectory;
@@ -67,52 +66,38 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.util.IOHelper;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        ZipFileDataFormatTest.class,
-        ZipFileDataFormatTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ZipFileDataFormatTest.class,
+        ZipFileDataFormatTest.TestConfiguration.class })
 public class ZipFileDataFormatTest {
 
-    
     private static final String TEXT = "The Masque of Queen Bersabe (excerpt) \n"
-        + "by: Algernon Charles Swinburne \n\n"
-        + "My lips kissed dumb the word of Ah \n"
-        + "Sighed on strange lips grown sick thereby. \n"
-        + "God wrought to me my royal bed; \n"
-        + "The inner work thereof was red, \n"
-        + "The outer work was ivory. \n"
-        + "My mouth's heat was the heat of flame \n"
-        + "For lust towards the kings that came \n"
-        + "With horsemen riding royally.";
+            + "by: Algernon Charles Swinburne \n\n" + "My lips kissed dumb the word of Ah \n"
+            + "Sighed on strange lips grown sick thereby. \n" + "God wrought to me my royal bed; \n"
+            + "The inner work thereof was red, \n" + "The outer work was ivory. \n"
+            + "My mouth's heat was the heat of flame \n" + "For lust towards the kings that came \n"
+            + "With horsemen riding royally.";
 
     private static final File TEST_DIR = new File("target/zip");
 
     private static ZipFileDataFormat zip;
-    
+
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
-   
-    
+
     @EndpointInject("mock:zipStreamCache")
     MockEndpoint mockZipStreamCache;
-    
+
     @EndpointInject("mock:zip")
     MockEndpoint mockZip;
-    
-    
+
     @Test
     public void testZipAndStreamCaching() throws Exception {
-        
+
         mockZipStreamCache.setExpectedMessageCount(1);
 
         template.sendBody("direct:zipStreamCache", TEXT);
@@ -122,7 +107,8 @@ public class ZipFileDataFormatTest {
         Exchange exchange = mockZipStreamCache.getReceivedExchanges().get(0);
         assertEquals(exchange.getIn().getMessageId() + ".zip", exchange.getIn().getHeader(FILE_NAME));
         assertIsInstanceOf(InputStreamCache.class, exchange.getIn().getBody());
-        assertArrayEquals(getZippedText(exchange.getIn().getMessageId()), exchange.getIn().getMandatoryBody(byte[].class));
+        assertArrayEquals(getZippedText(exchange.getIn().getMessageId()),
+                exchange.getIn().getMandatoryBody(byte[].class));
     }
 
     @Test
@@ -136,7 +122,8 @@ public class ZipFileDataFormatTest {
 
         Exchange exchange = mockZip.getReceivedExchanges().get(0);
         assertEquals(exchange.getIn().getMessageId() + ".zip", exchange.getIn().getHeader(FILE_NAME));
-        assertArrayEquals(getZippedText(exchange.getIn().getMessageId()), (byte[]) exchange.getIn().getBody(byte[].class));
+        assertArrayEquals(getZippedText(exchange.getIn().getMessageId()),
+                (byte[]) exchange.getIn().getBody(byte[].class));
     }
 
     @Test
@@ -177,7 +164,7 @@ public class ZipFileDataFormatTest {
 
     @EndpointInject("mock:unzip")
     MockEndpoint mockUnzip;
-    
+
     @Test
     public void testUnzip() throws Exception {
         mockUnzip.expectedBodiesReceived(TEXT);
@@ -218,6 +205,7 @@ public class ZipFileDataFormatTest {
 
     @EndpointInject("mock:zipAndUnzip")
     MockEndpoint mockZipAndUnzip;
+
     @Test
     public void testZipAndUnzip() throws Exception {
         mockZipAndUnzip.expectedMessageCount(1);
@@ -233,6 +221,7 @@ public class ZipFileDataFormatTest {
 
     @EndpointInject("mock:intercepted")
     MockEndpoint mockIntercepted;
+
     @Test
     public void testZipToFileWithoutFileName() throws Exception {
         mockIntercepted.reset();
@@ -241,7 +230,6 @@ public class ZipFileDataFormatTest {
         String[] files = TEST_DIR.list();
         assertTrue(files == null || files.length == 0);
 
-        
         mockIntercepted.expectedMessageCount(1);
 
         template.sendBody("direct:zipToFile", TEXT);
@@ -254,16 +242,17 @@ public class ZipFileDataFormatTest {
         Exchange exchange = mockIntercepted.getReceivedExchanges().get(0);
         File file = new File(TEST_DIR, exchange.getIn().getMessageId() + ".zip");
         assertTrue(file.exists(), "The file should exist.");
-        assertArrayEquals(getZippedText(exchange.getIn().getMessageId()), getBytes(file), "Get a wrong message content.");
+        assertArrayEquals(getZippedText(exchange.getIn().getMessageId()), getBytes(file),
+                "Get a wrong message content.");
     }
 
     @EndpointInject("mock:zipToFile")
     MockEndpoint mockZipToFile;
+
     @Test
     public void testZipToFileWithFileName() throws Exception {
         NotifyBuilder notify = new NotifyBuilder(context).whenDone(1).create();
 
-        
         mockZipToFile.expectedMessageCount(1);
 
         File file = new File(TEST_DIR, "poem.txt.zip");
@@ -283,6 +272,7 @@ public class ZipFileDataFormatTest {
 
     @EndpointInject("mock:dslZip")
     MockEndpoint mockDslZip;
+
     @Test
     public void testDslZip() throws Exception {
         mockDslZip.expectedBodiesReceived(getZippedText("poem.txt"));
@@ -295,6 +285,7 @@ public class ZipFileDataFormatTest {
 
     @EndpointInject("mock:dslUnzip")
     MockEndpoint mockDslUnzip;
+
     @Test
     public void testDslUnzip() throws Exception {
         mockDslUnzip.expectedBodiesReceived(TEXT);
@@ -328,14 +319,12 @@ public class ZipFileDataFormatTest {
         }
     }
 
-   
-
     private static void copy(InputStream in, File file) throws IOException {
         try (OutputStream out = new FileOutputStream(file)) {
             copy(in, out);
         }
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -359,15 +348,14 @@ public class ZipFileDataFormatTest {
 
                     from("direct:zip").marshal(zip).to("mock:zip");
                     from("direct:unzip").unmarshal(zip).to("mock:unzip");
-                    from("direct:unzipWithEmptyDirectory").unmarshal(zip)
-                            .split(bodyAs(Iterator.class))
-                            .streaming()
-                            //.to("file:hello_out?autoCreate=true")
+                    from("direct:unzipWithEmptyDirectory").unmarshal(zip).split(bodyAs(Iterator.class)).streaming()
+                            // .to("file:hello_out?autoCreate=true")
                             .process(new Processor() {
                                 @Override
                                 public void process(Exchange exchange) throws Exception {
                                     ZipFile zfile = new ZipFile(new File("src/test/resources/hello.odt"));
-                                    ZipEntry entry = new ZipEntry((String) exchange.getIn().getHeader(Exchange.FILE_NAME));
+                                    ZipEntry entry = new ZipEntry(
+                                            (String) exchange.getIn().getHeader(Exchange.FILE_NAME));
                                     String outputDirectory = "hello_out";
                                     File file = new File(outputDirectory, entry.getName());
 
@@ -376,7 +364,8 @@ public class ZipFileDataFormatTest {
                                     String destCanonicalPath = destDirectory.getCanonicalPath();
                                     String outputCanonicalPath = file.getCanonicalPath();
                                     if (!outputCanonicalPath.startsWith(destCanonicalPath)) {
-                                        throw new Exception("Zip path traversal found, expected " + destCanonicalPath + " but found " + outputCanonicalPath);
+                                        throw new Exception("Zip path traversal found, expected " + destCanonicalPath
+                                                + " but found " + outputCanonicalPath);
                                     }
 
                                     if (entry.isDirectory()) {
@@ -391,8 +380,7 @@ public class ZipFileDataFormatTest {
                                         }
                                     }
                                 }
-                            })
-                            .end();
+                            }).end();
                     from("direct:zipAndUnzip").marshal(zip).unmarshal(zip).to("mock:zipAndUnzip");
                     from("direct:zipToFile").marshal(zip).to("file:" + TEST_DIR.getPath()).to("mock:zipToFile");
                     from("direct:dslZip").marshal().zipFile().to("mock:dslZip");
@@ -408,7 +396,7 @@ public class ZipFileDataFormatTest {
             };
         }
     }
-    
+
     private static byte[] getZippedText(String entryName) throws IOException {
         ByteArrayInputStream bais = new ByteArrayInputStream(TEXT.getBytes("UTF-8"));
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

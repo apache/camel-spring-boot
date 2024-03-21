@@ -45,14 +45,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                MongoDbDynamicityIT.class,
-                MongoDbDynamicityIT.TestConfiguration.class,
-                AbstractMongoDbITSupport.MongoConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, MongoDbDynamicityIT.class,
+        MongoDbDynamicityIT.TestConfiguration.class, AbstractMongoDbITSupport.MongoConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class MongoDbDynamicityIT extends AbstractMongoDbITSupport {
 
@@ -64,8 +58,8 @@ public class MongoDbDynamicityIT extends AbstractMongoDbITSupport {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:noDynamicity")
-                            .to("mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert");
+                    from("direct:noDynamicity").to(
+                            "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert");
                     from("direct:noDynamicityExplicit").to(
                             "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert&dynamicity=false");
                     from("direct:dynamicityEnabled").to(
@@ -119,8 +113,8 @@ public class MongoDbDynamicityIT extends AbstractMongoDbITSupport {
         // Object result =
         template.requestBodyAndHeaders("direct:dynamicityEnabled", body, headers);
 
-        MongoCollection<Document> localDynamicCollection
-                = mongo.getDatabase("otherDB").getCollection(testCollection.getNamespace().getCollectionName(), Document.class);
+        MongoCollection<Document> localDynamicCollection = mongo.getDatabase("otherDB")
+                .getCollection(testCollection.getNamespace().getCollectionName(), Document.class);
 
         Document b = localDynamicCollection.find(eq(MONGO_ID, "testInsertDynamicityEnabledDBOnly")).first();
         assertNotNull(b, "No record with 'testInsertDynamicityEnabledDBOnly' _id");
@@ -174,8 +168,8 @@ public class MongoDbDynamicityIT extends AbstractMongoDbITSupport {
         // Object result =
         template.requestBodyAndHeaders("direct:dynamicityEnabled", body, headers);
 
-        MongoCollection<Document> loaclDynamicCollection
-                = mongo.getDatabase("otherDB").getCollection("otherCollection", Document.class);
+        MongoCollection<Document> loaclDynamicCollection = mongo.getDatabase("otherDB").getCollection("otherCollection",
+                Document.class);
 
         Document b = loaclDynamicCollection.find(eq(MONGO_ID, "testInsertDynamicityEnabledDBAndCollection")).first();
         assertNotNull(b, "No record with 'testInsertDynamicityEnabledDBAndCollection' _id");

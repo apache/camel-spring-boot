@@ -40,18 +40,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                CustomizedJdbcMessageIdRepositoryTest.class,
-                CustomizedJdbcMessageIdRepositoryTest.TestConfiguration.class,
-                BaseSql.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, CustomizedJdbcMessageIdRepositoryTest.class,
+        CustomizedJdbcMessageIdRepositoryTest.TestConfiguration.class, BaseSql.TestConfiguration.class })
 public class CustomizedJdbcMessageIdRepositoryTest extends BaseSql {
 
-    protected static final String SELECT_ALL_STRING
-            = "SELECT messageId FROM CUSTOMIZED_MESSAGE_REPOSITORY WHERE processorName = ?";
+    protected static final String SELECT_ALL_STRING = "SELECT messageId FROM CUSTOMIZED_MESSAGE_REPOSITORY WHERE processorName = ?";
     protected static final String PROCESSOR_NAME = "myProcessorName";
 
     protected JdbcTemplate jdbcTemplate;
@@ -106,7 +99,6 @@ public class CustomizedJdbcMessageIdRepositoryTest extends BaseSql {
             return initEmptyDb();
         }
 
-
         @Bean
         public RouteBuilder routeBuilder(DataSource dataSource) {
             return new RouteBuilder() {
@@ -116,14 +108,16 @@ public class CustomizedJdbcMessageIdRepositoryTest extends BaseSql {
 
                     JdbcMessageIdRepository repo = new JdbcMessageIdRepository(dataSource, PROCESSOR_NAME);
                     repo.setTableExistsString("SELECT 1 FROM CUSTOMIZED_MESSAGE_REPOSITORY WHERE 1 = 0");
-                    repo.setCreateString("CREATE TABLE CUSTOMIZED_MESSAGE_REPOSITORY (processorName VARCHAR(255), messageId VARCHAR(100), createdAt TIMESTAMP)");
-                    repo.setQueryString("SELECT COUNT(*) FROM CUSTOMIZED_MESSAGE_REPOSITORY WHERE processorName = ? AND messageId = ?");
-                    repo.setInsertString("INSERT INTO CUSTOMIZED_MESSAGE_REPOSITORY (processorName, messageId, createdAt) VALUES (?, ?, ?)");
-                    repo.setDeleteString("DELETE FROM CUSTOMIZED_MESSAGE_REPOSITORY WHERE processorName = ? AND messageId = ?");
+                    repo.setCreateString(
+                            "CREATE TABLE CUSTOMIZED_MESSAGE_REPOSITORY (processorName VARCHAR(255), messageId VARCHAR(100), createdAt TIMESTAMP)");
+                    repo.setQueryString(
+                            "SELECT COUNT(*) FROM CUSTOMIZED_MESSAGE_REPOSITORY WHERE processorName = ? AND messageId = ?");
+                    repo.setInsertString(
+                            "INSERT INTO CUSTOMIZED_MESSAGE_REPOSITORY (processorName, messageId, createdAt) VALUES (?, ?, ?)");
+                    repo.setDeleteString(
+                            "DELETE FROM CUSTOMIZED_MESSAGE_REPOSITORY WHERE processorName = ? AND messageId = ?");
 
-                    from("direct:start")
-                            .idempotentConsumer(header("messageId"), repo)
-                            .to("mock:result");
+                    from("direct:start").idempotentConsumer(header("messageId"), repo).to("mock:result");
                 }
             };
         }

@@ -30,13 +30,8 @@ import org.springframework.test.annotation.DirtiesContext;
 @CamelSpringBootTest
 @DirtiesContext
 @EnableAutoConfiguration
-@SpringBootTest(
-    classes = {
-        CacheManagerCustomizerWithoutCacheManagerTest.TestConfiguration.class
-    },
-    properties = {
-        "debug=false",
-    })
+@SpringBootTest(classes = { CacheManagerCustomizerWithoutCacheManagerTest.TestConfiguration.class }, properties = {
+        "debug=false", })
 public class CacheManagerCustomizerWithoutCacheManagerTest {
     @Autowired
     CamelContext context;

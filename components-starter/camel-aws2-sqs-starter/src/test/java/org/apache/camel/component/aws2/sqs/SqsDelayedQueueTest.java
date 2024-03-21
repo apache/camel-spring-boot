@@ -39,13 +39,7 @@ import static org.hamcrest.Matchers.is;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SqsDelayedQueueTest.class,
-                BaseSqs.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SqsDelayedQueueTest.class, BaseSqs.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 /**
  * Based on camel-quarkus Aws2SqsTest#sqsAutoCreateDelayedQueue
@@ -62,15 +56,13 @@ public class SqsDelayedQueueTest extends BaseSqs {
     public void delayedQueue() throws Exception {
         int delay = 20;
         String delayedQueueuName = sharedNameGenerator.getName() + "_delayed";
-        Instant start = Instant.now(); 
-        //create delayed queue
-        List<String> queues = producerTemplate
-                .requestBody(
-                        String.format("aws2-sqs://%s?autoCreateQueue=true&delayQueue=true&delaySeconds=%d&operation=listQueues", delayedQueueuName, delay),
-                        null,
-                        ListQueuesResponse.class)
-                .queueUrls();
-        
+        Instant start = Instant.now();
+        // create delayed queue
+        List<String> queues = producerTemplate.requestBody(
+                String.format("aws2-sqs://%s?autoCreateQueue=true&delayQueue=true&delaySeconds=%d&operation=listQueues",
+                        delayedQueueuName, delay),
+                null, ListQueuesResponse.class).queueUrls();
+
         String msg = sendSingleMessageToQueue(delayedQueueuName);
         awaitMessageWithExpectedContentFromQueue(msg, delayedQueueuName);
 
@@ -78,8 +70,8 @@ public class SqsDelayedQueueTest extends BaseSqs {
     }
 
     private void awaitMessageWithExpectedContentFromQueue(String expectedContent, String queueName) {
-        Awaitility.await().pollInterval(1, TimeUnit.SECONDS).atMost(120, TimeUnit.SECONDS).until(
-                () -> expectedContent.equals(receiveMessageFromQueue(queueName, false)));
+        Awaitility.await().pollInterval(1, TimeUnit.SECONDS).atMost(120, TimeUnit.SECONDS)
+                .until(() -> expectedContent.equals(receiveMessageFromQueue(queueName, false)));
 
     }
 }

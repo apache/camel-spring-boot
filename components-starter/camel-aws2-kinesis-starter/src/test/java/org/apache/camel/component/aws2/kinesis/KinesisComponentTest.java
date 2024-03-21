@@ -39,13 +39,8 @@ import software.amazon.awssdk.services.kinesis.model.CreateStreamRequest;
 //Based on CwComponentIT
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                KinesisComponentTest.class,
-                KinesisComponentTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KinesisComponentTest.class,
+        KinesisComponentTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class KinesisComponentTest extends BaseKinesis {
 
@@ -57,20 +52,15 @@ public class KinesisComponentTest extends BaseKinesis {
     @BeforeAll
     static void setUp() {
         client = AWSSDKClientUtils.newKinesisClient();
-        client.createStream(
-                CreateStreamRequest.builder()
-                        .shardCount(1)
-                        .streamName("kinesis1")
-                        .build());
+        client.createStream(CreateStreamRequest.builder().shardCount(1).streamName("kinesis1").build());
     }
 
     @AfterAll
     static void clean() {
-        if(client != null) {
+        if (client != null) {
             client.close();
         }
     }
-
 
     @Test
     public void send() throws Exception {

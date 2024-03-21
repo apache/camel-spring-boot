@@ -40,21 +40,14 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.awaitility.Awaitility;
 
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        TelegramChatBotTest.class,
-        TelegramChatBotTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, TelegramChatBotTest.class,
+        TelegramChatBotTest.TestConfiguration.class })
 public class TelegramChatBotTest extends TelegramTestSupport {
 
-    
     static TelegramMockRoutes mockRoutes;
-    
+
     @EndpointInject("mock:telegram")
     private MockEndpoint endpoint;
 
@@ -64,9 +57,7 @@ public class TelegramChatBotTest extends TelegramTestSupport {
         List<OutgoingTextMessage> msgs = Awaitility.await().atMost(5, TimeUnit.SECONDS)
                 .until(() -> mockRoutes.getMock("sendMessage").getRecordedMessages(),
                         rawMessages -> rawMessages.size() >= 2)
-                .stream()
-                .map(message -> (OutgoingTextMessage) message)
-                .collect(Collectors.toList());
+                .stream().map(message -> (OutgoingTextMessage) message).collect(Collectors.toList());
 
         assertEquals(msgs.size(), 2, "List should be of size: " + 2 + " but is: " + msgs.size());
         assertTrue(msgs.stream().anyMatch(m -> "echo from the bot: Hello World!".equals(m.getText())));
@@ -77,7 +68,8 @@ public class TelegramChatBotTest extends TelegramTestSupport {
     /**
      * This method simulates the first step of the chat-bot logic.
      *
-     * @param exchange the current exchange originating from the telegram bot
+     * @param exchange
+     *            the current exchange originating from the telegram bot
      */
     public void chatBotProcess1(Exchange exchange) {
         if (exchange.getIn().getBody(String.class).equals("intercept")) {
@@ -88,8 +80,10 @@ public class TelegramChatBotTest extends TelegramTestSupport {
     /**
      * This method simulates the second step of the chat-bot logic.
      *
-     * @param  message the message coming from the telegram bot
-     * @return         the reply, if any
+     * @param message
+     *            the message coming from the telegram bot
+     *
+     * @return the reply, if any
      */
     public String chatBotProcess2(String message) {
         return "echo from the bot: " + message;
@@ -115,7 +109,7 @@ public class TelegramChatBotTest extends TelegramTestSupport {
         }
 
     }
-    
+
     @Override
     @Bean
     protected TelegramMockRoutes createMockRoutes() {
@@ -127,19 +121,10 @@ public class TelegramChatBotTest extends TelegramTestSupport {
         request2.getUpdates().get(0).getMessage().setText("intercept");
         request2.getUpdates().get(0).getMessage().getChat().setId("my-chat-id");
 
-        mockRoutes = new TelegramMockRoutes(port)
-                .addEndpoint(
-                        "getUpdates",
-                        "GET",
-                        String.class,
-                        TelegramTestUtil.serialize(request),
-                        TelegramTestUtil.serialize(request2),
-                        TelegramTestUtil.stringResource("messages/updates-empty.json"))
-                .addEndpoint(
-                        "sendMessage",
-                        "POST",
-                        OutgoingTextMessage.class,
-                        TelegramTestUtil.stringResource("messages/send-message.json"),
+        mockRoutes = new TelegramMockRoutes(port).addEndpoint("getUpdates", "GET", String.class,
+                TelegramTestUtil.serialize(request), TelegramTestUtil.serialize(request2),
+                TelegramTestUtil.stringResource("messages/updates-empty.json")).addEndpoint("sendMessage", "POST",
+                        OutgoingTextMessage.class, TelegramTestUtil.stringResource("messages/send-message.json"),
                         TelegramTestUtil.stringResource("messages/send-message.json"),
                         TelegramTestUtil.stringResource("messages/send-message.json"));
         return mockRoutes;

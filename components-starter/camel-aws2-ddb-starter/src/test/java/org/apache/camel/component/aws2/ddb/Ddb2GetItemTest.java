@@ -42,13 +42,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                Ddb2GetItemTest.class,
-                Ddb2GetItemTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, Ddb2GetItemTest.class,
+        Ddb2GetItemTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class Ddb2GetItemTest extends BaseDdb2 {
     private Exchange exchange;
@@ -107,10 +102,9 @@ public class Ddb2GetItemTest extends BaseDdb2 {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:start").to(
-                            "aws2-ddb://" + tableName + "?keyAttributeName=" + attributeName + "&keyAttributeType=" + KeyType.HASH
-                                    + "&keyScalarType=" + ScalarAttributeType.S
-                                    + "&readCapacity=1&writeCapacity=1");
+                    from("direct:start").to("aws2-ddb://" + tableName + "?keyAttributeName=" + attributeName
+                            + "&keyAttributeType=" + KeyType.HASH + "&keyScalarType=" + ScalarAttributeType.S
+                            + "&readCapacity=1&writeCapacity=1");
                 }
             };
         }

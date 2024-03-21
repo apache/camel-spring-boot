@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
 
 import org.apache.camel.EndpointInject;
@@ -26,7 +25,6 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -34,16 +32,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathMockMatchesTest.class,
-        JsonPathMockMatchesTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathMockMatchesTest.class,
+        JsonPathMockMatchesTest.TestConfiguration.class })
 public class JsonPathMockMatchesTest {
 
     @Autowired
@@ -87,7 +79,6 @@ public class JsonPathMockMatchesTest {
 
         mock.assertIsNotSatisfied();
     }
-    
 
     // *************************************
     // Config
@@ -101,8 +92,7 @@ public class JsonPathMockMatchesTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                            .to("mock:result");
+                    from("direct:start").to("mock:result");
                 }
             };
         }

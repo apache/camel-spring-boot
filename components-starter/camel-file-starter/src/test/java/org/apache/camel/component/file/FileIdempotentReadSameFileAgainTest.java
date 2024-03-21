@@ -30,19 +30,14 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileIdempotentReadSameFileAgainTest.class,
-                FileIdempotentReadSameFileAgainTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileIdempotentReadSameFileAgainTest.class,
+        FileIdempotentReadSameFileAgainTest.TestConfiguration.class })
 public class FileIdempotentReadSameFileAgainTest extends BaseFile {
 
     @EndpointInject("mock:result")
     private MockEndpoint resultEndpoint;
     private String uri = fileUri("?idempotent=false&move=../done&moveFailed=../error"
-                                 + "&preMove=working/${date:now:yyyyMMddHHmmssSSS}-${file:name}&readLock=none&initialDelay=0&delay=10");
+            + "&preMove=working/${date:now:yyyyMMddHHmmssSSS}-${file:name}&readLock=none&initialDelay=0&delay=10");
 
     @Test
     public void testConsumeSameFileAgain() throws Exception {

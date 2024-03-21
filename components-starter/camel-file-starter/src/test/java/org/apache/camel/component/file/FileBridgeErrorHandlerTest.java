@@ -30,13 +30,8 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileBridgeErrorHandlerTest.class,
-                FileBridgeErrorHandlerTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileBridgeErrorHandlerTest.class,
+        FileBridgeErrorHandlerTest.TestConfiguration.class })
 public class FileBridgeErrorHandlerTest extends BaseFile {
 
     @EndpointInject("mock:result")
@@ -69,8 +64,7 @@ public class FileBridgeErrorHandlerTest extends BaseFile {
                     onException(Exception.class).handled(true).to("mock:error");
 
                     from("file://target/dummy?bridgeErrorHandler=true&autoCreate=false&directoryMustExist=true")
-                            .log("${body}")
-                            .to("mock:result");
+                            .log("${body}").to("mock:result");
                 }
             };
         }

@@ -24,7 +24,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelSnakeyamlTest extends AbstractSpringBootTestSupport {
 
@@ -34,9 +33,7 @@ public class CamelSnakeyamlTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelSnakeyamlTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelSnakeyamlTest.class)).build();
     }
 
     @Disabled("Is no more compatible with SnakeYAML v1.3")

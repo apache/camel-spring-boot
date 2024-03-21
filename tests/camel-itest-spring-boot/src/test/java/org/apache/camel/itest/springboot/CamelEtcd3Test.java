@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelEtcd3Test extends AbstractSpringBootTestSupport {
 
@@ -33,15 +32,12 @@ public class CamelEtcd3Test extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelEtcd3Test.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelEtcd3Test.class)).build();
     }
 
     @Test
     public void componentTests() throws Exception {
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

@@ -34,10 +34,11 @@ public class SpringBootRefreshContextTest {
     public void shouldOnlyCollectRoutesOnce() {
         GenericApplicationContext parent = new GenericApplicationContext();
         parent.refresh();
-        ConfigurableApplicationContext context = new SpringApplicationBuilder(Configuration.class).web(WebApplicationType.NONE).parent(parent).run();
+        ConfigurableApplicationContext context = new SpringApplicationBuilder(Configuration.class)
+                .web(WebApplicationType.NONE).parent(parent).run();
         ContextRefreshedEvent refreshEvent = new ContextRefreshedEvent(context);
         CamelSpringBootApplicationListener collector = context.getBean(CamelSpringBootApplicationListener.class);
-        collector.onApplicationEvent(refreshEvent); //no changes should happen here
+        collector.onApplicationEvent(refreshEvent); // no changes should happen here
     }
 
 }

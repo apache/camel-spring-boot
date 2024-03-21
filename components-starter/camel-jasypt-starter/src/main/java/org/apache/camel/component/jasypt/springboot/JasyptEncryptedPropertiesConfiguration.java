@@ -34,16 +34,14 @@ public class JasyptEncryptedPropertiesConfiguration {
     private String algorithm = "PBEWithMD5AndDES";
 
     /**
-     * The master password used by Jasypt for decrypting the values.
-     * This option supports prefixes which influence the master password lookup behaviour:
-     * sysenv: means to lookup the OS system environment with the given key.
-     * sys: means to lookup a JVM system property.
+     * The master password used by Jasypt for decrypting the values. This option supports prefixes which influence the
+     * master password lookup behaviour: sysenv: means to lookup the OS system environment with the given key. sys:
+     * means to lookup a JVM system property.
      */
     private String password;
 
     /**
-     * The initialization vector (IV) generator applied in decryption operations.
-     * Default: org.jasypt.iv.
+     * The initialization vector (IV) generator applied in decryption operations. Default: org.jasypt.iv.
      */
     private String ivGeneratorClassName;
 
@@ -63,8 +61,7 @@ public class JasyptEncryptedPropertiesConfiguration {
     private String randomSaltGeneratorAlgorithm = "SHA1PRNG";
 
     /**
-     * The class name of the security provider to be used for obtaining the encryption
-     * algorithm.
+     * The class name of the security provider to be used for obtaining the encryption algorithm.
      */
     private String providerName;
 
@@ -132,4 +129,3 @@ public class JasyptEncryptedPropertiesConfiguration {
         this.randomSaltGeneratorAlgorithm = randomSaltGeneratorAlgorithm;
     }
 }
-

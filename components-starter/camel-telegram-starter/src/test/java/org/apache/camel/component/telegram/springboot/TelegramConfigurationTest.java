@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.telegram.springboot;
 
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
@@ -35,27 +34,18 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        TelegramConfigurationTest.class,
-        TelegramConfigurationTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, TelegramConfigurationTest.class,
+        TelegramConfigurationTest.TestConfiguration.class })
 public class TelegramConfigurationTest extends TelegramTestSupport {
 
-    
-    
-    
     @EndpointInject("mock:telegram")
     private MockEndpoint endpoint;
 
     @Test
     public void testChatBotResult() {
-        TelegramEndpoint endpoint = (TelegramEndpoint)context.getEndpoints().stream()
+        TelegramEndpoint endpoint = (TelegramEndpoint) context.getEndpoints().stream()
                 .filter(e -> e instanceof TelegramEndpoint).findAny().get();
         TelegramConfiguration config = endpoint.getConfiguration();
 
@@ -70,7 +60,6 @@ public class TelegramConfigurationTest extends TelegramTestSupport {
         assertEquals(TelegramProxyType.SOCKS5, config.getProxyType());
     }
 
-
     // *************************************
     // Config
     // *************************************
@@ -83,13 +72,12 @@ public class TelegramConfigurationTest extends TelegramTestSupport {
                 @Override
                 public void configure() {
 
-                    from("direct:telegram")
-                            .to("telegram:bots/?authorizationToken=mock-token&chatId=12345&delay=2000&timeout=10&limit=60&proxyHost=127.0.0.1&proxyPort=1234&proxyType=SOCKS5");
+                    from("direct:telegram").to(
+                            "telegram:bots/?authorizationToken=mock-token&chatId=12345&delay=2000&timeout=10&limit=60&proxyHost=127.0.0.1&proxyPort=1234&proxyType=SOCKS5");
                 }
             };
         }
 
     }
-    
-    
+
 }

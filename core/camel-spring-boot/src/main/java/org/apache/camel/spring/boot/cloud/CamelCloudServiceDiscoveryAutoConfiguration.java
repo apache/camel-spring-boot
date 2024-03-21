@@ -67,7 +67,8 @@ public class CamelCloudServiceDiscoveryAutoConfiguration implements BeanFactoryA
 
     @Lazy
     @Bean(name = "service-discovery")
-    public CamelCloudServiceDiscovery serviceDiscovery(List<ServiceDiscovery> serviceDiscoveryList) throws NoTypeConversionAvailableException {
+    public CamelCloudServiceDiscovery serviceDiscovery(List<ServiceDiscovery> serviceDiscoveryList)
+            throws NoTypeConversionAvailableException {
         return new CamelCloudServiceDiscovery(serviceDiscoveryList);
     }
 
@@ -81,7 +82,7 @@ public class CamelCloudServiceDiscoveryAutoConfiguration implements BeanFactoryA
         final ConfigurableBeanFactory factory = (ConfigurableBeanFactory) beanFactory;
 
         configurationProperties.getServiceDiscovery().getConfigurations().entrySet().stream()
-            .forEach(entry -> registerBean(factory, entry.getKey(), entry.getValue()));
+                .forEach(entry -> registerBean(factory, entry.getKey(), entry.getValue()));
     }
 
     // *******************************
@@ -90,10 +91,7 @@ public class CamelCloudServiceDiscoveryAutoConfiguration implements BeanFactoryA
 
     public static class Condition extends GroupCondition {
         public Condition() {
-            super(
-                "camel.cloud",
-                "camel.cloud.service-discovery"
-            );
+            super("camel.cloud", "camel.cloud.service-discovery");
         }
     }
 
@@ -101,14 +99,13 @@ public class CamelCloudServiceDiscoveryAutoConfiguration implements BeanFactoryA
     // Helper
     // *******************************
 
-    private void registerBean(ConfigurableBeanFactory factory, String name, CamelCloudConfigurationProperties.ServiceDiscoveryConfiguration configuration) {
-        factory.registerSingleton(
-            name,
-            createStaticServiceDiscovery(configuration)
-        );
+    private void registerBean(ConfigurableBeanFactory factory, String name,
+            CamelCloudConfigurationProperties.ServiceDiscoveryConfiguration configuration) {
+        factory.registerSingleton(name, createStaticServiceDiscovery(configuration));
     }
 
-    private ServiceDiscovery createStaticServiceDiscovery(CamelCloudConfigurationProperties.ServiceDiscoveryConfiguration configuration) {
+    private ServiceDiscovery createStaticServiceDiscovery(
+            CamelCloudConfigurationProperties.ServiceDiscoveryConfiguration configuration) {
         StaticServiceDiscovery staticServiceDiscovery = new StaticServiceDiscovery();
 
         Map<String, List<String>> services = configuration.getServices();
@@ -116,18 +113,13 @@ public class CamelCloudServiceDiscoveryAutoConfiguration implements BeanFactoryA
             staticServiceDiscovery.addServers(entry.getKey(), entry.getValue());
         }
 
-        configuration.getServiceDefinitions().entrySet()
-            .stream()
-            .flatMap(serviceDefinitionEntry -> serviceDefinitionEntry.getValue()
-                .stream()
-                .map(serviceDefinitionConf -> DefaultServiceDefinition.builder()
-                    .withName(serviceDefinitionEntry.getKey())
-                    .withId(serviceDefinitionConf.getId())
-                    .withHost(serviceDefinitionConf.getHost())
-                    .withPort(serviceDefinitionConf.getPort())
-                    .withMeta(serviceDefinitionConf.getMetadata())
-                    .build())
-            ).forEach(staticServiceDiscovery::addServer);
+        configuration.getServiceDefinitions().entrySet().stream()
+                .flatMap(serviceDefinitionEntry -> serviceDefinitionEntry.getValue().stream()
+                        .map(serviceDefinitionConf -> DefaultServiceDefinition.builder()
+                                .withName(serviceDefinitionEntry.getKey()).withId(serviceDefinitionConf.getId())
+                                .withHost(serviceDefinitionConf.getHost()).withPort(serviceDefinitionConf.getPort())
+                                .withMeta(serviceDefinitionConf.getMetadata()).build()))
+                .forEach(staticServiceDiscovery::addServer);
 
         return staticServiceDiscovery;
     }

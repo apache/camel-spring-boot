@@ -38,20 +38,11 @@ import static org.awaitility.Awaitility.await;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        SupervisingRouteControllerTest.TestConfiguration.class
-    },
-    properties = {
-        "camel.springboot.routes-include-pattern = false",
-        "camel.springboot.main-run-controller = true",
-        "camel.routecontroller.enabled = true",
-        "camel.routecontroller.initialDelay = 500",
-        "camel.routecontroller.backoffDelay = 1000",
-        "camel.routecontroller.backoffMaxAttempts = 5",
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class,
+        SupervisingRouteControllerTest.TestConfiguration.class }, properties = {
+                "camel.springboot.routes-include-pattern = false", "camel.springboot.main-run-controller = true",
+                "camel.routecontroller.enabled = true", "camel.routecontroller.initialDelay = 500",
+                "camel.routecontroller.backoffDelay = 1000", "camel.routecontroller.backoffMaxAttempts = 5", })
 public class SupervisingRouteControllerTest {
     @Autowired
     private CamelContext context;
@@ -87,17 +78,9 @@ public class SupervisingRouteControllerTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("timer:foo?period=5000")
-                        .id("foo")
-                        .startupOrder(2)
-                        .to("mock:foo");
-                    from("timer:bar?period=5000")
-                        .id("bar")
-                        .startupOrder(1)
-                        .to("mock:bar");
-                    fromF("jetty:http://localhost:%d", PORT)
-                        .id("jetty")
-                        .to("mock:jetty");
+                    from("timer:foo?period=5000").id("foo").startupOrder(2).to("mock:foo");
+                    from("timer:bar?period=5000").id("bar").startupOrder(1).to("mock:bar");
+                    fromF("jetty:http://localhost:%d", PORT).id("jetty").to("mock:jetty");
                 }
             };
         }

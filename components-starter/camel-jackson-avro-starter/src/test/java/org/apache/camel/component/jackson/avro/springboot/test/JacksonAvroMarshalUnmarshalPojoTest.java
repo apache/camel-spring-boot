@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jackson.avro.springboot.test;
 
-
 import com.fasterxml.jackson.dataformat.avro.AvroSchema;
 
 import org.apache.avro.Schema;
@@ -39,46 +38,35 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JacksonAvroMarshalUnmarshalPojoTest.class,
-        JacksonAvroMarshalUnmarshalPojoTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JacksonAvroMarshalUnmarshalPojoTest.class,
+        JacksonAvroMarshalUnmarshalPojoTest.TestConfiguration.class })
 public class JacksonAvroMarshalUnmarshalPojoTest {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:serialized")
     MockEndpoint mock1;
-    
+
     @EndpointInject("mock:pojo")
     MockEndpoint mock2;
 
     @Bean("schema-resolver")
     private SchemaResolver getSchemaResolver() {
-        String schemaJson = "{\n"
-            + "\"type\": \"record\",\n"
-            + "\"name\": \"Pojo\",\n"
-            + "\"fields\": [\n"
-            + " {\"name\": \"text\", \"type\": \"string\"}\n"
-            + "]}";
+        String schemaJson = "{\n" + "\"type\": \"record\",\n" + "\"name\": \"Pojo\",\n" + "\"fields\": [\n"
+                + " {\"name\": \"text\", \"type\": \"string\"}\n" + "]}";
         Schema raw = new Schema.Parser().setValidate(true).parse(schemaJson);
         AvroSchema schema = new AvroSchema(raw);
         SchemaResolver resolver = ex -> schema;
-        
+
         return resolver;
     }
-    
+
     @Test
     public void testMarshalUnmarshalPojo() throws Exception {
-        
+
         mock1.expectedMessageCount(1);
         mock1.message(0).body().isInstanceOf(byte[].class);
 
@@ -89,7 +77,6 @@ public class JacksonAvroMarshalUnmarshalPojoTest {
         assertNotNull(serialized);
         assertEquals(6, serialized.length);
 
-        
         mock2.expectedMessageCount(1);
         mock2.message(0).body().isInstanceOf(Pojo.class);
 
@@ -100,8 +87,6 @@ public class JacksonAvroMarshalUnmarshalPojoTest {
 
         assertEquals(pojo.getText(), back.getText());
     }
-
-
 
     // *************************************
     // Config
@@ -121,7 +106,7 @@ public class JacksonAvroMarshalUnmarshalPojoTest {
             };
         }
     }
-    
+
     public static class Pojo {
 
         private String text;
@@ -142,6 +127,4 @@ public class JacksonAvroMarshalUnmarshalPojoTest {
         }
     }
 
-    
-    
 }

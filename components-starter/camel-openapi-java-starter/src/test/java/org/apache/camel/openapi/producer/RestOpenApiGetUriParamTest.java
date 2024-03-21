@@ -34,53 +34,47 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				RestOpenApiGetUriParamTest.class,
-				RestOpenApiGetUriParamTest.TestConfiguration.class,
-				DummyRestProducerFactory.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, RestOpenApiGetUriParamTest.class,
+        RestOpenApiGetUriParamTest.TestConfiguration.class, DummyRestProducerFactory.class })
 public class RestOpenApiGetUriParamTest {
 
-	@BindToRegistry("dummy")
-	private final DummyRestProducerFactory factory = new DummyRestProducerFactory();
+    @BindToRegistry("dummy")
+    private final DummyRestProducerFactory factory = new DummyRestProducerFactory();
 
-	@Autowired
-	ProducerTemplate producerTemplate;
+    @Autowired
+    ProducerTemplate producerTemplate;
 
-	@Autowired
-	CamelContext context;
+    @Autowired
+    CamelContext context;
 
-	// *************************************
-	// Config
-	// *************************************
+    // *************************************
+    // Config
+    // *************************************
 
-	@Configuration
-	public class TestConfiguration {
+    @Configuration
+    public class TestConfiguration {
 
-		@Bean
-		public RouteBuilder routeBuilder() {
-			return new RouteBuilder() {
+        @Bean
+        public RouteBuilder routeBuilder() {
+            return new RouteBuilder() {
 
-				@Override
-				public void configure() throws Exception {
-					restConfiguration().host("camelhost").producerComponent("dummy").producerApiDoc("hello-api.json");
+                @Override
+                public void configure() throws Exception {
+                    restConfiguration().host("camelhost").producerComponent("dummy").producerApiDoc("hello-api.json");
 
-					from("direct:start").to("rest:get:bye?name={name}").to("mock:result");
-				}
-			};
-		}
-	}
+                    from("direct:start").to("rest:get:bye?name={name}").to("mock:result");
+                }
+            };
+        }
+    }
 
-	@Test
-	public void testOpenApiGet() throws Exception {
-		MockEndpoint mockEndpoint = (MockEndpoint) context.getEndpoint("mock:result");
-		mockEndpoint.expectedBodiesReceived("Bye Donald+Duck");
+    @Test
+    public void testOpenApiGet() throws Exception {
+        MockEndpoint mockEndpoint = (MockEndpoint) context.getEndpoint("mock:result");
+        mockEndpoint.expectedBodiesReceived("Bye Donald+Duck");
 
-		producerTemplate.sendBodyAndHeader("direct:start", null, "name", "Donald Duck");
+        producerTemplate.sendBodyAndHeader("direct:start", null, "name", "Donald Duck");
 
-		mockEndpoint.assertIsSatisfied();
-	}
+        mockEndpoint.assertIsSatisfied();
+    }
 }

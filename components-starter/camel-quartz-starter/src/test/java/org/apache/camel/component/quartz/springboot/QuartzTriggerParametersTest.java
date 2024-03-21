@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import java.util.Map;
 
 import org.apache.camel.CamelContext;
@@ -30,8 +28,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -39,28 +35,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzTriggerParametersTest.class,
-        QuartzTriggerParametersTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzTriggerParametersTest.class,
+        QuartzTriggerParametersTest.TestConfiguration.class })
 public class QuartzTriggerParametersTest extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint resultEndpoint;
-    
+
     @Test
     public void testTriggerParameters() throws Exception {
         resultEndpoint.expectedBodiesReceived("Europe/Berlin");
@@ -68,7 +57,6 @@ public class QuartzTriggerParametersTest extends BaseQuartzTest {
         resultEndpoint.assertIsSatisfied();
     }
 
-    
     // *************************************
     // Config
     // *************************************
@@ -81,23 +69,20 @@ public class QuartzTriggerParametersTest extends BaseQuartzTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    String cron = String.format("quartz://job?cron=0+%s+%s+?+*+*&trigger.timeZone=%s&trigger.misfireInstruction=2",
-                            59, 23, "Europe/Berlin");
+                    String cron = String.format(
+                            "quartz://job?cron=0+%s+%s+?+*+*&trigger.timeZone=%s&trigger.misfireInstruction=2", 59, 23,
+                            "Europe/Berlin");
 
                     from(cron).to("mock:cron");
 
-                    from("timer://foo?repeatCount=1")
-                            .process(exchange -> {
-                                QuartzEndpoint endPoint = getContext().getEndpoint(cron, QuartzEndpoint.class);
-                                Map<String, Object> triggers = endPoint.getTriggerParameters();
-                                exchange.getIn().setBody(triggers.get("timeZone"));
-                            })
-                            .to("mock:result");
+                    from("timer://foo?repeatCount=1").process(exchange -> {
+                        QuartzEndpoint endPoint = getContext().getEndpoint(cron, QuartzEndpoint.class);
+                        Map<String, Object> triggers = endPoint.getTriggerParameters();
+                        exchange.getIn().setBody(triggers.get("timeZone"));
+                    }).to("mock:result");
                 }
             };
         }
     }
-    
-   
 
 }

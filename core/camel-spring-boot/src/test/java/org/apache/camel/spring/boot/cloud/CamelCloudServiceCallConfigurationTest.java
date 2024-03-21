@@ -37,22 +37,12 @@ public class CamelCloudServiceCallConfigurationTest {
     @Test
     public void testConfiguration() {
         new ApplicationContextRunner()
-            .withConfiguration(
-                AutoConfigurations.of(
-                        CamelAutoConfiguration.class,
-                        CamelCloudAutoConfiguration.class,
-                        CamelCloudServiceChooserAutoConfiguration.class
-                )
-            )
-            .withPropertyValues(
-                    "camel.cloud.enabled=false",
-                    "camel.cloud.service-discovery.enabled=false",
-                    "camel.cloud.service-filter.enabled=false",
-                    "camel.cloud.service-chooser.enabled=true",
-                    "camel.cloud.load-balancer.enabled=false",
-                    "debug=false"
-            )
-            .run(context -> {
+                .withConfiguration(AutoConfigurations.of(CamelAutoConfiguration.class,
+                        CamelCloudAutoConfiguration.class, CamelCloudServiceChooserAutoConfiguration.class))
+                .withPropertyValues("camel.cloud.enabled=false", "camel.cloud.service-discovery.enabled=false",
+                        "camel.cloud.service-filter.enabled=false", "camel.cloud.service-chooser.enabled=true",
+                        "camel.cloud.load-balancer.enabled=false", "debug=false")
+                .run(context -> {
                     Environment env = context.getEnvironment();
                     assertFalse(env.getProperty("camel.cloud.enabled", Boolean.class));
                     assertFalse(env.getProperty("camel.cloud.service-discovery.enabled", Boolean.class));
@@ -65,63 +55,55 @@ public class CamelCloudServiceCallConfigurationTest {
                     assertTrue(context.getBeansOfType(ServiceChooser.class).isEmpty());
                     assertTrue(context.getBeansOfType(ServiceLoadBalancer.class).isEmpty());
 
-                }
-            );
+                });
     }
 
     @Test
     public void testStaticServiceDiscoveryConfigurationWithMetadata() {
-      new ApplicationContextRunner()
-          .withConfiguration(
-              AutoConfigurations.of(
-                  CamelAutoConfiguration.class,
-                  CamelCloudAutoConfiguration.class,
-                  CamelCloudServiceChooserAutoConfiguration.class,
-                  CamelCloudServiceDiscoveryAutoConfiguration.class
-              )
-          )
-          .withPropertyValues(
-              "camel.cloud.enabled=true",
-              "camel.cloud.service-discovery.enabled=true",
-              "camel.cloud.service-discovery.services.first-service[0]=service1-1:80",
-              "camel.cloud.service-discovery.services.first-service[1]=service1-2:80",
-              "camel.cloud.service-discovery.services.second-service[0]=service2-1:80",
-              "camel.cloud.service-discovery.service-definitions.third-service-with-metadata[0].id=service3-0",
-              "camel.cloud.service-discovery.service-definitions.third-service-with-metadata[0].host=service3",
-              "camel.cloud.service-discovery.service-definitions.third-service-with-metadata[0].port=80",
-              "camel.cloud.service-discovery.service-definitions.third-service-with-metadata[0].metadata.foo=bar",
-              "camel.cloud.service-discovery.configurations.my-static-service-discovery.services.fourth-service[0]=service4-1:80",
-              "camel.cloud.service-discovery.configurations.my-static-service-discovery.service-definitions.fifth-service-with-metadata[0].host=service5",
-              "camel.cloud.service-discovery.configurations.my-static-service-discovery.service-definitions.fifth-service-with-metadata[0].port=80",
-              "camel.cloud.service-discovery.configurations.my-static-service-discovery.service-definitions.fifth-service-with-metadata[0].metadata.baz=gnarf",
-              "camel.cloud.service-filter.enabled=false",
-              "camel.cloud.service-chooser.enabled=false",
-              "camel.cloud.load-balancer.enabled=false",
-              "debug=false"
-          )
-          .run(context -> {
-                Map<String, ServiceDiscovery> serviceDiscoveryBeans = context.getBeansOfType(ServiceDiscovery.class);
+        new ApplicationContextRunner()
+                .withConfiguration(AutoConfigurations.of(CamelAutoConfiguration.class,
+                        CamelCloudAutoConfiguration.class, CamelCloudServiceChooserAutoConfiguration.class,
+                        CamelCloudServiceDiscoveryAutoConfiguration.class))
+                .withPropertyValues("camel.cloud.enabled=true", "camel.cloud.service-discovery.enabled=true",
+                        "camel.cloud.service-discovery.services.first-service[0]=service1-1:80",
+                        "camel.cloud.service-discovery.services.first-service[1]=service1-2:80",
+                        "camel.cloud.service-discovery.services.second-service[0]=service2-1:80",
+                        "camel.cloud.service-discovery.service-definitions.third-service-with-metadata[0].id=service3-0",
+                        "camel.cloud.service-discovery.service-definitions.third-service-with-metadata[0].host=service3",
+                        "camel.cloud.service-discovery.service-definitions.third-service-with-metadata[0].port=80",
+                        "camel.cloud.service-discovery.service-definitions.third-service-with-metadata[0].metadata.foo=bar",
+                        "camel.cloud.service-discovery.configurations.my-static-service-discovery.services.fourth-service[0]=service4-1:80",
+                        "camel.cloud.service-discovery.configurations.my-static-service-discovery.service-definitions.fifth-service-with-metadata[0].host=service5",
+                        "camel.cloud.service-discovery.configurations.my-static-service-discovery.service-definitions.fifth-service-with-metadata[0].port=80",
+                        "camel.cloud.service-discovery.configurations.my-static-service-discovery.service-definitions.fifth-service-with-metadata[0].metadata.baz=gnarf",
+                        "camel.cloud.service-filter.enabled=false", "camel.cloud.service-chooser.enabled=false",
+                        "camel.cloud.load-balancer.enabled=false", "debug=false")
+                .run(context -> {
+                    Map<String, ServiceDiscovery> serviceDiscoveryBeans = context
+                            .getBeansOfType(ServiceDiscovery.class);
 
-                ServiceDiscovery staticServiceDiscovery = serviceDiscoveryBeans.get("static-service-discovery");
-                assertEquals(2, staticServiceDiscovery.getServices("first-service").size());
-                assertEquals(1, staticServiceDiscovery.getServices("second-service").size());
-                List<ServiceDefinition> serviceDefinitionsWithMetadata = staticServiceDiscovery.getServices("third-service-with-metadata");
-                assertEquals(1, serviceDefinitionsWithMetadata.size());
-                ServiceDefinition serviceDefinition = serviceDefinitionsWithMetadata.get(0);
-                assertEquals("third-service-with-metadata", serviceDefinition.getName());
-                assertEquals("service3-0", serviceDefinition.getId());
-                assertEquals("service3", serviceDefinition.getHost());
-                assertEquals(80, serviceDefinition.getPort());
-                assertEquals("bar", serviceDefinition.getMetadata().get("foo"));
+                    ServiceDiscovery staticServiceDiscovery = serviceDiscoveryBeans.get("static-service-discovery");
+                    assertEquals(2, staticServiceDiscovery.getServices("first-service").size());
+                    assertEquals(1, staticServiceDiscovery.getServices("second-service").size());
+                    List<ServiceDefinition> serviceDefinitionsWithMetadata = staticServiceDiscovery
+                            .getServices("third-service-with-metadata");
+                    assertEquals(1, serviceDefinitionsWithMetadata.size());
+                    ServiceDefinition serviceDefinition = serviceDefinitionsWithMetadata.get(0);
+                    assertEquals("third-service-with-metadata", serviceDefinition.getName());
+                    assertEquals("service3-0", serviceDefinition.getId());
+                    assertEquals("service3", serviceDefinition.getHost());
+                    assertEquals(80, serviceDefinition.getPort());
+                    assertEquals("bar", serviceDefinition.getMetadata().get("foo"));
 
-                ServiceDiscovery myStaticServiceDiscovery = serviceDiscoveryBeans.get("my-static-service-discovery");
-                assertEquals(myStaticServiceDiscovery.getServices("fourth-service").size(), 1);
-                List<ServiceDefinition> services = myStaticServiceDiscovery.getServices("fifth-service-with-metadata");
-                assertEquals(services.size(), 1);
-                assertEquals(services.get(0).getMetadata().get("baz"), "gnarf");
+                    ServiceDiscovery myStaticServiceDiscovery = serviceDiscoveryBeans
+                            .get("my-static-service-discovery");
+                    assertEquals(myStaticServiceDiscovery.getServices("fourth-service").size(), 1);
+                    List<ServiceDefinition> services = myStaticServiceDiscovery
+                            .getServices("fifth-service-with-metadata");
+                    assertEquals(services.size(), 1);
+                    assertEquals(services.get(0).getMetadata().get("baz"), "gnarf");
 
-              }
-          );
+                });
     }
 
 }

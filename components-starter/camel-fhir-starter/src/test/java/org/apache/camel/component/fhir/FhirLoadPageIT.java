@@ -51,28 +51,19 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirLoadPageIT.class,
-                FhirLoadPageIT.TestConfiguration.class,
-                DefaultCamelContext.class,
-                FhirServer.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirLoadPageIT.class, FhirLoadPageIT.TestConfiguration.class,
+        DefaultCamelContext.class, FhirServer.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class FhirLoadPageIT extends AbstractFhirTestSupport {
 
     private static final Logger LOG = LoggerFactory.getLogger(FhirLoadPageIT.class);
-    private static final String PATH_PREFIX
-            = FhirApiCollection.getCollection().getApiName(FhirLoadPageApiMethod.class).getName();
+    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirLoadPageApiMethod.class)
+            .getName();
 
     @Test
     public void testByUrl() throws Exception {
         String url = "Patient?_count=2";
-        Bundle bundle = this.fhirClient.search()
-                .byUrl(url)
-                .returnBundle(Bundle.class).execute();
+        Bundle bundle = this.fhirClient.search().byUrl(url).returnBundle(Bundle.class).execute();
         assertNotNull(bundle.getLink(IBaseBundle.LINK_NEXT));
 
         String nextPageLink = bundle.getLink("next").getUrl();
@@ -92,9 +83,7 @@ public class FhirLoadPageIT extends AbstractFhirTestSupport {
     @Test
     public void testNext() throws Exception {
         String url = "Patient?_count=2";
-        Bundle bundle = this.fhirClient.search()
-                .byUrl(url)
-                .returnBundle(Bundle.class).execute();
+        Bundle bundle = this.fhirClient.search().byUrl(url).returnBundle(Bundle.class).execute();
         assertNotNull(bundle.getLink(IBaseBundle.LINK_NEXT));
 
         // using org.hl7.fhir.instance.model.api.IBaseBundle message body for single parameter "bundle"
@@ -107,9 +96,7 @@ public class FhirLoadPageIT extends AbstractFhirTestSupport {
     @Test
     public void testPrevious() throws Exception {
         String url = "Patient?_count=2";
-        Bundle bundle = this.fhirClient.search()
-                .byUrl(url)
-                .returnBundle(Bundle.class).execute();
+        Bundle bundle = this.fhirClient.search().byUrl(url).returnBundle(Bundle.class).execute();
         assertNotNull(bundle.getLink(IBaseBundle.LINK_NEXT));
 
         String nextPageLink = bundle.getLink("next").getUrl();
@@ -126,9 +113,7 @@ public class FhirLoadPageIT extends AbstractFhirTestSupport {
     @Test
     public void testPreviousWithEncodingEnum() throws Exception {
         String url = "Patient?_count=2";
-        Bundle bundle = this.fhirClient.search()
-                .byUrl(url)
-                .returnBundle(Bundle.class).execute();
+        Bundle bundle = this.fhirClient.search().byUrl(url).returnBundle(Bundle.class).execute();
         assertNotNull(bundle.getLink(IBaseBundle.LINK_NEXT));
 
         String nextPageLink = bundle.getLink("next").getUrl();
@@ -158,10 +143,7 @@ public class FhirLoadPageIT extends AbstractFhirTestSupport {
 
         input.add(new Patient().addName(new HumanName().setFamily("PATIENT3")));
 
-        List<IBaseResource> response = fhirClient.transaction()
-                .withResources(input)
-                .encodedJson()
-                .execute();
+        List<IBaseResource> response = fhirClient.transaction().withResources(input).encodedJson().execute();
         assertEquals(3, response.size());
     }
 
@@ -173,16 +155,13 @@ public class FhirLoadPageIT extends AbstractFhirTestSupport {
                 @Override
                 public void configure() {
                     // test route for byUrl
-                    from("direct://BY_URL")
-                            .to("fhir://" + PATH_PREFIX + "/byUrl");
+                    from("direct://BY_URL").to("fhir://" + PATH_PREFIX + "/byUrl");
 
                     // test route for next
-                    from("direct://NEXT")
-                            .to("fhir://" + PATH_PREFIX + "/next?inBody=bundle");
+                    from("direct://NEXT").to("fhir://" + PATH_PREFIX + "/next?inBody=bundle");
 
                     // test route for previous
-                    from("direct://PREVIOUS")
-                            .to("fhir://" + PATH_PREFIX + "/previous?inBody=bundle");
+                    from("direct://PREVIOUS").to("fhir://" + PATH_PREFIX + "/previous?inBody=bundle");
                 }
             };
         }

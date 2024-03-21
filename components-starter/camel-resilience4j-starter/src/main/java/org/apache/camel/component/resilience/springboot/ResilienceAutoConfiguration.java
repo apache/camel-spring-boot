@@ -79,7 +79,8 @@ public class ResilienceAutoConfiguration {
 
         Map<String, Object> properties = new HashMap<>();
 
-        for (Map.Entry<String, Resilience4jConfigurationDefinitionCommon> entry : config.getConfigurations().entrySet()) {
+        for (Map.Entry<String, Resilience4jConfigurationDefinitionCommon> entry : config.getConfigurations()
+                .entrySet()) {
 
             // clear the properties map for reuse
             properties.clear();

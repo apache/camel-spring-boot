@@ -73,7 +73,7 @@ public class CustomShutdownStrategyTest {
 
         camelContext.stop();
 
-        assertTrue(((MyShutdown)stat).isInvoked());
+        assertTrue(((MyShutdown) stat).isInvoked());
     }
 
     private static class MyShutdown extends DefaultShutdownStrategy {
@@ -81,8 +81,9 @@ public class CustomShutdownStrategyTest {
         private boolean invoked;
 
         @Override
-        protected boolean doShutdown(CamelContext context, List<RouteStartupOrder> routes, long timeout, TimeUnit timeUnit,
-                                     boolean suspendOnly, boolean abortAfterTimeout, boolean forceShutdown) throws Exception {
+        protected boolean doShutdown(CamelContext context, List<RouteStartupOrder> routes, long timeout,
+                TimeUnit timeUnit, boolean suspendOnly, boolean abortAfterTimeout, boolean forceShutdown)
+                throws Exception {
             invoked = true;
             return super.doShutdown(context, routes, timeout, timeUnit, suspendOnly, abortAfterTimeout, forceShutdown);
         }

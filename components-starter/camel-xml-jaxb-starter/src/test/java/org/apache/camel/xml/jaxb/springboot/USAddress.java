@@ -27,13 +27,7 @@ import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "USAddress", propOrder = {
-        "name",
-        "street",
-        "city",
-        "state",
-        "zip"
-})
+@XmlType(name = "USAddress", propOrder = { "name", "street", "city", "state", "zip" })
 public class USAddress {
 
     @XmlElement(required = true)
@@ -53,9 +47,7 @@ public class USAddress {
     /**
      * Gets the value of the name property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
+     * @return possible object is {@link String }
      *
      */
     public String getName() {
@@ -66,8 +58,7 @@ public class USAddress {
      * Sets the value of the name property.
      *
      * @param value
-     *     allowed object is
-     *     {@link String }
+     *            allowed object is {@link String }
      *
      */
     public void setName(String value) {
@@ -77,9 +68,7 @@ public class USAddress {
     /**
      * Gets the value of the street property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
+     * @return possible object is {@link String }
      *
      */
     public String getStreet() {
@@ -90,8 +79,7 @@ public class USAddress {
      * Sets the value of the street property.
      *
      * @param value
-     *     allowed object is
-     *     {@link String }
+     *            allowed object is {@link String }
      *
      */
     public void setStreet(String value) {
@@ -101,9 +89,7 @@ public class USAddress {
     /**
      * Gets the value of the city property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
+     * @return possible object is {@link String }
      *
      */
     public String getCity() {
@@ -114,8 +100,7 @@ public class USAddress {
      * Sets the value of the city property.
      *
      * @param value
-     *     allowed object is
-     *     {@link String }
+     *            allowed object is {@link String }
      *
      */
     public void setCity(String value) {
@@ -125,9 +110,7 @@ public class USAddress {
     /**
      * Gets the value of the state property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
+     * @return possible object is {@link String }
      *
      */
     public String getState() {
@@ -138,8 +121,7 @@ public class USAddress {
      * Sets the value of the state property.
      *
      * @param value
-     *     allowed object is
-     *     {@link String }
+     *            allowed object is {@link String }
      *
      */
     public void setState(String value) {
@@ -149,9 +131,7 @@ public class USAddress {
     /**
      * Gets the value of the zip property.
      *
-     * @return
-     *     possible object is
-     *     {@link java.math.BigDecimal }
+     * @return possible object is {@link java.math.BigDecimal }
      *
      */
     public BigDecimal getZip() {
@@ -162,8 +142,7 @@ public class USAddress {
      * Sets the value of the zip property.
      *
      * @param value
-     *     allowed object is
-     *     {@link java.math.BigDecimal }
+     *            allowed object is {@link java.math.BigDecimal }
      *
      */
     public void setZip(BigDecimal value) {
@@ -173,9 +152,7 @@ public class USAddress {
     /**
      * Gets the value of the country property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
+     * @return possible object is {@link String }
      *
      */
     public String getCountry() {
@@ -190,8 +167,7 @@ public class USAddress {
      * Sets the value of the country property.
      *
      * @param value
-     *     allowed object is
-     *     {@link String }
+     *            allowed object is {@link String }
      *
      */
     public void setCountry(String value) {

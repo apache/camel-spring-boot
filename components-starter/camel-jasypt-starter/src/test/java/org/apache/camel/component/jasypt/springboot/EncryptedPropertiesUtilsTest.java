@@ -29,23 +29,24 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 public class EncryptedPropertiesUtilsTest {
 
     @Test
-    public void noIvGeneratorPropertyTest(){
-        //IVGenerator is null
+    public void noIvGeneratorPropertyTest() {
+        // IVGenerator is null
         JasyptEncryptedPropertiesConfiguration configuration = new JasyptEncryptedPropertiesConfiguration();
         IvGenerator ivGenerator = getIVGenerator(configuration);
         assertThat(ivGenerator).isInstanceOf(NoIvGenerator.class);
     }
 
     @Test
-    public void nonExistentIvGeneratorTest(){
+    public void nonExistentIvGeneratorTest() {
         JasyptEncryptedPropertiesConfiguration configuration = new JasyptEncryptedPropertiesConfiguration();
         configuration.setIvGeneratorClassName("com.mycompany.iv.MyNonExixtentIvGenerator");
-        assertThatExceptionOfType(EncryptionInitializationException.class)
-                .isThrownBy(() -> { IvGenerator ivGenerator = getIVGenerator(configuration);});
+        assertThatExceptionOfType(EncryptionInitializationException.class).isThrownBy(() -> {
+            IvGenerator ivGenerator = getIVGenerator(configuration);
+        });
     }
 
     @Test
-    public void randomIvGeneratorTest(){
+    public void randomIvGeneratorTest() {
         JasyptEncryptedPropertiesConfiguration configuration = new JasyptEncryptedPropertiesConfiguration();
         configuration.setIvGeneratorClassName("org.jasypt.iv.RandomIvGenerator");
         IvGenerator ivGenerator = getIVGenerator(configuration);

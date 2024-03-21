@@ -47,23 +47,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirConfigurationIT.class,
-                FhirConfigurationIT.TestConfiguration.class,
-                CustomFhirConfiguration.class,
-                FhirServer.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirConfigurationIT.class,
+        FhirConfigurationIT.TestConfiguration.class, CustomFhirConfiguration.class, FhirServer.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class FhirConfigurationIT extends AbstractFhirTestSupport {
 
-    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirCreateApiMethod.class).getName();
+    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirCreateApiMethod.class)
+            .getName();
 
     private static final String TEST_URI = "fhir://" + PATH_PREFIX + "/resource?inBody=resourceAsString&log=true&"
-                                           + "encoding=JSON&summary=TEXT&compress=true&username=art&password=tatum&sessionCookie=mycookie%3DChips%20Ahoy"
-                                           + "&accessToken=token&serverUrl=http://localhost:8080/hapi-fhir-jpaserver-example/baseR4&fhirVersion=R4";
+            + "encoding=JSON&summary=TEXT&compress=true&username=art&password=tatum&sessionCookie=mycookie%3DChips%20Ahoy"
+            + "&accessToken=token&serverUrl=http://localhost:8080/hapi-fhir-jpaserver-example/baseR4&fhirVersion=R4";
 
     @Autowired
     private IClientInterceptor mockClientInterceptor;
@@ -87,7 +81,7 @@ public class FhirConfigurationIT extends AbstractFhirTestSupport {
 
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here
+                // do nothing here
             }
         };
     }

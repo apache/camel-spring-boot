@@ -16,7 +16,6 @@
  */
 package org.apache.camel.dataformat.zipfile.springboot;
 
-
 import java.io.File;
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -39,7 +38,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -49,16 +47,10 @@ import org.apache.camel.test.junit5.TestSupport;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.util.IOHelper;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        AggregationStrategyWithFilenameHeaderTest.class,
-        AggregationStrategyWithFilenameHeaderTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, AggregationStrategyWithFilenameHeaderTest.class,
+        AggregationStrategyWithFilenameHeaderTest.TestConfiguration.class })
 public class AggregationStrategyWithFilenameHeaderTest {
 
     private static final List<String> FILE_NAMES = Arrays.asList("foo", "bar");
@@ -66,10 +58,10 @@ public class AggregationStrategyWithFilenameHeaderTest {
 
     @Autowired
     ProducerTemplate template;
-    
+
     @EndpointInject("mock:aggregateToZipEntry")
     MockEndpoint mock;
-    
+
     @BeforeEach
     public void setUp() throws Exception {
         TestSupport.deleteDirectory(TEST_DIR);
@@ -77,7 +69,7 @@ public class AggregationStrategyWithFilenameHeaderTest {
 
     @Test
     public void testSplitter() throws Exception {
-        
+
         mock.expectedMessageCount(1);
 
         template.setDefaultEndpointUri("direct:start");
@@ -105,8 +97,7 @@ public class AggregationStrategyWithFilenameHeaderTest {
             IOHelper.close(file);
         }
     }
-    
-    
+
     // *************************************
     // Config
     // *************************************
@@ -119,18 +110,12 @@ public class AggregationStrategyWithFilenameHeaderTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:start")
-                            .aggregate(new ZipAggregationStrategy(false, true))
-                            .constant(true)
-                            .completionTimeout(50)
-                            .to("file:" + TEST_DIR)
-                            .to("mock:aggregateToZipEntry")
+                    from("direct:start").aggregate(new ZipAggregationStrategy(false, true)).constant(true)
+                            .completionTimeout(50).to("file:" + TEST_DIR).to("mock:aggregateToZipEntry")
                             .log("Done processing zip file: ${header.CamelFileName}");
                 }
             };
         }
     }
-    
-   
 
 }

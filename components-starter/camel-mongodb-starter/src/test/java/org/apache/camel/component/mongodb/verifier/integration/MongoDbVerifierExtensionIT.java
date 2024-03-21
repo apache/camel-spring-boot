@@ -40,13 +40,8 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                MongoDbVerifierExtensionIT.class,
-                AbstractMongoDbITSupport.MongoConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, MongoDbVerifierExtensionIT.class,
+        AbstractMongoDbITSupport.MongoConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class MongoDbVerifierExtensionIT extends AbstractMongoDbITSupport {
     // We simulate the presence of an authenticated user
@@ -57,8 +52,8 @@ public class MongoDbVerifierExtensionIT extends AbstractMongoDbITSupport {
 
     protected ComponentVerifierExtension getExtension() {
         Component component = context.getComponent(SCHEME);
-        ComponentVerifierExtension verifier
-                = component.getExtension(ComponentVerifierExtension.class).orElseThrow(IllegalStateException::new);
+        ComponentVerifierExtension verifier = component.getExtension(ComponentVerifierExtension.class)
+                .orElseThrow(IllegalStateException::new);
 
         return verifier;
     }
@@ -66,30 +61,30 @@ public class MongoDbVerifierExtensionIT extends AbstractMongoDbITSupport {
     @Test
     public void verifyConnectionOK() throws IOException {
         Properties properties = loadAuthProperties();
-        //When
+        // When
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("host", service.getConnectionAddress());
         parameters.put("user", properties.getProperty("testusername"));
         parameters.put("password", properties.getProperty("testpassword"));
-        //Given
-        ComponentVerifierExtension.Result result
-                = getExtension().verify(ComponentVerifierExtension.Scope.CONNECTIVITY, parameters);
-        //Then
+        // Given
+        ComponentVerifierExtension.Result result = getExtension().verify(ComponentVerifierExtension.Scope.CONNECTIVITY,
+                parameters);
+        // Then
         assertEquals(ComponentVerifierExtension.Result.Status.OK, result.getStatus());
     }
 
     @Test
     public void verifyConnectionKO() throws IOException {
         Properties properties = loadAuthProperties();
-        //When
+        // When
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("host", "notReachable.host");
         parameters.put("user", properties.getProperty("testusername"));
         parameters.put("password", properties.getProperty("testpassword"));
-        //Given
-        ComponentVerifierExtension.Result result
-                = getExtension().verify(ComponentVerifierExtension.Scope.CONNECTIVITY, parameters);
-        //Then
+        // Given
+        ComponentVerifierExtension.Result result = getExtension().verify(ComponentVerifierExtension.Scope.CONNECTIVITY,
+                parameters);
+        // Then
         assertEquals(ComponentVerifierExtension.Result.Status.ERROR, result.getStatus());
         assertTrue(result.getErrors().get(0).getDescription().startsWith("Unable to connect"));
     }
@@ -98,14 +93,14 @@ public class MongoDbVerifierExtensionIT extends AbstractMongoDbITSupport {
     public void verifyConnectionMissingParams() throws IOException {
         Properties properties = loadAuthProperties();
 
-        //When
+        // When
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("host", service.getConnectionAddress());
         parameters.put("user", properties.getProperty("testusername"));
-        //Given
-        ComponentVerifierExtension.Result result
-                = getExtension().verify(ComponentVerifierExtension.Scope.PARAMETERS, parameters);
-        //Then
+        // Given
+        ComponentVerifierExtension.Result result = getExtension().verify(ComponentVerifierExtension.Scope.PARAMETERS,
+                parameters);
+        // Then
         assertEquals(ComponentVerifierExtension.Result.Status.ERROR, result.getStatus());
         assertTrue(result.getErrors().get(0).getDescription().startsWith("password should be set"));
     }
@@ -114,15 +109,15 @@ public class MongoDbVerifierExtensionIT extends AbstractMongoDbITSupport {
     public void verifyConnectionNotAuthenticated() throws IOException {
         Properties properties = loadAuthProperties();
 
-        //When
+        // When
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("host", service.getConnectionAddress());
         parameters.put("user", properties.getProperty("wrongusername"));
         parameters.put("password", properties.getProperty("wrongpassword"));
-        //Given
-        ComponentVerifierExtension.Result result
-                = getExtension().verify(ComponentVerifierExtension.Scope.CONNECTIVITY, parameters);
-        //Then
+        // Given
+        ComponentVerifierExtension.Result result = getExtension().verify(ComponentVerifierExtension.Scope.CONNECTIVITY,
+                parameters);
+        // Then
         assertEquals(ComponentVerifierExtension.Result.Status.ERROR, result.getStatus());
         assertTrue(result.getErrors().get(0).getDescription().startsWith("Unable to authenticate"));
     }
@@ -131,16 +126,16 @@ public class MongoDbVerifierExtensionIT extends AbstractMongoDbITSupport {
     public void verifyConnectionAdminDBKO() throws IOException {
         Properties properties = loadAuthProperties();
 
-        //When
+        // When
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("host", service.getConnectionAddress());
         parameters.put("user", properties.getProperty("testusername"));
         parameters.put("password", properties.getProperty("testpassword"));
         parameters.put("adminDB", "someAdminDB");
-        //Given
-        ComponentVerifierExtension.Result result
-                = getExtension().verify(ComponentVerifierExtension.Scope.CONNECTIVITY, parameters);
-        //Then
+        // Given
+        ComponentVerifierExtension.Result result = getExtension().verify(ComponentVerifierExtension.Scope.CONNECTIVITY,
+                parameters);
+        // Then
         assertEquals(ComponentVerifierExtension.Result.Status.ERROR, result.getStatus());
         assertTrue(result.getErrors().get(0).getDescription().startsWith("Unable to authenticate"));
     }
@@ -149,15 +144,15 @@ public class MongoDbVerifierExtensionIT extends AbstractMongoDbITSupport {
     public void verifyConnectionPortKO() throws IOException {
         Properties properties = loadAuthProperties();
 
-        //When
+        // When
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("host", "localhost:12343");
         parameters.put("user", properties.getProperty("testusername"));
         parameters.put("password", properties.getProperty("testpassword"));
-        //Given
-        ComponentVerifierExtension.Result result
-                = getExtension().verify(ComponentVerifierExtension.Scope.CONNECTIVITY, parameters);
-        //Then
+        // Given
+        ComponentVerifierExtension.Result result = getExtension().verify(ComponentVerifierExtension.Scope.CONNECTIVITY,
+                parameters);
+        // Then
         assertEquals(ComponentVerifierExtension.Result.Status.ERROR, result.getStatus());
         assertTrue(result.getErrors().get(0).getDescription().startsWith("Unable to connect"));
     }

@@ -39,13 +39,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FilerProducerDoneFileNameRouteTest.class,
-                FilerProducerDoneFileNameRouteTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FilerProducerDoneFileNameRouteTest.class,
+        FilerProducerDoneFileNameRouteTest.TestConfiguration.class })
 public class FilerProducerDoneFileNameRouteTest extends BaseFile {
 
     @EndpointInject("mock:result")

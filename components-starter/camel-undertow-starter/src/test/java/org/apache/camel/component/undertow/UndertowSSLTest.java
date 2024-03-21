@@ -37,23 +37,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
-@SpringBootTest(
-    classes = {
-        UndertowSSLTest.TestConfiguration.class
-    },
-    properties = {
-        "debug=false",
-        "camel.ssl.config.cert-alias=web",
-        "camel.ssl.config.key-managers.key-password=changeit",
+@SpringBootTest(classes = { UndertowSSLTest.TestConfiguration.class }, properties = { "debug=false",
+        "camel.ssl.config.cert-alias=web", "camel.ssl.config.key-managers.key-password=changeit",
         "camel.ssl.config.key-managers.key-store.resource=/keystore.p12",
         "camel.ssl.config.key-managers.key-store.password=changeit",
         "camel.ssl.config.key-managers.key-store.type=PKCS12",
         "camel.ssl.config.trust-managers.key-store.resource=/cacerts",
         "camel.ssl.config.trust-managers.key-store.password=changeit",
         "camel.ssl.config.trust-managers.key-store.type=jks",
-        "camel.component.undertow.use-global-ssl-context-parameters=true"
-    }
-)
+        "camel.component.undertow.use-global-ssl-context-parameters=true" })
 public class UndertowSSLTest {
     private static int port;
 
@@ -75,8 +67,7 @@ public class UndertowSSLTest {
     public static class TestRoutes extends RouteBuilder {
         @Override
         public void configure() throws Exception {
-            from("undertow:https://localhost:" + port)
-                .transform().constant("Hello");
+            from("undertow:https://localhost:" + port).transform().constant("Hello");
         }
     }
 
@@ -84,4 +75,3 @@ public class UndertowSSLTest {
     public static class TestConfiguration {
     }
 }
-

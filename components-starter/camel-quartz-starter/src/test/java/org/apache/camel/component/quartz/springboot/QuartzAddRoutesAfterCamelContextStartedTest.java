@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -34,33 +32,25 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzAddRoutesAfterCamelContextStartedTest.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzAddRoutesAfterCamelContextStartedTest.class })
 public class QuartzAddRoutesAfterCamelContextStartedTest extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint mock;
-    
+
     @Test
     public void testAddRoutes() throws Exception {
         // camel context should already be started
         assertTrue(context.getStatus().isStarted());
 
-        
         mock.expectedMessageCount(2);
 
         // add the quartz router after CamelContext has been started
@@ -74,8 +64,5 @@ public class QuartzAddRoutesAfterCamelContextStartedTest extends BaseQuartzTest 
         // it should also work
         mock.assertIsSatisfied();
     }
-    
-        
-   
 
 }

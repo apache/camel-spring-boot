@@ -37,12 +37,7 @@ import org.junit.jupiter.api.Test;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                ValidatorWithResourceResolverRouteTest.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ValidatorWithResourceResolverRouteTest.class })
 public class ValidatorWithResourceResolverRouteTest extends ContextTestSupport {
 
     protected MockEndpoint validEndpoint;
@@ -54,10 +49,9 @@ public class ValidatorWithResourceResolverRouteTest extends ContextTestSupport {
         validEndpoint.expectedMessageCount(1);
         finallyEndpoint.expectedMessageCount(1);
         invalidEndpoint.expectedMessageCount(0);
-        template
-                .sendBody("direct:start",
-                        "<report xmlns='http://foo.com/report' xmlns:rb='http://foo.com/report-base'><author><rb:name>Knuth</rb:name></author><content><rb:chapter><rb:subject></rb:subject>"
-                                          + "<rb:abstract></rb:abstract><rb:body></rb:body></rb:chapter></content></report>");
+        template.sendBody("direct:start",
+                "<report xmlns='http://foo.com/report' xmlns:rb='http://foo.com/report-base'><author><rb:name>Knuth</rb:name></author><content><rb:chapter><rb:subject></rb:subject>"
+                        + "<rb:abstract></rb:abstract><rb:body></rb:body></rb:chapter></content></report>");
 
         MockEndpoint.assertIsSatisfied(validEndpoint, invalidEndpoint, finallyEndpoint);
     }
@@ -99,10 +93,10 @@ public class ValidatorWithResourceResolverRouteTest extends ContextTestSupport {
         return new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from("direct:start").doTry()
-                        .to("validator:org/apache/camel/component/validator/report.xsd?resourceResolver=#resourceResolver")
-                        .to("mock:valid")
-                        .doCatch(ValidationException.class).to("mock:invalid").doFinally().to("mock:finally").end();
+                from("direct:start").doTry().to(
+                        "validator:org/apache/camel/component/validator/report.xsd?resourceResolver=#resourceResolver")
+                        .to("mock:valid").doCatch(ValidationException.class).to("mock:invalid").doFinally()
+                        .to("mock:finally").end();
             }
         };
     }

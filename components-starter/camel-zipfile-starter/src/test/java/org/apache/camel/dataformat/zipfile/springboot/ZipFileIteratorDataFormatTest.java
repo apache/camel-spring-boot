@@ -16,7 +16,6 @@
  */
 package org.apache.camel.dataformat.zipfile.springboot;
 
-
 import java.io.File;
 import java.util.stream.Stream;
 
@@ -30,7 +29,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -38,34 +36,24 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        ZipFileIteratorDataFormatTest.class,
-        ZipFileIteratorDataFormatTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ZipFileIteratorDataFormatTest.class,
+        ZipFileIteratorDataFormatTest.TestConfiguration.class })
 public class ZipFileIteratorDataFormatTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
-   
-    
+
     @EndpointInject("mock:result")
     MockEndpoint mockResult;
-    
+
     @EndpointInject("mock:unzip")
     MockEndpoint mockUnzip;
-    
-    
+
     @Test
     public void testZipFileIterator() throws Exception {
         mockResult.expectedMessageCount(1);
@@ -86,7 +74,6 @@ public class ZipFileIteratorDataFormatTest {
         mockUnzip.assertIsSatisfied();
     }
 
-    
     // *************************************
     // Config
     // *************************************
@@ -99,20 +86,13 @@ public class ZipFileIteratorDataFormatTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:zip")
-                            .setHeader(Exchange.FILE_NAME, constant("report.txt"))
-                            .marshal().zipFile()
-                            .to("file:target/output")
-                            .to("mock:result");
+                    from("direct:zip").setHeader(Exchange.FILE_NAME, constant("report.txt")).marshal().zipFile()
+                            .to("file:target/output").to("mock:result");
 
-                    from("direct:unzip")
-                            .unmarshal().zipFile()
-                            .to("mock:unzip");
+                    from("direct:unzip").unmarshal().zipFile().to("mock:unzip");
                 }
             };
         }
     }
-    
-  
 
 }

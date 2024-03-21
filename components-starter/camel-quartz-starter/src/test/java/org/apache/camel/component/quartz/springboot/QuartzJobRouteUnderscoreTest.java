@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -38,28 +36,21 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.quartz.JobDetail;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzJobRouteUnderscoreTest.class,
-        QuartzJobRouteUnderscoreTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzJobRouteUnderscoreTest.class,
+        QuartzJobRouteUnderscoreTest.TestConfiguration.class })
 public class QuartzJobRouteUnderscoreTest extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint mock;
-    
+
     @Test
     public void testQuartzRoute() throws Exception {
         mock.expectedMessageCount(2);
@@ -73,7 +64,6 @@ public class QuartzJobRouteUnderscoreTest extends BaseQuartzTest {
         assertEquals("my_job", detail.getKey().getName());
     }
 
-    
     // *************************************
     // Config
     // *************************************
@@ -92,7 +82,5 @@ public class QuartzJobRouteUnderscoreTest extends BaseQuartzTest {
             };
         }
     }
-    
-   
 
 }

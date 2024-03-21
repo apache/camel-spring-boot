@@ -32,31 +32,29 @@ import java.util.Map;
 @Component("dummy")
 public class DummyRestProducerFactory implements RestProducerFactory {
 
-	@Override
-	public Producer createProducer(
-			CamelContext camelContext, String host,
-			String verb, String basePath, final String uriTemplate, String queryParameters,
-			String consumes, String produces, RestConfiguration configuration, Map<String, Object> parameters)
-			throws Exception {
+    @Override
+    public Producer createProducer(CamelContext camelContext, String host, String verb, String basePath,
+            final String uriTemplate, String queryParameters, String consumes, String produces,
+            RestConfiguration configuration, Map<String, Object> parameters) throws Exception {
 
-		// use a dummy endpoint
-		Endpoint endpoint = camelContext.getEndpoint("stub:dummy");
+        // use a dummy endpoint
+        Endpoint endpoint = camelContext.getEndpoint("stub:dummy");
 
-		return new DefaultProducer(endpoint) {
-			@Override
-			public void process(Exchange exchange) throws Exception {
-				String query = exchange.getIn().getHeader(Exchange.REST_HTTP_QUERY, String.class);
-				if (query != null) {
-					String name = StringHelper.after(query, "name=");
-					exchange.getIn().setBody("Bye " + name);
-				}
-				String uri = exchange.getIn().getHeader(Exchange.REST_HTTP_URI, String.class);
-				if (uri != null) {
-					int pos = uri.lastIndexOf('/');
-					String name = uri.substring(pos + 1);
-					exchange.getIn().setBody("Hello " + name);
-				}
-			}
-		};
-	}
+        return new DefaultProducer(endpoint) {
+            @Override
+            public void process(Exchange exchange) throws Exception {
+                String query = exchange.getIn().getHeader(Exchange.REST_HTTP_QUERY, String.class);
+                if (query != null) {
+                    String name = StringHelper.after(query, "name=");
+                    exchange.getIn().setBody("Bye " + name);
+                }
+                String uri = exchange.getIn().getHeader(Exchange.REST_HTTP_URI, String.class);
+                if (uri != null) {
+                    int pos = uri.lastIndexOf('/');
+                    String name = uri.substring(pos + 1);
+                    exchange.getIn().setBody("Hello " + name);
+                }
+            }
+        };
+    }
 }

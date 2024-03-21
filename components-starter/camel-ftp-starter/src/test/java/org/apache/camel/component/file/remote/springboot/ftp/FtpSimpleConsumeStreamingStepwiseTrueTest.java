@@ -25,13 +25,8 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FtpSimpleConsumeStreamingStepwiseTrueTest.class,
-                FtpSimpleConsumeStreamingStepwiseTrueTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FtpSimpleConsumeStreamingStepwiseTrueTest.class,
+        FtpSimpleConsumeStreamingStepwiseTrueTest.TestConfiguration.class })
 public class FtpSimpleConsumeStreamingStepwiseTrueTest extends FtpSimpleConsumeStreamingStepwiseFalseTest {
 
     @Override
@@ -53,6 +48,6 @@ public class FtpSimpleConsumeStreamingStepwiseTrueTest extends FtpSimpleConsumeS
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  FtpSimpleConsumeStreamingStepwiseFalseTest.TestConfiguration {
+    public class TestConfiguration extends FtpSimpleConsumeStreamingStepwiseFalseTest.TestConfiguration {
     }
 }

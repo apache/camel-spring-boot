@@ -25,31 +25,26 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class PropertiesComponentConfiguration {
 
     /**
-     * A list of locations to load properties. You can use comma to separate
-     * multiple locations. This option will override any default locations and
-     * only use the locations from this option.
+     * A list of locations to load properties. You can use comma to separate multiple locations. This option will
+     * override any default locations and only use the locations from this option.
      */
     private String location;
     /**
-     * Encoding to use when loading properties file from the file system or
-     * classpath. If no encoding has been set, then the properties files is
-     * loaded using ISO-8859-1 encoding (latin-1) as documented by
+     * Encoding to use when loading properties file from the file system or classpath. If no encoding has been set, then
+     * the properties files is loaded using ISO-8859-1 encoding (latin-1) as documented by
      * java.util.Properties#load(java.io.InputStream)
      */
     private String encoding;
     /**
-     * To use a custom PropertiesParser. The option is a
-     * org.apache.camel.component.properties.PropertiesParser type.
+     * To use a custom PropertiesParser. The option is a org.apache.camel.component.properties.PropertiesParser type.
      */
     private String propertiesParser;
     /**
-     * If false, the component does not attempt to find a default for the key by
-     * looking after the colon separator.
+     * If false, the component does not attempt to find a default for the key by looking after the colon separator.
      */
     private Boolean defaultFallbackEnabled = true;
     /**
-     * Whether to silently ignore if a location cannot be located, such as a
-     * properties file not found.
+     * Whether to silently ignore if a location cannot be located, such as a properties file not found.
      */
     private Boolean ignoreMissingLocation = false;
     /**
@@ -58,33 +53,29 @@ public class PropertiesComponentConfiguration {
      */
     private Boolean nestedPlaceholder = false;
     /**
-     * Sets initial properties which will be used before any locations are
-     * resolved. The option is a java.util.Properties type.
+     * Sets initial properties which will be used before any locations are resolved. The option is a
+     * java.util.Properties type.
      */
     private String initialProperties;
     /**
-     * Sets a special list of override properties that take precedence and will
-     * use first, if a property exist. The option is a java.util.Properties
-     * type.
+     * Sets a special list of override properties that take precedence and will use first, if a property exist. The
+     * option is a java.util.Properties type.
      */
     private String overrideProperties;
     /**
-     * Sets the JVM system property mode (0 = never, 1 = fallback, 2 =
-     * override). The default mode (override) is to use system properties if
-     * present, and override any existing properties. OS environment variable
-     * mode is checked before JVM system property mode
+     * Sets the JVM system property mode (0 = never, 1 = fallback, 2 = override). The default mode (override) is to use
+     * system properties if present, and override any existing properties. OS environment variable mode is checked
+     * before JVM system property mode
      */
     private Integer systemPropertiesMode = 2;
     /**
-     * Sets the OS environment variables mode (0 = never, 1 = fallback, 2 =
-     * override). The default mode (override) is to use OS environment variables
-     * if present, and override any existing properties. OS environment variable
-     * mode is checked before JVM system property mode
+     * Sets the OS environment variables mode (0 = never, 1 = fallback, 2 = override). The default mode (override) is to
+     * use OS environment variables if present, and override any existing properties. OS environment variable mode is
+     * checked before JVM system property mode
      */
     private Integer environmentVariableMode = 2;
     /**
-     * Whether to automatically discovery instances of PropertiesSource from
-     * registry and service factory.
+     * Whether to automatically discovery instances of PropertiesSource from registry and service factory.
      */
     private Boolean autoDiscoverPropertiesSources = true;
 
@@ -172,8 +163,7 @@ public class PropertiesComponentConfiguration {
         return autoDiscoverPropertiesSources;
     }
 
-    public void setAutoDiscoverPropertiesSources(
-            Boolean autoDiscoverPropertiesSources) {
+    public void setAutoDiscoverPropertiesSources(Boolean autoDiscoverPropertiesSources) {
         this.autoDiscoverPropertiesSources = autoDiscoverPropertiesSources;
     }
 

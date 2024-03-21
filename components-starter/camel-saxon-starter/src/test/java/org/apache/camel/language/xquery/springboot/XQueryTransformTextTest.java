@@ -16,8 +16,6 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
@@ -31,28 +29,20 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        XQueryTransformTextTest.class,
-        XQueryTransformTextTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, XQueryTransformTextTest.class,
+        XQueryTransformTextTest.TestConfiguration.class })
 public class XQueryTransformTextTest {
-    
-    
+
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
-    protected MockEndpoint resultEndpoint;   
-    
+    protected MockEndpoint resultEndpoint;
+
     @Test
     public void testSendMatchingMessage() throws Exception {
         // saxon converts all quotes to "

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.telegram.springboot;
 
-
 import org.apache.camel.PropertyBindingException;
 import org.apache.camel.component.telegram.TelegramComponent;
 import org.apache.camel.component.telegram.TelegramEndpoint;
@@ -32,18 +31,10 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        TelegramComponentParametersTest.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, TelegramComponentParametersTest.class })
 public class TelegramComponentParametersTest extends TelegramTestSupport {
-
-   
 
     @Test
     public void testDefaultsAndOverrides() throws Exception {

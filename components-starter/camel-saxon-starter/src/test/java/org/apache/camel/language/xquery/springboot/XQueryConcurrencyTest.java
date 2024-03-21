@@ -38,23 +38,18 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        XQueryConcurrencyTest.class,
-        XQueryConcurrencyTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, XQueryConcurrencyTest.class,
+        XQueryConcurrencyTest.TestConfiguration.class })
 public class XQueryConcurrencyTest {
-    
+
     private String uri = "seda:in?concurrentConsumers=5";
 
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
-    protected MockEndpoint mock;   
-    
+    protected MockEndpoint mock;
+
     @Test
     public void testConcurrency() throws Exception {
         int total = 1000;
@@ -89,7 +84,6 @@ public class XQueryConcurrencyTest {
         executor.shutdown();
     }
 
-    
     // *************************************
     // Config
     // *************************************
@@ -105,9 +99,7 @@ public class XQueryConcurrencyTest {
                     // no retry as we want every failure to submerge
                     errorHandler(noErrorHandler());
 
-                    from(uri)
-                            .transform().xquery("/person/id", String.class)
-                            .to("mock:result");
+                    from(uri).transform().xquery("/person/id", String.class).to("mock:result");
                 }
             };
         }

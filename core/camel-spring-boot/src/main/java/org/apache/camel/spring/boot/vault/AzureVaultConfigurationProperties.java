@@ -42,7 +42,6 @@ public class AzureVaultConfigurationProperties {
      */
     private String tenantId;
 
-
     /**
      * Whether the Azure Identity Authentication should be used or not.
      */
@@ -52,17 +51,17 @@ public class AzureVaultConfigurationProperties {
      * Whether to automatically reload Camel upon secrets being updated in Azure.
      */
     private boolean refreshEnabled;
-    
+
     /**
      * The period (millis) between checking Azure for updated secrets.
      */
     private long refreshPeriod = 30000;
-    
+
     /**
      * Specify the secret names (or pattern) to check for updates. Multiple secrets can be separated by comma.
      */
     private String secrets;
-    
+
     /**
      * The Eventhubs connection String for Key Vault Secret events notifications
      */

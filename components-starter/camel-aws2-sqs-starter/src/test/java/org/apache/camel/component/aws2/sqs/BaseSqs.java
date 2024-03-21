@@ -66,9 +66,10 @@ public class BaseSqs {
     }
 
     String receiveMessageFromQueue(String queueName, boolean deleteMessage) {
-        return consumerTemplate.receiveBody(String.format("aws2-sqs://%s?deleteAfterRead=%s&deleteIfFiltered=%s&defaultVisibilityTimeout=0", queueName, deleteMessage, deleteMessage),
-                10000,
-                String.class);
+        return consumerTemplate.receiveBody(
+                String.format("aws2-sqs://%s?deleteAfterRead=%s&deleteIfFiltered=%s&defaultVisibilityTimeout=0",
+                        queueName, deleteMessage, deleteMessage),
+                10000, String.class);
     }
 
     // *************************************

@@ -44,25 +44,16 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
-                KafkaConsumerAsyncManualCommitIT.class,
-                KafkaConsumerAsyncManualCommitIT.TestConfiguration.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
+        KafkaConsumerAsyncManualCommitIT.class, KafkaConsumerAsyncManualCommitIT.TestConfiguration.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
-@EnabledIfSystemProperty(named = "enable.kafka.consumer.async", matches = "true",
-                         disabledReason = "Temporarily disabled due to being flaky")
+@EnabledIfSystemProperty(named = "enable.kafka.consumer.async", matches = "true", disabledReason = "Temporarily disabled due to being flaky")
 public class KafkaConsumerAsyncManualCommitIT extends BaseEmbeddedKafkaTestSupport {
 
     public static final String TOPIC = "testManualCommitTest";
 
-    private final String from = "kafka:" + TOPIC
-                    + "?groupId=group1&sessionTimeoutMs=30000&autoCommitEnable=false"
-                    + "&allowManualCommit=true&autoOffsetReset=earliest&kafkaManualCommitFactory=#testFactory";
-
+    private final String from = "kafka:" + TOPIC + "?groupId=group1&sessionTimeoutMs=30000&autoCommitEnable=false"
+            + "&allowManualCommit=true&autoOffsetReset=earliest&kafkaManualCommitFactory=#testFactory";
 
     @EndpointInject("mock:result")
     private MockEndpoint to;
@@ -132,9 +123,10 @@ public class KafkaConsumerAsyncManualCommitIT extends BaseEmbeddedKafkaTestSuppo
     @Configuration
     public class TestConfiguration {
         @Bean("testFactory")
-        public KafkaManualCommitFactory createKafkaManualCommitFactory (){
+        public KafkaManualCommitFactory createKafkaManualCommitFactory() {
             return new DefaultKafkaManualAsyncCommitFactory();
         }
+
         @Bean
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
@@ -144,15 +136,10 @@ public class KafkaConsumerAsyncManualCommitIT extends BaseEmbeddedKafkaTestSuppo
                     // With sync manual commit, this would throw a concurrent modification exception
                     // It can be used in aggregator with completion timeout/interval for instance
                     // WARN: records from one partition must be processed by one unique thread
-                    from("direct:aggregate").routeId("aggregate").to(to)
-                            .aggregate()
-                            .constant(true)
-                            .completionTimeout(1)
-                            .aggregationStrategy(AggregationStrategies.groupedExchange())
-                            .split().body()
-                            .process(e -> {
-                                KafkaManualCommit manual = e.getMessage().getBody(Exchange.class)
-                                        .getMessage().getHeader(KafkaConstants.MANUAL_COMMIT, KafkaManualCommit.class);
+                    from("direct:aggregate").routeId("aggregate").to(to).aggregate().constant(true).completionTimeout(1)
+                            .aggregationStrategy(AggregationStrategies.groupedExchange()).split().body().process(e -> {
+                                KafkaManualCommit manual = e.getMessage().getBody(Exchange.class).getMessage()
+                                        .getHeader(KafkaConstants.MANUAL_COMMIT, KafkaManualCommit.class);
                                 assertNotNull(manual);
                                 manual.commit();
                             });

@@ -35,16 +35,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SqlProducerOutputTypeStreamListTest.class,
-                SqlProducerOutputTypeStreamListTest.TestConfiguration.class,
-                BaseSql.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SqlProducerOutputTypeStreamListTest.class,
+        SqlProducerOutputTypeStreamListTest.TestConfiguration.class, BaseSql.TestConfiguration.class })
 public class SqlProducerOutputTypeStreamListTest extends BaseSql {
-
 
     @EndpointInject("mock:result")
     private MockEndpoint resultEndpoint;
@@ -82,13 +75,8 @@ public class SqlProducerOutputTypeStreamListTest extends BaseSql {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:withSplit")
-                            .to("sql:select * from projects order by id?outputType=StreamList")
-                            .to("log:stream")
-                            .split(body()).streaming()
-                            .to("log:row")
-                            .to("mock:result")
-                            .end();
+                    from("direct:withSplit").to("sql:select * from projects order by id?outputType=StreamList")
+                            .to("log:stream").split(body()).streaming().to("log:row").to("mock:result").end();
                 }
             };
         }

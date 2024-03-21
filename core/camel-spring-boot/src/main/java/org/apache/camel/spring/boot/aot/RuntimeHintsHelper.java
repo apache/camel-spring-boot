@@ -32,19 +32,21 @@ public final class RuntimeHintsHelper {
     private RuntimeHintsHelper() {
     }
 
-
     /**
      * Register the given class and all its parent classes by applying the given member categories.
      *
-     * @param hints            the hints contributed so far for the deployment unit
-     * @param classLoader      the ClassLoader to load classpath resources with,
-     *                         or {@code null} for using the thread context class loader
-     *                         at the time of actual resource access
-     * @param className        the name of the class to register
-     * @param memberCategories the member categories to apply
+     * @param hints
+     *            the hints contributed so far for the deployment unit
+     * @param classLoader
+     *            the ClassLoader to load classpath resources with, or {@code null} for using the thread context class
+     *            loader at the time of actual resource access
+     * @param className
+     *            the name of the class to register
+     * @param memberCategories
+     *            the member categories to apply
      */
     public static void registerClassHierarchy(RuntimeHints hints, ClassLoader classLoader, String className,
-                                              MemberCategory... memberCategories) {
+            MemberCategory... memberCategories) {
         try {
             registerClassHierarchy(hints, ClassUtils.forName(className, classLoader), memberCategories);
         } catch (ClassNotFoundException | NoClassDefFoundError e) {
@@ -55,9 +57,12 @@ public final class RuntimeHintsHelper {
     /**
      * Register the given class and all its parent classes by applying the given member categories.
      *
-     * @param hints            the hints contributed so far for the deployment unit
-     * @param clazz            the class to register
-     * @param memberCategories the member categories to apply
+     * @param hints
+     *            the hints contributed so far for the deployment unit
+     * @param clazz
+     *            the class to register
+     * @param memberCategories
+     *            the member categories to apply
      */
     public static void registerClassHierarchy(RuntimeHints hints, Class<?> clazz, MemberCategory... memberCategories) {
         if (clazz.isInterface() || clazz.isArray()) {

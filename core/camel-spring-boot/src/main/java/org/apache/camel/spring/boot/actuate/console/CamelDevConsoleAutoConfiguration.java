@@ -45,5 +45,4 @@ public class CamelDevConsoleAutoConfiguration {
         return new CamelDevConsoleEndpoint(camelContext);
     }
 
-
 }

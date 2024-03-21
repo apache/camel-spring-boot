@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.telegram.springboot;
 
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
@@ -29,7 +28,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,21 +35,14 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        TelegramConsumerMediaGameTest.class,
-        TelegramConsumerMediaGameTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, TelegramConsumerMediaGameTest.class,
+        TelegramConsumerMediaGameTest.TestConfiguration.class })
 public class TelegramConsumerMediaGameTest extends TelegramTestSupport {
 
-    
     static TelegramMockRoutes mockRoutes;
-    
+
     @EndpointInject("mock:telegram")
     private MockEndpoint endpoint;
 
@@ -83,8 +74,6 @@ public class TelegramConsumerMediaGameTest extends TelegramTestSupport {
 
     }
 
-    
-
     // *************************************
     // Config
     // *************************************
@@ -96,25 +85,19 @@ public class TelegramConsumerMediaGameTest extends TelegramTestSupport {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("telegram:bots?authorizationToken=mock-token")
-                            .to("mock:telegram");
+                    from("telegram:bots?authorizationToken=mock-token").to("mock:telegram");
                 }
             };
         }
 
     }
-    
+
     @Override
     @Bean
     protected TelegramMockRoutes createMockRoutes() {
-        mockRoutes =
-            new TelegramMockRoutes(port)
-            .addEndpoint(
-                    "getUpdates",
-                    "GET",
-                    String.class,
-                    TelegramTestUtil.stringResource("messages/updates-media-game.json"),
-                    TelegramTestUtil.stringResource("messages/updates-empty.json"));
+        mockRoutes = new TelegramMockRoutes(port).addEndpoint("getUpdates", "GET", String.class,
+                TelegramTestUtil.stringResource("messages/updates-media-game.json"),
+                TelegramTestUtil.stringResource("messages/updates-empty.json"));
         return mockRoutes;
     }
 }

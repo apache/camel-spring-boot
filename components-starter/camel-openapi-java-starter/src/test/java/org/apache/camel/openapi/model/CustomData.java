@@ -18,9 +18,9 @@ package org.apache.camel.openapi.model;
 
 class CustomData implements GenericData {
 
-	private String customDataField;
+    private String customDataField;
 
-	public String getCustomDataField() {
-		return customDataField;
-	}
+    public String getCustomDataField() {
+        return customDataField;
+    }
 }

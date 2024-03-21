@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;    
+import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,13 +38,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SqsComponentTest.class,
-                SqsComponentTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SqsComponentTest.class,
+        SqsComponentTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class SqsComponentTest extends BaseSqs {
 
@@ -102,20 +97,18 @@ public class SqsComponentTest extends BaseSqs {
         assertEquals("6a1559560f67c5e7a7d5d838bf0272ee", exchange.getMessage().getHeader(Sqs2Constants.MD5_OF_BODY));
     }
 
-
     // *************************************
     // Config
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseSqs.TestConfiguration {
+    public class TestConfiguration extends BaseSqs.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
-            final String sqsEndpointUri = String
-                    .format("aws2-sqs://%s?messageRetentionPeriod=%s&maximumMessageSize=%s&visibilityTimeout=%s&policy=%s&autoCreateQueue=true",
-                            sharedNameGenerator.getName(),
-                            "1209600", "65536", "60",
-                            "file:src/test/resources/org/apache/camel/component/aws2/sqs/policy.txt");
+            final String sqsEndpointUri = String.format(
+                    "aws2-sqs://%s?messageRetentionPeriod=%s&maximumMessageSize=%s&visibilityTimeout=%s&policy=%s&autoCreateQueue=true",
+                    sharedNameGenerator.getName(), "1209600", "65536", "60",
+                    "file:src/test/resources/org/apache/camel/component/aws2/sqs/policy.txt");
             return new RouteBuilder() {
                 @Override
                 public void configure() {

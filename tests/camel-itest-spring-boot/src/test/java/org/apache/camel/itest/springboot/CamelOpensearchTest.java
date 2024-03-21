@@ -33,9 +33,7 @@ public class CamelOpensearchTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelOpensearchTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelOpensearchTest.class)).build();
     }
 
     @Test
@@ -43,6 +41,5 @@ public class CamelOpensearchTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

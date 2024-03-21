@@ -22,59 +22,53 @@ import java.util.List;
 
 public class InfinispanRemoteQueryTestSupport extends InfinispanRemoteTestSupport {
 
-	public static final User[] USERS = new User[] {
-			createUser("nameA", "surnameA"),
-			createUser("nameA", "surnameB"),
-			createUser("nameB", "surnameB")};
+    public static final User[] USERS = new User[] { createUser("nameA", "surnameA"), createUser("nameA", "surnameB"),
+            createUser("nameB", "surnameB") };
 
-	public static final User[] CQ_USERS = new User[] {
-			createUser("CQ01", "surname01"),
-			createUser("CQ02", "surname01"),
-			createUser("NQ03", "surname03"),
-			createUser("NQ04", "surname04")
-	};
+    public static final User[] CQ_USERS = new User[] { createUser("CQ01", "surname01"), createUser("CQ02", "surname01"),
+            createUser("NQ03", "surname03"), createUser("NQ04", "surname04") };
 
-	public static String createKey(User user) {
-		return String.format("%s+%s", user.getName(), user.getSurname());
-	}
+    public static String createKey(User user) {
+        return String.format("%s+%s", user.getName(), user.getSurname());
+    }
 
-	public static User createUser(String name, String surname) {
-		User user = new User();
-		user.setName(name);
-		user.setSurname(surname);
-		return user;
-	}
+    public static User createUser(String name, String surname) {
+        User user = new User();
+        user.setName(name);
+        user.setSurname(surname);
+        return user;
+    }
 
-	public static boolean eq(String str1, String str2) {
-		if (str1 == null) {
-			return str2 == null;
-		} else {
-			return str1.equals(str2);
-		}
-	}
+    public static boolean eq(String str1, String str2) {
+        if (str1 == null) {
+            return str2 == null;
+        } else {
+            return str1.equals(str2);
+        }
+    }
 
-	public static boolean eq(User user, String name, String surname) {
-		if (user == null) {
-			return false;
-		}
-		if (!eq(user.getName(), name)) {
-			return false;
-		}
-		if (!eq(user.getSurname(), surname)) {
-			return false;
-		}
-		return true;
-	}
+    public static boolean eq(User user, String name, String surname) {
+        if (user == null) {
+            return false;
+        }
+        if (!eq(user.getName(), name)) {
+            return false;
+        }
+        if (!eq(user.getSurname(), surname)) {
+            return false;
+        }
+        return true;
+    }
 
-	public static boolean hasUser(List<User> users, String name, String surname) {
-		if (users == null) {
-			return false;
-		}
-		for (User user : users) {
-			if (eq(user, name, surname)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    public static boolean hasUser(List<User> users, String name, String surname) {
+        if (users == null) {
+            return false;
+        }
+        for (User user : users) {
+            if (eq(user, name, surname)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

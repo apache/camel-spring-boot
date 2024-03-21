@@ -31,7 +31,7 @@ public class PatientProcessor implements Processor {
     @Override
     public void process(Exchange exchange) throws Exception {
         ORU_R01 msg = exchange.getIn().getBody(ORU_R01.class);
-        //map to Patient
+        // map to Patient
         Patient patient = getPatient(msg);
         exchange.getIn().setBody(patient);
     }
@@ -45,8 +45,7 @@ public class PatientProcessor implements Processor {
         String surname = pid.getPatientName()[0].getFamilyName().getFn1_Surname().getValue();
         String name = pid.getPatientName()[0].getGivenName().getValue();
         String patientId = msg.getPATIENT_RESULT().getPATIENT().getPID().getPatientID().getCx1_ID().getValue();
-        patient.addName()
-                .addGiven(name);
+        patient.addName().addGiven(name);
         patient.getNameFirstRep().setFamily(surname);
         patient.setId(patientId);
         return patient;

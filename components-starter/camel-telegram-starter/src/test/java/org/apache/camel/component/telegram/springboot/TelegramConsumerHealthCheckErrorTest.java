@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.telegram.springboot;
 
-
 import java.util.concurrent.TimeUnit;
 
 import org.apache.camel.CamelContext;
@@ -31,8 +30,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-
-
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,31 +38,24 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.awaitility.Awaitility;
 
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        TelegramConsumerHealthCheckErrorTest.class,
-        TelegramConsumerHealthCheckErrorTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, TelegramConsumerHealthCheckErrorTest.class,
+        TelegramConsumerHealthCheckErrorTest.TestConfiguration.class })
 public class TelegramConsumerHealthCheckErrorTest extends TelegramTestSupport {
 
-    
     static TelegramMockRoutes mockRoutes;
-    
+
     @EndpointInject("mock:telegram")
     private MockEndpoint endpoint;
-    
+
     @Override
     protected void configureCamelContext(CamelContext context) {
         // enabling consumers health check is a bit cumbersome via low-level Java code
         super.configureCamelContext(context);
         HealthCheckRegistry hcr = context.getCamelContextExtension().getContextPlugin(HealthCheckRegistry.class);
-        HealthCheckRepository repo
-                = hcr.getRepository("consumers").orElse((HealthCheckRepository) hcr.resolveById("consumers"));
+        HealthCheckRepository repo = hcr.getRepository("consumers")
+                .orElse((HealthCheckRepository) hcr.resolveById("consumers"));
         repo.setEnabled(true);
         hcr.register(repo);
     }
@@ -76,19 +66,18 @@ public class TelegramConsumerHealthCheckErrorTest extends TelegramTestSupport {
         HealthCheckRepository repo = hcr.getRepository("consumers").get();
 
         // wait until HC is DOWN
-        Awaitility.waitAtMost(5, TimeUnit.SECONDS).until(
-                () -> repo.stream().anyMatch(h -> h.call().getState().equals(HealthCheck.State.DOWN)));
+        Awaitility.waitAtMost(5, TimeUnit.SECONDS)
+                .until(() -> repo.stream().anyMatch(h -> h.call().getState().equals(HealthCheck.State.DOWN)));
 
         // if we grab the health check by id, we can also check it afterwards
         HealthCheck hc = hcr.getCheck("consumer:telegram").get();
 
         // wait until we have the error
-        Awaitility.waitAtMost(5, TimeUnit.SECONDS).until(
-                () -> {
-                    HealthCheck.Result rc = hc.call();
-                    Long count = (Long) rc.getDetails().get(HealthCheck.FAILURE_ERROR_COUNT);
-                    return count != null && count > 0;
-                });
+        Awaitility.waitAtMost(5, TimeUnit.SECONDS).until(() -> {
+            HealthCheck.Result rc = hc.call();
+            Long count = (Long) rc.getDetails().get(HealthCheck.FAILURE_ERROR_COUNT);
+            return count != null && count > 0;
+        });
 
         HealthCheck.Result rc = hc.call();
 
@@ -106,7 +95,6 @@ public class TelegramConsumerHealthCheckErrorTest extends TelegramTestSupport {
         Assertions.assertEquals(401, rc.getDetails().get(HealthCheck.HTTP_RESPONSE_CODE));
     }
 
-
     // *************************************
     // Config
     // *************************************
@@ -118,24 +106,18 @@ public class TelegramConsumerHealthCheckErrorTest extends TelegramTestSupport {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("telegram:bots?authorizationToken=mock-token").routeId("telegram")
-                            .convertBodyTo(String.class)
+                    from("telegram:bots?authorizationToken=mock-token").routeId("telegram").convertBodyTo(String.class)
                             .to("mock:telegram");
                 }
             };
         }
 
     }
-    
+
     @Override
     @Bean
     protected TelegramMockRoutes createMockRoutes() {
-        mockRoutes =
-            new TelegramMockRoutes(port)
-            .addErrorEndpoint(
-                    "getUpdates",
-                    "GET",
-                    401);
+        mockRoutes = new TelegramMockRoutes(port).addErrorEndpoint("getUpdates", "GET", 401);
         return mockRoutes;
     }
 }

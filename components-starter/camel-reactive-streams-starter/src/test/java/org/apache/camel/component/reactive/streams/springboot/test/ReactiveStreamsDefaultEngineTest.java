@@ -36,11 +36,7 @@ import org.springframework.test.annotation.DirtiesContext;
 @CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
-@SpringBootTest(
-    classes = {
-        ReactiveStreamsDefaultEngineTest.class
-    }
-)
+@SpringBootTest(classes = { ReactiveStreamsDefaultEngineTest.class })
 public class ReactiveStreamsDefaultEngineTest {
     @Autowired
     private CamelContext context;
@@ -51,8 +47,7 @@ public class ReactiveStreamsDefaultEngineTest {
         new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from("reactive-streams:data")
-                        .log("${body}");
+                from("reactive-streams:data").log("${body}");
             }
         }.addRoutesToCamelContext(context);
 
@@ -65,4 +60,3 @@ public class ReactiveStreamsDefaultEngineTest {
     public static class TestConfiguration {
     }
 }
-

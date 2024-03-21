@@ -43,18 +43,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirJsonDataFormatTest.class,
-                FhirJsonDataFormatTest.TestConfiguration.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirJsonDataFormatTest.class,
+        FhirJsonDataFormatTest.TestConfiguration.class, })
 public class FhirJsonDataFormatTest {
 
     private static final String PATIENT = "{\"resourceType\":\"Patient\","
-                                          + "\"name\":[{\"family\":\"Holmes\",\"given\":[\"Sherlock\"]}],"
-                                          + "\"address\":[{\"line\":[\"221b Baker St, Marylebone, London NW1 6XE, UK\"]}]}";
+            + "\"name\":[{\"family\":\"Holmes\",\"given\":[\"Sherlock\"]}],"
+            + "\"address\":[{\"line\":[\"221b Baker St, Marylebone, London NW1 6XE, UK\"]}]}";
 
     private MockEndpoint mockEndpoint;
 
@@ -94,7 +89,8 @@ public class FhirJsonDataFormatTest {
 
         Exchange exchange = mockEndpoint.getExchanges().get(0);
         InputStream inputStream = exchange.getIn().getBody(InputStream.class);
-        IBaseResource iBaseResource = FhirContext.forR4().newJsonParser().parseResource(new InputStreamReader(inputStream));
+        IBaseResource iBaseResource = FhirContext.forR4().newJsonParser()
+                .parseResource(new InputStreamReader(inputStream));
         assertTrue(patient.equalsDeep((Base) iBaseResource), "Patients should be equal!");
     }
 
@@ -112,13 +108,9 @@ public class FhirJsonDataFormatTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:marshal")
-                            .marshal().fhirJson("R4")
-                            .to("mock:result");
+                    from("direct:marshal").marshal().fhirJson("R4").to("mock:result");
 
-                    from("direct:unmarshal")
-                            .unmarshal().fhirJson()
-                            .to("mock:result");
+                    from("direct:unmarshal").unmarshal().fhirJson().to("mock:result");
                 }
             };
         }

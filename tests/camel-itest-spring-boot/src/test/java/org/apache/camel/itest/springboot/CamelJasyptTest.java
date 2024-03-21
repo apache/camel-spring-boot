@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelJasyptTest extends AbstractSpringBootTestSupport {
 
@@ -33,11 +32,10 @@ public class CamelJasyptTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelJasyptTest.class))
-                .unitTestExclusionPattern(".*(\\.integration\\..*|IntegrationTest$|\\.Test$|\\.SpringTest$|Blueprint.*Test$)")
-                .systemProperty("JASYPT_ENCRYPTION_PASSWORD", "mainpassword")
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelJasyptTest.class))
+                .unitTestExclusionPattern(
+                        ".*(\\.integration\\..*|IntegrationTest$|\\.Test$|\\.SpringTest$|Blueprint.*Test$)")
+                .systemProperty("JASYPT_ENCRYPTION_PASSWORD", "mainpassword").build();
     }
 
     @Test
@@ -45,6 +43,5 @@ public class CamelJasyptTest extends AbstractSpringBootTestSupport {
         // no component test
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

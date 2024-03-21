@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelWeatherTest extends AbstractSpringBootTestSupport {
 
@@ -33,10 +32,8 @@ public class CamelWeatherTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelWeatherTest.class))
-                .unitTestExclusionPattern(".*(\\.integration\\..*|IntegrationTest$|BaseUndertowTest$)")
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelWeatherTest.class))
+                .unitTestExclusionPattern(".*(\\.integration\\..*|IntegrationTest$|BaseUndertowTest$)").build();
     }
 
     @Test

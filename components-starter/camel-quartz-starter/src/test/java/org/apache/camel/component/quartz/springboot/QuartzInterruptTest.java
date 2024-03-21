@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -28,8 +26,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -37,31 +33,24 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzInterruptTest.class,
-        QuartzInterruptTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzInterruptTest.class,
+        QuartzInterruptTest.TestConfiguration.class })
 public class QuartzInterruptTest extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint resultEndpoint;
-    
+
     @Test
     public void testShutdown() throws Exception {
-        
+
         resultEndpoint.expectedMinimumMessageCount(10);
 
         // lets test the receive worked
@@ -86,14 +75,11 @@ public class QuartzInterruptTest extends BaseQuartzTest {
                     QuartzComponent quartz = context.getComponent("quartz", QuartzComponent.class);
                     quartz.setInterruptJobsOnShutdown(true);
 
-                    from("quartz://myGroup/myTimerName?trigger.repeatInterval=2&trigger.repeatCount=100").routeId("myRoute")
-                            .delay(constant(1000))
-                            .to("mock:result");
+                    from("quartz://myGroup/myTimerName?trigger.repeatInterval=2&trigger.repeatCount=100")
+                            .routeId("myRoute").delay(constant(1000)).to("mock:result");
                 }
             };
         }
     }
-    
-   
 
 }

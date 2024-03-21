@@ -24,7 +24,6 @@ public class FooRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("direct:start").routeId("foo")
-            .to("mock:foo");
+        from("direct:start").routeId("foo").to("mock:foo");
     }
 }

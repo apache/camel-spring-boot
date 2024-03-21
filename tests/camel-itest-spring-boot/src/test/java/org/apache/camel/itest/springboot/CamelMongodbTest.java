@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelMongodbTest extends AbstractSpringBootTestSupport {
 
@@ -33,11 +32,8 @@ public class CamelMongodbTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelMongodbTest.class))
-                .dependency("org.mongodb:mongodb-driver-sync")
-                .dependency("org.mongodb:mongodb-driver-core")
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelMongodbTest.class))
+                .dependency("org.mongodb:mongodb-driver-sync").dependency("org.mongodb:mongodb-driver-core").build();
     }
 
     @Test
@@ -45,6 +41,5 @@ public class CamelMongodbTest extends AbstractSpringBootTestSupport {
         // no component test
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

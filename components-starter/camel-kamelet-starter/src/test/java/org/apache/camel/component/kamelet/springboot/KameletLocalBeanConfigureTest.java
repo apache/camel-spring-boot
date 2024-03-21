@@ -33,12 +33,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletLocalBeanConfigureTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletLocalBeanConfigureTest.class, })
 
 public class KameletLocalBeanConfigureTest {
 
@@ -60,8 +55,7 @@ public class KameletLocalBeanConfigureTest {
     @Test
     public void testTwo() throws Exception {
         mock.reset();
-        mock.expectedBodiesReceived("Hi Jack we are going to Shamrock",
-                "Hi Mary we are going to Moes");
+        mock.expectedBodiesReceived("Hi Jack we are going to Shamrock", "Hi Mary we are going to Moes");
 
         template.sendBody("direct:shamrock", "Jack");
         template.sendBody("direct:moe", "Mary");
@@ -80,23 +74,17 @@ public class KameletLocalBeanConfigureTest {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                routeTemplate("whereTo")
-                        .templateParameter("bar") // name of bar
+                routeTemplate("whereTo").templateParameter("bar") // name of bar
                         .configure(rtc -> {
                             // create local bean with id myBar which can be used in the routes via {{myBar}}
                             rtc.bind("myBar", MyBar.class, new MyBar(rtc.getProperty("bar", String.class)));
-                        })
-                        .from("kamelet:source")
+                        }).from("kamelet:source")
                         // must use {{myBar}} to refer to the local bean
                         .to("bean:{{myBar}}");
 
-                from("direct:shamrock")
-                        .kamelet("whereTo?bar=Shamrock")
-                        .to("mock:result");
+                from("direct:shamrock").kamelet("whereTo?bar=Shamrock").to("mock:result");
 
-                from("direct:moe")
-                        .kamelet("whereTo?bar=Moes")
-                        .to("mock:result");
+                from("direct:moe").kamelet("whereTo?bar=Moes").to("mock:result");
             }
         };
     }

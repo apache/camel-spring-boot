@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelGooglePubsubTest extends AbstractSpringBootTestSupport {
 
@@ -33,21 +32,14 @@ public class CamelGooglePubsubTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelGooglePubsubTest.class))
+        return new ITestConfigBuilder().module(inferModuleName(CamelGooglePubsubTest.class))
                 .dependency("com.google.http-client:google-http-client-jackson2:1.43.3")
-                .dependency("com.google.http-client:google-http-client:1.43.3")
-                .dependency("io.grpc:grpc-alts:1.59.1")
-                .dependency("io.grpc:grpc-api:1.59.1")
-                .dependency("io.grpc:grpc-auth:1.59.1")
-                .dependency("io.grpc:grpc-context:1.59.1")
-                .dependency("io.grpc:grpc-core:1.59.1")
-                .dependency("io.grpc:grpc-grpclb:1.59.1")
-                .dependency("io.grpc:grpc-netty-shaded:1.59.1")
-                .dependency("io.grpc:grpc-protobuf:1.59.1")
-                .dependency("io.grpc:grpc-protobuf-lite:1.59.1")
-                .dependency("io.grpc:grpc-stub:1.59.1")
-                .build();
+                .dependency("com.google.http-client:google-http-client:1.43.3").dependency("io.grpc:grpc-alts:1.59.1")
+                .dependency("io.grpc:grpc-api:1.59.1").dependency("io.grpc:grpc-auth:1.59.1")
+                .dependency("io.grpc:grpc-context:1.59.1").dependency("io.grpc:grpc-core:1.59.1")
+                .dependency("io.grpc:grpc-grpclb:1.59.1").dependency("io.grpc:grpc-netty-shaded:1.59.1")
+                .dependency("io.grpc:grpc-protobuf:1.59.1").dependency("io.grpc:grpc-protobuf-lite:1.59.1")
+                .dependency("io.grpc:grpc-stub:1.59.1").build();
     }
 
     @Test
@@ -55,6 +47,5 @@ public class CamelGooglePubsubTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

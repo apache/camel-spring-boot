@@ -33,11 +33,8 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        properties = {
-                "camel.springboot.routes-include-pattern=classpath:camel-xml-io-dsl.xml",
-                "spring.main.allow-circular-references=true"
-        })
+@SpringBootTest(properties = { "camel.springboot.routes-include-pattern=classpath:camel-xml-io-dsl.xml",
+        "spring.main.allow-circular-references=true" })
 public class MixedRestDslTest {
 
     @Autowired
@@ -45,15 +42,9 @@ public class MixedRestDslTest {
 
     @Test
     public void testMultipleRestDslDefinition() {
-        Assertions.assertThat(camelContext.getRoutes())
-                .filteredOn(
-                        route -> route.getEndpoint() instanceof RestEndpoint
-                )
+        Assertions.assertThat(camelContext.getRoutes()).filteredOn(route -> route.getEndpoint() instanceof RestEndpoint)
                 .map(route -> ((RestEndpoint) route.getEndpoint()).getPath())
-                .containsExactlyInAnyOrder(
-                        "java",
-                        "xml-io",
-                        "spring");
+                .containsExactlyInAnyOrder("java", "xml-io", "spring");
     }
 
     @Configuration

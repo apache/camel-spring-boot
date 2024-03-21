@@ -39,15 +39,9 @@ import org.springframework.test.annotation.DirtiesContext;
 @CamelSpringBootTest
 @DirtiesContext
 @EnableAutoConfiguration
-@SpringBootTest(
-    classes = {
-        CacheManagerCustomizerOverrideTest.TestConfiguration.class
-    },
-    properties = {
-        "debug=false",
+@SpringBootTest(classes = { CacheManagerCustomizerOverrideTest.TestConfiguration.class }, properties = { "debug=false",
         "camel.component.ehcache.customizer.cache-manager.enabled=true",
-        "camel.component.ehcache.customizer.cache-manager.override=true"
-    })
+        "camel.component.ehcache.customizer.cache-manager.override=true" })
 public class CacheManagerCustomizerOverrideTest {
     private static final CacheManager CACHE_MANAGER = CacheManagerBuilder.newCacheManagerBuilder().build();
 
@@ -72,9 +66,8 @@ public class CacheManagerCustomizerOverrideTest {
     public static class TestConfiguration {
         @Bean
         public ComponentCustomizer customizer() {
-            return ComponentCustomizer.builder(EhcacheComponent.class)
-                .withOrder(Ordered.HIGHEST)
-                .build(component -> component.setCacheManager(CACHE_MANAGER));
+            return ComponentCustomizer.builder(EhcacheComponent.class).withOrder(Ordered.HIGHEST)
+                    .build(component -> component.setCacheManager(CACHE_MANAGER));
         }
 
         @Bean(initMethod = "init", destroyMethod = "close")

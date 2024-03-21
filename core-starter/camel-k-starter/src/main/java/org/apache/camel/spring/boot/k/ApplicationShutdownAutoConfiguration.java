@@ -29,14 +29,13 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
-@EnableConfigurationProperties({ApplicationConfiguration.class})
+@EnableConfigurationProperties({ ApplicationConfiguration.class })
 @ConditionalOnProperty(prefix = "camel.k.enabled", name = "enabled", havingValue = "true", matchIfMissing = true)
-@AutoConfigureBefore({CamelAutoConfiguration.class})
+@AutoConfigureBefore({ CamelAutoConfiguration.class })
 public class ApplicationShutdownAutoConfiguration {
 
     @Bean
-    CamelContextCustomizer registerShutdownCustomizer(
-            ConfigurableApplicationContext applicationContext,
+    CamelContextCustomizer registerShutdownCustomizer(ConfigurableApplicationContext applicationContext,
             ApplicationConfiguration configuration) {
 
         return new ApplicationShutdownCustomizer(applicationContext, configuration);

@@ -28,39 +28,38 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 import io.swagger.v3.core.util.Json;
 import io.swagger.v3.oas.models.OpenAPI;
 
 public class RestOpenApiReaderOverrideHostApiDocsTest extends RestOpenApiReaderApiDocsTest {
 
-	private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
-	@Override
-	@Test
-	public void testReaderReadV3() throws Exception {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		config.setHost("http:mycoolserver:8888/myapi");
-		RestOpenApiReader reader = new RestOpenApiReader();
+    @Override
+    @Test
+    public void testReaderReadV3() throws Exception {
+        BeanConfig config = new BeanConfig();
+        config.setHost("localhost:8080");
+        config.setSchemes(new String[] { "http" });
+        config.setBasePath("/api");
+        config.setHost("http:mycoolserver:8888/myapi");
+        RestOpenApiReader reader = new RestOpenApiReader();
 
-		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
-				new DefaultClassResolver());
-		assertNotNull(openApi);
+        OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config,
+                context.getName(), new DefaultClassResolver());
+        assertNotNull(openApi);
 
-		String json = Json.pretty(openApi);
+        String json = Json.pretty(openApi);
 
-		log.info(json);
+        log.info(json);
 
-		assertTrue(json.contains("\"url\" : \"http://http:mycoolserver:8888/myapi/api\""));
+        assertTrue(json.contains("\"url\" : \"http://http:mycoolserver:8888/myapi/api\""));
 
-		assertFalse(json.contains("\"/hello/bye\""));
-		assertFalse(json.contains("\"summary\" : \"To update the greeting message\""));
-		assertFalse(json.contains("\"/hello/bye/{name}\""));
-		assertTrue(json.contains("\"/hello/hi/{name}\""));
+        assertFalse(json.contains("\"/hello/bye\""));
+        assertFalse(json.contains("\"summary\" : \"To update the greeting message\""));
+        assertFalse(json.contains("\"/hello/bye/{name}\""));
+        assertTrue(json.contains("\"/hello/hi/{name}\""));
 
-		context.stop();
-	}
+        context.stop();
+    }
 }

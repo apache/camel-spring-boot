@@ -37,14 +37,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FromFtpToBinaryFileTest.class,
-                FromFtpToBinaryFileTest.TestConfiguration.class
-        }
-)
-//Baaed on FromFtpToBinaryFileIT
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FromFtpToBinaryFileTest.class,
+        FromFtpToBinaryFileTest.TestConfiguration.class })
+// Baaed on FromFtpToBinaryFileIT
 public class FromFtpToBinaryFileTest extends BaseFtp {
 
     @EndpointInject("mock:result")
@@ -53,15 +48,13 @@ public class FromFtpToBinaryFileTest extends BaseFtp {
     // must user "consumer." prefix on the parameters to the file component
     private String getFtpUrl() {
         return "ftp://admin@localhost:" + getPort() + "/tmp4/camel?password=admin&binary=true"
-               + "&delay=5000&recursive=false";
+                + "&delay=5000&recursive=false";
     }
-
 
     @BeforeEach
     public void setUp() throws Exception {
         prepareFtpServer();
     }
-
 
     @Test
     public void testFtpRoute() throws Exception {
@@ -96,7 +89,7 @@ public class FromFtpToBinaryFileTest extends BaseFtp {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseFtp.TestConfiguration {
+    public class TestConfiguration extends BaseFtp.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
 
@@ -104,7 +97,8 @@ public class FromFtpToBinaryFileTest extends BaseFtp {
                 @Override
                 public void configure() {
                     String fileUrl = fileUri("?noop=true&fileExist=Override");
-                    from(getFtpUrl()).setHeader(Exchange.FILE_NAME, constant("deleteme.jpg")).to(fileUrl, "mock:result");
+                    from(getFtpUrl()).setHeader(Exchange.FILE_NAME, constant("deleteme.jpg")).to(fileUrl,
+                            "mock:result");
                 }
             };
         }

@@ -40,15 +40,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        SwiftMtDataFormatTest.class
-    },
-    properties = {
-        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SwiftMtDataFormatTest.xml"
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SwiftMtDataFormatTest.class }, properties = {
+        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SwiftMtDataFormatTest.xml" })
 class SwiftMtDataFormatTest {
 
     @EndpointInject("mock:unmarshal")
@@ -71,7 +64,8 @@ class SwiftMtDataFormatTest {
     void testUnmarshal() throws Exception {
         mockEndpointUnmarshal.expectedMessageCount(1);
 
-        Object result = templateUnmarshal.requestBody(Files.readAllBytes(Paths.get("src/test/resources/mt/message1.txt")));
+        Object result = templateUnmarshal
+                .requestBody(Files.readAllBytes(Paths.get("src/test/resources/mt/message1.txt")));
         assertNotNull(result);
         assertInstanceOf(MT515.class, result);
         mockEndpointUnmarshal.assertIsSatisfied();
@@ -103,7 +97,7 @@ class SwiftMtDataFormatTest {
 
         ObjectMapper mapper = new ObjectMapper();
         assertEquals(mapper.readTree(Files.readString(Paths.get("src/test/resources/mt/message2.json"))),
-            mapper.readTree((InputStream) result));
+                mapper.readTree((InputStream) result));
         mockEndpointMarshalJson.assertIsSatisfied();
     }
 }

@@ -44,20 +44,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirReadIT.class,
-                FhirReadIT.TestConfiguration.class,
-                DefaultCamelContext.class,
-                FhirServer.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirReadIT.class, FhirReadIT.TestConfiguration.class,
+        DefaultCamelContext.class, FhirServer.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class FhirReadIT extends AbstractFhirTestSupport {
 
     private static final Logger LOG = LoggerFactory.getLogger(FhirReadIT.class);
-    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirReadApiMethod.class).getName();
+    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirReadApiMethod.class)
+            .getName();
 
     @Test
     public void testResourceById() throws Exception {
@@ -162,7 +156,8 @@ public class FhirReadIT extends AbstractFhirTestSupport {
         // parameter type is String
         headers.put("CamelFhir.version", patient.getIdElement().getVersionIdPart());
 
-        Patient result = requestBodyAndHeaders("direct://RESOURCE_BY_STRING_ID_AND_VERSION_AND_STRING_RESOURCE", null, headers);
+        Patient result = requestBodyAndHeaders("direct://RESOURCE_BY_STRING_ID_AND_VERSION_AND_STRING_RESOURCE", null,
+                headers);
 
         assertValidResponse(result);
     }
@@ -247,20 +242,16 @@ public class FhirReadIT extends AbstractFhirTestSupport {
                 @Override
                 public void configure() {
                     // test route for resourceById
-                    from("direct://RESOURCE_BY_ID")
-                            .to("fhir://" + PATH_PREFIX + "/resourceById");
+                    from("direct://RESOURCE_BY_ID").to("fhir://" + PATH_PREFIX + "/resourceById");
 
                     // test route for resourceById
-                    from("direct://RESOURCE_BY_LONG_ID")
-                            .to("fhir://" + PATH_PREFIX + "/resourceById");
+                    from("direct://RESOURCE_BY_LONG_ID").to("fhir://" + PATH_PREFIX + "/resourceById");
 
                     // test route for resourceById
-                    from("direct://RESOURCE_BY_STRING_ID")
-                            .to("fhir://" + PATH_PREFIX + "/resourceById");
+                    from("direct://RESOURCE_BY_STRING_ID").to("fhir://" + PATH_PREFIX + "/resourceById");
 
                     // test route for resourceById
-                    from("direct://RESOURCE_BY_ID_AND_STRING_RESOURCE")
-                            .to("fhir://" + PATH_PREFIX + "/resourceById");
+                    from("direct://RESOURCE_BY_ID_AND_STRING_RESOURCE").to("fhir://" + PATH_PREFIX + "/resourceById");
 
                     // test route for resourceById
                     from("direct://RESOURCE_BY_LONG_ID_AND_STRING_RESOURCE")
@@ -271,28 +262,24 @@ public class FhirReadIT extends AbstractFhirTestSupport {
                             .to("fhir://" + PATH_PREFIX + "/resourceById");
 
                     // test route for resourceById
-                    from("direct://RESOURCE_BY_STRING_ID_AND_VERSION")
-                            .to("fhir://" + PATH_PREFIX + "/resourceById");
+                    from("direct://RESOURCE_BY_STRING_ID_AND_VERSION").to("fhir://" + PATH_PREFIX + "/resourceById");
 
                     // test route for resourceById
                     from("direct://RESOURCE_BY_STRING_ID_AND_VERSION_AND_STRING_RESOURCE")
                             .to("fhir://" + PATH_PREFIX + "/resourceById");
 
                     // test route for resourceByUrl
-                    from("direct://RESOURCE_BY_IURL")
-                            .to("fhir://" + PATH_PREFIX + "/resourceByUrl");
+                    from("direct://RESOURCE_BY_IURL").to("fhir://" + PATH_PREFIX + "/resourceByUrl");
 
                     // test route for resourceByUrl
-                    from("direct://RESOURCE_BY_URL")
-                            .to("fhir://" + PATH_PREFIX + "/resourceByUrl");
+                    from("direct://RESOURCE_BY_URL").to("fhir://" + PATH_PREFIX + "/resourceByUrl");
 
                     // test route for resourceByUrl
                     from("direct://RESOURCE_BY_STRING_URL_AND_STRING_RESOURCE")
                             .to("fhir://" + PATH_PREFIX + "/resourceByUrl");
 
                     // test route for resourceByUrl
-                    from("direct://RESOURCE_BY_URL_AND_STRING_RESOURCE")
-                            .to("fhir://" + PATH_PREFIX + "/resourceByUrl");
+                    from("direct://RESOURCE_BY_URL_AND_STRING_RESOURCE").to("fhir://" + PATH_PREFIX + "/resourceByUrl");
                 }
             };
         }

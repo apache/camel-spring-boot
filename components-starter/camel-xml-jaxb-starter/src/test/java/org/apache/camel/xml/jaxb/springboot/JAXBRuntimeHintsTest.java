@@ -38,15 +38,19 @@ class JAXBRuntimeHintsTest {
 
     @Test
     void shouldRegisterHintsForJAXB() throws Exception {
-        assertThat(RuntimeHintsPredicates.resource().forResource("jakarta/xml/bind/Messages.properties")).accepts(hints);
-        assertThat(RuntimeHintsPredicates.resource().forResource("org/apache/camel/spring/boot/aot/jaxb.index")).accepts(hints);
+        assertThat(RuntimeHintsPredicates.resource().forResource("jakarta/xml/bind/Messages.properties"))
+                .accepts(hints);
+        assertThat(RuntimeHintsPredicates.resource().forResource("org/apache/camel/spring/boot/aot/jaxb.index"))
+                .accepts(hints);
         assertThat(RuntimeHintsPredicates.reflection().onType(Book.class)).accepts(hints);
         assertThat(RuntimeHintsPredicates.reflection().onMethod(Book.class, "getName")).accepts(hints);
         assertThat(RuntimeHintsPredicates.reflection().onType(IdentifiedType.class)).accepts(hints);
         assertThat(RuntimeHintsPredicates.reflection().onMethod(IdentifiedType.class, "setId")).accepts(hints);
-        assertThat(RuntimeHintsPredicates.resource().forResource("org/apache/camel/core/xml/util/jsse/jaxb.index")).accepts(hints);
+        assertThat(RuntimeHintsPredicates.resource().forResource("org/apache/camel/core/xml/util/jsse/jaxb.index"))
+                .accepts(hints);
         assertThat(RuntimeHintsPredicates.reflection().onType(BeanScope.class)).accepts(hints);
-        assertThat(RuntimeHintsPredicates.reflection().onMethod("org.glassfish.jaxb.core.v2.model.nav.ReflectionNavigator", "getInstance")).accepts(hints);
+        assertThat(RuntimeHintsPredicates.reflection()
+                .onMethod("org.glassfish.jaxb.core.v2.model.nav.ReflectionNavigator", "getInstance")).accepts(hints);
         assertThat(RuntimeHintsPredicates.reflection().onType(USAddress.class)).accepts(hints);
         assertThat(RuntimeHintsPredicates.reflection().onType(CollapsedStringAdapter.class)).accepts(hints);
     }

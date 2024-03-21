@@ -41,7 +41,7 @@ public abstract class AbstractSpringBootTestSupport {
         this.config = retrieveConfig();
 
         ArquillianSyncBootJarLauncher launcher = new ArquillianSyncBootJarLauncher();
-        launcher.run(new String[]{});
+        launcher.run(new String[] {});
 
         this.facade = new SpringBootContainerFacade(launcher.getClassLoader());
     }

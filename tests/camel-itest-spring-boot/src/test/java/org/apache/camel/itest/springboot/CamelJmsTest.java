@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelJmsTest extends AbstractSpringBootTestSupport {
 
@@ -33,9 +32,8 @@ public class CamelJmsTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelJmsTest.class))
-                .unitTestExclusionPattern(".*(\\.integration\\..*|IntegrationTest$|ManagedJmsEndpointTopicTest$|ManagedJmsEndpointTest$|JMSTransactionIsTransactedRedeliveredTest$"
+        return new ITestConfigBuilder().module(inferModuleName(CamelJmsTest.class)).unitTestExclusionPattern(
+                ".*(\\.integration\\..*|IntegrationTest$|ManagedJmsEndpointTopicTest$|ManagedJmsEndpointTest$|JMSTransactionIsTransactedRedeliveredTest$"
                         + "|JmsToJmsTransactedTest$|JmsRequestReplyProcessRepliesConcurrentUsingThreadsTest$|JmsRouteUsingSpringWithAutoWireTest$|JmsRouteUsingSpringTest$)")
                 // excluded tests that use JMX heavily and tests that pass when run separately
                 .build();
@@ -46,6 +44,5 @@ public class CamelJmsTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

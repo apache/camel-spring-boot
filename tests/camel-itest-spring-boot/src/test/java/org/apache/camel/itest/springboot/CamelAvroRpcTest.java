@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelAvroRpcTest extends AbstractSpringBootTestSupport {
 
@@ -33,12 +32,9 @@ public class CamelAvroRpcTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelAvroRpcTest.class))
-                .dependency("org.apache.avro:avro:1.11.3")
-                .dependency("org.apache.avro:avro-ipc:1.11.3")
-                .dependency("org.apache.avro:avro-ipc-jetty:1.11.3")
-                .dependency("org.apache.avro:avro-ipc-netty:1.11.3")
+        return new ITestConfigBuilder().module(inferModuleName(CamelAvroRpcTest.class))
+                .dependency("org.apache.avro:avro:1.11.3").dependency("org.apache.avro:avro-ipc:1.11.3")
+                .dependency("org.apache.avro:avro-ipc-jetty:1.11.3").dependency("org.apache.avro:avro-ipc-netty:1.11.3")
                 .build();
     }
 
@@ -46,6 +42,5 @@ public class CamelAvroRpcTest extends AbstractSpringBootTestSupport {
     public void componentTests() throws Exception {
         this.runComponentTest(createTestConfig(), "avro");
     }
-
 
 }

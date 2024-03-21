@@ -33,12 +33,13 @@ public class GroupCondition extends SpringBootCondition {
     }
 
     @Override
-    public ConditionOutcome getMatchOutcome(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata) {
+    public ConditionOutcome getMatchOutcome(ConditionContext conditionContext,
+            AnnotatedTypeMetadata annotatedTypeMetadata) {
         final ConditionMessage.Builder message = ConditionMessage.forCondition(this.single);
         final Environment environment = conditionContext.getEnvironment();
 
         return HierarchicalPropertiesEvaluator.evaluate(environment, this.group, this.single)
-            ? ConditionOutcome.match(message.because("enabled"))
-            : ConditionOutcome.noMatch(message.because("not enabled"));
+                ? ConditionOutcome.match(message.because("enabled"))
+                : ConditionOutcome.noMatch(message.because("not enabled"));
     }
 }

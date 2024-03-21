@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -36,31 +34,24 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzSuspendRouteTest.class,
-        QuartzSuspendRouteTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzSuspendRouteTest.class,
+        QuartzSuspendRouteTest.TestConfiguration.class })
 public class QuartzSuspendRouteTest extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint mock;
-    
+
     @Test
     public void testQuartzSuspend() throws Exception {
-        
+
         mock.expectedMinimumMessageCount(1);
 
         mock.assertIsSatisfied();
@@ -83,7 +74,7 @@ public class QuartzSuspendRouteTest extends BaseQuartzTest {
 
         mock.assertIsSatisfied();
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -99,15 +90,12 @@ public class QuartzSuspendRouteTest extends BaseQuartzTest {
                     // START SNIPPET: e1
                     // triggers every second at precise 00,01,02,03..59
                     // notice we must use + as space when configured using URI parameter
-                    from("quartz://myGroup/myTimerName?cron=0/1+*+*+*+*+?")
-                            .routeId("foo")
-                            .to("log:result", "mock:result");
+                    from("quartz://myGroup/myTimerName?cron=0/1+*+*+*+*+?").routeId("foo").to("log:result",
+                            "mock:result");
                     // END SNIPPET: e1
                 }
             };
         }
     }
-    
-   
 
 }

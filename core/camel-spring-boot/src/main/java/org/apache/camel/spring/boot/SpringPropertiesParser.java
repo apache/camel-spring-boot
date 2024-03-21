@@ -20,8 +20,7 @@ import org.apache.camel.component.properties.DefaultPropertiesParser;
 import org.springframework.core.env.Environment;
 
 /**
- * Extension to {@link DefaultPropertiesParser} that will lookup
- * in Spring via {@link Environment#getProperty(String)}.
+ * Extension to {@link DefaultPropertiesParser} that will lookup in Spring via {@link Environment#getProperty(String)}.
  */
 public class SpringPropertiesParser extends DefaultPropertiesParser {
 

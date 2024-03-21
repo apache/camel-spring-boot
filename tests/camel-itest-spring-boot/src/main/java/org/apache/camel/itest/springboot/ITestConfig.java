@@ -76,8 +76,7 @@ public class ITestConfig implements Serializable {
     private String springBootVersion;
 
     /**
-     * A flag to enable system-out logging.
-     * Cannot use logging libraries here.
+     * A flag to enable system-out logging. Cannot use logging libraries here.
      */
     private Boolean debugEnabled;
 
@@ -299,32 +298,19 @@ public class ITestConfig implements Serializable {
 
     @Override
     public String toString() {
-        return "ITestConfig{"
-                + "moduleName='" + moduleName + '\''
-                + ", mavenGroup='" + mavenGroup + '\''
-                + ", mavenVersion='" + mavenVersion + '\''
-                + ", mavenOfflineResolution=" + mavenOfflineResolution
-                + ", modulesPath='" + modulesPath + '\''
-                + ", moduleBasePath='" + moduleBasePath + '\''
-                + ", includeTestDependencies=" + includeTestDependencies
-                + ", includeProvidedDependencies=" + includeProvidedDependencies
-                + ", unitTestEnabled=" + unitTestEnabled
-                + ", unitTestInclusionPattern='" + unitTestInclusionPattern + '\''
-                + ", unitTestExclusionPattern='" + unitTestExclusionPattern + '\''
-                + ", unitTestBasePackage='" + unitTestBasePackage + '\''
-                + ", unitTestsExpectedNumber=" + unitTestsExpectedNumber
-                + ", resources=" + resources
-                + ", additionalDependencies=" + additionalDependencies
-                + ", mavenExclusions=" + mavenExclusions
-                + ", autoStartComponent=" + autoStartComponent
-                + ", jmxDisabledNames=" + jmxDisabledNames
-                + ", systemProperties=" + systemProperties
-                + ", useCustomLog=" + useCustomLog
-                + ", ignoreLibraryMismatch=" + ignoreLibraryMismatch
-                + ", testLibraryVersions=" + testLibraryVersions
-                + ", springBootVersion=" + springBootVersion
-                + ", debugEnabled=" + debugEnabled
-                + ", failOnRelatedLibraryMismatch=" + failOnRelatedLibraryMismatch
-                + '}';
+        return "ITestConfig{" + "moduleName='" + moduleName + '\'' + ", mavenGroup='" + mavenGroup + '\''
+                + ", mavenVersion='" + mavenVersion + '\'' + ", mavenOfflineResolution=" + mavenOfflineResolution
+                + ", modulesPath='" + modulesPath + '\'' + ", moduleBasePath='" + moduleBasePath + '\''
+                + ", includeTestDependencies=" + includeTestDependencies + ", includeProvidedDependencies="
+                + includeProvidedDependencies + ", unitTestEnabled=" + unitTestEnabled + ", unitTestInclusionPattern='"
+                + unitTestInclusionPattern + '\'' + ", unitTestExclusionPattern='" + unitTestExclusionPattern + '\''
+                + ", unitTestBasePackage='" + unitTestBasePackage + '\'' + ", unitTestsExpectedNumber="
+                + unitTestsExpectedNumber + ", resources=" + resources + ", additionalDependencies="
+                + additionalDependencies + ", mavenExclusions=" + mavenExclusions + ", autoStartComponent="
+                + autoStartComponent + ", jmxDisabledNames=" + jmxDisabledNames + ", systemProperties="
+                + systemProperties + ", useCustomLog=" + useCustomLog + ", ignoreLibraryMismatch="
+                + ignoreLibraryMismatch + ", testLibraryVersions=" + testLibraryVersions + ", springBootVersion="
+                + springBootVersion + ", debugEnabled=" + debugEnabled + ", failOnRelatedLibraryMismatch="
+                + failOnRelatedLibraryMismatch + '}';
     }
 }

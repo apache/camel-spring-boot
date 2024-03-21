@@ -32,9 +32,7 @@ public class CamelAzureStorageDatalakeTest extends AbstractSpringBootTestSupport
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelAzureStorageDatalakeTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelAzureStorageDatalakeTest.class)).build();
     }
 
     @Test
@@ -42,6 +40,5 @@ public class CamelAzureStorageDatalakeTest extends AbstractSpringBootTestSupport
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

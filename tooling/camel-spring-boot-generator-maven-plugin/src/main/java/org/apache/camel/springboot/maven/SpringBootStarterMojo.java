@@ -65,10 +65,7 @@ import org.apache.maven.project.ProjectBuildingResult;
 /**
  * Generate Spring Boot starter for the component
  */
-@Mojo(name = "prepare-spring-boot-starter", threadSafe = true,
-        requiresDependencyCollection = ResolutionScope.COMPILE_PLUS_RUNTIME,
-        requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME,
-        defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
+@Mojo(name = "prepare-spring-boot-starter", threadSafe = true, requiresDependencyCollection = ResolutionScope.COMPILE_PLUS_RUNTIME, requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME, defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
 public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
 
     private static final String GENERATED_SECTION_START = "START OF GENERATED CODE";
@@ -127,7 +124,6 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
 
         Set<String> deps = new TreeSet<>(csvToSet(properties.getProperty(getMainDepArtifactId())));
 
-
         Set<String> globalProps = csvToSet(properties.getProperty("global"));
         boolean inGlobal = false;
         for (String gp : globalProps) {
@@ -148,7 +144,8 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
             getLog().debug("The following dependencies will be added to the starter: " + deps);
 
             XPath xpath = XPathFactory.newInstance().newXPath();
-            Node dependencies = ((NodeList) xpath.compile("/project/dependencies").evaluate(pom, XPathConstants.NODESET)).item(0);
+            Node dependencies = ((NodeList) xpath.compile("/project/dependencies").evaluate(pom,
+                    XPathConstants.NODESET)).item(0);
 
             dependencies.appendChild(pom.createComment(GENERATED_SECTION_START));
             for (String dep : deps) {
@@ -188,7 +185,8 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
             Document originalPom = builder.parse(project.getFile());
 
             XPath xpath = XPathFactory.newInstance().newXPath();
-            Node repositories = (Node) xpath.compile("/project/repositories").evaluate(originalPom, XPathConstants.NODE);
+            Node repositories = (Node) xpath.compile("/project/repositories").evaluate(originalPom,
+                    XPathConstants.NODE);
             if (repositories != null) {
                 pom.getDocumentElement().appendChild(pom.createComment(GENERATED_SECTION_START));
                 pom.getDocumentElement().appendChild(pom.importNode(repositories, true));
@@ -254,10 +252,13 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
         libsToRemove = filterIncludedArtifacts(libsToRemove);
 
         if (!libsToRemove.isEmpty()) {
-            getLog().info("Spring-Boot-Starter: the following dependencies will be removed from the starter: " + libsToRemove);
+            getLog().info("Spring-Boot-Starter: the following dependencies will be removed from the starter: "
+                    + libsToRemove);
 
             XPath xpath = XPathFactory.newInstance().newXPath();
-            Node dependency = ((NodeList) xpath.compile("/project/dependencies/dependency[artifactId/text() = '" + getMainDepArtifactId() + "']").evaluate(pom, XPathConstants.NODESET)).item(0);
+            Node dependency = ((NodeList) xpath
+                    .compile("/project/dependencies/dependency[artifactId/text() = '" + getMainDepArtifactId() + "']")
+                    .evaluate(pom, XPathConstants.NODESET)).item(0);
 
             Element exclusions = pom.createElement("exclusions");
 
@@ -292,16 +293,15 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
             ProjectBuildingResult result = projectBuilder.build(artifact, project.getProjectBuildingRequest());
             MavenProject prj = result.getProject();
             prj.setRemoteArtifactRepositories(project.getRemoteArtifactRepositories());
-            dependencies = projectDependenciesResolver.resolve(prj, Collections.singleton(Artifact.SCOPE_COMPILE), session);
+            dependencies = projectDependenciesResolver.resolve(prj, Collections.singleton(Artifact.SCOPE_COMPILE),
+                    session);
         } catch (Exception e) {
             throw new RuntimeException("Unable to build project dependency tree", e);
         }
 
         Set<String> included = new TreeSet<>();
-        dependencies.stream()
-                .filter(a -> !Artifact.SCOPE_TEST.equals(a.getScope()))
-                .map(a -> a.getGroupId() + ":" + a.getArtifactId())
-                .forEach(included::add);
+        dependencies.stream().filter(a -> !Artifact.SCOPE_TEST.equals(a.getScope()))
+                .map(a -> a.getGroupId() + ":" + a.getArtifactId()).forEach(included::add);
         included.retainAll(artifacts);
 
         return included;
@@ -317,14 +317,17 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
                     if (editablePom) {
                         content = removeGeneratedSections(content, 10);
                         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-                        documentBuilderFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl",true);
-                        documentBuilderFactory.setFeature("http://xml.org/sax/features/external-general-entities",false);
-                        documentBuilderFactory.setFeature("http://xml.org/sax/features/external-parameter-entities",false);
+                        documentBuilderFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+                        documentBuilderFactory.setFeature("http://xml.org/sax/features/external-general-entities",
+                                false);
+                        documentBuilderFactory.setFeature("http://xml.org/sax/features/external-parameter-entities",
+                                false);
 
                         DocumentBuilder builder = documentBuilderFactory.newDocumentBuilder();
 
                         Document pom;
-                        try (InputStream contentIn = new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8))) {
+                        try (InputStream contentIn = new ByteArrayInputStream(
+                                content.getBytes(StandardCharsets.UTF_8))) {
                             pom = builder.parse(contentIn);
                         }
 
@@ -359,7 +362,7 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
         String notice;
         String license;
         try (InputStream isNotice = getClass().getResourceAsStream("/spring-boot-starter-NOTICE.txt");
-             InputStream isLicense = getClass().getResourceAsStream("/spring-boot-starter-LICENSE.txt")) {
+                InputStream isLicense = getClass().getResourceAsStream("/spring-boot-starter-LICENSE.txt")) {
             notice = IOUtils.toString(isNotice, StandardCharsets.UTF_8);
             license = IOUtils.toString(isLicense, StandardCharsets.UTF_8);
         }

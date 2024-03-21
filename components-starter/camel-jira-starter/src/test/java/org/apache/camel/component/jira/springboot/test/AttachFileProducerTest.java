@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jira.springboot.test;
 
-
 import static org.apache.camel.component.jira.JiraConstants.ISSUE_KEY;
 import static org.apache.camel.component.jira.JiraConstants.JIRA_REST_CLIENT_FACTORY;
 import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.KEY;
@@ -42,7 +41,6 @@ import com.atlassian.jira.rest.client.api.JiraRestClientFactory;
 import com.atlassian.jira.rest.client.api.domain.Attachment;
 import com.atlassian.jira.rest.client.api.domain.Issue;
 
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;
@@ -66,52 +64,44 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
-
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        AttachFileProducerTest.class,
-        AttachFileProducerTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, AttachFileProducerTest.class,
+        AttachFileProducerTest.TestConfiguration.class })
 
 public class AttachFileProducerTest {
 
     @Autowired
     private CamelContext camelContext;
-    
 
-    
     @Autowired
     @Produce("direct:start")
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mockResult;
-    
+
     static JiraRestClient jiraClient;
-    
+
     static JiraRestClientFactory jiraRestClientFactory;
-    
+
     static IssueRestClient issueRestClient;
 
     static File attachedFile;
-    
+
     static Issue issue;
-    
+
     @Bean
     CamelContextConfiguration contextConfiguration() {
         return new CamelContextConfiguration() {
             @Override
             public void beforeApplicationStart(CamelContext context) {
-                //get chance to mock camelContext/Registry
+                // get chance to mock camelContext/Registry
                 jiraRestClientFactory = mock(JiraRestClientFactory.class);
                 jiraClient = mock(JiraRestClient.class);
                 issueRestClient = mock(IssueRestClient.class);
-                lenient().when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any())).thenReturn(jiraClient);
+                lenient().when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any()))
+                        .thenReturn(jiraClient);
                 lenient().when(jiraClient.getIssueClient()).thenReturn(issueRestClient);
 
                 when(issueRestClient.getIssue(any())).then(inv -> {
@@ -127,25 +117,25 @@ public class AttachFileProducerTest {
                     Files.copy(attachedFileTmp.toPath(), attachedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                     attachedFile.deleteOnExit();
                     Collection<Attachment> attachments = new ArrayList<>();
-                    attachments.add(new Attachment(
-                            issue.getAttachmentsUri(), attachedFile.getName(), null, null,
+                    attachments.add(new Attachment(issue.getAttachmentsUri(), attachedFile.getName(), null, null,
                             Long.valueOf(attachedFile.length()).intValue(), null, null, null));
                     // re-create the issue with the attachment sent by the route
-                    issue = createIssueWithAttachment(issue.getId(), issue.getSummary(), issue.getKey(), issue.getIssueType(),
-                            issue.getDescription(), issue.getPriority(), issue.getAssignee(), attachments);
+                    issue = createIssueWithAttachment(issue.getId(), issue.getSummary(), issue.getKey(),
+                            issue.getIssueType(), issue.getDescription(), issue.getPriority(), issue.getAssignee(),
+                            attachments);
                     return null;
                 });
-                
+
                 camelContext.getRegistry().bind(JIRA_REST_CLIENT_FACTORY, jiraRestClientFactory);
             }
 
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here                
+                // do nothing here
             }
         };
     }
-    
+
     private File generateSampleFile() throws IOException {
         File sampleRandomFile = File.createTempFile("attach-test", null);
         sampleRandomFile.deleteOnExit();
@@ -153,7 +143,7 @@ public class AttachFileProducerTest {
         Files.write(sampleRandomFile.toPath(), text.getBytes(), StandardOpenOption.CREATE);
         return sampleRandomFile;
     }
-    
+
     @Test
     public void verifyAttachment() throws InterruptedException, IOException {
         template.sendBody(generateSampleFile());
@@ -167,29 +157,20 @@ public class AttachFileProducerTest {
         mockResult.assertIsSatisfied();
     }
 
-    
     @Configuration
     public class TestConfiguration {
-        
-        
 
         @Bean
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws IOException {
-                    from("direct:start")
-                            .setHeader(ISSUE_KEY, () -> KEY + "-1")
-                            .to("jira://attach?jiraUrl=" + JiraTestConstants.getJiraCredentials())
-                            .to(mockResult);
+                    from("direct:start").setHeader(ISSUE_KEY, () -> KEY + "-1")
+                            .to("jira://attach?jiraUrl=" + JiraTestConstants.getJiraCredentials()).to(mockResult);
                 }
             };
         }
-        
-      
+
     }
-    
-    
-    
-    
+
 }

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.telegram.springboot;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.apache.camel.EndpointInject;
@@ -31,7 +30,6 @@ import org.apache.camel.component.telegram.springboot.TelegramMockRoutes.MockPro
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,21 +37,14 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        TelegramProducerLocationTest.class,
-        TelegramProducerLocationTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, TelegramProducerLocationTest.class,
+        TelegramProducerLocationTest.TestConfiguration.class })
 public class TelegramProducerLocationTest extends TelegramTestSupport {
 
-    
     static TelegramMockRoutes mockRoutes;
-    
+
     @EndpointInject("mock:telegram")
     private MockEndpoint endpoint;
 
@@ -66,9 +57,7 @@ public class TelegramProducerLocationTest extends TelegramTestSupport {
         template.requestBody("direct:telegram", msg, MessageResult.class);
 
         final MockProcessor<SendLocationMessage> mockProcessor = mockRoutes.getMock("sendLocation");
-        assertThat(mockProcessor.awaitRecordedMessages(1, 5000).get(0))
-                .usingRecursiveComparison()
-                .isEqualTo(msg);
+        assertThat(mockProcessor.awaitRecordedMessages(1, 5000).get(0)).usingRecursiveComparison().isEqualTo(msg);
     }
 
     @Test
@@ -77,9 +66,7 @@ public class TelegramProducerLocationTest extends TelegramTestSupport {
         template.requestBody("direct:telegram", msg, MessageResult.class);
 
         final MockProcessor<SendVenueMessage> mockProcessor = mockRoutes.getMock("sendVenue");
-        assertThat(mockProcessor.awaitRecordedMessages(1, 5000).get(0))
-                .usingRecursiveComparison()
-                .isEqualTo(msg);
+        assertThat(mockProcessor.awaitRecordedMessages(1, 5000).get(0)).usingRecursiveComparison().isEqualTo(msg);
     }
 
     @Test
@@ -87,10 +74,9 @@ public class TelegramProducerLocationTest extends TelegramTestSupport {
         EditMessageLiveLocationMessage msg = new EditMessageLiveLocationMessage(latitude, longitude);
         template.requestBody("direct:telegram", msg, MessageResult.class);
 
-        final MockProcessor<EditMessageLiveLocationMessage> mockProcessor = mockRoutes.getMock("editMessageLiveLocation");
-        assertThat(mockProcessor.awaitRecordedMessages(1, 5000).get(0))
-                .usingRecursiveComparison()
-                .isEqualTo(msg);
+        final MockProcessor<EditMessageLiveLocationMessage> mockProcessor = mockRoutes
+                .getMock("editMessageLiveLocation");
+        assertThat(mockProcessor.awaitRecordedMessages(1, 5000).get(0)).usingRecursiveComparison().isEqualTo(msg);
     }
 
     @Test
@@ -98,13 +84,10 @@ public class TelegramProducerLocationTest extends TelegramTestSupport {
         StopMessageLiveLocationMessage msg = new StopMessageLiveLocationMessage();
         template.requestBody("direct:telegram", msg, MessageResult.class);
 
-        final MockProcessor<StopMessageLiveLocationMessage> mockProcessor = mockRoutes.getMock("stopMessageLiveLocation");
-        assertThat(mockProcessor.awaitRecordedMessages(1, 5000).get(0))
-                .usingRecursiveComparison()
-                .isEqualTo(msg);
+        final MockProcessor<StopMessageLiveLocationMessage> mockProcessor = mockRoutes
+                .getMock("stopMessageLiveLocation");
+        assertThat(mockProcessor.awaitRecordedMessages(1, 5000).get(0)).usingRecursiveComparison().isEqualTo(msg);
     }
-
-
 
     // *************************************
     // Config
@@ -123,32 +106,19 @@ public class TelegramProducerLocationTest extends TelegramTestSupport {
         }
 
     }
-    
+
     @Override
     @Bean
     protected TelegramMockRoutes createMockRoutes() {
-        mockRoutes =
-            new TelegramMockRoutes(port)
-            .addEndpoint(
-                    "sendLocation",
-                    "POST",
-                    SendLocationMessage.class,
-                    TelegramTestUtil.stringResource("messages/send-location.json"))
-            .addEndpoint(
-                    "sendVenue",
-                    "POST",
-                    SendVenueMessage.class,
-                    TelegramTestUtil.stringResource("messages/send-venue.json"))
-            .addEndpoint(
-                    "editMessageLiveLocation",
-                    "POST",
-                    EditMessageLiveLocationMessage.class,
-                    TelegramTestUtil.stringResource("messages/edit-message-live-location.json"))
-            .addEndpoint(
-                    "stopMessageLiveLocation",
-                    "POST",
-                    StopMessageLiveLocationMessage.class,
-                    TelegramTestUtil.stringResource("messages/stop-message-live-location.json"));
+        mockRoutes = new TelegramMockRoutes(port)
+                .addEndpoint("sendLocation", "POST", SendLocationMessage.class,
+                        TelegramTestUtil.stringResource("messages/send-location.json"))
+                .addEndpoint("sendVenue", "POST", SendVenueMessage.class,
+                        TelegramTestUtil.stringResource("messages/send-venue.json"))
+                .addEndpoint("editMessageLiveLocation", "POST", EditMessageLiveLocationMessage.class,
+                        TelegramTestUtil.stringResource("messages/edit-message-live-location.json"))
+                .addEndpoint("stopMessageLiveLocation", "POST", StopMessageLiveLocationMessage.class,
+                        TelegramTestUtil.stringResource("messages/stop-message-live-location.json"));
         return mockRoutes;
     }
 }

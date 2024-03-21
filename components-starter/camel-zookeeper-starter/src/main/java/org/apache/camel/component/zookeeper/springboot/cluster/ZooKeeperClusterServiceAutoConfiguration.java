@@ -45,42 +45,25 @@ public class ZooKeeperClusterServiceAutoConfiguration {
     public CamelClusterService zookeeperClusterService() throws Exception {
         ZooKeeperClusterService service = new ZooKeeperClusterService();
 
-        Optional.ofNullable(configuration.getId())
-                .ifPresent(service::setId);
-        Optional.ofNullable(configuration.getOrder())
-                .ifPresent(service::setOrder);
-        Optional.ofNullable(configuration.getAttributes())
-                .ifPresent(service::setAttributes);
-        Optional.ofNullable(configuration.getBasePath())
-                .ifPresent(service::setBasePath);
-        Optional.ofNullable(configuration.getNamespace())
-                .ifPresent(service::setNamespace);
-        Optional.ofNullable(configuration.getAuthInfoList())
-                .ifPresent(service::setAuthInfoList);
-        Optional.of(configuration.getConnectionTimeout())
-                .ifPresent(service::setConnectionTimeout);
-        Optional.ofNullable(configuration.getConnectionTimeoutUnit())
-                .ifPresent(service::setConnectionTimeoutUnit);
-        Optional.ofNullable(configuration.getCuratorFramework())
-                .ifPresent(service::setCuratorFramework);
-        Optional.of(configuration.getMaxCloseWait())
-                .ifPresent(service::setMaxCloseWait);
-        Optional.ofNullable(configuration.getMaxCloseWaitUnit())
-                .ifPresent(service::setMaxCloseWaitUnit);
-        Optional.ofNullable(configuration.getNodes())
-                .ifPresent(service::setNodes);
-        Optional.of(configuration.getReconnectBaseSleepTime())
-                .ifPresent(service::setReconnectBaseSleepTime);
+        Optional.ofNullable(configuration.getId()).ifPresent(service::setId);
+        Optional.ofNullable(configuration.getOrder()).ifPresent(service::setOrder);
+        Optional.ofNullable(configuration.getAttributes()).ifPresent(service::setAttributes);
+        Optional.ofNullable(configuration.getBasePath()).ifPresent(service::setBasePath);
+        Optional.ofNullable(configuration.getNamespace()).ifPresent(service::setNamespace);
+        Optional.ofNullable(configuration.getAuthInfoList()).ifPresent(service::setAuthInfoList);
+        Optional.of(configuration.getConnectionTimeout()).ifPresent(service::setConnectionTimeout);
+        Optional.ofNullable(configuration.getConnectionTimeoutUnit()).ifPresent(service::setConnectionTimeoutUnit);
+        Optional.ofNullable(configuration.getCuratorFramework()).ifPresent(service::setCuratorFramework);
+        Optional.of(configuration.getMaxCloseWait()).ifPresent(service::setMaxCloseWait);
+        Optional.ofNullable(configuration.getMaxCloseWaitUnit()).ifPresent(service::setMaxCloseWaitUnit);
+        Optional.ofNullable(configuration.getNodes()).ifPresent(service::setNodes);
+        Optional.of(configuration.getReconnectBaseSleepTime()).ifPresent(service::setReconnectBaseSleepTime);
         Optional.ofNullable(configuration.getReconnectBaseSleepTimeUnit())
                 .ifPresent(service::setReconnectBaseSleepTimeUnit);
-        Optional.of(configuration.getReconnectMaxRetries())
-                .ifPresent(service::setReconnectMaxRetries);
-        Optional.ofNullable(configuration.getRetryPolicy())
-                .ifPresent(service::setRetryPolicy);
-        Optional.of(configuration.getSessionTimeout())
-                .ifPresent(service::setSessionTimeout);
-        Optional.ofNullable(configuration.getSessionTimeoutUnit())
-                .ifPresent(service::setSessionTimeoutUnit);
+        Optional.of(configuration.getReconnectMaxRetries()).ifPresent(service::setReconnectMaxRetries);
+        Optional.ofNullable(configuration.getRetryPolicy()).ifPresent(service::setRetryPolicy);
+        Optional.of(configuration.getSessionTimeout()).ifPresent(service::setSessionTimeout);
+        Optional.ofNullable(configuration.getSessionTimeoutUnit()).ifPresent(service::setSessionTimeoutUnit);
         service.setConfiguration(configuration);
 
         return service;

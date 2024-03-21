@@ -50,13 +50,12 @@ public class BaseSql {
     }
 
     protected static EmbeddedDatabase initDb(EmbeddedDatabaseType type, String script) {
-        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder()
-                .setName(BaseSql.class.getSimpleName())
+        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder().setName(BaseSql.class.getSimpleName())
                 .setType(type);
-        if(script != null && !"".equals(script)) {
+        if (script != null && !"".equals(script)) {
             builder.addScript(script);
         }
-        EmbeddedDatabase ed =  builder.build();
+        EmbeddedDatabase ed = builder.build();
         return ed;
     }
 
@@ -77,7 +76,7 @@ public class BaseSql {
 
                 @Override
                 public void destroy() throws Exception {
-                    ((EmbeddedDatabase)dataSource).shutdown();
+                    ((EmbeddedDatabase) dataSource).shutdown();
                 }
 
             };

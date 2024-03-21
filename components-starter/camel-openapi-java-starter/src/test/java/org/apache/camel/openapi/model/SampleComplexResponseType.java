@@ -21,39 +21,39 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Month;
 
 public class SampleComplexResponseType {
-	@JsonProperty(required = true)
-	private final String responseField1 = "Response Field 1";
-	private final String responseField2 = "Response Field 2";
-	private String[] arrayOfStrings;
-	private Month month;
-	private InnerClass innerClass;
+    @JsonProperty(required = true)
+    private final String responseField1 = "Response Field 1";
+    private final String responseField2 = "Response Field 2";
+    private String[] arrayOfStrings;
+    private Month month;
+    private InnerClass innerClass;
 
-	public String getResponseField1() {
-		return responseField1;
-	}
+    public String getResponseField1() {
+        return responseField1;
+    }
 
-	public String getResponseField2() {
-		return responseField2;
-	}
+    public String getResponseField2() {
+        return responseField2;
+    }
 
-	@JsonProperty(required = true)
-	public String[] getArrayOfStrings() {
-		return arrayOfStrings;
-	}
+    @JsonProperty(required = true)
+    public String[] getArrayOfStrings() {
+        return arrayOfStrings;
+    }
 
-	public Month getMonth() {
-		return month;
-	}
+    public Month getMonth() {
+        return month;
+    }
 
-	public InnerClass getInnerClass() {
-		return innerClass;
-	}
+    public InnerClass getInnerClass() {
+        return innerClass;
+    }
 
-	public static class InnerClass {
-		double doubleField;
+    public static class InnerClass {
+        double doubleField;
 
-		public double getDoubleField() {
-			return doubleField;
-		}
-	}
+        public double getDoubleField() {
+            return doubleField;
+        }
+    }
 }

@@ -30,13 +30,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(
-    classes = {
-        CamelXmlRoutesTest.class,
-        RouteConfigWithCamelContextInjected.class },
-    properties = {
-        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/foo.xml,file:src/test/resources/routes/bar.xml"}
-)
+@SpringBootTest(classes = { CamelXmlRoutesTest.class, RouteConfigWithCamelContextInjected.class }, properties = {
+        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/foo.xml,file:src/test/resources/routes/bar.xml" })
 public class CamelXmlRoutesTest {
 
     // Collaborators fixtures

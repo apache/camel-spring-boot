@@ -24,17 +24,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class FromFileBase {
-    
+
     private boolean testDirectoryCleaned;
-    
+
     protected String fileUri() {
         return "file:" + testDirectory();
     }
-    
+
     protected String fileUri(String query) {
         return "file:" + testDirectory() + (query.startsWith("?") ? "" : "/") + query;
     }
-    
+
     protected Path testDirectory() {
         return testDirectory(false);
     }
@@ -44,8 +44,6 @@ public class FromFileBase {
         return testDirectory(testClass, create);
     }
 
-    
-    
     protected static Path testDirectory(Class<?> testClass, boolean create) {
         Path dir = Paths.get("target", "data", testClass.getSimpleName());
         if (create) {
@@ -57,17 +55,16 @@ public class FromFileBase {
         }
         return dir;
     }
-    
+
     protected Path testFile(String dir) {
         return testDirectory().resolve(dir);
     }
-    
+
     public void deleteTestDirectory() {
         if (!testDirectoryCleaned) {
             deleteDirectory(testDirectory());
             testDirectoryCleaned = true;
         }
     }
-    
 
 }

@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -42,54 +40,46 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzCronRouteWithSmallCacheTest.class,
-        QuartzCronRouteWithSmallCacheTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzCronRouteWithSmallCacheTest.class,
+        QuartzCronRouteWithSmallCacheTest.TestConfiguration.class })
 public class QuartzCronRouteWithSmallCacheTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint resultEndpoint;
-    
+
     private static final CountDownLatch latch = new CountDownLatch(3);
-    
+
     @Bean
     CamelContextConfiguration contextConfiguration() {
         return new CamelContextConfiguration() {
             @Override
             public void beforeApplicationStart(CamelContext context) {
                 context.getGlobalOptions().put(Exchange.MAXIMUM_ENDPOINT_CACHE_SIZE, "1");
-                
-                
+
             }
 
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here
+                // do nothing here
             }
         };
     }
-    
+
     @Test
     public void testQuartzCronRouteWithSmallCache() throws Exception {
         boolean wait = latch.await(10, TimeUnit.SECONDS);
         assertTrue(wait);
         assertTrue(latch.getCount() <= 0, "Quartz should trigger at least 3 times");
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -115,7 +105,5 @@ public class QuartzCronRouteWithSmallCacheTest {
             };
         }
     }
-    
-   
 
 }

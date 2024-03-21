@@ -39,81 +39,63 @@ import java.util.function.BiFunction;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				InfinispanRemoteProducerIT.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, InfinispanRemoteProducerIT.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Flaky on Github CI")
 public class InfinispanRemoteProducerIT extends InfinispanRemoteTestSupport implements InfinispanProducerTestSupport {
 
-	@Bean
-	public BiFunction<String, String, String> mappingFunction() {
-		return (k, v) -> v + "replay";
-	}
+    @Bean
+    public BiFunction<String, String, String> mappingFunction() {
+        return (k, v) -> v + "replay";
+    }
 
-	@Test
-	public void statsOperation() {
-		fluentTemplate()
-				.to("direct:start")
-				.withHeader(InfinispanConstants.KEY, InfinispanProducerTestSupport.KEY_ONE)
-				.withHeader(InfinispanConstants.VALUE, InfinispanProducerTestSupport.VALUE_ONE)
-				.withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUT)
-				.send();
+    @Test
+    public void statsOperation() {
+        fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, InfinispanProducerTestSupport.KEY_ONE)
+                .withHeader(InfinispanConstants.VALUE, InfinispanProducerTestSupport.VALUE_ONE)
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUT).send();
 
-		assertEquals(InfinispanProducerTestSupport.VALUE_ONE, getCache().get(InfinispanProducerTestSupport.KEY_ONE));
+        assertEquals(InfinispanProducerTestSupport.VALUE_ONE, getCache().get(InfinispanProducerTestSupport.KEY_ONE));
 
-		fluentTemplate()
-				.to("direct:start")
-				.withHeader(InfinispanConstants.KEY, InfinispanProducerTestSupport.KEY_TWO)
-				.withHeader(InfinispanConstants.VALUE, InfinispanProducerTestSupport.VALUE_TWO)
-				.withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUT)
-				.send();
+        fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, InfinispanProducerTestSupport.KEY_TWO)
+                .withHeader(InfinispanConstants.VALUE, InfinispanProducerTestSupport.VALUE_TWO)
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUT).send();
 
-		assertEquals(InfinispanProducerTestSupport.VALUE_TWO, getCache().get(InfinispanProducerTestSupport.KEY_TWO));
+        assertEquals(InfinispanProducerTestSupport.VALUE_TWO, getCache().get(InfinispanProducerTestSupport.KEY_TWO));
 
-		assertEquals(
-				2,
-				fluentTemplate()
-						.to("direct:start")
-						.withHeader(InfinispanConstants.OPERATION, InfinispanOperation.STATS)
-						.request(ServerStatistics.class)
-						.getIntStatistic(ServerStatistics.APPROXIMATE_ENTRIES));
-	}
+        assertEquals(2,
+                fluentTemplate().to("direct:start").withHeader(InfinispanConstants.OPERATION, InfinispanOperation.STATS)
+                        .request(ServerStatistics.class).getIntStatistic(ServerStatistics.APPROXIMATE_ENTRIES));
+    }
 
-	// *****************************
-	//
-	// *****************************
+    // *****************************
+    //
+    // *****************************
 
-	@BeforeEach
-	protected void beforeEach() {
-		// cleanup the default test cache before each run
-		getCache().clear();
-	}
+    @BeforeEach
+    protected void beforeEach() {
+        // cleanup the default test cache before each run
+        getCache().clear();
+    }
 
-	@Override
-	public BasicCache<Object, Object> getCache() {
-		return super.getCache();
-	}
+    @Override
+    public BasicCache<Object, Object> getCache() {
+        return super.getCache();
+    }
 
-	@Override
-	public BasicCache<Object, Object> getCache(String name) {
-		return InfinispanRemoteTestSupport.getCacheByName(name);
-	}
+    @Override
+    public BasicCache<Object, Object> getCache(String name) {
+        return InfinispanRemoteTestSupport.getCacheByName(name);
+    }
 
-	@Bean
-	protected RouteBuilder createRouteBuilder() throws Exception {
-		return new RouteBuilder() {
-			@Override
-			public void configure() {
-				from("direct:start")
-						.toF("infinispan:%s", getCacheName());
-				from("direct:compute")
-						.toF("infinispan:%s?remappingFunction=#mappingFunction", getCacheName());
-				from("direct:explicitput")
-						.toF("infinispan:%s?operation=PUT&key=a&value=3", getCacheName());
-			}
-		};
-	}
+    @Bean
+    protected RouteBuilder createRouteBuilder() throws Exception {
+        return new RouteBuilder() {
+            @Override
+            public void configure() {
+                from("direct:start").toF("infinispan:%s", getCacheName());
+                from("direct:compute").toF("infinispan:%s?remappingFunction=#mappingFunction", getCacheName());
+                from("direct:explicitput").toF("infinispan:%s?operation=PUT&key=a&value=3", getCacheName());
+            }
+        };
+    }
 }

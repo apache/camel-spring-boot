@@ -32,13 +32,8 @@ import org.springframework.test.annotation.DirtiesContext;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileProduceTempPrefixTest.class,
-                FileProduceTempPrefixTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileProduceTempPrefixTest.class,
+        FileProduceTempPrefixTest.TestConfiguration.class })
 public class FileProduceTempPrefixTest extends BaseFile {
 
     private String fileUrl = fileUri("?tempPrefix=inprogress.");

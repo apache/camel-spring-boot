@@ -33,13 +33,10 @@ public class KubernetesClusterServiceAutoConfigurationTest {
     @Test
     public void testDisable() {
         new ApplicationContextRunner()
-            .withConfiguration(AutoConfigurations.of(KubernetesClusterServiceAutoConfiguration.class))
-            .withUserConfiguration(TestConfiguration.class)
-            .run(
-                context -> {
+                .withConfiguration(AutoConfigurations.of(KubernetesClusterServiceAutoConfiguration.class))
+                .withUserConfiguration(TestConfiguration.class).run(context -> {
                     assertThat(context).doesNotHaveBean(KubernetesClusterService.class);
-                }
-            );
+                });
     }
 
     /**
@@ -48,24 +45,19 @@ public class KubernetesClusterServiceAutoConfigurationTest {
     @Test
     public void testPropertiesMapped() {
         new ApplicationContextRunner()
-            .withConfiguration(AutoConfigurations.of(KubernetesClusterServiceAutoConfiguration.class))
-            .withUserConfiguration(TestConfiguration.class)
-            .withPropertyValues(
-                "spring.main.banner-mode=off",
-                "camel.cluster.kubernetes.enabled=true",
-                "camel.cluster.kubernetes.id=myid1",
-                "camel.cluster.kubernetes.master-url=http://myurl:9000",
-                "camel.cluster.kubernetes.connection-timeout-millis=1234",
-                "camel.cluster.kubernetes.kubernetes-namespace=ns1",
-                "camel.cluster.kubernetes.config-map-name=cm",
-                "camel.cluster.kubernetes.pod-name=mypod1",
-                "camel.cluster.kubernetes.cluster-labels.app=myapp",
-                "camel.cluster.kubernetes.cluster-labels.provider=myprovider",
-                "camel.cluster.kubernetes.lease-duration-millis=10000",
-                "camel.cluster.kubernetes.renew-deadline-millis=8000",
-                "camel.cluster.kubernetes.retry-period-millis=4000")
-            .run(
-                context -> {
+                .withConfiguration(AutoConfigurations.of(KubernetesClusterServiceAutoConfiguration.class))
+                .withUserConfiguration(TestConfiguration.class)
+                .withPropertyValues("spring.main.banner-mode=off", "camel.cluster.kubernetes.enabled=true",
+                        "camel.cluster.kubernetes.id=myid1", "camel.cluster.kubernetes.master-url=http://myurl:9000",
+                        "camel.cluster.kubernetes.connection-timeout-millis=1234",
+                        "camel.cluster.kubernetes.kubernetes-namespace=ns1",
+                        "camel.cluster.kubernetes.config-map-name=cm", "camel.cluster.kubernetes.pod-name=mypod1",
+                        "camel.cluster.kubernetes.cluster-labels.app=myapp",
+                        "camel.cluster.kubernetes.cluster-labels.provider=myprovider",
+                        "camel.cluster.kubernetes.lease-duration-millis=10000",
+                        "camel.cluster.kubernetes.renew-deadline-millis=8000",
+                        "camel.cluster.kubernetes.retry-period-millis=4000")
+                .run(context -> {
                     final KubernetesClusterService clusterService = context.getBean(KubernetesClusterService.class);
 
                     assertEquals("myid1", clusterService.getId());
@@ -84,8 +76,7 @@ public class KubernetesClusterServiceAutoConfigurationTest {
                     assertEquals(10000, clusterService.getLeaseDurationMillis());
                     assertEquals(8000, clusterService.getRenewDeadlineMillis());
                     assertEquals(4000, clusterService.getRetryPeriodMillis());
-                }
-            );
+                });
     }
 
     @EnableAutoConfiguration
@@ -93,4 +84,3 @@ public class KubernetesClusterServiceAutoConfigurationTest {
     public static class TestConfiguration {
     }
 }
-

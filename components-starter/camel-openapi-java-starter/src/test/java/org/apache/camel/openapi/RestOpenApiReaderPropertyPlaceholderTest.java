@@ -46,51 +46,44 @@ import io.swagger.v3.oas.models.OpenAPI;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				RestOpenApiReaderPropertyPlaceholderTest.class,
-				RestOpenApiReaderPropertyPlaceholderTest.TestConfiguration.class,
-				DummyRestConsumerFactory.class
-		},
-		properties = {"foo=hello", "bar=bye"}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, RestOpenApiReaderPropertyPlaceholderTest.class,
+        RestOpenApiReaderPropertyPlaceholderTest.TestConfiguration.class,
+        DummyRestConsumerFactory.class }, properties = { "foo=hello", "bar=bye" })
 public class RestOpenApiReaderPropertyPlaceholderTest {
 
-	private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
-	@BindToRegistry("dummy-rest")
-	private final DummyRestProducerFactory factory = new DummyRestProducerFactory();
+    @BindToRegistry("dummy-rest")
+    private final DummyRestProducerFactory factory = new DummyRestProducerFactory();
 
-	@BindToRegistry("dummy-rest-consumer")
-	private final DummyRestConsumerFactory consumerFactory = new DummyRestConsumerFactory();
+    @BindToRegistry("dummy-rest-consumer")
+    private final DummyRestConsumerFactory consumerFactory = new DummyRestConsumerFactory();
 
-	@Autowired
-	CamelContext context;
+    @Autowired
+    CamelContext context;
 
-	@Configuration
-	public class TestConfiguration {
+    @Configuration
+    public class TestConfiguration {
 
-		@Bean
-		public RouteBuilder routeBuilder() {
-			return new RouteBuilder() {
+        @Bean
+        public RouteBuilder routeBuilder() {
+            return new RouteBuilder() {
 
-				@Override
-				public void configure() throws Exception {
-					// this user REST service is json only
-					rest("/{{foo}}").consumes("application/json").produces("application/json").get("/hi/{name}")
-							.description("Saying hi").param().name("name").type(RestParamType.path)
-							.dataType("string").description("Who is it").endParam().to("log:hi").get("/{{bar}}/{name}")
-							.description("Saying bye").param().name("name")
-							.type(RestParamType.path).dataType("string").description("Who is it").endParam().responseMessage()
-							.code(200).message("A reply message").endResponseMessage()
-							.to("log:bye").post("/{{bar}}").description("To update the greeting message")
-							.consumes("application/xml").produces("application/xml").param().name("greeting")
-							.type(RestParamType.body).dataType("string").description("Message to use as greeting").endParam()
-							.to("log:bye");
-				}
-			};
-		}
-	}
+                @Override
+                public void configure() throws Exception {
+                    // this user REST service is json only
+                    rest("/{{foo}}").consumes("application/json").produces("application/json").get("/hi/{name}")
+                            .description("Saying hi").param().name("name").type(RestParamType.path).dataType("string")
+                            .description("Who is it").endParam().to("log:hi").get("/{{bar}}/{name}")
+                            .description("Saying bye").param().name("name").type(RestParamType.path).dataType("string")
+                            .description("Who is it").endParam().responseMessage().code(200).message("A reply message")
+                            .endResponseMessage().to("log:bye").post("/{{bar}}")
+                            .description("To update the greeting message").consumes("application/xml")
+                            .produces("application/xml").param().name("greeting").type(RestParamType.body)
+                            .dataType("string").description("Message to use as greeting").endParam().to("log:bye");
+                }
+            };
+        }
+    }
 
 }

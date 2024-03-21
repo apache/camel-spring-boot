@@ -33,10 +33,8 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(
-    classes = XPathPropertyPlaceholderTest.TestConfig.class,
-    properties = {"foo = //greeting/text = 'Hello, world!'", "bar = //greeting/text = 'Bye, world!'"}
-)
+@SpringBootTest(classes = XPathPropertyPlaceholderTest.TestConfig.class, properties = {
+        "foo = //greeting/text = 'Hello, world!'", "bar = //greeting/text = 'Bye, world!'" })
 public class XPathPropertyPlaceholderTest {
 
     @Autowired
@@ -88,22 +86,13 @@ public class XPathPropertyPlaceholderTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:filter")
-                        .filter().xpath("{{foo}}")
-                            .log("Passed filter!")
-                            .to("mock:output-filter");
+                    from("direct:filter").filter().xpath("{{foo}}").log("Passed filter!").to("mock:output-filter");
 
-                    from("direct:choice")
-                        .choice()
-                            .when(xpath("{{bar}}"))
-                                .log("Passed choice!")
-                                .to("mock:output-choice");
+                    from("direct:choice").choice().when(xpath("{{bar}}")).log("Passed choice!")
+                            .to("mock:output-choice");
 
-                    from("direct:choice2")
-                        .choice()
-                            .when().xpath("{{bar}}")
-                                .log("Passed choice2!")
-                                .to("mock:output-choice2");
+                    from("direct:choice2").choice().when().xpath("{{bar}}").log("Passed choice2!")
+                            .to("mock:output-choice2");
                 }
             };
         }

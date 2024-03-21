@@ -42,13 +42,8 @@ import java.time.Instant;
 //Based on CwComponentIT
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                CwComponentTest.class,
-                CwComponentTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, CwComponentTest.class,
+        CwComponentTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class CwComponentTest extends BaseCw {
 
@@ -71,7 +66,8 @@ public class CwComponentTest extends BaseCw {
         assertMockEndpointsSatisfied();
 
         CloudWatchClient client = AWSSDKClientUtils.newCloudWatchClient();
-        ListMetricsResponse resp = client.listMetrics( ListMetricsRequest.builder().namespace("http://camel.apache.org/aws-cw").build());
+        ListMetricsResponse resp = client
+                .listMetrics(ListMetricsRequest.builder().namespace("http://camel.apache.org/aws-cw").build());
 
         Assertions.assertEquals(1, resp.metrics().size());
         Assertions.assertEquals("ExchangesCompleted", resp.metrics().get(0).metricName());
@@ -88,8 +84,7 @@ public class CwComponentTest extends BaseCw {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:start").to("aws2-cw://http://camel.apache.org/aws-cw")
-                            .to("mock:result");
+                    from("direct:start").to("aws2-cw://http://camel.apache.org/aws-cw").to("mock:result");
                 }
             };
         }

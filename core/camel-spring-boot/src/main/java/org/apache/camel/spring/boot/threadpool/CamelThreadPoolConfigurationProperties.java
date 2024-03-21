@@ -134,8 +134,7 @@ public class CamelThreadPoolConfigurationProperties {
 
     public boolean isEmpty() {
         return poolSize == null && maxPoolSize == null && keepAliveTime == null && timeUnit == null
-                && maxQueueSize == null && allowCoreThreadTimeOut == null && rejectedPolicy == null
-                && config.isEmpty();
+                && maxQueueSize == null && allowCoreThreadTimeOut == null && rejectedPolicy == null && config.isEmpty();
     }
 
     @ConfigurationProperties(prefix = "camel.threadpool.config")
@@ -249,5 +248,3 @@ public class CamelThreadPoolConfigurationProperties {
 
     }
 }
-
-

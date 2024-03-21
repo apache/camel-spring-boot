@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelNettyTest extends AbstractSpringBootTestSupport {
 
@@ -33,10 +32,8 @@ public class CamelNettyTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelNettyTest.class))
-                .unitTestExclusionPattern(".*(\\.integration\\..*|IntegrationTest$|BaseNettyTest$)")
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelNettyTest.class))
+                .unitTestExclusionPattern(".*(\\.integration\\..*|IntegrationTest$|BaseNettyTest$)").build();
     }
 
     @Test
@@ -44,6 +41,5 @@ public class CamelNettyTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

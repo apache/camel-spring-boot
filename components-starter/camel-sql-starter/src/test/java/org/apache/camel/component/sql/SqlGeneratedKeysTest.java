@@ -39,14 +39,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SqlGeneratedKeysTest.class,
-                SqlGeneratedKeysTest.TestConfiguration.class,
-                BaseSql.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SqlGeneratedKeysTest.class,
+        SqlGeneratedKeysTest.TestConfiguration.class, BaseSql.TestConfiguration.class })
 public class SqlGeneratedKeysTest extends BaseSql {
 
     @Test
@@ -69,9 +63,9 @@ public class SqlGeneratedKeysTest extends BaseSql {
         assertNotNull(out.getMessage().getHeader(SqlConstants.SQL_GENERATED_KEYS_DATA));
         assertSame(body, out.getMessage().getBody());
 
-        List<Map<String, Object>> generatedKeys = out.getMessage().getHeader(SqlConstants.SQL_GENERATED_KEYS_DATA, List.class);
-        assertNotNull(generatedKeys, "out body could not be converted to a List - was: "
-                                     + out.getMessage().getBody());
+        List<Map<String, Object>> generatedKeys = out.getMessage().getHeader(SqlConstants.SQL_GENERATED_KEYS_DATA,
+                List.class);
+        assertNotNull(generatedKeys, "out body could not be converted to a List - was: " + out.getMessage().getBody());
         assertEquals(1, generatedKeys.get(0).size());
 
         Map<String, Object> row = generatedKeys.get(0);
@@ -98,7 +92,8 @@ public class SqlGeneratedKeysTest extends BaseSql {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:insert").to("sql:insert into projects (project, license, description) values (#, #, #)");
+                    from("direct:insert")
+                            .to("sql:insert into projects (project, license, description) values (#, #, #)");
                 }
             };
         }

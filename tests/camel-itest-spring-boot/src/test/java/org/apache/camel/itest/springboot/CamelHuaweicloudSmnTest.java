@@ -32,15 +32,12 @@ public class CamelHuaweicloudSmnTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelHuaweicloudSmnTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelHuaweicloudSmnTest.class)).build();
     }
 
     @Test
     public void componentTests() throws Exception {
         this.runComponentTest(config, "hwcloud-smn");
     }
-
 
 }

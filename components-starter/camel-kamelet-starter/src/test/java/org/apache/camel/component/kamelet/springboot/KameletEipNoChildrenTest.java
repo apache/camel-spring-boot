@@ -30,21 +30,14 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.ProducerTemplate;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletEipNoChildrenTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletEipNoChildrenTest.class, })
 
 public class KameletEipNoChildrenTest {
 
     @Autowired
     ProducerTemplate template;
-
 
     @Test
     public void testOne() {
@@ -66,12 +59,9 @@ public class KameletEipNoChildrenTest {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                routeTemplate("echo")
-                        .from("kamelet:source")
-                        .setBody(body().append(body()));
+                routeTemplate("echo").from("kamelet:source").setBody(body().append(body()));
 
-                from("direct:start")
-                        .kamelet("echo");
+                from("direct:start").kamelet("echo");
             }
         };
     }

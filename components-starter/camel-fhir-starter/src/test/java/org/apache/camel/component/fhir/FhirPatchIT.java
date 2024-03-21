@@ -49,20 +49,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirPatchIT.class,
-                FhirPatchIT.TestConfiguration.class,
-                DefaultCamelContext.class,
-                FhirServer.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirPatchIT.class, FhirPatchIT.TestConfiguration.class,
+        DefaultCamelContext.class, FhirServer.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class FhirPatchIT extends AbstractFhirTestSupport {
 
     private static final Logger LOG = LoggerFactory.getLogger(FhirPatchIT.class);
-    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirPatchApiMethod.class).getName();
+    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirPatchApiMethod.class)
+            .getName();
     private static final String PATCH = "[ { \"op\":\"replace\", \"path\":\"/active\", \"value\":true } ]";
 
     @Test
@@ -138,16 +132,13 @@ public class FhirPatchIT extends AbstractFhirTestSupport {
                 @Override
                 public void configure() {
                     // test route for patchById
-                    from("direct://PATCH_BY_ID")
-                            .to("fhir://" + PATH_PREFIX + "/patchById");
+                    from("direct://PATCH_BY_ID").to("fhir://" + PATH_PREFIX + "/patchById");
 
                     // test route for patchBySId
-                    from("direct://PATCH_BY_SID")
-                            .to("fhir://" + PATH_PREFIX + "/patchById");
+                    from("direct://PATCH_BY_SID").to("fhir://" + PATH_PREFIX + "/patchById");
 
                     // test route for patchByUrl
-                    from("direct://PATCH_BY_URL")
-                            .to("fhir://" + PATH_PREFIX + "/patchByUrl");
+                    from("direct://PATCH_BY_URL").to("fhir://" + PATH_PREFIX + "/patchByUrl");
                 }
             };
         }
@@ -157,7 +148,8 @@ public class FhirPatchIT extends AbstractFhirTestSupport {
         LOG.debug("result: {}", result);
         IIdType id = result.getId();
 
-        Patient patient = fhirClient.read().resource(Patient.class).withId(id).preferResponseType(Patient.class).execute();
+        Patient patient = fhirClient.read().resource(Patient.class).withId(id).preferResponseType(Patient.class)
+                .execute();
         assertTrue(patient.getActive());
     }
 }

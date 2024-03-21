@@ -31,21 +31,17 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FtpConsumerMaxMessagesPerPollTest.class,
-                FtpConsumerMaxMessagesPerPollTest.TestConfiguration.class
-        }
-)
-//Based on FtpConsumerMaxMessagesPerPollIT
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FtpConsumerMaxMessagesPerPollTest.class,
+        FtpConsumerMaxMessagesPerPollTest.TestConfiguration.class })
+// Based on FtpConsumerMaxMessagesPerPollIT
 public class FtpConsumerMaxMessagesPerPollTest extends BaseFtp {
 
     @EndpointInject("mock:result")
     private MockEndpoint mock;
 
     private String getFtpUrl() {
-        return "ftp://admin@localhost:" + getPort() + "/poll/?password=admin&delay=6000&delete=true&sortBy=file:name&maxMessagesPerPoll=2";
+        return "ftp://admin@localhost:" + getPort()
+                + "/poll/?password=admin&delay=6000&delete=true&sortBy=file:name&maxMessagesPerPoll=2";
     }
 
     @BeforeEach
@@ -78,7 +74,7 @@ public class FtpConsumerMaxMessagesPerPollTest extends BaseFtp {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseFtp.TestConfiguration {
+    public class TestConfiguration extends BaseFtp.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
 

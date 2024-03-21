@@ -18,13 +18,13 @@ package org.apache.camel.openapi;
 
 public class DayResponse {
 
-	private String day;
+    private String day;
 
-	public String getDay() {
-		return day;
-	}
+    public String getDay() {
+        return day;
+    }
 
-	public void setDay(String day) {
-		this.day = day;
-	}
+    public void setDay(String day) {
+        this.day = day;
+    }
 }

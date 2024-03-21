@@ -38,7 +38,8 @@ public class CamelHealthCheckIndicator extends AbstractHealthIndicator {
 
     private final String exposureLevel;
 
-    public CamelHealthCheckIndicator(ApplicationContext applicationContext, CamelContext camelContext, String exposureLevel) {
+    public CamelHealthCheckIndicator(ApplicationContext applicationContext, CamelContext camelContext,
+            String exposureLevel) {
         this.applicationContext = applicationContext;
         this.camelContext = camelContext;
         this.exposureLevel = exposureLevel;

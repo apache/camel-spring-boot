@@ -42,13 +42,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                MongoDbChangeStreamsConsumerIT.class,
-                AbstractMongoDbITSupport.MongoConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, MongoDbChangeStreamsConsumerIT.class,
+        AbstractMongoDbITSupport.MongoConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class MongoDbChangeStreamsConsumerIT extends AbstractMongoDbITSupport {
 
@@ -165,15 +160,10 @@ public class MongoDbChangeStreamsConsumerIT extends AbstractMongoDbITSupport {
             @Override
             public void configure() {
                 from("mongodb:myDb?consumerType=changeStreams&database={{mongodb.testDb}}&collection={{mongodb.testCollection}}")
-                        .id("simpleConsumer")
-                        .autoStartup(false)
-                        .to("mock:test");
+                        .id("simpleConsumer").autoStartup(false).to("mock:test");
 
                 from("mongodb:myDb?consumerType=changeStreams&database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&streamFilter={{myStreamFilter}}")
-                        .id("filterConsumer")
-                        .autoStartup(false)
-                        .log("${body}")
-                        .to("mock:test");
+                        .id("filterConsumer").autoStartup(false).log("${body}").to("mock:test");
             }
         });
     }

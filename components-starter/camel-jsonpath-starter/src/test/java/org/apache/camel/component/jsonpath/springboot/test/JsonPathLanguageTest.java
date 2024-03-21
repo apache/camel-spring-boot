@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
@@ -51,22 +50,15 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathLanguageTest.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathLanguageTest.class })
 public class JsonPathLanguageTest {
-    
+
     private static final Logger LOG = LoggerFactory.getLogger(JsonPathLanguageTest.class);
-    
-    @Autowired 
+
+    @Autowired
     CamelContext context;
-    
 
     @Autowired
     ProducerTemplate template;

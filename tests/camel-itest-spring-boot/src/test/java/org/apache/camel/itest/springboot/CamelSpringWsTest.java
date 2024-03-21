@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelSpringWsTest extends AbstractSpringBootTestSupport {
 
@@ -33,10 +32,9 @@ public class CamelSpringWsTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelSpringWsTest.class))
-                //.dependency(DependencyResolver.withVersion("org.springframework.boot:spring-boot-starter-web"))
-                //.dependency(DependencyResolver.withVersion("org.springframework:spring-webmvc"))
+        return new ITestConfigBuilder().module(inferModuleName(CamelSpringWsTest.class))
+                // .dependency(DependencyResolver.withVersion("org.springframework.boot:spring-boot-starter-web"))
+                // .dependency(DependencyResolver.withVersion("org.springframework:spring-webmvc"))
                 .build();
     }
 
@@ -45,6 +43,5 @@ public class CamelSpringWsTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

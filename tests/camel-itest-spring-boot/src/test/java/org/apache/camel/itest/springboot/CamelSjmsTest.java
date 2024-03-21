@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelSjmsTest extends AbstractSpringBootTestSupport {
 
@@ -33,15 +32,14 @@ public class CamelSjmsTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelSjmsTest.class))
+        return new ITestConfigBuilder().module(inferModuleName(CamelSjmsTest.class))
                 .exclusion("com.atomikos:transactions-jta")
-//                // to run unit tests
-//                .dependency("com.atomikos:transactions-jdbc:3.9.3")
-//                .dependency("com.atomikos:transactions-jms:3.9.3")
-//                .dependency("com.atomikos:transactions-api:3.9.3")
-//                .dependency("javax.transaction:javax.transaction-api:1.2")
-//                .disableJmx("org.apache.activemq:*")
+                // // to run unit tests
+                // .dependency("com.atomikos:transactions-jdbc:3.9.3")
+                // .dependency("com.atomikos:transactions-jms:3.9.3")
+                // .dependency("com.atomikos:transactions-api:3.9.3")
+                // .dependency("javax.transaction:javax.transaction-api:1.2")
+                // .disableJmx("org.apache.activemq:*")
                 .build();
     }
 
@@ -50,7 +48,7 @@ public class CamelSjmsTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
 
         // Unit tests can be enabled if required
-        //this.runModuleUnitTestsIfEnabled(config);
+        // this.runModuleUnitTestsIfEnabled(config);
     }
 
 }

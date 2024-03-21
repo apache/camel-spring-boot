@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.hl7.springboot.test;
 
-
 import static org.apache.camel.component.hl7.HL7.hl7terser;
 
 import org.apache.camel.CamelExecutionException;
@@ -41,39 +40,30 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        TerserExpressionTest.class,
-        TerserExpressionTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, TerserExpressionTest.class,
+        TerserExpressionTest.TestConfiguration.class })
 public class TerserExpressionTest extends HL7TestSupport {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:test1")
     MockEndpoint mock1;
-    
+
     @EndpointInject("mock:test2")
     MockEndpoint mock2;
-    
+
     @EndpointInject("mock:test3")
     MockEndpoint mock3;
-    
+
     @EndpointInject("mock:test4")
     MockEndpoint mock4;
-    
+
     @EndpointInject("mock:test5")
     MockEndpoint mock5;
 
-    
     private static final String PATIENT_ID = "123456";
 
     @Test
@@ -86,7 +76,7 @@ public class TerserExpressionTest extends HL7TestSupport {
 
     @Test
     public void testTerserPredicateValue() throws Exception {
-        
+
         mock2.expectedMessageCount(1);
         template.sendBody("direct:test2", createADT01Message());
         mock2.assertIsSatisfied();
@@ -94,7 +84,7 @@ public class TerserExpressionTest extends HL7TestSupport {
 
     @Test
     public void testTerserPredicateNull() throws Exception {
-        
+
         mock3.expectedMessageCount(1);
         template.sendBody("direct:test3", createADT01Message());
         mock3.assertIsSatisfied();
@@ -104,21 +94,19 @@ public class TerserExpressionTest extends HL7TestSupport {
     public void testTerserInvalidExpression() throws Exception {
         final Message adt01Message = createADT01Message();
 
-        assertThrows(CamelExecutionException.class,
-                () -> {
-                    template.sendBody("direct:test4", adt01Message);
-                });
+        assertThrows(CamelExecutionException.class, () -> {
+            template.sendBody("direct:test4", adt01Message);
+        });
     }
 
     @Test
     public void testTerserInvalidMessage() throws Exception {
-        assertThrows(CamelExecutionException.class,
-                () -> template.sendBody("direct:test4", "text instead of message"));
+        assertThrows(CamelExecutionException.class, () -> template.sendBody("direct:test4", "text instead of message"));
     }
 
     @Test
     public void testTerserAnnotatedMethod() throws Exception {
-        
+
         mock5.expectedMessageCount(1);
         mock5.expectedBodiesReceived(PATIENT_ID);
         template.sendBody("direct:test5", createADT01Message());
@@ -152,7 +140,7 @@ public class TerserExpressionTest extends HL7TestSupport {
             };
         }
     }
-    
+
     private static Message createADT01Message() throws Exception {
         ADT_A01 adt = new ADT_A01();
         adt.initQuickstart("ADT", "A01", "P");
@@ -166,5 +154,4 @@ public class TerserExpressionTest extends HL7TestSupport {
         return adt;
     }
 
-    
 }

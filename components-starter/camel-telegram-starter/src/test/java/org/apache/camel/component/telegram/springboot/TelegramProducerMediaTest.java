@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.telegram.springboot;
 
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
@@ -53,21 +52,14 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        TelegramProducerMediaTest.class,
-        TelegramProducerMediaTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, TelegramProducerMediaTest.class,
+        TelegramProducerMediaTest.TestConfiguration.class })
 public class TelegramProducerMediaTest extends TelegramTestSupport {
 
-    
     static TelegramMockRoutes mockRoutes;
-    
+
     @EndpointInject("direct:telegram")
     private Endpoint endpoint;
 
@@ -102,7 +94,7 @@ public class TelegramProducerMediaTest extends TelegramTestSupport {
         Exchange ex = endpoint.createExchange();
         ex.getIn().setHeader(TelegramConstants.TELEGRAM_MEDIA_TITLE_CAPTION, "Photo");
         ex.getIn().setHeader(TelegramConstants.TELEGRAM_MEDIA_TYPE, TelegramMediaType.PHOTO_JPG); // without using
-                                                                                                 // .name()
+                                                                                                  // .name()
         byte[] image = TelegramTestUtil.createSampleImage("JPG");
         ex.getIn().setBody(image);
 
@@ -168,9 +160,8 @@ public class TelegramProducerMediaTest extends TelegramTestSupport {
         final MockProcessor<byte[]> mockProcessor = mockRoutes.getMock("sendPhoto");
         mockProcessor.clearRecordedMessages();
 
-        InlineKeyboardMarkup ik = InlineKeyboardMarkup.builder()
-                .addRow(Collections.singletonList(InlineKeyboardButton.builder().text("test")
-                        .url("https://camel.apache.org").build()))
+        InlineKeyboardMarkup ik = InlineKeyboardMarkup.builder().addRow(Collections
+                .singletonList(InlineKeyboardButton.builder().text("test").url("https://camel.apache.org").build()))
                 .build();
 
         Exchange ex = endpoint.createExchange();
@@ -392,49 +383,30 @@ public class TelegramProducerMediaTest extends TelegramTestSupport {
         }
 
     }
-    
+
     @Override
     @Bean
     protected TelegramMockRoutes createMockRoutes() {
-        mockRoutes =
-            new TelegramMockRoutes(port)
-            .addEndpoint(
-                    "sendPhoto",
-                    "POST",
-                    byte[].class,
-                    TelegramTestUtil.stringResource("messages/send-photo.json"))
-            .addEndpoint(
-                    "sendAudio",
-                    "POST",
-                    byte[].class,
-                    TelegramTestUtil.stringResource("messages/send-audio.json"))
-            .addEndpoint(
-                    "sendVideo",
-                    "POST",
-                    byte[].class,
-                    TelegramTestUtil.stringResource("messages/send-video.json"))
-            .addEndpoint(
-                    "sendDocument",
-                    "POST",
-                    byte[].class,
-                    TelegramTestUtil.stringResource("messages/send-document.json"))
-            .addEndpoint(
-                    "sendMessage",
-                    "POST",
-                    OutgoingTextMessage.class,
-                    TelegramTestUtil.stringResource("messages/send-message.json"))
-            .addEndpoint(
-                    "sendGame",
-                    "POST",
-                    OutgoingGameMessage.class,
-                    TelegramTestUtil.stringResource("messages/send-game.json"));
+        mockRoutes = new TelegramMockRoutes(port)
+                .addEndpoint("sendPhoto", "POST", byte[].class,
+                        TelegramTestUtil.stringResource("messages/send-photo.json"))
+                .addEndpoint("sendAudio", "POST", byte[].class,
+                        TelegramTestUtil.stringResource("messages/send-audio.json"))
+                .addEndpoint("sendVideo", "POST", byte[].class,
+                        TelegramTestUtil.stringResource("messages/send-video.json"))
+                .addEndpoint("sendDocument", "POST", byte[].class,
+                        TelegramTestUtil.stringResource("messages/send-document.json"))
+                .addEndpoint("sendMessage", "POST", OutgoingTextMessage.class,
+                        TelegramTestUtil.stringResource("messages/send-message.json"))
+                .addEndpoint("sendGame", "POST", OutgoingGameMessage.class,
+                        TelegramTestUtil.stringResource("messages/send-game.json"));
         return mockRoutes;
-        
+
     }
-    
+
     static void assertMultipartFilename(byte[] message, String name, String filename) {
-        assertTrue(
-                contains(message, ("name=\"" + name + "\"; filename=\"" + filename + "\"").getBytes(StandardCharsets.UTF_8)));
+        assertTrue(contains(message,
+                ("name=\"" + name + "\"; filename=\"" + filename + "\"").getBytes(StandardCharsets.UTF_8)));
     }
 
     static void assertMultipartText(byte[] message, String key, String value) {

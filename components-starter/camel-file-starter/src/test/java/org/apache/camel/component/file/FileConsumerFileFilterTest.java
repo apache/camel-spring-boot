@@ -34,13 +34,8 @@ import org.springframework.test.annotation.DirtiesContext;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileConsumerFileFilterTest.class,
-                FileConsumerFileFilterTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileConsumerFileFilterTest.class,
+        FileConsumerFileFilterTest.TestConfiguration.class })
 public class FileConsumerFileFilterTest extends BaseFile {
 
     @EndpointInject("mock:result")
@@ -57,9 +52,7 @@ public class FileConsumerFileFilterTest extends BaseFile {
     public void testFilterFiles() throws Exception {
         resultEndpoint.expectedMessageCount(0);
 
-        template.sendBodyAndHeader(fileUri(), "This is a file to be filtered",
-                Exchange.FILE_NAME,
-                "skipme.txt");
+        template.sendBodyAndHeader(fileUri(), "This is a file to be filtered", Exchange.FILE_NAME, "skipme.txt");
 
         resultEndpoint.setResultWaitTime(100);
         resultEndpoint.assertIsSatisfied();
@@ -69,12 +62,9 @@ public class FileConsumerFileFilterTest extends BaseFile {
     public void testFilterFilesWithARegularFile() throws Exception {
         resultEndpoint.expectedBodiesReceived("Hello World");
 
-        template.sendBodyAndHeader(fileUri(), "This is a file to be filtered",
-                Exchange.FILE_NAME,
-                "skipme.txt");
+        template.sendBodyAndHeader(fileUri(), "This is a file to be filtered", Exchange.FILE_NAME, "skipme.txt");
 
-        template.sendBodyAndHeader(fileUri(), "Hello World", Exchange.FILE_NAME,
-                "hello.txt");
+        template.sendBodyAndHeader(fileUri(), "Hello World", Exchange.FILE_NAME, "hello.txt");
 
         resultEndpoint.assertIsSatisfied();
     }
@@ -92,7 +82,6 @@ public class FileConsumerFileFilterTest extends BaseFile {
         }
     }
     // END SNIPPET: e1
-
 
     // *************************************
     // Config

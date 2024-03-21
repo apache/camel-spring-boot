@@ -36,13 +36,8 @@ import org.springframework.test.annotation.DirtiesContext;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileConsumerFileExpressionTest.class,
-                FileConsumerFileExpressionTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileConsumerFileExpressionTest.class,
+        FileConsumerFileExpressionTest.TestConfiguration.class })
 public class FileConsumerFileExpressionTest extends BaseFile {
 
     @EndpointInject("mock:result")
@@ -62,8 +57,8 @@ public class FileConsumerFileExpressionTest extends BaseFile {
         context.addRoutes(new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from(fileUri("bean"
-                             + "?initialDelay=0&delay=10&fileName=${bean:counter.next}.txt&delete=true")).to("mock:result");
+                from(fileUri("bean" + "?initialDelay=0&delay=10&fileName=${bean:counter.next}.txt&delete=true"))
+                        .to("mock:result");
             }
         });
 
@@ -76,10 +71,8 @@ public class FileConsumerFileExpressionTest extends BaseFile {
 
     @Test
     public void testConsumeFileBasedOnDatePattern() throws Exception {
-        template.sendBodyAndHeader(fileUri("date"), "Bye World", Exchange.FILE_NAME,
-                "myfile-20081128.txt");
-        template.sendBodyAndHeader(fileUri("date"), "Hello World", Exchange.FILE_NAME,
-                "myfile-20081129.txt");
+        template.sendBodyAndHeader(fileUri("date"), "Bye World", Exchange.FILE_NAME, "myfile-20081128.txt");
+        template.sendBodyAndHeader(fileUri("date"), "Hello World", Exchange.FILE_NAME, "myfile-20081129.txt");
         template.sendBodyAndHeader(fileUri("date"), "Goodday World", Exchange.FILE_NAME,
                 context.resolveLanguage("simple").createExpression("myfile-${date:now:yyyyMMdd}.txt"));
 
@@ -87,9 +80,8 @@ public class FileConsumerFileExpressionTest extends BaseFile {
             @Override
             public void configure() throws Exception {
                 // START SNIPPET: e1
-                from(fileUri("date"
-                             + "?initialDelay=0&delay=10&fileName=myfile-${date:now:yyyyMMdd}.txt")).convertBodyTo(String.class)
-                                     .to("mock:result");
+                from(fileUri("date" + "?initialDelay=0&delay=10&fileName=myfile-${date:now:yyyyMMdd}.txt"))
+                        .convertBodyTo(String.class).to("mock:result");
                 // END SNIPPET: e1
             }
         });

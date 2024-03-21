@@ -89,7 +89,8 @@ public final class ArquillianPackager {
 
     public static Archive<?> springBootPackage(ITestConfig config) throws Exception {
         if (!new File(".").getCanonicalFile().getName().equals("camel-itest-spring-boot")) {
-            throw new IllegalStateException("In order to run the integration tests, 'camel-itest-spring-boot' must be the working directory. Check your configuration.");
+            throw new IllegalStateException(
+                    "In order to run the integration tests, 'camel-itest-spring-boot' must be the working directory. Check your configuration.");
         }
 
         ExtensionLoader extensionLoader = new ServiceExtensionLoader(Collections.singleton(getExtensionClassloader()));
@@ -120,7 +121,8 @@ public final class ArquillianPackager {
         if (version == null) {
             // It is missing when launching from IDE
             PomEquippedResolveStage pom = resolver(config).loadPomFromFile("pom.xml");
-            MavenResolvedArtifact[] resolved = pom.importCompileAndRuntimeDependencies().resolve().withoutTransitivity().asResolvedArtifact();
+            MavenResolvedArtifact[] resolved = pom.importCompileAndRuntimeDependencies().resolve().withoutTransitivity()
+                    .asResolvedArtifact();
             for (MavenResolvedArtifact dep : resolved) {
                 if (dep.getCoordinate().getGroupId().equals("org.apache.camel.springboot")) {
                     version = dep.getCoordinate().getVersion();
@@ -152,7 +154,6 @@ public final class ArquillianPackager {
             commonExclusions.add(MavenDependencies.createExclusion(ex));
         }
 
-
         // Module dependencies
         List<MavenDependency> additionalDependencies = new LinkedList<>();
         for (String canonicalForm : config.getAdditionalDependencies()) {
@@ -161,16 +162,17 @@ public final class ArquillianPackager {
             additionalDependencies.add(dep);
         }
 
-
         List<String> providedDependenciesXml = new LinkedList<>();
         List<ScopeType> scopes = new LinkedList<>();
-        if (config.getIncludeProvidedDependencies() || config.getIncludeTestDependencies() || config.getUnitTestEnabled()) {
+        if (config.getIncludeProvidedDependencies() || config.getIncludeTestDependencies()
+                || config.getUnitTestEnabled()) {
 
             if (config.getIncludeTestDependencies() || config.getUnitTestEnabled()) {
                 scopes.add(ScopeType.TEST);
             }
             if (config.getIncludeProvidedDependencies()) {
-                providedDependenciesXml.addAll(DependencyResolver.getDependencies(config.getModuleBasePath() + "/pom.xml", ScopeType.PROVIDED.toString()));
+                providedDependenciesXml.addAll(DependencyResolver
+                        .getDependencies(config.getModuleBasePath() + "/pom.xml", ScopeType.PROVIDED.toString()));
                 scopes.add(ScopeType.PROVIDED);
             }
 
@@ -195,27 +197,20 @@ public final class ArquillianPackager {
 
         Set<MavenResolvedArtifact> runtimeDependencies;
         try {
-            runtimeDependencies = new HashSet<>(Arrays.asList(resolver(config)
-                    .loadPomFromFile(moduleSpringBootPom)
+            runtimeDependencies = new HashSet<>(Arrays.asList(resolver(config).loadPomFromFile(moduleSpringBootPom)
                     .importDependencies(resolvedScopes.toArray(new ScopeType[0]))
-                    .addDependencies(additionalDependencies)
-                    .resolve()
-                    .withTransitivity()
-                    .asResolvedArtifact()));
+                    .addDependencies(additionalDependencies).resolve().withTransitivity().asResolvedArtifact()));
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage(), e);
         }
-        
+
         // Load the test dependencies from the actual starter pom with transitivity
         // since most are defined in the parent pom
         Set<MavenResolvedArtifact> testProvidedDependenciesPom;
         try {
-            testProvidedDependenciesPom = new HashSet<>(Arrays.asList(resolver(config)
-                    .loadPomFromFile(new File(config.getModuleBasePath() + "/pom.xml"))
-                    .importTestDependencies()
-                    .resolve()
-                    .withTransitivity()
-                    .asResolvedArtifact()));
+            testProvidedDependenciesPom = new HashSet<>(
+                    Arrays.asList(resolver(config).loadPomFromFile(new File(config.getModuleBasePath() + "/pom.xml"))
+                            .importTestDependencies().resolve().withTransitivity().asResolvedArtifact()));
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage(), e);
         }
@@ -230,7 +225,8 @@ public final class ArquillianPackager {
             dependencies.add(a.asFile());
         }
 
-        // The spring boot-loader dependency will be added to the main jar, so it should be excluded from the embedded ones
+        // The spring boot-loader dependency will be added to the main jar, so it should be excluded from the embedded
+        // ones
         excludeDependencyRegex(dependencies, "^spring-boot-loader-[0-9].*");
 
         // Add all dependencies as spring-boot nested jars
@@ -254,11 +250,13 @@ public final class ArquillianPackager {
         external.addSystemProperty("javax.xml.accessExternalDTD", "all");
         external.addSystemProperty("javax.xml.accessExternalSchema", "all");
         // Set a java logging configuration which will not log to console
-        external.addSystemProperty("java.util.logging.config.file", new File(".").getCanonicalPath() + "/target/test-classes/jul.properties");
+        external.addSystemProperty("java.util.logging.config.file",
+                new File(".").getCanonicalPath() + "/target/test-classes/jul.properties");
 
         if (config.getUnitTestEnabled()) {
             external.addSystemProperty("container.user.dir", new File(config.getModuleBasePath()).getCanonicalPath());
-            external.addSystemProperty("container.test.resources.dir", new File(config.getModuleBasePath()).getCanonicalPath() + "/target/test-classes");
+            external.addSystemProperty("container.test.resources.dir",
+                    new File(config.getModuleBasePath()).getCanonicalPath() + "/target/test-classes");
         }
 
         // Adding configuration properties
@@ -362,7 +360,6 @@ public final class ArquillianPackager {
 
         // microsoft azure msal4j-persistence-extension library introduced by datalake component
         ignore.add("com.microsoft.azure:msal4j-persistence-extension");
-       
 
         Map<String, Map<String, Set<String>>> status = new TreeMap<>();
         Set<String> mismatches = new TreeSet<>();
@@ -454,7 +451,8 @@ public final class ArquillianPackager {
     }
 
     private static String getIdentifier(MavenResolvedArtifact a) {
-        return a.getCoordinate().getGroupId() + ":" + a.getCoordinate().getArtifactId() + ":" + a.getCoordinate().getType() + ":" + a.getCoordinate().getClassifier();
+        return a.getCoordinate().getGroupId() + ":" + a.getCoordinate().getArtifactId() + ":"
+                + a.getCoordinate().getType() + ":" + a.getCoordinate().getClassifier();
     }
 
     private static File createUserPom(ITestConfig config, List<String> cleanTestProvidedDependencies) throws Exception {
@@ -476,7 +474,8 @@ public final class ArquillianPackager {
         Matcher m = PROP_PATTERN.matcher(pom);
         while (m.find()) {
             String property = m.group();
-            String resolved = DependencyResolver.resolveModuleOrParentProperty(new File(new File(config.getModuleBasePath()), "pom.xml"), property);
+            String resolved = DependencyResolver
+                    .resolveModuleOrParentProperty(new File(new File(config.getModuleBasePath()), "pom.xml"), property);
             resolvedProperties.put(property, resolved);
         }
 
@@ -497,7 +496,6 @@ public final class ArquillianPackager {
         return pomFile;
     }
 
-
     private static ConfigurableMavenResolverSystem resolver(ITestConfig config) {
         return Maven.configureResolver().workOffline(config.getMavenOfflineResolution());
     }
@@ -516,14 +514,16 @@ public final class ArquillianPackager {
         return cl;
     }
 
-    private static boolean validTestDependency(ITestConfig config, String dependencyXml, List<MavenDependencyExclusion> exclusions) {
+    private static boolean validTestDependency(ITestConfig config, String dependencyXml,
+            List<MavenDependencyExclusion> exclusions) {
 
         boolean valid = true;
         for (MavenDependencyExclusion excl : exclusions) {
             String groupId = excl.getGroupId();
             String artifactId = excl.getArtifactId();
 
-            boolean notExclusion = !dependencyXml.contains("<exclusions>") || dependencyXml.indexOf(groupId) < dependencyXml.indexOf("<exclusions>");
+            boolean notExclusion = !dependencyXml.contains("<exclusions>")
+                    || dependencyXml.indexOf(groupId) < dependencyXml.indexOf("<exclusions>");
 
             if (dependencyXml.contains(groupId) && dependencyXml.contains(artifactId) && notExclusion) {
                 valid = false;
@@ -532,7 +532,8 @@ public final class ArquillianPackager {
         }
 
         if (!valid) {
-            debug(config, "Discarded test dependency: " + dependencyXml.replace("\n", "").replace("\r", "").replace("\t", ""));
+            debug(config, "Discarded test dependency: "
+                    + dependencyXml.replace("\n", "").replace("\r", "").replace("\t", ""));
         }
 
         return valid;
@@ -548,7 +549,8 @@ public final class ArquillianPackager {
             String groupId = excl.getGroupId();
             String artifactId = excl.getArtifactId();
 
-            dependencyXml = dependencyXml.replace("</exclusions>", "<exclusion><groupId>" + groupId + "</groupId><artifactId>" + artifactId + "</artifactId></exclusion></exclusions>");
+            dependencyXml = dependencyXml.replace("</exclusions>", "<exclusion><groupId>" + groupId
+                    + "</groupId><artifactId>" + artifactId + "</artifactId></exclusion></exclusions>");
         }
 
         return dependencyXml;
@@ -581,7 +583,8 @@ public final class ArquillianPackager {
         if (version == null) {
             boolean testsLib = dependencyXml.contains("<classifier>tests");
             stripVersion = !testsLib && BOMResolver.getInstance(config).getBOMVersion(groupId, artifactId) != null;
-            // skip if its org.infinispan as we need explict version to work-around a problem when using test-jar dependencies
+            // skip if its org.infinispan as we need explict version to work-around a problem when using test-jar
+            // dependencies
             if ("org.infinispan".equals(groupId)) {
                 stripVersion = false;
             }
@@ -596,7 +599,8 @@ public final class ArquillianPackager {
             } else {
                 String kw = "</artifactId>";
                 int pos = dependencyXml.indexOf(kw) + kw.length();
-                dependencyXml = dependencyXml.substring(0, pos) + "<version>" + version + "</version>" + dependencyXml.substring(pos);
+                dependencyXml = dependencyXml.substring(0, pos) + "<version>" + version + "</version>"
+                        + dependencyXml.substring(pos);
             }
         } else if (stripVersion && dependencyXml.contains("<version>")) {
             int from = dependencyXml.indexOf("<version>");
@@ -659,7 +663,8 @@ public final class ArquillianPackager {
                         ark.add(asset, location);
                     }
                 };
-                final URLPackageScanner scanner = URLPackageScanner.newInstance(true, classLoader, callback, packageName);
+                final URLPackageScanner scanner = URLPackageScanner.newInstance(true, classLoader, callback,
+                        packageName);
                 scanner.scanPackage();
             }
         }

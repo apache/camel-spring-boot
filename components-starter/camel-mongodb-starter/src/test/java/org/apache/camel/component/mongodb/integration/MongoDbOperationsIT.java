@@ -61,14 +61,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                MongoDbOperationsIT.class,
-                MongoDbOperationsIT.TestConfiguration.class,
-                AbstractMongoDbITSupport.MongoConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, MongoDbOperationsIT.class,
+        MongoDbOperationsIT.TestConfiguration.class, AbstractMongoDbITSupport.MongoConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class MongoDbOperationsIT extends AbstractMongoDbITSupport {
 
@@ -117,8 +111,8 @@ public class MongoDbOperationsIT extends AbstractMongoDbITSupport {
     public void testStoreOidsOnInsert() {
         Document firsDocument = new Document();
         Document secondDoocument = new Document();
-        List<?> oids
-                = template.requestBody("direct:testStoreOidOnInsert", Arrays.asList(firsDocument, secondDoocument), List.class);
+        List<?> oids = template.requestBody("direct:testStoreOidOnInsert", Arrays.asList(firsDocument, secondDoocument),
+                List.class);
         assertTrue(oids.contains(firsDocument.get(MONGO_ID)));
         assertTrue(oids.contains(secondDoocument.get(MONGO_ID)));
     }
@@ -127,8 +121,7 @@ public class MongoDbOperationsIT extends AbstractMongoDbITSupport {
     public void testSave() {
         // Prepare test
         assertEquals(0, testCollection.countDocuments());
-        Object[] req = new Object[] {
-                new Document(MONGO_ID, "testSave1").append("scientist", "Einstein").toJson(),
+        Object[] req = new Object[] { new Document(MONGO_ID, "testSave1").append("scientist", "Einstein").toJson(),
                 new Document(MONGO_ID, "testSave2").append("scientist", "Copernicus").toJson() };
         Object result = template.requestBody("direct:insert", req);
         assertTrue(result instanceof List);
@@ -192,7 +185,8 @@ public class MongoDbOperationsIT extends AbstractMongoDbITSupport {
                 if (i % 2 == 0) {
                     body = f.format("{\"_id\":\"testSave%d\", \"scientist\":\"Einstein\"}", i).toString();
                 } else {
-                    body = f.format("{\"_id\":\"testSave%d\", \"scientist\":\"Einstein\", \"extraField\": true}", i).toString();
+                    body = f.format("{\"_id\":\"testSave%d\", \"scientist\":\"Einstein\", \"extraField\": true}", i)
+                            .toString();
                 }
                 f.close();
             }
@@ -235,7 +229,8 @@ public class MongoDbOperationsIT extends AbstractMongoDbITSupport {
                 if (i % 2 == 0) {
                     body = f.format("{\"_id\":\"testSave%d\", \"scientist\":\"Einstein\"}", i).toString();
                 } else {
-                    body = f.format("{\"_id\":\"testSave%d\", \"scientist\":\"Einstein\", \"extraField\": true}", i).toString();
+                    body = f.format("{\"_id\":\"testSave%d\", \"scientist\":\"Einstein\", \"extraField\": true}", i)
+                            .toString();
                 }
                 f.close();
             }
@@ -252,9 +247,10 @@ public class MongoDbOperationsIT extends AbstractMongoDbITSupport {
 
         Bson updateObj = combine(set("scientist", "Darwin"), currentTimestamp("lastModified"));
 
-        String updates
-                = "[" + extraField.toBsonDocument(Document.class, MongoClientSettings.getDefaultCodecRegistry()).toJson() + ","
-                  + updateObj.toBsonDocument(Document.class, MongoClientSettings.getDefaultCodecRegistry()).toJson() + "]";
+        String updates = "["
+                + extraField.toBsonDocument(Document.class, MongoClientSettings.getDefaultCodecRegistry()).toJson()
+                + "," + updateObj.toBsonDocument(Document.class, MongoClientSettings.getDefaultCodecRegistry()).toJson()
+                + "]";
 
         Exchange resultExchange = template.request("direct:update", new Processor() {
             @Override
@@ -282,7 +278,8 @@ public class MongoDbOperationsIT extends AbstractMongoDbITSupport {
                 if (i % 2 == 0) {
                     body = f.format("{\"_id\":\"testSave%d\", \"scientist\":\"Einstein\"}", i).toString();
                 } else {
-                    body = f.format("{\"_id\":\"testSave%d\", \"scientist\":\"Einstein\", \"extraField\": true}", i).toString();
+                    body = f.format("{\"_id\":\"testSave%d\", \"scientist\":\"Einstein\", \"extraField\": true}", i)
+                            .toString();
                 }
                 f.close();
             }
@@ -319,7 +316,8 @@ public class MongoDbOperationsIT extends AbstractMongoDbITSupport {
                 if (i % 2 == 0) {
                     body = f.format("{\"_id\":\"testSave%d\", \"scientist\":\"Einstein\"}", i).toString();
                 } else {
-                    body = f.format("{\"_id\":\"testSave%d\", \"scientist\":\"Einstein\", \"extraField\": true}", i).toString();
+                    body = f.format("{\"_id\":\"testSave%d\", \"scientist\":\"Einstein\", \"extraField\": true}", i)
+                            .toString();
                 }
                 f.close();
             }
@@ -408,8 +406,8 @@ public class MongoDbOperationsIT extends AbstractMongoDbITSupport {
 
         // check that the count operation was invoked instead of the insert
         // operation
-        Object result
-                = template.requestBodyAndHeader("direct:insert", "irrelevantBody", MongoDbConstants.OPERATION_HEADER, "count");
+        Object result = template.requestBodyAndHeader("direct:insert", "irrelevantBody",
+                MongoDbConstants.OPERATION_HEADER, "count");
         assertTrue(result instanceof Long, "Result is not of type Long");
         assertEquals(0L, result, "Test collection should not contain any records");
 
@@ -432,22 +430,20 @@ public class MongoDbOperationsIT extends AbstractMongoDbITSupport {
                 public void configure() {
                     from("direct:count").to(
                             "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=count&dynamicity=true");
-                    from("direct:insert")
-                            .to("mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert");
-                    from("direct:testStoreOidOnInsert")
-                            .to("mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert")
-                            .setBody()
-                            .header(MongoDbConstants.OID);
-                    from("direct:save")
-                            .to("mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=save");
-                    from("direct:testStoreOidOnSave")
-                            .to("mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=save")
-                            .setBody()
-                            .header(MongoDbConstants.OID);
-                    from("direct:update")
-                            .to("mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=update");
-                    from("direct:remove")
-                            .to("mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=remove");
+                    from("direct:insert").to(
+                            "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert");
+                    from("direct:testStoreOidOnInsert").to(
+                            "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert")
+                            .setBody().header(MongoDbConstants.OID);
+                    from("direct:save").to(
+                            "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=save");
+                    from("direct:testStoreOidOnSave").to(
+                            "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=save")
+                            .setBody().header(MongoDbConstants.OID);
+                    from("direct:update").to(
+                            "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=update");
+                    from("direct:remove").to(
+                            "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=remove");
                     from("direct:aggregate").to(
                             "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=aggregate");
                     from("direct:getDbStats").to("mongodb:myDb?database={{mongodb.testDb}}&operation=getDbStats");

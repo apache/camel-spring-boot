@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jackson.avro.springboot.test;
 
-
 import com.fasterxml.jackson.dataformat.avro.AvroSchema;
 
 import org.apache.avro.Schema;
@@ -39,46 +38,35 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JacksonAvroLookupResolverTest.class,
-        JacksonAvroLookupResolverTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JacksonAvroLookupResolverTest.class,
+        JacksonAvroLookupResolverTest.TestConfiguration.class })
 public class JacksonAvroLookupResolverTest {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:serialized")
     MockEndpoint mock1;
-    
+
     @EndpointInject("mock:pojo")
     MockEndpoint mock2;
 
     @Bean("schema-resolver-1")
     private SchemaResolver getSchemaResolver() {
-        String schemaJson = "{\n"
-            + "\"type\": \"record\",\n"
-            + "\"name\": \"Pojo\",\n"
-            + "\"fields\": [\n"
-            + " {\"name\": \"text\", \"type\": \"string\"}\n"
-            + "]}";
+        String schemaJson = "{\n" + "\"type\": \"record\",\n" + "\"name\": \"Pojo\",\n" + "\"fields\": [\n"
+                + " {\"name\": \"text\", \"type\": \"string\"}\n" + "]}";
         Schema raw = new Schema.Parser().setValidate(true).parse(schemaJson);
         AvroSchema schema = new AvroSchema(raw);
         SchemaResolver resolver = ex -> schema;
-        
+
         return resolver;
     }
-    
+
     @Test
     public void testMarshalUnmarshalPojo() throws Exception {
-        
+
         mock1.expectedMessageCount(1);
         mock1.message(0).body().isInstanceOf(byte[].class);
 
@@ -100,7 +88,6 @@ public class JacksonAvroLookupResolverTest {
         assertEquals(pojo.getText(), back.getText());
     }
 
-
     // *************************************
     // Config
     // *************************************
@@ -115,12 +102,13 @@ public class JacksonAvroLookupResolverTest {
                 public void configure() throws Exception {
                     from("direct:serialized").unmarshal().avro(AvroLibrary.Jackson, Pojo.class, "schema-resolver-1")
                             .to("mock:pojo");
-                    from("direct:pojo").marshal().avro(AvroLibrary.Jackson, Pojo.class, "schema-resolver-1").to("mock:serialized");
+                    from("direct:pojo").marshal().avro(AvroLibrary.Jackson, Pojo.class, "schema-resolver-1")
+                            .to("mock:serialized");
                 }
             };
         }
     }
-    
+
     public static class Pojo {
 
         private String text;

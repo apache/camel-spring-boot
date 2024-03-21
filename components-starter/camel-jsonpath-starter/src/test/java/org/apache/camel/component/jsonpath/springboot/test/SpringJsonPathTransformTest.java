@@ -16,10 +16,8 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
 import java.util.List;
-
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -34,29 +32,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        SpringJsonPathTransformTest.class
-    },
-    properties = {
-        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringJsonPathTransformTest.xml"}
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SpringJsonPathTransformTest.class }, properties = {
+        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringJsonPathTransformTest.xml" }
 
 )
 public class SpringJsonPathTransformTest {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:authors")
     MockEndpoint mock;
-
-    
-    
 
     @Test
     public void testAuthors() throws Exception {

@@ -31,40 +31,33 @@ import java.util.Properties;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				SpringInfinispanRemoteIdempotentRepositorySpringIT.class
-		},
-		properties = {"camel.springboot.routes-include-pattern=file:src/test/resources/org/apache/camel/component/infinispan/spring/SpringInfinispanRemoteIdempotentRepositorySpringTest.xml"}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class,
+        SpringInfinispanRemoteIdempotentRepositorySpringIT.class }, properties = {
+                "camel.springboot.routes-include-pattern=file:src/test/resources/org/apache/camel/component/infinispan/spring/SpringInfinispanRemoteIdempotentRepositorySpringTest.xml" })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class SpringInfinispanRemoteIdempotentRepositorySpringIT
-		extends SpringInfinispanRemoteIdempotentRepositoryTestSupport {
+        extends SpringInfinispanRemoteIdempotentRepositoryTestSupport {
 
-	@Bean
-	public SpringRemoteCacheManagerFactoryBean springRemoteCacheManagerFactoryBean() throws Exception {
-		Properties props = new Properties();
-		props.putAll(Map.of("infinispan.client.hotrod.server_list", service.getServiceAddress(),
-				"infinispan.client.hotrod.force_return_values", true,
-				"infinispan.client.hotrod.auth_server_name", "infinispan",
-				"infinispan.client.hotrod.auth_username", service.username(),
-				"infinispan.client.hotrod.auth_password", service.password(),
-				"infinispan.client.hotrod.auth_realm", "default",
-				"infinispan.client.hotrod.sasl_mechanism", "DIGEST-MD5"
-		));
-		SpringRemoteCacheManagerFactoryBean springRemoteCacheManagerFactoryBean = new SpringRemoteCacheManagerFactoryBean();
-		springRemoteCacheManagerFactoryBean.setConfigurationProperties(props);
-		springRemoteCacheManagerFactoryBean.afterPropertiesSet();
+    @Bean
+    public SpringRemoteCacheManagerFactoryBean springRemoteCacheManagerFactoryBean() throws Exception {
+        Properties props = new Properties();
+        props.putAll(Map.of("infinispan.client.hotrod.server_list", service.getServiceAddress(),
+                "infinispan.client.hotrod.force_return_values", true, "infinispan.client.hotrod.auth_server_name",
+                "infinispan", "infinispan.client.hotrod.auth_username", service.username(),
+                "infinispan.client.hotrod.auth_password", service.password(), "infinispan.client.hotrod.auth_realm",
+                "default", "infinispan.client.hotrod.sasl_mechanism", "DIGEST-MD5"));
+        SpringRemoteCacheManagerFactoryBean springRemoteCacheManagerFactoryBean = new SpringRemoteCacheManagerFactoryBean();
+        springRemoteCacheManagerFactoryBean.setConfigurationProperties(props);
+        springRemoteCacheManagerFactoryBean.afterPropertiesSet();
 
-		return springRemoteCacheManagerFactoryBean;
-	}
+        return springRemoteCacheManagerFactoryBean;
+    }
 
-	@Bean
-	public SpringCacheIdempotentRepository repo() throws Exception {
-		SpringCacheIdempotentRepository springCacheIdempotentRepository =
-				new SpringCacheIdempotentRepository(springRemoteCacheManagerFactoryBean().getObject(), "idempotent");
+    @Bean
+    public SpringCacheIdempotentRepository repo() throws Exception {
+        SpringCacheIdempotentRepository springCacheIdempotentRepository = new SpringCacheIdempotentRepository(
+                springRemoteCacheManagerFactoryBean().getObject(), "idempotent");
 
-		return springCacheIdempotentRepository;
-	}
+        return springCacheIdempotentRepository;
+    }
 }

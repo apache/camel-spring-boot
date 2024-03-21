@@ -32,7 +32,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnBean({ CamelCloudAutoConfiguration.class, CamelContext.class})
+@ConditionalOnBean({ CamelCloudAutoConfiguration.class, CamelContext.class })
 @EnableConfigurationProperties(CamelCloudConfigurationProperties.class)
 @Conditional(CamelCloudServiceCallConfigurationAutoConfiguration.ServiceCallCondition.class)
 public class CamelCloudServiceCallConfigurationAutoConfiguration {
@@ -80,10 +80,7 @@ public class CamelCloudServiceCallConfigurationAutoConfiguration {
 
     public static class ServiceCallCondition extends GroupCondition {
         public ServiceCallCondition() {
-            super(
-                "camel.cloud",
-                "camel.cloud.service-call"
-            );
+            super("camel.cloud", "camel.cloud.service-call");
         }
     }
 }

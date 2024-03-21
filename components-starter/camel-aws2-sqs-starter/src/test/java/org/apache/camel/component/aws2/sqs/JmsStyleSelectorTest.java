@@ -40,16 +40,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                JmsStyleSelectorTest.class,
-                JmsStyleSelectorTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JmsStyleSelectorTest.class,
+        JmsStyleSelectorTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class JmsStyleSelectorTest extends BaseSqs {
-
 
     @EndpointInject("direct:start")
     private ProducerTemplate template;
@@ -81,19 +75,18 @@ public class JmsStyleSelectorTest extends BaseSqs {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseSqs.TestConfiguration {
+    public class TestConfiguration extends BaseSqs.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:start").startupOrder(2).toF("aws2-sqs://%s?autoCreateQueue=true", sharedNameGenerator.getName());
+                    from("direct:start").startupOrder(2).toF("aws2-sqs://%s?autoCreateQueue=true",
+                            sharedNameGenerator.getName());
 
                     fromF("aws2-sqs://%s?deleteAfterRead=false&deleteIfFiltered=true&autoCreateQueue=true",
-                            sharedNameGenerator.getName())
-                            .startupOrder(1)
-                            .filter(simple("${body} != 'ignore'")).log("${body}").log("${header.CamelAwsSqsReceiptHandle}")
-                            .to("mock:result");
+                            sharedNameGenerator.getName()).startupOrder(1).filter(simple("${body} != 'ignore'"))
+                                    .log("${body}").log("${header.CamelAwsSqsReceiptHandle}").to("mock:result");
                 }
             };
         }

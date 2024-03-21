@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import java.util.Date;
 
 import org.apache.camel.CamelContext;
@@ -35,7 +33,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -43,30 +40,23 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.throttling.ThrottlingInflightRoutePolicy;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        MultiplePoliciesOnRouteTest.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, MultiplePoliciesOnRouteTest.class })
 public class MultiplePoliciesOnRouteTest extends FromFileBase {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint mock;
-       
+
     private String url = "seda:foo?concurrentConsumers=20";
     private int size = 100;
-    
+
     @Bean("startPolicy")
     private RoutePolicy createRouteStartPolicy() {
         SimpleScheduledRoutePolicy policy = new SimpleScheduledRoutePolicy();
@@ -84,7 +74,7 @@ public class MultiplePoliciesOnRouteTest extends FromFileBase {
         policy.setMaxInflightExchanges(10);
         return policy;
     }
-    
+
     @Test
     public void testMultiplePoliciesOnRoute() throws Exception {
         MockEndpoint success = context.getEndpoint("mock:success", MockEndpoint.class);
@@ -94,10 +84,7 @@ public class MultiplePoliciesOnRouteTest extends FromFileBase {
                 .setPropertiesFile("org/apache/camel/routepolicy/quartz/myquartz.properties");
         context.addRoutes(new RouteBuilder() {
             public void configure() {
-                from(url)
-                        .routeId("test")
-                        .routePolicyRef("startPolicy, throttlePolicy")
-                        .to("log:foo?groupSize=10")
+                from(url).routeId("test").routePolicyRef("startPolicy, throttlePolicy").to("log:foo?groupSize=10")
                         .to("mock:success");
             }
         });
@@ -112,8 +99,5 @@ public class MultiplePoliciesOnRouteTest extends FromFileBase {
         context.getComponent("quartz", QuartzComponent.class).stop();
         success.assertIsSatisfied();
     }
-
-    
-   
 
 }

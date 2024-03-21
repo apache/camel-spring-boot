@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import java.util.Date;
 
 import org.apache.camel.CamelContext;
@@ -43,31 +41,24 @@ import org.quartz.Calendar;
 import org.quartz.Scheduler;
 import org.quartz.impl.calendar.HolidayCalendar;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzCustomCalendarNoFireTest.class,
-        QuartzCustomCalendarNoFireTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzCustomCalendarNoFireTest.class,
+        QuartzCustomCalendarNoFireTest.TestConfiguration.class })
 public class QuartzCustomCalendarNoFireTest extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint mock;
-    
+
     @Test
     public void testQuartzCustomCronRouteNoFire() throws Exception {
-        
+
         mock.expectedMinimumMessageCount(0);
 
         QuartzComponent component = context.getComponent("quartz", QuartzComponent.class);
@@ -109,7 +100,5 @@ public class QuartzCustomCalendarNoFireTest extends BaseQuartzTest {
             };
         }
     }
-    
-   
 
 }

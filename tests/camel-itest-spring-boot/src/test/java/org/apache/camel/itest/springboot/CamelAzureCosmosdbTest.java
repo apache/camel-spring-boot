@@ -32,9 +32,7 @@ public class CamelAzureCosmosdbTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelAzureCosmosdbTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelAzureCosmosdbTest.class)).build();
     }
 
     @Test
@@ -42,6 +40,5 @@ public class CamelAzureCosmosdbTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

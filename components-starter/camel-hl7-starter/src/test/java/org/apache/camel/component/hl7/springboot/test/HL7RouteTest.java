@@ -45,32 +45,23 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        HL7RouteTest.class,
-        HL7RouteTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, HL7RouteTest.class, HL7RouteTest.TestConfiguration.class })
 public class HL7RouteTest extends HL7TestSupport {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:a01")
     MockEndpoint mock01;
-    
+
     @EndpointInject("mock:a19")
     MockEndpoint mock19;
-    
+
     @EndpointInject("mock:unknown")
     MockEndpoint mockUnknow;
 
-    
     @Bean(name = "hl7service")
     private MyHL7BusinessLogic getMyHL7BusinessLogic() {
         return new MyHL7BusinessLogic();
@@ -99,8 +90,8 @@ public class HL7RouteTest extends HL7TestSupport {
         in.append("\r");
         in.append(line2);
 
-        String out = template.requestBody("mina:tcp://127.0.0.1:" + getPort() + "?sync=true&codec=#hl7codec", in.toString(),
-                String.class);
+        String out = template.requestBody("mina:tcp://127.0.0.1:" + getPort() + "?sync=true&codec=#hl7codec",
+                in.toString(), String.class);
 
         String[] lines = out.split("\r");
         assertEquals("MSH|^~\\&|MYSENDER||||200701011539||ADR^A19||||123", lines[0]);
@@ -111,7 +102,7 @@ public class HL7RouteTest extends HL7TestSupport {
 
     @Test
     public void testSendA01() throws Exception {
-        
+
         mock01.expectedMessageCount(1);
         mock01.message(0).body().isInstanceOf(Message.class);
 
@@ -123,8 +114,8 @@ public class HL7RouteTest extends HL7TestSupport {
         in.append("\r");
         in.append(line2);
 
-        String out = template.requestBody("mina:tcp://127.0.0.1:" + getPort() + "?sync=true&codec=#hl7codec", in.toString(),
-                String.class);
+        String out = template.requestBody("mina:tcp://127.0.0.1:" + getPort() + "?sync=true&codec=#hl7codec",
+                in.toString(), String.class);
         String[] lines = out.split("\r");
         assertEquals("MSH|^~\\&|MYSENDER||||200701011539||ADT^A01||||123", lines[0]);
         assertEquals("PID|||123||Doe^John", lines[1]);
@@ -134,7 +125,7 @@ public class HL7RouteTest extends HL7TestSupport {
 
     @Test
     public void testSendUnknown() throws Exception {
-        
+
         mockUnknow.expectedMessageCount(1);
         mockUnknow.message(0).body().isInstanceOf(Message.class);
 
@@ -150,7 +141,6 @@ public class HL7RouteTest extends HL7TestSupport {
 
         mockUnknow.assertIsSatisfied();
     }
-
 
     // *************************************
     // Config
@@ -179,11 +169,12 @@ public class HL7RouteTest extends HL7TestSupport {
                             .choice()
                             // where we choose that A19 queries invoke the handleA19
                             // method on our hl7service bean
-                            .when(header("CamelHL7TriggerEvent").isEqualTo("A19")).bean("hl7service", "handleA19").to("mock:a19")
+                            .when(header("CamelHL7TriggerEvent").isEqualTo("A19")).bean("hl7service", "handleA19")
+                            .to("mock:a19")
                             // and A01 should invoke the handleA01 method on our
                             // hl7service bean
-                            .when(header("CamelHL7TriggerEvent").isEqualTo("A01")).to("mock:a01").bean("hl7service", "handleA01")
-                            .to("mock:a19")
+                            .when(header("CamelHL7TriggerEvent").isEqualTo("A01")).to("mock:a01")
+                            .bean("hl7service", "handleA01").to("mock:a19")
                             // other types should go to mock:unknown
                             .otherwise().to("mock:unknown")
                             // end choice block
@@ -195,8 +186,8 @@ public class HL7RouteTest extends HL7TestSupport {
             };
         }
     }
-    
- // START SNIPPET: e2
+
+    // START SNIPPET: e2
     public class MyHL7BusinessLogic {
 
         // This is a plain POJO that has NO imports whatsoever on Apache Camel.

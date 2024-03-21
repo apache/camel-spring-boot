@@ -16,7 +16,6 @@
  */
 package org.apache.camel.dataformat.avro.springboot.test;
 
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.CamelException;
 import org.apache.camel.EndpointInject;
@@ -38,31 +37,22 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        AvroMarshalAndUnmarshallTest.class,
-        AvroMarshalAndUnmarshallTest.TestConfiguration.class
-    },
-    properties = {
-        "camel.dataformat.avro.instance-class-name = org.apache.camel.dataformat.avro.springboot.test.Value"
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, AvroMarshalAndUnmarshallTest.class,
+        AvroMarshalAndUnmarshallTest.TestConfiguration.class }, properties = {
+                "camel.dataformat.avro.instance-class-name = org.apache.camel.dataformat.avro.springboot.test.Value" })
 public class AvroMarshalAndUnmarshallTest {
 
     @Autowired
     private CamelContext context;
-    
+
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:reverse")
     MockEndpoint mock;
 
-    
     @Test
     public void testMarshalAndUnmarshalWithDataFormat() throws Exception {
         marshalAndUnmarshal("direct:in", "direct:back");
@@ -84,8 +74,8 @@ public class AvroMarshalAndUnmarshallTest {
             context.addRoutes(new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:unmarshalC").unmarshal().avro(AvroLibrary.ApacheAvro, new CamelException("wrong schema"))
-                            .to("mock:reverse");
+                    from("direct:unmarshalC").unmarshal()
+                            .avro(AvroLibrary.ApacheAvro, new CamelException("wrong schema")).to("mock:reverse");
                 }
             });
             fail("Expect the exception here");
@@ -129,9 +119,11 @@ public class AvroMarshalAndUnmarshallTest {
                     from("direct:back").unmarshal(format).to("mock:reverse");
 
                     from("direct:marshal").marshal().avro(AvroLibrary.ApacheAvro);
-                    from("direct:unmarshalA").unmarshal().avro(AvroLibrary.ApacheAvro, Value.class.getName()).to("mock:reverse");
+                    from("direct:unmarshalA").unmarshal().avro(AvroLibrary.ApacheAvro, Value.class.getName())
+                            .to("mock:reverse");
 
-                    from("direct:unmarshalB").unmarshal().avro(AvroLibrary.ApacheAvro, Value.SCHEMA$).to("mock:reverse");
+                    from("direct:unmarshalB").unmarshal().avro(AvroLibrary.ApacheAvro, Value.SCHEMA$)
+                            .to("mock:reverse");
                 }
             };
         }

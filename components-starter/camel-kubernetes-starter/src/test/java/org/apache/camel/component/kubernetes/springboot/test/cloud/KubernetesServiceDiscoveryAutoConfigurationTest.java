@@ -33,109 +33,94 @@ public class KubernetesServiceDiscoveryAutoConfigurationTest {
 
     @Test
     public void testServiceDiscoveryDisabled() {
-        new ApplicationContextRunner()
-            .withUserConfiguration(TestConfiguration.class)
-            .withPropertyValues(
-                "spring.main.banner-mode=off",
-                "camel.cloud.kubernetes.service-discovery.enabled=false")
-            .run(
-                context -> {
-                    assertThat(context).doesNotHaveBean(KubernetesServiceCallServiceDiscoveryConfigurationProperties.class);
-                    assertThat(context).getBeans(ServiceDiscovery.class).doesNotContainKeys("kubernetes-service-discovery");
-                }
-            );
+        new ApplicationContextRunner().withUserConfiguration(TestConfiguration.class)
+                .withPropertyValues("spring.main.banner-mode=off",
+                        "camel.cloud.kubernetes.service-discovery.enabled=false")
+                .run(context -> {
+                    assertThat(context)
+                            .doesNotHaveBean(KubernetesServiceCallServiceDiscoveryConfigurationProperties.class);
+                    assertThat(context).getBeans(ServiceDiscovery.class)
+                            .doesNotContainKeys("kubernetes-service-discovery");
+                });
     }
 
     @Test
     public void testServiceDiscoveryEnabled() {
-        new ApplicationContextRunner()
-            .withUserConfiguration(TestConfiguration.class)
-            .withPropertyValues(
-                "spring.main.banner-mode=off",
-                "camel.cloud.kubernetes.service-discovery.enabled=true")
-            .run(
-                context -> {
-                    assertThat(context).hasSingleBean(KubernetesServiceCallServiceDiscoveryConfigurationProperties.class);
+        new ApplicationContextRunner().withUserConfiguration(TestConfiguration.class).withPropertyValues(
+                "spring.main.banner-mode=off", "camel.cloud.kubernetes.service-discovery.enabled=true").run(context -> {
+                    assertThat(context)
+                            .hasSingleBean(KubernetesServiceCallServiceDiscoveryConfigurationProperties.class);
                     assertThat(context).getBeans(ServiceDiscovery.class).containsKeys("kubernetes-service-discovery");
-                    assertThat(context).getBean("kubernetes-service-discovery").isInstanceOf(KubernetesEnvServiceDiscovery.class);
-                }
-            );
+                    assertThat(context).getBean("kubernetes-service-discovery")
+                            .isInstanceOf(KubernetesEnvServiceDiscovery.class);
+                });
     }
 
     @Test
     public void testServiceDiscoveryWithEnv() {
-        new ApplicationContextRunner()
-            .withUserConfiguration(TestConfiguration.class)
-            .withPropertyValues(
-                "spring.main.banner-mode=off",
-                "camel.cloud.kubernetes.service-discovery.enabled=true",
-                "camel.cloud.kubernetes.service-discovery.lookup=env")
-            .run(
-                context -> {
-                    assertThat(context).hasSingleBean(KubernetesServiceCallServiceDiscoveryConfigurationProperties.class);
+        new ApplicationContextRunner().withUserConfiguration(TestConfiguration.class)
+                .withPropertyValues("spring.main.banner-mode=off",
+                        "camel.cloud.kubernetes.service-discovery.enabled=true",
+                        "camel.cloud.kubernetes.service-discovery.lookup=env")
+                .run(context -> {
+                    assertThat(context)
+                            .hasSingleBean(KubernetesServiceCallServiceDiscoveryConfigurationProperties.class);
                     assertThat(context).getBeans(ServiceDiscovery.class).containsKeys("kubernetes-service-discovery");
-                    assertThat(context).getBean("kubernetes-service-discovery").isInstanceOf(KubernetesEnvServiceDiscovery.class);
-                }
-            );
+                    assertThat(context).getBean("kubernetes-service-discovery")
+                            .isInstanceOf(KubernetesEnvServiceDiscovery.class);
+                });
     }
 
     @Test
     public void testServiceDiscoveryWithDns() {
-        new ApplicationContextRunner()
-            .withUserConfiguration(TestConfiguration.class)
-            .withPropertyValues(
-                "spring.main.banner-mode=off",
-                "camel.cloud.kubernetes.service-discovery.enabled=true",
-                "camel.cloud.kubernetes.service-discovery.lookup=dns",
-                "camel.cloud.kubernetes.service-discovery.dns-domain=mydomain",
-                "camel.cloud.kubernetes.service-discovery.namespace=mynamespace")
-            .run(
-                context -> {
-                    assertThat(context).hasSingleBean(KubernetesServiceCallServiceDiscoveryConfigurationProperties.class);
+        new ApplicationContextRunner().withUserConfiguration(TestConfiguration.class)
+                .withPropertyValues("spring.main.banner-mode=off",
+                        "camel.cloud.kubernetes.service-discovery.enabled=true",
+                        "camel.cloud.kubernetes.service-discovery.lookup=dns",
+                        "camel.cloud.kubernetes.service-discovery.dns-domain=mydomain",
+                        "camel.cloud.kubernetes.service-discovery.namespace=mynamespace")
+                .run(context -> {
+                    assertThat(context)
+                            .hasSingleBean(KubernetesServiceCallServiceDiscoveryConfigurationProperties.class);
                     assertThat(context).getBeans(ServiceDiscovery.class).containsKeys("kubernetes-service-discovery");
-                    assertThat(context).getBean("kubernetes-service-discovery").isInstanceOf(KubernetesDnsServiceDiscovery.class);
-                }
-            );
+                    assertThat(context).getBean("kubernetes-service-discovery")
+                            .isInstanceOf(KubernetesDnsServiceDiscovery.class);
+                });
     }
 
     @Test
     public void testServiceDiscoveryWithDnsSrv() {
-        new ApplicationContextRunner()
-            .withUserConfiguration(TestConfiguration.class)
-            .withPropertyValues(
-                "spring.main.banner-mode=off",
-                "camel.cloud.kubernetes.service-discovery.enabled=true",
-                "camel.cloud.kubernetes.service-discovery.lookup=dnssrv",
-                "camel.cloud.kubernetes.service-discovery.port-name=myportname",
-                "camel.cloud.kubernetes.service-discovery.port-proocole=myportproto",
-                "camel.cloud.kubernetes.service-discovery.dns-domain=mydomain",
-                "camel.cloud.kubernetes.service-discovery.namespace=mynamespace")
-            .run(
-                context -> {
-                    assertThat(context).hasSingleBean(KubernetesServiceCallServiceDiscoveryConfigurationProperties.class);
+        new ApplicationContextRunner().withUserConfiguration(TestConfiguration.class)
+                .withPropertyValues("spring.main.banner-mode=off",
+                        "camel.cloud.kubernetes.service-discovery.enabled=true",
+                        "camel.cloud.kubernetes.service-discovery.lookup=dnssrv",
+                        "camel.cloud.kubernetes.service-discovery.port-name=myportname",
+                        "camel.cloud.kubernetes.service-discovery.port-proocole=myportproto",
+                        "camel.cloud.kubernetes.service-discovery.dns-domain=mydomain",
+                        "camel.cloud.kubernetes.service-discovery.namespace=mynamespace")
+                .run(context -> {
+                    assertThat(context)
+                            .hasSingleBean(KubernetesServiceCallServiceDiscoveryConfigurationProperties.class);
                     assertThat(context).getBeans(ServiceDiscovery.class).containsKeys("kubernetes-service-discovery");
-                    assertThat(context).getBean("kubernetes-service-discovery").isInstanceOf(KubernetesDnsSrvServiceDiscovery.class);
-                }
-            );
+                    assertThat(context).getBean("kubernetes-service-discovery")
+                            .isInstanceOf(KubernetesDnsSrvServiceDiscovery.class);
+                });
     }
 
     @Test
     public void testServiceDiscoveryWithClient() {
-        new ApplicationContextRunner()
-            .withUserConfiguration(TestConfiguration.class)
-            .withPropertyValues(
-                "spring.main.banner-mode=off",
-                "camel.cloud.kubernetes.service-discovery.enabled=true",
-                "camel.cloud.kubernetes.service-discovery.lookup=client")
-            .run(
-                context -> {
-                    assertThat(context).hasSingleBean(KubernetesServiceCallServiceDiscoveryConfigurationProperties.class);
+        new ApplicationContextRunner().withUserConfiguration(TestConfiguration.class)
+                .withPropertyValues("spring.main.banner-mode=off",
+                        "camel.cloud.kubernetes.service-discovery.enabled=true",
+                        "camel.cloud.kubernetes.service-discovery.lookup=client")
+                .run(context -> {
+                    assertThat(context)
+                            .hasSingleBean(KubernetesServiceCallServiceDiscoveryConfigurationProperties.class);
                     assertThat(context).getBeans(ServiceDiscovery.class).containsKeys("kubernetes-service-discovery");
-                    assertThat(context).getBean("kubernetes-service-discovery").isInstanceOf(KubernetesClientServiceDiscovery.class);
-                }
-            );
+                    assertThat(context).getBean("kubernetes-service-discovery")
+                            .isInstanceOf(KubernetesClientServiceDiscovery.class);
+                });
     }
-
 
     @EnableAutoConfiguration
     @Configuration

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jira.springboot.test;
 
-
 import static org.apache.camel.component.jira.JiraConstants.CHILD_ISSUE_KEY;
 import static org.apache.camel.component.jira.JiraConstants.JIRA_REST_CLIENT_FACTORY;
 import static org.apache.camel.component.jira.JiraConstants.LINK_TYPE;
@@ -70,66 +69,58 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
-
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        AddIssueLinkProducerTest.class,
-        AddIssueLinkProducerTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, AddIssueLinkProducerTest.class,
+        AddIssueLinkProducerTest.TestConfiguration.class })
 
 public class AddIssueLinkProducerTest {
 
     @Autowired
     private CamelContext camelContext;
-    
 
-    
     @Autowired
     @Produce("direct:start")
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mockResult;
-    
+
     static JiraRestClient jiraClient;
-    
+
     static JiraRestClientFactory jiraRestClientFactory;
-    
+
     static IssueRestClient issueRestClient;
 
     static Issue parentIssue;
     static Issue childIssue;
-    
+
     @Bean
     CamelContextConfiguration contextConfiguration() {
         return new CamelContextConfiguration() {
             @Override
             public void beforeApplicationStart(CamelContext context) {
-                //get chance to mock camelContext/Registry
+                // get chance to mock camelContext/Registry
                 jiraRestClientFactory = mock(JiraRestClientFactory.class);
                 jiraClient = mock(JiraRestClient.class);
                 issueRestClient = mock(IssueRestClient.class);
-                lenient().when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any())).thenReturn(jiraClient);
+                lenient().when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any()))
+                        .thenReturn(jiraClient);
                 lenient().when(jiraClient.getIssueClient()).thenReturn(issueRestClient);
 
                 parentIssue = createIssue(1);
                 childIssue = createIssue(2);
-                
+
                 camelContext.getRegistry().bind(JIRA_REST_CLIENT_FACTORY, jiraRestClientFactory);
             }
 
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here                
+                // do nothing here
             }
         };
     }
-    
+
     @Test
     public void testAddIssueLink() throws InterruptedException {
         String comment = "A new test comment " + new Date();
@@ -139,13 +130,12 @@ public class AddIssueLinkProducerTest {
         headers.put(CHILD_ISSUE_KEY, childIssue.getKey());
         headers.put(LINK_TYPE, linkType);
 
-        when(issueRestClient.linkIssue(any(LinkIssuesInput.class)))
-                .then((Answer<Void>) inv -> {
-                    Collection<IssueLink> links = new ArrayList<>();
-                    links.add(newIssueLink(childIssue.getId(), 1, comment));
-                    parentIssue = createIssueWithLinks(parentIssue.getId(), links);
-                    return null;
-                });
+        when(issueRestClient.linkIssue(any(LinkIssuesInput.class))).then((Answer<Void>) inv -> {
+            Collection<IssueLink> links = new ArrayList<>();
+            links.add(newIssueLink(childIssue.getId(), 1, comment));
+            parentIssue = createIssueWithLinks(parentIssue.getId(), links);
+            return null;
+        });
 
         template.sendBodyAndHeaders(comment, headers);
 
@@ -163,13 +153,12 @@ public class AddIssueLinkProducerTest {
         headers.put(CHILD_ISSUE_KEY, childIssue.getKey());
         headers.put(LINK_TYPE, linkType);
 
-        when(issueRestClient.linkIssue(any(LinkIssuesInput.class)))
-                .then((Answer<Void>) inv -> {
-                    Collection<IssueLink> links = new ArrayList<>();
-                    links.add(newIssueLink(childIssue.getId(), 1, null));
-                    parentIssue = createIssueWithLinks(parentIssue.getId(), links);
-                    return null;
-                });
+        when(issueRestClient.linkIssue(any(LinkIssuesInput.class))).then((Answer<Void>) inv -> {
+            Collection<IssueLink> links = new ArrayList<>();
+            links.add(newIssueLink(childIssue.getId(), 1, null));
+            parentIssue = createIssueWithLinks(parentIssue.getId(), links);
+            return null;
+        });
 
         template.sendBodyAndHeaders(null, headers);
 
@@ -244,28 +233,20 @@ public class AddIssueLinkProducerTest {
         verify(issueRestClient, never()).linkIssue(any(LinkIssuesInput.class));
     }
 
-    
     @Configuration
     public class TestConfiguration {
-        
-        
 
         @Bean
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws IOException {
-                    from("direct:start")
-                            .to("jira://addIssueLink?jiraUrl=" + JiraTestConstants.getJiraCredentials())
+                    from("direct:start").to("jira://addIssueLink?jiraUrl=" + JiraTestConstants.getJiraCredentials())
                             .to(mockResult);
                 }
             };
         }
-        
-      
+
     }
-    
-    
-    
-    
+
 }

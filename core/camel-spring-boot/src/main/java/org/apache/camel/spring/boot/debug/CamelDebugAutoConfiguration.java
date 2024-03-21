@@ -34,7 +34,8 @@ import org.springframework.context.annotation.Configuration;
 public class CamelDebugAutoConfiguration {
 
     @Bean
-    public BacklogDebugger backlogDebugger(CamelContext camelContext, CamelDebugConfigurationProperties config) throws Exception {
+    public BacklogDebugger backlogDebugger(CamelContext camelContext, CamelDebugConfigurationProperties config)
+            throws Exception {
         if (!config.isEnabled() && !config.isStandby()) {
             return null;
         }

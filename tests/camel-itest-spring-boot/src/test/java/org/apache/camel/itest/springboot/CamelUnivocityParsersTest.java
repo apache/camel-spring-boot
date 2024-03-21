@@ -24,7 +24,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelUnivocityParsersTest extends AbstractSpringBootTestSupport {
 
@@ -34,9 +33,7 @@ public class CamelUnivocityParsersTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelUnivocityParsersTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelUnivocityParsersTest.class)).build();
     }
 
     @Test
@@ -47,6 +44,5 @@ public class CamelUnivocityParsersTest extends AbstractSpringBootTestSupport {
 
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

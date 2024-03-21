@@ -34,9 +34,7 @@ public class CamelDebeziumMongodbTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelDebeziumMongodbTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelDebeziumMongodbTest.class)).build();
     }
 
     @Test

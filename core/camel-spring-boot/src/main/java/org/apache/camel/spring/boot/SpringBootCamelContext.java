@@ -53,9 +53,10 @@ public class SpringBootCamelContext extends SpringCamelContext {
             boolean junit = cp != null && cp.contains("junit-");
             boolean starterWeb = cp != null && cp.contains("spring-boot-starter-web");
             if (!junit && !starterWeb) {
-                LOG.warn("CamelContext has only been running for less than a second. If you intend to run Camel for a longer time "
-                        + "then you can set the property camel.springboot.main-run-controller=true in application.properties"
-                        + " or add spring-boot-starter-web JAR to the classpath.");
+                LOG.warn(
+                        "CamelContext has only been running for less than a second. If you intend to run Camel for a longer time "
+                                + "then you can set the property camel.springboot.main-run-controller=true in application.properties"
+                                + " or add spring-boot-starter-web JAR to the classpath.");
             }
         }
         super.doStop();

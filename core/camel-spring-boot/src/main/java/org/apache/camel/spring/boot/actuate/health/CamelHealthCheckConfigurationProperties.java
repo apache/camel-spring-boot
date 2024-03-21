@@ -213,6 +213,3 @@ public class CamelHealthCheckConfigurationProperties {
         this.asyncCamelHealthCheck = asyncCamelHealthCheck;
     }
 }
-
-
-

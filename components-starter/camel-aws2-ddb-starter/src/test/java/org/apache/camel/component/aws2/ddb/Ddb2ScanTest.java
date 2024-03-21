@@ -53,13 +53,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                Ddb2ScanTest.class,
-                Ddb2ScanTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, Ddb2ScanTest.class, Ddb2ScanTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class Ddb2ScanTest extends BaseDdb2 {
 
@@ -76,29 +70,16 @@ public class Ddb2ScanTest extends BaseDdb2 {
     protected static void setupResources() throws Exception {
         DynamoDbClient ddbClient = AWSSDKClientUtils.newDynamoDBClient();
 
-        CreateTableRequest createTableRequest = CreateTableRequest.builder()
-                .tableName(tableName)
-                .keySchema(
-                        KeySchemaElement.builder()
-                                .attributeName(attributeName)
-                                .keyType(KeyType.HASH)
-                                .build(),
-                        KeySchemaElement.builder()
-                                .attributeName(secondaryAttributeName)
-                                .keyType(KeyType.RANGE)
+        CreateTableRequest createTableRequest = CreateTableRequest.builder().tableName(tableName)
+                .keySchema(KeySchemaElement.builder().attributeName(attributeName).keyType(KeyType.HASH).build(),
+                        KeySchemaElement.builder().attributeName(secondaryAttributeName).keyType(KeyType.RANGE).build())
+                .attributeDefinitions(
+                        AttributeDefinition.builder().attributeType(ScalarAttributeType.S)
+                                .attributeName(secondaryAttributeName).build(),
+                        AttributeDefinition.builder().attributeType(ScalarAttributeType.S).attributeName(attributeName)
                                 .build())
-                .attributeDefinitions(AttributeDefinition.builder()
-                        .attributeType(ScalarAttributeType.S)
-                        .attributeName(secondaryAttributeName)
-                        .build(),
-                        AttributeDefinition.builder()
-                                .attributeType(ScalarAttributeType.S)
-                                .attributeName(attributeName)
-                                .build())
-                .provisionedThroughput(ProvisionedThroughput.builder()
-                        .readCapacityUnits(5L)
-                        .writeCapacityUnits(5L)
-                        .build())
+                .provisionedThroughput(
+                        ProvisionedThroughput.builder().readCapacityUnits(5L).writeCapacityUnits(5L).build())
                 .build();
         CreateTableResponse res = ddbClient.createTable(createTableRequest);
     }
@@ -107,9 +88,7 @@ public class Ddb2ScanTest extends BaseDdb2 {
     protected static void cleanupResources() {
         DynamoDbClient ddbClient = AWSSDKClientUtils.newDynamoDBClient();
 
-        DeleteTableRequest deleteTableRequest = DeleteTableRequest.builder()
-                .tableName(tableName)
-                .build();
+        DeleteTableRequest deleteTableRequest = DeleteTableRequest.builder().tableName(tableName).build();
         ddbClient.deleteTable(deleteTableRequest);
     }
 
@@ -127,10 +106,8 @@ public class Ddb2ScanTest extends BaseDdb2 {
             e.getIn().setHeader(Ddb2Constants.OPERATION, Ddb2Operations.Scan);
             e.getIn().setHeader(Ddb2Constants.CONSISTENT_READ, true);
             Map<String, Condition> keyConditions = new HashMap<>();
-            keyConditions.put(attributeName, Condition.builder().comparisonOperator(
-                    ComparisonOperator.EQ.toString())
-                    .attributeValueList(AttributeValue.builder().s(retrieveValue).build())
-                    .build());
+            keyConditions.put(attributeName, Condition.builder().comparisonOperator(ComparisonOperator.EQ.toString())
+                    .attributeValueList(AttributeValue.builder().s(retrieveValue).build()).build());
             e.getIn().setHeader(Ddb2Constants.SCAN_FILTER, keyConditions);
         });
 

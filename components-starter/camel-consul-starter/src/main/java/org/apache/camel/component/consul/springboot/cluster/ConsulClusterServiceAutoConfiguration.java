@@ -45,38 +45,22 @@ public class ConsulClusterServiceAutoConfiguration {
     public CamelClusterService consulClusterService() throws Exception {
         ConsulClusterService service = new ConsulClusterService();
 
-        Optional.ofNullable(configuration.getId())
-                .ifPresent(service::setId);
-        Optional.ofNullable(configuration.getOrder())
-                .ifPresent(service::setOrder);
-        Optional.ofNullable(configuration.getAttributes())
-                .ifPresent(service::setAttributes);
-        Optional.ofNullable(configuration.getAclToken())
-                .ifPresent(service::setAclToken);
-        Optional.ofNullable(configuration.getDatacenter())
-                .ifPresent(service::setDatacenter);
-        Optional.ofNullable(configuration.getBlockSeconds())
-                .ifPresent(service::setBlockSeconds);
-        Optional.ofNullable(configuration.getConnectTimeout())
-                .ifPresent(service::setConnectTimeout);
-        Optional.ofNullable(configuration.getUrl())
-                .ifPresent(service::setUrl);
-        Optional.ofNullable(configuration.getSessionLockDelay())
-                .ifPresent(service::setLockDelay);
-        Optional.ofNullable(configuration.getPassword())
-                .ifPresent(service::setPassword);
-        Optional.ofNullable(configuration.getReadTimeout())
-                .ifPresent(service::setReadTimeout);
-        Optional.ofNullable(configuration.getRootPath())
-                .ifPresent(service::setRootPath);
-        Optional.ofNullable(configuration.getSslContextParameters())
-                .ifPresent(service::setSslContextParameters);
-        Optional.ofNullable(configuration.getSessionTtl())
-                .ifPresent(service::setTtl);
-        Optional.ofNullable(configuration.getUserName())
-                .ifPresent(service::setUserName);
-        Optional.ofNullable(configuration.getWriteTimeout())
-                .ifPresent(service::setWriteTimeout);
+        Optional.ofNullable(configuration.getId()).ifPresent(service::setId);
+        Optional.ofNullable(configuration.getOrder()).ifPresent(service::setOrder);
+        Optional.ofNullable(configuration.getAttributes()).ifPresent(service::setAttributes);
+        Optional.ofNullable(configuration.getAclToken()).ifPresent(service::setAclToken);
+        Optional.ofNullable(configuration.getDatacenter()).ifPresent(service::setDatacenter);
+        Optional.ofNullable(configuration.getBlockSeconds()).ifPresent(service::setBlockSeconds);
+        Optional.ofNullable(configuration.getConnectTimeout()).ifPresent(service::setConnectTimeout);
+        Optional.ofNullable(configuration.getUrl()).ifPresent(service::setUrl);
+        Optional.ofNullable(configuration.getSessionLockDelay()).ifPresent(service::setLockDelay);
+        Optional.ofNullable(configuration.getPassword()).ifPresent(service::setPassword);
+        Optional.ofNullable(configuration.getReadTimeout()).ifPresent(service::setReadTimeout);
+        Optional.ofNullable(configuration.getRootPath()).ifPresent(service::setRootPath);
+        Optional.ofNullable(configuration.getSslContextParameters()).ifPresent(service::setSslContextParameters);
+        Optional.ofNullable(configuration.getSessionTtl()).ifPresent(service::setTtl);
+        Optional.ofNullable(configuration.getUserName()).ifPresent(service::setUserName);
+        Optional.ofNullable(configuration.getWriteTimeout()).ifPresent(service::setWriteTimeout);
         service.setConfiguration(configuration);
 
         return service;

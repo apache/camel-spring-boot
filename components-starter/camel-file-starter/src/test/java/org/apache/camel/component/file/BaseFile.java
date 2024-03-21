@@ -56,12 +56,12 @@ public class BaseFile {
         oneExchangeDone = new NotifyBuilder(context).whenDone(1).create();
     }
 
-    //-------------------- assertions from testSupport ------------------------------
+    // -------------------- assertions from testSupport ------------------------------
 
     /**
      * To be used to check is a file is found in the file system
      */
-    public static void  assertFileExists(Path file, String content) throws IOException {
+    public static void assertFileExists(Path file, String content) throws IOException {
         assertTrue(Files.exists(file), "File " + file + " should exist");
         assertTrue(Files.isRegularFile(file), "File " + file + " should be a file");
         assertEquals(content, new String(Files.readAllBytes(file)), "File " + file + " has unexpected content");
@@ -104,8 +104,7 @@ public class BaseFile {
         }
     }
 
-
-    //--------------------- from TestSupport ------------------------------------
+    // --------------------- from TestSupport ------------------------------------
 
     protected static final String LS = System.lineSeparator();
     protected boolean testDirectoryCleaned;
@@ -145,7 +144,6 @@ public class BaseFile {
         return testDirectory().resolve(dir);
     }
 
-
     protected Path testDirectory(String dir) {
         return testDirectory(dir, false);
     }
@@ -165,7 +163,8 @@ public class BaseFile {
     /**
      * Recursively delete a directory, useful to zapping test data
      *
-     * @param file the directory to be deleted
+     * @param file
+     *            the directory to be deleted
      */
     public static void deleteDirectory(File file) {
         if (file.isDirectory()) {

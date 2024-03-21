@@ -26,7 +26,7 @@ import org.apache.camel.component.salesforce.api.dto.AbstractSObjectBase;
 /**
  * Sample POJO for MSP tests using Strings instead of Constants.
  */
-//CHECKSTYLE:OFF
+// CHECKSTYLE:OFF
 public class StringMSPTest extends AbstractSObjectBase {
 
     public StringMSPTest() {
@@ -47,4 +47,4 @@ public class StringMSPTest extends AbstractSObjectBase {
         this.MspField = mspField;
     }
 }
-//CHECKSTYLE:ON
+// CHECKSTYLE:ON

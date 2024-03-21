@@ -24,53 +24,53 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.ConfigurablePropertyResolver;
 import org.springframework.util.StringValueResolver;
 
-
 import static org.jasypt.properties.PropertyValueEncryptionUtils.decrypt;
 import static org.jasypt.properties.PropertyValueEncryptionUtils.isEncryptedValue;
 
-
-public class EncryptablePropertySourcesPlaceholderConfigurer
-        extends PropertySourcesPlaceholderConfigurer {
+public class EncryptablePropertySourcesPlaceholderConfigurer extends PropertySourcesPlaceholderConfigurer {
     /**
      * The encryptor.
      */
     private StringEncryptor stringEncryptor;
 
     /**
-     * PropertySourcesPlaceholderConfigurer  constructor
-     * @param stringEncryptor the encryptor
+     * PropertySourcesPlaceholderConfigurer constructor
+     *
+     * @param stringEncryptor
+     *            the encryptor
      */
     @Autowired
-    public EncryptablePropertySourcesPlaceholderConfigurer(StringEncryptor stringEncryptor){
+    public EncryptablePropertySourcesPlaceholderConfigurer(StringEncryptor stringEncryptor) {
         this.stringEncryptor = stringEncryptor;
     }
 
-
     /**
-     * Visit each bean definition in the given bean factory and attempt to replace ${...} property
-     * placeholders with values from the given properties. If a property is encrypted, it decrypt first
-     * and then replace.
+     * Visit each bean definition in the given bean factory and attempt to replace ${...} property placeholders with
+     * values from the given properties. If a property is encrypted, it decrypt first and then replace.
      *
-     * @param beanFactory the bean factory to process.
-     * @param propertyResolver used to resolve the properties
-     * @throws BeansException If an error occurs.
+     * @param beanFactory
+     *            the bean factory to process.
+     * @param propertyResolver
+     *            used to resolve the properties
+     *
+     * @throws BeansException
+     *             If an error occurs.
      */
     @Override
     protected void processProperties(ConfigurableListableBeanFactory beanFactory,
-                final ConfigurablePropertyResolver propertyResolver) throws BeansException {
+            final ConfigurablePropertyResolver propertyResolver) throws BeansException {
 
         propertyResolver.setPlaceholderPrefix(this.placeholderPrefix);
         propertyResolver.setPlaceholderSuffix(this.placeholderSuffix);
         propertyResolver.setValueSeparator(this.valueSeparator);
 
         StringValueResolver valueResolver = strVal -> {
-            String resolved = this.ignoreUnresolvablePlaceholders ?
-                    propertyResolver.resolvePlaceholders(strVal) :
-                    propertyResolver.resolveRequiredPlaceholders(strVal);
+            String resolved = this.ignoreUnresolvablePlaceholders ? propertyResolver.resolvePlaceholders(strVal)
+                    : propertyResolver.resolveRequiredPlaceholders(strVal);
             if (this.trimValues) {
                 resolved = resolved.trim();
             }
-            if(isEncryptedValue(resolved)){
+            if (isEncryptedValue(resolved)) {
                 resolved = decrypt(resolved, stringEncryptor);
             }
             return (resolved.equals(this.nullValue) ? null : resolved);

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.hl7.springboot.test;
 
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -35,7 +34,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import ca.uhn.hl7v2.model.v25.message.MDM_T02;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -44,29 +42,22 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.util.IOHelper;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        HL7MLLPNettyCodecBoundaryTest.class,
-        HL7MLLPNettyCodecBoundaryTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, HL7MLLPNettyCodecBoundaryTest.class,
+        HL7MLLPNettyCodecBoundaryTest.TestConfiguration.class })
 public class HL7MLLPNettyCodecBoundaryTest extends HL7TestSupport {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mock;
 
-    
     @Test
     public void testSendHL7Message() throws Exception {
-        BufferedReader in = IOHelper.buffered(new InputStreamReader(getClass().getResourceAsStream("/mdm_t02-1022.txt")));
+        BufferedReader in = IOHelper
+                .buffered(new InputStreamReader(getClass().getResourceAsStream("/mdm_t02-1022.txt")));
         String line = "";
         String message = "";
         while (line != null) {
@@ -76,10 +67,10 @@ public class HL7MLLPNettyCodecBoundaryTest extends HL7TestSupport {
         }
         message = message.substring(0, message.length() - 1);
         assertEquals(1022, message.length());
-        
+
         mock.expectedMessageCount(1);
-        template.requestBody("netty:tcp://127.0.0.1:" + getPort() + "?sync=true&decoders=#hl7decoder&encoders=#hl7encoder",
-                message);
+        template.requestBody(
+                "netty:tcp://127.0.0.1:" + getPort() + "?sync=true&decoders=#hl7decoder&encoders=#hl7encoder", message);
         mock.assertIsSatisfied();
     }
 
@@ -106,7 +97,7 @@ public class HL7MLLPNettyCodecBoundaryTest extends HL7TestSupport {
             };
         }
     }
-    
+
     @Bean("hl7decoder")
     private HL7MLLPNettyDecoderFactory addNettyDecoder() throws Exception {
 

@@ -34,10 +34,7 @@ public class CamelCloudServiceChooserAutoConfiguration {
 
     public static class ServiceChooserCondition extends GroupCondition {
         public ServiceChooserCondition() {
-            super(
-                "camel.cloud",
-                "camel.cloud.service-chooser"
-            );
+            super("camel.cloud", "camel.cloud.service-chooser");
         }
     }
 }

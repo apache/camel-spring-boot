@@ -25,11 +25,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 
-public abstract class AbstractSalesforceTestBase  {
+public abstract class AbstractSalesforceTestBase {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
-    
-    
+
     @Bean("salesforce")
     protected SalesforceComponent createComponent() throws Exception {
         // create the component

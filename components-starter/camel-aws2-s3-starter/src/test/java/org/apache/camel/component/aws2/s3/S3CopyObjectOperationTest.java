@@ -34,13 +34,8 @@ import software.amazon.awssdk.services.s3.S3Client;
 //Based on S3CopyObjectOperationManualIT
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                S3CopyObjectOperationTest.class,
-                S3CopyObjectOperationTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, S3CopyObjectOperationTest.class,
+        S3CopyObjectOperationTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class S3CopyObjectOperationTest extends BaseS3 {
     private static final String ACCESS_KEY = System.getProperty("aws.manual.access.key");
@@ -81,7 +76,7 @@ public class S3CopyObjectOperationTest extends BaseS3 {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseS3.TestConfiguration {
+    public class TestConfiguration extends BaseS3.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder(S3Client s3Client) {
             return new RouteBuilder() {

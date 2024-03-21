@@ -47,7 +47,7 @@ public class SpringTypeConverter extends TypeConverterSupport {
         if (type.getCanonicalName().startsWith("org.apache")) {
             return null;
         }
-        
+
         // do not attempt to convert List -> Map. Ognl expression may use this converter as a fallback expecting null
         if (type.isAssignableFrom(Map.class) && isArrayOrCollection(value)) {
             return null;
@@ -59,7 +59,7 @@ public class SpringTypeConverter extends TypeConverterSupport {
         for (ConversionService conversionService : conversionServices) {
             if (conversionService.canConvert(sourceType, targetType)) {
                 try {
-                    return (T)conversionService.convert(value, sourceType, targetType);
+                    return (T) conversionService.convert(value, sourceType, targetType);
                 } catch (ConversionFailedException e) {
                     // if value is a collection or an array the check ConversionService::canConvert
                     // may return true but then the conversion of specific objects may fail

@@ -51,13 +51,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                Ddb2BatchGetItemsTest.class,
-                Ddb2BatchGetItemsTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, Ddb2BatchGetItemsTest.class,
+        Ddb2BatchGetItemsTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class Ddb2BatchGetItemsTest extends BaseDdb2 {
 
@@ -70,26 +65,15 @@ public class Ddb2BatchGetItemsTest extends BaseDdb2 {
     private final String retrieveValue = "retrieve";
     private final String notRetrieveValue = "ignore";
 
-
     @BeforeAll
     protected static void setupResources() throws Exception {
         DynamoDbClient ddbClient = AWSSDKClientUtils.newDynamoDBClient();
-        CreateTableRequest createTableRequest = CreateTableRequest.builder()
-                .tableName(tableName)
-                .keySchema(
-                        KeySchemaElement.builder()
-                                .attributeName(attributeName)
-                                .keyType(KeyType.HASH)
-                                .build())
-                .attributeDefinitions(
-                        AttributeDefinition.builder()
-                                .attributeType(ScalarAttributeType.S)
-                                .attributeName(attributeName)
-                                .build())
-                .provisionedThroughput(ProvisionedThroughput.builder()
-                        .readCapacityUnits(5L)
-                        .writeCapacityUnits(5L)
-                        .build())
+        CreateTableRequest createTableRequest = CreateTableRequest.builder().tableName(tableName)
+                .keySchema(KeySchemaElement.builder().attributeName(attributeName).keyType(KeyType.HASH).build())
+                .attributeDefinitions(AttributeDefinition.builder().attributeType(ScalarAttributeType.S)
+                        .attributeName(attributeName).build())
+                .provisionedThroughput(
+                        ProvisionedThroughput.builder().readCapacityUnits(5L).writeCapacityUnits(5L).build())
                 .build();
         ddbClient.createTable(createTableRequest);
     }
@@ -97,9 +81,7 @@ public class Ddb2BatchGetItemsTest extends BaseDdb2 {
     @AfterAll
     protected static void cleanupResources() throws Exception {
         DynamoDbClient ddbClient = AWSSDKClientUtils.newDynamoDBClient();
-        DeleteTableRequest deleteTableRequest = DeleteTableRequest.builder()
-                .tableName(tableName)
-                .build();
+        DeleteTableRequest deleteTableRequest = DeleteTableRequest.builder().tableName(tableName).build();
         ddbClient.deleteTable(deleteTableRequest);
     }
 
@@ -115,9 +97,7 @@ public class Ddb2BatchGetItemsTest extends BaseDdb2 {
             Map<String, AttributeValue> key = new HashMap<>();
             key.put(attributeName, AttributeValue.builder().s(retrieveValue).build());
             Map<String, KeysAndAttributes> keysAndAttributesMap = new HashMap<>();
-            KeysAndAttributes keysAndAttributes = KeysAndAttributes.builder()
-                    .keys(key)
-                    .build();
+            KeysAndAttributes keysAndAttributes = KeysAndAttributes.builder().keys(key).build();
             keysAndAttributesMap.put(tableName, keysAndAttributes);
             e.getIn().setHeader(Ddb2Constants.BATCH_ITEMS, keysAndAttributesMap);
 

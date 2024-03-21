@@ -32,9 +32,7 @@ public class CamelHashicorpVaultTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelHashicorpVaultTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelHashicorpVaultTest.class)).build();
     }
 
     @Test
@@ -42,6 +40,5 @@ public class CamelHashicorpVaultTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

@@ -35,12 +35,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletRouteDumpTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletRouteDumpTest.class, })
 
 public class KameletRouteDumpTest {
 
@@ -58,8 +53,7 @@ public class KameletRouteDumpTest {
     public void canProduceToKamelet() {
         String body = UUID.randomUUID().toString();
 
-        assertThat(
-                fluentTemplate.toF("direct:templateEmbedded", body).request(String.class)).isEqualTo("test");
+        assertThat(fluentTemplate.toF("direct:templateEmbedded", body).request(String.class)).isEqualTo("test");
     }
 
     // **********************************************
@@ -73,14 +67,10 @@ public class KameletRouteDumpTest {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                routeTemplate("setBody")
-                        .templateParameter("bodyValue")
-                        .from("kamelet:source")
-                        .setBody().constant("{{bodyValue}}")
-                        .to("kamelet:sink");
+                routeTemplate("setBody").templateParameter("bodyValue").from("kamelet:source").setBody()
+                        .constant("{{bodyValue}}").to("kamelet:sink");
 
-                from("direct:templateEmbedded").id("test")
-                        .kamelet("setBody?bodyValue=test")
+                from("direct:templateEmbedded").id("test").kamelet("setBody?bodyValue=test")
                         .to("log:TEST?showAll=true&multiline=true");
             }
         };

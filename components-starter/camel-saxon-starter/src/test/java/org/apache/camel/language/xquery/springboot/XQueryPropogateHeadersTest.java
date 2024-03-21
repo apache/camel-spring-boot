@@ -16,13 +16,11 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,38 +30,30 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        XQueryPropogateHeadersTest.class,
-        XQueryPropogateHeadersTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, XQueryPropogateHeadersTest.class,
+        XQueryPropogateHeadersTest.TestConfiguration.class })
 public class XQueryPropogateHeadersTest {
-    
-    
+
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
-    protected MockEndpoint mock;   
-    
+    protected MockEndpoint mock;
+
     @Test
     public void testPropogateHeadersTest() throws Exception {
         mock.reset();
         mock.expectedMessageCount(1);
         mock.expectedBodiesReceived("<transformed sender=\"bar\" subject=\"Hey\"><mail><subject>Hey</subject>"
-                                    + "<body>Hello world!</body></mail></transformed>");
+                + "<body>Hello world!</body></mail></transformed>");
         mock.expectedHeaderReceived("foo", "bar");
 
-        template.sendBodyAndHeader("direct:one",
-                "<mail><subject>Hey</subject><body>Hello world!</body></mail>", "foo", "bar");
+        template.sendBodyAndHeader("direct:one", "<mail><subject>Hey</subject><body>Hello world!</body></mail>", "foo",
+                "bar");
 
         mock.assertIsSatisfied();
     }
@@ -75,8 +65,7 @@ public class XQueryPropogateHeadersTest {
         mock.expectedBodiesReceived("London");
         mock.expectedHeaderReceived("foo", "bar");
 
-        template.sendBodyAndHeader("direct:two",
-                "<person name='James' city='London'/>", "foo", "bar");
+        template.sendBodyAndHeader("direct:two", "<person name='James' city='London'/>", "foo", "bar");
 
         mock.assertIsSatisfied();
     }
@@ -88,13 +77,11 @@ public class XQueryPropogateHeadersTest {
         mock.expectedBodiesReceived("London");
         mock.expectedHeaderReceived("foo", "bar");
 
-        template.sendBodyAndHeader("direct:three",
-                "<person name='James' city='London'/>", "foo", "bar");
+        template.sendBodyAndHeader("direct:three", "<person name='James' city='London'/>", "foo", "bar");
 
         mock.assertIsSatisfied();
     }
 
-    
     // *************************************
     // Config
     // *************************************
@@ -107,17 +94,12 @@ public class XQueryPropogateHeadersTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:one")
-                            .to("xquery:org/apache/camel/component/xquery/transform_with_headers.xquery")
+                    from("direct:one").to("xquery:org/apache/camel/component/xquery/transform_with_headers.xquery")
                             .to("mock:result");
 
-                    from("direct:two")
-                            .transform().xquery("/person/@city", String.class)
-                            .to("mock:result");
+                    from("direct:two").transform().xquery("/person/@city", String.class).to("mock:result");
 
-                    from("direct:three")
-                            .setBody().xquery("/person/@city", String.class)
-                            .to("mock:result");
+                    from("direct:three").setBody().xquery("/person/@city", String.class).to("mock:result");
                 }
             };
         }

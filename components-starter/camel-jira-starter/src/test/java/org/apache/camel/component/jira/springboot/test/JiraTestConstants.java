@@ -34,6 +34,7 @@ public class JiraTestConstants {
 
     public static String getJiraCredentials() throws IOException {
         Properties props = loadAuthProperties();
-        return TEST_JIRA_URL + "&username=" + props.getProperty("username") + "&password=" + props.getProperty("password");
+        return TEST_JIRA_URL + "&username=" + props.getProperty("username") + "&password="
+                + props.getProperty("password");
     }
 }

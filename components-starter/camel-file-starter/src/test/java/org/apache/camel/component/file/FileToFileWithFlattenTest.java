@@ -30,12 +30,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileToFileWithFlattenTest.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileToFileWithFlattenTest.class })
 public class FileToFileWithFlattenTest extends BaseFile {
 
     @EndpointInject("mock:result")

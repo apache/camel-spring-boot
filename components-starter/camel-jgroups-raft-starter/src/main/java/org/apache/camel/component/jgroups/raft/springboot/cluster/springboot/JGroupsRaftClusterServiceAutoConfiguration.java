@@ -45,14 +45,10 @@ public class JGroupsRaftClusterServiceAutoConfiguration {
     public CamelClusterService jgroupsRaftClusterService() throws Exception {
         JGroupsRaftClusterService service = new JGroupsRaftClusterService();
 
-        Optional.ofNullable(configuration.getId())
-                .ifPresent(service::setId);
-        Optional.ofNullable(configuration.getRaftId())
-                .ifPresent(service::setRaftId);
-        Optional.ofNullable(configuration.getJgroupsRaftClusterName())
-                .ifPresent(service::setJgroupsClusterName);
-        Optional.ofNullable(configuration.getJgroupsRaftConfig())
-                .ifPresent(service::setJgroupsConfig);
+        Optional.ofNullable(configuration.getId()).ifPresent(service::setId);
+        Optional.ofNullable(configuration.getRaftId()).ifPresent(service::setRaftId);
+        Optional.ofNullable(configuration.getJgroupsRaftClusterName()).ifPresent(service::setJgroupsClusterName);
+        Optional.ofNullable(configuration.getJgroupsRaftConfig()).ifPresent(service::setJgroupsConfig);
 
         return service;
     }

@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.hl7.springboot.test;
 
-
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -44,26 +42,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        HL7MLLPNettyCodecTest.class,
-        HL7MLLPNettyCodecTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, HL7MLLPNettyCodecTest.class,
+        HL7MLLPNettyCodecTest.TestConfiguration.class })
 public class HL7MLLPNettyCodecTest extends HL7TestSupport {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mock;
 
-    
     @Test
     public void testSendHL7Message() throws Exception {
         // START SNIPPET: e2
@@ -76,8 +66,8 @@ public class HL7MLLPNettyCodecTest extends HL7TestSupport {
         in.append(line2);
 
         String out = template.requestBody(
-                "netty:tcp://127.0.0.1:" + getPort() + "?sync=true&decoders=#hl7decoder&encoders=#hl7encoder", in.toString(),
-                String.class);
+                "netty:tcp://127.0.0.1:" + getPort() + "?sync=true&decoders=#hl7decoder&encoders=#hl7encoder",
+                in.toString(), String.class);
         // END SNIPPET: e2
 
         String[] lines = out.split("\r");
@@ -137,7 +127,7 @@ public class HL7MLLPNettyCodecTest extends HL7TestSupport {
             };
         }
     }
-    
+
     @Bean(name = "hl7decoder")
     private HL7MLLPNettyDecoderFactory addDecoder() throws Exception {
 
@@ -146,7 +136,7 @@ public class HL7MLLPNettyCodecTest extends HL7TestSupport {
         decoder.setConvertLFtoCR(true);
         return decoder;
     }
-    
+
     @Bean(name = "hl7encoder")
     private HL7MLLPNettyEncoderFactory addEncoder() throws Exception {
 

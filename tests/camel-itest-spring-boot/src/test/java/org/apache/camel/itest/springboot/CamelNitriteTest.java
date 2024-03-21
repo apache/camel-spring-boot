@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelNitriteTest extends AbstractSpringBootTestSupport {
 
@@ -33,10 +32,8 @@ public class CamelNitriteTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelNitriteTest.class))
-                .ignoreLibraryMismatch("org.objenesis")
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelNitriteTest.class))
+                .ignoreLibraryMismatch("org.objenesis").build();
     }
 
     @Test
@@ -44,6 +41,5 @@ public class CamelNitriteTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

@@ -43,8 +43,7 @@ public class CamelConfigurationLocationsTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:foo")
-                            .to("stub:foo?password={{mypassword}}");
+                    from("direct:foo").to("stub:foo?password={{mypassword}}");
                 }
             };
         }

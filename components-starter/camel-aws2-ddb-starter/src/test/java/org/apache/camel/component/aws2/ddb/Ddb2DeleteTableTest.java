@@ -38,13 +38,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                Ddb2DeleteTableTest.class,
-                Ddb2DeleteTableTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, Ddb2DeleteTableTest.class,
+        Ddb2DeleteTableTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class Ddb2DeleteTableTest extends BaseDdb2 {
 
@@ -57,7 +52,7 @@ public class Ddb2DeleteTableTest extends BaseDdb2 {
     @Test
     public void deleteTable() {
 
-        //First we run the delete command, which will say the table is still active
+        // First we run the delete command, which will say the table is still active
         Exchange exchange = template.send("direct:start", new Processor() {
             public void process(Exchange exchange) {
                 exchange.getIn().setHeader(Ddb2Constants.OPERATION, Ddb2Operations.DeleteTable);
@@ -68,7 +63,7 @@ public class Ddb2DeleteTableTest extends BaseDdb2 {
         assertEquals(tableName, exchange.getIn().getHeader(Ddb2Constants.TABLE_NAME));
         assertEquals(TableStatus.ACTIVE, exchange.getIn().getHeader(Ddb2Constants.TABLE_STATUS));
 
-        //And... it's gone.
+        // And... it's gone.
         exchange = template.send("direct:start", new Processor() {
             public void process(Exchange exchange) {
                 exchange.getIn().setHeader(Ddb2Constants.OPERATION, Ddb2Operations.DeleteTable);
@@ -77,7 +72,6 @@ public class Ddb2DeleteTableTest extends BaseDdb2 {
         });
         assertEquals(null, exchange.getIn().getHeader(Ddb2Constants.TABLE_STATUS));
     }
-
 
     // *************************************
     // Config
@@ -90,10 +84,9 @@ public class Ddb2DeleteTableTest extends BaseDdb2 {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:start").to(
-                            "aws2-ddb://" + tableName + "?keyAttributeName=" + attributeName + "&keyAttributeType=" + KeyType.HASH
-                                    + "&keyScalarType=" + ScalarAttributeType.S
-                                    + "&readCapacity=1&writeCapacity=1");
+                    from("direct:start").to("aws2-ddb://" + tableName + "?keyAttributeName=" + attributeName
+                            + "&keyAttributeType=" + KeyType.HASH + "&keyScalarType=" + ScalarAttributeType.S
+                            + "&readCapacity=1&writeCapacity=1");
                 }
             };
         }

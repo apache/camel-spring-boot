@@ -16,13 +16,10 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-
-
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.xquery.XQuery;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,31 +35,24 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        BeanWithXQueryInjectionTest.class,
-        BeanWithXQueryInjectionTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, BeanWithXQueryInjectionTest.class,
+        BeanWithXQueryInjectionTest.TestConfiguration.class })
 public class BeanWithXQueryInjectionTest {
-    
+
     private static final Logger LOG = LoggerFactory.getLogger(BeanWithXQueryInjectionTest.class);
-    
+
     static MyBean myBean = new MyBean();
 
     @Autowired
     ProducerTemplate template;
 
-
-    @Bean("myBean") 
+    @Bean("myBean")
     private MyBean getMyBean() {
         return myBean;
     }
-    
+
     @Test
     public void testSendMessage() throws Exception {
         String expectedBody = "<foo id='bar'>hellow</foo>";
@@ -73,7 +63,6 @@ public class BeanWithXQueryInjectionTest {
         assertEquals("bar", myBean.foo, "bean foo: " + myBean);
     }
 
-    
     // *************************************
     // Config
     // *************************************
@@ -91,7 +80,7 @@ public class BeanWithXQueryInjectionTest {
             };
         }
     }
-    
+
     public static class MyBean {
         public String body;
         public String foo;

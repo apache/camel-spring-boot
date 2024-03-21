@@ -32,9 +32,7 @@ public class CamelAzureKeyVaultTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelAzureKeyVaultTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelAzureKeyVaultTest.class)).build();
     }
 
     @Test
@@ -42,6 +40,5 @@ public class CamelAzureKeyVaultTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

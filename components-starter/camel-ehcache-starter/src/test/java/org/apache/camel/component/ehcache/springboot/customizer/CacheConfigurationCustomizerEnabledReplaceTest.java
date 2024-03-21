@@ -42,17 +42,10 @@ import org.springframework.test.annotation.DirtiesContext;
 @CamelSpringBootTest
 @DirtiesContext
 @EnableAutoConfiguration
-@SpringBootTest(
-    classes = {
-        CacheConfigurationCustomizerEnabledReplaceTest.TestConfiguration.class,
-    },
-    properties = {
-        "debug=false",
-        "camel.component.customizer.enabled=false",
-        "camel.component.ehcache.customizer.enabled=true",
+@SpringBootTest(classes = { CacheConfigurationCustomizerEnabledReplaceTest.TestConfiguration.class, }, properties = {
+        "debug=false", "camel.component.customizer.enabled=false", "camel.component.ehcache.customizer.enabled=true",
         "camel.component.ehcache.customizer.cache-configuration.enabled=true",
-        "camel.component.ehcache.customizer.cache-configuration.mode=REPLACE"
-    })
+        "camel.component.ehcache.customizer.cache-configuration.mode=REPLACE" })
 public class CacheConfigurationCustomizerEnabledReplaceTest {
     private static final String CACHE_CONFIG_ID = UUID.randomUUID().toString();
 
@@ -79,42 +72,31 @@ public class CacheConfigurationCustomizerEnabledReplaceTest {
     static class TestConfiguration {
         @Bean
         public ComponentCustomizer customizer() {
-            return ComponentCustomizer.builder(EhcacheComponent.class)
-                .withOrder(Ordered.HIGHEST)
-                .build(component -> {
-                    component.addCachesConfigurations(Collections.singletonMap(
-                        CACHE_CONFIG_ID,
-                        CacheConfigurationBuilder.newCacheConfigurationBuilder(
-                            String.class,
-                            String.class,
-                            ResourcePoolsBuilder.newResourcePoolsBuilder()
-                                .heap(2100, EntryUnit.ENTRIES)
-                                .offheap(2, MemoryUnit.MB))
-                            .build()
-                    ));
-                });
+            return ComponentCustomizer.builder(EhcacheComponent.class).withOrder(Ordered.HIGHEST).build(component -> {
+                component
+                        .addCachesConfigurations(Collections.singletonMap(CACHE_CONFIG_ID,
+                                CacheConfigurationBuilder
+                                        .newCacheConfigurationBuilder(String.class, String.class,
+                                                ResourcePoolsBuilder.newResourcePoolsBuilder()
+                                                        .heap(2100, EntryUnit.ENTRIES).offheap(2, MemoryUnit.MB))
+                                        .build()));
+            });
         }
 
         @Bean
         public CacheConfiguration<?, ?> myConfig1() {
-            return CacheConfigurationBuilder.newCacheConfigurationBuilder(
-                String.class,
-                String.class,
-                ResourcePoolsBuilder.newResourcePoolsBuilder()
-                    .heap(100, EntryUnit.ENTRIES)
-                    .offheap(1, MemoryUnit.MB))
-                .build();
+            return CacheConfigurationBuilder
+                    .newCacheConfigurationBuilder(String.class, String.class, ResourcePoolsBuilder
+                            .newResourcePoolsBuilder().heap(100, EntryUnit.ENTRIES).offheap(1, MemoryUnit.MB))
+                    .build();
         }
 
         @Bean
         public CacheConfiguration<?, ?> myConfig2() {
-            return CacheConfigurationBuilder.newCacheConfigurationBuilder(
-                String.class,
-                String.class,
-                ResourcePoolsBuilder.newResourcePoolsBuilder()
-                    .heap(2100, EntryUnit.ENTRIES)
-                    .offheap(2, MemoryUnit.MB))
-                .build();
+            return CacheConfigurationBuilder
+                    .newCacheConfigurationBuilder(String.class, String.class, ResourcePoolsBuilder
+                            .newResourcePoolsBuilder().heap(2100, EntryUnit.ENTRIES).offheap(2, MemoryUnit.MB))
+                    .build();
         }
     }
 }

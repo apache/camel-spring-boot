@@ -16,14 +16,12 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.language.xpath.XPathBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,37 +31,29 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        XPathHeaderEnableSaxonJavaDslTest.class,
-        XPathHeaderEnableSaxonJavaDslTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, XPathHeaderEnableSaxonJavaDslTest.class,
+        XPathHeaderEnableSaxonJavaDslTest.TestConfiguration.class })
 public class XPathHeaderEnableSaxonJavaDslTest {
-    
-    
+
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:camel")
-    protected MockEndpoint camel;   
-    
+    protected MockEndpoint camel;
+
     @EndpointInject("mock:donkey")
-    protected MockEndpoint donkey;   
-    
+    protected MockEndpoint donkey;
+
     @EndpointInject("mock:other")
-    protected MockEndpoint other;   
-    
+    protected MockEndpoint other;
+
     @Test
     public void testChoiceWithHeaderSelectCamel() throws Exception {
-        
+
         camel.expectedBodiesReceived("<name>King</name>");
         camel.expectedHeaderReceived("type", "Camel");
 
@@ -74,7 +64,7 @@ public class XPathHeaderEnableSaxonJavaDslTest {
 
     @Test
     public void testChoiceWithNoHeaderSelectDonkey() throws Exception {
-        
+
         donkey.expectedBodiesReceived("<name>Kong</name>");
 
         template.sendBody("direct:in", "<name>Kong</name>");
@@ -84,14 +74,14 @@ public class XPathHeaderEnableSaxonJavaDslTest {
 
     @Test
     public void testChoiceWithNoHeaderSelectOther() throws Exception {
-        
+
         other.expectedBodiesReceived("<name>Other</name>");
 
         template.sendBody("direct:in", "<name>Other</name>");
 
         other.assertIsSatisfied();
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -104,13 +94,8 @@ public class XPathHeaderEnableSaxonJavaDslTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:in")
-                            .choice()
-                            .when(XPathBuilder.xpath("$type = 'Camel'").saxon())
-                            .to("mock:camel")
-                            .when(XPathBuilder.xpath("//name = 'Kong'").saxon())
-                            .to("mock:donkey")
-                            .otherwise()
+                    from("direct:in").choice().when(XPathBuilder.xpath("$type = 'Camel'").saxon()).to("mock:camel")
+                            .when(XPathBuilder.xpath("//name = 'Kong'").saxon()).to("mock:donkey").otherwise()
                             .to("mock:other");
                 }
             };

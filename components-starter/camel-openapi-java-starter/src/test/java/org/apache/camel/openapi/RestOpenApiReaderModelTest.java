@@ -39,92 +39,84 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
-
 import io.swagger.v3.core.util.Json;
 import io.swagger.v3.oas.models.OpenAPI;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				RestOpenApiReaderModelTest.class,
-				RestOpenApiReaderModelTest.TestConfiguration.class,
-				DummyRestConsumerFactory.class,
-				DummyUserService.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, RestOpenApiReaderModelTest.class,
+        RestOpenApiReaderModelTest.TestConfiguration.class, DummyRestConsumerFactory.class, DummyUserService.class })
 public class RestOpenApiReaderModelTest {
 
-	private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
-	@BindToRegistry("dummy-rest")
-	private final DummyRestConsumerFactory factory = new DummyRestConsumerFactory();
+    @BindToRegistry("dummy-rest")
+    private final DummyRestConsumerFactory factory = new DummyRestConsumerFactory();
 
-	@BindToRegistry("userService")
-	private final DummyUserService dummy = new DummyUserService();
+    @BindToRegistry("userService")
+    private final DummyUserService dummy = new DummyUserService();
 
-	@Autowired
-	CamelContext context;
+    @Autowired
+    CamelContext context;
 
-	@Configuration
-	public class TestConfiguration {
+    @Configuration
+    public class TestConfiguration {
 
-		@Bean
-		public RouteBuilder routeBuilder() {
-			return new RouteBuilder() {
+        @Bean
+        public RouteBuilder routeBuilder() {
+            return new RouteBuilder() {
 
-				@Override
-				public void configure() throws Exception {
-					// this user REST service is json only
-					rest("/user").tag("dude").description("User rest service").consumes("application/json")
-							.produces("application/json")
+                @Override
+                public void configure() throws Exception {
+                    // this user REST service is json only
+                    rest("/user").tag("dude").description("User rest service").consumes("application/json")
+                            .produces("application/json")
 
-							.get("/{id}/{date}").description("Find user by id and date").outType(User.class).responseMessage()
-							.message("The user returned").endResponseMessage().param()
-							.name("id").type(RestParamType.path).description("The id of the user to get").endParam().param()
-							.name("date").type(RestParamType.path).description("The date")
-							.dataFormat("date").endParam().to("bean:userService?method=getUser(${header.id})")
+                            .get("/{id}/{date}").description("Find user by id and date").outType(User.class)
+                            .responseMessage().message("The user returned").endResponseMessage().param().name("id")
+                            .type(RestParamType.path).description("The id of the user to get").endParam().param()
+                            .name("date").type(RestParamType.path).description("The date").dataFormat("date").endParam()
+                            .to("bean:userService?method=getUser(${header.id})")
 
-							.put().description("Updates or create a user").type(User.class).param().name("body")
-							.type(RestParamType.body).description("The user to update or create")
-							.endParam().to("bean:userService?method=updateUser")
+                            .put().description("Updates or create a user").type(User.class).param().name("body")
+                            .type(RestParamType.body).description("The user to update or create").endParam()
+                            .to("bean:userService?method=updateUser")
 
-							.get("/findAll").description("Find all users").outType(User[].class).responseMessage()
-							.message("All the found users").endResponseMessage()
-							.to("bean:userService?method=listUsers");
-				}
-			};
-		}
-	}
+                            .get("/findAll").description("Find all users").outType(User[].class).responseMessage()
+                            .message("All the found users").endResponseMessage()
+                            .to("bean:userService?method=listUsers");
+                }
+            };
+        }
+    }
 
-	@Test
-	public void testReaderReadV3() throws Exception {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		config.setTitle("Camel User store");
-		config.setLicense("Apache 2.0");
-		config.setLicenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html");
-		RestOpenApiReader reader = new RestOpenApiReader();
+    @Test
+    public void testReaderReadV3() throws Exception {
+        BeanConfig config = new BeanConfig();
+        config.setHost("localhost:8080");
+        config.setSchemes(new String[] { "http" });
+        config.setBasePath("/api");
+        config.setTitle("Camel User store");
+        config.setLicense("Apache 2.0");
+        config.setLicenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html");
+        RestOpenApiReader reader = new RestOpenApiReader();
 
-		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
-				new DefaultClassResolver());
-		assertNotNull(openApi);
+        OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config,
+                context.getName(), new DefaultClassResolver());
+        assertNotNull(openApi);
 
-		String json = Json.pretty(openApi);
+        String json = Json.pretty(openApi);
 
-		log.info(json);
+        log.info(json);
 
-		assertTrue(json.contains("\"url\" : \"http://localhost:8080/api\""));
-		assertTrue(json.contains("\"description\" : \"The user returned\""));
-		assertTrue(json.contains("\"$ref\" : \"#/components/schemas/User\""));
-		assertTrue(json.contains("\"x-className\""));
-		assertTrue(json.contains("\"format\" : \"org.apache.camel.openapi.User\""));
-		assertTrue(json.contains("\"type\" : \"string\""));
-		assertTrue(json.contains("\"format\" : \"date\""));
-		assertFalse(json.contains("\"enum\""));
-		context.stop();
-	}
+        assertTrue(json.contains("\"url\" : \"http://localhost:8080/api\""));
+        assertTrue(json.contains("\"description\" : \"The user returned\""));
+        assertTrue(json.contains("\"$ref\" : \"#/components/schemas/User\""));
+        assertTrue(json.contains("\"x-className\""));
+        assertTrue(json.contains("\"format\" : \"org.apache.camel.openapi.User\""));
+        assertTrue(json.contains("\"type\" : \"string\""));
+        assertTrue(json.contains("\"format\" : \"date\""));
+        assertFalse(json.contains("\"enum\""));
+        context.stop();
+    }
 }

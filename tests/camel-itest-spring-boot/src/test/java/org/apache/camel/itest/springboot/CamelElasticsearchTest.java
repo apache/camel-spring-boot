@@ -33,12 +33,10 @@ public class CamelElasticsearchTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelElasticsearchTest.class))
+        return new ITestConfigBuilder().module(inferModuleName(CamelElasticsearchTest.class))
                 .dependency("org.elasticsearch.client:elasticsearch-rest-client-sniffer:8.10.4")
                 .dependency("org.elasticsearch.client:elasticsearch-rest-client:8.10.4")
-                .dependency("co.elastic.clients:elasticsearch-java:8.10.4")
-                .build();
+                .dependency("co.elastic.clients:elasticsearch-java:8.10.4").build();
     }
 
     @Test
@@ -46,6 +44,5 @@ public class CamelElasticsearchTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

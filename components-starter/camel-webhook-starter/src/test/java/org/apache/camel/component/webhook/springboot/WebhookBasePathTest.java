@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.webhook.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.CamelExecutionException;
 import org.apache.camel.EndpointInject;
@@ -43,32 +41,25 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.AvailablePortFinder;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        WebhookBasePathTest.class,
-        WebhookBasePathTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, WebhookBasePathTest.class,
+        WebhookBasePathTest.TestConfiguration.class })
 public class WebhookBasePathTest {
-    
+
     private static int port;
 
-   
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:authors")
     MockEndpoint mock;
-    
+
     @BeforeAll
     public static void initPort() {
         port = AvailablePortFinder.getNextAvailable();
     }
-    
+
     @Bean
     CamelContextConfiguration contextConfiguration() {
         return new CamelContextConfiguration() {
@@ -77,15 +68,15 @@ public class WebhookBasePathTest {
                 WebhookComponent comp = (WebhookComponent) context.getComponent("webhook");
                 comp.getConfiguration().setWebhookBasePath("/base");
             }
+
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here
+                // do nothing here
             }
 
         };
     }
 
-    
     @Bean("wb-delegate-component")
     private TestComponent getTestComponent() {
         return new TestComponent(endpoint -> {
@@ -111,8 +102,7 @@ public class WebhookBasePathTest {
     @Test
     public void testAutoPath() {
         String result = template.requestBody("netty-http:http://localhost:" + port + "/base"
-                                             + WebhookConfiguration.computeDefaultPath("wb-delegate://auto"),
-                "", String.class);
+                + WebhookConfiguration.computeDefaultPath("wb-delegate://auto"), "", String.class);
         assertEquals("auto: webhook", result);
     }
 
@@ -128,8 +118,6 @@ public class WebhookBasePathTest {
                 () -> template.requestBody("netty-http:http://localhost:" + port + "/base/", "", String.class));
     }
 
-        
-
     // *************************************
     // Config
     // *************************************
@@ -143,18 +131,13 @@ public class WebhookBasePathTest {
                 @Override
                 public void configure() throws Exception {
 
-                    restConfiguration()
-                            .host("0.0.0.0")
-                            .port(port);
+                    restConfiguration().host("0.0.0.0").port(port);
 
-                    from("webhook:wb-delegate://xx?webhookPath=uri0")
-                            .transform(body().prepend("msg: "));
+                    from("webhook:wb-delegate://xx?webhookPath=uri0").transform(body().prepend("msg: "));
 
-                    from("webhook:wb-delegate://xx?webhookPath=/uri")
-                            .transform(body().prepend("uri: "));
+                    from("webhook:wb-delegate://xx?webhookPath=/uri").transform(body().prepend("uri: "));
 
-                    from("webhook:wb-delegate://auto")
-                            .transform(body().prepend("auto: "));
+                    from("webhook:wb-delegate://auto").transform(body().prepend("auto: "));
 
                 }
             };

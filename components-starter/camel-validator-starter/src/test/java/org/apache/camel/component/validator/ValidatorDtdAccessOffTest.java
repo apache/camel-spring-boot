@@ -36,13 +36,8 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                ValidatorDtdAccessOffTest.class,
-                ValidatorDtdAccessAbstractTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ValidatorDtdAccessOffTest.class,
+        ValidatorDtdAccessAbstractTest.TestConfiguration.class })
 public class ValidatorDtdAccessOffTest extends ValidatorDtdAccessAbstractTest {
 
     /** Tests that no external DTD call is executed for StringSource. */

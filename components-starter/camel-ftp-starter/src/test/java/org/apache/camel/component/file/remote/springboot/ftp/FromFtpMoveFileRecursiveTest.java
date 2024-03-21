@@ -31,13 +31,8 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FromFtpMoveFileRecursiveTest.class,
-                FromFtpMoveFileRecursiveTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FromFtpMoveFileRecursiveTest.class,
+        FromFtpMoveFileRecursiveTest.TestConfiguration.class })
 // Based on FromFtpMoveFileRecursiveIT
 public class FromFtpMoveFileRecursiveTest extends BaseFtp {
 
@@ -46,7 +41,7 @@ public class FromFtpMoveFileRecursiveTest extends BaseFtp {
 
     protected String getFtpUrl() {
         return "ftp://admin@localhost:" + getPort() + "/movefile?password=admin&recursive=true&binary=false"
-               + "&move=.done/${file:name}.old&initialDelay=2500&delay=5000";
+                + "&move=.done/${file:name}.old&initialDelay=2500&delay=5000";
     }
 
     @BeforeEach
@@ -75,7 +70,7 @@ public class FromFtpMoveFileRecursiveTest extends BaseFtp {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseFtp.TestConfiguration {
+    public class TestConfiguration extends BaseFtp.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
 

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-
 import java.util.List;
 
 import org.apache.camel.EndpointInject;
@@ -25,7 +24,6 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -40,27 +38,21 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        XQueryFromFileTest.class,
-        XQueryFromFileTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, XQueryFromFileTest.class,
+        XQueryFromFileTest.TestConfiguration.class })
 public class XQueryFromFileTest extends FromFileBase {
 
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
-    protected MockEndpoint mock; 
-      
+    protected MockEndpoint mock;
+
     @Test
     public void testXQueryFromFile() throws Exception {
-        
+
         mock.expectedMessageCount(1);
 
         template.sendBodyAndHeader(fileUri(), "<mail><subject>Hey</subject><body>Hello world!</body></mail>",
@@ -73,14 +65,9 @@ public class XQueryFromFileTest extends FromFileBase {
         String xml = exchange.getIn().getBody(String.class);
         assertNotNull(xml, "The transformed XML should not be null");
         assertEquals("<transformed subject=\"Hey\"><mail><subject>Hey</subject>"
-                     + "<body>Hello world!</body></mail></transformed>",
-                xml, "transformed");
+                + "<body>Hello world!</body></mail></transformed>", xml, "transformed");
     }
 
-    
-
-    
-    
     // *************************************
     // Config
     // *************************************
@@ -93,9 +80,7 @@ public class XQueryFromFileTest extends FromFileBase {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from(fileUri())
-                            .to("xquery:org/apache/camel/component/xquery/transform.xquery")
-                            .to("mock:result");
+                    from(fileUri()).to("xquery:org/apache/camel/component/xquery/transform.xquery").to("mock:result");
                 }
             };
         }

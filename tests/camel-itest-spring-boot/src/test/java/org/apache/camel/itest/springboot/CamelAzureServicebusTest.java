@@ -32,9 +32,7 @@ public class CamelAzureServicebusTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelAzureServicebusTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelAzureServicebusTest.class)).build();
     }
 
     @Test
@@ -42,6 +40,5 @@ public class CamelAzureServicebusTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.telegram.springboot;
 
-
 import java.io.InputStream;
 
 import org.apache.camel.EndpointInject;
@@ -30,7 +29,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,33 +37,25 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.apache.camel.test.AvailablePortFinder;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        TelegramWebhookCallTest.class,
-        TelegramWebhookCallTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, TelegramWebhookCallTest.class,
+        TelegramWebhookCallTest.TestConfiguration.class })
 public class TelegramWebhookCallTest extends TelegramTestSupport {
 
-    
-        
     private static int port;
-    
+
     @EndpointInject("mock:endpoint")
     private MockEndpoint mock;
 
     @Test
     public void testWebhookCall() throws Exception {
-        WebhookConfiguration config
-                = ((WebhookEndpoint) context.getRoute("webhook").getConsumer().getEndpoint()).getConfiguration();
+        WebhookConfiguration config = ((WebhookEndpoint) context.getRoute("webhook").getConsumer().getEndpoint())
+                .getConfiguration();
         String url = config.computeFullExternalUrl();
 
         try (InputStream content = getClass().getClassLoader().getResourceAsStream("messages/webhook-call.json")) {
-            
+
             mock.expectedBodiesReceived("aho");
             mock.expectedMinimumMessageCount(1);
 
@@ -79,7 +69,6 @@ public class TelegramWebhookCallTest extends TelegramTestSupport {
         port = AvailablePortFinder.getNextAvailable();
     }
 
-   
     // *************************************
     // Config
     // *************************************
@@ -91,19 +80,14 @@ public class TelegramWebhookCallTest extends TelegramTestSupport {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    restConfiguration()
-                            .host("localhost")
-                            .port(port);
+                    restConfiguration().host("localhost").port(port);
 
-                    from("webhook:telegram:bots?authorizationToken=mock-token&webhookAutoRegister=false")
-                            .id("webhook")
-                            .convertBodyTo(String.class)
-                            .to("mock:endpoint");
+                    from("webhook:telegram:bots?authorizationToken=mock-token&webhookAutoRegister=false").id("webhook")
+                            .convertBodyTo(String.class).to("mock:endpoint");
                 }
             };
         }
 
     }
-    
-    
+
 }

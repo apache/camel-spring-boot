@@ -41,12 +41,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                InfinispanRemoteAggregationRepositoryOperationsIT.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, InfinispanRemoteAggregationRepositoryOperationsIT.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class InfinispanRemoteAggregationRepositoryOperationsIT extends InfinispanRemoteTestSupport {
     private static InfinispanRemoteAggregationRepository aggregationRepository;

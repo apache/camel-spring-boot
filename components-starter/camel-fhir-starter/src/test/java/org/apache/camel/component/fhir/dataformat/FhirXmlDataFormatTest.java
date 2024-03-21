@@ -43,19 +43,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirXmlDataFormatTest.class,
-                FhirXmlDataFormatTest.TestConfiguration.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirXmlDataFormatTest.class,
+        FhirXmlDataFormatTest.TestConfiguration.class, })
 public class FhirXmlDataFormatTest {
 
     private static final String PATIENT = "<Patient xmlns=\"http://hl7.org/fhir\">"
-                                          + "<name><family value=\"Holmes\"/><given value=\"Sherlock\"/></name>"
-                                          + "<address><line value=\"221b Baker St, Marylebone, London NW1 6XE, UK\"/></address>"
-                                          + "</Patient>";
+            + "<name><family value=\"Holmes\"/><given value=\"Sherlock\"/></name>"
+            + "<address><line value=\"221b Baker St, Marylebone, London NW1 6XE, UK\"/></address>" + "</Patient>";
     private MockEndpoint mockEndpoint;
 
     @Autowired
@@ -94,8 +88,8 @@ public class FhirXmlDataFormatTest {
 
         Exchange exchange = mockEndpoint.getExchanges().get(0);
         InputStream inputStream = exchange.getIn().getBody(InputStream.class);
-        final IBaseResource iBaseResource
-                = FhirContext.forR4().newXmlParser().parseResource(new InputStreamReader(inputStream));
+        final IBaseResource iBaseResource = FhirContext.forR4().newXmlParser()
+                .parseResource(new InputStreamReader(inputStream));
         assertTrue(patient.equalsDeep((Base) iBaseResource), "Patients should be equal!");
     }
 
@@ -113,13 +107,9 @@ public class FhirXmlDataFormatTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:marshal")
-                            .marshal().fhirXml()
-                            .to("mock:result");
+                    from("direct:marshal").marshal().fhirXml().to("mock:result");
 
-                    from("direct:unmarshal")
-                            .unmarshal().fhirXml()
-                            .to("mock:result");
+                    from("direct:unmarshal").unmarshal().fhirXml().to("mock:result");
                 }
             };
         }

@@ -34,26 +34,19 @@ import org.springframework.test.annotation.DirtiesContext;
  */
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                ValidatorIllegalImportTest.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ValidatorIllegalImportTest.class })
 public class ValidatorIllegalImportTest extends ContextTestSupport {
 
-    private final String broadCastEvent
-            = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" + "<BroadcastMonitor> "
-              + "<updated>2012-03-01T03:46:26</updated>"
-              + "<stationName>P7 Mix</stationName>" + "<Current>" + "<startTime>2012-03-01T03:46:26</startTime>"
-              + "<itemId>1000736343:8505553</itemId>"
-              + "<titleId>785173</titleId>" + "<itemCode>9004342-0101</itemCode>" + "<itemReference></itemReference>"
-              + "<titleName>Part Of Me</titleName>" + "<artistName>Katy Perry</artistName>" + "<albumName></albumName>"
-              + "</Current>" + "<Next>"
-              + "<startTime>2012-03-01T03:50:00</startTime>" + "<itemId>1000736343:8505554</itemId>"
-              + "<titleId>780319</titleId>"
-              + "<itemCode>2318050-0101</itemCode>" + "<itemReference></itemReference>" + "<titleName>Fine</titleName>"
-              + "<artistName>Whitney Houston</artistName>" + "<albumName></albumName>" + "</Next>" + "</BroadcastMonitor>";
+    private final String broadCastEvent = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
+            + "<BroadcastMonitor> " + "<updated>2012-03-01T03:46:26</updated>" + "<stationName>P7 Mix</stationName>"
+            + "<Current>" + "<startTime>2012-03-01T03:46:26</startTime>" + "<itemId>1000736343:8505553</itemId>"
+            + "<titleId>785173</titleId>" + "<itemCode>9004342-0101</itemCode>" + "<itemReference></itemReference>"
+            + "<titleName>Part Of Me</titleName>" + "<artistName>Katy Perry</artistName>" + "<albumName></albumName>"
+            + "</Current>" + "<Next>" + "<startTime>2012-03-01T03:50:00</startTime>"
+            + "<itemId>1000736343:8505554</itemId>" + "<titleId>780319</titleId>" + "<itemCode>2318050-0101</itemCode>"
+            + "<itemReference></itemReference>" + "<titleName>Fine</titleName>"
+            + "<artistName>Whitney Houston</artistName>" + "<albumName></albumName>" + "</Next>"
+            + "</BroadcastMonitor>";
 
     @Test
     public void testOk() throws Exception {
@@ -77,7 +70,8 @@ public class ValidatorIllegalImportTest extends ContextTestSupport {
             context.addRoutes(new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:test").to("validator:org/apache/camel/component/validator/BroadcastMonitor.xsd").to("mock:result");
+                    from("direct:test").to("validator:org/apache/camel/component/validator/BroadcastMonitor.xsd")
+                            .to("mock:result");
                 }
             });
             fail("Should have thrown exception");

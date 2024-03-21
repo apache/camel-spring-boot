@@ -37,13 +37,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 // Based on SnsTopicProducerIT
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SnsTopicProducerTest.class,
-                SnsTopicProducerTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SnsTopicProducerTest.class,
+        SnsTopicProducerTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class SnsTopicProducerTest extends BaseSns {
 
@@ -76,15 +71,15 @@ public class SnsTopicProducerTest extends BaseSns {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseSns.TestConfiguration {
+    public class TestConfiguration extends BaseSns.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
 
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:start")
-                            .toF("aws2-sns://%s?subject=The+subject+message&autoCreateTopic=true", sharedNameGenerator.getName());
+                    from("direct:start").toF("aws2-sns://%s?subject=The+subject+message&autoCreateTopic=true",
+                            sharedNameGenerator.getName());
 
                 }
             };

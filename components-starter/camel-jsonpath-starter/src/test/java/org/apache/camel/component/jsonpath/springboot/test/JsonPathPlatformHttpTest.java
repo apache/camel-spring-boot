@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
@@ -42,29 +40,21 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.AvailablePortFinder;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathPlatformHttpTest.class,
-        JsonPathPlatformHttpTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathPlatformHttpTest.class,
+        JsonPathPlatformHttpTest.TestConfiguration.class })
 public class JsonPathPlatformHttpTest {
 
     @Autowired
     ProducerTemplate template;
-
- 
 
     public static final String BODY = "{\"room\":{\"temperature\":30}}";
     public static final String JSON_PATH = "$.room[?(@.temperature > 20)]";
     public static final String RESULT = "HOT";
 
     private static final int PORT = AvailablePortFinder.getNextAvailable();
-    
+
     @Bean
     CamelContextConfiguration contextConfiguration() {
         return new CamelContextConfiguration() {
@@ -82,21 +72,15 @@ public class JsonPathPlatformHttpTest {
 
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here
+                // do nothing here
             }
         };
     }
 
     @Test
     public void testWithPlatformHttp() {
-        String result = RestAssured.given()
-                .port(PORT)
-                .contentType(ContentType.JSON)
-                .body(BODY)
-                .post("/getTemperature")
-                .then()
-                .statusCode(200)
-                .extract().asString();
+        String result = RestAssured.given().port(PORT).contentType(ContentType.JSON).body(BODY).post("/getTemperature")
+                .then().statusCode(200).extract().asString();
 
         assertEquals(RESULT, result);
     }
@@ -107,7 +91,6 @@ public class JsonPathPlatformHttpTest {
 
         assertEquals(RESULT, result);
     }
-    
 
     // *************************************
     // Config
@@ -128,8 +111,8 @@ public class JsonPathPlatformHttpTest {
                 }
 
                 private ProcessorDefinition<?> addRoute(String from) {
-                    return from(from).choice().when().jsonpath(JSON_PATH).setBody(simple("HOT"))
-                            .otherwise().setBody(constant("WARM")).end();
+                    return from(from).choice().when().jsonpath(JSON_PATH).setBody(simple("HOT")).otherwise()
+                            .setBody(constant("WARM")).end();
                 }
             };
         }

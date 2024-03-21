@@ -25,7 +25,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.stereotype.Component;
 
-
 @Configuration(proxyBeanMethods = false)
 @ConfigurationPropertiesBinding
 @Component

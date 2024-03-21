@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelHazelcastTest extends AbstractSpringBootTestSupport {
 
@@ -33,9 +32,9 @@ public class CamelHazelcastTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelHazelcastTest.class))
-                .unitTestExclusionPattern(".*(\\.integration\\..*|IntegrationTest$|HazelcastAggregationRepositoryOperationsTest$)")
+        return new ITestConfigBuilder().module(inferModuleName(CamelHazelcastTest.class))
+                .unitTestExclusionPattern(
+                        ".*(\\.integration\\..*|IntegrationTest$|HazelcastAggregationRepositoryOperationsTest$)")
                 // the test fails when running in normal conditions
                 // arquillian fails, but the tests are ok
                 .build();
@@ -57,6 +56,5 @@ public class CamelHazelcastTest extends AbstractSpringBootTestSupport {
 
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

@@ -45,17 +45,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirJsonDataformatErrorHandlerTest.class,
-                FhirJsonDataformatErrorHandlerTest.TestConfiguration.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirJsonDataformatErrorHandlerTest.class,
+        FhirJsonDataformatErrorHandlerTest.TestConfiguration.class, })
 public class FhirJsonDataformatErrorHandlerTest {
 
-    private static final String INPUT
-            = "{\"resourceType\":\"Patient\",\"extension\":[ {\"valueDateTime\":\"2011-01-02T11:13:15\"} ]}";
+    private static final String INPUT = "{\"resourceType\":\"Patient\",\"extension\":[ {\"valueDateTime\":\"2011-01-02T11:13:15\"} ]}";
 
     private MockEndpoint mockEndpoint;
     private final FhirContext fhirContext = FhirContext.forR4();
@@ -97,7 +91,6 @@ public class FhirJsonDataformatErrorHandlerTest {
         assertEquals("2011-01-02T11:13:15", patient.getExtension().get(0).getValueAsPrimitive().getValueAsString());
     }
 
-
     @Configuration
     public class TestConfiguration {
         @Bean
@@ -108,12 +101,10 @@ public class FhirJsonDataformatErrorHandlerTest {
                     FhirJsonDataFormat strickErrorHandlerDataformat = getStrictErrorHandlerDataFormat();
                     FhirJsonDataFormat lenientErrorHandlerDataFormat = getLenientErrorHandlerDataFormat();
 
-                    from("direct:unmarshalErrorHandlerStrict")
-                            .unmarshal(strickErrorHandlerDataformat)
+                    from("direct:unmarshalErrorHandlerStrict").unmarshal(strickErrorHandlerDataformat)
                             .to("mock:errorIsThrown");
 
-                    from("direct:unmarshalErrorHandlerLenient")
-                            .unmarshal(lenientErrorHandlerDataFormat)
+                    from("direct:unmarshalErrorHandlerLenient").unmarshal(lenientErrorHandlerDataFormat)
                             .to("mock:result");
                 }
 

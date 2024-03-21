@@ -45,12 +45,9 @@ public class JGroupsLockClusterServiceAutoConfiguration {
     public CamelClusterService zookeeperClusterService() throws Exception {
         JGroupsLockClusterService service = new JGroupsLockClusterService();
 
-        Optional.ofNullable(configuration.getId())
-                .ifPresent(service::setId);
-        Optional.ofNullable(configuration.getJgroupsClusterName())
-                .ifPresent(service::setJgroupsClusterName);
-        Optional.ofNullable(configuration.getJgroupsConfig())
-                .ifPresent(service::setJgroupsConfig);
+        Optional.ofNullable(configuration.getId()).ifPresent(service::setId);
+        Optional.ofNullable(configuration.getJgroupsClusterName()).ifPresent(service::setJgroupsClusterName);
+        Optional.ofNullable(configuration.getJgroupsConfig()).ifPresent(service::setJgroupsConfig);
 
         return service;
     }

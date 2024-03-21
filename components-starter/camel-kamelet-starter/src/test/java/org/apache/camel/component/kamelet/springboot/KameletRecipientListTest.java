@@ -32,12 +32,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletRecipientListTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletRecipientListTest.class, })
 
 public class KameletRecipientListTest {
 
@@ -75,16 +70,12 @@ public class KameletRecipientListTest {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                routeTemplate("broker")
-                        .templateParameter("queue")
-                        .from("kamelet:source")
+                routeTemplate("broker").templateParameter("queue").from("kamelet:source")
                         .recipientList(constant("mock:{{queue}}"));
 
-                from("direct:foo")
-                        .kamelet("broker?queue=foo");
+                from("direct:foo").kamelet("broker?queue=foo");
 
-                from("direct:bar")
-                        .kamelet("broker?queue=bar");
+                from("direct:bar").kamelet("broker?queue=bar");
             }
         };
     }

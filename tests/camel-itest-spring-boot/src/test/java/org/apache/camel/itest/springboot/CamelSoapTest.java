@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelSoapTest extends AbstractSpringBootTestSupport {
 
@@ -33,9 +32,7 @@ public class CamelSoapTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelSoapTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelSoapTest.class)).build();
     }
 
     @Test
@@ -44,6 +41,5 @@ public class CamelSoapTest extends AbstractSpringBootTestSupport {
 
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

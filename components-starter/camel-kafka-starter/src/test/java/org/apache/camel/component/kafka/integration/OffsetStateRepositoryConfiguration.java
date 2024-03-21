@@ -24,12 +24,12 @@ import org.springframework.context.annotation.Configuration;
 public class OffsetStateRepositoryConfiguration {
 
     @Bean("offset")
-    public KafkaConsumerRebalanceIT.OffsetStateRepository createOffsetStateRepository(CountDownLatch messagesLatch){
+    public KafkaConsumerRebalanceIT.OffsetStateRepository createOffsetStateRepository(CountDownLatch messagesLatch) {
         return new KafkaConsumerRebalanceIT.OffsetStateRepository(messagesLatch);
     }
 
     @Bean
-    public CountDownLatch createCountDownLatch(){
+    public CountDownLatch createCountDownLatch() {
         return new CountDownLatch(1);
     }
 }

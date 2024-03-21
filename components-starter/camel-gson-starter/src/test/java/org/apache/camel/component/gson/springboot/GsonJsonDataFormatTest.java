@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.gson.springboot;
 
-
 import java.util.Map;
 
 import org.apache.camel.EndpointInject;
@@ -36,26 +35,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        GsonJsonDataFormatTest.class,
-        GsonJsonDataFormatTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, GsonJsonDataFormatTest.class,
+        GsonJsonDataFormatTest.TestConfiguration.class })
 public class GsonJsonDataFormatTest {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:reversePojo")
     MockEndpoint mock;
 
-    
     @Test
     public void testUnmarshalMap() {
         Map<?, ?> unmarshalled = template.requestBody("direct:json",

@@ -34,12 +34,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(
-    classes = {
-        CamelAnnotationsTest.class,
-        CamelAnnotationsTest.TestConfig.class
-    }
-)
+@SpringBootTest(classes = { CamelAnnotationsTest.class, CamelAnnotationsTest.TestConfig.class })
 public class CamelAnnotationsTest {
     @Autowired
     ProducerTemplate producerTemplate;

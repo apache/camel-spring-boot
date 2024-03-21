@@ -51,9 +51,7 @@ public class OverridePropertiesTest extends CamelSpringTestSupport {
         context.addRoutes(new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from("direct:start")
-                        .setBody().simple("Name is {{name}}")
-                        .to("mock:result");
+                from("direct:start").setBody().simple("Name is {{name}}").to("mock:result");
             }
         });
 
@@ -73,9 +71,7 @@ public class OverridePropertiesTest extends CamelSpringTestSupport {
         context.addRoutes(new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from("direct:start")
-                        .setBody().simple("Name is {{name}}")
-                        .to("mock:result");
+                from("direct:start").setBody().simple("Name is {{name}}").to("mock:result");
             }
         });
 

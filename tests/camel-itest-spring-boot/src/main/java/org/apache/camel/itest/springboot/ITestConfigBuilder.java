@@ -105,7 +105,8 @@ public class ITestConfigBuilder {
 
     public ITestConfigBuilder exclusion(String exclusionCanonicalForm) {
         if (exclusionCanonicalForm.split(":").length != 2) {
-            throw new IllegalArgumentException("Expected exclusion in the form groupId:artifactId, got: " + exclusionCanonicalForm);
+            throw new IllegalArgumentException(
+                    "Expected exclusion in the form groupId:artifactId, got: " + exclusionCanonicalForm);
         }
         if (config.getMavenExclusions() == null) {
             config.setMavenExclusions(new HashSet<String>());
@@ -169,7 +170,7 @@ public class ITestConfigBuilder {
         config.setSpringBootVersion(springBootVersion);
         return this;
     }
-    
+
     public ITestConfigBuilder mavenOfflineResolution(Boolean offlineResolution) {
         config.setMavenOfflineResolution(offlineResolution);
         return this;
@@ -214,11 +215,14 @@ public class ITestConfigBuilder {
         }
 
         if (config.getUnitTestExclusionPattern() == null) {
-            config.setUnitTestExclusionPattern(propertyOr("unitTestExclusionPattern", ".*(\\.integration\\..*|IntegrationTest$)")); // Integration test
+            config.setUnitTestExclusionPattern(
+                    propertyOr("unitTestExclusionPattern", ".*(\\.integration\\..*|IntegrationTest$)")); // Integration
+                                                                                                         // test
         }
 
         if (config.getIncludeTestDependencies() == null) {
-            config.setIncludeTestDependencies(booleanPropertyOr("includeTestDependencies", config.getUnitTestEnabled()));
+            config.setIncludeTestDependencies(
+                    booleanPropertyOr("includeTestDependencies", config.getUnitTestEnabled()));
         }
 
         if (config.getIncludeProvidedDependencies() == null) {

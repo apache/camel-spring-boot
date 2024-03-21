@@ -16,10 +16,8 @@
  */
 package org.apache.camel.component.hl7.springboot.test;
 
-
 import static org.apache.camel.component.hl7.HL7.ack;
 import static org.apache.camel.component.hl7.HL7.hl7terser;
-
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -37,7 +35,6 @@ import ca.uhn.hl7v2.model.v24.message.ACK;
 import ca.uhn.hl7v2.model.v24.message.ADT_A01;
 import ca.uhn.hl7v2.model.v24.segment.PID;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -45,33 +42,24 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        AckExpressionTest.class,
-        AckExpressionTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, AckExpressionTest.class,
+        AckExpressionTest.TestConfiguration.class })
 public class AckExpressionTest extends HL7TestSupport {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mock;
 
-    
     @Test
     public void testAckExpression() throws Exception {
         ADT_A01 a01 = createADT01Message();
         ACK ack = template.requestBody("direct:test1", a01, ACK.class);
         assertEquals("AA", ack.getMSA().getAcknowledgementCode().getValue());
-        assertEquals(a01.getMSH().getMessageControlID().getValue(), ack.getMSA().getMessageControlID()
-                .getValue());
+        assertEquals(a01.getMSH().getMessageControlID().getValue(), ack.getMSA().getMessageControlID().getValue());
     }
 
     @Test
@@ -79,8 +67,7 @@ public class AckExpressionTest extends HL7TestSupport {
         ADT_A01 a01 = createADT01Message();
         ACK ack = template.requestBody("direct:test2", a01, ACK.class);
         assertEquals("CA", ack.getMSA().getAcknowledgementCode().getValue());
-        assertEquals(a01.getMSH().getMessageControlID().getValue(), ack.getMSA().getMessageControlID()
-                .getValue());
+        assertEquals(a01.getMSH().getMessageControlID().getValue(), ack.getMSA().getMessageControlID().getValue());
     }
 
     @Test
@@ -88,10 +75,9 @@ public class AckExpressionTest extends HL7TestSupport {
         ADT_A01 a01 = createADT01Message();
         ACK ack = template.requestBody("direct:test3", a01, ACK.class);
         assertEquals("AE", ack.getMSA().getAcknowledgementCode().getValue());
-        assertEquals(a01.getMSH().getMessageControlID().getValue(), ack.getMSA().getMessageControlID()
-                .getValue());
-        assertEquals(String.valueOf(ErrorCode.APPLICATION_INTERNAL_ERROR.getCode()), ack.getERR()
-                .getErrorCodeAndLocation(0).getCodeIdentifyingError().getIdentifier().getValue());
+        assertEquals(a01.getMSH().getMessageControlID().getValue(), ack.getMSA().getMessageControlID().getValue());
+        assertEquals(String.valueOf(ErrorCode.APPLICATION_INTERNAL_ERROR.getCode()),
+                ack.getERR().getErrorCodeAndLocation(0).getCodeIdentifyingError().getIdentifier().getValue());
     }
 
     @Test
@@ -99,12 +85,11 @@ public class AckExpressionTest extends HL7TestSupport {
         ADT_A01 a01 = createADT01Message();
         ACK ack = template.requestBody("direct:test4", a01, ACK.class);
         assertEquals("AR", ack.getMSA().getAcknowledgementCode().getValue());
-        assertEquals(a01.getMSH().getMessageControlID().getValue(), ack.getMSA().getMessageControlID()
-                .getValue());
-        assertEquals(String.valueOf(ErrorCode.APPLICATION_INTERNAL_ERROR.getCode()), ack.getERR()
-                .getErrorCodeAndLocation(0).getCodeIdentifyingError().getIdentifier().getValue());
-        assertEquals("Problem!", ack.getERR().getErrorCodeAndLocation(0).getCodeIdentifyingError()
-                .getAlternateText().getValue());
+        assertEquals(a01.getMSH().getMessageControlID().getValue(), ack.getMSA().getMessageControlID().getValue());
+        assertEquals(String.valueOf(ErrorCode.APPLICATION_INTERNAL_ERROR.getCode()),
+                ack.getERR().getErrorCodeAndLocation(0).getCodeIdentifyingError().getIdentifier().getValue());
+        assertEquals("Problem!",
+                ack.getERR().getErrorCodeAndLocation(0).getCodeIdentifyingError().getAlternateText().getValue());
     }
 
     @Test
@@ -112,12 +97,11 @@ public class AckExpressionTest extends HL7TestSupport {
         ADT_A01 a01 = createADT01Message();
         ACK ack = template.requestBody("direct:test5", a01, ACK.class);
         assertEquals("AR", ack.getMSA().getAcknowledgementCode().getValue());
-        assertEquals(a01.getMSH().getMessageControlID().getValue(), ack.getMSA().getMessageControlID()
-                .getValue());
-        assertEquals(String.valueOf(ErrorCode.DATA_TYPE_ERROR.getCode()), ack.getERR().getErrorCodeAndLocation(0)
-                .getCodeIdentifyingError().getIdentifier().getValue());
-        assertEquals("Problem!", ack.getERR().getErrorCodeAndLocation(0).getCodeIdentifyingError()
-                .getAlternateText().getValue());
+        assertEquals(a01.getMSH().getMessageControlID().getValue(), ack.getMSA().getMessageControlID().getValue());
+        assertEquals(String.valueOf(ErrorCode.DATA_TYPE_ERROR.getCode()),
+                ack.getERR().getErrorCodeAndLocation(0).getCodeIdentifyingError().getIdentifier().getValue());
+        assertEquals("Problem!",
+                ack.getERR().getErrorCodeAndLocation(0).getCodeIdentifyingError().getAlternateText().getValue());
     }
 
     // *************************************
@@ -137,14 +121,14 @@ public class AckExpressionTest extends HL7TestSupport {
                     from("direct:test3").onException(HL7Exception.class).handled(true).transform(ack()).end()
                             .transform(hl7terser("/.BLORG"));
                     from("direct:test4").onException(HL7Exception.class).handled(true)
-                            .transform(ack(AcknowledgmentCode.AR, "Problem!", ErrorCode.APPLICATION_INTERNAL_ERROR)).end()
-                            .transform(hl7terser("/.BLORG"));
+                            .transform(ack(AcknowledgmentCode.AR, "Problem!", ErrorCode.APPLICATION_INTERNAL_ERROR))
+                            .end().transform(hl7terser("/.BLORG"));
                     from("direct:test5").transform(ack(AcknowledgmentCode.AR, "Problem!", ErrorCode.DATA_TYPE_ERROR));
                 }
             };
         }
     }
-    
+
     private static ADT_A01 createADT01Message() throws Exception {
         ADT_A01 adt = new ADT_A01();
         adt.initQuickstart("ADT", "A01", "P");

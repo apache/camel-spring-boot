@@ -52,7 +52,7 @@ public class MixedJavaDslAndXmlTest {
                 @Override
                 public void configure() throws Exception {
                     from("timer:project?period=1000").id("java").setBody().constant("Hello World from Java Route")
-                        .log(">>> ${body}");
+                            .log(">>> ${body}");
                 }
             };
         }
@@ -67,7 +67,8 @@ public class MixedJavaDslAndXmlTest {
         final List<Route> routes = camel.getRoutes();
         assertThat(routes).as("There should be two routes configured, one from Java DSL and one from XML").hasSize(2);
         final List<String> routeIds = routes.stream().map(Route::getId).collect(Collectors.toList());
-        assertThat(routeIds).as("Should contain routes from Java DSL, XML and auto-loaded XML").containsOnly("java", "xml");
+        assertThat(routeIds).as("Should contain routes from Java DSL, XML and auto-loaded XML").containsOnly("java",
+                "xml");
         assertThat(routes).as("All routes should be started").are(new Condition<Route>() {
             @Override
             public boolean matches(final Route route) {

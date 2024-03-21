@@ -45,20 +45,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirCreateIT.class,
-                FhirCreateIT.TestConfiguration.class,
-                CustomNoFhirServerUrlCamelContext.class,
-                FhirServer.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirCreateIT.class, FhirCreateIT.TestConfiguration.class,
+        CustomNoFhirServerUrlCamelContext.class, FhirServer.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class FhirCreateIT extends AbstractFhirTestSupport {
 
     private static final Logger LOG = LoggerFactory.getLogger(FhirCreateIT.class);
-    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirCreateApiMethod.class).getName();
+    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirCreateApiMethod.class)
+            .getName();
 
     @Test
     public void testCreateResource() throws Exception {
@@ -106,13 +100,11 @@ public class FhirCreateIT extends AbstractFhirTestSupport {
                     // test route for resource
                     String serverUrl = service.getServiceBaseURL();
                     from("direct://RESOURCE")
-                            .to("fhir://" + PATH_PREFIX + "/resource?inBody=resource&serverUrl="
-                                    + serverUrl);
+                            .to("fhir://" + PATH_PREFIX + "/resource?inBody=resource&serverUrl=" + serverUrl);
 
                     // test route for resource
-                    from("direct://RESOURCE_STRING")
-                            .to("fhir://" + PATH_PREFIX + "/resource?inBody=resourceAsString&log=true&serverUrl="
-                                    + serverUrl);
+                    from("direct://RESOURCE_STRING").to("fhir://" + PATH_PREFIX
+                            + "/resource?inBody=resourceAsString&log=true&serverUrl=" + serverUrl);
                 }
             };
         }

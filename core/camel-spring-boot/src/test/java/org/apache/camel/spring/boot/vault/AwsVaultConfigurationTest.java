@@ -28,21 +28,11 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(
-        classes = {
-                AwsVaultConfigurationTest.class},
-        properties = {
-                "camel.vault.aws.accessKey=myAccessKey",
-                "camel.vault.aws.secretKey=mySecretKey",
-                "camel.vault.aws.region=myRegion",
-                "camel.vault.aws.defaultCredentialsProvider=false",
-                "camel.vault.aws.refreshPeriod=60000",
-                "camel.vault.aws.refreshEnabled=false",
-                "camel.vault.aws.secrets=supersecret",
-                "camel.vault.aws.profile-credentials-provider=true",
-                "camel.vault.aws.profile-name=test"
-        }
-)
+@SpringBootTest(classes = { AwsVaultConfigurationTest.class }, properties = { "camel.vault.aws.accessKey=myAccessKey",
+        "camel.vault.aws.secretKey=mySecretKey", "camel.vault.aws.region=myRegion",
+        "camel.vault.aws.defaultCredentialsProvider=false", "camel.vault.aws.refreshPeriod=60000",
+        "camel.vault.aws.refreshEnabled=false", "camel.vault.aws.secrets=supersecret",
+        "camel.vault.aws.profile-credentials-provider=true", "camel.vault.aws.profile-name=test" })
 public class AwsVaultConfigurationTest {
 
     @Autowired

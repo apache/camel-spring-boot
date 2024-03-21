@@ -51,7 +51,7 @@ import org.springframework.security.web.SecurityFilterChain;
  */
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(CamelAutoConfiguration.class)
-@EnableConfigurationProperties({ComponentConfigurationProperties.class, UndertowSpringSecurityConfiguration.class})
+@EnableConfigurationProperties({ ComponentConfigurationProperties.class, UndertowSpringSecurityConfiguration.class })
 public class UndertowSpringSecurityCustomizer implements ComponentCustomizer {
     private AbstractProviderConfiguration provider;
     private ClientRegistration clientRegistration;
@@ -85,11 +85,9 @@ public class UndertowSpringSecurityCustomizer implements ComponentCustomizer {
 
         @Bean
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-            http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and().authorizeHttpRequests()
-                    .anyRequest().authenticated()
-                    .and().oauth2ResourceServer()
-                    .jwt().jwtAuthenticationConverter(getProvider().getJwtAuthenticationConverter());
+            http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                    .authorizeHttpRequests().anyRequest().authenticated().and().oauth2ResourceServer().jwt()
+                    .jwtAuthenticationConverter(getProvider().getJwtAuthenticationConverter());
             return http.build();
         }
     }
@@ -112,7 +110,8 @@ public class UndertowSpringSecurityCustomizer implements ComponentCustomizer {
         return new InMemoryOAuth2AuthorizedClientService(repository);
     }
 
-    //----------------------------------------------- provider configuration helper methods --------------------------------------
+    // ----------------------------------------------- provider configuration helper methods
+    // --------------------------------------
 
     private enum ProviderType {
         keycloak;
@@ -127,10 +126,13 @@ public class UndertowSpringSecurityCustomizer implements ComponentCustomizer {
             }
 
             if (definedProviders.isEmpty()) {
-                throw new IllegalArgumentException(String.format("Properties camel.component.undertow.spring.security.provider.* are not defined. Allowed providers are (%s)", ProviderType.values()));
+                throw new IllegalArgumentException(String.format(
+                        "Properties camel.component.undertow.spring.security.provider.* are not defined. Allowed providers are (%s)",
+                        ProviderType.values()));
             }
             if (definedProviders.size() > 1) {
-                throw new IllegalArgumentException(String.format("Two or more providers are defined (%s)", definedProviders));
+                throw new IllegalArgumentException(
+                        String.format("Two or more providers are defined (%s)", definedProviders));
             }
 
             provider = definedProviders.getFirst();

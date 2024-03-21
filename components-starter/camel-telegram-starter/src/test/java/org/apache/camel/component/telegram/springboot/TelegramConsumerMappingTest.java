@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.telegram.springboot;
 
-
 import java.time.Instant;
 
 import org.apache.camel.EndpointInject;
@@ -43,21 +42,14 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        TelegramConsumerMappingTest.class,
-        TelegramConsumerMappingTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, TelegramConsumerMappingTest.class,
+        TelegramConsumerMappingTest.TestConfiguration.class })
 public class TelegramConsumerMappingTest extends TelegramTestSupport {
 
-    
     static TelegramMockRoutes mockRoutes;
-    
+
     @EndpointInject("mock:telegram")
     private MockEndpoint endpoint;
 
@@ -107,7 +99,8 @@ public class TelegramConsumerMappingTest extends TelegramTestSupport {
         assertEquals(true, messageResult.isOk());
         assertEquals(true, messageResult.isOk());
         assertEquals((Long) 33L, messageResult.getMessage().getMessageId());
-        assertEquals(Instant.ofEpochSecond(1548091564).getEpochSecond(), messageResult.getMessage().getDate().getEpochSecond());
+        assertEquals(Instant.ofEpochSecond(1548091564).getEpochSecond(),
+                messageResult.getMessage().getDate().getEpochSecond());
         assertEquals((Long) 665977497L, messageResult.getMessage().getFrom().getId());
         assertEquals(true, messageResult.getMessage().getFrom().isBot());
         assertEquals("camelbot", messageResult.getMessage().getFrom().getFirstName());
@@ -121,8 +114,6 @@ public class TelegramConsumerMappingTest extends TelegramTestSupport {
         assertEquals(59.9386292, messageResult.getMessage().getLocation().getLatitude(), 1.0E-07);
         assertEquals(30.3141308, messageResult.getMessage().getLocation().getLongitude(), 1.0E-07);
     }
-
-
 
     // *************************************
     // Config
@@ -141,18 +132,13 @@ public class TelegramConsumerMappingTest extends TelegramTestSupport {
         }
 
     }
-    
+
     @Override
     @Bean
     protected TelegramMockRoutes createMockRoutes() {
-        mockRoutes =
-            new TelegramMockRoutes(port)
-            .addEndpoint(
-                    "getUpdates",
-                    "GET",
-                    String.class,
-                    TelegramTestUtil.stringResource("messages/updates-single.json"),
-                    TelegramTestUtil.stringResource("messages/updates-empty.json"));
+        mockRoutes = new TelegramMockRoutes(port).addEndpoint("getUpdates", "GET", String.class,
+                TelegramTestUtil.stringResource("messages/updates-single.json"),
+                TelegramTestUtil.stringResource("messages/updates-empty.json"));
         return mockRoutes;
     }
 }

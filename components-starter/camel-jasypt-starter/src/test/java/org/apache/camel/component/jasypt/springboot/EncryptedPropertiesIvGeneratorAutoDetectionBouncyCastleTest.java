@@ -27,24 +27,21 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @CamelSpringBootTest
-public class EncryptedPropertiesIvGeneratorAutoDetectionBouncyCastleTest extends AbstractEncryptedPropertiesIvGeneratorAutoDetectionTest {
+public class EncryptedPropertiesIvGeneratorAutoDetectionBouncyCastleTest
+        extends AbstractEncryptedPropertiesIvGeneratorAutoDetectionTest {
 
     public EncryptedPropertiesIvGeneratorAutoDetectionBouncyCastleTest() {
         provider = BOUNCY_CASTLE_PROVIDER_NAME;
     }
 
     @BeforeEach
-    public void setUp(){
-        Security.addProvider( new BouncyCastleProvider());
+    public void setUp() {
+        Security.addProvider(new BouncyCastleProvider());
     }
 
-
     public static Collection<String> data() {
-        return new BouncyCastleProvider().keySet()
-                .stream()
-                .filter(x->((String)x).startsWith("Cipher"))
-                .map(x->((String) x).split("\\.",2)[1])
-                .filter(x->x.startsWith("PBE"))
+        return new BouncyCastleProvider().keySet().stream().filter(x -> ((String) x).startsWith("Cipher"))
+                .map(x -> ((String) x).split("\\.", 2)[1]).filter(x -> x.startsWith("PBE"))
                 .collect(Collectors.toList());
     }
 }

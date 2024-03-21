@@ -41,10 +41,12 @@ public final class FileDeploymentUtils {
     private FileDeploymentUtils() {
     }
 
-    public static void materializeClass(File entryDirectory, ClassAsset classAsset) throws DeploymentException, IOException {
+    public static void materializeClass(File entryDirectory, ClassAsset classAsset)
+            throws DeploymentException, IOException {
         File classDirectory;
         if (classAsset.getSource().getPackage() != null) {
-            classDirectory = new File(entryDirectory, classAsset.getSource().getPackage().getName().replace(DELIMITER_CLASS_NAME_PATH, File.separatorChar));
+            classDirectory = new File(entryDirectory, classAsset.getSource().getPackage().getName()
+                    .replace(DELIMITER_CLASS_NAME_PATH, File.separatorChar));
             if (!classDirectory.mkdirs()) {
                 throw new DeploymentException("Could not create class package directory: " + classDirectory);
             }
@@ -58,7 +60,8 @@ public final class FileDeploymentUtils {
         }
     }
 
-    public static void materializeSubdirectories(File entryDirectory, Node node) throws DeploymentException, IOException {
+    public static void materializeSubdirectories(File entryDirectory, Node node)
+            throws DeploymentException, IOException {
         for (Node child : node.getChildren()) {
             if (child.getAsset() == null) {
                 materializeSubdirectories(entryDirectory, child);
@@ -68,13 +71,15 @@ public final class FileDeploymentUtils {
                     continue;
                 }
                 // E.g. META-INF/my-super-descriptor.xml
-                File resourceFile = new File(entryDirectory, child.getPath().get().replace(DELIMITER_RESOURCE_PATH, File.separatorChar));
+                File resourceFile = new File(entryDirectory,
+                        child.getPath().get().replace(DELIMITER_RESOURCE_PATH, File.separatorChar));
                 File resoureDirectory = resourceFile.getParentFile();
                 if (!resoureDirectory.exists() && !resoureDirectory.mkdirs()) {
                     throw new DeploymentException("Could not create class path directory: " + entryDirectory);
                 }
                 resourceFile.createNewFile();
-                try (InputStream in = child.getAsset().openStream(); OutputStream out = new FileOutputStream(resourceFile)) {
+                try (InputStream in = child.getAsset().openStream();
+                        OutputStream out = new FileOutputStream(resourceFile)) {
                     copy(in, out);
                 }
                 child.getPath().get();

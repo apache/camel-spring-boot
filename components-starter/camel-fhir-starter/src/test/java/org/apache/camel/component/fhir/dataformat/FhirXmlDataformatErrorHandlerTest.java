@@ -44,13 +44,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirXmlDataformatErrorHandlerTest.class,
-                FhirXmlDataformatErrorHandlerTest.TestConfiguration.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirXmlDataformatErrorHandlerTest.class,
+        FhirXmlDataformatErrorHandlerTest.TestConfiguration.class, })
 public class FhirXmlDataformatErrorHandlerTest {
 
     private static final String INPUT = "<Patient><active value=\"true\"/><active value=\"false\"/></Patient>";
@@ -101,12 +96,10 @@ public class FhirXmlDataformatErrorHandlerTest {
                     FhirXmlDataFormat strickErrorHandlerDataformat = getStrictErrorHandlerDataFormat();
                     FhirXmlDataFormat lenientErrorHandlerDataFormat = getLenientErrorHandlerDataFormat();
 
-                    from("direct:unmarshalErrorHandlerStrict")
-                            .unmarshal(strickErrorHandlerDataformat)
+                    from("direct:unmarshalErrorHandlerStrict").unmarshal(strickErrorHandlerDataformat)
                             .to("mock:errorIsThrown");
 
-                    from("direct:unmarshalErrorHandlerLenient")
-                            .unmarshal(lenientErrorHandlerDataFormat)
+                    from("direct:unmarshalErrorHandlerLenient").unmarshal(lenientErrorHandlerDataFormat)
                             .to("mock:result");
                 }
 

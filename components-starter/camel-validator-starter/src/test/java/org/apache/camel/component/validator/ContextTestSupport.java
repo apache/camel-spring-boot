@@ -36,111 +36,112 @@ import java.nio.file.Paths;
 
 public class ContextTestSupport {
 
-	protected MockEndpoint validEndpoint;
-	protected MockEndpoint finallyEndpoint;
-	protected MockEndpoint invalidEndpoint;
+    protected MockEndpoint validEndpoint;
+    protected MockEndpoint finallyEndpoint;
+    protected MockEndpoint invalidEndpoint;
 
-	protected volatile NotifyBuilder oneExchangeDone;
+    protected volatile NotifyBuilder oneExchangeDone;
 
-	@Autowired
-	protected CamelContext context;
+    @Autowired
+    protected CamelContext context;
 
-	@Autowired
-	protected ProducerTemplate template;
+    @Autowired
+    protected ProducerTemplate template;
 
-	protected boolean testDirectoryCleaned;
+    protected boolean testDirectoryCleaned;
 
-	@AfterEach
-	public void tearDown() throws Exception {
-		testDirectoryCleaned = false;
-	}
+    @AfterEach
+    public void tearDown() throws Exception {
+        testDirectoryCleaned = false;
+    }
 
-	protected Path testFile(String dir) {
-		return testDirectory().resolve(dir);
-	}
+    protected Path testFile(String dir) {
+        return testDirectory().resolve(dir);
+    }
 
-	protected String fileUri() {
-		return "file:" + testDirectory();
-	}
+    protected String fileUri() {
+        return "file:" + testDirectory();
+    }
 
-	protected String fileUri(String query) {
-		return "file:" + testDirectory() + (query.startsWith("?") ? "" : "/") + query;
-	}
+    protected String fileUri(String query) {
+        return "file:" + testDirectory() + (query.startsWith("?") ? "" : "/") + query;
+    }
 
-	protected Path testDirectory(String dir, boolean create) {
-		Path f = testDirectory().resolve(dir);
-		if (create) {
-			try {
-				Files.createDirectories(f);
-			} catch (IOException e) {
-				throw new IllegalStateException("Unable to create test directory: " + dir, e);
-			}
-		}
-		return f;
-	}
+    protected Path testDirectory(String dir, boolean create) {
+        Path f = testDirectory().resolve(dir);
+        if (create) {
+            try {
+                Files.createDirectories(f);
+            } catch (IOException e) {
+                throw new IllegalStateException("Unable to create test directory: " + dir, e);
+            }
+        }
+        return f;
+    }
 
-	protected Path testDirectory() {
-		return testDirectory(false);
-	}
+    protected Path testDirectory() {
+        return testDirectory(false);
+    }
 
-	protected Path testDirectory(boolean create) {
-		Class<?> testClass = getClass();
-		if (create) {
-			deleteTestDirectory();
-		}
-		return testDirectory(testClass, create);
-	}
+    protected Path testDirectory(boolean create) {
+        Class<?> testClass = getClass();
+        if (create) {
+            deleteTestDirectory();
+        }
+        return testDirectory(testClass, create);
+    }
 
-	public static Path testDirectory(Class<?> testClass, boolean create) {
-		Path dir = Paths.get("target", "data", testClass.getSimpleName());
-		if (create) {
-			try {
-				Files.createDirectories(dir);
-			} catch (IOException e) {
-				throw new IllegalStateException("Unable to create test directory: " + dir, e);
-			}
-		}
-		return dir;
-	}
+    public static Path testDirectory(Class<?> testClass, boolean create) {
+        Path dir = Paths.get("target", "data", testClass.getSimpleName());
+        if (create) {
+            try {
+                Files.createDirectories(dir);
+            } catch (IOException e) {
+                throw new IllegalStateException("Unable to create test directory: " + dir, e);
+            }
+        }
+        return dir;
+    }
 
-	public void deleteTestDirectory() {
-		if (!testDirectoryCleaned) {
-			deleteDirectory(testDirectory().toFile());
-			testDirectoryCleaned = true;
-		}
-	}
+    public void deleteTestDirectory() {
+        if (!testDirectoryCleaned) {
+            deleteDirectory(testDirectory().toFile());
+            testDirectoryCleaned = true;
+        }
+    }
 
-	public static void deleteDirectory(String file) {
-		deleteDirectory(new File(file));
-	}
+    public static void deleteDirectory(String file) {
+        deleteDirectory(new File(file));
+    }
 
-	/**
-	 * Recursively delete a directory, useful to zapping test data
-	 *
-	 * @param file the directory to be deleted
-	 */
-	public static void deleteDirectory(File file) {
-		if (file.isDirectory()) {
-			File[] files = file.listFiles();
-			if (files != null) {
-				for (File child : files) {
-					deleteDirectory(child);
-				}
-			}
-		}
+    /**
+     * Recursively delete a directory, useful to zapping test data
+     *
+     * @param file
+     *            the directory to be deleted
+     */
+    public static void deleteDirectory(File file) {
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            if (files != null) {
+                for (File child : files) {
+                    deleteDirectory(child);
+                }
+            }
+        }
 
-		file.delete();
-	}
+        file.delete();
+    }
 
-	protected NotifyBuilder event() {
-		return new NotifyBuilder(context);
-	}
+    protected NotifyBuilder event() {
+        return new NotifyBuilder(context);
+    }
 
-	public static <T> T assertIsInstanceOf(Class<T> expectedType, Object value) {
-		Assertions.assertNotNull(value, "Expected an instance of type: " + expectedType.getName() + " but was null");
-		assertTrue(expectedType.isInstance(value), "object should be a " + expectedType.getName() + " but was: " + value
-				+ " with type: " + value.getClass().getName());
-		return expectedType.cast(value);
-	}
+    public static <T> T assertIsInstanceOf(Class<T> expectedType, Object value) {
+        Assertions.assertNotNull(value, "Expected an instance of type: " + expectedType.getName() + " but was null");
+        assertTrue(expectedType.isInstance(value), "object should be a " + expectedType.getName() + " but was: " + value
+                + " with type: " + value.getClass().getName());
+        return expectedType.cast(value);
+    }
 
 }

@@ -53,14 +53,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
-                KafkaConsumerFullIT.class,
-                KafkaConsumerFullIT.TestConfiguration.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
+        KafkaConsumerFullIT.class, KafkaConsumerFullIT.TestConfiguration.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class KafkaConsumerFullIT extends BaseEmbeddedKafkaTestSupport {
     public static final String TOPIC = "test-full";
@@ -71,7 +65,6 @@ public class KafkaConsumerFullIT extends BaseEmbeddedKafkaTestSupport {
             + "?groupId=group1&autoOffsetReset=earliest&keyDeserializer=org.apache.kafka.common.serialization.StringDeserializer&"
             + "valueDeserializer=org.apache.kafka.common.serialization.StringDeserializer"
             + "&autoCommitIntervalMs=1000&sessionTimeoutMs=30000&autoCommitEnable=true&interceptorClasses=org.apache.camel.component.kafka.integration.MockConsumerInterceptor";
-
 
     @EndpointInject("mock:result")
     private MockEndpoint to;
@@ -105,7 +98,8 @@ public class KafkaConsumerFullIT extends BaseEmbeddedKafkaTestSupport {
         to.expectedBodiesReceivedInAnyOrder("message-0", "message-1", "message-2", "message-3", "message-4");
         // The LAST_RECORD_BEFORE_COMMIT header should not be configured on any
         // exchange because autoCommitEnable=true
-        to.expectedHeaderValuesReceivedInAnyOrder(KafkaConstants.LAST_RECORD_BEFORE_COMMIT, null, null, null, null, null);
+        to.expectedHeaderValuesReceivedInAnyOrder(KafkaConstants.LAST_RECORD_BEFORE_COMMIT, null, null, null, null,
+                null);
         to.expectedHeaderReceived(propagatedHeaderKey, propagatedHeaderValue);
 
         for (int k = 0; k < 5; k++) {
@@ -118,8 +112,8 @@ public class KafkaConsumerFullIT extends BaseEmbeddedKafkaTestSupport {
 
         to.assertIsSatisfied(3000);
 
-        assertEquals(5, StreamSupport.stream(MockConsumerInterceptor.recordsCaptured.get(0).records(TOPIC).spliterator(), false)
-                .count());
+        assertEquals(5, StreamSupport
+                .stream(MockConsumerInterceptor.recordsCaptured.get(0).records(TOPIC).spliterator(), false).count());
 
         Map<String, Object> headers = to.getExchanges().get(0).getIn().getHeaders();
         assertFalse(headers.containsKey(skippedHeaderKey), "Should not receive skipped header");
@@ -140,7 +134,8 @@ public class KafkaConsumerFullIT extends BaseEmbeddedKafkaTestSupport {
         to.assertIsSatisfied(3000);
 
         Map<String, Object> headers = to.getExchanges().get(0).getIn().getHeaders();
-        assertTrue(headers.containsKey(KafkaConstants.TOPIC), "Should receive KafkaEndpoint populated kafka.TOPIC header");
+        assertTrue(headers.containsKey(KafkaConstants.TOPIC),
+                "Should receive KafkaEndpoint populated kafka.TOPIC header");
         assertEquals(TOPIC, headers.get(KafkaConstants.TOPIC), "Topic name received");
     }
 
@@ -204,8 +199,8 @@ public class KafkaConsumerFullIT extends BaseEmbeddedKafkaTestSupport {
     @Order(5)
     @Test
     public void headerDeserializerCouldBeOverridden() {
-        KafkaEndpoint kafkaEndpoint
-                = context.getEndpoint("kafka:random_topic?headerDeserializer=#myHeaderDeserializer", KafkaEndpoint.class);
+        KafkaEndpoint kafkaEndpoint = context.getEndpoint("kafka:random_topic?headerDeserializer=#myHeaderDeserializer",
+                KafkaEndpoint.class);
         assertIsInstanceOf(MyKafkaHeaderDeserializer.class, kafkaEndpoint.getConfiguration().getHeaderDeserializer());
     }
 
@@ -216,14 +211,15 @@ public class KafkaConsumerFullIT extends BaseEmbeddedKafkaTestSupport {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from(from).process(exchange -> LOG.trace("Captured on the processor: {}", exchange.getMessage().getBody()))
+                    from(from).process(
+                            exchange -> LOG.trace("Captured on the processor: {}", exchange.getMessage().getBody()))
                             .routeId("full-it").to(to);
                 }
             };
         }
 
         @Bean("myHeaderDeserializer")
-        public MyKafkaHeaderDeserializer createMyKafkaHeaderDeserializer(){
+        public MyKafkaHeaderDeserializer createMyKafkaHeaderDeserializer() {
             return new MyKafkaHeaderDeserializer();
         }
     }

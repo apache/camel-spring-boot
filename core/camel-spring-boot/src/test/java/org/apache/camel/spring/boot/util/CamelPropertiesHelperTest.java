@@ -35,11 +35,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 @CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
-@SpringBootTest(
-    classes = {
-        CamelPropertiesHelperTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelPropertiesHelperTest.TestConfiguration.class })
 public class CamelPropertiesHelperTest {
 
     @Autowired

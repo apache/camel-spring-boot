@@ -34,13 +34,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileBeginFailureOneTimeTest.class,
-                FileBeginFailureOneTimeTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileBeginFailureOneTimeTest.class,
+        FileBeginFailureOneTimeTest.TestConfiguration.class })
 public class FileBeginFailureOneTimeTest extends BaseFile {
 
     private static MyStrategy myStrategy = new MyStrategy();
@@ -64,16 +59,13 @@ public class FileBeginFailureOneTimeTest extends BaseFile {
         private volatile int invoked;
 
         @Override
-        public void prepareOnStartup(
-                GenericFileOperations<File> fileGenericFileOperations, GenericFileEndpoint<File> fileGenericFileEndpoint)
-                throws Exception {
+        public void prepareOnStartup(GenericFileOperations<File> fileGenericFileOperations,
+                GenericFileEndpoint<File> fileGenericFileEndpoint) throws Exception {
         }
 
         @Override
-        public boolean begin(
-                GenericFileOperations<File> fileGenericFileOperations, GenericFileEndpoint<File> fileGenericFileEndpoint,
-                Exchange exchange,
-                GenericFile<File> fileGenericFile)
+        public boolean begin(GenericFileOperations<File> fileGenericFileOperations,
+                GenericFileEndpoint<File> fileGenericFileEndpoint, Exchange exchange, GenericFile<File> fileGenericFile)
                 throws Exception {
             invoked++;
             if (invoked <= 1) {
@@ -83,27 +75,21 @@ public class FileBeginFailureOneTimeTest extends BaseFile {
         }
 
         @Override
-        public void abort(
-                GenericFileOperations<File> fileGenericFileOperations, GenericFileEndpoint<File> fileGenericFileEndpoint,
-                Exchange exchange,
-                GenericFile<File> fileGenericFile)
+        public void abort(GenericFileOperations<File> fileGenericFileOperations,
+                GenericFileEndpoint<File> fileGenericFileEndpoint, Exchange exchange, GenericFile<File> fileGenericFile)
                 throws Exception {
             // noop
         }
 
         @Override
-        public void commit(
-                GenericFileOperations<File> fileGenericFileOperations, GenericFileEndpoint<File> fileGenericFileEndpoint,
-                Exchange exchange,
-                GenericFile<File> fileGenericFile)
+        public void commit(GenericFileOperations<File> fileGenericFileOperations,
+                GenericFileEndpoint<File> fileGenericFileEndpoint, Exchange exchange, GenericFile<File> fileGenericFile)
                 throws Exception {
         }
 
         @Override
-        public void rollback(
-                GenericFileOperations<File> fileGenericFileOperations, GenericFileEndpoint<File> fileGenericFileEndpoint,
-                Exchange exchange,
-                GenericFile<File> fileGenericFile)
+        public void rollback(GenericFileOperations<File> fileGenericFileOperations,
+                GenericFileEndpoint<File> fileGenericFileEndpoint, Exchange exchange, GenericFile<File> fileGenericFile)
                 throws Exception {
         }
 

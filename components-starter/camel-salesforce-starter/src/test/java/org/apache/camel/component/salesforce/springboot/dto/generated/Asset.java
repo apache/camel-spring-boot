@@ -173,4 +173,4 @@ public class Asset extends AbstractSObjectBase {
     }
 
 }
-//CHECKSTYLE:ON
+// CHECKSTYLE:ON

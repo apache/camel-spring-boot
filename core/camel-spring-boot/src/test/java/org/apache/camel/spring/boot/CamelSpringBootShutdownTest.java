@@ -36,23 +36,22 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 /**
- * Test class illustrating the invalid shutdown sequence when using the autoconfiguration
- * provided by <code>camel-spring-boot</code>.
+ * Test class illustrating the invalid shutdown sequence when using the autoconfiguration provided by
+ * <code>camel-spring-boot</code>.
  * <p>
- * This is caused by the {@link TypeConversionConfiguration} class registering a
- * {@link TypeConverter} (of actual type {@link DefaultTypeConverter}) in the Spring
- * {@link ApplicationContext}. Its '{@code public void shutdown()}' method is inferred as a
- * destroy-method by <i>Spring</i>, which will thus be called before the {@link CamelContext}
- * shutdown when the context is closed.
+ * This is caused by the {@link TypeConversionConfiguration} class registering a {@link TypeConverter} (of actual type
+ * {@link DefaultTypeConverter}) in the Spring {@link ApplicationContext}. Its '{@code public void shutdown()}' method
+ * is inferred as a destroy-method by <i>Spring</i>, which will thus be called before the {@link CamelContext} shutdown
+ * when the context is closed.
  * <p>
- * As a consequence, any inflight message that should be processed during the graceful
- * shutdown period of Camel won't have access to any type conversion support.
+ * As a consequence, any inflight message that should be processed during the graceful shutdown period of Camel won't
+ * have access to any type conversion support.
  */
 @CamelSpringBootTest
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 // Let the CamelAutoConfiguration do all the configuration for us
 // including the TypeConverter registration into the ApplicationContext
-@SpringBootTest(classes = {CamelAutoConfiguration.class, CamelSpringBootShutdownTest.TestRouteConfiguration.class})
+@SpringBootTest(classes = { CamelAutoConfiguration.class, CamelSpringBootShutdownTest.TestRouteConfiguration.class })
 public class CamelSpringBootShutdownTest {
 
     @Autowired
@@ -115,9 +114,7 @@ public class CamelSpringBootShutdownTest {
                     from("direct:start")
                             // delay the processing to force the exchange to be inflight
                             // during the context shutdown
-                            .delay(1000)
-                            .convertBodyTo(InputStream.class)
-                            .to("log:route-log");
+                            .delay(1000).convertBodyTo(InputStream.class).to("log:route-log");
                 }
             };
         }

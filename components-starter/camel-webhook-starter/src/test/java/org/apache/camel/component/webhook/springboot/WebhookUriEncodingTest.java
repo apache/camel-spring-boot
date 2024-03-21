@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.webhook.springboot;
 
-
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.ExchangePattern;
@@ -40,32 +38,25 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.AvailablePortFinder;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        WebhookUriEncodingTest.class,
-        WebhookUriEncodingTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, WebhookUriEncodingTest.class,
+        WebhookUriEncodingTest.TestConfiguration.class })
 public class WebhookUriEncodingTest {
-    
+
     private static int port;
 
-   
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:authors")
     MockEndpoint mock;
-    
+
     @BeforeAll
     public static void initPort() {
         port = AvailablePortFinder.getNextAvailable();
     }
-    
+
     @Test
     public void test() {
         Exchange exchange = template.send("netty-http:http://localhost:" + port + "/base/uri", ExchangePattern.InOut,
@@ -75,7 +66,7 @@ public class WebhookUriEncodingTest {
         assertEquals("hello} world", result.getHeader("foo"));
         assertEquals("hello} world", result.getHeader("bar"));
     }
-    
+
     @Bean("wb-delegate-component")
     private TestComponent getTestComponent() {
         return new TestComponent(endpoint -> {
@@ -87,8 +78,6 @@ public class WebhookUriEncodingTest {
             });
         });
     }
-
-            
 
     // *************************************
     // Config
@@ -103,9 +92,7 @@ public class WebhookUriEncodingTest {
                 @Override
                 public void configure() throws Exception {
 
-                    restConfiguration()
-                            .host("0.0.0.0")
-                            .port(port);
+                    restConfiguration().host("0.0.0.0").port(port);
 
                     from("webhook:wb-delegate://xx?webhookBasePath=/base&webhookPath=/uri&foo=hello} world&bar=RAW(hello} world)")
                             .transform(body().prepend("msg: "));

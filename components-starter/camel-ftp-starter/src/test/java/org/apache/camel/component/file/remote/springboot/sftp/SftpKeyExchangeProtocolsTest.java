@@ -44,13 +44,8 @@ import java.util.List;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SftpKeyExchangeProtocolsTest.class
-        }
-)
-//Based on SftpKeyExchangeProtocolsIT
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SftpKeyExchangeProtocolsTest.class })
+// Based on SftpKeyExchangeProtocolsIT
 @Isolated
 public class SftpKeyExchangeProtocolsTest extends BaseSftp {
 
@@ -72,18 +67,16 @@ public class SftpKeyExchangeProtocolsTest extends BaseSftp {
 
     protected String getFtpUrl() {
         return "sftp://admin@localhost:" + getPort() + "/" + getRootDir() + "/keyExchangeProtocols/?password=admin"
-               + "&noop=true";
+                + "&noop=true";
     }
 
     @Test
     public void testNonExistingKey() {
         Throwable exception = Assertions.assertThrows(CamelExecutionException.class,
-                () -> template
-                        .sendBodyAndHeader("sftp://admin@localhost:" + getPort() + "/" + getRootDir() + "}/keyExchangeProtocols?" +
-                                           "password=admin" +
-                                           "&keyExchangeProtocols=nonExistingKeyExchange",
-                                "a", Exchange.FILE_NAME,
-                                "a.txt"));
+                () -> template.sendBodyAndHeader(
+                        "sftp://admin@localhost:" + getPort() + "/" + getRootDir() + "}/keyExchangeProtocols?"
+                                + "password=admin" + "&keyExchangeProtocols=nonExistingKeyExchange",
+                        "a", Exchange.FILE_NAME, "a.txt"));
 
         final List<String> errorMessages = new ArrayList<>();
         while (exception.getCause() != null) {
@@ -98,11 +91,8 @@ public class SftpKeyExchangeProtocolsTest extends BaseSftp {
     public void testSingleKey() throws Exception {
         result.expectedMessageCount(1);
 
-        template.sendBodyAndHeader("sftp://admin@localhost:" + getPort() + "/" + getRootDir() + "/keyExchangeProtocols" +
-                                   "?password=admin" +
-                                   "&keyExchangeProtocols=ecdh-sha2-nistp384",
-                "a", Exchange.FILE_NAME,
-                "a.txt");
+        template.sendBodyAndHeader("sftp://admin@localhost:" + getPort() + "/" + getRootDir() + "/keyExchangeProtocols"
+                + "?password=admin" + "&keyExchangeProtocols=ecdh-sha2-nistp384", "a", Exchange.FILE_NAME, "a.txt");
 
         result.assertIsSatisfied();
     }
@@ -111,11 +101,10 @@ public class SftpKeyExchangeProtocolsTest extends BaseSftp {
     public void testMultipleKey() throws Exception {
         result.expectedMessageCount(1);
 
-        template.sendBodyAndHeader("sftp://admin@localhost:" + getPort() + "/" + getRootDir() + "/keyExchangeProtocols" +
-                                   "?password=admin" +
-                                   "&keyExchangeProtocols=ecdh-sha2-nistp384,diffie-hellman-group-exchange-sha256,nonExistingKey",
-                "a", Exchange.FILE_NAME,
-                "a.txt");
+        template.sendBodyAndHeader("sftp://admin@localhost:" + getPort() + "/" + getRootDir() + "/keyExchangeProtocols"
+                + "?password=admin"
+                + "&keyExchangeProtocols=ecdh-sha2-nistp384,diffie-hellman-group-exchange-sha256,nonExistingKey", "a",
+                Exchange.FILE_NAME, "a.txt");
 
         result.assertIsSatisfied();
     }
@@ -130,7 +119,7 @@ public class SftpKeyExchangeProtocolsTest extends BaseSftp {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseFtp.TestConfiguration {
+    public class TestConfiguration extends BaseFtp.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
 

@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
@@ -28,8 +26,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -37,28 +33,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        FileConsumerQuartzSchedulerRestartTest.class,
-        FileConsumerQuartzSchedulerRestartTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileConsumerQuartzSchedulerRestartTest.class,
+        FileConsumerQuartzSchedulerRestartTest.TestConfiguration.class })
 public class FileConsumerQuartzSchedulerRestartTest extends FromFileBase {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint mock;
-    
+
     @Test
     public void testQuartzSchedulerRestart() throws Exception {
         mock.expectedMessageCount(1);
@@ -74,7 +63,7 @@ public class FileConsumerQuartzSchedulerRestartTest extends FromFileBase {
         context.getRouteController().startRoute("foo");
         mock.assertIsSatisfied();
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -89,13 +78,10 @@ public class FileConsumerQuartzSchedulerRestartTest extends FromFileBase {
                 public void configure() {
                     from(fileUri(
                             "?scheduler=quartz&scheduler.cron=0/2+*+*+*+*+?&scheduler.triggerGroup=myGroup&scheduler.triggerId=myId"))
-                                    .routeId("foo").noAutoStartup()
-                                    .to("mock:result");
+                                    .routeId("foo").noAutoStartup().to("mock:result");
                 }
             };
         }
     }
-    
-   
 
 }

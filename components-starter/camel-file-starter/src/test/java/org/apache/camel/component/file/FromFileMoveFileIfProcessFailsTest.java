@@ -33,13 +33,8 @@ import java.util.Properties;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FromFileMoveFileIfProcessFailsTest.class,
-                FromFileMoveFileIfProcessFailsTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FromFileMoveFileIfProcessFailsTest.class,
+        FromFileMoveFileIfProcessFailsTest.TestConfiguration.class })
 public class FromFileMoveFileIfProcessFailsTest extends BaseFile {
 
     @EndpointInject("mock:foo")

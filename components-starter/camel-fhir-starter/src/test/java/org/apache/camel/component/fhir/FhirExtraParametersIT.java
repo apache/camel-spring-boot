@@ -44,20 +44,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirExtraParametersIT.class,
-                FhirExtraParametersIT.TestConfiguration.class,
-                DefaultCamelContext.class,
-                FhirServer.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirExtraParametersIT.class,
+        FhirExtraParametersIT.TestConfiguration.class, DefaultCamelContext.class, FhirServer.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class FhirExtraParametersIT extends AbstractFhirTestSupport {
 
     private static final Logger LOG = LoggerFactory.getLogger(FhirExtraParametersIT.class);
-    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirSearchApiMethod.class).getName();
+    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirSearchApiMethod.class)
+            .getName();
 
     @Test
     public void testEncodeRequestToXml() throws Exception {
@@ -83,8 +77,7 @@ public class FhirExtraParametersIT extends AbstractFhirTestSupport {
                 @Override
                 public void configure() {
                     // test route for searchByUrl
-                    from("direct://SEARCH_BY_URL")
-                            .to("fhir://" + PATH_PREFIX + "/searchByUrl?inBody=url");
+                    from("direct://SEARCH_BY_URL").to("fhir://" + PATH_PREFIX + "/searchByUrl?inBody=url");
                 }
             };
         }

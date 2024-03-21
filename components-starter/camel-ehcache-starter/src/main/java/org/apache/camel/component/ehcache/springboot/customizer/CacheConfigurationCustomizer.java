@@ -34,24 +34,18 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * A simple implementation of {@link ComponentCustomizer} that auto discovers a
- * {@link org.ehcache.config.CacheConfiguration} instance and bind it to the
- * {@link EhcacheComponent} component.
+ * {@link org.ehcache.config.CacheConfiguration} instance and bind it to the {@link EhcacheComponent} component.
  *
  * This customizer can be disabled/enabled with different strategies:
  *
- * 1. globally using:
- *    camel.component.customizer.enable = true/false
- * 2. for component:
- *    camel.component.ehcache.customizer.enabled = true/false
- * 3. individually:
- *    camel.component.ehcache.customizer.cache-configuration.enabled = true/false
+ * 1. globally using: camel.component.customizer.enable = true/false 2. for component:
+ * camel.component.ehcache.customizer.enabled = true/false 3. individually:
+ * camel.component.ehcache.customizer.cache-configuration.enabled = true/false
  */
 @Configuration
 @ConditionalOnBean(CamelAutoConfiguration.class)
-@ConditionalOnHierarchicalProperties({
-    "camel.component.customizer",
-    "camel.component.ehcache.customizer",
-    "camel.component.ehcache.customizer.cache-configuration"})
+@ConditionalOnHierarchicalProperties({ "camel.component.customizer", "camel.component.ehcache.customizer",
+        "camel.component.ehcache.customizer.cache-configuration" })
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @EnableConfigurationProperties(CacheConfigurationCustomizerConfiguration.class)
 public class CacheConfigurationCustomizer implements HasId, ComponentCustomizer {
@@ -62,12 +56,14 @@ public class CacheConfigurationCustomizer implements HasId, ComponentCustomizer 
 
     @Override
     public void configure(String name, Component target) {
-        EhcacheComponent component = (EhcacheComponent)target;
+        EhcacheComponent component = (EhcacheComponent) target;
 
-        if (configurations != null && configuration.getMode() == CacheConfigurationCustomizerConfiguration.Mode.APPEND) {
+        if (configurations != null
+                && configuration.getMode() == CacheConfigurationCustomizerConfiguration.Mode.APPEND) {
             component.addCachesConfigurations(configurations);
         }
-        if (configurations != null && configuration.getMode() == CacheConfigurationCustomizerConfiguration.Mode.REPLACE) {
+        if (configurations != null
+                && configuration.getMode() == CacheConfigurationCustomizerConfiguration.Mode.REPLACE) {
             component.setCachesConfigurations(configurations);
         }
     }

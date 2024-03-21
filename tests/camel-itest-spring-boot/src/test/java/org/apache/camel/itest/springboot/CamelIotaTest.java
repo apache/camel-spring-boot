@@ -24,7 +24,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @Disabled("MongoDB driver 3.x is not supported in SB 2.3.0")
 @ExtendWith(ArquillianExtension.class)
 public class CamelIotaTest extends AbstractSpringBootTestSupport {
@@ -35,9 +34,7 @@ public class CamelIotaTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelIotaTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelIotaTest.class)).build();
     }
 
     @Test
@@ -45,6 +42,5 @@ public class CamelIotaTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

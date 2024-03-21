@@ -40,16 +40,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 // Based on S3ComponentManualIT
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                S3ComponentTest.class,
-                S3ComponentTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, S3ComponentTest.class,
+        S3ComponentTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class S3ComponentTest extends BaseS3 {
-
 
     @EndpointInject("mock:result")
     private MockEndpoint result;
@@ -122,17 +116,15 @@ public class S3ComponentTest extends BaseS3 {
         assertNull(message.getHeader(AWS2S3Constants.VERSION_ID));
     }
 
-
     // *************************************
     // Config
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseS3.TestConfiguration {
+    public class TestConfiguration extends BaseS3.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
-            final String s3EndpointUri
-                    = "aws2-s3://mycamelbucket?autoCreateBucket=true";
+            final String s3EndpointUri = "aws2-s3://mycamelbucket?autoCreateBucket=true";
             return new RouteBuilder() {
                 @Override
                 public void configure() {

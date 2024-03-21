@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -37,31 +35,24 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzAutoStartTest.class,
-        QuartzAutoStartTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzAutoStartTest.class,
+        QuartzAutoStartTest.TestConfiguration.class })
 public class QuartzAutoStartTest extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:one")
     MockEndpoint mock;
-    
+
     @Test
     public void testQuartzAutoStart() throws Exception {
-        
+
         mock.expectedMessageCount(0);
 
         QuartzComponent quartz = context.getComponent("quartz", QuartzComponent.class);
@@ -98,7 +89,5 @@ public class QuartzAutoStartTest extends BaseQuartzTest {
             };
         }
     }
-    
-   
 
 }

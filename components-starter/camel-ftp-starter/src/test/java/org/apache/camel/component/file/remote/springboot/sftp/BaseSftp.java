@@ -22,7 +22,6 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 
 import java.nio.file.Path;
 
-
 public class BaseSftp extends AbstractBaseFtp {
 
     @RegisterExtension

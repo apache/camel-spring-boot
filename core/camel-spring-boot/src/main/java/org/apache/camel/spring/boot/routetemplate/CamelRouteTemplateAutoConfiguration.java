@@ -35,7 +35,8 @@ import org.springframework.context.annotation.Configuration;
 public class CamelRouteTemplateAutoConfiguration {
 
     @Bean
-    public RouteTemplateParameterSource routeTemplate(CamelContext camelContext, CamelRouteTemplateConfigurationProperties rt) {
+    public RouteTemplateParameterSource routeTemplate(CamelContext camelContext,
+            CamelRouteTemplateConfigurationProperties rt) {
         if (rt.getConfig() == null) {
             return null;
         }
@@ -57,7 +58,8 @@ public class CamelRouteTemplateAutoConfiguration {
             }
         }
 
-        camelContext.getRegistry().bind("CamelSpringBootRouteTemplateParametersSource", RouteTemplateParameterSource.class, source);
+        camelContext.getRegistry().bind("CamelSpringBootRouteTemplateParametersSource",
+                RouteTemplateParameterSource.class, source);
 
         return source;
     }

@@ -40,7 +40,7 @@ public class ReactiveStreamsServiceAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public CamelReactiveStreamsService camelReactiveStreamsService(CamelContext context,
-                                                                   ReactiveStreamsComponentConfiguration configuration) {
+            ReactiveStreamsComponentConfiguration configuration) {
         ReactiveStreamsEngineConfiguration engineConfiguration = new ReactiveStreamsEngineConfiguration();
 
         if (configuration.getReactiveStreamsEngineConfiguration() != null) {

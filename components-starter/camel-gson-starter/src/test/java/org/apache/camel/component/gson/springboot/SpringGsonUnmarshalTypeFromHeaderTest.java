@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.gson.springboot;
 
-
-
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
@@ -30,29 +28,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        SpringGsonUnmarshalTypeFromHeaderTest.class
-    },
-    properties = {
-        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringGsonUnmarshalTypeFromHeaderTest.xml"}
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SpringGsonUnmarshalTypeFromHeaderTest.class }, properties = {
+        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringGsonUnmarshalTypeFromHeaderTest.xml" }
 
 )
 public class SpringGsonUnmarshalTypeFromHeaderTest {
 
-      
     @Autowired
     ProducerTemplate template;
 
-    
-    
     @Test
     public void testUnmarshalTypeFromHeader() {
-        TestPojo pojo = template.requestBody("direct:springUnmarshalTypeFromHeader", "{\"name\":\"my-name\"}", TestPojo.class);
+        TestPojo pojo = template.requestBody("direct:springUnmarshalTypeFromHeader", "{\"name\":\"my-name\"}",
+                TestPojo.class);
         assertNotNull(pojo);
         assertEquals("my-name", pojo.getName());
     }

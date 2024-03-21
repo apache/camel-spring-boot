@@ -24,14 +24,7 @@ import org.springframework.test.annotation.DirtiesContext;
 @CamelSpringBootTest
 @DirtiesContext
 @EnableAutoConfiguration
-@SpringBootTest(
-    classes = {
-        CacheManagerCustomizerEnabledTestBase.TestConfiguration.class
-    },
-    properties = {
-        "debug=false",
-        "camel.component.customizer.enabled=false",
-        "camel.component.ehcache.customizer.enabled=true"
-    })
+@SpringBootTest(classes = { CacheManagerCustomizerEnabledTestBase.TestConfiguration.class }, properties = {
+        "debug=false", "camel.component.customizer.enabled=false", "camel.component.ehcache.customizer.enabled=true" })
 public class CacheManagerCustomizerEnabledOnComponentTest extends CacheManagerCustomizerEnabledTestBase {
 }

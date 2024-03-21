@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelGsonTest extends AbstractSpringBootTestSupport {
 
@@ -33,9 +32,7 @@ public class CamelGsonTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelGsonTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelGsonTest.class)).build();
     }
 
     @Test
@@ -43,6 +40,5 @@ public class CamelGsonTest extends AbstractSpringBootTestSupport {
         this.runDataformatTest(config, "gson");
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jira.springboot.test;
 
-
 import static org.apache.camel.component.jira.JiraConstants.JIRA_REST_CLIENT_FACTORY;
 import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.PROJECT;
 import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.WATCHED_COMPONENTS;
@@ -55,7 +54,6 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-
 import io.atlassian.util.concurrent.Promise;
 import io.atlassian.util.concurrent.Promises;
 
@@ -66,42 +64,33 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
-
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        WatchUpdatesConsumerTest.class,
-        WatchUpdatesConsumerTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, WatchUpdatesConsumerTest.class,
+        WatchUpdatesConsumerTest.TestConfiguration.class })
 
 public class WatchUpdatesConsumerTest {
 
     @Autowired
     private CamelContext camelContext;
-    
 
-    
     @Autowired
     @Produce("direct:start")
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mockResult;
-    
+
     static JiraRestClient jiraClient;
-    
+
     static JiraRestClientFactory jiraRestClientFactory;
-    
+
     static IssueRestClient issueRestClient;
-    
+
     static SearchRestClient searchRestClient;
-    
+
     static List<Issue> issues = new ArrayList<>();
-    
+
     @BeforeAll
     public static void beforeAll() {
         issues.clear();
@@ -109,13 +98,13 @@ public class WatchUpdatesConsumerTest {
         issues.add(createIssue(2L));
         issues.add(createIssue(3L));
     }
-    
+
     @Bean
     CamelContextConfiguration contextConfiguration() {
         return new CamelContextConfiguration() {
             @Override
             public void beforeApplicationStart(CamelContext context) {
-                //get chance to mock camelContext/Registry
+                // get chance to mock camelContext/Registry
                 jiraRestClientFactory = mock(JiraRestClientFactory.class);
                 jiraClient = mock(JiraRestClient.class);
                 issueRestClient = mock(IssueRestClient.class);
@@ -124,19 +113,20 @@ public class WatchUpdatesConsumerTest {
                 Promise<SearchResult> promiseSearchResult = Promises.promise(result);
 
                 when(jiraClient.getSearchClient()).thenReturn(searchRestClient);
-                when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any())).thenReturn(jiraClient);
+                when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any()))
+                        .thenReturn(jiraClient);
                 when(searchRestClient.searchJql(any(), any(), any(), any())).thenReturn(promiseSearchResult);
-                
+
                 camelContext.getRegistry().bind(JIRA_REST_CLIENT_FACTORY, jiraRestClientFactory);
             }
 
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here                
+                // do nothing here
             }
         };
     }
-    
+
     @Test
     public void emptyAtStartupTest() throws Exception {
         mockResult.expectedMessageCount(0);
@@ -145,8 +135,7 @@ public class WatchUpdatesConsumerTest {
 
     @Test
     public void singleChangeTest() throws Exception {
-        Issue issue = setPriority(issues.get(0), new Priority(
-                null, 4L, "High", null, null, null));
+        Issue issue = setPriority(issues.get(0), new Priority(null, 4L, "High", null, null, null));
         reset(searchRestClient);
         AtomicBoolean searched = new AtomicBoolean();
         when(searchRestClient.searchJql(any(), any(), any(), any())).then(invocation -> {
@@ -169,8 +158,7 @@ public class WatchUpdatesConsumerTest {
     @Test
     public void multipleChangesWithAddedNewIssueTest() throws Exception {
         final Issue issue = transitionIssueDone(issues.get(1));
-        final Issue issue2 = setPriority(issues.get(2), new Priority(
-                null, 4L, "High", null, null, null));
+        final Issue issue2 = setPriority(issues.get(2), new Priority(null, 4L, "High", null, null, null));
 
         reset(searchRestClient);
         AtomicBoolean searched = new AtomicBoolean();
@@ -193,28 +181,20 @@ public class WatchUpdatesConsumerTest {
         mockResult.assertIsSatisfied(1000);
     }
 
-    
     @Configuration
     public class TestConfiguration {
-        
-        
 
         @Bean
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws IOException {
-                    from("jira://watchUpdates?jiraUrl=" + JiraTestConstants.getJiraCredentials()
-                         + "&jql=project=" + PROJECT + "&delay=5000&watchedFields=" + WATCHED_COMPONENTS)
-                                 .to(mockResult);
+                    from("jira://watchUpdates?jiraUrl=" + JiraTestConstants.getJiraCredentials() + "&jql=project="
+                            + PROJECT + "&delay=5000&watchedFields=" + WATCHED_COMPONENTS).to(mockResult);
                 }
             };
         }
-        
-      
+
     }
-    
-    
-    
-    
+
 }

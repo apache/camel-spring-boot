@@ -38,88 +38,89 @@ import org.springframework.http.server.observation.ServerRequestObservationConve
 import java.util.Optional;
 
 @Configuration(proxyBeanMethods = false)
-@Conditional({ConditionalOnCamelContextAndAutoConfigurationBeans.class})
+@Conditional({ ConditionalOnCamelContextAndAutoConfigurationBeans.class })
 @ConditionalOnProperty(prefix = "camel.metrics", name = "uriTagEnabled", havingValue = "true")
-@AutoConfigureAfter({CamelAutoConfiguration.class})
+@AutoConfigureAfter({ CamelAutoConfiguration.class })
 public class MicrometerTagsAutoConfiguration {
 
-	/**
-	 * To integrate with micrometer to include expanded uri in tags when for example using
-	 * camel rest-dsl with servlet.
-	 */
-	@Bean
-	ServerRequestObservationConvention serverRequestObservationConvention(
-			Optional<CamelServlet> servlet, CamelMetricsConfiguration configuration) {
-		return new DefaultServerRequestObservationConvention() {
+    /**
+     * To integrate with micrometer to include expanded uri in tags when for example using camel rest-dsl with servlet.
+     */
+    @Bean
+    ServerRequestObservationConvention serverRequestObservationConvention(Optional<CamelServlet> servlet,
+            CamelMetricsConfiguration configuration) {
+        return new DefaultServerRequestObservationConvention() {
 
-			@Override
-			public KeyValues getLowCardinalityKeyValues(ServerRequestObservationContext context) {
-				// here, we just want to have an additional KeyValue to the observation, keeping the default values
-				return super.getLowCardinalityKeyValues(context).and(custom(context));
-			}
+            @Override
+            public KeyValues getLowCardinalityKeyValues(ServerRequestObservationContext context) {
+                // here, we just want to have an additional KeyValue to the observation, keeping the default values
+                return super.getLowCardinalityKeyValues(context).and(custom(context));
+            }
 
-			protected KeyValue custom(ServerRequestObservationContext context) {
-				HttpServletRequest request = context.getCarrier();
-				String uri = null;
-				if (servlet.isPresent() && !configuration.isUriTagDynamic()) {
-					HttpConsumer consumer = servlet.get().getServletResolveConsumerStrategy().resolve(request, servlet.get().getConsumers());
-					if (consumer != null) {
-						uri = consumer.getPath();
-					}
-				}
+            protected KeyValue custom(ServerRequestObservationContext context) {
+                HttpServletRequest request = context.getCarrier();
+                String uri = null;
+                if (servlet.isPresent() && !configuration.isUriTagDynamic()) {
+                    HttpConsumer consumer = servlet.get().getServletResolveConsumerStrategy().resolve(request,
+                            servlet.get().getConsumers());
+                    if (consumer != null) {
+                        uri = consumer.getPath();
+                    }
+                }
 
-				// the request may not be for camel servlet, so we need to capture uri from request
-				if (uri == null || uri.isEmpty()) {
-					// dynamic uri with the actual value from the http request
-					uri = request.getServletPath();
-					if (uri == null || uri.isEmpty()) {
-						uri = request.getPathInfo();
-					} else {
-						String p = request.getPathInfo();
-						if (p != null) {
-							uri = uri + p;
-						}
-					}
-				}
-				if (uri == null) {
-					uri = "";
-				}
+                // the request may not be for camel servlet, so we need to capture uri from request
+                if (uri == null || uri.isEmpty()) {
+                    // dynamic uri with the actual value from the http request
+                    uri = request.getServletPath();
+                    if (uri == null || uri.isEmpty()) {
+                        uri = request.getPathInfo();
+                    } else {
+                        String p = request.getPathInfo();
+                        if (p != null) {
+                            uri = uri + p;
+                        }
+                    }
+                }
+                if (uri == null) {
+                    uri = "";
+                }
 
-				return KeyValue.of("uri", context.getCarrier().getMethod());
-			}
-//            @Override
-//            public Iterable<Tag> getTags(HttpServletRequest request, HttpServletResponse response,
-//                                         Object handler, Throwable exception) {
-//
-//                String uri = null;
-//                if (servlet.isPresent() && !configuration.isUriTagDynamic()) {
-//                    HttpConsumer consumer = servlet.get().getServletResolveConsumerStrategy().resolve(request, servlet.get().getConsumers());
-//                    if (consumer != null) {
-//                        uri = consumer.getPath();
-//                    }
-//                }
-//
-//                // the request may not be for camel servlet, so we need to capture uri from request
-//                if (uri == null || uri.isEmpty()) {
-//                    // dynamic uri with the actual value from the http request
-//                    uri = request.getServletPath();
-//                    if (uri == null || uri.isEmpty()) {
-//                        uri = request.getPathInfo();
-//                    } else {
-//                        String p = request.getPathInfo();
-//                        if (p != null) {
-//                            uri = uri + p;
-//                        }
-//                    }
-//                }
-//                if (uri == null) {
-//                    uri = "";
-//                }
-//                return Tags.concat(
-//                        super.getTags(request, response, handler, exception),
-//                        Tags.of(Tag.of("uri", uri))
-//                );
-//            }
-		};
-	}
+                return KeyValue.of("uri", context.getCarrier().getMethod());
+            }
+            // @Override
+            // public Iterable<Tag> getTags(HttpServletRequest request, HttpServletResponse response,
+            // Object handler, Throwable exception) {
+            //
+            // String uri = null;
+            // if (servlet.isPresent() && !configuration.isUriTagDynamic()) {
+            // HttpConsumer consumer = servlet.get().getServletResolveConsumerStrategy().resolve(request,
+            // servlet.get().getConsumers());
+            // if (consumer != null) {
+            // uri = consumer.getPath();
+            // }
+            // }
+            //
+            // // the request may not be for camel servlet, so we need to capture uri from request
+            // if (uri == null || uri.isEmpty()) {
+            // // dynamic uri with the actual value from the http request
+            // uri = request.getServletPath();
+            // if (uri == null || uri.isEmpty()) {
+            // uri = request.getPathInfo();
+            // } else {
+            // String p = request.getPathInfo();
+            // if (p != null) {
+            // uri = uri + p;
+            // }
+            // }
+            // }
+            // if (uri == null) {
+            // uri = "";
+            // }
+            // return Tags.concat(
+            // super.getTags(request, response, handler, exception),
+            // Tags.of(Tag.of("uri", uri))
+            // );
+            // }
+        };
+    }
 }

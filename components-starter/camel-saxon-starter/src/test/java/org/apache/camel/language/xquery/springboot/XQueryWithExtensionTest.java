@@ -32,7 +32,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -41,28 +40,20 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        XQueryWithExtensionTest.class,
-        XQueryWithExtensionTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, XQueryWithExtensionTest.class,
+        XQueryWithExtensionTest.TestConfiguration.class })
 public class XQueryWithExtensionTest {
-    
-    
+
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
-    protected MockEndpoint mock;   
-    
+    protected MockEndpoint mock;
+
     private net.sf.saxon.Configuration conf;
 
     @Bean("saxonConf")
@@ -76,7 +67,7 @@ public class XQueryWithExtensionTest {
 
     @Test
     public void testWithExtension() throws Exception {
-        
+
         mock.expectedBodiesReceived("<transformed extension-function-render=\"arg1[test]\"/>");
 
         template.sendBody("direct:start", "<body>test</body>");
@@ -84,7 +75,6 @@ public class XQueryWithExtensionTest {
         mock.assertIsSatisfied();
     }
 
-    
     // *************************************
     // Config
     // *************************************
@@ -97,15 +87,14 @@ public class XQueryWithExtensionTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                            .to("xquery:org/apache/camel/component/xquery/transformWithExtension.xquery?configuration=#saxonConf")
+                    from("direct:start").to(
+                            "xquery:org/apache/camel/component/xquery/transformWithExtension.xquery?configuration=#saxonConf")
                             .to("mock:result");
                 }
             };
         }
     }
-    
-    
+
     /**
      * This is a very simple example of a saxon extension function. We will use this for testing purposes.
      * <p/>
@@ -134,7 +123,6 @@ public class XQueryWithExtensionTest {
         @Override
         public ExtensionFunctionCall makeCallExpression() {
             return new ExtensionFunctionCall() {
-
 
                 @Override
                 public Sequence call(XPathContext xPathContext, Sequence[] sequences) throws XPathException {

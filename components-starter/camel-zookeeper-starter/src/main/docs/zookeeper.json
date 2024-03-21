@@ -63,7 +63,7 @@
     {
       "name": "camel.cloud.zookeeper.deregister-services-on-stop",
       "type": "java.lang.Boolean",
-      "description": "Should we remove all the registered services know by this registry on stop ?  Default is true.",
+      "description": "Should we remove all the registered services know by this registry on stop ? Default is true.",
       "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
       "defaultValue": true
     },
@@ -114,7 +114,7 @@
     {
       "name": "camel.cloud.zookeeper.override-service-host",
       "type": "java.lang.Boolean",
-      "description": "Should we override the service host if given ?  Default is true.",
+      "description": "Should we override the service host if given ? Default is true.",
       "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
       "defaultValue": true
     },

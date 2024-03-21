@@ -46,20 +46,14 @@ public class FileLockClusterServiceAutoConfiguration {
     public CamelClusterService fileClusterService() throws Exception {
         FileLockClusterService service = new FileLockClusterService();
 
-        Optional.ofNullable(configuration.getId())
-            .ifPresent(service::setId);
-        Optional.ofNullable(configuration.getRoot())
-            .ifPresent(service::setRoot);
-        Optional.ofNullable(configuration.getOrder())
-            .ifPresent(service::setOrder);
-        Optional.ofNullable(configuration.getAttributes())
-            .ifPresent(service::setAttributes);
-        Optional.ofNullable(configuration.getAcquireLockDelay())
-            .map(TimePatternConverter::toMilliSeconds)
-            .ifPresent(v -> service.setAcquireLockDelay(v, TimeUnit.MILLISECONDS));
-        Optional.ofNullable(configuration.getAcquireLockInterval())
-            .map(TimePatternConverter::toMilliSeconds)
-            .ifPresent(v -> service.setAcquireLockInterval(v, TimeUnit.MILLISECONDS));
+        Optional.ofNullable(configuration.getId()).ifPresent(service::setId);
+        Optional.ofNullable(configuration.getRoot()).ifPresent(service::setRoot);
+        Optional.ofNullable(configuration.getOrder()).ifPresent(service::setOrder);
+        Optional.ofNullable(configuration.getAttributes()).ifPresent(service::setAttributes);
+        Optional.ofNullable(configuration.getAcquireLockDelay()).map(TimePatternConverter::toMilliSeconds)
+                .ifPresent(v -> service.setAcquireLockDelay(v, TimeUnit.MILLISECONDS));
+        Optional.ofNullable(configuration.getAcquireLockInterval()).map(TimePatternConverter::toMilliSeconds)
+                .ifPresent(v -> service.setAcquireLockInterval(v, TimeUnit.MILLISECONDS));
 
         return service;
     }

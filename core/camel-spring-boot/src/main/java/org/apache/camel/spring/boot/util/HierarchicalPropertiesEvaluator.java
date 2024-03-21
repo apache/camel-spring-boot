@@ -31,8 +31,11 @@ public final class HierarchicalPropertiesEvaluator {
     /**
      * Determine the value of the "enabled" flag for a hierarchy of properties.
      *
-     * @param applicationContext the spring {@link ApplicationContext}
-     * @param prefixes an ordered list of prefixed (less restrictive to more restrictive)
+     * @param applicationContext
+     *            the spring {@link ApplicationContext}
+     * @param prefixes
+     *            an ordered list of prefixed (less restrictive to more restrictive)
+     *
      * @return the value of the key `enabled` for most restrictive prefix
      */
     public static boolean evaluate(ApplicationContext applicationContext, String... prefixes) {
@@ -42,8 +45,11 @@ public final class HierarchicalPropertiesEvaluator {
     /**
      * Determine the value of the "enabled" flag for a hierarchy of properties.
      *
-     * @param environment the environment
-     * @param prefixes an ordered list of prefixed (less restrictive to more restrictive)
+     * @param environment
+     *            the environment
+     * @param prefixes
+     *            an ordered list of prefixed (less restrictive to more restrictive)
+     *
      * @return the value of the key `enabled` for most restrictive prefix
      */
     public static boolean evaluate(Environment environment, String... prefixes) {
@@ -64,8 +70,11 @@ public final class HierarchicalPropertiesEvaluator {
     /**
      * Determine the value of the "enabled" flag for a hierarchy of properties.
      *
-     * @param environment the environment
-     * @param prefixes an ordered list of prefixed (less restrictive to more restrictive)
+     * @param environment
+     *            the environment
+     * @param prefixes
+     *            an ordered list of prefixed (less restrictive to more restrictive)
+     *
      * @return the value of the key `enabled` for most restrictive prefix
      */
     public static boolean evaluate(Environment environment, Collection<String> prefixes) {

@@ -31,15 +31,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletEipAggregateTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletEipAggregateTest.class, })
 
 public class KameletEipAggregateTest {
 
@@ -72,20 +66,12 @@ public class KameletEipAggregateTest {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                routeTemplate("my-aggregate")
-                        .templateParameter("count")
-                        .from("kamelet:source")
-                        .aggregate(constant(true))
-                            .completionSize("{{count}}")
-                            .aggregationStrategy(AggregationStrategies.string(","))
-                            .to("log:aggregate")
-                            .to("kamelet:sink")
+                routeTemplate("my-aggregate").templateParameter("count").from("kamelet:source")
+                        .aggregate(constant(true)).completionSize("{{count}}")
+                        .aggregationStrategy(AggregationStrategies.string(",")).to("log:aggregate").to("kamelet:sink")
                         .end();
 
-                from("direct:start")
-                        .kamelet("my-aggregate?count=5")
-                        .to("log:info")
-                        .to("mock:result");
+                from("direct:start").kamelet("my-aggregate?count=5").to("log:info").to("mock:result");
             }
         };
     }

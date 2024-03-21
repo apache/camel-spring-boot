@@ -37,14 +37,8 @@ import java.util.concurrent.TimeUnit;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                JdbcAggregateRecoverDeadLetterChannelTest.class,
-                JdbcAggregateRecoverDeadLetterChannelTest.TestConfiguration.class,
-                BaseSql.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JdbcAggregateRecoverDeadLetterChannelTest.class,
+        JdbcAggregateRecoverDeadLetterChannelTest.TestConfiguration.class, BaseSql.TestConfiguration.class })
 public class JdbcAggregateRecoverDeadLetterChannelTest extends BaseSql {
 
     @EndpointInject("mock:result")
@@ -74,7 +68,6 @@ public class JdbcAggregateRecoverDeadLetterChannelTest extends BaseSql {
         assertMockEndpointsSatisfied();
     }
 
-
     // *************************************
     // Config
     // *************************************
@@ -93,8 +86,10 @@ public class JdbcAggregateRecoverDeadLetterChannelTest extends BaseSql {
         }
 
         @Bean
-        public JdbcAggregationRepository jdbcAggregationRepository(DataSource dataSource, PlatformTransactionManager transactionManager) {
-            JdbcAggregationRepository repo = new JdbcAggregationRepository(transactionManager, "aggregationRepo1", dataSource);
+        public JdbcAggregationRepository jdbcAggregationRepository(DataSource dataSource,
+                PlatformTransactionManager transactionManager) {
+            JdbcAggregationRepository repo = new JdbcAggregationRepository(transactionManager, "aggregationRepo1",
+                    dataSource);
 
             // enable recovery
             repo.setUseRecovery(true);
@@ -115,14 +110,10 @@ public class JdbcAggregateRecoverDeadLetterChannelTest extends BaseSql {
                 public void configure() throws Exception {
                     deadLetterChannel("mock:error");
 
-                    from("direct:start")
-                            .aggregate(header("id"), new MyAggregationStrategy())
-                            .completionSize(5).aggregationRepository(repo)
-                            .log("aggregated exchange id ${exchangeId} with ${body}")
-                            .to("mock:aggregated")
-                            .throwException(new IllegalArgumentException("Damn"))
-                            .to("mock:result")
-                            .end();
+                    from("direct:start").aggregate(header("id"), new MyAggregationStrategy()).completionSize(5)
+                            .aggregationRepository(repo).log("aggregated exchange id ${exchangeId} with ${body}")
+                            .to("mock:aggregated").throwException(new IllegalArgumentException("Damn"))
+                            .to("mock:result").end();
                 }
             };
         }

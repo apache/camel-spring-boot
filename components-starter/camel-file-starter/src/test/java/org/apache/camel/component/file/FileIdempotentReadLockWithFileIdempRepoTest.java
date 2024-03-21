@@ -43,14 +43,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileIdempotentReadLockWithFileIdempRepoTest.class,
-                FileIdempotentReadLockWithFileIdempRepoTest.TestConfiguration.class
-        }
-)
-//Based on FileIdempotentReadLockTest
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileIdempotentReadLockWithFileIdempRepoTest.class,
+        FileIdempotentReadLockWithFileIdempRepoTest.TestConfiguration.class })
+// Based on FileIdempotentReadLockTest
 public class FileIdempotentReadLockWithFileIdempRepoTest extends BaseFile {
 
     @EndpointInject("mock:result")
@@ -67,7 +62,7 @@ public class FileIdempotentReadLockWithFileIdempRepoTest extends BaseFile {
 
             myRepo = new FileIdempotentRepository(f, new HashMap<>());
         } catch (IOException e) {
-            //asserted before the test
+            // asserted before the test
         }
     }
 

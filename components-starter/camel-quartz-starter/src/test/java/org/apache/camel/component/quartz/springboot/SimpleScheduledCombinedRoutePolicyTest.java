@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import java.util.Date;
 
 import org.apache.camel.CamelContext;
@@ -35,35 +33,25 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        SimpleScheduledCombinedRoutePolicyTest.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SimpleScheduledCombinedRoutePolicyTest.class })
 public class SimpleScheduledCombinedRoutePolicyTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:success")
     MockEndpoint success;
-    
-    
-    
+
     @Test
     public void testScheduledStartAndStopRoutePolicy() throws Exception {
         success.expectedMessageCount(1);
@@ -83,10 +71,7 @@ public class SimpleScheduledCombinedRoutePolicyTest {
                 policy.setRouteStopRepeatCount(1);
                 policy.setRouteStopRepeatInterval(3000);
 
-                from("direct:start")
-                        .routeId("test")
-                        .routePolicy(policy)
-                        .to("mock:success");
+                from("direct:start").routeId("test").routePolicy(policy).to("mock:success");
             }
         });
         context.start();
@@ -100,6 +85,5 @@ public class SimpleScheduledCombinedRoutePolicyTest {
         context.getComponent("quartz", QuartzComponent.class).stop();
         success.assertIsSatisfied();
     }
-   
 
 }

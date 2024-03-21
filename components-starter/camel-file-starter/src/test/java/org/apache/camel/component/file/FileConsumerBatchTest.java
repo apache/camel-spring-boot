@@ -31,16 +31,11 @@ import org.springframework.test.annotation.DirtiesContext;
 /**
  * Unit test for consuming a batch of files (multiple files in one consume)
  */
-//Based on FileConsumerBatchTest
+// Based on FileConsumerBatchTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileConsumerBatchTest.class,
-                FileConsumerBatchTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileConsumerBatchTest.class,
+        FileConsumerBatchTest.TestConfiguration.class })
 public class FileConsumerBatchTest extends BaseFile {
 
     @EndpointInject("mock:result")

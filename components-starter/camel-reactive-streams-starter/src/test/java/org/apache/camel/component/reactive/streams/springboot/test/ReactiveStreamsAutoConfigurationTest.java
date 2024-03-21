@@ -45,14 +45,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
-@SpringBootTest(
-    classes = {
-        ReactiveStreamsAutoConfigurationTest.TestConfiguration.class
-    },
-    properties = {
-        "camel.component.reactive-streams.thread-pool-name=rs-test"
-    }
-)
+@SpringBootTest(classes = { ReactiveStreamsAutoConfigurationTest.TestConfiguration.class }, properties = {
+        "camel.component.reactive-streams.thread-pool-name=rs-test" })
 public class ReactiveStreamsAutoConfigurationTest {
     @Autowired
     private CamelContext context;
@@ -65,7 +59,8 @@ public class ReactiveStreamsAutoConfigurationTest {
         assertTrue(service instanceof DefaultCamelReactiveStreamsService);
         assertEquals(service, reactiveStreamsService);
 
-        ReactiveStreamsComponent component = context.getComponent(ReactiveStreamsConstants.SCHEME, ReactiveStreamsComponent.class);
+        ReactiveStreamsComponent component = context.getComponent(ReactiveStreamsConstants.SCHEME,
+                ReactiveStreamsComponent.class);
         assertEquals("rs-test", component.getThreadPoolName());
     }
 
@@ -111,8 +106,7 @@ public class ReactiveStreamsAutoConfigurationTest {
     static class Routes extends RouteBuilder {
         @Override
         public void configure() throws Exception {
-            from("direct:endpoint")
-                .to("reactive-streams:stream");
+            from("direct:endpoint").to("reactive-streams:stream");
         }
     }
 
@@ -120,4 +114,3 @@ public class ReactiveStreamsAutoConfigurationTest {
     public static class TestConfiguration {
     }
 }
-

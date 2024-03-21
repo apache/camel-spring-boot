@@ -39,9 +39,13 @@ public final class TelegramTestUtil {
     /**
      * Creates a sample image.
      *
-     * @param  imageIOType the image-io code of the image type (eg. PNG, JPG)
-     * @return             a sample image
-     * @throws IOException if anything goes wrong
+     * @param imageIOType
+     *            the image-io code of the image type (eg. PNG, JPG)
+     *
+     * @return a sample image
+     *
+     * @throws IOException
+     *             if anything goes wrong
      */
     public static byte[] createSampleImage(String imageIOType) throws IOException {
         byte[] img;
@@ -79,8 +83,8 @@ public final class TelegramTestUtil {
     }
 
     public static String stringResource(String path) {
-        try (Reader r = new InputStreamReader(
-                TelegramTestUtil.class.getClassLoader().getResourceAsStream(path), StandardCharsets.UTF_8)) {
+        try (Reader r = new InputStreamReader(TelegramTestUtil.class.getClassLoader().getResourceAsStream(path),
+                StandardCharsets.UTF_8)) {
             return IOHelper.toString(r);
         } catch (IOException e) {
             throw new RuntimeCamelException(e);

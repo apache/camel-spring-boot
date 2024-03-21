@@ -47,32 +47,26 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(
-    classes = {
-        NettyComponentConfigurationTest.class,
-        NettyComponentConfigurationTest.TestConfiguration.class
-    },
-    properties = { 
-        "camel.component.netty.ssl=true", 
-        "camel.component.netty.ssl-context-parameters=#sslContextParameters" 
-    }
-)
+@SpringBootTest(classes = { NettyComponentConfigurationTest.class,
+        NettyComponentConfigurationTest.TestConfiguration.class }, properties = { "camel.component.netty.ssl=true",
+                "camel.component.netty.ssl-context-parameters=#sslContextParameters" })
 class NettyComponentConfigurationTest {
 
     private static final String TLSv13 = "TLSv1.3";
-    
+
     @Autowired
     CamelContext context;
-    
+
     @Autowired
     protected ProducerTemplate template;
-    
+
     @EndpointInject("mock:result")
     private MockEndpoint mockResult;
-    
+
     private static Properties loadAuthProperties() throws IOException {
         Properties properties = new Properties();
-        properties.load(NettyComponentConfigurationTest.class.getClassLoader().getResourceAsStream("nettycomponentconfigurationtest.properties"));
+        properties.load(NettyComponentConfigurationTest.class.getClassLoader()
+                .getResourceAsStream("nettycomponentconfigurationtest.properties"));
         return properties;
     }
 
@@ -89,13 +83,10 @@ class NettyComponentConfigurationTest {
         KeyManagersParameters kmp = scp.getKeyManagers();
         assertEquals(properties.getProperty("password"), kmp.getKeyPassword());
     }
-    
+
     @Test
     void testRoute() {
-        template.requestBody(
-            "netty:tcp://localhost:5150",
-            "Hello Netty",
-            String.class);
+        template.requestBody("netty:tcp://localhost:5150", "Hello Netty", String.class);
         Exchange exchange = mockResult.getReceivedExchanges().get(0);
         assertNotNull(exchange);
         SSLSession session = exchange.getIn().getHeader(NettyConstants.NETTY_SSL_SESSION, SSLSession.class);
@@ -128,8 +119,7 @@ class NettyComponentConfigurationTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("netty:tcp://localhost:5150")
-                    .to("mock:result");
+                    from("netty:tcp://localhost:5150").to("mock:result");
                 }
             };
         }

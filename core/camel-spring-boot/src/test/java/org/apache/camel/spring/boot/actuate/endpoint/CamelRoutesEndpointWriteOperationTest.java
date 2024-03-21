@@ -38,10 +38,9 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 @CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootApplication
-@SpringBootTest(
-    classes = {CamelAutoConfiguration.class, CamelRoutesEndpointAutoConfiguration.class, ActuatorTestRoute.class},
-    properties = {"management.endpoints.web.exposure.include=*",
-            "management.endpoint.camelroutes.read-only = false"})
+@SpringBootTest(classes = { CamelAutoConfiguration.class, CamelRoutesEndpointAutoConfiguration.class,
+        ActuatorTestRoute.class }, properties = { "management.endpoints.web.exposure.include=*",
+                "management.endpoint.camelroutes.read-only = false" })
 public class CamelRoutesEndpointWriteOperationTest {
 
     @Autowired
@@ -52,7 +51,8 @@ public class CamelRoutesEndpointWriteOperationTest {
 
     @Test
     public void testWriteOperation() throws Exception {
-        AbstractCamelContext acontext = camelContext.getCamelContextExtension().getContextPlugin(AbstractCamelContext.class);
+        AbstractCamelContext acontext = camelContext.getCamelContextExtension()
+                .getContextPlugin(AbstractCamelContext.class);
         ServiceStatus status = acontext.getRouteStatus("foo-route");
         Assertions.assertTrue(status.isStarted());
         TimeInfo timeInfo = new TimeInfo();

@@ -31,25 +31,22 @@ import java.util.Collection;
 
 public class CamelReadinessStateHealthIndicator extends ReadinessStateHealthIndicator {
 
-	private static final Logger LOG = LoggerFactory.getLogger(CamelReadinessStateHealthIndicator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CamelReadinessStateHealthIndicator.class);
 
-	private final CamelContext camelContext;
+    private final CamelContext camelContext;
 
-	public CamelReadinessStateHealthIndicator(
-			ApplicationAvailability availability,
-			CamelContext camelContext) {
-		super(availability);
+    public CamelReadinessStateHealthIndicator(ApplicationAvailability availability, CamelContext camelContext) {
+        super(availability);
 
-		this.camelContext = camelContext;
-	}
+        this.camelContext = camelContext;
+    }
 
-	@Override
-	protected AvailabilityState getState(ApplicationAvailability applicationAvailability) {
-		Collection<HealthCheck.Result> results = HealthCheckHelper.invokeReadiness(camelContext);
+    @Override
+    protected AvailabilityState getState(ApplicationAvailability applicationAvailability) {
+        Collection<HealthCheck.Result> results = HealthCheckHelper.invokeReadiness(camelContext);
 
-		boolean isReady = CamelProbesHelper.checkProbeState(results, LOG);
+        boolean isReady = CamelProbesHelper.checkProbeState(results, LOG);
 
-		return isReady ?
-				ReadinessState.ACCEPTING_TRAFFIC : ReadinessState.REFUSING_TRAFFIC;
-	}
+        return isReady ? ReadinessState.ACCEPTING_TRAFFIC : ReadinessState.REFUSING_TRAFFIC;
+    }
 }

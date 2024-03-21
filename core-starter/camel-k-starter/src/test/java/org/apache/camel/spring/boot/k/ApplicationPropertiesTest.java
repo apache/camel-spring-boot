@@ -33,14 +33,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                ApplicationRoutesAutoConfiguration.class,
-                ApplicationShutdownAutoConfiguration.class,
-                ApplicationPropertiesTest.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ApplicationRoutesAutoConfiguration.class,
+        ApplicationShutdownAutoConfiguration.class, ApplicationPropertiesTest.class })
 public class ApplicationPropertiesTest {
 
     @Autowired
@@ -49,25 +43,18 @@ public class ApplicationPropertiesTest {
     private Environment env;
 
     /**
-     * Ensure that properties are available both from Camel's {@link PropertiesComponent} as
-     * well as from Spring Boot's {@link Environment}.
+     * Ensure that properties are available both from Camel's {@link PropertiesComponent} as well as from Spring Boot's
+     * {@link Environment}.
      */
     @ParameterizedTest
-    @CsvSource(value = {
-            "app.property,app.value",
-            "my.override,default-value",
-            "cm-flat,cm-flat-value",
-            "secret-flat,secret-flat-value",
-    })
+    @CsvSource(value = { "app.property,app.value", "my.override,default-value", "cm-flat,cm-flat-value",
+            "secret-flat,secret-flat-value", })
     public void testProperties(String name, String value) throws Exception {
         PropertiesComponent component = camelContext.getPropertiesComponent();
 
-        assertThat(component.resolveProperty("{{" + name + "}}"))
-                .isPresent()
-                .containsInstanceOf(String.class)
+        assertThat(component.resolveProperty("{{" + name + "}}")).isPresent().containsInstanceOf(String.class)
                 .contains(value);
 
-        assertThat(env.getProperty(name))
-                .isEqualTo(value);
+        assertThat(env.getProperty(name)).isEqualTo(value);
     }
 }

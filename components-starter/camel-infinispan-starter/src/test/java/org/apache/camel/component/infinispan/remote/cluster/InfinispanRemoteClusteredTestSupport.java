@@ -29,40 +29,29 @@ import org.infinispan.configuration.cache.CacheMode;
 
 public final class InfinispanRemoteClusteredTestSupport {
 
-	private InfinispanRemoteClusteredTestSupport() {
-	}
+    private InfinispanRemoteClusteredTestSupport() {
+    }
 
-	public static Configuration createConfiguration(InfinispanService service) {
+    public static Configuration createConfiguration(InfinispanService service) {
 
-		final ConfigurationBuilder configBuilder = new ConfigurationBuilder();
+        final ConfigurationBuilder configBuilder = new ConfigurationBuilder();
 
-		if (CLIENT_INTELLIGENCE_BASIC) {
-			final Properties properties = new Properties();
-			properties.put("infinispan.client.hotrod.client_intelligence", "BASIC");
-			configBuilder.withProperties(properties);
-		}
+        if (CLIENT_INTELLIGENCE_BASIC) {
+            final Properties properties = new Properties();
+            properties.put("infinispan.client.hotrod.client_intelligence", "BASIC");
+            configBuilder.withProperties(properties);
+        }
 
-		configBuilder
-				.addServer()
-				.host(service.host())
-				.port(service.port())
-				.security()
-				.authentication()
-				.username(service.username())
-				.password(service.password())
-				.serverName("infinispan")
-				.saslMechanism("DIGEST-MD5")
-				.realm("default");
+        configBuilder.addServer().host(service.host()).port(service.port()).security().authentication()
+                .username(service.username()).password(service.password()).serverName("infinispan")
+                .saslMechanism("DIGEST-MD5").realm("default");
 
-		return configBuilder.build();
-	}
+        return configBuilder.build();
+    }
 
-	public static void createCache(RemoteCacheManager cacheContainer, String cacheName) {
-		cacheContainer.administration()
-				.getOrCreateCache(
-						cacheName,
-						new org.infinispan.configuration.cache.ConfigurationBuilder()
-								.clustering()
-								.cacheMode(CacheMode.DIST_SYNC).build());
-	}
+    public static void createCache(RemoteCacheManager cacheContainer, String cacheName) {
+        cacheContainer.administration().getOrCreateCache(cacheName,
+                new org.infinispan.configuration.cache.ConfigurationBuilder().clustering()
+                        .cacheMode(CacheMode.DIST_SYNC).build());
+    }
 }

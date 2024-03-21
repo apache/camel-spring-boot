@@ -83,46 +83,20 @@ final class JAXBRuntimeHints implements RuntimeHintsRegistrar {
      */
     private static final Logger LOG = LoggerFactory.getLogger(JAXBRuntimeHints.class);
 
-    private static final List<Class<? extends Annotation>> JAXB_ROOT_ANNOTATIONS = List.of(
-            XmlRootElement.class, XmlType.class, XmlRegistry.class, XmlJavaTypeAdapter.class, XmlSeeAlso.class);
+    private static final List<Class<? extends Annotation>> JAXB_ROOT_ANNOTATIONS = List.of(XmlRootElement.class,
+            XmlType.class, XmlRegistry.class, XmlJavaTypeAdapter.class, XmlSeeAlso.class);
 
-    private static final List<Class<? extends Annotation>> JAXB_ANNOTATIONS = List.of(
-            XmlAccessorType.class,
-            XmlAnyAttribute.class,
-            XmlAnyElement.class,
-            XmlAttachmentRef.class,
-            XmlAttribute.class,
-            XmlElement.class,
-            XmlElementDecl.class,
-            XmlElementRef.class,
-            XmlElementRefs.class,
-            XmlElements.class,
-            XmlElementWrapper.class,
-            XmlEnum.class,
-            XmlEnumValue.class,
-            XmlID.class,
-            XmlIDREF.class,
-            XmlInlineBinaryData.class,
-            XmlList.class,
-            XmlMimeType.class,
-            XmlMixed.class,
-            XmlNs.class,
-            XmlRegistry.class,
-            XmlRootElement.class,
-            XmlSchema.class,
-            XmlSchemaType.class,
-            XmlSchemaTypes.class,
-            XmlSeeAlso.class,
-            XmlTransient.class,
-            XmlType.class,
-            XmlValue.class,
-            XmlJavaTypeAdapter.class,
-            XmlJavaTypeAdapters.class);
+    private static final List<Class<? extends Annotation>> JAXB_ANNOTATIONS = List.of(XmlAccessorType.class,
+            XmlAnyAttribute.class, XmlAnyElement.class, XmlAttachmentRef.class, XmlAttribute.class, XmlElement.class,
+            XmlElementDecl.class, XmlElementRef.class, XmlElementRefs.class, XmlElements.class, XmlElementWrapper.class,
+            XmlEnum.class, XmlEnumValue.class, XmlID.class, XmlIDREF.class, XmlInlineBinaryData.class, XmlList.class,
+            XmlMimeType.class, XmlMixed.class, XmlNs.class, XmlRegistry.class, XmlRootElement.class, XmlSchema.class,
+            XmlSchemaType.class, XmlSchemaTypes.class, XmlSeeAlso.class, XmlTransient.class, XmlType.class,
+            XmlValue.class, XmlJavaTypeAdapter.class, XmlJavaTypeAdapters.class);
 
     private static final List<String> NATIVE_PROXY_DEFINITIONS = List.of(
             "org.glassfish.jaxb.core.marshaller.CharacterEscapeHandler",
-            "com.sun.xml.txw2.output.CharacterEscapeHandler",
-            "org.glassfish.jaxb.core.v2.schemagen.episode.Bindings",
+            "com.sun.xml.txw2.output.CharacterEscapeHandler", "org.glassfish.jaxb.core.v2.schemagen.episode.Bindings",
             "org.glassfish.jaxb.core.v2.schemagen.episode.SchemaBindings",
             "org.glassfish.jaxb.core.v2.schemagen.episode.Klass",
             "org.glassfish.jaxb.core.v2.schemagen.episode.Package",
@@ -167,11 +141,9 @@ final class JAXBRuntimeHints implements RuntimeHintsRegistrar {
             "org.glassfish.jaxb.runtime.v2.schemagen.xmlschema.TypeDefParticle",
             "org.glassfish.jaxb.runtime.v2.schemagen.xmlschema.TypeHost",
             "org.glassfish.jaxb.runtime.v2.schemagen.xmlschema.Union",
-            "org.glassfish.jaxb.runtime.v2.schemagen.xmlschema.Wildcard",
-            "com.sun.xml.txw2.TypedXmlWriter");
+            "org.glassfish.jaxb.runtime.v2.schemagen.xmlschema.Wildcard", "com.sun.xml.txw2.TypedXmlWriter");
     private static final List<String> JAXB_RUNTIME_CLASSES = List.of("org.glassfish.jaxb.runtime.v2.ContextFactory",
-            "com.sun.xml.internal.stream.XMLInputFactoryImpl",
-            "com.sun.xml.internal.stream.XMLOutputFactoryImpl",
+            "com.sun.xml.internal.stream.XMLInputFactoryImpl", "com.sun.xml.internal.stream.XMLOutputFactoryImpl",
             "com.sun.org.apache.xpath.internal.functions.FuncNot",
             "org.glassfish.jaxb.core.v2.model.nav.ReflectionNavigator",
             "org.glassfish.jaxb.runtime.v2.runtime.property.SingleElementLeafProperty",
@@ -182,7 +154,6 @@ final class JAXBRuntimeHints implements RuntimeHintsRegistrar {
             "org.glassfish.jaxb.runtime.v2.runtime.property.ArrayElementNodeProperty",
             "org.glassfish.jaxb.runtime.v2.runtime.property.ArrayReferenceNodeProperty",
             "com.sun.org.apache.xerces.internal.impl.dv.xs.SchemaDVFactoryImpl", XmlAccessOrder.class.getName());
-
 
     @Override
     public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
@@ -205,8 +176,7 @@ final class JAXBRuntimeHints implements RuntimeHintsRegistrar {
         boolean classDetected = false;
         for (String className : getClassesFromIndexes(classLoader)) {
             registerClassHierarchy(hints, classLoader, className, MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS,
-                    MemberCategory.INTROSPECT_DECLARED_METHODS, MemberCategory.DECLARED_FIELDS
-            );
+                    MemberCategory.INTROSPECT_DECLARED_METHODS, MemberCategory.DECLARED_FIELDS);
             classDetected = true;
         }
         if (classes.isEmpty() && !classDetected) {
@@ -221,13 +191,13 @@ final class JAXBRuntimeHints implements RuntimeHintsRegistrar {
             hints.reflection().registerType(c, MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS,
                     MemberCategory.INVOKE_DECLARED_METHODS, MemberCategory.INVOKE_PUBLIC_METHODS);
         }
-        hints.proxies().registerJdkProxy(TypeReference.of(XmlSeeAlso.class), TypeReference.of("org.glassfish.jaxb.core.v2.model.annotation.Locatable"));
+        hints.proxies().registerJdkProxy(TypeReference.of(XmlSeeAlso.class),
+                TypeReference.of("org.glassfish.jaxb.core.v2.model.annotation.Locatable"));
         for (String className : NATIVE_PROXY_DEFINITIONS) {
             hints.proxies().registerJdkProxy(TypeReference.of(className));
         }
         for (String className : JAXB_RUNTIME_CLASSES) {
-            hints.reflection().registerTypeIfPresent(classLoader, className,
-                    MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS,
+            hints.reflection().registerTypeIfPresent(classLoader, className, MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS,
                     MemberCategory.INVOKE_DECLARED_METHODS, MemberCategory.INVOKE_PUBLIC_METHODS);
         }
         // Register the JAXB resource bundles
@@ -251,7 +221,8 @@ final class JAXBRuntimeHints implements RuntimeHintsRegistrar {
                     LOG.debug("The package name could not be found for the resource {}", resource);
                     continue;
                 }
-                try (BufferedReader reader = new BufferedReader(new StringReader(resource.getContentAsString(StandardCharsets.UTF_8)))) {
+                try (BufferedReader reader = new BufferedReader(
+                        new StringReader(resource.getContentAsString(StandardCharsets.UTF_8)))) {
                     String line = reader.readLine();
                     while (line != null) {
                         if (line.startsWith("#") || line.isBlank()) {
@@ -274,10 +245,15 @@ final class JAXBRuntimeHints implements RuntimeHintsRegistrar {
     /**
      * Give the package name of the given resource.
      *
-     * @param resource the resource for which the package name is expected.
-     * @param fileName the name of file corresponding to the resource
+     * @param resource
+     *            the resource for which the package name is expected.
+     * @param fileName
+     *            the name of file corresponding to the resource
+     *
      * @return the package name if it could be found, {@code null} otherwise.
-     * @throws IOException an error occurs while trying to retrieve the package name.
+     *
+     * @throws IOException
+     *             an error occurs while trying to retrieve the package name.
      */
     private static String getPackageName(Resource resource, String fileName) throws IOException {
         URL url = resource.getURL();

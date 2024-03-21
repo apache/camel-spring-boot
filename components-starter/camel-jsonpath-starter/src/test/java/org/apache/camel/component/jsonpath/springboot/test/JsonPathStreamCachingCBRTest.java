@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 
@@ -33,7 +32,6 @@ import org.apache.camel.spring.boot.CamelContextConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -41,30 +39,24 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathStreamCachingCBRTest.class,
-        JsonPathStreamCachingCBRTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathStreamCachingCBRTest.class,
+        JsonPathStreamCachingCBRTest.TestConfiguration.class })
 public class JsonPathStreamCachingCBRTest {
 
     @Autowired
-    CamelContext  context;
-    
+    CamelContext context;
+
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:cheap")
     MockEndpoint mockCheap;
-    
+
     @EndpointInject("mock:average")
     MockEndpoint mockAverage;
-    
+
     @EndpointInject("mock:expensive")
     MockEndpoint mockExpensive;
 
@@ -76,12 +68,11 @@ public class JsonPathStreamCachingCBRTest {
                 context.getStreamCachingStrategy().setSpoolDirectory("target/tmp");
                 context.getStreamCachingStrategy().setSpoolThreshold(-1);
 
-
             }
 
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here
+                // do nothing here
             }
         };
     }
@@ -98,39 +89,24 @@ public class JsonPathStreamCachingCBRTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    
-                    from("direct:start")
-                            .streamCaching()
-                            .choice()
-                            .when().jsonpath("$.store.book[?(@.price < 10)]")
-                            .to("mock:cheap")
-                            .when().jsonpath("$.store.book[?(@.price < 30)]")
-                            .to("mock:average")
-                            .otherwise()
-                            .to("mock:expensive");
 
-                    from("direct:bicycle")
-                            .streamCaching()
-                            .choice()
-                            .when().method(new BeanPredicate())
-                            .to("mock:cheap")
-                            .otherwise()
-                            .to("mock:expensive");
+                    from("direct:start").streamCaching().choice().when().jsonpath("$.store.book[?(@.price < 10)]")
+                            .to("mock:cheap").when().jsonpath("$.store.book[?(@.price < 30)]").to("mock:average")
+                            .otherwise().to("mock:expensive");
 
-                    from("direct:bicycle2")
-                            .streamCaching()
-                            .choice()
+                    from("direct:bicycle").streamCaching().choice().when().method(new BeanPredicate()).to("mock:cheap")
+                            .otherwise().to("mock:expensive");
+
+                    from("direct:bicycle2").streamCaching().choice()
                             .when(PredicateBuilder.isLessThan(
                                     ExpressionBuilder.languageExpression("jsonpath", "$.store.bicycle.price"),
                                     ExpressionBuilder.constantExpression(100)))
-                            .to("mock:cheap")
-                            .otherwise()
-                            .to("mock:expensive");
+                            .to("mock:cheap").otherwise().to("mock:expensive");
                 }
             };
         }
     }
-    
+
     public static class BeanPredicate {
         public boolean checkPrice(@JsonPath("$.store.bicycle.price") double price) {
             return price < 100;
@@ -169,7 +145,7 @@ public class JsonPathStreamCachingCBRTest {
 
     @Test
     public void testAverage() throws Exception {
-        
+
         MockEndpoint.resetMocks(context);
         mockCheap.expectedMessageCount(0);
         mockAverage.expectedMessageCount(1);

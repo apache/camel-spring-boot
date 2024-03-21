@@ -40,7 +40,8 @@ public class ZooKeeperServiceRegistryAutoConfiguration {
 
     @Bean(name = "zookeeper-service-registry")
     @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-    public ZooKeeperServiceRegistry zookeeperServiceRegistry(ZooKeeperServiceRegistryConfiguration configuration) throws Exception {
+    public ZooKeeperServiceRegistry zookeeperServiceRegistry(ZooKeeperServiceRegistryConfiguration configuration)
+            throws Exception {
         ZooKeeperServiceRegistry service = new ZooKeeperServiceRegistry();
 
         CamelPropertiesHelper.setCamelProperties(camelContext, service,

@@ -23,24 +23,21 @@ import java.util.Collection;
 
 public final class CamelProbesHelper {
 
-	private CamelProbesHelper() {
-	}
+    private CamelProbesHelper() {
+    }
 
-	public static boolean checkProbeState(Collection<HealthCheck.Result> results, Logger log) {
-		boolean isUp = true;
-		for (HealthCheck.Result result : results) {
-			if (!HealthCheck.State.UP.equals(result.getState())) {
-				isUp = false;
+    public static boolean checkProbeState(Collection<HealthCheck.Result> results, Logger log) {
+        boolean isUp = true;
+        for (HealthCheck.Result result : results) {
+            if (!HealthCheck.State.UP.equals(result.getState())) {
+                isUp = false;
 
-				log.warn(
-						"Probe in group '{}', with id '{}' failed with message '{}'",
-						result.getCheck().getGroup(),
-						result.getCheck().getId(),
-						result.getMessage().orElse(""));
-				result.getError().ifPresent(error -> log.warn(error.getMessage(), error));
-			}
-		}
+                log.warn("Probe in group '{}', with id '{}' failed with message '{}'", result.getCheck().getGroup(),
+                        result.getCheck().getId(), result.getMessage().orElse(""));
+                result.getError().ifPresent(error -> log.warn(error.getMessage(), error));
+            }
+        }
 
-		return isUp;
-	}
+        return isUp;
+    }
 }

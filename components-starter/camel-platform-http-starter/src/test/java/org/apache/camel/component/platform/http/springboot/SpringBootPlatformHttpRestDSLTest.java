@@ -29,37 +29,28 @@ import org.springframework.test.annotation.DirtiesContext;
 @SpringBootApplication
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-		classes = {
-				CamelAutoConfiguration.class,
-				SpringBootPlatformHttpRestDSLTest.class,
-				SpringBootPlatformHttpRestDSLTest.TestConfiguration.class,
-				PlatformHttpComponentAutoConfiguration.class,
-				SpringBootPlatformHttpAutoConfiguration.class,
-		}
-)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
+        SpringBootPlatformHttpRestDSLTest.class, SpringBootPlatformHttpRestDSLTest.TestConfiguration.class,
+        PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class, })
 public class SpringBootPlatformHttpRestDSLTest extends PlatformHttpBase {
 
-	// *************************************
-	// Config
-	// *************************************
-	@Configuration
-	public static class TestConfiguration {
+    // *************************************
+    // Config
+    // *************************************
+    @Configuration
+    public static class TestConfiguration {
 
-		@Bean
-		public RouteBuilder springBootPlatformHttpRestDSLRouteBuilder() {
-			return new RouteBuilder() {
-				@Override
-				public void configure() throws Exception {
-					rest()
-							.get("myget").to("direct:get")
-							.post("mypost").to("direct:post");
+        @Bean
+        public RouteBuilder springBootPlatformHttpRestDSLRouteBuilder() {
+            return new RouteBuilder() {
+                @Override
+                public void configure() throws Exception {
+                    rest().get("myget").to("direct:get").post("mypost").to("direct:post");
 
-					from("direct:post").transform().body(String.class, b -> b.toUpperCase());
-					from("direct:get").setBody().constant("get");
-				}
-			};
-		}
-	}
+                    from("direct:post").transform().body(String.class, b -> b.toUpperCase());
+                    from("direct:get").setBody().constant("get");
+                }
+            };
+        }
+    }
 }

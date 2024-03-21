@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.cron.springboot;
 
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -38,55 +37,42 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        CronLoaderTest.class,
-        CronLoaderTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, CronLoaderTest.class,
+        CronLoaderTest.TestConfiguration.class })
 public class CronLoaderTest {
 
     @Autowired
     private CamelContext context;
-    
+
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mock;
-    
+
     @Bean("dummy2")
     private DummyCamelCronService getDummyCamelCronService() {
         return new DummyCamelCronService("dummy2");
     }
-    
-    
-    
-    
 
     @Test
     void testDummyCronServiceLoading() throws Exception {
-                
+
         mock.expectedMinimumMessageCount(1);
 
         mock.assertIsSatisfied();
     }
-    
+
     @Test
     void testPreferRegistryOverServiceLoading() throws Exception {
         assertEquals("dummy2", getCamelCronService().getId());
     }
-    
-    
-    
+
     private CamelCronService getCamelCronService() {
         return context.getComponent("cron", CronComponent.class).getService();
     }
-    
 
     // *************************************
     // Config
@@ -100,9 +86,7 @@ public class CronLoaderTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("cron:tab?schedule=0/1 * * * * ?")
-                            .setBody().constant("x")
-                            .to("mock:result");
+                    from("cron:tab?schedule=0/1 * * * * ?").setBody().constant("x").to("mock:result");
                 }
             };
         }

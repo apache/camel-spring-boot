@@ -49,18 +49,19 @@ public final class CamelRuntimeHints implements RuntimeHintsRegistrar {
         registerCamelServices(hints, classLoader);
         // Register collections
         hints.reflection().registerType(java.util.List.class, MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS,
-            MemberCategory.INVOKE_PUBLIC_METHODS);
+                MemberCategory.INVOKE_PUBLIC_METHODS);
         hints.reflection().registerType(java.util.Collection.class, MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS,
-            MemberCategory.INVOKE_PUBLIC_METHODS);
+                MemberCategory.INVOKE_PUBLIC_METHODS);
     }
 
     /**
      * Register all the Camel services that could be found in the given classloader.
      *
-     * @param hints       the hints contributed so far for the deployment unit
-     * @param classLoader the ClassLoader to load classpath resources with,
-     *                    or {@code null} for using the thread context class loader
-     *                    at the time of actual resource access
+     * @param hints
+     *            the hints contributed so far for the deployment unit
+     * @param classLoader
+     *            the ClassLoader to load classpath resources with, or {@code null} for using the thread context class
+     *            loader at the time of actual resource access
      */
     private static void registerCamelServices(RuntimeHints hints, ClassLoader classLoader) {
         hints.resources().registerPattern("META-INF/services/org/apache/camel/*");
@@ -71,7 +72,8 @@ public final class CamelRuntimeHints implements RuntimeHintsRegistrar {
                 if (filename == null || filename.isBlank() || filename.endsWith(".properties")) {
                     continue;
                 }
-                try (BufferedReader reader = new BufferedReader(new StringReader(resource.getContentAsString(StandardCharsets.UTF_8)))) {
+                try (BufferedReader reader = new BufferedReader(
+                        new StringReader(resource.getContentAsString(StandardCharsets.UTF_8)))) {
                     String line = reader.readLine();
                     String prefixClass = "class=";
                     while (line != null) {

@@ -47,21 +47,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirValidateIT.class,
-                FhirValidateIT.TestConfiguration.class,
-                DefaultCamelContext.class,
-                FhirServer.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirValidateIT.class, FhirValidateIT.TestConfiguration.class,
+        DefaultCamelContext.class, FhirServer.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class FhirValidateIT extends AbstractFhirTestSupport {
 
     private static final Logger LOG = LoggerFactory.getLogger(FhirValidateIT.class);
-    private static final String PATH_PREFIX
-            = FhirApiCollection.getCollection().getApiName(FhirValidateApiMethod.class).getName();
+    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirValidateApiMethod.class)
+            .getName();
 
     @Test
     public void testResource() throws Exception {
@@ -80,8 +73,7 @@ public class FhirValidateIT extends AbstractFhirTestSupport {
         List<OperationOutcome.OperationOutcomeIssueComponent> issue = operationOutcome.getIssue();
         assertNotNull(issue);
         assertEquals(1, issue.size());
-        assertTrue(issue.get(0).getDiagnostics()
-                .contains("No issues detected during validation"));
+        assertTrue(issue.get(0).getDiagnostics().contains("No issues detected during validation"));
     }
 
     @Test
@@ -91,8 +83,8 @@ public class FhirValidateIT extends AbstractFhirTestSupport {
         bobbyHebb.getText().setDivAsString("<div>This is the narrative text</div>");
 
         // using org.hl7.fhir.instance.model.api.IBaseResource message body for single parameter "resource"
-        MethodOutcome result
-                = requestBody("direct://RESOURCE_AS_STRING", this.fhirContext.newXmlParser().encodeResourceToString(bobbyHebb));
+        MethodOutcome result = requestBody("direct://RESOURCE_AS_STRING",
+                this.fhirContext.newXmlParser().encodeResourceToString(bobbyHebb));
 
         assertNotNull(result, "resource result");
         LOG.debug("resource: {}", result);
@@ -102,8 +94,7 @@ public class FhirValidateIT extends AbstractFhirTestSupport {
         List<OperationOutcome.OperationOutcomeIssueComponent> issue = operationOutcome.getIssue();
         assertNotNull(issue);
         assertEquals(1, issue.size());
-        assertTrue(issue.get(0).getDiagnostics()
-                .contains("No issues detected during validation"));
+        assertTrue(issue.get(0).getDiagnostics().contains("No issues detected during validation"));
     }
 
     @Configuration
@@ -114,8 +105,7 @@ public class FhirValidateIT extends AbstractFhirTestSupport {
                 @Override
                 public void configure() {
                     // test route for resource
-                    from("direct://RESOURCE")
-                            .to("fhir://" + PATH_PREFIX + "/resource?inBody=resource");
+                    from("direct://RESOURCE").to("fhir://" + PATH_PREFIX + "/resource?inBody=resource");
 
                     // test route for resource
                     from("direct://RESOURCE_AS_STRING")

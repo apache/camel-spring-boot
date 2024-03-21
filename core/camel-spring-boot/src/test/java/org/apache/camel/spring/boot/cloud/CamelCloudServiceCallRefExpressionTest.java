@@ -41,12 +41,9 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 @DirtiesContext
 @CamelSpringBootTest
 @SpringBootApplication
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
+@SpringBootTest(classes = { CamelAutoConfiguration.class,
         CamelCloudServiceCallRefExpressionTest.TestConfiguration.class,
-        CamelCloudServiceCallRefExpressionTest.SpringBootPropertySourceConfig.class
-    }
+        CamelCloudServiceCallRefExpressionTest.SpringBootPropertySourceConfig.class }
 
 )
 @Disabled("TODO: Fix me later")
@@ -71,8 +68,7 @@ public class CamelCloudServiceCallRefExpressionTest {
         @Bean
         Expression myExpression() {
             return new SimpleExpression(
-                "http://${header.CamelServiceCallServiceHost}:${header.CamelServiceCallServicePort}/hello"
-            );
+                    "http://${header.CamelServiceCallServiceHost}:${header.CamelServiceCallServicePort}/hello");
         }
 
         @Bean
@@ -80,27 +76,23 @@ public class CamelCloudServiceCallRefExpressionTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                        .serviceCall("{{service.name}}");
+                    from("direct:start").serviceCall("{{service.name}}");
 
-                    fromF("jetty:http://localhost:%d/hello", SpringBootPropertyUtil.PORT1)
-                        .transform()
-                        .constant(SpringBootPropertyUtil.PORT1);
-                    fromF("jetty:http://localhost:%d/hello", SpringBootPropertyUtil.PORT2)
-                        .transform()
-                        .constant(SpringBootPropertyUtil.PORT2);
-                    fromF("jetty:http://localhost:%d/hello", SpringBootPropertyUtil.PORT3)
-                        .transform()
-                        .constant(SpringBootPropertyUtil.PORT3);
+                    fromF("jetty:http://localhost:%d/hello", SpringBootPropertyUtil.PORT1).transform()
+                            .constant(SpringBootPropertyUtil.PORT1);
+                    fromF("jetty:http://localhost:%d/hello", SpringBootPropertyUtil.PORT2).transform()
+                            .constant(SpringBootPropertyUtil.PORT2);
+                    fromF("jetty:http://localhost:%d/hello", SpringBootPropertyUtil.PORT3).transform()
+                            .constant(SpringBootPropertyUtil.PORT3);
                 }
             };
         }
     }
-    
+
     // *************************************
     // Config
     // *************************************
-    
+
     @Configuration
     public static class SpringBootPropertySourceConfig {
 
@@ -112,23 +104,26 @@ public class CamelCloudServiceCallRefExpressionTest {
         public MutablePropertySources springBootPropertySource() {
 
             MutablePropertySources sources = env.getPropertySources();
-            sources.addFirst(new PropertiesPropertySource("boot-test-property", CamelCloudServiceCallRefExpressionTest.getAllProperties()));
+            sources.addFirst(new PropertiesPropertySource("boot-test-property",
+                    CamelCloudServiceCallRefExpressionTest.getAllProperties()));
             return sources;
 
         }
     }
-    
+
     private static Properties getAllProperties() {
-        
+
         Properties prop = new Properties();
         prop.put("service.name", "custom-svc-list");
         prop.put("camel.cloud.service-call.expression", "myExpression");
         prop.put("camel.cloud.load-balancer.enabled", false);
         prop.put("camel.cloud.service-call.component", "http");
-        prop.put("camel.cloud.service-discovery.services[custom-svc-list]", SpringBootPropertyUtil.getDiscoveryServices());
-        prop.put("camel.cloud.service-filter.blacklist[custom-svc-list]", SpringBootPropertyUtil.getServiceFilterBlacklist());
+        prop.put("camel.cloud.service-discovery.services[custom-svc-list]",
+                SpringBootPropertyUtil.getDiscoveryServices());
+        prop.put("camel.cloud.service-filter.blacklist[custom-svc-list]",
+                SpringBootPropertyUtil.getServiceFilterBlacklist());
         prop.put("debug", false);
         return prop;
     }
-    
+
 }

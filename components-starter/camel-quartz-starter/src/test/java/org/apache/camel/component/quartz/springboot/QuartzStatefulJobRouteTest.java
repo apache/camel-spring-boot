@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.apache.camel.CamelContext;
@@ -30,8 +28,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -43,31 +39,24 @@ import org.quartz.CronTrigger;
 import org.quartz.JobDetail;
 import org.quartz.Trigger;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzStatefulJobRouteTest.class,
-        QuartzStatefulJobRouteTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzStatefulJobRouteTest.class,
+        QuartzStatefulJobRouteTest.TestConfiguration.class })
 public class QuartzStatefulJobRouteTest extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint mock;
-    
+
     @Test
     public void testQuartzCronRoute() throws Exception {
-        
+
         mock.expectedMinimumMessageCount(3);
 
         mock.assertIsSatisfied();
@@ -79,7 +68,6 @@ public class QuartzStatefulJobRouteTest extends BaseQuartzTest {
         assertThat(detail.getJobClass().equals(StatefulCamelJob.class), CoreMatchers.is(true));
     }
 
-    
     // *************************************
     // Config
     // *************************************
@@ -99,7 +87,5 @@ public class QuartzStatefulJobRouteTest extends BaseQuartzTest {
             };
         }
     }
-    
-   
 
 }

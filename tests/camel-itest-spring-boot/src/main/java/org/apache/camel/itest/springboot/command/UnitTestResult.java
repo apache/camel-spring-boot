@@ -21,8 +21,8 @@ import java.io.Serializable;
 import org.junit.platform.launcher.listeners.TestExecutionSummary;
 
 /**
- * Contains the result of the execution of a test suite.
- * Can be rebuilt at the other classloader as it does not contain reference to internal classes.
+ * Contains the result of the execution of a test suite. Can be rebuilt at the other classloader as it does not contain
+ * reference to internal classes.
  */
 public class UnitTestResult implements Serializable {
 
@@ -44,9 +44,9 @@ public class UnitTestResult implements Serializable {
     public UnitTestResult(TestExecutionSummary jr) {
         this.runCount = (int) jr.getTestsStartedCount();
         this.failureCount = (int) jr.getTestsFailedCount();
-        this.runTime = jr.getTimeFinished()-jr.getTimeStarted();
+        this.runTime = jr.getTimeFinished() - jr.getTimeStarted();
         this.ignoreCount = (int) jr.getTestsSkippedCount();
-        this.successful = jr.getTestsFailedCount()==0;
+        this.successful = jr.getTestsFailedCount() == 0;
     }
 
     public int getRunCount() {

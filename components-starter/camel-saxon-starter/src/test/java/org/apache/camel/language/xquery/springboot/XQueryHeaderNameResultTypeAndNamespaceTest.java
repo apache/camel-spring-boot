@@ -16,8 +16,6 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
@@ -32,31 +30,23 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        XQueryHeaderNameResultTypeAndNamespaceTest.class,
-        XQueryHeaderNameResultTypeAndNamespaceTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, XQueryHeaderNameResultTypeAndNamespaceTest.class,
+        XQueryHeaderNameResultTypeAndNamespaceTest.TestConfiguration.class })
 public class XQueryHeaderNameResultTypeAndNamespaceTest {
-    
-    
+
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:55")
-    protected MockEndpoint mock;   
-    
+    protected MockEndpoint mock;
+
     @Test
     public void testXPathWithNamespace() throws Exception {
-        
+
         mock.expectedBodiesReceived("body");
         mock.expectedHeaderReceived("cheeseDetails", "<number xmlns=\"http://acme.com/cheese\">55</number>");
 
@@ -65,7 +55,7 @@ public class XQueryHeaderNameResultTypeAndNamespaceTest {
 
         mock.assertIsSatisfied();
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -82,12 +72,7 @@ public class XQueryHeaderNameResultTypeAndNamespaceTest {
                     var xq = expression().xquery().expression("/c:number = 55").namespaces(ns).resultType(Integer.class)
                             .source("header:cheeseDetails").end();
 
-                    from("direct:in").choice()
-                            .when(xq)
-                            .to("mock:55")
-                            .otherwise()
-                            .to("mock:other")
-                            .end();
+                    from("direct:in").choice().when(xq).to("mock:55").otherwise().to("mock:other").end();
                 }
             };
         }

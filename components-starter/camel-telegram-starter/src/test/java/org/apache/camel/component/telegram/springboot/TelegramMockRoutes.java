@@ -56,8 +56,8 @@ public class TelegramMockRoutes extends RouteBuilder {
     public void configure() {
 
         mocks.forEach((key, value) -> {
-            from("netty-http:http://localhost:" + port + "/botmock-token/" + key + "?httpMethodRestrict=" + value.method)
-                    .process(value);
+            from("netty-http:http://localhost:" + port + "/botmock-token/" + key + "?httpMethodRestrict="
+                    + value.method).process(value);
         });
 
     }
@@ -100,9 +100,8 @@ public class TelegramMockRoutes extends RouteBuilder {
                         final String rawBody = m.getBody(String.class);
                         LOG.debug("Recording {} {} body {}", method, path, rawBody);
                         @SuppressWarnings("unchecked")
-                        final T body
-                                = returnType != String.class
-                                        ? (T) new ObjectMapper().readValue(rawBody, returnType) : (T) rawBody;
+                        final T body = returnType != String.class
+                                ? (T) new ObjectMapper().readValue(rawBody, returnType) : (T) rawBody;
                         recordedMessages.add(body);
                         final byte[] bytes = responseBodies[responseIndex].getBytes(StandardCharsets.UTF_8);
                         m.setBody(bytes);
@@ -126,9 +125,8 @@ public class TelegramMockRoutes extends RouteBuilder {
         }
 
         public List<T> awaitRecordedMessages(int count, long timeoutMillis) {
-            return Awaitility.await()
-                    .atMost(timeoutMillis, TimeUnit.MILLISECONDS)
-                    .until(this::getRecordedMessages, msgs -> msgs.size() >= count);
+            return Awaitility.await().atMost(timeoutMillis, TimeUnit.MILLISECONDS).until(this::getRecordedMessages,
+                    msgs -> msgs.size() >= count);
         }
 
     }

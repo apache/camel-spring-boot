@@ -32,9 +32,7 @@ public class CamelStitchTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelStitchTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelStitchTest.class)).build();
     }
 
     @Test
@@ -42,6 +40,5 @@ public class CamelStitchTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

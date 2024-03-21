@@ -33,12 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileBrowsableEndpointTest.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileBrowsableEndpointTest.class })
 public class FileBrowsableEndpointTest extends BaseFile {
 
     @Test
@@ -46,8 +41,8 @@ public class FileBrowsableEndpointTest extends BaseFile {
         template.sendBodyAndHeader(fileUri(), "B", Exchange.FILE_NAME, "b.txt");
         template.sendBodyAndHeader(fileUri(), "A", Exchange.FILE_NAME, "a.txt");
 
-        FileEndpoint endpoint
-                = context.getEndpoint(fileUri("?initialDelay=0&delay=10&sortBy=file:name"), FileEndpoint.class);
+        FileEndpoint endpoint = context.getEndpoint(fileUri("?initialDelay=0&delay=10&sortBy=file:name"),
+                FileEndpoint.class);
         assertNotNull(endpoint);
 
         MemoryIdempotentRepository repo = (MemoryIdempotentRepository) endpoint.getInProgressRepository();

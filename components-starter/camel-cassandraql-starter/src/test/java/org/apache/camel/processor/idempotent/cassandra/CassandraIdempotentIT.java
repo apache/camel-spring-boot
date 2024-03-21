@@ -16,7 +16,6 @@
  */
 package org.apache.camel.processor.idempotent.cassandra;
 
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.cassandra.springboot.BaseCassandra;
@@ -32,27 +31,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        CassandraIdempotentIT.class,
-        CassandraIdempotentIT.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, CassandraIdempotentIT.class,
+        CassandraIdempotentIT.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class CassandraIdempotentIT extends BaseCassandra {
 
     CassandraIdempotentRepository idempotentRepository;
 
-    
     @EndpointInject("mock:output")
     MockEndpoint mockOutput;
-
-
-   
 
     private void send(String idempotentId, String body) {
         super.template.sendBodyAndHeader("direct:input", body, "idempotentId", idempotentId);
@@ -61,7 +50,7 @@ public class CassandraIdempotentIT extends BaseCassandra {
     @Test
     public void testIdempotentRoute() throws Exception {
         // Given
-        
+
         mockOutput.expectedMessageCount(2);
         mockOutput.expectedBodiesReceivedInAnyOrder("A", "B");
         // When
@@ -90,7 +79,8 @@ public class CassandraIdempotentIT extends BaseCassandra {
                     idempotentRepository = new NamedCassandraIdempotentRepository(getSession(), "ID");
                     idempotentRepository.setTable("NAMED_CAMEL_IDEMPOTENT");
                     idempotentRepository.start();
-                    from("direct:input").idempotentConsumer(header("idempotentId"), idempotentRepository).to("mock:output");
+                    from("direct:input").idempotentConsumer(header("idempotentId"), idempotentRepository)
+                            .to("mock:output");
                 }
             };
         }

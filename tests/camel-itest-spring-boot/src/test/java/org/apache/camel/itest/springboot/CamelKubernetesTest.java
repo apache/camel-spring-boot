@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelKubernetesTest extends AbstractSpringBootTestSupport {
 
@@ -33,9 +32,8 @@ public class CamelKubernetesTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelKubernetesTest.class))
-                //.dependency(DependencyResolver.withVersion("org.hibernate.validator:hibernate-validator"))
+        return new ITestConfigBuilder().module(inferModuleName(CamelKubernetesTest.class))
+                // .dependency(DependencyResolver.withVersion("org.hibernate.validator:hibernate-validator"))
                 .build();
     }
 
@@ -61,6 +59,5 @@ public class CamelKubernetesTest extends AbstractSpringBootTestSupport {
 
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

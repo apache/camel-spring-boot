@@ -113,14 +113,14 @@ public class ManagedSEDeployableContainer implements DeployableContainer<Managed
 
     private void configureLogging(ManagedSEContainerConfiguration configuration) {
         final String loggingConfigFile = System.getProperty("java.util.logging.config.file");
-        if (loggingConfigFile==null) {
-          ConsoleHandler consoleHandler = new ConsoleHandler();
-          consoleHandler.setLevel(configuration.getLogLevel());
-          LOGGER.setUseParentHandlers(false);
-          LOGGER.addHandler(consoleHandler);
-          LOGGER.info("No logging configured, using console");
+        if (loggingConfigFile == null) {
+            ConsoleHandler consoleHandler = new ConsoleHandler();
+            consoleHandler.setLevel(configuration.getLogLevel());
+            LOGGER.setUseParentHandlers(false);
+            LOGGER.addHandler(consoleHandler);
+            LOGGER.info("No logging configured, using console");
         } else {
-            // suppose that logging has been configured using the specified file 
+            // suppose that logging has been configured using the specified file
             LOGGER.info("Logging configured using file " + loggingConfigFile);
         }
         LOGGER.setLevel(configuration.getLogLevel());
@@ -181,7 +181,8 @@ public class ManagedSEDeployableContainer implements DeployableContainer<Managed
     public ProtocolMetaData deploy(final Archive<?> archive) throws DeploymentException {
         LOGGER.info("Deploying " + archive.getName());
 
-        // First of all clear the list of previously materialized deployments - otherwise the class path would grow indefinitely
+        // First of all clear the list of previously materialized deployments - otherwise the class path would grow
+        // indefinitely
         materializedFiles.clear();
 
         // Create a new classpath
@@ -217,7 +218,8 @@ public class ManagedSEDeployableContainer implements DeployableContainer<Managed
             processBuilder.directory(new File(path));
         }
 
-        processBuilder.environment().put("JAVA_HOME", new File(System.getProperty(SYSPROP_KEY_JAVA_HOME)).getAbsolutePath());
+        processBuilder.environment().put("JAVA_HOME",
+                new File(System.getProperty(SYSPROP_KEY_JAVA_HOME)).getAbsolutePath());
 
         processBuilder.redirectErrorStream(true);
         processBuilder.redirectError(ProcessBuilder.Redirect.INHERIT);
@@ -269,7 +271,8 @@ public class ManagedSEDeployableContainer implements DeployableContainer<Managed
         }).start();
     }
 
-    private boolean isJMXTestRunnerMBeanRegistered(final String host, final int port, int waitTime) throws DeploymentException {
+    private boolean isJMXTestRunnerMBeanRegistered(final String host, final int port, int waitTime)
+            throws DeploymentException {
         // Taken from org.jboss.arquillian.container.spi.client.protocol.metadata.JMXContext
         final String jmxServiceUrl = "service:jmx:rmi:///jndi/rmi://" + host + ":" + port + "/jmxrmi";
         try (JMXConnector jmxc = JMXConnectorFactory.connect(new JMXServiceURL(jmxServiceUrl), null)) {
@@ -407,7 +410,7 @@ public class ManagedSEDeployableContainer implements DeployableContainer<Managed
 
     private static int getJavaMajorVersion() {
         String javaSpecVersion = System.getProperty("java.specification.version");
-        if (javaSpecVersion.contains(".")) { //before jdk 9
+        if (javaSpecVersion.contains(".")) { // before jdk 9
             return Integer.parseInt(javaSpecVersion.split("\\.")[1]);
         } else {
             return Integer.parseInt(javaSpecVersion);

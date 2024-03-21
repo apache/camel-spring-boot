@@ -36,7 +36,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass({HealthIndicator.class})
+@ConditionalOnClass({ HealthIndicator.class })
 @ConditionalOnBean(CamelAutoConfiguration.class)
 @EnableConfigurationProperties(CamelHealthCheckConfigurationProperties.class)
 @AutoConfigureAfter(CamelAutoConfiguration.class)
@@ -45,13 +45,13 @@ public class CamelHealthCheckAutoConfiguration {
     private static final Logger LOG = LoggerFactory.getLogger(CamelHealthCheckAutoConfiguration.class);
 
     @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-    @ConditionalOnClass({CamelContext.class})
+    @ConditionalOnClass({ CamelContext.class })
     @ConditionalOnMissingBean(CamelHealthCheckIndicator.class)
     protected class CamelHealthCheckIndicatorInitializer {
 
         @Bean(name = "camelHealth")
         public HealthIndicator camelHealthCheckIndicator(ApplicationContext applicationContext,
-                                                         CamelContext camelContext, CamelHealthCheckConfigurationProperties config) {
+                CamelContext camelContext, CamelHealthCheckConfigurationProperties config) {
             if (config != null && config.getEnabled() != null && !config.getEnabled()) {
                 // health check is disabled
                 return null;
@@ -61,7 +61,8 @@ public class CamelHealthCheckAutoConfiguration {
             }
 
             // auto-detect camel-health on classpath
-            HealthCheckRegistry hcr = camelContext.getCamelContextExtension().getContextPlugin(HealthCheckRegistry.class);
+            HealthCheckRegistry hcr = camelContext.getCamelContextExtension()
+                    .getContextPlugin(HealthCheckRegistry.class);
             if (hcr == null) {
                 if (config.getEnabled() != null && config.getEnabled()) {
                     LOG.warn("Cannot find HealthCheckRegistry from classpath. Add camel-health to classpath.");
@@ -81,7 +82,8 @@ public class CamelHealthCheckAutoConfiguration {
                 hcr.setExposureLevel(config.getExposureLevel());
             }
             if (config.getInitialState() != null) {
-                hcr.setInitialState(camelContext.getTypeConverter().convertTo(HealthCheck.State.class, config.getInitialState()));
+                hcr.setInitialState(
+                        camelContext.getTypeConverter().convertTo(HealthCheck.State.class, config.getInitialState()));
             }
 
             // context is enabled by default
@@ -93,7 +95,8 @@ public class CamelHealthCheckAutoConfiguration {
             }
             // routes are enabled by default
             if (hcr.isEnabled()) {
-                HealthCheckRepository hc = hcr.getRepository("routes").orElse((HealthCheckRepository) hcr.resolveById("routes"));
+                HealthCheckRepository hc = hcr.getRepository("routes")
+                        .orElse((HealthCheckRepository) hcr.resolveById("routes"));
                 if (hc != null) {
                     if (config.getRoutesEnabled() != null) {
                         hc.setEnabled(config.getRoutesEnabled());
@@ -103,8 +106,8 @@ public class CamelHealthCheckAutoConfiguration {
             }
             // producers are disabled by default
             if (hcr.isEnabled()) {
-                HealthCheckRepository hc
-                    = hcr.getRepository("producers").orElse((HealthCheckRepository) hcr.resolveById("producers"));
+                HealthCheckRepository hc = hcr.getRepository("producers")
+                        .orElse((HealthCheckRepository) hcr.resolveById("producers"));
                 if (hc != null) {
                     if (config.getProducersEnabled() != null) {
                         hc.setEnabled(config.getProducersEnabled());
@@ -114,8 +117,8 @@ public class CamelHealthCheckAutoConfiguration {
             }
             // consumers are enabled by default
             if (hcr.isEnabled()) {
-                HealthCheckRepository hc
-                        = hcr.getRepository("consumers").orElse((HealthCheckRepository) hcr.resolveById("consumers"));
+                HealthCheckRepository hc = hcr.getRepository("consumers")
+                        .orElse((HealthCheckRepository) hcr.resolveById("consumers"));
                 if (hc != null) {
                     if (config.getConsumersEnabled() != null) {
                         hc.setEnabled(config.getConsumersEnabled());
@@ -125,8 +128,8 @@ public class CamelHealthCheckAutoConfiguration {
             }
             // registry are enabled by default
             if (hcr.isEnabled()) {
-                HealthCheckRepository hc
-                        = hcr.getRepository("registry").orElse((HealthCheckRepository) hcr.resolveById("registry"));
+                HealthCheckRepository hc = hcr.getRepository("registry")
+                        .orElse((HealthCheckRepository) hcr.resolveById("registry"));
                 if (hc != null) {
                     if (config.getRegistryEnabled() != null) {
                         hc.setEnabled(config.getRegistryEnabled());

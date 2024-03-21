@@ -31,25 +31,22 @@ import java.util.Collection;
 
 public class CamelLivenessStateHealthIndicator extends LivenessStateHealthIndicator {
 
-	private static final Logger LOG = LoggerFactory.getLogger(CamelLivenessStateHealthIndicator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CamelLivenessStateHealthIndicator.class);
 
-	private final CamelContext camelContext;
+    private final CamelContext camelContext;
 
-	public CamelLivenessStateHealthIndicator(
-			ApplicationAvailability availability,
-			CamelContext camelContext) {
-		super(availability);
+    public CamelLivenessStateHealthIndicator(ApplicationAvailability availability, CamelContext camelContext) {
+        super(availability);
 
-		this.camelContext = camelContext;
-	}
+        this.camelContext = camelContext;
+    }
 
-	@Override
-	protected AvailabilityState getState(ApplicationAvailability applicationAvailability) {
-		Collection<HealthCheck.Result> results = HealthCheckHelper.invokeLiveness(camelContext);
+    @Override
+    protected AvailabilityState getState(ApplicationAvailability applicationAvailability) {
+        Collection<HealthCheck.Result> results = HealthCheckHelper.invokeLiveness(camelContext);
 
-		boolean isLive = CamelProbesHelper.checkProbeState(results, LOG);
+        boolean isLive = CamelProbesHelper.checkProbeState(results, LOG);
 
-		return isLive ?
-				LivenessState.CORRECT : LivenessState.BROKEN;
-	}
+        return isLive ? LivenessState.CORRECT : LivenessState.BROKEN;
+    }
 }

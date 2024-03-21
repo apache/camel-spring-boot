@@ -34,7 +34,7 @@ import static org.apache.camel.component.jasypt.springboot.Constants.START_URI_T
 @CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
-@SpringBootTest(classes = {EncryptedPropertiesTest.TestConfiguration.class})
+@SpringBootTest(classes = { EncryptedPropertiesTest.TestConfiguration.class })
 public class EncryptedPropertiesTest extends EncryptedPropertiesTestBase {
 
     @Test
@@ -57,10 +57,10 @@ public class EncryptedPropertiesTest extends EncryptedPropertiesTestBase {
         testEncryption(START_URI_TEST_UNENCRYPTED_PROPS_OUT_CC, "unEncrYpteD");
     }
 
-
     @Configuration
     @Import(Routes.class)
     @AutoConfigureBefore(CamelAutoConfiguration.class)
-    public static class TestConfiguration {}
+    public static class TestConfiguration {
+    }
 
 }

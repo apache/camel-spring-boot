@@ -32,12 +32,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletLocalBeanClassThreeTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletLocalBeanClassThreeTest.class, })
 
 public class KameletLocalBeanClassThreeTest {
 
@@ -67,19 +62,12 @@ public class KameletLocalBeanClassThreeTest {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                routeTemplate("whereTo")
-                        .templateParameter("bar")
-                        .templateBean("myBar")
-                        .typeClass(MyBar.class)
-                        .property("bar", "{{bar}}")
-                        .end()
-                        .from("kamelet:source")
+                routeTemplate("whereTo").templateParameter("bar").templateBean("myBar").typeClass(MyBar.class)
+                        .property("bar", "{{bar}}").end().from("kamelet:source")
                         // must use {{myBar}} to refer to the local bean
                         .to("bean:{{myBar}}");
 
-                from("direct:bar")
-                        .kamelet("whereTo?bar=Moes")
-                        .to("mock:result");
+                from("direct:bar").kamelet("whereTo?bar=Moes").to("mock:result");
             }
         };
     }

@@ -30,11 +30,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(
-    classes = {
-        CamelLambdaRouteBuilderTest.class,
-        LambdaRouteBuilderConfiguration.class}
-)
+@SpringBootTest(classes = { CamelLambdaRouteBuilderTest.class, LambdaRouteBuilderConfiguration.class })
 public class CamelLambdaRouteBuilderTest {
 
     // Collaborators fixtures

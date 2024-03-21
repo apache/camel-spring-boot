@@ -23,59 +23,55 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class CamelMetricsConfiguration {
 
     /**
-     * Whether HTTP uri tags should be enabled or not in captured metrics.
-     * If disabled then the uri tag, is likely not able to be resolved and will be marked as UNKNOWN.
+     * Whether HTTP uri tags should be enabled or not in captured metrics. If disabled then the uri tag, is likely not
+     * able to be resolved and will be marked as UNKNOWN.
      */
     private boolean uriTagEnabled = true;
 
     /**
      * Whether to use static or dynamic values for URI tags in captured metrics.
      *
-     * When using dynamic tags, then a REST service with base URL: /users/{id} will capture metrics
-     * with uri tag with the actual dynamic value such as: /users/123.
-     * However, this can lead to many tags as the URI is dynamic, so use this with care.
+     * When using dynamic tags, then a REST service with base URL: /users/{id} will capture metrics with uri tag with
+     * the actual dynamic value such as: /users/123. However, this can lead to many tags as the URI is dynamic, so use
+     * this with care.
      */
     private boolean uriTagDynamic;
 
     /**
-     * Set whether to enable the MicrometerRoutePolicyFactory for capturing metrics
-     * on route processing times.
+     * Set whether to enable the MicrometerRoutePolicyFactory for capturing metrics on route processing times.
      */
     private boolean enableRoutePolicy = true;
 
     /**
      * Sets the level of information to capture. Possible values are all,route,context.
      *
-     * all = both context and routes.
-     * route = routes only.
-     * context = camel context only.
+     * all = both context and routes. route = routes only. context = camel context only.
      */
     private String routePolicyLevel = "all";
 
     /**
-     * Controls the name style to use for metrics.
-     * Default = uses micrometer naming convention. Legacy = uses the classic naming style (camelCase)
+     * Controls the name style to use for metrics. Default = uses micrometer naming convention. Legacy = uses the
+     * classic naming style (camelCase)
      */
     private String namingStrategy = "default";
 
     /**
-     * Set whether to enable the MicrometerMessageHistoryFactory for capturing metrics
-     * on individual route node processing times.
+     * Set whether to enable the MicrometerMessageHistoryFactory for capturing metrics on individual route node
+     * processing times.
      *
-     * Depending on the number of configured route nodes, there is the potential to create a large
-     * volume of metrics. Therefore, this option is disabled by default.
+     * Depending on the number of configured route nodes, there is the potential to create a large volume of metrics.
+     * Therefore, this option is disabled by default.
      */
     private boolean enableMessageHistory;
 
     /**
-     * Set whether to enable the MicrometerExchangeEventNotifier for capturing metrics
-     * on exchange processing times.
+     * Set whether to enable the MicrometerExchangeEventNotifier for capturing metrics on exchange processing times.
      */
     private boolean enableExchangeEventNotifier = true;
 
     /**
-     * Set whether to enable the MicrometerRouteEventNotifier for capturing metrics
-     * on the total number of routes and total number of routes running.
+     * Set whether to enable the MicrometerRouteEventNotifier for capturing metrics on the total number of routes and
+     * total number of routes running.
      */
     private boolean enableRouteEventNotifier = true;
 

@@ -25,8 +25,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class OpenApiConfiguration {
 
     /**
-     * Enables Camel Rest DSL to automatic register its OpenAPI (eg swagger doc) in Spring Boot
-     * which allows tooling such as SpringDoc to integrate with Camel.
+     * Enables Camel Rest DSL to automatic register its OpenAPI (eg swagger doc) in Spring Boot which allows tooling
+     * such as SpringDoc to integrate with Camel.
      */
     private Boolean enabled = true;
 

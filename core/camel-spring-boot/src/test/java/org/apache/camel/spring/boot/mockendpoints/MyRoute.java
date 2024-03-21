@@ -24,7 +24,6 @@ public class MyRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("direct:start")
-            .to("seda:foo");
+        from("direct:start").to("seda:foo");
     }
 }

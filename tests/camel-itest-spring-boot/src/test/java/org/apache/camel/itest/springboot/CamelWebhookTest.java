@@ -24,7 +24,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 @Disabled
 public class CamelWebhookTest extends AbstractSpringBootTestSupport {
@@ -35,9 +34,7 @@ public class CamelWebhookTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelWebhookTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelWebhookTest.class)).build();
     }
 
     @Test
@@ -45,6 +42,5 @@ public class CamelWebhookTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

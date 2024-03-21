@@ -77,7 +77,7 @@ public class CamelCloudServiceFilterAutoConfiguration implements BeanFactoryAwar
         final ConfigurableBeanFactory factory = (ConfigurableBeanFactory) beanFactory;
 
         configurationProperties.getServiceFilter().getConfigurations().entrySet().stream()
-            .forEach(entry -> registerBean(factory, entry.getKey(), entry.getValue()));
+                .forEach(entry -> registerBean(factory, entry.getKey(), entry.getValue()));
     }
 
     // *******************************
@@ -86,10 +86,7 @@ public class CamelCloudServiceFilterAutoConfiguration implements BeanFactoryAwar
 
     public static class Condition extends GroupCondition {
         public Condition() {
-            super(
-                "camel.cloud",
-                "camel.cloud.service-filter"
-            );
+            super("camel.cloud", "camel.cloud.service-filter");
         }
     }
 
@@ -97,14 +94,13 @@ public class CamelCloudServiceFilterAutoConfiguration implements BeanFactoryAwar
     // Helper
     // *******************************
 
-    private void registerBean(ConfigurableBeanFactory factory, String name, CamelCloudConfigurationProperties.ServiceFilterConfiguration configuration) {
-        factory.registerSingleton(
-            name,
-            createServiceFilter(configuration)
-        );
+    private void registerBean(ConfigurableBeanFactory factory, String name,
+            CamelCloudConfigurationProperties.ServiceFilterConfiguration configuration) {
+        factory.registerSingleton(name, createServiceFilter(configuration));
     }
 
-    private CamelCloudServiceFilter createServiceFilter(CamelCloudConfigurationProperties.ServiceFilterConfiguration configuration) {
+    private CamelCloudServiceFilter createServiceFilter(
+            CamelCloudConfigurationProperties.ServiceFilterConfiguration configuration) {
         BlacklistServiceFilter blacklist = new BlacklistServiceFilter();
 
         Map<String, List<String>> services = configuration.getBlacklist();
@@ -114,13 +110,8 @@ public class CamelCloudServiceFilterAutoConfiguration implements BeanFactoryAwar
                 String port = StringHelper.after(part, ":");
 
                 if (ObjectHelper.isNotEmpty(host) && ObjectHelper.isNotEmpty(port)) {
-                    blacklist.addServer(
-                        DefaultServiceDefinition.builder()
-                            .withName(entry.getKey())
-                            .withHost(host)
-                            .withPort(Integer.parseInt(port))
-                            .build()
-                    );
+                    blacklist.addServer(DefaultServiceDefinition.builder().withName(entry.getKey()).withHost(host)
+                            .withPort(Integer.parseInt(port)).build());
                 }
             }
         }

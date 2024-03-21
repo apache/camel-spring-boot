@@ -47,20 +47,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirUpdateIT.class,
-                FhirUpdateIT.TestConfiguration.class,
-                DefaultCamelContext.class,
-                FhirServer.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirUpdateIT.class, FhirUpdateIT.TestConfiguration.class,
+        DefaultCamelContext.class, FhirServer.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class FhirUpdateIT extends AbstractFhirTestSupport {
 
     private static final Logger LOG = LoggerFactory.getLogger(FhirUpdateIT.class);
-    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirUpdateApiMethod.class).getName();
+    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirUpdateApiMethod.class)
+            .getName();
 
     @Test
     public void testResource() throws Exception {
@@ -127,7 +121,8 @@ public class FhirUpdateIT extends AbstractFhirTestSupport {
         this.patient.setBirthDate(date);
         final Map<String, Object> headers = new HashMap<>();
         // parameter type is org.hl7.fhir.instance.model.api.IBaseResource
-        headers.put("CamelFhir.resourceAsString", this.fhirContext.newJsonParser().encodeResourceToString(this.patient));
+        headers.put("CamelFhir.resourceAsString",
+                this.fhirContext.newJsonParser().encodeResourceToString(this.patient));
         // parameter type is org.hl7.fhir.instance.model.api.IIdType
         headers.put("CamelFhir.id", this.patient.getIdElement());
         // parameter type is ca.uhn.fhir.rest.api.PreferReturnEnum
@@ -147,7 +142,8 @@ public class FhirUpdateIT extends AbstractFhirTestSupport {
         this.patient.setBirthDate(date);
         final Map<String, Object> headers = new HashMap<>();
         // parameter type is org.hl7.fhir.instance.model.api.IBaseResource
-        headers.put("CamelFhir.resourceAsString", this.fhirContext.newJsonParser().encodeResourceToString(this.patient));
+        headers.put("CamelFhir.resourceAsString",
+                this.fhirContext.newJsonParser().encodeResourceToString(this.patient));
         // parameter type is org.hl7.fhir.instance.model.api.IIdType
         headers.put("CamelFhir.stringId", this.patient.getIdElement().getIdPart());
         // parameter type is ca.uhn.fhir.rest.api.PreferReturnEnum
@@ -189,13 +185,15 @@ public class FhirUpdateIT extends AbstractFhirTestSupport {
         String url = "Patient?" + Patient.SP_RES_ID + '=' + patient.getIdPart();
         final Map<String, Object> headers = new HashMap<>();
         // parameter type is org.hl7.fhir.instance.model.api.IBaseResource
-        headers.put("CamelFhir.resourceAsString", this.fhirContext.newJsonParser().encodeResourceToString(this.patient));
+        headers.put("CamelFhir.resourceAsString",
+                this.fhirContext.newJsonParser().encodeResourceToString(this.patient));
         // parameter type is String
         headers.put("CamelFhir.url", url);
         // parameter type is ca.uhn.fhir.rest.api.PreferReturnEnum
         headers.put("CamelFhir.preferReturn", PreferReturnEnum.REPRESENTATION);
 
-        MethodOutcome result = requestBodyAndHeaders("direct://RESOURCE_BY_SEARCH_URL_AND_RESOURCE_AS_STRING", null, headers);
+        MethodOutcome result = requestBodyAndHeaders("direct://RESOURCE_BY_SEARCH_URL_AND_RESOURCE_AS_STRING", null,
+                headers);
 
         assertNotNull(result, "resource result");
         LOG.debug("resource: {}", result);
@@ -210,24 +208,19 @@ public class FhirUpdateIT extends AbstractFhirTestSupport {
                 @Override
                 public void configure() {
                     // test route for resource
-                    from("direct://RESOURCE")
-                            .to("fhir://" + PATH_PREFIX + "/resource");
+                    from("direct://RESOURCE").to("fhir://" + PATH_PREFIX + "/resource");
 
                     // test route for resource
-                    from("direct://RESOURCE_WITH_STRING_ID")
-                            .to("fhir://" + PATH_PREFIX + "/resource");
+                    from("direct://RESOURCE_WITH_STRING_ID").to("fhir://" + PATH_PREFIX + "/resource");
 
                     // test route for resource
-                    from("direct://RESOURCE_AS_STRING")
-                            .to("fhir://" + PATH_PREFIX + "/resource");
+                    from("direct://RESOURCE_AS_STRING").to("fhir://" + PATH_PREFIX + "/resource");
 
                     // test route for resource
-                    from("direct://RESOURCE_AS_STRING_WITH_STRING_ID")
-                            .to("fhir://" + PATH_PREFIX + "/resource");
+                    from("direct://RESOURCE_AS_STRING_WITH_STRING_ID").to("fhir://" + PATH_PREFIX + "/resource");
 
                     // test route for resourceBySearchUrl
-                    from("direct://RESOURCE_BY_SEARCH_URL")
-                            .to("fhir://" + PATH_PREFIX + "/resourceBySearchUrl");
+                    from("direct://RESOURCE_BY_SEARCH_URL").to("fhir://" + PATH_PREFIX + "/resourceBySearchUrl");
 
                     // test route for resourceBySearchUrl
                     from("direct://RESOURCE_BY_SEARCH_URL_AND_RESOURCE_AS_STRING")

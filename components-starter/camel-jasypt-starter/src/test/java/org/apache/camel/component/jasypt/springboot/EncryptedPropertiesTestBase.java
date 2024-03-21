@@ -32,7 +32,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public abstract class EncryptedPropertiesTestBase {
 
-
     @EndpointInject(MOCK_URI)
     protected MockEndpoint mock;
 
@@ -41,7 +40,6 @@ public abstract class EncryptedPropertiesTestBase {
 
     @Autowired
     protected ApplicationContext context;
-
 
     @Test
     public void testUnencryptedPropsInsideCamelContext() {
@@ -53,12 +51,10 @@ public abstract class EncryptedPropertiesTestBase {
         testEncryption(START_URI_TEST_UNENCRYPTED_PROPS_OUT_CC, "unEncrYpteD");
     }
 
-
-    public void testEncryption(String uri, String expected){
-        Object o =  producer.sendBody(uri, InOut,"Hi from Camel!");
+    public void testEncryption(String uri, String expected) {
+        Object o = producer.sendBody(uri, InOut, "Hi from Camel!");
         assertEquals(expected, mock.assertExchangeReceived(0).getIn().getBody());
         mock.reset();
     }
-
 
 }

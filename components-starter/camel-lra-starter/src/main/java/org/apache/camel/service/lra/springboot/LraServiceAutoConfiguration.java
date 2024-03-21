@@ -32,10 +32,10 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
-@Conditional({ConditionalOnCamelContextAndAutoConfigurationBeans.class,
-        LraServiceAutoConfiguration.GroupConditions.class})
+@Conditional({ ConditionalOnCamelContextAndAutoConfigurationBeans.class,
+        LraServiceAutoConfiguration.GroupConditions.class })
 @AutoConfigureAfter(CamelAutoConfiguration.class)
-@EnableConfigurationProperties({LraServiceConfiguration.class})
+@EnableConfigurationProperties({ LraServiceConfiguration.class })
 public class LraServiceAutoConfiguration {
 
     @Autowired

@@ -46,13 +46,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                Ddb2UpdateItemTest.class,
-                Ddb2UpdateItemTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, Ddb2UpdateItemTest.class,
+        Ddb2UpdateItemTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class Ddb2UpdateItemTest extends BaseDdb2 {
 
@@ -92,9 +87,7 @@ public class Ddb2UpdateItemTest extends BaseDdb2 {
         HashMap<String, AttributeValueUpdate> attributeMapUpdated = new HashMap<String, AttributeValueUpdate>();
 
         attributeMapUpdated.put("secondary_attribute", AttributeValueUpdate.builder()
-                .value(AttributeValue.builder().s("new").build())
-                .action(AttributeAction.PUT)
-                .build());
+                .value(AttributeValue.builder().s("new").build()).action(AttributeAction.PUT).build());
 
         exchange = template.send("direct:start", new Processor() {
             public void process(Exchange exchange) {
@@ -122,10 +115,9 @@ public class Ddb2UpdateItemTest extends BaseDdb2 {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:start").to(
-                            "aws2-ddb://" + tableName + "?keyAttributeName=" + attributeName + "&keyAttributeType=" + KeyType.HASH
-                                    + "&keyScalarType=" + ScalarAttributeType.S
-                                    + "&readCapacity=1&writeCapacity=1");
+                    from("direct:start").to("aws2-ddb://" + tableName + "?keyAttributeName=" + attributeName
+                            + "&keyAttributeType=" + KeyType.HASH + "&keyScalarType=" + ScalarAttributeType.S
+                            + "&readCapacity=1&writeCapacity=1");
                 }
             };
         }

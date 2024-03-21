@@ -39,7 +39,7 @@ import org.springframework.context.annotation.Lazy;
 @ConditionalOnBean(type = "org.apache.camel.spring.boot.CamelAutoConfiguration")
 @AutoConfigureAfter(name = "org.apache.camel.spring.boot.CamelAutoConfiguration")
 @ConditionalOnWebApplication
-@EnableConfigurationProperties({ServletMappingConfiguration.class, MultipartProperties.class})
+@EnableConfigurationProperties({ ServletMappingConfiguration.class, MultipartProperties.class })
 public class ServletMappingAutoConfiguration {
 
     /**
@@ -56,13 +56,13 @@ public class ServletMappingAutoConfiguration {
      */
     @Bean
     ServletRegistrationBean camelServletRegistrationBean(CamelHttpTransportServlet servlet,
-                                                         ServletMappingConfiguration config, MultipartProperties multipartProperties) {
+            ServletMappingConfiguration config, MultipartProperties multipartProperties) {
         ServletRegistrationBean mapping = new ServletRegistrationBean();
         mapping.setServlet(servlet);
         mapping.addUrlMappings(config.getContextPath());
         mapping.setName(config.getServletName());
         mapping.setLoadOnStartup(1);
-        if (multipartProperties != null && multipartProperties.getEnabled()){
+        if (multipartProperties != null && multipartProperties.getEnabled()) {
             mapping.setMultipartConfig(multipartProperties.createMultipartConfig());
         }
         return mapping;

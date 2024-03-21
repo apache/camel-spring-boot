@@ -31,16 +31,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletComponentTest.class,
-    }
-)
-
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletComponentTest.class, })
 
 public class KameletComponentTest {
 
@@ -51,16 +44,11 @@ public class KameletComponentTest {
     public void testComponent() {
         KameletComponent component = context.getComponent(Kamelet.SCHEME, KameletComponent.class);
 
-        PropertyBindingSupport.build()
-                .withIgnoreCase(true)
-                .withReflection(false)
-                .withRemoveParameters(false)
-                .withCamelContext(context)
-                .withTarget(component)
+        PropertyBindingSupport.build().withIgnoreCase(true).withReflection(false).withRemoveParameters(false)
+                .withCamelContext(context).withTarget(component)
                 .withConfigurer(component.getComponentPropertyConfigurer())
-                .withProperties(mapOf(
-                        "template-properties[myTemplate].foo", "bar",
-                        "route-properties[myRoute].foo", "baz"))
+                .withProperties(
+                        mapOf("template-properties[myTemplate].foo", "bar", "route-properties[myRoute].foo", "baz"))
                 .bind();
 
         assertThat(component.getTemplateProperties()).isNotEmpty();

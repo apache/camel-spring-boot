@@ -75,8 +75,7 @@ public class CamelCloudConfigurationProperties {
     public class ServiceCall {
 
         /**
-         * The uri of the endpoint to send to.
-         * The uri can be dynamic computed using the simple language expression.
+         * The uri of the endpoint to send to. The uri can be dynamic computed using the simple language expression.
          */
         private String uri;
 

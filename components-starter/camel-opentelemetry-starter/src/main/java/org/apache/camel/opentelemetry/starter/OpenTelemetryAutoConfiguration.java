@@ -42,7 +42,7 @@ public class OpenTelemetryAutoConfiguration {
     // Camel handles the lifecycle of this bean
     @ConditionalOnMissingBean(OpenTelemetryTracer.class)
     OpenTelemetryTracer openTelemetryEventNotifier(CamelContext camelContext,
-                                                 OpenTelemetryConfigurationProperties config) {
+            OpenTelemetryConfigurationProperties config) {
         OpenTelemetryTracer ottracer = new OpenTelemetryTracer();
         if (tracer != null) {
             ottracer.setTracer(tracer);

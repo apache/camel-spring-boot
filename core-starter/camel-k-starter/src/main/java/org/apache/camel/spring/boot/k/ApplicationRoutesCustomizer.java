@@ -41,11 +41,9 @@ public class ApplicationRoutesCustomizer implements CamelContextCustomizer {
         this.config = config;
     }
 
-
     @Override
     public void configure(CamelContext camelContext) {
-        camelContext.getCamelContextExtension()
-                .getContextPlugin(Model.class)
+        camelContext.getCamelContextExtension().getContextPlugin(Model.class)
                 .setModelReifierFactory(new ApplicationModelReifierFactory(config));
     }
 
@@ -84,13 +82,12 @@ public class ApplicationRoutesCustomizer implements CamelContextCustomizer {
                 if (ObjectHelper.isNotEmpty(overrideRouteId) && !Objects.equals(overrideRouteId, id)) {
                     continue;
                 }
-                if (ObjectHelper.isNotEmpty(overrideRouteFrom) && !Objects.equals(from.getEndpointUri(), overrideRouteFrom)) {
+                if (ObjectHelper.isNotEmpty(overrideRouteFrom)
+                        && !Objects.equals(from.getEndpointUri(), overrideRouteFrom)) {
                     continue;
                 }
 
-                LOGGER.debug("Replace '{}' --> '{}' for route {}",
-                        from.getEndpointUri(),
-                        override.getInput().getWith(),
+                LOGGER.debug("Replace '{}' --> '{}' for route {}", from.getEndpointUri(), override.getInput().getWith(),
                         definition.getRouteId());
 
                 from.setUri(override.getInput().getWith());

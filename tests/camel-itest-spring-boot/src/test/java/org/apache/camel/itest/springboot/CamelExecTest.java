@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelExecTest extends AbstractSpringBootTestSupport {
 
@@ -33,9 +32,8 @@ public class CamelExecTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelExecTest.class))
-                .unitTestExclusionPattern(".*(\\.integration\\..*|IntegrationTest$|ExecJavaProcessRecipientListTest$|ExecJavaProcessTest$)")
+        return new ITestConfigBuilder().module(inferModuleName(CamelExecTest.class)).unitTestExclusionPattern(
+                ".*(\\.integration\\..*|IntegrationTest$|ExecJavaProcessRecipientListTest$|ExecJavaProcessTest$)")
                 // these tests are not written to work wit a fat jar, we just skip them
                 .build();
     }
@@ -45,6 +43,5 @@ public class CamelExecTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

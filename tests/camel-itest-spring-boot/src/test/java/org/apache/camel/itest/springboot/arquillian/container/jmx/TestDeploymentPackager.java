@@ -28,7 +28,8 @@ import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 public class TestDeploymentPackager implements DeploymentPackager {
 
     @Override
-    public Archive<?> generateDeployment(TestDeployment testDeployment, Collection<ProtocolArchiveProcessor> collection) {
+    public Archive<?> generateDeployment(TestDeployment testDeployment,
+            Collection<ProtocolArchiveProcessor> collection) {
         Archive<?> applicationArchive = testDeployment.getApplicationArchive();
         boolean isClassPath = ClassPath.isRepresentedBy(applicationArchive);
         for (Archive<?> auxiliaryArchive : testDeployment.getAuxiliaryArchives()) {

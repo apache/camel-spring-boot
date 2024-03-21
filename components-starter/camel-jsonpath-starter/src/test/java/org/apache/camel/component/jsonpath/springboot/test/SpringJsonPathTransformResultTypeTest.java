@@ -16,9 +16,7 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
-
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -26,37 +24,25 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        SpringJsonPathTransformResultTypeTest.class
-    },
-    properties = {
-        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringJsonPathTransformResultTypeTest.xml"}
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SpringJsonPathTransformResultTypeTest.class }, properties = {
+        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringJsonPathTransformResultTypeTest.xml" }
 
 )
 public class SpringJsonPathTransformResultTypeTest {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:price")
     MockEndpoint mock;
 
-    
-    
-
-    
     @Test
     public void testPriceResultType() throws Exception {
         mock.expectedMessageCount(4);

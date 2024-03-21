@@ -41,22 +41,16 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SftpConsumerLocalWorkDirectoryTest.class
-        }
-)
-//Based on SftpConsumerLocalWorkDirectoryIT
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SftpConsumerLocalWorkDirectoryTest.class })
+// Based on SftpConsumerLocalWorkDirectoryIT
 public class SftpConsumerLocalWorkDirectoryTest extends BaseSftp {
 
     @EndpointInject("mock:result")
     private MockEndpoint mock;
 
     protected String getFtpUrl() {
-        return "sftp://localhost:" + getPort() + "/" + getRootDir() + "/?password=admin"
-               + "&localWorkDirectory=" + ftpFile("lwd")
-               + "&noop=true";
+        return "sftp://localhost:" + getPort() + "/" + getRootDir() + "/?password=admin" + "&localWorkDirectory="
+                + ftpFile("lwd") + "&noop=true";
     }
 
     @BeforeEach
@@ -108,7 +102,7 @@ public class SftpConsumerLocalWorkDirectoryTest extends BaseSftp {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseFtp.TestConfiguration {
+    public class TestConfiguration extends BaseFtp.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
 

@@ -28,8 +28,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -37,42 +35,32 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        ZipFileSplitIteratorCorruptTest.class,
-        ZipFileSplitIteratorCorruptTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ZipFileSplitIteratorCorruptTest.class,
+        ZipFileSplitIteratorCorruptTest.TestConfiguration.class })
 public class ZipFileSplitIteratorCorruptTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @EndpointInject("mock:dead")
     MockEndpoint mockDead;
-    
+
     @EndpointInject("mock:end")
     MockEndpoint mockEnd;
-    
-    
+
     @Test
     public void testZipFileUnmarshal() throws Exception {
         mockDead.expectedMessageCount(1);
-        mockDead.message(0).exchangeProperty(Exchange.EXCEPTION_CAUGHT)
-                .isInstanceOf(IllegalStateException.class);
+        mockDead.message(0).exchangeProperty(Exchange.EXCEPTION_CAUGHT).isInstanceOf(IllegalStateException.class);
         mockEnd.expectedMessageCount(0);
 
         mockDead.assertIsSatisfied();
         mockEnd.assertIsSatisfied();
-    
+
     }
-    
-    
+
     // *************************************
     // Config
     // *************************************
@@ -90,17 +78,11 @@ public class ZipFileSplitIteratorCorruptTest {
 
                     errorHandler(deadLetterChannel("mock:dead"));
 
-                    from("file://src/test/resources?delay=10&fileName=corrupt.zip&noop=true")
-                            .unmarshal(zf)
-                            .split(bodyAs(Iterator.class)).streaming()
-                            .convertBodyTo(String.class)
-                            .to("mock:end")
-                            .end();
+                    from("file://src/test/resources?delay=10&fileName=corrupt.zip&noop=true").unmarshal(zf)
+                            .split(bodyAs(Iterator.class)).streaming().convertBodyTo(String.class).to("mock:end").end();
                 }
             };
         }
     }
-    
-   
 
 }

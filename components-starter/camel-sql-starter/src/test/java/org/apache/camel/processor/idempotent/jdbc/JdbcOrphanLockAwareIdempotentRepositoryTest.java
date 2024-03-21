@@ -51,7 +51,8 @@ public class JdbcOrphanLockAwareIdempotentRepositoryTest extends BaseSql {
     @BeforeAll
     public void setup() throws Exception {
         dataSource = initDb(EmbeddedDatabaseType.HSQL, "sql/idempotentWithOrphanLockRemoval.sql");
-        jdbcMessageIdRepository = new JdbcOrphanLockAwareIdempotentRepository(dataSource, APP_NAME, new DefaultCamelContext());
+        jdbcMessageIdRepository = new JdbcOrphanLockAwareIdempotentRepository(dataSource, APP_NAME,
+                new DefaultCamelContext());
         jdbcMessageIdRepository.setLockMaxAgeMillis(3000_00L);
         jdbcMessageIdRepository.setLockKeepAliveIntervalMillis(3000L);
         jdbcMessageIdRepository.doInit();
@@ -79,8 +80,8 @@ public class JdbcOrphanLockAwareIdempotentRepositoryTest extends BaseSql {
         assertTrue(jdbcMessageIdRepository.contains("FILE_4"));
         JdbcTemplate template = new JdbcTemplate(dataSource);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis() - 5 * 60 * 1000L);
-        template.update("UPDATE CAMEL_MESSAGEPROCESSED SET createdAT = ? WHERE processorName = ? AND messageId = ?", timestamp,
-                APP_NAME, "FILE_4");
+        template.update("UPDATE CAMEL_MESSAGEPROCESSED SET createdAT = ? WHERE processorName = ? AND messageId = ?",
+                timestamp, APP_NAME, "FILE_4");
 
         await().atMost(5, TimeUnit.SECONDS).until(() -> !jdbcMessageIdRepository.contains("FILE_4"));
         jdbcMessageIdRepository.keepAlive();

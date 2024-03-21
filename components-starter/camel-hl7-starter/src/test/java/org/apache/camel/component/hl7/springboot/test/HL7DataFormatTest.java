@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.hl7.springboot.test;
 
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -48,32 +47,24 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        HL7DataFormatTest.class,
-        HL7DataFormatTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, HL7DataFormatTest.class,
+        HL7DataFormatTest.TestConfiguration.class })
 public class HL7DataFormatTest extends HL7TestSupport {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:marshal")
     MockEndpoint mockMarshal;
-    
+
     @EndpointInject("mock:unmarshal")
     MockEndpoint mockUnmarshal;
-    
+
     @EndpointInject("mock:unmarshalBig5")
     MockEndpoint mockUnmarshalBig5;
 
-    
     private static final String NONE_ISO_8859_1 = "\u221a\u00c4\u221a\u00e0\u221a\u00e5\u221a\u00ed\u221a\u00f4\u2248\u00ea";
 
     private static HL7DataFormat hl7 = new HL7DataFormat();
@@ -179,7 +170,8 @@ public class HL7DataFormatTest extends HL7TestSupport {
         mockUnmarshal.reset();
         mockUnmarshal.expectedMessageCount(1);
         mockUnmarshal.message(0).body().isInstanceOf(Message.class);
-        mockUnmarshal.expectedHeaderReceived(HL7Constants.HL7_CHARSET, HL7Charset.getHL7Charset(charset).getHL7CharsetName());
+        mockUnmarshal.expectedHeaderReceived(HL7Constants.HL7_CHARSET,
+                HL7Charset.getHL7Charset(charset).getHL7CharsetName());
         mockUnmarshal.expectedHeaderReceived(Exchange.CHARSET_NAME, charset);
 
         // Message with explicit encoding in MSH-18
@@ -197,7 +189,7 @@ public class HL7DataFormatTest extends HL7TestSupport {
     @Test
     public void testUnmarshalWithImplicitBig5Charset() throws Exception {
         String charset = "Big5";
-        
+
         mockUnmarshalBig5.expectedMessageCount(1);
         mockUnmarshalBig5.message(0).body().isInstanceOf(Message.class);
         mockUnmarshalBig5.expectedHeaderReceived(HL7Constants.HL7_CHARSET, null);
@@ -236,7 +228,7 @@ public class HL7DataFormatTest extends HL7TestSupport {
             };
         }
     }
-    
+
     private static String createHL7AsString() {
         return createHL7WithCharsetAsString(null);
     }
@@ -244,7 +236,8 @@ public class HL7DataFormatTest extends HL7TestSupport {
     private static String createHL7WithCharsetAsString(HL7Charset charset) {
         String hl7Charset = charset == null ? "" : charset.getHL7CharsetName();
         String line1 = String.format(
-                "MSH|^~\\&|MYSENDER|MYSENDERAPP|MYCLIENT|MYCLIENTAPP|200612211200||QRY^A19|1234|P|2.4||||||%s", hl7Charset);
+                "MSH|^~\\&|MYSENDER|MYSENDERAPP|MYCLIENT|MYCLIENTAPP|200612211200||QRY^A19|1234|P|2.4||||||%s",
+                hl7Charset);
         String line2 = "QRD|200612211200|R|I|GetPatient|||1^RD|0101701234|DEM||";
 
         StringBuilder body = new StringBuilder();

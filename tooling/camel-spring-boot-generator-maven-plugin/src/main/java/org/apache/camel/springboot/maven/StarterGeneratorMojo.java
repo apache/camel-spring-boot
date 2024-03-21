@@ -35,8 +35,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
-@Mojo(name = "generate-starter", threadSafe = true,
-        defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
+@Mojo(name = "generate-starter", threadSafe = true, defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
 public class StarterGeneratorMojo extends AbstractMojo {
 
     /**
@@ -87,12 +86,12 @@ public class StarterGeneratorMojo extends AbstractMojo {
 
     protected void doExecute() throws Exception {
         switch (action) {
-            case "create":
-                createStarter();
-                break;
-            case "delete":
-                deleteStarter();
-                break;
+        case "create":
+            createStarter();
+            break;
+        case "delete":
+            deleteStarter();
+            break;
         }
     }
 
@@ -114,10 +113,9 @@ public class StarterGeneratorMojo extends AbstractMojo {
                 modulesEnd = i;
         }
         lines = concat(lines.subList(0, modulesStart).stream(),
-                       lines.subList(modulesStart, modulesEnd).stream()
-                            .filter(s -> !s.contains("<module>camel-" + componentName + "-starter</module>")),
-                       lines.subList(modulesEnd, lines.size()).stream())
-                 .collect(Collectors.toList());
+                lines.subList(modulesStart, modulesEnd).stream()
+                        .filter(s -> !s.contains("<module>camel-" + componentName + "-starter</module>")),
+                lines.subList(modulesEnd, lines.size()).stream()).collect(Collectors.toList());
         Files.write(parent, lines);
     }
 
@@ -134,10 +132,8 @@ public class StarterGeneratorMojo extends AbstractMojo {
         if (!directory.mkdirs()) {
             throw new MojoFailureException("Unable to create directory: " + directory);
         }
-        Files.write(new File(directory, "pom.xml").toPath(),
-                Files.lines(sourcePom.toPath())
-                        .map(s -> s.replaceAll("%NAME%", componentName))
-                        .collect(Collectors.toList()));
+        Files.write(new File(directory, "pom.xml").toPath(), Files.lines(sourcePom.toPath())
+                .map(s -> s.replaceAll("%NAME%", componentName)).collect(Collectors.toList()));
         Path parent = new File(startersDir, "pom.xml").toPath();
         List<String> lines = Files.readAllLines(parent);
         int modulesStart = -1, modulesEnd = -1;
@@ -149,11 +145,9 @@ public class StarterGeneratorMojo extends AbstractMojo {
                 modulesEnd = i;
         }
         lines = concat(lines.subList(0, modulesStart).stream(),
-                       Stream.concat(lines.subList(modulesStart, modulesEnd).stream(),
-                                     Stream.of("    <module>camel-" + componentName + "-starter</module>"))
-                             .sorted().distinct(),
-                       lines.subList(modulesEnd, lines.size()).stream())
-                           .collect(Collectors.toList());
+                Stream.concat(lines.subList(modulesStart, modulesEnd).stream(),
+                        Stream.of("    <module>camel-" + componentName + "-starter</module>")).sorted().distinct(),
+                lines.subList(modulesEnd, lines.size()).stream()).collect(Collectors.toList());
         Files.write(parent, lines);
     }
 

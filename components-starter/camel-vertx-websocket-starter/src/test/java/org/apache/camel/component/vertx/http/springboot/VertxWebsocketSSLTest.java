@@ -40,25 +40,16 @@ import org.springframework.test.annotation.DirtiesContext;
 @CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                VertxWebsocketSSLTest.TestConfiguration.class
-        },
-        properties = {
-                "debug=false",
+@SpringBootTest(classes = { CamelAutoConfiguration.class,
+        VertxWebsocketSSLTest.TestConfiguration.class }, properties = { "debug=false",
                 // camel.ssl.config
-                "camel.ssl.config.cert-alias=web",
-                "camel.ssl.config.key-managers.key-password=changeit",
+                "camel.ssl.config.cert-alias=web", "camel.ssl.config.key-managers.key-password=changeit",
                 "camel.ssl.config.key-managers.key-store.resource=/keystore.p12",
                 "camel.ssl.config.key-managers.key-store.password=changeit",
                 "camel.ssl.config.key-managers.key-store.type=PKCS12",
                 // camel.ssl
                 "camel.ssl.trust-managers.key-store.resource=/cacerts",
-                "camel.ssl.trust-managers.key-store.password=changeit",
-                "camel.ssl.trust-managers.key-store.type=jks"
-        }
-)
+                "camel.ssl.trust-managers.key-store.password=changeit", "camel.ssl.trust-managers.key-store.type=jks" })
 public class VertxWebsocketSSLTest {
     private static int port;
 
@@ -72,16 +63,16 @@ public class VertxWebsocketSSLTest {
 
     @Test
     void testConsumeAsSecureClient() throws Exception {
-            MockEndpoint mockEndpoint = camelContext.getEndpoint("mock:result", MockEndpoint.class);
-            mockEndpoint.expectedMessageCount(5);
+        MockEndpoint mockEndpoint = camelContext.getEndpoint("mock:result", MockEndpoint.class);
+        mockEndpoint.expectedMessageCount(5);
 
-            ProducerTemplate template = camelContext.createProducerTemplate();
-            String uri = "vertx-websocket:wss:localhost:" + port + "/echo?sslContextParameters=#clientSSLParameters";
-            for (int i = 1; i <= 5; i++) {
-                template.sendBody(uri, "Hello World " + i);
-            }
+        ProducerTemplate template = camelContext.createProducerTemplate();
+        String uri = "vertx-websocket:wss:localhost:" + port + "/echo?sslContextParameters=#clientSSLParameters";
+        for (int i = 1; i <= 5; i++) {
+            template.sendBody(uri, "Hello World " + i);
+        }
 
-            mockEndpoint.assertIsSatisfied();
+        mockEndpoint.assertIsSatisfied();
     }
 
     @Configuration
@@ -106,9 +97,8 @@ public class VertxWebsocketSSLTest {
                             .toF("vertx-websocket:localhost:%d/echo?sendToAll=true&sslContextParameters=#clientSSLParameters",
                                     port);
 
-                    fromF("vertx-websocket:localhost:%d/echo?consumeAsClient=true&sslContextParameters=#clientSSLParameters", port)
-                            .log("Client consumer received message: ${body}")
-                            .to("mock:result");
+                    fromF("vertx-websocket:localhost:%d/echo?consumeAsClient=true&sslContextParameters=#clientSSLParameters",
+                            port).log("Client consumer received message: ${body}").to("mock:result");
                 }
             };
         }

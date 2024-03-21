@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import java.util.List;
 
 import org.apache.camel.CamelContext;
@@ -31,8 +29,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -42,32 +38,26 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        StatefulQuartzRouteTest.class,
-        StatefulQuartzRouteTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, StatefulQuartzRouteTest.class,
+        StatefulQuartzRouteTest.TestConfiguration.class })
 public class StatefulQuartzRouteTest extends BaseQuartzTest {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
-    
+
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint resultEndpoint;
-    
+
     @Test
     public void testQuartz() throws Exception {
-        
+
         resultEndpoint.expectedMessageCount(2);
         resultEndpoint.message(0).header("triggerName").isEqualTo("myTimerName");
         resultEndpoint.message(0).header("triggerGroup").isEqualTo("myGroup");
@@ -82,7 +72,6 @@ public class StatefulQuartzRouteTest extends BaseQuartzTest {
         }
     }
 
-    
     // *************************************
     // Config
     // *************************************
@@ -103,7 +92,5 @@ public class StatefulQuartzRouteTest extends BaseQuartzTest {
             };
         }
     }
-    
-   
 
 }

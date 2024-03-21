@@ -30,18 +30,12 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileProducerFileExistOverrideTest.class,
-                FileProducerFileExistOverrideTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileProducerFileExistOverrideTest.class,
+        FileProducerFileExistOverrideTest.TestConfiguration.class })
 public class FileProducerFileExistOverrideTest extends BaseFile {
 
     @EndpointInject("mock:result")
     private MockEndpoint resultEndpoint;
-
 
     @Test
     public void testOverride() throws Exception {

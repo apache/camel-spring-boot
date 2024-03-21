@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.hl7.springboot.test;
 
-
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
@@ -35,26 +33,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        HL7MLLPCodecPlainStringTest.class,
-        HL7MLLPCodecPlainStringTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, HL7MLLPCodecPlainStringTest.class,
+        HL7MLLPCodecPlainStringTest.TestConfiguration.class })
 public class HL7MLLPCodecPlainStringTest extends HL7TestSupport {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mock;
 
-    
     @Bean("hl7codec")
     private HL7MLLPCodec addCodec() throws Exception {
 
@@ -70,8 +60,8 @@ public class HL7MLLPCodecPlainStringTest extends HL7TestSupport {
         mock.expectedBodiesReceived("Bye World");
 
         // send plain hello world as String
-        Object out = template.requestBody("mina:tcp://127.0.0.1:" + getPort() + "?sync=true&codec=#hl7codec", "Hello World",
-                String.class);
+        Object out = template.requestBody("mina:tcp://127.0.0.1:" + getPort() + "?sync=true&codec=#hl7codec",
+                "Hello World", String.class);
 
         mock.assertIsSatisfied();
 
@@ -105,6 +95,5 @@ public class HL7MLLPCodecPlainStringTest extends HL7TestSupport {
             };
         }
     }
-    
-    
+
 }

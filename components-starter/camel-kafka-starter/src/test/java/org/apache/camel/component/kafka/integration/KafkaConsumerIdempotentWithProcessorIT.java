@@ -35,20 +35,13 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
-                KafkaConsumerIdempotentWithProcessorIT.class,
-                KafkaConsumerIdempotentWithProcessorIT.TestConfiguration.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
+        KafkaConsumerIdempotentWithProcessorIT.class, KafkaConsumerIdempotentWithProcessorIT.TestConfiguration.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class KafkaConsumerIdempotentWithProcessorIT extends KafkaConsumerIdempotentTestSupport {
     public static final String TOPIC = "testidemp3";
 
-    private final String from = "kafka:" + TOPIC
-            + "?groupId=group2&autoOffsetReset=earliest"
+    private final String from = "kafka:" + TOPIC + "?groupId=group2&autoOffsetReset=earliest"
             + "&keyDeserializer=org.apache.kafka.common.serialization.StringDeserializer"
             + "&valueDeserializer=org.apache.kafka.common.serialization.StringDeserializer"
             + "&autoCommitIntervalMs=1000&sessionTimeoutMs=30000&autoCommitEnable=true"
@@ -83,23 +76,19 @@ public class KafkaConsumerIdempotentWithProcessorIT extends KafkaConsumerIdempot
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from(from).routeId("idemp-with-prop")
-                            .process(exchange -> {
-                                byte[] id = exchange.getIn().getHeader("id", byte[].class);
+                    from(from).routeId("idemp-with-prop").process(exchange -> {
+                        byte[] id = exchange.getIn().getHeader("id", byte[].class);
 
-                                BigInteger bi = new BigInteger(id);
+                        BigInteger bi = new BigInteger(id);
 
-                                exchange.getIn().setHeader("id", String.valueOf(bi.longValue()));
-                            })
-                            .idempotentConsumer(header("id"))
-                            .idempotentRepository("kafkaIdempotentRepository")
-                            .to(to);
+                        exchange.getIn().setHeader("id", String.valueOf(bi.longValue()));
+                    }).idempotentConsumer(header("id")).idempotentRepository("kafkaIdempotentRepository").to(to);
                 }
             };
         }
 
         @Bean("kafkaIdempotentRepository")
-        public KafkaIdempotentRepository createKafkaIdempotentRepository(){
+        public KafkaIdempotentRepository createKafkaIdempotentRepository() {
             return new KafkaIdempotentRepository("TEST_IDEMPOTENT", getBootstrapServers());
         }
     }

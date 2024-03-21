@@ -16,8 +16,6 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -32,34 +30,26 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        XQueryRecipientListTest.class,
-        XQueryRecipientListTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, XQueryRecipientListTest.class,
+        XQueryRecipientListTest.TestConfiguration.class })
 public class XQueryRecipientListTest {
-    
-    
+
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
 
     @EndpointInject("mock:foo.London")
-    protected MockEndpoint londonEndpoint;   
-    
+    protected MockEndpoint londonEndpoint;
+
     @EndpointInject("mock:foo.Tampa")
-    protected MockEndpoint tampaEndpoint;   
-    
+    protected MockEndpoint tampaEndpoint;
+
     @Test
     public void testSendLondonMessage() throws Exception {
         MockEndpoint.resetMocks(context);
@@ -68,7 +58,7 @@ public class XQueryRecipientListTest {
 
         template.sendBody("direct:start", "<person name='James' city='London'/>");
         MockEndpoint.assertIsSatisfied(context);
-        
+
     }
 
     @Test
@@ -81,7 +71,7 @@ public class XQueryRecipientListTest {
 
         MockEndpoint.assertIsSatisfied(context);
     }
-    
+
     // *************************************
     // Config
     // *************************************

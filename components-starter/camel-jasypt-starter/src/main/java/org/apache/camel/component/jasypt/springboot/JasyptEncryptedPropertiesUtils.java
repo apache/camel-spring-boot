@@ -36,26 +36,19 @@ public class JasyptEncryptedPropertiesUtils {
     private static final String SYSTEM_PROPERTIES_PREFIX = "sys:";
 
     /**
-     *  Algorithms that mandatory require initialization vector
+     * Algorithms that mandatory require initialization vector
      */
-    static final Set<String> ALGORITHMS_THAT_REQUIRE_IV = new HashSet<>(
-            Arrays.asList(
-                    "PBEWITHHMACSHA1ANDAES_128",
-                    "PBEWITHHMACSHA1ANDAES_256",
-                    "PBEWITHHMACSHA224ANDAES_128",
-                    "PBEWITHHMACSHA224ANDAES_256",
-                    "PBEWITHHMACSHA256ANDAES_128",
-                    "PBEWITHHMACSHA256ANDAES_256",
-                    "PBEWITHHMACSHA384ANDAES_128",
-                    "PBEWITHHMACSHA384ANDAES_256",
-                    "PBEWITHHMACSHA512ANDAES_128",
-                    "PBEWITHHMACSHA512ANDAES_256"
-            )
-    );
+    static final Set<String> ALGORITHMS_THAT_REQUIRE_IV = new HashSet<>(Arrays.asList("PBEWITHHMACSHA1ANDAES_128",
+            "PBEWITHHMACSHA1ANDAES_256", "PBEWITHHMACSHA224ANDAES_128", "PBEWITHHMACSHA224ANDAES_256",
+            "PBEWITHHMACSHA256ANDAES_128", "PBEWITHHMACSHA256ANDAES_256", "PBEWITHHMACSHA384ANDAES_128",
+            "PBEWITHHMACSHA384ANDAES_256", "PBEWITHHMACSHA512ANDAES_128", "PBEWITHHMACSHA512ANDAES_256"));
 
     /**
      * test if algorithm requires an initialization vector
-     * @param algorithm the algorithm to test
+     *
+     * @param algorithm
+     *            the algorithm to test
+     *
      * @return true if the algorithm requires initialization vector, false otherwise
      */
     static boolean isIVNeeded(String algorithm) {
@@ -67,7 +60,10 @@ public class JasyptEncryptedPropertiesUtils {
 
     /**
      * Checks if a CharSequence is empty (""), null or whitespace only.
-     * @param cs  the CharSequence to check, may be null
+     *
+     * @param cs
+     *            the CharSequence to check, may be null
+     *
      * @return true if the CharSequence is null, empty or whitespace only
      */
     static boolean isBlank(final CharSequence cs) {
@@ -85,15 +81,18 @@ public class JasyptEncryptedPropertiesUtils {
 
     /**
      * Checks if a CharSequence is not empty (""), not null or not whitespace only.
-     * @param cs the CharSequence to check, may be null
+     *
+     * @param cs
+     *            the CharSequence to check, may be null
+     *
      * @return true if the CharSequence is not null, not empty or not whitespace only
      */
     static boolean isNotBlank(final CharSequence cs) {
         return !isBlank(cs);
     }
 
-
-    static void parsePassword(EnvironmentStringPBEConfig environmentStringPBEConfig, JasyptEncryptedPropertiesConfiguration configuration) {
+    static void parsePassword(EnvironmentStringPBEConfig environmentStringPBEConfig,
+            JasyptEncryptedPropertiesConfiguration configuration) {
         String passwordReference = configuration.getPassword();
         if (isNotEmpty(passwordReference) && passwordReference.startsWith(SYSTEM_ENVIRONMENT_PREFIX)) {
             environmentStringPBEConfig.setPasswordEnvName(after(passwordReference, SYSTEM_ENVIRONMENT_PREFIX));
@@ -111,8 +110,9 @@ public class JasyptEncryptedPropertiesUtils {
         String algorithm = configuration.getAlgorithm();
         if (isBlank(ivGeneratorClassName)) {
             if (isIVNeeded(algorithm)) {
-                return configuration.getRandomIvGeneratorAlgorithm() != null ?
-                        new RandomIvGenerator(configuration.getRandomIvGeneratorAlgorithm()) : new RandomIvGenerator();
+                return configuration.getRandomIvGeneratorAlgorithm() != null
+                        ? new RandomIvGenerator(configuration.getRandomIvGeneratorAlgorithm())
+                        : new RandomIvGenerator();
             } else {
                 return new NoIvGenerator();
             }
@@ -123,7 +123,10 @@ public class JasyptEncryptedPropertiesUtils {
 
     /**
      * search and load the class identified by className parameter
-     * @param className fully qualified class name to be loaded
+     *
+     * @param className
+     *            fully qualified class name to be loaded
+     *
      * @return a new instance of type className
      */
     static <T> T loadClass(String className) {

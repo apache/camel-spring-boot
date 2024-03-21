@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.hl7.springboot.test;
 
-
 import static org.apache.camel.component.hl7.HL7.convertLFToCR;
 
 import org.apache.camel.ProducerTemplate;
@@ -26,8 +25,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -35,24 +32,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        ConvertLineFeedTest.class,
-        ConvertLineFeedTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ConvertLineFeedTest.class,
+        ConvertLineFeedTest.TestConfiguration.class })
 public class ConvertLineFeedTest extends HL7TestSupport {
 
-    
     @Autowired
     ProducerTemplate template;
 
-    
     @Test
     public void testConvertLineFeed() throws Exception {
         String s = "line1\nline2\rline3";
@@ -77,5 +65,5 @@ public class ConvertLineFeedTest extends HL7TestSupport {
             };
         }
     }
-    
+
 }

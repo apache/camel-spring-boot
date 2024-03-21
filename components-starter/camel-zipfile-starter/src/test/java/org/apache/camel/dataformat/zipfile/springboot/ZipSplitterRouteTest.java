@@ -16,8 +16,6 @@
  */
 package org.apache.camel.dataformat.zipfile.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -28,7 +26,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -36,40 +33,28 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        ZipSplitterRouteTest.class,
-        ZipSplitterRouteTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ZipSplitterRouteTest.class,
+        ZipSplitterRouteTest.TestConfiguration.class })
 public class ZipSplitterRouteTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
-   
-    
+
     @EndpointInject("mock:processZipEntry")
     MockEndpoint processZipEntry;
-    
-    
-    
 
     @Test
     public void testSplitter() throws InterruptedException {
-        
+
         processZipEntry.expectedBodiesReceivedInAnyOrder("chau", "hi", "hola", "another_chiau", "another_hi");
         processZipEntry.assertIsSatisfied();
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -84,17 +69,12 @@ public class ZipSplitterRouteTest {
                 public void configure() {
                     // Unzip file and Split it according to FileEntry
                     from("file:src/test/resources/org/apache/camel/dataformat/zipfile/data?delay=1000&noop=true")
-                            .log("Start processing big file: ${header.CamelFileName}")
-                            .split(new ZipSplitter()).streaming()
-                            .to("log:entry")
-                            .convertBodyTo(String.class).to("mock:processZipEntry")
-                            .end()
+                            .log("Start processing big file: ${header.CamelFileName}").split(new ZipSplitter())
+                            .streaming().to("log:entry").convertBodyTo(String.class).to("mock:processZipEntry").end()
                             .log("Done processing big file: ${header.CamelFileName}");
                 }
             };
         }
     }
-    
-   
 
 }

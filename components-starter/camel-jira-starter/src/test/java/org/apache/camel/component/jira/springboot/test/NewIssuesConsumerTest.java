@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jira.springboot.test;
 
-
 import static org.apache.camel.component.jira.JiraConstants.JIRA_REST_CLIENT_FACTORY;
 import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.PROJECT;
 import static org.apache.camel.component.jira.springboot.test.Utils.createIssue;
@@ -50,7 +49,6 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-
 import io.atlassian.util.concurrent.Promise;
 import io.atlassian.util.concurrent.Promises;
 
@@ -61,55 +59,46 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
-
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        NewIssuesConsumerTest.class,
-        NewIssuesConsumerTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, NewIssuesConsumerTest.class,
+        NewIssuesConsumerTest.TestConfiguration.class })
 
 public class NewIssuesConsumerTest {
 
     @Autowired
     private CamelContext camelContext;
-    
 
-    
     @Autowired
     @Produce("direct:start")
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mockResult;
-    
+
     static JiraRestClient jiraClient;
-    
+
     static JiraRestClientFactory jiraRestClientFactory;
-    
+
     static IssueRestClient issueRestClient;
 
     static SearchRestClient searchRestClient;
-    
+
     static List<Issue> issues = new ArrayList<>();
-    
+
     @BeforeAll
     public static void beforeAll() {
         issues.add(createIssue(1L));
         issues.add(createIssue(2L));
         issues.add(createIssue(3L));
     }
-    
+
     @Bean
     CamelContextConfiguration contextConfiguration() {
         return new CamelContextConfiguration() {
             @Override
             public void beforeApplicationStart(CamelContext context) {
-                //get chance to mock camelContext/Registry
+                // get chance to mock camelContext/Registry
                 jiraRestClientFactory = mock(JiraRestClientFactory.class);
                 jiraClient = mock(JiraRestClient.class);
                 issueRestClient = mock(IssueRestClient.class);
@@ -118,18 +107,19 @@ public class NewIssuesConsumerTest {
                 Promise<SearchResult> promiseSearchResult = Promises.promise(result);
 
                 when(jiraClient.getSearchClient()).thenReturn(searchRestClient);
-                when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any())).thenReturn(jiraClient);
+                when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any()))
+                        .thenReturn(jiraClient);
                 when(searchRestClient.searchJql(any(), any(), any(), any())).thenReturn(promiseSearchResult);
                 camelContext.getRegistry().bind(JIRA_REST_CLIENT_FACTORY, jiraRestClientFactory);
             }
 
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here                
+                // do nothing here
             }
         };
     }
-    
+
     @Test
     public void emptyAtStartupTest() throws Exception {
         mockResult.expectedMessageCount(0);
@@ -179,27 +169,20 @@ public class NewIssuesConsumerTest {
         mockResult.assertIsSatisfied();
     }
 
-    
     @Configuration
     public class TestConfiguration {
-        
-        
 
         @Bean
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
-                public void configure() throws IOException  {
-                    from("jira://newIssues?jiraUrl=" + JiraTestConstants.getJiraCredentials() + "&jql=project=" + PROJECT + "&delay=5000")
-                            .to(mockResult);
+                public void configure() throws IOException {
+                    from("jira://newIssues?jiraUrl=" + JiraTestConstants.getJiraCredentials() + "&jql=project="
+                            + PROJECT + "&delay=5000").to(mockResult);
                 }
             };
         }
-        
-      
+
     }
-    
-    
-    
-    
+
 }

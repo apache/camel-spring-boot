@@ -26,10 +26,10 @@ public class CacheConfigurationCustomizerConfiguration {
     private boolean enabled = true;
 
     /**
-     * Configure if the cache configurations have be added or they have to replace those already configured on the component.
+     * Configure if the cache configurations have be added or they have to replace those already configured on the
+     * component.
      */
     private Mode mode = Mode.APPEND;
-
 
     public boolean isEnabled() {
         return enabled;
@@ -48,7 +48,6 @@ public class CacheConfigurationCustomizerConfiguration {
     }
 
     public enum Mode {
-        REPLACE,
-        APPEND
+        REPLACE, APPEND
     }
 }

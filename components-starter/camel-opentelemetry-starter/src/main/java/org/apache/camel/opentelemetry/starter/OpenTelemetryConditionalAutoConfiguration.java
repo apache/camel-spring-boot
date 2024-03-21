@@ -21,8 +21,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
- * A configuration controller to enable OpenTracing via the configuration property.
- * Useful to bootstrap OpenTracing when not using the {@link CamelOpenTelemetry} annotation.
+ * A configuration controller to enable OpenTracing via the configuration property. Useful to bootstrap OpenTracing when
+ * not using the {@link CamelOpenTelemetry} annotation.
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(value = "camel.opentelemetry.enabled")

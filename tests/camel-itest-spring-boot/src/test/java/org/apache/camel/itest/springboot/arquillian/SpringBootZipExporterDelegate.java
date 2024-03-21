@@ -24,9 +24,8 @@ import org.jboss.shrinkwrap.api.Node;
 import org.jboss.shrinkwrap.impl.base.exporter.AbstractExporterDelegate;
 
 /**
- * A spring-boot compatible zip exporter delegate.
- * Uses {@link SpringBootZipOnDemandInputStream} not to compress entries for spring-boot
- * nested jar structure compatibility.
+ * A spring-boot compatible zip exporter delegate. Uses {@link SpringBootZipOnDemandInputStream} not to compress entries
+ * for spring-boot nested jar structure compatibility.
  */
 public class SpringBootZipExporterDelegate extends AbstractExporterDelegate<InputStream> {
 

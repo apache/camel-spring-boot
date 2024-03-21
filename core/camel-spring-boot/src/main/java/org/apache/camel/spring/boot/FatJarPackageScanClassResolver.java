@@ -35,8 +35,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * An implementation of the {@code org.apache.camel.spi.PackageScanClassResolver} that is able to
- * scan spring-boot fat jars to find classes contained also in nested jars.
+ * An implementation of the {@code org.apache.camel.spi.PackageScanClassResolver} that is able to scan spring-boot fat
+ * jars to find classes contained also in nested jars.
  */
 public class FatJarPackageScanClassResolver extends DefaultPackageScanClassResolver {
     private static final Logger LOG = LoggerFactory.getLogger(FatJarPackageScanClassResolver.class);
@@ -78,7 +78,8 @@ public class FatJarPackageScanClassResolver extends DefaultPackageScanClassResol
         return super.parseUrlPath(url);
     }
 
-    protected List<String> doLoadJarClassEntries(InputStream stream, String urlPath, boolean inspectNestedJars, boolean closeStream) {
+    protected List<String> doLoadJarClassEntries(InputStream stream, String urlPath, boolean inspectNestedJars,
+            boolean closeStream) {
         List<String> entries = new ArrayList<>();
 
         JarInputStream jarStream = null;
@@ -101,7 +102,8 @@ public class FatJarPackageScanClassResolver extends DefaultPackageScanClassResol
                 }
             }
         } catch (IOException ioe) {
-            LOG.warn("Cannot search jar file '" + urlPath + " due to an IOException: " + ioe.getMessage() + ". This exception is ignored.", ioe);
+            LOG.warn("Cannot search jar file '" + urlPath + " due to an IOException: " + ioe.getMessage()
+                    + ". This exception is ignored.", ioe);
         } finally {
             if (closeStream) {
                 // stream is left open when scanning nested jars, otherwise the fat jar stream gets closed
@@ -114,7 +116,8 @@ public class FatJarPackageScanClassResolver extends DefaultPackageScanClassResol
 
     private boolean isSpringBootNestedJar(String name) {
         // Supporting both versions of the packaging model
-        return name.endsWith(".jar") && (name.startsWith(SPRING_BOOT_CLASSIC_LIB_ROOT) || name.startsWith(SPRING_BOOT_BOOT_INF_LIB_ROOT) || name.startsWith(SPRING_BOOT_WEB_INF_LIB_ROOT));
+        return name.endsWith(".jar") && (name.startsWith(SPRING_BOOT_CLASSIC_LIB_ROOT)
+                || name.startsWith(SPRING_BOOT_BOOT_INF_LIB_ROOT) || name.startsWith(SPRING_BOOT_WEB_INF_LIB_ROOT));
     }
 
     private String cleanupSpringBootClassName(String name) {

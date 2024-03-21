@@ -31,20 +31,14 @@ import java.util.concurrent.TimeUnit;
 
 import static org.awaitility.Awaitility.await;
 
-
 /**
  *
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileProducerOverruleToDifferentFolderTest.class,
-                FileProducerOverruleToDifferentFolderTest.TestConfiguration.class
-        }
-)
-//Based on FileProducerCharsetUTFtoISOTest
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileProducerOverruleToDifferentFolderTest.class,
+        FileProducerOverruleToDifferentFolderTest.TestConfiguration.class })
+// Based on FileProducerCharsetUTFtoISOTest
 public class FileProducerOverruleToDifferentFolderTest extends BaseFile {
 
     @Test
@@ -52,7 +46,8 @@ public class FileProducerOverruleToDifferentFolderTest extends BaseFile {
         template.sendBodyAndHeader(fileUri(), "Hello World", Exchange.FILE_NAME, "in/hello.txt");
         template.sendBodyAndHeader(fileUri(), "Bye World", Exchange.FILE_NAME, "in/bye.txt");
 
-        await().atMost(10, TimeUnit.SECONDS).until(() -> Files.exists(testFile("out/copy-of-hello.txt")) && Files.exists(testFile("out/copy-of-bye.txt")));
+        await().atMost(10, TimeUnit.SECONDS).until(
+                () -> Files.exists(testFile("out/copy-of-hello.txt")) && Files.exists(testFile("out/copy-of-bye.txt")));
     }
 
     // *************************************

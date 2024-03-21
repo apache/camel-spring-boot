@@ -97,21 +97,18 @@ public class BomGeneratorMojo extends AbstractMojo {
     private List<Dependency> starters() throws IOException {
         List<Dependency> outDependencies = new ArrayList<>();
 
-        Files.list(startersDir.toPath())
-                .filter(Files::isDirectory)
+        Files.list(startersDir.toPath()).filter(Files::isDirectory)
                 // must have a pom.xml to be active
                 .filter(d -> {
                     File pom = new File(d.toFile(), "pom.xml");
                     return pom.isFile() && pom.exists();
-                })
-                .map(dir -> {
+                }).map(dir -> {
                     Dependency dep = new Dependency();
                     dep.setGroupId("org.apache.camel.springboot");
                     dep.setArtifactId(dir.getFileName().toString());
                     dep.setVersion(project.getVersion());
                     return dep;
-                })
-                .forEach(outDependencies::add);
+                }).forEach(outDependencies::add);
 
         // include core starters
         Dependency dep = new Dependency();
@@ -247,7 +244,8 @@ public class BomGeneratorMojo extends AbstractMojo {
 
     private void setActualVersion(Document pom, XPathExpression path) throws XPathExpressionException {
         Node node = (Node) path.evaluate(pom, XPathConstants.NODE);
-        if (node != null && node.getTextContent() != null && node.getTextContent().trim().equals("${project.version}")) {
+        if (node != null && node.getTextContent() != null
+                && node.getTextContent().trim().equals("${project.version}")) {
             node.setTextContent(project.getVersion());
         }
     }
@@ -311,14 +309,14 @@ public class BomGeneratorMojo extends AbstractMojo {
         }
     }
 
-
     private void overwriteDependencyManagement(Document pom, List<Dependency> dependencies) throws Exception {
         XPath xpath = XPathFactory.newInstance().newXPath();
         XPathExpression expr = xpath.compile("/project/dependencyManagement/dependencies");
 
         NodeList nodes = (NodeList) expr.evaluate(pom, XPathConstants.NODESET);
         if (nodes.getLength() == 0) {
-            throw new IllegalStateException("No dependencies found in the dependencyManagement section of the current pom");
+            throw new IllegalStateException(
+                    "No dependencies found in the dependencyManagement section of the current pom");
         }
 
         Node dependenciesSection = nodes.item(0);

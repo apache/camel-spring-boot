@@ -40,72 +40,61 @@ import io.swagger.v3.oas.models.OpenAPI;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				RestOpenApiModelApiSecurityRequirementsTest.class,
-				RestOpenApiModelApiSecurityRequirementsTest.TestConfiguration.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, RestOpenApiModelApiSecurityRequirementsTest.class,
+        RestOpenApiModelApiSecurityRequirementsTest.TestConfiguration.class })
 public class RestOpenApiModelApiSecurityRequirementsTest {
 
-	private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
-	@Autowired
-	CamelContext context;
+    @Autowired
+    CamelContext context;
 
-	// *************************************
-	// Config
-	// *************************************
+    // *************************************
+    // Config
+    // *************************************
 
-	@Configuration
-	public class TestConfiguration {
+    @Configuration
+    public class TestConfiguration {
 
-		@Bean
-		public RouteBuilder routeBuilder() {
-			return new RouteBuilder() {
+        @Bean
+        public RouteBuilder routeBuilder() {
+            return new RouteBuilder() {
 
-				@Override
-				public void configure() throws Exception {
-					rest()
-							.securityDefinitions()
-							.oauth2("petstore_auth")
-							.authorizationUrl("https://petstore.swagger.io/oauth/dialog")
-							.end()
-							.apiKey("api_key")
-							.withHeader("myHeader").end()
-							.end()
-							.security("petstore_auth", "read, write")
-							.security("api_key");
-				}
-			};
-		}
-	}
+                @Override
+                public void configure() throws Exception {
+                    rest().securityDefinitions().oauth2("petstore_auth")
+                            .authorizationUrl("https://petstore.swagger.io/oauth/dialog").end().apiKey("api_key")
+                            .withHeader("myHeader").end().end().security("petstore_auth", "read, write")
+                            .security("api_key");
+                }
+            };
+        }
+    }
 
-	@Test
-	public void testReaderReadV3() throws Exception {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		config.setTitle("Camel User store");
-		config.setLicense("Apache 2.0");
-		config.setLicenseUrl("https://www.apache.org/licenses/LICENSE-2.0.html");
-		RestOpenApiReader reader = new RestOpenApiReader();
+    @Test
+    public void testReaderReadV3() throws Exception {
+        BeanConfig config = new BeanConfig();
+        config.setHost("localhost:8080");
+        config.setSchemes(new String[] { "http" });
+        config.setBasePath("/api");
+        config.setTitle("Camel User store");
+        config.setLicense("Apache 2.0");
+        config.setLicenseUrl("https://www.apache.org/licenses/LICENSE-2.0.html");
+        RestOpenApiReader reader = new RestOpenApiReader();
 
-		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
-				new DefaultClassResolver());
-		assertNotNull(openApi);
+        OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config,
+                context.getName(), new DefaultClassResolver());
+        assertNotNull(openApi);
         String json = io.swagger.v3.core.util.Json.pretty(openApi);
-		log.info(json);
+        log.info(json);
 
-		assertTrue(json.contains("securitySchemes"));
-		assertTrue(json.contains("\"type\" : \"oauth2\""));
-		assertTrue(json.contains("\"authorizationUrl\" : \"https://petstore.swagger.io/oauth/dialog\""));
-		assertTrue(json.contains("\"flows\" : {"));
-		assertTrue(json.contains("\"implicit\""));
-		assertTrue(json.contains("\"security\" : [ {"));
-		assertTrue(json.contains("\"petstore_auth\" : [ \"read\", \"write\" ]"));
-		assertTrue(json.contains("\"api_key\" : [ ]"));
-	}
+        assertTrue(json.contains("securitySchemes"));
+        assertTrue(json.contains("\"type\" : \"oauth2\""));
+        assertTrue(json.contains("\"authorizationUrl\" : \"https://petstore.swagger.io/oauth/dialog\""));
+        assertTrue(json.contains("\"flows\" : {"));
+        assertTrue(json.contains("\"implicit\""));
+        assertTrue(json.contains("\"security\" : [ {"));
+        assertTrue(json.contains("\"petstore_auth\" : [ \"read\", \"write\" ]"));
+        assertTrue(json.contains("\"api_key\" : [ ]"));
+    }
 }

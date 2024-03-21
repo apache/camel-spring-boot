@@ -32,12 +32,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletValidationTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletValidationTest.class, })
 public class KameletValidationTest {
 
     @Autowired
@@ -45,10 +40,8 @@ public class KameletValidationTest {
 
     @Test
     public void validation() throws Exception {
-        assertThatExceptionOfType(RuntimeCamelException.class)
-                .isThrownBy(this::addRoute)
-                .withRootCauseExactlyInstanceOf(IllegalArgumentException.class)
-                .havingRootCause()
+        assertThatExceptionOfType(RuntimeCamelException.class).isThrownBy(this::addRoute)
+                .withRootCauseExactlyInstanceOf(IllegalArgumentException.class).havingRootCause()
                 .withMessageContaining("bodyValue").withMessageContaining("setBody");
     }
 
@@ -56,13 +49,10 @@ public class KameletValidationTest {
         context.addRoutes(new RouteBuilder() {
             @Override
             public void configure() {
-                routeTemplate("setBody")
-                        .templateParameter("bodyValue")
-                        .from("kamelet:source")
-                        .setBody().constant("{{bodyValue}}");
+                routeTemplate("setBody").templateParameter("bodyValue").from("kamelet:source").setBody()
+                        .constant("{{bodyValue}}");
 
-                from("direct:start")
-                        .to("kamelet:setBody/test");
+                from("direct:start").to("kamelet:setBody/test");
             }
         });
     }

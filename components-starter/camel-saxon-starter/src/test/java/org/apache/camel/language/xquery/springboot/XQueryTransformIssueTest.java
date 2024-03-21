@@ -16,8 +16,6 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-
-
 import java.io.FileInputStream;
 
 import org.apache.camel.EndpointInject;
@@ -25,7 +23,6 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,29 +32,21 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.util.IOHelper;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        XQueryTransformIssueTest.class,
-        XQueryTransformIssueTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, XQueryTransformIssueTest.class,
+        XQueryTransformIssueTest.TestConfiguration.class })
 public class XQueryTransformIssueTest {
-    
-    
+
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
-    protected MockEndpoint mock;   
-    
+    protected MockEndpoint mock;
+
     @Test
     public void testTransform() throws Exception {
         String data = IOHelper.loadText(new FileInputStream("src/test/resources/myinput.xml"));
@@ -69,7 +58,6 @@ public class XQueryTransformIssueTest {
         mock.assertIsSatisfied();
     }
 
-    
     // *************************************
     // Config
     // *************************************
@@ -82,10 +70,9 @@ public class XQueryTransformIssueTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                            .transform().xquery("concat(/Envelope/Body/getEmployee/EmpId/text(),\"TestConcat\")", String.class)
-                            .to("log:info")
-                            .to("mock:result");
+                    from("direct:start").transform()
+                            .xquery("concat(/Envelope/Body/getEmployee/EmpId/text(),\"TestConcat\")", String.class)
+                            .to("log:info").to("mock:result");
                 }
             };
         }

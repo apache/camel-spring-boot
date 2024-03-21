@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
 import java.util.List;
 
@@ -36,16 +35,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathTransformHeaderNameTest.class,
-        JsonPathTransformHeaderNameTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathTransformHeaderNameTest.class,
+        JsonPathTransformHeaderNameTest.TestConfiguration.class })
 public class JsonPathTransformHeaderNameTest {
 
     @Autowired
@@ -67,7 +60,6 @@ public class JsonPathTransformHeaderNameTest {
         assertEquals("Nigel Rees", authors.get(0));
         assertEquals("Evelyn Waugh", authors.get(1));
     }
-    
 
     // *************************************
     // Config
@@ -81,11 +73,10 @@ public class JsonPathTransformHeaderNameTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    var jp = expression().jsonpath().expression("$.store.book[*].author").source("header:myHeader").end();
+                    var jp = expression().jsonpath().expression("$.store.book[*].author").source("header:myHeader")
+                            .end();
 
-                    from("direct:start")
-                            .transform(jp)
-                            .to("mock:authors");
+                    from("direct:start").transform(jp).to("mock:authors");
                 }
             };
         }

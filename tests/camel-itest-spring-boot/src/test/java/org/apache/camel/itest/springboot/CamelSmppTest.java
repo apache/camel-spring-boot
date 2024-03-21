@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelSmppTest extends AbstractSpringBootTestSupport {
 
@@ -33,9 +32,7 @@ public class CamelSmppTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelSmppTest.class))
-                .unitTestInclusionPattern("^$")
+        return new ITestConfigBuilder().module(inferModuleName(CamelSmppTest.class)).unitTestInclusionPattern("^$")
                 .unitTestExpectedNumber(0)
                 // The only unit test that can be run has a log-level dependent outcome...
                 .build();
@@ -46,6 +43,5 @@ public class CamelSmppTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

@@ -38,13 +38,10 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
 /**
  * Prepares the Spring Boot provider camel catalog to include component it supports
  */
-@Mojo(name = "prepare-catalog-springboot", threadSafe = true,
-        requiresDependencyCollection = ResolutionScope.COMPILE_PLUS_RUNTIME,
-        requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME,
-        defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
+@Mojo(name = "prepare-catalog-springboot", threadSafe = true, requiresDependencyCollection = ResolutionScope.COMPILE_PLUS_RUNTIME, requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME, defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
 public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
 
-    private static final String[] IGNORE_MODULES = {"camel-spring-boot-xml", "camel-spring-boot-engine"};
+    private static final String[] IGNORE_MODULES = { "camel-spring-boot-xml", "camel-spring-boot-engine" };
 
     /**
      * The catalog directory
@@ -62,7 +59,8 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
         }
     }
 
-    private void executeAll(String groupId, String artifactId) throws MojoExecutionException, MojoFailureException, IOException {
+    private void executeAll(String groupId, String artifactId)
+            throws MojoExecutionException, MojoFailureException, IOException {
         try (JarFile jar = getJarFile(groupId, artifactId)) {
             if (jar != null) {
                 Map<String, Supplier<String>> files = getJSonFiles(jar);
@@ -79,7 +77,8 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
         return Arrays.asList(IGNORE_MODULES).contains(artifactId);
     }
 
-    protected void executeComponents(JarFile componentJar, Map<String, Supplier<String>> jsonFiles) throws MojoExecutionException, MojoFailureException, IOException {
+    protected void executeComponents(JarFile componentJar, Map<String, Supplier<String>> jsonFiles)
+            throws MojoExecutionException, MojoFailureException, IOException {
         List<String> componentNames = findComponentNames(componentJar);
         if (!componentNames.isEmpty()) {
             getLog().info("Components found: " + String.join(", ", componentNames));
@@ -87,24 +86,30 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
             for (String componentName : componentNames) {
                 String json = loadComponentJson(jsonFiles, componentName);
                 if (json != null) {
-                    json = json.replace("\"groupId\": \"" + getMainDepGroupId() + "\"", "\"groupId\": \"" + project.getGroupId() + "\"")
-                               .replace("\"artifactId\": \"" + getMainDepArtifactId() + "\"", "\"artifactId\": \"" + project.getArtifactId() + "\"")
-                               .replace("\"version\": \"" + getMainDepVersion() + "\"", "\"version\": \"" + project.getVersion() + "\"");
-                    writeIfChanged(json, new File(catalogDir,
-                            "src/main/resources/org/apache/camel/springboot/catalog/components/" + componentName + ".json"));
+                    json = json
+                            .replace("\"groupId\": \"" + getMainDepGroupId() + "\"",
+                                    "\"groupId\": \"" + project.getGroupId() + "\"")
+                            .replace("\"artifactId\": \"" + getMainDepArtifactId() + "\"",
+                                    "\"artifactId\": \"" + project.getArtifactId() + "\"")
+                            .replace("\"version\": \"" + getMainDepVersion() + "\"",
+                                    "\"version\": \"" + project.getVersion() + "\"");
+                    writeIfChanged(json,
+                            new File(catalogDir, "src/main/resources/org/apache/camel/springboot/catalog/components/"
+                                    + componentName + ".json"));
                     actual.add(componentName);
                 }
             }
-            File components = new File(catalogDir, "src/main/resources/org/apache/camel/springboot/catalog/components.properties");
+            File components = new File(catalogDir,
+                    "src/main/resources/org/apache/camel/springboot/catalog/components.properties");
             Stream<String> existing = components.isFile() ? Files.lines(components.toPath()) : Stream.empty();
-            String content = Stream.concat(existing, actual.stream())
-                    .sorted().distinct()
+            String content = Stream.concat(existing, actual.stream()).sorted().distinct()
                     .collect(Collectors.joining("\n"));
             writeIfChanged(content, components);
         }
     }
 
-    protected void executeDataFormats(JarFile componentJar, Map<String, Supplier<String>> jsonFiles) throws MojoExecutionException, MojoFailureException, IOException {
+    protected void executeDataFormats(JarFile componentJar, Map<String, Supplier<String>> jsonFiles)
+            throws MojoExecutionException, MojoFailureException, IOException {
         List<String> dataFormatNames = findDataFormatNames(componentJar);
         if (!dataFormatNames.isEmpty()) {
             getLog().info("Dataformats found: " + String.join(", ", dataFormatNames));
@@ -112,24 +117,30 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
             for (String dataformatName : dataFormatNames) {
                 String json = loadDataFormatJson(jsonFiles, dataformatName);
                 if (json != null) {
-                    json = json.replace("\"groupId\": \"" + getMainDepGroupId() + "\"", "\"groupId\": \"" + project.getGroupId() + "\"")
-                               .replace("\"artifactId\": \"" + getMainDepArtifactId() + "\"", "\"artifactId\": \"" + project.getArtifactId() + "\"")
-                               .replace("\"version\": \"" + getMainDepVersion() + "\"", "\"version\": \"" + project.getVersion() + "\"");
-                    writeIfChanged(json, new File(catalogDir,
-                            "src/main/resources/org/apache/camel/springboot/catalog/dataformats/" + dataformatName + ".json"));
+                    json = json
+                            .replace("\"groupId\": \"" + getMainDepGroupId() + "\"",
+                                    "\"groupId\": \"" + project.getGroupId() + "\"")
+                            .replace("\"artifactId\": \"" + getMainDepArtifactId() + "\"",
+                                    "\"artifactId\": \"" + project.getArtifactId() + "\"")
+                            .replace("\"version\": \"" + getMainDepVersion() + "\"",
+                                    "\"version\": \"" + project.getVersion() + "\"");
+                    writeIfChanged(json,
+                            new File(catalogDir, "src/main/resources/org/apache/camel/springboot/catalog/dataformats/"
+                                    + dataformatName + ".json"));
                     actual.add(dataformatName);
                 }
             }
-            File dataformats = new File(catalogDir, "src/main/resources/org/apache/camel/springboot/catalog/dataformats.properties");
+            File dataformats = new File(catalogDir,
+                    "src/main/resources/org/apache/camel/springboot/catalog/dataformats.properties");
             Stream<String> existing = dataformats.isFile() ? Files.lines(dataformats.toPath()) : Stream.empty();
-            String content = Stream.concat(existing, actual.stream())
-                    .sorted().distinct()
+            String content = Stream.concat(existing, actual.stream()).sorted().distinct()
                     .collect(Collectors.joining("\n"));
             writeIfChanged(content, dataformats);
         }
     }
 
-    protected void executeLanguages(JarFile componentJar, Map<String, Supplier<String>> jsonFiles) throws MojoExecutionException, MojoFailureException, IOException {
+    protected void executeLanguages(JarFile componentJar, Map<String, Supplier<String>> jsonFiles)
+            throws MojoExecutionException, MojoFailureException, IOException {
         List<String> languageNames = findLanguageNames(componentJar);
         if (!languageNames.isEmpty()) {
             getLog().info("Languages found: " + String.join(", ", languageNames));
@@ -137,29 +148,36 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
             for (String languageName : languageNames) {
                 String json = loadLanguageJson(jsonFiles, languageName);
                 if (json != null) {
-                    json = json.replace("\"groupId\": \"" + getMainDepGroupId() + "\"", "\"groupId\": \"" + project.getGroupId() + "\"")
-                               .replace("\"artifactId\": \"" + getMainDepArtifactId() + "\"", "\"artifactId\": \"" + project.getArtifactId() + "\"")
-                               .replace("\"version\": \"" + getMainDepVersion() + "\"", "\"version\": \"" + project.getVersion() + "\"");
-                    writeIfChanged(json, new File(catalogDir,
-                            "src/main/resources/org/apache/camel/springboot/catalog/languages/" + languageName + ".json"));
+                    json = json
+                            .replace("\"groupId\": \"" + getMainDepGroupId() + "\"",
+                                    "\"groupId\": \"" + project.getGroupId() + "\"")
+                            .replace("\"artifactId\": \"" + getMainDepArtifactId() + "\"",
+                                    "\"artifactId\": \"" + project.getArtifactId() + "\"")
+                            .replace("\"version\": \"" + getMainDepVersion() + "\"",
+                                    "\"version\": \"" + project.getVersion() + "\"");
+                    writeIfChanged(json,
+                            new File(catalogDir, "src/main/resources/org/apache/camel/springboot/catalog/languages/"
+                                    + languageName + ".json"));
                     actual.add(languageName);
                 }
             }
-            File languages = new File(catalogDir, "src/main/resources/org/apache/camel/springboot/catalog/languages.properties");
+            File languages = new File(catalogDir,
+                    "src/main/resources/org/apache/camel/springboot/catalog/languages.properties");
             Stream<String> existing = languages.isFile() ? Files.lines(languages.toPath()) : Stream.empty();
-            String content = Stream.concat(existing, actual.stream())
-                    .sorted().distinct()
+            String content = Stream.concat(existing, actual.stream()).sorted().distinct()
                     .collect(Collectors.joining("\n"));
             writeIfChanged(content, languages);
         }
     }
 
-    protected void executeOthers(JarFile componentJar, Map<String, Supplier<String>> jsonFiles) throws MojoExecutionException, MojoFailureException, IOException {
+    protected void executeOthers(JarFile componentJar, Map<String, Supplier<String>> jsonFiles)
+            throws MojoExecutionException, MojoFailureException, IOException {
         // The json files for 'other' components are in the root of the jars
         List<String> otherNames = findNames(componentJar, "").stream()
                 .map(s -> s.substring(0, s.length() - ".json".length()))
                 // skip some that are otherwise mistaken as others
-                .filter(s -> !s.endsWith("-common") && !s.equals("as2") && !s.equals("cbor") && !s.equals("salesforce") && !s.equals("servicenow"))
+                .filter(s -> !s.endsWith("-common") && !s.equals("as2") && !s.equals("cbor") && !s.equals("salesforce")
+                        && !s.equals("servicenow"))
                 .collect(Collectors.toList());
         if (!otherNames.isEmpty()) {
             getLog().info("Others found: " + String.join(", ", otherNames));
@@ -167,18 +185,22 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
             for (String otherName : otherNames) {
                 String json = loadOtherJson(jsonFiles, otherName);
                 if (json != null) {
-                    json = json.replace("\"groupId\": \"" + getMainDepGroupId() + "\"", "\"groupId\": \"" + project.getGroupId() + "\"")
-                            .replace("\"artifactId\": \"" + getMainDepArtifactId() + "\"", "\"artifactId\": \"" + project.getArtifactId() + "\"")
-                            .replace("\"version\": \"" + getMainDepVersion() + "\"", "\"version\": \"" + project.getVersion() + "\"");
+                    json = json
+                            .replace("\"groupId\": \"" + getMainDepGroupId() + "\"",
+                                    "\"groupId\": \"" + project.getGroupId() + "\"")
+                            .replace("\"artifactId\": \"" + getMainDepArtifactId() + "\"",
+                                    "\"artifactId\": \"" + project.getArtifactId() + "\"")
+                            .replace("\"version\": \"" + getMainDepVersion() + "\"",
+                                    "\"version\": \"" + project.getVersion() + "\"");
                     writeIfChanged(json, new File(catalogDir,
                             "src/main/resources/org/apache/camel/springboot/catalog/others/" + otherName + ".json"));
                     actual.add(otherName);
                 }
             }
-            File others = new File(catalogDir, "src/main/resources/org/apache/camel/springboot/catalog/others.properties");
+            File others = new File(catalogDir,
+                    "src/main/resources/org/apache/camel/springboot/catalog/others.properties");
             Stream<String> existing = others.isFile() ? Files.lines(others.toPath()) : Stream.empty();
-            String content = Stream.concat(existing, actual.stream())
-                    .sorted().distinct()
+            String content = Stream.concat(existing, actual.stream()).sorted().distinct()
                     .collect(Collectors.joining("\n"));
             writeIfChanged(content, others);
         }

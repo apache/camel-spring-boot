@@ -26,7 +26,6 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.language.xquery.XQueryLanguage;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -34,31 +33,23 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        SaxonLanguageExtensionFunctionsTest.class,
-        SaxonLanguageExtensionFunctionsTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SaxonLanguageExtensionFunctionsTest.class,
+        SaxonLanguageExtensionFunctionsTest.TestConfiguration.class })
 public class SaxonLanguageExtensionFunctionsTest {
-    
-    
+
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
 
     @EndpointInject("mock:result")
-    protected MockEndpoint mock;   
-    
+    protected MockEndpoint mock;
+
     @Test
     public void testWithExtension() throws Exception {
         mock.expectedBodiesReceived("<transformed extension-function-render=\"arg1[test]\"/>");
@@ -66,9 +57,8 @@ public class SaxonLanguageExtensionFunctionsTest {
         template.sendBody("direct:start", "<body>test</body>");
 
         mock.assertIsSatisfied();
-    }   
+    }
 
-    
     // *************************************
     // Config
     // *************************************
@@ -87,9 +77,8 @@ public class SaxonLanguageExtensionFunctionsTest {
                     XQueryLanguage xq = (XQueryLanguage) context.resolveLanguage("xquery");
                     xq.setConfiguration(conf);
 
-                    from("direct:start")
-                            .transform()
-                            .xquery("resource:classpath:org/apache/camel/component/xquery/transformWithExtension.xquery")
+                    from("direct:start").transform().xquery(
+                            "resource:classpath:org/apache/camel/component/xquery/transformWithExtension.xquery")
                             .to("mock:result");
                 }
             };

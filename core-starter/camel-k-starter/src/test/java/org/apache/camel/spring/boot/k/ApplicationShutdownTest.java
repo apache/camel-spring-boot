@@ -39,22 +39,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                ApplicationRoutesAutoConfiguration.class,
-                ApplicationShutdownAutoConfiguration.class,
-                ApplicationShutdownTest.TestConfiguration.class,
-        },
-        properties = {
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ApplicationRoutesAutoConfiguration.class,
+        ApplicationShutdownAutoConfiguration.class, ApplicationShutdownTest.TestConfiguration.class, }, properties = {
                 "camel.main.routes-include-pattern=classpath:camel-k/sources/test-route-002.yaml",
                 // camel-k
-                "camel.k.shutdown.maxMessages=1",
-                "camel.k.shutdown.strategy=CAMEL",
+                "camel.k.shutdown.maxMessages=1", "camel.k.shutdown.strategy=CAMEL",
                 // misc
-                "greeted.subject=Joe"
-        }
-)
+                "greeted.subject=Joe" })
 @ExtendWith(OutputCaptureExtension.class)
 public class ApplicationShutdownTest {
 
@@ -66,13 +57,10 @@ public class ApplicationShutdownTest {
 
         Logger l = LoggerFactory.getLogger(getClass());
 
-        Awaitility.await()
-                .pollInterval(1, TimeUnit.SECONDS)
-                .atMost(3, TimeUnit.MINUTES)
-                .untilAsserted(() -> {
-                    assertThat(output).contains("Hello Joe!");
-                    assertThat(output).contains("Once done");
-                    assertThat(output).contains("Initiate runtime shutdown (max: 1, handled: 2)");
+        Awaitility.await().pollInterval(1, TimeUnit.SECONDS).atMost(3, TimeUnit.MINUTES).untilAsserted(() -> {
+            assertThat(output).contains("Hello Joe!");
+            assertThat(output).contains("Once done");
+            assertThat(output).contains("Initiate runtime shutdown (max: 1, handled: 2)");
         });
     }
 

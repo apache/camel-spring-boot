@@ -50,21 +50,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirTransactionIT.class,
-                FhirTransactionIT.TestConfiguration.class,
-                DefaultCamelContext.class,
-                FhirServer.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirTransactionIT.class,
+        FhirTransactionIT.TestConfiguration.class, DefaultCamelContext.class, FhirServer.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class FhirTransactionIT extends AbstractFhirTestSupport {
 
     private static final Logger LOG = LoggerFactory.getLogger(FhirTransactionIT.class);
-    private static final String PATH_PREFIX
-            = FhirApiCollection.getCollection().getApiName(FhirTransactionApiMethod.class).getName();
+    private static final String PATH_PREFIX = FhirApiCollection.getCollection()
+            .getApiName(FhirTransactionApiMethod.class).getName();
 
     @Test
     public void testWithBundle() throws Exception {
@@ -131,16 +124,13 @@ public class FhirTransactionIT extends AbstractFhirTestSupport {
                 @Override
                 public void configure() {
                     // test route for withBundle
-                    from("direct://WITH_BUNDLE")
-                            .to("fhir://" + PATH_PREFIX + "/withBundle?inBody=bundle");
+                    from("direct://WITH_BUNDLE").to("fhir://" + PATH_PREFIX + "/withBundle?inBody=bundle");
 
                     // test route for withBundle
-                    from("direct://WITH_STRING_BUNDLE")
-                            .to("fhir://" + PATH_PREFIX + "/withBundle?inBody=stringBundle");
+                    from("direct://WITH_STRING_BUNDLE").to("fhir://" + PATH_PREFIX + "/withBundle?inBody=stringBundle");
 
                     // test route for withResources
-                    from("direct://WITH_RESOURCES")
-                            .to("fhir://" + PATH_PREFIX + "/withResources?inBody=resources");
+                    from("direct://WITH_RESOURCES").to("fhir://" + PATH_PREFIX + "/withResources?inBody=resources");
                 }
             };
         }
@@ -149,10 +139,8 @@ public class FhirTransactionIT extends AbstractFhirTestSupport {
     private Bundle createTransactionBundle() {
         Bundle input = new Bundle();
         input.setType(Bundle.BundleType.TRANSACTION);
-        input.addEntry()
-                .setResource(new Patient().addName(new HumanName().addGiven("Art").setFamily("Tatum")))
-                .getRequest()
-                .setMethod(Bundle.HTTPVerb.POST);
+        input.addEntry().setResource(new Patient().addName(new HumanName().addGiven("Art").setFamily("Tatum")))
+                .getRequest().setMethod(Bundle.HTTPVerb.POST);
         return input;
     }
 

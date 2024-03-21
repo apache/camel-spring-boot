@@ -47,113 +47,109 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				InfinispanRemoteQueryConsumerIT.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, InfinispanRemoteQueryConsumerIT.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class InfinispanRemoteQueryConsumerIT extends InfinispanRemoteQueryTestSupport {
 
-	@Bean
-	InfinispanQueryBuilder continuousQueryBuilderAll() {
-		return qf -> qf.from(User.class).having("name").like("%Q0%").build();
-	}
+    @Bean
+    InfinispanQueryBuilder continuousQueryBuilderAll() {
+        return qf -> qf.from(User.class).having("name").like("%Q0%").build();
+    }
 
-	@Bean
-	InfinispanQueryBuilder continuousQueryBuilderNoMatch() {
-		return qf -> qf.from(User.class).having("name").like("%TEST%").build();
-	}
+    @Bean
+    InfinispanQueryBuilder continuousQueryBuilderNoMatch() {
+        return qf -> qf.from(User.class).having("name").like("%TEST%").build();
+    }
 
-	@Bean
-	InfinispanQueryBuilder continuousQueryBuilder() {
-		return qf -> qf.from(User.class).having("name").like("CQ%").build();
-	}
+    @Bean
+    InfinispanQueryBuilder continuousQueryBuilder() {
+        return qf -> qf.from(User.class).having("name").like("CQ%").build();
+    }
 
-	// *****************************
-	//
-	// *****************************
+    // *****************************
+    //
+    // *****************************
 
-	@Test
-	public void continuousQuery() throws Exception {
-		MockEndpoint continuousQueryBuilderNoMatch = getMockEndpoint("mock:continuousQueryNoMatch");
-		continuousQueryBuilderNoMatch.expectedMessageCount(0);
+    @Test
+    public void continuousQuery() throws Exception {
+        MockEndpoint continuousQueryBuilderNoMatch = getMockEndpoint("mock:continuousQueryNoMatch");
+        continuousQueryBuilderNoMatch.expectedMessageCount(0);
 
-		MockEndpoint continuousQueryBuilderAll = getMockEndpoint("mock:continuousQueryAll");
-		continuousQueryBuilderAll.expectedMessageCount(CQ_USERS.length * 2);
+        MockEndpoint continuousQueryBuilderAll = getMockEndpoint("mock:continuousQueryAll");
+        continuousQueryBuilderAll.expectedMessageCount(CQ_USERS.length * 2);
 
-		MockEndpoint continuousQuery = getMockEndpoint("mock:continuousQuery");
-		continuousQuery.expectedMessageCount(4);
+        MockEndpoint continuousQuery = getMockEndpoint("mock:continuousQuery");
+        continuousQuery.expectedMessageCount(4);
 
-		for (int i = 0; i < 4; i++) {
-			continuousQuery.message(i).header(InfinispanConstants.KEY).isEqualTo(createKey(CQ_USERS[i % 2]));
-			continuousQuery.message(i).header(InfinispanConstants.CACHE_NAME).isEqualTo(getCache().getName());
-			if (i >= 2) {
-				continuousQuery.message(i).header(InfinispanConstants.EVENT_TYPE)
-						.isEqualTo(InfinispanConstants.CACHE_ENTRY_LEAVING);
-				continuousQuery.message(i).header(InfinispanConstants.EVENT_DATA).isNull();
-			} else {
-				continuousQuery.message(i).header(InfinispanConstants.EVENT_TYPE)
-						.isEqualTo(InfinispanConstants.CACHE_ENTRY_JOINING);
-				continuousQuery.message(i).header(InfinispanConstants.EVENT_DATA).isNotNull();
-				continuousQuery.message(i).header(InfinispanConstants.EVENT_DATA).isInstanceOf(User.class);
-			}
-		}
+        for (int i = 0; i < 4; i++) {
+            continuousQuery.message(i).header(InfinispanConstants.KEY).isEqualTo(createKey(CQ_USERS[i % 2]));
+            continuousQuery.message(i).header(InfinispanConstants.CACHE_NAME).isEqualTo(getCache().getName());
+            if (i >= 2) {
+                continuousQuery.message(i).header(InfinispanConstants.EVENT_TYPE)
+                        .isEqualTo(InfinispanConstants.CACHE_ENTRY_LEAVING);
+                continuousQuery.message(i).header(InfinispanConstants.EVENT_DATA).isNull();
+            } else {
+                continuousQuery.message(i).header(InfinispanConstants.EVENT_TYPE)
+                        .isEqualTo(InfinispanConstants.CACHE_ENTRY_JOINING);
+                continuousQuery.message(i).header(InfinispanConstants.EVENT_DATA).isNotNull();
+                continuousQuery.message(i).header(InfinispanConstants.EVENT_DATA).isInstanceOf(User.class);
+            }
+        }
 
-		for (final User user : CQ_USERS) {
-			getCache().put(createKey(user), user);
-		}
+        for (final User user : CQ_USERS) {
+            getCache().put(createKey(user), user);
+        }
 
-		assertEquals(CQ_USERS.length, getCache().size());
+        assertEquals(CQ_USERS.length, getCache().size());
 
-		for (final User user : CQ_USERS) {
-			getCache().remove(createKey(user));
-		}
+        for (final User user : CQ_USERS) {
+            getCache().remove(createKey(user));
+        }
 
-		assertTrue(getCache().isEmpty());
+        assertTrue(getCache().isEmpty());
 
-		continuousQuery.assertIsSatisfied();
-		continuousQueryBuilderNoMatch.assertIsSatisfied();
-		continuousQueryBuilderAll.assertIsSatisfied();
-	}
+        continuousQuery.assertIsSatisfied();
+        continuousQueryBuilderNoMatch.assertIsSatisfied();
+        continuousQueryBuilderAll.assertIsSatisfied();
+    }
 
-	// *****************************
-	//
-	// *****************************
+    // *****************************
+    //
+    // *****************************
 
-	@BeforeAll
-	protected static void setupResources() throws Exception {
-		String proto = Util.read(InfinispanRemoteQueryConsumerIT.class.getResourceAsStream("/sample_bank_account/bank.proto"));
+    @BeforeAll
+    protected static void setupResources() throws Exception {
+        String proto = Util
+                .read(InfinispanRemoteQueryConsumerIT.class.getResourceAsStream("/sample_bank_account/bank.proto"));
 
-		BasicCache<Object, Object> cache = getCacheByName(ProtobufMetadataManagerConstants.PROTOBUF_METADATA_CACHE_NAME);
-		cache.put("sample_bank_account/bank.proto", proto);
+        BasicCache<Object, Object> cache = getCacheByName(
+                ProtobufMetadataManagerConstants.PROTOBUF_METADATA_CACHE_NAME);
+        cache.put("sample_bank_account/bank.proto", proto);
 
-		MarshallerRegistration.init(MarshallerUtil.getSerializationContext(cacheContainer));
-		SerializationContext serCtx = MarshallerUtil.getSerializationContext(cacheContainer);
-		serCtx.registerProtoFiles(FileDescriptorSource.fromResources("/sample_bank_account/bank.proto"));
-		serCtx.registerMarshaller(new UserMarshaller());
-		serCtx.registerMarshaller(new GenderMarshaller());
-	}
+        MarshallerRegistration.init(MarshallerUtil.getSerializationContext(cacheContainer));
+        SerializationContext serCtx = MarshallerUtil.getSerializationContext(cacheContainer);
+        serCtx.registerProtoFiles(FileDescriptorSource.fromResources("/sample_bank_account/bank.proto"));
+        serCtx.registerMarshaller(new UserMarshaller());
+        serCtx.registerMarshaller(new GenderMarshaller());
+    }
 
-	@BeforeEach
-	protected void beforeEach() {
-		// cleanup the default test cache before each run
-		getCache().clear();
-	}
+    @BeforeEach
+    protected void beforeEach() {
+        // cleanup the default test cache before each run
+        getCache().clear();
+    }
 
-	@Bean
-	protected RouteBuilder createRouteBuilder() {
-		return new RouteBuilder() {
-			@Override
-			public void configure() {
-				fromF("infinispan:%s?queryBuilder=#continuousQueryBuilder", getCacheName())
-						.to("mock:continuousQuery");
-				fromF("infinispan:%s?queryBuilder=#continuousQueryBuilderNoMatch", getCacheName())
-						.to("mock:continuousQueryNoMatch");
-				fromF("infinispan:%s?queryBuilder=#continuousQueryBuilderAll", getCacheName())
-						.to("mock:continuousQueryAll");
-			}
-		};
-	}
+    @Bean
+    protected RouteBuilder createRouteBuilder() {
+        return new RouteBuilder() {
+            @Override
+            public void configure() {
+                fromF("infinispan:%s?queryBuilder=#continuousQueryBuilder", getCacheName()).to("mock:continuousQuery");
+                fromF("infinispan:%s?queryBuilder=#continuousQueryBuilderNoMatch", getCacheName())
+                        .to("mock:continuousQueryNoMatch");
+                fromF("infinispan:%s?queryBuilder=#continuousQueryBuilderAll", getCacheName())
+                        .to("mock:continuousQueryAll");
+            }
+        };
+    }
 }

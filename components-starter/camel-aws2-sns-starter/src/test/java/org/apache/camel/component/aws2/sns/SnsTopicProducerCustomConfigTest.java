@@ -36,13 +36,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 //Based on SnsTopicProducerCustomConfigIT
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SnsTopicProducerCustomConfigTest.class,
-                SnsTopicProducerCustomConfigTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SnsTopicProducerCustomConfigTest.class,
+        SnsTopicProducerCustomConfigTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class SnsTopicProducerCustomConfigTest extends BaseSns {
 
@@ -72,9 +67,11 @@ public class SnsTopicProducerCustomConfigTest extends BaseSns {
 
     @Test
     public void testFailure() {
-        String uri = String.format("aws2-sns://%s?subject=The+subject+message&configuration=#class:%s&autoCreateTopic=true",
+        String uri = String.format(
+                "aws2-sns://%s?subject=The+subject+message&configuration=#class:%s&autoCreateTopic=true",
                 sharedNameGenerator.getName(), EmptyTestSnsConfiguration.class.getName());
-        Assertions.assertThrows(ResolveEndpointFailedException.class, () -> producerTemplate.requestBody(uri, "test", String.class));
+        Assertions.assertThrows(ResolveEndpointFailedException.class,
+                () -> producerTemplate.requestBody(uri, "test", String.class));
     }
 
     // *************************************
@@ -89,9 +86,9 @@ public class SnsTopicProducerCustomConfigTest extends BaseSns {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:start")
-                            .toF("aws2-sns://%s?subject=The+subject+message&configuration=#class:%s&autoCreateTopic=true",
-                                    sharedNameGenerator.getName(), TestSnsConfiguration.class.getName());
+                    from("direct:start").toF(
+                            "aws2-sns://%s?subject=The+subject+message&configuration=#class:%s&autoCreateTopic=true",
+                            sharedNameGenerator.getName(), TestSnsConfiguration.class.getName());
                 }
             };
         }

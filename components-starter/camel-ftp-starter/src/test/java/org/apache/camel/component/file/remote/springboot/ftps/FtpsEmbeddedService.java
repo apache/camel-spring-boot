@@ -62,7 +62,7 @@ public class FtpsEmbeddedService extends FtpEmbeddedService {
 
     protected SslConfigurationFactory createSslConfiguration() {
         // comment in, if you have trouble with SSL
-         System.setProperty("javax.net.debug", "all");
+        System.setProperty("javax.net.debug", "all");
 
         SslConfigurationFactory sslConfigFactory = new SslConfigurationFactory();
         sslConfigFactory.setSslProtocol(authValue);
@@ -94,7 +94,8 @@ public class FtpsEmbeddedService extends FtpEmbeddedService {
             String name = System.getProperty("os.name");
             String message = e.getMessage();
 
-            LOG.warn("SunX509 is not available on this platform [{}] Testing is skipped! Real cause: {}", name, message, e);
+            LOG.warn("SunX509 is not available on this platform [{}] Testing is skipped! Real cause: {}", name, message,
+                    e);
             return false;
         }
     }

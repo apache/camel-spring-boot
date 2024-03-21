@@ -43,14 +43,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 // Test class performs the same tests as DBOperationsIT but with modified URIs
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                MongoDbCredentialsFromUriConnectionIT.class,
-                MongoDbCredentialsFromUriConnectionIT.TestConfiguration.class,
-                AbstractMongoDbITSupport.MongoConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, MongoDbCredentialsFromUriConnectionIT.class,
+        MongoDbCredentialsFromUriConnectionIT.TestConfiguration.class,
+        AbstractMongoDbITSupport.MongoConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class MongoDbCredentialsFromUriConnectionIT extends MongoDbOperationsIT {
 
@@ -64,46 +59,39 @@ public class MongoDbCredentialsFromUriConnectionIT extends MongoDbOperationsIT {
                 public void configure() throws IOException {
                     Properties properties = loadAuthProperties();
                     String uriHostnameOnly = String.format("mongodb:mongo?hosts=%s&", service.getConnectionAddress());
-                    //connecting with credentials for created user
-                    String uriWithCredentials = String.format("%susername=%s&password=%s&", uriHostnameOnly, properties.getProperty("testusername"), properties.getProperty("testpassword"));
+                    // connecting with credentials for created user
+                    String uriWithCredentials = String.format("%susername=%s&password=%s&", uriHostnameOnly,
+                            properties.getProperty("testusername"), properties.getProperty("testpassword"));
 
-                    String uriWithAuthSource = String.format(
-                            "%susername=%s&password=%s&authSource=%s&",
-                            uriHostnameOnly, properties.getProperty("authsourceusername"), properties.getProperty("authsourceuserpassword"), dbName);
+                    String uriWithAuthSource = String.format("%susername=%s&password=%s&authSource=%s&",
+                            uriHostnameOnly, properties.getProperty("authsourceusername"),
+                            properties.getProperty("authsourceuserpassword"), dbName);
 
-                    from("direct:count").to(
-                            uriHostnameOnly + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=count&dynamicity=true");
-                    from("direct:insert")
-                            .to(uriWithCredentials
-                                    + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert");
-                    from("direct:testStoreOidOnInsert")
-                            .to(uriHostnameOnly
-                                    + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert")
-                            .setBody()
-                            .header(MongoDbConstants.OID);
-                    from("direct:save")
-                            .to(uriWithCredentials
-                                    + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=save");
-                    from("direct:testStoreOidOnSave")
-                            .to(uriWithCredentials
-                                    + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=save")
-                            .setBody()
-                            .header(MongoDbConstants.OID);
-                    from("direct:update")
-                            .to(uriWithCredentials
-                                    + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=update");
-                    from("direct:remove")
-                            .to(uriWithCredentials
-                                    + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=remove");
-                    from("direct:aggregate").to(
-                            uriHostnameOnly + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=aggregate");
-                    from("direct:getDbStats").to(uriWithCredentials + "database={{mongodb.testDb}}&operation=getDbStats");
-                    from("direct:getColStats").to(
-                            uriWithCredentials + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=getColStats");
+                    from("direct:count").to(uriHostnameOnly
+                            + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=count&dynamicity=true");
+                    from("direct:insert").to(uriWithCredentials
+                            + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert");
+                    from("direct:testStoreOidOnInsert").to(uriHostnameOnly
+                            + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert")
+                            .setBody().header(MongoDbConstants.OID);
+                    from("direct:save").to(uriWithCredentials
+                            + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=save");
+                    from("direct:testStoreOidOnSave").to(uriWithCredentials
+                            + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=save")
+                            .setBody().header(MongoDbConstants.OID);
+                    from("direct:update").to(uriWithCredentials
+                            + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=update");
+                    from("direct:remove").to(uriWithCredentials
+                            + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=remove");
+                    from("direct:aggregate").to(uriHostnameOnly
+                            + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=aggregate");
+                    from("direct:getDbStats")
+                            .to(uriWithCredentials + "database={{mongodb.testDb}}&operation=getDbStats");
+                    from("direct:getColStats").to(uriWithCredentials
+                            + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=getColStats");
                     from("direct:command").to(uriWithCredentials + "database={{mongodb.testDb}}&operation=command");
-                    from("direct:testAuthSource")
-                            .to(uriWithAuthSource
-                                    + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=count&dynamicity=true");
+                    from("direct:testAuthSource").to(uriWithAuthSource
+                            + "database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=count&dynamicity=true");
                 }
             };
         }
@@ -113,7 +101,8 @@ public class MongoDbCredentialsFromUriConnectionIT extends MongoDbOperationsIT {
     public void before() throws IOException {
         Properties properties = loadAuthProperties();
         createAuthorizationUser();
-        createAuthorizationUser(dbName, properties.getProperty("authsourceusername"), properties.getProperty("authsourcepassword"));
+        createAuthorizationUser(dbName, properties.getProperty("authsourceusername"),
+                properties.getProperty("authsourcepassword"));
     }
 
     @Test

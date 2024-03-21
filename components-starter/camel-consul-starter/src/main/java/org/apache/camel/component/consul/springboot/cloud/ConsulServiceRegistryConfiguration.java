@@ -28,7 +28,8 @@ import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.cloud.consul")
-public class ConsulServiceRegistryConfiguration extends org.apache.camel.component.consul.cloud.ConsulServiceRegistryConfiguration {
+public class ConsulServiceRegistryConfiguration
+        extends org.apache.camel.component.consul.cloud.ConsulServiceRegistryConfiguration {
 
     /**
      * Sets if the consul service registry should be enabled or not, default is false.
@@ -44,7 +45,7 @@ public class ConsulServiceRegistryConfiguration extends org.apache.camel.compone
      * Custom service attributes.
      */
     private Map<String, Object> attributes;
-    
+
     /**
      * Service lookup order/priority.
      */
@@ -82,8 +83,6 @@ public class ConsulServiceRegistryConfiguration extends org.apache.camel.compone
         this.order = order;
     }
 
-
-
     //
     // Fields copied from org.apache.camel.component.consul.cloud.ConsulServiceRegistryConfiguration
     // to add javadoc which is used by spring-boot-configuration-processor
@@ -91,8 +90,7 @@ public class ConsulServiceRegistryConfiguration extends org.apache.camel.compone
     // ----------------
 
     /**
-     * Should we remove all the registered services know by this registry on
-     * stop?
+     * Should we remove all the registered services know by this registry on stop?
      */
     private boolean deregisterServicesOnStop = true;
 
@@ -112,14 +110,13 @@ public class ConsulServiceRegistryConfiguration extends org.apache.camel.compone
     private int checkTtl = 60;
 
     /**
-     * How often (in seconds) a service has to be marked as healthy if its check
-     * is TTL or how often the check should run. Default is 5 seconds.
+     * How often (in seconds) a service has to be marked as healthy if its check is TTL or how often the check should
+     * run. Default is 5 seconds.
      */
     private int checkInterval = 5;
 
     /**
-     * How long (in seconds) to wait to deregister a service in case of unclean
-     * shutdown. Default is 1 hour.
+     * How long (in seconds) to wait to deregister a service in case of unclean shutdown. Default is 1 hour.
      */
     private int deregisterAfter = 3600;
 
@@ -127,26 +124,26 @@ public class ConsulServiceRegistryConfiguration extends org.apache.camel.compone
     // Fields copied from org.apache.camel.component.consul.cluster.ConsulClusterConfiguration
     // ------------------------------------------
     /**
-     * 
+     *
      */
     private int sessionTtl = 60;
 
     /**
-     * 
+     *
      */
     private int sessionLockDelay = 5;
 
     /**
-     * 
+     *
      */
     private int sessionRefreshInterval = 5;
 
     /**
-     * 
+     *
      */
     private String rootPath = "/camel";
 
-    // 
+    //
     // Fields copied from org.apache.camel.component.consul.ConsulClientConfiguration
     // ---------------
 
@@ -186,8 +183,7 @@ public class ConsulServiceRegistryConfiguration extends org.apache.camel.compone
     private Set<String> tags;
 
     /**
-     * SSL configuration using an
-     * org.apache.camel.support.jsse.SSLContextParameters instance.
+     * SSL configuration using an org.apache.camel.support.jsse.SSLContextParameters instance.
      */
     private SSLContextParameters sslContextParameters;
 
@@ -237,8 +233,7 @@ public class ConsulServiceRegistryConfiguration extends org.apache.camel.compone
     private Duration writeTimeout;
 
     /**
-     * Configure if the AgentClient should attempt a ping before returning the
-     * Consul instance
+     * Configure if the AgentClient should attempt a ping before returning the Consul instance
      */
     private boolean pingInstance = true;
 

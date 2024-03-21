@@ -46,8 +46,8 @@ import java.util.function.BiConsumer;
 public class SftpEmbeddedService extends AbstractTestService implements FtpService {
     private static final Logger LOG = LoggerFactory.getLogger(SftpEmbeddedService.class);
     private static final String KNOWN_HOSTS = "[localhost]:%d ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDdfIWeSV4o68dRrKS"
-                                              + "zFd/Bk51E65UTmmSrmW0O1ohtzi6HzsDPjXgCtlTt3FqTcfFfI92IlTr4JWqC9UK1QT1ZTeng0MkPQmv68hDANHbt5CpETZHjW5q4OOgWhV"
-                                              + "vj5IyOC2NZHtKlJBkdsMAa15ouOOJLzBvAvbqOR/yUROsEiQ==";
+            + "zFd/Bk51E65UTmmSrmW0O1ohtzi6HzsDPjXgCtlTt3FqTcfFfI92IlTr4JWqC9UK1QT1ZTeng0MkPQmv68hDANHbt5CpETZHjW5q4OOgWhV"
+            + "vj5IyOC2NZHtKlJBkdsMAa15ouOOJLzBvAvbqOR/yUROsEiQ==";
 
     protected SshServer sshd;
     protected final boolean rootDirMode;
@@ -169,7 +169,8 @@ public class SftpEmbeddedService extends AbstractTestService implements FtpServi
             String name = System.getProperty("os.name");
             String message = e.getMessage();
 
-            LOG.warn("SunX509 is not available on this platform [{}] Testing is skipped! Real cause: {}", name, message, e);
+            LOG.warn("SunX509 is not available on this platform [{}] Testing is skipped! Real cause: {}", name, message,
+                    e);
             return false;
         }
     }

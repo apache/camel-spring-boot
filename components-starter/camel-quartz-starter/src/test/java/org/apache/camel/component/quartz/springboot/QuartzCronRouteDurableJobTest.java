@@ -16,13 +16,8 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-
-
-
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -30,21 +25,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzCronRouteDurableJobTest.class,
-        QuartzCronRouteDurableJobTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzCronRouteDurableJobTest.class,
+        QuartzCronRouteDurableJobTest.TestConfiguration.class })
 public class QuartzCronRouteDurableJobTest extends QuartzCronRouteTest {
 
-    
-    
-    
     // *************************************
     // Config
     // *************************************
@@ -59,12 +45,11 @@ public class QuartzCronRouteDurableJobTest extends QuartzCronRouteTest {
                 public void configure() {
                     // triggers every 1th second at precise 00,01,02,03..59
                     // notice we must use + as space when configured using URI parameter
-                    from("quartz://myGroup/myTimerName?durableJob=true&recoverableJob=true&cron=0/1+*+*+*+*+?").to("mock:result");
+                    from("quartz://myGroup/myTimerName?durableJob=true&recoverableJob=true&cron=0/1+*+*+*+*+?")
+                            .to("mock:result");
                 }
             };
         }
     }
-    
-   
 
 }

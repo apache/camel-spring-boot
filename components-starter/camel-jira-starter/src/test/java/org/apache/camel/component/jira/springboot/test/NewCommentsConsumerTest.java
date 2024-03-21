@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.jira.springboot.test;
 
-
-
 import static org.apache.camel.component.jira.JiraConstants.JIRA_REST_CLIENT_FACTORY;
 import static org.apache.camel.component.jira.springboot.test.Utils.createIssueWithComments;
 import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.PROJECT;
@@ -55,7 +53,6 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-
 import io.atlassian.util.concurrent.Promise;
 import io.atlassian.util.concurrent.Promises;
 
@@ -66,56 +63,46 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
-
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        NewCommentsConsumerTest.class,
-        NewCommentsConsumerTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, NewCommentsConsumerTest.class,
+        NewCommentsConsumerTest.TestConfiguration.class })
 
 public class NewCommentsConsumerTest {
 
     @Autowired
     private CamelContext camelContext;
-    
 
-    
     @Autowired
     @Produce("direct:start")
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mockResult;
-    
+
     static JiraRestClient jiraClient;
-    
+
     static JiraRestClientFactory jiraRestClientFactory;
-    
+
     static IssueRestClient issueRestClient;
-    
+
     static SearchRestClient searchRestClient;
 
     static List<Issue> issues = new ArrayList<>();
-  
-       
+
     @BeforeAll
     public static void beforeAll() {
         issues.add(createIssueWithComments(1L, 1));
         issues.add(createIssueWithComments(2L, 1));
         issues.add(createIssueWithComments(3L, 1));
     }
-    
+
     @Bean
     CamelContextConfiguration contextConfiguration() {
         return new CamelContextConfiguration() {
             @Override
             public void beforeApplicationStart(CamelContext context) {
-                //get chance to mock camelContext/Registry
+                // get chance to mock camelContext/Registry
                 jiraRestClientFactory = mock(JiraRestClientFactory.class);
                 jiraClient = mock(JiraRestClient.class);
                 issueRestClient = mock(IssueRestClient.class);
@@ -127,20 +114,21 @@ public class NewCommentsConsumerTest {
 
                 when(jiraClient.getSearchClient()).thenReturn(searchRestClient);
                 when(jiraClient.getIssueClient()).thenReturn(issueRestClient);
-                when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any())).thenReturn(jiraClient);
+                when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any()))
+                        .thenReturn(jiraClient);
                 when(searchRestClient.searchJql(any(), any(), any(), any())).thenReturn(promiseSearchResult);
                 when(issueRestClient.getIssue(anyString())).thenReturn(promiseIssue);
-                
+
                 camelContext.getRegistry().bind(JIRA_REST_CLIENT_FACTORY, jiraRestClientFactory);
             }
 
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here                
+                // do nothing here
             }
         };
     }
-    
+
     @Test
     public void emptyAtStartupTest() throws Exception {
         mockResult.expectedMessageCount(0);
@@ -210,27 +198,21 @@ public class NewCommentsConsumerTest {
         mockResult.expectedBodiesReceived(comments);
         mockResult.assertIsSatisfied();
     }
-    
+
     @Configuration
     public class TestConfiguration {
-        
-        
 
         @Bean
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws IOException {
-                    from("jira://newComments?jiraUrl=" + JiraTestConstants.getJiraCredentials() + "&jql=project=" + PROJECT + "&delay=1000")
-                            .to(mockResult);
+                    from("jira://newComments?jiraUrl=" + JiraTestConstants.getJiraCredentials() + "&jql=project="
+                            + PROJECT + "&delay=1000").to(mockResult);
                 }
             };
         }
-        
-      
+
     }
-    
-    
-    
-    
+
 }

@@ -16,9 +16,6 @@
  */
 package org.apache.camel.component.cassandra.integration;
 
-
-
-
 import com.datastax.oss.driver.api.core.CqlSession;
 
 import org.apache.camel.builder.RouteBuilder;
@@ -38,16 +35,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        CassandraComponentBeanRefIT.class,
-        CassandraComponentBeanRefIT.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, CassandraComponentBeanRefIT.class,
+        CassandraComponentBeanRefIT.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class CassandraComponentBeanRefIT extends BaseCassandra {
 
@@ -56,17 +47,13 @@ public class CassandraComponentBeanRefIT extends BaseCassandra {
 
     @Bean("cassandraSession")
     protected CqlSession createSession() {
-              
+
         return getSession();
     }
-    
-    
-   
 
     @Test
     public void testSession() {
-        
-        
+
         CassandraEndpoint endpoint = context.getEndpoint(SESSION_URI, CassandraEndpoint.class);
         assertNotNull(endpoint, "No endpoint found for uri: " + SESSION_URI);
 

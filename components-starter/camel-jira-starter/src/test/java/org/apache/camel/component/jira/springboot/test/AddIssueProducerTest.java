@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jira.springboot.test;
 
-
 import static org.apache.camel.component.jira.JiraConstants.ISSUE_ASSIGNEE;
 import static org.apache.camel.component.jira.JiraConstants.ISSUE_PRIORITY_ID;
 import static org.apache.camel.component.jira.JiraConstants.ISSUE_PRIORITY_NAME;
@@ -73,53 +72,45 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
-
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        AddIssueProducerTest.class,
-        AddIssueProducerTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, AddIssueProducerTest.class,
+        AddIssueProducerTest.TestConfiguration.class })
 
 public class AddIssueProducerTest {
 
     @Autowired
     private CamelContext camelContext;
-    
 
-    
     @Autowired
     @Produce("direct:start")
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mockResult;
-    
+
     static JiraRestClient jiraClient;
-    
+
     static JiraRestClientFactory jiraRestClientFactory;
-    
+
     static IssueRestClient issueRestClient;
 
     static Issue backendIssue;
-    
+
     static MetadataRestClient metadataRestClient;
-    
+
     @Bean
     CamelContextConfiguration contextConfiguration() {
         return new CamelContextConfiguration() {
             @Override
             public void beforeApplicationStart(CamelContext context) {
-                //get chance to mock camelContext/Registry
+                // get chance to mock camelContext/Registry
                 jiraRestClientFactory = mock(JiraRestClientFactory.class);
                 jiraClient = mock(JiraRestClient.class);
                 issueRestClient = mock(IssueRestClient.class);
                 metadataRestClient = mock(MetadataRestClient.class);
-                lenient().when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any())).thenReturn(jiraClient);
+                lenient().when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any()))
+                        .thenReturn(jiraClient);
                 lenient().when(jiraClient.getIssueClient()).thenReturn(issueRestClient);
 
                 lenient().when(jiraClient.getMetadataClient()).thenReturn(metadataRestClient);
@@ -145,27 +136,29 @@ public class AddIssueProducerTest {
                     String description = (String) issueInput.getField("description").getValue();
                     Integer priorityId = Integer.parseInt(getValue(issueInput, "priority", "id"));
                     BasicPriority priority = issuePriorities.get(priorityId);
-                    backendIssue = createIssue(11L, summary, project, issueType, description, priority, userAssignee, null, null);
-                    BasicIssue basicIssue = new BasicIssue(backendIssue.getSelf(), backendIssue.getKey(), backendIssue.getId());
+                    backendIssue = createIssue(11L, summary, project, issueType, description, priority, userAssignee,
+                            null, null);
+                    BasicIssue basicIssue = new BasicIssue(backendIssue.getSelf(), backendIssue.getKey(),
+                            backendIssue.getId());
                     return Promises.promise(basicIssue);
                 });
                 lenient().when(issueRestClient.getIssue(any())).then(inv -> Promises.promise(backendIssue));
-                
+
                 camelContext.getRegistry().bind(JIRA_REST_CLIENT_FACTORY, jiraRestClientFactory);
             }
 
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here                
+                // do nothing here
             }
         };
     }
-    
+
     private String getValue(IssueInput issueInput, String field, String key) {
         ComplexIssueInputFieldValue complexField = (ComplexIssueInputFieldValue) issueInput.getField(field).getValue();
         return (String) complexField.getValuesMap().get(key);
     }
-    
+
     @Test
     public void verifyIssueAdded() throws InterruptedException {
 
@@ -211,29 +204,20 @@ public class AddIssueProducerTest {
         mockResult.assertIsSatisfied();
     }
 
-
-    
     @Configuration
     public class TestConfiguration {
-        
-        
 
         @Bean
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws IOException {
-                    from("direct:start")
-                            .to("jira://addIssue?jiraUrl=" + JiraTestConstants.getJiraCredentials())
+                    from("direct:start").to("jira://addIssue?jiraUrl=" + JiraTestConstants.getJiraCredentials())
                             .to(mockResult);
                 }
             };
         }
-        
-      
+
     }
-    
-    
-    
-    
+
 }

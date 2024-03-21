@@ -68,33 +68,28 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirCustomClientConfigurationIT.class,
-                FhirCustomClientConfigurationIT.TestConfiguration.class,
-                CustomNoFhirServerUrlCamelContext.class,
-                FhirServer.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirCustomClientConfigurationIT.class,
+        FhirCustomClientConfigurationIT.TestConfiguration.class, CustomNoFhirServerUrlCamelContext.class,
+        FhirServer.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class FhirCustomClientConfigurationIT extends AbstractFhirTestSupport {
 
-    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirCreateApiMethod.class).getName();
+    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirCreateApiMethod.class)
+            .getName();
 
-    private static final String TEST_URI_CUSTOM_CLIENT
-            = "fhir://" + PATH_PREFIX + "/resource?inBody=resourceAsString&client=#customClient";
+    private static final String TEST_URI_CUSTOM_CLIENT = "fhir://" + PATH_PREFIX
+            + "/resource?inBody=resourceAsString&client=#customClient";
 
-    private static final String TEST_URI_CUSTOM_CLIENT_FACTORY
-            = "fhir://" + PATH_PREFIX + "/resource?inBody=resourceAsString&clientFactory=#customClientFactory&serverUrl=foobar";
+    private static final String TEST_URI_CUSTOM_CLIENT_FACTORY = "fhir://" + PATH_PREFIX
+            + "/resource?inBody=resourceAsString&clientFactory=#customClientFactory&serverUrl=foobar";
 
     @Bean("customClientFactory")
-    public CustomClientFactory createCustomClientFactory(){
+    public CustomClientFactory createCustomClientFactory() {
         return new CustomClientFactory();
     }
 
     @Bean("customClient")
-    public CustomClient createCustomClient(){
+    public CustomClient createCustomClient() {
         return new CustomClient();
     }
 
@@ -144,9 +139,8 @@ public class FhirCustomClientConfigurationIT extends AbstractFhirTestSupport {
         }
 
         @Override
-        public IHttpClient getHttpClient(
-                StringBuilder theUrl, Map<String, List<String>> theIfNoneExistParams, String theIfNoneExistString,
-                RequestTypeEnum theRequestType, List<Header> theHeaders) {
+        public IHttpClient getHttpClient(StringBuilder theUrl, Map<String, List<String>> theIfNoneExistParams,
+                String theIfNoneExistString, RequestTypeEnum theRequestType, List<Header> theHeaders) {
             return null;
         }
 
@@ -241,8 +235,8 @@ public class FhirCustomClientConfigurationIT extends AbstractFhirTestSupport {
         }
 
         @Override
-        public void validateServerBaseIfConfiguredToDoSo(
-                String theServerBase, IHttpClient theHttpClient, IRestfulClient theClient) {
+        public void validateServerBaseIfConfiguredToDoSo(String theServerBase, IHttpClient theHttpClient,
+                IRestfulClient theClient) {
 
         }
     }

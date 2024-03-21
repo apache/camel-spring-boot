@@ -24,29 +24,29 @@ import java.util.Map;
  */
 public class GenericComplexRequestType<T extends GenericData> {
 
-	private T data;
-	private List<T> listOfData;
-	private List<List<T>> listOfListOfData;
-	private Map<String, T> mapOfData;
-	private Map<String, Map<String, T>> mapOfMapOfData;
+    private T data;
+    private List<T> listOfData;
+    private List<List<T>> listOfListOfData;
+    private Map<String, T> mapOfData;
+    private Map<String, Map<String, T>> mapOfMapOfData;
 
-	public T getData() {
-		return data;
-	}
+    public T getData() {
+        return data;
+    }
 
-	public List<T> getListOfData() {
-		return listOfData;
-	}
+    public List<T> getListOfData() {
+        return listOfData;
+    }
 
-	public Map<String, T> getMapOfData() {
-		return mapOfData;
-	}
+    public Map<String, T> getMapOfData() {
+        return mapOfData;
+    }
 
-	public List<List<T>> getListOfListOfData() {
-		return listOfListOfData;
-	}
+    public List<List<T>> getListOfListOfData() {
+        return listOfListOfData;
+    }
 
-	public Map<String, Map<String, T>> getMapOfMapOfData() {
-		return mapOfMapOfData;
-	}
+    public Map<String, Map<String, T>> getMapOfMapOfData() {
+        return mapOfMapOfData;
+    }
 }

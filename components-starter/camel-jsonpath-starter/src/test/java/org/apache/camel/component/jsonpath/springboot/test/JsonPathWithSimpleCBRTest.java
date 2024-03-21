@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
 
 import org.apache.camel.CamelContext;
@@ -29,7 +28,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -37,36 +35,28 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathWithSimpleCBRTest.class,
-        JsonPathWithSimpleCBRTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathWithSimpleCBRTest.class,
+        JsonPathWithSimpleCBRTest.TestConfiguration.class })
 public class JsonPathWithSimpleCBRTest {
 
     @Autowired
-    CamelContext  context;
-    
+    CamelContext context;
+
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:cheap")
     MockEndpoint mockCheap;
-    
+
     @EndpointInject("mock:average")
     MockEndpoint mockAverage;
-    
+
     @EndpointInject("mock:expensive")
     MockEndpoint mockExpensive;
-    
+
     FluentProducerTemplate fluentTemplate;
-    
-    
 
     @Test
     public void testCheap() throws Exception {
@@ -77,8 +67,8 @@ public class JsonPathWithSimpleCBRTest {
         mockAverage.expectedMessageCount(0);
         mockExpensive.expectedMessageCount(0);
 
-        fluentTemplate.withHeader("cheap", 10).withHeader("average", 30).withBody(new File("src/test/resources/cheap.json"))
-                .to("direct:start").send();
+        fluentTemplate.withHeader("cheap", 10).withHeader("average", 30)
+                .withBody(new File("src/test/resources/cheap.json")).to("direct:start").send();
 
         MockEndpoint.assertIsSatisfied(context);
     }
@@ -92,8 +82,8 @@ public class JsonPathWithSimpleCBRTest {
         mockAverage.expectedMessageCount(1);
         mockExpensive.expectedMessageCount(0);
 
-        fluentTemplate.withHeader("cheap", 10).withHeader("average", 30).withBody(new File("src/test/resources/average.json"))
-                .to("direct:start").send();
+        fluentTemplate.withHeader("cheap", 10).withHeader("average", 30)
+                .withBody(new File("src/test/resources/average.json")).to("direct:start").send();
 
         MockEndpoint.assertIsSatisfied(context);
     }
@@ -107,13 +97,11 @@ public class JsonPathWithSimpleCBRTest {
         mockAverage.expectedMessageCount(0);
         mockExpensive.expectedMessageCount(1);
 
-        fluentTemplate.withHeader("cheap", 10).withHeader("average", 30).withBody(new File("src/test/resources/expensive.json"))
-                .to("direct:start").send();
+        fluentTemplate.withHeader("cheap", 10).withHeader("average", 30)
+                .withBody(new File("src/test/resources/expensive.json")).to("direct:start").send();
 
         MockEndpoint.assertIsSatisfied(context);
     }
-
-    
 
     // *************************************
     // Config
@@ -127,14 +115,9 @@ public class JsonPathWithSimpleCBRTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                            .choice()
-                            .when().jsonpath("$.store.book[?(@.price < ${header.cheap})]")
-                            .to("mock:cheap")
-                            .when().jsonpath("$.store.book[?(@.price < ${header.average})]")
-                            .to("mock:average")
-                            .otherwise()
-                            .to("mock:expensive");
+                    from("direct:start").choice().when().jsonpath("$.store.book[?(@.price < ${header.cheap})]")
+                            .to("mock:cheap").when().jsonpath("$.store.book[?(@.price < ${header.average})]")
+                            .to("mock:average").otherwise().to("mock:expensive");
                 }
             };
         }

@@ -38,13 +38,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 //Based on S3CopyObjectOperationManualIT
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                S3PojoAsBodyTest.class,
-                S3PojoAsBodyTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, S3PojoAsBodyTest.class,
+        S3PojoAsBodyTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class S3PojoAsBodyTest extends BaseS3 {
 
@@ -78,7 +73,7 @@ public class S3PojoAsBodyTest extends BaseS3 {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseS3.TestConfiguration {
+    public class TestConfiguration extends BaseS3.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder(S3Client s3Client) {
             return new RouteBuilder() {
@@ -86,7 +81,8 @@ public class S3PojoAsBodyTest extends BaseS3 {
                 public void configure() {
                     from("direct:send").to("aws2-s3://mycamel?autoCreateBucket=true");
 
-                    from("direct:list").to("aws2-s3://mycamel?autoCreateBucket=true&operation=listObjects&pojoRequest=true");
+                    from("direct:list")
+                            .to("aws2-s3://mycamel?autoCreateBucket=true&operation=listObjects&pojoRequest=true");
                 }
             };
         }

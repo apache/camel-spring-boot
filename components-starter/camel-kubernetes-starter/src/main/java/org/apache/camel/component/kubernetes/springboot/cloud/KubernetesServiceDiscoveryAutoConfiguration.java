@@ -71,7 +71,8 @@ public class KubernetesServiceDiscoveryAutoConfiguration {
         if (beanFactory != null) {
             Map<String, Object> parameters = new HashMap<>();
 
-            for (Map.Entry<String, KubernetesServiceCallServiceDiscoveryConfigurationCommon> entry : configuration.getConfigurations().entrySet()) {
+            for (Map.Entry<String, KubernetesServiceCallServiceDiscoveryConfigurationCommon> entry : configuration
+                    .getConfigurations().entrySet()) {
                 // clean up params
                 parameters.clear();
 
@@ -97,10 +98,7 @@ public class KubernetesServiceDiscoveryAutoConfiguration {
 
     public static class Condition extends GroupCondition {
         public Condition() {
-            super(
-                "camel.cloud.kubernetes",
-                "camel.cloud.kubernetes.service-discovery"
-            );
+            super("camel.cloud.kubernetes", "camel.cloud.kubernetes.service-discovery");
         }
     }
 }

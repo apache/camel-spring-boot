@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.cassandra.integration;
 
-
 import static com.datastax.oss.driver.api.querybuilder.QueryBuilder.bindMarker;
 
 import java.util.Arrays;
@@ -28,7 +27,6 @@ import com.datastax.oss.driver.api.core.cql.ResultSet;
 import com.datastax.oss.driver.api.core.cql.Row;
 import com.datastax.oss.driver.api.querybuilder.QueryBuilder;
 import com.datastax.oss.driver.api.querybuilder.update.Update;
-
 
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
@@ -46,7 +44,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-
 import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -54,16 +51,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        CassandraComponentProducerIT.class,
-        CassandraComponentProducerIT.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, CassandraComponentProducerIT.class,
+        CassandraComponentProducerIT.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class CassandraComponentProducerIT extends BaseCassandra {
 
@@ -84,14 +75,13 @@ public class CassandraComponentProducerIT extends BaseCassandra {
 
     @Produce("direct:inputNoEndpointCql")
     ProducerTemplate producerTemplateNoEndpointCql;
-   
 
     @Test
     public void testRequestUriCql() {
         producerTemplate.requestBody(Arrays.asList("w_jiang", "Willem", "Jiang"));
 
-        ResultSet resultSet = getSession()
-                .execute(String.format("select login, first_name, last_name from camel_user where login = '%s'", "w_jiang"));
+        ResultSet resultSet = getSession().execute(
+                String.format("select login, first_name, last_name from camel_user where login = '%s'", "w_jiang"));
         Row row = resultSet.one();
         assertNotNull(row);
         assertEquals("Willem", row.getString("first_name"));
@@ -116,11 +106,11 @@ public class CassandraComponentProducerIT extends BaseCassandra {
 
     @Test
     public void testRequestMessageCql() {
-        producerTemplate.requestBodyAndHeader(new Object[] { "Claus 2", "Ibsen 2", "c_ibsen" }, CassandraConstants.CQL_QUERY,
-                "update camel_user set first_name=?, last_name=? where login=?");
+        producerTemplate.requestBodyAndHeader(new Object[] { "Claus 2", "Ibsen 2", "c_ibsen" },
+                CassandraConstants.CQL_QUERY, "update camel_user set first_name=?, last_name=? where login=?");
 
-        ResultSet resultSet = getSession()
-                .execute(String.format("select login, first_name, last_name from camel_user where login = '%s'", "c_ibsen"));
+        ResultSet resultSet = getSession().execute(
+                String.format("select login, first_name, last_name from camel_user where login = '%s'", "c_ibsen"));
         Row row = resultSet.one();
         assertNotNull(row);
         assertEquals("Claus 2", row.getString("first_name"));
@@ -130,11 +120,10 @@ public class CassandraComponentProducerIT extends BaseCassandra {
     @Test
     public void testLoadBalancing() {
         loadBalancingPolicyTemplate.requestBodyAndHeader(new Object[] { "Claus 2", "Ibsen 2", "c_ibsen" },
-                CassandraConstants.CQL_QUERY,
-                "update camel_user set first_name=?, last_name=? where login=?");
+                CassandraConstants.CQL_QUERY, "update camel_user set first_name=?, last_name=? where login=?");
 
-        ResultSet resultSet = getSession()
-                .execute(String.format("select login, first_name, last_name from camel_user where login = '%s'", "c_ibsen"));
+        ResultSet resultSet = getSession().execute(
+                String.format("select login, first_name, last_name from camel_user where login = '%s'", "c_ibsen"));
         Row row = resultSet.one();
         assertNotNull(row);
         assertEquals("Claus 2", row.getString("first_name"));
@@ -149,15 +138,13 @@ public class CassandraComponentProducerIT extends BaseCassandra {
     @Test
     public void testRequestMessageStatement() {
 
-        Update update = QueryBuilder.update("camel_user")
-                .setColumn("first_name", bindMarker())
-                .setColumn("last_name", bindMarker())
-                .whereColumn("login").isEqualTo(bindMarker());
-        producerTemplate.requestBodyAndHeader(new Object[] { "Claus 2", "Ibsen 2", "c_ibsen" }, CassandraConstants.CQL_QUERY,
-                update.build());
+        Update update = QueryBuilder.update("camel_user").setColumn("first_name", bindMarker())
+                .setColumn("last_name", bindMarker()).whereColumn("login").isEqualTo(bindMarker());
+        producerTemplate.requestBodyAndHeader(new Object[] { "Claus 2", "Ibsen 2", "c_ibsen" },
+                CassandraConstants.CQL_QUERY, update.build());
 
-        ResultSet resultSet = getSession()
-                .execute(String.format("select login, first_name, last_name from camel_user where login = '%s'", "c_ibsen"));
+        ResultSet resultSet = getSession().execute(
+                String.format("select login, first_name, last_name from camel_user where login = '%s'", "c_ibsen"));
         Row row = resultSet.one();
         assertNotNull(row);
         assertEquals("Claus 2", row.getString("first_name"));
@@ -170,27 +157,25 @@ public class CassandraComponentProducerIT extends BaseCassandra {
      */
     @Test
     public void testEndpointNoCqlParameter() {
-        Update update = QueryBuilder.update("camel_user")
-                .setColumn("first_name", bindMarker())
-                .whereColumn("login").isEqualTo(bindMarker());
-        producerTemplateNoEndpointCql.sendBodyAndHeader(new Object[] { "Claus 2", "c_ibsen" }, CassandraConstants.CQL_QUERY,
-                update.build());
+        Update update = QueryBuilder.update("camel_user").setColumn("first_name", bindMarker()).whereColumn("login")
+                .isEqualTo(bindMarker());
+        producerTemplateNoEndpointCql.sendBodyAndHeader(new Object[] { "Claus 2", "c_ibsen" },
+                CassandraConstants.CQL_QUERY, update.build());
 
-        ResultSet resultSet1 = getSession()
-                .execute(String.format("select login, first_name, last_name from camel_user where login = '%s'", "c_ibsen"));
+        ResultSet resultSet1 = getSession().execute(
+                String.format("select login, first_name, last_name from camel_user where login = '%s'", "c_ibsen"));
         Row row1 = resultSet1.one();
         assertNotNull(row1);
         assertEquals("Claus 2", row1.getString("first_name"));
         assertEquals("Ibsen", row1.getString("last_name"));
 
-        update = QueryBuilder.update("camel_user")
-                .setColumn("last_name", bindMarker())
-                .whereColumn("login").isEqualTo(bindMarker());
-        producerTemplateNoEndpointCql.sendBodyAndHeader(new Object[] { "Ibsen 2", "c_ibsen" }, CassandraConstants.CQL_QUERY,
-                update.build());
+        update = QueryBuilder.update("camel_user").setColumn("last_name", bindMarker()).whereColumn("login")
+                .isEqualTo(bindMarker());
+        producerTemplateNoEndpointCql.sendBodyAndHeader(new Object[] { "Ibsen 2", "c_ibsen" },
+                CassandraConstants.CQL_QUERY, update.build());
 
-        ResultSet resultSet2 = getSession()
-                .execute(String.format("select login, first_name, last_name from camel_user where login = '%s'", "c_ibsen"));
+        ResultSet resultSet2 = getSession().execute(
+                String.format("select login, first_name, last_name from camel_user where login = '%s'", "c_ibsen"));
         Row row2 = resultSet2.one();
         assertNotNull(row2);
         assertEquals("Claus 2", row2.getString("first_name"));
@@ -199,9 +184,9 @@ public class CassandraComponentProducerIT extends BaseCassandra {
 
     @Test
     public void testRequestNotConsistent() {
-        CassandraEndpoint endpoint
-                = context.getEndpoint(String.format("cql://%s/%s?cql=%s&consistencyLevel=ANY", getUrl(), KEYSPACE_NAME, CQL),
-                        CassandraEndpoint.class);
+        CassandraEndpoint endpoint = context.getEndpoint(
+                String.format("cql://%s/%s?cql=%s&consistencyLevel=ANY", getUrl(), KEYSPACE_NAME, CQL),
+                CassandraEndpoint.class);
         assertEquals(ConsistencyLevel.ANY, endpoint.getConsistencyLevel());
 
         notConsistentProducerTemplate.requestBody(Arrays.asList("j_anstey", "Jonathan", "Anstey"));

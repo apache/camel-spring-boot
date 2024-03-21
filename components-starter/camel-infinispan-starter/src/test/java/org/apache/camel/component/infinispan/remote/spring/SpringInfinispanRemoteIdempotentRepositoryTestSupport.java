@@ -40,58 +40,48 @@ import java.util.UUID;
 
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public abstract class SpringInfinispanRemoteIdempotentRepositoryTestSupport {
-	@RegisterExtension
-	public static InfinispanService service = InfinispanServiceFactory.createService();
+    @RegisterExtension
+    public static InfinispanService service = InfinispanServiceFactory.createService();
 
-	static RemoteCacheManager manager;
+    static RemoteCacheManager manager;
 
-	@Autowired
-	public CamelContext context;
+    @Autowired
+    public CamelContext context;
 
-	@Autowired
-	public ProducerTemplate template;
+    @Autowired
+    public ProducerTemplate template;
 
-	@BeforeAll
-	public static void doPreSetup() throws Exception {
-		ConfigurationBuilder clientBuilder = new ConfigurationBuilder();
+    @BeforeAll
+    public static void doPreSetup() throws Exception {
+        ConfigurationBuilder clientBuilder = new ConfigurationBuilder();
 
-		// for default tests, we force return value for all the
-		// operations
-		clientBuilder
-				.forceReturnValues(true);
+        // for default tests, we force return value for all the
+        // operations
+        clientBuilder.forceReturnValues(true);
 
-		// add server from the test infra service
-		clientBuilder
-				.addServer()
-				.host(service.host())
-				.port(service.port());
+        // add server from the test infra service
+        clientBuilder.addServer().host(service.host()).port(service.port());
 
-		// add security info
-		clientBuilder
-				.security()
-				.authentication()
-				.username(service.username())
-				.password(service.password())
-				.serverName("infinispan")
-				.saslMechanism("DIGEST-MD5")
-				.realm("default");
+        // add security info
+        clientBuilder.security().authentication().username(service.username()).password(service.password())
+                .serverName("infinispan").saslMechanism("DIGEST-MD5").realm("default");
 
-		manager = new RemoteCacheManager(clientBuilder.create());
-		MarshallerRegistration.init(MarshallerUtil.getSerializationContext(manager));
-		RemoteCache<Object, Object> cache = manager.administration().getOrCreateCache("idempotent", (String) null);
-		assertNotNull(cache);
-	}
+        manager = new RemoteCacheManager(clientBuilder.create());
+        MarshallerRegistration.init(MarshallerUtil.getSerializationContext(manager));
+        RemoteCache<Object, Object> cache = manager.administration().getOrCreateCache("idempotent", (String) null);
+        assertNotNull(cache);
+    }
 
-	@Test
-	public void testIdempotent() throws Exception {
-		MockEndpoint mock = context.getEndpoint("mock:result", MockEndpoint.class);
-		mock.expectedMessageCount(1);
+    @Test
+    public void testIdempotent() throws Exception {
+        MockEndpoint mock = context.getEndpoint("mock:result", MockEndpoint.class);
+        mock.expectedMessageCount(1);
 
-		String messageId = UUID.randomUUID().toString();
-		for (int i = 0; i < 5; i++) {
-			template.sendBodyAndHeader("direct:start", UUID.randomUUID().toString(), "MessageId", messageId);
-		}
+        String messageId = UUID.randomUUID().toString();
+        for (int i = 0; i < 5; i++) {
+            template.sendBodyAndHeader("direct:start", UUID.randomUUID().toString(), "MessageId", messageId);
+        }
 
-		mock.assertIsSatisfied();
-	}
+        mock.assertIsSatisfied();
+    }
 }

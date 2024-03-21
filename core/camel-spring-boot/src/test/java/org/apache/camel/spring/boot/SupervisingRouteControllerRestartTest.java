@@ -38,19 +38,11 @@ import static org.awaitility.Awaitility.await;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        SupervisingRouteControllerRestartTest.TestConfiguration.class
-    },
-    properties = {
-        "camel.springboot.main-run-controller = true",
-        "camel.routecontroller.enabled = true",
-        "camel.routecontroller.initialDelay = 500",
-        "camel.routecontroller.backoffDelay = 1000",
-        "camel.routecontroller.backoffMaxAttempts = 5",
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class,
+        SupervisingRouteControllerRestartTest.TestConfiguration.class }, properties = {
+                "camel.springboot.main-run-controller = true", "camel.routecontroller.enabled = true",
+                "camel.routecontroller.initialDelay = 500", "camel.routecontroller.backoffDelay = 1000",
+                "camel.routecontroller.backoffMaxAttempts = 5", })
 public class SupervisingRouteControllerRestartTest {
 
     @Autowired
@@ -103,17 +95,9 @@ public class SupervisingRouteControllerRestartTest {
                 public void configure() throws Exception {
                     getContext().addComponent("dummy", new DummyComponent());
 
-                    from("timer:foo?period=5000")
-                        .id("foo")
-                        .startupOrder(2)
-                        .to("mock:foo");
-                    from("timer:bar?period=5000")
-                        .id("bar")
-                        .startupOrder(1)
-                        .to("mock:bar");
-                    from("dummy:foo?failOnRestart=true")
-                        .id("dummy")
-                        .to("mock:dummy");
+                    from("timer:foo?period=5000").id("foo").startupOrder(2).to("mock:foo");
+                    from("timer:bar?period=5000").id("bar").startupOrder(1).to("mock:bar");
+                    from("dummy:foo?failOnRestart=true").id("dummy").to("mock:dummy");
                 }
             };
         }

@@ -29,14 +29,11 @@ import org.springframework.test.annotation.DirtiesContext;
 @CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
-@SpringBootTest(properties = {
-        "camel.component.salesforce.refresh-token=myToken",
-        "camel.component.salesforce.client-secret=mySecret",
-        "camel.component.salesforce.client-id=myClient",
+@SpringBootTest(properties = { "camel.component.salesforce.refresh-token=myToken",
+        "camel.component.salesforce.client-secret=mySecret", "camel.component.salesforce.client-id=myClient",
         "camel.component.salesforce.lazy-login=true",
         "camel.component.salesforce.http-client-properties.requestBufferSize=12345",
-        "camel.component.salesforce.http-client-properties.bar=yes",
-})
+        "camel.component.salesforce.http-client-properties.bar=yes", })
 public class SalesforceComponentTest {
 
     @Autowired

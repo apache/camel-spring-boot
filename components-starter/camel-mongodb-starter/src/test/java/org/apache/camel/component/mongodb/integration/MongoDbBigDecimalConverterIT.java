@@ -38,14 +38,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                MongoDbBigDecimalConverterIT.class,
-                MongoDbBigDecimalConverterIT.TestConfiguration.class,
-                AbstractMongoDbITSupport.MongoConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, MongoDbBigDecimalConverterIT.class,
+        MongoDbBigDecimalConverterIT.TestConfiguration.class, AbstractMongoDbITSupport.MongoConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class MongoDbBigDecimalConverterIT extends AbstractMongoDbITSupport {
 
@@ -57,8 +51,8 @@ public class MongoDbBigDecimalConverterIT extends AbstractMongoDbITSupport {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:insert")
-                            .to("mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert");
+                    from("direct:insert").to(
+                            "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=insert");
                 }
             };
         }

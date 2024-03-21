@@ -37,10 +37,11 @@ public abstract class ValidatorDtdAccessAbstractTest extends ContextTestSupport 
 
     protected String payloud = getPayloudPart("Hello world!");
 
-    protected String ssrfPayloud = "<!DOCTYPE roottag PUBLIC \"-//VSR//PENTEST//EN\" \"http://notex.isting/test\">\n" + payloud;
+    protected String ssrfPayloud = "<!DOCTYPE roottag PUBLIC \"-//VSR//PENTEST//EN\" \"http://notex.isting/test\">\n"
+            + payloud;
 
-    protected String xxePayloud
-            = "<!DOCTYPE updateProfile [<!ENTITY file SYSTEM \"http://notex.istinghost/test\">]>\n" + getPayloudPart("&file;");
+    protected String xxePayloud = "<!DOCTYPE updateProfile [<!ENTITY file SYSTEM \"http://notex.istinghost/test\">]>\n"
+            + getPayloudPart("&file;");
 
     private String getPayloudPart(String bodyValue) {
         return "<mail xmlns='http://foo.com/bar'><subject>Hey</subject><body>" + bodyValue + "</body></mail>";
@@ -56,13 +57,13 @@ public abstract class ValidatorDtdAccessAbstractTest extends ContextTestSupport 
 
                 @Override
                 public void configure() throws Exception {
-                    if(accessExternalDTD()) {
+                    if (accessExternalDTD()) {
                         getContext().getGlobalOptions().put(SchemaReader.ACCESS_EXTERNAL_DTD, "true");
                     }
-                    from("direct:start").doTry().to("validator:org/apache/camel/component/validator/schema.xsd").to("mock:valid")
-                            .doCatch(ValidationException.class).to("mock:invalid")
-                            .doCatch(UnknownHostException.class).to("mock:unknownHostException").doFinally().to("mock:finally")
-                            .end();
+                    from("direct:start").doTry().to("validator:org/apache/camel/component/validator/schema.xsd")
+                            .to("mock:valid").doCatch(ValidationException.class).to("mock:invalid")
+                            .doCatch(UnknownHostException.class).to("mock:unknownHostException").doFinally()
+                            .to("mock:finally").end();
                 }
             };
         }

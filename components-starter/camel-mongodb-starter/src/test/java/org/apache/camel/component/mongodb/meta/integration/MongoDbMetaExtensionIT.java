@@ -47,13 +47,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                MongoDbMetaExtensionIT.class,
-                AbstractMongoDbITSupport.MongoConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, MongoDbMetaExtensionIT.class,
+        AbstractMongoDbITSupport.MongoConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class MongoDbMetaExtensionIT extends AbstractMongoDbITSupport {
     // We simulate the presence of an authenticated user
@@ -74,29 +69,19 @@ public class MongoDbMetaExtensionIT extends AbstractMongoDbITSupport {
         final String collection = "validatedCollection";
         MongoDbComponent component = this.getComponent();
         // Given
-        Document jsonSchema = Document.parse("{ \n"
-                                             + "      bsonType: \"object\", \n"
-                                             + "      required: [ \"name\", \"surname\", \"email\" ], \n"
-                                             + "      properties: { \n"
-                                             + "         name: { \n"
-                                             + "            bsonType: \"string\", \n"
-                                             + "            description: \"required and must be a string\" }, \n"
-                                             + "         surname: { \n"
-                                             + "            bsonType: \"string\", \n"
-                                             + "            description: \"required and must be a string\" }, \n"
-                                             + "         email: { \n"
-                                             + "            bsonType: \"string\", \n"
-                                             + "            pattern: \"^.+@.+$\", \n"
-                                             + "            description: \"required and must be a valid email address\" }, \n"
-                                             + "         year_of_birth: { \n"
-                                             + "            bsonType: \"int\", \n"
-                                             + "            minimum: 1900, \n"
-                                             + "            maximum: 2018,\n"
-                                             + "            description: \"the value must be in the range 1900-2018\" }, \n"
-                                             + "         gender: { \n"
-                                             + "            enum: [ \"M\", \"F\" ], \n"
-                                             + "            description: \"can be only M or F\" } \n"
-                                             + "      }}");
+        Document jsonSchema = Document.parse(
+                "{ \n" + "      bsonType: \"object\", \n" + "      required: [ \"name\", \"surname\", \"email\" ], \n"
+                        + "      properties: { \n" + "         name: { \n" + "            bsonType: \"string\", \n"
+                        + "            description: \"required and must be a string\" }, \n" + "         surname: { \n"
+                        + "            bsonType: \"string\", \n"
+                        + "            description: \"required and must be a string\" }, \n" + "         email: { \n"
+                        + "            bsonType: \"string\", \n" + "            pattern: \"^.+@.+$\", \n"
+                        + "            description: \"required and must be a valid email address\" }, \n"
+                        + "         year_of_birth: { \n" + "            bsonType: \"int\", \n"
+                        + "            minimum: 1900, \n" + "            maximum: 2018,\n"
+                        + "            description: \"the value must be in the range 1900-2018\" }, \n"
+                        + "         gender: { \n" + "            enum: [ \"M\", \"F\" ], \n"
+                        + "            description: \"can be only M or F\" } \n" + "      }}");
         ValidationOptions collOptions = new ValidationOptions().validator(Filters.jsonSchema(jsonSchema));
         AbstractMongoDbITSupport.mongo.getDatabase(database).createCollection(collection,
                 new CreateCollectionOptions().validationOptions(collOptions));
@@ -136,8 +121,8 @@ public class MongoDbMetaExtensionIT extends AbstractMongoDbITSupport {
         parameters.put("user", properties.getProperty("testusername"));
         parameters.put("password", properties.getProperty("testpassword"));
 
-        final Optional<MetaDataExtension.MetaData> meta
-                = component.getExtension(MetaDataExtension.class).get().meta(parameters);
+        final Optional<MetaDataExtension.MetaData> meta = component.getExtension(MetaDataExtension.class).get()
+                .meta(parameters);
 
         // Then
         assertThrows(IllegalArgumentException.class, () -> meta.orElseThrow(IllegalArgumentException::new));
@@ -172,8 +157,8 @@ public class MongoDbMetaExtensionIT extends AbstractMongoDbITSupport {
         parameters.put("user", properties.getProperty("testusername"));
         parameters.put("password", properties.getProperty("testpassword"));
 
-        final Optional<MetaDataExtension.MetaData> meta
-                = component.getExtension(MetaDataExtension.class).get().meta(parameters);
+        final Optional<MetaDataExtension.MetaData> meta = component.getExtension(MetaDataExtension.class).get()
+                .meta(parameters);
 
         // Then
         assertThrows(UnsupportedOperationException.class, () -> meta.orElseThrow(UnsupportedOperationException::new));

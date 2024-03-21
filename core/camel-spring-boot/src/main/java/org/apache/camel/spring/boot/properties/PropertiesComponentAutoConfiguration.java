@@ -34,9 +34,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 
 @Configuration(proxyBeanMethods = false)
-@Conditional({ConditionalOnCamelContextAndAutoConfigurationBeans.class})
+@Conditional({ ConditionalOnCamelContextAndAutoConfigurationBeans.class })
 @AutoConfigureAfter(CamelAutoConfiguration.class)
-@EnableConfigurationProperties({PropertiesComponentConfiguration.class})
+@EnableConfigurationProperties({ PropertiesComponentConfiguration.class })
 public class PropertiesComponentAutoConfiguration {
 
     @Autowired
@@ -47,7 +47,8 @@ public class PropertiesComponentAutoConfiguration {
     @Lazy
     @Bean(name = "properties-component")
     @ConditionalOnMissingBean(PropertiesComponent.class)
-    public PropertiesComponent configurePropertiesComponent(PropertiesComponentConfiguration configuration) throws Exception {
+    public PropertiesComponent configurePropertiesComponent(PropertiesComponentConfiguration configuration)
+            throws Exception {
         PropertiesComponent component = new PropertiesComponent();
         component.setCamelContext(camelContext);
 
@@ -76,15 +77,18 @@ public class PropertiesComponentAutoConfiguration {
             component.setLocation(configuration.getLocation());
         }
         if (configuration.getInitialProperties() != null) {
-            Properties prop = camelContext.getRegistry().lookupByNameAndType(configuration.getInitialProperties(), Properties.class);
+            Properties prop = camelContext.getRegistry().lookupByNameAndType(configuration.getInitialProperties(),
+                    Properties.class);
             component.setInitialProperties(prop);
         }
         if (configuration.getOverrideProperties() != null) {
-            Properties prop = camelContext.getRegistry().lookupByNameAndType(configuration.getOverrideProperties(), Properties.class);
+            Properties prop = camelContext.getRegistry().lookupByNameAndType(configuration.getOverrideProperties(),
+                    Properties.class);
             component.setOverrideProperties(prop);
         }
         if (configuration.getPropertiesParser() != null) {
-            PropertiesParser parser = camelContext.getRegistry().lookupByNameAndType(configuration.getPropertiesParser(), PropertiesParser.class);
+            PropertiesParser parser = camelContext.getRegistry()
+                    .lookupByNameAndType(configuration.getPropertiesParser(), PropertiesParser.class);
             component.setPropertiesParser(parser);
         }
         return component;

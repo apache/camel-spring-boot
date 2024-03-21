@@ -38,91 +38,83 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
-
 import io.swagger.v3.core.util.Json;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				RestOpenApiReaderTest.class,
-				RestOpenApiReaderTest.TestConfiguration.class,
-				DummyRestConsumerFactory.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, RestOpenApiReaderTest.class,
+        RestOpenApiReaderTest.TestConfiguration.class, DummyRestConsumerFactory.class })
 public class RestOpenApiReaderTest {
 
-	private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
-	@BindToRegistry("dummy-rest")
-	private final DummyRestConsumerFactory factory = new DummyRestConsumerFactory();
+    @BindToRegistry("dummy-rest")
+    private final DummyRestConsumerFactory factory = new DummyRestConsumerFactory();
 
-	@Autowired
-	CamelContext context;
+    @Autowired
+    CamelContext context;
 
-	@Configuration
-	public class TestConfiguration {
+    @Configuration
+    public class TestConfiguration {
 
-		@Bean
-		public RouteBuilder routeBuilder() {
-			return new RouteBuilder() {
+        @Bean
+        public RouteBuilder routeBuilder() {
+            return new RouteBuilder() {
 
-				@Override
-				public void configure() throws Exception {
-					rest("/hello").consumes("application/json").produces("application/json").get("/hi/{name}")
-							.description("Saying hi").param().name("name").type(RestParamType.path)
-							.dataType("string").description("Who is it").example("Donald Duck").endParam()
-							.param().name("filter").description("Filters to apply to the entity.").type(RestParamType.query)
-							.dataType("array").arrayType("date-time").endParam().to("log:hi")
-							.get("/bye/{name}").description("Saying bye").param().name("name")
-							.type(RestParamType.path).dataType("string").description("Who is it").example("Donald Duck").endParam()
-							.responseMessage().code(200).message("A reply number")
-							.responseModel(float.class).example("success", "123").example("error", "-1").endResponseMessage()
-							.to("log:bye").post("/bye")
-							.description("To update the greeting message").consumes("application/xml").produces("application/xml")
-							.param().name("greeting").type(RestParamType.body)
-							.dataType("string").description("Message to use as greeting")
-							.example("application/xml", "<hello>Hi</hello>").endParam().to("log:bye");
-				}
-			};
-		}
-	}
+                @Override
+                public void configure() throws Exception {
+                    rest("/hello").consumes("application/json").produces("application/json").get("/hi/{name}")
+                            .description("Saying hi").param().name("name").type(RestParamType.path).dataType("string")
+                            .description("Who is it").example("Donald Duck").endParam().param().name("filter")
+                            .description("Filters to apply to the entity.").type(RestParamType.query).dataType("array")
+                            .arrayType("date-time").endParam().to("log:hi").get("/bye/{name}").description("Saying bye")
+                            .param().name("name").type(RestParamType.path).dataType("string").description("Who is it")
+                            .example("Donald Duck").endParam().responseMessage().code(200).message("A reply number")
+                            .responseModel(float.class).example("success", "123").example("error", "-1")
+                            .endResponseMessage().to("log:bye").post("/bye")
+                            .description("To update the greeting message").consumes("application/xml")
+                            .produces("application/xml").param().name("greeting").type(RestParamType.body)
+                            .dataType("string").description("Message to use as greeting")
+                            .example("application/xml", "<hello>Hi</hello>").endParam().to("log:bye");
+                }
+            };
+        }
+    }
 
-	@Test
-	public void testReaderReadV3() throws Exception {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		Info info = new Info();
-		config.setInfo(info);
-		RestOpenApiReader reader = new RestOpenApiReader();
+    @Test
+    public void testReaderReadV3() throws Exception {
+        BeanConfig config = new BeanConfig();
+        config.setHost("localhost:8080");
+        config.setSchemes(new String[] { "http" });
+        config.setBasePath("/api");
+        Info info = new Info();
+        config.setInfo(info);
+        RestOpenApiReader reader = new RestOpenApiReader();
 
-		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
-				new DefaultClassResolver());
-		assertNotNull(openApi);
+        OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config,
+                context.getName(), new DefaultClassResolver());
+        assertNotNull(openApi);
 
-		String json = Json.pretty(openApi);
-		log.info(json);
-		 json = json.replace("\n", " ").replaceAll("\\s+", " ");
+        String json = Json.pretty(openApi);
+        log.info(json);
+        json = json.replace("\n", " ").replaceAll("\\s+", " ");
 
-		assertTrue(json.contains("\"url\" : \"http://localhost:8080/api\""));
-		assertTrue(json.contains("\"/hello/bye\""));
-		assertTrue(json.contains("\"summary\" : \"To update the greeting message\""));
-		assertTrue(json.contains("\"/hello/bye/{name}\""));
-		assertTrue(json.contains("\"/hello/hi/{name}\""));
-		assertTrue(json.contains("\"type\" : \"number\""));
-		assertTrue(json.contains("\"format\" : \"float\""));
-		assertTrue(json.contains("\"example\" : \"<hello>Hi</hello>\""));
+        assertTrue(json.contains("\"url\" : \"http://localhost:8080/api\""));
+        assertTrue(json.contains("\"/hello/bye\""));
+        assertTrue(json.contains("\"summary\" : \"To update the greeting message\""));
+        assertTrue(json.contains("\"/hello/bye/{name}\""));
+        assertTrue(json.contains("\"/hello/hi/{name}\""));
+        assertTrue(json.contains("\"type\" : \"number\""));
+        assertTrue(json.contains("\"format\" : \"float\""));
+        assertTrue(json.contains("\"example\" : \"<hello>Hi</hello>\""));
         assertTrue(json.contains("\"example\" : \"Donald Duck\""));
         assertTrue(json.contains("\"success\" : { \"value\" : \"123\" }"));
         assertTrue(json.contains("\"error\" : { \"value\" : \"-1\" }"));
-		assertTrue(json.contains("\"type\" : \"array\""));
-		assertTrue(json.contains("\"format\" : \"date-time\""));
+        assertTrue(json.contains("\"type\" : \"array\""));
+        assertTrue(json.contains("\"format\" : \"date-time\""));
 
-		context.stop();
-	}
+        context.stop();
+    }
 }

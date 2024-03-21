@@ -73,8 +73,7 @@ public class FtpEmbeddedService extends AbstractTestService implements FtpServic
         ftpServer = factory.createServer();
         ftpServer.start();
 
-        port = ((DefaultFtpServer) ftpServer).getListeners().values().stream()
-                .map(Listener::getPort).findAny().get();
+        port = ((DefaultFtpServer) ftpServer).getListeners().values().stream().map(Listener::getPort).findAny().get();
     }
 
     private Path testDirectory() {
@@ -153,9 +152,9 @@ public class FtpEmbeddedService extends AbstractTestService implements FtpServic
             ftpServer = null;
         }
 
-        //        if (port != null) {
-        //            port.release();
-        //        }
+        // if (port != null) {
+        // port.release();
+        // }
     }
 
     public void disconnectAllSessions() {
@@ -186,8 +185,7 @@ public class FtpEmbeddedService extends AbstractTestService implements FtpServic
 
     public void resume() {
         ftpServer.resume();
-        port = ((DefaultFtpServer) ftpServer).getListeners().values().stream()
-                .map(Listener::getPort).findAny().get();
+        port = ((DefaultFtpServer) ftpServer).getListeners().values().stream().map(Listener::getPort).findAny().get();
     }
 
     public int getPort() {

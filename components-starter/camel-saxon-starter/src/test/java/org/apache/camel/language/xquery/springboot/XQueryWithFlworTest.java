@@ -16,11 +16,9 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,31 +32,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        XQueryWithFlworTest.class,
-        XQueryWithFlworTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, XQueryWithFlworTest.class,
+        XQueryWithFlworTest.TestConfiguration.class })
 public class XQueryWithFlworTest {
 
     @Autowired
     ProducerTemplate template;
 
-      
     @Test
     public void testWithFlworExpression() {
-        String xml
-                = "<items><item><id>3</id><name>third</name></item><item><id>1</id><name>first</name></item><item><id>2</id><name>second</name></item></items>";
+        String xml = "<items><item><id>3</id><name>third</name></item><item><id>1</id><name>first</name></item><item><id>2</id><name>second</name></item></items>";
         String expectedOrderedIds = "<base><id>1</id><id>3</id></base>";
         String orderedIds = template.requestBody("direct:flwor-expression", xml, String.class);
         assertEquals(expectedOrderedIds, orderedIds);
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -71,7 +61,8 @@ public class XQueryWithFlworTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:flwor-expression").to("xquery:org/apache/camel/component/xquery/flwor-expression.xquery");
+                    from("direct:flwor-expression")
+                            .to("xquery:org/apache/camel/component/xquery/flwor-expression.xquery");
                 }
             };
         }

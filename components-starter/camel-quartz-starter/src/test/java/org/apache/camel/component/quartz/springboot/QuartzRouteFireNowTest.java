@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -27,8 +25,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -36,31 +32,24 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzRouteFireNowTest.class,
-        QuartzRouteFireNowTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzRouteFireNowTest.class,
+        QuartzRouteFireNowTest.TestConfiguration.class })
 public class QuartzRouteFireNowTest extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint resultEndpoint;
-    
+
     @Test
     public void testQuartzRoute() throws Exception {
-        
+
         resultEndpoint.expectedMinimumMessageCount(2);
         resultEndpoint.message(0).header("triggerName").isEqualTo("myTimerName");
         resultEndpoint.message(0).header("triggerGroup").isEqualTo("myGroup");
@@ -68,7 +57,7 @@ public class QuartzRouteFireNowTest extends BaseQuartzTest {
         // lets test the receive worked
         resultEndpoint.assertIsSatisfied();
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -83,14 +72,11 @@ public class QuartzRouteFireNowTest extends BaseQuartzTest {
                 public void configure() {
                     // START SNIPPET: example
                     from("quartz://myGroup/myTimerName?trigger.repeatInterval=100&trigger.repeatCount=2")
-                            .to("log:quartz")
-                            .to("mock:result");
+                            .to("log:quartz").to("mock:result");
                     // END SNIPPET: example
                 }
             };
         }
     }
-    
-   
 
 }

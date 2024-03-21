@@ -38,97 +38,84 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
-
 import io.swagger.v3.core.util.Json;
 import io.swagger.v3.oas.models.OpenAPI;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				RestOpenApiReaderModelBookOrderTest.class,
-				RestOpenApiReaderModelBookOrderTest.TestConfiguration.class,
-				DummyRestConsumerFactory.class,
-				DummyBookService.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, RestOpenApiReaderModelBookOrderTest.class,
+        RestOpenApiReaderModelBookOrderTest.TestConfiguration.class, DummyRestConsumerFactory.class,
+        DummyBookService.class })
 public class RestOpenApiReaderModelBookOrderTest {
 
-	private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
-	@BindToRegistry("dummy-rest")
-	private final DummyRestConsumerFactory factory = new DummyRestConsumerFactory();
+    @BindToRegistry("dummy-rest")
+    private final DummyRestConsumerFactory factory = new DummyRestConsumerFactory();
 
-	@BindToRegistry("bookService")
-	private final DummyBookService dummy = new DummyBookService();
+    @BindToRegistry("bookService")
+    private final DummyBookService dummy = new DummyBookService();
 
-	@Autowired
-	CamelContext context;
+    @Autowired
+    CamelContext context;
 
-	@Configuration
-	public class TestConfiguration {
+    @Configuration
+    public class TestConfiguration {
 
-		@Bean
-		public RouteBuilder routeBuilder() {
-			return new RouteBuilder() {
+        @Bean
+        public RouteBuilder routeBuilder() {
+            return new RouteBuilder() {
 
-				@Override
-				public void configure() throws Exception {
-					rest()
-							.securityDefinitions()
-							.oauth2("global")
-							.accessCode(
-									"https://AUTHORIZATION_URL",
-									"https://TOKEN_URL"
-							)
-							.withScope("groups", "Required scopes for Camel REST APIs")
-							.end();
+                @Override
+                public void configure() throws Exception {
+                    rest().securityDefinitions().oauth2("global")
+                            .accessCode("https://AUTHORIZATION_URL", "https://TOKEN_URL")
+                            .withScope("groups", "Required scopes for Camel REST APIs").end();
 
-					// this user REST service is json only
-					rest("/books").tag("dude").description("Book order service").consumes("application/json")
-							.produces("application/json")
+                    // this user REST service is json only
+                    rest("/books").tag("dude").description("Book order service").consumes("application/json")
+                            .produces("application/json")
 
-							.get("/{id}").description("Find order by id").outType(BookOrder.class).responseMessage()
-							.message("The order returned").endResponseMessage().param().name("id")
-							.type(RestParamType.path).description("The id of the order to get").dataType("integer").endParam()
-							.to("bean:bookService?method=getOrder(${header.id})")
-							.get("/books/{id}/line/{lineNum}").outType(LineItem.class)
-							.to("bean:bookService?method=getOrder(${header.id})");
-				}
-			};
-		}
-	}
+                            .get("/{id}").description("Find order by id").outType(BookOrder.class).responseMessage()
+                            .message("The order returned").endResponseMessage().param().name("id")
+                            .type(RestParamType.path).description("The id of the order to get").dataType("integer")
+                            .endParam().to("bean:bookService?method=getOrder(${header.id})")
+                            .get("/books/{id}/line/{lineNum}").outType(LineItem.class)
+                            .to("bean:bookService?method=getOrder(${header.id})");
+                }
+            };
+        }
+    }
 
-	@Test
-	public void testReaderReadV3() throws Exception {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		config.setTitle("Camel User store");
-		config.setLicense("Apache 2.0");
-		config.setLicenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html");
-		RestOpenApiReader reader = new RestOpenApiReader();
+    @Test
+    public void testReaderReadV3() throws Exception {
+        BeanConfig config = new BeanConfig();
+        config.setHost("localhost:8080");
+        config.setSchemes(new String[] { "http" });
+        config.setBasePath("/api");
+        config.setTitle("Camel User store");
+        config.setLicense("Apache 2.0");
+        config.setLicenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html");
+        RestOpenApiReader reader = new RestOpenApiReader();
 
-		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
-				new DefaultClassResolver());
-		assertNotNull(openApi);
+        OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config,
+                context.getName(), new DefaultClassResolver());
+        assertNotNull(openApi);
 
-		String json = Json.pretty(openApi);
+        String json = Json.pretty(openApi);
 
-		log.info(json);
+        log.info(json);
 
-		assertTrue(json.contains("\"url\" : \"http://localhost:8080/api\""));
-		assertTrue(json.contains("\"description\" : \"The order returned\""));
-		assertTrue(json.contains("\"BookOrder\""));
-		assertTrue(json.contains("\"LineItem\""));
-		assertTrue(json.contains("\"$ref\" : \"#/components/schemas/BookOrder"));
-		assertTrue(json.contains("\"$ref\" : \"#/components/schemas/LineItem"));
-		assertTrue(json.contains("\"x-className\""));
-		assertTrue(json.contains("\"format\" : \"org.apache.camel.openapi.BookOrder\""));
-		assertTrue(json.contains("\"format\" : \"org.apache.camel.openapi.LineItem\""));
+        assertTrue(json.contains("\"url\" : \"http://localhost:8080/api\""));
+        assertTrue(json.contains("\"description\" : \"The order returned\""));
+        assertTrue(json.contains("\"BookOrder\""));
+        assertTrue(json.contains("\"LineItem\""));
+        assertTrue(json.contains("\"$ref\" : \"#/components/schemas/BookOrder"));
+        assertTrue(json.contains("\"$ref\" : \"#/components/schemas/LineItem"));
+        assertTrue(json.contains("\"x-className\""));
+        assertTrue(json.contains("\"format\" : \"org.apache.camel.openapi.BookOrder\""));
+        assertTrue(json.contains("\"format\" : \"org.apache.camel.openapi.LineItem\""));
 
-		context.stop();
-	}
+        context.stop();
+    }
 }

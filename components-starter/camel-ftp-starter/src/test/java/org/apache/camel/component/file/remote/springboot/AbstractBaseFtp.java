@@ -65,9 +65,9 @@ public abstract class AbstractBaseFtp {
     protected static void assertFileExists(Path file, String content) throws IOException {
         Assertions.assertTrue(Files.exists(file, new LinkOption[0]), "File " + file + " should exist");
         Assertions.assertTrue(Files.isRegularFile(file, new LinkOption[0]), "File " + file + " should be a file");
-        Assertions.assertEquals(content, new String(Files.readAllBytes(file)), "File " + file + " has unexpected content");
+        Assertions.assertEquals(content, new String(Files.readAllBytes(file)),
+                "File " + file + " has unexpected content");
     }
-
 
     protected Path testFile(String dir) {
         return this.testDirectory().resolve(dir);
@@ -99,7 +99,6 @@ public abstract class AbstractBaseFtp {
         Path var10000 = this.testDirectory();
         return "file:" + var10000 + (query.startsWith("?") ? "" : "/") + query;
     }
-
 
     // *************************************
     // Config

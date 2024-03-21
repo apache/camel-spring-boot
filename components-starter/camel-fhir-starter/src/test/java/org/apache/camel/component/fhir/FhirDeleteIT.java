@@ -45,20 +45,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirDeleteIT.class,
-                FhirDeleteIT.TestConfiguration.class,
-                DefaultCamelContext.class,
-                FhirServer.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirDeleteIT.class, FhirDeleteIT.TestConfiguration.class,
+        DefaultCamelContext.class, FhirServer.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class FhirDeleteIT extends AbstractFhirTestSupport {
 
     private static final Logger LOG = LoggerFactory.getLogger(FhirDeleteIT.class);
-    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirDeleteApiMethod.class).getName();
+    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirDeleteApiMethod.class)
+            .getName();
 
     @Test
     public void testDeleteResource() throws Exception {
@@ -104,8 +98,8 @@ public class FhirDeleteIT extends AbstractFhirTestSupport {
     public void testDeleteResourceConditionalByUrl() throws Exception {
         assertTrue(patientExists());
 
-        MethodOutcome result
-                = requestBody("direct://RESOURCE_CONDITIONAL_BY_URL", "Patient?given=Vincent&family=Freeman");
+        MethodOutcome result = requestBody("direct://RESOURCE_CONDITIONAL_BY_URL",
+                "Patient?given=Vincent&family=Freeman");
 
         LOG.debug("resourceConditionalByUrl: {}", result);
         assertNotNull(result, "resourceConditionalByUrl result");
@@ -116,7 +110,8 @@ public class FhirDeleteIT extends AbstractFhirTestSupport {
     public void testDeleteResourceConditionalByUrlCacheControlDirective() throws Exception {
         assertTrue(patientExists());
         Map<String, Object> headers = new HashMap<>();
-        headers.put(ExtraParameters.CACHE_CONTROL_DIRECTIVE.getHeaderName(), new CacheControlDirective().setNoCache(true));
+        headers.put(ExtraParameters.CACHE_CONTROL_DIRECTIVE.getHeaderName(),
+                new CacheControlDirective().setNoCache(true));
 
         MethodOutcome result = requestBodyAndHeaders("direct://RESOURCE_CONDITIONAL_BY_URL",
                 "Patient?given=Vincent&family=Freeman", headers);
@@ -134,16 +129,13 @@ public class FhirDeleteIT extends AbstractFhirTestSupport {
                 @Override
                 public void configure() {
                     // test route for resource
-                    from("direct://RESOURCE")
-                            .to("fhir://" + PATH_PREFIX + "/resource?inBody=resource");
+                    from("direct://RESOURCE").to("fhir://" + PATH_PREFIX + "/resource?inBody=resource");
 
                     // test route for resourceById
-                    from("direct://RESOURCE_BY_ID")
-                            .to("fhir://" + PATH_PREFIX + "/resourceById?inBody=id");
+                    from("direct://RESOURCE_BY_ID").to("fhir://" + PATH_PREFIX + "/resourceById?inBody=id");
 
                     // test route for resourceById
-                    from("direct://RESOURCE_BY_STRING_ID")
-                            .to("fhir://" + PATH_PREFIX + "/resourceById");
+                    from("direct://RESOURCE_BY_STRING_ID").to("fhir://" + PATH_PREFIX + "/resourceById");
 
                     // test route for resourceConditionalByUrl
                     from("direct://RESOURCE_CONDITIONAL_BY_URL")

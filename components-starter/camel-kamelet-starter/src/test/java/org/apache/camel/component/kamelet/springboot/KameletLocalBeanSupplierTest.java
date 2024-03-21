@@ -34,12 +34,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletLocalBeanSupplierTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletLocalBeanSupplierTest.class, })
 
 public class KameletLocalBeanSupplierTest {
 
@@ -47,7 +42,7 @@ public class KameletLocalBeanSupplierTest {
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
-    MockEndpoint mock; 
+    MockEndpoint mock;
 
     private final AtomicInteger counter = new AtomicInteger();
 
@@ -72,21 +67,14 @@ public class KameletLocalBeanSupplierTest {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                routeTemplate("whereTo")
-                        .templateParameter("foo")
-                        .templateBean("myBar", () -> new MyStaticBar(counter.incrementAndGet()))
-                        .from("kamelet:source")
+                routeTemplate("whereTo").templateParameter("foo")
+                        .templateBean("myBar", () -> new MyStaticBar(counter.incrementAndGet())).from("kamelet:source")
                         // must use {{myBar}} to refer to the local bean
-                        .setBody(simple("{{foo}} ${body}"))
-                        .to("bean:{{myBar}}");
+                        .setBody(simple("{{foo}} ${body}")).to("bean:{{myBar}}");
 
-                from("direct:hi")
-                        .kamelet("whereTo?foo=Hi")
-                        .to("mock:result");
+                from("direct:hi").kamelet("whereTo?foo=Hi").to("mock:result");
 
-                from("direct:hello")
-                        .kamelet("whereTo?foo=Hello")
-                        .to("mock:result");
+                from("direct:hello").kamelet("whereTo?foo=Hello").to("mock:result");
             }
         };
     }

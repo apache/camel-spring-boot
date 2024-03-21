@@ -63,7 +63,7 @@ public class SpringTypeConverterTest {
             // Expected as Person can't be converted to a string according to
             // Spring's FallbackObjectToStringConverter, see javadoc for:
             //
-            //   org.springframework.core.convert.support.FallbackObjectToStringConverter
+            // org.springframework.core.convert.support.FallbackObjectToStringConverter
             //
             Assertions.assertTrue(e.getCause() instanceof ConverterNotFoundException);
         }
@@ -98,10 +98,7 @@ public class SpringTypeConverterTest {
 
         @Override
         public String toString() {
-            return "Person{"
-                + "name='" + name + '\''
-                + ", age=" + age
-                + '}';
+            return "Person{" + "name='" + name + '\'' + ", age=" + age + '}';
         }
     }
 

@@ -42,25 +42,19 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzManagementTest.class,
-        QuartzManagementTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzManagementTest.class,
+        QuartzManagementTest.TestConfiguration.class })
 public class QuartzManagementTest extends BaseQuartzTest {
-    
-    
+
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint mock;
-    
+
     @Test
     public void testQuartzRoute() throws Exception {
         // JMX tests dont work well on AIX CI servers (hangs them)
@@ -82,7 +76,7 @@ public class QuartzManagementTest extends BaseQuartzTest {
         Boolean started = (Boolean) mbeanServer.getAttribute(on, "Started");
         assertEquals(true, started);
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -95,13 +89,11 @@ public class QuartzManagementTest extends BaseQuartzTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("quartz://myGroup/myTimerName?trigger.repeatInterval=2&trigger.repeatCount=1").routeId("myRoute")
-                            .to("mock:result");
+                    from("quartz://myGroup/myTimerName?trigger.repeatInterval=2&trigger.repeatCount=1")
+                            .routeId("myRoute").to("mock:result");
                 }
             };
         }
     }
-    
-   
 
 }

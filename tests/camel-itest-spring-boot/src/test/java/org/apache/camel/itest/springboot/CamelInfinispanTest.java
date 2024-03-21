@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelInfinispanTest extends AbstractSpringBootTestSupport {
 
@@ -33,8 +32,7 @@ public class CamelInfinispanTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelInfinispanTest.class))
+        return new ITestConfigBuilder().module(inferModuleName(CamelInfinispanTest.class))
                 .dependency("org.infinispan:infinispan-client-hotrod:14.0.21.Final")
                 .dependency("org.infinispan:infinispan-commons:14.0.21.Final")
                 .dependency("org.infinispan:infinispan-component-annotations:14.0.21.Final")
@@ -44,8 +42,7 @@ public class CamelInfinispanTest extends AbstractSpringBootTestSupport {
                 .dependency("org.infinispan:infinispan-marshaller-protostuff:14.0.21.Final")
                 .dependency("org.infinispan:infinispan-remote-query-client:14.0.21.Final")
                 .dependency("org.infinispan.protostream:protostream-types:4.6.5.Final")
-                .dependency("org.infinispan.protostream:protostream:4.6.5.Final")
-                .disableJmx("org.infinispan:*")
+                .dependency("org.infinispan.protostream:protostream:4.6.5.Final").disableJmx("org.infinispan:*")
                 .build();
     }
 
@@ -54,6 +51,5 @@ public class CamelInfinispanTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

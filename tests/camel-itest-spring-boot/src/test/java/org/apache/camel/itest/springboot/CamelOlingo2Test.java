@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelOlingo2Test extends AbstractSpringBootTestSupport {
 
@@ -33,10 +32,9 @@ public class CamelOlingo2Test extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelOlingo2Test.class))
-//                .basePath("../../components/camel-olingo2/camel-olingo2-component")
-//                .dependency(DependencyResolver.withVersion("javax.ws.rs:javax.ws.rs-api"))
+        return new ITestConfigBuilder().module(inferModuleName(CamelOlingo2Test.class))
+                // .basePath("../../components/camel-olingo2/camel-olingo2-component")
+                // .dependency(DependencyResolver.withVersion("javax.ws.rs:javax.ws.rs-api"))
                 .build();
     }
 
@@ -45,6 +43,5 @@ public class CamelOlingo2Test extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

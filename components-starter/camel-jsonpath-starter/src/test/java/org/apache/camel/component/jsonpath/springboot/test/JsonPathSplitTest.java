@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
 import java.util.Map;
 
@@ -38,16 +37,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathSplitTest.class,
-        JsonPathSplitTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathSplitTest.class,
+        JsonPathSplitTest.TestConfiguration.class })
 public class JsonPathSplitTest {
 
     @Autowired
@@ -55,13 +48,13 @@ public class JsonPathSplitTest {
 
     @EndpointInject("mock:authors")
     MockEndpoint mock;
-    
+
     @EndpointInject("mock:result-1")
     MockEndpoint mock1;
-    
+
     @EndpointInject("mock:result-2")
     MockEndpoint mock2;
-    
+
     @EndpointInject("mock:result-3")
     MockEndpoint mock3;
 
@@ -93,7 +86,7 @@ public class JsonPathSplitTest {
     public void testJsonPathSplitDelimiterDisable() throws Exception {
         // CAMEL-15769
         String json = "{ \"text\": { \"div\": \"some , text\" } }";
-        
+
         mock1.expectedPropertyReceived("CamelSplitSize", 1);
         mock1.expectedBodiesReceived("some , text");
         template.sendBody("direct:start-1", json);
@@ -104,7 +97,7 @@ public class JsonPathSplitTest {
     public void testJsonPathSplitDelimiterDefault() throws Exception {
         // CAMEL-15769
         String json = "{ \"text\": { \"div\": \"some , text\" } }";
-        
+
         mock2.expectedPropertyReceived("CamelSplitSize", 2);
         mock2.expectedBodiesReceived("some ", " text");
         template.sendBody("direct:start-2", json);
@@ -115,7 +108,7 @@ public class JsonPathSplitTest {
     public void testJsonPathSplitDelimiter() throws Exception {
         // CAMEL-15769
         String json = "{ \"text\": { \"div\": \"some ,# text\" } }";
-        
+
         mock3.expectedPropertyReceived("CamelSplitSize", 2);
         mock3.expectedBodiesReceived("some ,", " text");
         template.sendBody("direct:start-3", json);
@@ -134,22 +127,14 @@ public class JsonPathSplitTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                            .split().jsonpath("$.store.book[*]")
-                            .to("mock:authors")
+                    from("direct:start").split().jsonpath("$.store.book[*]").to("mock:authors")
                             .convertBodyTo(String.class);
 
-                    from("direct:start-1")
-                            .split(jsonpath("text.div", String.class), "false")
-                            .to("mock:result-1");
+                    from("direct:start-1").split(jsonpath("text.div", String.class), "false").to("mock:result-1");
 
-                    from("direct:start-2")
-                            .split(jsonpath("text.div", String.class))
-                            .to("mock:result-2");
+                    from("direct:start-2").split(jsonpath("text.div", String.class)).to("mock:result-2");
 
-                    from("direct:start-3")
-                            .split(jsonpath("text.div", String.class), "#")
-                            .to("mock:result-3");
+                    from("direct:start-3").split(jsonpath("text.div", String.class), "#").to("mock:result-3");
                 }
             };
         }

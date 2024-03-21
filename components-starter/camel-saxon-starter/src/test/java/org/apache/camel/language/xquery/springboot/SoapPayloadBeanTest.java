@@ -16,12 +16,10 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -30,26 +28,17 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        SoapPayloadBeanTest.class,
-        SoapPayloadBeanTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SoapPayloadBeanTest.class,
+        SoapPayloadBeanTest.TestConfiguration.class })
 public class SoapPayloadBeanTest {
-    
-    
-    
+
     @EndpointInject("mock:result")
-    protected MockEndpoint mock;   
-    
+    protected MockEndpoint mock;
+
     @Test
     public void testSoapPayloadBean() throws Exception {
         mock.expectedMessageCount(1);
@@ -60,7 +49,7 @@ public class SoapPayloadBeanTest {
 
         mock.assertIsSatisfied();
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -73,8 +62,7 @@ public class SoapPayloadBeanTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("file:src/test/resources/?fileName=payload.xml&noop=true")
-                            .bean(SoapPayloadBean.class)
+                    from("file:src/test/resources/?fileName=payload.xml&noop=true").bean(SoapPayloadBean.class)
                             .to("log:xml", "mock:result");
                 }
             };

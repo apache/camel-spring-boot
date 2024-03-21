@@ -35,13 +35,8 @@ import java.util.Comparator;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileSorterRefTest.class,
-                FileSorterRefTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileSorterRefTest.class,
+        FileSorterRefTest.TestConfiguration.class })
 public class FileSorterRefTest extends BaseFile {
 
     @EndpointInject("mock:result")
@@ -58,7 +53,8 @@ public class FileSorterRefTest extends BaseFile {
         context.addRoutes(new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from(fileUri("?initialDelay=0&delay=10&sorter=#mySorter")).convertBodyTo(String.class).to("mock:result");
+                from(fileUri("?initialDelay=0&delay=10&sorter=#mySorter")).convertBodyTo(String.class)
+                        .to("mock:result");
             }
         });
 
@@ -92,9 +88,9 @@ public class FileSorterRefTest extends BaseFile {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from(fileUri("in?initialDelay=0&delay=10&readLock=changed&readLockCheckInterval=100&readLockMarkerFile=false"))
-                            .to(fileUri("out"),
-                                    "mock:result");
+                    from(fileUri(
+                            "in?initialDelay=0&delay=10&readLock=changed&readLockCheckInterval=100&readLockMarkerFile=false"))
+                                    .to(fileUri("out"), "mock:result");
                 }
             };
         }

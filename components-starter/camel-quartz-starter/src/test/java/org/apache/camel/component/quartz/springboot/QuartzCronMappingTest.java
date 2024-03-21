@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.DelegateEndpoint;
 import org.apache.camel.Endpoint;
@@ -38,35 +36,26 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzCronMappingTest.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzCronMappingTest.class })
 public class QuartzCronMappingTest extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint resultEndpoint;
-    
+
     @Test
     public void test5PartsCronPattern() throws Exception {
         context.addRoutes(new RouteBuilder() {
             @Override
             public void configure() {
-                from("cron://myName?schedule=* * * * ?")
-                        .id("cron")
-                        .to("mock:result");
+                from("cron://myName?schedule=* * * * ?").id("cron").to("mock:result");
             }
         });
         context.start();
@@ -78,9 +67,7 @@ public class QuartzCronMappingTest extends BaseQuartzTest {
         context.addRoutes(new RouteBuilder() {
             @Override
             public void configure() {
-                from("cron://myName?schedule=0/2 * * * * ?")
-                        .id("cron")
-                        .to("mock:result");
+                from("cron://myName?schedule=0/2 * * * * ?").id("cron").to("mock:result");
             }
         });
         context.start();
@@ -94,7 +81,5 @@ public class QuartzCronMappingTest extends BaseQuartzTest {
         }
         return (QuartzEndpoint) endpoint;
     }
-    
-   
 
 }

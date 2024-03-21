@@ -42,7 +42,7 @@ public class ZooKeeperClusterServiceConfiguration extends ZooKeeperCuratorConfig
      * Custom service attributes.
      */
     private Map<String, Object> attributes;
-    
+
     /**
      * Service lookup order/priority.
      */
@@ -80,7 +80,6 @@ public class ZooKeeperClusterServiceConfiguration extends ZooKeeperCuratorConfig
         this.order = order;
     }
 
-
     //
     // Fields copied from ZooKeeperCuratorConfiguration to add
     // javadoc which is used by spring-boot-configuration-processor
@@ -108,8 +107,7 @@ public class ZooKeeperClusterServiceConfiguration extends ZooKeeperCuratorConfig
     private long reconnectBaseSleepTime;
 
     /**
-     * ReconnectBaseSleepTime TimeUnit.
-     * Default is TimeUnit.MILLISECONDS.
+     * ReconnectBaseSleepTime TimeUnit. Default is TimeUnit.MILLISECONDS.
      */
     private TimeUnit reconnectBaseSleepTimeUnit = TimeUnit.MILLISECONDS;
 
@@ -119,27 +117,24 @@ public class ZooKeeperClusterServiceConfiguration extends ZooKeeperCuratorConfig
     private int reconnectMaxRetries = 3;
 
     /**
-     * Max time to sleep on each retry.
-     * Default is Integer.MAX_VALUE.
+     * Max time to sleep on each retry. Default is Integer.MAX_VALUE.
      */
     private long reconnectMaxSleepTime = Integer.MAX_VALUE;
-    
+
     /**
-     * ReconnectMaxSleepTimeUnit TimeUnit.
-     * Default is TimeUnit.MILLISECONDS.
+     * ReconnectMaxSleepTimeUnit TimeUnit. Default is TimeUnit.MILLISECONDS.
      */
     private TimeUnit reconnectMaxSleepTimeUnit = TimeUnit.MILLISECONDS;
-    
+
     /**
      * Session timeout.
      */
     private long sessionTimeout = 60000;
 
     /**
-     * Session timeout TimeUnit.
-     * Default is TimeUnit.MILLISECONDS.
+     * Session timeout TimeUnit. Default is TimeUnit.MILLISECONDS.
      */
-    private TimeUnit sessionTimeoutUnit =  TimeUnit.MILLISECONDS;
+    private TimeUnit sessionTimeoutUnit = TimeUnit.MILLISECONDS;
 
     /**
      * Connection timeout.
@@ -147,22 +142,20 @@ public class ZooKeeperClusterServiceConfiguration extends ZooKeeperCuratorConfig
     private long connectionTimeout = 15000;
 
     /**
-     * Connection timeout TimeUnit.
-     * Default is TimeUnit.MILLISECONDS.
+     * Connection timeout TimeUnit. Default is TimeUnit.MILLISECONDS.
      */
     private TimeUnit connectionTimeoutUnit = TimeUnit.MILLISECONDS;
-    
+
     /**
      * Time to wait during close to join background threads.
      */
     private long maxCloseWait = 1000;
-    
+
     /**
-     * MaxCloseWait TimeUnit.
-     * Default is TimeUnit.MILLISECONDS.
+     * MaxCloseWait TimeUnit. Default is TimeUnit.MILLISECONDS.
      */
     private TimeUnit maxCloseWaitUnit = TimeUnit.MILLISECONDS;
-    
+
     /**
      * Zookeeper CuratorFramework-style client.
      */
@@ -173,7 +166,7 @@ public class ZooKeeperClusterServiceConfiguration extends ZooKeeperCuratorConfig
      */
     private List<AuthInfo> authInfoList;
 
-    /** 
+    /**
      * Retry policy to use.
      */
     private RetryPolicy retryPolicy;

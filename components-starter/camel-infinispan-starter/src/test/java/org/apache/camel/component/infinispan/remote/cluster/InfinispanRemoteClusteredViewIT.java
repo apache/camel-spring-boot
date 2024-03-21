@@ -46,52 +46,43 @@ import java.util.concurrent.TimeUnit;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				InfinispanRemoteClusteredViewIT.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, InfinispanRemoteClusteredViewIT.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class InfinispanRemoteClusteredViewIT {
-	@RegisterExtension
-	public static InfinispanService service = InfinispanServiceFactory.createService();
+    @RegisterExtension
+    public static InfinispanService service = InfinispanServiceFactory.createService();
 
-	@Autowired
-	private CamelContext context;
+    @Autowired
+    private CamelContext context;
 
-	@Test
-	public void getLeaderTest() throws Exception {
-		final String viewName = "myView";
+    @Test
+    public void getLeaderTest() throws Exception {
+        final String viewName = "myView";
 
-		Configuration configuration = createConfiguration(service);
+        Configuration configuration = createConfiguration(service);
 
-		try (RemoteCacheManager cacheContainer = new RemoteCacheManager(configuration)) {
-			createCache(cacheContainer, viewName);
+        try (RemoteCacheManager cacheContainer = new RemoteCacheManager(configuration)) {
+            createCache(cacheContainer, viewName);
 
-			InfinispanRemoteClusterService clusterService = new InfinispanRemoteClusterService();
-			clusterService.setCacheContainer(cacheContainer);
-			clusterService.setId("node");
+            InfinispanRemoteClusterService clusterService = new InfinispanRemoteClusterService();
+            clusterService.setCacheContainer(cacheContainer);
+            clusterService.setId("node");
 
             context.addService(clusterService);
 
-			context.addRoutes(new RouteBuilder() {
-				@Override
-				public void configure() {
-					fromF("master:%s:timer:infinispan?repeatCount=1", viewName)
-							.routeId("route1")
-							.stop();
-				}
-			});
+            context.addRoutes(new RouteBuilder() {
+                @Override
+                public void configure() {
+                    fromF("master:%s:timer:infinispan?repeatCount=1", viewName).routeId("route1").stop();
+                }
+            });
 
-			CamelClusterView view = clusterService.getView(viewName);
+            CamelClusterView view = clusterService.getView(viewName);
 
-			await().atMost(5, TimeUnit.SECONDS).untilAsserted(() -> {
-				assertThat(view.getLeader())
-						.get()
-						.satisfies(CamelClusterMember::isLeader)
-						.satisfies(CamelClusterMember::isLocal);
-			});
-		}
-	}
+            await().atMost(5, TimeUnit.SECONDS).untilAsserted(() -> {
+                assertThat(view.getLeader()).get().satisfies(CamelClusterMember::isLeader)
+                        .satisfies(CamelClusterMember::isLocal);
+            });
+        }
+    }
 }

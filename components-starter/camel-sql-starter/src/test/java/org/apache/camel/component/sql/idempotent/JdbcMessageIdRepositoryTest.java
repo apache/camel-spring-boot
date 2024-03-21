@@ -41,14 +41,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                JdbcMessageIdRepositoryTest.class,
-                JdbcMessageIdRepositoryTest.TestConfiguration.class,
-                BaseSql.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JdbcMessageIdRepositoryTest.class,
+        JdbcMessageIdRepositoryTest.TestConfiguration.class, BaseSql.TestConfiguration.class })
 public class JdbcMessageIdRepositoryTest extends BaseSql {
 
     protected static final String SELECT_ALL_STRING = "SELECT messageId FROM CAMEL_MESSAGEPROCESSED WHERE processorName = ?";
@@ -95,7 +89,6 @@ public class JdbcMessageIdRepositoryTest extends BaseSql {
         assertTrue(receivedMessageIds.contains("3"));
     }
 
-
     // *************************************
     // Config
     // *************************************
@@ -116,9 +109,7 @@ public class JdbcMessageIdRepositoryTest extends BaseSql {
                     deadLetterChannel("mock:error");
 
                     JdbcMessageIdRepository repo = new JdbcMessageIdRepository(dataSource, PROCESSOR_NAME);
-                    from("direct:start")
-                            .idempotentConsumer(header("messageId"), repo)
-                            .to("mock:result");
+                    from("direct:start").idempotentConsumer(header("messageId"), repo).to("mock:result");
                 }
             };
         }

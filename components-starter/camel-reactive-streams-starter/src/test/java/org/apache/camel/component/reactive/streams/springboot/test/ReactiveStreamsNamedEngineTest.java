@@ -33,14 +33,8 @@ import org.springframework.test.annotation.DirtiesContext;
 @CamelSpringBootTest
 @SpringBootApplication
 @DirtiesContext
-@SpringBootTest(
-    classes = {
-        ReactiveStreamsNamedEngineTest.TestConfiguration.class
-    },
-    properties = {
-        "camel.component.reactive-streams.service-type=my-engine"
-    }
-)
+@SpringBootTest(classes = { ReactiveStreamsNamedEngineTest.TestConfiguration.class }, properties = {
+        "camel.component.reactive-streams.service-type=my-engine" })
 public class ReactiveStreamsNamedEngineTest {
     @Autowired
     private CamelContext context;
@@ -65,4 +59,3 @@ public class ReactiveStreamsNamedEngineTest {
     public static class TestConfiguration {
     }
 }
-

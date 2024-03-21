@@ -38,81 +38,74 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
-
 import io.swagger.v3.core.util.Json;
 import io.swagger.v3.oas.models.OpenAPI;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				RestOpenApiReaderDayOfWeekTest.class,
-				RestOpenApiReaderDayOfWeekTest.TestConfiguration.class,
-				DummyRestConsumerFactory.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, RestOpenApiReaderDayOfWeekTest.class,
+        RestOpenApiReaderDayOfWeekTest.TestConfiguration.class, DummyRestConsumerFactory.class })
 public class RestOpenApiReaderDayOfWeekTest {
 
-	private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
-	@BindToRegistry("dummy-rest")
-	private final DummyRestConsumerFactory factory = new DummyRestConsumerFactory();
+    @BindToRegistry("dummy-rest")
+    private final DummyRestConsumerFactory factory = new DummyRestConsumerFactory();
 
-	@Autowired
-	CamelContext context;
+    @Autowired
+    CamelContext context;
 
-	@Configuration
-	public class TestConfiguration {
+    @Configuration
+    public class TestConfiguration {
 
-		@Bean
-		public RouteBuilder routeBuilder() {
-			return new RouteBuilder() {
+        @Bean
+        public RouteBuilder routeBuilder() {
+            return new RouteBuilder() {
 
-				@Override
-				public void configure() throws Exception {
-					// this user REST service is json only
-					rest("/day").tag("dude").description("Day service").consumes("application/json").produces("application/json")
+                @Override
+                public void configure() throws Exception {
+                    // this user REST service is json only
+                    rest("/day").tag("dude").description("Day service").consumes("application/json")
+                            .produces("application/json")
 
-							.get("/week").description("Day of week").param().name("day").type(RestParamType.query)
-							.description("Day of week").defaultValue("friday").dataType("string")
-							.allowableValues("monday", "tuesday", "wednesday", "thursday", "friday").endParam().responseMessage()
-							.code(200).responseModel(DayResponse.class)
-							.header("X-Rate-Limit-Limit").description("The number of allowed requests in the current period")
-							.dataType("integer").endHeader().endResponseMessage()
-							.to("log:week");
-				}
-			};
-		}
-	}
+                            .get("/week").description("Day of week").param().name("day").type(RestParamType.query)
+                            .description("Day of week").defaultValue("friday").dataType("string")
+                            .allowableValues("monday", "tuesday", "wednesday", "thursday", "friday").endParam()
+                            .responseMessage().code(200).responseModel(DayResponse.class).header("X-Rate-Limit-Limit")
+                            .description("The number of allowed requests in the current period").dataType("integer")
+                            .endHeader().endResponseMessage().to("log:week");
+                }
+            };
+        }
+    }
 
-	@Test
-	public void testReaderReadV3() throws Exception {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		config.setTitle("Day");
-		config.setLicense("Apache 2.0");
-		config.setLicenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html");
-		RestOpenApiReader reader = new RestOpenApiReader();
+    @Test
+    public void testReaderReadV3() throws Exception {
+        BeanConfig config = new BeanConfig();
+        config.setHost("localhost:8080");
+        config.setSchemes(new String[] { "http" });
+        config.setBasePath("/api");
+        config.setTitle("Day");
+        config.setLicense("Apache 2.0");
+        config.setLicenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html");
+        RestOpenApiReader reader = new RestOpenApiReader();
 
-		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
-				new DefaultClassResolver());
-		assertNotNull(openApi);
+        OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config,
+                context.getName(), new DefaultClassResolver());
+        assertNotNull(openApi);
 
-		String json = Json.pretty(openApi);
+        String json = Json.pretty(openApi);
 
-		log.info(json);
+        log.info(json);
 
-		assertTrue(json.contains("\"url\" : \"http://localhost:8080/api\""));
-		assertTrue(json.contains("\"default\" : \"friday\""));
-		assertTrue(json.contains("\"enum\" : [ \"monday\", \"tuesday\", \"wednesday\", \"thursday\", \"friday\" ]"));
-		assertTrue(json.contains("\"$ref\" : \"#/components/schemas/DayResponse\""));
-		assertTrue(json.contains("\"format\" : \"org.apache.camel.openapi.DayResponse\""));
-		assertTrue(json.contains("\"X-Rate-Limit-Limit\" : {"));
-		assertTrue(json.contains("\"description\" : \"The number of allowed requests in the current period\""));
+        assertTrue(json.contains("\"url\" : \"http://localhost:8080/api\""));
+        assertTrue(json.contains("\"default\" : \"friday\""));
+        assertTrue(json.contains("\"enum\" : [ \"monday\", \"tuesday\", \"wednesday\", \"thursday\", \"friday\" ]"));
+        assertTrue(json.contains("\"$ref\" : \"#/components/schemas/DayResponse\""));
+        assertTrue(json.contains("\"format\" : \"org.apache.camel.openapi.DayResponse\""));
+        assertTrue(json.contains("\"X-Rate-Limit-Limit\" : {"));
+        assertTrue(json.contains("\"description\" : \"The number of allowed requests in the current period\""));
 
-		context.stop();
-	}
+        context.stop();
+    }
 }

@@ -39,21 +39,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
-                KafkaConsumerManualCommitIT.class,
-                KafkaConsumerManualCommitIT.TestConfiguration.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
+        KafkaConsumerManualCommitIT.class, KafkaConsumerManualCommitIT.TestConfiguration.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class KafkaConsumerManualCommitIT extends BaseEmbeddedKafkaTestSupport {
 
     public static final String TOPIC = "testManualCommitTest";
 
-    private final String from = "kafka:" + TOPIC
-            + "?groupId=group1&sessionTimeoutMs=30000&autoCommitEnable=false"
+    private final String from = "kafka:" + TOPIC + "?groupId=group1&sessionTimeoutMs=30000&autoCommitEnable=false"
             + "&allowManualCommit=true&autoOffsetReset=earliest";
 
     @EndpointInject("mock:result")
@@ -79,7 +72,7 @@ public class KafkaConsumerManualCommitIT extends BaseEmbeddedKafkaTestSupport {
         kafkaAdminClient.deleteTopics(Collections.singletonList(TOPIC));
     }
 
-     @RepeatedTest(4)
+    @RepeatedTest(4)
     public void kafkaAutoCommitDisabledDuringRebalance() throws Exception {
         to.expectedMessageCount(1);
         String firstMessage = "message-0";
@@ -169,7 +162,8 @@ public class KafkaConsumerManualCommitIT extends BaseEmbeddedKafkaTestSupport {
                 @Override
                 public void configure() {
                     from(from).routeId("foo").to(to).process(e -> {
-                        KafkaManualCommit manual = e.getIn().getHeader(KafkaConstants.MANUAL_COMMIT, KafkaManualCommit.class);
+                        KafkaManualCommit manual = e.getIn().getHeader(KafkaConstants.MANUAL_COMMIT,
+                                KafkaManualCommit.class);
                         assertNotNull(manual);
                         manual.commit();
                     });

@@ -31,11 +31,10 @@ import static org.apache.camel.component.jasypt.springboot.Constants.START_URI_T
 @CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
-@SpringBootTest(
-        classes = {EncryptedPropertiesDisabledCustomConfigurationBeansTest.TestConfiguration.class},
-        properties = {
+@SpringBootTest(classes = {
+        EncryptedPropertiesDisabledCustomConfigurationBeansTest.TestConfiguration.class }, properties = {
                 "camel.component.jasypt.enabled = false",
-                "encrypted.password=ENC(6q7H+bWqPbSZVW1hUzDVgnl7iSnC04zRmKwD31ounBMPM/2CtDS7fwb4u1OGZ2Q4)"})
+                "encrypted.password=ENC(6q7H+bWqPbSZVW1hUzDVgnl7iSnC04zRmKwD31ounBMPM/2CtDS7fwb4u1OGZ2Q4)" })
 public class EncryptedPropertiesDisabledCustomConfigurationBeansTest extends EncryptedPropertiesTestBase {
 
     @Test
@@ -50,15 +49,18 @@ public class EncryptedPropertiesDisabledCustomConfigurationBeansTest extends Enc
 
     @Test
     public void testEncryptionInsideCamelContext() {
-        testEncryption(START_URI_TEST_ENCRYPTED_PROPS_IN_CC, "ENC(6q7H+bWqPbSZVW1hUzDVgnl7iSnC04zRmKwD31ounBMPM/2CtDS7fwb4u1OGZ2Q4)");
+        testEncryption(START_URI_TEST_ENCRYPTED_PROPS_IN_CC,
+                "ENC(6q7H+bWqPbSZVW1hUzDVgnl7iSnC04zRmKwD31ounBMPM/2CtDS7fwb4u1OGZ2Q4)");
     }
 
     @Test
     public void testEncryptionOutsideCamelContext() {
-        testEncryption(START_URI_TEST_ENCRYPTED_PROPS_OUT_CC, "ENC(6q7H+bWqPbSZVW1hUzDVgnl7iSnC04zRmKwD31ounBMPM/2CtDS7fwb4u1OGZ2Q4)");
+        testEncryption(START_URI_TEST_ENCRYPTED_PROPS_OUT_CC,
+                "ENC(6q7H+bWqPbSZVW1hUzDVgnl7iSnC04zRmKwD31ounBMPM/2CtDS7fwb4u1OGZ2Q4)");
     }
 
     @Configuration
-    @Import({Routes.class,EncryptedPropertiesCustomConfigurationBeansTest.TestConfiguration.class})
-    public static class TestConfiguration {}
+    @Import({ Routes.class, EncryptedPropertiesCustomConfigurationBeansTest.TestConfiguration.class })
+    public static class TestConfiguration {
+    }
 }

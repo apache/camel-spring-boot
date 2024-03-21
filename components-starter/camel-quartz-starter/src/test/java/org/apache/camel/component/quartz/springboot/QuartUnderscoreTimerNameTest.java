@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -27,8 +25,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -36,31 +32,24 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartUnderscoreTimerNameTest.class,
-        QuartUnderscoreTimerNameTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartUnderscoreTimerNameTest.class,
+        QuartUnderscoreTimerNameTest.TestConfiguration.class })
 public class QuartUnderscoreTimerNameTest extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint mock;
-    
+
     @Test
     public void testQuartzCronRouteUnderscore() throws Exception {
-        
+
         mock.expectedMinimumMessageCount(1);
 
         mock.assertIsSatisfied();
@@ -82,7 +71,5 @@ public class QuartUnderscoreTimerNameTest extends BaseQuartzTest {
             };
         }
     }
-    
-   
 
 }

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.gson.springboot;
 
-
 public class TestPojoExclusion {
 
     @ExcludeAge

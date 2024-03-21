@@ -30,27 +30,24 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SpringInfinispanRemoteIdempotentRepositoryCamelIT.class
-        },
-        properties = { "camel.springboot.routes-include-pattern=file:src/test/resources/org/apache/camel/component/infinispan/spring/SpringInfinispanRemoteIdempotentRepositoryCamelTest.xml" }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class,
+        SpringInfinispanRemoteIdempotentRepositoryCamelIT.class }, properties = {
+                "camel.springboot.routes-include-pattern=file:src/test/resources/org/apache/camel/component/infinispan/spring/SpringInfinispanRemoteIdempotentRepositoryCamelTest.xml" })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class SpringInfinispanRemoteIdempotentRepositoryCamelIT
         extends SpringInfinispanRemoteIdempotentRepositoryTestSupport {
 
-        @Bean
-        public org.apache.camel.spi.IdempotentRepository repo() {
-                InfinispanRemoteIdempotentRepository infinispanRemoteIdempotentRepository = new InfinispanRemoteIdempotentRepository("idempotent");
-                infinispanRemoteIdempotentRepository.setCacheContainer(manager);
+    @Bean
+    public org.apache.camel.spi.IdempotentRepository repo() {
+        InfinispanRemoteIdempotentRepository infinispanRemoteIdempotentRepository = new InfinispanRemoteIdempotentRepository(
+                "idempotent");
+        infinispanRemoteIdempotentRepository.setCacheContainer(manager);
 
-                return infinispanRemoteIdempotentRepository;
-        }
+        return infinispanRemoteIdempotentRepository;
+    }
 
-        @Bean
-        public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-                return new PropertySourcesPlaceholderConfigurer();
-        }
+    @Bean
+    public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
 }

@@ -38,68 +38,63 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
-
 import io.swagger.v3.core.util.Json;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				RestOpenApiReaderFileResponseModelTest.class,
-				RestOpenApiReaderFileResponseModelTest.TestConfiguration.class,
-				DummyRestConsumerFactory.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, RestOpenApiReaderFileResponseModelTest.class,
+        RestOpenApiReaderFileResponseModelTest.TestConfiguration.class, DummyRestConsumerFactory.class })
 public class RestOpenApiReaderFileResponseModelTest {
 
-	private static final Logger LOG = LoggerFactory.getLogger(RestOpenApiReaderFileResponseModelTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RestOpenApiReaderFileResponseModelTest.class);
 
-	@BindToRegistry("dummy-rest")
-	private final DummyRestConsumerFactory factory = new DummyRestConsumerFactory();
+    @BindToRegistry("dummy-rest")
+    private final DummyRestConsumerFactory factory = new DummyRestConsumerFactory();
 
-	@Autowired
-	CamelContext context;
+    @Autowired
+    CamelContext context;
 
-	@Configuration
-	public class TestConfiguration {
+    @Configuration
+    public class TestConfiguration {
 
-		@Bean
-		public RouteBuilder routeBuilder() {
-			return new RouteBuilder() {
+        @Bean
+        public RouteBuilder routeBuilder() {
+            return new RouteBuilder() {
 
-				@Override
-				public void configure() throws Exception {
-					rest("/hello").consumes("application/json").produces("application/octet-stream").get("/pdf/{name}").description("Saying hi").param().name("name")
-							.type(RestParamType.path).dataType("string").description("Who is it").example("Donald Duck").endParam().responseMessage().code(200)
-							.message("A document as reply").responseModel(java.io.File.class).endResponseMessage().to("log:hi");
-				}
-			};
-		}
-	}
+                @Override
+                public void configure() throws Exception {
+                    rest("/hello").consumes("application/json").produces("application/octet-stream").get("/pdf/{name}")
+                            .description("Saying hi").param().name("name").type(RestParamType.path).dataType("string")
+                            .description("Who is it").example("Donald Duck").endParam().responseMessage().code(200)
+                            .message("A document as reply").responseModel(java.io.File.class).endResponseMessage()
+                            .to("log:hi");
+                }
+            };
+        }
+    }
 
-	@Test
-	public void testReaderReadV3() throws Exception {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		Info info = new Info();
-		config.setInfo(info);
-		RestOpenApiReader reader = new RestOpenApiReader();
+    @Test
+    public void testReaderReadV3() throws Exception {
+        BeanConfig config = new BeanConfig();
+        config.setHost("localhost:8080");
+        config.setSchemes(new String[] { "http" });
+        config.setBasePath("/api");
+        Info info = new Info();
+        config.setInfo(info);
+        RestOpenApiReader reader = new RestOpenApiReader();
 
-		OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
-				new DefaultClassResolver());
-		assertNotNull(openApi);
+        OpenAPI openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config,
+                context.getName(), new DefaultClassResolver());
+        assertNotNull(openApi);
 
-		String json = Json.pretty(openApi);
+        String json = Json.pretty(openApi);
 
-		LOG.info(json);
-		assertTrue(json.contains("\"format\" : \"binary\""));
-		assertTrue(json.contains("\"type\" : \"string\""));
+        LOG.info(json);
+        assertTrue(json.contains("\"format\" : \"binary\""));
+        assertTrue(json.contains("\"type\" : \"string\""));
 
-		context.stop();
-	}
+        context.stop();
+    }
 }

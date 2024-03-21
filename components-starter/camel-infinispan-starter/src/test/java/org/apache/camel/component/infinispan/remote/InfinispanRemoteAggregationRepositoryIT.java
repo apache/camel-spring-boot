@@ -32,68 +32,60 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				InfinispanRemoteAggregationRepositoryIT.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, InfinispanRemoteAggregationRepositoryIT.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class InfinispanRemoteAggregationRepositoryIT extends InfinispanRemoteTestSupport {
-	public static final int COMPLETION_SIZE = 4;
-	public static final String CORRELATOR_HEADER = "CORRELATOR_HEADER";
+    public static final int COMPLETION_SIZE = 4;
+    public static final String CORRELATOR_HEADER = "CORRELATOR_HEADER";
 
-	@Bean
-	public InfinispanRemoteAggregationRepository infinispanRemoteAggregationRepository() {
-		InfinispanRemoteConfiguration configuration = new InfinispanRemoteConfiguration();
-		configuration.setCacheContainerConfiguration(getConfiguration().build());
+    @Bean
+    public InfinispanRemoteAggregationRepository infinispanRemoteAggregationRepository() {
+        InfinispanRemoteConfiguration configuration = new InfinispanRemoteConfiguration();
+        configuration.setCacheContainerConfiguration(getConfiguration().build());
 
-		InfinispanRemoteAggregationRepository repo = new InfinispanRemoteAggregationRepository(getCacheName());
-		repo.setConfiguration(configuration);
+        InfinispanRemoteAggregationRepository repo = new InfinispanRemoteAggregationRepository(getCacheName());
+        repo.setConfiguration(configuration);
 
-		return repo;
-	}
+        return repo;
+    }
 
-	@Autowired
-	private ApplicationContext applicationContext;
+    @Autowired
+    private ApplicationContext applicationContext;
 
-	@Test
-	public void checkAggregationFromOneRoute() throws Exception {
-		context.addRoutes(new RouteBuilder() {
-			@Override
-			public void configure() {
-				from("direct:start")
-						.aggregate(header(CORRELATOR_HEADER))
-						.aggregationRepository(applicationContext.getBean(InfinispanRemoteAggregationRepository.class))
-						.aggregationStrategy((oldExchange, newExchange) -> {
-							if (oldExchange == null) {
-								return newExchange;
-							} else {
-								Integer n = newExchange.getIn().getBody(Integer.class);
-								Integer o = oldExchange.getIn().getBody(Integer.class);
-								Integer v = (o == null ? 0 : o) + (n == null ? 0 : n);
-								oldExchange.getIn().setBody(v, Integer.class);
-								return oldExchange;
-							}
-						})
-						.completionSize(COMPLETION_SIZE)
-						.to("mock:result");
-			}
-		});
+    @Test
+    public void checkAggregationFromOneRoute() throws Exception {
+        context.addRoutes(new RouteBuilder() {
+            @Override
+            public void configure() {
+                from("direct:start").aggregate(header(CORRELATOR_HEADER))
+                        .aggregationRepository(applicationContext.getBean(InfinispanRemoteAggregationRepository.class))
+                        .aggregationStrategy((oldExchange, newExchange) -> {
+                            if (oldExchange == null) {
+                                return newExchange;
+                            } else {
+                                Integer n = newExchange.getIn().getBody(Integer.class);
+                                Integer o = oldExchange.getIn().getBody(Integer.class);
+                                Integer v = (o == null ? 0 : o) + (n == null ? 0 : n);
+                                oldExchange.getIn().setBody(v, Integer.class);
+                                return oldExchange;
+                            }
+                        }).completionSize(COMPLETION_SIZE).to("mock:result");
+            }
+        });
 
-		MockEndpoint mock = getMockEndpoint("mock:result");
-		mock.expectedMessageCount(2);
-		mock.expectedBodiesReceived(1 + 3 + 4 + 5, 6 + 7 + 20 + 21);
+        MockEndpoint mock = getMockEndpoint("mock:result");
+        mock.expectedMessageCount(2);
+        mock.expectedBodiesReceived(1 + 3 + 4 + 5, 6 + 7 + 20 + 21);
 
-		template.sendBodyAndHeader("direct:start", 1, CORRELATOR_HEADER, CORRELATOR_HEADER);
-		template.sendBodyAndHeader("direct:start", 3, CORRELATOR_HEADER, CORRELATOR_HEADER);
-		template.sendBodyAndHeader("direct:start", 4, CORRELATOR_HEADER, CORRELATOR_HEADER);
-		template.sendBodyAndHeader("direct:start", 5, CORRELATOR_HEADER, CORRELATOR_HEADER);
-		template.sendBodyAndHeader("direct:start", 6, CORRELATOR_HEADER, CORRELATOR_HEADER);
-		template.sendBodyAndHeader("direct:start", 7, CORRELATOR_HEADER, CORRELATOR_HEADER);
-		template.sendBodyAndHeader("direct:start", 20, CORRELATOR_HEADER, CORRELATOR_HEADER);
-		template.sendBodyAndHeader("direct:start", 21, CORRELATOR_HEADER, CORRELATOR_HEADER);
+        template.sendBodyAndHeader("direct:start", 1, CORRELATOR_HEADER, CORRELATOR_HEADER);
+        template.sendBodyAndHeader("direct:start", 3, CORRELATOR_HEADER, CORRELATOR_HEADER);
+        template.sendBodyAndHeader("direct:start", 4, CORRELATOR_HEADER, CORRELATOR_HEADER);
+        template.sendBodyAndHeader("direct:start", 5, CORRELATOR_HEADER, CORRELATOR_HEADER);
+        template.sendBodyAndHeader("direct:start", 6, CORRELATOR_HEADER, CORRELATOR_HEADER);
+        template.sendBodyAndHeader("direct:start", 7, CORRELATOR_HEADER, CORRELATOR_HEADER);
+        template.sendBodyAndHeader("direct:start", 20, CORRELATOR_HEADER, CORRELATOR_HEADER);
+        template.sendBodyAndHeader("direct:start", 21, CORRELATOR_HEADER, CORRELATOR_HEADER);
 
-		mock.assertIsSatisfied();
-	}
+        mock.assertIsSatisfied();
+    }
 }

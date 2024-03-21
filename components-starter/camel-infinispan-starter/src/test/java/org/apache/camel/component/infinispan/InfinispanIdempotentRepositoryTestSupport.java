@@ -95,8 +95,8 @@ public interface InfinispanIdempotentRepositoryTestSupport {
         mock.expectedMessageCount(1);
 
         final String messageId = UUID.randomUUID().toString();
-        IntStream.range(0, 10).forEach(
-                i -> template().sendBodyAndHeader("direct:start", "message-" + i, "MessageID", messageId));
+        IntStream.range(0, 10)
+                .forEach(i -> template().sendBodyAndHeader("direct:start", "message-" + i, "MessageID", messageId));
 
         mock.assertIsSatisfied();
     }

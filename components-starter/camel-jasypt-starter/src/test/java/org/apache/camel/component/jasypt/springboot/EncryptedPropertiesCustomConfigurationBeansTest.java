@@ -38,14 +38,14 @@ import org.springframework.test.annotation.DirtiesContext;
 @CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
-@SpringBootTest(
-        classes = {EncryptedPropertiesCustomConfigurationBeansTest.TestConfiguration.class},
-        properties = {"encrypted.password=ENC(6q7H+bWqPbSZVW1hUzDVgnl7iSnC04zRmKwD31ounBMPM/2CtDS7fwb4u1OGZ2Q4)"})
+@SpringBootTest(classes = { EncryptedPropertiesCustomConfigurationBeansTest.TestConfiguration.class }, properties = {
+        "encrypted.password=ENC(6q7H+bWqPbSZVW1hUzDVgnl7iSnC04zRmKwD31ounBMPM/2CtDS7fwb4u1OGZ2Q4)" })
 public class EncryptedPropertiesCustomConfigurationBeansTest extends EncryptedPropertiesTestBase {
 
     public static Properties loadAuthProperties() throws IOException {
         Properties properties = new Properties();
-        properties.load(EncryptedPropertiesCustomConfigurationBeansTest.class.getClassLoader().getResourceAsStream("test.properties"));
+        properties.load(EncryptedPropertiesCustomConfigurationBeansTest.class.getClassLoader()
+                .getResourceAsStream("test.properties"));
         return properties;
     }
 
@@ -63,7 +63,7 @@ public class EncryptedPropertiesCustomConfigurationBeansTest extends EncryptedPr
     @Import(Routes.class)
     @AutoConfigureBefore(CamelAutoConfiguration.class)
     public static class TestConfiguration {
-        
+
         private static String OS = System.getProperty("os.name");
 
         private String getSecureRandomAlgorithm() {
@@ -87,7 +87,8 @@ public class EncryptedPropertiesCustomConfigurationBeansTest extends EncryptedPr
         }
 
         @Bean("customStringEncryptor")
-        public StandardPBEStringEncryptor stringEncryptor(EnvironmentStringPBEConfig environmentVariablesConfiguration) {
+        public StandardPBEStringEncryptor stringEncryptor(
+                EnvironmentStringPBEConfig environmentVariablesConfiguration) {
             StandardPBEStringEncryptor standardPBEStringEncryptor = new StandardPBEStringEncryptor();
             standardPBEStringEncryptor.setConfig(environmentVariablesConfiguration);
             return standardPBEStringEncryptor;

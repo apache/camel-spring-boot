@@ -36,13 +36,8 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                ValidatorDtdAccessOnTest.class,
-                ValidatorDtdAccessAbstractTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ValidatorDtdAccessOnTest.class,
+        ValidatorDtdAccessAbstractTest.TestConfiguration.class })
 public class ValidatorDtdAccessOnTest extends ValidatorDtdAccessAbstractTest {
 
     /**

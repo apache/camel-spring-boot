@@ -20,9 +20,7 @@ import jakarta.xml.bind.annotation.XmlEnum;
 
 @XmlEnum
 public enum BeanScope {
-    Singleton,
-    Request,
-    Prototype;
+    Singleton, Request, Prototype;
 
     BeanScope() {
     }

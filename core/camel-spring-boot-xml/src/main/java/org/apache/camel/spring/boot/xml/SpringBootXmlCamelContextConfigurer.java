@@ -28,9 +28,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 /**
- * Used to merge Camel Spring Boot configuration with {@link org.apache.camel.CamelContext} that
- * has been created from XML files. This allows to configure your Camel applications with Spring Boot
- * configuration for both Java and XML Camel routes in similar way.
+ * Used to merge Camel Spring Boot configuration with {@link org.apache.camel.CamelContext} that has been created from
+ * XML files. This allows to configure your Camel applications with Spring Boot configuration for both Java and XML
+ * Camel routes in similar way.
  */
 public class SpringBootXmlCamelContextConfigurer implements XmlCamelContextConfigurer {
 

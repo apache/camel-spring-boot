@@ -39,21 +39,14 @@ import static org.apache.camel.component.kafka.serde.KafkaSerdeHelper.numericHea
 @EnabledIfSystemProperty(named = "enable.kafka.consumer.idempotency.tests", matches = "true")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
-                KafkaConsumerIdempotentIT.class,
-                KafkaConsumerIdempotentIT.TestConfiguration.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
+        KafkaConsumerIdempotentIT.class, KafkaConsumerIdempotentIT.TestConfiguration.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class KafkaConsumerIdempotentIT extends KafkaConsumerIdempotentTestSupport {
 
     public static final String TOPIC = "idempt";
 
-    private final String from = "kafka:" + TOPIC
-            + "?groupId=group2&autoOffsetReset=earliest"
+    private final String from = "kafka:" + TOPIC + "?groupId=group2&autoOffsetReset=earliest"
             + "&keyDeserializer=org.apache.kafka.common.serialization.StringDeserializer"
             + "&valueDeserializer=org.apache.kafka.common.serialization.StringDeserializer"
             + "&autoCommitIntervalMs=1000&sessionTimeoutMs=30000&autoCommitEnable=true"
@@ -88,16 +81,14 @@ public class KafkaConsumerIdempotentIT extends KafkaConsumerIdempotentTestSuppor
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from(from).routeId("foo")
-                            .idempotentConsumer(numericHeader("id"))
-                            .idempotentRepository("kafkaIdempotentRepository")
-                            .to(to);
+                    from(from).routeId("foo").idempotentConsumer(numericHeader("id"))
+                            .idempotentRepository("kafkaIdempotentRepository").to(to);
                 }
             };
         }
 
         @Bean("kafkaIdempotentRepository")
-        public KafkaIdempotentRepository createKafkaIdempotentRepository(){
+        public KafkaIdempotentRepository createKafkaIdempotentRepository() {
             return new KafkaIdempotentRepository("TEST_IDEMPOTENT", getBootstrapServers());
         }
     }

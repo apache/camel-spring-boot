@@ -40,52 +40,34 @@ import io.swagger.v3.oas.models.OpenAPI;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				RestOpenApiV2SecuritySchemesTest.class,
-				RestOpenApiV2SecuritySchemesTest.TestConfiguration.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, RestOpenApiV2SecuritySchemesTest.class,
+        RestOpenApiV2SecuritySchemesTest.TestConfiguration.class })
 public class RestOpenApiV2SecuritySchemesTest {
 
-	private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
-	@Autowired
-	CamelContext context;
+    @Autowired
+    CamelContext context;
 
-	@Configuration
-	public class TestConfiguration {
+    @Configuration
+    public class TestConfiguration {
 
-		@Bean
-		public RouteBuilder routeBuilder() {
-			return new RouteBuilder() {
+        @Bean
+        public RouteBuilder routeBuilder() {
+            return new RouteBuilder() {
 
-				@Override
-				public void configure() throws Exception {
-					rest()
-							.securityDefinitions()
-							.oauth2("petstore_auth_implicit")// OAuth implicit
-							.authorizationUrl("https://petstore.swagger.io/oauth/dialog")
-							.end()
-							.oauth2("oauth_password")
-							.flow("password")
-							.tokenUrl("https://petstore.swagger.io/oauth/token")
-							.end()
-							.oauth2("oauth2_accessCode")// OAuth access/authorization code
-							.authorizationUrl("https://petstore.swagger.io/oauth/dialog")
-							.tokenUrl("https://petstore.swagger.io/oauth/token")
-							.end()
-							.apiKey("api_key_header")
-							.withHeader("myHeader")
-							.end()
-							.apiKey("api_key_query")
-							.withQuery("myQuery")
-							.end()
-							.end();
-				}
-			};
-		}
-	}
+                @Override
+                public void configure() throws Exception {
+                    rest().securityDefinitions().oauth2("petstore_auth_implicit")// OAuth implicit
+                            .authorizationUrl("https://petstore.swagger.io/oauth/dialog").end().oauth2("oauth_password")
+                            .flow("password").tokenUrl("https://petstore.swagger.io/oauth/token").end()
+                            .oauth2("oauth2_accessCode")// OAuth access/authorization code
+                            .authorizationUrl("https://petstore.swagger.io/oauth/dialog")
+                            .tokenUrl("https://petstore.swagger.io/oauth/token").end().apiKey("api_key_header")
+                            .withHeader("myHeader").end().apiKey("api_key_query").withQuery("myQuery").end().end();
+                }
+            };
+        }
+    }
 
 }

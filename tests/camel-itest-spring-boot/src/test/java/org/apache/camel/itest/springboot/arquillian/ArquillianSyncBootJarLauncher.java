@@ -57,9 +57,12 @@ public class ArquillianSyncBootJarLauncher extends JarLauncher {
 
     @Override
     protected ClassLoader createClassLoader(Collection<URL> urls) throws Exception {
-        // The spring classloader should not be built on top of the current classloader, it should just share the test classes if available
+        // The spring classloader should not be built on top of the current classloader, it should just share the test
+        // classes if available
         List<URL> parentUrls = Arrays.asList(urlsFromClassLoader(this.getClassLoader()));
-        List<URL> additionalURLs = parentUrls.stream().filter(u -> u.toString().startsWith("file") && !u.toString().endsWith(".jar")).collect(Collectors.toList());
+        List<URL> additionalURLs = parentUrls.stream()
+                .filter(u -> u.toString().startsWith("file") && !u.toString().endsWith(".jar"))
+                .collect(Collectors.toList());
 
         ArrayList<URL> newURLs = new ArrayList<>();
         newURLs.addAll(urls);
@@ -81,7 +84,7 @@ public class ArquillianSyncBootJarLauncher extends JarLauncher {
 
     private static int getJavaMajorVersion() {
         String javaSpecVersion = System.getProperty("java.specification.version");
-        if (javaSpecVersion.contains(".")) { //before jdk 9
+        if (javaSpecVersion.contains(".")) { // before jdk 9
             return Integer.parseInt(javaSpecVersion.split("\\.")[1]);
         } else {
             return Integer.parseInt(javaSpecVersion);
@@ -92,9 +95,7 @@ public class ArquillianSyncBootJarLauncher extends JarLauncher {
         if (classLoader instanceof URLClassLoader) {
             return ((URLClassLoader) classLoader).getURLs();
         }
-        return Stream
-                .of(ManagementFactory.getRuntimeMXBean().getClassPath()
-                        .split(File.pathSeparator))
+        return Stream.of(ManagementFactory.getRuntimeMXBean().getClassPath().split(File.pathSeparator))
                 .map(ArquillianSyncBootJarLauncher::toURL).toArray(URL[]::new);
     }
 
@@ -102,8 +103,7 @@ public class ArquillianSyncBootJarLauncher extends JarLauncher {
         try {
             return new File(classPathEntry).toURI().toURL();
         } catch (MalformedURLException ex) {
-            throw new IllegalArgumentException(
-                    "URL could not be created from '" + classPathEntry + "'", ex);
+            throw new IllegalArgumentException("URL could not be created from '" + classPathEntry + "'", ex);
         }
     }
 }

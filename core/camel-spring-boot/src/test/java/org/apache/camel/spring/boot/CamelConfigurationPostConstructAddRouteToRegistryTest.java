@@ -32,10 +32,8 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(classes = {
-        CamelAutoConfiguration.class,
-        CamelConfigurationPostConstructAddRouteToRegistryTest.Config.class
-})
+@SpringBootTest(classes = { CamelAutoConfiguration.class,
+        CamelConfigurationPostConstructAddRouteToRegistryTest.Config.class })
 public class CamelConfigurationPostConstructAddRouteToRegistryTest {
 
     @Configuration
@@ -49,8 +47,7 @@ public class CamelConfigurationPostConstructAddRouteToRegistryTest {
             camelContext.getRegistry().bind("myExtraRoute", new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:extra")
-                            .to("mock:extra");
+                    from("direct:extra").to("mock:extra");
                 }
             });
         }

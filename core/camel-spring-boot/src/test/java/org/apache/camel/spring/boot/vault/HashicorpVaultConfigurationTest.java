@@ -28,17 +28,10 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(
-        classes = {
-                HashicorpVaultConfigurationTest.class},
-        properties = {
-                "camel.vault.hashicorp.token=myToken",
-                "camel.vault.hashicorp.engine=myEngine",
-                "camel.vault.hashicorp.host=myHost",
-                "camel.vault.hashicorp.port=myPort",
-                "camel.vault.hashicorp.scheme=myScheme"
-        }
-)
+@SpringBootTest(classes = { HashicorpVaultConfigurationTest.class }, properties = {
+        "camel.vault.hashicorp.token=myToken", "camel.vault.hashicorp.engine=myEngine",
+        "camel.vault.hashicorp.host=myHost", "camel.vault.hashicorp.port=myPort",
+        "camel.vault.hashicorp.scheme=myScheme" })
 public class HashicorpVaultConfigurationTest {
 
     @Autowired

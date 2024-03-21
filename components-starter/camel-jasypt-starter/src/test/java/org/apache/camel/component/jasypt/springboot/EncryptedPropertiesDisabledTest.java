@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jasypt.springboot;
 
-
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,26 +26,25 @@ import static org.apache.camel.component.jasypt.springboot.Constants.START_URI_T
 
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
-@SpringBootTest(
-        properties = {"camel.component.jasypt.enabled = false"},
-        classes = {EncryptedPropertiesCustomConfigurationBeansTest.TestConfiguration.class})
-public class EncryptedPropertiesDisabledTest extends EncryptedPropertiesTestBase{
-
+@SpringBootTest(properties = { "camel.component.jasypt.enabled = false" }, classes = {
+        EncryptedPropertiesCustomConfigurationBeansTest.TestConfiguration.class })
+public class EncryptedPropertiesDisabledTest extends EncryptedPropertiesTestBase {
 
     /**
      * Disabling the encryption, properties will not fm decrypted
      */
     @Test
     public void testEncryptionInsideCamelContext() {
-        testEncryption(START_URI_TEST_ENCRYPTED_PROPS_IN_CC, "ENC(ngTGZvEjfnNnKMTrbRCR3tHEnFShMGdBSgfW5K9mlg23u+ygbtNCgJGmDriQBVcB)");
+        testEncryption(START_URI_TEST_ENCRYPTED_PROPS_IN_CC,
+                "ENC(ngTGZvEjfnNnKMTrbRCR3tHEnFShMGdBSgfW5K9mlg23u+ygbtNCgJGmDriQBVcB)");
     }
 
     @Test
     public void testEncryptionOutsideCamelContext() {
-        testEncryption(START_URI_TEST_ENCRYPTED_PROPS_OUT_CC, "ENC(ngTGZvEjfnNnKMTrbRCR3tHEnFShMGdBSgfW5K9mlg23u+ygbtNCgJGmDriQBVcB)");
+        testEncryption(START_URI_TEST_ENCRYPTED_PROPS_OUT_CC,
+                "ENC(ngTGZvEjfnNnKMTrbRCR3tHEnFShMGdBSgfW5K9mlg23u+ygbtNCgJGmDriQBVcB)");
     }
 }

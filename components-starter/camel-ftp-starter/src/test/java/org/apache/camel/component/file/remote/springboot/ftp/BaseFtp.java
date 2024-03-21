@@ -21,7 +21,6 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 
 import java.nio.file.Path;
 
-
 public class BaseFtp extends AbstractBaseFtp {
     protected static final String AUTH_VALUE_SSL = "SSLv3";
     protected static final String AUTH_VALUE_TLS = "TLSv1.3";

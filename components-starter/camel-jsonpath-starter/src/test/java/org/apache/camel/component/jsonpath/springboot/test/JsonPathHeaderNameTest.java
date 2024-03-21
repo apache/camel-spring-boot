@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
 
 import org.apache.camel.EndpointInject;
@@ -26,7 +25,6 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -34,16 +32,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathHeaderNameTest.class,
-        JsonPathHeaderNameTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathHeaderNameTest.class,
+        JsonPathHeaderNameTest.TestConfiguration.class })
 public class JsonPathHeaderNameTest {
 
     @Autowired
@@ -62,7 +54,6 @@ public class JsonPathHeaderNameTest {
 
         mock.assertIsSatisfied();
     }
-    
 
     // *************************************
     // Config
@@ -79,9 +70,7 @@ public class JsonPathHeaderNameTest {
                     var jp = expression().jsonpath().expression("$..store.book.length()").resultType(int.class)
                             .source("header:myHeader").end();
 
-                    from("direct:start")
-                            .setHeader("number", jp)
-                            .to("mock:result");
+                    from("direct:start").setHeader("number", jp).to("mock:result");
                 }
             };
         }

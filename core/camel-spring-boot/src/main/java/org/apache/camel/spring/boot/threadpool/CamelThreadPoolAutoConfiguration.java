@@ -38,24 +38,20 @@ public class CamelThreadPoolAutoConfiguration {
             return null;
         }
 
-        // okay we have all properties set so we should be able to create thread pool profiles and register them on camel
+        // okay we have all properties set so we should be able to create thread pool profiles and register them on
+        // camel
         ThreadPoolProfile defaultProfile = camelContext.getExecutorServiceManager().getDefaultThreadPoolProfile();
-        final ThreadPoolProfile dp = new ThreadPoolProfileBuilder("default", defaultProfile)
-                .poolSize(tp.getPoolSize())
-                .maxPoolSize(tp.getMaxPoolSize())
-                .keepAliveTime(tp.getKeepAliveTime(), tp.getTimeUnit())
-                .maxQueueSize(tp.getMaxQueueSize())
-                .allowCoreThreadTimeOut(tp.getAllowCoreThreadTimeOut())
+        final ThreadPoolProfile dp = new ThreadPoolProfileBuilder("default", defaultProfile).poolSize(tp.getPoolSize())
+                .maxPoolSize(tp.getMaxPoolSize()).keepAliveTime(tp.getKeepAliveTime(), tp.getTimeUnit())
+                .maxQueueSize(tp.getMaxQueueSize()).allowCoreThreadTimeOut(tp.getAllowCoreThreadTimeOut())
                 .rejectedPolicy(tp.getRejectedPolicy()).build();
 
         tp.getConfig().forEach((k, v) -> {
             ThreadPoolProfileBuilder builder = new ThreadPoolProfileBuilder(k, dp);
-            final ThreadPoolProfile tpp = builder.poolSize(v.getPoolSize())
-                    .maxPoolSize(v.getMaxPoolSize())
-                    .keepAliveTime(v.getKeepAliveTime(), v.getTimeUnit())
-                    .maxQueueSize(v.getMaxQueueSize())
-                    .allowCoreThreadTimeOut(v.getAllowCoreThreadTimeOut())
-                    .rejectedPolicy(v.getRejectedPolicy()).build();
+            final ThreadPoolProfile tpp = builder.poolSize(v.getPoolSize()).maxPoolSize(v.getMaxPoolSize())
+                    .keepAliveTime(v.getKeepAliveTime(), v.getTimeUnit()).maxQueueSize(v.getMaxQueueSize())
+                    .allowCoreThreadTimeOut(v.getAllowCoreThreadTimeOut()).rejectedPolicy(v.getRejectedPolicy())
+                    .build();
             if (!tpp.isEmpty()) {
                 camelContext.getExecutorServiceManager().registerThreadPoolProfile(tpp);
             }

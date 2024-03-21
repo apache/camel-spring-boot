@@ -40,7 +40,6 @@ public class JGroupsLockClusterServiceConfiguration {
      */
     private String jgroupsClusterName;
 
-
     public boolean isEnabled() {
         return enabled;
     }

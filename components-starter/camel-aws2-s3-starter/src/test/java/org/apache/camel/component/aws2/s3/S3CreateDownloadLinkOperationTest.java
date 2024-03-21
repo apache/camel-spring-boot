@@ -38,13 +38,8 @@ import static org.junit.Assert.assertNull;
 //Based on S3CreateDownloadLinkOperationIT
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                S3CreateDownloadLinkOperationTest.class,
-                S3CreateDownloadLinkOperationTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, S3CreateDownloadLinkOperationTest.class,
+        S3CreateDownloadLinkOperationTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class S3CreateDownloadLinkOperationTest extends BaseS3 {
 
@@ -90,7 +85,7 @@ public class S3CreateDownloadLinkOperationTest extends BaseS3 {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseS3.TestConfiguration {
+    public class TestConfiguration extends BaseS3.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder(S3Client s3Client) {
             return new RouteBuilder() {
@@ -108,6 +103,5 @@ public class S3CreateDownloadLinkOperationTest extends BaseS3 {
             };
         }
     }
-
 
 }

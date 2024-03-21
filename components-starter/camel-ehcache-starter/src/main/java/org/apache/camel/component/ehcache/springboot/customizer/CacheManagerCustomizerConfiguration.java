@@ -30,7 +30,6 @@ public class CacheManagerCustomizerConfiguration {
      */
     private boolean override;
 
-
     public boolean isEnabled() {
         return enabled;
     }

@@ -21,8 +21,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
- * A configuration controller to enable Micrometer Observation via the configuration property.
- * Useful to bootstrap Micrometer Observation when not using the {@link CamelObservation} annotation.
+ * A configuration controller to enable Micrometer Observation via the configuration property. Useful to bootstrap
+ * Micrometer Observation when not using the {@link CamelObservation} annotation.
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(value = "camel.observation.enabled")

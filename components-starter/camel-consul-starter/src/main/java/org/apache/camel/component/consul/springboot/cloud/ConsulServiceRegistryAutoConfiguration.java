@@ -40,7 +40,8 @@ public class ConsulServiceRegistryAutoConfiguration {
 
     @Bean(name = "consul-service-registry")
     @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-    public ConsulServiceRegistry consulServiceRegistry(ConsulServiceRegistryConfiguration configuration) throws Exception {
+    public ConsulServiceRegistry consulServiceRegistry(ConsulServiceRegistryConfiguration configuration)
+            throws Exception {
         ConsulServiceRegistry service = new ConsulServiceRegistry();
 
         CamelPropertiesHelper.setCamelProperties(camelContext, service,

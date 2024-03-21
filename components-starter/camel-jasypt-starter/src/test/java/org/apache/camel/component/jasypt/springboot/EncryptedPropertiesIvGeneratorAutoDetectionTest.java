@@ -22,8 +22,8 @@ import java.security.Security;
 import java.util.Collection;
 import java.util.Set;
 
-public class EncryptedPropertiesIvGeneratorAutoDetectionTest extends AbstractEncryptedPropertiesIvGeneratorAutoDetectionTest{
-
+public class EncryptedPropertiesIvGeneratorAutoDetectionTest
+        extends AbstractEncryptedPropertiesIvGeneratorAutoDetectionTest {
 
     public EncryptedPropertiesIvGeneratorAutoDetectionTest() {
         provider = SUN_JCE_PROVIDER_NAME;
@@ -33,7 +33,5 @@ public class EncryptedPropertiesIvGeneratorAutoDetectionTest extends AbstractEnc
         Security.removeProvider(BOUNCY_CASTLE_PROVIDER_NAME);
         return (Set<String>) AlgorithmRegistry.getAllPBEAlgorithms();
     }
-
-
 
 }

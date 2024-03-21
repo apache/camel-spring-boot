@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelFtpTest extends AbstractSpringBootTestSupport {
 
@@ -33,8 +32,7 @@ public class CamelFtpTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelFtpTest.class))
+        return new ITestConfigBuilder().module(inferModuleName(CamelFtpTest.class))
                 // arquillian fails, but the tests are ok
                 .build();
     }
@@ -46,6 +44,5 @@ public class CamelFtpTest extends AbstractSpringBootTestSupport {
 
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

@@ -62,19 +62,25 @@ public final class ReflectionHelper {
     }
 
     /**
-     * Apply a specific action anytime the annotation is found in the class according to the type of target supported
-     * by the annotation which can be either {@link ElementType#TYPE}, {@link ElementType#CONSTRUCTOR},
+     * Apply a specific action anytime the annotation is found in the class according to the type of target supported by
+     * the annotation which can be either {@link ElementType#TYPE}, {@link ElementType#CONSTRUCTOR},
      * {@link ElementType#METHOD}, {@link ElementType#FIELD}, or {@link ElementType#PARAMETER}.
      *
-     * @param c the target class
-     * @param a the target type of annotation
-     * @param getter the method allowing to extract the excepted values from the annotation
-     * @param onMatch the action to perform in case of a match
-     * @param <A> the type of the target annotation
-     * @param <T> the type of the content extracted from the annotation found
+     * @param c
+     *            the target class
+     * @param a
+     *            the target type of annotation
+     * @param getter
+     *            the method allowing to extract the excepted values from the annotation
+     * @param onMatch
+     *            the action to perform in case of a match
+     * @param <A>
+     *            the type of the target annotation
+     * @param <T>
+     *            the type of the content extracted from the annotation found
      */
     public static <A extends Annotation, T> void applyIfMatch(Class<?> c, Class<A> a, Function<A, T> getter,
-                                                              Consumer<T> onMatch) {
+            Consumer<T> onMatch) {
         Set<ElementType> targets = null;
         if (a.isAnnotationPresent(Target.class)) {
             targets = Collections.newSetFromMap(new EnumMap<>(ElementType.class));
@@ -100,45 +106,50 @@ public final class ReflectionHelper {
             }
         }
         if (targets == null || targets.contains(ElementType.FIELD)) {
-            ReflectionUtils.doWithFields(c,
-                field -> onMatch.accept(getter.apply(field.getAnnotation(a))), field -> field.isAnnotationPresent(a));
+            ReflectionUtils.doWithFields(c, field -> onMatch.accept(getter.apply(field.getAnnotation(a))),
+                    field -> field.isAnnotationPresent(a));
         }
         boolean checkMethods = targets == null || targets.contains(ElementType.METHOD);
         if (checkMethods || checkParameters) {
-            ReflectionUtils.doWithMethods(
-                c,
-                method -> {
-                    if (checkMethods && method.isAnnotationPresent(a)) {
-                        onMatch.accept(getter.apply(method.getAnnotation(a)));
-                    }
-                    if (checkParameters) {
-                        for (Parameter parameter : method.getParameters()) {
-                            if (parameter.isAnnotationPresent(a)) {
-                                onMatch.accept(getter.apply(parameter.getAnnotation(a)));
-                            }
+            ReflectionUtils.doWithMethods(c, method -> {
+                if (checkMethods && method.isAnnotationPresent(a)) {
+                    onMatch.accept(getter.apply(method.getAnnotation(a)));
+                }
+                if (checkParameters) {
+                    for (Parameter parameter : method.getParameters()) {
+                        if (parameter.isAnnotationPresent(a)) {
+                            onMatch.accept(getter.apply(parameter.getAnnotation(a)));
                         }
                     }
                 }
-            );
+            });
         }
     }
 
     /**
      * Give all the classes available in the given class loader that are annotated with at least one of the annotations.
      *
-     * @param classLoader the class loader from which the classes to find are loaded
-     * @param annotations the target annotations
+     * @param classLoader
+     *            the class loader from which the classes to find are loaded
+     * @param annotations
+     *            the target annotations
+     *
      * @return the list of classes that are annotated with at least one of the annotations.
      */
-    public static List<Class<?>> getClassesByAnnotations(ClassLoader classLoader, List<Class<? extends Annotation>> annotations) {
-        return getClassesByFilters(classLoader, annotations.stream().map(AnnotationTypeFilter::new).collect(Collectors.toList()));
+    public static List<Class<?>> getClassesByAnnotations(ClassLoader classLoader,
+            List<Class<? extends Annotation>> annotations) {
+        return getClassesByFilters(classLoader,
+                annotations.stream().map(AnnotationTypeFilter::new).collect(Collectors.toList()));
     }
 
     /**
      * Give all the classes available in the given class loader that match with at least one of the filters.
      *
-     * @param classLoader the class loader from which the classes to find are loaded
-     * @param includeFilters the filters to apply the classes found
+     * @param classLoader
+     *            the class loader from which the classes to find are loaded
+     * @param includeFilters
+     *            the filters to apply the classes found
+     *
      * @return a list of classes that match with at least one of the given filters
      */
     public static List<Class<?>> getClassesByFilters(ClassLoader classLoader, List<TypeFilter> includeFilters) {
@@ -150,24 +161,26 @@ public final class ReflectionHelper {
         };
         provider.setResourceLoader(new PathMatchingResourcePatternResolver(classLoader));
         provider.setMetadataReaderFactory(new SafeMetadataReaderFactory(provider.getMetadataReaderFactory()));
-        provider.addExcludeFilter(
-            (metadata, factory) -> {
-                String className = metadata.getClassMetadata().getClassName();
-                return className.startsWith("org.springframework.") || className.startsWith("java.") || className.startsWith("jakarta.");
-            });
+        provider.addExcludeFilter((metadata, factory) -> {
+            String className = metadata.getClassMetadata().getClassName();
+            return className.startsWith("org.springframework.") || className.startsWith("java.")
+                    || className.startsWith("jakarta.");
+        });
         for (TypeFilter filter : includeFilters) {
             provider.addIncludeFilter(filter);
         }
-        return provider.findCandidateComponents("")
-                .stream()
-                .map(b -> asClass(b, classLoader))
+        return provider.findCandidateComponents("").stream().map(b -> asClass(b, classLoader))
                 .collect(Collectors.toList());
     }
 
     /**
      * Convert the given bean definition into a class.
-     * @param bean the bean definition to convert.
-     * @param classLoader the classloader from which the class of the bean is loaded
+     *
+     * @param bean
+     *            the bean definition to convert.
+     * @param classLoader
+     *            the classloader from which the class of the bean is loaded
+     *
      * @return the class corresponding to the bean definition if it could be found, {@code null} otherwise.
      */
     private static Class<?> asClass(BeanDefinition bean, ClassLoader classLoader) {

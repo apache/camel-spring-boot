@@ -16,7 +16,6 @@
  */
 package org.apache.camel.processor.idempotent.cassandra;
 
-
 import org.apache.camel.component.cassandra.springboot.BaseCassandra;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
@@ -32,24 +31,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        NamedCassandraIdempotentRepositoryIT.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, NamedCassandraIdempotentRepositoryIT.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class NamedCassandraIdempotentRepositoryIT extends BaseCassandra {
 
     CassandraIdempotentRepository idempotentRepository;
 
-    
-       
-
-    
     @BeforeEach
     protected void doPreSetup() throws Exception {
         idempotentRepository = new NamedCassandraIdempotentRepository(getSession(), "ID");
@@ -64,16 +53,15 @@ public class NamedCassandraIdempotentRepositoryIT extends BaseCassandra {
         executeScript("NamedIdempotentDataSet.cql");
     }
 
-    
     @AfterEach
     public void tearDown() throws Exception {
         idempotentRepository.stop();
     }
 
     private boolean exists(String key) {
-        return getSession().execute(String.format("select KEY from NAMED_CAMEL_IDEMPOTENT where NAME='ID' and KEY='%s'", key))
-                .one()
-               != null;
+        return getSession()
+                .execute(String.format("select KEY from NAMED_CAMEL_IDEMPOTENT where NAME='ID' and KEY='%s'", key))
+                .one() != null;
     }
 
     @Test

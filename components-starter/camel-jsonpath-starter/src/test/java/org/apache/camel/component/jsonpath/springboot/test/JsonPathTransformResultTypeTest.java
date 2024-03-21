@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
 
 import org.apache.camel.EndpointInject;
@@ -26,7 +25,6 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -34,16 +32,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathTransformResultTypeTest.class,
-        JsonPathTransformResultTypeTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathTransformResultTypeTest.class,
+        JsonPathTransformResultTypeTest.TestConfiguration.class })
 public class JsonPathTransformResultTypeTest {
 
     @Autowired
@@ -67,7 +59,6 @@ public class JsonPathTransformResultTypeTest {
 
         mock.assertIsSatisfied();
     }
-    
 
     // *************************************
     // Config
@@ -81,13 +72,9 @@ public class JsonPathTransformResultTypeTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                            .transform().jsonpath("$.store.book[0].price", Float.class)
-                            .to("mock:price");
+                    from("direct:start").transform().jsonpath("$.store.book[0].price", Float.class).to("mock:price");
 
-                    from("direct:second")
-                            .transform().jsonpath("$.store.book[0].price", Double.class)
-                            .to("mock:price");
+                    from("direct:second").transform().jsonpath("$.store.book[0].price", Double.class).to("mock:price");
                 }
             };
         }

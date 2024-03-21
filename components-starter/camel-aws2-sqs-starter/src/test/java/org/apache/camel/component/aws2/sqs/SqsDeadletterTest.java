@@ -35,13 +35,8 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SqsDeadletterTest.class,
-                SqsDeadletterTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SqsDeadletterTest.class,
+        SqsDeadletterTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class SqsDeadletterTest extends BaseSqs {
 
@@ -73,11 +68,10 @@ public class SqsDeadletterTest extends BaseSqs {
 
         @Bean
         public RouteBuilder routeBuilder() {
-            final String sqsEndpointUri = String
-                    .format("aws2-sqs://%s?messageRetentionPeriod=%s&maximumMessageSize=%s&visibilityTimeout=%s&policy=%s&autoCreateQueue=true",
-                            sharedNameGenerator.getName(),
-                            "1209600", "65536", "60",
-                            "file:src/test/resources/org/apache/camel/component/aws2/sqs/policy.txt");
+            final String sqsEndpointUri = String.format(
+                    "aws2-sqs://%s?messageRetentionPeriod=%s&maximumMessageSize=%s&visibilityTimeout=%s&policy=%s&autoCreateQueue=true",
+                    sharedNameGenerator.getName(), "1209600", "65536", "60",
+                    "file:src/test/resources/org/apache/camel/component/aws2/sqs/policy.txt");
             return new RouteBuilder() {
                 @Override
                 public void configure() {

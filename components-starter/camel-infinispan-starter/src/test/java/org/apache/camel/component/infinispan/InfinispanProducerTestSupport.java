@@ -76,11 +76,8 @@ public interface InfinispanProducerTestSupport {
 
     @Test
     default void keyAndValueArePublishedWithDefaultOperation() {
-        fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
-                .withHeader(InfinispanConstants.VALUE, VALUE_ONE)
-                .send();
+        fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
+                .withHeader(InfinispanConstants.VALUE, VALUE_ONE).send();
 
         Object value = getCache().get(KEY_ONE);
         assertEquals(VALUE_ONE, value.toString());
@@ -91,22 +88,17 @@ public interface InfinispanProducerTestSupport {
         getCache().put(KEY_ONE, VALUE_ONE);
         getCache().put(KEY_TWO, VALUE_TWO);
 
-        Integer cacheSize = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.SIZE)
-                .request(Integer.class);
+        Integer cacheSize = fluentTemplate().to("direct:start")
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.SIZE).request(Integer.class);
 
         assertEquals(cacheSize, Integer.valueOf(2));
     }
 
     @Test
     default void publishKeyAndValueByExplicitlySpecifyingTheOperation() {
-        fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.VALUE, VALUE_ONE)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUT)
-                .send();
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUT).send();
 
         assertEquals(VALUE_ONE, getCache().get(KEY_ONE));
     }
@@ -115,13 +107,10 @@ public interface InfinispanProducerTestSupport {
     default void publishKeyAndValueAsync() throws Exception {
         assertTrue(getCache().isEmpty());
 
-        fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.VALUE, VALUE_ONE)
                 .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTASYNC)
-                .request(CompletableFuture.class)
-                .get(5, TimeUnit.SECONDS);
+                .request(CompletableFuture.class).get(5, TimeUnit.SECONDS);
 
         assertEquals(VALUE_ONE, getCache().get(KEY_ONE));
     }
@@ -130,15 +119,11 @@ public interface InfinispanProducerTestSupport {
     default void publishKeyAndValueAsyncWithLifespan() throws Exception {
         assertTrue(getCache().isEmpty());
 
-        fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTASYNC)
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
-                .withHeader(InfinispanConstants.VALUE, VALUE_ONE)
+        fluentTemplate().to("direct:start").withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTASYNC)
+                .withHeader(InfinispanConstants.KEY, KEY_ONE).withHeader(InfinispanConstants.VALUE, VALUE_ONE)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME, LIFESPAN_TIME)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME_UNIT, TimeUnit.MILLISECONDS)
-                .request(CompletableFuture.class)
-                .get(5, TimeUnit.SECONDS);
+                .request(CompletableFuture.class).get(5, TimeUnit.SECONDS);
 
         assertEquals(VALUE_ONE, getCache().get(KEY_ONE));
 
@@ -149,17 +134,13 @@ public interface InfinispanProducerTestSupport {
     default void publishKeyAndValueAsyncWithLifespanAndMaxIdle() throws Exception {
         assertTrue(getCache().isEmpty());
 
-        fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTASYNC)
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
-                .withHeader(InfinispanConstants.VALUE, VALUE_ONE)
+        fluentTemplate().to("direct:start").withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTASYNC)
+                .withHeader(InfinispanConstants.KEY, KEY_ONE).withHeader(InfinispanConstants.VALUE, VALUE_ONE)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME, LIFESPAN_FOR_MAX_IDLE)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME_UNIT, TimeUnit.MILLISECONDS)
                 .withHeader(InfinispanConstants.MAX_IDLE_TIME, MAX_IDLE_TIME)
                 .withHeader(InfinispanConstants.MAX_IDLE_TIME_UNIT, TimeUnit.MILLISECONDS)
-                .request(CompletableFuture.class)
-                .get(5, TimeUnit.SECONDS);
+                .request(CompletableFuture.class).get(5, TimeUnit.SECONDS);
 
         assertEquals(VALUE_ONE, getCache().get(KEY_ONE));
 
@@ -168,11 +149,9 @@ public interface InfinispanProducerTestSupport {
 
     @Test
     default void publishMapNormal() {
-        fluentTemplate()
-                .to("direct:start")
+        fluentTemplate().to("direct:start")
                 .withHeader(InfinispanConstants.MAP, CollectionHelper.mapOf(KEY_ONE, VALUE_ONE, KEY_TWO, VALUE_TWO))
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTALL)
-                .send();
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTALL).send();
 
         assertEquals(2, getCache().size());
         assertEquals(VALUE_ONE, getCache().get(KEY_ONE));
@@ -181,13 +160,11 @@ public interface InfinispanProducerTestSupport {
 
     @Test
     default void publishMapWithLifespan() throws Exception {
-        fluentTemplate()
-                .to("direct:start")
+        fluentTemplate().to("direct:start")
                 .withHeader(InfinispanConstants.MAP, CollectionHelper.mapOf(KEY_ONE, VALUE_ONE, KEY_TWO, VALUE_TWO))
                 .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTALL)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME, LIFESPAN_TIME)
-                .withHeader(InfinispanConstants.LIFESPAN_TIME_UNIT, TimeUnit.MILLISECONDS)
-                .send();
+                .withHeader(InfinispanConstants.LIFESPAN_TIME_UNIT, TimeUnit.MILLISECONDS).send();
 
         assertEquals(VALUE_ONE, getCache().get(KEY_ONE));
         assertEquals(VALUE_TWO, getCache().get(KEY_TWO));
@@ -197,15 +174,13 @@ public interface InfinispanProducerTestSupport {
 
     @Test
     default void publishMapWithLifespanAndMaxIdleTime() throws Exception {
-        fluentTemplate()
-                .to("direct:start")
+        fluentTemplate().to("direct:start")
                 .withHeader(InfinispanConstants.MAP, CollectionHelper.mapOf(KEY_ONE, VALUE_ONE, KEY_TWO, VALUE_TWO))
                 .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTALL)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME, LIFESPAN_FOR_MAX_IDLE)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME_UNIT, TimeUnit.MILLISECONDS)
                 .withHeader(InfinispanConstants.MAX_IDLE_TIME, MAX_IDLE_TIME)
-                .withHeader(InfinispanConstants.MAX_IDLE_TIME_UNIT, TimeUnit.MILLISECONDS)
-                .send();
+                .withHeader(InfinispanConstants.MAX_IDLE_TIME_UNIT, TimeUnit.MILLISECONDS).send();
 
         assertEquals(VALUE_ONE, getCache().get(KEY_ONE));
         assertEquals(VALUE_TWO, getCache().get(KEY_TWO));
@@ -215,12 +190,10 @@ public interface InfinispanProducerTestSupport {
 
     @Test
     default void publishMapNormalAsync() throws Exception {
-        fluentTemplate()
-                .to("direct:start")
+        fluentTemplate().to("direct:start")
                 .withHeader(InfinispanConstants.MAP, CollectionHelper.mapOf(KEY_ONE, VALUE_ONE, KEY_TWO, VALUE_TWO))
                 .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTALLASYNC)
-                .request(CompletableFuture.class)
-                .get(5, TimeUnit.SECONDS);
+                .request(CompletableFuture.class).get(5, TimeUnit.SECONDS);
 
         assertEquals(VALUE_ONE, getCache().get(KEY_ONE));
         assertEquals(VALUE_TWO, getCache().get(KEY_TWO));
@@ -228,14 +201,12 @@ public interface InfinispanProducerTestSupport {
 
     @Test
     default void publishMapWithLifespanAsync() throws Exception {
-        fluentTemplate()
-                .to("direct:start")
+        fluentTemplate().to("direct:start")
                 .withHeader(InfinispanConstants.MAP, CollectionHelper.mapOf(KEY_ONE, VALUE_ONE, KEY_TWO, VALUE_TWO))
                 .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTALLASYNC)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME, LIFESPAN_TIME)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME_UNIT, TimeUnit.MILLISECONDS)
-                .request(CompletableFuture.class)
-                .get(5, TimeUnit.SECONDS);
+                .request(CompletableFuture.class).get(5, TimeUnit.SECONDS);
 
         assertEquals(VALUE_ONE, getCache().get(KEY_ONE));
         assertEquals(VALUE_TWO, getCache().get(KEY_TWO));
@@ -245,16 +216,14 @@ public interface InfinispanProducerTestSupport {
 
     @Test
     default void publishMapWithLifespanAndMaxIdleTimeAsync() throws Exception {
-        fluentTemplate()
-                .to("direct:start")
+        fluentTemplate().to("direct:start")
                 .withHeader(InfinispanConstants.MAP, CollectionHelper.mapOf(KEY_ONE, VALUE_ONE, KEY_TWO, VALUE_TWO))
                 .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTALLASYNC)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME, LIFESPAN_FOR_MAX_IDLE)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME_UNIT, TimeUnit.MILLISECONDS)
                 .withHeader(InfinispanConstants.MAX_IDLE_TIME, MAX_IDLE_TIME)
                 .withHeader(InfinispanConstants.MAX_IDLE_TIME_UNIT, TimeUnit.MILLISECONDS)
-                .request(CompletableFuture.class)
-                .get(5, TimeUnit.SECONDS);
+                .request(CompletableFuture.class).get(5, TimeUnit.SECONDS);
 
         assertEquals(VALUE_ONE, getCache().get(KEY_ONE));
         assertEquals(VALUE_TWO, getCache().get(KEY_TWO));
@@ -266,12 +235,9 @@ public interface InfinispanProducerTestSupport {
     default void putIfAbsentAlreadyExists() {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.VALUE, VALUE_ONE)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTIFABSENT)
-                .send();
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTIFABSENT).send();
 
         assertEquals(VALUE_ONE, getCache().get(KEY_ONE));
         assertEquals(1, getCache().size());
@@ -281,12 +247,9 @@ public interface InfinispanProducerTestSupport {
     default void putIfAbsentNotExists() {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_TWO)
+        fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_TWO)
                 .withHeader(InfinispanConstants.VALUE, VALUE_TWO)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTIFABSENT)
-                .send();
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTIFABSENT).send();
 
         assertEquals(VALUE_TWO, getCache().get(KEY_TWO));
         assertEquals(2, getCache().size());
@@ -294,28 +257,22 @@ public interface InfinispanProducerTestSupport {
 
     @Test
     default void putIfAbsentKeyAndValueAsync() throws Exception {
-        fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.VALUE, VALUE_ONE)
                 .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTIFABSENTASYNC)
-                .request(CompletableFuture.class)
-                .get(1, TimeUnit.SECONDS);
+                .request(CompletableFuture.class).get(1, TimeUnit.SECONDS);
 
         assertEquals(VALUE_ONE, getCache().get(KEY_ONE));
     }
 
     @Test
     default void putIfAbsentKeyAndValueAsyncWithLifespan() throws Exception {
-        fluentTemplate()
-                .to("direct:start")
+        fluentTemplate().to("direct:start")
                 .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTIFABSENTASYNC)
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
-                .withHeader(InfinispanConstants.VALUE, VALUE_ONE)
+                .withHeader(InfinispanConstants.KEY, KEY_ONE).withHeader(InfinispanConstants.VALUE, VALUE_ONE)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME, LIFESPAN_TIME)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME_UNIT, TimeUnit.MILLISECONDS)
-                .request(CompletableFuture.class)
-                .get(5, TimeUnit.SECONDS);
+                .request(CompletableFuture.class).get(5, TimeUnit.SECONDS);
 
         assertEquals(VALUE_ONE, getCache().get(KEY_ONE));
 
@@ -324,17 +281,14 @@ public interface InfinispanProducerTestSupport {
 
     @Test
     default void putIfAbsentKeyAndValueAsyncWithLifespanAndMaxIdle() throws Exception {
-        fluentTemplate()
-                .to("direct:start")
+        fluentTemplate().to("direct:start")
                 .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUTIFABSENTASYNC)
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
-                .withHeader(InfinispanConstants.VALUE, VALUE_ONE)
+                .withHeader(InfinispanConstants.KEY, KEY_ONE).withHeader(InfinispanConstants.VALUE, VALUE_ONE)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME, LIFESPAN_FOR_MAX_IDLE)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME_UNIT, TimeUnit.MILLISECONDS)
                 .withHeader(InfinispanConstants.MAX_IDLE_TIME, MAX_IDLE_TIME)
                 .withHeader(InfinispanConstants.MAX_IDLE_TIME_UNIT, TimeUnit.MILLISECONDS)
-                .request(CompletableFuture.class)
-                .get(5, TimeUnit.SECONDS);
+                .request(CompletableFuture.class).get(5, TimeUnit.SECONDS);
 
         assertEquals(VALUE_ONE, getCache().get(KEY_ONE));
         Thread.sleep(MAX_IDLE_TIME * 2);
@@ -345,11 +299,8 @@ public interface InfinispanProducerTestSupport {
     default void notContainsKeyTest() {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        boolean result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_TWO)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.CONTAINSKEY)
-                .request(Boolean.class);
+        boolean result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_TWO)
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.CONTAINSKEY).request(Boolean.class);
 
         assertFalse(result);
     }
@@ -358,11 +309,8 @@ public interface InfinispanProducerTestSupport {
     default void containsKeyTest() {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        boolean result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.CONTAINSKEY)
-                .request(Boolean.class);
+        boolean result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.CONTAINSKEY).request(Boolean.class);
 
         assertTrue(result);
     }
@@ -371,11 +319,8 @@ public interface InfinispanProducerTestSupport {
     default void notContainsValueTest() {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        boolean result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.VALUE, VALUE_TWO)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.CONTAINSVALUE)
-                .request(Boolean.class);
+        boolean result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.VALUE, VALUE_TWO)
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.CONTAINSVALUE).request(Boolean.class);
 
         assertFalse(result);
     }
@@ -384,25 +329,19 @@ public interface InfinispanProducerTestSupport {
     default void containsValueTest() {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        boolean result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.VALUE, VALUE_ONE)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.CONTAINSVALUE)
-                .request(Boolean.class);
+        boolean result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.VALUE, VALUE_ONE)
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.CONTAINSVALUE).request(Boolean.class);
 
         assertTrue(result);
     }
 
     @Test
     default void publishKeyAndValueWithLifespan() throws Exception {
-        fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.VALUE, VALUE_ONE)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME, LIFESPAN_TIME)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME_UNIT, TimeUnit.MILLISECONDS)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUT)
-                .send();
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUT).send();
 
         assertEquals(VALUE_ONE, getCache().get(KEY_ONE).toString());
         wait(LIFESPAN_TIME, 5000, () -> !getCache().containsKey(KEY_ONE));
@@ -410,30 +349,21 @@ public interface InfinispanProducerTestSupport {
 
     @Test
     default void getOrDefault() throws Exception {
-        fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.VALUE, VALUE_ONE)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUT)
-                .send();
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUT).send();
 
         assertEquals(VALUE_ONE, getCache().get(KEY_ONE));
 
-        String result1 = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        String result1 = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.DEFAULT_VALUE, "defaultTest")
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.GETORDEFAULT)
-                .request(String.class);
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.GETORDEFAULT).request(String.class);
 
         assertEquals(VALUE_ONE, result1);
 
-        String result2 = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_TWO)
+        String result2 = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_TWO)
                 .withHeader(InfinispanConstants.DEFAULT_VALUE, "defaultTest")
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.GETORDEFAULT)
-                .request(String.class);
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.GETORDEFAULT).request(String.class);
 
         assertEquals("defaultTest", result2);
     }
@@ -442,12 +372,9 @@ public interface InfinispanProducerTestSupport {
     default void putOperationReturnsThePreviousValue() throws Exception {
         getCache().put(KEY_ONE, "existing value");
 
-        String result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        String result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.VALUE, VALUE_ONE)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUT)
-                .request(String.class);
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUT).request(String.class);
 
         assertEquals("existing value", result);
     }
@@ -456,11 +383,8 @@ public interface InfinispanProducerTestSupport {
     default void computeOperation() {
         getCache().put(KEY_ONE, "existing value");
 
-        String result = fluentTemplate()
-                .to("direct:compute")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.COMPUTE)
-                .request(String.class);
+        String result = fluentTemplate().to("direct:compute").withHeader(InfinispanConstants.KEY, KEY_ONE)
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.COMPUTE).request(String.class);
 
         assertEquals("existing valuereplay", result);
     }
@@ -469,9 +393,7 @@ public interface InfinispanProducerTestSupport {
     default void computeAsyncOperation() throws Exception {
         getCache().put(KEY_ONE, "existing value");
 
-        CompletableFuture<?> result = fluentTemplate()
-                .to("direct:compute")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        CompletableFuture<?> result = fluentTemplate().to("direct:compute").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.COMPUTEASYNC)
                 .request(CompletableFuture.class);
 
@@ -482,11 +404,8 @@ public interface InfinispanProducerTestSupport {
     default void retrievesAValueByKey() {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        String result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.GET)
-                .request(String.class);
+        String result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.GET).request(String.class);
 
         assertEquals(VALUE_ONE, result);
     }
@@ -495,12 +414,9 @@ public interface InfinispanProducerTestSupport {
     default void replaceAValueByKey() {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        String result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        String result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.VALUE, VALUE_TWO)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACE)
-                .request(String.class);
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACE).request(String.class);
 
         assertEquals(VALUE_ONE, result);
         assertEquals(VALUE_TWO, getCache().get(KEY_ONE));
@@ -510,14 +426,11 @@ public interface InfinispanProducerTestSupport {
     default void replaceAValueByKeyWithLifespan() {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        Object result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        Object result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.VALUE, VALUE_TWO)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME, LIFESPAN_TIME)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME_UNIT, TimeUnit.MILLISECONDS)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACE)
-                .request(String.class);
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACE).request(String.class);
 
         assertEquals(VALUE_ONE, result);
         assertEquals(VALUE_TWO, getCache().get(KEY_ONE));
@@ -529,16 +442,13 @@ public interface InfinispanProducerTestSupport {
     default void replaceAValueByKeyWithLifespanAndMaxIdleTime() {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        Object result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        Object result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.VALUE, VALUE_TWO)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME, LIFESPAN_FOR_MAX_IDLE)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME_UNIT, TimeUnit.MILLISECONDS)
                 .withHeader(InfinispanConstants.MAX_IDLE_TIME, MAX_IDLE_TIME)
                 .withHeader(InfinispanConstants.MAX_IDLE_TIME_UNIT, TimeUnit.MILLISECONDS)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACE)
-                .request(String.class);
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACE).request(String.class);
 
         assertEquals(VALUE_ONE, result);
         assertEquals(VALUE_TWO, getCache().get(KEY_ONE));
@@ -550,13 +460,9 @@ public interface InfinispanProducerTestSupport {
     default void replaceAValueByKeyWithOldValue() {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        Boolean result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
-                .withHeader(InfinispanConstants.VALUE, VALUE_TWO)
-                .withHeader(InfinispanConstants.OLD_VALUE, VALUE_ONE)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACE)
-                .request(Boolean.class);
+        Boolean result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
+                .withHeader(InfinispanConstants.VALUE, VALUE_TWO).withHeader(InfinispanConstants.OLD_VALUE, VALUE_ONE)
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACE).request(Boolean.class);
 
         assertTrue(result);
         assertEquals(VALUE_TWO, getCache().get(KEY_ONE));
@@ -566,15 +472,11 @@ public interface InfinispanProducerTestSupport {
     default void replaceAValueByKeyWithLifespanWithOldValue() {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        Object result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
-                .withHeader(InfinispanConstants.VALUE, VALUE_TWO)
-                .withHeader(InfinispanConstants.OLD_VALUE, VALUE_ONE)
+        Object result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
+                .withHeader(InfinispanConstants.VALUE, VALUE_TWO).withHeader(InfinispanConstants.OLD_VALUE, VALUE_ONE)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME, LIFESPAN_TIME)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME_UNIT, TimeUnit.MILLISECONDS)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACE)
-                .request(Boolean.class);
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACE).request(Boolean.class);
 
         assertEquals(Boolean.TRUE, result);
         assertEquals(VALUE_TWO, getCache().get(KEY_ONE));
@@ -586,17 +488,13 @@ public interface InfinispanProducerTestSupport {
     default void replaceAValueByKeyWithLifespanAndMaxIdleTimeWithOldValue() {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        Object result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
-                .withHeader(InfinispanConstants.VALUE, VALUE_TWO)
-                .withHeader(InfinispanConstants.OLD_VALUE, VALUE_ONE)
+        Object result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
+                .withHeader(InfinispanConstants.VALUE, VALUE_TWO).withHeader(InfinispanConstants.OLD_VALUE, VALUE_ONE)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME, LIFESPAN_FOR_MAX_IDLE)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME_UNIT, TimeUnit.MILLISECONDS)
                 .withHeader(InfinispanConstants.MAX_IDLE_TIME, MAX_IDLE_TIME)
                 .withHeader(InfinispanConstants.MAX_IDLE_TIME_UNIT, TimeUnit.MILLISECONDS)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACE)
-                .request(Boolean.class);
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACE).request(Boolean.class);
 
         assertEquals(Boolean.TRUE, result);
         assertEquals(VALUE_TWO, getCache().get(KEY_ONE));
@@ -608,12 +506,9 @@ public interface InfinispanProducerTestSupport {
     default void replaceAValueByKeyAsync() {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        String result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        String result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.VALUE, VALUE_TWO)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACEASYNC)
-                .request(String.class);
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACEASYNC).request(String.class);
 
         assertEquals(VALUE_ONE, result);
         assertEquals(VALUE_TWO, getCache().get(KEY_ONE));
@@ -623,15 +518,12 @@ public interface InfinispanProducerTestSupport {
     default void replaceAValueByKeyWithLifespanAsync() throws Exception {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        Object result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        Object result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.VALUE, VALUE_TWO)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME, LIFESPAN_TIME)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME_UNIT, TimeUnit.MILLISECONDS)
                 .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACEASYNC)
-                .request(CompletableFuture.class)
-                .get(5, TimeUnit.SECONDS);
+                .request(CompletableFuture.class).get(5, TimeUnit.SECONDS);
 
         assertEquals(VALUE_ONE, result);
         assertEquals(VALUE_TWO, getCache().get(KEY_ONE));
@@ -643,17 +535,14 @@ public interface InfinispanProducerTestSupport {
     default void replaceAValueByKeyWithLifespanAndMaxIdleTimeAsync() throws Exception {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        Object result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        Object result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.VALUE, VALUE_TWO)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME, LIFESPAN_FOR_MAX_IDLE)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME_UNIT, TimeUnit.MILLISECONDS)
                 .withHeader(InfinispanConstants.MAX_IDLE_TIME, MAX_IDLE_TIME)
                 .withHeader(InfinispanConstants.MAX_IDLE_TIME_UNIT, TimeUnit.MILLISECONDS)
                 .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACEASYNC)
-                .request(CompletableFuture.class)
-                .get(5, TimeUnit.SECONDS);
+                .request(CompletableFuture.class).get(5, TimeUnit.SECONDS);
 
         assertEquals(VALUE_ONE, result);
         assertEquals(VALUE_TWO, getCache().get(KEY_ONE));
@@ -665,13 +554,9 @@ public interface InfinispanProducerTestSupport {
     default void replaceAValueByKeyAsyncWithOldValue() {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        Boolean result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
-                .withHeader(InfinispanConstants.VALUE, VALUE_TWO)
-                .withHeader(InfinispanConstants.OLD_VALUE, VALUE_ONE)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACEASYNC)
-                .request(Boolean.class);
+        Boolean result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
+                .withHeader(InfinispanConstants.VALUE, VALUE_TWO).withHeader(InfinispanConstants.OLD_VALUE, VALUE_ONE)
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACEASYNC).request(Boolean.class);
 
         assertTrue(result);
         assertEquals(VALUE_TWO, getCache().get(KEY_ONE));
@@ -681,16 +566,12 @@ public interface InfinispanProducerTestSupport {
     default void replaceAValueByKeyWithLifespanAsyncWithOldValue() throws Exception {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        Object result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
-                .withHeader(InfinispanConstants.VALUE, VALUE_TWO)
-                .withHeader(InfinispanConstants.OLD_VALUE, VALUE_ONE)
+        Object result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
+                .withHeader(InfinispanConstants.VALUE, VALUE_TWO).withHeader(InfinispanConstants.OLD_VALUE, VALUE_ONE)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME, LIFESPAN_TIME)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME_UNIT, TimeUnit.MILLISECONDS)
                 .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACEASYNC)
-                .request(CompletableFuture.class)
-                .get(5, TimeUnit.SECONDS);
+                .request(CompletableFuture.class).get(5, TimeUnit.SECONDS);
 
         assertEquals(Boolean.TRUE, result);
         assertEquals(VALUE_TWO, getCache().get(KEY_ONE));
@@ -702,18 +583,14 @@ public interface InfinispanProducerTestSupport {
     default void replaceAValueByKeyWithLifespanAndMaxIdleTimeAsyncWithOldValue() throws Exception {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        Object result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
-                .withHeader(InfinispanConstants.VALUE, VALUE_TWO)
-                .withHeader(InfinispanConstants.OLD_VALUE, VALUE_ONE)
+        Object result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
+                .withHeader(InfinispanConstants.VALUE, VALUE_TWO).withHeader(InfinispanConstants.OLD_VALUE, VALUE_ONE)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME, LIFESPAN_FOR_MAX_IDLE)
                 .withHeader(InfinispanConstants.LIFESPAN_TIME_UNIT, TimeUnit.MILLISECONDS)
                 .withHeader(InfinispanConstants.MAX_IDLE_TIME, MAX_IDLE_TIME)
                 .withHeader(InfinispanConstants.MAX_IDLE_TIME_UNIT, TimeUnit.MILLISECONDS)
                 .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REPLACEASYNC)
-                .request(CompletableFuture.class)
-                .get(5, TimeUnit.SECONDS);
+                .request(CompletableFuture.class).get(5, TimeUnit.SECONDS);
 
         assertEquals(Boolean.TRUE, result);
         assertEquals(VALUE_TWO, getCache().get(KEY_ONE));
@@ -725,11 +602,8 @@ public interface InfinispanProducerTestSupport {
     default void deletesExistingValueByKey() {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        String result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REMOVE)
-                .request(String.class);
+        String result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REMOVE).request(String.class);
 
         assertEquals(VALUE_ONE, result);
         assertNull(getCache().get(KEY_ONE));
@@ -739,12 +613,9 @@ public interface InfinispanProducerTestSupport {
     default void deletesExistingValueByKeyAsync() throws Exception {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REMOVEASYNC)
-                .request(CompletableFuture.class)
-                .get(5, TimeUnit.SECONDS);
+                .request(CompletableFuture.class).get(5, TimeUnit.SECONDS);
 
         assertNull(getCache().get(KEY_ONE));
     }
@@ -753,12 +624,9 @@ public interface InfinispanProducerTestSupport {
     default void deletesExistingValueByKeyWithValue() {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        Boolean result = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        Boolean result = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.VALUE, VALUE_ONE)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REMOVE)
-                .request(Boolean.class);
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REMOVE).request(Boolean.class);
 
         assertTrue(result);
         assertNull(getCache().get(KEY_ONE));
@@ -768,13 +636,10 @@ public interface InfinispanProducerTestSupport {
     default void deletesExistingValueByKeyAsyncWithValue() throws Exception {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.VALUE, VALUE_ONE)
                 .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REMOVEASYNC)
-                .request(CompletableFuture.class)
-                .get(5, TimeUnit.SECONDS);
+                .request(CompletableFuture.class).get(5, TimeUnit.SECONDS);
 
         assertNull(getCache().get(KEY_ONE));
     }
@@ -783,38 +648,26 @@ public interface InfinispanProducerTestSupport {
     default void clearsAllValues() {
         getCache().put(KEY_ONE, VALUE_ONE);
 
-        fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.CLEAR)
-                .send();
+        fluentTemplate().to("direct:start").withHeader(InfinispanConstants.OPERATION, InfinispanOperation.CLEAR).send();
 
         assertTrue(getCache().isEmpty());
     }
 
     @Test
     default void testUriCommandOption() {
-        fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, COMMAND_KEY)
+        fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, COMMAND_KEY)
                 .withHeader(InfinispanConstants.VALUE, COMMAND_VALUE)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUT)
-                .request(String.class);
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUT).request(String.class);
 
         assertEquals(COMMAND_VALUE, getCache().get(COMMAND_KEY));
 
-        String result2 = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, COMMAND_KEY)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.GET)
-                .request(String.class);
+        String result2 = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, COMMAND_KEY)
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.GET).request(String.class);
 
         assertEquals(COMMAND_VALUE, result2);
 
-        String result3 = fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.KEY, COMMAND_KEY)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REMOVE)
-                .request(String.class);
+        String result3 = fluentTemplate().to("direct:start").withHeader(InfinispanConstants.KEY, COMMAND_KEY)
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.REMOVE).request(String.class);
 
         assertEquals(COMMAND_VALUE, result3);
 
@@ -824,10 +677,7 @@ public interface InfinispanProducerTestSupport {
         getCache().put(COMMAND_KEY, COMMAND_VALUE);
         getCache().put("keyTest", "valueTest");
 
-        fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.CLEAR)
-                .send();
+        fluentTemplate().to("direct:start").withHeader(InfinispanConstants.OPERATION, InfinispanOperation.CLEAR).send();
 
         assertTrue(getCache().isEmpty());
     }
@@ -837,20 +687,15 @@ public interface InfinispanProducerTestSupport {
         getCache().put(KEY_ONE, VALUE_ONE);
         getCache().put(KEY_TWO, VALUE_TWO);
 
-        fluentTemplate()
-                .to("direct:start")
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.CLEARASYNC)
-                .request(CompletableFuture.class)
-                .get(5, TimeUnit.SECONDS);
+        fluentTemplate().to("direct:start").withHeader(InfinispanConstants.OPERATION, InfinispanOperation.CLEARASYNC)
+                .request(CompletableFuture.class).get(5, TimeUnit.SECONDS);
 
         assertTrue(getCache().isEmpty());
     }
 
     @Test
     default void publishKeyAndValueByExplicitlySpecifyingTheKeyAndValueOptions() {
-        fluentTemplate()
-                .to("direct:explicitput")
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUT)
+        fluentTemplate().to("direct:explicitput").withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUT)
                 .send();
 
         assertEquals("3", getCache().get("a"));
@@ -858,12 +703,9 @@ public interface InfinispanProducerTestSupport {
 
     @Test
     default void publishKeyAndValueByExplicitlySpecifyingTheKeyAndValueOptionsHeaderHavePriorities() {
-        fluentTemplate()
-                .to("direct:explicitput")
-                .withHeader(InfinispanConstants.KEY, KEY_ONE)
+        fluentTemplate().to("direct:explicitput").withHeader(InfinispanConstants.KEY, KEY_ONE)
                 .withHeader(InfinispanConstants.VALUE, VALUE_ONE)
-                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUT)
-                .send();
+                .withHeader(InfinispanConstants.OPERATION, InfinispanOperation.PUT).send();
 
         assertEquals(VALUE_ONE, getCache().get(KEY_ONE));
     }

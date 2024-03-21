@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.gson.springboot;
 
-
-
 import com.google.gson.FieldNamingPolicy;
 
 import org.apache.camel.ProducerTemplate;
@@ -37,24 +35,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        GsonFieldNamePolicyTest.class,
-        GsonFieldNamePolicyTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, GsonFieldNamePolicyTest.class,
+        GsonFieldNamePolicyTest.TestConfiguration.class })
 public class GsonFieldNamePolicyTest {
 
-    
     @Autowired
     ProducerTemplate template;
 
-   
-    
     @Test
     public void testUnmarshalPojo() {
         String json = "{\"id\":\"123\",\"first_name\":\"Donald\",\"last_name\":\"Duck\"}";

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.hl7.springboot.test;
 
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -42,26 +41,18 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.util.IOHelper;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        HL7MLLPCodecLongTest.class,
-        HL7MLLPCodecLongTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, HL7MLLPCodecLongTest.class,
+        HL7MLLPCodecLongTest.TestConfiguration.class })
 public class HL7MLLPCodecLongTest extends HL7TestSupport {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mock;
 
-    
     @Test
     public void testSendHL7Message() throws Exception {
         // START SNIPPET: e2
@@ -105,7 +96,7 @@ public class HL7MLLPCodecLongTest extends HL7TestSupport {
             };
         }
     }
-    
+
     @Bean(name = "hl7codec")
     private HL7MLLPCodec addHl7MllpCodec() throws Exception {
         HL7MLLPCodec codec = new HL7MLLPCodec();

@@ -16,7 +16,6 @@
  */
 package org.apache.camel.processor.aggregate.cassandra;
 
-
 import java.util.Set;
 
 import org.apache.camel.EndpointInject;
@@ -41,21 +40,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        NamedCassandraAggregationRepositoryIT.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, NamedCassandraAggregationRepositoryIT.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class NamedCassandraAggregationRepositoryIT extends BaseCassandra {
 
     CassandraAggregationRepository aggregationRepository;
 
-    
     @EndpointInject("mock:output")
     MockEndpoint mockOutput;
 
@@ -67,17 +59,16 @@ public class NamedCassandraAggregationRepositoryIT extends BaseCassandra {
 
     }
 
-    
     @AfterEach
     public void tearDown() throws Exception {
-    
+
         aggregationRepository.stop();
     }
 
     private boolean exists(String key) {
-        return getSession().execute(String.format("select KEY from NAMED_CAMEL_AGGREGATION where NAME='ID' and KEY='%s'", key))
-                .one()
-               != null;
+        return getSession()
+                .execute(String.format("select KEY from NAMED_CAMEL_AGGREGATION where NAME='ID' and KEY='%s'", key))
+                .one() != null;
     }
 
     @Test

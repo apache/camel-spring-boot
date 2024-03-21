@@ -28,12 +28,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass({InfoContributor.class})
+@ConditionalOnClass({ InfoContributor.class })
 @ConditionalOnBean(CamelAutoConfiguration.class)
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 public class CamelInfoAutoConfiguration {
 
-    @ConditionalOnClass({CamelContext.class})
+    @ConditionalOnClass({ CamelContext.class })
     @ConditionalOnMissingBean(CamelInfoContributor.class)
     @ConditionalOnEnabledInfoContributor(value = "camel")
     protected static class CamelInfoContributorInitializer {

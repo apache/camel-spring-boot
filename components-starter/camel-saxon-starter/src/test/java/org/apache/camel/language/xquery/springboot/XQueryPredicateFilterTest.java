@@ -16,7 +16,6 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;
@@ -26,7 +25,6 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.language.xpath.XPathBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -35,31 +33,24 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        XQueryPredicateFilterTest.class,
-        XQueryPredicateFilterTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, XQueryPredicateFilterTest.class,
+        XQueryPredicateFilterTest.TestConfiguration.class })
 public class XQueryPredicateFilterTest {
 
     @Autowired
     @Produce("direct:xpath")
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
 
     @EndpointInject("mock:result")
-    protected MockEndpoint resultEndpoint;  
-    
+    protected MockEndpoint resultEndpoint;
+
     @Test
     public void testXQuerySplitter() throws Exception {
         resultEndpoint.expectedMessageCount(1);
@@ -71,7 +62,7 @@ public class XQueryPredicateFilterTest {
         resultEndpoint.expectedMessageCount(0);
         resultEndpoint.assertIsSatisfied();
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -89,8 +80,7 @@ public class XQueryPredicateFilterTest {
 
                     context.setTracing(true);
 
-                    from("direct:xpath").split(splitter).filter().xquery("//record[type=2]")
-                            .to("mock:result");
+                    from("direct:xpath").split(splitter).filter().xquery("//record[type=2]").to("mock:result");
 
                 }
             };

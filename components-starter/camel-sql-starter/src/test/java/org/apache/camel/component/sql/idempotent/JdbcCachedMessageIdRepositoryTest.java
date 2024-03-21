@@ -42,18 +42,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                JdbcCachedMessageIdRepositoryTest.class,
-                JdbcCachedMessageIdRepositoryTest.TestConfiguration.class,
-                BaseSql.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JdbcCachedMessageIdRepositoryTest.class,
+        JdbcCachedMessageIdRepositoryTest.TestConfiguration.class, BaseSql.TestConfiguration.class })
 public class JdbcCachedMessageIdRepositoryTest extends BaseSql {
 
-    private static final String INSERT_STRING
-            = "INSERT INTO CAMEL_MESSAGEPROCESSED (processorName, messageId, createdAt) VALUES (?, ?, ?)";
+    private static final String INSERT_STRING = "INSERT INTO CAMEL_MESSAGEPROCESSED (processorName, messageId, createdAt) VALUES (?, ?, ?)";
     private static final String PROCESSOR_NAME = "myProcessorName";
 
     private JdbcTemplate jdbcTemplate;
@@ -118,9 +111,7 @@ public class JdbcCachedMessageIdRepositoryTest extends BaseSql {
 
                     JdbcMessageIdRepository repo = new JdbcCachedMessageIdRepository(dataSource, PROCESSOR_NAME);
                     context.getRegistry().bind(PROCESSOR_NAME, repo);
-                    from("direct:start")
-                            .idempotentConsumer(header("messageId"), repo)
-                            .to("mock:result");
+                    from("direct:start").idempotentConsumer(header("messageId"), repo).to("mock:result");
                 }
             };
         }

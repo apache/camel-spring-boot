@@ -37,14 +37,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                MongoDbExceptionHandlingIT.class,
-                MongoDbExceptionHandlingIT.TestConfiguration.class,
-                AbstractMongoDbITSupport.MongoConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, MongoDbExceptionHandlingIT.class,
+        MongoDbExceptionHandlingIT.TestConfiguration.class, AbstractMongoDbITSupport.MongoConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class MongoDbExceptionHandlingIT extends AbstractMongoDbITSupport {
 
@@ -57,15 +51,15 @@ public class MongoDbExceptionHandlingIT extends AbstractMongoDbITSupport {
                 @Override
                 public void configure() {
                     from("direct:findAll").to(
-                                    "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=findAll&dynamicity=true")
+                            "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=findAll&dynamicity=true")
                             .to("mock:resultFindAll");
 
                     from("direct:findOneByQuery").to(
-                                    "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=findOneByQuery&dynamicity=true")
+                            "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=findOneByQuery&dynamicity=true")
                             .to("mock:resultFindOneByQuery");
 
                     from("direct:findById").to(
-                                    "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=findById&dynamicity=true")
+                            "mongodb:myDb?database={{mongodb.testDb}}&collection={{mongodb.testCollection}}&operation=findById&dynamicity=true")
                             .to("mock:resultFindById");
                 }
             };

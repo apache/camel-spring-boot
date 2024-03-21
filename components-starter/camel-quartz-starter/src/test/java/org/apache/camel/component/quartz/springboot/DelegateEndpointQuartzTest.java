@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import java.util.Map;
 
 import org.apache.camel.CamelContext;
@@ -49,33 +47,26 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.util.URISupport;
 import org.quartz.JobDetail;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        DelegateEndpointQuartzTest.class,
-        DelegateEndpointQuartzTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, DelegateEndpointQuartzTest.class,
+        DelegateEndpointQuartzTest.TestConfiguration.class })
 public class DelegateEndpointQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint mock;
-    
+
     @Bean("my")
     private MyComponent getMyComponent() {
         return new MyComponent();
     }
-    
+
     class MyComponent extends DefaultComponent {
 
         @Override
@@ -129,10 +120,10 @@ public class DelegateEndpointQuartzTest {
         }
 
     }
-    
+
     @Test
     public void testQuartzCronRoute() throws Exception {
-        
+
         mock.expectedMinimumMessageCount(3);
 
         mock.assertIsSatisfied();
@@ -143,7 +134,7 @@ public class DelegateEndpointQuartzTest {
         assertEquals("cron", job.getJobDataMap().get(QuartzConstants.QUARTZ_TRIGGER_TYPE));
         assertEquals("0/2 * * * * ?", job.getJobDataMap().get(QuartzConstants.QUARTZ_TRIGGER_CRON_EXPRESSION));
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -161,7 +152,5 @@ public class DelegateEndpointQuartzTest {
             };
         }
     }
-    
-   
 
 }

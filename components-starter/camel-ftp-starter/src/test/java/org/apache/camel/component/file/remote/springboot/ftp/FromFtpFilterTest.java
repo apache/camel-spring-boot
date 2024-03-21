@@ -31,14 +31,9 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FromFtpFilterTest.class,
-                FromFtpFilterTest.TestConfiguration.class
-        }
-)
-//Based on FromFtpFilterIT
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FromFtpFilterTest.class,
+        FromFtpFilterTest.TestConfiguration.class })
+// Based on FromFtpFilterIT
 public class FromFtpFilterTest extends BaseFtp {
 
     @EndpointInject("mock:result")
@@ -75,7 +70,7 @@ public class FromFtpFilterTest extends BaseFtp {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseFtp.TestConfiguration {
+    public class TestConfiguration extends BaseFtp.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
 

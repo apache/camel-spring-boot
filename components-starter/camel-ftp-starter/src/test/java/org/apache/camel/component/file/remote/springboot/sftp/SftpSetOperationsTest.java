@@ -28,20 +28,15 @@ import java.io.File;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SftpSetOperationsTest.class
-        }
-)
-//Based on SftpSetOperationsTest
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SftpSetOperationsTest.class })
+// Based on SftpSetOperationsTest
 public class SftpSetOperationsTest extends BaseSftp {
 
     @Test
     public void testSftpSetOperations() {
         String preferredAuthentications = "password,publickey";
         String uri = "sftp://localhost:" + getPort() + "/" + getRootDir()
-                     + "?username=admin&password=admin&ciphers=aes256-ctr" + "&preferredAuthentications=password,publickey";
+                + "?username=admin&password=admin&ciphers=aes256-ctr" + "&preferredAuthentications=password,publickey";
         template.sendBodyAndHeader(uri, "Hello World", Exchange.FILE_NAME, "hello.txt");
 
         // test setting the cipher doesn't interfere with message payload

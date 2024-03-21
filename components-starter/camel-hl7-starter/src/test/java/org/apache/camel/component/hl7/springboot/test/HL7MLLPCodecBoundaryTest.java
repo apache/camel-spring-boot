@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.hl7.springboot.test;
 
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -42,26 +41,18 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.util.IOHelper;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        HL7MLLPCodecBoundaryTest.class,
-        HL7MLLPCodecBoundaryTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, HL7MLLPCodecBoundaryTest.class,
+        HL7MLLPCodecBoundaryTest.TestConfiguration.class })
 public class HL7MLLPCodecBoundaryTest extends HL7TestSupport {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mock;
 
-    
     @Bean("hl7codec")
     private HL7MLLPCodec getHl7MllpCodec() throws Exception {
         HL7MLLPCodec codec = new HL7MLLPCodec();
@@ -69,10 +60,10 @@ public class HL7MLLPCodecBoundaryTest extends HL7TestSupport {
         return codec;
     }
 
-    
     @Test
     public void testSendHL7Message() throws Exception {
-        BufferedReader in = IOHelper.buffered(new InputStreamReader(getClass().getResourceAsStream("/mdm_t02-1022.txt")));
+        BufferedReader in = IOHelper
+                .buffered(new InputStreamReader(getClass().getResourceAsStream("/mdm_t02-1022.txt")));
         String line = "";
         String message = "";
         while (line != null) {
@@ -108,6 +99,5 @@ public class HL7MLLPCodecBoundaryTest extends HL7TestSupport {
             };
         }
     }
-    
-    
+
 }

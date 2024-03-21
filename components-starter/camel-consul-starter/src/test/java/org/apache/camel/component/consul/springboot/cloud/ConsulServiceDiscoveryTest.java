@@ -28,32 +28,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ConsulServiceDiscoveryTest {
     @Test
     public void testConsulServiceDiscoveryDisabled() {
-        new ApplicationContextRunner()
-            .withUserConfiguration(TestConfiguration.class)
-            .withPropertyValues(
-                "spring.main.banner-mode=off",
-                "camel.cloud.consul.service-discovery.enabled=false")
-            .run(
-                context -> {
+        new ApplicationContextRunner().withUserConfiguration(TestConfiguration.class)
+                .withPropertyValues("spring.main.banner-mode=off", "camel.cloud.consul.service-discovery.enabled=false")
+                .run(context -> {
                     assertThat(context).doesNotHaveBean(ConsulServiceCallServiceDiscoveryConfigurationProperties.class);
                     assertThat(context).getBeans(ServiceDiscovery.class).doesNotContainKeys("consul-service-discovery");
-                }
-            );
+                });
     }
 
     @Test
     public void testConsulServiceDiscoveryEnabled() {
-        new ApplicationContextRunner()
-            .withUserConfiguration(TestConfiguration.class)
-            .withPropertyValues(
-                "spring.main.banner-mode=off",
-                "camel.cloud.consul.service-discovery.enabled=true")
-            .run(
-                context -> {
+        new ApplicationContextRunner().withUserConfiguration(TestConfiguration.class)
+                .withPropertyValues("spring.main.banner-mode=off", "camel.cloud.consul.service-discovery.enabled=true")
+                .run(context -> {
                     assertThat(context).hasSingleBean(ConsulServiceCallServiceDiscoveryConfigurationProperties.class);
                     assertThat(context).getBeans(ServiceDiscovery.class).containsKeys("consul-service-discovery");
-                }
-            );
+                });
     }
 
     @EnableAutoConfiguration

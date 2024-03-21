@@ -32,13 +32,8 @@ import java.util.stream.Stream;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileProducerStreamTest.class,
-                FileProducerStreamTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileProducerStreamTest.class,
+        FileProducerStreamTest.TestConfiguration.class })
 public class FileProducerStreamTest extends BaseFile {
 
     @EndpointInject("mock:result")

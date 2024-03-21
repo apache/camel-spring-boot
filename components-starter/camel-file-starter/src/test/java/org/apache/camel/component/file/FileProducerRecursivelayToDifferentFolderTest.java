@@ -35,20 +35,14 @@ import java.util.concurrent.TimeUnit;
 import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 /**
  *
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileProducerRecursivelayToDifferentFolderTest.class,
-                FileProducerRecursivelayToDifferentFolderTest.TestConfiguration.class
-        }
-)
-//Based on FileProducerCharsetUTFtoISOTest
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileProducerRecursivelayToDifferentFolderTest.class,
+        FileProducerRecursivelayToDifferentFolderTest.TestConfiguration.class })
+// Based on FileProducerCharsetUTFtoISOTest
 public class FileProducerRecursivelayToDifferentFolderTest extends BaseFile {
 
     @Test
@@ -56,7 +50,8 @@ public class FileProducerRecursivelayToDifferentFolderTest extends BaseFile {
         template.sendBodyAndHeader(fileUri(), "Hello World", Exchange.FILE_NAME, "in/hello.txt");
         template.sendBodyAndHeader(fileUri(), "Hello World in subdir", Exchange.FILE_NAME, "in/sub/bye.txt");
 
-        await().atMost(10, TimeUnit.SECONDS).until(() -> Files.exists(testFile("out/hello.txt")) && Files.exists(testFile("out/sub/bye.txt")));
+        await().atMost(10, TimeUnit.SECONDS)
+                .until(() -> Files.exists(testFile("out/hello.txt")) && Files.exists(testFile("out/sub/bye.txt")));
     }
 
     // *************************************

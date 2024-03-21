@@ -34,7 +34,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(classes = {CamelNonInvasiveCamelContextTest.TestApplication.class, CamelNonInvasiveCamelContextTest.class })
+@SpringBootTest(classes = { CamelNonInvasiveCamelContextTest.TestApplication.class,
+        CamelNonInvasiveCamelContextTest.class })
 public class CamelNonInvasiveCamelContextTest {
 
     // Collaborators fixtures

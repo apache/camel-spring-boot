@@ -46,12 +46,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                ValidatorRouteTest.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ValidatorRouteTest.class })
 public class ValidatorRouteTest extends ContextTestSupport {
 
     @Autowired
@@ -137,7 +132,8 @@ public class ValidatorRouteTest extends ContextTestSupport {
         invalidEndpoint.expectedMessageCount(1);
         finallyEndpoint.expectedMessageCount(1);
 
-        template.sendBody("direct:start", "<mail xmlns='http://foo.com/bar'><body>Hello world!</body></mail>".getBytes());
+        template.sendBody("direct:start",
+                "<mail xmlns='http://foo.com/bar'><body>Hello world!</body></mail>".getBytes());
 
         MockEndpoint.assertIsSatisfied(validEndpoint, invalidEndpoint, finallyEndpoint);
     }
@@ -210,14 +206,14 @@ public class ValidatorRouteTest extends ContextTestSupport {
         return new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from("direct:start").doTry().to("validator:org/apache/camel/component/validator/schema.xsd").to("mock:valid")
-                        .doCatch(ValidationException.class).to("mock:invalid")
-                        .doFinally().to("mock:finally").end();
+                from("direct:start").doTry().to("validator:org/apache/camel/component/validator/schema.xsd")
+                        .to("mock:valid").doCatch(ValidationException.class).to("mock:invalid").doFinally()
+                        .to("mock:finally").end();
 
                 from("direct:startHeaders").doTry()
                         .to("validator:org/apache/camel/component/validator/schema.xsd?headerName=headerToValidate")
-                        .to("mock:valid")
-                        .doCatch(ValidationException.class).to("mock:invalid").doFinally().to("mock:finally").end();
+                        .to("mock:valid").doCatch(ValidationException.class).to("mock:invalid").doFinally()
+                        .to("mock:finally").end();
 
                 from("direct:startNoHeaderException")
                         .to("validator:org/apache/camel/component/validator/schema.xsd?headerName=headerToValidate")
@@ -228,7 +224,8 @@ public class ValidatorRouteTest extends ContextTestSupport {
                         .to("mock:valid");
 
                 from("direct:useNotASharedSchema")
-                        .to("validator:org/apache/camel/component/validator/schema.xsd?useSharedSchema=false").to("mock:valid");
+                        .to("validator:org/apache/camel/component/validator/schema.xsd?useSharedSchema=false")
+                        .to("mock:valid");
             }
         };
     }

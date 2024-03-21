@@ -33,16 +33,17 @@ public class HierarchicalCondition extends SpringBootCondition {
     }
 
     @Override
-    public ConditionOutcome getMatchOutcome(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata) {
+    public ConditionOutcome getMatchOutcome(ConditionContext conditionContext,
+            AnnotatedTypeMetadata annotatedTypeMetadata) {
         if (items.length == 0) {
-            return ConditionOutcome.match( ConditionMessage.forCondition("no condition").because("no conditions"));
+            return ConditionOutcome.match(ConditionMessage.forCondition("no condition").because("no conditions"));
         }
 
         final ConditionMessage.Builder message = ConditionMessage.forCondition(this.items[0]);
         final Environment environment = conditionContext.getEnvironment();
 
         return HierarchicalPropertiesEvaluator.evaluate(environment, items)
-            ? ConditionOutcome.match(message.because("enabled"))
-            : ConditionOutcome.noMatch(message.because("not enabled"));
+                ? ConditionOutcome.match(message.because("enabled"))
+                : ConditionOutcome.noMatch(message.because("not enabled"));
     }
 }

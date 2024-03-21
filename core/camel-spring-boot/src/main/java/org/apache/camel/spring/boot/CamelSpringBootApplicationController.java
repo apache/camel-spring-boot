@@ -31,7 +31,8 @@ public class CamelSpringBootApplicationController {
 
     private final Main main;
 
-    public CamelSpringBootApplicationController(final ApplicationContext applicationContext, final CamelContext context) {
+    public CamelSpringBootApplicationController(final ApplicationContext applicationContext,
+            final CamelContext context) {
         this.main = new CamelSpringMain(applicationContext, context);
     }
 

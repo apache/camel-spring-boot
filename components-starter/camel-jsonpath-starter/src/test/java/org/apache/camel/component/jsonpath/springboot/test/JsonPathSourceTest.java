@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
@@ -31,7 +30,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -39,18 +37,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathSourceTest.class,
-        JsonPathSourceTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathSourceTest.class,
+        JsonPathSourceTest.TestConfiguration.class })
 public class JsonPathSourceTest {
-    
+
     private static final String MESSAGE1 = "Joseph und seine Br\u00fcder";
     private static final String MESSAGE2 = "G\u00f6tzend\u00e4mmerung";
     private static final Charset DEFAULT_CHARSET = Charset.defaultCharset();
@@ -59,7 +51,6 @@ public class JsonPathSourceTest {
     public static void setDefaultCharsetBack() {
         switchToDefaultCharset(DEFAULT_CHARSET.displayName());
     }
-
 
     @Autowired
     ProducerTemplate template;
@@ -75,12 +66,10 @@ public class JsonPathSourceTest {
         mock.message(0).body().isEqualTo(MESSAGE1);
         mock.message(1).body().isEqualTo(MESSAGE2);
 
-        template.sendBody("direct:start", FileConsumer
-                .asGenericFile("src/test/resources/germanbooks-utf8.json",
-                        new File("src/test/resources/germanbooks-utf8.json"), "UTF-8", false));
-        template.sendBody("direct:second", FileConsumer
-                .asGenericFile("src/test/resources/germanbooks-utf8.json",
-                        new File("src/test/resources/germanbooks-utf8.json"), "UTF-8", false));
+        template.sendBody("direct:start", FileConsumer.asGenericFile("src/test/resources/germanbooks-utf8.json",
+                new File("src/test/resources/germanbooks-utf8.json"), "UTF-8", false));
+        template.sendBody("direct:second", FileConsumer.asGenericFile("src/test/resources/germanbooks-utf8.json",
+                new File("src/test/resources/germanbooks-utf8.json"), "UTF-8", false));
 
         mock.assertIsSatisfied();
     }
@@ -93,12 +82,10 @@ public class JsonPathSourceTest {
         mock.message(0).body().isEqualTo(MESSAGE1);
         mock.message(1).body().isEqualTo(MESSAGE2);
 
-        template.sendBody("direct:start", FileConsumer
-                .asGenericFile("src/test/resources/germanbooks-utf8.json",
-                        new File("src/test/resources/germanbooks-utf8.json"), "UTF-8", false));
-        template.sendBody("direct:second", FileConsumer
-                .asGenericFile("src/test/resources/germanbooks-utf8.json",
-                        new File("src/test/resources/germanbooks-utf8.json"), "UTF-8", false));
+        template.sendBody("direct:start", FileConsumer.asGenericFile("src/test/resources/germanbooks-utf8.json",
+                new File("src/test/resources/germanbooks-utf8.json"), "UTF-8", false));
+        template.sendBody("direct:second", FileConsumer.asGenericFile("src/test/resources/germanbooks-utf8.json",
+                new File("src/test/resources/germanbooks-utf8.json"), "UTF-8", false));
 
         mock.assertIsSatisfied();
     }
@@ -111,12 +98,10 @@ public class JsonPathSourceTest {
         mock.message(0).body().isEqualTo(MESSAGE1);
         mock.message(1).body().isEqualTo(MESSAGE2);
 
-        template.sendBody("direct:start", FileConsumer
-                .asGenericFile("src/test/resources/germanbooks-iso-8859-1.json",
-                        new File("src/test/resources/germanbooks-iso-8859-1.json"), "ISO-8859-1", false));
-        template.sendBody("direct:second", FileConsumer
-                .asGenericFile("src/test/resources/germanbooks-iso-8859-1.json",
-                        new File("src/test/resources/germanbooks-iso-8859-1.json"), "ISO-8859-1", false));
+        template.sendBody("direct:start", FileConsumer.asGenericFile("src/test/resources/germanbooks-iso-8859-1.json",
+                new File("src/test/resources/germanbooks-iso-8859-1.json"), "ISO-8859-1", false));
+        template.sendBody("direct:second", FileConsumer.asGenericFile("src/test/resources/germanbooks-iso-8859-1.json",
+                new File("src/test/resources/germanbooks-iso-8859-1.json"), "ISO-8859-1", false));
 
         mock.assertIsSatisfied();
     }
@@ -131,8 +116,6 @@ public class JsonPathSourceTest {
         }
     }
 
-    
-
     // *************************************
     // Config
     // *************************************
@@ -145,11 +128,9 @@ public class JsonPathSourceTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start").transform().jsonpath("$.store.book[0].title", String.class)
-                            .to("mock:title");
+                    from("direct:start").transform().jsonpath("$.store.book[0].title", String.class).to("mock:title");
 
-                    from("direct:second").transform().jsonpath("$.store.book[1].title", String.class)
-                            .to("mock:title");
+                    from("direct:second").transform().jsonpath("$.store.book[1].title", String.class).to("mock:title");
                 }
             };
         }

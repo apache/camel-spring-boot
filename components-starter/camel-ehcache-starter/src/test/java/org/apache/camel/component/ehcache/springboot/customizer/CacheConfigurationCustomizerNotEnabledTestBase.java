@@ -51,23 +51,18 @@ class CacheConfigurationCustomizerNotEnabledTestBase {
     public static class TestConfiguration {
         @Bean
         public CacheConfiguration<?, ?> myConfig1() {
-            return CacheConfigurationBuilder.newCacheConfigurationBuilder(
-                String.class,
-                String.class,
-                ResourcePoolsBuilder.newResourcePoolsBuilder()
-                    .heap(100, EntryUnit.ENTRIES)
-                    .offheap(1, MemoryUnit.MB))
-                .build();
+            return CacheConfigurationBuilder
+                    .newCacheConfigurationBuilder(String.class, String.class, ResourcePoolsBuilder
+                            .newResourcePoolsBuilder().heap(100, EntryUnit.ENTRIES).offheap(1, MemoryUnit.MB))
+                    .build();
         }
+
         @Bean
         public CacheConfiguration<?, ?> myConfig2() {
-            return CacheConfigurationBuilder.newCacheConfigurationBuilder(
-                String.class,
-                String.class,
-                ResourcePoolsBuilder.newResourcePoolsBuilder()
-                    .heap(2100, EntryUnit.ENTRIES)
-                    .offheap(2, MemoryUnit.MB))
-                .build();
+            return CacheConfigurationBuilder
+                    .newCacheConfigurationBuilder(String.class, String.class, ResourcePoolsBuilder
+                            .newResourcePoolsBuilder().heap(2100, EntryUnit.ENTRIES).offheap(2, MemoryUnit.MB))
+                    .build();
         }
     }
 }

@@ -39,75 +39,67 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
-
 import io.swagger.v3.core.util.Json;
 import io.swagger.v3.oas.models.OpenAPI;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				RestOpenApiReaderApiDocsOverrideTest.class,
-				RestOpenApiReaderApiDocsOverrideTest.TestConfiguration.class,
-				DummyRestConsumerFactory.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, RestOpenApiReaderApiDocsOverrideTest.class,
+        RestOpenApiReaderApiDocsOverrideTest.TestConfiguration.class, DummyRestConsumerFactory.class })
 public class RestOpenApiReaderApiDocsOverrideTest {
 
-	private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
-	@Autowired
-	CamelContext context;
+    @Autowired
+    CamelContext context;
 
-	@BindToRegistry("dummy-rest")
-	private final DummyRestConsumerFactory factory = new DummyRestConsumerFactory();
+    @BindToRegistry("dummy-rest")
+    private final DummyRestConsumerFactory factory = new DummyRestConsumerFactory();
 
-	@Configuration
-	public class TestConfiguration {
+    @Configuration
+    public class TestConfiguration {
 
-		@Bean
-		public RouteBuilder routeBuilder() {
-			return new RouteBuilder() {
+        @Bean
+        public RouteBuilder routeBuilder() {
+            return new RouteBuilder() {
 
-				@Override
-				public void configure() throws Exception {
-					rest("/hello").apiDocs(false).consumes("application/json").produces("application/json").get("/hi/{name}")
-							.description("Saying hi").param().name("name")
-							.type(RestParamType.path).dataType("string").description("Who is it").endParam().to("log:hi")
-							.get("/bye/{name}").apiDocs(true).description("Saying bye").param()
-							.name("name").type(RestParamType.path).dataType("string").description("Who is it").endParam()
-							.responseMessage().code(200).message("A reply message")
-							.endResponseMessage().to("log:bye").post("/bye").description("To update the greeting message")
-							.consumes("application/xml").produces("application/xml").param()
-							.name("greeting").type(RestParamType.body).dataType("string").description("Message to use as greeting")
-							.endParam().to("log:bye");
-				}
-			};
-		}
-	}
+                @Override
+                public void configure() throws Exception {
+                    rest("/hello").apiDocs(false).consumes("application/json").produces("application/json")
+                            .get("/hi/{name}").description("Saying hi").param().name("name").type(RestParamType.path)
+                            .dataType("string").description("Who is it").endParam().to("log:hi").get("/bye/{name}")
+                            .apiDocs(true).description("Saying bye").param().name("name").type(RestParamType.path)
+                            .dataType("string").description("Who is it").endParam().responseMessage().code(200)
+                            .message("A reply message").endResponseMessage().to("log:bye").post("/bye")
+                            .description("To update the greeting message").consumes("application/xml")
+                            .produces("application/xml").param().name("greeting").type(RestParamType.body)
+                            .dataType("string").description("Message to use as greeting").endParam().to("log:bye");
+                }
+            };
+        }
+    }
 
-	@Test
-	public void testReaderReadV3() throws Exception {
-		BeanConfig config = new BeanConfig();
-		config.setHost("localhost:8080");
-		config.setSchemes(new String[] {"http"});
-		config.setBasePath("/api");
-		RestOpenApiReader reader = new RestOpenApiReader();
-		OpenAPI openApi = null;
-		openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
-				new DefaultClassResolver());
+    @Test
+    public void testReaderReadV3() throws Exception {
+        BeanConfig config = new BeanConfig();
+        config.setHost("localhost:8080");
+        config.setSchemes(new String[] { "http" });
+        config.setBasePath("/api");
+        RestOpenApiReader reader = new RestOpenApiReader();
+        OpenAPI openApi = null;
+        openApi = reader.read(context, ((ModelCamelContext) context).getRestDefinitions(), config, context.getName(),
+                new DefaultClassResolver());
 
-		assertNotNull(openApi);
+        assertNotNull(openApi);
 
-		String json = Json.pretty(openApi);
-		log.info(json);
+        String json = Json.pretty(openApi);
+        log.info(json);
 
-		assertFalse(json.contains("\"/hello/bye\""));
-		assertFalse(json.contains("\"summary\" : \"To update the greeting message\""));
-		assertTrue(json.contains("\"/hello/bye/{name}\""));
-		assertFalse(json.contains("\"/hello/hi/{name}\""));
+        assertFalse(json.contains("\"/hello/bye\""));
+        assertFalse(json.contains("\"summary\" : \"To update the greeting message\""));
+        assertTrue(json.contains("\"/hello/bye/{name}\""));
+        assertFalse(json.contains("\"/hello/hi/{name}\""));
 
-		context.stop();
-	}
+        context.stop();
+    }
 }

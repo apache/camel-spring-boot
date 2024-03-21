@@ -32,13 +32,8 @@ import org.springframework.test.annotation.DirtiesContext;
 //Based on FileConsumerMoveAndMoveFailureTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileConsumerMoveAndMoveFailureTest.class,
-                FileConsumerMoveAndMoveFailureTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileConsumerMoveAndMoveFailureTest.class,
+        FileConsumerMoveAndMoveFailureTest.TestConfiguration.class })
 public class FileConsumerMoveAndMoveFailureTest extends BaseFile {
 
     @EndpointInject("mock:result")

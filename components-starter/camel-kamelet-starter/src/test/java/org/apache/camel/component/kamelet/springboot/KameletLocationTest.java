@@ -35,12 +35,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletLocationTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletLocationTest.class, })
 
 public class KameletLocationTest {
 
@@ -82,7 +77,6 @@ public class KameletLocationTest {
     // and use this class that has the route template hardcoded from java
     public class MyRoutesLoader implements RoutesBuilderLoader {
 
-
         @Override
         public CamelContext getCamelContext() {
             return context;
@@ -103,13 +97,10 @@ public class KameletLocationTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    routeTemplate("upper")
-                            .from("kamelet:source")
-                            .transform().simple("${body.toUpperCase()}");
+                    routeTemplate("upper").from("kamelet:source").transform().simple("${body.toUpperCase()}");
 
-                    from("direct:start")
-                        .kamelet("upper?location=file:resource:classpath:upper-kamelet.xml")
-                        .to("mock:result");        
+                    from("direct:start").kamelet("upper?location=file:resource:classpath:upper-kamelet.xml")
+                            .to("mock:result");
                 }
             };
         }
@@ -136,8 +127,7 @@ public class KameletLocationTest {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                from("direct:start")
-                        .kamelet("upper?location=file:src/test/resources/upper-kamelet.xml")
+                from("direct:start").kamelet("upper?location=file:src/test/resources/upper-kamelet.xml")
                         .to("mock:result");
             }
         };

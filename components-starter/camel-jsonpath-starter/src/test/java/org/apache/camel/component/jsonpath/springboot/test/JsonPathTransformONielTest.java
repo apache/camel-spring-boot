@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
 import java.util.List;
 
@@ -36,16 +35,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathTransformONielTest.class,
-        JsonPathTransformONielTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathTransformONielTest.class,
+        JsonPathTransformONielTest.TestConfiguration.class })
 public class JsonPathTransformONielTest {
 
     @Autowired
@@ -65,7 +58,6 @@ public class JsonPathTransformONielTest {
         List<?> titles = mock.getReceivedExchanges().get(0).getIn().getBody(List.class);
         assertEquals("Camels in Space", titles.get(0));
     }
-    
 
     // *************************************
     // Config
@@ -79,8 +71,7 @@ public class JsonPathTransformONielTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                            .transform().jsonpath("$.store.book[?(@.author == \"John O'Niel\")].title")
+                    from("direct:start").transform().jsonpath("$.store.book[?(@.author == \"John O'Niel\")].title")
                             .to("mock:authors");
                 }
             };

@@ -33,33 +33,29 @@ import org.xml.sax.SAXNotSupportedException;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		classes = {
-				CamelAutoConfiguration.class,
-				CustomSchemaFactoryFeatureTest.class,
-				CustomSchemaFactoryFeatureTest.TestConfiguration.class
-		}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, CustomSchemaFactoryFeatureTest.class,
+        CustomSchemaFactoryFeatureTest.TestConfiguration.class })
 public class CustomSchemaFactoryFeatureTest extends ContextTestSupport {
 
-	// just inject the SchemaFactory as we want
-	@Test
-	public void testCustomSchemaFactory() throws Exception {
-		ValidatorComponent v = new ValidatorComponent();
-		v.setCamelContext(context);
-		v.init();
-		v.createEndpoint("validator:org/apache/camel/component/validator/unsecuredSchema.xsd?schemaFactory=#mySchemaFactory");
-	}
+    // just inject the SchemaFactory as we want
+    @Test
+    public void testCustomSchemaFactory() throws Exception {
+        ValidatorComponent v = new ValidatorComponent();
+        v.setCamelContext(context);
+        v.init();
+        v.createEndpoint(
+                "validator:org/apache/camel/component/validator/unsecuredSchema.xsd?schemaFactory=#mySchemaFactory");
+    }
 
-	@Configuration
-	class TestConfiguration {
+    @Configuration
+    class TestConfiguration {
 
-		@Bean
-		public SchemaFactory mySchemaFactory() throws SAXNotSupportedException, SAXNotRecognizedException {
-			SchemaFactory mySchemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-			mySchemaFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, false);
+        @Bean
+        public SchemaFactory mySchemaFactory() throws SAXNotSupportedException, SAXNotRecognizedException {
+            SchemaFactory mySchemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            mySchemaFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, false);
 
-			return mySchemaFactory;
-		}
-	}
+            return mySchemaFactory;
+        }
+    }
 }

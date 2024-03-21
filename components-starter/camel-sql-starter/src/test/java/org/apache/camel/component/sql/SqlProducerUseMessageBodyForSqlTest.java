@@ -39,14 +39,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SqlProducerUseMessageBodyForSqlTest.class,
-                SqlProducerUseMessageBodyForSqlTest.TestConfiguration.class,
-                BaseSql.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SqlProducerUseMessageBodyForSqlTest.class,
+        SqlProducerUseMessageBodyForSqlTest.TestConfiguration.class, BaseSql.TestConfiguration.class })
 public class SqlProducerUseMessageBodyForSqlTest extends BaseSql {
 
     @EndpointInject("mock:result")
@@ -77,7 +71,6 @@ public class SqlProducerUseMessageBodyForSqlTest extends BaseSql {
         assertEquals("AMQ", row.get("PROJECT"));
     }
 
-
     @Test
     @SuppressWarnings({ "unchecked", "deprecated" })
     public void testUseMessageBodyForSqlAndCamelSqlParametersBatch() throws Exception {
@@ -97,7 +90,8 @@ public class SqlProducerUseMessageBodyForSqlTest extends BaseSql {
         rows.add(row);
         template.sendBodyAndHeader("direct:insert", null, SqlConstants.SQL_PARAMETERS, rows);
 
-        String origSql = assertInstanceOf(String.class, resultInsertEndpoint.getReceivedExchanges().get(0).getIn().getBody());
+        String origSql = assertInstanceOf(String.class,
+                resultInsertEndpoint.getReceivedExchanges().get(0).getIn().getBody());
         assertEquals("insert into projects(id, project, license) values(:?id,:?project,:?lic)", origSql);
 
         assertEquals(null, resultInsertEndpoint.getReceivedExchanges().get(0).getOut().getBody());
@@ -136,16 +130,13 @@ public class SqlProducerUseMessageBodyForSqlTest extends BaseSql {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                            .setBody(constant("select * from projects where license = :?lic order by id"))
-                            .to("sql://query?useMessageBodyForSql=true")
-                            .to("mock:result");
-
+                    from("direct:start").setBody(constant("select * from projects where license = :?lic order by id"))
+                            .to("sql://query?useMessageBodyForSql=true").to("mock:result");
 
                     from("direct:insert").routeId("baz")
-                            .setBody(constant("insert into projects(id, project, license) values(:?id,:?project,:?lic)"))
-                            .to("sql://query?useMessageBodyForSql=true&batch=true")
-                            .to("mock:resultInsert");
+                            .setBody(
+                                    constant("insert into projects(id, project, license) values(:?id,:?project,:?lic)"))
+                            .to("sql://query?useMessageBodyForSql=true&batch=true").to("mock:resultInsert");
                 }
             };
         }

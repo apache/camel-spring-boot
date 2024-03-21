@@ -23,8 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.PropertyResolver;
 
 import static org.jasypt.properties.PropertyValueEncryptionUtils.isEncryptedValue;
-import static  org.jasypt.properties.PropertyValueEncryptionUtils.decrypt;
-
+import static org.jasypt.properties.PropertyValueEncryptionUtils.decrypt;
 
 public class JasyptSpringEncryptedPropertiesParser extends DefaultPropertiesParser {
 
@@ -33,7 +32,7 @@ public class JasyptSpringEncryptedPropertiesParser extends DefaultPropertiesPars
     private StringEncryptor stringEncryptor;
 
     @Autowired
-    public JasyptSpringEncryptedPropertiesParser(PropertyResolver propertyResolver, StringEncryptor stringEncryptor){
+    public JasyptSpringEncryptedPropertiesParser(PropertyResolver propertyResolver, StringEncryptor stringEncryptor) {
         this.propertyResolver = propertyResolver;
         this.stringEncryptor = stringEncryptor;
     }

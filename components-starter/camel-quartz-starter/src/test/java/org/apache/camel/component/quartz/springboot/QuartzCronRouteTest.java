@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.apache.camel.CamelContext;
@@ -31,8 +29,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -44,31 +40,24 @@ import org.quartz.CronTrigger;
 import org.quartz.JobDetail;
 import org.quartz.Trigger;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzCronRouteTest.class,
-        QuartzCronRouteTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzCronRouteTest.class,
+        QuartzCronRouteTest.TestConfiguration.class })
 public class QuartzCronRouteTest extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint mock;
-    
+
     @Test
     public void testQuartzCronRoute() throws Exception {
-        
+
         mock.expectedMinimumMessageCount(3);
 
         mock.assertIsSatisfied();
@@ -79,12 +68,12 @@ public class QuartzCronRouteTest extends BaseQuartzTest {
         JobDetail detail = mock.getReceivedExchanges().get(0).getIn().getHeader("jobDetail", JobDetail.class);
         assertThat(detail.getJobClass().equals(CamelJob.class), CoreMatchers.is(true));
 
-        assertThat(detail.getJobDataMap().get(QuartzConstants.QUARTZ_TRIGGER_TYPE).equals("cron"), CoreMatchers.is(true));
+        assertThat(detail.getJobDataMap().get(QuartzConstants.QUARTZ_TRIGGER_TYPE).equals("cron"),
+                CoreMatchers.is(true));
         assertThat(detail.getJobDataMap().get(QuartzConstants.QUARTZ_TRIGGER_CRON_EXPRESSION).equals("0/1 * * * * ?"),
                 CoreMatchers.is(true));
     }
 
-    
     // *************************************
     // Config
     // *************************************
@@ -103,7 +92,5 @@ public class QuartzCronRouteTest extends BaseQuartzTest {
             };
         }
     }
-    
-   
 
 }

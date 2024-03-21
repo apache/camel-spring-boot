@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
 import java.util.List;
 import java.util.Properties;
@@ -41,27 +40,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathTransformONielPlaceholderTest.class,
-        JsonPathTransformONielPlaceholderTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathTransformONielPlaceholderTest.class,
+        JsonPathTransformONielPlaceholderTest.TestConfiguration.class })
 public class JsonPathTransformONielPlaceholderTest {
 
-
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:authors")
     MockEndpoint mock;
 
-    
     @Bean
     CamelContextConfiguration contextConfiguration() {
         return new CamelContextConfiguration() {
@@ -77,15 +67,14 @@ public class JsonPathTransformONielPlaceholderTest {
 
             @Override
             public void afterApplicationStart(CamelContext camelContext) {
-                //do nothing here
+                // do nothing here
             }
         };
     }
 
-    
     @Test
     public void testAuthors() throws Exception {
-        
+
         mock.expectedMessageCount(1);
 
         template.sendBody("direct:start", new File("src/test/resources/books.json"));
@@ -110,8 +99,8 @@ public class JsonPathTransformONielPlaceholderTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                            .transform().jsonpath("$.store.book[?(@.author == '{{who}}' || @.title == '{{search}}')].title")
+                    from("direct:start").transform()
+                            .jsonpath("$.store.book[?(@.author == '{{who}}' || @.title == '{{search}}')].title")
                             .to("mock:authors");
                 }
             };

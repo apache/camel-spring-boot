@@ -31,16 +31,10 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                MongoDbSpringDslOperationsIT.class,
-                AbstractMongoDbITSupport.MongoConfiguration.class
-        },
-        properties = { "camel.springboot.routes-include-pattern=file:src/test/resources/org/apache/camel/component/mongodb/mongoBasicOperationsTest.xml" }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, MongoDbSpringDslOperationsIT.class,
+        AbstractMongoDbITSupport.MongoConfiguration.class }, properties = {
+                "camel.springboot.routes-include-pattern=file:src/test/resources/org/apache/camel/component/mongodb/mongoBasicOperationsTest.xml" })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class MongoDbSpringDslOperationsIT extends MongoDbOperationsIT {
-
 
 }

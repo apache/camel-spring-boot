@@ -28,15 +28,8 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 @CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
-@SpringBootTest(
-    classes = {
-        GroupCondition3Test.TestConfiguration.class
-    },
-    properties = {
-        "test.group.enabled=true",
-        "test.group.my-class.enabled=false"
-    }
-)
+@SpringBootTest(classes = { GroupCondition3Test.TestConfiguration.class }, properties = { "test.group.enabled=true",
+        "test.group.my-class.enabled=false" })
 public class GroupCondition3Test extends GroupConditionTestBase {
     @Autowired
     ApplicationContext context;

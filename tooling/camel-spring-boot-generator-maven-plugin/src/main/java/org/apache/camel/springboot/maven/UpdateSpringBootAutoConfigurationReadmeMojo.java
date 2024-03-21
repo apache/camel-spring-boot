@@ -45,13 +45,12 @@ import org.apache.maven.project.MavenProject;
 import org.mvel2.templates.TemplateRuntime;
 import org.codehaus.plexus.build.BuildContext;
 
-
 import static org.apache.camel.tooling.util.PackageHelper.loadText;
 import static org.apache.camel.tooling.util.PackageHelper.writeText;
 
 /**
- * For all the Camel components that has Spring Boot starter JAR, their documentation
- * .adoc files in their component directory is updated to include spring boot auto configuration options.
+ * For all the Camel components that has Spring Boot starter JAR, their documentation .adoc files in their component
+ * directory is updated to include spring boot auto configuration options.
  */
 @Mojo(name = "update-spring-boot-auto-configuration-readme", threadSafe = true)
 public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
@@ -70,8 +69,7 @@ public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
     protected File buildDir;
 
     /**
-     * build context to check changed files and mark them for refresh (used for
-     * m2e compatibility)
+     * build context to check changed files and mark them for refresh (used for m2e compatibility)
      */
     @Component
     private BuildContext buildContext;
@@ -90,7 +88,7 @@ public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
     private void executeStarter(File starter) throws Exception {
         String name = starter.getName();
 
-        //There's almost certainly a better test!
+        // There's almost certainly a better test!
         if ("components-starter".equals(name) || "core".equals(name)) {
             return;
         }
@@ -117,6 +115,5 @@ public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
             Files.write(jsonFileCopy, contents);
         }
     }
-
 
 }

@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelMailTest extends AbstractSpringBootTestSupport {
 
@@ -33,9 +32,7 @@ public class CamelMailTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelMailTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelMailTest.class)).build();
         // sometimes the arquillian test fails, but the unit tests don't.
     }
 
@@ -47,6 +44,5 @@ public class CamelMailTest extends AbstractSpringBootTestSupport {
 
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

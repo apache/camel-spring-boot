@@ -59,10 +59,8 @@ public class ClusteredRouteControllerAutoConfiguration {
         ClusteredRouteController controller = new ClusteredRouteController();
         controller.setNamespace(configuration.getNamespace());
 
-        Optional.ofNullable(configuration.getInitialDelay())
-            .map(TimePatternConverter::toMilliSeconds)
-            .map(Duration::ofMillis)
-            .ifPresent(controller::setInitialDelay);
+        Optional.ofNullable(configuration.getInitialDelay()).map(TimePatternConverter::toMilliSeconds)
+                .map(Duration::ofMillis).ifPresent(controller::setInitialDelay);
 
         controller.setFilters(filters);
         controller.addFilter(new ClusteredRouteFilters.IsAutoStartup());
@@ -71,23 +69,19 @@ public class ClusteredRouteControllerAutoConfiguration {
             controller.setClusterService(configuration.getClusterService());
         }
 
-        for (Map.Entry<String, ClusteredRouteControllerConfiguration.RouteConfiguration> entry: configuration.getRoutes().entrySet()) {
+        for (Map.Entry<String, ClusteredRouteControllerConfiguration.RouteConfiguration> entry : configuration
+                .getRoutes().entrySet()) {
             final String routeId = entry.getKey();
             final ClusteredRouteControllerConfiguration.RouteConfiguration conf = entry.getValue();
 
             if (conf.isClustered()) {
                 ClusteredRouteConfiguration routeConfiguration = new ClusteredRouteConfiguration();
 
-                routeConfiguration.setNamespace(
-                    Optional.ofNullable(conf.getNamespace())
-                        .orElseGet(controller::getNamespace)
-                );
+                routeConfiguration
+                        .setNamespace(Optional.ofNullable(conf.getNamespace()).orElseGet(controller::getNamespace));
                 routeConfiguration.setInitialDelay(
-                    Optional.ofNullable(conf.getInitialDelay())
-                        .map(TimePatternConverter::toMilliSeconds)
-                        .map(Duration::ofMillis)
-                        .orElseGet(controller::getInitialDelay)
-                );
+                        Optional.ofNullable(conf.getInitialDelay()).map(TimePatternConverter::toMilliSeconds)
+                                .map(Duration::ofMillis).orElseGet(controller::getInitialDelay));
 
                 controller.addRouteConfiguration(routeId, routeConfiguration);
             } else {

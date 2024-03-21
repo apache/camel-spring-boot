@@ -29,35 +29,26 @@ import org.springframework.test.annotation.DirtiesContext;
 @SpringBootApplication
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-		classes = {
-				CamelAutoConfiguration.class,
-				SpringBootPlatformHttpTest.class,
-				SpringBootPlatformHttpTest.TestConfiguration.class,
-				PlatformHttpComponentAutoConfiguration.class,
-				SpringBootPlatformHttpAutoConfiguration.class
-		}
-)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
+        SpringBootPlatformHttpTest.class, SpringBootPlatformHttpTest.TestConfiguration.class,
+        PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class })
 public class SpringBootPlatformHttpTest extends PlatformHttpBase {
 
-	// *************************************
-	// Config
-	// *************************************
-	@Configuration
-	public static class TestConfiguration {
+    // *************************************
+    // Config
+    // *************************************
+    @Configuration
+    public static class TestConfiguration {
 
-		@Bean
-		public RouteBuilder servletPlatformHttpRouteBuilder() {
-			return new RouteBuilder() {
-				@Override
-				public void configure() throws Exception {
-					from("platform-http:/myget")
-							.setBody().constant("get");
-					from("platform-http:/mypost")
-							.transform().body(String.class, b -> b.toUpperCase());
-				}
-			};
-		}
-	}
+        @Bean
+        public RouteBuilder servletPlatformHttpRouteBuilder() {
+            return new RouteBuilder() {
+                @Override
+                public void configure() throws Exception {
+                    from("platform-http:/myget").setBody().constant("get");
+                    from("platform-http:/mypost").transform().body(String.class, b -> b.toUpperCase());
+                }
+            };
+        }
+    }
 }

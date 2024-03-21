@@ -27,11 +27,9 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {CamelAutoConfiguration.class, CamelRouteControllerEndpointAutoConfiguration.class,
-               CamelRoutesEndpointAutoConfiguration.class},
-    properties = {"management.endpoints.web.exposure.include=*"})
-                   
+@SpringBootTest(classes = { CamelAutoConfiguration.class, CamelRouteControllerEndpointAutoConfiguration.class,
+        CamelRoutesEndpointAutoConfiguration.class }, properties = { "management.endpoints.web.exposure.include=*" })
+
 public class CamelEndpointsGloballyEnabledTest {
     @Autowired
     private CamelRouteControllerEndpoint routeControllerEndpoint;

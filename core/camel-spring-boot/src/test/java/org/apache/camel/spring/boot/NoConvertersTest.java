@@ -39,8 +39,7 @@ public class NoConvertersTest {
 
     @Test
     public void shouldNotProvideConverter() {
-        assertThrows(NoSuchBeanDefinitionException.class,
-                () -> applicationContext.getBean(TypeConverter.class));
+        assertThrows(NoSuchBeanDefinitionException.class, () -> applicationContext.getBean(TypeConverter.class));
     }
 
 }

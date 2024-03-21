@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.telegram.springboot;
 
-
 import org.apache.camel.Endpoint;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
@@ -37,21 +36,14 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        TelegramProducerChatIdResolutionTest.class,
-        TelegramProducerChatIdResolutionTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, TelegramProducerChatIdResolutionTest.class,
+        TelegramProducerChatIdResolutionTest.TestConfiguration.class })
 public class TelegramProducerChatIdResolutionTest extends TelegramTestSupport {
 
-    
     static TelegramMockRoutes mockRoutes;
-    
+
     @EndpointInject("direct:telegram")
     private Endpoint endpoint;
 
@@ -85,7 +77,6 @@ public class TelegramProducerChatIdResolutionTest extends TelegramTestSupport {
         assertNull(message.getParseMode());
 
     }
-    
 
     // *************************************
     // Config
@@ -98,24 +89,18 @@ public class TelegramProducerChatIdResolutionTest extends TelegramTestSupport {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:telegram")
-                            .to("telegram:bots?authorizationToken=mock-token&chatId=my-id");
+                    from("direct:telegram").to("telegram:bots?authorizationToken=mock-token&chatId=my-id");
                 }
             };
         }
 
     }
-    
+
     @Override
     @Bean
     protected TelegramMockRoutes createMockRoutes() {
-        mockRoutes =
-         new TelegramMockRoutes(port)
-            .addEndpoint(
-                    "sendMessage",
-                    "POST",
-                    OutgoingTextMessage.class,
-                    TelegramTestUtil.stringResource("messages/send-message.json"));
+        mockRoutes = new TelegramMockRoutes(port).addEndpoint("sendMessage", "POST", OutgoingTextMessage.class,
+                TelegramTestUtil.stringResource("messages/send-message.json"));
         return mockRoutes;
     }
 }

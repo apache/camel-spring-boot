@@ -40,13 +40,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Isolated("Does not play well with parallel unit test execution")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileChangedReadLockMarkerFileFalseTest.class,
-                FileChangedReadLockMarkerFileFalseTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileChangedReadLockMarkerFileFalseTest.class,
+        FileChangedReadLockMarkerFileFalseTest.TestConfiguration.class })
 public class FileChangedReadLockMarkerFileFalseTest extends BaseFile {
 
     private static final Logger LOG = LoggerFactory.getLogger(FileChangedReadLockMarkerFileFalseTest.class);
@@ -111,9 +106,9 @@ public class FileChangedReadLockMarkerFileFalseTest extends BaseFile {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from(fileUri("in?initialDelay=0&delay=10&readLock=changed&readLockCheckInterval=100&readLockMarkerFile=false"))
-                            .to(fileUri("out"),
-                                    "mock:result");
+                    from(fileUri(
+                            "in?initialDelay=0&delay=10&readLock=changed&readLockCheckInterval=100&readLockMarkerFile=false"))
+                                    .to(fileUri("out"), "mock:result");
                 }
             };
         }

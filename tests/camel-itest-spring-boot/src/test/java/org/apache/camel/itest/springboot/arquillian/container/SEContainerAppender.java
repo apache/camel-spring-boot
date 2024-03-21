@@ -27,10 +27,8 @@ public class SEContainerAppender extends CachedAuxilliaryArchiveAppender {
 
     @Override
     protected Archive<?> buildArchive() {
-        return ShrinkWrap.create(JavaArchive.class, "arquillian-container-se.jar")
-                .addPackage(Main.class.getPackage())
-                .addClass(LaunchServices.class)
-                .addPackage("org.jboss.arquillian.protocol.jmx");
+        return ShrinkWrap.create(JavaArchive.class, "arquillian-container-se.jar").addPackage(Main.class.getPackage())
+                .addClass(LaunchServices.class).addPackage("org.jboss.arquillian.protocol.jmx");
     }
 
 }

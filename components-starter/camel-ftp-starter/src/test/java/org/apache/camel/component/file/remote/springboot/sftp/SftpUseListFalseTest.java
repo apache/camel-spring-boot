@@ -40,13 +40,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SftpUseListFalseTest.class
-        }
-)
-//Based on SftpUseListFalseIT
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SftpUseListFalseTest.class })
+// Based on SftpUseListFalseIT
 public class SftpUseListFalseTest extends BaseSftp {
 
     @EndpointInject("mock:result")
@@ -78,7 +73,7 @@ public class SftpUseListFalseTest extends BaseSftp {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseFtp.TestConfiguration {
+    public class TestConfiguration extends BaseFtp.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
 
@@ -87,8 +82,7 @@ public class SftpUseListFalseTest extends BaseSftp {
                 public void configure() {
                     from("sftp://localhost:" + getPort() + "/" + getRootDir()
                             + "?username=admin&password=admin&delay=10000&disconnect=true&stepwise=false&useList=false&fileName=report.txt&delete=true")
-                            .routeId("foo").noAutoStartup()
-                            .to("mock:result");
+                                    .routeId("foo").noAutoStartup().to("mock:result");
                 }
             };
         }

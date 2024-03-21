@@ -31,12 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        UuidGeneratorDiscoveryTest.MyUuidGenerator.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, UuidGeneratorDiscoveryTest.MyUuidGenerator.class })
 public class UuidGeneratorDiscoveryTest {
     @Autowired
     private CamelContext camelContext;

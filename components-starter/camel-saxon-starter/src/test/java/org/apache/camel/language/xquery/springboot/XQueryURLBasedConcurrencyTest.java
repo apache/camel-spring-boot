@@ -26,7 +26,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -38,33 +37,25 @@ import org.junit.jupiter.api.Test;
 
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        XQueryURLBasedConcurrencyTest.class,
-        XQueryURLBasedConcurrencyTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, XQueryURLBasedConcurrencyTest.class,
+        XQueryURLBasedConcurrencyTest.TestConfiguration.class })
 public class XQueryURLBasedConcurrencyTest {
 
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint mock;
 
-      
     @Test
     public void testConcurrency() throws Exception {
         int total = 1000;
 
-        
         mock.expectedMessageCount(total);
 
         // setup a task executor to be able send the messages in parallel
@@ -99,7 +90,7 @@ public class XQueryURLBasedConcurrencyTest {
         mock.assertNoDuplicates(Builder.bodyAs(String.class));
         executor.shutdown();
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -119,8 +110,7 @@ public class XQueryURLBasedConcurrencyTest {
 
                     from("seda:foo?concurrentConsumers=5")
                             .to("xquery:org/apache/camel/component/xquery/transform.xquery")
-                            .to("log:result?groupSize=100")
-                            .to("mock:result");
+                            .to("log:result?groupSize=100").to("mock:result");
                 }
             };
         }

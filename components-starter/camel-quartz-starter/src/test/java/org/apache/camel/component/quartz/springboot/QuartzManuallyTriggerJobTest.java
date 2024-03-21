@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import java.util.ArrayList;
 
 import org.apache.camel.CamelContext;
@@ -30,8 +28,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -43,31 +39,24 @@ import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.impl.matchers.GroupMatcher;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzManuallyTriggerJobTest.class,
-        QuartzManuallyTriggerJobTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzManuallyTriggerJobTest.class,
+        QuartzManuallyTriggerJobTest.TestConfiguration.class })
 public class QuartzManuallyTriggerJobTest extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint mock;
-    
+
     @Test
     public void testQuartzCronRoute() throws Exception {
-        
+
         mock.expectedMinimumMessageCount(1);
 
         QuartzComponent component = context.getComponent("quartz", QuartzComponent.class);
@@ -87,7 +76,7 @@ public class QuartzManuallyTriggerJobTest extends BaseQuartzTest {
         scheduler.triggerJob(jobKeys.get(0), jobDataMap);
         mock.assertIsSatisfied();
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -105,7 +94,5 @@ public class QuartzManuallyTriggerJobTest extends BaseQuartzTest {
             };
         }
     }
-    
-   
 
 }

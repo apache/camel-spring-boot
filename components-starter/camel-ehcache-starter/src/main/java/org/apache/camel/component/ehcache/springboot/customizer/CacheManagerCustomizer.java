@@ -33,25 +33,19 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 
 /**
- * A simple implementation of {@link ComponentCustomizer} that auto discovers a
- * {@link CacheManager} instance and bind it to the {@link EhcacheComponent}
- * component.
+ * A simple implementation of {@link ComponentCustomizer} that auto discovers a {@link CacheManager} instance and bind
+ * it to the {@link EhcacheComponent} component.
  *
  * This customizer can be disabled/enabled with different strategies:
  *
- * 1. globally using:
- *    camel.component.customizer.enable = true/false
- * 2. for component:
- *    camel.component.ehcache.customizer.enabled = true/false
- * 3. individually:
- *    camel.component.ehcache.customizer.cache-manager.enabled = true/false
+ * 1. globally using: camel.component.customizer.enable = true/false 2. for component:
+ * camel.component.ehcache.customizer.enabled = true/false 3. individually:
+ * camel.component.ehcache.customizer.cache-manager.enabled = true/false
  */
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnBean({CamelAutoConfiguration.class, CacheManager.class})
-@ConditionalOnHierarchicalProperties({
-    "camel.component.customizer",
-    "camel.component.ehcache.customizer",
-    "camel.component.ehcache.customizer.cache-manager"})
+@ConditionalOnBean({ CamelAutoConfiguration.class, CacheManager.class })
+@ConditionalOnHierarchicalProperties({ "camel.component.customizer", "camel.component.ehcache.customizer",
+        "camel.component.ehcache.customizer.cache-manager" })
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @EnableConfigurationProperties(CacheManagerCustomizerConfiguration.class)
 public class CacheManagerCustomizer implements HasId, ComponentCustomizer {
@@ -62,7 +56,7 @@ public class CacheManagerCustomizer implements HasId, ComponentCustomizer {
 
     @Override
     public void configure(String name, Component target) {
-        EhcacheComponent component = (EhcacheComponent)target;
+        EhcacheComponent component = (EhcacheComponent) target;
 
         // Set the cache manager only if the customizer is configured to always
         // set it or if no cache manager is already configured on component

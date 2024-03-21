@@ -41,17 +41,10 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                JdbcAggregateStoreAsTextTest.class,
-                JdbcAggregateStoreAsTextTest.TestConfiguration.class,
-                BaseSql.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JdbcAggregateStoreAsTextTest.class,
+        JdbcAggregateStoreAsTextTest.TestConfiguration.class, BaseSql.TestConfiguration.class })
 public class JdbcAggregateStoreAsTextTest extends BaseSql {
     protected JdbcTemplate jdbcTemplate;
 
@@ -70,8 +63,6 @@ public class JdbcAggregateStoreAsTextTest extends BaseSql {
     @Test
     public void testStoreBodyAsTextAndCompanyNameHeaderAndAccountNameHeader() throws Exception {
         resultEndpoint.expectedBodiesReceived("ABCDE");
-
-
 
         Map<String, Object> headers = new HashMap<>();
         headers.put("id", 123);
@@ -116,7 +107,8 @@ public class JdbcAggregateStoreAsTextTest extends BaseSql {
     }
 
     public String getAggregationRepositoryColumn(int id, String columnName) {
-        return jdbcTemplate.queryForObject("SELECT " + columnName + " from aggregationRepo3 where id = ?", String.class, id);
+        return jdbcTemplate.queryForObject("SELECT " + columnName + " from aggregationRepo3 where id = ?", String.class,
+                id);
     }
 
     @Configuration
@@ -133,8 +125,10 @@ public class JdbcAggregateStoreAsTextTest extends BaseSql {
         }
 
         @Bean
-        public JdbcAggregationRepository jdbcAggregationRepository(DataSource dataSource, PlatformTransactionManager transactionManager) {
-            JdbcAggregationRepository repo = new JdbcAggregationRepository(transactionManager, "aggregationRepo3", dataSource);
+        public JdbcAggregationRepository jdbcAggregationRepository(DataSource dataSource,
+                PlatformTransactionManager transactionManager) {
+            JdbcAggregationRepository repo = new JdbcAggregationRepository(transactionManager, "aggregationRepo3",
+                    dataSource);
 
             repo.setStoreBodyAsText(true);
             repo.setHeadersToStoreAsText(Arrays.asList("companyName", "accountName"));
@@ -147,13 +141,9 @@ public class JdbcAggregateStoreAsTextTest extends BaseSql {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                            .aggregate(header("id"), new MyAggregationStrategy())
-                            .aggregationRepository(repo)
-                            .completionSize(5)
-                            .to("log:output?showHeaders=true")
-                            .to("mock:result")
-                            .end();
+                    from("direct:start").aggregate(header("id"), new MyAggregationStrategy())
+                            .aggregationRepository(repo).completionSize(5).to("log:output?showHeaders=true")
+                            .to("mock:result").end();
                 }
             };
         }

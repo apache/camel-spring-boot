@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelAzureFilesTest extends AbstractSpringBootTestSupport {
 
@@ -33,8 +32,7 @@ public class CamelAzureFilesTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelAzureFilesTest.class))
+        return new ITestConfigBuilder().module(inferModuleName(CamelAzureFilesTest.class))
                 // arquillian fails, but the tests are ok
                 .build();
     }
@@ -45,6 +43,5 @@ public class CamelAzureFilesTest extends AbstractSpringBootTestSupport {
 
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

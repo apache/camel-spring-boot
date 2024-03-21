@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelAws2KinesisTest extends AbstractSpringBootTestSupport {
 
@@ -33,9 +32,7 @@ public class CamelAws2KinesisTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelAws2KinesisTest.class))
-                .build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelAws2KinesisTest.class)).build();
     }
 
     @Test
@@ -45,6 +42,5 @@ public class CamelAws2KinesisTest extends AbstractSpringBootTestSupport {
 
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

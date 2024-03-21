@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelOpentelemetryTest extends AbstractSpringBootTestSupport {
 
@@ -33,19 +32,13 @@ public class CamelOpentelemetryTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .dependency("io.grpc:grpc-api:1.59.1")
-                .dependency("io.grpc:grpc-context:1.59.1")
-                .dependency("io.grpc:grpc-core:1.59.1")
-                .dependency("io.grpc:grpc-netty-shaded:1.59.1")
-                .dependency("io.grpc:grpc-protobuf-lite:1.59.1")
-                .dependency("io.grpc:grpc-protobuf:1.59.1")
-                .dependency("io.grpc:grpc-stub:1.59.1")
-                .dependency("com.google.protobuf:protobuf-java-util:3.23.4")
+        return new ITestConfigBuilder().dependency("io.grpc:grpc-api:1.59.1").dependency("io.grpc:grpc-context:1.59.1")
+                .dependency("io.grpc:grpc-core:1.59.1").dependency("io.grpc:grpc-netty-shaded:1.59.1")
+                .dependency("io.grpc:grpc-protobuf-lite:1.59.1").dependency("io.grpc:grpc-protobuf:1.59.1")
+                .dependency("io.grpc:grpc-stub:1.59.1").dependency("com.google.protobuf:protobuf-java-util:3.23.4")
                 .dependency("com.google.protobuf:protobuf-java:3.23.4")
                 .dependency("com.google.protobuf:protobuf-javalite:3.23.4")
-                .module(inferModuleName(CamelOpentelemetryTest.class))
-                .build();
+                .module(inferModuleName(CamelOpentelemetryTest.class)).build();
     }
 
     @Test
@@ -53,6 +46,5 @@ public class CamelOpentelemetryTest extends AbstractSpringBootTestSupport {
         // no component test
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

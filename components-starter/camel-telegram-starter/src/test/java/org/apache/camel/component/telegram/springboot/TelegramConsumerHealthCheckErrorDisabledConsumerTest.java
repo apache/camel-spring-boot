@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.telegram.springboot;
 
-
 import java.util.concurrent.TimeUnit;
 
 import org.apache.camel.CamelContext;
@@ -31,7 +30,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,30 +38,24 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.awaitility.Awaitility;
 
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        TelegramConsumerHealthCheckErrorDisabledConsumerTest.class,
-        TelegramConsumerHealthCheckErrorDisabledConsumerTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, TelegramConsumerHealthCheckErrorDisabledConsumerTest.class,
+        TelegramConsumerHealthCheckErrorDisabledConsumerTest.TestConfiguration.class })
 public class TelegramConsumerHealthCheckErrorDisabledConsumerTest extends TelegramTestSupport {
 
-    
     static TelegramMockRoutes mockRoutes;
-    
+
     @EndpointInject("mock:telegram")
     private MockEndpoint endpoint;
-    
+
     @Override
     protected void configureCamelContext(CamelContext context) {
         // enabling routes health check is a bit cumbersome via low-level Java code
         super.configureCamelContext(context);
         HealthCheckRegistry hcr = context.getCamelContextExtension().getContextPlugin(HealthCheckRegistry.class);
-        HealthCheckRepository repo = hcr.getRepository("routes").orElse((HealthCheckRepository) hcr.resolveById("routes"));
+        HealthCheckRepository repo = hcr.getRepository("routes")
+                .orElse((HealthCheckRepository) hcr.resolveById("routes"));
         repo.setEnabled(true);
         hcr.register(repo);
         // enabling consumers health check is a bit cumbersome via low-level Java code
@@ -83,8 +75,8 @@ public class TelegramConsumerHealthCheckErrorDisabledConsumerTest extends Telegr
         Assertions.assertFalse(down, "None health-check should be DOWN");
 
         // wait until HC is UP
-        Awaitility.waitAtMost(5, TimeUnit.SECONDS).until(
-                () -> repo.stream().anyMatch(h -> h.call().getState().equals(HealthCheck.State.UP)));
+        Awaitility.waitAtMost(5, TimeUnit.SECONDS)
+                .until(() -> repo.stream().anyMatch(h -> h.call().getState().equals(HealthCheck.State.UP)));
 
         // if we grab the health check by id, we can also check it afterwards
         HealthCheck hc = hcr.getCheck("telegram").get();
@@ -107,24 +99,18 @@ public class TelegramConsumerHealthCheckErrorDisabledConsumerTest extends Telegr
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("telegram:bots?authorizationToken=mock-token").routeId("telegram")
-                            .convertBodyTo(String.class)
+                    from("telegram:bots?authorizationToken=mock-token").routeId("telegram").convertBodyTo(String.class)
                             .to("mock:telegram");
                 }
             };
         }
 
     }
-    
+
     @Override
     @Bean
     protected TelegramMockRoutes createMockRoutes() {
-        mockRoutes =
-            new TelegramMockRoutes(port)
-            .addErrorEndpoint(
-                    "getUpdates",
-                    "GET",
-                    401);
+        mockRoutes = new TelegramMockRoutes(port).addErrorEndpoint("getUpdates", "GET", 401);
         return mockRoutes;
     }
 }

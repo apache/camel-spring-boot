@@ -16,8 +16,6 @@
  */
 package org.apache.camel.dataformat.zipfile.springboot;
 
-
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.zip.ZipEntry;
@@ -37,7 +35,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -47,16 +44,10 @@ import org.apache.camel.test.junit5.TestSupport;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.util.IOHelper;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        ZipAggregationStrategyEmptyFileTest.class,
-        ZipAggregationStrategyEmptyFileTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ZipAggregationStrategyEmptyFileTest.class,
+        ZipAggregationStrategyEmptyFileTest.TestConfiguration.class })
 public class ZipAggregationStrategyEmptyFileTest {
 
     private static final int EXPECTED_NO_FILES = 3;
@@ -64,10 +55,10 @@ public class ZipAggregationStrategyEmptyFileTest {
 
     @Autowired
     ProducerTemplate template;
-    
+
     @EndpointInject("mock:aggregateToZipEntry")
     MockEndpoint mock;
-    
+
     @BeforeEach
     public void setUp() throws Exception {
         TestSupport.deleteDirectory("target/foo");
@@ -76,7 +67,7 @@ public class ZipAggregationStrategyEmptyFileTest {
 
     @Test
     public void testEmptyFile() throws Exception {
-        
+
         mock.expectedMessageCount(1);
 
         template.sendBody("file:target/foo", "Hello");
@@ -106,8 +97,6 @@ public class ZipAggregationStrategyEmptyFileTest {
         }
     }
 
-    
-    
     // *************************************
     // Config
     // *************************************
@@ -120,19 +109,12 @@ public class ZipAggregationStrategyEmptyFileTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("file:target/foo")
-                            .aggregate(new ZipAggregationStrategy())
-                            .constant(true)
-                            .completionSize(4)
-                            .eagerCheckCompletion()
-                            .to("file:" + TEST_DIR)
-                            .to("mock:aggregateToZipEntry")
+                    from("file:target/foo").aggregate(new ZipAggregationStrategy()).constant(true).completionSize(4)
+                            .eagerCheckCompletion().to("file:" + TEST_DIR).to("mock:aggregateToZipEntry")
                             .log("Done processing zip file: ${header.CamelFileName}");
                 }
             };
         }
     }
-    
-   
 
 }

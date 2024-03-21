@@ -34,10 +34,8 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 @CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootApplication
-@SpringBootTest(
-    classes = {CamelAutoConfiguration.class, CamelRouteControllerEndpointAutoConfiguration.class, ActuatorTestRoute.class},
-    properties = {"management.endpoints.web.exposure.include=camelroutecontroller"}
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, CamelRouteControllerEndpointAutoConfiguration.class,
+        ActuatorTestRoute.class }, properties = { "management.endpoints.web.exposure.include=camelroutecontroller" })
 public class CamelRouteControllerEndpointEnabledTest {
 
     @Autowired

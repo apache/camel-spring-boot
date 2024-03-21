@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import static org.apache.camel.test.junit5.TestSupport.assertIsInstanceOf;
 
 import java.io.FileInputStream;
@@ -42,16 +41,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathMapTransformTest.class,
-        JsonPathMapTransformTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathMapTransformTest.class,
+        JsonPathMapTransformTest.TestConfiguration.class })
 public class JsonPathMapTransformTest {
 
     @Autowired
@@ -68,8 +61,8 @@ public class JsonPathMapTransformTest {
         Configuration.ConfigurationBuilder builder = Configuration.builder();
         builder.jsonProvider(new JacksonJsonProvider());
         builder.mappingProvider(new JacksonMappingProvider());
-        Object document = builder.build().jsonProvider()
-                .parse(new FileInputStream("src/test/resources/books.json"), "utf-8");
+        Object document = builder.build().jsonProvider().parse(new FileInputStream("src/test/resources/books.json"),
+                "utf-8");
         assertIsInstanceOf(Map.class, document);
 
         template.sendBody("direct:start", document);
@@ -80,7 +73,6 @@ public class JsonPathMapTransformTest {
         assertEquals("Nigel Rees", authors.get(0));
         assertEquals("Evelyn Waugh", authors.get(1));
     }
-    
 
     // *************************************
     // Config
@@ -94,9 +86,7 @@ public class JsonPathMapTransformTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                            .transform().jsonpath("$.store.book[*].author")
-                            .to("mock:authors");
+                    from("direct:start").transform().jsonpath("$.store.book[*].author").to("mock:authors");
                 }
             };
         }

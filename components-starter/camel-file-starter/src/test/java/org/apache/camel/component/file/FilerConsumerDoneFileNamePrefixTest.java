@@ -34,13 +34,8 @@ import org.springframework.test.annotation.DirtiesContext;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FilerConsumerDoneFileNamePrefixTest.class,
-                FilerConsumerDoneFileNamePrefixTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FilerConsumerDoneFileNamePrefixTest.class,
+        FilerConsumerDoneFileNamePrefixTest.TestConfiguration.class })
 public class FilerConsumerDoneFileNamePrefixTest extends BaseFile {
 
     @EndpointInject("mock:result")

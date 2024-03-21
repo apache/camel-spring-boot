@@ -46,13 +46,8 @@ import java.nio.charset.StandardCharsets;
 //Based on S3ObjectRangeOperationManualIT
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                S3ObjectRangeOperationTest.class,
-                S3ObjectRangeOperationTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, S3ObjectRangeOperationTest.class,
+        S3ObjectRangeOperationTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class S3ObjectRangeOperationTest extends BaseS3 {
     private static final Logger LOG = LoggerFactory.getLogger(S3ObjectRangeOperationTest.class);
@@ -73,7 +68,6 @@ public class S3ObjectRangeOperationTest extends BaseS3 {
             }
         });
 
-
         template.send("direct:getObjectRange", new Processor() {
 
             @Override
@@ -93,7 +87,7 @@ public class S3ObjectRangeOperationTest extends BaseS3 {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseS3.TestConfiguration {
+    public class TestConfiguration extends BaseS3.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder(S3Client s3Client) {
             return new RouteBuilder() {

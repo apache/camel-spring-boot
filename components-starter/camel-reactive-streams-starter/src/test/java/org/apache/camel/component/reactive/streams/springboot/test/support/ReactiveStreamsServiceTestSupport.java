@@ -165,8 +165,8 @@ public class ReactiveStreamsServiceTestSupport implements CamelReactiveStreamsSe
         return id;
     }
 
-	@Override
-	public CamelContext getCamelContext() {
-		return null;
-	}
+    @Override
+    public CamelContext getCamelContext() {
+        return null;
+    }
 }

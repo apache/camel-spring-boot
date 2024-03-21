@@ -32,7 +32,8 @@ import org.springframework.context.annotation.Configuration;
 public class CamelTraceAutoConfiguration {
 
     @Bean
-    public BacklogTracer backlogTracer(CamelContext camelContext, CamelTraceConfigurationProperties config) throws Exception {
+    public BacklogTracer backlogTracer(CamelContext camelContext, CamelTraceConfigurationProperties config)
+            throws Exception {
         if (!config.isEnabled() && !config.isStandby()) {
             return null;
         }

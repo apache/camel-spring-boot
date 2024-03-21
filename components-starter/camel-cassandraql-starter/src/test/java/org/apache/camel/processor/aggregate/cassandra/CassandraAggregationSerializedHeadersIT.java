@@ -16,7 +16,6 @@
  */
 package org.apache.camel.processor.aggregate.cassandra;
 
-
 import org.apache.camel.AggregationStrategy;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
@@ -37,22 +36,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        CassandraAggregationSerializedHeadersIT.class,
-        CassandraAggregationSerializedHeadersIT.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, CassandraAggregationSerializedHeadersIT.class,
+        CassandraAggregationSerializedHeadersIT.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class CassandraAggregationSerializedHeadersIT extends BaseCassandra {
 
     CassandraAggregationRepository aggregationRepository;
 
-    
     @EndpointInject("mock:output")
     MockEndpoint mockOutput;
 
@@ -65,10 +57,9 @@ public class CassandraAggregationSerializedHeadersIT extends BaseCassandra {
 
     }
 
-    
     @AfterEach
     public void tearDown() throws Exception {
-    
+
         aggregationRepository.stop();
     }
 
@@ -79,7 +70,7 @@ public class CassandraAggregationSerializedHeadersIT extends BaseCassandra {
     @Test
     public void testAggregationRoute() throws Exception {
         // Given
-        
+
         mockOutput.expectedMessageCount(2);
         mockOutput.expectedBodiesReceivedInAnyOrder("A,C,E", "B,D");
         HeaderDto dto1 = new HeaderDto("org", "company", 1);
@@ -94,7 +85,6 @@ public class CassandraAggregationSerializedHeadersIT extends BaseCassandra {
         mockOutput.assertIsSatisfied(4000L);
 
     }
-    
 
     // *************************************
     // Config
@@ -121,8 +111,7 @@ public class CassandraAggregationSerializedHeadersIT extends BaseCassandra {
                         }
                     };
                     from("direct:input").aggregate(header("aggregationId"), aggregationStrategy).completionSize(3)
-                            .completionTimeout(3000L).aggregationRepository(aggregationRepository)
-                            .to("mock:output");
+                            .completionTimeout(3000L).aggregationRepository(aggregationRepository).to("mock:output");
                 }
             };
         }

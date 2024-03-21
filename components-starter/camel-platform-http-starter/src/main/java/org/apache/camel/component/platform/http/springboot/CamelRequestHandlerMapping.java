@@ -53,7 +53,7 @@ public class CamelRequestHandlerMapping extends RequestMappingHandlerMapping imp
     @Override
     protected String[] getCandidateBeanNames() {
         // no candidates
-        return new String[]{};
+        return new String[] {};
     }
 
     @Override
@@ -76,7 +76,8 @@ public class CamelRequestHandlerMapping extends RequestMappingHandlerMapping imp
     @Override
     public void registerHttpEndpoint(HttpEndpointModel model) {
         RequestMappingInfo info = asRequestMappingInfo(model);
-        Method m = ReflectionHelper.findMethod(SpringBootPlatformHttpConsumer.class, "service", HttpServletRequest.class, HttpServletResponse.class);
+        Method m = ReflectionHelper.findMethod(SpringBootPlatformHttpConsumer.class, "service",
+                HttpServletRequest.class, HttpServletResponse.class);
         registerMapping(info, model.getConsumer(), m);
     }
 
@@ -100,10 +101,8 @@ public class CamelRequestHandlerMapping extends RequestMappingHandlerMapping imp
             }
         }
 
-        RequestMappingInfo info = RequestMappingInfo
-                .paths(model.getUri())
-                .methods(methods.toArray(new RequestMethod[0]))
-                .options(this.getBuilderConfiguration()).build();
+        RequestMappingInfo info = RequestMappingInfo.paths(model.getUri())
+                .methods(methods.toArray(new RequestMethod[0])).options(this.getBuilderConfiguration()).build();
         return info;
     }
 

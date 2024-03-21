@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(ArquillianExtension.class)
-public class CamelArangodbTest extends AbstractSpringBootTestSupport{
+public class CamelArangodbTest extends AbstractSpringBootTestSupport {
 
     @Deployment
     public static Archive<?> createSpringBootPackage() throws Exception {
@@ -32,9 +32,7 @@ public class CamelArangodbTest extends AbstractSpringBootTestSupport{
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelArangodbTest.class))
-                .unitTestsEnabled(false)
+        return new ITestConfigBuilder().module(inferModuleName(CamelArangodbTest.class)).unitTestsEnabled(false)
                 .build();
     }
 
@@ -44,6 +42,4 @@ public class CamelArangodbTest extends AbstractSpringBootTestSupport{
         this.runModuleUnitTestsIfEnabled(config);
     }
 
-
 }
-

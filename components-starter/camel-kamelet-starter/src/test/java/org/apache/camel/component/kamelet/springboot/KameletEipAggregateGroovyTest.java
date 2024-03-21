@@ -30,15 +30,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletEipAggregateGroovyTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletEipAggregateGroovyTest.class, })
 
 public class KameletEipAggregateGroovyTest {
 
@@ -72,26 +66,17 @@ public class KameletEipAggregateGroovyTest {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                routeTemplate("my-aggregate")
-                        .templateBean("myAgg", "groovy",
-                                // for aggregation we need a class that has the method with how to aggregate the messages
-                                // the logic can of course be much more than just to append with comma
-                                "class MyAgg { String agg(b1, b2) { b1 + ',' + b2 } }; new MyAgg()")
+                routeTemplate("my-aggregate").templateBean("myAgg", "groovy",
+                        // for aggregation we need a class that has the method with how to aggregate the messages
+                        // the logic can of course be much more than just to append with comma
+                        "class MyAgg { String agg(b1, b2) { b1 + ',' + b2 } }; new MyAgg()")
                         // the groovy is evaluated as a script so must return an instance of the class
-                        .templateParameter("count")
-                        .from("kamelet:source")
-                        .aggregate(constant(true))
-                            .completionSize("{{count}}")
-                            // use the groovy script bean for aggregation
-                            .aggregationStrategy("{{myAgg}}")
-                            .to("log:aggregate")
-                            .to("kamelet:sink")
-                        .end();
+                        .templateParameter("count").from("kamelet:source").aggregate(constant(true))
+                        .completionSize("{{count}}")
+                        // use the groovy script bean for aggregation
+                        .aggregationStrategy("{{myAgg}}").to("log:aggregate").to("kamelet:sink").end();
 
-                from("direct:start")
-                        .kamelet("my-aggregate?count=5")
-                        .to("log:info")
-                        .to("mock:result");
+                from("direct:start").kamelet("my-aggregate?count=5").to("log:info").to("mock:result");
             }
         };
     }

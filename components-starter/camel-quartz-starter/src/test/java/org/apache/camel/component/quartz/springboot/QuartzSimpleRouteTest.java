@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.apache.camel.CamelContext;
@@ -31,8 +29,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -44,31 +40,24 @@ import org.quartz.JobDetail;
 import org.quartz.SimpleTrigger;
 import org.quartz.Trigger;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzSimpleRouteTest.class,
-        QuartzSimpleRouteTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzSimpleRouteTest.class,
+        QuartzSimpleRouteTest.TestConfiguration.class })
 public class QuartzSimpleRouteTest extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint mock;
-    
+
     @Test
     public void testQuartzCronRoute() throws Exception {
-        
+
         mock.expectedMinimumMessageCount(3);
 
         mock.assertIsSatisfied();
@@ -78,13 +67,14 @@ public class QuartzSimpleRouteTest extends BaseQuartzTest {
         JobDetail detail = mock.getReceivedExchanges().get(0).getIn().getHeader("jobDetail", JobDetail.class);
         assertThat(detail.getJobClass().equals(CamelJob.class), CoreMatchers.is(true));
 
-        assertThat(detail.getJobDataMap().get(QuartzConstants.QUARTZ_TRIGGER_TYPE).equals("simple"), CoreMatchers.is(true));
+        assertThat(detail.getJobDataMap().get(QuartzConstants.QUARTZ_TRIGGER_TYPE).equals("simple"),
+                CoreMatchers.is(true));
         assertThat(detail.getJobDataMap().get(QuartzConstants.QUARTZ_TRIGGER_SIMPLE_REPEAT_COUNTER).equals("-1"),
                 CoreMatchers.is(true));
         assertThat(detail.getJobDataMap().get(QuartzConstants.QUARTZ_TRIGGER_SIMPLE_REPEAT_INTERVAL).equals("100"),
                 CoreMatchers.is(true));
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -97,12 +87,11 @@ public class QuartzSimpleRouteTest extends BaseQuartzTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("quartz://myGroup/myTimerName?trigger.repeatInterval=100&trigger.repeatCount=-1").to("mock:result");
+                    from("quartz://myGroup/myTimerName?trigger.repeatInterval=100&trigger.repeatCount=-1")
+                            .to("mock:result");
                 }
             };
         }
     }
-    
-   
 
 }

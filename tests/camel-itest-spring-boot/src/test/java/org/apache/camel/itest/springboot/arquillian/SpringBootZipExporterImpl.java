@@ -24,8 +24,8 @@ import org.jboss.shrinkwrap.impl.base.exporter.AbstractExporterDelegate;
 import org.jboss.shrinkwrap.impl.base.exporter.AbstractStreamExporterImpl;
 
 /**
- * An implementation of the zip exporter that does not compress entries,
- * for compatibility with spring-boot nested jar structure.
+ * An implementation of the zip exporter that does not compress entries, for compatibility with spring-boot nested jar
+ * structure.
  */
 public class SpringBootZipExporterImpl extends AbstractStreamExporterImpl implements ZipExporter {
 
@@ -36,7 +36,8 @@ public class SpringBootZipExporterImpl extends AbstractStreamExporterImpl implem
     @Override
     public InputStream exportAsInputStream() {
         // Create export delegate
-        final AbstractExporterDelegate<InputStream> exportDelegate = new SpringBootZipExporterDelegate(this.getArchive());
+        final AbstractExporterDelegate<InputStream> exportDelegate = new SpringBootZipExporterDelegate(
+                this.getArchive());
 
         // Export and get result
         return exportDelegate.export();

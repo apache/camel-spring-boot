@@ -25,8 +25,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 /**
- * Provide basic serialization utils.
- * Cannot rely on common available libraries to not influence the test outcome.
+ * Provide basic serialization utils. Cannot rely on common available libraries to not influence the test outcome.
  */
 public final class SerializationUtils {
 
@@ -34,7 +33,8 @@ public final class SerializationUtils {
     }
 
     public static byte[] marshal(Object o) {
-        try (ByteArrayOutputStream out = new ByteArrayOutputStream(); ObjectOutputStream oout = new ObjectOutputStream(out)) {
+        try (ByteArrayOutputStream out = new ByteArrayOutputStream();
+                ObjectOutputStream oout = new ObjectOutputStream(out)) {
             oout.writeObject(o);
             oout.flush();
             return out.toByteArray();
@@ -48,7 +48,8 @@ public final class SerializationUtils {
             return null;
         }
 
-        try (ByteArrayInputStream in = new ByteArrayInputStream(content); ObjectInputStream oin = new ObjectInputStream(in)) {
+        try (ByteArrayInputStream in = new ByteArrayInputStream(content);
+                ObjectInputStream oin = new ObjectInputStream(in)) {
             Object bean = oin.readObject();
             return bean;
 

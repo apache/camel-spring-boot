@@ -32,10 +32,10 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
-@EnableConfigurationProperties({ComponentConfigurationProperties.class,MapstructComponentConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.component", "camel.component.mapstruct"})
+@EnableConfigurationProperties({ ComponentConfigurationProperties.class, MapstructComponentConfiguration.class })
+@ConditionalOnHierarchicalProperties({ "camel.component", "camel.component.mapstruct" })
 @ConditionalOnProperty(prefix = "camel.component.mapstruct", name = "enabled", havingValue = "true", matchIfMissing = true)
-@AutoConfigureAfter({CamelAutoConfiguration.class, MapstructComponentAutoConfiguration.class})
+@AutoConfigureAfter({ CamelAutoConfiguration.class, MapstructComponentAutoConfiguration.class })
 public class MapstructMappingAutoConfiguration {
 
     @Bean

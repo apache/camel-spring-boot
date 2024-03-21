@@ -24,5 +24,4 @@ public class Constants {
     public static final String START_URI_TEST_UNENCRYPTED_PROPS_IN_CC = "direct:startUnencInCC";
     public static final String START_URI_TEST_UNENCRYPTED_PROPS_OUT_CC = "direct:startUnencOutCC";
 
-
 }

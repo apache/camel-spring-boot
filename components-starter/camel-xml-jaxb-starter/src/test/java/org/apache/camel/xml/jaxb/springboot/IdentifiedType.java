@@ -24,16 +24,12 @@ import jakarta.xml.bind.annotation.XmlType;
 
 import org.apache.camel.spi.Metadata;
 
-@XmlType(
-        name = "identifiedType"
-)
+@XmlType(name = "identifiedType")
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class IdentifiedType {
     @XmlAttribute
     @XmlID
-    @Metadata(
-            description = "The id of this node"
-    )
+    @Metadata(description = "The id of this node")
     private String id;
 
     public IdentifiedType() {

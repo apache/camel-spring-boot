@@ -30,13 +30,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FileToFtpsWithCustomTrustStorePropertiesTest.class
-        }
-)
-//based on FileToFtpsWithCustomTrustStorePropertiesIT
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileToFtpsWithCustomTrustStorePropertiesTest.class })
+// based on FileToFtpsWithCustomTrustStorePropertiesIT
 public class FileToFtpsWithCustomTrustStorePropertiesTest extends BaseFtpsClientAuth {
 
     @EndpointInject("mock:result")
@@ -44,9 +39,9 @@ public class FileToFtpsWithCustomTrustStorePropertiesTest extends BaseFtpsClient
 
     private String getFtpUrl() {
         return "ftps://admin@localhost:" + getPort()
-               + "/tmp2/camel?password=admin&initialDelay=2000&disableSecureDataChannelDefaults=true"
-               + "&securityProtocol=TLSv1.3&implicit=false&ftpClient.trustStore.file=./src/test/resources/server.jks&ftpClient.trustStore.type=PKCS12"
-               + "&ftpClient.trustStore.algorithm=SunX509&ftpClient.trustStore.password=password&delete=true";
+                + "/tmp2/camel?password=admin&initialDelay=2000&disableSecureDataChannelDefaults=true"
+                + "&securityProtocol=TLSv1.3&implicit=false&ftpClient.trustStore.file=./src/test/resources/server.jks&ftpClient.trustStore.type=PKCS12"
+                + "&ftpClient.trustStore.algorithm=SunX509&ftpClient.trustStore.password=password&delete=true";
 
     }
 
@@ -68,7 +63,7 @@ public class FileToFtpsWithCustomTrustStorePropertiesTest extends BaseFtpsClient
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseFtp.TestConfiguration {
+    public class TestConfiguration extends BaseFtp.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
 

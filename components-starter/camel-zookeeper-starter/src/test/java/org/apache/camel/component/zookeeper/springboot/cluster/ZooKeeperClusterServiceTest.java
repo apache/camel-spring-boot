@@ -41,25 +41,20 @@ public class ZooKeeperClusterServiceTest {
 
     @Test
     public void testClusterService() throws Exception {
-        final int zkPort =  AvailablePortFinder.getNextAvailable();
-        final File zkDir =  temporaryFolder.toFile();
+        final int zkPort = AvailablePortFinder.getNextAvailable();
+        final File zkDir = temporaryFolder.toFile();
 
         final TestingServer zkServer = new TestingServer(zkPort, zkDir);
         zkServer.start();
 
         try {
-            new ApplicationContextRunner()
-                .withUserConfiguration(TestConfiguration.class)
-                .withPropertyValues(
-                    "debug=false",
-                    "spring.main.banner-mode=OFF",
-                    "spring.application.name=" + UUID.randomUUID(),
-                    "camel.cluster.zookeeper.enabled=true",
-                    "camel.cluster.zookeeper.nodes=localhost:" + zkPort,
-                    "camel.cluster.zookeeper.id=" + UUID.randomUUID(),
-                    "camel.cluster.zookeeper.base-path=" + SERVICE_PATH)
-                .run(
-                    context -> {
+            new ApplicationContextRunner().withUserConfiguration(TestConfiguration.class)
+                    .withPropertyValues("debug=false", "spring.main.banner-mode=OFF",
+                            "spring.application.name=" + UUID.randomUUID(), "camel.cluster.zookeeper.enabled=true",
+                            "camel.cluster.zookeeper.nodes=localhost:" + zkPort,
+                            "camel.cluster.zookeeper.id=" + UUID.randomUUID(),
+                            "camel.cluster.zookeeper.base-path=" + SERVICE_PATH)
+                    .run(context -> {
                         assertThat(context).hasSingleBean(CamelContext.class);
                         assertThat(context).hasSingleBean(CamelClusterService.class);
 
@@ -68,8 +63,7 @@ public class ZooKeeperClusterServiceTest {
                         assertThat(clusterService).isNotNull();
                         clusterService.start();
                         assertThat(clusterService).isInstanceOf(ZooKeeperClusterService.class);
-                    }
-                );
+                    });
         } finally {
             zkServer.stop();
         }

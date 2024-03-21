@@ -30,15 +30,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        KameletEipFilterTest.class,
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletEipFilterTest.class, })
 
 public class KameletEipFilterTest {
 
@@ -70,15 +64,10 @@ public class KameletEipFilterTest {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                routeTemplate("filter")
-                        .from("kamelet:source")
-                        .filter().simple("${body} range '5..10'")
-                        .to("log:filter")
+                routeTemplate("filter").from("kamelet:source").filter().simple("${body} range '5..10'").to("log:filter")
                         .to("kamelet:sink");
 
-                from("direct:start")
-                        .kamelet("filter")
-                        .to("mock:result");
+                from("direct:start").kamelet("filter").to("mock:result");
             }
         };
     }

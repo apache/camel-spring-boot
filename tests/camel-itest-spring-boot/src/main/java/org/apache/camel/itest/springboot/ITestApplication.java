@@ -25,13 +25,11 @@ import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
- * Contains the main class of the sample spring-boot application created for the 
- * module under test.
+ * Contains the main class of the sample spring-boot application created for the module under test.
  *
  */
 // Don't load the datasource bean here because the properties are only defined in the unit test class (CamelSqlTest)
-@SpringBootApplication(excludeName = {"org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration"}
-)
+@SpringBootApplication(excludeName = { "org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration" })
 @EnableAsync
 @Import(ITestXmlConfiguration.class)
 public class ITestApplication {

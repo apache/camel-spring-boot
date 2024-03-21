@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -27,8 +25,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -36,28 +32,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        QuartzAddDynamicRouteTest.class,
-        QuartzAddDynamicRouteTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, QuartzAddDynamicRouteTest.class,
+        QuartzAddDynamicRouteTest.TestConfiguration.class })
 public class QuartzAddDynamicRouteTest extends BaseQuartzTest {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint resultEndpoint;
-    
+
     @Test
     public void testAddDynamicRoute() throws Exception {
         resultEndpoint.expectedMessageCount(1);
@@ -80,7 +69,7 @@ public class QuartzAddDynamicRouteTest extends BaseQuartzTest {
 
         resultEndpoint.assertIsSatisfied();
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -98,7 +87,5 @@ public class QuartzAddDynamicRouteTest extends BaseQuartzTest {
             };
         }
     }
-    
-   
 
 }

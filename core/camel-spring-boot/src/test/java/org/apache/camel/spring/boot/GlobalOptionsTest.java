@@ -31,19 +31,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        GlobalOptionsTest.TestConfiguration.class
-    },
-    properties = {
-        "camel.springboot.global-options[foo] = 123",
-        "camel.springboot.global-options[bar] = true",
-        "camel.springboot.globalOptions[baz] = 999",
-        "camel.springboot.globalOptions[cheese] = Gauda",
-        "camel.springboot.global-options[drink] = Wine",
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, GlobalOptionsTest.TestConfiguration.class }, properties = {
+        "camel.springboot.global-options[foo] = 123", "camel.springboot.global-options[bar] = true",
+        "camel.springboot.globalOptions[baz] = 999", "camel.springboot.globalOptions[cheese] = Gauda",
+        "camel.springboot.global-options[drink] = Wine", })
 public class GlobalOptionsTest {
     @Autowired
     private CamelContext context;
@@ -71,8 +62,7 @@ public class GlobalOptionsTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                        .to("mock:result");
+                    from("direct:start").to("mock:result");
                 }
             };
         }

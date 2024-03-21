@@ -44,21 +44,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirHistoryIT.class,
-                FhirHistoryIT.TestConfiguration.class,
-                DefaultCamelContext.class,
-                FhirServer.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirHistoryIT.class, FhirHistoryIT.TestConfiguration.class,
+        DefaultCamelContext.class, FhirServer.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class FhirHistoryIT extends AbstractFhirTestSupport {
 
     private static final Logger LOG = LoggerFactory.getLogger(FhirHistoryIT.class);
-    private static final String PATH_PREFIX
-            = FhirApiCollection.getCollection().getApiName(FhirHistoryApiMethod.class).getName();
+    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirHistoryApiMethod.class)
+            .getName();
 
     @Test
     public void testOnInstance() throws Exception {
@@ -132,16 +125,13 @@ public class FhirHistoryIT extends AbstractFhirTestSupport {
                 @Override
                 public void configure() {
                     // test route for onInstance
-                    from("direct://ON_INSTANCE")
-                            .to("fhir://" + PATH_PREFIX + "/onInstance");
+                    from("direct://ON_INSTANCE").to("fhir://" + PATH_PREFIX + "/onInstance");
 
                     // test route for onServer
-                    from("direct://ON_SERVER")
-                            .to("fhir://" + PATH_PREFIX + "/onServer");
+                    from("direct://ON_SERVER").to("fhir://" + PATH_PREFIX + "/onServer");
 
                     // test route for onType
-                    from("direct://ON_TYPE")
-                            .to("fhir://" + PATH_PREFIX + "/onType");
+                    from("direct://ON_TYPE").to("fhir://" + PATH_PREFIX + "/onType");
                 }
             };
         }

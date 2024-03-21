@@ -23,7 +23,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelServletTest extends AbstractSpringBootTestSupport {
 
@@ -33,12 +32,12 @@ public class CamelServletTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelServletTest.class))
-//                .dependency(DependencyResolver.withVersion("org.springframework.boot:spring-boot-starter-web"))
-//                .dependency(DependencyResolver.withVersion("org.springframework:spring-webmvc"))
+        return new ITestConfigBuilder().module(inferModuleName(CamelServletTest.class))
+                // .dependency(DependencyResolver.withVersion("org.springframework.boot:spring-boot-starter-web"))
+                // .dependency(DependencyResolver.withVersion("org.springframework:spring-webmvc"))
                 .dependency("jakarta.servlet:jakarta.servlet-api")
-                .unitTestExclusionPattern(".*(\\.integration\\..*|IntegrationTest$|ExposedServletEndpointURIToJMXTest$.*Arquillian.*)")
+                .unitTestExclusionPattern(
+                        ".*(\\.integration\\..*|IntegrationTest$|ExposedServletEndpointURIToJMXTest$.*Arquillian.*)")
                 .build();
     }
 
@@ -47,6 +46,5 @@ public class CamelServletTest extends AbstractSpringBootTestSupport {
         this.runComponentTest(config);
         this.runModuleUnitTestsIfEnabled(config);
     }
-
 
 }

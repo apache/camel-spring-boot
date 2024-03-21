@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.slack.springboot;
 
-
 import java.util.Collections;
 
 import com.slack.api.model.Message;
@@ -34,7 +33,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -43,25 +41,17 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.AvailablePortFinder;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        SlackProducerTest.class,
-        SlackProducerTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SlackProducerTest.class,
+        SlackProducerTest.TestConfiguration.class })
 public class SlackProducerTest {
-    
-    
 
     protected static final int UNDERTOW_PORT = AvailablePortFinder.getNextAvailable();
-    
+
     @Autowired
     CamelContext context;
-    
+
     @Autowired
     ProducerTemplate template;
 
@@ -71,14 +61,10 @@ public class SlackProducerTest {
     @EndpointInject("direct:test")
     DirectEndpoint test;
 
-    
-   
-      
-    
     @Test
     public void testSlackMessage() throws Exception {
         errors.reset();
-        
+
         errors.expectedMessageCount(0);
 
         template.sendBody(test, "Hello from Camel!");
@@ -92,21 +78,13 @@ public class SlackProducerTest {
         errors.expectedMessageCount(0);
 
         Message message = new Message();
-        message.setBlocks(Collections.singletonList(SectionBlock
-                .builder()
-                .text(MarkdownTextObject
-                        .builder()
-                        .text("*Hello from Camel!*")
-                        .build())
-                .build()));
+        message.setBlocks(Collections.singletonList(
+                SectionBlock.builder().text(MarkdownTextObject.builder().text("*Hello from Camel!*").build()).build()));
 
         template.sendBody(test, message);
 
         errors.assertIsSatisfied();
     }
-
-    
-    
 
     // *************************************
     // Config
@@ -127,7 +105,8 @@ public class SlackProducerTest {
                     onException(Exception.class).handled(true).to(errors);
 
                     final String slackUser = System.getProperty("SLACK_USER", "CamelTest");
-                    from("undertow:http://localhost:" + UNDERTOW_PORT + "/slack/webhook").setBody(constant("{\"ok\": true}"));
+                    from("undertow:http://localhost:" + UNDERTOW_PORT + "/slack/webhook")
+                            .setBody(constant("{\"ok\": true}"));
 
                     from(test).to(String.format("slack:#general?iconEmoji=:camel:&username=%s", slackUser));
                 }

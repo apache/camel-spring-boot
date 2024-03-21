@@ -38,14 +38,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SqlProducerExpressionParameterTest.class,
-                SqlProducerExpressionParameterTest.TestConfiguration.class,
-                BaseSql.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SqlProducerExpressionParameterTest.class,
+        SqlProducerExpressionParameterTest.TestConfiguration.class, BaseSql.TestConfiguration.class })
 public class SqlProducerExpressionParameterTest extends BaseSql {
 
     @EndpointInject("mock:result")
@@ -67,7 +61,6 @@ public class SqlProducerExpressionParameterTest extends BaseSql {
         assertEquals("AMQ", row.get("PROJECT"));
     }
 
-
     // *************************************
     // Config
     // *************************************
@@ -85,7 +78,8 @@ public class SqlProducerExpressionParameterTest extends BaseSql {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start").to("sql:select * from projects where license = :#${exchangeProperty.license} order by id")
+                    from("direct:start")
+                            .to("sql:select * from projects where license = :#${exchangeProperty.license} order by id")
                             .to("mock:result");
                 }
             };

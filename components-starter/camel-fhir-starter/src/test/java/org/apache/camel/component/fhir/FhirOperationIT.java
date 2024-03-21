@@ -45,21 +45,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FhirOperationIT.class,
-                FhirOperationIT.TestConfiguration.class,
-                DefaultCamelContext.class,
-                FhirServer.class,
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FhirOperationIT.class,
+        FhirOperationIT.TestConfiguration.class, DefaultCamelContext.class, FhirServer.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class FhirOperationIT extends AbstractFhirTestSupport {
 
     private static final Logger LOG = LoggerFactory.getLogger(FhirOperationIT.class);
-    private static final String PATH_PREFIX
-            = FhirApiCollection.getCollection().getApiName(FhirOperationApiMethod.class).getName();
+    private static final String PATH_PREFIX = FhirApiCollection.getCollection().getApiName(FhirOperationApiMethod.class)
+            .getName();
 
     @Test
     public void testOnInstance() throws Exception {
@@ -151,14 +144,15 @@ public class FhirOperationIT extends AbstractFhirTestSupport {
         // parameter type is java.util.Map
         headers.put("CamelFhir.extraParameters", null);
 
-        final org.hl7.fhir.instance.model.api.IBaseResource result = requestBodyAndHeaders("direct://ON_TYPE", null, headers);
+        final org.hl7.fhir.instance.model.api.IBaseResource result = requestBodyAndHeaders("direct://ON_TYPE", null,
+                headers);
 
         assertNotNull(result, "onType result");
         LOG.debug("onType: {}", result);
     }
 
     @Disabled("Not implemented yet in HAPI FHIR server side, see"
-              + " https://github.com/jamesagnew/hapi-fhir/blob/master/hapi-fhir-jpaserver-base/src/main/java/ca/uhn/fhir/jpa/dao/dstu3/FhirResourceDaoMessageHeaderDstu3.java#L33")
+            + " https://github.com/jamesagnew/hapi-fhir/blob/master/hapi-fhir-jpaserver-base/src/main/java/ca/uhn/fhir/jpa/dao/dstu3/FhirResourceDaoMessageHeaderDstu3.java#L33")
     @Test
     public void testProcessMessage() throws Exception {
         final Map<String, Object> headers = new HashMap<>();
@@ -172,8 +166,8 @@ public class FhirOperationIT extends AbstractFhirTestSupport {
         // parameter type is java.util.Map
         headers.put("CamelFhir.extraParameters", null);
 
-        final org.hl7.fhir.instance.model.api.IBaseBundle result
-                = requestBodyAndHeaders("direct://PROCESS_MESSAGE", null, headers);
+        final org.hl7.fhir.instance.model.api.IBaseBundle result = requestBodyAndHeaders("direct://PROCESS_MESSAGE",
+                null, headers);
 
         assertNotNull(result, "processMessage result");
         LOG.debug("processMessage: {}", result);
@@ -187,24 +181,19 @@ public class FhirOperationIT extends AbstractFhirTestSupport {
                 @Override
                 public void configure() {
                     // test route for onInstance
-                    from("direct://ON_INSTANCE")
-                            .to("fhir://" + PATH_PREFIX + "/onInstance");
+                    from("direct://ON_INSTANCE").to("fhir://" + PATH_PREFIX + "/onInstance");
 
                     // test route for onInstanceVersion
-                    from("direct://ON_INSTANCE_VERSION")
-                            .to("fhir://" + PATH_PREFIX + "/onInstanceVersion");
+                    from("direct://ON_INSTANCE_VERSION").to("fhir://" + PATH_PREFIX + "/onInstanceVersion");
 
                     // test route for onServer
-                    from("direct://ON_SERVER")
-                            .to("fhir://" + PATH_PREFIX + "/onServer");
+                    from("direct://ON_SERVER").to("fhir://" + PATH_PREFIX + "/onServer");
 
                     // test route for onType
-                    from("direct://ON_TYPE")
-                            .to("fhir://" + PATH_PREFIX + "/onType");
+                    from("direct://ON_TYPE").to("fhir://" + PATH_PREFIX + "/onType");
 
                     // test route for processMessage
-                    from("direct://PROCESS_MESSAGE")
-                            .to("fhir://" + PATH_PREFIX + "/processMessage");
+                    from("direct://PROCESS_MESSAGE").to("fhir://" + PATH_PREFIX + "/processMessage");
                 }
             };
         }

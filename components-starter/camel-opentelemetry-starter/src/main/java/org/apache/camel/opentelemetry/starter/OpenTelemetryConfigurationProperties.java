@@ -26,13 +26,12 @@ public class OpenTelemetryConfigurationProperties {
      */
     private boolean enabled = true;
     /**
-     * Sets exclude pattern(s) that will disable tracing for Camel messages that
-     * matches the pattern. Multiple patterns can be separated by comma.
+     * Sets exclude pattern(s) that will disable tracing for Camel messages that matches the pattern. Multiple patterns
+     * can be separated by comma.
      */
     private String excludePatterns;
     /**
-     * Activate or deactivate dash encoding in headers (required by JMS) for
-     * messaging
+     * Activate or deactivate dash encoding in headers (required by JMS) for messaging
      */
     private Boolean encoding;
 

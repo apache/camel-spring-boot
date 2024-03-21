@@ -26,7 +26,6 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith(ArquillianExtension.class)
 public class CamelXmppTest extends AbstractSpringBootTestSupport {
 
@@ -36,9 +35,9 @@ public class CamelXmppTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() throws IOException {
-        return new ITestConfigBuilder()
-                .module(inferModuleName(CamelXmppTest.class))
-                .systemProperty("javax.net.ssl.trustStore", new File("../../components/camel-xmpp/src/test/resources/xmppServer.jks").getCanonicalPath())
+        return new ITestConfigBuilder().module(inferModuleName(CamelXmppTest.class))
+                .systemProperty("javax.net.ssl.trustStore",
+                        new File("../../components/camel-xmpp/src/test/resources/xmppServer.jks").getCanonicalPath())
                 .build();
     }
 

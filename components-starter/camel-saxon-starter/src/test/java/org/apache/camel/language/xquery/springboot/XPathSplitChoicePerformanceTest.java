@@ -16,8 +16,6 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.concurrent.TimeUnit;
@@ -32,7 +30,6 @@ import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -52,20 +49,14 @@ import org.apache.camel.util.TimeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        XPathSplitChoicePerformanceTest.class,
-        XPathSplitChoicePerformanceTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, XPathSplitChoicePerformanceTest.class,
+        XPathSplitChoicePerformanceTest.TestConfiguration.class })
 public class XPathSplitChoicePerformanceTest extends FromFileBase {
-    
+
     private static final Logger LOG = LoggerFactory.getLogger(XPathSplitChoicePerformanceTest.class);
-    
+
     private int size = 20 * 1000;
     private final static AtomicInteger tiny = new AtomicInteger();
     private final static AtomicInteger small = new AtomicInteger();
@@ -78,19 +69,17 @@ public class XPathSplitChoicePerformanceTest extends FromFileBase {
 
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
-    protected MockEndpoint mock;   
-    
-    
+    protected MockEndpoint mock;
+
     @BeforeEach
     public void setUp() throws Exception {
         createDataFile(LOG, size);
     }
 
-    
     @Test
-    //@Disabled("Manual test")
+    // @Disabled("Manual test")
     public void testXPathPerformanceRoute() throws Exception {
         NotifyBuilder notify = new NotifyBuilder(context).whenDone(size).create();
 
@@ -109,7 +98,7 @@ public class XPathSplitChoicePerformanceTest extends FromFileBase {
 
         assertTrue(matches, "Should complete route");
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -122,16 +111,12 @@ public class XPathSplitChoicePerformanceTest extends FromFileBase {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from(fileUri("?noop=true"))
-                            .process(new Processor() {
-                                public void process(Exchange exchange) throws Exception {
-                                    log.info("Starting to process file");
-                                    watch.restart();
-                                }
-                            })
-                            .split().xpath("/orders/order").streaming()
-                            .choice()
-                            .when().xpath("/order/amount < 10")
+                    from(fileUri("?noop=true")).process(new Processor() {
+                        public void process(Exchange exchange) throws Exception {
+                            log.info("Starting to process file");
+                            watch.restart();
+                        }
+                    }).split().xpath("/orders/order").streaming().choice().when().xpath("/order/amount < 10")
                             .process(new Processor() {
                                 public void process(Exchange exchange) throws Exception {
                                     String xml = exchange.getIn().getBody(String.class);
@@ -143,9 +128,7 @@ public class XPathSplitChoicePerformanceTest extends FromFileBase {
                                         log.debug(xml);
                                     }
                                 }
-                            })
-                            .when().xpath("/order/amount < 50")
-                            .process(new Processor() {
+                            }).when().xpath("/order/amount < 50").process(new Processor() {
                                 public void process(Exchange exchange) throws Exception {
                                     String xml = exchange.getIn().getBody(String.class);
                                     assertTrue(xml.contains("<amount>44</amount>"), xml);
@@ -156,9 +139,7 @@ public class XPathSplitChoicePerformanceTest extends FromFileBase {
                                         log.debug(xml);
                                     }
                                 }
-                            })
-                            .when().xpath("/order/amount < 100")
-                            .process(new Processor() {
+                            }).when().xpath("/order/amount < 100").process(new Processor() {
                                 public void process(Exchange exchange) throws Exception {
                                     String xml = exchange.getIn().getBody(String.class);
                                     assertTrue(xml.contains("<amount>88</amount>"), xml);
@@ -169,9 +150,7 @@ public class XPathSplitChoicePerformanceTest extends FromFileBase {
                                         log.debug(xml);
                                     }
                                 }
-                            })
-                            .otherwise()
-                            .process(new Processor() {
+                            }).otherwise().process(new Processor() {
                                 public void process(Exchange exchange) throws Exception {
                                     String xml = exchange.getIn().getBody(String.class);
                                     assertTrue(xml.contains("<amount>123</amount>"), xml);
@@ -182,14 +161,13 @@ public class XPathSplitChoicePerformanceTest extends FromFileBase {
                                         log.debug(xml);
                                     }
                                 }
-                            })
-                            .end() // choice
+                            }).end() // choice
                             .end(); // split
                 }
             };
         }
     }
-    
+
     public void createDataFile(Logger log, int size) throws Exception {
         deleteTestDirectory();
 

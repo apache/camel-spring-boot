@@ -33,12 +33,14 @@ public class PlatformHttpMessage extends DefaultMessage {
     private HttpBinding binding;
     private boolean requestRead;
 
-    public PlatformHttpMessage(Exchange exchange, HttpBinding binding, HttpServletRequest request, HttpServletResponse response) {
+    public PlatformHttpMessage(Exchange exchange, HttpBinding binding, HttpServletRequest request,
+            HttpServletResponse response) {
         super(exchange);
         this.init(exchange, binding, request, response);
     }
 
-    private PlatformHttpMessage(HttpServletRequest request, HttpServletResponse response, Exchange exchange, HttpBinding binding, boolean requestRead) {
+    private PlatformHttpMessage(HttpServletRequest request, HttpServletResponse response, Exchange exchange,
+            HttpBinding binding, boolean requestRead) {
         super(exchange);
         this.request = request;
         this.response = response;
@@ -54,7 +56,7 @@ public class PlatformHttpMessage extends DefaultMessage {
         this.response = response;
         this.setHeader("CamelHttpServletRequest", request);
         this.setHeader("CamelHttpServletResponse", response);
-        Boolean flag = (Boolean)exchange.getProperty("CamelSkipWwwFormUrlEncoding", Boolean.class);
+        Boolean flag = (Boolean) exchange.getProperty("CamelSkipWwwFormUrlEncoding", Boolean.class);
         if (flag != null && flag) {
             this.setHeader("CamelSkipWwwFormUrlEncoding", Boolean.TRUE);
         }
@@ -102,6 +104,5 @@ public class PlatformHttpMessage extends DefaultMessage {
     public String toString() {
         return "PlatformHttpMessage@" + ObjectHelper.getIdentityHashCode(this);
     }
-
 
 }

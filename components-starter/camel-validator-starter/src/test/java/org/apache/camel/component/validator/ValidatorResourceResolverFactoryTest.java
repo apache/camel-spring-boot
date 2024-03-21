@@ -49,12 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                ValidatorResourceResolverFactoryTest.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ValidatorResourceResolverFactoryTest.class })
 public class ValidatorResourceResolverFactoryTest extends ContextTestSupport {
 
     private static Context jndiContext;
@@ -66,8 +61,7 @@ public class ValidatorResourceResolverFactoryTest extends ContextTestSupport {
         jndiContext.unbind("validator");
 
         String directStart = "direct:start";
-        String endpointUri
-                = "validator:org/apache/camel/component/validator/xsds/person.xsd?resourceResolverFactory=#resourceResolverFactory";
+        String endpointUri = "validator:org/apache/camel/component/validator/xsds/person.xsd?resourceResolverFactory=#resourceResolverFactory";
 
         execute(directStart, endpointUri);
     }
@@ -98,25 +92,25 @@ public class ValidatorResourceResolverFactoryTest extends ContextTestSupport {
         endEndpoint.reset();
         endEndpoint.expectedMessageCount(1);
 
-        final String body
-                = "<p:person user=\"james\" xmlns:p=\"org.person\" xmlns:h=\"org.health.check.person\" xmlns:c=\"org.health.check.common\">\n" //
-                  + "  <p:firstName>James</p:firstName>\n" //
-                  + "  <p:lastName>Strachan</p:lastName>\n" //
-                  + "  <p:city>London</p:city>\n" //
-                  + "  <h:health>\n"//
-                  + "      <h:lastCheck>2011-12-23</h:lastCheck>\n" //
-                  + "      <h:status>OK</h:status>\n" //
-                  + "      <c:commonElement>" //
-                  + "          <c:element1/>" //
-                  + "          <c:element2/>" //
-                  + "      </c:commonElement>" //
-                  + "  </h:health>\n" //
-                  + "</p:person>";
+        final String body = "<p:person user=\"james\" xmlns:p=\"org.person\" xmlns:h=\"org.health.check.person\" xmlns:c=\"org.health.check.common\">\n" //
+                + "  <p:firstName>James</p:firstName>\n" //
+                + "  <p:lastName>Strachan</p:lastName>\n" //
+                + "  <p:city>London</p:city>\n" //
+                + "  <h:health>\n"//
+                + "      <h:lastCheck>2011-12-23</h:lastCheck>\n" //
+                + "      <h:status>OK</h:status>\n" //
+                + "      <c:commonElement>" //
+                + "          <c:element1/>" //
+                + "          <c:element2/>" //
+                + "      </c:commonElement>" //
+                + "  </h:health>\n" //
+                + "</p:person>";
 
         template.sendBody(directStart, body);
 
         // wait until endpoint is resolved
-        await().atMost(1, TimeUnit.SECONDS).until(() -> context.getEndpoint(endpointUri, ValidatorEndpoint.class) != null);
+        await().atMost(1, TimeUnit.SECONDS)
+                .until(() -> context.getEndpoint(endpointUri, ValidatorEndpoint.class) != null);
 
         MockEndpoint.assertIsSatisfied(endEndpoint);
 
@@ -135,16 +129,17 @@ public class ValidatorResourceResolverFactoryTest extends ContextTestSupport {
         assertTrue(uris.contains(resourceUri), "Missing resource uri " + resourceUri + " in resolved resource URI set");
     }
 
-//    @Override
-//    protected Registry createRegistry() throws Exception {
-//        jndiContext = createJndiContext();
-//        jndiContext.bind("resourceResolverFactory", new ResourceResolverFactoryImpl());
-//        return new DefaultRegistry(new JndiBeanRepository(jndiContext));
-//
-//    }
+    // @Override
+    // protected Registry createRegistry() throws Exception {
+    // jndiContext = createJndiContext();
+    // jndiContext.bind("resourceResolverFactory", new ResourceResolverFactoryImpl());
+    // return new DefaultRegistry(new JndiBeanRepository(jndiContext));
+    //
+    // }
 
     public static Context createInitialContext() throws Exception {
-        try (InputStream in = ValidatorResourceResolverFactoryTest.class.getClassLoader().getResourceAsStream("jndi-example.properties");) {
+        try (InputStream in = ValidatorResourceResolverFactoryTest.class.getClassLoader()
+                .getResourceAsStream("jndi-example.properties");) {
             assertNotNull(in, "Cannot find jndi-example.properties on the classpath!");
             Properties properties = new Properties();
             properties.load(in);
@@ -169,7 +164,8 @@ public class ValidatorResourceResolverFactoryTest extends ContextTestSupport {
             @Override
             public void configure() throws Exception {
                 from("direct:start")
-                        .setHeader("xsd_file", new ConstantExpression("org/apache/camel/component/validator/xsds/person.xsd"))
+                        .setHeader("xsd_file",
+                                new ConstantExpression("org/apache/camel/component/validator/xsds/person.xsd"))
                         .recipientList(new SimpleExpression(
                                 "validator:${header.xsd_file}?resourceResolverFactory=#resourceResolverFactory"))
                         .to("mock:end");
@@ -183,7 +179,8 @@ public class ValidatorResourceResolverFactoryTest extends ContextTestSupport {
             @Override
             public void configure() throws Exception {
                 from("direct:startComponent")
-                        .setHeader("xsd_file", new ConstantExpression("org/apache/camel/component/validator/xsds/person.xsd"))
+                        .setHeader("xsd_file",
+                                new ConstantExpression("org/apache/camel/component/validator/xsds/person.xsd"))
                         .recipientList(new SimpleExpression("customValidator:${header.xsd_file}")).to("mock:end");
             }
         };
@@ -212,7 +209,8 @@ public class ValidatorResourceResolverFactoryTest extends ContextTestSupport {
         }
 
         @Override
-        public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
+        public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId,
+                String baseURI) {
             LSInput result = super.resolveResource(type, namespaceURI, publicId, systemId, baseURI);
             resolvedRsourceUris.add(systemId);
             return result;

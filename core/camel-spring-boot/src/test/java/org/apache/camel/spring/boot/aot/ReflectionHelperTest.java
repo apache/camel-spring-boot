@@ -86,18 +86,22 @@ class ReflectionHelperTest {
         private String someField2;
 
         @All
-        private Foo() {}
+        private Foo() {
+        }
 
         @OnlyConstructor
         @All
-        private Foo(@OnlyParameter @All String someParam1, @All String someParam2) {}
+        private Foo(@OnlyParameter @All String someParam1, @All String someParam2) {
+        }
 
         @All
-        private void someMethod1(@All String someParam1, @All @OnlyParameter String someParam2) {}
+        private void someMethod1(@All String someParam1, @All @OnlyParameter String someParam2) {
+        }
 
         @OnlyMethod
         @All
-        private void someMethod2() {}
+        private void someMethod2() {
+        }
     }
 
     @Retention(RetentionPolicy.RUNTIME)

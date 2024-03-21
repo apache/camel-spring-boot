@@ -31,13 +31,11 @@ public class JarExporter {
     @Test
     public void exportJar() throws Exception {
 
-        Archive<?> archive = ArquillianPackager.springBootPackage(new ITestConfigBuilder()
-                .module("camel-websocket")
-                .build());
+        Archive<?> archive = ArquillianPackager
+                .springBootPackage(new ITestConfigBuilder().module("camel-websocket").build());
 
         new ZipExporterImpl(archive).exportTo(new File("target/export.zip"), true);
 
     }
-
 
 }

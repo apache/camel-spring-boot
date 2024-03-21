@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.hl7.springboot.test;
 
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
@@ -47,32 +46,24 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        HL7MLLPNettyCodecByteArrayRouteTest.class,
-        HL7MLLPNettyCodecByteArrayRouteTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, HL7MLLPNettyCodecByteArrayRouteTest.class,
+        HL7MLLPNettyCodecByteArrayRouteTest.TestConfiguration.class })
 public class HL7MLLPNettyCodecByteArrayRouteTest extends HL7TestSupport {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:a01")
     MockEndpoint mock01;
-    
+
     @EndpointInject("mock:a19")
     MockEndpoint mock19;
-    
+
     @EndpointInject("mock:unknown")
     MockEndpoint mockUnknow;
 
-    
     @Bean("hl7encoder")
     private HL7MLLPNettyEncoderFactory getHL7MLLPNettyEncoderFactory() {
         return new HL7MLLPNettyEncoderFactory();
@@ -106,8 +97,8 @@ public class HL7MLLPNettyCodecByteArrayRouteTest extends HL7TestSupport {
         in.append(line2);
 
         String out = template.requestBody(
-                "netty:tcp://127.0.0.1:" + getPort() + "?sync=true&encoders=#hl7encoder&decoders=#hl7decoder", in.toString(),
-                String.class);
+                "netty:tcp://127.0.0.1:" + getPort() + "?sync=true&encoders=#hl7encoder&decoders=#hl7decoder",
+                in.toString(), String.class);
 
         String[] lines = out.split("\r");
         assertEquals("MSH|^~\\&|MYSENDER||||200701011539||ADR^A19||||123|||||UNICODE UTF-8", lines[0]);
@@ -130,8 +121,8 @@ public class HL7MLLPNettyCodecByteArrayRouteTest extends HL7TestSupport {
         in.append(line2);
 
         String out = template.requestBody(
-                "netty:tcp://127.0.0.1:" + getPort() + "?sync=true&encoders=#hl7encoder&decoders=#hl7decoder", in.toString(),
-                String.class);
+                "netty:tcp://127.0.0.1:" + getPort() + "?sync=true&encoders=#hl7encoder&decoders=#hl7decoder",
+                in.toString(), String.class);
         String[] lines = out.split("\r");
         assertEquals("MSH|^~\\&|MYSENDER||||200701011539||ADT^A01||||123|||||UNICODE UTF-8", lines[0]);
         assertEquals("PID|||123||Döe^John", lines[1]);
@@ -141,7 +132,7 @@ public class HL7MLLPNettyCodecByteArrayRouteTest extends HL7TestSupport {
 
     @Test
     public void testSendUnknown() throws Exception {
-        
+
         mockUnknow.expectedMessageCount(1);
         mockUnknow.message(0).body().isInstanceOf(Message.class);
 
@@ -153,7 +144,8 @@ public class HL7MLLPNettyCodecByteArrayRouteTest extends HL7TestSupport {
         in.append("\r");
         in.append(line2);
 
-        template.requestBody("netty:tcp://127.0.0.1:" + getPort() + "?sync=true&encoders=#hl7encoder&decoders=#hl7decoder",
+        template.requestBody(
+                "netty:tcp://127.0.0.1:" + getPort() + "?sync=true&encoders=#hl7encoder&decoders=#hl7decoder",
                 in.toString());
 
         mockUnknow.assertIsSatisfied();
@@ -186,11 +178,12 @@ public class HL7MLLPNettyCodecByteArrayRouteTest extends HL7TestSupport {
                             .choice()
                             // where we choose that A19 queries invoke the handleA19
                             // method on our hl7service bean
-                            .when(header("CamelHL7TriggerEvent").isEqualTo("A19")).bean("hl7service", "handleA19").to("mock:a19")
+                            .when(header("CamelHL7TriggerEvent").isEqualTo("A19")).bean("hl7service", "handleA19")
+                            .to("mock:a19")
                             // and A01 should invoke the handleA01 method on our
                             // hl7service bean
-                            .when(header("CamelHL7TriggerEvent").isEqualTo("A01")).to("mock:a01").bean("hl7service", "handleA01")
-                            .to("mock:a19")
+                            .when(header("CamelHL7TriggerEvent").isEqualTo("A01")).to("mock:a01")
+                            .bean("hl7service", "handleA01").to("mock:a19")
                             // other types should go to mock:unknown
                             .otherwise().to("mock:unknown")
                             // end choice block
@@ -202,7 +195,7 @@ public class HL7MLLPNettyCodecByteArrayRouteTest extends HL7TestSupport {
             };
         }
     }
-    
+
     public class MyHL7BusinessLogic {
 
         // This is a plain POJO that has NO imports whatsoever on Apache Camel.

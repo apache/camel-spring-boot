@@ -71,7 +71,8 @@ public class ConsulServiceDiscoveryAutoConfiguration {
         if (beanFactory != null) {
             Map<String, Object> parameters = new HashMap<>();
 
-            for (Map.Entry<String, ConsulServiceCallServiceDiscoveryConfigurationCommon> entry : configuration.getConfigurations().entrySet()) {
+            for (Map.Entry<String, ConsulServiceCallServiceDiscoveryConfigurationCommon> entry : configuration
+                    .getConfigurations().entrySet()) {
                 // clean up params
                 parameters.clear();
 
@@ -97,10 +98,7 @@ public class ConsulServiceDiscoveryAutoConfiguration {
 
     public static class Condition extends GroupCondition {
         public Condition() {
-            super(
-                "camel.cloud.consul",
-                "camel.cloud.consul.service-discovery"
-            );
+            super("camel.cloud.consul", "camel.cloud.consul.service-discovery");
         }
     }
 }

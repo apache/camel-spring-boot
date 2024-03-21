@@ -36,14 +36,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SqlProducerInTest.class,
-                SqlProducerInTest.TestConfiguration.class,
-                BaseSql.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SqlProducerInTest.class,
+        SqlProducerInTest.TestConfiguration.class, BaseSql.TestConfiguration.class })
 public class SqlProducerInTest extends BaseSql {
 
     @EndpointInject("mock:query")
@@ -82,10 +76,7 @@ public class SqlProducerInTest extends BaseSql {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:query")
-                            .to("sql:classpath:sql/selectProjectsIn.sql")
-                            .to("log:query")
-                            .to("mock:query");
+                    from("direct:query").to("sql:classpath:sql/selectProjectsIn.sql").to("log:query").to("mock:query");
                 }
             };
         }

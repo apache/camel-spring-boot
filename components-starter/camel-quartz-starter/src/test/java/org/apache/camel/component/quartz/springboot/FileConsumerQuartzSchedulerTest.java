@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
@@ -27,8 +26,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -36,28 +33,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        FileConsumerQuartzSchedulerTest.class,
-        FileConsumerQuartzSchedulerTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FileConsumerQuartzSchedulerTest.class,
+        FileConsumerQuartzSchedulerTest.TestConfiguration.class })
 public class FileConsumerQuartzSchedulerTest extends FromFileBase {
 
-    
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:result")
     MockEndpoint mock;
-    
+
     @Test
     public void testQuartzScheduler() throws Exception {
         mock.expectedMessageCount(1);
@@ -68,7 +58,7 @@ public class FileConsumerQuartzSchedulerTest extends FromFileBase {
 
         mock.assertIsSatisfied();
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -87,7 +77,5 @@ public class FileConsumerQuartzSchedulerTest extends FromFileBase {
             };
         }
     }
-    
-   
 
 }

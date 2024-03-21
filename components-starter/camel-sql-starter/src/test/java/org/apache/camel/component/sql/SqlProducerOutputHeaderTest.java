@@ -31,14 +31,8 @@ import javax.sql.DataSource;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                SqlProducerOutputHeaderTest.class,
-                SqlProducerOutputHeaderTest.TestConfiguration.class,
-                BaseSql.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SqlProducerOutputHeaderTest.class,
+        SqlProducerOutputHeaderTest.TestConfiguration.class, BaseSql.TestConfiguration.class })
 public class SqlProducerOutputHeaderTest extends BaseSql {
 
     @EndpointInject("mock:query")
@@ -55,7 +49,6 @@ public class SqlProducerOutputHeaderTest extends BaseSql {
 
         assertMockEndpointsSatisfied();
     }
-
 
     // *************************************
     // Config
@@ -74,7 +67,8 @@ public class SqlProducerOutputHeaderTest extends BaseSql {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:query").to("sql:select max(id) from projects?outputType=SelectOne&outputHeader=MaxProjectID")
+                    from("direct:query")
+                            .to("sql:select max(id) from projects?outputType=SelectOne&outputHeader=MaxProjectID")
                             .to("mock:query");
                 }
             };

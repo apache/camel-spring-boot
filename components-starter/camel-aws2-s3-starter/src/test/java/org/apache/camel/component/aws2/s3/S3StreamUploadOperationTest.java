@@ -39,16 +39,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 //based on S3StreamUploadOperationIT
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                S3StreamUploadOperationTest.class,
-                S3StreamUploadOperationTest.TestConfiguration.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, S3StreamUploadOperationTest.class,
+        S3StreamUploadOperationTest.TestConfiguration.class })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class S3StreamUploadOperationTest extends BaseS3 {
-
 
     @EndpointInject("mock:result")
     private MockEndpoint result;
@@ -75,20 +69,18 @@ public class S3StreamUploadOperationTest extends BaseS3 {
         assertEquals(40, resp.size());
     }
 
-
     // *************************************
     // Config
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseS3.TestConfiguration {
+    public class TestConfiguration extends BaseS3.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder(S3Client s3Client) {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    String awsEndpoint1
-                            = "aws2-s3://mycamel-1?autoCreateBucket=true&streamingUploadMode=true&keyName=fileTest.txt&batchMessageNumber=25&namingStrategy=random";
+                    String awsEndpoint1 = "aws2-s3://mycamel-1?autoCreateBucket=true&streamingUploadMode=true&keyName=fileTest.txt&batchMessageNumber=25&namingStrategy=random";
 
                     from("direct:stream1").to(awsEndpoint1).to("mock:result");
 

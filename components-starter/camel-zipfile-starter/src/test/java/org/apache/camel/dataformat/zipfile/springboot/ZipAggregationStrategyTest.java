@@ -16,7 +16,6 @@
  */
 package org.apache.camel.dataformat.zipfile.springboot;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.zip.ZipEntry;
@@ -36,7 +35,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -46,27 +44,21 @@ import org.apache.camel.test.junit5.TestSupport;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.util.IOHelper;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        ZipAggregationStrategyTest.class,
-        ZipAggregationStrategyTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ZipAggregationStrategyTest.class,
+        ZipAggregationStrategyTest.TestConfiguration.class })
 public class ZipAggregationStrategyTest {
 
     private static final int EXPECTED_NO_FILES = 3;
     private static final String TEST_DIR = "target/out_ZipAggregationStrategyTest";
-    
+
     @Autowired
     ProducerTemplate template;
-    
+
     @EndpointInject("mock:aggregateToZipEntry")
     MockEndpoint mock;
-    
+
     @BeforeEach
     public void setUp() throws Exception {
         TestSupport.deleteDirectory(TEST_DIR);
@@ -74,7 +66,7 @@ public class ZipAggregationStrategyTest {
 
     @Test
     public void testSplitter() throws Exception {
-        
+
         mock.expectedMessageCount(1);
         mock.expectedHeaderReceived("foo", "bar");
 
@@ -98,8 +90,7 @@ public class ZipAggregationStrategyTest {
             IOHelper.close(zin);
         }
     }
-    
-    
+
     // *************************************
     // Config
     // *************************************
@@ -114,18 +105,12 @@ public class ZipAggregationStrategyTest {
                 public void configure() {
                     // Unzip file and Split it according to FileEntry
                     from("file:src/test/resources/org/apache/camel/aggregate/zipfile/data?delay=1000&noop=true")
-                            .setHeader("foo", constant("bar"))
-                            .aggregate(new ZipAggregationStrategy())
-                            .constant(true)
-                            .completionFromBatchConsumer()
-                            .eagerCheckCompletion()
-                            .to("file:" + TEST_DIR)
-                            .to("mock:aggregateToZipEntry")
-                            .log("Done processing zip file: ${header.CamelFileName}");
+                            .setHeader("foo", constant("bar")).aggregate(new ZipAggregationStrategy()).constant(true)
+                            .completionFromBatchConsumer().eagerCheckCompletion().to("file:" + TEST_DIR)
+                            .to("mock:aggregateToZipEntry").log("Done processing zip file: ${header.CamelFileName}");
                 }
             };
         }
     }
-    
-   
+
 }

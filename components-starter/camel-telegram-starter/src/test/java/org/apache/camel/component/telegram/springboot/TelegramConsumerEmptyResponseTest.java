@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.telegram.springboot;
 
-
 import java.util.concurrent.TimeUnit;
 
 import org.apache.camel.EndpointInject;
@@ -35,21 +34,14 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.awaitility.Awaitility;
 
-
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        TelegramConsumerEmptyResponseTest.class,
-        TelegramConsumerEmptyResponseTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, TelegramConsumerEmptyResponseTest.class,
+        TelegramConsumerEmptyResponseTest.TestConfiguration.class })
 public class TelegramConsumerEmptyResponseTest extends TelegramTestSupport {
 
-    
     static TelegramMockRoutes mockRoutes;
-    
+
     @EndpointInject("mock:telegram")
     private MockEndpoint endpoint;
 
@@ -68,7 +60,6 @@ public class TelegramConsumerEmptyResponseTest extends TelegramTestSupport {
         });
     }
 
-
     // *************************************
     // Config
     // *************************************
@@ -86,17 +77,12 @@ public class TelegramConsumerEmptyResponseTest extends TelegramTestSupport {
         }
 
     }
-    
+
     @Override
     @Bean
     protected TelegramMockRoutes createMockRoutes() {
-        mockRoutes =
-            new TelegramMockRoutes(port)
-            .addEndpoint(
-                    "getUpdates",
-                    "GET",
-                    String.class,
-                    TelegramTestUtil.stringResource("messages/updates-empty.json"));
+        mockRoutes = new TelegramMockRoutes(port).addEndpoint("getUpdates", "GET", String.class,
+                TelegramTestUtil.stringResource("messages/updates-empty.json"));
         return mockRoutes;
     }
 }

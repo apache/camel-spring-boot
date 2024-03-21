@@ -16,7 +16,6 @@
  */
 package org.apache.camel.dataformat.avro.springboot.test;
 
-
 import java.io.File;
 import java.io.IOException;
 
@@ -42,31 +41,22 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        AvroGenericMarshaAndUnmarshaTest.class,
-        AvroGenericMarshaAndUnmarshaTest.TestConfiguration.class
-    }
-    
+@SpringBootTest(classes = { CamelAutoConfiguration.class, AvroGenericMarshaAndUnmarshaTest.class,
+        AvroGenericMarshaAndUnmarshaTest.TestConfiguration.class }
+
 )
 public class AvroGenericMarshaAndUnmarshaTest {
-    
+
     private static Schema schema;
 
-  
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:reverse")
     MockEndpoint mock;
 
-        
-    
-    
     @Test
     public void testGenericMarshalAndUnmarshal() throws InterruptedException {
         marshalAndUnmarshalGeneric("direct:in", "direct:back");
@@ -89,8 +79,6 @@ public class AvroGenericMarshaAndUnmarshaTest {
 
     }
 
-    
-
     // *************************************
     // Config
     // *************************************
@@ -111,7 +99,7 @@ public class AvroGenericMarshaAndUnmarshaTest {
                 }
             };
         }
-        
+
         private Schema getSchema() throws IOException {
             String schemaLocation = getClass().getResource("user.avsc").getFile();
             File schemaFile = new File(schemaLocation);

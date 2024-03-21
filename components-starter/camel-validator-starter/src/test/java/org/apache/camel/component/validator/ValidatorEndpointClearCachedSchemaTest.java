@@ -42,12 +42,7 @@ import org.springframework.test.annotation.DirtiesContext;
  */
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                ValidatorEndpointClearCachedSchemaTest.class
-        }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, ValidatorEndpointClearCachedSchemaTest.class })
 public class ValidatorEndpointClearCachedSchemaTest extends ContextTestSupport {
 
     private static final Logger LOG = LoggerFactory.getLogger(ValidatorEndpointClearCachedSchemaTest.class);
@@ -100,9 +95,9 @@ public class ValidatorEndpointClearCachedSchemaTest extends ContextTestSupport {
     private class Sender implements Runnable {
 
         private final String message = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + //
-                                       "<p:TestMessage xmlns:p=\"http://apache.camel.org/test\">" + //
-                                       "<MessageContent>MessageContent</MessageContent>" + //
-                                       "</p:TestMessage>";
+                "<p:TestMessage xmlns:p=\"http://apache.camel.org/test\">" + //
+                "<MessageContent>MessageContent</MessageContent>" + //
+                "</p:TestMessage>";
 
         private final byte[] messageBytes = message.getBytes(StandardCharsets.UTF_8);
 

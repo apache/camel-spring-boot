@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonpath.springboot.test;
 
-
 import java.io.File;
 import java.util.Map;
 
@@ -36,16 +35,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        JsonPathSplitWriteAsStringMapTest.class,
-        JsonPathSplitWriteAsStringMapTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JsonPathSplitWriteAsStringMapTest.class,
+        JsonPathSplitWriteAsStringMapTest.TestConfiguration.class })
 public class JsonPathSplitWriteAsStringMapTest {
 
     @Autowired
@@ -56,7 +49,7 @@ public class JsonPathSplitWriteAsStringMapTest {
 
     @Test
     public void testSplitToJSon() throws Exception {
-        
+
         mock.expectedMessageCount(2);
 
         template.sendBody("direct:start", new File("src/test/resources/content-map.json"));
@@ -65,11 +58,13 @@ public class JsonPathSplitWriteAsStringMapTest {
 
         Map.Entry<?, ?> row = mock.getReceivedExchanges().get(0).getIn().getBody(Map.Entry.class);
         assertEquals("foo", row.getKey());
-        assertEquals("{\"action\":\"CU\",\"id\":123,\"modifiedTime\":\"2015-07-28T11:40:09.520+02:00\"}", row.getValue());
+        assertEquals("{\"action\":\"CU\",\"id\":123,\"modifiedTime\":\"2015-07-28T11:40:09.520+02:00\"}",
+                row.getValue());
 
         row = mock.getReceivedExchanges().get(1).getIn().getBody(Map.Entry.class);
         assertEquals("bar", row.getKey());
-        assertEquals("{\"action\":\"CU\",\"id\":456,\"modifiedTime\":\"2015-07-28T11:42:29.510+02:00\"}", row.getValue());
+        assertEquals("{\"action\":\"CU\",\"id\":456,\"modifiedTime\":\"2015-07-28T11:42:29.510+02:00\"}",
+                row.getValue());
     }
 
     // *************************************
@@ -84,10 +79,7 @@ public class JsonPathSplitWriteAsStringMapTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                            .split().jsonpathWriteAsString("$.content")
-                            .to("mock:line")
-                            .to("log:line")
+                    from("direct:start").split().jsonpathWriteAsString("$.content").to("mock:line").to("log:line")
                             .end();
                 }
             };

@@ -62,8 +62,8 @@ public abstract class AbstractFhirTestSupport {
 
     boolean patientExists() {
         try {
-            Bundle bundle
-                    = fhirClient.search().byUrl("Patient?given=Vincent&family=Freeman").returnBundle(Bundle.class).execute();
+            Bundle bundle = fhirClient.search().byUrl("Patient?given=Vincent&family=Freeman").returnBundle(Bundle.class)
+                    .execute();
             return !bundle.getEntry().isEmpty();
         } catch (ResourceGoneException e) {
             return false;

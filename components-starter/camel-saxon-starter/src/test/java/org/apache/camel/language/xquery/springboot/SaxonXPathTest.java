@@ -16,8 +16,6 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -32,37 +30,29 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        SaxonXPathTest.class,
-        SaxonXPathTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, SaxonXPathTest.class,
+        SaxonXPathTest.TestConfiguration.class })
 public class SaxonXPathTest {
-    
-    
+
     @Autowired
     ProducerTemplate template;
 
     @Autowired
     CamelContext context;
-    
+
     @EndpointInject("mock:london")
-    protected MockEndpoint mockLondon;   
-    
+    protected MockEndpoint mockLondon;
+
     @EndpointInject("mock:paris")
     protected MockEndpoint mockParis;
-    
+
     @EndpointInject("mock:other")
     protected MockEndpoint mockOther;
-    
+
     @Test
     public void testSaxonXPathSplit() throws Exception {
         mockLondon.expectedMessageCount(1);
@@ -76,7 +66,6 @@ public class SaxonXPathTest {
         MockEndpoint.assertIsSatisfied(context);
     }
 
-    
     // *************************************
     // Config
     // *************************************
@@ -89,14 +78,8 @@ public class SaxonXPathTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                            .choice()
-                            .when().xpath("person/city = 'London'")
-                            .to("mock:london")
-                            .when().xpath("person/city = 'Paris'")
-                            .to("mock:paris")
-                            .otherwise()
-                            .to("mock:other");
+                    from("direct:start").choice().when().xpath("person/city = 'London'").to("mock:london").when()
+                            .xpath("person/city = 'Paris'").to("mock:paris").otherwise().to("mock:other");
                 }
             };
         }

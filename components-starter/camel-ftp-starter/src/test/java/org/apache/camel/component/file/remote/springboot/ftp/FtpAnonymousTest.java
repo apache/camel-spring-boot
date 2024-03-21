@@ -33,14 +33,9 @@ import org.springframework.test.annotation.DirtiesContext;
  */
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-        classes = {
-                CamelAutoConfiguration.class,
-                FtpAnonymousTest.class,
-                FtpAnonymousTest.TestConfiguration.class
-        }
-)
-//Based on FtpAnonymousIT
+@SpringBootTest(classes = { CamelAutoConfiguration.class, FtpAnonymousTest.class,
+        FtpAnonymousTest.TestConfiguration.class })
+// Based on FtpAnonymousIT
 public class FtpAnonymousTest extends BaseFtp {
 
     @EndpointInject("mock:result")
@@ -67,7 +62,7 @@ public class FtpAnonymousTest extends BaseFtp {
     // *************************************
 
     @Configuration
-    public class TestConfiguration extends  BaseFtp.TestConfiguration {
+    public class TestConfiguration extends BaseFtp.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
 

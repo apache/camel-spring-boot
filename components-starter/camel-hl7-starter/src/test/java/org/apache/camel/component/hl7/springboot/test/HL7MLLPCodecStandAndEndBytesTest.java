@@ -16,8 +16,6 @@
  */
 package org.apache.camel.component.hl7.springboot.test;
 
-
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
@@ -41,25 +39,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
-
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        HL7MLLPCodecStandAndEndBytesTest.class,
-        HL7MLLPCodecStandAndEndBytesTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, HL7MLLPCodecStandAndEndBytesTest.class,
+        HL7MLLPCodecStandAndEndBytesTest.TestConfiguration.class })
 public class HL7MLLPCodecStandAndEndBytesTest extends HL7TestSupport {
 
-    
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
     MockEndpoint mock;
-    
+
     @Bean("hl7codec")
     private HL7MLLPCodec addCodec() throws Exception {
 
@@ -73,7 +64,6 @@ public class HL7MLLPCodecStandAndEndBytesTest extends HL7TestSupport {
         return codec;
     }
 
-    
     @Test
     public void testSendHL7Message() throws Exception {
         String line1 = "MSH|^~\\&|MYSENDER|MYRECEIVER|MYAPPLICATION||200612211200||QRY^A19|1234|P|2.4";
@@ -84,8 +74,8 @@ public class HL7MLLPCodecStandAndEndBytesTest extends HL7TestSupport {
         in.append("\r");
         in.append(line2);
 
-        String out = template.requestBody("mina:tcp://127.0.0.1:" + getPort() + "?sync=true&codec=#hl7codec", in.toString(),
-                String.class);
+        String out = template.requestBody("mina:tcp://127.0.0.1:" + getPort() + "?sync=true&codec=#hl7codec",
+                in.toString(), String.class);
 
         String[] lines = out.split("\r");
         assertEquals("MSH|^~\\&|MYSENDER||||200701011539||ADR^A19||||123", lines[0]);
@@ -142,6 +132,5 @@ public class HL7MLLPCodecStandAndEndBytesTest extends HL7TestSupport {
             };
         }
     }
-    
-    
+
 }

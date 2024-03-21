@@ -46,15 +46,13 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(classes = {
-                           CamelAutoConfiguration.class, JacksonAvroMarshalUnmarshalJsonNodeTest.class,
-                           JacksonAvroMarshalUnmarshalJsonNodeTest.TestConfiguration.class
-})
+@SpringBootTest(classes = { CamelAutoConfiguration.class, JacksonAvroMarshalUnmarshalJsonNodeTest.class,
+        JacksonAvroMarshalUnmarshalJsonNodeTest.TestConfiguration.class })
 public class JacksonAvroMarshalUnmarshalJsonNodeTest {
 
     @Autowired
     ProducerTemplate template;
-    
+
     @Autowired
     CamelContext context;
 
@@ -67,11 +65,10 @@ public class JacksonAvroMarshalUnmarshalJsonNodeTest {
     @Bean("schema-resolver")
     private SchemaResolver getSchemaResolver() {
         String schemaJson = "{\n" + "\"type\": \"record\",\n" + "\"name\": \"Pojo\",\n" + "\"fields\": [\n"
-                            + " {\"name\": \"text\", \"type\": \"string\"}\n" + "]}";
-        String listSchemaJson = "{\n" + "  \"type\": \"array\",  \n" + "  \"items\":{\n"
-                                + "    \"name\":\"Pojo\",\n" + "    \"type\":\"record\",\n"
-                                + "    \"fields\":[\n" + "      {\"name\":\"text\", \"type\":\"string\"}\n"
-                                + "    ]\n" + "  }\n" + "}";
+                + " {\"name\": \"text\", \"type\": \"string\"}\n" + "]}";
+        String listSchemaJson = "{\n" + "  \"type\": \"array\",  \n" + "  \"items\":{\n" + "    \"name\":\"Pojo\",\n"
+                + "    \"type\":\"record\",\n" + "    \"fields\":[\n"
+                + "      {\"name\":\"text\", \"type\":\"string\"}\n" + "    ]\n" + "  }\n" + "}";
 
         Schema raw = new Schema.Parser().setValidate(true).parse(schemaJson);
         AvroSchema schema = new AvroSchema(raw);
@@ -135,7 +132,6 @@ public class JacksonAvroMarshalUnmarshalJsonNodeTest {
         template.sendBodyAndHeader("direct:serialized", serialized, "list", true);
         mock2.assertIsSatisfied();
 
-        
         JsonNode back = mock2.getReceivedExchanges().get(0).getIn().getBody(JsonNode.class);
         assertTrue(back.isArray());
         assertEquals(2, back.size());
@@ -155,8 +151,7 @@ public class JacksonAvroMarshalUnmarshalJsonNodeTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:serialized").unmarshal().avro(AvroLibrary.Jackson, JsonNode.class)
-                        .to("mock:pojo");
+                    from("direct:serialized").unmarshal().avro(AvroLibrary.Jackson, JsonNode.class).to("mock:pojo");
                     from("direct:pojo").marshal().avro(AvroLibrary.Jackson).to("mock:serialized");
                 }
             };

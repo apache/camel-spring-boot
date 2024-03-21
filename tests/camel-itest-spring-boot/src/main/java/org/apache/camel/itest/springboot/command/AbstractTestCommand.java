@@ -37,12 +37,12 @@ public abstract class AbstractTestCommand implements Command {
         Object configObj = parameters[0];
         Assertions.assertNotNull(configObj, "The first parameter cannot be null");
         Assertions.assertTrue(configObj instanceof ITestConfig,
-            "First parameter should be of type ITestConfig, found type " + configObj.getClass().getName());
+                "First parameter should be of type ITestConfig, found type " + configObj.getClass().getName());
 
         Object compNameObj = parameters[1];
         Assertions.assertNotNull(compNameObj, "The second parameter cannot be null");
         Assertions.assertTrue(compNameObj instanceof String,
-            "Second parameter should be of type String, found type " + compNameObj.getClass().getName());
+                "Second parameter should be of type String, found type " + compNameObj.getClass().getName());
 
         String compName = (String) compNameObj;
 

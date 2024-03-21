@@ -16,8 +16,6 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
@@ -31,28 +29,20 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import org.junit.jupiter.api.Test;
 
-
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(
-    classes = {
-        CamelAutoConfiguration.class,
-        XQueryResourceTest.class,
-        XQueryResourceTest.TestConfiguration.class
-    }
-)
+@SpringBootTest(classes = { CamelAutoConfiguration.class, XQueryResourceTest.class,
+        XQueryResourceTest.TestConfiguration.class })
 public class XQueryResourceTest {
-    
-    
+
     @Autowired
     ProducerTemplate template;
 
     @EndpointInject("mock:result")
-    protected MockEndpoint mock;   
-    
+    protected MockEndpoint mock;
+
     @Test
     public void testXPathResource() throws Exception {
         mock.expectedBodiesReceived("London");
@@ -61,7 +51,7 @@ public class XQueryResourceTest {
 
         mock.assertIsSatisfied();
     }
-    
+
     // *************************************
     // Config
     // *************************************
@@ -74,8 +64,7 @@ public class XQueryResourceTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start")
-                            .transform().xquery("resource:classpath:myxquery.txt", String.class)
+                    from("direct:start").transform().xquery("resource:classpath:myxquery.txt", String.class)
                             .to("mock:result");
                 }
             };
