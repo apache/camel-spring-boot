@@ -601,6 +601,12 @@
       "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties"
     },
     {
+      "name": "camel.resilience4j.ignore-exception",
+      "type": "java.util.List<java.lang.String>",
+      "description": "Configure a list of exceptions that are ignored and neither count as a failure nor success. Any exception matching or inheriting from one of the list will not count as a failure nor success, even if the exceptions is part of recordExceptions.",
+      "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties"
+    },
+    {
       "name": "camel.resilience4j.minimum-number-of-calls",
       "type": "java.lang.Integer",
       "description": "Configures the minimum number of calls which are required (per sliding window period) before the CircuitBreaker can calculate the error rate. For example, if minimumNumberOfCalls is 10, then at least 10 calls must be recorded, before the failure rate can be calculated. If only 9 calls have been recorded the CircuitBreaker will not transition to open even if all 9 calls have failed. Default minimumNumberOfCalls is 100",
@@ -613,6 +619,12 @@
       "description": "Configures the number of permitted calls when the CircuitBreaker is half open. The size must be greater than 0. Default size is 10.",
       "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
       "defaultValue": 10
+    },
+    {
+      "name": "camel.resilience4j.record-exception",
+      "type": "java.util.List<java.lang.String>",
+      "description": "Configure a list of exceptions that are recorded as a failure and thus increase the failure rate. Any exception matching or inheriting from one of the list counts as a failure, unless explicitly ignored via ignoreExceptions.",
+      "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties"
     },
     {
       "name": "camel.resilience4j.sliding-window-size",

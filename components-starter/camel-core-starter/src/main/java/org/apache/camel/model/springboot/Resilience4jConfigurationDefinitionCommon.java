@@ -16,6 +16,7 @@
  */
 package org.apache.camel.model.springboot;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 
 /**
@@ -162,6 +163,20 @@ public class Resilience4jConfigurationDefinitionCommon {
      * true.
      */
     private Boolean timeoutCancelRunningFuture = true;
+    /**
+     * Configure a list of exceptions that are recorded as a failure and thus
+     * increase the failure rate. Any exception matching or inheriting from one
+     * of the list counts as a failure, unless explicitly ignored via
+     * ignoreExceptions.
+     */
+    private List<String> recordException;
+    /**
+     * Configure a list of exceptions that are ignored and neither count as a
+     * failure nor success. Any exception matching or inheriting from one of the
+     * list will not count as a failure nor success, even if the exceptions is
+     * part of recordExceptions.
+     */
+    private List<String> ignoreException;
 
     public String getCircuitBreaker() {
         return circuitBreaker;
@@ -324,5 +339,21 @@ public class Resilience4jConfigurationDefinitionCommon {
 
     public void setTimeoutCancelRunningFuture(Boolean timeoutCancelRunningFuture) {
         this.timeoutCancelRunningFuture = timeoutCancelRunningFuture;
+    }
+
+    public List<String> getRecordException() {
+        return recordException;
+    }
+
+    public void setRecordException(List<String> recordException) {
+        this.recordException = recordException;
+    }
+
+    public List<String> getIgnoreException() {
+        return ignoreException;
+    }
+
+    public void setIgnoreException(List<String> ignoreException) {
+        this.ignoreException = ignoreException;
     }
 }

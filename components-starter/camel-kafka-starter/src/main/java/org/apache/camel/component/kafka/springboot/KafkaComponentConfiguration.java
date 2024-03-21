@@ -89,6 +89,26 @@ public class KafkaComponentConfiguration
      */
     private Integer reconnectBackoffMaxMs = 1000;
     /**
+     * The maximum amount of time in milliseconds to wait when retrying a
+     * request to the broker that has repeatedly failed. If provided, the
+     * backoff per client will increase exponentially for each failed request,
+     * up to this maximum. To prevent all clients from being synchronized upon
+     * retry, a randomized jitter with a factor of 0.2 will be applied to the
+     * backoff, resulting in the backoff falling within a range between 20%
+     * below and 20% above the computed value. If retry.backoff.ms is set to be
+     * higher than retry.backoff.max.ms, then retry.backoff.max.ms will be used
+     * as a constant backoff from the beginning without any exponential increase
+     */
+    private Integer retryBackoffMaxMs = 1000;
+    /**
+     * The amount of time to wait before attempting to retry a failed request to
+     * a given topic partition. This avoids repeatedly sending requests in a
+     * tight loop under some failure scenarios. This value is the initial
+     * backoff value and will increase exponentially for each failed request, up
+     * to the retry.backoff.max.ms value.
+     */
+    private Integer retryBackoffMs = 100;
+    /**
      * Timeout in milliseconds to wait gracefully for the consumer or producer
      * to shut down and terminate its worker threads.
      */
@@ -644,13 +664,6 @@ public class KafkaComponentConfiguration
      */
     private Integer retries;
     /**
-     * Before each retry, the producer refreshes the metadata of relevant topics
-     * to see if a new leader has been elected. Since the leader election takes
-     * a bit of time, this property specifies the amount of time that the
-     * producer waits before refreshing the metadata.
-     */
-    private Integer retryBackoffMs = 100;
-    /**
      * Socket write buffer size
      */
     private Integer sendBufferBytes = 131072;
@@ -933,6 +946,22 @@ public class KafkaComponentConfiguration
 
     public void setReconnectBackoffMaxMs(Integer reconnectBackoffMaxMs) {
         this.reconnectBackoffMaxMs = reconnectBackoffMaxMs;
+    }
+
+    public Integer getRetryBackoffMaxMs() {
+        return retryBackoffMaxMs;
+    }
+
+    public void setRetryBackoffMaxMs(Integer retryBackoffMaxMs) {
+        this.retryBackoffMaxMs = retryBackoffMaxMs;
+    }
+
+    public Integer getRetryBackoffMs() {
+        return retryBackoffMs;
+    }
+
+    public void setRetryBackoffMs(Integer retryBackoffMs) {
+        this.retryBackoffMs = retryBackoffMs;
     }
 
     public Integer getShutdownTimeout() {
@@ -1492,14 +1521,6 @@ public class KafkaComponentConfiguration
 
     public void setRetries(Integer retries) {
         this.retries = retries;
-    }
-
-    public Integer getRetryBackoffMs() {
-        return retryBackoffMs;
-    }
-
-    public void setRetryBackoffMs(Integer retryBackoffMs) {
-        this.retryBackoffMs = retryBackoffMs;
     }
 
     public Integer getSendBufferBytes() {
