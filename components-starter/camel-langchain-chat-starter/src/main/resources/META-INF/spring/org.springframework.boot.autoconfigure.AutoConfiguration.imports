@@ -17,3 +17,5 @@
 
 org.apache.camel.component.chat.springboot.LangchainChatComponentConverter
 org.apache.camel.component.chat.springboot.LangchainChatComponentAutoConfiguration
+org.apache.camel.component.chat.springboot.LangChainChatComponentConverter
+org.apache.camel.component.chat.springboot.LangChainChatComponentAutoConfiguration

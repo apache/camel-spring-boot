@@ -18,7 +18,7 @@ package org.apache.camel.component.langchain.embeddings.springboot;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
-import org.apache.camel.component.langchain.embeddings.LangchainEmbeddingsComponent;
+import org.apache.camel.component.langchain.embeddings.LangChainEmbeddingsComponent;
 import org.apache.camel.spi.ComponentCustomizer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
@@ -40,25 +40,25 @@ import org.springframework.context.annotation.Lazy;
  */
 @Configuration(proxyBeanMethods = false)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
-@EnableConfigurationProperties({ComponentConfigurationProperties.class,LangchainEmbeddingsComponentConfiguration.class})
+@EnableConfigurationProperties({ComponentConfigurationProperties.class,LangChainEmbeddingsComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.langchain-embeddings"})
-@AutoConfigureAfter({CamelAutoConfiguration.class, LangchainEmbeddingsComponentConverter.class})
-public class LangchainEmbeddingsComponentAutoConfiguration {
+@AutoConfigureAfter({CamelAutoConfiguration.class, LangChainEmbeddingsComponentConverter.class})
+public class LangChainEmbeddingsComponentAutoConfiguration {
 
     @Autowired
     private ApplicationContext applicationContext;
     private final CamelContext camelContext;
     @Autowired
-    private LangchainEmbeddingsComponentConfiguration configuration;
+    private LangChainEmbeddingsComponentConfiguration configuration;
 
-    public LangchainEmbeddingsComponentAutoConfiguration(
+    public LangChainEmbeddingsComponentAutoConfiguration(
             org.apache.camel.CamelContext camelContext) {
         this.camelContext = camelContext;
     }
 
     @Lazy
     @Bean
-    public ComponentCustomizer configureLangchainEmbeddingsComponent() {
+    public ComponentCustomizer configureLangChainEmbeddingsComponent() {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
@@ -70,7 +70,7 @@ public class LangchainEmbeddingsComponentAutoConfiguration {
                         applicationContext,
                         "camel.component.customizer",
                         "camel.component.langchain-embeddings.customizer")
-                    && target instanceof LangchainEmbeddingsComponent;
+                    && target instanceof LangChainEmbeddingsComponent;
             }
         };
     }
