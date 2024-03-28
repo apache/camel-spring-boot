@@ -82,7 +82,7 @@
     <!-- testing - infinispan -->
     <dependency>
       <groupId>org.infinispan</groupId>
-      <artifactId>infinispan-core-jakarta</artifactId>
+      <artifactId>infinispan-core</artifactId>
       <version>${infinispan-version}</version>
       <scope>test</scope>
     </dependency>
@@ -94,13 +94,7 @@
     </dependency>
     <dependency>
       <groupId>org.infinispan</groupId>
-      <artifactId>infinispan-spring5-remote</artifactId>
-      <version>${infinispan-version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.infinispan</groupId>
-      <artifactId>proto-sample-domain-definition</artifactId>
+      <artifactId>infinispan-spring6-remote</artifactId>
       <version>${infinispan-version}</version>
       <scope>test</scope>
     </dependency>
