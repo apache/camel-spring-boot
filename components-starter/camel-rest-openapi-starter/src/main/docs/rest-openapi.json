@@ -14,6 +14,12 @@
   ],
   "properties": [
     {
+      "name": "camel.component.rest-openapi.api-context-path",
+      "type": "java.lang.String",
+      "description": "Sets the context-path to use for servicing the OpenAPI specification",
+      "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration"
+    },
+    {
       "name": "camel.component.rest-openapi.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
@@ -27,9 +33,22 @@
       "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration"
     },
     {
+      "name": "camel.component.rest-openapi.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.rest-openapi.component-name",
       "type": "java.lang.String",
       "description": "Name of the Camel component that will perform the requests. The component must be present in Camel registry and it must implement RestProducerFactory service provider interface. If not set CLASSPATH is searched for single component that implements RestProducerFactory SPI. Can be overridden in endpoint configuration.",
+      "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.rest-openapi.consumer-component-name",
+      "type": "java.lang.String",
+      "description": "Name of the Camel component that will service the requests. The component must be present in Camel registry and it must implement RestOpenApiConsumerFactory service provider interface. If not set CLASSPATH is searched for single component that implements RestOpenApiConsumerFactory SPI. Can be overridden in endpoint configuration.",
       "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration"
     },
     {
@@ -63,6 +82,20 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.rest-openapi.missing-operation",
+      "type": "java.lang.String",
+      "description": "Whether the consumer should fail,ignore or return a mock response for OpenAPI operations that are not mapped to a corresponding route.",
+      "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration",
+      "defaultValue": "fail"
+    },
+    {
+      "name": "camel.component.rest-openapi.mock-include-pattern",
+      "type": "java.lang.String",
+      "description": "Used for inclusive filtering of mock data from directories. The pattern is using Ant-path style pattern. Multiple patterns can be specified separated by comma.",
+      "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration",
+      "defaultValue": "classpath:camel-mock\/**"
+    },
+    {
       "name": "camel.component.rest-openapi.produces",
       "type": "java.lang.String",
       "description": "What payload type this component is producing. For example application\/json according to the RFC7231. This equates to the value of Content-Type HTTP header. If set overrides any value present in the OpenApi specification. Can be overridden in endpoint configuration.",
@@ -82,10 +115,17 @@
       "defaultValue": false
     },
     {
-      "name": "camel.component.rest-openapi.specification-uri",
-      "type": "java.net.URI",
-      "description": "Path to the OpenApi specification file. The scheme, host base path are taken from this specification, but these can be overridden with properties on the component or endpoint level. If not given the component tries to load openapi.json resource. Note that the host defined on the component and endpoint of this Component should contain the scheme, hostname and optionally the port in the URI syntax (i.e. https:\/\/api.example.com:8080). Can be overridden in endpoint configuration.",
+      "name": "camel.component.rest-openapi.rest-openapi-processor-strategy",
+      "type": "org.apache.camel.component.rest.openapi.RestOpenapiProcessorStrategy",
+      "description": "To use a custom strategy for how to process Rest DSL requests. The option is a org.apache.camel.component.rest.openapi.RestOpenapiProcessorStrategy type.",
       "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.rest-openapi.specification-uri",
+      "type": "java.lang.String",
+      "description": "Path to the OpenApi specification file. The scheme, host base path are taken from this specification, but these can be overridden with properties on the component or endpoint level. If not given the component tries to load openapi.json resource. Note that the host defined on the component and endpoint of this Component should contain the scheme, hostname and optionally the port in the URI syntax (i.e. https:\/\/api.example.com:8080). Can be overridden in endpoint configuration.",
+      "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration",
+      "defaultValue": "openapi.json"
     },
     {
       "name": "camel.component.rest-openapi.ssl-context-parameters",

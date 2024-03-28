@@ -16,7 +16,7 @@
  */
 package org.apache.camel.component.rest.openapi.springboot;
 
-import java.net.URI;
+import org.apache.camel.component.rest.openapi.RestOpenapiProcessorStrategy;
 import org.apache.camel.component.rest.openapi.validator.RequestValidationCustomizer;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
@@ -43,21 +43,72 @@ public class RestOpenApiComponentConfiguration
      */
     private String basePath;
     /**
-     * Name of the Camel component that will perform the requests. The component
-     * must be present in Camel registry and it must implement
-     * RestProducerFactory service provider interface. If not set CLASSPATH is
-     * searched for single component that implements RestProducerFactory SPI.
-     * Can be overridden in endpoint configuration.
+     * Enable validation of requests against the configured OpenAPI
+     * specification
      */
-    private String componentName;
+    private Boolean requestValidationEnabled = false;
     /**
-     * What payload type this component capable of consuming. Could be one type,
-     * like application/json or multiple types as application/json,
-     * application/xml; q=0.5 according to the RFC7231. This equates to the
-     * value of Accept HTTP header. If set overrides any value found in the
-     * OpenApi specification. Can be overridden in endpoint configuration
+     * Path to the OpenApi specification file. The scheme, host base path are
+     * taken from this specification, but these can be overridden with
+     * properties on the component or endpoint level. If not given the component
+     * tries to load openapi.json resource. Note that the host defined on the
+     * component and endpoint of this Component should contain the scheme,
+     * hostname and optionally the port in the URI syntax (i.e.
+     * https://api.example.com:8080). Can be overridden in endpoint
+     * configuration.
      */
-    private String consumes;
+    private String specificationUri = "openapi.json";
+    /**
+     * If request validation is enabled, this option provides the capability to
+     * customize the creation of OpenApiInteractionValidator used to validate
+     * requests. The option is a
+     * org.apache.camel.component.rest.openapi.validator.RequestValidationCustomizer type.
+     */
+    private RequestValidationCustomizer requestValidationCustomizer;
+    /**
+     * Sets the context-path to use for servicing the OpenAPI specification
+     */
+    private String apiContextPath;
+    /**
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions (if possible) occurred while the Camel consumer
+     * is trying to pickup incoming messages, or the likes, will now be
+     * processed as a message and handled by the routing Error Handler.
+     * Important: This is only possible if the 3rd party component allows Camel
+     * to be alerted if an exception was thrown. Some components handle this
+     * internally only, and therefore bridgeErrorHandler is not possible. In
+     * other situations we may improve the Camel component to hook into the 3rd
+     * party component and make this possible for future releases. By default
+     * the consumer will use the org.apache.camel.spi.ExceptionHandler to deal
+     * with exceptions, that will be logged at WARN or ERROR level and ignored.
+     */
+    private Boolean bridgeErrorHandler = false;
+    /**
+     * Whether the consumer should fail,ignore or return a mock response for
+     * OpenAPI operations that are not mapped to a corresponding route.
+     */
+    private String missingOperation = "fail";
+    /**
+     * Name of the Camel component that will service the requests. The component
+     * must be present in Camel registry and it must implement
+     * RestOpenApiConsumerFactory service provider interface. If not set
+     * CLASSPATH is searched for single component that implements
+     * RestOpenApiConsumerFactory SPI. Can be overridden in endpoint
+     * configuration.
+     */
+    private String consumerComponentName;
+    /**
+     * Used for inclusive filtering of mock data from directories. The pattern
+     * is using Ant-path style pattern. Multiple patterns can be specified
+     * separated by comma.
+     */
+    private String mockIncludePattern = "classpath:camel-mock/**";
+    /**
+     * To use a custom strategy for how to process Rest DSL requests. The option
+     * is a org.apache.camel.component.rest.openapi.RestOpenapiProcessorStrategy
+     * type.
+     */
+    private RestOpenapiProcessorStrategy restOpenapiProcessorStrategy;
     /**
      * Scheme hostname and port to direct the HTTP requests to in the form of
      * https://hostname:port. Can be configured at the endpoint, component or in
@@ -80,35 +131,28 @@ public class RestOpenApiComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Name of the Camel component that will perform the requests. The component
+     * must be present in Camel registry and it must implement
+     * RestProducerFactory service provider interface. If not set CLASSPATH is
+     * searched for single component that implements RestProducerFactory SPI.
+     * Can be overridden in endpoint configuration.
+     */
+    private String componentName;
+    /**
+     * What payload type this component capable of consuming. Could be one type,
+     * like application/json or multiple types as application/json,
+     * application/xml; q=0.5 according to the RFC7231. This equates to the
+     * value of Accept HTTP header. If set overrides any value found in the
+     * OpenApi specification. Can be overridden in endpoint configuration
+     */
+    private String consumes;
+    /**
      * What payload type this component is producing. For example
      * application/json according to the RFC7231. This equates to the value of
      * Content-Type HTTP header. If set overrides any value present in the
      * OpenApi specification. Can be overridden in endpoint configuration.
      */
     private String produces;
-    /**
-     * If request validation is enabled, this option provides the capability to
-     * customize the creation of OpenApiInteractionValidator used to validate
-     * requests. The option is a
-     * org.apache.camel.component.rest.openapi.validator.RequestValidationCustomizer type.
-     */
-    private RequestValidationCustomizer requestValidationCustomizer;
-    /**
-     * Enable validation of requests against the configured OpenAPI
-     * specification
-     */
-    private Boolean requestValidationEnabled = false;
-    /**
-     * Path to the OpenApi specification file. The scheme, host base path are
-     * taken from this specification, but these can be overridden with
-     * properties on the component or endpoint level. If not given the component
-     * tries to load openapi.json resource. Note that the host defined on the
-     * component and endpoint of this Component should contain the scheme,
-     * hostname and optionally the port in the URI syntax (i.e.
-     * https://api.example.com:8080). Can be overridden in endpoint
-     * configuration.
-     */
-    private URI specificationUri;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -137,20 +181,78 @@ public class RestOpenApiComponentConfiguration
         this.basePath = basePath;
     }
 
-    public String getComponentName() {
-        return componentName;
+    public Boolean getRequestValidationEnabled() {
+        return requestValidationEnabled;
     }
 
-    public void setComponentName(String componentName) {
-        this.componentName = componentName;
+    public void setRequestValidationEnabled(Boolean requestValidationEnabled) {
+        this.requestValidationEnabled = requestValidationEnabled;
     }
 
-    public String getConsumes() {
-        return consumes;
+    public String getSpecificationUri() {
+        return specificationUri;
     }
 
-    public void setConsumes(String consumes) {
-        this.consumes = consumes;
+    public void setSpecificationUri(String specificationUri) {
+        this.specificationUri = specificationUri;
+    }
+
+    public RequestValidationCustomizer getRequestValidationCustomizer() {
+        return requestValidationCustomizer;
+    }
+
+    public void setRequestValidationCustomizer(
+            RequestValidationCustomizer requestValidationCustomizer) {
+        this.requestValidationCustomizer = requestValidationCustomizer;
+    }
+
+    public String getApiContextPath() {
+        return apiContextPath;
+    }
+
+    public void setApiContextPath(String apiContextPath) {
+        this.apiContextPath = apiContextPath;
+    }
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public String getMissingOperation() {
+        return missingOperation;
+    }
+
+    public void setMissingOperation(String missingOperation) {
+        this.missingOperation = missingOperation;
+    }
+
+    public String getConsumerComponentName() {
+        return consumerComponentName;
+    }
+
+    public void setConsumerComponentName(String consumerComponentName) {
+        this.consumerComponentName = consumerComponentName;
+    }
+
+    public String getMockIncludePattern() {
+        return mockIncludePattern;
+    }
+
+    public void setMockIncludePattern(String mockIncludePattern) {
+        this.mockIncludePattern = mockIncludePattern;
+    }
+
+    public RestOpenapiProcessorStrategy getRestOpenapiProcessorStrategy() {
+        return restOpenapiProcessorStrategy;
+    }
+
+    public void setRestOpenapiProcessorStrategy(
+            RestOpenapiProcessorStrategy restOpenapiProcessorStrategy) {
+        this.restOpenapiProcessorStrategy = restOpenapiProcessorStrategy;
     }
 
     public String getHost() {
@@ -169,37 +271,28 @@ public class RestOpenApiComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public String getComponentName() {
+        return componentName;
+    }
+
+    public void setComponentName(String componentName) {
+        this.componentName = componentName;
+    }
+
+    public String getConsumes() {
+        return consumes;
+    }
+
+    public void setConsumes(String consumes) {
+        this.consumes = consumes;
+    }
+
     public String getProduces() {
         return produces;
     }
 
     public void setProduces(String produces) {
         this.produces = produces;
-    }
-
-    public RequestValidationCustomizer getRequestValidationCustomizer() {
-        return requestValidationCustomizer;
-    }
-
-    public void setRequestValidationCustomizer(
-            RequestValidationCustomizer requestValidationCustomizer) {
-        this.requestValidationCustomizer = requestValidationCustomizer;
-    }
-
-    public Boolean getRequestValidationEnabled() {
-        return requestValidationEnabled;
-    }
-
-    public void setRequestValidationEnabled(Boolean requestValidationEnabled) {
-        this.requestValidationEnabled = requestValidationEnabled;
-    }
-
-    public URI getSpecificationUri() {
-        return specificationUri;
-    }
-
-    public void setSpecificationUri(URI specificationUri) {
-        this.specificationUri = specificationUri;
     }
 
     public Boolean getAutowiredEnabled() {

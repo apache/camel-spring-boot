@@ -102,9 +102,9 @@ public class RestConfigurationDefinitionProperties {
      */
     private String contextPath;
     /**
-     * Sets a leading API context-path the REST API services will be using. This
-     * can be used when using components such as camel-servlet where the
-     * deployed web application is deployed using a context-path.
+     * Sets a leading context-path the REST API will be using. This can be used
+     * when using components such as camel-servlet where the deployed web
+     * application is deployed using a context-path.
      */
     private String apiContextPath;
     /**
