@@ -49,6 +49,7 @@ public class CamelMetricsAutoConfiguration {
             MeterRegistry meterRegistry) {
         if (configuration.isEnableRoutePolicy()) {
             MicrometerRoutePolicyFactory factory = new MicrometerRoutePolicyFactory();
+            factory.setCamelContext(camelContext);
             factory.setMeterRegistry(meterRegistry);
             if ("legacy".equalsIgnoreCase(configuration.getNamingStrategy())) {
                 factory.setNamingStrategy(MicrometerRoutePolicyNamingStrategy.LEGACY);
@@ -69,6 +70,7 @@ public class CamelMetricsAutoConfiguration {
         ManagementStrategy managementStrategy = camelContext.getManagementStrategy();
         if (configuration.isEnableExchangeEventNotifier()) {
             MicrometerExchangeEventNotifier notifier = new MicrometerExchangeEventNotifier();
+            notifier.setCamelContext(camelContext);
             notifier.setMeterRegistry(meterRegistry);
             if ("legacy".equalsIgnoreCase(configuration.getNamingStrategy())) {
                 notifier.setNamingStrategy(MicrometerExchangeEventNotifierNamingStrategy.LEGACY);
@@ -78,6 +80,7 @@ public class CamelMetricsAutoConfiguration {
 
         if (configuration.isEnableRouteEventNotifier()) {
             MicrometerRouteEventNotifier notifier = new MicrometerRouteEventNotifier();
+            notifier.setCamelContext(camelContext);
             notifier.setMeterRegistry(meterRegistry);
             if ("legacy".equalsIgnoreCase(configuration.getNamingStrategy())) {
                 notifier.setNamingStrategy(MicrometerRouteEventNotifierNamingStrategy.LEGACY);
@@ -90,6 +93,7 @@ public class CamelMetricsAutoConfiguration {
                 camelContext.setMessageHistory(true);
             }
             MicrometerMessageHistoryFactory factory = new MicrometerMessageHistoryFactory();
+            factory.setCamelContext(camelContext);
             factory.setMeterRegistry(meterRegistry);
             if ("legacy".equalsIgnoreCase(configuration.getNamingStrategy())) {
                 factory.setNamingStrategy(MicrometerMessageHistoryNamingStrategy.LEGACY);
