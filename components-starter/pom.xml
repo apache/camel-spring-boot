@@ -223,6 +223,7 @@
     <module>camel-google-drive-starter</module>
     <module>camel-google-functions-starter</module>
     <module>camel-google-mail-starter</module>
+    <module>camel-google-pubsub-lite-starter</module>
     <module>camel-google-pubsub-starter</module>
     <module>camel-google-secret-manager-starter</module>
     <module>camel-google-sheets-starter</module>
