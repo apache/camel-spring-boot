@@ -30,7 +30,7 @@
     {
       "name": "camel.component.google-pubsub-lite.consumer-bytes-outstanding",
       "type": "java.lang.Long",
-      "description": "How many milliseconds should each producer stay alive in the cache. Must be greater than the allowed size of the largest message (1 MiB).",
+      "description": "The number of quota bytes that may be outstanding to the client. Must be greater than the allowed size of the largest message (1 MiB).",
       "sourceType": "org.apache.camel.component.google.pubsublite.springboot.GooglePubsubLiteComponentConfiguration",
       "defaultValue": 10485760
     },

@@ -49,14 +49,14 @@ public class GooglePubsubLiteComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * The number of quota bytes that may be outstanding to the client. Must be
+     * greater than the allowed size of the largest message (1 MiB).
+     */
+    private Long consumerBytesOutstanding = 10485760L;
+    /**
      * The number of messages that may be outstanding to the client. Must be 0.
      */
     private Long consumerMessagesOutstanding = 1000L;
-    /**
-     * How many milliseconds should each producer stay alive in the cache. Must
-     * be greater than the allowed size of the largest message (1 MiB).
-     */
-    private Long consumerBytesOutstanding = 10485760L;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -106,20 +106,20 @@ public class GooglePubsubLiteComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    public Long getConsumerMessagesOutstanding() {
-        return consumerMessagesOutstanding;
-    }
-
-    public void setConsumerMessagesOutstanding(Long consumerMessagesOutstanding) {
-        this.consumerMessagesOutstanding = consumerMessagesOutstanding;
-    }
-
     public Long getConsumerBytesOutstanding() {
         return consumerBytesOutstanding;
     }
 
     public void setConsumerBytesOutstanding(Long consumerBytesOutstanding) {
         this.consumerBytesOutstanding = consumerBytesOutstanding;
+    }
+
+    public Long getConsumerMessagesOutstanding() {
+        return consumerMessagesOutstanding;
+    }
+
+    public void setConsumerMessagesOutstanding(Long consumerMessagesOutstanding) {
+        this.consumerMessagesOutstanding = consumerMessagesOutstanding;
     }
 
     public Boolean getLazyStartProducer() {

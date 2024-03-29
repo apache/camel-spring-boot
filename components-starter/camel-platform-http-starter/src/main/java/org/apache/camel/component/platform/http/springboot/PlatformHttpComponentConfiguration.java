@@ -17,6 +17,7 @@
 package org.apache.camel.component.platform.http.springboot;
 
 import org.apache.camel.component.platform.http.spi.PlatformHttpEngine;
+import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -64,6 +65,12 @@ public class PlatformHttpComponentConfiguration
      * a org.apache.camel.component.platform.http.spi.PlatformHttpEngine type.
      */
     private PlatformHttpEngine engine;
+    /**
+     * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
+     * header to and from Camel message. The option is a
+     * org.apache.camel.spi.HeaderFilterStrategy type.
+     */
+    private HeaderFilterStrategy headerFilterStrategy;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -87,5 +94,14 @@ public class PlatformHttpComponentConfiguration
 
     public void setEngine(PlatformHttpEngine engine) {
         this.engine = engine;
+    }
+
+    public HeaderFilterStrategy getHeaderFilterStrategy() {
+        return headerFilterStrategy;
+    }
+
+    public void setHeaderFilterStrategy(
+            HeaderFilterStrategy headerFilterStrategy) {
+        this.headerFilterStrategy = headerFilterStrategy;
     }
 }
