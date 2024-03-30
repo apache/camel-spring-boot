@@ -17,7 +17,6 @@
 package org.apache.camel.component.rest.openapi.springboot;
 
 import org.apache.camel.component.rest.openapi.RestOpenapiProcessorStrategy;
-import org.apache.camel.component.rest.openapi.validator.RequestValidationCustomizer;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -53,13 +52,6 @@ public class RestOpenApiComponentConfiguration
      * configuration.
      */
     private String specificationUri = "openapi.json";
-    /**
-     * If request validation is enabled, this option provides the capability to
-     * customize the creation of OpenApiInteractionValidator used to validate
-     * requests. The option is a
-     * org.apache.camel.component.rest.openapi.validator.RequestValidationCustomizer type.
-     */
-    private RequestValidationCustomizer requestValidationCustomizer;
     /**
      * Sets the context-path to use for servicing the OpenAPI specification
      */
@@ -192,15 +184,6 @@ public class RestOpenApiComponentConfiguration
 
     public void setSpecificationUri(String specificationUri) {
         this.specificationUri = specificationUri;
-    }
-
-    public RequestValidationCustomizer getRequestValidationCustomizer() {
-        return requestValidationCustomizer;
-    }
-
-    public void setRequestValidationCustomizer(
-            RequestValidationCustomizer requestValidationCustomizer) {
-        this.requestValidationCustomizer = requestValidationCustomizer;
     }
 
     public String getApiContextPath() {

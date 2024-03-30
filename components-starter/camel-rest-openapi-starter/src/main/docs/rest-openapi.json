@@ -109,12 +109,6 @@
       "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration"
     },
     {
-      "name": "camel.component.rest-openapi.request-validation-customizer",
-      "type": "org.apache.camel.component.rest.openapi.validator.RequestValidationCustomizer",
-      "description": "If request validation is enabled, this option provides the capability to customize the creation of OpenApiInteractionValidator used to validate requests. The option is a org.apache.camel.component.rest.openapi.validator.RequestValidationCustomizer type.",
-      "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration"
-    },
-    {
       "name": "camel.component.rest-openapi.request-validation-enabled",
       "type": "java.lang.Boolean",
       "description": "Enable validation of requests against the configured OpenAPI specification",
