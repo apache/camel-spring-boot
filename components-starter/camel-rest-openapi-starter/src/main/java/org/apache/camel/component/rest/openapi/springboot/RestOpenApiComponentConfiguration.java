@@ -43,11 +43,6 @@ public class RestOpenApiComponentConfiguration
      */
     private String basePath;
     /**
-     * Enable validation of requests against the configured OpenAPI
-     * specification
-     */
-    private Boolean requestValidationEnabled = false;
-    /**
      * Path to the OpenApi specification file. The scheme, host base path are
      * taken from this specification, but these can be overridden with
      * properties on the component or endpoint level. If not given the component
@@ -131,6 +126,11 @@ public class RestOpenApiComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Enable validation of requests against the configured OpenAPI
+     * specification
+     */
+    private Boolean requestValidationEnabled = false;
+    /**
      * Name of the Camel component that will perform the requests. The component
      * must be present in Camel registry and it must implement
      * RestProducerFactory service provider interface. If not set CLASSPATH is
@@ -163,6 +163,11 @@ public class RestOpenApiComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * Whether to enable validation of the client request to check if the
+     * incoming request is valid according to the OpenAPI specification
+     */
+    private Boolean clientRequestValidation = false;
+    /**
      * Customize TLS parameters used by the component. If not set defaults to
      * the TLS parameters set in the Camel context. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
@@ -179,14 +184,6 @@ public class RestOpenApiComponentConfiguration
 
     public void setBasePath(String basePath) {
         this.basePath = basePath;
-    }
-
-    public Boolean getRequestValidationEnabled() {
-        return requestValidationEnabled;
-    }
-
-    public void setRequestValidationEnabled(Boolean requestValidationEnabled) {
-        this.requestValidationEnabled = requestValidationEnabled;
     }
 
     public String getSpecificationUri() {
@@ -271,6 +268,14 @@ public class RestOpenApiComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public Boolean getRequestValidationEnabled() {
+        return requestValidationEnabled;
+    }
+
+    public void setRequestValidationEnabled(Boolean requestValidationEnabled) {
+        this.requestValidationEnabled = requestValidationEnabled;
+    }
+
     public String getComponentName() {
         return componentName;
     }
@@ -301,6 +306,14 @@ public class RestOpenApiComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Boolean getClientRequestValidation() {
+        return clientRequestValidation;
+    }
+
+    public void setClientRequestValidation(Boolean clientRequestValidation) {
+        this.clientRequestValidation = clientRequestValidation;
     }
 
     public SSLContextParameters getSslContextParameters() {
