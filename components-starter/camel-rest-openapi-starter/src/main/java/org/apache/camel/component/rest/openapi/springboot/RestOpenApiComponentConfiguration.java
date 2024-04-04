@@ -71,10 +71,21 @@ public class RestOpenApiComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Whether to enable validation of the client request to check if the
+     * incoming request is valid according to the OpenAPI specification
+     */
+    private Boolean clientRequestValidation = false;
+    /**
      * Whether the consumer should fail,ignore or return a mock response for
      * OpenAPI operations that are not mapped to a corresponding route.
      */
     private String missingOperation = "fail";
+    /**
+     * Package name to use as base (offset) for classpath scanning of POJO
+     * classes are located when using binding mode is enabled for JSon or XML.
+     * Multiple package names can be separated by comma.
+     */
+    private String bindingPackageScan;
     /**
      * Name of the Camel component that will service the requests. The component
      * must be present in Camel registry and it must implement
@@ -155,11 +166,6 @@ public class RestOpenApiComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * Whether to enable validation of the client request to check if the
-     * incoming request is valid according to the OpenAPI specification
-     */
-    private Boolean clientRequestValidation = false;
-    /**
      * Customize TLS parameters used by the component. If not set defaults to
      * the TLS parameters set in the Camel context. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
@@ -202,12 +208,28 @@ public class RestOpenApiComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
+    public Boolean getClientRequestValidation() {
+        return clientRequestValidation;
+    }
+
+    public void setClientRequestValidation(Boolean clientRequestValidation) {
+        this.clientRequestValidation = clientRequestValidation;
+    }
+
     public String getMissingOperation() {
         return missingOperation;
     }
 
     public void setMissingOperation(String missingOperation) {
         this.missingOperation = missingOperation;
+    }
+
+    public String getBindingPackageScan() {
+        return bindingPackageScan;
+    }
+
+    public void setBindingPackageScan(String bindingPackageScan) {
+        this.bindingPackageScan = bindingPackageScan;
     }
 
     public String getConsumerComponentName() {
@@ -289,14 +311,6 @@ public class RestOpenApiComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
-    }
-
-    public Boolean getClientRequestValidation() {
-        return clientRequestValidation;
-    }
-
-    public void setClientRequestValidation(Boolean clientRequestValidation) {
-        this.clientRequestValidation = clientRequestValidation;
     }
 
     public SSLContextParameters getSslContextParameters() {

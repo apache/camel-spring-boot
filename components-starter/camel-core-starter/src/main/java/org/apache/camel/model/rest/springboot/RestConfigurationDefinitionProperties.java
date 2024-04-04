@@ -130,6 +130,12 @@ public class RestConfigurationDefinitionProperties {
      */
     private RestBindingMode bindingMode = RestBindingMode.off;
     /**
+     * Package name to use as base (offset) for classpath scanning of POJO
+     * classes are located when using binding mode is enabled for JSon or XML.
+     * Multiple package names can be separated by comma.
+     */
+    private String bindingPackageScan;
+    /**
      * Whether to skip binding on output if there is a custom HTTP error code
      * header. This allows to build custom error messages that do not bind to
      * json / xml etc, as success messages otherwise will do.
@@ -332,6 +338,14 @@ public class RestConfigurationDefinitionProperties {
 
     public void setBindingMode(RestBindingMode bindingMode) {
         this.bindingMode = bindingMode;
+    }
+
+    public String getBindingPackageScan() {
+        return bindingPackageScan;
+    }
+
+    public void setBindingPackageScan(String bindingPackageScan) {
+        this.bindingPackageScan = bindingPackageScan;
     }
 
     public Boolean getSkipBindingOnErrorCode() {
