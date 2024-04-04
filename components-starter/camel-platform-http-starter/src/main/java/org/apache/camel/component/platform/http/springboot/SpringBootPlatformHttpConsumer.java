@@ -25,6 +25,7 @@ import org.apache.camel.Processor;
 import org.apache.camel.Suspendable;
 import org.apache.camel.SuspendableService;
 import org.apache.camel.component.platform.http.PlatformHttpEndpoint;
+import org.apache.camel.component.platform.http.spi.PlatformHttpConsumer;
 import org.apache.camel.http.common.DefaultHttpBinding;
 import org.apache.camel.http.common.HttpHelper;
 import org.apache.camel.support.DefaultConsumer;
@@ -33,7 +34,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements Suspendable, SuspendableService {
+public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements PlatformHttpConsumer, Suspendable, SuspendableService {
 
     private static final Logger LOG = LoggerFactory.getLogger(SpringBootPlatformHttpConsumer.class);
 

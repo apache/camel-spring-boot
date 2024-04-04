@@ -19,6 +19,7 @@ package org.apache.camel.component.platform.http.springboot;
 import org.apache.camel.Consumer;
 import org.apache.camel.Processor;
 import org.apache.camel.component.platform.http.PlatformHttpEndpoint;
+import org.apache.camel.component.platform.http.spi.PlatformHttpConsumer;
 import org.apache.camel.component.platform.http.spi.PlatformHttpEngine;
 
 public class SpringBootPlatformHttpEngine implements PlatformHttpEngine {
@@ -30,7 +31,7 @@ public class SpringBootPlatformHttpEngine implements PlatformHttpEngine {
     }
 
     @Override
-    public Consumer createConsumer(PlatformHttpEndpoint endpoint, Processor processor) {
+    public PlatformHttpConsumer createConsumer(PlatformHttpEndpoint endpoint, Processor processor) {
         return new SpringBootPlatformHttpConsumer(endpoint, processor);
     }
 
