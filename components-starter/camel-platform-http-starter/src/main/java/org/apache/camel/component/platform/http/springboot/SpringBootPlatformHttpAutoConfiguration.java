@@ -25,6 +25,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.core.env.Environment;
 
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(name = { "org.apache.camel.component.servlet.springboot.PlatformHttpComponentAutoConfiguration",
@@ -36,8 +37,9 @@ public class SpringBootPlatformHttpAutoConfiguration {
 
     @Bean(name = "platform-http-engine")
     @ConditionalOnMissingBean(PlatformHttpEngine.class)
-    public PlatformHttpEngine springBootPlatformHttpEngine() {
-        return new SpringBootPlatformHttpEngine();
+    public PlatformHttpEngine springBootPlatformHttpEngine(Environment env) {
+        int port = Integer.parseInt(env.getProperty("server.port", "8080"));
+        return new SpringBootPlatformHttpEngine(port);
     }
 
     @Bean

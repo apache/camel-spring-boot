@@ -23,9 +23,19 @@ import org.apache.camel.component.platform.http.spi.PlatformHttpEngine;
 
 public class SpringBootPlatformHttpEngine implements PlatformHttpEngine {
 
+    private final int port;
+
+    public SpringBootPlatformHttpEngine(int port) {
+        this.port = port;
+    }
+
     @Override
     public Consumer createConsumer(PlatformHttpEndpoint endpoint, Processor processor) {
         return new SpringBootPlatformHttpConsumer(endpoint, processor);
     }
 
+    @Override
+    public int getServerPort() {
+        return port;
+    }
 }
