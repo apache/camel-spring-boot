@@ -535,12 +535,6 @@
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration"
     },
     {
-      "name": "camel.component.debezium-postgres.snapshot-custom-class",
-      "type": "java.lang.String",
-      "description": "When 'snapshot.mode' is set as custom, this setting must be set to specify a fully qualified class name to load (via the default class loader). This class must implement the 'Snapshotter' interface and is called on each app boot to determine whether to do a snapshot and how to build queries.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration"
-    },
-    {
       "name": "camel.component.debezium-postgres.snapshot-delay-ms",
       "type": "java.lang.Long",
       "description": "A delay period before a snapshot will begin, given in milliseconds. Defaults to 0 ms. The option is a long type.",
@@ -567,6 +561,19 @@
       "defaultValue": 10000
     },
     {
+      "name": "camel.component.debezium-postgres.snapshot-locking-mode",
+      "type": "java.lang.String",
+      "description": "Controls how the connector holds locks on tables while performing the schema snapshot. The 'shared' which means the connector will hold a table lock that prevents exclusive table access for just the initial portion of the snapshot while the database schemas and other metadata are being read. The remaining work in a snapshot involves selecting all rows from each table, and this is done using a flashback query that requires no locks. However, in some cases it may be desirable to avoid locks entirely which can be done by specifying 'none'. This mode is only safe to use if no schema changes are happening while the snapshot is taken.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": "none"
+    },
+    {
+      "name": "camel.component.debezium-postgres.snapshot-locking-mode-custom-name",
+      "type": "java.lang.String",
+      "description": "When 'snapshot.locking.mode' is set as custom, this setting must be set to specify a the name of the custom implementation provided in the 'name()' method. The implementations must implement the 'SnapshotterLocking' interface and is called to determine how to lock tables during schema snapshot.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration"
+    },
+    {
       "name": "camel.component.debezium-postgres.snapshot-max-threads",
       "type": "java.lang.Integer",
       "description": "The maximum number of threads used to perform the snapshot. Defaults to 1.",
@@ -579,6 +586,60 @@
       "description": "The criteria for running a snapshot upon startup of the connector. Select one of the following snapshot options: 'always': The connector runs a snapshot every time that it starts. After the snapshot completes, the connector begins to stream changes from the transaction log.; 'initial' (default): If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures the current full state of the configured tables. After the snapshot completes, the connector begins to stream changes from the transaction log. 'initial_only': The connector performs a snapshot as it does for the 'initial' option, but after the connector completes the snapshot, it stops, and does not stream changes from the transaction log.; 'never': The connector does not run a snapshot. Upon first startup, the connector immediately begins reading from the beginning of the transaction log. 'exported': This option is deprecated; use 'initial' instead.; 'custom': The connector loads a custom class to specify how the connector performs snapshots. For more information, see Custom snapshotter SPI in the PostgreSQL connector documentation.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
       "defaultValue": "initial"
+    },
+    {
+      "name": "camel.component.debezium-postgres.snapshot-mode-configuration-based-snapshot-data",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the data should be snapshotted or not.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-postgres.snapshot-mode-configuration-based-snapshot-on-data-error",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the data should be snapshotted or not in case of error.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-postgres.snapshot-mode-configuration-based-snapshot-on-schema-error",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the schema should be snapshotted or not in case of error.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-postgres.snapshot-mode-configuration-based-snapshot-schema",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the schema should be snapshotted or not.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-postgres.snapshot-mode-configuration-based-start-stream",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the stream should start or not after snapshot.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-postgres.snapshot-mode-custom-name",
+      "type": "java.lang.String",
+      "description": "When 'snapshot.mode' is set as custom, this setting must be set to specify a the name of the custom implementation provided in the 'name()' method. The implementations must implement the 'Snapshotter' interface and is called on each app boot to determine whether to do a snapshot.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-postgres.snapshot-query-mode",
+      "type": "java.lang.String",
+      "description": "Controls query used during the snapshot",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": "select_all"
+    },
+    {
+      "name": "camel.component.debezium-postgres.snapshot-query-mode-custom-name",
+      "type": "java.lang.String",
+      "description": "When 'snapshot.query.mode' is set as custom, this setting must be set to specify a the name of the custom implementation provided in the 'name()' method. The implementations must implement the 'SnapshotterQuery' interface and is called to determine how to build queries during snapshot.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-postgres.snapshot-select-statement-overrides",

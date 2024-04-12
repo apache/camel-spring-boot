@@ -413,6 +413,47 @@
       "defaultValue": "initial"
     },
     {
+      "name": "camel.component.debezium-db2.snapshot-mode-configuration-based-snapshot-data",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the data should be snapshotted or not.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-db2.snapshot-mode-configuration-based-snapshot-on-data-error",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the data should be snapshotted or not in case of error.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-db2.snapshot-mode-configuration-based-snapshot-on-schema-error",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the schema should be snapshotted or not in case of error.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-db2.snapshot-mode-configuration-based-snapshot-schema",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the schema should be snapshotted or not.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-db2.snapshot-mode-configuration-based-start-stream",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the stream should start or not after snapshot.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-db2.snapshot-mode-custom-name",
+      "type": "java.lang.String",
+      "description": "When 'snapshot.mode' is set as custom, this setting must be set to specify a the name of the custom implementation provided in the 'name()' method. The implementations must implement the 'Snapshotter' interface and is called on each app boot to determine whether to do a snapshot.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
+    },
+    {
       "name": "camel.component.debezium-db2.snapshot-select-statement-overrides",
       "type": "java.lang.String",
       "description": "This property contains a comma-separated list of fully-qualified tables (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connectors. Select statements for the individual tables are specified in further configuration properties, one for each table, identified by the id 'snapshot.select.statement.overrides.DB_NAME.TABLE_NAME' or 'snapshot.select.statement.overrides.SCHEMA_NAME.TABLE_NAME', respectively. The value of those properties is the select statement to use when retrieving data from the specific table during snapshotting. A possible use case for large append-only tables is setting a specific point where to start (resume) snapshotting, in case a previous snapshotting was interrupted.",

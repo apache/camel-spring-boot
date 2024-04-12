@@ -613,11 +613,65 @@
       "defaultValue": "initial"
     },
     {
+      "name": "camel.component.debezium-mysql.snapshot-mode-configuration-based-snapshot-data",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the data should be snapshotted or not.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-mysql.snapshot-mode-configuration-based-snapshot-on-data-error",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the data should be snapshotted or not in case of error.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-mysql.snapshot-mode-configuration-based-snapshot-on-schema-error",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the schema should be snapshotted or not in case of error.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-mysql.snapshot-mode-configuration-based-snapshot-schema",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the schema should be snapshotted or not.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-mysql.snapshot-mode-configuration-based-start-stream",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the stream should start or not after snapshot.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-mysql.snapshot-mode-custom-name",
+      "type": "java.lang.String",
+      "description": "When 'snapshot.mode' is set as custom, this setting must be set to specify a the name of the custom implementation provided in the 'name()' method. The implementations must implement the 'Snapshotter' interface and is called on each app boot to determine whether to do a snapshot.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration"
+    },
+    {
       "name": "camel.component.debezium-mysql.snapshot-new-tables",
       "type": "java.lang.String",
       "description": "BETA FEATURE: On connector restart, the connector will check if there have been any new tables added to the configuration, and snapshot them. There is presently only two options: 'off': Default behavior. Do not snapshot new tables. 'parallel': The snapshot of the new tables will occur in parallel to the continued binlog reading of the old tables. When the snapshot completes, an independent binlog reader will begin reading the events for the new tables until it catches up to present time. At this point, both old and new binlog readers will be momentarily halted and new binlog reader will start that will read the binlog for all configured tables. The parallel binlog reader will have a configured server id of 10000 the primary binlog reader's server id.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": "off"
+    },
+    {
+      "name": "camel.component.debezium-mysql.snapshot-query-mode",
+      "type": "java.lang.String",
+      "description": "Controls query used during the snapshot",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": "select_all"
+    },
+    {
+      "name": "camel.component.debezium-mysql.snapshot-query-mode-custom-name",
+      "type": "java.lang.String",
+      "description": "When 'snapshot.query.mode' is set as custom, this setting must be set to specify a the name of the custom implementation provided in the 'name()' method. The implementations must implement the 'SnapshotterQuery' interface and is called to determine how to build queries during snapshot.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-mysql.snapshot-select-statement-overrides",

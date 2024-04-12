@@ -82,6 +82,13 @@
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
+      "name": "camel.component.debezium-sqlserver.data-query-mode",
+      "type": "java.lang.String",
+      "description": "Controls how the connector queries CDC data. The default is 'function', which means the data is queried by means of calling cdc.fn_cdc_get_all_changes_# function. The value of 'direct' makes the connector to query the change tables directly.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": "function"
+    },
+    {
       "name": "camel.component.debezium-sqlserver.database-hostname",
       "type": "java.lang.String",
       "description": "Resolvable hostname or IP address of the database server.",
@@ -441,7 +448,7 @@
     {
       "name": "camel.component.debezium-sqlserver.snapshot-isolation-mode",
       "type": "java.lang.String",
-      "description": "Controls which transaction isolation level is used and how long the connector locks the captured tables. The default is 'repeatable_read', which means that repeatable read isolation level is used. In addition, exclusive locks are taken only during schema snapshot. Using a value of 'exclusive' ensures that the connector holds the exclusive lock (and thus prevents any reads and updates) for all captured tables during the entire snapshot duration. When 'snapshot' is specified, connector runs the initial snapshot in SNAPSHOT isolation level, which guarantees snapshot consistency. In addition, neither table nor row-level locks are held. When 'read_committed' is specified, connector runs the initial snapshot in READ COMMITTED isolation level. No long-running locks are taken, so that initial snapshot does not prevent other transactions from updating table rows. Snapshot consistency is not guaranteed.In 'read_uncommitted' mode neither table nor row-level locks are acquired, but connector does not guarantee snapshot consistency.",
+      "description": "Controls which transaction isolation level is used and how long the connector locks the captured tables. The default is 'repeatable_read', which means that repeatable read isolation level is used. In addition, type of acquired lock during schema snapshot depends on snapshot.locking.mode property. Using a value of 'exclusive' ensures that the connector holds the type of lock specified with snapshot.locking.mode property (and thus prevents any reads and updates) for all captured tables during the entire snapshot duration. When 'snapshot' is specified, connector runs the initial snapshot in SNAPSHOT isolation level, which guarantees snapshot consistency. In addition, neither table nor row-level locks are held. When 'read_committed' is specified, connector runs the initial snapshot in READ COMMITTED isolation level. No long-running locks are taken, so that initial snapshot does not prevent other transactions from updating table rows. Snapshot consistency is not guaranteed.In 'read_uncommitted' mode neither table nor row-level locks are acquired, but connector does not guarantee snapshot consistency.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "repeatable_read"
     },
@@ -465,6 +472,47 @@
       "description": "The criteria for running a snapshot upon startup of the connector. Select one of the following snapshot options: 'initial' (default): If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures the current full state of the configured tables. After the snapshot completes, the connector begins to stream changes from the transaction log.; 'initial_only': The connector performs a snapshot as it does for the 'initial' option, but after the connector completes the snapshot, it stops, and does not stream changes from the transaction log.; 'schema_only': If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures only the schema (table structures), but not any table data. After the snapshot completes, the connector begins to stream changes from the transaction log.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "initial"
+    },
+    {
+      "name": "camel.component.debezium-sqlserver.snapshot-mode-configuration-based-snapshot-data",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the data should be snapshotted or not.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-sqlserver.snapshot-mode-configuration-based-snapshot-on-data-error",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the data should be snapshotted or not in case of error.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-sqlserver.snapshot-mode-configuration-based-snapshot-on-schema-error",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the schema should be snapshotted or not in case of error.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-sqlserver.snapshot-mode-configuration-based-snapshot-schema",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the schema should be snapshotted or not.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-sqlserver.snapshot-mode-configuration-based-start-stream",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the stream should start or not after snapshot.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-sqlserver.snapshot-mode-custom-name",
+      "type": "java.lang.String",
+      "description": "When 'snapshot.mode' is set as custom, this setting must be set to specify a the name of the custom implementation provided in the 'name()' method. The implementations must implement the 'Snapshotter' interface and is called on each app boot to determine whether to do a snapshot.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.snapshot-select-statement-overrides",

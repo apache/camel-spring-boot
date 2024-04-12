@@ -20,6 +20,19 @@
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-oracle.archive-destination-name",
+      "type": "java.lang.String",
+      "description": "Sets the specific archive log destination as the source for reading archive logs.When not set, the connector will automatically select the first LOCAL and VALID destination.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.archive-log-hours",
+      "type": "java.lang.Long",
+      "description": "The number of hours in the past from SYSDATE to mine archive logs. Using 0 mines all available archive logs",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
       "name": "camel.component.debezium-oracle.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
@@ -240,19 +253,6 @@
       "defaultValue": false
     },
     {
-      "name": "camel.component.debezium-oracle.log-mining-archive-destination-name",
-      "type": "java.lang.String",
-      "description": "Sets the specific archive log destination as the source for reading archive logs.When not set, the connector will automatically select the first LOCAL and VALID destination.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
-    },
-    {
-      "name": "camel.component.debezium-oracle.log-mining-archive-log-hours",
-      "type": "java.lang.Long",
-      "description": "The number of hours in the past from SYSDATE to mine archive logs. Using 0 mines all available archive logs",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
-      "defaultValue": 0
-    },
-    {
       "name": "camel.component.debezium-oracle.log-mining-archive-log-only-mode",
       "type": "java.lang.Boolean",
       "description": "When set to 'false', the default, the connector will mine both archive log and redo logs to emit change events. When set to 'true', the connector will only mine archive logs. There are circumstances where its advantageous to only mine archive logs and accept latency in event emission due to frequent revolving redo logs.",
@@ -344,6 +344,13 @@
       "description": "The name of the flush table used by the connector, defaults to LOG_MINING_FLUSH.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": "LOG_MINING_FLUSH"
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-include-redo-sql",
+      "type": "java.lang.Boolean",
+      "description": "When enabled, the transaction log REDO SQL will be included in the source information block.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.debezium-oracle.log-mining-query-filter-mode",
@@ -651,6 +658,13 @@
       "defaultValue": "t"
     },
     {
+      "name": "camel.component.debezium-oracle.snapshot-database-errors-max-retries",
+      "type": "java.lang.Integer",
+      "description": "The number of attempts to retry database errors during snapshots before failing.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
       "name": "camel.component.debezium-oracle.snapshot-delay-ms",
       "type": "java.lang.Long",
       "description": "A delay period before a snapshot will begin, given in milliseconds. Defaults to 0 ms. The option is a long type.",
@@ -702,6 +716,47 @@
       "description": "The criteria for running a snapshot upon startup of the connector. Select one of the following snapshot options: 'always': The connector runs a snapshot every time that it starts. After the snapshot completes, the connector begins to stream changes from the redo logs.; 'initial' (default): If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures the current full state of the configured tables. After the snapshot completes, the connector begins to stream changes from the redo logs. 'initial_only': The connector performs a snapshot as it does for the 'initial' option, but after the connector completes the snapshot, it stops, and does not stream changes from the redo logs.; 'schema_only': If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures only the schema (table structures), but not any table data. After the snapshot completes, the connector begins to stream changes from the redo logs.; 'schema_only_recovery': The connector performs a snapshot that captures only the database schema history. The connector then transitions to streaming from the redo logs. Use this setting to restore a corrupted or lost database schema history topic. Do not use if the database schema was modified after the connector stopped.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": "initial"
+    },
+    {
+      "name": "camel.component.debezium-oracle.snapshot-mode-configuration-based-snapshot-data",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the data should be snapshotted or not.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-oracle.snapshot-mode-configuration-based-snapshot-on-data-error",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the data should be snapshotted or not in case of error.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-oracle.snapshot-mode-configuration-based-snapshot-on-schema-error",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the schema should be snapshotted or not in case of error.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-oracle.snapshot-mode-configuration-based-snapshot-schema",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the schema should be snapshotted or not.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-oracle.snapshot-mode-configuration-based-start-stream",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the stream should start or not after snapshot.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-oracle.snapshot-mode-custom-name",
+      "type": "java.lang.String",
+      "description": "When 'snapshot.mode' is set as custom, this setting must be set to specify a the name of the custom implementation provided in the 'name()' method. The implementations must implement the 'Snapshotter' interface and is called on each app boot to determine whether to do a snapshot.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-oracle.snapshot-select-statement-overrides",

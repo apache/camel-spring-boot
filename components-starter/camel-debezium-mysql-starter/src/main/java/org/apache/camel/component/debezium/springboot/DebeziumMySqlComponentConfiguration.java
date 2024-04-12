@@ -629,6 +629,40 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String snapshotMode = "initial";
     /**
+     * When 'snapshot.mode' is set as configuration_based, this setting permits
+     * to specify whenever the data should be snapshotted or not.
+     */
+    private Boolean snapshotModeConfigurationBasedSnapshotData = false;
+    /**
+     * When 'snapshot.mode' is set as configuration_based, this setting permits
+     * to specify whenever the data should be snapshotted or not in case of
+     * error.
+     */
+    private Boolean snapshotModeConfigurationBasedSnapshotOnDataError = false;
+    /**
+     * When 'snapshot.mode' is set as configuration_based, this setting permits
+     * to specify whenever the schema should be snapshotted or not in case of
+     * error.
+     */
+    private Boolean snapshotModeConfigurationBasedSnapshotOnSchemaError = false;
+    /**
+     * When 'snapshot.mode' is set as configuration_based, this setting permits
+     * to specify whenever the schema should be snapshotted or not.
+     */
+    private Boolean snapshotModeConfigurationBasedSnapshotSchema = false;
+    /**
+     * When 'snapshot.mode' is set as configuration_based, this setting permits
+     * to specify whenever the stream should start or not after snapshot.
+     */
+    private Boolean snapshotModeConfigurationBasedStartStream = false;
+    /**
+     * When 'snapshot.mode' is set as custom, this setting must be set to
+     * specify a the name of the custom implementation provided in the 'name()'
+     * method. The implementations must implement the 'Snapshotter' interface
+     * and is called on each app boot to determine whether to do a snapshot.
+     */
+    private String snapshotModeCustomName;
+    /**
      * BETA FEATURE: On connector restart, the connector will check if there
      * have been any new tables added to the configuration, and snapshot them.
      * There is presently only two options: 'off': Default behavior. Do not
@@ -642,6 +676,18 @@ public class DebeziumMySqlComponentConfiguration
      * server id of 10000 the primary binlog reader's server id.
      */
     private String snapshotNewTables = "off";
+    /**
+     * Controls query used during the snapshot
+     */
+    private String snapshotQueryMode = "select_all";
+    /**
+     * When 'snapshot.query.mode' is set as custom, this setting must be set to
+     * specify a the name of the custom implementation provided in the 'name()'
+     * method. The implementations must implement the 'SnapshotterQuery'
+     * interface and is called to determine how to build queries during
+     * snapshot.
+     */
+    private String snapshotQueryModeCustomName;
     /**
      * This property contains a comma-separated list of fully-qualified tables
      * (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the
@@ -1445,12 +1491,82 @@ public class DebeziumMySqlComponentConfiguration
         this.snapshotMode = snapshotMode;
     }
 
+    public Boolean getSnapshotModeConfigurationBasedSnapshotData() {
+        return snapshotModeConfigurationBasedSnapshotData;
+    }
+
+    public void setSnapshotModeConfigurationBasedSnapshotData(
+            Boolean snapshotModeConfigurationBasedSnapshotData) {
+        this.snapshotModeConfigurationBasedSnapshotData = snapshotModeConfigurationBasedSnapshotData;
+    }
+
+    public Boolean getSnapshotModeConfigurationBasedSnapshotOnDataError() {
+        return snapshotModeConfigurationBasedSnapshotOnDataError;
+    }
+
+    public void setSnapshotModeConfigurationBasedSnapshotOnDataError(
+            Boolean snapshotModeConfigurationBasedSnapshotOnDataError) {
+        this.snapshotModeConfigurationBasedSnapshotOnDataError = snapshotModeConfigurationBasedSnapshotOnDataError;
+    }
+
+    public Boolean getSnapshotModeConfigurationBasedSnapshotOnSchemaError() {
+        return snapshotModeConfigurationBasedSnapshotOnSchemaError;
+    }
+
+    public void setSnapshotModeConfigurationBasedSnapshotOnSchemaError(
+            Boolean snapshotModeConfigurationBasedSnapshotOnSchemaError) {
+        this.snapshotModeConfigurationBasedSnapshotOnSchemaError = snapshotModeConfigurationBasedSnapshotOnSchemaError;
+    }
+
+    public Boolean getSnapshotModeConfigurationBasedSnapshotSchema() {
+        return snapshotModeConfigurationBasedSnapshotSchema;
+    }
+
+    public void setSnapshotModeConfigurationBasedSnapshotSchema(
+            Boolean snapshotModeConfigurationBasedSnapshotSchema) {
+        this.snapshotModeConfigurationBasedSnapshotSchema = snapshotModeConfigurationBasedSnapshotSchema;
+    }
+
+    public Boolean getSnapshotModeConfigurationBasedStartStream() {
+        return snapshotModeConfigurationBasedStartStream;
+    }
+
+    public void setSnapshotModeConfigurationBasedStartStream(
+            Boolean snapshotModeConfigurationBasedStartStream) {
+        this.snapshotModeConfigurationBasedStartStream = snapshotModeConfigurationBasedStartStream;
+    }
+
+    public String getSnapshotModeCustomName() {
+        return snapshotModeCustomName;
+    }
+
+    public void setSnapshotModeCustomName(String snapshotModeCustomName) {
+        this.snapshotModeCustomName = snapshotModeCustomName;
+    }
+
     public String getSnapshotNewTables() {
         return snapshotNewTables;
     }
 
     public void setSnapshotNewTables(String snapshotNewTables) {
         this.snapshotNewTables = snapshotNewTables;
+    }
+
+    public String getSnapshotQueryMode() {
+        return snapshotQueryMode;
+    }
+
+    public void setSnapshotQueryMode(String snapshotQueryMode) {
+        this.snapshotQueryMode = snapshotQueryMode;
+    }
+
+    public String getSnapshotQueryModeCustomName() {
+        return snapshotQueryModeCustomName;
+    }
+
+    public void setSnapshotQueryModeCustomName(
+            String snapshotQueryModeCustomName) {
+        this.snapshotQueryModeCustomName = snapshotQueryModeCustomName;
     }
 
     public String getSnapshotSelectStatementOverrides() {

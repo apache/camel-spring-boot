@@ -129,6 +129,17 @@ public class DebeziumOracleComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * Sets the specific archive log destination as the source for reading
+     * archive logs.When not set, the connector will automatically select the
+     * first LOCAL and VALID destination.
+     */
+    private String archiveDestinationName;
+    /**
+     * The number of hours in the past from SYSDATE to mine archive logs. Using
+     * 0 mines all available archive logs
+     */
+    private Long archiveLogHours = 0L;
+    /**
      * Specify how binary (blob, binary, etc.) columns should be represented in
      * change events, including: 'bytes' represents binary data as byte array
      * (default); 'base64' represents binary data as base64-encoded string;
@@ -291,17 +302,6 @@ public class DebeziumOracleComponentConfiguration
      */
     private Boolean lobEnabled = false;
     /**
-     * Sets the specific archive log destination as the source for reading
-     * archive logs.When not set, the connector will automatically select the
-     * first LOCAL and VALID destination.
-     */
-    private String logMiningArchiveDestinationName;
-    /**
-     * The number of hours in the past from SYSDATE to mine archive logs. Using
-     * 0 mines all available archive logs
-     */
-    private Long logMiningArchiveLogHours = 0L;
-    /**
      * When set to 'false', the default, the connector will mine both archive
      * log and redo logs to emit change events. When set to 'true', the
      * connector will only mine archive logs. There are circumstances where its
@@ -378,6 +378,11 @@ public class DebeziumOracleComponentConfiguration
      * LOG_MINING_FLUSH.
      */
     private String logMiningFlushTableName = "LOG_MINING_FLUSH";
+    /**
+     * When enabled, the transaction log REDO SQL will be included in the source
+     * information block.
+     */
+    private Boolean logMiningIncludeRedoSql = false;
     /**
      * Specifies how the filter configuration is applied to the LogMiner
      * database query. none - The query does not apply any schema or table
@@ -603,6 +608,11 @@ public class DebeziumOracleComponentConfiguration
      */
     private String skippedOperations = "t";
     /**
+     * The number of attempts to retry database errors during snapshots before
+     * failing.
+     */
+    private Integer snapshotDatabaseErrorsMaxRetries = 0;
+    /**
      * A delay period before a snapshot will begin, given in milliseconds.
      * Defaults to 0 ms. The option is a long type.
      */
@@ -667,6 +677,40 @@ public class DebeziumOracleComponentConfiguration
      * was modified after the connector stopped.
      */
     private String snapshotMode = "initial";
+    /**
+     * When 'snapshot.mode' is set as configuration_based, this setting permits
+     * to specify whenever the data should be snapshotted or not.
+     */
+    private Boolean snapshotModeConfigurationBasedSnapshotData = false;
+    /**
+     * When 'snapshot.mode' is set as configuration_based, this setting permits
+     * to specify whenever the data should be snapshotted or not in case of
+     * error.
+     */
+    private Boolean snapshotModeConfigurationBasedSnapshotOnDataError = false;
+    /**
+     * When 'snapshot.mode' is set as configuration_based, this setting permits
+     * to specify whenever the schema should be snapshotted or not in case of
+     * error.
+     */
+    private Boolean snapshotModeConfigurationBasedSnapshotOnSchemaError = false;
+    /**
+     * When 'snapshot.mode' is set as configuration_based, this setting permits
+     * to specify whenever the schema should be snapshotted or not.
+     */
+    private Boolean snapshotModeConfigurationBasedSnapshotSchema = false;
+    /**
+     * When 'snapshot.mode' is set as configuration_based, this setting permits
+     * to specify whenever the stream should start or not after snapshot.
+     */
+    private Boolean snapshotModeConfigurationBasedStartStream = false;
+    /**
+     * When 'snapshot.mode' is set as custom, this setting must be set to
+     * specify a the name of the custom implementation provided in the 'name()'
+     * method. The implementations must implement the 'Snapshotter' interface
+     * and is called on each app boot to determine whether to do a snapshot.
+     */
+    private String snapshotModeCustomName;
     /**
      * This property contains a comma-separated list of fully-qualified tables
      * (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the
@@ -854,6 +898,22 @@ public class DebeziumOracleComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public String getArchiveDestinationName() {
+        return archiveDestinationName;
+    }
+
+    public void setArchiveDestinationName(String archiveDestinationName) {
+        this.archiveDestinationName = archiveDestinationName;
+    }
+
+    public Long getArchiveLogHours() {
+        return archiveLogHours;
+    }
+
+    public void setArchiveLogHours(Long archiveLogHours) {
+        this.archiveLogHours = archiveLogHours;
     }
 
     public String getBinaryHandlingMode() {
@@ -1075,23 +1135,6 @@ public class DebeziumOracleComponentConfiguration
         this.lobEnabled = lobEnabled;
     }
 
-    public String getLogMiningArchiveDestinationName() {
-        return logMiningArchiveDestinationName;
-    }
-
-    public void setLogMiningArchiveDestinationName(
-            String logMiningArchiveDestinationName) {
-        this.logMiningArchiveDestinationName = logMiningArchiveDestinationName;
-    }
-
-    public Long getLogMiningArchiveLogHours() {
-        return logMiningArchiveLogHours;
-    }
-
-    public void setLogMiningArchiveLogHours(Long logMiningArchiveLogHours) {
-        this.logMiningArchiveLogHours = logMiningArchiveLogHours;
-    }
-
     public Boolean getLogMiningArchiveLogOnlyMode() {
         return logMiningArchiveLogOnlyMode;
     }
@@ -1210,6 +1253,14 @@ public class DebeziumOracleComponentConfiguration
 
     public void setLogMiningFlushTableName(String logMiningFlushTableName) {
         this.logMiningFlushTableName = logMiningFlushTableName;
+    }
+
+    public Boolean getLogMiningIncludeRedoSql() {
+        return logMiningIncludeRedoSql;
+    }
+
+    public void setLogMiningIncludeRedoSql(Boolean logMiningIncludeRedoSql) {
+        this.logMiningIncludeRedoSql = logMiningIncludeRedoSql;
     }
 
     public String getLogMiningQueryFilterMode() {
@@ -1528,6 +1579,15 @@ public class DebeziumOracleComponentConfiguration
         this.skippedOperations = skippedOperations;
     }
 
+    public Integer getSnapshotDatabaseErrorsMaxRetries() {
+        return snapshotDatabaseErrorsMaxRetries;
+    }
+
+    public void setSnapshotDatabaseErrorsMaxRetries(
+            Integer snapshotDatabaseErrorsMaxRetries) {
+        this.snapshotDatabaseErrorsMaxRetries = snapshotDatabaseErrorsMaxRetries;
+    }
+
     public Long getSnapshotDelayMs() {
         return snapshotDelayMs;
     }
@@ -1592,6 +1652,59 @@ public class DebeziumOracleComponentConfiguration
 
     public void setSnapshotMode(String snapshotMode) {
         this.snapshotMode = snapshotMode;
+    }
+
+    public Boolean getSnapshotModeConfigurationBasedSnapshotData() {
+        return snapshotModeConfigurationBasedSnapshotData;
+    }
+
+    public void setSnapshotModeConfigurationBasedSnapshotData(
+            Boolean snapshotModeConfigurationBasedSnapshotData) {
+        this.snapshotModeConfigurationBasedSnapshotData = snapshotModeConfigurationBasedSnapshotData;
+    }
+
+    public Boolean getSnapshotModeConfigurationBasedSnapshotOnDataError() {
+        return snapshotModeConfigurationBasedSnapshotOnDataError;
+    }
+
+    public void setSnapshotModeConfigurationBasedSnapshotOnDataError(
+            Boolean snapshotModeConfigurationBasedSnapshotOnDataError) {
+        this.snapshotModeConfigurationBasedSnapshotOnDataError = snapshotModeConfigurationBasedSnapshotOnDataError;
+    }
+
+    public Boolean getSnapshotModeConfigurationBasedSnapshotOnSchemaError() {
+        return snapshotModeConfigurationBasedSnapshotOnSchemaError;
+    }
+
+    public void setSnapshotModeConfigurationBasedSnapshotOnSchemaError(
+            Boolean snapshotModeConfigurationBasedSnapshotOnSchemaError) {
+        this.snapshotModeConfigurationBasedSnapshotOnSchemaError = snapshotModeConfigurationBasedSnapshotOnSchemaError;
+    }
+
+    public Boolean getSnapshotModeConfigurationBasedSnapshotSchema() {
+        return snapshotModeConfigurationBasedSnapshotSchema;
+    }
+
+    public void setSnapshotModeConfigurationBasedSnapshotSchema(
+            Boolean snapshotModeConfigurationBasedSnapshotSchema) {
+        this.snapshotModeConfigurationBasedSnapshotSchema = snapshotModeConfigurationBasedSnapshotSchema;
+    }
+
+    public Boolean getSnapshotModeConfigurationBasedStartStream() {
+        return snapshotModeConfigurationBasedStartStream;
+    }
+
+    public void setSnapshotModeConfigurationBasedStartStream(
+            Boolean snapshotModeConfigurationBasedStartStream) {
+        this.snapshotModeConfigurationBasedStartStream = snapshotModeConfigurationBasedStartStream;
+    }
+
+    public String getSnapshotModeCustomName() {
+        return snapshotModeCustomName;
+    }
+
+    public void setSnapshotModeCustomName(String snapshotModeCustomName) {
+        this.snapshotModeCustomName = snapshotModeCustomName;
     }
 
     public String getSnapshotSelectStatementOverrides() {

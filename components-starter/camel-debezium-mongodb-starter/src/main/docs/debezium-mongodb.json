@@ -196,13 +196,6 @@
       "defaultValue": 10000
     },
     {
-      "name": "camel.component.debezium-mongodb.mongodb-connection-mode",
-      "type": "java.lang.String",
-      "description": "The method used to connect to MongoDB cluster. Options include: 'replica_set' to individually connect to each replica set \/ shard 'sharded' (the default) to connect via single connection obtained from connection string",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
-      "defaultValue": "sharded"
-    },
-    {
       "name": "camel.component.debezium-mongodb.mongodb-connection-string",
       "type": "java.lang.String",
       "description": "Database connection string.",
@@ -437,6 +430,47 @@
       "description": "The criteria for running a snapshot upon startup of the connector. Select one of the following snapshot options: 'initial' (default): If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures the current full state of the configured tables. After the snapshot completes, the connector begins to stream changes from the oplog. 'never': The connector does not run a snapshot. Upon first startup, the connector immediately begins reading from the beginning of the oplog.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
       "defaultValue": "initial"
+    },
+    {
+      "name": "camel.component.debezium-mongodb.snapshot-mode-configuration-based-snapshot-data",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the data should be snapshotted or not.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-mongodb.snapshot-mode-configuration-based-snapshot-on-data-error",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the data should be snapshotted or not in case of error.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-mongodb.snapshot-mode-configuration-based-snapshot-on-schema-error",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the schema should be snapshotted or not in case of error.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-mongodb.snapshot-mode-configuration-based-snapshot-schema",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the schema should be snapshotted or not.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-mongodb.snapshot-mode-configuration-based-start-stream",
+      "type": "java.lang.Boolean",
+      "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the stream should start or not after snapshot.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-mongodb.snapshot-mode-custom-name",
+      "type": "java.lang.String",
+      "description": "When 'snapshot.mode' is set as custom, this setting must be set to specify a the name of the custom implementation provided in the 'name()' method. The implementations must implement the 'Snapshotter' interface and is called on each app boot to determine whether to do a snapshot.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-mongodb.sourceinfo-struct-maker",
