@@ -1,0 +1,43 @@
+{
+  "groups": [
+    {
+      "name": "camel.cluster.jgroups-raft",
+      "type": "org.apache.camel.component.jgroups.raft.springboot.cluster.JGroupsRaftClusterServiceConfiguration",
+      "sourceType": "org.apache.camel.component.jgroups.raft.springboot.cluster.JGroupsRaftClusterServiceConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.cluster.jgroups-raft.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Sets if the jgroups raft cluster service should be enabled or not, default is true.",
+      "sourceType": "org.apache.camel.component.jgroups.raft.springboot.cluster.JGroupsRaftClusterServiceConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.cluster.jgroups-raft.id",
+      "type": "java.lang.String",
+      "description": "Cluster Service ID",
+      "sourceType": "org.apache.camel.component.jgroups.raft.springboot.cluster.JGroupsRaftClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.jgroups-raft.jgroups-raft-cluster-name",
+      "type": "java.lang.String",
+      "description": "JGroups Cluster name",
+      "sourceType": "org.apache.camel.component.jgroups.raft.springboot.cluster.JGroupsRaftClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.jgroups-raft.jgroups-raft-config",
+      "type": "java.lang.String",
+      "description": "JGrups-raft configuration File name",
+      "sourceType": "org.apache.camel.component.jgroups.raft.springboot.cluster.JGroupsRaftClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.jgroups-raft.raft-id",
+      "type": "java.lang.String",
+      "description": "JGroups-raft ID",
+      "sourceType": "org.apache.camel.component.jgroups.raft.springboot.cluster.JGroupsRaftClusterServiceConfiguration"
+    }
+  ],
+  "hints": []
+}

@@ -1,11 +1,6 @@
 {
   "groups": [
     {
-      "name": "camel.cluster.jgroups",
-      "type": "org.apache.camel.component.jgroups.springboot.cluster.springboot.JGroupsLockClusterServiceConfiguration",
-      "sourceType": "org.apache.camel.component.jgroups.springboot.cluster.springboot.JGroupsLockClusterServiceConfiguration"
-    },
-    {
       "name": "camel.component.jgroups",
       "type": "org.apache.camel.component.jgroups.springboot.JGroupsComponentConfiguration",
       "sourceType": "org.apache.camel.component.jgroups.springboot.JGroupsComponentConfiguration"
@@ -18,31 +13,6 @@
     }
   ],
   "properties": [
-    {
-      "name": "camel.cluster.jgroups.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Sets if the jgroups lock cluster service should be enabled or not, default is false.",
-      "sourceType": "org.apache.camel.component.jgroups.springboot.cluster.springboot.JGroupsLockClusterServiceConfiguration",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.cluster.jgroups.id",
-      "type": "java.lang.String",
-      "description": "Cluster Service ID",
-      "sourceType": "org.apache.camel.component.jgroups.springboot.cluster.springboot.JGroupsLockClusterServiceConfiguration"
-    },
-    {
-      "name": "camel.cluster.jgroups.jgroups-cluster-name",
-      "type": "java.lang.String",
-      "description": "JGroups Cluster name",
-      "sourceType": "org.apache.camel.component.jgroups.springboot.cluster.springboot.JGroupsLockClusterServiceConfiguration"
-    },
-    {
-      "name": "camel.cluster.jgroups.jgroups-config",
-      "type": "java.lang.String",
-      "description": "JGrups configuration File name",
-      "sourceType": "org.apache.camel.component.jgroups.springboot.cluster.springboot.JGroupsLockClusterServiceConfiguration"
-    },
     {
       "name": "camel.component.jgroups.autowired-enabled",
       "type": "java.lang.Boolean",

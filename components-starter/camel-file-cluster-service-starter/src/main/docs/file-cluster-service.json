@@ -1,0 +1,55 @@
+{
+  "groups": [
+    {
+      "name": "camel.cluster.file",
+      "type": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.cluster.file.acquire-lock-delay",
+      "type": "java.lang.String",
+      "description": "The time to wait before starting to try to acquire lock.",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.file.acquire-lock-interval",
+      "type": "java.lang.String",
+      "description": "The time to wait between attempts to try to acquire lock.",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.file.attributes",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "Custom service attributes.",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.file.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Sets if the file cluster service should be enabled or not, default is true.",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.cluster.file.id",
+      "type": "java.lang.String",
+      "description": "Cluster Service ID",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.file.order",
+      "type": "java.lang.Integer",
+      "description": "Service lookup order\/priority.",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.file.root",
+      "type": "java.lang.String",
+      "description": "The root path.",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    }
+  ],
+  "hints": []
+}

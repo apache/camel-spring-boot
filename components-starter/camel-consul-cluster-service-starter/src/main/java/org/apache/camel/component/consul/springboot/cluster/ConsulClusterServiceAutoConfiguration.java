@@ -1,0 +1,68 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.camel.component.consul.springboot.cluster;
+
+import org.apache.camel.cluster.CamelClusterService;
+import org.apache.camel.component.consul.cluster.ConsulClusterService;
+import org.apache.camel.spring.boot.CamelAutoConfiguration;
+import org.apache.camel.spring.boot.cluster.ClusteredRouteControllerAutoConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+
+import java.util.Optional;
+
+@Configuration(proxyBeanMethods = false)
+@AutoConfigureBefore({ ClusteredRouteControllerAutoConfiguration.class, CamelAutoConfiguration.class })
+@ConditionalOnProperty(prefix = "camel.cluster.consul", name = "enabled", matchIfMissing = true)
+@EnableConfigurationProperties(ConsulClusterServiceConfiguration.class)
+public class ConsulClusterServiceAutoConfiguration {
+
+    @Autowired
+    private ConsulClusterServiceConfiguration configuration;
+
+    @Bean(name = "consul-cluster-service")
+    @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+    public CamelClusterService consulClusterService() throws Exception {
+        ConsulClusterService service = new ConsulClusterService();
+
+        Optional.ofNullable(configuration.getId()).ifPresent(service::setId);
+        Optional.ofNullable(configuration.getOrder()).ifPresent(service::setOrder);
+        Optional.ofNullable(configuration.getAttributes()).ifPresent(service::setAttributes);
+        Optional.ofNullable(configuration.getAclToken()).ifPresent(service::setAclToken);
+        Optional.ofNullable(configuration.getDatacenter()).ifPresent(service::setDatacenter);
+        Optional.ofNullable(configuration.getBlockSeconds()).ifPresent(service::setBlockSeconds);
+        Optional.ofNullable(configuration.getConnectTimeout()).ifPresent(service::setConnectTimeout);
+        Optional.ofNullable(configuration.getUrl()).ifPresent(service::setUrl);
+        Optional.ofNullable(configuration.getSessionLockDelay()).ifPresent(service::setLockDelay);
+        Optional.ofNullable(configuration.getPassword()).ifPresent(service::setPassword);
+        Optional.ofNullable(configuration.getReadTimeout()).ifPresent(service::setReadTimeout);
+        Optional.ofNullable(configuration.getRootPath()).ifPresent(service::setRootPath);
+        Optional.ofNullable(configuration.getSslContextParameters()).ifPresent(service::setSslContextParameters);
+        Optional.ofNullable(configuration.getSessionTtl()).ifPresent(service::setTtl);
+        Optional.ofNullable(configuration.getUserName()).ifPresent(service::setUserName);
+        Optional.ofNullable(configuration.getWriteTimeout()).ifPresent(service::setWriteTimeout);
+        service.setConfiguration(configuration);
+
+        return service;
+    }
+}

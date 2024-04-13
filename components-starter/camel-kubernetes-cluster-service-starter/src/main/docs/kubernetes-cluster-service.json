@@ -1,0 +1,97 @@
+{
+  "groups": [
+    {
+      "name": "camel.cluster.kubernetes",
+      "type": "org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceConfiguration",
+      "sourceType": "org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.cluster.kubernetes.attributes",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "Custom service attributes.",
+      "sourceType": "org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.kubernetes.cluster-labels",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "description": "Set the labels used to identify the pods composing the cluster.",
+      "sourceType": "org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.kubernetes.config-map-name",
+      "type": "java.lang.String",
+      "description": "Set the name of the ConfigMap used to do optimistic locking (defaults to 'leaders').",
+      "sourceType": "org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.kubernetes.connection-timeout-millis",
+      "type": "java.lang.Integer",
+      "description": "Connection timeout in milliseconds to use when making requests to the Kubernetes API server.",
+      "sourceType": "org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.kubernetes.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Sets if the Kubernetes cluster service should be enabled or not, default is true.",
+      "sourceType": "org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.cluster.kubernetes.id",
+      "type": "java.lang.String",
+      "description": "Cluster Service ID",
+      "sourceType": "org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.kubernetes.jitter-factor",
+      "type": "java.lang.Double",
+      "description": "A jitter factor to apply in order to prevent all pods to call Kubernetes APIs in the same instant.",
+      "sourceType": "org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.kubernetes.kubernetes-namespace",
+      "type": "java.lang.String",
+      "description": "Set the name of the Kubernetes namespace containing the pods and the configmap (autodetected by default)",
+      "sourceType": "org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.kubernetes.lease-duration-millis",
+      "type": "java.lang.Long",
+      "description": "The default duration of the lease for the current leader.",
+      "sourceType": "org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.kubernetes.master-url",
+      "type": "java.lang.String",
+      "description": "Set the URL of the Kubernetes master (read from Kubernetes client properties by default).",
+      "sourceType": "org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.kubernetes.order",
+      "type": "java.lang.Integer",
+      "description": "Service lookup order\/priority.",
+      "sourceType": "org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.kubernetes.pod-name",
+      "type": "java.lang.String",
+      "description": "Set the name of the current pod (autodetected from container host name by default).",
+      "sourceType": "org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.kubernetes.renew-deadline-millis",
+      "type": "java.lang.Long",
+      "description": "The deadline after which the leader must stop its services because it may have lost the leadership.",
+      "sourceType": "org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.kubernetes.retry-period-millis",
+      "type": "java.lang.Long",
+      "description": "The time between two subsequent attempts to check and acquire the leadership. It is randomized using the jitter factor.",
+      "sourceType": "org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceConfiguration"
+    }
+  ],
+  "hints": []
+}

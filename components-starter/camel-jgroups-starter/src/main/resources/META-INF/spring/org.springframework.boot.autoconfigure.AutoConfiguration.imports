@@ -17,4 +17,3 @@
 
 org.apache.camel.component.jgroups.springboot.JGroupsComponentConverter
 org.apache.camel.component.jgroups.springboot.JGroupsComponentAutoConfiguration
-org.apache.camel.component.jgroups.springboot.cluster.springboot.JGroupsLockClusterServiceAutoConfiguration
