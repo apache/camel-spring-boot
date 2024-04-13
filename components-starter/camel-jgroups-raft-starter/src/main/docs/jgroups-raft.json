@@ -1,11 +1,6 @@
 {
   "groups": [
     {
-      "name": "camel.cluster.jgroups-raft",
-      "type": "org.apache.camel.component.jgroups.raft.springboot.cluster.springboot.JGroupsRaftClusterServiceConfiguration",
-      "sourceType": "org.apache.camel.component.jgroups.raft.springboot.cluster.springboot.JGroupsRaftClusterServiceConfiguration"
-    },
-    {
       "name": "camel.component.jgroups-raft",
       "type": "org.apache.camel.component.jgroups.raft.springboot.JGroupsRaftComponentConfiguration",
       "sourceType": "org.apache.camel.component.jgroups.raft.springboot.JGroupsRaftComponentConfiguration"
@@ -18,37 +13,6 @@
     }
   ],
   "properties": [
-    {
-      "name": "camel.cluster.jgroups-raft.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Sets if the jgroups raft cluster service should be enabled or not, default is false.",
-      "sourceType": "org.apache.camel.component.jgroups.raft.springboot.cluster.springboot.JGroupsRaftClusterServiceConfiguration",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.cluster.jgroups-raft.id",
-      "type": "java.lang.String",
-      "description": "Cluster Service ID",
-      "sourceType": "org.apache.camel.component.jgroups.raft.springboot.cluster.springboot.JGroupsRaftClusterServiceConfiguration"
-    },
-    {
-      "name": "camel.cluster.jgroups-raft.jgroups-raft-cluster-name",
-      "type": "java.lang.String",
-      "description": "JGroups Cluster name",
-      "sourceType": "org.apache.camel.component.jgroups.raft.springboot.cluster.springboot.JGroupsRaftClusterServiceConfiguration"
-    },
-    {
-      "name": "camel.cluster.jgroups-raft.jgroups-raft-config",
-      "type": "java.lang.String",
-      "description": "JGrups-raft configuration File name",
-      "sourceType": "org.apache.camel.component.jgroups.raft.springboot.cluster.springboot.JGroupsRaftClusterServiceConfiguration"
-    },
-    {
-      "name": "camel.cluster.jgroups-raft.raft-id",
-      "type": "java.lang.String",
-      "description": "JGroups-raft ID",
-      "sourceType": "org.apache.camel.component.jgroups.raft.springboot.cluster.springboot.JGroupsRaftClusterServiceConfiguration"
-    },
     {
       "name": "camel.component.jgroups-raft.autowired-enabled",
       "type": "java.lang.Boolean",

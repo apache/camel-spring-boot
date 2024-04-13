@@ -287,6 +287,10 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
         Set<Artifact> dependencies;
         try {
             Artifact artifact = project.getArtifactMap().get(getMainDepGroupId() + ":" + getMainDepArtifactId());
+            if (artifact == null) {
+                return Collections.emptySet();
+            }
+
             ProjectBuildingResult result = projectBuilder.build(artifact, project.getProjectBuildingRequest());
             MavenProject prj = result.getProject();
             prj.setRemoteArtifactRepositories(project.getRemoteArtifactRepositories());
