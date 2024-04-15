@@ -378,7 +378,7 @@ public class SalesforceComponentConfiguration
      */
     private String eventName;
     /**
-     * EXPANDED: Apache Avro format but doesnt strictly adhere to the record
+     * EXPANDED: Apache Avro format but doesn't strictly adhere to the record
      * complex type. COMPACT: Apache Avro, adheres to the specification for the
      * record complex type. This parameter is available in API version 43.0 and
      * later.

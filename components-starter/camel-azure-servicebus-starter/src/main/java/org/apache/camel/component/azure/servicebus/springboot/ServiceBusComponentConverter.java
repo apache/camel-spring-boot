@@ -42,6 +42,7 @@ public class ServiceBusComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, com.azure.core.amqp.AmqpRetryOptions.class));
         answer.add(new ConvertiblePair(String.class, com.azure.core.util.ClientOptions.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.azure.servicebus.ServiceBusConfiguration.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
         answer.add(new ConvertiblePair(String.class, com.azure.core.amqp.ProxyOptions.class));
         answer.add(new ConvertiblePair(String.class, com.azure.messaging.servicebus.ServiceBusReceiverAsyncClient.class));
         answer.add(new ConvertiblePair(String.class, com.azure.messaging.servicebus.ServiceBusSenderAsyncClient.class));
@@ -66,6 +67,7 @@ public class ServiceBusComponentConverter implements GenericConverter {
             case "com.azure.core.amqp.AmqpRetryOptions": return applicationContext.getBean(ref, com.azure.core.amqp.AmqpRetryOptions.class);
             case "com.azure.core.util.ClientOptions": return applicationContext.getBean(ref, com.azure.core.util.ClientOptions.class);
             case "org.apache.camel.component.azure.servicebus.ServiceBusConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.azure.servicebus.ServiceBusConfiguration.class);
+            case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
             case "com.azure.core.amqp.ProxyOptions": return applicationContext.getBean(ref, com.azure.core.amqp.ProxyOptions.class);
             case "com.azure.messaging.servicebus.ServiceBusReceiverAsyncClient": return applicationContext.getBean(ref, com.azure.messaging.servicebus.ServiceBusReceiverAsyncClient.class);
             case "com.azure.messaging.servicebus.ServiceBusSenderAsyncClient": return applicationContext.getBean(ref, com.azure.messaging.servicebus.ServiceBusSenderAsyncClient.class);

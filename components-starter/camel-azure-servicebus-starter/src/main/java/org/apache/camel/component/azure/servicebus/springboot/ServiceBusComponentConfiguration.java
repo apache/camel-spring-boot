@@ -34,6 +34,7 @@ import org.apache.camel.component.azure.servicebus.ServiceBusConfiguration;
 import org.apache.camel.component.azure.servicebus.ServiceBusConsumerOperationDefinition;
 import org.apache.camel.component.azure.servicebus.ServiceBusProducerOperationDefinition;
 import org.apache.camel.component.azure.servicebus.ServiceBusType;
+import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -75,6 +76,12 @@ public class ServiceBusComponentConfiguration
      * org.apache.camel.component.azure.servicebus.ServiceBusConfiguration type.
      */
     private ServiceBusConfiguration configuration;
+    /**
+     * To use a custom HeaderFilterStrategy to filter Service Bus application
+     * properties to and from Camel message headers. The option is a
+     * org.apache.camel.spi.HeaderFilterStrategy type.
+     */
+    private HeaderFilterStrategy headerFilterStrategy;
     /**
      * Sets the proxy configuration to use for ServiceBusSenderAsyncClient. When
      * a proxy is configured, AMQP_WEB_SOCKETS must be used for the transport
@@ -249,6 +256,15 @@ public class ServiceBusComponentConfiguration
 
     public void setConfiguration(ServiceBusConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public HeaderFilterStrategy getHeaderFilterStrategy() {
+        return headerFilterStrategy;
+    }
+
+    public void setHeaderFilterStrategy(
+            HeaderFilterStrategy headerFilterStrategy) {
+        this.headerFilterStrategy = headerFilterStrategy;
     }
 
     public ProxyOptions getProxyOptions() {

@@ -135,7 +135,7 @@
     {
       "name": "camel.component.salesforce.event-schema-format",
       "type": "org.apache.camel.component.salesforce.internal.dto.EventSchemaFormatEnum",
-      "description": "EXPANDED: Apache Avro format but doesnt strictly adhere to the record complex type. COMPACT: Apache Avro, adheres to the specification for the record complex type. This parameter is available in API version 43.0 and later.",
+      "description": "EXPANDED: Apache Avro format but doesn't strictly adhere to the record complex type. COMPACT: Apache Avro, adheres to the specification for the record complex type. This parameter is available in API version 43.0 and later.",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {
