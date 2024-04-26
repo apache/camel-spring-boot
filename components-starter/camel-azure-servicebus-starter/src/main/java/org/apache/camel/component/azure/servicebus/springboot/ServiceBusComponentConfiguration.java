@@ -23,7 +23,7 @@ import com.azure.core.amqp.AmqpTransportType;
 import com.azure.core.amqp.ProxyOptions;
 import com.azure.core.credential.TokenCredential;
 import com.azure.core.util.ClientOptions;
-import com.azure.messaging.servicebus.ServiceBusReceiverAsyncClient;
+import com.azure.messaging.servicebus.ServiceBusProcessorClient;
 import com.azure.messaging.servicebus.ServiceBusSenderAsyncClient;
 import com.azure.messaging.servicebus.ServiceBusTransactionContext;
 import com.azure.messaging.servicebus.models.ServiceBusReceiveMode;
@@ -31,7 +31,6 @@ import com.azure.messaging.servicebus.models.SubQueue;
 import org.apache.camel.component.azure.servicebus.CredentialType;
 import org.apache.camel.component.azure.servicebus.ServiceBusComponent;
 import org.apache.camel.component.azure.servicebus.ServiceBusConfiguration;
-import org.apache.camel.component.azure.servicebus.ServiceBusConsumerOperationDefinition;
 import org.apache.camel.component.azure.servicebus.ServiceBusProducerOperationDefinition;
 import org.apache.camel.component.azure.servicebus.ServiceBusType;
 import org.apache.camel.spi.HeaderFilterStrategy;
@@ -108,16 +107,6 @@ public class ServiceBusComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
-     * Sets the desired operation to be used in the consumer
-     */
-    private ServiceBusConsumerOperationDefinition consumerOperation = ServiceBusConsumerOperationDefinition.receiveMessages;
-    /**
-     * Disables auto-complete and auto-abandon of received messages. By default,
-     * a successfully processed message is completed. If an error happens when
-     * the message is abandoned.
-     */
-    private Boolean disableAutoComplete = false;
-    /**
      * Enable application level deadlettering to the subscription deadletter
      * subqueue if deadletter related headers are set.
      */
@@ -129,9 +118,9 @@ public class ServiceBusComponentConfiguration
      */
     private Duration maxAutoLockRenewDuration;
     /**
-     * Set the max number of messages to be peeked during the peek operation.
+     * Sets maximum number of concurrent calls
      */
-    private Integer peekNumMaxMessages;
+    private Integer maxConcurrentCalls = 1;
     /**
      * Sets the prefetch count of the receiver. For both PEEK_LOCK PEEK_LOCK and
      * RECEIVE_AND_DELETE RECEIVE_AND_DELETE receive modes the default value is
@@ -143,11 +132,11 @@ public class ServiceBusComponentConfiguration
      */
     private Integer prefetchCount;
     /**
-     * Sets the receiverAsyncClient in order to consume messages by the
-     * consumer. The option is a
-     * com.azure.messaging.servicebus.ServiceBusReceiverAsyncClient type.
+     * Sets the processorClient in order to consume messages by the consumer.
+     * The option is a com.azure.messaging.servicebus.ServiceBusProcessorClient
+     * type.
      */
-    private ServiceBusReceiverAsyncClient receiverAsyncClient;
+    private ServiceBusProcessorClient processorClient;
     /**
      * Sets the receive mode for the receiver.
      */
@@ -162,11 +151,6 @@ public class ServiceBusComponentConfiguration
      * is required if serviceBusType=topic and the consumer is in use.
      */
     private String subscriptionName;
-    /**
-     * If the consumer has connection failure to Azure ServiceBus, then delay
-     * (millis) some time before re-connecting.
-     */
-    private Integer reconnectDelay = 5000;
     /**
      * Set binary mode. If true, message body will be sent as byte. By default,
      * it is false.
@@ -296,23 +280,6 @@ public class ServiceBusComponentConfiguration
         this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
-    public ServiceBusConsumerOperationDefinition getConsumerOperation() {
-        return consumerOperation;
-    }
-
-    public void setConsumerOperation(
-            ServiceBusConsumerOperationDefinition consumerOperation) {
-        this.consumerOperation = consumerOperation;
-    }
-
-    public Boolean getDisableAutoComplete() {
-        return disableAutoComplete;
-    }
-
-    public void setDisableAutoComplete(Boolean disableAutoComplete) {
-        this.disableAutoComplete = disableAutoComplete;
-    }
-
     public Boolean getEnableDeadLettering() {
         return enableDeadLettering;
     }
@@ -329,12 +296,12 @@ public class ServiceBusComponentConfiguration
         this.maxAutoLockRenewDuration = maxAutoLockRenewDuration;
     }
 
-    public Integer getPeekNumMaxMessages() {
-        return peekNumMaxMessages;
+    public Integer getMaxConcurrentCalls() {
+        return maxConcurrentCalls;
     }
 
-    public void setPeekNumMaxMessages(Integer peekNumMaxMessages) {
-        this.peekNumMaxMessages = peekNumMaxMessages;
+    public void setMaxConcurrentCalls(Integer maxConcurrentCalls) {
+        this.maxConcurrentCalls = maxConcurrentCalls;
     }
 
     public Integer getPrefetchCount() {
@@ -345,13 +312,12 @@ public class ServiceBusComponentConfiguration
         this.prefetchCount = prefetchCount;
     }
 
-    public ServiceBusReceiverAsyncClient getReceiverAsyncClient() {
-        return receiverAsyncClient;
+    public ServiceBusProcessorClient getProcessorClient() {
+        return processorClient;
     }
 
-    public void setReceiverAsyncClient(
-            ServiceBusReceiverAsyncClient receiverAsyncClient) {
-        this.receiverAsyncClient = receiverAsyncClient;
+    public void setProcessorClient(ServiceBusProcessorClient processorClient) {
+        this.processorClient = processorClient;
     }
 
     public ServiceBusReceiveMode getServiceBusReceiveMode() {
@@ -377,14 +343,6 @@ public class ServiceBusComponentConfiguration
 
     public void setSubscriptionName(String subscriptionName) {
         this.subscriptionName = subscriptionName;
-    }
-
-    public Integer getReconnectDelay() {
-        return reconnectDelay;
-    }
-
-    public void setReconnectDelay(Integer reconnectDelay) {
-        this.reconnectDelay = reconnectDelay;
     }
 
     public Boolean getBinary() {
