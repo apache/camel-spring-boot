@@ -295,8 +295,8 @@
     <module>camel-kafka-starter</module>
     <module>camel-kamelet-starter</module>
     <module>camel-knative-starter</module>
-    <module>camel-kubernetes-starter</module>
     <module>camel-kubernetes-cluster-service-starter</module>
+    <module>camel-kubernetes-starter</module>
     <module>camel-kudu-starter</module>
     <module>camel-langchain4j-chat-starter</module>
     <module>camel-langchain4j-embeddings-starter</module>
@@ -346,6 +346,7 @@
     <module>camel-pdf-starter</module>
     <module>camel-pg-replication-slot-starter</module>
     <module>camel-pgevent-starter</module>
+    <module>camel-pinecone-starter</module>
     <module>camel-platform-http-starter</module>
     <module>camel-plc4x-starter</module>
     <module>camel-printer-starter</module>
