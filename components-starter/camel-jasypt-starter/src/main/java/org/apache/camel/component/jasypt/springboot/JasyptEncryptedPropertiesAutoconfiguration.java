@@ -58,6 +58,7 @@ import static org.springframework.core.annotation.AnnotationUtils.findAnnotation
 public class JasyptEncryptedPropertiesAutoconfiguration {
 
     @Bean
+    @ConditionalOnMissingBean(JasyptEncryptedPropertiesConfiguration.class)
     public JasyptEncryptedPropertiesConfiguration JasyptEncryptedPropertiesAutoconfiguration(
             final ConfigurableEnvironment environment) {
         JasyptEncryptedPropertiesConfiguration config = new JasyptEncryptedPropertiesConfiguration();
@@ -98,6 +99,7 @@ public class JasyptEncryptedPropertiesAutoconfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean(EncryptablePropertySourcesPlaceholderConfigurer.class)
     public EncryptablePropertySourcesPlaceholderConfigurer propertyConfigurer(StringEncryptor stringEncryptor) {
         return new EncryptablePropertySourcesPlaceholderConfigurer(stringEncryptor);
     }
@@ -107,6 +109,7 @@ public class JasyptEncryptedPropertiesAutoconfiguration {
      * properties inside the camel context.
      */
     @Bean
+    @ConditionalOnMissingBean(PropertiesParser.class)
     public PropertiesParser encryptedPropertiesParser(PropertyResolver propertyResolver,
             StringEncryptor stringEncryptor) {
         return new JasyptSpringEncryptedPropertiesParser(propertyResolver, stringEncryptor);
