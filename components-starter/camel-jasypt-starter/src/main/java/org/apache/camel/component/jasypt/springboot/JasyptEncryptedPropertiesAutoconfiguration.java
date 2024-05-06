@@ -39,6 +39,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.Environment;
 import org.springframework.core.env.MutablePropertySources;
 import org.springframework.core.env.PropertyResolver;
 
@@ -111,8 +112,8 @@ public class JasyptEncryptedPropertiesAutoconfiguration {
     @Bean
     @ConditionalOnMissingBean(PropertiesParser.class)
     public PropertiesParser encryptedPropertiesParser(PropertyResolver propertyResolver,
-            StringEncryptor stringEncryptor) {
-        return new JasyptSpringEncryptedPropertiesParser(propertyResolver, stringEncryptor);
+             StringEncryptor stringEncryptor, Environment env) {
+        return new JasyptSpringEncryptedPropertiesParser(propertyResolver, stringEncryptor, env);
     }
 
     public SaltGenerator getSaltGenerator(JasyptEncryptedPropertiesConfiguration configuration) {
