@@ -16,24 +16,29 @@
  */
 package org.apache.camel.component.jasypt.springboot;
 
-import org.apache.camel.component.properties.DefaultPropertiesParser;
 import org.apache.camel.component.properties.PropertiesLookup;
+import org.apache.camel.spring.boot.SpringPropertiesParser;
 import org.jasypt.encryption.StringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.core.env.PropertyResolver;
 
 import static org.jasypt.properties.PropertyValueEncryptionUtils.isEncryptedValue;
 import static  org.jasypt.properties.PropertyValueEncryptionUtils.decrypt;
 
 
-public class JasyptSpringEncryptedPropertiesParser extends DefaultPropertiesParser {
+public class JasyptSpringEncryptedPropertiesParser extends SpringPropertiesParser {
 
     private PropertyResolver propertyResolver;
 
     private StringEncryptor stringEncryptor;
 
     @Autowired
-    public JasyptSpringEncryptedPropertiesParser(PropertyResolver propertyResolver, StringEncryptor stringEncryptor){
+    public JasyptSpringEncryptedPropertiesParser(
+            PropertyResolver propertyResolver,
+            StringEncryptor stringEncryptor,
+            Environment env) {
+        super(env);
         this.propertyResolver = propertyResolver;
         this.stringEncryptor = stringEncryptor;
     }
