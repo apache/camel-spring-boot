@@ -39,6 +39,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.Environment;
 import org.springframework.core.env.MutablePropertySources;
 import org.springframework.core.env.PropertyResolver;
 
@@ -60,7 +61,9 @@ public class JasyptEncryptedPropertiesAutoconfiguration {
 
 
     @Bean
-    public JasyptEncryptedPropertiesConfiguration JasyptEncryptedPropertiesAutoconfiguration(final ConfigurableEnvironment environment) {
+    @ConditionalOnMissingBean(JasyptEncryptedPropertiesConfiguration.class)
+    public JasyptEncryptedPropertiesConfiguration JasyptEncryptedPropertiesAutoconfiguration(
+            final ConfigurableEnvironment environment) {
         JasyptEncryptedPropertiesConfiguration config = new JasyptEncryptedPropertiesConfiguration();
         final BindHandler handler = new IgnoreErrorsBindHandler(BindHandler.DEFAULT);
         final MutablePropertySources propertySources = environment.getPropertySources();
@@ -97,6 +100,7 @@ public class JasyptEncryptedPropertiesAutoconfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean(EncryptablePropertySourcesPlaceholderConfigurer.class)
     public EncryptablePropertySourcesPlaceholderConfigurer propertyConfigurer(StringEncryptor stringEncryptor) {
         return new EncryptablePropertySourcesPlaceholderConfigurer(stringEncryptor);
     }
@@ -106,8 +110,10 @@ public class JasyptEncryptedPropertiesAutoconfiguration {
         and allow the use of encrypted properties inside the camel context.
      */
     @Bean
-    public PropertiesParser encryptedPropertiesParser(PropertyResolver propertyResolver, StringEncryptor stringEncryptor) {
-        return new JasyptSpringEncryptedPropertiesParser(propertyResolver, stringEncryptor);
+    @ConditionalOnMissingBean(PropertiesParser.class)
+    public PropertiesParser encryptedPropertiesParser(PropertyResolver propertyResolver,
+             StringEncryptor stringEncryptor, Environment env) {
+        return new JasyptSpringEncryptedPropertiesParser(propertyResolver, stringEncryptor, env);
     }
 
     public SaltGenerator getSaltGenerator(JasyptEncryptedPropertiesConfiguration configuration) {
