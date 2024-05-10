@@ -41,7 +41,7 @@ public class KameletComponentConfiguration
      * The location(s) of the Kamelets on the file system. Multiple locations
      * can be set separated by comma.
      */
-    private String location = "classpath:/kamelets";
+    private String location = "classpath:kamelets";
     /**
      * Set route local parameters.
      */

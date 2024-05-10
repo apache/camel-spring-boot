@@ -57,7 +57,7 @@
       "type": "java.lang.String",
       "description": "The location(s) of the Kamelets on the file system. Multiple locations can be set separated by comma.",
       "sourceType": "org.apache.camel.component.kamelet.springboot.KameletComponentConfiguration",
-      "defaultValue": "classpath:\/kamelets"
+      "defaultValue": "classpath:kamelets"
     },
     {
       "name": "camel.component.kamelet.no-error-handler",
