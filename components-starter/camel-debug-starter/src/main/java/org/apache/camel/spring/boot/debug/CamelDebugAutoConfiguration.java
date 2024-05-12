@@ -17,6 +17,7 @@
 package org.apache.camel.spring.boot.debug;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.component.debug.JmxConnectorService;
 import org.apache.camel.impl.debugger.DefaultBacklogDebugger;
 import org.apache.camel.spi.BacklogDebugger;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
@@ -36,6 +37,7 @@ public class CamelDebugAutoConfiguration {
     @Bean
     public BacklogDebugger backlogDebugger(CamelContext camelContext, CamelDebugConfigurationProperties config)
             throws Exception {
+
         if (!config.isEnabled() && !config.isStandby()) {
             return null;
         }
@@ -76,6 +78,9 @@ public class CamelDebugAutoConfiguration {
                 debugger.disableDebugger();
             }
         });
+
+        // to make debugging possible for tooling we need to make it possible to do remote JMX connection
+        camelContext.addService(new JmxConnectorService());
 
         camelContext.addService(debugger);
 
