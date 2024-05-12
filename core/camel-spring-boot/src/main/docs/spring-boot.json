@@ -79,11 +79,6 @@
       "sourceMethod": "getCustomizer()"
     },
     {
-      "name": "camel.debug",
-      "type": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
-      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties"
-    },
-    {
       "name": "camel.health",
       "type": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties",
       "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
@@ -447,95 +442,6 @@
       "description": "Global option to enable\/disable dataformat auto-configuration, default is true.",
       "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationProperties",
       "defaultValue": true
-    },
-    {
-      "name": "camel.debug.body-include-files",
-      "type": "java.lang.Boolean",
-      "description": "Whether to include the message body of file based messages. The overhead is that the file content has to be read from the file.",
-      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
-      "defaultValue": true
-    },
-    {
-      "name": "camel.debug.body-include-streams",
-      "type": "java.lang.Boolean",
-      "description": "Whether to include the message body of stream based messages. If enabled then beware the stream may not be re-readable later. See more about Stream Caching.",
-      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.debug.body-max-chars",
-      "type": "java.lang.Integer",
-      "description": "To limit the message body to a maximum size in the traced message. Use 0 or negative value to use unlimited size.",
-      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
-      "defaultValue": 0
-    },
-    {
-      "name": "camel.debug.breakpoints",
-      "type": "java.lang.String",
-      "description": "Allows to pre-configure breakpoints (node ids) to use with debugger on startup. Multiple ids can be separated by comma. Use special value _all_routes_ to add a breakpoint for the first node for every route, in other words this makes it easy to debug from the beginning of every route without knowing the exact node ids.",
-      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties"
-    },
-    {
-      "name": "camel.debug.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Enables Debugger in your Camel application.",
-      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.debug.fallback-timeout",
-      "type": "java.lang.Long",
-      "description": "Fallback Timeout in seconds (300 seconds as default) when block the message processing in Camel. A timeout used for waiting for a message to arrive at a given breakpoint.",
-      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
-      "defaultValue": 300
-    },
-    {
-      "name": "camel.debug.include-exception",
-      "type": "java.lang.Boolean",
-      "description": "Trace messages to include exception if the message failed",
-      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
-      "defaultValue": true
-    },
-    {
-      "name": "camel.debug.include-exchange-properties",
-      "type": "java.lang.Boolean",
-      "description": "Whether to include the exchange properties in the traced message",
-      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
-      "defaultValue": true
-    },
-    {
-      "name": "camel.debug.include-exchange-variables",
-      "type": "java.lang.Boolean",
-      "description": "Whether to include the exchange variables in the traced message",
-      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
-      "defaultValue": true
-    },
-    {
-      "name": "camel.debug.logging-level",
-      "type": "org.apache.camel.LoggingLevel",
-      "description": "The debugger logging level to use when logging activity.",
-      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties"
-    },
-    {
-      "name": "camel.debug.single-step-include-start-end",
-      "type": "java.lang.Boolean",
-      "description": "In single step mode, then when the exchange is created and completed, then simulate a breakpoint at start and end, that allows to suspend and watch the incoming\/complete exchange at the route (you can see message body as response, failed exception etc).",
-      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.debug.standby",
-      "type": "java.lang.Boolean",
-      "description": "To set the debugger in standby mode, where the debugger will be installed by not automatic enabled. The debugger can then later be enabled explicit from Java, JMX or tooling.",
-      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.debug.wait-for-attach",
-      "type": "java.lang.Boolean",
-      "description": "Whether the debugger should suspend on startup, and wait for a remote debugger to attach. This is what the IDEA and VSCode tooling is using.",
-      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
-      "defaultValue": false
     },
     {
       "name": "camel.health.async-camel-health-check",
