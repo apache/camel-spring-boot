@@ -26,7 +26,7 @@ public class CamelDebugConfigurationProperties {
     /**
      * Enables Debugger in your Camel application.
      */
-    private boolean enabled;
+    private boolean enabled = true;
 
     /**
      * To set the debugger in standby mode, where the debugger will be installed by not automatic enabled. The debugger

@@ -21,8 +21,10 @@ import org.apache.camel.component.debug.JmxConnectorService;
 import org.apache.camel.impl.debugger.DefaultBacklogDebugger;
 import org.apache.camel.spi.BacklogDebugger;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
+import org.apache.camel.spring.boot.CamelSpringBootApplicationListener;
 import org.apache.camel.support.LifecycleStrategySupport;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -32,22 +34,23 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnBean(CamelAutoConfiguration.class)
 @EnableConfigurationProperties(CamelDebugConfigurationProperties.class)
 @AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfigureBefore(CamelSpringBootApplicationListener.class)
 public class CamelDebugAutoConfiguration {
 
     @Bean
     public BacklogDebugger backlogDebugger(CamelContext camelContext, CamelDebugConfigurationProperties config)
             throws Exception {
 
-        if (!config.isEnabled() && !config.isStandby()) {
-            return null;
-        }
-
-        // must enable source location so debugger tooling knows to map breakpoints to source code
-        camelContext.setSourceLocationEnabled(true);
-
         // enable debugger on camel
         camelContext.setDebugging(config.isEnabled());
         camelContext.setDebugStandby(config.isStandby());
+
+        if (config.isEnabled() || config.isStandby()) {
+            // must enable source location and history
+            // so debugger tooling knows to map breakpoints to source code
+            camelContext.setSourceLocationEnabled(true);
+            camelContext.setMessageHistory(true);
+        }
 
         BacklogDebugger debugger = DefaultBacklogDebugger.createDebugger(camelContext);
         debugger.setStandby(config.isStandby());
@@ -68,19 +71,23 @@ public class CamelDebugAutoConfiguration {
             @Override
             public void onContextStarted(CamelContext context) {
                 // only enable debugger if not in standby mode
-                if (!debugger.isStandby()) {
+                if (config.isEnabled() && !debugger.isStandby()) {
                     debugger.enableDebugger();
                 }
             }
 
             @Override
             public void onContextStopping(CamelContext context) {
-                debugger.disableDebugger();
+                if (debugger.isEnabled()) {
+                    debugger.disableDebugger();
+                }
             }
         });
 
         // to make debugging possible for tooling we need to make it possible to do remote JMX connection
-        camelContext.addService(new JmxConnectorService());
+        if (config.isEnabled() || config.isStandby()) {
+            camelContext.addService(new JmxConnectorService());
+        }
 
         camelContext.addService(debugger);
 

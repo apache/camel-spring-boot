@@ -39,7 +39,7 @@
       "type": "java.lang.Boolean",
       "description": "Enables Debugger in your Camel application.",
       "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
-      "defaultValue": false
+      "defaultValue": true
     },
     {
       "name": "camel.debug.fallback-timeout",
