@@ -210,22 +210,22 @@
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-commons</artifactId>
-        <version>1.12.5</version>
+        <version>1.13.0</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-observation</artifactId>
-        <version>1.12.5</version>
+        <version>1.13.0</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-registry-jmx</artifactId>
-        <version>1.12.5</version>
+        <version>1.13.0</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-registry-prometheus</artifactId>
-        <version>1.12.5</version>
+        <version>1.13.0</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
@@ -235,12 +235,12 @@
       <dependency>
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy</artifactId>
-        <version>1.14.14</version>
+        <version>1.14.15</version>
       </dependency>
       <dependency>
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy-agent</artifactId>
-        <version>1.14.14</version>
+        <version>1.14.15</version>
       </dependency>
       <dependency>
         <groupId>org.apache.avro</groupId>
