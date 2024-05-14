@@ -49,7 +49,7 @@ public class MockComponentConfiguration
     /**
      * To turn on logging when the mock receives an incoming message. This will
      * log only one time at INFO level for the incoming message. For more
-     * detailed logging then set the logger to DEBUG level for the
+     * detailed logging, then set the logger to DEBUG level for the
      * org.apache.camel.component.mock.MockEndpoint class.
      */
     private Boolean log = false;

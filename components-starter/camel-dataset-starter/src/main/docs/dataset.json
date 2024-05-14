@@ -58,7 +58,7 @@
     {
       "name": "camel.component.dataset-test.log",
       "type": "java.lang.Boolean",
-      "description": "To turn on logging when the mock receives an incoming message. This will log only one time at INFO level for the incoming message. For more detailed logging then set the logger to DEBUG level for the org.apache.camel.component.mock.MockEndpoint class.",
+      "description": "To turn on logging when the mock receives an incoming message. This will log only one time at INFO level for the incoming message. For more detailed logging, then set the logger to DEBUG level for the org.apache.camel.component.mock.MockEndpoint class.",
       "sourceType": "org.apache.camel.component.dataset.springboot.DataSetTestComponentConfiguration",
       "defaultValue": false
     },
@@ -103,7 +103,7 @@
     {
       "name": "camel.component.dataset.log",
       "type": "java.lang.Boolean",
-      "description": "To turn on logging when the mock receives an incoming message. This will log only one time at INFO level for the incoming message. For more detailed logging then set the logger to DEBUG level for the org.apache.camel.component.mock.MockEndpoint class.",
+      "description": "To turn on logging when the mock receives an incoming message. This will log only one time at INFO level for the incoming message. For more detailed logging, then set the logger to DEBUG level for the org.apache.camel.component.mock.MockEndpoint class.",
       "sourceType": "org.apache.camel.component.dataset.springboot.DataSetComponentConfiguration",
       "defaultValue": false
     }
