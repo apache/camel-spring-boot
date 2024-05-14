@@ -70,6 +70,20 @@
       "defaultValue": true
     },
     {
+      "name": "camel.debug.jmx-connector-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to create JMX connector that allows tooling to control the Camel debugger. This is what the IDEA and VSCode tooling is using.",
+      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.debug.jmx-connector-port",
+      "type": "java.lang.Integer",
+      "description": "Port number to expose a JMX RMI connector for tooling that needs to control the debugger.",
+      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
+      "defaultValue": 1099
+    },
+    {
       "name": "camel.debug.logging-level",
       "type": "org.apache.camel.LoggingLevel",
       "description": "The debugger logging level to use when logging activity.",

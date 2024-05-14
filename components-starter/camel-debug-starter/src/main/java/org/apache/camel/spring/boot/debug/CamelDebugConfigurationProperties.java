@@ -100,6 +100,19 @@ public class CamelDebugConfigurationProperties {
     @Metadata(label = "advanced", defaultValue = "300")
     private long fallbackTimeout = 300;
 
+    /**
+     * Whether to create JMX connector that allows tooling to control the Camel debugger.
+     * This is what the IDEA and VSCode tooling is using.
+     */
+    @Metadata(label = "advanced", defaultValue = "true")
+    private boolean jmxConnectorEnabled = true;
+
+    /**
+     * Port number to expose a JMX RMI connector for tooling that needs to control the debugger.
+     */
+    @Metadata(label = "advanced", defaultValue = "1099")
+    private int jmxConnectorPort = 1099;
+
     public boolean isEnabled() {
         return enabled;
     }
@@ -202,5 +215,21 @@ public class CamelDebugConfigurationProperties {
 
     public void setFallbackTimeout(long fallbackTimeout) {
         this.fallbackTimeout = fallbackTimeout;
+    }
+
+    public boolean isJmxConnectorEnabled() {
+        return jmxConnectorEnabled;
+    }
+
+    public void setJmxConnectorEnabled(boolean jmxConnectorEnabled) {
+        this.jmxConnectorEnabled = jmxConnectorEnabled;
+    }
+
+    public int getJmxConnectorPort() {
+        return jmxConnectorPort;
+    }
+
+    public void setJmxConnectorPort(int jmxConnectorPort) {
+        this.jmxConnectorPort = jmxConnectorPort;
     }
 }
