@@ -692,6 +692,20 @@
       "description": "Interval in millis to sleep each time while waiting for provisional correlation id to be updated. The option is a long type.",
       "sourceType": "org.apache.camel.component.jms.springboot.JmsComponentConfiguration",
       "defaultValue": 100
+    },
+    {
+      "name": "camel.component.jms.wait-for-temporary-reply-to-to-be-updated-counter",
+      "type": "java.lang.Integer",
+      "description": "Number of times to wait for temporary replyTo queue to be created and ready when doing request\/reply over JMS.",
+      "sourceType": "org.apache.camel.component.jms.springboot.JmsComponentConfiguration",
+      "defaultValue": 200
+    },
+    {
+      "name": "camel.component.jms.wait-for-temporary-reply-to-to-be-updated-thread-sleeping-time",
+      "type": "java.lang.Long",
+      "description": "Interval in millis to sleep each time while waiting for temporary replyTo queue to be ready. The option is a long type.",
+      "sourceType": "org.apache.camel.component.jms.springboot.JmsComponentConfiguration",
+      "defaultValue": 100
     }
   ],
   "hints": []

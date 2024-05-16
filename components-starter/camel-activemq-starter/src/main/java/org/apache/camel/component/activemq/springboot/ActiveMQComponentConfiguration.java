@@ -765,6 +765,16 @@ public class ActiveMQComponentConfiguration
      */
     private Long waitForProvisionCorrelationToBeUpdatedThreadSleepingTime = 100L;
     /**
+     * Number of times to wait for temporary replyTo queue to be created and
+     * ready when doing request/reply over JMS.
+     */
+    private Integer waitForTemporaryReplyToToBeUpdatedCounter = 200;
+    /**
+     * Interval in millis to sleep each time while waiting for temporary replyTo
+     * queue to be ready. The option is a long type.
+     */
+    private Long waitForTemporaryReplyToToBeUpdatedThreadSleepingTime = 100L;
+    /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
      * org.apache.camel.spi.HeaderFilterStrategy type.
@@ -1608,6 +1618,24 @@ public class ActiveMQComponentConfiguration
     public void setWaitForProvisionCorrelationToBeUpdatedThreadSleepingTime(
             Long waitForProvisionCorrelationToBeUpdatedThreadSleepingTime) {
         this.waitForProvisionCorrelationToBeUpdatedThreadSleepingTime = waitForProvisionCorrelationToBeUpdatedThreadSleepingTime;
+    }
+
+    public Integer getWaitForTemporaryReplyToToBeUpdatedCounter() {
+        return waitForTemporaryReplyToToBeUpdatedCounter;
+    }
+
+    public void setWaitForTemporaryReplyToToBeUpdatedCounter(
+            Integer waitForTemporaryReplyToToBeUpdatedCounter) {
+        this.waitForTemporaryReplyToToBeUpdatedCounter = waitForTemporaryReplyToToBeUpdatedCounter;
+    }
+
+    public Long getWaitForTemporaryReplyToToBeUpdatedThreadSleepingTime() {
+        return waitForTemporaryReplyToToBeUpdatedThreadSleepingTime;
+    }
+
+    public void setWaitForTemporaryReplyToToBeUpdatedThreadSleepingTime(
+            Long waitForTemporaryReplyToToBeUpdatedThreadSleepingTime) {
+        this.waitForTemporaryReplyToToBeUpdatedThreadSleepingTime = waitForTemporaryReplyToToBeUpdatedThreadSleepingTime;
     }
 
     public HeaderFilterStrategy getHeaderFilterStrategy() {

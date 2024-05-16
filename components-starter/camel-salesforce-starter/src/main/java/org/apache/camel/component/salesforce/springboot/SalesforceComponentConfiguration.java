@@ -450,9 +450,9 @@ public class SalesforceComponentConfiguration
     private Boolean httpProxySocks4 = false;
     /**
      * Explicit authentication method to be used, one of USERNAME_PASSWORD,
-     * REFRESH_TOKEN or JWT. Salesforce component can auto-determine the
-     * authentication method to use from the properties set, set this property
-     * to eliminate any ambiguity.
+     * REFRESH_TOKEN, CLIENT_CREDENTIALS, or JWT. Salesforce component can
+     * auto-determine the authentication method to use from the properties set,
+     * set this property to eliminate any ambiguity.
      */
     private AuthenticationType authenticationType;
     /**
