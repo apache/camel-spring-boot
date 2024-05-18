@@ -105,6 +105,7 @@
   <modules>
 
     <module>camel-activemq-starter</module>
+    <module>camel-activemq6-starter</module>
     <module>camel-amqp-starter</module>
     <module>camel-arangodb-starter</module>
     <module>camel-as2-starter</module>
