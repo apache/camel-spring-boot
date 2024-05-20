@@ -34,7 +34,6 @@ public class HashicorpVaultAutoConfiguration {
     public HashicorpVaultConfiguration hashicorpVaultConfiguration(HashicorpVaultConfigurationProperties config) {
         HashicorpVaultConfiguration answer = new HashicorpVaultConfiguration();
         answer.setToken(config.getToken());
-        answer.setEngine(config.getEngine());
         answer.setHost(config.getHost());
         answer.setPort(config.getPort());
         answer.setScheme(config.getScheme());

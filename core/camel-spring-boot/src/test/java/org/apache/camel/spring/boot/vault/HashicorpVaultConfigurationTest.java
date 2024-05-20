@@ -29,7 +29,7 @@ import org.springframework.test.annotation.DirtiesContext;
 @CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootTest(classes = { HashicorpVaultConfigurationTest.class }, properties = {
-        "camel.vault.hashicorp.token=myToken", "camel.vault.hashicorp.engine=myEngine",
+        "camel.vault.hashicorp.token=myToken",
         "camel.vault.hashicorp.host=myHost", "camel.vault.hashicorp.port=myPort",
         "camel.vault.hashicorp.scheme=myScheme" })
 public class HashicorpVaultConfigurationTest {
@@ -40,7 +40,6 @@ public class HashicorpVaultConfigurationTest {
     @Test
     public void testAwsVault() throws Exception {
         Assertions.assertEquals("myToken", camelContext.getVaultConfiguration().hashicorp().getToken());
-        Assertions.assertEquals("myEngine", camelContext.getVaultConfiguration().hashicorp().getEngine());
         Assertions.assertEquals("myHost", camelContext.getVaultConfiguration().hashicorp().getHost());
         Assertions.assertEquals("myPort", camelContext.getVaultConfiguration().hashicorp().getPort());
         Assertions.assertEquals("myScheme", camelContext.getVaultConfiguration().hashicorp().getScheme());
