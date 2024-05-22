@@ -16,11 +16,13 @@
 #
 
 github:
-  description: "Apache Camel Spring Boot support"
+  description: "Runs Camel on Spring Boot and provides starters for Camel components"
   homepage: https://camel.apache.org
   labels:
     - camel
     - integration
+    - eip
+    - microservices
     - java
     - spring-boot
 notifications:
