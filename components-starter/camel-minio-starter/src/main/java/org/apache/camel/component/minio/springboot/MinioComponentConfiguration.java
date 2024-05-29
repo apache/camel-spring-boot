@@ -51,11 +51,6 @@ public class MinioComponentConfiguration
      */
     private MinioConfiguration configuration;
     /**
-     * Set custom HTTP client for authenticated access. The option is a
-     * okhttp3.OkHttpClient type.
-     */
-    private OkHttpClient customHttpClient;
-    /**
      * Endpoint can be an URL, domain name, IPv4 address or IPv6 address.
      */
     private String endpoint;
@@ -87,16 +82,6 @@ public class MinioComponentConfiguration
      * Flag to indicate to use secure connection to minio service or not.
      */
     private Boolean secure = false;
-    /**
-     * Server-side encryption. The option is a io.minio.ServerSideEncryption
-     * type.
-     */
-    private ServerSideEncryption serverSideEncryption;
-    /**
-     * Server-side encryption for source object while copy/move objects. The
-     * option is a io.minio.ServerSideEncryptionCustomerKey type.
-     */
-    private ServerSideEncryptionCustomerKey serverSideEncryptionCustomerKey;
     /**
      * If this option is true and includeBody is true, then the
      * MinioObject.close() method will be called on exchange completion. This
@@ -281,6 +266,11 @@ public class MinioComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * Set custom HTTP client for authenticated access. The option is a
+     * okhttp3.OkHttpClient type.
+     */
+    private OkHttpClient customHttpClient;
+    /**
      * Used for enabling or disabling all consumer based health checks from this
      * component
      */
@@ -302,6 +292,16 @@ public class MinioComponentConfiguration
      * connect to service for anonymous access.
      */
     private String secretKey;
+    /**
+     * Server-side encryption. The option is a io.minio.ServerSideEncryption
+     * type.
+     */
+    private ServerSideEncryption serverSideEncryption;
+    /**
+     * Server-side encryption for source object while copy/move objects. The
+     * option is a io.minio.ServerSideEncryptionCustomerKey type.
+     */
+    private ServerSideEncryptionCustomerKey serverSideEncryptionCustomerKey;
 
     public Boolean getAutoCreateBucket() {
         return autoCreateBucket;
@@ -317,14 +317,6 @@ public class MinioComponentConfiguration
 
     public void setConfiguration(MinioConfiguration configuration) {
         this.configuration = configuration;
-    }
-
-    public OkHttpClient getCustomHttpClient() {
-        return customHttpClient;
-    }
-
-    public void setCustomHttpClient(OkHttpClient customHttpClient) {
-        this.customHttpClient = customHttpClient;
     }
 
     public String getEndpoint() {
@@ -381,24 +373,6 @@ public class MinioComponentConfiguration
 
     public void setSecure(Boolean secure) {
         this.secure = secure;
-    }
-
-    public ServerSideEncryption getServerSideEncryption() {
-        return serverSideEncryption;
-    }
-
-    public void setServerSideEncryption(
-            ServerSideEncryption serverSideEncryption) {
-        this.serverSideEncryption = serverSideEncryption;
-    }
-
-    public ServerSideEncryptionCustomerKey getServerSideEncryptionCustomerKey() {
-        return serverSideEncryptionCustomerKey;
-    }
-
-    public void setServerSideEncryptionCustomerKey(
-            ServerSideEncryptionCustomerKey serverSideEncryptionCustomerKey) {
-        this.serverSideEncryptionCustomerKey = serverSideEncryptionCustomerKey;
     }
 
     public Boolean getAutoCloseBody() {
@@ -665,6 +639,14 @@ public class MinioComponentConfiguration
         this.autowiredEnabled = autowiredEnabled;
     }
 
+    public OkHttpClient getCustomHttpClient() {
+        return customHttpClient;
+    }
+
+    public void setCustomHttpClient(OkHttpClient customHttpClient) {
+        this.customHttpClient = customHttpClient;
+    }
+
     public Boolean getHealthCheckConsumerEnabled() {
         return healthCheckConsumerEnabled;
     }
@@ -695,5 +677,23 @@ public class MinioComponentConfiguration
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public ServerSideEncryption getServerSideEncryption() {
+        return serverSideEncryption;
+    }
+
+    public void setServerSideEncryption(
+            ServerSideEncryption serverSideEncryption) {
+        this.serverSideEncryption = serverSideEncryption;
+    }
+
+    public ServerSideEncryptionCustomerKey getServerSideEncryptionCustomerKey() {
+        return serverSideEncryptionCustomerKey;
+    }
+
+    public void setServerSideEncryptionCustomerKey(
+            ServerSideEncryptionCustomerKey serverSideEncryptionCustomerKey) {
+        this.serverSideEncryptionCustomerKey = serverSideEncryptionCustomerKey;
     }
 }

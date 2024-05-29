@@ -49,7 +49,8 @@ public class InfinispanRemoteComponentConfiguration
      */
     private InfinispanRemoteConfiguration configuration;
     /**
-     * Specifies the host of the cache on Infinispan instance
+     * Specifies the host of the cache on Infinispan instance. Multiple hosts
+     * can be separated by semicolon.
      */
     private String hosts;
     /**
@@ -57,10 +58,6 @@ public class InfinispanRemoteComponentConfiguration
      * org.apache.camel.component.infinispan.InfinispanQueryBuilder type.
      */
     private InfinispanQueryBuilder queryBuilder;
-    /**
-     * Define if we are connecting to a secured Infinispan instance
-     */
-    private Boolean secure = false;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions (if possible) occurred while the Camel consumer
@@ -180,6 +177,10 @@ public class InfinispanRemoteComponentConfiguration
      */
     private String saslMechanism;
     /**
+     * Define if we are connecting to a secured Infinispan instance
+     */
+    private Boolean secure = false;
+    /**
      * Define the security realm to access the infinispan instance
      */
     private String securityRealm;
@@ -214,14 +215,6 @@ public class InfinispanRemoteComponentConfiguration
 
     public void setQueryBuilder(InfinispanQueryBuilder queryBuilder) {
         this.queryBuilder = queryBuilder;
-    }
-
-    public Boolean getSecure() {
-        return secure;
-    }
-
-    public void setSecure(Boolean secure) {
-        this.secure = secure;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -376,6 +369,14 @@ public class InfinispanRemoteComponentConfiguration
 
     public void setSaslMechanism(String saslMechanism) {
         this.saslMechanism = saslMechanism;
+    }
+
+    public Boolean getSecure() {
+        return secure;
+    }
+
+    public void setSecure(Boolean secure) {
+        this.secure = secure;
     }
 
     public String getSecurityRealm() {

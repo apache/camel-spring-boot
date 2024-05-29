@@ -60,6 +60,13 @@ public class SqlStoredComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * Whether to detect the network address location of the JMS broker on
+     * startup. This information is gathered via reflection on the
+     * ConnectionFactory, and is vendor specific. This option can be used to
+     * turn this off.
+     */
+    private Boolean serviceLocationEnabled = true;
 
     public DataSource getDataSource() {
         return dataSource;
@@ -83,5 +90,13 @@ public class SqlStoredComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Boolean getServiceLocationEnabled() {
+        return serviceLocationEnabled;
+    }
+
+    public void setServiceLocationEnabled(Boolean serviceLocationEnabled) {
+        this.serviceLocationEnabled = serviceLocationEnabled;
     }
 }

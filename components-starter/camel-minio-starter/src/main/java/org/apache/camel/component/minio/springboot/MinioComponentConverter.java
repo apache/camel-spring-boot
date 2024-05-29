@@ -40,8 +40,8 @@ public class MinioComponentConverter implements GenericConverter {
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.minio.MinioConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, okhttp3.OkHttpClient.class));
         answer.add(new ConvertiblePair(String.class, io.minio.MinioClient.class));
+        answer.add(new ConvertiblePair(String.class, okhttp3.OkHttpClient.class));
         answer.add(new ConvertiblePair(String.class, io.minio.ServerSideEncryption.class));
         answer.add(new ConvertiblePair(String.class, io.minio.ServerSideEncryptionCustomerKey.class));
         return answer;
@@ -61,8 +61,8 @@ public class MinioComponentConverter implements GenericConverter {
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.apache.camel.component.minio.MinioConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.minio.MinioConfiguration.class);
-            case "okhttp3.OkHttpClient": return applicationContext.getBean(ref, okhttp3.OkHttpClient.class);
             case "io.minio.MinioClient": return applicationContext.getBean(ref, io.minio.MinioClient.class);
+            case "okhttp3.OkHttpClient": return applicationContext.getBean(ref, okhttp3.OkHttpClient.class);
             case "io.minio.ServerSideEncryption": return applicationContext.getBean(ref, io.minio.ServerSideEncryption.class);
             case "io.minio.ServerSideEncryptionCustomerKey": return applicationContext.getBean(ref, io.minio.ServerSideEncryptionCustomerKey.class);
         }

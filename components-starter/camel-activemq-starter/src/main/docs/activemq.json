@@ -573,6 +573,13 @@
       "sourceType": "org.apache.camel.component.activemq.springboot.ActiveMQComponentConfiguration"
     },
     {
+      "name": "camel.component.activemq.service-location-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to detect the network address location of the JMS broker on startup. This information is gathered via reflection on the ConnectionFactory, and is vendor specific. This option can be used to turn this off.",
+      "sourceType": "org.apache.camel.component.activemq.springboot.ActiveMQComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.activemq.stream-message-type-enabled",
       "type": "java.lang.Boolean",
       "description": "Sets whether StreamMessage type is enabled or not. Message payloads of streaming kind such as files, InputStream, etc will either by sent as BytesMessage or StreamMessage. This option controls which kind will be used. By default BytesMessage is used which enforces the entire message payload to be read into memory. By enabling this option the message payload is read into memory in chunks and each chunk is then written to the StreamMessage until no more data.",

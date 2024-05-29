@@ -701,6 +701,13 @@ public class ActiveMQComponentConfiguration
      */
     private Long requestTimeoutCheckerInterval = 1000L;
     /**
+     * Whether to detect the network address location of the JMS broker on
+     * startup. This information is gathered via reflection on the
+     * ConnectionFactory, and is vendor specific. This option can be used to
+     * turn this off.
+     */
+    private Boolean serviceLocationEnabled = true;
+    /**
      * Sets whether synchronous processing should be strictly used
      */
     private Boolean synchronous = false;
@@ -1550,6 +1557,14 @@ public class ActiveMQComponentConfiguration
     public void setRequestTimeoutCheckerInterval(
             Long requestTimeoutCheckerInterval) {
         this.requestTimeoutCheckerInterval = requestTimeoutCheckerInterval;
+    }
+
+    public Boolean getServiceLocationEnabled() {
+        return serviceLocationEnabled;
+    }
+
+    public void setServiceLocationEnabled(Boolean serviceLocationEnabled) {
+        this.serviceLocationEnabled = serviceLocationEnabled;
     }
 
     public Boolean getSynchronous() {

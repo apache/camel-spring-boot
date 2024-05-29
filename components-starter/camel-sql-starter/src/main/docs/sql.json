@@ -50,6 +50,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.sql-stored.service-location-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to detect the network address location of the JMS broker on startup. This information is gathered via reflection on the ConnectionFactory, and is vendor specific. This option can be used to turn this off.",
+      "sourceType": "org.apache.camel.component.sql.stored.springboot.SqlStoredComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.sql.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
@@ -100,6 +107,13 @@
       "type": "org.apache.camel.component.sql.RowMapperFactory",
       "description": "Factory for creating RowMapper. The option is a org.apache.camel.component.sql.RowMapperFactory type.",
       "sourceType": "org.apache.camel.component.sql.springboot.SqlComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sql.service-location-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to detect the network address location of the JMS broker on startup. This information is gathered via reflection on the ConnectionFactory, and is vendor specific. This option can be used to turn this off.",
+      "sourceType": "org.apache.camel.component.sql.springboot.SqlComponentConfiguration",
+      "defaultValue": true
     },
     {
       "name": "camel.component.sql.use-placeholder",

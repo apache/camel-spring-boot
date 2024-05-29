@@ -113,7 +113,7 @@
     {
       "name": "camel.component.infinispan.hosts",
       "type": "java.lang.String",
-      "description": "Specifies the host of the cache on Infinispan instance",
+      "description": "Specifies the host of the cache on Infinispan instance. Multiple hosts can be separated by semicolon.",
       "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration"
     },
     {
