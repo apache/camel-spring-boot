@@ -44,9 +44,10 @@ public class Etcd3ComponentConfiguration
      */
     private Etcd3Configuration configuration;
     /**
-     * Configure etcd server endpoints using the IPNameResolver.
+     * Configure etcd server endpoints using the IPNameResolver. Multiple
+     * endpoints can be separated by comma.
      */
-    private String[] endpoints;
+    private String endpoints = "http://localhost:2379";
     /**
      * Configure the charset to use for the keys.
      */
@@ -173,11 +174,11 @@ public class Etcd3ComponentConfiguration
         this.configuration = configuration;
     }
 
-    public String[] getEndpoints() {
+    public String getEndpoints() {
         return endpoints;
     }
 
-    public void setEndpoints(String[] endpoints) {
+    public void setEndpoints(String endpoints) {
         this.endpoints = endpoints;
     }
 

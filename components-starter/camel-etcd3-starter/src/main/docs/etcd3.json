@@ -64,9 +64,10 @@
     },
     {
       "name": "camel.component.etcd3.endpoints",
-      "type": "java.lang.String[]",
-      "description": "Configure etcd server endpoints using the IPNameResolver.",
-      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration"
+      "type": "java.lang.String",
+      "description": "Configure etcd server endpoints using the IPNameResolver. Multiple endpoints can be separated by comma.",
+      "sourceType": "org.apache.camel.component.etcd3.springboot.Etcd3ComponentConfiguration",
+      "defaultValue": "http:\/\/localhost:2379"
     },
     {
       "name": "camel.component.etcd3.from-index",
