@@ -168,11 +168,6 @@
     },
     {
       "name": "management.endpoint.camelroutes",
-      "type": "org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpoint",
-      "sourceType": "org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpoint"
-    },
-    {
-      "name": "management.endpoint.camelroutes",
       "type": "org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpointProperties",
       "sourceType": "org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpointProperties"
     }
