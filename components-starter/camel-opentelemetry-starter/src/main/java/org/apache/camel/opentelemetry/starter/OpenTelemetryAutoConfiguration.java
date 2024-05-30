@@ -20,6 +20,7 @@ import io.opentelemetry.api.trace.Tracer;
 import io.opentelemetry.context.propagation.ContextPropagators;
 import org.apache.camel.CamelContext;
 import org.apache.camel.opentelemetry.OpenTelemetryTracer;
+import org.apache.camel.opentelemetry.OpenTelemetryTracingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -55,6 +56,11 @@ public class OpenTelemetryAutoConfiguration {
         }
         if (config.getEncoding() != null) {
             ottracer.setEncoding(config.getEncoding().booleanValue());
+        }
+        if (config.getTraceProcessors() != null && config.getTraceProcessors()) {
+            OpenTelemetryTracingStrategy tracingStrategy = new OpenTelemetryTracingStrategy(ottracer);
+            tracingStrategy.setPropagateContext(true);
+            ottracer.setTracingStrategy(tracingStrategy);
         }
         ottracer.init(camelContext);
 
