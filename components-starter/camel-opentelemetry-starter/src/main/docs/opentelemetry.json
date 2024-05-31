@@ -25,6 +25,12 @@
       "type": "java.lang.String",
       "description": "Sets exclude pattern(s) that will disable tracing for Camel messages that matches the pattern. Multiple patterns can be separated by comma.",
       "sourceType": "org.apache.camel.opentelemetry.starter.OpenTelemetryConfigurationProperties"
+    },
+    {
+      "name": "camel.opentelemetry.trace-processors",
+      "type": "java.lang.Boolean",
+      "description": "Setting this to true will create new OpenTelemetry Spans for each Camel Processors. Use the excludePattern property to filter out Processors.",
+      "sourceType": "org.apache.camel.opentelemetry.starter.OpenTelemetryConfigurationProperties"
     }
   ],
   "hints": []

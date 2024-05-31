@@ -35,6 +35,20 @@ public class OpenTelemetryConfigurationProperties {
      */
     private Boolean encoding;
 
+    /**
+     * Setting this to true will create new OpenTelemetry Spans for each Camel Processors. Use the excludePattern
+     * property to filter out Processors.
+     */
+    private Boolean traceProcessors;
+
+    public Boolean getTraceProcessors() {
+        return traceProcessors;
+    }
+
+    public void setTraceProcessors(Boolean traceProcessors) {
+        this.traceProcessors = traceProcessors;
+    }
+
     public boolean isEnabled() {
         return enabled;
     }
