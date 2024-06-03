@@ -308,10 +308,6 @@ public class NettyComponentConfiguration
      */
     private Boolean useByteBuf = false;
     /**
-     * To enable/disable hostname verification on SSLEngine
-     */
-    private Boolean hostnameVerification = false;
-    /**
      * Only used for TCP when transferExchange is true. When set to true,
      * serializable objects in headers and properties will be added to the
      * exchange. Otherwise Camel will exclude any non-serializable objects and
@@ -444,6 +440,10 @@ public class NettyComponentConfiguration
      * Which protocols to enable when using SSL
      */
     private String enabledProtocols = "TLSv1.2,TLSv1.3";
+    /**
+     * To enable/disable hostname verification on SSLEngine
+     */
+    private Boolean hostnameVerification = false;
     /**
      * Client side certificate keystore to be used for encryption
      */
@@ -837,14 +837,6 @@ public class NettyComponentConfiguration
         this.useByteBuf = useByteBuf;
     }
 
-    public Boolean getHostnameVerification() {
-        return hostnameVerification;
-    }
-
-    public void setHostnameVerification(Boolean hostnameVerification) {
-        this.hostnameVerification = hostnameVerification;
-    }
-
     public Boolean getAllowSerializedHeaders() {
         return allowSerializedHeaders;
     }
@@ -1019,6 +1011,14 @@ public class NettyComponentConfiguration
 
     public void setEnabledProtocols(String enabledProtocols) {
         this.enabledProtocols = enabledProtocols;
+    }
+
+    public Boolean getHostnameVerification() {
+        return hostnameVerification;
+    }
+
+    public void setHostnameVerification(Boolean hostnameVerification) {
+        this.hostnameVerification = hostnameVerification;
     }
 
     public File getKeyStoreFile() {
