@@ -383,6 +383,7 @@
     <module>camel-sjms2-starter</module>
     <module>camel-slack-starter</module>
     <module>camel-smb-starter</module>
+    <module>camel-smooks-starter</module>
     <module>camel-smpp-starter</module>
     <module>camel-snakeyaml-starter</module>
     <module>camel-snmp-starter</module>
