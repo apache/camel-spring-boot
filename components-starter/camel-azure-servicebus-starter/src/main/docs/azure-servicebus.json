@@ -141,7 +141,7 @@
     {
       "name": "camel.component.azure-servicebus.proxy-options",
       "type": "com.azure.core.amqp.ProxyOptions",
-      "description": "Sets the proxy configuration to use for ServiceBusSenderAsyncClient. When a proxy is configured, AMQP_WEB_SOCKETS must be used for the transport type. The option is a com.azure.core.amqp.ProxyOptions type.",
+      "description": "Sets the proxy configuration to use for ServiceBusSenderClient. When a proxy is configured, AMQP_WEB_SOCKETS must be used for the transport type. The option is a com.azure.core.amqp.ProxyOptions type.",
       "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration"
     },
     {
@@ -151,9 +151,9 @@
       "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration"
     },
     {
-      "name": "camel.component.azure-servicebus.sender-async-client",
-      "type": "com.azure.messaging.servicebus.ServiceBusSenderAsyncClient",
-      "description": "Sets SenderAsyncClient to be used in the producer. The option is a com.azure.messaging.servicebus.ServiceBusSenderAsyncClient type.",
+      "name": "camel.component.azure-servicebus.sender-client",
+      "type": "com.azure.messaging.servicebus.ServiceBusSenderClient",
+      "description": "Sets senderClient to be used in the producer. The option is a com.azure.messaging.servicebus.ServiceBusSenderClient type.",
       "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration"
     },
     {

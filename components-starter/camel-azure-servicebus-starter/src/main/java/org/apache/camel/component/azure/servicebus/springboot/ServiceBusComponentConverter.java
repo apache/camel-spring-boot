@@ -45,7 +45,7 @@ public class ServiceBusComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
         answer.add(new ConvertiblePair(String.class, com.azure.core.amqp.ProxyOptions.class));
         answer.add(new ConvertiblePair(String.class, com.azure.messaging.servicebus.ServiceBusProcessorClient.class));
-        answer.add(new ConvertiblePair(String.class, com.azure.messaging.servicebus.ServiceBusSenderAsyncClient.class));
+        answer.add(new ConvertiblePair(String.class, com.azure.messaging.servicebus.ServiceBusSenderClient.class));
         answer.add(new ConvertiblePair(String.class, com.azure.messaging.servicebus.ServiceBusTransactionContext.class));
         answer.add(new ConvertiblePair(String.class, com.azure.core.credential.TokenCredential.class));
         return answer;
@@ -70,7 +70,7 @@ public class ServiceBusComponentConverter implements GenericConverter {
             case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
             case "com.azure.core.amqp.ProxyOptions": return applicationContext.getBean(ref, com.azure.core.amqp.ProxyOptions.class);
             case "com.azure.messaging.servicebus.ServiceBusProcessorClient": return applicationContext.getBean(ref, com.azure.messaging.servicebus.ServiceBusProcessorClient.class);
-            case "com.azure.messaging.servicebus.ServiceBusSenderAsyncClient": return applicationContext.getBean(ref, com.azure.messaging.servicebus.ServiceBusSenderAsyncClient.class);
+            case "com.azure.messaging.servicebus.ServiceBusSenderClient": return applicationContext.getBean(ref, com.azure.messaging.servicebus.ServiceBusSenderClient.class);
             case "com.azure.messaging.servicebus.ServiceBusTransactionContext": return applicationContext.getBean(ref, com.azure.messaging.servicebus.ServiceBusTransactionContext.class);
             case "com.azure.core.credential.TokenCredential": return applicationContext.getBean(ref, com.azure.core.credential.TokenCredential.class);
         }

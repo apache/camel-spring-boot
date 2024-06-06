@@ -24,7 +24,7 @@ import com.azure.core.amqp.ProxyOptions;
 import com.azure.core.credential.TokenCredential;
 import com.azure.core.util.ClientOptions;
 import com.azure.messaging.servicebus.ServiceBusProcessorClient;
-import com.azure.messaging.servicebus.ServiceBusSenderAsyncClient;
+import com.azure.messaging.servicebus.ServiceBusSenderClient;
 import com.azure.messaging.servicebus.ServiceBusTransactionContext;
 import com.azure.messaging.servicebus.models.ServiceBusReceiveMode;
 import com.azure.messaging.servicebus.models.SubQueue;
@@ -82,8 +82,8 @@ public class ServiceBusComponentConfiguration
      */
     private HeaderFilterStrategy headerFilterStrategy;
     /**
-     * Sets the proxy configuration to use for ServiceBusSenderAsyncClient. When
-     * a proxy is configured, AMQP_WEB_SOCKETS must be used for the transport
+     * Sets the proxy configuration to use for ServiceBusSenderClient. When a
+     * proxy is configured, AMQP_WEB_SOCKETS must be used for the transport
      * type. The option is a com.azure.core.amqp.ProxyOptions type.
      */
     private ProxyOptions proxyOptions;
@@ -177,10 +177,10 @@ public class ServiceBusComponentConfiguration
      */
     private OffsetDateTime scheduledEnqueueTime;
     /**
-     * Sets SenderAsyncClient to be used in the producer. The option is a
-     * com.azure.messaging.servicebus.ServiceBusSenderAsyncClient type.
+     * Sets senderClient to be used in the producer. The option is a
+     * com.azure.messaging.servicebus.ServiceBusSenderClient type.
      */
-    private ServiceBusSenderAsyncClient senderAsyncClient;
+    private ServiceBusSenderClient senderClient;
     /**
      * Represents transaction in service. This object just contains transaction
      * id. The option is a
@@ -378,13 +378,12 @@ public class ServiceBusComponentConfiguration
         this.scheduledEnqueueTime = scheduledEnqueueTime;
     }
 
-    public ServiceBusSenderAsyncClient getSenderAsyncClient() {
-        return senderAsyncClient;
+    public ServiceBusSenderClient getSenderClient() {
+        return senderClient;
     }
 
-    public void setSenderAsyncClient(
-            ServiceBusSenderAsyncClient senderAsyncClient) {
-        this.senderAsyncClient = senderAsyncClient;
+    public void setSenderClient(ServiceBusSenderClient senderClient) {
+        this.senderClient = senderClient;
     }
 
     public ServiceBusTransactionContext getServiceBusTransactionContext() {
