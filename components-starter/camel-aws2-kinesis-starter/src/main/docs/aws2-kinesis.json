@@ -322,6 +322,13 @@
       "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
     },
     {
+      "name": "camel.component.aws2-kinesis.shard-monitor-interval",
+      "type": "java.lang.Long",
+      "description": "The interval in milliseconds to wait between shard polling",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration",
+      "defaultValue": 10000
+    },
+    {
       "name": "camel.component.aws2-kinesis.trust-all-certificates",
       "type": "java.lang.Boolean",
       "description": "If we want to trust all certificates in case of overriding the endpoint",

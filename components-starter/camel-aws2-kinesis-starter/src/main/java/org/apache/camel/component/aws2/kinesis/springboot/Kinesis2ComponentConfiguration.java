@@ -106,6 +106,10 @@ public class Kinesis2ComponentConfiguration
      */
     private String shardId;
     /**
+     * The interval in milliseconds to wait between shard polling
+     */
+    private Long shardMonitorInterval = 10000L;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -283,6 +287,14 @@ public class Kinesis2ComponentConfiguration
 
     public void setShardId(String shardId) {
         this.shardId = shardId;
+    }
+
+    public Long getShardMonitorInterval() {
+        return shardMonitorInterval;
+    }
+
+    public void setShardMonitorInterval(Long shardMonitorInterval) {
+        this.shardMonitorInterval = shardMonitorInterval;
     }
 
     public Boolean getLazyStartProducer() {
