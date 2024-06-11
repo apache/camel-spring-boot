@@ -17,6 +17,7 @@
 package org.apache.camel.component.elasticsearch.rest.client.springboot;
 
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.elasticsearch.client.RestClient;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -36,6 +37,14 @@ public class ElasticsearchRestClientComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Connection timeout
+     */
+    private Integer connectionTimeout = 30000;
+    /**
+     * List of host Addresses, multiple hosts can be separated by comma.
+     */
+    private String hostAddressesList;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -47,6 +56,10 @@ public class ElasticsearchRestClientComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Socket timeout
+     */
+    private Integer socketTimeout = 30000;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -55,6 +68,51 @@ public class ElasticsearchRestClientComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * Enabling Sniffer
+     */
+    private Boolean enableSniffer = false;
+    /**
+     * Rest Client of type org.elasticsearch.client.RestClient. This is only for
+     * advanced usage. The option is a org.elasticsearch.client.RestClient type.
+     */
+    private RestClient restClient;
+    /**
+     * Sniffer after failure delay (in millis)
+     */
+    private Integer sniffAfterFailureDelay = 60000;
+    /**
+     * Sniffer interval (in millis)
+     */
+    private Integer snifferInterval = 60000;
+    /**
+     * Certificate Path
+     */
+    private String certificatePath;
+    /**
+     * Password
+     */
+    private String password;
+    /**
+     * Username
+     */
+    private String user;
+
+    public Integer getConnectionTimeout() {
+        return connectionTimeout;
+    }
+
+    public void setConnectionTimeout(Integer connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
+    }
+
+    public String getHostAddressesList() {
+        return hostAddressesList;
+    }
+
+    public void setHostAddressesList(String hostAddressesList) {
+        this.hostAddressesList = hostAddressesList;
+    }
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -64,11 +122,75 @@ public class ElasticsearchRestClientComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public Integer getSocketTimeout() {
+        return socketTimeout;
+    }
+
+    public void setSocketTimeout(Integer socketTimeout) {
+        this.socketTimeout = socketTimeout;
+    }
+
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Boolean getEnableSniffer() {
+        return enableSniffer;
+    }
+
+    public void setEnableSniffer(Boolean enableSniffer) {
+        this.enableSniffer = enableSniffer;
+    }
+
+    public RestClient getRestClient() {
+        return restClient;
+    }
+
+    public void setRestClient(RestClient restClient) {
+        this.restClient = restClient;
+    }
+
+    public Integer getSniffAfterFailureDelay() {
+        return sniffAfterFailureDelay;
+    }
+
+    public void setSniffAfterFailureDelay(Integer sniffAfterFailureDelay) {
+        this.sniffAfterFailureDelay = sniffAfterFailureDelay;
+    }
+
+    public Integer getSnifferInterval() {
+        return snifferInterval;
+    }
+
+    public void setSnifferInterval(Integer snifferInterval) {
+        this.snifferInterval = snifferInterval;
+    }
+
+    public String getCertificatePath() {
+        return certificatePath;
+    }
+
+    public void setCertificatePath(String certificatePath) {
+        this.certificatePath = certificatePath;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }

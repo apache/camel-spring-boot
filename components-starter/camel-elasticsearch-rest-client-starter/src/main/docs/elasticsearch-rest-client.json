@@ -21,9 +21,29 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.elasticsearch-rest-client.certificate-path",
+      "type": "java.lang.String",
+      "description": "Certificate Path",
+      "sourceType": "org.apache.camel.component.elasticsearch.rest.client.springboot.ElasticsearchRestClientComponentConfiguration"
+    },
+    {
+      "name": "camel.component.elasticsearch-rest-client.connection-timeout",
+      "type": "java.lang.Integer",
+      "description": "Connection timeout",
+      "sourceType": "org.apache.camel.component.elasticsearch.rest.client.springboot.ElasticsearchRestClientComponentConfiguration",
+      "defaultValue": 30000
+    },
+    {
       "name": "camel.component.elasticsearch-rest-client.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.elasticsearch-rest-client.enable-sniffer",
+      "type": "java.lang.Boolean",
+      "description": "Enabling Sniffer",
+      "sourceType": "org.apache.camel.component.elasticsearch.rest.client.springboot.ElasticsearchRestClientComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.elasticsearch-rest-client.enabled",
@@ -32,11 +52,56 @@
       "sourceType": "org.apache.camel.component.elasticsearch.rest.client.springboot.ElasticsearchRestClientComponentConfiguration"
     },
     {
+      "name": "camel.component.elasticsearch-rest-client.host-addresses-list",
+      "type": "java.lang.String",
+      "description": "List of host Addresses, multiple hosts can be separated by comma.",
+      "sourceType": "org.apache.camel.component.elasticsearch.rest.client.springboot.ElasticsearchRestClientComponentConfiguration"
+    },
+    {
       "name": "camel.component.elasticsearch-rest-client.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
       "sourceType": "org.apache.camel.component.elasticsearch.rest.client.springboot.ElasticsearchRestClientComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.elasticsearch-rest-client.password",
+      "type": "java.lang.String",
+      "description": "Password",
+      "sourceType": "org.apache.camel.component.elasticsearch.rest.client.springboot.ElasticsearchRestClientComponentConfiguration"
+    },
+    {
+      "name": "camel.component.elasticsearch-rest-client.rest-client",
+      "type": "org.elasticsearch.client.RestClient",
+      "description": "Rest Client of type org.elasticsearch.client.RestClient. This is only for advanced usage. The option is a org.elasticsearch.client.RestClient type.",
+      "sourceType": "org.apache.camel.component.elasticsearch.rest.client.springboot.ElasticsearchRestClientComponentConfiguration"
+    },
+    {
+      "name": "camel.component.elasticsearch-rest-client.sniff-after-failure-delay",
+      "type": "java.lang.Integer",
+      "description": "Sniffer after failure delay (in millis)",
+      "sourceType": "org.apache.camel.component.elasticsearch.rest.client.springboot.ElasticsearchRestClientComponentConfiguration",
+      "defaultValue": 60000
+    },
+    {
+      "name": "camel.component.elasticsearch-rest-client.sniffer-interval",
+      "type": "java.lang.Integer",
+      "description": "Sniffer interval (in millis)",
+      "sourceType": "org.apache.camel.component.elasticsearch.rest.client.springboot.ElasticsearchRestClientComponentConfiguration",
+      "defaultValue": 60000
+    },
+    {
+      "name": "camel.component.elasticsearch-rest-client.socket-timeout",
+      "type": "java.lang.Integer",
+      "description": "Socket timeout",
+      "sourceType": "org.apache.camel.component.elasticsearch.rest.client.springboot.ElasticsearchRestClientComponentConfiguration",
+      "defaultValue": 30000
+    },
+    {
+      "name": "camel.component.elasticsearch-rest-client.user",
+      "type": "java.lang.String",
+      "description": "Username",
+      "sourceType": "org.apache.camel.component.elasticsearch.rest.client.springboot.ElasticsearchRestClientComponentConfiguration"
     }
   ],
   "hints": []

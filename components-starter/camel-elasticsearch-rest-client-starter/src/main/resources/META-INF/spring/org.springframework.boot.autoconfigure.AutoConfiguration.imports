@@ -16,3 +16,4 @@
 ## ---------------------------------------------------------------------------
 
 org.apache.camel.component.elasticsearch.rest.client.springboot.ElasticsearchRestClientComponentAutoConfiguration
+org.apache.camel.component.elasticsearch.rest.client.springboot.ElasticsearchRestClientComponentConverter

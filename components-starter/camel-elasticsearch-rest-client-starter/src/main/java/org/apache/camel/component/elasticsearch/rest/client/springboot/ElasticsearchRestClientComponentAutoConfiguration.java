@@ -42,7 +42,7 @@ import org.springframework.context.annotation.Lazy;
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,ElasticsearchRestClientComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.elasticsearch-rest-client"})
-@AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfigureAfter({CamelAutoConfiguration.class, ElasticsearchRestClientComponentConverter.class})
 public class ElasticsearchRestClientComponentAutoConfiguration {
 
     @Autowired
