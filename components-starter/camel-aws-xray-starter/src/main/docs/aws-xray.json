@@ -1,3 +1,31 @@
 {
-  "properties": []
+  "groups": [
+    {
+      "name": "camel.aws-xray",
+      "type": "org.apache.camel.aws.xray.starter.AwsXRayConfigurationProperties",
+      "sourceType": "org.apache.camel.aws.xray.starter.AwsXRayConfigurationProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.aws-xray.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Global option to enable\/disable AWS XRay integration, default is true.",
+      "sourceType": "org.apache.camel.aws.xray.starter.AwsXRayConfigurationProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.aws-xray.exclude-patterns",
+      "type": "java.util.Set<java.lang.String>",
+      "description": "Sets exclude pattern(s) that will disable tracing for Camel messages that matches the pattern. Multiple patterns can be separated by comma.",
+      "sourceType": "org.apache.camel.aws.xray.starter.AwsXRayConfigurationProperties"
+    },
+    {
+      "name": "camel.aws-xray.tracing-strategy",
+      "type": "org.apache.camel.aws.xray.starter.AwsXRayConfigurationProperties$TracingStrategy",
+      "description": "Tracing strategy used. Defaults to {@link org.apache.camel.component.aws.xray.TraceAnnotatedTracingStrategy}",
+      "sourceType": "org.apache.camel.aws.xray.starter.AwsXRayConfigurationProperties"
+    }
+  ],
+  "hints": []
 }
