@@ -140,6 +140,10 @@ public class OpenApiAutoConfiguration {
     }
 
     private static void initOpenApi(BeanConfig bc, Info info, Map<String, Object> config) {
+        if (config == null || config.isEmpty()) {
+            return;
+        }
+
         // configure openApi options
         String s = (String) config.get("openapi.version");
         if (s != null) {
