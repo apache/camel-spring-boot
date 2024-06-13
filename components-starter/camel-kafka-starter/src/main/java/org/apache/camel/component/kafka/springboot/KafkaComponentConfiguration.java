@@ -668,6 +668,12 @@ public class KafkaComponentConfiguration
      */
     private Integer sendBufferBytes = 131072;
     /**
+     * Sets whether sending to kafka should send the message body as a single
+     * record, or use a java.util.Iterator to send multiple records to kafka (if
+     * the message body can be iterated).
+     */
+    private Boolean useIterator = true;
+    /**
      * The serializer class for messages.
      */
     private String valueSerializer = "org.apache.kafka.common.serialization.StringSerializer";
@@ -1529,6 +1535,14 @@ public class KafkaComponentConfiguration
 
     public void setSendBufferBytes(Integer sendBufferBytes) {
         this.sendBufferBytes = sendBufferBytes;
+    }
+
+    public Boolean getUseIterator() {
+        return useIterator;
+    }
+
+    public void setUseIterator(Boolean useIterator) {
+        this.useIterator = useIterator;
     }
 
     public String getValueSerializer() {
