@@ -71,8 +71,14 @@ public class OpenApiAutoConfiguration {
                 try {
                     OpenAPI created = createOpenAPI(camelContext);
                     if (created != null) {
-                        LOG.info("OpenAPI ({}) created from Camel Rest-DSL v{} - {}", created.getOpenapi(),
-                                created.getInfo().getVersion(), created.getInfo().getTitle());
+                        String msg = "OpenAPI (" + created.getOpenapi() + ") created from Camel Rest-DSL";
+                        if (created.getInfo().getVersion() != null) {
+                            msg += " v" + created.getInfo().getVersion();
+                        }
+                        if (created.getInfo().getTitle() != null) {
+                            msg += " " + created.getInfo().getTitle();
+                        }
+                        LOG.info(msg);
                         // transfer data to the existing
                         openAPI.setInfo(created.getInfo());
                         openAPI.setOpenapi(created.getOpenapi());
