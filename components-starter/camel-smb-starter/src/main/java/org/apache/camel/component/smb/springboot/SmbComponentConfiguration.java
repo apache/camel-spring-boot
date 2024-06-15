@@ -49,6 +49,17 @@ public class SmbComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Whether the producer should be started lazy (on the first message). By
+     * starting lazy you can use this to allow CamelContext and routes to
+     * startup in situations where a producer may otherwise fail during starting
+     * and cause the route to fail being started. By deferring this startup to
+     * be lazy then the startup failure can be handled during routing messages
+     * via Camel's routing error handlers. Beware that when the first message is
+     * processed then creating and starting the producer may take a little time
+     * and prolong the total processing time of the processing.
+     */
+    private Boolean lazyStartProducer = false;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -64,6 +75,14 @@ public class SmbComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getAutowiredEnabled() {
