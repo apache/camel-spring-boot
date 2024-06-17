@@ -72,6 +72,15 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
                 executeBeans(jar, files);
             }
         }
+        // special to include core languages
+        if (getMainDep() != null) {
+            try (JarFile jar = getJarFile("org.apache.camel", "camel-core-languages")) {
+                if (jar != null) {
+                    Map<String, Supplier<String>> files = getJSonFiles(jar);
+                    executeLanguages(jar, files);
+                }
+            }
+        }
     }
 
     @Override
