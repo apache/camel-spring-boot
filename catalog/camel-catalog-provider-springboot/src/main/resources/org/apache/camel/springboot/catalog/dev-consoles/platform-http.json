@@ -1,0 +1,15 @@
+{
+  "console": {
+    "kind": "console",
+    "group": "camel",
+    "name": "platform-http",
+    "title": "Platform HTTP",
+    "description": "Embedded HTTP Server",
+    "deprecated": false,
+    "javaType": "org.apache.camel.component.platform.http.PlatformHttpConsole",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-platform-http-starter",
+    "version": "4.7.0-SNAPSHOT"
+  }
+}
+

@@ -1,0 +1,14 @@
+{
+  "transformer": {
+    "kind": "transformer",
+    "name": "pinecone:embeddings",
+    "title": "Pinecone (Embeddings)",
+    "description": "Prepares the message to become an object writable by Pinecone component",
+    "deprecated": false,
+    "javaType": "org.apache.camel.component.pinecone.transform.PineconeEmbeddingsDataTypeTransformer",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-pinecone-starter",
+    "version": "4.7.0-SNAPSHOT"
+  }
+}
+

@@ -1,0 +1,15 @@
+{
+  "bean": {
+    "kind": "bean",
+    "name": "ElasticsearchBulkRequestAggregationStrategy",
+    "javaType": "org.apache.camel.component.es.aggregation.ElasticsearchBulkRequestAggregationStrategy",
+    "interfaceType": "org.apache.camel.AggregationStrategy",
+    "title": "Elasticsearch Bulk Request Aggregation Strategy",
+    "description": "Aggregates two ElasticSearch BulkOperation into a single BulkRequest",
+    "deprecated": false,
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-elasticsearch-starter",
+    "version": "4.7.0-SNAPSHOT"
+  }
+}
+

@@ -1,0 +1,14 @@
+{
+  "transformer": {
+    "kind": "transformer",
+    "name": "google-mail-stream:application-cloudevents",
+    "title": "Google Mail Stream (Application Cloudevents)",
+    "description": "Adds CloudEvent headers to the Camel message with Google Mail Stream consumer response details",
+    "deprecated": false,
+    "javaType": "org.apache.camel.component.google.mail.stream.transform.GoogleMailStreamCloudEventDataTypeTransformer",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-google-mail-starter",
+    "version": "4.7.0-SNAPSHOT"
+  }
+}
+

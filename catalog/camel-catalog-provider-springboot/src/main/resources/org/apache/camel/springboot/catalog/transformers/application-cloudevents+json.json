@@ -1,0 +1,14 @@
+{
+  "transformer": {
+    "kind": "transformer",
+    "name": "application-cloudevents+json",
+    "title": "Application Cloudevents+json",
+    "description": "Adds default CloudEvent (JSon binding) headers to the Camel message (such as content-type, event source, event type etc.)",
+    "deprecated": false,
+    "javaType": "org.apache.camel.component.cloudevents.transformer.CloudEventJsonDataTypeTransformer",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-cloudevents-starter",
+    "version": "4.7.0-SNAPSHOT"
+  }
+}
+

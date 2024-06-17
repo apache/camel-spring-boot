@@ -29,6 +29,9 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
+
+import com.google.common.base.MoreObjects;
+import org.apache.camel.tooling.util.FileUtil;
 import org.apache.camel.tooling.util.PackageHelper;
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.artifact.Artifact;
@@ -121,27 +124,47 @@ public abstract class AbstractSpringBootGenerator extends AbstractMojo {
         Artifact mainDep = getMainDep();
         Map<String, Supplier<String>> files;
         files = componentJar.stream().filter(je -> je.getName().endsWith(".json"))
-                .collect(Collectors.toMap(je -> "jar:" + mainDep.getFile().toURI().toString() + "!" + je.getName(),
+                .collect(Collectors.toMap(je -> "jar:" + mainDep.getFile().toURI() + "!" + je.getName(),
                         je -> cache(() -> loadJson(componentJar, je))));
         return files;
     }
 
     protected List<String> findComponentNames(JarFile componentJar) {
-        return findNames(componentJar, "META-INF/services/org/apache/camel/component/");
+        return findNames(componentJar, "META-INF/services/org/apache/camel/component/", true);
     }
 
     protected List<String> findDataFormatNames(JarFile componentJar) {
-        return findNames(componentJar, "META-INF/services/org/apache/camel/dataformat/");
+        return findNames(componentJar, "META-INF/services/org/apache/camel/dataformat/", true);
     }
 
     protected List<String> findLanguageNames(JarFile componentJar) {
-        return findNames(componentJar, "META-INF/services/org/apache/camel/language/");
+        return findNames(componentJar, "META-INF/services/org/apache/camel/language/", true);
+    }
+
+    protected List<String> findTransformerNames(JarFile componentJar) {
+        return findNames(componentJar, "META-INF/services/org/apache/camel/transformer/", true);
+    }
+
+    protected List<String> findDevConsoleNames(JarFile componentJar) {
+        return findNames(componentJar, "META-INF/services/org/apache/camel/dev-console/", true);
+    }
+
+    protected List<String> findBeanNames(JarFile componentJar) {
+        return findNames(componentJar, "META-INF/services/org/apache/camel/bean/", true);
     }
 
     protected List<String> findNames(JarFile componentJar, String dir) {
         return componentJar.stream().filter(je -> !je.isDirectory()).map(ZipEntry::getName)
                 .filter(s -> s.startsWith(dir)).map(s -> s.substring(dir.length()))
                 .filter(s -> !s.startsWith(".") && !s.contains("/")).collect(Collectors.toList());
+    }
+
+    protected List<String> findNames(JarFile componentJar, String dir, boolean dropExt) {
+        return componentJar.stream().filter(je -> !je.isDirectory()).map(ZipEntry::getName)
+                .filter(s -> s.startsWith(dir)).map(s -> s.substring(dir.length()))
+                .filter(s -> !s.startsWith(".") && !s.contains("/"))
+                .map(n -> dropExt ? stripExt(n) : n)
+                .collect(Collectors.toList());
     }
 
     protected static String loadJson(JarFile jar, JarEntry je) {
@@ -186,6 +209,18 @@ public abstract class AbstractSpringBootGenerator extends AbstractMojo {
         return loadJsonOfType(jsonFiles, otherName + ".json", "other");
     }
 
+    protected String loadTransformerJson(Map<String, Supplier<String>> jsonFiles, String otherName) {
+        return loadJsonOfType(jsonFiles, otherName + ".json", "transformer");
+    }
+
+    protected String loadDevConsoleJson(Map<String, Supplier<String>> jsonFiles, String otherName) {
+        return loadJsonOfType(jsonFiles, otherName + ".json", "console");
+    }
+
+    protected String loadBeanJson(Map<String, Supplier<String>> jsonFiles, String otherName) {
+        return loadJsonOfType(jsonFiles, otherName + ".json", "bean");
+    }
+
     protected String loadJsonOfType(Map<String, Supplier<String>> jsonFiles, String modelName, String type) {
         for (Map.Entry<String, Supplier<String>> entry : jsonFiles.entrySet()) {
             if (entry.getKey().endsWith("/" + modelName) || entry.getKey().endsWith("!" + modelName)) {
@@ -223,6 +258,37 @@ public abstract class AbstractSpringBootGenerator extends AbstractMojo {
                 IOUtils.write(content, fw);
             }
         }
+    }
+
+    public static String stripExt(String name) {
+        return stripExt(name, false);
+    }
+
+    public static String stripExt(String name, boolean singleMode) {
+        if (name == null) {
+            return null;
+        }
+
+        // the name may have a leading path
+        int posUnix = name.lastIndexOf('/');
+        int posWin = name.lastIndexOf('\\');
+        int pos = Math.max(posUnix, posWin);
+
+        if (pos > 0) {
+            String onlyName = name.substring(pos + 1);
+            int pos2 = singleMode ? onlyName.lastIndexOf('.') : onlyName.indexOf('.');
+            if (pos2 > 0) {
+                return name.substring(0, pos + pos2 + 1);
+            }
+        } else {
+            // if single ext mode, then only return last extension
+            int pos2 = singleMode ? name.lastIndexOf('.') : name.indexOf('.');
+            if (pos2 > 0) {
+                return name.substring(0, pos2);
+            }
+        }
+
+        return name;
     }
 
 }

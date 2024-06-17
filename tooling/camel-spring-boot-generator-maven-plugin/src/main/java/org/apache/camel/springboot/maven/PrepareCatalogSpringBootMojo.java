@@ -67,6 +67,9 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
                 executeComponents(jar, files);
                 executeDataFormats(jar, files);
                 executeLanguages(jar, files);
+                executeTransformers(jar, files);
+                executeDevConsoles(jar, files);
+                executeBeans(jar, files);
             }
         }
     }
@@ -202,6 +205,99 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
             String content = Stream.concat(existing, actual.stream()).sorted().distinct()
                     .collect(Collectors.joining("\n"));
             writeIfChanged(content, others);
+        }
+    }
+
+    protected void executeTransformers(JarFile componentJar, Map<String, Supplier<String>> jsonFiles)
+            throws MojoExecutionException, MojoFailureException, IOException {
+        List<String> transformerNames = findTransformerNames(componentJar);
+        if (!transformerNames.isEmpty()) {
+            getLog().info("Transformers found: " + String.join(", ", transformerNames));
+            List<String> actual = new ArrayList<>();
+            for (String transformerName : transformerNames) {
+                String json = loadTransformerJson(jsonFiles, transformerName);
+                if (json != null) {
+                    json = json
+                            .replace("\"groupId\": \"" + getMainDepGroupId() + "\"",
+                                    "\"groupId\": \"" + project.getGroupId() + "\"")
+                            .replace("\"artifactId\": \"" + getMainDepArtifactId() + "\"",
+                                    "\"artifactId\": \"" + project.getArtifactId() + "\"")
+                            .replace("\"version\": \"" + getMainDepVersion() + "\"",
+                                    "\"version\": \"" + project.getVersion() + "\"");
+                    writeIfChanged(json,
+                            new File(catalogDir, "src/main/resources/org/apache/camel/springboot/catalog/transformers/"
+                                                 + transformerName + ".json"));
+                    actual.add(transformerName);
+                }
+            }
+            File languages = new File(catalogDir,
+                    "src/main/resources/org/apache/camel/springboot/catalog/transformers.properties");
+            Stream<String> existing = languages.isFile() ? Files.lines(languages.toPath()) : Stream.empty();
+            String content = Stream.concat(existing, actual.stream()).sorted().distinct()
+                    .collect(Collectors.joining("\n"));
+            writeIfChanged(content, languages);
+        }
+    }
+
+    protected void executeDevConsoles(JarFile componentJar, Map<String, Supplier<String>> jsonFiles)
+            throws MojoExecutionException, MojoFailureException, IOException {
+        List<String> names = findDevConsoleNames(componentJar);
+        if (!names.isEmpty()) {
+            getLog().info("DevConsoles found: " + String.join(", ", names));
+            List<String> actual = new ArrayList<>();
+            for (String name : names) {
+                String json = loadDevConsoleJson(jsonFiles, name);
+                if (json != null) {
+                    json = json
+                            .replace("\"groupId\": \"" + getMainDepGroupId() + "\"",
+                                    "\"groupId\": \"" + project.getGroupId() + "\"")
+                            .replace("\"artifactId\": \"" + getMainDepArtifactId() + "\"",
+                                    "\"artifactId\": \"" + project.getArtifactId() + "\"")
+                            .replace("\"version\": \"" + getMainDepVersion() + "\"",
+                                    "\"version\": \"" + project.getVersion() + "\"");
+                    writeIfChanged(json,
+                            new File(catalogDir, "src/main/resources/org/apache/camel/springboot/catalog/dev-consoles/"
+                                                 + name + ".json"));
+                    actual.add(name);
+                }
+            }
+            File languages = new File(catalogDir,
+                    "src/main/resources/org/apache/camel/springboot/catalog/dev-consoles.properties");
+            Stream<String> existing = languages.isFile() ? Files.lines(languages.toPath()) : Stream.empty();
+            String content = Stream.concat(existing, actual.stream()).sorted().distinct()
+                    .collect(Collectors.joining("\n"));
+            writeIfChanged(content, languages);
+        }
+    }
+
+    protected void executeBeans(JarFile componentJar, Map<String, Supplier<String>> jsonFiles)
+            throws MojoExecutionException, MojoFailureException, IOException {
+        List<String> names = findBeanNames(componentJar);
+        if (!names.isEmpty()) {
+            getLog().info("Beans found: " + String.join(", ", names));
+            List<String> actual = new ArrayList<>();
+            for (String name : names) {
+                String json = loadBeanJson(jsonFiles, name);
+                if (json != null) {
+                    json = json
+                            .replace("\"groupId\": \"" + getMainDepGroupId() + "\"",
+                                    "\"groupId\": \"" + project.getGroupId() + "\"")
+                            .replace("\"artifactId\": \"" + getMainDepArtifactId() + "\"",
+                                    "\"artifactId\": \"" + project.getArtifactId() + "\"")
+                            .replace("\"version\": \"" + getMainDepVersion() + "\"",
+                                    "\"version\": \"" + project.getVersion() + "\"");
+                    writeIfChanged(json,
+                            new File(catalogDir, "src/main/resources/org/apache/camel/springboot/catalog/beans/"
+                                                 + name + ".json"));
+                    actual.add(name);
+                }
+            }
+            File languages = new File(catalogDir,
+                    "src/main/resources/org/apache/camel/springboot/catalog/beans.properties");
+            Stream<String> existing = languages.isFile() ? Files.lines(languages.toPath()) : Stream.empty();
+            String content = Stream.concat(existing, actual.stream()).sorted().distinct()
+                    .collect(Collectors.joining("\n"));
+            writeIfChanged(content, languages);
         }
     }
 
