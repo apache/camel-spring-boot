@@ -139,6 +139,10 @@ public class Kinesis2ComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * If we want to a KCL Consumer set it to true
+     */
+    private Boolean useKclConsumers = false;
+    /**
      * Used for enabling or disabling all consumer based health checks from this
      * component
      */
@@ -327,6 +331,14 @@ public class Kinesis2ComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Boolean getUseKclConsumers() {
+        return useKclConsumers;
+    }
+
+    public void setUseKclConsumers(Boolean useKclConsumers) {
+        this.useKclConsumers = useKclConsumers;
     }
 
     public Boolean getHealthCheckConsumerEnabled() {
