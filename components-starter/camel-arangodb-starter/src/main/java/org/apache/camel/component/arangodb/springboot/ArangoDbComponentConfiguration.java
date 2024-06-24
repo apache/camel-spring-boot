@@ -17,6 +17,7 @@
 package org.apache.camel.component.arangodb.springboot;
 
 import com.arangodb.ArangoDB;
+import io.vertx.core.Vertx;
 import org.apache.camel.component.arangodb.ArangoDbConfiguration;
 import org.apache.camel.component.arangodb.ArangoDbOperation;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -109,6 +110,11 @@ public class ArangoDbComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * To use an existing Vertx in the ArangoDB client. The option is a
+     * io.vertx.core.Vertx type.
+     */
+    private Vertx vertx;
     /**
      * ArangoDB password. If user and password are default, this field is
      * Optional.
@@ -205,6 +211,14 @@ public class ArangoDbComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Vertx getVertx() {
+        return vertx;
+    }
+
+    public void setVertx(Vertx vertx) {
+        this.vertx = vertx;
     }
 
     public String getPassword() {

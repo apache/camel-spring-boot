@@ -103,6 +103,12 @@
       "type": "java.lang.String",
       "description": "Collection name of vertices, when using ArangoDb as a Graph Database. Set the vertexCollection name to perform CRUD operation on vertices using these operations : SAVE_EDGE, FIND_EDGE_BY_KEY, UPDATE_EDGE, DELETE_EDGE. The graph attribute is mandatory.",
       "sourceType": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.arangodb.vertx",
+      "type": "io.vertx.core.Vertx",
+      "description": "To use an existing Vertx in the ArangoDB client. The option is a io.vertx.core.Vertx type.",
+      "sourceType": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration"
     }
   ],
   "hints": []

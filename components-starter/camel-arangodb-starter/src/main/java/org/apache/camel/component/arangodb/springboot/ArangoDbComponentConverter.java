@@ -41,6 +41,7 @@ public class ArangoDbComponentConverter implements GenericConverter {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.arangodb.ArangoDbConfiguration.class));
         answer.add(new ConvertiblePair(String.class, com.arangodb.ArangoDB.class));
+        answer.add(new ConvertiblePair(String.class, io.vertx.core.Vertx.class));
         return answer;
     }
 
@@ -59,6 +60,7 @@ public class ArangoDbComponentConverter implements GenericConverter {
         switch (targetType.getName()) {
             case "org.apache.camel.component.arangodb.ArangoDbConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.arangodb.ArangoDbConfiguration.class);
             case "com.arangodb.ArangoDB": return applicationContext.getBean(ref, com.arangodb.ArangoDB.class);
+            case "io.vertx.core.Vertx": return applicationContext.getBean(ref, io.vertx.core.Vertx.class);
         }
         return null;
     }
