@@ -41,6 +41,8 @@ public class Kinesis2ComponentConverter implements GenericConverter {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.kinesis.Kinesis2Configuration.class));
         answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.kinesis.KinesisClient.class));
+        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.cloudwatch.CloudWatchAsyncClient.class));
+        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient.class));
         return answer;
     }
 
@@ -59,6 +61,8 @@ public class Kinesis2ComponentConverter implements GenericConverter {
         switch (targetType.getName()) {
             case "org.apache.camel.component.aws2.kinesis.Kinesis2Configuration": return applicationContext.getBean(ref, org.apache.camel.component.aws2.kinesis.Kinesis2Configuration.class);
             case "software.amazon.awssdk.services.kinesis.KinesisClient": return applicationContext.getBean(ref, software.amazon.awssdk.services.kinesis.KinesisClient.class);
+            case "software.amazon.awssdk.services.cloudwatch.CloudWatchAsyncClient": return applicationContext.getBean(ref, software.amazon.awssdk.services.cloudwatch.CloudWatchAsyncClient.class);
+            case "software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient": return applicationContext.getBean(ref, software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient.class);
         }
         return null;
     }

@@ -22,6 +22,8 @@ import org.apache.camel.component.aws2.kinesis.Kinesis2ShardClosedStrategyEnum;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.cloudwatch.CloudWatchAsyncClient;
+import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
 import software.amazon.awssdk.services.kinesis.KinesisClient;
 import software.amazon.awssdk.services.kinesis.model.ShardIteratorType;
 
@@ -138,6 +140,18 @@ public class Kinesis2ComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * If we want to a KCL Consumer, we can pass an instance of
+     * CloudWatchAsyncClient. The option is a
+     * software.amazon.awssdk.services.cloudwatch.CloudWatchAsyncClient type.
+     */
+    private CloudWatchAsyncClient cloudWatchAsyncClient;
+    /**
+     * If we want to a KCL Consumer, we can pass an instance of
+     * DynamoDbAsyncClient. The option is a
+     * software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient type.
+     */
+    private DynamoDbAsyncClient dynamoDbAsyncClient;
     /**
      * If we want to a KCL Consumer set it to true
      */
@@ -331,6 +345,23 @@ public class Kinesis2ComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public CloudWatchAsyncClient getCloudWatchAsyncClient() {
+        return cloudWatchAsyncClient;
+    }
+
+    public void setCloudWatchAsyncClient(
+            CloudWatchAsyncClient cloudWatchAsyncClient) {
+        this.cloudWatchAsyncClient = cloudWatchAsyncClient;
+    }
+
+    public DynamoDbAsyncClient getDynamoDbAsyncClient() {
+        return dynamoDbAsyncClient;
+    }
+
+    public void setDynamoDbAsyncClient(DynamoDbAsyncClient dynamoDbAsyncClient) {
+        this.dynamoDbAsyncClient = dynamoDbAsyncClient;
     }
 
     public Boolean getUseKclConsumers() {

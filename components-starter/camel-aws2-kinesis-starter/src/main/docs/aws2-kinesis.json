@@ -204,6 +204,12 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.aws2-kinesis.cloud-watch-async-client",
+      "type": "software.amazon.awssdk.services.cloudwatch.CloudWatchAsyncClient",
+      "description": "If we want to a KCL Consumer, we can pass an instance of CloudWatchAsyncClient. The option is a software.amazon.awssdk.services.cloudwatch.CloudWatchAsyncClient type.",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
       "name": "camel.component.aws2-kinesis.configuration",
       "type": "org.apache.camel.component.aws2.kinesis.Kinesis2Configuration",
       "description": "Component configuration. The option is a org.apache.camel.component.aws2.kinesis.Kinesis2Configuration type.",
@@ -213,6 +219,12 @@
       "name": "camel.component.aws2-kinesis.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.aws2-kinesis.dynamo-db-async-client",
+      "type": "software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient",
+      "description": "If we want to a KCL Consumer, we can pass an instance of DynamoDbAsyncClient. The option is a software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient type.",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-kinesis.enabled",
