@@ -15,6 +15,4 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-org.apache.camel.component.crypto.springboot.DigitalSignatureComponentConverter
-org.apache.camel.component.crypto.springboot.DigitalSignatureComponentAutoConfiguration
-org.apache.camel.converter.crypto.springboot.CryptoDataFormatAutoConfiguration
+org.apache.camel.converter.crypto.springboot.PGPDataFormatAutoConfiguration

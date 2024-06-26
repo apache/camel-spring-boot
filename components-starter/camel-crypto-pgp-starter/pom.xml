@@ -24,9 +24,9 @@
     <artifactId>components-starter</artifactId>
     <version>4.7.0-SNAPSHOT</version>
   </parent>
-  <artifactId>camel-crypto-starter</artifactId>
+  <artifactId>camel-crypto-pgp-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: Crypto</name>
+  <name>Camel SB Starters :: Crypto PGP</name>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -35,7 +35,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-crypto</artifactId>
+      <artifactId>camel-crypto-pgp</artifactId>
       <version>${camel-version}</version>
     </dependency>
     <!--START OF GENERATED CODE-->
