@@ -480,6 +480,13 @@
       "defaultValue": "io.debezium.connector.mongodb.MongoDbSourceInfoStructMaker"
     },
     {
+      "name": "camel.component.debezium-mongodb.streaming-delay-ms",
+      "type": "java.lang.Long",
+      "description": "A delay period after the snapshot is completed and the streaming begins, given in milliseconds. Defaults to 0 ms. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
       "name": "camel.component.debezium-mongodb.tombstones-on-delete",
       "type": "java.lang.Boolean",
       "description": "Whether delete operations should be represented by a delete event and a subsequent tombstone event (true) or only by a delete event (false). Emitting the tombstone event (the default behavior) allows Kafka to completely delete all events pertaining to the given key once the source record got deleted.",
@@ -498,6 +505,13 @@
       "type": "java.lang.String",
       "description": "Topic prefix that identifies and provides a namespace for the particular database server\/cluster is capturing changes. The topic prefix should be unique across all other connectors, since it is used as a prefix for all Kafka topic names that receive events emitted by this connector. Only alphanumeric characters, hyphens, dots and underscores must be accepted.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-mongodb.transaction-metadata-factory",
+      "type": "java.lang.String",
+      "description": "Class to make transaction context & transaction struct\/schemas",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": "io.debezium.pipeline.txmetadata.DefaultTransactionMetadataFactory"
     }
   ],
   "hints": []

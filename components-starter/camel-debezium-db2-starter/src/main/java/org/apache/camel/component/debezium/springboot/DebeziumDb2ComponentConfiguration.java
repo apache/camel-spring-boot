@@ -129,6 +129,16 @@ public class DebeziumDb2ComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * The name of the schema where CDC change tables are located; defaults to
+     * 'ASNCDC'
+     */
+    private String cdcChangeTablesSchema = "ASNCDC";
+    /**
+     * The name of the schema where CDC control structures are located; defaults
+     * to 'ASNCDC'
+     */
+    private String cdcControlSchema = "ASNCDC";
+    /**
      * Regular expressions matching columns to exclude from change events
      */
     private String columnExcludeList;
@@ -183,6 +193,12 @@ public class DebeziumDb2ComponentConfiguration
      * the emitted change records.
      */
     private String datatypePropagateSourceType;
+    /**
+     * Informs connector which Db2 implementation platform it is connected to.
+     * The default is 'LUW', which means Windows, UNIX, Linux. Using a value of
+     * 'Z' ensures that the Db2 for z/OS specific SQL statements are used.
+     */
+    private String db2Platform = "LUW";
     /**
      * Specify how DECIMAL and NUMERIC columns should be represented in change
      * events, including: 'precise' (the default) uses java.math.BigDecimal to
@@ -457,6 +473,11 @@ public class DebeziumDb2ComponentConfiguration
      */
     private String sourceinfoStructMaker = "io.debezium.connector.db2.Db2SourceInfoStructMaker";
     /**
+     * A delay period after the snapshot is completed and the streaming begins,
+     * given in milliseconds. Defaults to 0 ms. The option is a long type.
+     */
+    private Long streamingDelayMs = 0L;
+    /**
      * A comma-separated list of regular expressions that match the
      * fully-qualified names of tables to be excluded from monitoring
      */
@@ -502,6 +523,10 @@ public class DebeziumDb2ComponentConfiguration
      * alphanumeric characters, hyphens, dots and underscores must be accepted.
      */
     private String topicPrefix;
+    /**
+     * Class to make transaction context & transaction struct/schemas
+     */
+    private String transactionMetadataFactory = "io.debezium.pipeline.txmetadata.DefaultTransactionMetadataFactory";
 
     public Map<String, Object> getAdditionalProperties() {
         return additionalProperties;
@@ -617,6 +642,22 @@ public class DebeziumDb2ComponentConfiguration
         this.autowiredEnabled = autowiredEnabled;
     }
 
+    public String getCdcChangeTablesSchema() {
+        return cdcChangeTablesSchema;
+    }
+
+    public void setCdcChangeTablesSchema(String cdcChangeTablesSchema) {
+        this.cdcChangeTablesSchema = cdcChangeTablesSchema;
+    }
+
+    public String getCdcControlSchema() {
+        return cdcControlSchema;
+    }
+
+    public void setCdcControlSchema(String cdcControlSchema) {
+        this.cdcControlSchema = cdcControlSchema;
+    }
+
     public String getColumnExcludeList() {
         return columnExcludeList;
     }
@@ -704,6 +745,14 @@ public class DebeziumDb2ComponentConfiguration
     public void setDatatypePropagateSourceType(
             String datatypePropagateSourceType) {
         this.datatypePropagateSourceType = datatypePropagateSourceType;
+    }
+
+    public String getDb2Platform() {
+        return db2Platform;
+    }
+
+    public void setDb2Platform(String db2Platform) {
+        this.db2Platform = db2Platform;
     }
 
     public String getDecimalHandlingMode() {
@@ -1067,6 +1116,14 @@ public class DebeziumDb2ComponentConfiguration
         this.sourceinfoStructMaker = sourceinfoStructMaker;
     }
 
+    public Long getStreamingDelayMs() {
+        return streamingDelayMs;
+    }
+
+    public void setStreamingDelayMs(Long streamingDelayMs) {
+        this.streamingDelayMs = streamingDelayMs;
+    }
+
     public String getTableExcludeList() {
         return tableExcludeList;
     }
@@ -1121,5 +1178,13 @@ public class DebeziumDb2ComponentConfiguration
 
     public void setTopicPrefix(String topicPrefix) {
         this.topicPrefix = topicPrefix;
+    }
+
+    public String getTransactionMetadataFactory() {
+        return transactionMetadataFactory;
+    }
+
+    public void setTransactionMetadataFactory(String transactionMetadataFactory) {
+        this.transactionMetadataFactory = transactionMetadataFactory;
     }
 }

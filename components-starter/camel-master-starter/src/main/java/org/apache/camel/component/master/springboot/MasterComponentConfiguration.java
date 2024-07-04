@@ -61,6 +61,18 @@ public class MasterComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * When the master becomes leader then backoff is in use to repeat starting
+     * the consumer until the consumer is successfully started or max attempts
+     * reached. This option is the delay in millis between start attempts.
+     */
+    private Long backOffDelay;
+    /**
+     * When the master becomes leader then backoff is in use to repeat starting
+     * the consumer until the consumer is successfully started or max attempts
+     * reached. This option is the maximum number of attempts to try.
+     */
+    private Long backOffMaxAttempts;
+    /**
      * Inject the service to use. The option is a
      * org.apache.camel.cluster.CamelClusterService type.
      */
@@ -86,6 +98,22 @@ public class MasterComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Long getBackOffDelay() {
+        return backOffDelay;
+    }
+
+    public void setBackOffDelay(Long backOffDelay) {
+        this.backOffDelay = backOffDelay;
+    }
+
+    public Long getBackOffMaxAttempts() {
+        return backOffMaxAttempts;
+    }
+
+    public void setBackOffMaxAttempts(Long backOffMaxAttempts) {
+        this.backOffMaxAttempts = backOffMaxAttempts;
     }
 
     public CamelClusterService getService() {

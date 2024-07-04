@@ -34,16 +34,9 @@
       "defaultValue": "long"
     },
     {
-      "name": "camel.component.debezium-mysql.binary-handling-mode",
-      "type": "java.lang.String",
-      "description": "Specify how binary (blob, binary, etc.) columns should be represented in change events, including: 'bytes' represents binary data as byte array (default); 'base64' represents binary data as base64-encoded string; 'base64-url-safe' represents binary data as base64-url-safe-encoded string; 'hex' represents binary data as hex-encoded (base16) string",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
-      "defaultValue": "bytes"
-    },
-    {
       "name": "camel.component.debezium-mysql.binlog-buffer-size",
       "type": "java.lang.Integer",
-      "description": "The size of a look-ahead buffer used by the binlog reader to decide whether the transaction in progress is going to be committed or rolled back. Use 0 to disable look-ahead buffering. Defaults to 0 (i.e. buffering is disabled).",
+      "description": "The size of a look-ahead buffer used by the binlog reader to decide whether the transaction in progress is going to be committed or rolled back. Use 0 to disable look-ahead buffering. Defaults to 0 (i.e. buffering is disabled.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": 0
     },
@@ -98,13 +91,6 @@
       "description": "Maximum time to wait after trying to connect to the database before timing out, given in milliseconds. Defaults to 30 seconds (30,000 ms). The option is a int type.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": 30000
-    },
-    {
-      "name": "camel.component.debezium-mysql.connector-adapter",
-      "type": "java.lang.String",
-      "description": "Specifies the connection adapter to be used",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
-      "defaultValue": "mysql"
     },
     {
       "name": "camel.component.debezium-mysql.converters",
@@ -168,9 +154,23 @@
       "defaultValue": 3306
     },
     {
+      "name": "camel.component.debezium-mysql.database-protocol",
+      "type": "java.lang.String",
+      "description": "JDBC protocol to use with the driver.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": "jdbc:mysql"
+    },
+    {
+      "name": "camel.component.debezium-mysql.database-query-timeout-ms",
+      "type": "java.lang.Integer",
+      "description": "Time to wait for a query to execute, given in milliseconds. Defaults to 600 seconds (600,000 ms); zero means there is no limit. The option is a int type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": 600000
+    },
+    {
       "name": "camel.component.debezium-mysql.database-server-id",
       "type": "java.lang.Long",
-      "description": "A numeric ID of this database client, which must be unique across all currently-running database processes in the cluster. This connector joins the MySQL database cluster as another server (with this unique ID) so it can read the binlog.",
+      "description": "A numeric ID of this database client, which must be unique across all currently-running database processes in the cluster. This connector joins the database cluster as another server (with this unique ID) so it can read the binlog.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration"
     },
     {
@@ -183,7 +183,7 @@
     {
       "name": "camel.component.debezium-mysql.database-ssl-keystore",
       "type": "java.lang.String",
-      "description": "The location of the key store file. This is optional and can be used for two-way authentication between the client and the MySQL Server.",
+      "description": "The location of the key store file. This is optional and can be used for two-way authentication between the client and the database.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration"
     },
     {
@@ -195,7 +195,7 @@
     {
       "name": "camel.component.debezium-mysql.database-ssl-mode",
       "type": "java.lang.String",
-      "description": "Whether to use an encrypted connection to MySQL. Options include: 'disabled' to use an unencrypted connection; 'preferred' (the default) to establish a secure (encrypted) connection if the server supports secure connections, but fall back to an unencrypted connection otherwise; 'required' to use a secure (encrypted) connection, and fail if one cannot be established; 'verify_ca' like 'required' but additionally verify the server TLS certificate against the configured Certificate Authority (CA) certificates, or fail if no valid matching CA certificates are found; or'verify_identity' like 'verify_ca' but additionally verify that the server certificate matches the host to which the connection is attempted.",
+      "description": "Whether to use an encrypted connection to the database. Options include: 'disabled' to use an unencrypted connection; 'preferred' (the default) to establish a secure (encrypted) connection if the server supports secure connections, but fall back to an unencrypted connection otherwise; 'required' to use a secure (encrypted) connection, and fail if one cannot be established; 'verify_ca' like 'required' but additionally verify the server TLS certificate against the configured Certificate Authority (CA) certificates, or fail if no valid matching CA certificates are found; or 'verify_identity' like 'verify_ca' but additionally verify that the server certificate matches the host to which the connection is attempted.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": "preferred"
     },
@@ -233,7 +233,7 @@
     {
       "name": "camel.component.debezium-mysql.enable-time-adjuster",
       "type": "java.lang.Boolean",
-      "description": "MySQL allows user to insert year value as either 2-digit or 4-digit. In case of two digit the value is automatically mapped into 1970 - 2069.false - delegates the implicit conversion to the databasetrue - (the default) Debezium makes the conversion",
+      "description": "The database allows the user to insert year value as either 2-digit or 4-digit. In case of two digit the value is automatically mapped into 1970 - 2069.false - delegates the implicit conversion to the database; true - (the default) Debezium makes the conversion",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": true
     },
@@ -273,7 +273,7 @@
     {
       "name": "camel.component.debezium-mysql.gtid-source-filter-dml-events",
       "type": "java.lang.Boolean",
-      "description": "If set to true, we will only produce DML events into Kafka for transactions that were written on mysql servers with UUIDs matching the filters defined by the gtid.source.includes or gtid.source.excludes configuration options, if they are specified.",
+      "description": "When set to true, only produce DML events for transactions that were written on the server with matching GTIDs defined by the gtid.source.includes or gtid.source.excludes, if they were specified.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": true
     },
@@ -306,7 +306,7 @@
     {
       "name": "camel.component.debezium-mysql.include-query",
       "type": "java.lang.Boolean",
-      "description": "Whether the connector should include the original SQL query that generated the change event. Note: This option requires MySQL be configured with the binlog_rows_query_log_events option set to ON. If using MariaDB, configure the binlog_annotate_row_events option must be set to ON. Query will not be present for events generated from snapshot. WARNING: Enabling this option may expose tables or fields explicitly excluded or masked by including the original SQL statement in the change event. For this reason the default value is 'false'.",
+      "description": "Whether the connector should include the original SQL query that generated the change event. Note: This option requires the database to be configured using the server option binlog_rows_query_log_events (MySQL) or binlog_annotate_row_events (MariaDB) set to ON.Query will not be present for events generated from snapshot. WARNING: Enabling this option may expose tables or fields explicitly excluded or masked by including the original SQL statement in the change event. For this reason the default value is 'false'.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": false
     },
@@ -654,13 +654,6 @@
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration"
     },
     {
-      "name": "camel.component.debezium-mysql.snapshot-new-tables",
-      "type": "java.lang.String",
-      "description": "BETA FEATURE: On connector restart, the connector will check if there have been any new tables added to the configuration, and snapshot them. There is presently only two options: 'off': Default behavior. Do not snapshot new tables. 'parallel': The snapshot of the new tables will occur in parallel to the continued binlog reading of the old tables. When the snapshot completes, an independent binlog reader will begin reading the events for the new tables until it catches up to present time. At this point, both old and new binlog readers will be momentarily halted and new binlog reader will start that will read the binlog for all configured tables. The parallel binlog reader will have a configured server id of 10000 the primary binlog reader's server id.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
-      "defaultValue": "off"
-    },
-    {
       "name": "camel.component.debezium-mysql.snapshot-query-mode",
       "type": "java.lang.String",
       "description": "Controls query used during the snapshot",
@@ -692,6 +685,13 @@
       "description": "The name of the SourceInfoStructMaker class that returns SourceInfo schema and struct.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": "io.debezium.connector.mysql.MySqlSourceInfoStructMaker"
+    },
+    {
+      "name": "camel.component.debezium-mysql.streaming-delay-ms",
+      "type": "java.lang.Long",
+      "description": "A delay period after the snapshot is completed and the streaming begins, given in milliseconds. Defaults to 0 ms. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": 0
     },
     {
       "name": "camel.component.debezium-mysql.table-exclude-list",
@@ -738,6 +738,20 @@
       "type": "java.lang.String",
       "description": "Topic prefix that identifies and provides a namespace for the particular database server\/cluster is capturing changes. The topic prefix should be unique across all other connectors, since it is used as a prefix for all Kafka topic names that receive events emitted by this connector. Only alphanumeric characters, hyphens, dots and underscores must be accepted.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-mysql.transaction-metadata-factory",
+      "type": "java.lang.String",
+      "description": "Class to make transaction context & transaction struct\/schemas",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": "io.debezium.pipeline.txmetadata.DefaultTransactionMetadataFactory"
+    },
+    {
+      "name": "camel.component.debezium-mysql.use-nongraceful-disconnect",
+      "type": "java.lang.Boolean",
+      "description": "Whether to use socket.setSoLinger(true, 0) when BinaryLogClient keepalive thread triggers a disconnect for a stale connection.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": false
     }
   ],
   "hints": []

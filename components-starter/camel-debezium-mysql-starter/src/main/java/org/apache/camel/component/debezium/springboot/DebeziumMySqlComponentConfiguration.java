@@ -139,18 +139,10 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String bigintUnsignedHandlingMode = "long";
     /**
-     * Specify how binary (blob, binary, etc.) columns should be represented in
-     * change events, including: 'bytes' represents binary data as byte array
-     * (default); 'base64' represents binary data as base64-encoded string;
-     * 'base64-url-safe' represents binary data as base64-url-safe-encoded
-     * string; 'hex' represents binary data as hex-encoded (base16) string
-     */
-    private String binaryHandlingMode = "bytes";
-    /**
      * The size of a look-ahead buffer used by the binlog reader to decide
      * whether the transaction in progress is going to be committed or rolled
      * back. Use 0 to disable look-ahead buffering. Defaults to 0 (i.e.
-     * buffering is disabled).
+     * buffering is disabled.
      */
     private Integer binlogBufferSize = 0;
     /**
@@ -178,10 +170,6 @@ public class DebeziumMySqlComponentConfiguration
      * milliseconds Defaults to 1 minute (60,000 ms). The option is a long type.
      */
     private Long connectKeepAliveIntervalMs = 60000L;
-    /**
-     * Specifies the connection adapter to be used
-     */
-    private String connectorAdapter = "mysql";
     /**
      * Maximum time to wait after trying to connect to the database before
      * timing out, given in milliseconds. Defaults to 30 seconds (30,000 ms).
@@ -237,10 +225,20 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Integer databasePort = 3306;
     /**
+     * JDBC protocol to use with the driver.
+     */
+    private String databaseProtocol = "jdbc:mysql";
+    /**
+     * Time to wait for a query to execute, given in milliseconds. Defaults to
+     * 600 seconds (600,000 ms); zero means there is no limit. The option is a
+     * int type.
+     */
+    private Integer databaseQueryTimeoutMs = 600000;
+    /**
      * A numeric ID of this database client, which must be unique across all
      * currently-running database processes in the cluster. This connector joins
-     * the MySQL database cluster as another server (with this unique ID) so it
-     * can read the binlog.
+     * the database cluster as another server (with this unique ID) so it can
+     * read the binlog.
      */
     private Long databaseServerId;
     /**
@@ -252,7 +250,7 @@ public class DebeziumMySqlComponentConfiguration
     private Long databaseServerIdOffset = 10000L;
     /**
      * The location of the key store file. This is optional and can be used for
-     * two-way authentication between the client and the MySQL Server.
+     * two-way authentication between the client and the database.
      */
     private String databaseSslKeystore;
     /**
@@ -261,15 +259,15 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String databaseSslKeystorePassword;
     /**
-     * Whether to use an encrypted connection to MySQL. Options include:
+     * Whether to use an encrypted connection to the database. Options include:
      * 'disabled' to use an unencrypted connection; 'preferred' (the default) to
      * establish a secure (encrypted) connection if the server supports secure
      * connections, but fall back to an unencrypted connection otherwise;
      * 'required' to use a secure (encrypted) connection, and fail if one cannot
      * be established; 'verify_ca' like 'required' but additionally verify the
      * server TLS certificate against the configured Certificate Authority (CA)
-     * certificates, or fail if no valid matching CA certificates are found;
-     * or'verify_identity' like 'verify_ca' but additionally verify that the
+     * certificates, or fail if no valid matching CA certificates are found; or
+     * 'verify_identity' like 'verify_ca' but additionally verify that the
      * server certificate matches the host to which the connection is attempted.
      */
     private String databaseSslMode = "preferred";
@@ -305,10 +303,10 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String decimalHandlingMode = "precise";
     /**
-     * MySQL allows user to insert year value as either 2-digit or 4-digit. In
-     * case of two digit the value is automatically mapped into 1970 -
-     * 2069.false - delegates the implicit conversion to the databasetrue - (the
-     * default) Debezium makes the conversion
+     * The database allows the user to insert year value as either 2-digit or
+     * 4-digit. In case of two digit the value is automatically mapped into 1970
+     * - 2069.false - delegates the implicit conversion to the database; true -
+     * (the default) Debezium makes the conversion
      */
     private Boolean enableTimeAdjuster = true;
     /**
@@ -340,10 +338,9 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String gtidSourceExcludes;
     /**
-     * If set to true, we will only produce DML events into Kafka for
-     * transactions that were written on mysql servers with UUIDs matching the
-     * filters defined by the gtid.source.includes or gtid.source.excludes
-     * configuration options, if they are specified.
+     * When set to true, only produce DML events for transactions that were
+     * written on the server with matching GTIDs defined by the
+     * gtid.source.includes or gtid.source.excludes, if they were specified.
      */
     private Boolean gtidSourceFilterDmlEvents = true;
     /**
@@ -369,13 +366,13 @@ public class DebeziumMySqlComponentConfiguration
     private String heartbeatTopicsPrefix = "__debezium-heartbeat";
     /**
      * Whether the connector should include the original SQL query that
-     * generated the change event. Note: This option requires MySQL be
-     * configured with the binlog_rows_query_log_events option set to ON. If
-     * using MariaDB, configure the binlog_annotate_row_events option must be
-     * set to ON. Query will not be present for events generated from snapshot.
-     * WARNING: Enabling this option may expose tables or fields explicitly
-     * excluded or masked by including the original SQL statement in the change
-     * event. For this reason the default value is 'false'.
+     * generated the change event. Note: This option requires the database to be
+     * configured using the server option binlog_rows_query_log_events (MySQL)
+     * or binlog_annotate_row_events (MariaDB) set to ON.Query will not be
+     * present for events generated from snapshot. WARNING: Enabling this option
+     * may expose tables or fields explicitly excluded or masked by including
+     * the original SQL statement in the change event. For this reason the
+     * default value is 'false'.
      */
     private Boolean includeQuery = false;
     /**
@@ -663,20 +660,6 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String snapshotModeCustomName;
     /**
-     * BETA FEATURE: On connector restart, the connector will check if there
-     * have been any new tables added to the configuration, and snapshot them.
-     * There is presently only two options: 'off': Default behavior. Do not
-     * snapshot new tables. 'parallel': The snapshot of the new tables will
-     * occur in parallel to the continued binlog reading of the old tables. When
-     * the snapshot completes, an independent binlog reader will begin reading
-     * the events for the new tables until it catches up to present time. At
-     * this point, both old and new binlog readers will be momentarily halted
-     * and new binlog reader will start that will read the binlog for all
-     * configured tables. The parallel binlog reader will have a configured
-     * server id of 10000 the primary binlog reader's server id.
-     */
-    private String snapshotNewTables = "off";
-    /**
      * Controls query used during the snapshot
      */
     private String snapshotQueryMode = "select_all";
@@ -715,6 +698,11 @@ public class DebeziumMySqlComponentConfiguration
      * schema and struct.
      */
     private String sourceinfoStructMaker = "io.debezium.connector.mysql.MySqlSourceInfoStructMaker";
+    /**
+     * A delay period after the snapshot is completed and the streaming begins,
+     * given in milliseconds. Defaults to 0 ms. The option is a long type.
+     */
+    private Long streamingDelayMs = 0L;
     /**
      * A comma-separated list of regular expressions that match the
      * fully-qualified names of tables to be excluded from monitoring
@@ -760,6 +748,15 @@ public class DebeziumMySqlComponentConfiguration
      * alphanumeric characters, hyphens, dots and underscores must be accepted.
      */
     private String topicPrefix;
+    /**
+     * Class to make transaction context & transaction struct/schemas
+     */
+    private String transactionMetadataFactory = "io.debezium.pipeline.txmetadata.DefaultTransactionMetadataFactory";
+    /**
+     * Whether to use socket.setSoLinger(true, 0) when BinaryLogClient keepalive
+     * thread triggers a disconnect for a stale connection.
+     */
+    private Boolean useNongracefulDisconnect = false;
 
     public Map<String, Object> getAdditionalProperties() {
         return additionalProperties;
@@ -883,14 +880,6 @@ public class DebeziumMySqlComponentConfiguration
         this.bigintUnsignedHandlingMode = bigintUnsignedHandlingMode;
     }
 
-    public String getBinaryHandlingMode() {
-        return binaryHandlingMode;
-    }
-
-    public void setBinaryHandlingMode(String binaryHandlingMode) {
-        this.binaryHandlingMode = binaryHandlingMode;
-    }
-
     public Integer getBinlogBufferSize() {
         return binlogBufferSize;
     }
@@ -937,14 +926,6 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setConnectKeepAliveIntervalMs(Long connectKeepAliveIntervalMs) {
         this.connectKeepAliveIntervalMs = connectKeepAliveIntervalMs;
-    }
-
-    public String getConnectorAdapter() {
-        return connectorAdapter;
-    }
-
-    public void setConnectorAdapter(String connectorAdapter) {
-        this.connectorAdapter = connectorAdapter;
     }
 
     public Integer getConnectTimeoutMs() {
@@ -1025,6 +1006,22 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setDatabasePort(Integer databasePort) {
         this.databasePort = databasePort;
+    }
+
+    public String getDatabaseProtocol() {
+        return databaseProtocol;
+    }
+
+    public void setDatabaseProtocol(String databaseProtocol) {
+        this.databaseProtocol = databaseProtocol;
+    }
+
+    public Integer getDatabaseQueryTimeoutMs() {
+        return databaseQueryTimeoutMs;
+    }
+
+    public void setDatabaseQueryTimeoutMs(Integer databaseQueryTimeoutMs) {
+        this.databaseQueryTimeoutMs = databaseQueryTimeoutMs;
     }
 
     public Long getDatabaseServerId() {
@@ -1544,14 +1541,6 @@ public class DebeziumMySqlComponentConfiguration
         this.snapshotModeCustomName = snapshotModeCustomName;
     }
 
-    public String getSnapshotNewTables() {
-        return snapshotNewTables;
-    }
-
-    public void setSnapshotNewTables(String snapshotNewTables) {
-        this.snapshotNewTables = snapshotNewTables;
-    }
-
     public String getSnapshotQueryMode() {
         return snapshotQueryMode;
     }
@@ -1593,6 +1582,14 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setSourceinfoStructMaker(String sourceinfoStructMaker) {
         this.sourceinfoStructMaker = sourceinfoStructMaker;
+    }
+
+    public Long getStreamingDelayMs() {
+        return streamingDelayMs;
+    }
+
+    public void setStreamingDelayMs(Long streamingDelayMs) {
+        this.streamingDelayMs = streamingDelayMs;
     }
 
     public String getTableExcludeList() {
@@ -1649,5 +1646,21 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setTopicPrefix(String topicPrefix) {
         this.topicPrefix = topicPrefix;
+    }
+
+    public String getTransactionMetadataFactory() {
+        return transactionMetadataFactory;
+    }
+
+    public void setTransactionMetadataFactory(String transactionMetadataFactory) {
+        this.transactionMetadataFactory = transactionMetadataFactory;
+    }
+
+    public Boolean getUseNongracefulDisconnect() {
+        return useNongracefulDisconnect;
+    }
+
+    public void setUseNongracefulDisconnect(Boolean useNongracefulDisconnect) {
+        this.useNongracefulDisconnect = useNongracefulDisconnect;
     }
 }

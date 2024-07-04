@@ -186,6 +186,12 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private Integer databasePort = 1433;
     /**
+     * Time to wait for a query to execute, given in milliseconds. Defaults to
+     * 600 seconds (600,000 ms); zero means there is no limit. The option is a
+     * int type.
+     */
+    private Integer databaseQueryTimeoutMs = 600000;
+    /**
      * Name of the database user to be used when connecting to the database.
      */
     private String databaseUser;
@@ -299,7 +305,7 @@ public class DebeziumSqlserverComponentConfiguration
      * This property can be used to reduce the connector memory usage footprint
      * when changes are streamed from multiple tables per database.
      */
-    private Integer maxIterationTransactions = 0;
+    private Integer maxIterationTransactions = 500;
     /**
      * Maximum size of the queue for change events read from the database log
      * but not yet recorded or forwarded. Defaults to 8192, and should always be
@@ -538,6 +544,11 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private String sourceinfoStructMaker = "io.debezium.connector.sqlserver.SqlServerSourceInfoStructMaker";
     /**
+     * A delay period after the snapshot is completed and the streaming begins,
+     * given in milliseconds. Defaults to 0 ms. The option is a long type.
+     */
+    private Long streamingDelayMs = 0L;
+    /**
      * A comma-separated list of regular expressions that match the
      * fully-qualified names of tables to be excluded from monitoring
      */
@@ -583,6 +594,10 @@ public class DebeziumSqlserverComponentConfiguration
      * alphanumeric characters, hyphens, dots and underscores must be accepted.
      */
     private String topicPrefix;
+    /**
+     * Class to make transaction context & transaction struct/schemas
+     */
+    private String transactionMetadataFactory = "io.debezium.pipeline.txmetadata.DefaultTransactionMetadataFactory";
 
     public Map<String, Object> getAdditionalProperties() {
         return additionalProperties;
@@ -784,6 +799,14 @@ public class DebeziumSqlserverComponentConfiguration
 
     public void setDatabasePort(Integer databasePort) {
         this.databasePort = databasePort;
+    }
+
+    public Integer getDatabaseQueryTimeoutMs() {
+        return databaseQueryTimeoutMs;
+    }
+
+    public void setDatabaseQueryTimeoutMs(Integer databaseQueryTimeoutMs) {
+        this.databaseQueryTimeoutMs = databaseQueryTimeoutMs;
     }
 
     public String getDatabaseUser() {
@@ -1222,6 +1245,14 @@ public class DebeziumSqlserverComponentConfiguration
         this.sourceinfoStructMaker = sourceinfoStructMaker;
     }
 
+    public Long getStreamingDelayMs() {
+        return streamingDelayMs;
+    }
+
+    public void setStreamingDelayMs(Long streamingDelayMs) {
+        this.streamingDelayMs = streamingDelayMs;
+    }
+
     public String getTableExcludeList() {
         return tableExcludeList;
     }
@@ -1276,5 +1307,13 @@ public class DebeziumSqlserverComponentConfiguration
 
     public void setTopicPrefix(String topicPrefix) {
         this.topicPrefix = topicPrefix;
+    }
+
+    public String getTransactionMetadataFactory() {
+        return transactionMetadataFactory;
+    }
+
+    public void setTransactionMetadataFactory(String transactionMetadataFactory) {
+        this.transactionMetadataFactory = transactionMetadataFactory;
     }
 }

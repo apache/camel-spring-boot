@@ -120,6 +120,13 @@
       "defaultValue": 1433
     },
     {
+      "name": "camel.component.debezium-sqlserver.database-query-timeout-ms",
+      "type": "java.lang.Integer",
+      "description": "Time to wait for a query to execute, given in milliseconds. Defaults to 600 seconds (600,000 ms); zero means there is no limit. The option is a int type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": 600000
+    },
+    {
       "name": "camel.component.debezium-sqlserver.database-user",
       "type": "java.lang.String",
       "description": "Name of the database user to be used when connecting to the database.",
@@ -246,7 +253,7 @@
       "type": "java.lang.Integer",
       "description": "This property can be used to reduce the connector memory usage footprint when changes are streamed from multiple tables per database.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
-      "defaultValue": 0
+      "defaultValue": 500
     },
     {
       "name": "camel.component.debezium-sqlserver.max-queue-size",
@@ -535,6 +542,13 @@
       "defaultValue": "io.debezium.connector.sqlserver.SqlServerSourceInfoStructMaker"
     },
     {
+      "name": "camel.component.debezium-sqlserver.streaming-delay-ms",
+      "type": "java.lang.Long",
+      "description": "A delay period after the snapshot is completed and the streaming begins, given in milliseconds. Defaults to 0 ms. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
       "name": "camel.component.debezium-sqlserver.table-exclude-list",
       "type": "java.lang.String",
       "description": "A comma-separated list of regular expressions that match the fully-qualified names of tables to be excluded from monitoring",
@@ -579,6 +593,13 @@
       "type": "java.lang.String",
       "description": "Topic prefix that identifies and provides a namespace for the particular database server\/cluster is capturing changes. The topic prefix should be unique across all other connectors, since it is used as a prefix for all Kafka topic names that receive events emitted by this connector. Only alphanumeric characters, hyphens, dots and underscores must be accepted.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-sqlserver.transaction-metadata-factory",
+      "type": "java.lang.String",
+      "description": "Class to make transaction context & transaction struct\/schemas",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": "io.debezium.pipeline.txmetadata.DefaultTransactionMetadataFactory"
     }
   ],
   "hints": []

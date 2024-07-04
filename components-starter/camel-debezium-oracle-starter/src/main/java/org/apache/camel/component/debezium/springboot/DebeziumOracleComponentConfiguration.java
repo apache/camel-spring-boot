@@ -207,6 +207,12 @@ public class DebeziumOracleComponentConfiguration
      */
     private Integer databasePort = 1528;
     /**
+     * Time to wait for a query to execute, given in milliseconds. Defaults to
+     * 600 seconds (600,000 ms); zero means there is no limit. The option is a
+     * int type.
+     */
+    private Integer databaseQueryTimeoutMs = 600000;
+    /**
      * Complete JDBC URL as an alternative to specifying hostname, port and
      * database provided as a way to support alternative connection scenarios.
      */
@@ -618,10 +624,6 @@ public class DebeziumOracleComponentConfiguration
      */
     private Long snapshotDelayMs = 0L;
     /**
-     * A token to replace on snapshot predicate template
-     */
-    private String snapshotEnhancePredicateScn;
-    /**
      * The maximum number of records that should be loaded into memory while
      * performing a snapshot.
      */
@@ -739,6 +741,11 @@ public class DebeziumOracleComponentConfiguration
      */
     private String sourceinfoStructMaker = "io.debezium.connector.oracle.OracleSourceInfoStructMaker";
     /**
+     * A delay period after the snapshot is completed and the streaming begins,
+     * given in milliseconds. Defaults to 0 ms. The option is a long type.
+     */
+    private Long streamingDelayMs = 0L;
+    /**
      * A comma-separated list of regular expressions that match the
      * fully-qualified names of tables to be excluded from monitoring
      */
@@ -780,6 +787,10 @@ public class DebeziumOracleComponentConfiguration
      * alphanumeric characters, hyphens, dots and underscores must be accepted.
      */
     private String topicPrefix;
+    /**
+     * Class to make transaction context & transaction struct/schemas
+     */
+    private String transactionMetadataFactory = "io.debezium.pipeline.txmetadata.DefaultTransactionMetadataFactory";
     /**
      * Specify the constant that will be provided by Debezium to indicate that
      * the original value is unavailable and not provided by the database.
@@ -1018,6 +1029,14 @@ public class DebeziumOracleComponentConfiguration
 
     public void setDatabasePort(Integer databasePort) {
         this.databasePort = databasePort;
+    }
+
+    public Integer getDatabaseQueryTimeoutMs() {
+        return databaseQueryTimeoutMs;
+    }
+
+    public void setDatabaseQueryTimeoutMs(Integer databaseQueryTimeoutMs) {
+        this.databaseQueryTimeoutMs = databaseQueryTimeoutMs;
     }
 
     public String getDatabaseUrl() {
@@ -1596,15 +1615,6 @@ public class DebeziumOracleComponentConfiguration
         this.snapshotDelayMs = snapshotDelayMs;
     }
 
-    public String getSnapshotEnhancePredicateScn() {
-        return snapshotEnhancePredicateScn;
-    }
-
-    public void setSnapshotEnhancePredicateScn(
-            String snapshotEnhancePredicateScn) {
-        this.snapshotEnhancePredicateScn = snapshotEnhancePredicateScn;
-    }
-
     public Integer getSnapshotFetchSize() {
         return snapshotFetchSize;
     }
@@ -1733,6 +1743,14 @@ public class DebeziumOracleComponentConfiguration
         this.sourceinfoStructMaker = sourceinfoStructMaker;
     }
 
+    public Long getStreamingDelayMs() {
+        return streamingDelayMs;
+    }
+
+    public void setStreamingDelayMs(Long streamingDelayMs) {
+        this.streamingDelayMs = streamingDelayMs;
+    }
+
     public String getTableExcludeList() {
         return tableExcludeList;
     }
@@ -1779,6 +1797,14 @@ public class DebeziumOracleComponentConfiguration
 
     public void setTopicPrefix(String topicPrefix) {
         this.topicPrefix = topicPrefix;
+    }
+
+    public String getTransactionMetadataFactory() {
+        return transactionMetadataFactory;
+    }
+
+    public void setTransactionMetadataFactory(String transactionMetadataFactory) {
+        this.transactionMetadataFactory = transactionMetadataFactory;
     }
 
     public String getUnavailableValuePlaceholder() {

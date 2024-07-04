@@ -34,6 +34,20 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.debezium-db2.cdc-change-tables-schema",
+      "type": "java.lang.String",
+      "description": "The name of the schema where CDC change tables are located; defaults to 'ASNCDC'",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
+      "defaultValue": "ASNCDC"
+    },
+    {
+      "name": "camel.component.debezium-db2.cdc-control-schema",
+      "type": "java.lang.String",
+      "description": "The name of the schema where CDC control structures are located; defaults to 'ASNCDC'",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
+      "defaultValue": "ASNCDC"
+    },
+    {
       "name": "camel.component.debezium-db2.column-exclude-list",
       "type": "java.lang.String",
       "description": "Regular expressions matching columns to exclude from change events",
@@ -110,6 +124,13 @@
       "type": "java.lang.String",
       "description": "A comma-separated list of regular expressions matching the database-specific data type names that adds the data type's original type and original length as parameters to the corresponding field schemas in the emitted change records.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-db2.db2-platform",
+      "type": "java.lang.String",
+      "description": "Informs connector which Db2 implementation platform it is connected to. The default is 'LUW', which means Windows, UNIX, Linux. Using a value of 'Z' ensures that the Db2 for z\/OS specific SQL statements are used.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
+      "defaultValue": "LUW"
     },
     {
       "name": "camel.component.debezium-db2.decimal-handling-mode",
@@ -474,6 +495,13 @@
       "defaultValue": "io.debezium.connector.db2.Db2SourceInfoStructMaker"
     },
     {
+      "name": "camel.component.debezium-db2.streaming-delay-ms",
+      "type": "java.lang.Long",
+      "description": "A delay period after the snapshot is completed and the streaming begins, given in milliseconds. Defaults to 0 ms. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
       "name": "camel.component.debezium-db2.table-exclude-list",
       "type": "java.lang.String",
       "description": "A comma-separated list of regular expressions that match the fully-qualified names of tables to be excluded from monitoring",
@@ -518,6 +546,13 @@
       "type": "java.lang.String",
       "description": "Topic prefix that identifies and provides a namespace for the particular database server\/cluster is capturing changes. The topic prefix should be unique across all other connectors, since it is used as a prefix for all Kafka topic names that receive events emitted by this connector. Only alphanumeric characters, hyphens, dots and underscores must be accepted.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-db2.transaction-metadata-factory",
+      "type": "java.lang.String",
+      "description": "Class to make transaction context & transaction struct\/schemas",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConfiguration",
+      "defaultValue": "io.debezium.pipeline.txmetadata.DefaultTransactionMetadataFactory"
     }
   ],
   "hints": []

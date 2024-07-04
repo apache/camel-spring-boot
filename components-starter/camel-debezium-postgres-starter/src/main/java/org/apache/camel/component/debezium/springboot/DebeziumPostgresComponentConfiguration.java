@@ -190,6 +190,12 @@ public class DebeziumPostgresComponentConfiguration
      */
     private Integer databasePort = 5432;
     /**
+     * Time to wait for a query to execute, given in milliseconds. Defaults to
+     * 600 seconds (600,000 ms); zero means there is no limit. The option is a
+     * int type.
+     */
+    private Integer databaseQueryTimeoutMs = 600000;
+    /**
      * File containing the SSL Certificate for the client. See the Postgres SSL
      * docs for further information
      */
@@ -680,6 +686,11 @@ public class DebeziumPostgresComponentConfiguration
      */
     private Integer statusUpdateIntervalMs = 10000;
     /**
+     * A delay period after the snapshot is completed and the streaming begins,
+     * given in milliseconds. Defaults to 0 ms. The option is a long type.
+     */
+    private Long streamingDelayMs = 0L;
+    /**
      * A comma-separated list of regular expressions that match the
      * fully-qualified names of tables to be excluded from monitoring
      */
@@ -725,6 +736,10 @@ public class DebeziumPostgresComponentConfiguration
      * alphanumeric characters, hyphens, dots and underscores must be accepted.
      */
     private String topicPrefix;
+    /**
+     * Class to make transaction context & transaction struct/schemas
+     */
+    private String transactionMetadataFactory = "io.debezium.pipeline.txmetadata.DefaultTransactionMetadataFactory";
     /**
      * Specify the constant that will be provided by Debezium to indicate that
      * the original value is a toasted value not provided by the database. If
@@ -944,6 +959,14 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setDatabasePort(Integer databasePort) {
         this.databasePort = databasePort;
+    }
+
+    public Integer getDatabaseQueryTimeoutMs() {
+        return databaseQueryTimeoutMs;
+    }
+
+    public void setDatabaseQueryTimeoutMs(Integer databaseQueryTimeoutMs) {
+        this.databaseQueryTimeoutMs = databaseQueryTimeoutMs;
     }
 
     public String getDatabaseSslcert() {
@@ -1548,6 +1571,14 @@ public class DebeziumPostgresComponentConfiguration
         this.statusUpdateIntervalMs = statusUpdateIntervalMs;
     }
 
+    public Long getStreamingDelayMs() {
+        return streamingDelayMs;
+    }
+
+    public void setStreamingDelayMs(Long streamingDelayMs) {
+        this.streamingDelayMs = streamingDelayMs;
+    }
+
     public String getTableExcludeList() {
         return tableExcludeList;
     }
@@ -1602,6 +1633,14 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setTopicPrefix(String topicPrefix) {
         this.topicPrefix = topicPrefix;
+    }
+
+    public String getTransactionMetadataFactory() {
+        return transactionMetadataFactory;
+    }
+
+    public void setTransactionMetadataFactory(String transactionMetadataFactory) {
+        this.transactionMetadataFactory = transactionMetadataFactory;
     }
 
     public String getUnavailableValuePlaceholder() {

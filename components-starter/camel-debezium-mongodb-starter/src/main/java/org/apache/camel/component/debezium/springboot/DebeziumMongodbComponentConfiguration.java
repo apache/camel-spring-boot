@@ -438,6 +438,11 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String sourceinfoStructMaker = "io.debezium.connector.mongodb.MongoDbSourceInfoStructMaker";
     /**
+     * A delay period after the snapshot is completed and the streaming begins,
+     * given in milliseconds. Defaults to 0 ms. The option is a long type.
+     */
+    private Long streamingDelayMs = 0L;
+    /**
      * Whether delete operations should be represented by a delete event and a
      * subsequent tombstone event (true) or only by a delete event (false).
      * Emitting the tombstone event (the default behavior) allows Kafka to
@@ -459,6 +464,10 @@ public class DebeziumMongodbComponentConfiguration
      * alphanumeric characters, hyphens, dots and underscores must be accepted.
      */
     private String topicPrefix;
+    /**
+     * Class to make transaction context & transaction struct/schemas
+     */
+    private String transactionMetadataFactory = "io.debezium.pipeline.txmetadata.DefaultTransactionMetadataFactory";
 
     public Map<String, Object> getAdditionalProperties() {
         return additionalProperties;
@@ -1029,6 +1038,14 @@ public class DebeziumMongodbComponentConfiguration
         this.sourceinfoStructMaker = sourceinfoStructMaker;
     }
 
+    public Long getStreamingDelayMs() {
+        return streamingDelayMs;
+    }
+
+    public void setStreamingDelayMs(Long streamingDelayMs) {
+        this.streamingDelayMs = streamingDelayMs;
+    }
+
     public Boolean getTombstonesOnDelete() {
         return tombstonesOnDelete;
     }
@@ -1051,5 +1068,13 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setTopicPrefix(String topicPrefix) {
         this.topicPrefix = topicPrefix;
+    }
+
+    public String getTransactionMetadataFactory() {
+        return transactionMetadataFactory;
+    }
+
+    public void setTransactionMetadataFactory(String transactionMetadataFactory) {
+        this.transactionMetadataFactory = transactionMetadataFactory;
     }
 }
