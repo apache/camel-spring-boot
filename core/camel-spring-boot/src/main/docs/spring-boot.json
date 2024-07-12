@@ -863,6 +863,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.main.log-name",
+      "type": "java.lang.String",
+      "description": "The global name to use for Log EIP The name is default the routeId or the source:line if source location is enabled. You can also specify the name using tokens: <br\/> ${class} - the logger class name (org.apache.camel.processor.LogProcessor) <br\/> ${contextId} - the camel context id <br\/> ${routeId} - the route id <br\/> ${groupId} - the route group id <br\/> ${nodeId} - the node id <br\/> ${nodePrefixId} - the node prefix id <br\/> ${source} - the source:line (source location must be enabled) <br\/> ${source.name} - the source filename (source location must be enabled) <br\/> ${source.line} - the source line number (source location must be enabled) For example to use the route and node id you can specify the name as: ${routeId}\/${nodeId}",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main"
+    },
+    {
       "name": "camel.main.mdc-logging-keys-pattern",
       "type": "java.lang.String",
       "description": "Sets the pattern used for determine which custom MDC keys to propagate during message routing when the routing engine continues routing asynchronously for the given message. Setting this pattern to * will propagate all custom keys. Or setting the pattern to foo*,bar* will propagate any keys starting with either foo or bar. Notice that a set of standard Camel MDC keys are always propagated which starts with camel. as key name. The match rules are applied in this order (case insensitive): 1. exact match, returns true 2. wildcard match (pattern ends with a * and the name starts with the pattern), returns true 3. regular expression match, returns true 4. otherwise returns false",
@@ -2445,6 +2451,17 @@
       "deprecated": true,
       "deprecation": {
         "replacement": "camel.main.log-mask",
+        "since": "4.5.0"
+      }
+    },
+    {
+      "name": "camel.springboot.log-name",
+      "type": "java.lang.String",
+      "description": "The global name to use for Log EIP The name is default the routeId or the source:line if source location is enabled. You can also specify the name using tokens: <br\/> ${class} - the logger class name (org.apache.camel.processor.LogProcessor) <br\/> ${contextId} - the camel context id <br\/> ${routeId} - the route id <br\/> ${groupId} - the route group id <br\/> ${nodeId} - the node id <br\/> ${nodePrefixId} - the node prefix id <br\/> ${source} - the source:line (source location must be enabled) <br\/> ${source.name} - the source filename (source location must be enabled) <br\/> ${source.line} - the source line number (source location must be enabled) For example to use the route and node id you can specify the name as: ${routeId}\/${nodeId}",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Springboot",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "camel.main.log-name",
         "since": "4.5.0"
       }
     },
