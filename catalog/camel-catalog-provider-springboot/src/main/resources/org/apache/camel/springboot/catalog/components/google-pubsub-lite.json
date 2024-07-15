@@ -8,7 +8,7 @@
     "firstVersion": "4.6.0",
     "label": "cloud,messaging",
     "javaType": "org.apache.camel.component.google.pubsublite.GooglePubsubLiteComponent",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-google-pubsub-lite-starter",
     "version": "4.8.0-SNAPSHOT",
