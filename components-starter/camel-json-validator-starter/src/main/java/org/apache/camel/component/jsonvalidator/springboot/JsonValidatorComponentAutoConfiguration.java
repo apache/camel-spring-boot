@@ -42,7 +42,7 @@ import org.springframework.context.annotation.Lazy;
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,JsonValidatorComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.json-validator"})
-@AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfigureAfter({CamelAutoConfiguration.class, JsonValidatorComponentConverter.class})
 public class JsonValidatorComponentAutoConfiguration {
 
     @Autowired
