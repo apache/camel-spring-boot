@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.jsonvalidator.springboot;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -54,6 +55,11 @@ public class JsonValidatorComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * To use a custom ObjectMapper. The option is a
+     * com.fasterxml.jackson.databind.ObjectMapper type.
+     */
+    private ObjectMapper objectMapper;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -69,5 +75,13 @@ public class JsonValidatorComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public ObjectMapper getObjectMapper() {
+        return objectMapper;
+    }
+
+    public void setObjectMapper(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
     }
 }
