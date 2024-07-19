@@ -16,9 +16,24 @@
  */
 package org.apache.camel.spring.boot.actuate.endpoint;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.apache.camel.CamelContext;
+import org.apache.camel.Route;
+import org.apache.camel.RuntimeCamelException;
+import org.apache.camel.StatefulService;
+import org.apache.camel.api.management.ManagedCamelContext;
+import org.apache.camel.api.management.mbean.ManagedRouteMBean;
+import org.apache.camel.spi.RouteController;
+import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
+import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
+import org.springframework.boot.actuate.endpoint.annotation.Selector;
+import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
+import org.springframework.lang.Nullable;
+
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -26,18 +41,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 import java.util.stream.Collectors;
-import org.apache.camel.CamelContext;
-import org.apache.camel.Route;
-import org.apache.camel.RuntimeCamelException;
-import org.apache.camel.StatefulService;
-import org.apache.camel.api.management.ManagedCamelContext;
-import org.apache.camel.api.management.mbean.ManagedRouteMBean;
-import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
-import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
-import org.springframework.boot.actuate.endpoint.annotation.Selector;
-import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
-import org.springframework.lang.Nullable;
+
+import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
+
 
 /*
  * Spring Boot Management Endpoint to expose Camel Route information.
@@ -103,7 +113,7 @@ public class CamelRoutesEndpoint {
     }
 
     private RouteEndpointInfo getRouteInfo(String id) {
-        Route route = camelContext.getRoute(id);
+        Route route = getRoute(id);
         if (route != null) {
             return new RouteEndpointInfo(route);
         }
@@ -111,12 +121,28 @@ public class CamelRoutesEndpoint {
         return null;
     }
 
+    private Route getRoute(String id){
+        return getRoutes().stream().filter(x->x.getId().equals(id)).findAny().get();
+    }
+
+    private Collection<Route> getRoutes(){
+        RouteController routeController = camelContext.getRouteController();
+        Map<String,Route> routes = new HashMap<>();
+
+        if (routeController != null ){
+            routes.putAll(routeController.getControlledRoutes().stream().collect(toMap(Route::getId, identity())));
+        }
+        routes.putAll(camelContext.getRoutes().stream().collect(toMap(Route::getId, identity())));
+
+        return routes.values();
+    }
+
     private List<RouteEndpointInfo> getRoutesInfo() {
-        return camelContext.getRoutes().stream().map(RouteEndpointInfo::new).collect(Collectors.toList());
+        return getRoutes().stream().map(RouteEndpointInfo::new).collect(toList());
     }
 
     private RouteDetailsEndpointInfo getRouteDetailsInfo(String id) {
-        Route route = camelContext.getRoute(id);
+        Route route = getRoute(id);
         if (route != null) {
             return new RouteDetailsEndpointInfo(camelContext, route);
         }
@@ -186,6 +212,7 @@ public class CamelRoutesEndpoint {
 
         private final String id;
         private final String group;
+        @JsonIgnoreProperties(value = {"route.start.exception"})
         private final Map<String, Object> properties;
         private final String description;
         private final String uptime;
@@ -249,14 +276,25 @@ public class CamelRoutesEndpoint {
 
         @JsonProperty("details")
         private RouteDetails routeDetails;
+        private final Map<String, Object> properties;
 
         public RouteDetailsEndpointInfo(final CamelContext camelContext, final Route route) {
             super(route);
+
+            if (route.getProperties() != null) {
+                this.properties = new HashMap<>(route.getProperties());
+            } else {
+                this.properties = Collections.emptyMap();
+            }
             if (camelContext.getManagementStrategy().getManagementAgent() != null) {
                 ManagedCamelContext mcc = camelContext.getCamelContextExtension()
                         .getContextPlugin(ManagedCamelContext.class);
                 this.routeDetails = new RouteDetails(mcc.getManagedRoute(route.getId(), ManagedRouteMBean.class));
             }
+        }
+
+        public Map<String, Object> getProperties() {
+            return properties;
         }
 
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
