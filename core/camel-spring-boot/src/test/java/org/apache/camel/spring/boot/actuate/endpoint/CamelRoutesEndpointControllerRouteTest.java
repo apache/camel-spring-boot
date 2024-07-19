@@ -17,30 +17,37 @@
 package org.apache.camel.spring.boot.actuate.endpoint;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.Route;
 import org.apache.camel.ServiceStatus;
-import org.apache.camel.impl.engine.AbstractCamelContext;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpoint.TimeInfo;
-import org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpoint.WriteAction;
+import org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpoint.RouteEndpointInfo;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /*
  * Test for the {@link CamelRoutesEndpoint} actuator endpoint.
  */
-@DirtiesContext
-@CamelSpringBootTest
+
 @EnableAutoConfiguration
 @SpringBootTest(classes = { CamelAutoConfiguration.class, CamelRoutesEndpointAutoConfiguration.class,
-        ActuatorTestRoute.class }, properties = { "management.endpoints.web.exposure.include=*",
-                "management.endpoint.camelroutes.read-only = false" })
-public class CamelRoutesEndpointWriteOperationTest {
+        ActuatorTestControlledRoutes.class }, properties = {
+        "management.endpoints.web.exposure.include=*",
+        "camel.routecontroller.enabled=true",
+        "camel.routecontroller.initial-delay=100",
+        "camel.routecontroller.back-off-delay=100",
+        "camel.routecontroller.back-off-max-attempts=3",
+        "camel.springboot.routes-exclude-pattern=*",
+        "camel.springboot.routes-collector-enabled=true"}
+)
+public class CamelRoutesEndpointControllerRouteTest {
 
     @Autowired
     CamelRoutesEndpoint endpoint;
@@ -48,17 +55,27 @@ public class CamelRoutesEndpointWriteOperationTest {
     @Autowired
     CamelContext camelContext;
 
-    @Test
-    public void testWriteOperation() throws Exception {
-        AbstractCamelContext acontext = camelContext.getCamelContextExtension()
-                .getContextPlugin(AbstractCamelContext.class);
-        ServiceStatus status = acontext.getRouteStatus("foo-route");
-        Assertions.assertTrue(status.isStarted());
-        TimeInfo timeInfo = new TimeInfo();
-        timeInfo.setAbortAfterTimeout(true);
-        timeInfo.setTimeout(10L);
-        endpoint.doWriteAction("foo-route", WriteAction.STOP, timeInfo);
-        status = acontext.getRouteStatus("foo-route");
-        Assertions.assertTrue(status.isStopped());
+
+   @Test
+    public void testFailedRouteVisible() throws Exception {
+        List<RouteEndpointInfo> routes = endpoint.readRoutes();
+        Assertions.assertTrue(contains(routes,"controlled-bar"));
+        List<RouteEndpointInfo> filtered = filterById( routes,"controlled-bar");
+        Assertions.assertEquals(1, filtered.size());
+       Assertions.assertEquals(ServiceStatus.Stopped.name(),filtered.get(0).getStatus());
+
+
     }
+
+
+    private boolean contains(List<RouteEndpointInfo> routes, String routeId){
+        List<RouteEndpointInfo> list = filterById( routes,  routeId);
+        return list.size() > 0;
+    }
+
+    private  List<RouteEndpointInfo> filterById(List<RouteEndpointInfo> routes, String routeId){
+        return routes.stream().filter(x->(routeId.equals(x.getId()))).collect(Collectors.toUnmodifiableList());
+    }
+
+
 }

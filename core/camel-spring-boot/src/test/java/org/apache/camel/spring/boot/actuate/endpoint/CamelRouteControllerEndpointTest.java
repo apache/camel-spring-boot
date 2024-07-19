@@ -34,7 +34,6 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootApplication
 @SpringBootTest(classes = { CamelAutoConfiguration.class, CamelRouteControllerEndpointAutoConfiguration.class,
         CamelRoutesEndpointAutoConfiguration.class, ActuatorTestRoute.class }, properties = {
                 "management.endpoints.web.exposure.include=*", "camel.routecontroller.enabled=true" })
