@@ -32,7 +32,7 @@ import org.springframework.test.annotation.DirtiesContext;
         "camel.vault.aws.secretKey=mySecretKey", "camel.vault.aws.region=myRegion",
         "camel.vault.aws.defaultCredentialsProvider=false", "camel.vault.aws.refreshPeriod=60000",
         "camel.vault.aws.refreshEnabled=false", "camel.vault.aws.secrets=supersecret",
-        "camel.vault.aws.profile-credentials-provider=true", "camel.vault.aws.profile-name=test" })
+        "camel.vault.aws.profile-credentials-provider=true", "camel.vault.aws.profile-name=test", "camel.vault.aws.use-sqs-notification=true", "camel.vault.aws.sqs-queue-url=http://sqs-2" })
 public class AwsVaultConfigurationTest {
 
     @Autowired
@@ -49,5 +49,7 @@ public class AwsVaultConfigurationTest {
         Assertions.assertEquals("supersecret", camelContext.getVaultConfiguration().aws().getSecrets());
         Assertions.assertEquals("test", camelContext.getVaultConfiguration().aws().getProfileName());
         Assertions.assertEquals(true, camelContext.getVaultConfiguration().aws().isProfileCredentialsProvider());
+        Assertions.assertEquals(true, camelContext.getVaultConfiguration().aws().isUseSqsNotification());
+        Assertions.assertEquals("http://sqs-2", camelContext.getVaultConfiguration().aws().getSqsQueueUrl());
     }
 }
