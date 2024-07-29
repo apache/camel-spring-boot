@@ -1673,6 +1673,19 @@
       "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties"
     },
     {
+      "name": "camel.vault.aws.sqs-queue-url",
+      "type": "java.lang.String",
+      "description": "In case of usage of SQS notification this field will specified the Queue URL to use",
+      "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.aws.use-sqs-notification",
+      "type": "java.lang.Boolean",
+      "description": "Whether to use AWS SQS for secrets updates notification, this will require setting up Eventbridge\/Cloudtrail\/SQS communication",
+      "sourceType": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.vault.azure.azure-identity-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether the Azure Identity Authentication should be used or not.",

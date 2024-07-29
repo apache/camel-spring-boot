@@ -65,6 +65,17 @@ public class AwsVaultConfigurationProperties {
      * Define the secrets to look at
      */
     private String secrets;
+    
+    /**
+     * Whether to use AWS SQS for secrets updates notification, this will require setting up Eventbridge/Cloudtrail/SQS
+     * communication
+     */
+    private boolean useSqsNotification;
+
+    /**
+     * In case of usage of SQS notification this field will specified the Queue URL to use
+     */
+    private String sqsQueueUrl;
 
     public String getAccessKey() {
         return accessKey;
@@ -136,5 +147,21 @@ public class AwsVaultConfigurationProperties {
 
     public void setSecrets(String secrets) {
         this.secrets = secrets;
+    }
+    
+   public boolean isUseSqsNotification() {
+        return useSqsNotification;
+    }
+
+    public void setUseSqsNotification(boolean useSqsNotification) {
+        this.useSqsNotification = useSqsNotification;
+    }
+
+    public String getSqsQueueUrl() {
+        return sqsQueueUrl;
+    }
+
+    public void setSqsQueueUrl(String sqsQueueUrl) {
+        this.sqsQueueUrl = sqsQueueUrl;
     }
 }
