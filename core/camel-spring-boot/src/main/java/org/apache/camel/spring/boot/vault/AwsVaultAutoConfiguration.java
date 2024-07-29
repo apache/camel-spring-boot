@@ -42,6 +42,8 @@ public class AwsVaultAutoConfiguration {
         answer.setRefreshEnabled(config.isRefreshEnabled());
         answer.setRefreshPeriod(config.getRefreshPeriod());
         answer.setSecrets(config.getSecrets());
+        answer.setUseSqsNotification(config.isUseSqsNotification());
+        answer.setSqsQueueUrl(config.getSqsQueueUrl());
         return answer;
     }
 
