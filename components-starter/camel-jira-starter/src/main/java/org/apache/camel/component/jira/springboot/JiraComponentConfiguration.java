@@ -40,7 +40,7 @@ public class JiraComponentConfiguration
      */
     private Integer delay = 6000;
     /**
-     * The Jira server url, example: http://my_jira.com:8081
+     * The Jira server url, for example http://my_jira.com:8081.
      */
     private String jiraUrl;
     /**

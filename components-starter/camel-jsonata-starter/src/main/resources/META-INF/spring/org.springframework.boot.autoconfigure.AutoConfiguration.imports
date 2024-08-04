@@ -16,3 +16,4 @@
 ## ---------------------------------------------------------------------------
 
 org.apache.camel.component.jsonata.springboot.JsonataComponentAutoConfiguration
+org.apache.camel.component.jsonata.springboot.JsonataComponentConverter

@@ -190,7 +190,7 @@
     {
       "name": "camel.component.kafka.fetch-max-bytes",
       "type": "java.lang.Integer",
-      "description": "The maximum amount of data the server should return for a fetch request This is not an absolute maximum, if the first message in the first non-empty partition of the fetch is larger than this value, the message will still be returned to ensure that the consumer can make progress. The maximum message size accepted by the broker is defined via message.max.bytes (broker config) or max.message.bytes (topic config). Note that the consumer performs multiple fetches in parallel.",
+      "description": "The maximum amount of data the server should return for a fetch request. This is not an absolute maximum, if the first message in the first non-empty partition of the fetch is larger than this value, the message will still be returned to ensure that the consumer can make progress. The maximum message size accepted by the broker is defined via message.max.bytes (broker config) or max.message.bytes (topic config). Note that the consumer performs multiple fetches in parallel.",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
       "defaultValue": 52428800
     },
@@ -204,7 +204,7 @@
     {
       "name": "camel.component.kafka.fetch-wait-max-ms",
       "type": "java.lang.Integer",
-      "description": "The maximum amount of time the server will block before answering the fetch request if there isn't sufficient data to immediately satisfy fetch.min.bytes",
+      "description": "The maximum amount of time the server will block before answering the fetch request if there isn't enough data to immediately satisfy fetch.min.bytes",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
       "defaultValue": 500
     },
@@ -353,7 +353,7 @@
     {
       "name": "camel.component.kafka.linger-ms",
       "type": "java.lang.Integer",
-      "description": "The producer groups together any records that arrive in between request transmissions into a single, batched, request. Normally, this occurs only under load when records arrive faster than they can be sent out. However, in some circumstances, the client may want to reduce the number of requests even under a moderate load. This setting accomplishes this by adding a small amount of artificial delay. That is, rather than immediately sending out a record, the producer will wait for up to the given delay to allow other records to be sent so that they can be batched together. This can be thought of as analogous to Nagle's algorithm in TCP. This setting gives the upper bound on the delay for batching: once we get batch.size worth of records for a partition, it will be sent immediately regardless of this setting, however, if we have fewer than this many bytes accumulated for this partition, we will 'linger' for the specified time waiting for more records to show up. This setting defaults to 0 (i.e., no delay). Setting linger.ms=5, for example, would have the effect of reducing the number of requests sent but would add up to 5ms of latency to records sent in the absence of load.",
+      "description": "The producer groups together any records that arrive in between request transmissions into a single, batched, request. Normally, this occurs only under load when records arrive faster than they can be sent out. However, in some circumstances, the client may want to reduce the number of requests even under a moderate load. This setting achieves this by adding a small amount of artificial delay. That is, rather than immediately sending out a record, the producer will wait for up to the given delay to allow other records to be sent so that they can be batched together. This can be thought of as analogous to Nagle's algorithm in TCP. This setting gives the upper bound on the delay for batching: once we get batch.size worth of records for a partition, it will be sent immediately regardless of this setting, however, if we have fewer than this many bytes accumulated for this partition, we will 'linger' for the specified time waiting for more records to show up. This setting defaults to 0 (i.e., no delay). Setting linger.ms=5, for example, would have the effect of reducing the number of requests sent but would add up to 5ms of latency to records sent in the absence of load.",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
       "defaultValue": 0
     },
@@ -542,7 +542,7 @@
     {
       "name": "camel.component.kafka.retries",
       "type": "java.lang.Integer",
-      "description": "Setting a value greater than zero will cause the client to resend any record that has failed to be sent due to a potentially transient error. Note that this retry is no different from if the client re-sending the record upon receiving the error. Produce requests will be failed before the number of retries has been exhausted if the timeout configured by delivery.timeout.ms expires first before successful acknowledgement. Users should generally prefer to leave this config unset and instead use delivery.timeout.ms to control retry behavior. Enabling idempotence requires this config value to be greater than 0. If conflicting configurations are set and idempotence is not explicitly enabled, idempotence is disabled. Allowing retries while setting enable.idempotence to false and max.in.flight.requests.per.connection to 1 will potentially change the ordering of records because if two batches are sent to a single partition, and the first fails and is retried but the second succeeds, then the records in the second batch may appear first.",
+      "description": "Setting a value greater than zero will cause the client to resend any record that has failed to be sent due to a potentially transient error. Note that this retry is no different from if the client re-sending the record upon receiving the error. Produce requests will be failed before the number of retries has been exhausted if the timeout configured by delivery.timeout.ms expires first before successful acknowledgement. Users should generally prefer to leave this config unset and instead use delivery.timeout.ms to control retry behavior. Enabling idempotence requires this config value to be greater than 0. If conflicting configurations are set and idempotence is not explicitly enabled, idempotence is disabled. Allowing retries while setting enable.idempotence to false and max.in.flight.requests.per.connection to 1 will potentially change the ordering of records, because if two batches are sent to a single partition, and the first fails and is retried but the second succeeds; then the records in the second batch may appear first.",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
     },
     {

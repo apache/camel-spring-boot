@@ -213,7 +213,7 @@ public class Athena2ComponentConfiguration
      */
     private String kmsKey;
     /**
-     * If using a profile credentials provider this parameter will set the
+     * If using a profile credentials provider, this parameter will set the
      * profile name
      */
     private String profileCredentialsName;
@@ -238,7 +238,7 @@ public class Athena2ComponentConfiguration
     private Boolean useProfileCredentialsProvider = false;
     /**
      * Set whether the Athena client should expect to use Session Credentials.
-     * This is useful in a situation in which the user needs to assume a IAM
+     * This is useful in a situation in which the user needs to assume an IAM
      * role for doing operations in Athena.
      */
     private Boolean useSessionCredentials = false;

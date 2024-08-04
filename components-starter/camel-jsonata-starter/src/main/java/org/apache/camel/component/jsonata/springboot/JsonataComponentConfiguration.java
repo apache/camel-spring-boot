@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.jsonata.springboot;
 
+import org.apache.camel.component.jsonata.JsonataFrameBinding;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -54,6 +55,11 @@ public class JsonataComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * To configure custom frame bindings and inject user functions. The option
+     * is a org.apache.camel.component.jsonata.JsonataFrameBinding type.
+     */
+    private JsonataFrameBinding frameBinding;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -69,5 +75,13 @@ public class JsonataComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public JsonataFrameBinding getFrameBinding() {
+        return frameBinding;
+    }
+
+    public void setFrameBinding(JsonataFrameBinding frameBinding) {
+        this.frameBinding = frameBinding;
     }
 }

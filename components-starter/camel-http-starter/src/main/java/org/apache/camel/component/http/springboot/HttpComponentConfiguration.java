@@ -137,7 +137,7 @@ public class HttpComponentConfiguration
     private Boolean connectionStateDisabled = false;
     /**
      * The time for connection to live, the time unit is millisecond, the
-     * default value is always keep alive.
+     * default value is always keepAlive.
      */
     private Long connectionTimeToLive;
     /**

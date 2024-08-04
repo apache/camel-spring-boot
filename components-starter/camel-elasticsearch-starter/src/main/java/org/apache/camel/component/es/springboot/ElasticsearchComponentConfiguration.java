@@ -36,7 +36,7 @@ public class ElasticsearchComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The time in ms to wait before connection will timeout.
+     * The time in ms to wait before connection will time out.
      */
     private Integer connectionTimeout = 30000;
     /**
@@ -45,8 +45,8 @@ public class ElasticsearchComponentConfiguration
      * the Document API supports (see
      * https://www.elastic.co/guide/en/elasticsearch/reference/current/docs.html
      * for more details). To ease the migration of routes based on the legacy
-     * component camel-elasticsearch-rest, you should consider enabling the mode
-     * especially if your routes do update operations.
+     * component camel-elasticsearch-rest, you should consider enabling the
+     * mode, especially if your routes do update operations.
      */
     private Boolean enableDocumentOnlyMode = false;
     /**
@@ -71,7 +71,7 @@ public class ElasticsearchComponentConfiguration
      */
     private Integer maxRetryTimeout = 30000;
     /**
-     * The timeout in ms to wait before the socket will timeout.
+     * The timeout in ms to wait before the socket will time out.
      */
     private Integer socketTimeout = 30000;
     /**
@@ -85,13 +85,13 @@ public class ElasticsearchComponentConfiguration
     private Boolean autowiredEnabled = true;
     /**
      * To use an existing configured Elasticsearch client, instead of creating a
-     * client per endpoint. This allow to customize the client with specific
+     * client per endpoint. This allows customizing the client with specific
      * settings. The option is a org.elasticsearch.client.RestClient type.
      */
     private RestClient client;
     /**
      * Enable automatically discover nodes from a running Elasticsearch cluster.
-     * If this option is used in conjunction with Spring Boot then it's managed
+     * If this option is used in conjunction with Spring Boot, then it's managed
      * by the Spring Boot configuration (see: Disable Sniffer in Spring Boot).
      */
     private Boolean enableSniffer = false;
@@ -116,7 +116,7 @@ public class ElasticsearchComponentConfiguration
      */
     private Boolean enableSSL = false;
     /**
-     * Password for authenticate
+     * Password for authenticating
      */
     private String password;
     /**
