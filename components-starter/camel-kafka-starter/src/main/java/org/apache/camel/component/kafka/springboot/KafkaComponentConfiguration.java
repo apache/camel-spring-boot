@@ -197,7 +197,7 @@ public class KafkaComponentConfiguration
      */
     private Integer consumersCount = 1;
     /**
-     * The maximum amount of data the server should return for a fetch request
+     * The maximum amount of data the server should return for a fetch request.
      * This is not an absolute maximum, if the first message in the first
      * non-empty partition of the fetch is larger than this value, the message
      * will still be returned to ensure that the consumer can make progress. The
@@ -214,7 +214,7 @@ public class KafkaComponentConfiguration
     private Integer fetchMinBytes = 1;
     /**
      * The maximum amount of time the server will block before answering the
-     * fetch request if there isn't sufficient data to immediately satisfy
+     * fetch request if there isn't enough data to immediately satisfy
      * fetch.min.bytes
      */
     private Integer fetchWaitMaxMs = 500;
@@ -498,19 +498,19 @@ public class KafkaComponentConfiguration
      * transmissions into a single, batched, request. Normally, this occurs only
      * under load when records arrive faster than they can be sent out. However,
      * in some circumstances, the client may want to reduce the number of
-     * requests even under a moderate load. This setting accomplishes this by
-     * adding a small amount of artificial delay. That is, rather than
-     * immediately sending out a record, the producer will wait for up to the
-     * given delay to allow other records to be sent so that they can be batched
-     * together. This can be thought of as analogous to Nagle's algorithm in
-     * TCP. This setting gives the upper bound on the delay for batching: once
-     * we get batch.size worth of records for a partition, it will be sent
-     * immediately regardless of this setting, however, if we have fewer than
-     * this many bytes accumulated for this partition, we will 'linger' for the
-     * specified time waiting for more records to show up. This setting defaults
-     * to 0 (i.e., no delay). Setting linger.ms=5, for example, would have the
-     * effect of reducing the number of requests sent but would add up to 5ms of
-     * latency to records sent in the absence of load.
+     * requests even under a moderate load. This setting achieves this by adding
+     * a small amount of artificial delay. That is, rather than immediately
+     * sending out a record, the producer will wait for up to the given delay to
+     * allow other records to be sent so that they can be batched together. This
+     * can be thought of as analogous to Nagle's algorithm in TCP. This setting
+     * gives the upper bound on the delay for batching: once we get batch.size
+     * worth of records for a partition, it will be sent immediately regardless
+     * of this setting, however, if we have fewer than this many bytes
+     * accumulated for this partition, we will 'linger' for the specified time
+     * waiting for more records to show up. This setting defaults to 0 (i.e., no
+     * delay). Setting linger.ms=5, for example, would have the effect of
+     * reducing the number of requests sent but would add up to 5ms of latency
+     * to records sent in the absence of load.
      */
     private Integer lingerMs = 0;
     /**
@@ -657,9 +657,9 @@ public class KafkaComponentConfiguration
      * configurations are set and idempotence is not explicitly enabled,
      * idempotence is disabled. Allowing retries while setting
      * enable.idempotence to false and max.in.flight.requests.per.connection to
-     * 1 will potentially change the ordering of records because if two batches
+     * 1 will potentially change the ordering of records, because if two batches
      * are sent to a single partition, and the first fails and is retried but
-     * the second succeeds, then the records in the second batch may appear
+     * the second succeeds; then the records in the second batch may appear
      * first.
      */
     private Integer retries;

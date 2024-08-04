@@ -69,7 +69,7 @@
     {
       "name": "camel.component.http.connection-time-to-live",
       "type": "java.lang.Long",
-      "description": "The time for connection to live, the time unit is millisecond, the default value is always keep alive.",
+      "description": "The time for connection to live, the time unit is millisecond, the default value is always keepAlive.",
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
     },
     {

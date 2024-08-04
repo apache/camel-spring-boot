@@ -155,7 +155,7 @@
     {
       "name": "camel.component.aws2-athena.profile-credentials-name",
       "type": "java.lang.String",
-      "description": "If using a profile credentials provider this parameter will set the profile name",
+      "description": "If using a profile credentials provider, this parameter will set the profile name",
       "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration"
     },
     {
@@ -237,7 +237,7 @@
     {
       "name": "camel.component.aws2-athena.use-session-credentials",
       "type": "java.lang.Boolean",
-      "description": "Set whether the Athena client should expect to use Session Credentials. This is useful in a situation in which the user needs to assume a IAM role for doing operations in Athena.",
+      "description": "Set whether the Athena client should expect to use Session Credentials. This is useful in a situation in which the user needs to assume an IAM role for doing operations in Athena.",
       "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration",
       "defaultValue": false
     },

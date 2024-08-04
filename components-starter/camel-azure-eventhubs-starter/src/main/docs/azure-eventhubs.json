@@ -66,21 +66,21 @@
     {
       "name": "camel.component.azure-eventhubs.checkpoint-batch-size",
       "type": "java.lang.Integer",
-      "description": "Sets the batch size between each checkpoint updates. Works jointly with checkpointBatchTimeout.",
+      "description": "Sets the batch size between each checkpoint update. Works jointly with checkpointBatchTimeout.",
       "sourceType": "org.apache.camel.component.azure.eventhubs.springboot.EventHubsComponentConfiguration",
       "defaultValue": 500
     },
     {
       "name": "camel.component.azure-eventhubs.checkpoint-batch-timeout",
       "type": "java.lang.Integer",
-      "description": "Sets the batch timeout between each checkpoint updates. Works jointly with checkpointBatchSize.",
+      "description": "Sets the batch timeout between each checkpoint update. Works jointly with checkpointBatchSize.",
       "sourceType": "org.apache.camel.component.azure.eventhubs.springboot.EventHubsComponentConfiguration",
       "defaultValue": 5000
     },
     {
       "name": "camel.component.azure-eventhubs.checkpoint-store",
       "type": "com.azure.messaging.eventhubs.CheckpointStore",
-      "description": "Sets the CheckpointStore the EventProcessorClient will use for storing partition ownership and checkpoint information. Users can, optionally, provide their own implementation of CheckpointStore which will store ownership and checkpoint information. By default it set to use com.azure.messaging.eventhubs.checkpointstore.blob.BlobCheckpointStore which stores all checkpoint offsets into Azure Blob Storage. The option is a com.azure.messaging.eventhubs.CheckpointStore type.",
+      "description": "Sets the CheckpointStore the EventProcessorClient will use for storing partition ownership and checkpoint information. Users can, optionally, provide their own implementation of CheckpointStore which will store ownership and checkpoint information. By default, it's set to use com.azure.messaging.eventhubs.checkpointstore.blob.BlobCheckpointStore which stores all checkpoint offsets into Azure Blob Storage. The option is a com.azure.messaging.eventhubs.CheckpointStore type.",
       "sourceType": "org.apache.camel.component.azure.eventhubs.springboot.EventHubsComponentConfiguration"
     },
     {
@@ -92,7 +92,7 @@
     {
       "name": "camel.component.azure-eventhubs.connection-string",
       "type": "java.lang.String",
-      "description": "Instead of supplying namespace, sharedAccessKey, sharedAccessName ... etc, you can just supply the connection string for your eventHub. The connection string for EventHubs already include all the necessary information to connection to your EventHub. To learn on how to generate the connection string, take a look at this documentation: https:\/\/docs.microsoft.com\/en-us\/azure\/event-hubs\/event-hubs-get-connection-string",
+      "description": "Instead of supplying namespace, sharedAccessKey, sharedAccessName, etc, you can supply the connection string for your eventHub. The connection string for EventHubs already includes all the necessary information to connection to your EventHub. To learn how to generate the connection string, take a look at this documentation: https:\/\/docs.microsoft.com\/en-us\/azure\/event-hubs\/event-hubs-get-connection-string",
       "sourceType": "org.apache.camel.component.azure.eventhubs.springboot.EventHubsComponentConfiguration"
     },
     {

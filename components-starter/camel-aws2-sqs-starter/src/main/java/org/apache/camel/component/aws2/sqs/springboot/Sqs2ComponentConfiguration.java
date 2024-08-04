@@ -102,6 +102,11 @@ public class Sqs2ComponentConfiguration
      */
     private Integer concurrentConsumers = 1;
     /**
+     * The maximum number of concurrent receive request send to AWS in single
+     * consumer polling.
+     */
+    private Integer concurrentRequestLimit = 50;
+    /**
      * The default visibility timeout (in seconds)
      */
     private Integer defaultVisibilityTimeout;
@@ -143,6 +148,14 @@ public class Sqs2ComponentConfiguration
      * Define if Server Side Encryption is enabled or not on the queue
      */
     private Boolean serverSideEncryptionEnabled = false;
+    /**
+     * The name of the message attribute used for sorting the messages. When
+     * specified, the messages polled by the consumer will be sorted by this
+     * attribute. This configuration may be of importance when you configure
+     * maxMessagesPerPoll parameter exceeding 10. In such cases, the messages
+     * will be fetched concurrently so the ordering is not guaranteed.
+     */
+    private String sortAttributeName;
     /**
      * The duration (in seconds) that the received messages are hidden from
      * subsequent retrieve requests after being retrieved by a ReceiveMessage
@@ -406,6 +419,14 @@ public class Sqs2ComponentConfiguration
         this.concurrentConsumers = concurrentConsumers;
     }
 
+    public Integer getConcurrentRequestLimit() {
+        return concurrentRequestLimit;
+    }
+
+    public void setConcurrentRequestLimit(Integer concurrentRequestLimit) {
+        this.concurrentRequestLimit = concurrentRequestLimit;
+    }
+
     public Integer getDefaultVisibilityTimeout() {
         return defaultVisibilityTimeout;
     }
@@ -470,6 +491,14 @@ public class Sqs2ComponentConfiguration
     public void setServerSideEncryptionEnabled(
             Boolean serverSideEncryptionEnabled) {
         this.serverSideEncryptionEnabled = serverSideEncryptionEnabled;
+    }
+
+    public String getSortAttributeName() {
+        return sortAttributeName;
+    }
+
+    public void setSortAttributeName(String sortAttributeName) {
+        this.sortAttributeName = sortAttributeName;
     }
 
     public Integer getVisibilityTimeout() {

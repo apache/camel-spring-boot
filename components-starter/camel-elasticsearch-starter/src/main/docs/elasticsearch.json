@@ -29,13 +29,13 @@
     {
       "name": "camel.component.elasticsearch.client",
       "type": "org.elasticsearch.client.RestClient",
-      "description": "To use an existing configured Elasticsearch client, instead of creating a client per endpoint. This allow to customize the client with specific settings. The option is a org.elasticsearch.client.RestClient type.",
+      "description": "To use an existing configured Elasticsearch client, instead of creating a client per endpoint. This allows customizing the client with specific settings. The option is a org.elasticsearch.client.RestClient type.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration"
     },
     {
       "name": "camel.component.elasticsearch.connection-timeout",
       "type": "java.lang.Integer",
-      "description": "The time in ms to wait before connection will timeout.",
+      "description": "The time in ms to wait before connection will time out.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
       "defaultValue": 30000
     },
@@ -47,7 +47,7 @@
     {
       "name": "camel.component.elasticsearch.enable-document-only-mode",
       "type": "java.lang.Boolean",
-      "description": "Indicates whether the body of the message contains only documents. By default, it is set to false to be able to do the same requests as what the Document API supports (see https:\/\/www.elastic.co\/guide\/en\/elasticsearch\/reference\/current\/docs.html for more details). To ease the migration of routes based on the legacy component camel-elasticsearch-rest, you should consider enabling the mode especially if your routes do update operations.",
+      "description": "Indicates whether the body of the message contains only documents. By default, it is set to false to be able to do the same requests as what the Document API supports (see https:\/\/www.elastic.co\/guide\/en\/elasticsearch\/reference\/current\/docs.html for more details). To ease the migration of routes based on the legacy component camel-elasticsearch-rest, you should consider enabling the mode, especially if your routes do update operations.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
       "defaultValue": false
     },
@@ -61,7 +61,7 @@
     {
       "name": "camel.component.elasticsearch.enable-sniffer",
       "type": "java.lang.Boolean",
-      "description": "Enable automatically discover nodes from a running Elasticsearch cluster. If this option is used in conjunction with Spring Boot then it's managed by the Spring Boot configuration (see: Disable Sniffer in Spring Boot).",
+      "description": "Enable automatically discover nodes from a running Elasticsearch cluster. If this option is used in conjunction with Spring Boot, then it's managed by the Spring Boot configuration (see: Disable Sniffer in Spring Boot).",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
       "defaultValue": false
     },
@@ -94,7 +94,7 @@
     {
       "name": "camel.component.elasticsearch.password",
       "type": "java.lang.String",
-      "description": "Password for authenticate",
+      "description": "Password for authenticating",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration"
     },
     {
@@ -114,7 +114,7 @@
     {
       "name": "camel.component.elasticsearch.socket-timeout",
       "type": "java.lang.Integer",
-      "description": "The timeout in ms to wait before the socket will timeout.",
+      "description": "The timeout in ms to wait before the socket will time out.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
       "defaultValue": 30000
     },

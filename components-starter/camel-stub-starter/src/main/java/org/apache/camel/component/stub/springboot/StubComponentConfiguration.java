@@ -90,8 +90,8 @@ public class StubComponentConfiguration
      * Whether a thread that sends messages to a full SEDA queue will block
      * until the queue's capacity is no longer exhausted. By default, an
      * exception will be thrown stating that the queue is full. By enabling this
-     * option, where a configured timeout can be added to the block case.
-     * Utilizing the .offer(timeout) method of the underlining java queue
+     * option, where a configured timeout can be added to the block case. Using
+     * the .offer(timeout) method of the underlining java queue
      */
     private Long defaultOfferTimeout;
     /**

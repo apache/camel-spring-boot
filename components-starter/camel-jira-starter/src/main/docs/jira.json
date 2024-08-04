@@ -80,7 +80,7 @@
     {
       "name": "camel.component.jira.jira-url",
       "type": "java.lang.String",
-      "description": "The Jira server url, example: http:\/\/my_jira.com:8081",
+      "description": "The Jira server url, for example http:\/\/my_jira.com:8081.",
       "sourceType": "org.apache.camel.component.jira.springboot.JiraComponentConfiguration"
     },
     {

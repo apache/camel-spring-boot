@@ -75,13 +75,13 @@ public class OpensearchComponentConfiguration
     private Boolean autowiredEnabled = true;
     /**
      * To use an existing configured OpenSearch client, instead of creating a
-     * client per endpoint. This allows to customize the client with specific
+     * client per endpoint. This allows customizing the client with specific
      * settings. The option is a org.opensearch.client.RestClient type.
      */
     private RestClient client;
     /**
      * Enable automatically discover nodes from a running OpenSearch cluster. If
-     * this option is used in conjunction with Spring Boot then it's managed by
+     * this option is used in conjunction with Spring Boot, then it's managed by
      * the Spring Boot configuration (see: Disable Sniffer in Spring Boot).
      */
     private Boolean enableSniffer = false;
@@ -101,7 +101,7 @@ public class OpensearchComponentConfiguration
      */
     private Boolean enableSSL = false;
     /**
-     * Password for authenticate
+     * Password for authenticating
      */
     private String password;
     /**

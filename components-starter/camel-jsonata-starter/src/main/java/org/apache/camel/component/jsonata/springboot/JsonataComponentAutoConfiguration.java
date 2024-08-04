@@ -42,7 +42,7 @@ import org.springframework.context.annotation.Lazy;
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,JsonataComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.jsonata"})
-@AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfigureAfter({CamelAutoConfiguration.class, JsonataComponentConverter.class})
 public class JsonataComponentAutoConfiguration {
 
     @Autowired
