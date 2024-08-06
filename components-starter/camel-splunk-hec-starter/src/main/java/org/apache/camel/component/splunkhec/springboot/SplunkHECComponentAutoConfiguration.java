@@ -42,7 +42,7 @@ import org.springframework.context.annotation.Lazy;
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,SplunkHECComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.splunk-hec"})
-@AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfigureAfter({CamelAutoConfiguration.class, SplunkHECComponentConverter.class})
 public class SplunkHECComponentAutoConfiguration {
 
     @Autowired

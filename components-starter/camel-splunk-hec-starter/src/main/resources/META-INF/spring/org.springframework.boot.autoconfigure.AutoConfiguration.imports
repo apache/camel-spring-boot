@@ -16,3 +16,4 @@
 ## ---------------------------------------------------------------------------
 
 org.apache.camel.component.splunkhec.springboot.SplunkHECComponentAutoConfiguration
+org.apache.camel.component.splunkhec.springboot.SplunkHECComponentConverter
