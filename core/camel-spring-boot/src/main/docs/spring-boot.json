@@ -567,7 +567,7 @@
     {
       "name": "camel.main.bean-post-processor-enabled",
       "type": "java.lang.Boolean",
-      "description": "Can be used to turn off bean post processing. Be careful to turn this off, as this means that beans that use Camel annotations such as {@link org.apache.camel.EndpointInject}, {@link org.apache.camel.ProducerTemplate}, {@link org.apache.camel.Produce}, {@link org.apache.camel.Consume} etc will not be injected and in use. Turning this off should only be done if you are sure you do not use any of these Camel features. Not all runtimes allow turning this off (such as camel-blueprint or camel-cdi with XML). The default value is true (enabled).",
+      "description": "Can be used to turn off bean post processing. Be careful to turn this off, as this means that beans that use Camel annotations such as {@link org.apache.camel.EndpointInject}, {@link org.apache.camel.ProducerTemplate}, {@link org.apache.camel.Produce}, {@link org.apache.camel.Consume} etc will not be injected and in use. Turning this off should only be done if you are sure you do not use any of these Camel features. Not all runtimes allow turning this off. The default value is true (enabled).",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
       "defaultValue": true
     },
@@ -1952,7 +1952,7 @@
     {
       "name": "camel.springboot.bean-post-processor-enabled",
       "type": "java.lang.Boolean",
-      "description": "Can be used to turn off bean post processing. Be careful to turn this off, as this means that beans that use Camel annotations such as {@link org.apache.camel.EndpointInject}, {@link org.apache.camel.ProducerTemplate}, {@link org.apache.camel.Produce}, {@link org.apache.camel.Consume} etc will not be injected and in use. Turning this off should only be done if you are sure you do not use any of these Camel features. Not all runtimes allow turning this off (such as camel-blueprint or camel-cdi with XML). The default value is true (enabled).",
+      "description": "Can be used to turn off bean post processing. Be careful to turn this off, as this means that beans that use Camel annotations such as {@link org.apache.camel.EndpointInject}, {@link org.apache.camel.ProducerTemplate}, {@link org.apache.camel.Produce}, {@link org.apache.camel.Consume} etc will not be injected and in use. Turning this off should only be done if you are sure you do not use any of these Camel features. Not all runtimes allow turning this off. The default value is true (enabled).",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Springboot",
       "defaultValue": true,
       "deprecated": true,
