@@ -586,6 +586,12 @@
       "defaultValue": true
     },
     {
+      "name": "camel.main.cloud-properties-location",
+      "type": "java.lang.String",
+      "description": "Sets the locations (comma separated values) where to find properties configuration as defined for cloud native environments such as Kubernetes. You should only scan text based mounted configuration.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main"
+    },
+    {
       "name": "camel.main.compile-work-dir",
       "type": "java.lang.String",
       "description": "Work directory for compiler. Can be used to write compiled classes or other resources.",
@@ -1982,6 +1988,17 @@
       "deprecated": true,
       "deprecation": {
         "replacement": "camel.main.case-insensitive-headers",
+        "since": "4.5.0"
+      }
+    },
+    {
+      "name": "camel.springboot.cloud-properties-location",
+      "type": "java.lang.String",
+      "description": "Sets the locations (comma separated values) where to find properties configuration as defined for cloud native environments such as Kubernetes. You should only scan text based mounted configuration.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Springboot",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "camel.main.cloud-properties-location",
         "since": "4.5.0"
       }
     },
