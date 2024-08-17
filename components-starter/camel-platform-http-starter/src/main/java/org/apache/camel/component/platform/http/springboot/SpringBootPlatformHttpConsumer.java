@@ -46,6 +46,7 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         this.binding.setHeaderFilterStrategy(endpoint.getHeaderFilterStrategy());
         this.binding.setMuteException(endpoint.isMuteException());
         this.binding.setFileNameExtWhitelist(endpoint.getFileNameExtWhitelist());
+        this.binding.setUseReaderForPayload(!endpoint.isUseStreaming());
     }
 
     @Override
