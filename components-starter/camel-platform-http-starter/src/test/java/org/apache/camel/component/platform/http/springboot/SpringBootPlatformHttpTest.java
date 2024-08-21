@@ -19,20 +19,24 @@ package org.apache.camel.component.platform.http.springboot;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
-@SpringBootApplication
-@DirtiesContext
+@EnableAutoConfiguration
+@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
         SpringBootPlatformHttpTest.class, SpringBootPlatformHttpTest.TestConfiguration.class,
         PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class })
 public class SpringBootPlatformHttpTest extends PlatformHttpBase {
+
+    private static final String postRouteId = "SpringBootPlatformHttpTest_mypost";
+
+    private static final String getRouteId = "SpringBootPlatformHttpTest_myget";
 
     // *************************************
     // Config
@@ -44,11 +48,21 @@ public class SpringBootPlatformHttpTest extends PlatformHttpBase {
         public RouteBuilder servletPlatformHttpRouteBuilder() {
             return new RouteBuilder() {
                 @Override
-                public void configure() throws Exception {
-                    from("platform-http:/myget").setBody().constant("get");
-                    from("platform-http:/mypost").transform().body(String.class, b -> b.toUpperCase());
+                public void configure() {
+                    from("platform-http:/myget").id(postRouteId).setBody().constant("get");
+                    from("platform-http:/mypost").id(getRouteId).transform().body(String.class, b -> b.toUpperCase());
                 }
             };
         }
+    }
+
+    @Override
+    protected String getPostRouteId() {
+        return postRouteId;
+    }
+
+    @Override
+    protected String getGetRouteId() {
+        return getRouteId;
     }
 }

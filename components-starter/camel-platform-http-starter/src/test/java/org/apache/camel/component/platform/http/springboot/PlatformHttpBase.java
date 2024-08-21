@@ -16,24 +16,46 @@
  */
 package org.apache.camel.component.platform.http.springboot;
 
-import org.junit.jupiter.api.Test;
-
+import java.util.concurrent.TimeUnit;
+import org.apache.camel.CamelContext;
+import org.apache.camel.ServiceStatus;
 import org.assertj.core.api.Assertions;
+import org.awaitility.Awaitility;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 abstract class PlatformHttpBase {
 
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @Autowired
+    CamelContext camelContext;
+
     @Test
     public void testGet() {
+        waitUntilRouteIsStarted(1, getGetRouteId());
+
         Assertions.assertThat(restTemplate.getForEntity("/myget", String.class).getStatusCodeValue()).isEqualTo(200);
     }
 
     @Test
     public void testPost() {
+        waitUntilRouteIsStarted(1, getPostRouteId());
+
         Assertions.assertThat(restTemplate.postForEntity("/mypost", "test", String.class).getBody()).isEqualTo("TEST");
     }
+
+    protected void waitUntilRouteIsStarted(int atMostSeconds, String routeId) {
+        Awaitility.await().atMost(atMostSeconds, TimeUnit.SECONDS).untilAsserted(() ->
+                assertEquals(ServiceStatus.Started, camelContext.getRouteController().getRouteStatus(routeId))
+        );
+    }
+
+    protected abstract String getPostRouteId();
+
+    protected abstract String getGetRouteId();
 }
