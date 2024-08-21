@@ -46,14 +46,14 @@ public class EventHubsComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Sets the retry policy for EventHubAsyncClient. If not specified, the
-     * default retry options are used. The option is a
+     * Sets the retry policy for EventHubProducerAsyncClient. If not specified,
+     * the default retry options are used. The option is a
      * com.azure.core.amqp.AmqpRetryOptions type.
      */
     private AmqpRetryOptions amqpRetryOptions;
     /**
      * Sets the transport type by which all the communication with Azure Event
-     * Hubs occurs. Default value is AmqpTransportType#AMQP.
+     * Hubs occurs.
      */
     private AmqpTransportType amqpTransportType = AmqpTransportType.AMQP;
     /**
@@ -122,7 +122,7 @@ public class EventHubsComponentConfiguration
     /**
      * Sets the name of the consumer group this consumer is associated with.
      * Events are read in the context of this group. The name of the consumer
-     * group that is created by default is {code $Default}.
+     * group that is created by default is $Default.
      */
     private String consumerGroupName = "$Default";
     /**
@@ -130,7 +130,7 @@ public class EventHubsComponentConfiguration
      * checkpoint for the partition does not exist in CheckpointStore. This map
      * is keyed off of the partition id. If there is no checkpoint in
      * CheckpointStore and there is no entry in this map, the processing of the
-     * partition will start from {link EventPosition#latest() latest} position.
+     * partition will start from EventPosition#latest() position.
      */
     private Map<String, EventPosition> eventPosition;
     /**
@@ -151,10 +151,10 @@ public class EventHubsComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Sets the identifier of the Event Hub partition that the events will be
-     * sent to. If the identifier is not specified, the Event Hubs service will
-     * be responsible for routing events that are sent to an available
-     * partition.
+     * Sets the identifier of the Event Hub partition that the EventData events
+     * will be sent to. If the identifier is not specified, the Event Hubs
+     * service will be responsible for routing events that are sent to an
+     * available partition.
      */
     private String partitionId;
     /**
@@ -166,18 +166,20 @@ public class EventHubsComponentConfiguration
      * partition. This should be specified only when there is a need to group
      * events by partition, but there is flexibility into which partition they
      * are routed. If ensuring that a batch of events is sent only to a specific
-     * partition, it is recommended that the {link #setPartitionId(String)
-     * identifier of the position be specified directly} when sending the batch.
+     * partition, it is recommended that the identifier of the position be
+     * specified directly when sending the batch.
      */
     private String partitionKey;
     /**
      * Sets the EventHubProducerAsyncClient.An asynchronous producer responsible
      * for transmitting EventData to a specific Event Hub, grouped together in
-     * batches. Depending on the options specified when creating an
-     * {linkEventDataBatch}, the events may be automatically routed to an
-     * available partition or specific to a partition. Use by this component to
-     * produce the data in camel producer. The option is a
-     * com.azure.messaging.eventhubs.EventHubProducerAsyncClient type.
+     * batches. Depending on the
+     * com.azure.messaging.eventhubs.models.CreateBatchOptions options specified
+     * when creating an com.azure.messaging.eventhubs.EventDataBatch, the events
+     * may be automatically routed to an available partition or specific to a
+     * partition. Use by this component to produce the data in camel producer.
+     * The option is a com.azure.messaging.eventhubs.EventHubProducerAsyncClient
+     * type.
      */
     private EventHubProducerAsyncClient producerAsyncClient;
     /**
@@ -190,11 +192,11 @@ public class EventHubsComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * Instead of supplying namespace, sharedAccessKey, sharedAccessName, etc,
+     * Instead of supplying namespace, sharedAccessKey, sharedAccessName, etc.
      * you can supply the connection string for your eventHub. The connection
      * string for EventHubs already includes all the necessary information to
-     * connection to your EventHub. To learn how to generate the connection
-     * string, take a look at this documentation:
+     * connect to your EventHub. To learn how to generate the connection string,
+     * take a look at this documentation:
      * https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-get-connection-string
      */
     private String connectionString;
@@ -211,9 +213,7 @@ public class EventHubsComponentConfiguration
      */
     private String sharedAccessName;
     /**
-     * Still another way of authentication (beside supplying namespace,
-     * sharedAccessKey, sharedAccessName or connection string) is through
-     * Azure-AD authentication using an implementation instance of
+     * Provide custom authentication credentials using an implementation of
      * TokenCredential. The option is a
      * com.azure.core.credential.TokenCredential type.
      */
