@@ -19,6 +19,8 @@ package org.apache.camel.component.platform.http.springboot;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 import org.apache.camel.Exchange;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.Processor;
@@ -31,8 +33,7 @@ import org.apache.camel.http.common.HttpHelper;
 import org.apache.camel.support.DefaultConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements PlatformHttpConsumer, Suspendable, SuspendableService {
 
@@ -56,21 +57,24 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
     /**
      * This method is invoked by Spring Boot when invoking Camel via platform-http
      */
-    public void service(HttpServletRequest request, HttpServletResponse response) {
-        LOG.trace("Service: {}", request);
-        try {
-            handleService(request, response);
-        } catch (Exception e) {
-            // do not leak exception back to caller
-            LOG.warn("Error handling request due to: {}", e.getMessage(), e);
+    @ResponseBody
+    public CompletableFuture<Void> service(HttpServletRequest request, HttpServletResponse response) {
+        return CompletableFuture.runAsync(() -> {
+            LOG.trace("Service: {}", request);
             try {
-                if (!response.isCommitted()) {
-                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                handleService(request, response);
+            } catch (Exception e) {
+                // do not leak exception back to caller
+                LOG.warn("Error handling request due to: {}", e.getMessage(), e);
+                try {
+                    if (!response.isCommitted()) {
+                        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    }
+                } catch (Exception e1) {
+                    // ignore
                 }
-            } catch (Exception e1) {
-                // ignore
             }
-        }
+        });
     }
 
     protected void handleService(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -92,8 +96,6 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         if (contextPath != null && httpPath.startsWith(contextPath)) {
             exchange.getIn().setHeader(Exchange.HTTP_PATH, httpPath.substring(contextPath.length()));
         }
-
-        // TODO: async with CompletionStage returned to spring boot?
 
         // we want to handle the UoW
         try {
