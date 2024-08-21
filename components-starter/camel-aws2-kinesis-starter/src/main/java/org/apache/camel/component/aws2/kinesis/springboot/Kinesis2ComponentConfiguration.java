@@ -97,10 +97,11 @@ public class Kinesis2ComponentConfiguration
     private String sequenceNumber;
     /**
      * Define what will be the behavior in case of shard closed. Possible value
-     * are ignore, silent and fail. In case of ignore a message will be logged
-     * and the consumer will restart from the beginning,in case of silent there
-     * will be no logging and the consumer will start from the beginning,in case
-     * of fail a ReachedClosedStateException will be raised
+     * are ignore, silent and fail. In case of ignore a WARN message will be
+     * logged once and the consumer will not process new messages until
+     * restarted,in case of silent there will be no logging and the consumer
+     * will not process new messages until restarted,in case of fail a
+     * ReachedClosedStateException will be thrown
      */
     private Kinesis2ShardClosedStrategyEnum shardClosed = Kinesis2ShardClosedStrategyEnum.ignore;
     /**
