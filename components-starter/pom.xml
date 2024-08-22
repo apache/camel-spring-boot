@@ -413,6 +413,7 @@
     <module>camel-stub-starter</module>
     <module>camel-swift-starter</module>
     <module>camel-syslog-starter</module>
+    <module>camel-tahu-starter</module>
     <module>camel-tarfile-starter</module>
     <module>camel-telegram-starter</module>
     <module>camel-thrift-starter</module>

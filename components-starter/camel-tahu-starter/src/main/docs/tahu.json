@@ -1,0 +1,207 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.tahu-edge",
+      "type": "org.apache.camel.component.tahu.springboot.TahuEdgeComponentConfiguration",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuEdgeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.tahu-edge.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuEdgeComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.component.tahu-host",
+      "type": "org.apache.camel.component.tahu.springboot.TahuHostComponentConfiguration",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuHostComponentConfiguration"
+    },
+    {
+      "name": "camel.component.tahu-host.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuHostComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.tahu-edge.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuEdgeComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.tahu-edge.check-client-id-length",
+      "type": "java.lang.Boolean",
+      "description": "MQTT client ID length check enabled",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuEdgeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.tahu-edge.client-id",
+      "type": "java.lang.String",
+      "description": "MQTT client ID to use for all server definitions, rather than specifying the same one for each. Note that if neither the 'clientId' parameter nor an 'MqttClientId' are defined for an MQTT Server, a random MQTT Client ID will be generated automatically, prefaced with 'Camel'",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuEdgeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.tahu-edge.configuration",
+      "type": "org.apache.camel.component.tahu.TahuConfiguration",
+      "description": "To use a shared Tahu configuration. The option is a org.apache.camel.component.tahu.TahuConfiguration type.",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuEdgeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.tahu-edge.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.tahu-edge.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the tahu-edge component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuEdgeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.tahu-edge.keep-alive-timeout",
+      "type": "java.lang.Integer",
+      "description": "MQTT connection keep alive timeout, in seconds",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuEdgeComponentConfiguration",
+      "defaultValue": 30
+    },
+    {
+      "name": "camel.component.tahu-edge.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuEdgeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.tahu-edge.password",
+      "type": "java.lang.String",
+      "description": "Password for MQTT server authentication",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuEdgeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.tahu-edge.rebirth-debounce-delay",
+      "type": "java.lang.Long",
+      "description": "Delay before recurring node rebirth messages will be sent",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuEdgeComponentConfiguration",
+      "defaultValue": 5000
+    },
+    {
+      "name": "camel.component.tahu-edge.servers",
+      "type": "java.lang.String",
+      "description": "MQTT server definitions, given with the following syntax in a comma-separated list: MqttServerName:(MqttClientId:)(tcp\/ssl):\/\/hostname(:port),...",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuEdgeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.tahu-edge.ssl-context-parameters",
+      "type": "org.apache.camel.support.jsse.SSLContextParameters",
+      "description": "SSL configuration for MQTT server connections. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuEdgeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.tahu-edge.use-global-ssl-context-parameters",
+      "type": "java.lang.Boolean",
+      "description": "Enable\/disable global SSL context parameters use",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuEdgeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.tahu-edge.username",
+      "type": "java.lang.String",
+      "description": "Username for MQTT server authentication",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuEdgeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.tahu-host.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuHostComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.tahu-host.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuHostComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.tahu-host.check-client-id-length",
+      "type": "java.lang.Boolean",
+      "description": "MQTT client ID length check enabled",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuHostComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.tahu-host.client-id",
+      "type": "java.lang.String",
+      "description": "MQTT client ID to use for all server definitions, rather than specifying the same one for each. Note that if neither the 'clientId' parameter nor an 'MqttClientId' are defined for an MQTT Server, a random MQTT Client ID will be generated automatically, prefaced with 'Camel'",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuHostComponentConfiguration"
+    },
+    {
+      "name": "camel.component.tahu-host.configuration",
+      "type": "org.apache.camel.component.tahu.TahuConfiguration",
+      "description": "To use a shared Tahu configuration. The option is a org.apache.camel.component.tahu.TahuConfiguration type.",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuHostComponentConfiguration"
+    },
+    {
+      "name": "camel.component.tahu-host.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.tahu-host.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the tahu-host component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuHostComponentConfiguration"
+    },
+    {
+      "name": "camel.component.tahu-host.keep-alive-timeout",
+      "type": "java.lang.Integer",
+      "description": "MQTT connection keep alive timeout, in seconds",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuHostComponentConfiguration",
+      "defaultValue": 30
+    },
+    {
+      "name": "camel.component.tahu-host.password",
+      "type": "java.lang.String",
+      "description": "Password for MQTT server authentication",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuHostComponentConfiguration"
+    },
+    {
+      "name": "camel.component.tahu-host.rebirth-debounce-delay",
+      "type": "java.lang.Long",
+      "description": "Delay before recurring node rebirth messages will be sent",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuHostComponentConfiguration",
+      "defaultValue": 5000
+    },
+    {
+      "name": "camel.component.tahu-host.servers",
+      "type": "java.lang.String",
+      "description": "MQTT server definitions, given with the following syntax in a comma-separated list: MqttServerName:(MqttClientId:)(tcp\/ssl):\/\/hostname(:port),...",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuHostComponentConfiguration"
+    },
+    {
+      "name": "camel.component.tahu-host.ssl-context-parameters",
+      "type": "org.apache.camel.support.jsse.SSLContextParameters",
+      "description": "SSL configuration for MQTT server connections. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuHostComponentConfiguration"
+    },
+    {
+      "name": "camel.component.tahu-host.use-global-ssl-context-parameters",
+      "type": "java.lang.Boolean",
+      "description": "Enable\/disable global SSL context parameters use",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuHostComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.tahu-host.username",
+      "type": "java.lang.String",
+      "description": "Username for MQTT server authentication",
+      "sourceType": "org.apache.camel.component.tahu.springboot.TahuHostComponentConfiguration"
+    }
+  ],
+  "hints": []
+}
