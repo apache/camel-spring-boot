@@ -42,7 +42,10 @@ public class CamelSSLAutoConfigurationTest {
                         "camel.ssl.config.key-managers.key-store.password=changeit",
                         "camel.ssl.config.key-managers.key-store.type=PKCS12",
                         "camel.ssl.config.trust-managers.key-store.password=changeit",
-                        "camel.ssl.config.trust-managers.key-store.type=jks")
+                        "camel.ssl.config.trust-managers.key-store.type=jks",
+                        "camel.ssl.config.cipher-suites-filter.include[0]=abc",
+                        "camel.ssl.config.cipher-suites-filter.include[1]=def",
+                        "camel.ssl.config.cipher-suites-filter.exclude[0]=xxx")
                 .run(context -> {
                     GlobalSSLContextParametersSupplier supplier = context
                             .getBean(GlobalSSLContextParametersSupplier.class);
@@ -62,6 +65,12 @@ public class CamelSSLAutoConfigurationTest {
                     assertNotNull(supplier.get().getTrustManagers().getKeyStore());
                     assertEquals("changeit", supplier.get().getTrustManagers().getKeyStore().getPassword());
                     assertEquals("jks", supplier.get().getTrustManagers().getKeyStore().getType());
+
+                    assertEquals(2, supplier.get().getCipherSuitesFilter().getInclude().size());
+                    assertEquals("abc", supplier.get().getCipherSuitesFilter().getInclude().get(0));
+                    assertEquals("def", supplier.get().getCipherSuitesFilter().getInclude().get(1));
+                    assertEquals(1, supplier.get().getCipherSuitesFilter().getExclude().size());
+                    assertEquals("xxx", supplier.get().getCipherSuitesFilter().getExclude().get(0));
 
                     // since no camel.ssl properties provided
                     Assertions.assertThrows(NoSuchBeanDefinitionException.class,
