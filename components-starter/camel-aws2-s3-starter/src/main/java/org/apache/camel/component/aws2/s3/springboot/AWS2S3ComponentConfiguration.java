@@ -65,6 +65,12 @@ public class AWS2S3ComponentConfiguration
      */
     private Boolean forcePathStyle = false;
     /**
+     * If it is true, the S3 Object Body will be ignored completely if it is set
+     * to false, the S3 Object will be put in the body. Setting this to true
+     * will override any behavior defined by includeBody option.
+     */
+    private Boolean ignoreBody = false;
+    /**
      * Set the need for overriding the endpoint. This option needs to be used in
      * combination with the uriEndpointOverride option
      */
@@ -155,12 +161,6 @@ public class AWS2S3ComponentConfiguration
      * To get the object from the bucket with the given file name
      */
     private String fileName;
-    /**
-     * If it is true, the S3 Object Body will be ignored completely if it is set
-     * to false, the S3 Object will be put in the body. Setting this to true
-     * will override any behavior defined by includeBody option.
-     */
-    private Boolean ignoreBody = false;
     /**
      * If it is true, the S3Object exchange will be consumed and put into the
      * body and closed. If false, the S3Object stream will be put raw into the
@@ -396,6 +396,14 @@ public class AWS2S3ComponentConfiguration
         this.forcePathStyle = forcePathStyle;
     }
 
+    public Boolean getIgnoreBody() {
+        return ignoreBody;
+    }
+
+    public void setIgnoreBody(Boolean ignoreBody) {
+        this.ignoreBody = ignoreBody;
+    }
+
     public Boolean getOverrideEndpoint() {
         return overrideEndpoint;
     }
@@ -522,14 +530,6 @@ public class AWS2S3ComponentConfiguration
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
-    }
-
-    public Boolean getIgnoreBody() {
-        return ignoreBody;
-    }
-
-    public void setIgnoreBody(Boolean ignoreBody) {
-        this.ignoreBody = ignoreBody;
     }
 
     public Boolean getIncludeBody() {
