@@ -108,7 +108,7 @@
         <compiler.fork>false</compiler.fork>
 
         <!-- Spring-Boot target version -->
-        <spring-boot-version>3.2.8</spring-boot-version>
+        <spring-boot-version>3.2.9</spring-boot-version>
 
         <!-- Camel target version -->
         <camel-version>4.4.4-SNAPSHOT</camel-version>
