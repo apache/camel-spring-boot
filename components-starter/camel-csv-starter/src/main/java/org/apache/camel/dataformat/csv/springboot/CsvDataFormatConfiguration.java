@@ -97,7 +97,7 @@ public class CsvDataFormatConfiguration
      */
     private Boolean quoteDisabled = false;
     /**
-     * Sets the quote which by default is
+     * Sets the quote to use which by default is double-quote character
      */
     private String quote;
     /**
