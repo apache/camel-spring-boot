@@ -63,7 +63,9 @@ public class CamelDebugAutoConfiguration {
         debugger.setIncludeExchangeVariables(config.isIncludeExchangeVariables());
         debugger.setIncludeException(config.isIncludeException());
         debugger.setLoggingLevel(config.getLoggingLevel().name());
-        debugger.setSuspendMode(config.isWaitForAttach());
+        if (config.isWaitForAttach()) {
+            debugger.setSuspendMode(config.isWaitForAttach());
+        }
         debugger.setFallbackTimeout(config.getFallbackTimeout());
 
         // enable jmx connector if port is set
