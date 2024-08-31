@@ -245,12 +245,12 @@
       <dependency>
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy</artifactId>
-        <version>1.15.0</version>
+        <version>1.15.1</version>
       </dependency>
       <dependency>
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy-agent</artifactId>
-        <version>1.15.0</version>
+        <version>1.15.1</version>
       </dependency>
       <dependency>
         <groupId>org.apache.avro</groupId>
@@ -4392,7 +4392,7 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>3.16.0</version>
+        <version>3.17.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.plugin-tools</groupId>
