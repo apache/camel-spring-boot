@@ -51,6 +51,20 @@ public class LangChain4jChatComponentConfiguration
      */
     private LangChain4jChatConfiguration configuration;
     /**
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions (if possible) occurred while the Camel consumer
+     * is trying to pickup incoming messages, or the likes, will now be
+     * processed as a message and handled by the routing Error Handler.
+     * Important: This is only possible if the 3rd party component allows Camel
+     * to be alerted if an exception was thrown. Some components handle this
+     * internally only, and therefore bridgeErrorHandler is not possible. In
+     * other situations we may improve the Camel component to hook into the 3rd
+     * party component and make this possible for future releases. By default
+     * the consumer will use the org.apache.camel.spi.ExceptionHandler to deal
+     * with exceptions, that will be logged at WARN or ERROR level and ignored.
+     */
+    private Boolean bridgeErrorHandler = false;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -90,6 +104,14 @@ public class LangChain4jChatComponentConfiguration
 
     public void setConfiguration(LangChain4jChatConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
     }
 
     public Boolean getLazyStartProducer() {
