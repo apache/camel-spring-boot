@@ -157,6 +157,11 @@
       "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
     },
     {
+      "name": "camel.vault.kubernetes",
+      "type": "org.apache.camel.spring.boot.vault.KubernetesVaultConfigurationProperties",
+      "sourceType": "org.apache.camel.spring.boot.vault.KubernetesVaultConfigurationProperties"
+    },
+    {
       "name": "management.endpoint.camel",
       "type": "org.apache.camel.spring.boot.actuate.console.CamelDevConsoleEndpoint",
       "sourceType": "org.apache.camel.spring.boot.actuate.console.CamelDevConsoleEndpoint"
@@ -1840,6 +1845,19 @@
       "type": "java.lang.String",
       "description": "The Hashicorp Vault Token for accessing the service",
       "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.kubernetes.refresh-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Define if we want to refresh the secrets on update",
+      "sourceType": "org.apache.camel.spring.boot.vault.KubernetesVaultConfigurationProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.vault.kubernetes.secrets",
+      "type": "java.lang.String",
+      "description": "Define the secrets to look at",
+      "sourceType": "org.apache.camel.spring.boot.vault.KubernetesVaultConfigurationProperties"
     },
     {
       "name": "management.endpoint.camel.cache.time-to-live",
