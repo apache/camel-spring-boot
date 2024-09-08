@@ -36,6 +36,7 @@
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-solr</artifactId>
+      <version>${camel-version}</version>
       <!--START OF GENERATED CODE-->
       <exclusions>
         <exclusion>
