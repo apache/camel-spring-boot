@@ -1299,11 +1299,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-kotlin-dsl-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-kubernetes-cluster-service-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -3377,16 +3372,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-knative-http</artifactId>
-        <version>4.9.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-kotlin-api</artifactId>
-        <version>4.9.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-kotlin-dsl</artifactId>
         <version>4.9.0-SNAPSHOT</version>
       </dependency>
       <dependency>
