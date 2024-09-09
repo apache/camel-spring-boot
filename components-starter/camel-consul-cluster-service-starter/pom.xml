@@ -36,7 +36,6 @@
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
       <artifactId>camel-consul-starter</artifactId>
-      <version>${camel-version}</version>
     </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
