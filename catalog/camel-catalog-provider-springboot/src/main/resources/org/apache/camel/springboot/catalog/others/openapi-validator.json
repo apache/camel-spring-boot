@@ -7,7 +7,7 @@
     "deprecated": false,
     "firstVersion": "4.7.0",
     "label": "rest,api",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-openapi-validator-starter",
     "version": "4.9.0-SNAPSHOT"
