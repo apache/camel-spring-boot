@@ -123,13 +123,14 @@
         <jakarta-jaxb-version>4.0.0</jakarta-jaxb-version>
         <jaxb-version>2.3.0</jaxb-version>
         <maven-compiler-plugin-version>3.11.0</maven-compiler-plugin-version>
-        <maven-javadoc-plugin-version>3.4.1</maven-javadoc-plugin-version>
+        <maven.compiler.release>${jdk.version}</maven.compiler.release>
+        <maven-javadoc-plugin-version>3.10.0</maven-javadoc-plugin-version>
         <maven-surefire-plugin-version>3.1.2</maven-surefire-plugin-version>
         <mycila-license-version>3.0</mycila-license-version>
         <springdoc-version>2.2.0</springdoc-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
         <swagger-parser-v3-version>2.1.10</swagger-parser-v3-version>
-	<cyclonedx-maven-plugin-version>2.8.1</cyclonedx-maven-plugin-version>
+	    <cyclonedx-maven-plugin-version>2.8.1</cyclonedx-maven-plugin-version>
     </properties>
 
 
@@ -178,13 +179,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
-                    <attach>true</attach>
-                    <source>${jdk.version}</source>
-                    <quiet>true</quiet>
-                    <bottom>Apache Camel</bottom>
-                    <detectOfflineLinks>false</detectOfflineLinks>
-                    <javadocVersion>1.8.0</javadocVersion>
-                    <encoding>UTF-8</encoding>
+                    <source>17</source>
+                    <additionalOptions>${javadoc.opts}</additionalOptions>
+                    <!-- disable Javadoc linting for buildung the release with Java 11 -->
+                    <doclint>none</doclint>
                 </configuration>
             </plugin>
             <plugin>
@@ -688,7 +686,8 @@
                                     <goal>jar</goal>
                                 </goals>
                                 <configuration>
-                                    <additionalOptions>${javadoc.opts}</additionalOptions>
+                                    <source>17</source>
+                                    <doclint>none</doclint>
                                 </configuration>
                             </execution>
                         </executions>
