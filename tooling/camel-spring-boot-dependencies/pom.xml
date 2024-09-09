@@ -1299,11 +1299,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-kotlin-dsl-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-kubernetes-cluster-service-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
