@@ -526,6 +526,11 @@ public class JmsComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * Maximum number of messages to keep in memory available for browsing. Use
+     * 0 for unlimited.
+     */
+    private Integer browseLimit = 100;
+    /**
      * To use a shared JMS configuration. The option is a
      * org.apache.camel.component.jms.JmsConfiguration type.
      */
@@ -1314,6 +1319,14 @@ public class JmsComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Integer getBrowseLimit() {
+        return browseLimit;
+    }
+
+    public void setBrowseLimit(Integer browseLimit) {
+        this.browseLimit = browseLimit;
     }
 
     public JmsConfiguration getConfiguration() {

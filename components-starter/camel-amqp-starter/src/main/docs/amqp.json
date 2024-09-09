@@ -124,6 +124,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.amqp.browse-limit",
+      "type": "java.lang.Integer",
+      "description": "Maximum number of messages to keep in memory available for browsing. Use 0 for unlimited.",
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
+      "defaultValue": 100
+    },
+    {
       "name": "camel.component.amqp.cache-level",
       "type": "java.lang.Integer",
       "description": "Sets the cache level by ID for the underlying JMS resources. See cacheLevelName option for more details.",
