@@ -1030,7 +1030,7 @@
     {
       "name": "camel.main.source-location-enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether to capture precise source location:line-number for all EIPs in Camel routes. Enabling this will impact parsing Java based routes (also Groovy, Kotlin, etc.) on startup as this uses JDK StackTraceElement to calculate the location from the Camel route, which comes with a performance cost. This only impact startup, not the performance of the routes at runtime.",
+      "description": "Whether to capture precise source location:line-number for all EIPs in Camel routes. Enabling this will impact parsing Java based routes (also Groovy etc.) on startup as this uses JDK StackTraceElement to calculate the location from the Camel route, which comes with a performance cost. This only impact startup, not the performance of the routes at runtime.",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
       "defaultValue": false
     },
@@ -2774,7 +2774,7 @@
     {
       "name": "camel.springboot.source-location-enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether to capture precise source location:line-number for all EIPs in Camel routes. Enabling this will impact parsing Java based routes (also Groovy, Kotlin, etc.) on startup as this uses JDK StackTraceElement to calculate the location from the Camel route, which comes with a performance cost. This only impact startup, not the performance of the routes at runtime.",
+      "description": "Whether to capture precise source location:line-number for all EIPs in Camel routes. Enabling this will impact parsing Java based routes (also Groovy etc.) on startup as this uses JDK StackTraceElement to calculate the location from the Camel route, which comes with a performance cost. This only impact startup, not the performance of the routes at runtime.",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Springboot",
       "defaultValue": false,
       "deprecated": true,
