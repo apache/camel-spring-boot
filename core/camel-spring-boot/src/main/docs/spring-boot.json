@@ -867,6 +867,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.main.log-language",
+      "type": "java.lang.String",
+      "description": "To configure the language to use for Log EIP. By default, the simple language is used. However, Camel also supports other languages such as groovy.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main"
+    },
+    {
       "name": "camel.main.log-mask",
       "type": "java.lang.Boolean",
       "description": "Sets whether log mask is enabled or not. Default is false.",
@@ -2487,6 +2493,17 @@
       "deprecated": true,
       "deprecation": {
         "replacement": "camel.main.log-exhausted-message-body",
+        "since": "4.5.0"
+      }
+    },
+    {
+      "name": "camel.springboot.log-language",
+      "type": "java.lang.String",
+      "description": "To configure the language to use for Log EIP. By default, the simple language is used. However, Camel also supports other languages such as groovy.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Springboot",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "camel.main.log-language",
         "since": "4.5.0"
       }
     },
