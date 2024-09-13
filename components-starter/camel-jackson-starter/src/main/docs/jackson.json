@@ -151,6 +151,13 @@
       "description": "To unmarshal to a List of Map or a List of Pojo.",
       "sourceType": "org.apache.camel.component.jackson.springboot.JacksonDataFormatConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.jackson.use-writer",
+      "type": "java.lang.Boolean",
+      "description": "Force using generator that outputs JSON content using a java.io.Writer which handles character encoding. This should be preferred when using 2-byte\/4-byte characters such as Japanese.",
+      "sourceType": "org.apache.camel.component.jackson.springboot.JacksonDataFormatConfiguration",
+      "defaultValue": false
     }
   ],
   "hints": []

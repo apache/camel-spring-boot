@@ -53,6 +53,12 @@ public class JacksonDataFormatConfiguration
      */
     private Boolean prettyPrint = false;
     /**
+     * Force using generator that outputs JSON content using a java.io.Writer
+     * which handles character encoding. This should be preferred when using
+     * 2-byte/4-byte characters such as Japanese.
+     */
+    private Boolean useWriter = false;
+    /**
      * Class name of the java type to use when unmarshalling
      */
     private String unmarshalType;
@@ -179,6 +185,14 @@ public class JacksonDataFormatConfiguration
 
     public void setPrettyPrint(Boolean prettyPrint) {
         this.prettyPrint = prettyPrint;
+    }
+
+    public Boolean getUseWriter() {
+        return useWriter;
+    }
+
+    public void setUseWriter(Boolean useWriter) {
+        this.useWriter = useWriter;
     }
 
     public String getUnmarshalType() {
