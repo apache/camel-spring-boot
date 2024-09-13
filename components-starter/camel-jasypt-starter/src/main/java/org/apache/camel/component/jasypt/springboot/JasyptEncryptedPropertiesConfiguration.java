@@ -29,6 +29,14 @@ public class JasyptEncryptedPropertiesConfiguration {
     private boolean enabled;
 
     /**
+     * Enable the early properties decryption during Spring Start Up.
+     * Enabling this feature, encrypted properties can be decrypted before the Spring Boot AutoConfiguration
+     * kicks in, for example, server.port=ENC(oBpQDDUvFY0c4WNAG0o4LIS5bWqmlxYlUUDTW2iXJIAZFYvM+3vOredaMcVfL4xW)
+     * will be decrypted to 8082, and the application will start using that port.
+     */
+    private boolean earlyDecryptionEnabled;
+
+    /**
      * The algorithm to be used for decryption. Default: PBEWithMD5AndDES
      */
     private String algorithm = "PBEWithMD5AndDES";
@@ -71,6 +79,14 @@ public class JasyptEncryptedPropertiesConfiguration {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public boolean isEarlyDecryptionEnabled() {
+        return earlyDecryptionEnabled;
+    }
+
+    public void setEarlyDecryptionEnabled(boolean earlyDecryptionEnabled) {
+        this.earlyDecryptionEnabled = earlyDecryptionEnabled;
     }
 
     public String getAlgorithm() {

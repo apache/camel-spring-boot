@@ -15,6 +15,13 @@
       "defaultValue": "PBEWithMD5AndDES"
     },
     {
+      "name": "camel.component.jasypt.early-decryption-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable the early properties decryption during Spring Start Up",
+      "sourceType": "org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.jasypt.enabled",
       "type": "java.lang.Boolean",
       "description": "Enable the component",
