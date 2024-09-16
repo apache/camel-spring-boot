@@ -17,7 +17,7 @@
     {
       "name": "camel.component.jasypt.early-decryption-enabled",
       "type": "java.lang.Boolean",
-      "description": "Enable the early properties decryption during Spring Start Up",
+      "description": "Enable the early properties decryption during Spring Start Up. Enabling this feature, encrypted properties can be decrypted before the Spring Boot AutoConfiguration kicks in, for example, server.port=ENC(oBpQDDUvFY0c4WNAG0o4LIS5bWqmlxYlUUDTW2iXJIAZFYvM+3vOredaMcVfL4xW) will be decrypted to 8082, and the application will start using that port.",
       "sourceType": "org.apache.camel.component.jasypt.springboot.JasyptEncryptedPropertiesConfiguration",
       "defaultValue": false
     },
