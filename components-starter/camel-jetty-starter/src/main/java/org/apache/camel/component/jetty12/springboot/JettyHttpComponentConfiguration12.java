@@ -24,6 +24,7 @@ import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.eclipse.jetty.jmx.MBeanContainer;
 import org.eclipse.jetty.server.Connector;
+import org.eclipse.jetty.server.RequestLog;
 import org.eclipse.jetty.server.handler.ErrorHandler;
 import org.eclipse.jetty.util.thread.ThreadPool;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -184,6 +185,11 @@ public class JettyHttpComponentConfiguration12
      * org.eclipse.jetty.jmx.MBeanContainer type.
      */
     private MBeanContainer mbContainer;
+    /**
+     * To configure Jetty request logging. The option is a
+     * org.eclipse.jetty.server.RequestLog type.
+     */
+    private RequestLog requestLog;
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
@@ -433,6 +439,14 @@ public class JettyHttpComponentConfiguration12
 
     public void setMbContainer(MBeanContainer mbContainer) {
         this.mbContainer = mbContainer;
+    }
+
+    public RequestLog getRequestLog() {
+        return requestLog;
+    }
+
+    public void setRequestLog(RequestLog requestLog) {
+        this.requestLog = requestLog;
     }
 
     public HeaderFilterStrategy getHeaderFilterStrategy() {

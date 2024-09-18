@@ -166,6 +166,12 @@
       "sourceType": "org.apache.camel.component.jetty12.springboot.JettyHttpComponentConfiguration12"
     },
     {
+      "name": "camel.component.jetty.request-log",
+      "type": "org.eclipse.jetty.server.RequestLog",
+      "description": "To configure Jetty request logging. The option is a org.eclipse.jetty.server.RequestLog type.",
+      "sourceType": "org.apache.camel.component.jetty12.springboot.JettyHttpComponentConfiguration12"
+    },
+    {
       "name": "camel.component.jetty.response-buffer-size",
       "type": "java.lang.Integer",
       "description": "Allows to configure a custom value of the response buffer size on the Jetty connectors.",
