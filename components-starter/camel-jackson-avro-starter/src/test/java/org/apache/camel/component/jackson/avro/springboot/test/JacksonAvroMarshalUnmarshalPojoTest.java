@@ -18,6 +18,7 @@ package org.apache.camel.component.jackson.avro.springboot.test;
 
 import com.fasterxml.jackson.dataformat.avro.AvroSchema;
 
+import org.apache.avro.NameValidator;
 import org.apache.avro.Schema;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -57,7 +58,7 @@ public class JacksonAvroMarshalUnmarshalPojoTest {
     private SchemaResolver getSchemaResolver() {
         String schemaJson = "{\n" + "\"type\": \"record\",\n" + "\"name\": \"Pojo\",\n" + "\"fields\": [\n"
                 + " {\"name\": \"text\", \"type\": \"string\"}\n" + "]}";
-        Schema raw = new Schema.Parser().setValidate(true).parse(schemaJson);
+        Schema raw = new Schema.Parser(NameValidator.STRICT_VALIDATOR).parse(schemaJson);
         AvroSchema schema = new AvroSchema(raw);
         SchemaResolver resolver = ex -> schema;
 

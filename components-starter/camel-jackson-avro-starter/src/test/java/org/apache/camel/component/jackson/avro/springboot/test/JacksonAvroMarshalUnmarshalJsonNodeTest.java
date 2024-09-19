@@ -22,6 +22,7 @@ import java.util.List;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.avro.AvroSchema;
 
+import org.apache.avro.NameValidator;
 import org.apache.avro.Schema;
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
@@ -70,10 +71,10 @@ public class JacksonAvroMarshalUnmarshalJsonNodeTest {
                 + "    \"type\":\"record\",\n" + "    \"fields\":[\n"
                 + "      {\"name\":\"text\", \"type\":\"string\"}\n" + "    ]\n" + "  }\n" + "}";
 
-        Schema raw = new Schema.Parser().setValidate(true).parse(schemaJson);
+        Schema raw = new Schema.Parser(NameValidator.STRICT_VALIDATOR).parse(schemaJson);
         AvroSchema schema = new AvroSchema(raw);
 
-        Schema rawList = new Schema.Parser().setValidate(true).parse(listSchemaJson);
+        Schema rawList = new Schema.Parser(NameValidator.STRICT_VALIDATOR).parse(listSchemaJson);
         AvroSchema schemaList = new AvroSchema(rawList);
 
         SchemaResolver resolver = ex -> {
