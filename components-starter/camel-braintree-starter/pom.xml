@@ -28,6 +28,18 @@
   <packaging>jar</packaging>
   <name>Camel SB Starters :: Braintree</name>
   <description>Spring-Boot Starter for Camel Braintree support</description>
+  <properties>
+    <camel-braintree-osgi-version>4.2.0</camel-braintree-osgi-version>
+  </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.osgi</groupId>
+        <artifactId>org.osgi.core</artifactId>
+        <version>${camel-braintree-osgi-version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
