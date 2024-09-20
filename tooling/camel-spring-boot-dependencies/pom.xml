@@ -43,7 +43,7 @@
       <dependency>
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-java-util</artifactId>
-        <version>3.25.3</version>
+        <version>3.25.5</version>
         <exclusions>
           <exclusion>
             <groupId>org.checkerframework</groupId>
