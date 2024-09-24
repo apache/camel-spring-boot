@@ -279,6 +279,7 @@
     <module>camel-jira-starter</module>
     <module>camel-jms-starter</module>
     <module>camel-jmx-starter</module>
+    <module>camel-jolokia-starter</module>
     <module>camel-jolt-starter</module>
     <module>camel-jooq-starter</module>
     <module>camel-joor-starter</module>
