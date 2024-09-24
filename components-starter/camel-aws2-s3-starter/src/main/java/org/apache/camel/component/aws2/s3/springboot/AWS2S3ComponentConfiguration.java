@@ -271,6 +271,11 @@ public class AWS2S3ComponentConfiguration
      */
     private String awsKMSKeyId;
     /**
+     * Uploads the object only if the object key name does not already exist in
+     * the bucket specified.
+     */
+    private Boolean conditionalWritesEnabled = false;
+    /**
      * Define if KMS must be used or not
      */
     private Boolean useAwsKMS = false;
@@ -682,6 +687,14 @@ public class AWS2S3ComponentConfiguration
 
     public void setAwsKMSKeyId(String awsKMSKeyId) {
         this.awsKMSKeyId = awsKMSKeyId;
+    }
+
+    public Boolean getConditionalWritesEnabled() {
+        return conditionalWritesEnabled;
+    }
+
+    public void setConditionalWritesEnabled(Boolean conditionalWritesEnabled) {
+        this.conditionalWritesEnabled = conditionalWritesEnabled;
     }
 
     public Boolean getUseAwsKMS() {

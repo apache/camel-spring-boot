@@ -87,6 +87,13 @@
       "defaultValue": 1000000
     },
     {
+      "name": "camel.component.aws2-s3.conditional-writes-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Uploads the object only if the object key name does not already exist in the bucket specified.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.aws2-s3.configuration",
       "type": "org.apache.camel.component.aws2.s3.AWS2S3Configuration",
       "description": "The component configuration. The option is a org.apache.camel.component.aws2.s3.AWS2S3Configuration type.",
