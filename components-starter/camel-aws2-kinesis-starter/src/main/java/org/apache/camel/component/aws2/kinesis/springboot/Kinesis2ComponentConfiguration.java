@@ -154,6 +154,11 @@ public class Kinesis2ComponentConfiguration
      */
     private DynamoDbAsyncClient dynamoDbAsyncClient;
     /**
+     * If we want to use a KCL Consumer and disable the CloudWatch Metrics
+     * Export
+     */
+    private Boolean kclDisableCloudwatchMetricsExport = false;
+    /**
      * If we want to a KCL Consumer set it to true
      */
     private Boolean useKclConsumers = false;
@@ -363,6 +368,15 @@ public class Kinesis2ComponentConfiguration
 
     public void setDynamoDbAsyncClient(DynamoDbAsyncClient dynamoDbAsyncClient) {
         this.dynamoDbAsyncClient = dynamoDbAsyncClient;
+    }
+
+    public Boolean getKclDisableCloudwatchMetricsExport() {
+        return kclDisableCloudwatchMetricsExport;
+    }
+
+    public void setKclDisableCloudwatchMetricsExport(
+            Boolean kclDisableCloudwatchMetricsExport) {
+        this.kclDisableCloudwatchMetricsExport = kclDisableCloudwatchMetricsExport;
     }
 
     public Boolean getUseKclConsumers() {
