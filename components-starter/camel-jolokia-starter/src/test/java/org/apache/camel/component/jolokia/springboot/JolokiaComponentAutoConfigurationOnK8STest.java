@@ -55,7 +55,8 @@ public class JolokiaComponentAutoConfigurationOnK8STest extends JolokiaComponent
 	void sslConfigurationTest() {
 		Assertions.assertThat(agent.getServerConfig().getCaCert()).as("check caCert ssl configuration")
 						.isNotBlank()
-						.startsWith(String.format("%s%scsb", System.getProperty("java.io.tmpdir"), File.separator))
+						.startsWith(String.format("%s%scsb", System.getProperty("java.io.tmpdir"),
+								System.getProperty("java.io.tmpdir").endsWith(File.separator) ? "" : File.separator))
 						.endsWith(".ca");
 		Assertions.assertThat(agent.getServerConfig().getProtocol()).as("check ssl protocol configuration")
 				.isEqualTo("https");
