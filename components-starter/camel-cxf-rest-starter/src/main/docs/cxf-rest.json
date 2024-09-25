@@ -52,6 +52,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.cxfrs.synchronous",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether synchronous processing should be strictly used",
+      "sourceType": "org.apache.camel.component.cxf.jaxrs.springboot.CxfRsComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.cxfrs.use-global-ssl-context-parameters",
       "type": "java.lang.Boolean",
       "description": "Enable usage of global SSL context parameters.",
