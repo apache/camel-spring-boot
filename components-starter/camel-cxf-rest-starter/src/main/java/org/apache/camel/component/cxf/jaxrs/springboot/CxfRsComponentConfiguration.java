@@ -62,6 +62,10 @@ public class CxfRsComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Sets whether synchronous processing should be strictly used
+     */
+    private Boolean synchronous = false;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -95,6 +99,14 @@ public class CxfRsComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getSynchronous() {
+        return synchronous;
+    }
+
+    public void setSynchronous(Boolean synchronous) {
+        this.synchronous = synchronous;
     }
 
     public Boolean getAutowiredEnabled() {
