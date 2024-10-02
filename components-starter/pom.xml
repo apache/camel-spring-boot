@@ -165,6 +165,7 @@
     <module>camel-cbor-starter</module>
     <module>camel-chatscript-starter</module>
     <module>camel-chunk-starter</module>
+    <module>camel-clickup-starter</module>
     <module>camel-cloudevents-starter</module>
     <module>camel-cm-sms-starter</module>
     <module>camel-coap-starter</module>
