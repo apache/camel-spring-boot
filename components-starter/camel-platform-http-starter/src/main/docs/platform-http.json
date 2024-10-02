@@ -43,6 +43,13 @@
       "type": "org.apache.camel.component.platform.http.spi.PlatformHttpEngine",
       "description": "An HTTP Server engine implementation to serve the requests. The option is a org.apache.camel.component.platform.http.spi.PlatformHttpEngine type.",
       "sourceType": "org.apache.camel.component.platform.http.springboot.PlatformHttpComponentConfiguration"
+    },
+    {
+      "name": "camel.component.platform-http.handle-write-response-error",
+      "type": "java.lang.Boolean",
+      "description": "When Camel is complete processing the message, and the HTTP server is writing response. This option controls whether Camel should catch any failure during writing response and store this on the Exchange, which allows onCompletion\/UnitOfWork to regard the Exchange as failed and have access to the caused exception from the HTTP server.",
+      "sourceType": "org.apache.camel.component.platform.http.springboot.PlatformHttpComponentConfiguration",
+      "defaultValue": false
     }
   ],
   "hints": []

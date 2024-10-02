@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.platform.http.springboot;
 
+import org.apache.camel.CamelContext;
 import org.junit.jupiter.api.Test;
 
 import org.assertj.core.api.Assertions;
@@ -24,20 +25,20 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 
 abstract class PlatformHttpBase {
 
-	@Autowired
-	private TestRestTemplate restTemplate;
+    @Autowired
+    TestRestTemplate restTemplate;
 
-	@Test
-	public void testGet() {
-		Assertions.assertThat(
-						restTemplate.getForEntity("/myget", String.class).getStatusCodeValue())
-				.isEqualTo(200);
-	}
+    @Autowired
+    CamelContext camelContext;
 
-	@Test
-	public void testPost() {
-		Assertions.assertThat(
-						restTemplate.postForEntity("/mypost", "test", String.class).getBody())
-				.isEqualTo("TEST");
-	}
+    @Test
+    public void testGet() throws Exception {
+        Assertions.assertThat(restTemplate.getForEntity("/myget", String.class).getStatusCode().value()).isEqualTo(200);
+    }
+
+    @Test
+    public void testPost() throws Exception {
+        Assertions.assertThat(restTemplate.postForEntity("/mypost", "test", String.class).getBody()).isEqualTo("TEST");
+    }
+
 }
