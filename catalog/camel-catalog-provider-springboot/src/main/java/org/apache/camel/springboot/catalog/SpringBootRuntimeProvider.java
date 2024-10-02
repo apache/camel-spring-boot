@@ -21,8 +21,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-import java.util.TreeMap;
 
 import org.apache.camel.catalog.CamelCatalog;
 import org.apache.camel.catalog.RuntimeProvider;
@@ -48,7 +46,6 @@ public class SpringBootRuntimeProvider implements RuntimeProvider {
     private static final String CONSOLES_CATALOG = "org/apache/camel/springboot/catalog/dev-consoles.properties";
     private static final String OTHER_CATALOG = "org/apache/camel/springboot/catalog/others.properties";
     private static final String BEAN_CATALOG = "org/apache/camel/springboot/catalog/beans.properties";
-    private static final String CAPABILITIES_CATALOG = "org/apache/camel/springboot/catalog/capabilities.properties";
 
     private CamelCatalog camelCatalog;
 
@@ -145,22 +142,6 @@ public class SpringBootRuntimeProvider implements RuntimeProvider {
     @Override
     public List<String> findBeansNames() {
         return findNames(BEAN_CATALOG);
-    }
-
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    @Override
-    public Map<String, String> findCapabilities() {
-        final Properties properties = new Properties();
-
-        try (InputStream is = getCamelCatalog().getVersionManager().getResourceAsStream(CAPABILITIES_CATALOG)) {
-            if (is != null) {
-                properties.load(is);
-            }
-        } catch (IOException e) {
-            // ignore
-        }
-
-        return new TreeMap<>((Map<String, String>) (Map) properties);
     }
 
     private List<String> findNames(String pathToPropertyCatalogDescriptor) {
