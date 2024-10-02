@@ -52,6 +52,14 @@ public class PlatformHttpComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * When Camel is complete processing the message, and the HTTP server is
+     * writing response. This option controls whether Camel should catch any
+     * failure during writing response and store this on the Exchange, which
+     * allows onCompletion/UnitOfWork to regard the Exchange as failed and have
+     * access to the caused exception from the HTTP server.
+     */
+    private Boolean handleWriteResponseError = false;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -78,6 +86,14 @@ public class PlatformHttpComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getHandleWriteResponseError() {
+        return handleWriteResponseError;
+    }
+
+    public void setHandleWriteResponseError(Boolean handleWriteResponseError) {
+        this.handleWriteResponseError = handleWriteResponseError;
     }
 
     public Boolean getAutowiredEnabled() {

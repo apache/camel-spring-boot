@@ -45,6 +45,13 @@
       "sourceType": "org.apache.camel.component.platform.http.springboot.PlatformHttpComponentConfiguration"
     },
     {
+      "name": "camel.component.platform-http.handle-write-response-error",
+      "type": "java.lang.Boolean",
+      "description": "When Camel is complete processing the message, and the HTTP server is writing response. This option controls whether Camel should catch any failure during writing response and store this on the Exchange, which allows onCompletion\/UnitOfWork to regard the Exchange as failed and have access to the caused exception from the HTTP server.",
+      "sourceType": "org.apache.camel.component.platform.http.springboot.PlatformHttpComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.platform-http.header-filter-strategy",
       "type": "org.apache.camel.spi.HeaderFilterStrategy",
       "description": "To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type.",
