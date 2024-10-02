@@ -19,7 +19,6 @@ package org.apache.camel.component.platform.http.springboot;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 import org.apache.camel.Exchange;
 import org.apache.camel.ExchangePattern;
@@ -29,6 +28,7 @@ import org.apache.camel.SuspendableService;
 import org.apache.camel.component.platform.http.PlatformHttpEndpoint;
 import org.apache.camel.component.platform.http.spi.PlatformHttpConsumer;
 import org.apache.camel.http.common.DefaultHttpBinding;
+import org.apache.camel.http.common.HttpBinding;
 import org.apache.camel.http.common.HttpHelper;
 import org.apache.camel.support.DefaultConsumer;
 import org.slf4j.Logger;
@@ -39,7 +39,8 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
 
     private static final Logger LOG = LoggerFactory.getLogger(SpringBootPlatformHttpConsumer.class);
 
-    private final DefaultHttpBinding binding;
+    private HttpBinding binding;
+    private final boolean handleWriteResponseError;
 
     public SpringBootPlatformHttpConsumer(PlatformHttpEndpoint endpoint, Processor processor) {
         super(endpoint, processor);
@@ -48,6 +49,14 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         this.binding.setMuteException(endpoint.isMuteException());
         this.binding.setFileNameExtWhitelist(endpoint.getFileNameExtWhitelist());
         this.binding.setUseReaderForPayload(!endpoint.isUseStreaming());
+        this.handleWriteResponseError = endpoint.isHandleWriteResponseError();
+    }
+
+    /**
+     * Used for testing purposes
+     */
+    void setBinding(HttpBinding binding) {
+        this.binding = binding;
     }
 
     @Override
@@ -112,35 +121,46 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         } catch (Exception e) {
             exchange.setException(e);
         } finally {
-            afterProcess(response, exchange, true);
+            afterProcess(response, exchange);
         }
     }
 
-    protected void afterProcess(HttpServletResponse response, Exchange exchange, boolean rethrow)
-            throws IOException, ServletException {
+    protected void afterProcess(HttpServletResponse response, Exchange exchange) throws Exception {
+        boolean writeFailure = false;
         try {
             // now lets output to the res
             if (LOG.isTraceEnabled()) {
                 LOG.trace("Writing res for exchangeId: {}", exchange.getExchangeId());
             }
             binding.writeResponse(exchange, response);
-        } catch (IOException e) {
-            LOG.error("Error processing request", e);
-            if (rethrow) {
-                throw e;
-            } else {
-                exchange.setException(e);
-            }
         } catch (Exception e) {
-            LOG.error("Error processing request", e);
-            if (rethrow) {
-                throw new ServletException(e);
-            } else {
-                exchange.setException(e);
-            }
+            writeFailure = true;
+            handleFailure(exchange, e);
         } finally {
             doneUoW(exchange);
             releaseExchange(exchange, false);
+        }
+        try {
+            if (writeFailure && !response.isCommitted()) {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        } catch (Exception e) {
+            // ignore
+        }
+
+    }
+
+    private void handleFailure(Exchange exchange, Throwable failure) {
+        getExceptionHandler().handleException(
+                "Failed writing HTTP response url: " + getEndpoint().getPath() + " due to: " + failure.getMessage(),
+                failure);
+        if (handleWriteResponseError) {
+            Exception existing = exchange.getException();
+            if (existing != null) {
+                failure.addSuppressed(existing);
+            }
+            exchange.setProperty(Exchange.EXCEPTION_CAUGHT, failure);
+            exchange.setException(failure);
         }
     }
 

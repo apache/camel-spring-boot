@@ -30,20 +30,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 abstract class PlatformHttpBase {
 
     @Autowired
-    private TestRestTemplate restTemplate;
+    TestRestTemplate restTemplate;
 
     @Autowired
     CamelContext camelContext;
 
     @Test
-    public void testGet() {
+    public void testGet() throws Exception {
         waitUntilRouteIsStarted(1, getGetRouteId());
 
         Assertions.assertThat(restTemplate.getForEntity("/myget", String.class).getStatusCodeValue()).isEqualTo(200);
     }
 
     @Test
-    public void testPost() {
+    public void testPost() throws Exception {
         waitUntilRouteIsStarted(1, getPostRouteId());
 
         Assertions.assertThat(restTemplate.postForEntity("/mypost", "test", String.class).getBody()).isEqualTo("TEST");
