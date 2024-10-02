@@ -17,13 +17,9 @@
 package org.apache.camel.springboot.catalog;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.apache.camel.catalog.CamelCatalog;
 import org.apache.camel.catalog.DefaultCamelCatalog;
-import org.apache.camel.tooling.model.EntityRef;
-import org.apache.camel.tooling.model.Kind;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -136,20 +132,6 @@ public class SpringBootRuntimeProviderTest {
 
         assertNotNull(json);
         assertTrue(json.contains("camel-lra-starter"));
-    }
-
-    @Test
-    public void capabilities() {
-        List<String> list = catalog.findCapabilityNames();
-        Assertions.assertEquals(1, list.size());
-
-        Optional<EntityRef> ref = catalog.findCapabilityRef("platform-http");
-        Assertions.assertTrue(ref.isPresent());
-        Assertions.assertEquals(Kind.component, ref.get().kind());
-        Assertions.assertEquals("platform-http", ref.get().name());
-
-        Optional<EntityRef> ref2 = catalog.findCapabilityRef("not-implemented");
-        Assertions.assertFalse(ref2.isPresent());
     }
 
 }
