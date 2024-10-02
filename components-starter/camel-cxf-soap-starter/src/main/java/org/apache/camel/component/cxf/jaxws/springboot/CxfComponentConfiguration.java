@@ -62,6 +62,10 @@ public class CxfComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Sets whether synchronous processing should be strictly used
+     */
+    private Boolean synchronous = false;
+    /**
      * This option controls whether the CXF component, when running in PAYLOAD
      * mode, will DOM parse the incoming messages into DOM Elements or keep the
      * payload as a javax.xml.transform.Source object that would allow streaming
@@ -102,6 +106,14 @@ public class CxfComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getSynchronous() {
+        return synchronous;
+    }
+
+    public void setSynchronous(Boolean synchronous) {
+        this.synchronous = synchronous;
     }
 
     public Boolean getAllowStreaming() {
