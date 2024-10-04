@@ -561,6 +561,13 @@
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-postgres.snapshot-isolation-mode",
+      "type": "java.lang.String",
+      "description": "Controls which transaction isolation level is used. The default is 'serializable', which means that serializable isolation level is used. When 'repeatable_read' is specified, connector runs the initial snapshot in REPEATABLE READ isolation level. When 'read_committed' is specified, connector runs the initial snapshot in READ COMMITTED isolation level. In 'read_uncommitted' is specified, connector runs the initial snapshot in READ UNCOMMITTED isolation level.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": "serializable"
+    },
+    {
       "name": "camel.component.debezium-postgres.snapshot-lock-timeout-ms",
       "type": "java.lang.Long",
       "description": "The maximum number of millis to wait for table locks at the beginning of a snapshot. If locks cannot be acquired in this time frame, the snapshot will be aborted. Defaults to 10 seconds. The option is a long type.",

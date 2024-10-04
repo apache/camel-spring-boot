@@ -302,6 +302,36 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-ehcache-events-config",
+      "type": "java.lang.String",
+      "description": "Specifies the inner body the Ehcache tag for the events cache, but should not include the nor the attributes as these are managed by Debezium.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-ehcache-global-config",
+      "type": "java.lang.String",
+      "description": "Specifies any Ehcache global configurations such as services or persistence. This cannot include nor tags as these are managed by Debezium.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-ehcache-processedtransactions-config",
+      "type": "java.lang.String",
+      "description": "Specifies the inner body the Ehcache tag for the processed transaction cache, but should not include the nor the attributes as these are managed by Debezium.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-ehcache-schemachanges-config",
+      "type": "java.lang.String",
+      "description": "Specifies the inner body the Ehcache tag for the schema changes cache, but should not include the nor the attributes as these are managed by Debezium.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-ehcache-transactions-config",
+      "type": "java.lang.String",
+      "description": "Specifies the inner body the Ehcache tag for the transaction cache, but should not include the nor the attributes as these are managed by Debezium.",
+      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
       "name": "camel.component.debezium-oracle.log-mining-buffer-infinispan-cache-events",
       "type": "java.lang.String",
       "description": "Specifies the XML configuration for the Infinispan 'events' cache",
@@ -341,7 +371,7 @@
     {
       "name": "camel.component.debezium-oracle.log-mining-buffer-type",
       "type": "java.lang.String",
-      "description": "The buffer type controls how the connector manages buffering transaction data. memory - Uses the JVM process' heap to buffer all transaction data. infinispan_embedded - This option uses an embedded Infinispan cache to buffer transaction data and persist it to disk. infinispan_remote - This option uses a remote Infinispan cluster to buffer transaction data and persist it to disk.",
+      "description": "The buffer type controls how the connector manages buffering transaction data. memory - Uses the JVM process' heap to buffer all transaction data. infinispan_embedded - This option uses an embedded Infinispan cache to buffer transaction data and persist it to disk. infinispan_remote - This option uses a remote Infinispan cluster to buffer transaction data and persist it to disk. ehcache - Use ehcache in embedded mode to buffer transaction data and persist it to disk.",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": "memory"
     },
@@ -427,7 +457,7 @@
       "type": "java.lang.String",
       "description": "There are strategies: Online catalog with faster mining but no captured DDL. Another - with data dictionary loaded into REDO LOG files",
       "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConfiguration",
-      "defaultValue": "redo_log_catalog"
+      "defaultValue": "online_catalog"
     },
     {
       "name": "camel.component.debezium-oracle.log-mining-transaction-retention-ms",

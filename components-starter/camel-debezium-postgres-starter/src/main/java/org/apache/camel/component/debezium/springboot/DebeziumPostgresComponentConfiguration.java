@@ -556,6 +556,16 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String snapshotIncludeCollectionList;
     /**
+     * Controls which transaction isolation level is used. The default is
+     * 'serializable', which means that serializable isolation level is used.
+     * When 'repeatable_read' is specified, connector runs the initial snapshot
+     * in REPEATABLE READ isolation level. When 'read_committed' is specified,
+     * connector runs the initial snapshot in READ COMMITTED isolation level. In
+     * 'read_uncommitted' is specified, connector runs the initial snapshot in
+     * READ UNCOMMITTED isolation level.
+     */
+    private String snapshotIsolationMode = "serializable";
+    /**
      * Controls how the connector holds locks on tables while performing the
      * schema snapshot. The 'shared' which means the connector will hold a table
      * lock that prevents exclusive table access for just the initial portion of
@@ -1424,6 +1434,14 @@ public class DebeziumPostgresComponentConfiguration
     public void setSnapshotIncludeCollectionList(
             String snapshotIncludeCollectionList) {
         this.snapshotIncludeCollectionList = snapshotIncludeCollectionList;
+    }
+
+    public String getSnapshotIsolationMode() {
+        return snapshotIsolationMode;
+    }
+
+    public void setSnapshotIsolationMode(String snapshotIsolationMode) {
+        this.snapshotIsolationMode = snapshotIsolationMode;
     }
 
     public String getSnapshotLockingMode() {

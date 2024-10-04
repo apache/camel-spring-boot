@@ -343,6 +343,35 @@ public class DebeziumOracleComponentConfiguration
      */
     private Boolean logMiningBufferDropOnStop = false;
     /**
+     * Specifies the inner body the Ehcache tag for the events cache, but should
+     * not include the nor the attributes as these are managed by Debezium.
+     */
+    private String logMiningBufferEhcacheEventsConfig;
+    /**
+     * Specifies any Ehcache global configurations such as services or
+     * persistence. This cannot include nor tags as these are managed by
+     * Debezium.
+     */
+    private String logMiningBufferEhcacheGlobalConfig;
+    /**
+     * Specifies the inner body the Ehcache tag for the processed transaction
+     * cache, but should not include the nor the attributes as these are managed
+     * by Debezium.
+     */
+    private String logMiningBufferEhcacheProcessedtransactionsConfig;
+    /**
+     * Specifies the inner body the Ehcache tag for the schema changes cache,
+     * but should not include the nor the attributes as these are managed by
+     * Debezium.
+     */
+    private String logMiningBufferEhcacheSchemachangesConfig;
+    /**
+     * Specifies the inner body the Ehcache tag for the transaction cache, but
+     * should not include the nor the attributes as these are managed by
+     * Debezium.
+     */
+    private String logMiningBufferEhcacheTransactionsConfig;
+    /**
      * Specifies the XML configuration for the Infinispan 'events' cache
      */
     private String logMiningBufferInfinispanCacheEvents;
@@ -376,7 +405,8 @@ public class DebeziumOracleComponentConfiguration
      * infinispan_embedded - This option uses an embedded Infinispan cache to
      * buffer transaction data and persist it to disk. infinispan_remote - This
      * option uses a remote Infinispan cluster to buffer transaction data and
-     * persist it to disk.
+     * persist it to disk. ehcache - Use ehcache in embedded mode to buffer
+     * transaction data and persist it to disk.
      */
     private String logMiningBufferType = "memory";
     /**
@@ -456,7 +486,7 @@ public class DebeziumOracleComponentConfiguration
      * There are strategies: Online catalog with faster mining but no captured
      * DDL. Another - with data dictionary loaded into REDO LOG files
      */
-    private String logMiningStrategy = "redo_log_catalog";
+    private String logMiningStrategy = "online_catalog";
     /**
      * Duration in milliseconds to keep long running transactions in transaction
      * buffer between log mining sessions. By default, all transactions are
@@ -1202,6 +1232,51 @@ public class DebeziumOracleComponentConfiguration
 
     public void setLogMiningBufferDropOnStop(Boolean logMiningBufferDropOnStop) {
         this.logMiningBufferDropOnStop = logMiningBufferDropOnStop;
+    }
+
+    public String getLogMiningBufferEhcacheEventsConfig() {
+        return logMiningBufferEhcacheEventsConfig;
+    }
+
+    public void setLogMiningBufferEhcacheEventsConfig(
+            String logMiningBufferEhcacheEventsConfig) {
+        this.logMiningBufferEhcacheEventsConfig = logMiningBufferEhcacheEventsConfig;
+    }
+
+    public String getLogMiningBufferEhcacheGlobalConfig() {
+        return logMiningBufferEhcacheGlobalConfig;
+    }
+
+    public void setLogMiningBufferEhcacheGlobalConfig(
+            String logMiningBufferEhcacheGlobalConfig) {
+        this.logMiningBufferEhcacheGlobalConfig = logMiningBufferEhcacheGlobalConfig;
+    }
+
+    public String getLogMiningBufferEhcacheProcessedtransactionsConfig() {
+        return logMiningBufferEhcacheProcessedtransactionsConfig;
+    }
+
+    public void setLogMiningBufferEhcacheProcessedtransactionsConfig(
+            String logMiningBufferEhcacheProcessedtransactionsConfig) {
+        this.logMiningBufferEhcacheProcessedtransactionsConfig = logMiningBufferEhcacheProcessedtransactionsConfig;
+    }
+
+    public String getLogMiningBufferEhcacheSchemachangesConfig() {
+        return logMiningBufferEhcacheSchemachangesConfig;
+    }
+
+    public void setLogMiningBufferEhcacheSchemachangesConfig(
+            String logMiningBufferEhcacheSchemachangesConfig) {
+        this.logMiningBufferEhcacheSchemachangesConfig = logMiningBufferEhcacheSchemachangesConfig;
+    }
+
+    public String getLogMiningBufferEhcacheTransactionsConfig() {
+        return logMiningBufferEhcacheTransactionsConfig;
+    }
+
+    public void setLogMiningBufferEhcacheTransactionsConfig(
+            String logMiningBufferEhcacheTransactionsConfig) {
+        this.logMiningBufferEhcacheTransactionsConfig = logMiningBufferEhcacheTransactionsConfig;
     }
 
     public String getLogMiningBufferInfinispanCacheEvents() {
