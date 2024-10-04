@@ -19,7 +19,6 @@ package org.apache.camel.component.platform.http.springboot;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.concurrent.CompletableFuture;
 import org.apache.camel.Exchange;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.Processor;
@@ -27,7 +26,6 @@ import org.apache.camel.Suspendable;
 import org.apache.camel.SuspendableService;
 import org.apache.camel.component.platform.http.PlatformHttpEndpoint;
 import org.apache.camel.component.platform.http.spi.PlatformHttpConsumer;
-import org.apache.camel.http.common.DefaultHttpBinding;
 import org.apache.camel.http.common.HttpBinding;
 import org.apache.camel.http.common.HttpHelper;
 import org.apache.camel.support.DefaultConsumer;
@@ -35,12 +33,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements PlatformHttpConsumer, Suspendable, SuspendableService {
 
     private static final Logger LOG = LoggerFactory.getLogger(SpringBootPlatformHttpConsumer.class);
 
     private HttpBinding binding;
     private final boolean handleWriteResponseError;
+    private Executor executor;
 
     public SpringBootPlatformHttpConsumer(PlatformHttpEndpoint endpoint, Processor processor) {
         super(endpoint, processor);
@@ -50,6 +53,12 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         this.binding.setFileNameExtWhitelist(endpoint.getFileNameExtWhitelist());
         this.binding.setUseReaderForPayload(!endpoint.isUseStreaming());
         this.handleWriteResponseError = endpoint.isHandleWriteResponseError();
+        this.executor = Executors.newSingleThreadExecutor();
+    }
+
+    public SpringBootPlatformHttpConsumer(PlatformHttpEndpoint endpoint, Processor processor, Executor executor) {
+        this(endpoint, processor);
+        this.executor = executor;
     }
 
     /**
@@ -84,7 +93,7 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
                     // ignore
                 }
             }
-        });
+        }, executor);
     }
 
     protected void handleService(HttpServletRequest request, HttpServletResponse response) throws Exception {
