@@ -1,0 +1,169 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.torchserve",
+      "type": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.torchserve.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.torchserve.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.torchserve.configuration",
+      "type": "org.apache.camel.component.torchserve.TorchServeConfiguration",
+      "description": "The configuration. The option is a org.apache.camel.component.torchserve.TorchServeConfiguration type.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.torchserve.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.torchserve.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the torchserve component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.torchserve.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.torchserve.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.torchserve.inference-address",
+      "type": "java.lang.String",
+      "description": "The address of the inference API endpoint.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.torchserve.inference-key",
+      "type": "java.lang.String",
+      "description": "The token authorization key for accessing the inference API.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.torchserve.inference-port",
+      "type": "java.lang.Integer",
+      "description": "The port of the inference API endpoint.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration",
+      "defaultValue": 8080
+    },
+    {
+      "name": "camel.component.torchserve.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.torchserve.list-limit",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of items to return for the list operation. When this value is present, TorchServe does not return more than the specified number of items, but it might return fewer. This value is optional. If you include a value, it must be between 1 and 1000, inclusive. If you do not include a value, it defaults to 100.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration",
+      "defaultValue": 100
+    },
+    {
+      "name": "camel.component.torchserve.list-next-page-token",
+      "type": "java.lang.String",
+      "description": "The token to retrieve the next set of results for the list operation. TorchServe provides the token when the response from a previous call has more results than the maximum page size.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.torchserve.management-address",
+      "type": "java.lang.String",
+      "description": "The address of the management API endpoint.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.torchserve.management-key",
+      "type": "java.lang.String",
+      "description": "The token authorization key for accessing the management API.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.torchserve.management-port",
+      "type": "java.lang.Integer",
+      "description": "The port of the management API endpoint.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration",
+      "defaultValue": 8081
+    },
+    {
+      "name": "camel.component.torchserve.metrics-address",
+      "type": "java.lang.String",
+      "description": "The address of the metrics API endpoint.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.torchserve.metrics-name",
+      "type": "java.lang.String",
+      "description": "Names of metrics to filter.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.torchserve.metrics-port",
+      "type": "java.lang.Integer",
+      "description": "The port of the metrics API endpoint.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration",
+      "defaultValue": 8082
+    },
+    {
+      "name": "camel.component.torchserve.model-name",
+      "type": "java.lang.String",
+      "description": "The name of model.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.torchserve.model-version",
+      "type": "java.lang.String",
+      "description": "The version of model.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.torchserve.register-options",
+      "type": "org.apache.camel.component.torchserve.client.model.RegisterOptions",
+      "description": "Additional options for the register operation. The option is a org.apache.camel.component.torchserve.client.model.RegisterOptions type.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.torchserve.scale-worker-options",
+      "type": "org.apache.camel.component.torchserve.client.model.ScaleWorkerOptions",
+      "description": "Additional options for the scale-worker operation. The option is a org.apache.camel.component.torchserve.client.model.ScaleWorkerOptions type.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.torchserve.unregister-options",
+      "type": "org.apache.camel.component.torchserve.client.model.UnregisterOptions",
+      "description": "Additional options for the unregister operation. The option is a org.apache.camel.component.torchserve.client.model.UnregisterOptions type.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.torchserve.url",
+      "type": "java.lang.String",
+      "description": "Model archive download url, support local file or HTTP(s) protocol. For S3, consider using pre-signed url.",
+      "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration"
+    }
+  ],
+  "hints": []
+}
