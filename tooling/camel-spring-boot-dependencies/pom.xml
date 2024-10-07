@@ -5194,11 +5194,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-groovy-dsl-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-groovy-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -7207,16 +7202,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-groovy</artifactId>
-        <version>4.9.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-groovy-dsl</artifactId>
-        <version>4.9.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-groovy-dsl-common</artifactId>
         <version>4.9.0-SNAPSHOT</version>
       </dependency>
       <dependency>

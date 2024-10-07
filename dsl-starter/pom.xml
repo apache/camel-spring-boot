@@ -38,7 +38,6 @@
         <module>camel-componentdsl-starter</module>
         <module>camel-dsl-modeline-starter</module>
         <module>camel-endpointdsl-starter</module>
-        <module>camel-groovy-dsl-starter</module>
         <module>camel-java-joor-dsl-starter</module>
         <module>camel-xml-io-dsl-starter</module>
         <module>camel-xml-jaxb-dsl-starter</module>
