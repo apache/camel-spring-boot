@@ -40,7 +40,6 @@
         <module>camel-endpointdsl-starter</module>
         <module>camel-groovy-dsl-starter</module>
         <module>camel-java-joor-dsl-starter</module>
-        <module>camel-js-dsl-starter</module>
         <module>camel-xml-io-dsl-starter</module>
         <module>camel-xml-jaxb-dsl-starter</module>
         <module>camel-yaml-dsl-starter</module>
