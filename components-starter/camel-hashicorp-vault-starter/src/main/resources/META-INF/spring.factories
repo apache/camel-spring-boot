@@ -1,0 +1,2 @@
+org.springframework.context.ApplicationListener=\
+  org.apache.camel.component.hashicorp.vault.springboot.SpringBootHashicorpVaultPropertiesParser

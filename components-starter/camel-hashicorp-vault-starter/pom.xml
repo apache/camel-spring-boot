@@ -38,6 +38,25 @@
       <artifactId>camel-hashicorp-vault</artifactId>
       <version>${camel-version}</version>
     </dependency>
+    <!-- for testing -->
+    <dependency>
+      <groupId>org.awaitility</groupId>
+      <artifactId>awaitility</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <version>${spring-boot-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-test-infra-hashicorp-vault</artifactId>
+      <version>${project.version}</version>
+      <type>test-jar</type>
+      <scope>test</scope>
+    </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
@@ -45,4 +64,29 @@
     </dependency>
     <!--END OF GENERATED CODE-->
   </dependencies>
+  <profiles>
+    <profile>
+      <id>ppc64le</id>
+      <activation>
+        <os>
+          <arch>ppc64le</arch>
+        </os>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <configuration>
+              <skipITs>${skipTests}</skipITs>
+              <reuseForks>true</reuseForks>
+              <systemPropertyVariables>
+                <hashicorp.vault.container>icr.io/ppc64le-oss/vault-ppc64le:v1.13.1</hashicorp.vault.container>
+              </systemPropertyVariables>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
