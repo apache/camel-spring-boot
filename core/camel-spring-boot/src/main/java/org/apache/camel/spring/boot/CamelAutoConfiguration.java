@@ -25,9 +25,11 @@ import java.util.Map;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.ConsumerTemplate;
+import org.apache.camel.ContextEvents;
 import org.apache.camel.FluentProducerTemplate;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.RuntimeCamelException;
+import org.apache.camel.clock.Clock;
 import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.component.properties.PropertiesParser;
 import org.apache.camel.main.DefaultConfigurationConfigurer;
@@ -46,6 +48,7 @@ import org.apache.camel.spring.spi.ApplicationContextBeanRepository;
 import org.apache.camel.spring.spi.CamelBeanPostProcessor;
 import org.apache.camel.support.DefaultRegistry;
 import org.apache.camel.support.LanguageSupport;
+import org.apache.camel.support.ResetableClock;
 import org.apache.camel.support.ResourceHelper;
 import org.apache.camel.support.service.ServiceHelper;
 import org.apache.camel.support.startup.LoggingStartupStepRecorder;
@@ -95,8 +98,10 @@ public class CamelAutoConfiguration {
     @ConditionalOnMissingBean(CamelContext.class)
     CamelContext camelContext(ApplicationContext applicationContext, CamelConfigurationProperties config,
             CamelBeanPostProcessor beanPostProcessor) throws Exception {
+        Clock clock = new ResetableClock();
         CamelContext camelContext = new SpringBootCamelContext(applicationContext,
                 config.getSpringboot().isWarnOnEarlyShutdown());
+        camelContext.getClock().add(ContextEvents.BOOT, clock);
         // bean post processor is created before CamelContext
         beanPostProcessor.setCamelContext(camelContext);
         camelContext.getCamelContextExtension().addContextPlugin(CamelBeanPostProcessor.class, beanPostProcessor);
