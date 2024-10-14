@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.jsonvalidator.springboot;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -47,6 +46,10 @@ public class JsonValidatorComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Whether to lookup and use default Jackson ObjectMapper from the registry.
+     */
+    private Boolean useDefaultObjectMapper = true;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -56,10 +59,9 @@ public class JsonValidatorComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * To use a custom ObjectMapper. The option is a
-     * com.fasterxml.jackson.databind.ObjectMapper type.
+     * Lookup and use the existing ObjectMapper with the given id.
      */
-    private ObjectMapper objectMapper;
+    private String objectMapper;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -67,6 +69,14 @@ public class JsonValidatorComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getUseDefaultObjectMapper() {
+        return useDefaultObjectMapper;
+    }
+
+    public void setUseDefaultObjectMapper(Boolean useDefaultObjectMapper) {
+        this.useDefaultObjectMapper = useDefaultObjectMapper;
     }
 
     public Boolean getAutowiredEnabled() {
@@ -77,11 +87,11 @@ public class JsonValidatorComponentConfiguration
         this.autowiredEnabled = autowiredEnabled;
     }
 
-    public ObjectMapper getObjectMapper() {
+    public String getObjectMapper() {
         return objectMapper;
     }
 
-    public void setObjectMapper(ObjectMapper objectMapper) {
+    public void setObjectMapper(String objectMapper) {
         this.objectMapper = objectMapper;
     }
 }
