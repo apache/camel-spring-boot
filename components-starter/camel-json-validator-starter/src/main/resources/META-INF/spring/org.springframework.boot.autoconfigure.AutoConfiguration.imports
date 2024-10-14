@@ -16,4 +16,3 @@
 ## ---------------------------------------------------------------------------
 
 org.apache.camel.component.jsonvalidator.springboot.JsonValidatorComponentAutoConfiguration
-org.apache.camel.component.jsonvalidator.springboot.JsonValidatorComponentConverter

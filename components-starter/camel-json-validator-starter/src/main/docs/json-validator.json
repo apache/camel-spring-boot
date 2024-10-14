@@ -40,9 +40,16 @@
     },
     {
       "name": "camel.component.json-validator.object-mapper",
-      "type": "com.fasterxml.jackson.databind.ObjectMapper",
-      "description": "To use a custom ObjectMapper. The option is a com.fasterxml.jackson.databind.ObjectMapper type.",
+      "type": "java.lang.String",
+      "description": "Lookup and use the existing ObjectMapper with the given id.",
       "sourceType": "org.apache.camel.component.jsonvalidator.springboot.JsonValidatorComponentConfiguration"
+    },
+    {
+      "name": "camel.component.json-validator.use-default-object-mapper",
+      "type": "java.lang.Boolean",
+      "description": "Whether to lookup and use default Jackson ObjectMapper from the registry.",
+      "sourceType": "org.apache.camel.component.jsonvalidator.springboot.JsonValidatorComponentConfiguration",
+      "defaultValue": true
     }
   ],
   "hints": []
