@@ -16,9 +16,11 @@
  */
 package org.apache.camel.spring.boot.xml;
 
+import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.TypeConversionConfiguration;
 import org.apache.camel.spring.xml.XmlCamelContextConfigurer;
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -27,6 +29,7 @@ import org.springframework.context.annotation.Role;
 @Configuration(proxyBeanMethods = false)
 @Import(TypeConversionConfiguration.class)
 @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
+@AutoConfigureBefore(CamelAutoConfiguration.class)
 public class CamelXmlAutoConfiguration {
 
     /**
