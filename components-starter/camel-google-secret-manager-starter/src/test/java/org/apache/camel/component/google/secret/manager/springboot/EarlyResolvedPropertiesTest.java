@@ -53,12 +53,12 @@ import java.io.IOException;
                 "early.resolved.property.simple={{gcp:databaseTestPassword}}"
         })
 
-// Must be manually tested. Provide your own projectId using -Dcamel.vault.test.gcp.projectId and -Dcamel.vault.test.gcp.useDefaultInstance
+// Must be manually tested. Provide your own projectId using -Dcamel.vault.test.gcp.projectId and -Dcamel.vault.test.gcp.useDefaultInstance=true
 @EnabledIfSystemProperties({
         @EnabledIfSystemProperty(named = "camel.vault.test.gcp.projectId", matches = ".*",
-                disabledReason = "Access key not provided"),
-        @EnabledIfSystemProperty(named = "camel.vault.test.gcp.useDefaultInstance", matches = ".*",
-                disabledReason = "Secret key not provided"),
+                disabledReason = "Project Id not provided"),
+        @EnabledIfSystemProperty(named = "camel.vault.test.gcp.useDefaultInstance", matches = "true",
+                disabledReason = "Default instance not enabled"),
 })
 @EnabledIfEnvironmentVariables({
     @EnabledIfEnvironmentVariable(named="GOOGLE_APPLICATION_CREDENTIALS", matches = ".*", disabledReason = "No environment variables for google credentials set")
