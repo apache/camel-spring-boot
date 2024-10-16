@@ -45,6 +45,7 @@ public class JettyHttpComponentConverter12 implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, org.apache.camel.http.common.HttpConfiguration.class));
         answer.add(new ConvertiblePair(String.class, org.eclipse.jetty.jmx.MBeanContainer.class));
         answer.add(new ConvertiblePair(String.class, org.eclipse.jetty.server.RequestLog.class));
+        answer.add(new ConvertiblePair(String.class, org.eclipse.jetty.server.SecureRequestCustomizer.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         return answer;
@@ -69,6 +70,7 @@ public class JettyHttpComponentConverter12 implements GenericConverter {
             case "org.apache.camel.http.common.HttpConfiguration": return applicationContext.getBean(ref, org.apache.camel.http.common.HttpConfiguration.class);
             case "org.eclipse.jetty.jmx.MBeanContainer": return applicationContext.getBean(ref, org.eclipse.jetty.jmx.MBeanContainer.class);
             case "org.eclipse.jetty.server.RequestLog": return applicationContext.getBean(ref, org.eclipse.jetty.server.RequestLog.class);
+            case "org.eclipse.jetty.server.SecureRequestCustomizer": return applicationContext.getBean(ref, org.eclipse.jetty.server.SecureRequestCustomizer.class);
             case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
             case "org.apache.camel.support.jsse.SSLContextParameters": return applicationContext.getBean(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
         }
