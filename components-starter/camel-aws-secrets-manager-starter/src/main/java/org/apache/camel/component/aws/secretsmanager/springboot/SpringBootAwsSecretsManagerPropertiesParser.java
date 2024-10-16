@@ -92,7 +92,6 @@ public class SpringBootAwsSecretsManagerPropertiesParser implements ApplicationL
                                 String element = secretsManagerPropertiesFunction.apply(stringValue
                                         .replace("{{aws:", "")
                                         .replace("}}", ""));
-                                System.err.println("Element: " + element);
                                 props.put(key, element);
                             } catch (Exception e) {
                                 // Log and do nothing

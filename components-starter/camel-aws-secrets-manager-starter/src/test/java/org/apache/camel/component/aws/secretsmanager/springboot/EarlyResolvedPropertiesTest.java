@@ -48,7 +48,7 @@ import software.amazon.awssdk.services.secretsmanager.model.DeleteSecretRequest;
                 "early.resolved.property.simple={{aws:databaseTest/password}}"
         })
 
-// Must be manually tested. Provide your own accessKey and secretKey using -Dcamel.vault.aws.accessKey, -Dcamel.vault.aws.secretKey and -Dcamel.vault.aws.region
+// Must be manually tested. Provide your own accessKey and secretKey using -Dcamel.vault.test.aws.accessKey, -Dcamel.vault.test.aws.secretKey and -Dcamel.vault.test.aws.region
 @EnabledIfSystemProperties({
         @EnabledIfSystemProperty(named = "camel.vault.test.aws.accessKey", matches = ".*",
                 disabledReason = "Access key not provided"),
