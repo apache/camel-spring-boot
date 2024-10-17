@@ -53,11 +53,11 @@ public class JacksonDataFormatConfiguration
      */
     private Boolean prettyPrint = false;
     /**
-     * Force using generator that outputs JSON content using a java.io.Writer
-     * which handles character encoding. This should be preferred when using
-     * 2-byte/4-byte characters such as Japanese.
+     * Force generator that outputs JSON content to combine surrogate pairs (if
+     * any) into 4-byte characters. This should be preferred when using 4-byte
+     * characters such as Japanese.
      */
-    private Boolean useWriter = false;
+    private Boolean combineUnicodeSurrogates = false;
     /**
      * Class name of the java type to use when unmarshalling
      */
@@ -187,12 +187,12 @@ public class JacksonDataFormatConfiguration
         this.prettyPrint = prettyPrint;
     }
 
-    public Boolean getUseWriter() {
-        return useWriter;
+    public Boolean getCombineUnicodeSurrogates() {
+        return combineUnicodeSurrogates;
     }
 
-    public void setUseWriter(Boolean useWriter) {
-        this.useWriter = useWriter;
+    public void setCombineUnicodeSurrogates(Boolean combineUnicodeSurrogates) {
+        this.combineUnicodeSurrogates = combineUnicodeSurrogates;
     }
 
     public String getUnmarshalType() {

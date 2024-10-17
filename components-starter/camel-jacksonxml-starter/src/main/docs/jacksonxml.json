@@ -121,13 +121,6 @@
       "defaultValue": false
     },
     {
-      "name": "camel.dataformat.jackson-xml.use-writer",
-      "type": "java.lang.Boolean",
-      "description": "Force using generator that outputs XML content using a java.io.Writer which handles character encoding. This should be preferred when using 2-byte\/4-byte characters such as Japanese.",
-      "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration",
-      "defaultValue": false
-    },
-    {
       "name": "camel.dataformat.jackson-xml.xml-mapper",
       "type": "java.lang.String",
       "description": "Lookup and use the existing XmlMapper with the given id.",
