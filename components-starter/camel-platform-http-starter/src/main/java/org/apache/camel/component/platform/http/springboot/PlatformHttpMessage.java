@@ -20,6 +20,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.camel.Exchange;
 import org.apache.camel.RuntimeCamelException;
+import org.apache.camel.StreamCache;
 import org.apache.camel.http.common.HttpBinding;
 import org.apache.camel.support.DefaultMessage;
 import org.apache.camel.util.ObjectHelper;
@@ -60,7 +61,12 @@ public class PlatformHttpMessage extends DefaultMessage {
         if (flag != null && flag) {
             this.setHeader("CamelSkipWwwFormUrlEncoding", Boolean.TRUE);
         }
-
+        // we need to favor using stream cache so the body can be re-read later when routing the message
+        StreamCache newBody = camelContext.getTypeConverter().tryConvertTo(StreamCache.class,
+                exchange, getBody());
+        if (newBody != null) {
+            setBody(newBody);
+        }
         binding.readRequest(request, this);
     }
 

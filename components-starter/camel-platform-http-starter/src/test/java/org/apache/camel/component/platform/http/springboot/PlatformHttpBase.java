@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.platform.http.springboot;
 
-import java.util.concurrent.TimeUnit;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ServiceStatus;
 import org.assertj.core.api.Assertions;
@@ -24,6 +23,8 @@ import org.awaitility.Awaitility;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
