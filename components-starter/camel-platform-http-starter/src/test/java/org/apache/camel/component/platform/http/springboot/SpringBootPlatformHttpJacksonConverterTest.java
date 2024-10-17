@@ -16,55 +16,75 @@
  */
 package org.apache.camel.component.platform.http.springboot;
 
+import io.restassured.RestAssured;
+import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.jackson.JacksonConstants;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.annotation.DirtiesContext.ClassMode;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 @EnableAutoConfiguration(exclude = {OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class})
-@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
-        SpringBootPlatformHttpTest.class, SpringBootPlatformHttpTest.TestConfiguration.class,
-        PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class })
-public class SpringBootPlatformHttpTest extends PlatformHttpBase {
+        SpringBootPlatformHttpJacksonConverterTest.class, SpringBootPlatformHttpJacksonConverterTest.TestConfiguration.class,
+        PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class, })
+public class SpringBootPlatformHttpJacksonConverterTest {
 
-    private static final String postRouteId = "SpringBootPlatformHttpTest_mypost";
+    @Autowired
+    TestRestTemplate restTemplate;
 
-    private static final String getRouteId = "SpringBootPlatformHttpTest_myget";
+    @Autowired
+    CamelContext camelContext;
 
-    // *************************************
-    // Config
-    // *************************************
+    @LocalServerPort
+    private Integer port;
+
+    @BeforeEach
+    void setUp() {
+        RestAssured.port = port;
+    }
+
     @Configuration
     public static class TestConfiguration {
 
         @Bean
-        public RouteBuilder servletPlatformHttpRouteBuilder() {
+        public RouteBuilder springBootPlatformHttpRestDSLRouteBuilder() {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("platform-http:/myget").id(postRouteId).setBody().constant("get");
-                    from("platform-http:/mypost").id(getRouteId).transform().body(String.class, b -> b.toUpperCase());
+                    getContext().getGlobalOptions().put(JacksonConstants.ENABLE_TYPE_CONVERTER, "true");
+
+                    from("platform-http:/hello")
+                            .setBody().constant("{\"hello\": \"world\"}")
+                            .unmarshal().json();
                 }
             };
         }
     }
 
-    @Override
-    protected String getPostRouteId() {
-        return postRouteId;
-    }
-
-    @Override
-    protected String getGetRouteId() {
-        return getRouteId;
+    @Test
+    public void jacksonTypeConverter() {
+        given()
+                .when()
+                .get("/hello")
+                .then()
+                .statusCode(200)
+                .body(equalTo("{\"hello\":\"world\"}"));
     }
 }

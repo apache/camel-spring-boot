@@ -16,9 +16,16 @@
  */
 package org.apache.camel.component.platform.http.springboot;
 
+import jakarta.activation.DataHandler;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.camel.Message;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.camel.*;
+import org.apache.camel.attachment.AttachmentMessage;
+import org.apache.camel.attachment.CamelFileDataSource;
 import org.apache.camel.component.platform.http.PlatformHttpEndpoint;
+import org.apache.camel.converter.stream.CachedOutputStream;
 import org.apache.camel.http.base.HttpHelper;
 import org.apache.camel.http.common.DefaultHttpBinding;
 import org.apache.camel.support.ExchangeHelper;
@@ -38,6 +45,7 @@ import java.util.Locale;
 import java.util.UUID;
 
 public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
+    private static final Logger LOG = LoggerFactory.getLogger(SpringBootPlatformHttpBinding.class);
 
     protected void populateRequestParameters(HttpServletRequest request, Message message) {
         super.populateRequestParameters(request, message);
