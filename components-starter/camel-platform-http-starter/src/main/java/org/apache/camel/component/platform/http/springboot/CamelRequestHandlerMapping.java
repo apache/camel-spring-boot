@@ -133,7 +133,7 @@ public class CamelRequestHandlerMapping extends RequestMappingHandlerMapping imp
 
     @Override
     public void registerHttpEndpoint(HttpEndpointModel model) {
-        RequestMappingInfo info = asRequestMappingInfo(model);
+        List<RequestMappingInfo> requestMappingInfos = asRequestMappingInfo(model);
         Method m = ReflectionHelper.findMethod(SpringBootPlatformHttpConsumer.class, "service",
                 HttpServletRequest.class, HttpServletResponse.class);
         for (RequestMappingInfo info : requestMappingInfos) {
@@ -148,7 +148,9 @@ public class CamelRequestHandlerMapping extends RequestMappingHandlerMapping imp
         // noop
     }
 
-    private RequestMappingInfo asRequestMappingInfo(HttpEndpointModel model) {
+    private List<RequestMappingInfo> asRequestMappingInfo(HttpEndpointModel model) {
+        List<RequestMappingInfo> result = new ArrayList<>();
+
         // allowed methods from model or endpoint
         List<RequestMethod> methods = new ArrayList<>();
         String verbs = model.getVerbs();
