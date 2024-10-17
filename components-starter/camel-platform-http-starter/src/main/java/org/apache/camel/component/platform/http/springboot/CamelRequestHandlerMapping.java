@@ -75,10 +75,12 @@ public class CamelRequestHandlerMapping extends RequestMappingHandlerMapping imp
 
     @Override
     public void registerHttpEndpoint(HttpEndpointModel model) {
-        RequestMappingInfo info = asRequestMappingInfo(model);
+        List<RequestMappingInfo> requestMappingInfos = asRequestMappingInfo(model);
         Method m = ReflectionHelper.findMethod(SpringBootPlatformHttpConsumer.class, "service",
                 HttpServletRequest.class, HttpServletResponse.class);
-        registerMapping(info, model.getConsumer(), m);
+        for (RequestMappingInfo info : requestMappingInfos) {
+            registerMapping(info, model.getConsumer(), m);
+        }
     }
 
     @Override
@@ -86,24 +88,52 @@ public class CamelRequestHandlerMapping extends RequestMappingHandlerMapping imp
         // noop
     }
 
-    private RequestMappingInfo asRequestMappingInfo(HttpEndpointModel model) {
+    private List<RequestMappingInfo> asRequestMappingInfo(HttpEndpointModel model) {
+        List<RequestMappingInfo> result = new ArrayList<>();
+
         // allowed methods from model or endpoint
         List<RequestMethod> methods = new ArrayList<>();
         String verbs = model.getVerbs();
         if (verbs == null && model.getConsumer() != null) {
             PlatformHttpEndpoint endpoint = (PlatformHttpEndpoint) model.getConsumer().getEndpoint();
             verbs = endpoint.getHttpMethodRestrict();
+
+            for (RequestMethod rm : RequestMethod.values()) {
+                createRequestMappingInfo(model, rm, result);
+            }
         }
         if (verbs != null) {
             for (String v : model.getVerbs().split(",")) {
                 RequestMethod rm = RequestMethod.resolve(v);
                 methods.add(rm);
+
+                createRequestMappingInfo(model, rm, result);
             }
         }
 
-        RequestMappingInfo info = RequestMappingInfo.paths(model.getUri())
-                .methods(methods.toArray(new RequestMethod[0])).options(this.getBuilderConfiguration()).build();
-        return info;
+        return result;
+    }
+
+    private void createRequestMappingInfo(HttpEndpointModel model, RequestMethod rm, List<RequestMappingInfo> result) {
+        RequestMethod[] methods = new RequestMethod[]{};
+        if (rm != null) {
+            methods = new RequestMethod[]{rm};
+        }
+
+        RequestMappingInfo.Builder info = RequestMappingInfo
+                .paths(model.getUri())
+                .methods(methods)
+                .options(this.getBuilderConfiguration());
+
+        if (model.getConsumes() != null
+                && (RequestMethod.POST.name().equals(rm.name()) || RequestMethod.PUT.name().equals(rm.name()) || RequestMethod.PATCH.name().equals(rm.name()))) {
+            info.consumes(model.getConsumes().split(","));
+        }
+        if (model.getProduces() != null) {
+            info.produces(model.getProduces().split(","));
+        }
+
+        result.add(info.build());
     }
 
 }
