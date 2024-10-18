@@ -29,7 +29,7 @@
 
   <artifactId>camel-k-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Core Starters :: Spring Boot Camel K</name>
+  <name>Camel SB Core Starters :: Spring Boot Camel K (deprecated)</name>
 
   <dependencies>
 
