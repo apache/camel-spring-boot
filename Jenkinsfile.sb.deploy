@@ -56,9 +56,8 @@ pipeline {
             when {
                 anyOf {
                     branch 'main'
-                    branch 'camel-spring-boot-4.0.x'
-                    branch 'camel-spring-boot-3.21.x'
-                    branch 'camel-spring-boot-3.22.x'
+                    branch 'camel-spring-boot-4.8.x'
+                    branch 'camel-spring-boot-4.4.x'
                 }
             }
             steps {
