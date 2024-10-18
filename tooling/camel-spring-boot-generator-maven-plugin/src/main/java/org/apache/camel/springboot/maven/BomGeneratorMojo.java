@@ -76,6 +76,9 @@ public class BomGeneratorMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project.build.directory}/${project.name}-pom.xml")
     protected File targetPom;
 
+    @Parameter(property = "bom.camelKameletsVersion", defaultValue = "${camel-kamelets-version}")
+    protected String camelKameletsVersion;
+
     @Parameter(defaultValue = "${basedir}/../../components-starter")
     protected File startersDir;
 
@@ -191,6 +194,20 @@ public class BomGeneratorMojo extends AbstractMojo {
         outDependencies.add(dep);
 
         outDependencies.sort(Comparator.comparing(d -> (d.getGroupId() + ":" + d.getArtifactId())));
+
+        // add camel-kamelets
+        dep = new Dependency();
+        dep.setGroupId("org.apache.camel.kamelets");
+        dep.setArtifactId("camel-kamelets-catalog");
+        dep.setVersion(camelKameletsVersion);
+        outDependencies.add(dep);
+
+        dep = new Dependency();
+        dep.setGroupId("org.apache.camel.kamelets");
+        dep.setArtifactId("camel-kamelets-utils");
+        dep.setVersion(camelKameletsVersion);
+        outDependencies.add(dep);
+
 
         // include some dependencies for testing and management
         dep = new Dependency();

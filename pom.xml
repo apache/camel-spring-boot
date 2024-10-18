@@ -112,6 +112,7 @@
 
         <!-- Camel target version -->
         <camel-version>4.9.0-SNAPSHOT</camel-version>
+        <camel-kamelets-version>4.9.0-SNAPSHOT</camel-kamelets-version>
 
         <!-- versions -->
         <aether-version>1.0.2.v20150114</aether-version>
@@ -130,10 +131,9 @@
         <springdoc-version>2.2.0</springdoc-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
         <swagger-parser-v3-version>2.1.10</swagger-parser-v3-version>
-	    <cyclonedx-maven-plugin-version>2.8.1</cyclonedx-maven-plugin-version>
+        <cyclonedx-maven-plugin-version>2.8.1</cyclonedx-maven-plugin-version>
         <jolokia-version>2.1.1</jolokia-version>
     </properties>
-
 
     <!-- Comment out the snapshot repositories as we don't need them now -->
     <repositories>
