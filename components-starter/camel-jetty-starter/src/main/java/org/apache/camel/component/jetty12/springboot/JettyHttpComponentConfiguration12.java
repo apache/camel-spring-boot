@@ -24,6 +24,7 @@ import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.eclipse.jetty.jmx.MBeanContainer;
 import org.eclipse.jetty.server.Connector;
+import org.eclipse.jetty.server.SecureRequestCustomizer;
 import org.eclipse.jetty.server.handler.ErrorHandler;
 import org.eclipse.jetty.util.thread.ThreadPool;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -184,6 +185,12 @@ public class JettyHttpComponentConfiguration12
      * org.eclipse.jetty.jmx.MBeanContainer type.
      */
     private MBeanContainer mbContainer;
+    /**
+     * To use a custom SecureRequestCustomizer. The option is a
+     * org.eclipse.jetty.server.SecureRequestCustomizer type. The option is a
+     * org.eclipse.jetty.server.SecureRequestCustomizer type.
+     */
+    private SecureRequestCustomizer secureRequestCustomizer;
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
@@ -433,6 +440,15 @@ public class JettyHttpComponentConfiguration12
 
     public void setMbContainer(MBeanContainer mbContainer) {
         this.mbContainer = mbContainer;
+    }
+
+    public SecureRequestCustomizer getSecureRequestCustomizer() {
+        return secureRequestCustomizer;
+    }
+
+    public void setSecureRequestCustomizer(
+            SecureRequestCustomizer secureRequestCustomizer) {
+        this.secureRequestCustomizer = secureRequestCustomizer;
     }
 
     public HeaderFilterStrategy getHeaderFilterStrategy() {
