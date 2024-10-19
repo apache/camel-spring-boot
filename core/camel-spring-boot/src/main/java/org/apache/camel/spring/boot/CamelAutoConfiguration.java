@@ -40,6 +40,7 @@ import org.apache.camel.spi.CliConnector;
 import org.apache.camel.spi.CliConnectorFactory;
 import org.apache.camel.spi.PackageScanClassResolver;
 import org.apache.camel.spi.PackageScanResourceResolver;
+import org.apache.camel.spi.StartupConditionStrategy;
 import org.apache.camel.spi.StartupStepRecorder;
 import org.apache.camel.spi.VariableRepository;
 import org.apache.camel.spi.VariableRepositoryFactory;
@@ -51,6 +52,9 @@ import org.apache.camel.support.LanguageSupport;
 import org.apache.camel.support.ResetableClock;
 import org.apache.camel.support.ResourceHelper;
 import org.apache.camel.support.service.ServiceHelper;
+import org.apache.camel.support.startup.DefaultStartupConditionStrategy;
+import org.apache.camel.support.startup.EnvStartupCondition;
+import org.apache.camel.support.startup.FileStartupCondition;
 import org.apache.camel.support.startup.LoggingStartupStepRecorder;
 import org.apache.camel.util.IOHelper;
 import org.apache.camel.util.ObjectHelper;
@@ -77,7 +81,7 @@ import org.springframework.core.env.MutablePropertySources;
 
 @ImportRuntimeHints(CamelRuntimeHints.class)
 @Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties({ CamelConfigurationProperties.class })
+@EnableConfigurationProperties({CamelConfigurationProperties.class, CamelStartupConditionConfigurationProperties.class})
 @Import(TypeConversionConfiguration.class)
 @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 public class CamelAutoConfiguration {
@@ -97,7 +101,7 @@ public class CamelAutoConfiguration {
     @Bean(destroyMethod = "")
     @ConditionalOnMissingBean(CamelContext.class)
     CamelContext camelContext(ApplicationContext applicationContext, CamelConfigurationProperties config,
-            CamelBeanPostProcessor beanPostProcessor) throws Exception {
+                              CamelBeanPostProcessor beanPostProcessor, StartupConditionStrategy startup) throws Exception {
         Clock clock = new ResetableClock();
         CamelContext camelContext = new SpringBootCamelContext(applicationContext,
                 config.getSpringboot().isWarnOnEarlyShutdown());
@@ -105,6 +109,8 @@ public class CamelAutoConfiguration {
         // bean post processor is created before CamelContext
         beanPostProcessor.setCamelContext(camelContext);
         camelContext.getCamelContextExtension().addContextPlugin(CamelBeanPostProcessor.class, beanPostProcessor);
+        // startup condition is created before CamelContext
+        camelContext.getCamelContextExtension().addContextPlugin(StartupConditionStrategy.class, startup);
         return doConfigureCamelContext(applicationContext, camelContext, config);
     }
 
@@ -112,7 +118,7 @@ public class CamelAutoConfiguration {
      * Not to be used by Camel end users
      */
     public static CamelContext doConfigureCamelContext(ApplicationContext applicationContext, CamelContext camelContext,
-            CamelConfigurationProperties config) throws Exception {
+                                                       CamelConfigurationProperties config) throws Exception {
 
         // setup startup recorder before building context
         configureStartupRecorder(camelContext, config);
@@ -185,7 +191,7 @@ public class CamelAutoConfiguration {
                 new FatJarPackageScanResourceResolver());
 
         if (config.getMain().getRouteFilterIncludePattern() != null
-                || config.getMain().getRouteFilterExcludePattern() != null) {
+            || config.getMain().getRouteFilterExcludePattern() != null) {
             LOG.info("Route filtering pattern: include={}, exclude={}", config.getMain().getRouteFilterIncludePattern(),
                     config.getMain().getRouteFilterExcludePattern());
             camelContext.getCamelContextExtension().getContextPlugin(Model.class).setRouteFilterPattern(
@@ -244,7 +250,7 @@ public class CamelAutoConfiguration {
         } else if ("logging".equals(config.getMain().getStartupRecorder())) {
             camelContext.getCamelContextExtension().setStartupStepRecorder(new LoggingStartupStepRecorder());
         } else if ("java-flight-recorder".equals(config.getMain().getStartupRecorder())
-                || config.getMain().getStartupRecorder() == null) {
+                   || config.getMain().getStartupRecorder() == null) {
             // try to auto discover camel-jfr to use
             StartupStepRecorder fr = camelContext.getCamelContextExtension().getBootstrapFactoryFinder()
                     .newInstance(StartupStepRecorder.FACTORY, StartupStepRecorder.class).orElse(null);
@@ -261,7 +267,7 @@ public class CamelAutoConfiguration {
 
     @Bean
     CamelSpringBootApplicationController applicationController(ApplicationContext applicationContext,
-            CamelContext camelContext) {
+                                                               CamelContext camelContext) {
         return new CamelSpringBootApplicationController(applicationContext, camelContext);
     }
 
@@ -275,7 +281,7 @@ public class CamelAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(CamelSpringBootApplicationListener.class)
     CamelSpringBootApplicationListener routesCollectorListener(ApplicationContext applicationContext,
-            CamelConfigurationProperties config, RoutesCollector routesCollector) {
+                                                               CamelConfigurationProperties config, RoutesCollector routesCollector) {
         Collection<CamelContextConfiguration> configurations = applicationContext
                 .getBeansOfType(CamelContextConfiguration.class).values();
         return new CamelSpringBootApplicationListener(applicationContext, new ArrayList(configurations), config,
@@ -372,6 +378,28 @@ public class CamelAutoConfiguration {
     @Bean
     CamelBeanPostProcessor camelBeanPostProcessor(ApplicationContext applicationContext) {
         return new CamelSpringBootBeanPostProcessor(applicationContext);
+    }
+
+    /**
+     * Camel startup strategy - used early by Camel
+     */
+    @Bean
+    StartupConditionStrategy startupConditionStrategy(CamelStartupConditionConfigurationProperties config) {
+        StartupConditionStrategy scs = new DefaultStartupConditionStrategy();
+        scs.setEnabled(config.isEnabled());
+        scs.setInterval(config.getInterval());
+        scs.setTimeout(config.getTimeout());
+        scs.setOnTimeout(config.getOnTimeout());
+        String envExist = config.getEnvironmentVariableExists();
+        if (envExist != null) {
+            scs.addStartupCondition(new EnvStartupCondition(envExist));
+        }
+        String file = config.getFileExists();
+        if (file != null) {
+            scs.addStartupCondition(new FileStartupCondition(file));
+        }
+        scs.addStartupConditions(config.getCustomClassNames());
+        return scs;
     }
 
 }

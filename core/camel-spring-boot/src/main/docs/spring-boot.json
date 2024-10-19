@@ -122,6 +122,11 @@
       "sourceType": "org.apache.camel.spring.boot.security.CamelSSLConfigurationProperties"
     },
     {
+      "name": "camel.startupcondition",
+      "type": "org.apache.camel.spring.boot.CamelStartupConditionConfigurationProperties",
+      "sourceType": "org.apache.camel.spring.boot.CamelStartupConditionConfigurationProperties"
+    },
+    {
       "name": "camel.threadpool",
       "type": "org.apache.camel.spring.boot.threadpool.CamelThreadPoolConfigurationProperties",
       "sourceType": "org.apache.camel.spring.boot.threadpool.CamelThreadPoolConfigurationProperties"
@@ -1438,6 +1443,52 @@
       "type": "org.apache.camel.support.jsse.TrustManagersParameters",
       "description": "The optional trust manager configuration for creating the TrustManager used in constructing an SSLContext.",
       "sourceType": "org.apache.camel.spring.boot.security.CamelSSLConfigurationProperties"
+    },
+    {
+      "name": "camel.startupcondition.custom-class-names",
+      "type": "java.lang.String",
+      "description": "A list of custom class names (FQN). Multiple classes can be separated by comma.",
+      "sourceType": "org.apache.camel.spring.boot.CamelStartupConditionConfigurationProperties"
+    },
+    {
+      "name": "camel.startupcondition.enabled",
+      "type": "java.lang.Boolean",
+      "description": "To enable using startup conditions",
+      "sourceType": "org.apache.camel.spring.boot.CamelStartupConditionConfigurationProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.startupcondition.environment-variable-exists",
+      "type": "java.lang.String",
+      "description": "Wait for an environment variable with the given name to exists before continuing",
+      "sourceType": "org.apache.camel.spring.boot.CamelStartupConditionConfigurationProperties"
+    },
+    {
+      "name": "camel.startupcondition.file-exists",
+      "type": "java.lang.String",
+      "description": "Wait for a file with the given name to exists before continuing",
+      "sourceType": "org.apache.camel.spring.boot.CamelStartupConditionConfigurationProperties"
+    },
+    {
+      "name": "camel.startupcondition.interval",
+      "type": "java.lang.Integer",
+      "description": "Interval in millis between checking conditions.",
+      "sourceType": "org.apache.camel.spring.boot.CamelStartupConditionConfigurationProperties",
+      "defaultValue": 500
+    },
+    {
+      "name": "camel.startupcondition.on-timeout",
+      "type": "java.lang.String",
+      "description": "What action, to do on timeout. fail = do not startup, and throw an exception causing camel to fail stop = do not startup, and stop camel ignore = log a WARN and continue to startup",
+      "sourceType": "org.apache.camel.spring.boot.CamelStartupConditionConfigurationProperties",
+      "defaultValue": "stop"
+    },
+    {
+      "name": "camel.startupcondition.timeout",
+      "type": "java.lang.Integer",
+      "description": "Total timeout (in millis) for all startup conditions.",
+      "sourceType": "org.apache.camel.spring.boot.CamelStartupConditionConfigurationProperties",
+      "defaultValue": 20000
     },
     {
       "name": "camel.threadpool.allow-core-thread-time-out",
