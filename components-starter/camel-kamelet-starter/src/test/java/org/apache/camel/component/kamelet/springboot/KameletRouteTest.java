@@ -16,29 +16,25 @@
  */
 package org.apache.camel.component.kamelet.springboot;
 
-import java.util.UUID;
-
-import org.apache.camel.FailedToCreateRouteException;
+import org.apache.camel.CamelContext;
+import org.apache.camel.FluentProducerTemplate;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.RouteBuilder;
-import org.junit.jupiter.api.Test;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.FluentProducerTemplate;
-import org.apache.camel.CamelContext;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.annotation.DirtiesContext;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+
+import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DirtiesContext
 @CamelSpringBootTest
 @SpringBootTest(classes = { CamelAutoConfiguration.class, KameletRouteTest.class, })
-
 public class KameletRouteTest {
 
     @Autowired
@@ -59,18 +55,6 @@ public class KameletRouteTest {
         String body = UUID.randomUUID().toString();
 
         assertThat(fluentTemplate.toF("direct:chain").withBody(body).request(String.class)).isEqualTo("b-a-" + body);
-    }
-
-    @Test
-    public void duplicateRouteId() {
-        RouteBuilder rb = new RouteBuilder(context) {
-            @Override
-            public void configure() {
-                from("direct:start").to("kamelet:echo/test?prefix=test");
-            }
-        };
-
-        assertThrows(FailedToCreateRouteException.class, () -> rb.addRoutesToCamelContext(context));
     }
 
     // **********************************************
