@@ -15,3 +15,4 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 org.apache.camel.opentelemetry.starter.OpenTelemetryConditionalAutoConfiguration
+org.apache.camel.opentelemetry.starter.OpenTelemetryAutoConfiguration
