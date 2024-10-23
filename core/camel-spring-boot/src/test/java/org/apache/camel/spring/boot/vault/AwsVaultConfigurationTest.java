@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.util.Assert;
 
 @DirtiesContext
 @CamelSpringBootTest
@@ -32,7 +33,7 @@ import org.springframework.test.annotation.DirtiesContext;
         "camel.vault.aws.secretKey=mySecretKey", "camel.vault.aws.region=myRegion",
         "camel.vault.aws.defaultCredentialsProvider=false", "camel.vault.aws.refreshPeriod=60000",
         "camel.vault.aws.refreshEnabled=false", "camel.vault.aws.secrets=supersecret",
-        "camel.vault.aws.profile-credentials-provider=true", "camel.vault.aws.profile-name=test", "camel.vault.aws.use-sqs-notification=true", "camel.vault.aws.sqs-queue-url=http://sqs-2" })
+        "camel.vault.aws.profile-credentials-provider=true", "camel.vault.aws.profile-name=test", "camel.vault.aws.use-sqs-notification=true", "camel.vault.aws.sqs-queue-url=http://sqs-2", "camel.vault.aws.override-endpoint=true", "camel.vault.aws.uri-endpoint-override=http://localhost:8080" })
 public class AwsVaultConfigurationTest {
 
     @Autowired
@@ -51,5 +52,7 @@ public class AwsVaultConfigurationTest {
         Assertions.assertEquals(true, camelContext.getVaultConfiguration().aws().isProfileCredentialsProvider());
         Assertions.assertEquals(true, camelContext.getVaultConfiguration().aws().isUseSqsNotification());
         Assertions.assertEquals("http://sqs-2", camelContext.getVaultConfiguration().aws().getSqsQueueUrl());
+        Assertions.assertTrue(camelContext.getVaultConfiguration().aws().isOverrideEndpoint());
+        Assertions.assertEquals("http://localhost:8080", camelContext.getVaultConfiguration().aws().getUriEndpointOverride());
     }
 }

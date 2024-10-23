@@ -77,6 +77,17 @@ public class AwsVaultConfigurationProperties {
      */
     private String sqsQueueUrl;
 
+    /**
+     * Set the need for overriding the endpoint. This option needs to be used in combination with the
+     * uriEndpointOverride option
+     */
+    private boolean overrideEndpoint;
+
+    /**
+     * Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option
+     */
+    private String uriEndpointOverride;
+
     public String getAccessKey() {
         return accessKey;
     }
@@ -163,5 +174,21 @@ public class AwsVaultConfigurationProperties {
 
     public void setSqsQueueUrl(String sqsQueueUrl) {
         this.sqsQueueUrl = sqsQueueUrl;
+    }
+
+    public boolean isOverrideEndpoint() {
+        return overrideEndpoint;
+    }
+
+    public void setOverrideEndpoint(boolean overrideEndpoint) {
+        this.overrideEndpoint = overrideEndpoint;
+    }
+
+    public String getUriEndpointOverride() {
+        return uriEndpointOverride;
+    }
+
+    public void setUriEndpointOverride(String uriEndpointOverride) {
+        this.uriEndpointOverride = uriEndpointOverride;
     }
 }
