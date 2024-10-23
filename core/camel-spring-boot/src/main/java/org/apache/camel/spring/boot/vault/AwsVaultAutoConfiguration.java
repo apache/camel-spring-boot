@@ -44,6 +44,8 @@ public class AwsVaultAutoConfiguration {
         answer.setSecrets(config.getSecrets());
         answer.setUseSqsNotification(config.isUseSqsNotification());
         answer.setSqsQueueUrl(config.getSqsQueueUrl());
+        answer.setUriEndpointOverride(config.getUriEndpointOverride());
+        answer.setOverrideEndpoint(config.isOverrideEndpoint());
         return answer;
     }
 
