@@ -449,6 +449,11 @@ public class SalesforceComponentConfiguration
      */
     private Boolean httpProxySocks4 = false;
     /**
+     * Allow the Pub/Sub API client to use the proxy detected by
+     * java.net.ProxySelector. If false then no proxy server will be used.
+     */
+    private Boolean pubsubAllowUseSystemProxy = true;
+    /**
      * Explicit authentication method to be used, one of USERNAME_PASSWORD,
      * REFRESH_TOKEN, CLIENT_CREDENTIALS, or JWT. Salesforce component can
      * auto-determine the authentication method to use from the properties set,
@@ -1210,6 +1215,14 @@ public class SalesforceComponentConfiguration
 
     public void setHttpProxySocks4(Boolean httpProxySocks4) {
         this.httpProxySocks4 = httpProxySocks4;
+    }
+
+    public Boolean getPubsubAllowUseSystemProxy() {
+        return pubsubAllowUseSystemProxy;
+    }
+
+    public void setPubsubAllowUseSystemProxy(Boolean pubsubAllowUseSystemProxy) {
+        this.pubsubAllowUseSystemProxy = pubsubAllowUseSystemProxy;
     }
 
     public AuthenticationType getAuthenticationType() {
