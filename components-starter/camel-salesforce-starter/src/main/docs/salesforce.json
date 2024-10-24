@@ -490,6 +490,13 @@
       "defaultValue": 7443
     },
     {
+      "name": "camel.component.salesforce.pubsub-allow-use-system-proxy",
+      "type": "java.lang.Boolean",
+      "description": "Allow the Pub\/Sub API client to use the proxy detected by java.net.ProxySelector. If false then no proxy server will be used.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.salesforce.query-locator",
       "type": "java.lang.String",
       "description": "Query Locator provided by salesforce for use when a query results in more records than can be retrieved in a single call. Use this value in a subsequent call to retrieve additional records.",
