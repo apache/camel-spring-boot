@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-vertx-http-starter",
-    "version": "4.8.1-SNAPSHOT",
+    "version": "4.8.2-SNAPSHOT",
     "scheme": "vertx-http",
     "extendsScheme": "",
     "syntax": "vertx-http:httpUri",
