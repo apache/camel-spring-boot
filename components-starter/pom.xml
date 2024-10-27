@@ -217,6 +217,7 @@
     <module>camel-file-watch-starter</module>
     <module>camel-flatpack-starter</module>
     <module>camel-flink-starter</module>
+    <module>camel-flowable-starter</module>
     <module>camel-fop-starter</module>
     <module>camel-freemarker-starter</module>
     <module>camel-ftp-starter</module>
