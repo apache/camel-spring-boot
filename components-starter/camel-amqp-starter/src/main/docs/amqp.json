@@ -317,6 +317,13 @@
       "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
     },
     {
+      "name": "camel.component.amqp.host",
+      "type": "java.lang.String",
+      "description": "The host name or IP address of the computer that hosts the AMQP Broker.",
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
+      "defaultValue": "localhost"
+    },
+    {
       "name": "camel.component.amqp.idle-consumer-limit",
       "type": "java.lang.Integer",
       "description": "Specify the limit for the number of consumers that are allowed to be idle at any given time.",
@@ -375,6 +382,25 @@
       "type": "org.apache.camel.component.jms.JmsMessageType",
       "description": "Allows you to force the use of a specific jakarta.jms.Message implementation for sending JMS messages. Possible values are: Bytes, Map, Object, Stream, Text. By default, Camel would determine which JMS message type to use from the In body type. This option allows you to specify it.",
       "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
+    },
+    {
+      "name": "camel.component.amqp.key-store-location",
+      "type": "java.lang.String",
+      "description": "The SSL keystore location.",
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
+    },
+    {
+      "name": "camel.component.amqp.key-store-password",
+      "type": "java.lang.String",
+      "description": "The SSL keystore password.",
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
+    },
+    {
+      "name": "camel.component.amqp.key-store-type",
+      "type": "java.lang.String",
+      "description": "The SSL keystore type.",
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
+      "defaultValue": "JKS"
     },
     {
       "name": "camel.component.amqp.lazy-create-transaction-manager",
@@ -447,6 +473,13 @@
       "type": "java.lang.String",
       "description": "Password to use with the ConnectionFactory. You can also configure username\/password directly on the ConnectionFactory.",
       "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
+    },
+    {
+      "name": "camel.component.amqp.port",
+      "type": "java.lang.Integer",
+      "description": "The port number on which the AMPQ Broker listens.",
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
+      "defaultValue": 5672
     },
     {
       "name": "camel.component.amqp.preserve-message-qos",
@@ -694,11 +727,44 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.amqp.trust-store-location",
+      "type": "java.lang.String",
+      "description": "The SSL truststore location.",
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
+    },
+    {
+      "name": "camel.component.amqp.trust-store-password",
+      "type": "java.lang.String",
+      "description": "The SSL truststore password.",
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
+    },
+    {
+      "name": "camel.component.amqp.trust-store-type",
+      "type": "java.lang.String",
+      "description": "The SSL truststore type.",
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
+      "defaultValue": "JKS"
+    },
+    {
       "name": "camel.component.amqp.use-message-id-as-correlation-id",
       "type": "java.lang.Boolean",
       "description": "Specifies whether JMSMessageID should always be used as JMSCorrelationID for InOut messages.",
       "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.amqp.use-ssl",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable SSL when connecting to the AMQP Broker.",
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.amqp.use-topic-prefix",
+      "type": "java.lang.Boolean",
+      "description": "Whether to configure topics with a topic:\/\/ prefix.",
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
+      "defaultValue": true
     },
     {
       "name": "camel.component.amqp.username",

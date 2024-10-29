@@ -74,6 +74,10 @@ public class AMQPComponentConfiguration
      */
     private String durableSubscriptionName;
     /**
+     * The host name or IP address of the computer that hosts the AMQP Broker.
+     */
+    private String host = "localhost";
+    /**
      * Whether to include AMQP annotations when mapping from AMQP to Camel
      * Message. Setting this to true maps AMQP message annotations that contain
      * a JMS_AMQP_MA_ prefix to message headers. Due to limitations in Apache
@@ -88,6 +92,18 @@ public class AMQPComponentConfiguration
      */
     private JmsMessageType jmsMessageType;
     /**
+     * The SSL keystore location.
+     */
+    private String keyStoreLocation;
+    /**
+     * The SSL keystore type.
+     */
+    private String keyStoreType = "JKS";
+    /**
+     * The port number on which the AMPQ Broker listens.
+     */
+    private Integer port = 5672;
+    /**
      * Provides an explicit ReplyTo destination (overrides any incoming value of
      * Message.getJMSReplyTo() in consumer).
      */
@@ -100,6 +116,22 @@ public class AMQPComponentConfiguration
      * connections. The JMS producers is tested as well.
      */
     private Boolean testConnectionOnStartup = false;
+    /**
+     * The SSL truststore location.
+     */
+    private String trustStoreLocation;
+    /**
+     * The SSL truststore type.
+     */
+    private String trustStoreType = "JKS";
+    /**
+     * Whether to enable SSL when connecting to the AMQP Broker.
+     */
+    private Boolean useSsl = false;
+    /**
+     * Whether to configure topics with a topic:// prefix.
+     */
+    private Boolean useTopicPrefix = true;
     /**
      * The JMS acknowledgement name, which is one of: SESSION_TRANSACTED,
      * CLIENT_ACKNOWLEDGE, AUTO_ACKNOWLEDGE, DUPS_OK_ACKNOWLEDGE
@@ -797,10 +829,18 @@ public class AMQPComponentConfiguration
      */
     private Boolean errorHandlerLogStackTrace = true;
     /**
+     * The SSL keystore password.
+     */
+    private String keyStorePassword;
+    /**
      * Password to use with the ConnectionFactory. You can also configure
      * username/password directly on the ConnectionFactory.
      */
     private String password;
+    /**
+     * The SSL truststore password.
+     */
+    private String trustStorePassword;
     /**
      * Username to use with the ConnectionFactory. You can also configure
      * username/password directly on the ConnectionFactory.
@@ -881,6 +921,14 @@ public class AMQPComponentConfiguration
         this.durableSubscriptionName = durableSubscriptionName;
     }
 
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
     public Boolean getIncludeAmqpAnnotations() {
         return includeAmqpAnnotations;
     }
@@ -897,6 +945,30 @@ public class AMQPComponentConfiguration
         this.jmsMessageType = jmsMessageType;
     }
 
+    public String getKeyStoreLocation() {
+        return keyStoreLocation;
+    }
+
+    public void setKeyStoreLocation(String keyStoreLocation) {
+        this.keyStoreLocation = keyStoreLocation;
+    }
+
+    public String getKeyStoreType() {
+        return keyStoreType;
+    }
+
+    public void setKeyStoreType(String keyStoreType) {
+        this.keyStoreType = keyStoreType;
+    }
+
+    public Integer getPort() {
+        return port;
+    }
+
+    public void setPort(Integer port) {
+        this.port = port;
+    }
+
     public String getReplyTo() {
         return replyTo;
     }
@@ -911,6 +983,38 @@ public class AMQPComponentConfiguration
 
     public void setTestConnectionOnStartup(Boolean testConnectionOnStartup) {
         this.testConnectionOnStartup = testConnectionOnStartup;
+    }
+
+    public String getTrustStoreLocation() {
+        return trustStoreLocation;
+    }
+
+    public void setTrustStoreLocation(String trustStoreLocation) {
+        this.trustStoreLocation = trustStoreLocation;
+    }
+
+    public String getTrustStoreType() {
+        return trustStoreType;
+    }
+
+    public void setTrustStoreType(String trustStoreType) {
+        this.trustStoreType = trustStoreType;
+    }
+
+    public Boolean getUseSsl() {
+        return useSsl;
+    }
+
+    public void setUseSsl(Boolean useSsl) {
+        this.useSsl = useSsl;
+    }
+
+    public Boolean getUseTopicPrefix() {
+        return useTopicPrefix;
+    }
+
+    public void setUseTopicPrefix(Boolean useTopicPrefix) {
+        this.useTopicPrefix = useTopicPrefix;
     }
 
     public String getAcknowledgementModeName() {
@@ -1662,12 +1766,28 @@ public class AMQPComponentConfiguration
         this.errorHandlerLogStackTrace = errorHandlerLogStackTrace;
     }
 
+    public String getKeyStorePassword() {
+        return keyStorePassword;
+    }
+
+    public void setKeyStorePassword(String keyStorePassword) {
+        this.keyStorePassword = keyStorePassword;
+    }
+
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getTrustStorePassword() {
+        return trustStorePassword;
+    }
+
+    public void setTrustStorePassword(String trustStorePassword) {
+        this.trustStorePassword = trustStorePassword;
     }
 
     public String getUsername() {

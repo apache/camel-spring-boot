@@ -650,7 +650,7 @@
     {
       "name": "camel.main.dump-routes-include",
       "type": "java.lang.String",
-      "description": "Controls what to include in output for route dumping. Possible values: all, routes, rests, routeConfigurations, routeTemplates, beans. Multiple values can be separated by comma. Default is routes.",
+      "description": "Controls what to include in output for route dumping. Possible values: all, routes, rests, routeConfigurations, routeTemplates, beans, dataFormats. Multiple values can be separated by comma. Default is routes.",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
       "defaultValue": "routes"
     },
@@ -2174,7 +2174,7 @@
     {
       "name": "camel.springboot.dump-routes-include",
       "type": "java.lang.String",
-      "description": "Controls what to include in output for route dumping. Possible values: all, routes, rests, routeConfigurations, routeTemplates, beans. Multiple values can be separated by comma. Default is routes.",
+      "description": "Controls what to include in output for route dumping. Possible values: all, routes, rests, routeConfigurations, routeTemplates, beans, dataFormats. Multiple values can be separated by comma. Default is routes.",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Springboot",
       "defaultValue": "routes",
       "deprecated": true,
