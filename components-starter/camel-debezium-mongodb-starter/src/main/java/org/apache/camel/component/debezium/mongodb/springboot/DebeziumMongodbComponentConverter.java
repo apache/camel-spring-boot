@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.debezium.springboot;
+package org.apache.camel.component.debezium.mongodb.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -39,7 +39,7 @@ public class DebeziumMongodbComponentConverter implements GenericConverter {
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.debezium.configuration.MongoDbConnectorEmbeddedDebeziumConfiguration.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.debezium.mongodb.configuration.MongoDbConnectorEmbeddedDebeziumConfiguration.class));
         return answer;
     }
 
@@ -56,7 +56,7 @@ public class DebeziumMongodbComponentConverter implements GenericConverter {
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "org.apache.camel.component.debezium.configuration.MongoDbConnectorEmbeddedDebeziumConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.debezium.configuration.MongoDbConnectorEmbeddedDebeziumConfiguration.class);
+            case "org.apache.camel.component.debezium.mongodb.configuration.MongoDbConnectorEmbeddedDebeziumConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.debezium.mongodb.configuration.MongoDbConnectorEmbeddedDebeziumConfiguration.class);
         }
         return null;
     }

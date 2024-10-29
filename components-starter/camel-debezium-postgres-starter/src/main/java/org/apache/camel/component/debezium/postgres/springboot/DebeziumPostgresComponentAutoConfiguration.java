@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.debezium.springboot;
+package org.apache.camel.component.debezium.postgres.springboot;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
-import org.apache.camel.component.debezium.DebeziumDb2Component;
+import org.apache.camel.component.debezium.postgres.DebeziumPostgresComponent;
 import org.apache.camel.spi.ComponentCustomizer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
@@ -40,25 +40,25 @@ import org.springframework.context.annotation.Lazy;
  */
 @Configuration(proxyBeanMethods = false)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
-@EnableConfigurationProperties({ComponentConfigurationProperties.class,DebeziumDb2ComponentConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.component", "camel.component.debezium-db2"})
-@AutoConfigureAfter({CamelAutoConfiguration.class, DebeziumDb2ComponentConverter.class})
-public class DebeziumDb2ComponentAutoConfiguration {
+@EnableConfigurationProperties({ComponentConfigurationProperties.class,DebeziumPostgresComponentConfiguration.class})
+@ConditionalOnHierarchicalProperties({"camel.component", "camel.component.debezium-postgres"})
+@AutoConfigureAfter({CamelAutoConfiguration.class, DebeziumPostgresComponentConverter.class})
+public class DebeziumPostgresComponentAutoConfiguration {
 
     @Autowired
     private ApplicationContext applicationContext;
     private final CamelContext camelContext;
     @Autowired
-    private DebeziumDb2ComponentConfiguration configuration;
+    private DebeziumPostgresComponentConfiguration configuration;
 
-    public DebeziumDb2ComponentAutoConfiguration(
+    public DebeziumPostgresComponentAutoConfiguration(
             org.apache.camel.CamelContext camelContext) {
         this.camelContext = camelContext;
     }
 
     @Lazy
     @Bean
-    public ComponentCustomizer configureDebeziumDb2Component() {
+    public ComponentCustomizer configureDebeziumPostgresComponent() {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
@@ -69,8 +69,8 @@ public class DebeziumDb2ComponentAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.component.customizer",
-                        "camel.component.debezium-db2.customizer")
-                    && target instanceof DebeziumDb2Component;
+                        "camel.component.debezium-postgres.customizer")
+                    && target instanceof DebeziumPostgresComponent;
             }
         };
     }

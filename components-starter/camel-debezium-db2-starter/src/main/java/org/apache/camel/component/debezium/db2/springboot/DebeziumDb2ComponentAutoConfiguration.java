@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.debezium.springboot;
+package org.apache.camel.component.debezium.db2.springboot;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
-import org.apache.camel.component.debezium.DebeziumOracleComponent;
+import org.apache.camel.component.debezium.db2.DebeziumDb2Component;
 import org.apache.camel.spi.ComponentCustomizer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
@@ -40,25 +40,25 @@ import org.springframework.context.annotation.Lazy;
  */
 @Configuration(proxyBeanMethods = false)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
-@EnableConfigurationProperties({ComponentConfigurationProperties.class,DebeziumOracleComponentConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.component", "camel.component.debezium-oracle"})
-@AutoConfigureAfter({CamelAutoConfiguration.class, DebeziumOracleComponentConverter.class})
-public class DebeziumOracleComponentAutoConfiguration {
+@EnableConfigurationProperties({ComponentConfigurationProperties.class,DebeziumDb2ComponentConfiguration.class})
+@ConditionalOnHierarchicalProperties({"camel.component", "camel.component.debezium-db2"})
+@AutoConfigureAfter({CamelAutoConfiguration.class, DebeziumDb2ComponentConverter.class})
+public class DebeziumDb2ComponentAutoConfiguration {
 
     @Autowired
     private ApplicationContext applicationContext;
     private final CamelContext camelContext;
     @Autowired
-    private DebeziumOracleComponentConfiguration configuration;
+    private DebeziumDb2ComponentConfiguration configuration;
 
-    public DebeziumOracleComponentAutoConfiguration(
+    public DebeziumDb2ComponentAutoConfiguration(
             org.apache.camel.CamelContext camelContext) {
         this.camelContext = camelContext;
     }
 
     @Lazy
     @Bean
-    public ComponentCustomizer configureDebeziumOracleComponent() {
+    public ComponentCustomizer configureDebeziumDb2Component() {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
@@ -69,8 +69,8 @@ public class DebeziumOracleComponentAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.component.customizer",
-                        "camel.component.debezium-oracle.customizer")
-                    && target instanceof DebeziumOracleComponent;
+                        "camel.component.debezium-db2.customizer")
+                    && target instanceof DebeziumDb2Component;
             }
         };
     }
