@@ -2,13 +2,13 @@
   "groups": [
     {
       "name": "camel.component.debezium-sqlserver",
-      "type": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "type": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.customizer",
       "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "sourceMethod": "getCustomizer()"
     }
   ],
@@ -17,64 +17,64 @@
       "name": "camel.component.debezium-sqlserver.additional-properties",
       "type": "java.util.Map<java.lang.String,java.lang.Object>",
       "description": "Additional properties for debezium components in case they can't be set directly on the camel configurations (e.g: setting Kafka Connect properties needed by Debezium engine, for example setting KafkaOffsetBackingStore), the properties have to be prefixed with additionalProperties.. E.g: additionalProperties.transactional.id=12345&additionalProperties.schema.registry.url=http:\/\/localhost:8811\/avro",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.debezium-sqlserver.binary-handling-mode",
       "type": "java.lang.String",
       "description": "Specify how binary (blob, binary, etc.) columns should be represented in change events, including: 'bytes' represents binary data as byte array (default); 'base64' represents binary data as base64-encoded string; 'base64-url-safe' represents binary data as base64-url-safe-encoded string; 'hex' represents binary data as hex-encoded (base16) string",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "bytes"
     },
     {
       "name": "camel.component.debezium-sqlserver.bridge-error-handler",
       "type": "java.lang.Boolean",
       "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.debezium-sqlserver.column-exclude-list",
       "type": "java.lang.String",
       "description": "Regular expressions matching columns to exclude from change events",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.column-include-list",
       "type": "java.lang.String",
       "description": "Regular expressions matching columns to include in change events",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.column-propagate-source-type",
       "type": "java.lang.String",
       "description": "A comma-separated list of regular expressions matching fully-qualified names of columns that adds the columns original type and original length as parameters to the corresponding field schemas in the emitted change records.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.configuration",
-      "type": "org.apache.camel.component.debezium.configuration.SqlServerConnectorEmbeddedDebeziumConfiguration",
-      "description": "Allow pre-configured Configurations to be set. The option is a org.apache.camel.component.debezium.configuration.SqlServerConnectorEmbeddedDebeziumConfiguration type.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "type": "org.apache.camel.component.debezium.sqlserver.configuration.SqlServerConnectorEmbeddedDebeziumConfiguration",
+      "description": "Allow pre-configured Configurations to be set. The option is a org.apache.camel.component.debezium.sqlserver.configuration.SqlServerConnectorEmbeddedDebeziumConfiguration type.",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.converters",
       "type": "java.lang.String",
       "description": "Optional list of custom converters that would be used instead of default ones. The converters are defined using '.type' config option and configured using options '.'",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.custom-metric-tags",
       "type": "java.lang.String",
       "description": "The custom metric tags will accept key-value pairs to customize the MBean object name which should be appended the end of regular name, each key would represent a tag for the MBean object name, and the corresponding value would be the value of that tag the key is. For example: k1=v1,k2=v2",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.customizer.enabled",
@@ -85,520 +85,520 @@
       "name": "camel.component.debezium-sqlserver.data-query-mode",
       "type": "java.lang.String",
       "description": "Controls how the connector queries CDC data. The default is 'function', which means the data is queried by means of calling cdc.fn_cdc_get_all_changes_# function. The value of 'direct' makes the connector to query the change tables directly.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "function"
     },
     {
       "name": "camel.component.debezium-sqlserver.database-hostname",
       "type": "java.lang.String",
       "description": "Resolvable hostname or IP address of the database server.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.database-instance",
       "type": "java.lang.String",
       "description": "The SQL Server instance name",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.database-names",
       "type": "java.lang.String",
       "description": "The names of the databases from which the connector should capture changes",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.database-password",
       "type": "java.lang.String",
       "description": "Password of the database user to be used when connecting to the database.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.database-port",
       "type": "java.lang.Integer",
       "description": "Port of the database server.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": 1433
     },
     {
       "name": "camel.component.debezium-sqlserver.database-query-timeout-ms",
       "type": "java.lang.Integer",
       "description": "Time to wait for a query to execute, given in milliseconds. Defaults to 600 seconds (600,000 ms); zero means there is no limit. The option is a int type.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": 600000
     },
     {
       "name": "camel.component.debezium-sqlserver.database-user",
       "type": "java.lang.String",
       "description": "Name of the database user to be used when connecting to the database.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.datatype-propagate-source-type",
       "type": "java.lang.String",
       "description": "A comma-separated list of regular expressions matching the database-specific data type names that adds the data type's original type and original length as parameters to the corresponding field schemas in the emitted change records.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.decimal-handling-mode",
       "type": "java.lang.String",
       "description": "Specify how DECIMAL and NUMERIC columns should be represented in change events, including: 'precise' (the default) uses java.math.BigDecimal to represent values, which are encoded in the change events using a binary representation and Kafka Connect's 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to represent values; 'double' represents values using Java's 'double', which may not offer the precision but will be far easier to use in consumers.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "precise"
     },
     {
       "name": "camel.component.debezium-sqlserver.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the debezium-sqlserver component. This is enabled by default.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.errors-max-retries",
       "type": "java.lang.Integer",
       "description": "The maximum number of retries on connection errors before failing (-1 = no limit, 0 = disabled, 0 = num of retries).",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": -1
     },
     {
       "name": "camel.component.debezium-sqlserver.event-processing-failure-handling-mode",
       "type": "java.lang.String",
       "description": "Specify how failures during processing of events (i.e. when encountering a corrupted event) should be handled, including: 'fail' (the default) an exception indicating the problematic event and its position is raised, causing the connector to be stopped; 'warn' the problematic event and its position will be logged and the event will be skipped; 'ignore' the problematic event will be skipped.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "fail"
     },
     {
       "name": "camel.component.debezium-sqlserver.heartbeat-action-query",
       "type": "java.lang.String",
       "description": "The query executed with every heartbeat.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.heartbeat-interval-ms",
       "type": "java.lang.Integer",
       "description": "Length of an interval in milli-seconds in in which the connector periodically sends heartbeat messages to a heartbeat topic. Use 0 to disable heartbeat messages. Disabled by default. The option is a int type.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": 0
     },
     {
       "name": "camel.component.debezium-sqlserver.heartbeat-topics-prefix",
       "type": "java.lang.String",
       "description": "The prefix that is used to name heartbeat topics.Defaults to __debezium-heartbeat.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "__debezium-heartbeat"
     },
     {
       "name": "camel.component.debezium-sqlserver.include-schema-changes",
       "type": "java.lang.Boolean",
       "description": "Whether the connector should publish changes in the database schema to a Kafka topic with the same name as the database server ID. Each schema change will be recorded using a key that contains the database name and whose value include logical description of the new schema and optionally the DDL statement(s). The default is 'true'. This is independent of how the connector internally records database schema history.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.debezium-sqlserver.include-schema-comments",
       "type": "java.lang.Boolean",
       "description": "Whether the connector parse table and column's comment to metadata object. Note: Enable this option will bring the implications on memory usage. The number and size of ColumnImpl objects is what largely impacts how much memory is consumed by the Debezium connectors, and adding a String to each of them can potentially be quite heavy. The default is 'false'.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.debezium-sqlserver.incremental-snapshot-allow-schema-changes",
       "type": "java.lang.Boolean",
       "description": "Detect schema change during an incremental snapshot and re-select a current chunk to avoid locking DDLs. Note that changes to a primary key are not supported and can cause incorrect results if performed during an incremental snapshot. Another limitation is that if a schema change affects only columns' default values, then the change won't be detected until the DDL is processed from the binlog stream. This doesn't affect the snapshot events' values, but the schema of snapshot events may have outdated defaults.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.debezium-sqlserver.incremental-snapshot-chunk-size",
       "type": "java.lang.Integer",
       "description": "The maximum size of chunk (number of documents\/rows) for incremental snapshotting",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": 1024
     },
     {
       "name": "camel.component.debezium-sqlserver.incremental-snapshot-option-recompile",
       "type": "java.lang.Boolean",
       "description": "Add OPTION(RECOMPILE) on each SELECT statement during the incremental snapshot process. This prevents parameter sniffing but can cause CPU pressure on the source database.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.debezium-sqlserver.incremental-snapshot-watermarking-strategy",
       "type": "java.lang.String",
       "description": "Specify the strategy used for watermarking during an incremental snapshot: 'insert_insert' both open and close signal is written into signal data collection (default); 'insert_delete' only open signal is written on signal data collection, the close will delete the relative open signal;",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "INSERT_INSERT"
     },
     {
       "name": "camel.component.debezium-sqlserver.internal-key-converter",
       "type": "java.lang.String",
       "description": "The Converter class that should be used to serialize and deserialize key data for offsets. The default is JSON converter.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "org.apache.kafka.connect.json.JsonConverter"
     },
     {
       "name": "camel.component.debezium-sqlserver.internal-value-converter",
       "type": "java.lang.String",
       "description": "The Converter class that should be used to serialize and deserialize value data for offsets. The default is JSON converter.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "org.apache.kafka.connect.json.JsonConverter"
     },
     {
       "name": "camel.component.debezium-sqlserver.max-batch-size",
       "type": "java.lang.Integer",
       "description": "Maximum size of each batch of source records. Defaults to 2048.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": 2048
     },
     {
       "name": "camel.component.debezium-sqlserver.max-iteration-transactions",
       "type": "java.lang.Integer",
       "description": "This property can be used to reduce the connector memory usage footprint when changes are streamed from multiple tables per database.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": 500
     },
     {
       "name": "camel.component.debezium-sqlserver.max-queue-size",
       "type": "java.lang.Integer",
       "description": "Maximum size of the queue for change events read from the database log but not yet recorded or forwarded. Defaults to 8192, and should always be larger than the maximum batch size.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": 8192
     },
     {
       "name": "camel.component.debezium-sqlserver.max-queue-size-in-bytes",
       "type": "java.lang.Long",
       "description": "Maximum size of the queue in bytes for change events read from the database log but not yet recorded or forwarded. Defaults to 0. Mean the feature is not enabled",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": 0
     },
     {
       "name": "camel.component.debezium-sqlserver.message-key-columns",
       "type": "java.lang.String",
       "description": "A semicolon-separated list of expressions that match fully-qualified tables and column(s) to be used as message key. Each expression must match the pattern ':', where the table names could be defined as (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connector, and the key columns are a comma-separated list of columns representing the custom key. For any table without an explicit key configuration the table's primary key column(s) will be used as message key. Example: dbserver1.inventory.orderlines:orderId,orderLineId;dbserver1.inventory.orders:id",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.notification-enabled-channels",
       "type": "java.lang.String",
       "description": "List of notification channels names that are enabled.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.notification-sink-topic-name",
       "type": "java.lang.String",
       "description": "The name of the topic for the notifications. This is required in case 'sink' is in the list of enabled channels",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.offset-commit-policy",
       "type": "java.lang.String",
       "description": "The name of the Java class of the commit policy. It defines when offsets commit has to be triggered based on the number of events processed and the time elapsed since the last commit. This class must implement the interface 'OffsetCommitPolicy'. The default is a periodic commit policy based upon time intervals.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.offset-commit-timeout-ms",
       "type": "java.lang.Long",
       "description": "Maximum number of milliseconds to wait for records to flush and partition offset data to be committed to offset storage before cancelling the process and restoring the offset data to be committed in a future attempt. The default is 5 seconds. The option is a long type.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": 5000
     },
     {
       "name": "camel.component.debezium-sqlserver.offset-flush-interval-ms",
       "type": "java.lang.Long",
       "description": "Interval at which to try committing offsets. The default is 1 minute. The option is a long type.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": 60000
     },
     {
       "name": "camel.component.debezium-sqlserver.offset-storage",
       "type": "java.lang.String",
       "description": "The name of the Java class that is responsible for persistence of connector offsets.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "org.apache.kafka.connect.storage.FileOffsetBackingStore"
     },
     {
       "name": "camel.component.debezium-sqlserver.offset-storage-file-name",
       "type": "java.lang.String",
       "description": "Path to file where offsets are to be stored. Required when offset.storage is set to the FileOffsetBackingStore.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.offset-storage-partitions",
       "type": "java.lang.Integer",
       "description": "The number of partitions used when creating the offset storage topic. Required when offset.storage is set to the 'KafkaOffsetBackingStore'.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.offset-storage-replication-factor",
       "type": "java.lang.Integer",
       "description": "Replication factor used when creating the offset storage topic. Required when offset.storage is set to the KafkaOffsetBackingStore",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.offset-storage-topic",
       "type": "java.lang.String",
       "description": "The name of the Kafka topic where offsets are to be stored. Required when offset.storage is set to the KafkaOffsetBackingStore.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.poll-interval-ms",
       "type": "java.lang.Long",
       "description": "Time to wait for new change events to appear after receiving no events, given in milliseconds. Defaults to 500 ms. The option is a long type.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": 500
     },
     {
       "name": "camel.component.debezium-sqlserver.post-processors",
       "type": "java.lang.String",
       "description": "Optional list of post processors. The processors are defined using '.type' config option and configured using options ''",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.provide-transaction-metadata",
       "type": "java.lang.Boolean",
       "description": "Enables transaction metadata extraction together with event counting",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.debezium-sqlserver.retriable-restart-connector-wait-ms",
       "type": "java.lang.Long",
       "description": "Time to wait before restarting connector after retriable exception occurs. Defaults to 10000ms. The option is a long type.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": 10000
     },
     {
       "name": "camel.component.debezium-sqlserver.schema-history-internal",
       "type": "java.lang.String",
       "description": "The name of the SchemaHistory class that should be used to store and recover database schema changes. The configuration properties for the history are prefixed with the 'schema.history.internal.' string.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "io.debezium.storage.kafka.history.KafkaSchemaHistory"
     },
     {
       "name": "camel.component.debezium-sqlserver.schema-history-internal-file-filename",
       "type": "java.lang.String",
       "description": "The path to the file that will be used to record the database schema history",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.schema-history-internal-skip-unparseable-ddl",
       "type": "java.lang.Boolean",
       "description": "Controls the action Debezium will take when it meets a DDL statement in binlog, that it cannot parse.By default the connector will stop operating but by changing the setting it can ignore the statements which it cannot parse. If skipping is enabled then Debezium can miss metadata changes.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.debezium-sqlserver.schema-history-internal-store-only-captured-databases-ddl",
       "type": "java.lang.Boolean",
       "description": "Controls what DDL will Debezium store in database schema history. By default (true) only DDL that manipulates a table from captured schema\/database will be stored. If set to false, then Debezium will store all incoming DDL statements.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.debezium-sqlserver.schema-history-internal-store-only-captured-tables-ddl",
       "type": "java.lang.Boolean",
       "description": "Controls what DDL will Debezium store in database schema history. By default (false) Debezium will store all incoming DDL statements. If set to true, then only DDL that manipulates a captured table will be stored.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.debezium-sqlserver.schema-name-adjustment-mode",
       "type": "java.lang.String",
       "description": "Specify how schema names should be adjusted for compatibility with the message converter used by the connector, including: 'avro' replaces the characters that cannot be used in the Avro type name with underscore; 'avro_unicode' replaces the underscore or characters that cannot be used in the Avro type name with corresponding unicode like _uxxxx. Note: _ is an escape sequence like backslash in Java;'none' does not apply any adjustment (default)",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "none"
     },
     {
       "name": "camel.component.debezium-sqlserver.signal-data-collection",
       "type": "java.lang.String",
       "description": "The name of the data collection that is used to send signals\/commands to Debezium. Signaling is disabled when not set.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.signal-enabled-channels",
       "type": "java.lang.String",
       "description": "List of channels names that are enabled. Source channel is enabled by default",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "source"
     },
     {
       "name": "camel.component.debezium-sqlserver.signal-poll-interval-ms",
       "type": "java.lang.Long",
       "description": "Interval for looking for new signals in registered channels, given in milliseconds. Defaults to 5 seconds. The option is a long type.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": 5000
     },
     {
       "name": "camel.component.debezium-sqlserver.skipped-operations",
       "type": "java.lang.String",
       "description": "The comma-separated list of operations to skip during streaming, defined as: 'c' for inserts\/create; 'u' for updates; 'd' for deletes, 't' for truncates, and 'none' to indicate nothing skipped. By default, only truncate operations will be skipped.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "t"
     },
     {
       "name": "camel.component.debezium-sqlserver.snapshot-delay-ms",
       "type": "java.lang.Long",
       "description": "A delay period before a snapshot will begin, given in milliseconds. Defaults to 0 ms. The option is a long type.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": 0
     },
     {
       "name": "camel.component.debezium-sqlserver.snapshot-fetch-size",
       "type": "java.lang.Integer",
       "description": "The maximum number of records that should be loaded into memory while performing a snapshot.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.snapshot-include-collection-list",
       "type": "java.lang.String",
       "description": "This setting must be set to specify a list of tables\/collections whose snapshot must be taken on creating or restarting the connector.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.snapshot-isolation-mode",
       "type": "java.lang.String",
       "description": "Controls which transaction isolation level is used and how long the connector locks the captured tables. The default is 'repeatable_read', which means that repeatable read isolation level is used. In addition, type of acquired lock during schema snapshot depends on snapshot.locking.mode property. Using a value of 'exclusive' ensures that the connector holds the type of lock specified with snapshot.locking.mode property (and thus prevents any reads and updates) for all captured tables during the entire snapshot duration. When 'snapshot' is specified, connector runs the initial snapshot in SNAPSHOT isolation level, which guarantees snapshot consistency. In addition, neither table nor row-level locks are held. When 'read_committed' is specified, connector runs the initial snapshot in READ COMMITTED isolation level. No long-running locks are taken, so that initial snapshot does not prevent other transactions from updating table rows. Snapshot consistency is not guaranteed.In 'read_uncommitted' mode neither table nor row-level locks are acquired, but connector does not guarantee snapshot consistency.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "repeatable_read"
     },
     {
       "name": "camel.component.debezium-sqlserver.snapshot-lock-timeout-ms",
       "type": "java.lang.Long",
       "description": "The maximum number of millis to wait for table locks at the beginning of a snapshot. If locks cannot be acquired in this time frame, the snapshot will be aborted. Defaults to 10 seconds. The option is a long type.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": 10000
     },
     {
       "name": "camel.component.debezium-sqlserver.snapshot-max-threads",
       "type": "java.lang.Integer",
       "description": "The maximum number of threads used to perform the snapshot. Defaults to 1.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": 1
     },
     {
       "name": "camel.component.debezium-sqlserver.snapshot-mode",
       "type": "java.lang.String",
       "description": "The criteria for running a snapshot upon startup of the connector. Select one of the following snapshot options: 'initial' (default): If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures the current full state of the configured tables. After the snapshot completes, the connector begins to stream changes from the transaction log.; 'initial_only': The connector performs a snapshot as it does for the 'initial' option, but after the connector completes the snapshot, it stops, and does not stream changes from the transaction log.; 'schema_only': If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures only the schema (table structures), but not any table data. After the snapshot completes, the connector begins to stream changes from the transaction log.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "initial"
     },
     {
       "name": "camel.component.debezium-sqlserver.snapshot-mode-configuration-based-snapshot-data",
       "type": "java.lang.Boolean",
       "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the data should be snapshotted or not.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.debezium-sqlserver.snapshot-mode-configuration-based-snapshot-on-data-error",
       "type": "java.lang.Boolean",
       "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the data should be snapshotted or not in case of error.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.debezium-sqlserver.snapshot-mode-configuration-based-snapshot-on-schema-error",
       "type": "java.lang.Boolean",
       "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the schema should be snapshotted or not in case of error.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.debezium-sqlserver.snapshot-mode-configuration-based-snapshot-schema",
       "type": "java.lang.Boolean",
       "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the schema should be snapshotted or not.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.debezium-sqlserver.snapshot-mode-configuration-based-start-stream",
       "type": "java.lang.Boolean",
       "description": "When 'snapshot.mode' is set as configuration_based, this setting permits to specify whenever the stream should start or not after snapshot.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.debezium-sqlserver.snapshot-mode-custom-name",
       "type": "java.lang.String",
       "description": "When 'snapshot.mode' is set as custom, this setting must be set to specify a the name of the custom implementation provided in the 'name()' method. The implementations must implement the 'Snapshotter' interface and is called on each app boot to determine whether to do a snapshot.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.snapshot-select-statement-overrides",
       "type": "java.lang.String",
       "description": "This property contains a comma-separated list of fully-qualified tables (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connectors. Select statements for the individual tables are specified in further configuration properties, one for each table, identified by the id 'snapshot.select.statement.overrides.DB_NAME.TABLE_NAME' or 'snapshot.select.statement.overrides.SCHEMA_NAME.TABLE_NAME', respectively. The value of those properties is the select statement to use when retrieving data from the specific table during snapshotting. A possible use case for large append-only tables is setting a specific point where to start (resume) snapshotting, in case a previous snapshotting was interrupted.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.snapshot-tables-order-by-row-count",
       "type": "java.lang.String",
       "description": "Controls the order in which tables are processed in the initial snapshot. A descending value will order the tables by row count descending. A ascending value will order the tables by row count ascending. A value of disabled (the default) will disable ordering by row count.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "disabled"
     },
     {
       "name": "camel.component.debezium-sqlserver.sourceinfo-struct-maker",
       "type": "java.lang.String",
       "description": "The name of the SourceInfoStructMaker class that returns SourceInfo schema and struct.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "io.debezium.connector.sqlserver.SqlServerSourceInfoStructMaker"
     },
     {
       "name": "camel.component.debezium-sqlserver.streaming-delay-ms",
       "type": "java.lang.Long",
       "description": "A delay period after the snapshot is completed and the streaming begins, given in milliseconds. Defaults to 0 ms. The option is a long type.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": 0
     },
     {
       "name": "camel.component.debezium-sqlserver.table-exclude-list",
       "type": "java.lang.String",
       "description": "A comma-separated list of regular expressions that match the fully-qualified names of tables to be excluded from monitoring",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.table-ignore-builtin",
       "type": "java.lang.Boolean",
       "description": "Flag specifying whether built-in tables should be ignored.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.debezium-sqlserver.table-include-list",
       "type": "java.lang.String",
       "description": "The tables for which changes are to be captured",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.time-precision-mode",
       "type": "java.lang.String",
       "description": "Time, date, and timestamps can be represented with different kinds of precisions, including: 'adaptive' (the default) bases the precision of time, date, and timestamp values on the database column's precision; 'adaptive_time_microseconds' like 'adaptive' mode, but TIME fields always use microseconds precision; 'connect' always represents time, date, and timestamp values using Kafka Connect's built-in representations for Time, Date, and Timestamp, which uses millisecond precision regardless of the database columns' precision.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "adaptive"
     },
     {
       "name": "camel.component.debezium-sqlserver.tombstones-on-delete",
       "type": "java.lang.Boolean",
       "description": "Whether delete operations should be represented by a delete event and a subsequent tombstone event (true) or only by a delete event (false). Emitting the tombstone event (the default behavior) allows Kafka to completely delete all events pertaining to the given key once the source record got deleted.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.debezium-sqlserver.topic-naming-strategy",
       "type": "java.lang.String",
       "description": "The name of the TopicNamingStrategy class that should be used to determine the topic name for data change, schema change, transaction, heartbeat event etc.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "io.debezium.schema.SchemaTopicNamingStrategy"
     },
     {
       "name": "camel.component.debezium-sqlserver.topic-prefix",
       "type": "java.lang.String",
       "description": "Topic prefix that identifies and provides a namespace for the particular database server\/cluster is capturing changes. The topic prefix should be unique across all other connectors, since it is used as a prefix for all Kafka topic names that receive events emitted by this connector. Only alphanumeric characters, hyphens, dots and underscores must be accepted.",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration"
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.transaction-metadata-factory",
       "type": "java.lang.String",
       "description": "Class to make transaction context & transaction struct\/schemas",
-      "sourceType": "org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConfiguration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "io.debezium.pipeline.txmetadata.DefaultTransactionMetadataFactory"
     }
   ],
