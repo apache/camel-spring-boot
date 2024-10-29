@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.debezium.springboot;
+package org.apache.camel.component.debezium.oracle.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -32,14 +32,14 @@ import org.springframework.stereotype.Component;
 @Configuration(proxyBeanMethods = false)
 @ConfigurationPropertiesBinding
 @Component
-public class DebeziumDb2ComponentConverter implements GenericConverter {
+public class DebeziumOracleComponentConverter implements GenericConverter {
 
     @Autowired
     private ApplicationContext applicationContext;
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.debezium.configuration.Db2ConnectorEmbeddedDebeziumConfiguration.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.debezium.oracle.configuration.OracleConnectorEmbeddedDebeziumConfiguration.class));
         return answer;
     }
 
@@ -56,7 +56,7 @@ public class DebeziumDb2ComponentConverter implements GenericConverter {
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
-            case "org.apache.camel.component.debezium.configuration.Db2ConnectorEmbeddedDebeziumConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.debezium.configuration.Db2ConnectorEmbeddedDebeziumConfiguration.class);
+            case "org.apache.camel.component.debezium.oracle.configuration.OracleConnectorEmbeddedDebeziumConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.debezium.oracle.configuration.OracleConnectorEmbeddedDebeziumConfiguration.class);
         }
         return null;
     }
