@@ -221,6 +221,7 @@
     <module>camel-fop-starter</module>
     <module>camel-freemarker-starter</module>
     <module>camel-ftp-starter</module>
+    <module>camel-fury-starter</module>
     <module>camel-geocoder-starter</module>
     <module>camel-git-starter</module>
     <module>camel-github-starter</module>
