@@ -17,6 +17,7 @@
 package org.apache.camel.component.smooks.springboot;
 
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.smooks.SmooksFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -55,6 +56,11 @@ public class SmooksComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * To use a custom factory for creating Smooks. The option is a
+     * org.smooks.SmooksFactory type.
+     */
+    private SmooksFactory smooksFactory;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -70,5 +76,13 @@ public class SmooksComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public SmooksFactory getSmooksFactory() {
+        return smooksFactory;
+    }
+
+    public void setSmooksFactory(SmooksFactory smooksFactory) {
+        this.smooksFactory = smooksFactory;
     }
 }

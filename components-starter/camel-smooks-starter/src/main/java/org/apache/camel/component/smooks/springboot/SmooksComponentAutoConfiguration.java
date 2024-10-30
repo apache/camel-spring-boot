@@ -42,7 +42,7 @@ import org.springframework.context.annotation.Lazy;
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,SmooksComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.smooks"})
-@AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfigureAfter({CamelAutoConfiguration.class, SmooksComponentConverter.class})
 public class SmooksComponentAutoConfiguration {
 
     @Autowired

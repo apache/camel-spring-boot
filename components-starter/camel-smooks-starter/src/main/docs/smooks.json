@@ -50,6 +50,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.smooks.smooks-factory",
+      "type": "org.smooks.SmooksFactory",
+      "description": "To use a custom factory for creating Smooks. The option is a org.smooks.SmooksFactory type.",
+      "sourceType": "org.apache.camel.component.smooks.springboot.SmooksComponentConfiguration"
+    },
+    {
       "name": "camel.dataformat.smooks.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
