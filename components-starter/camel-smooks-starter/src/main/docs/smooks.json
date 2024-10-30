@@ -10,6 +10,17 @@
       "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
       "sourceType": "org.apache.camel.component.smooks.springboot.SmooksComponentConfiguration",
       "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.dataformat.smooks",
+      "type": "org.apache.camel.dataformat.smooks.springboot.SmooksDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.smooks.springboot.SmooksDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.smooks.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.smooks.springboot.SmooksDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
     }
   ],
   "properties": [
@@ -44,6 +55,23 @@
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
       "sourceType": "org.apache.camel.component.smooks.springboot.SmooksComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.smooks.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.smooks.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the smooks data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.smooks.springboot.SmooksDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.smooks.smooks-config",
+      "type": "java.lang.String",
+      "description": "Path to the Smooks configuration file.",
+      "sourceType": "org.apache.camel.dataformat.smooks.springboot.SmooksDataFormatConfiguration"
     }
   ],
   "hints": []

@@ -16,3 +16,4 @@
 ## ---------------------------------------------------------------------------
 
 org.apache.camel.component.smooks.springboot.SmooksComponentAutoConfiguration
+org.apache.camel.dataformat.smooks.springboot.SmooksDataFormatAutoConfiguration
