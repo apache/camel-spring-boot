@@ -76,7 +76,7 @@ public class AMQPComponentConfiguration
     /**
      * The host name or IP address of the computer that hosts the AMQP Broker.
      */
-    private String host = "localhost";
+    private String host;
     /**
      * Whether to include AMQP annotations when mapping from AMQP to Camel
      * Message. Setting this to true maps AMQP message annotations that contain
@@ -102,7 +102,7 @@ public class AMQPComponentConfiguration
     /**
      * The port number on which the AMPQ Broker listens.
      */
-    private Integer port = 5672;
+    private Integer port;
     /**
      * Provides an explicit ReplyTo destination (overrides any incoming value of
      * Message.getJMSReplyTo() in consumer).
@@ -127,11 +127,11 @@ public class AMQPComponentConfiguration
     /**
      * Whether to enable SSL when connecting to the AMQP Broker.
      */
-    private Boolean useSsl = false;
+    private Boolean useSsl;
     /**
      * Whether to configure topics with a topic:// prefix.
      */
-    private Boolean useTopicPrefix = true;
+    private Boolean useTopicPrefix;
     /**
      * The JMS acknowledgement name, which is one of: SESSION_TRANSACTED,
      * CLIENT_ACKNOWLEDGE, AUTO_ACKNOWLEDGE, DUPS_OK_ACKNOWLEDGE

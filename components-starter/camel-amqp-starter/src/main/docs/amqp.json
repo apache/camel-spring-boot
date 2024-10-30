@@ -320,8 +320,7 @@
       "name": "camel.component.amqp.host",
       "type": "java.lang.String",
       "description": "The host name or IP address of the computer that hosts the AMQP Broker.",
-      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
-      "defaultValue": "localhost"
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
     },
     {
       "name": "camel.component.amqp.idle-consumer-limit",
@@ -478,8 +477,7 @@
       "name": "camel.component.amqp.port",
       "type": "java.lang.Integer",
       "description": "The port number on which the AMPQ Broker listens.",
-      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
-      "defaultValue": 5672
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
     },
     {
       "name": "camel.component.amqp.preserve-message-qos",
@@ -756,15 +754,13 @@
       "name": "camel.component.amqp.use-ssl",
       "type": "java.lang.Boolean",
       "description": "Whether to enable SSL when connecting to the AMQP Broker.",
-      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
     },
     {
       "name": "camel.component.amqp.use-topic-prefix",
       "type": "java.lang.Boolean",
       "description": "Whether to configure topics with a topic:\/\/ prefix.",
-      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
-      "defaultValue": true
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
     },
     {
       "name": "camel.component.amqp.username",
