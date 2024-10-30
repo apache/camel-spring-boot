@@ -47,7 +47,7 @@ jobs:
       with:
         mode: test
         pr-id: ${{ github.event.number }}
-        github-token: ${{ env.GITHUB_TOKEN_TOKEN }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         skip-mvnd-install: 'false'
         github-repo: apache/camel-spring-boot
     - name: Archive Logs
