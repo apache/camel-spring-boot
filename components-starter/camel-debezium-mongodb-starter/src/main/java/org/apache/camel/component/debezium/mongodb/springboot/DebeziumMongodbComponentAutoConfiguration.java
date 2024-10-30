@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.debezium.springboot;
+package org.apache.camel.component.debezium.mongodb.springboot;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
-import org.apache.camel.component.debezium.DebeziumSqlserverComponent;
+import org.apache.camel.component.debezium.mongodb.DebeziumMongodbComponent;
 import org.apache.camel.spi.ComponentCustomizer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
@@ -40,25 +40,25 @@ import org.springframework.context.annotation.Lazy;
  */
 @Configuration(proxyBeanMethods = false)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
-@EnableConfigurationProperties({ComponentConfigurationProperties.class,DebeziumSqlserverComponentConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.component", "camel.component.debezium-sqlserver"})
-@AutoConfigureAfter({CamelAutoConfiguration.class, DebeziumSqlserverComponentConverter.class})
-public class DebeziumSqlserverComponentAutoConfiguration {
+@EnableConfigurationProperties({ComponentConfigurationProperties.class,DebeziumMongodbComponentConfiguration.class})
+@ConditionalOnHierarchicalProperties({"camel.component", "camel.component.debezium-mongodb"})
+@AutoConfigureAfter({CamelAutoConfiguration.class, DebeziumMongodbComponentConverter.class})
+public class DebeziumMongodbComponentAutoConfiguration {
 
     @Autowired
     private ApplicationContext applicationContext;
     private final CamelContext camelContext;
     @Autowired
-    private DebeziumSqlserverComponentConfiguration configuration;
+    private DebeziumMongodbComponentConfiguration configuration;
 
-    public DebeziumSqlserverComponentAutoConfiguration(
+    public DebeziumMongodbComponentAutoConfiguration(
             org.apache.camel.CamelContext camelContext) {
         this.camelContext = camelContext;
     }
 
     @Lazy
     @Bean
-    public ComponentCustomizer configureDebeziumSqlserverComponent() {
+    public ComponentCustomizer configureDebeziumMongodbComponent() {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
@@ -69,8 +69,8 @@ public class DebeziumSqlserverComponentAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.component.customizer",
-                        "camel.component.debezium-sqlserver.customizer")
-                    && target instanceof DebeziumSqlserverComponent;
+                        "camel.component.debezium-mongodb.customizer")
+                    && target instanceof DebeziumMongodbComponent;
             }
         };
     }

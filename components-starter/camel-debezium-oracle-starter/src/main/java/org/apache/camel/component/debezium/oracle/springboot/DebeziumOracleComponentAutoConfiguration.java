@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.debezium.springboot;
+package org.apache.camel.component.debezium.oracle.springboot;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
-import org.apache.camel.component.debezium.DebeziumMySqlComponent;
+import org.apache.camel.component.debezium.oracle.DebeziumOracleComponent;
 import org.apache.camel.spi.ComponentCustomizer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
@@ -40,25 +40,25 @@ import org.springframework.context.annotation.Lazy;
  */
 @Configuration(proxyBeanMethods = false)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
-@EnableConfigurationProperties({ComponentConfigurationProperties.class,DebeziumMySqlComponentConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.component", "camel.component.debezium-mysql"})
-@AutoConfigureAfter({CamelAutoConfiguration.class, DebeziumMySqlComponentConverter.class})
-public class DebeziumMySqlComponentAutoConfiguration {
+@EnableConfigurationProperties({ComponentConfigurationProperties.class,DebeziumOracleComponentConfiguration.class})
+@ConditionalOnHierarchicalProperties({"camel.component", "camel.component.debezium-oracle"})
+@AutoConfigureAfter({CamelAutoConfiguration.class, DebeziumOracleComponentConverter.class})
+public class DebeziumOracleComponentAutoConfiguration {
 
     @Autowired
     private ApplicationContext applicationContext;
     private final CamelContext camelContext;
     @Autowired
-    private DebeziumMySqlComponentConfiguration configuration;
+    private DebeziumOracleComponentConfiguration configuration;
 
-    public DebeziumMySqlComponentAutoConfiguration(
+    public DebeziumOracleComponentAutoConfiguration(
             org.apache.camel.CamelContext camelContext) {
         this.camelContext = camelContext;
     }
 
     @Lazy
     @Bean
-    public ComponentCustomizer configureDebeziumMySqlComponent() {
+    public ComponentCustomizer configureDebeziumOracleComponent() {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
@@ -69,8 +69,8 @@ public class DebeziumMySqlComponentAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.component.customizer",
-                        "camel.component.debezium-mysql.customizer")
-                    && target instanceof DebeziumMySqlComponent;
+                        "camel.component.debezium-oracle.customizer")
+                    && target instanceof DebeziumOracleComponent;
             }
         };
     }

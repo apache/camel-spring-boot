@@ -14,10 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.debezium.springboot;
+package org.apache.camel.component.debezium.sqlserver.springboot;
 
 import java.util.Map;
-import org.apache.camel.component.debezium.configuration.SqlServerConnectorEmbeddedDebeziumConfiguration;
+import org.apache.camel.component.debezium.sqlserver.configuration.SqlServerConnectorEmbeddedDebeziumConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -61,7 +61,7 @@ public class DebeziumSqlserverComponentConfiguration
     private Boolean bridgeErrorHandler = false;
     /**
      * Allow pre-configured Configurations to be set. The option is a
-     * org.apache.camel.component.debezium.configuration.SqlServerConnectorEmbeddedDebeziumConfiguration type.
+     * org.apache.camel.component.debezium.sqlserver.configuration.SqlServerConnectorEmbeddedDebeziumConfiguration type.
      */
     private SqlServerConnectorEmbeddedDebeziumConfiguration configuration;
     /**

@@ -14,10 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.debezium.springboot;
+package org.apache.camel.component.debezium.oracle.springboot;
 
 import java.util.Map;
-import org.apache.camel.component.debezium.configuration.OracleConnectorEmbeddedDebeziumConfiguration;
+import org.apache.camel.component.debezium.oracle.configuration.OracleConnectorEmbeddedDebeziumConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -61,7 +61,7 @@ public class DebeziumOracleComponentConfiguration
     private Boolean bridgeErrorHandler = false;
     /**
      * Allow pre-configured Configurations to be set. The option is a
-     * org.apache.camel.component.debezium.configuration.OracleConnectorEmbeddedDebeziumConfiguration type.
+     * org.apache.camel.component.debezium.oracle.configuration.OracleConnectorEmbeddedDebeziumConfiguration type.
      */
     private OracleConnectorEmbeddedDebeziumConfiguration configuration;
     /**
