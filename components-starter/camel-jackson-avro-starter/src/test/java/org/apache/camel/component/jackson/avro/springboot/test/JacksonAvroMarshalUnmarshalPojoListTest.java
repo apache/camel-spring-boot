@@ -63,7 +63,7 @@ public class JacksonAvroMarshalUnmarshalPojoListTest {
         String schemaJson = "{\n" + "  \"type\": \"array\",  \n" + "  \"items\":{\n" + "    \"name\":\"Pojo\",\n"
                 + "    \"type\":\"record\",\n" + "    \"fields\":[\n"
                 + "      {\"name\":\"text\", \"type\":\"string\"}\n" + "    ]\n" + "  }\n" + "}";
-        Schema raw = new Schema.Parser(NameValidator.STRICT_VALIDATOR).parse(schemaJson);
+        Schema raw = new Schema.Parser(NameValidator.UTF_VALIDATOR).parse(schemaJson);
         AvroSchema schema = new AvroSchema(raw);
         SchemaResolver resolver = ex -> schema;
 
