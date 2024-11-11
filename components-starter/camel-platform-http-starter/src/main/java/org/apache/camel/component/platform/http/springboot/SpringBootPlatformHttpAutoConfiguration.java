@@ -26,7 +26,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.env.Environment;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import java.util.List;
 import java.util.concurrent.Executor;
 
 @Configuration(proxyBeanMethods = false)
@@ -38,11 +40,21 @@ public class SpringBootPlatformHttpAutoConfiguration {
     CamelContext camelContext;
 
     @Autowired
-    Executor executor;
+    List<Executor> executors;
 
     @Bean(name = "platform-http-engine")
     @ConditionalOnMissingBean(PlatformHttpEngine.class)
     public PlatformHttpEngine springBootPlatformHttpEngine(Environment env) {
+        Executor executor;
+
+        if (executors != null && !executors.isEmpty()) {
+            executor = executors.stream()
+                    .filter(e -> e instanceof ThreadPoolTaskExecutor)
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("No ThreadPoolTaskExecutor configured"));
+        } else {
+            throw new RuntimeException("No Executor configured");
+        }
         int port = Integer.parseInt(env.getProperty("server.port", "8080"));
         return new SpringBootPlatformHttpEngine(port, executor);
     }
