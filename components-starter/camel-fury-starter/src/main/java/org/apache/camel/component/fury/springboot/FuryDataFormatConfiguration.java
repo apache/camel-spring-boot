@@ -38,6 +38,18 @@ public class FuryDataFormatConfiguration
      * Class of the java type to use when unmarshalling
      */
     private String unmarshalType;
+    /**
+     * Whether to require register classes
+     */
+    private Boolean requireClassRegistration = true;
+    /**
+     * Whether to use the threadsafe fury
+     */
+    private Boolean threadSafe = true;
+    /**
+     * Whether to auto-discover Fury from the registry
+     */
+    private Boolean allowAutoWiredFury = true;
 
     public String getUnmarshalType() {
         return unmarshalType;
@@ -45,5 +57,29 @@ public class FuryDataFormatConfiguration
 
     public void setUnmarshalType(String unmarshalType) {
         this.unmarshalType = unmarshalType;
+    }
+
+    public Boolean getRequireClassRegistration() {
+        return requireClassRegistration;
+    }
+
+    public void setRequireClassRegistration(Boolean requireClassRegistration) {
+        this.requireClassRegistration = requireClassRegistration;
+    }
+
+    public Boolean getThreadSafe() {
+        return threadSafe;
+    }
+
+    public void setThreadSafe(Boolean threadSafe) {
+        this.threadSafe = threadSafe;
+    }
+
+    public Boolean getAllowAutoWiredFury() {
+        return allowAutoWiredFury;
+    }
+
+    public void setAllowAutoWiredFury(Boolean allowAutoWiredFury) {
+        this.allowAutoWiredFury = allowAutoWiredFury;
     }
 }
