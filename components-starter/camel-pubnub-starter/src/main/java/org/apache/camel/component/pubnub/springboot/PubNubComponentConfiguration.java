@@ -19,6 +19,7 @@ package org.apache.camel.component.pubnub.springboot;
 import org.apache.camel.component.pubnub.PubNubConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Send and receive messages to/from PubNub data stream network for connected
@@ -99,13 +100,13 @@ public class PubNubComponentConfiguration
     private Boolean autowiredEnabled = true;
     /**
      * If Access Manager is utilized, client will use this authKey in all
-     * restricted requests.
+     * restricted requests. Default value notice: This setting is deprecated
+     * because it relates to deprecated Access Manager (PAM V2) and will be
+     * removed in the future. Please, migrate to new Access Manager (PAM V3)
+     * https://www.pubnub.com/docs/general/resources/migration-guides/pam-v3-migration
      */
+    @Deprecated
     private String authKey;
-    /**
-     * If cipher is passed, all communications to/from PubNub will be encrypted.
-     */
-    private String cipherKey;
     /**
      * The publish key obtained from your PubNub account. Required when
      * publishing messages.
@@ -181,20 +182,15 @@ public class PubNubComponentConfiguration
         this.autowiredEnabled = autowiredEnabled;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public String getAuthKey() {
         return authKey;
     }
 
+    @Deprecated
     public void setAuthKey(String authKey) {
         this.authKey = authKey;
-    }
-
-    public String getCipherKey() {
-        return cipherKey;
-    }
-
-    public void setCipherKey(String cipherKey) {
-        this.cipherKey = cipherKey;
     }
 
     public String getPublishKey() {
