@@ -167,6 +167,11 @@
       "sourceType": "org.apache.camel.spring.boot.vault.KubernetesVaultConfigurationProperties"
     },
     {
+      "name": "camel.vault.kubernetescm",
+      "type": "org.apache.camel.spring.boot.vault.KubernetesConfigMapVaultConfigurationProperties",
+      "sourceType": "org.apache.camel.spring.boot.vault.KubernetesConfigMapVaultConfigurationProperties"
+    },
+    {
       "name": "management.endpoint.camel",
       "type": "org.apache.camel.spring.boot.actuate.console.CamelDevConsoleEndpoint",
       "sourceType": "org.apache.camel.spring.boot.actuate.console.CamelDevConsoleEndpoint"
@@ -1928,6 +1933,19 @@
       "type": "java.lang.String",
       "description": "Define the secrets to look at",
       "sourceType": "org.apache.camel.spring.boot.vault.KubernetesVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.kubernetescm.configmaps",
+      "type": "java.lang.String",
+      "description": "Define the configmaps to look at",
+      "sourceType": "org.apache.camel.spring.boot.vault.KubernetesConfigMapVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.kubernetescm.refresh-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Define if we want to refresh the configmaps on update",
+      "sourceType": "org.apache.camel.spring.boot.vault.KubernetesConfigMapVaultConfigurationProperties",
+      "defaultValue": false
     },
     {
       "name": "management.endpoint.camel.cache.time-to-live",
