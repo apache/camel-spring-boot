@@ -78,7 +78,8 @@ public class JolokiaComponentAutoConfigurationTest extends JolokiaComponentTestB
 				.asInstanceOf(InstanceOfAssertFactories.map(String.class, String.class))
 				.containsEntry("host", "0.0.0.0")
 				.containsEntry("autoStart", "true")
-				.containsEntry("restrictorClass", CamelRestrictor.class.getCanonicalName());
+				.containsEntry("restrictorClass", CamelRestrictor.class.getCanonicalName())
+				.containsEntry("discoveryEnabled", "true");
 
 		Assertions.assertThat(agent).as("check default agent/server configuration")
 				.hasFieldOrPropertyWithValue("lookupConfig", false)
@@ -89,5 +90,7 @@ public class JolokiaComponentAutoConfigurationTest extends JolokiaComponentTestB
 				.extracting("config")
 					.hasFieldOrPropertyWithValue("protocol", "http")
 					.hasFieldOrPropertyWithValue("context", "/jolokia/");
+
+		assertDiscoveryEnabled(true);
 	}
 }

@@ -89,6 +89,7 @@ public class JolokiaComponentAutoConfiguration {
 			setDefaultConfigValue(ConfigKey.RESTRICTOR_CLASS.getKeyValue(),
 					"org.apache.camel.component.jolokia.springboot.restrictor.CamelRestrictor");
 		}
+		boolean k8sSet = false;
 		if (configuration.isKubernetesDiscover()) {
 			LOG.debug("trying to discover k8s environment");
 			final String caCert = configuration.isKubernetesUseDefaultCa() ? DEFAULT_CA_ON_K8S
@@ -97,9 +98,14 @@ public class JolokiaComponentAutoConfiguration {
 				setDefaultConfigValue("protocol", "https");
 				setDefaultConfigValue("useSslClientAuthentication", "true");
 				setDefaultConfigValue("caCert", caCert);
+				k8sSet = true;
 			} else {
 				LOG.debug("kubernetesDiscover is enabled but the file {} does not exist, no additional properties will be set", caCert);
 			}
+		}
+		//enable discovery on local JVM not in a POD
+		if (!k8sSet && !Files.exists(Path.of(DEFAULT_CA_ON_K8S))) {
+			setDefaultConfigValue("discoveryEnabled", "true");
 		}
 		springJolokiaConfigHolder.setConfig(configuration.getServerConfig());
 		return springJolokiaConfigHolder;
