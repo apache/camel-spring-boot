@@ -97,7 +97,8 @@
       "name": "camel.component.ehcache.customizer.cache-configuration.mode",
       "type": "org.apache.camel.component.ehcache.springboot.customizer.CacheConfigurationCustomizerConfiguration$Mode",
       "description": "Configure if the cache configurations have be added or they have to replace those already configured on the component.",
-      "sourceType": "org.apache.camel.component.ehcache.springboot.customizer.CacheConfigurationCustomizerConfiguration"
+      "sourceType": "org.apache.camel.component.ehcache.springboot.customizer.CacheConfigurationCustomizerConfiguration",
+      "defaultValue": "append"
     },
     {
       "name": "camel.component.ehcache.customizer.cache-manager.enabled",
@@ -128,13 +129,15 @@
       "name": "camel.component.ehcache.event-firing",
       "type": "org.ehcache.event.EventFiring",
       "description": "Set the delivery mode (synchronous, asynchronous)",
-      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration",
+      "defaultValue": "asynchronous"
     },
     {
       "name": "camel.component.ehcache.event-ordering",
       "type": "org.ehcache.event.EventOrdering",
       "description": "Set the delivery mode (ordered, unordered)",
-      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
+      "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration",
+      "defaultValue": "ordered"
     },
     {
       "name": "camel.component.ehcache.event-types",

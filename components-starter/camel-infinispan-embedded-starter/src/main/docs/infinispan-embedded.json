@@ -122,7 +122,8 @@
       "name": "camel.component.infinispan-embedded.operation",
       "type": "org.apache.camel.component.infinispan.InfinispanOperation",
       "description": "The operation to perform",
-      "sourceType": "org.apache.camel.component.infinispan.embedded.springboot.InfinispanEmbeddedComponentConfiguration"
+      "sourceType": "org.apache.camel.component.infinispan.embedded.springboot.InfinispanEmbeddedComponentConfiguration",
+      "defaultValue": "put"
     },
     {
       "name": "camel.component.infinispan-embedded.query-builder",

@@ -24,7 +24,8 @@
       "name": "camel.component.reactive-streams.backpressure-strategy",
       "type": "org.apache.camel.component.reactive.streams.ReactiveStreamsBackpressureStrategy",
       "description": "The backpressure strategy to use when pushing events to a slow subscriber.",
-      "sourceType": "org.apache.camel.component.reactive.streams.springboot.ReactiveStreamsComponentConfiguration"
+      "sourceType": "org.apache.camel.component.reactive.streams.springboot.ReactiveStreamsComponentConfiguration",
+      "defaultValue": "buffer"
     },
     {
       "name": "camel.component.reactive-streams.bridge-error-handler",

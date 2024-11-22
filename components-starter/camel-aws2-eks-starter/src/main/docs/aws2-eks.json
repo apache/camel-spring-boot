@@ -113,7 +113,8 @@
       "name": "camel.component.aws2-eks.proxy-protocol",
       "type": "software.amazon.awssdk.core.Protocol",
       "description": "To define a proxy protocol when instantiating the EKS client",
-      "sourceType": "org.apache.camel.component.aws2.eks.springboot.EKS2ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.eks.springboot.EKS2ComponentConfiguration",
+      "defaultValue": "https"
     },
     {
       "name": "camel.component.aws2-eks.region",

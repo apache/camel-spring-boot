@@ -138,7 +138,8 @@
       "name": "camel.component.aws2-athena.operation",
       "type": "org.apache.camel.component.aws2.athena.Athena2Operations",
       "description": "The Athena API function to call.",
-      "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration",
+      "defaultValue": "startqueryexecution"
     },
     {
       "name": "camel.component.aws2-athena.output-location",
@@ -150,7 +151,8 @@
       "name": "camel.component.aws2-athena.output-type",
       "type": "org.apache.camel.component.aws2.athena.Athena2OutputType",
       "description": "How query results should be returned. One of StreamList (default - return a GetQueryResultsIterable that can page through all results), SelectList (returns at most 1000 rows at a time, plus a NextToken value as a header than can be used for manual pagination of results), S3Pointer (return an S3 path pointing to the results).",
-      "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration",
+      "defaultValue": "streamlist"
     },
     {
       "name": "camel.component.aws2-athena.profile-credentials-name",
@@ -174,7 +176,8 @@
       "name": "camel.component.aws2-athena.proxy-protocol",
       "type": "software.amazon.awssdk.core.Protocol",
       "description": "To define a proxy protocol when instantiating the Athena client.",
-      "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration",
+      "defaultValue": "https"
     },
     {
       "name": "camel.component.aws2-athena.query-execution-id",

@@ -376,7 +376,8 @@
       "name": "camel.component.salesforce.not-found-behaviour",
       "type": "org.apache.camel.component.salesforce.NotFoundBehaviour",
       "description": "Sets the behaviour of 404 not found status received from Salesforce API. Should the body be set to NULL NotFoundBehaviour#NULL or should a exception be signaled on the exchange NotFoundBehaviour#EXCEPTION - the default.",
-      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": "exception"
     },
     {
       "name": "camel.component.salesforce.notify-for-fields",
@@ -467,7 +468,8 @@
       "name": "camel.component.salesforce.pub-sub-deserialize-type",
       "type": "org.apache.camel.component.salesforce.PubSubDeserializeType",
       "description": "How to deserialize events consume from the Pub\/Sub API. AVRO will try a SpecificRecord subclass if found, otherwise GenericRecord.",
-      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": "avro"
     },
     {
       "name": "camel.component.salesforce.pub-sub-host",
@@ -543,7 +545,8 @@
       "name": "camel.component.salesforce.replay-preset",
       "type": "com.salesforce.eventbus.protobuf.ReplayPreset",
       "description": "Replay preset for Pub\/Sub API.",
-      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": "latest"
     },
     {
       "name": "camel.component.salesforce.report-id",

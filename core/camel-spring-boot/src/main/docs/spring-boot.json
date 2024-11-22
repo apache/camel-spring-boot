@@ -1948,6 +1948,13 @@
       "defaultValue": false
     },
     {
+      "name": "management.endpoint.camel.access",
+      "type": "org.springframework.boot.actuate.endpoint.Access",
+      "description": "Permitted level of access for the camel endpoint.",
+      "sourceType": "org.apache.camel.spring.boot.actuate.console.CamelDevConsoleEndpoint",
+      "defaultValue": "unrestricted"
+    },
+    {
       "name": "management.endpoint.camel.cache.time-to-live",
       "type": "java.time.Duration",
       "description": "Maximum time that a response can be cached.",
@@ -1955,11 +1962,11 @@
       "defaultValue": "0ms"
     },
     {
-      "name": "management.endpoint.camel.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Whether to enable the camel endpoint.",
-      "sourceType": "org.apache.camel.spring.boot.actuate.console.CamelDevConsoleEndpoint",
-      "defaultValue": true
+      "name": "management.endpoint.camelroutecontroller.access",
+      "type": "org.springframework.boot.actuate.endpoint.Access",
+      "description": "Permitted level of access for the camelroutecontroller endpoint.",
+      "sourceType": "org.apache.camel.spring.boot.actuate.endpoint.CamelRouteControllerEndpoint",
+      "defaultValue": "unrestricted"
     },
     {
       "name": "management.endpoint.camelroutecontroller.cache.time-to-live",
@@ -1969,11 +1976,11 @@
       "defaultValue": "0ms"
     },
     {
-      "name": "management.endpoint.camelroutecontroller.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Whether to enable the camelroutecontroller endpoint.",
-      "sourceType": "org.apache.camel.spring.boot.actuate.endpoint.CamelRouteControllerEndpoint",
-      "defaultValue": true
+      "name": "management.endpoint.camelroutes.access",
+      "type": "org.springframework.boot.actuate.endpoint.Access",
+      "description": "Permitted level of access for the camelroutes endpoint.",
+      "sourceType": "org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpoint",
+      "defaultValue": "unrestricted"
     },
     {
       "name": "management.endpoint.camelroutes.cache.time-to-live",
@@ -1981,13 +1988,6 @@
       "description": "Maximum time that a response can be cached.",
       "sourceType": "org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpoint",
       "defaultValue": "0ms"
-    },
-    {
-      "name": "management.endpoint.camelroutes.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Whether to enable the camelroutes endpoint.",
-      "sourceType": "org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpoint",
-      "defaultValue": true
     },
     {
       "name": "management.endpoint.camelroutes.read-only",
@@ -3241,6 +3241,42 @@
       "deprecation": {
         "replacement": "camel.main.uuid-generator",
         "since": "4.5.0"
+      }
+    },
+    {
+      "name": "management.endpoint.camel.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable the camel endpoint.",
+      "sourceType": "org.apache.camel.spring.boot.actuate.console.CamelDevConsoleEndpoint",
+      "defaultValue": true,
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "management.endpoint.camel.access",
+        "since": "3.4.0"
+      }
+    },
+    {
+      "name": "management.endpoint.camelroutecontroller.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable the camelroutecontroller endpoint.",
+      "sourceType": "org.apache.camel.spring.boot.actuate.endpoint.CamelRouteControllerEndpoint",
+      "defaultValue": true,
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "management.endpoint.camelroutecontroller.access",
+        "since": "3.4.0"
+      }
+    },
+    {
+      "name": "management.endpoint.camelroutes.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable the camelroutes endpoint.",
+      "sourceType": "org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpoint",
+      "defaultValue": true,
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "management.endpoint.camelroutes.access",
+        "since": "3.4.0"
       }
     }
   ],

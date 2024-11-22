@@ -127,7 +127,8 @@
       "name": "camel.component.infinispan.operation",
       "type": "org.apache.camel.component.infinispan.InfinispanOperation",
       "description": "The operation to perform",
-      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration"
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration",
+      "defaultValue": "put"
     },
     {
       "name": "camel.component.infinispan.password",

@@ -23,7 +23,8 @@
       "name": "camel.component.azure-servicebus.amqp-transport-type",
       "type": "com.azure.core.amqp.AmqpTransportType",
       "description": "Sets the transport type by which all the communication with Azure Service Bus occurs. Default value is AMQP.",
-      "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration"
+      "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration",
+      "defaultValue": "amqp"
     },
     {
       "name": "camel.component.azure-servicebus.autowired-enabled",
@@ -68,7 +69,8 @@
       "name": "camel.component.azure-servicebus.credential-type",
       "type": "org.apache.camel.component.azure.servicebus.CredentialType",
       "description": "Determines the credential strategy to adopt",
-      "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration"
+      "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration",
+      "defaultValue": "connection-string"
     },
     {
       "name": "camel.component.azure-servicebus.customizer.enabled",
@@ -136,7 +138,8 @@
       "name": "camel.component.azure-servicebus.producer-operation",
       "type": "org.apache.camel.component.azure.servicebus.ServiceBusProducerOperationDefinition",
       "description": "Sets the desired operation to be used in the producer",
-      "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration"
+      "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration",
+      "defaultValue": "sendmessages"
     },
     {
       "name": "camel.component.azure-servicebus.proxy-options",
@@ -160,7 +163,8 @@
       "name": "camel.component.azure-servicebus.service-bus-receive-mode",
       "type": "com.azure.messaging.servicebus.models.ServiceBusReceiveMode",
       "description": "Sets the receive mode for the receiver.",
-      "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration"
+      "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration",
+      "defaultValue": "peek-lock"
     },
     {
       "name": "camel.component.azure-servicebus.service-bus-transaction-context",
@@ -172,7 +176,8 @@
       "name": "camel.component.azure-servicebus.service-bus-type",
       "type": "org.apache.camel.component.azure.servicebus.ServiceBusType",
       "description": "The service bus type of connection to execute. Queue is for typical queue option and topic for subscription based model.",
-      "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration"
+      "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration",
+      "defaultValue": "queue"
     },
     {
       "name": "camel.component.azure-servicebus.sub-queue",

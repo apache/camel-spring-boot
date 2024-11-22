@@ -117,7 +117,8 @@
       "name": "camel.component.aws2-ddb.operation",
       "type": "org.apache.camel.component.aws2.ddb.Ddb2Operations",
       "description": "What operation to perform",
-      "sourceType": "org.apache.camel.component.aws2.ddb.springboot.Ddb2ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.ddb.springboot.Ddb2ComponentConfiguration",
+      "defaultValue": "putitem"
     },
     {
       "name": "camel.component.aws2-ddb.override-endpoint",
@@ -148,7 +149,8 @@
       "name": "camel.component.aws2-ddb.proxy-protocol",
       "type": "software.amazon.awssdk.core.Protocol",
       "description": "To define a proxy protocol when instantiating the DDB client",
-      "sourceType": "org.apache.camel.component.aws2.ddb.springboot.Ddb2ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.ddb.springboot.Ddb2ComponentConfiguration",
+      "defaultValue": "https"
     },
     {
       "name": "camel.component.aws2-ddb.read-capacity",
@@ -306,7 +308,8 @@
       "name": "camel.component.aws2-ddbstream.proxy-protocol",
       "type": "software.amazon.awssdk.core.Protocol",
       "description": "To define a proxy protocol when instantiating the DDBStreams client",
-      "sourceType": "org.apache.camel.component.aws2.ddbstream.springboot.Ddb2StreamComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.ddbstream.springboot.Ddb2StreamComponentConfiguration",
+      "defaultValue": "https"
     },
     {
       "name": "camel.component.aws2-ddbstream.region",
@@ -330,7 +333,8 @@
       "name": "camel.component.aws2-ddbstream.stream-iterator-type",
       "type": "org.apache.camel.component.aws2.ddbstream.Ddb2StreamConfiguration$StreamIteratorType",
       "description": "Defines where in the DynamoDB stream to start getting records. Note that using FROM_START can cause a significant delay before the stream has caught up to real-time.",
-      "sourceType": "org.apache.camel.component.aws2.ddbstream.springboot.Ddb2StreamComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.ddbstream.springboot.Ddb2StreamComponentConfiguration",
+      "defaultValue": "from-latest"
     },
     {
       "name": "camel.component.aws2-ddbstream.trust-all-certificates",

@@ -80,7 +80,8 @@
       "name": "camel.component.aws2-eventbridge.operation",
       "type": "org.apache.camel.component.aws2.eventbridge.EventbridgeOperations",
       "description": "The operation to perform",
-      "sourceType": "org.apache.camel.component.aws2.eventbridge.springboot.EventbridgeComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.eventbridge.springboot.EventbridgeComponentConfiguration",
+      "defaultValue": "putrule"
     },
     {
       "name": "camel.component.aws2-eventbridge.override-endpoint",
@@ -118,7 +119,8 @@
       "name": "camel.component.aws2-eventbridge.proxy-protocol",
       "type": "software.amazon.awssdk.core.Protocol",
       "description": "To define a proxy protocol when instantiating the Eventbridge client",
-      "sourceType": "org.apache.camel.component.aws2.eventbridge.springboot.EventbridgeComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.eventbridge.springboot.EventbridgeComponentConfiguration",
+      "defaultValue": "https"
     },
     {
       "name": "camel.component.aws2-eventbridge.region",

@@ -50,7 +50,8 @@
       "name": "camel.component.azure-storage-queue.credential-type",
       "type": "org.apache.camel.component.azure.storage.queue.CredentialType",
       "description": "Determines the credential strategy to adopt",
-      "sourceType": "org.apache.camel.component.azure.storage.queue.springboot.QueueComponentConfiguration"
+      "sourceType": "org.apache.camel.component.azure.storage.queue.springboot.QueueComponentConfiguration",
+      "defaultValue": "shared-account-key"
     },
     {
       "name": "camel.component.azure-storage-queue.credentials",

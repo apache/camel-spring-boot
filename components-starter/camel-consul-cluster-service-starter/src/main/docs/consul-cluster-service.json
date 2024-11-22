@@ -36,7 +36,8 @@
       "name": "camel.cluster.consul.consistency-mode",
       "type": "org.kiwiproject.consul.option.ConsistencyMode",
       "description": "The consistencyMode used for queries, default ConsistencyMode.DEFAULT",
-      "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration"
+      "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
+      "defaultValue": "default"
     },
     {
       "name": "camel.cluster.consul.datacenter",

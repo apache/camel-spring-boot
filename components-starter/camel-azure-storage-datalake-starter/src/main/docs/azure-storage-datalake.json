@@ -73,7 +73,8 @@
       "name": "camel.component.azure-storage-datalake.credential-type",
       "type": "org.apache.camel.component.azure.storage.datalake.CredentialType",
       "description": "Determines the credential strategy to adopt",
-      "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
+      "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration",
+      "defaultValue": "client-secret"
     },
     {
       "name": "camel.component.azure-storage-datalake.customizer.enabled",
@@ -171,7 +172,8 @@
       "name": "camel.component.azure-storage-datalake.operation",
       "type": "org.apache.camel.component.azure.storage.datalake.DataLakeOperationsDefinition",
       "description": "operation to be performed",
-      "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
+      "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration",
+      "defaultValue": "listfilesystem"
     },
     {
       "name": "camel.component.azure-storage-datalake.path",

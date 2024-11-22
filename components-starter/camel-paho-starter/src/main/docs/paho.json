@@ -154,7 +154,8 @@
       "name": "camel.component.paho.persistence",
       "type": "org.apache.camel.component.paho.PahoPersistence",
       "description": "Client persistence to be used - memory or file.",
-      "sourceType": "org.apache.camel.component.paho.springboot.PahoComponentConfiguration"
+      "sourceType": "org.apache.camel.component.paho.springboot.PahoComponentConfiguration",
+      "defaultValue": "memory"
     },
     {
       "name": "camel.component.paho.qos",

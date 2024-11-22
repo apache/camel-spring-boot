@@ -47,7 +47,8 @@
       "name": "camel.cloud.zookeeper.connection-timeout-unit",
       "type": "java.util.concurrent.TimeUnit",
       "description": "Connection timeout TimeUnit. Default is TimeUnit.MILLISECONDS.",
-      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": "milliseconds"
     },
     {
       "name": "camel.cloud.zookeeper.curator-framework",
@@ -86,7 +87,8 @@
       "name": "camel.cloud.zookeeper.max-close-wait-unit",
       "type": "java.util.concurrent.TimeUnit",
       "description": "MaxCloseWait TimeUnit. Default is TimeUnit.MILLISECONDS.",
-      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": "milliseconds"
     },
     {
       "name": "camel.cloud.zookeeper.namespace",
@@ -124,7 +126,8 @@
       "name": "camel.cloud.zookeeper.reconnect-base-sleep-time-unit",
       "type": "java.util.concurrent.TimeUnit",
       "description": "ReconnectBaseSleepTime TimeUnit. Default is TimeUnit.MILLISECONDS.",
-      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": "milliseconds"
     },
     {
       "name": "camel.cloud.zookeeper.reconnect-max-retries",
@@ -143,7 +146,8 @@
       "name": "camel.cloud.zookeeper.reconnect-max-sleep-time-unit",
       "type": "java.util.concurrent.TimeUnit",
       "description": "ReconnectMaxSleepTimeUnit TimeUnit. Default is TimeUnit.MILLISECONDS.",
-      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": "milliseconds"
     },
     {
       "name": "camel.cloud.zookeeper.retry-policy",
@@ -168,7 +172,8 @@
       "name": "camel.cloud.zookeeper.session-timeout-unit",
       "type": "java.util.concurrent.TimeUnit",
       "description": "Session timeout TimeUnit. Default is TimeUnit.MILLISECONDS.",
-      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": "milliseconds"
     },
     {
       "name": "camel.component.zookeeper.autowired-enabled",

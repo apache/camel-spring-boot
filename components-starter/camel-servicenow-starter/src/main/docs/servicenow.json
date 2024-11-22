@@ -227,7 +227,8 @@
       "name": "camel.component.servicenow.release",
       "type": "org.apache.camel.component.servicenow.ServiceNowRelease",
       "description": "The ServiceNow release to target, default to Helsinki See https:\/\/docs.servicenow.com",
-      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": "helsinki"
     },
     {
       "name": "camel.component.servicenow.request-models",

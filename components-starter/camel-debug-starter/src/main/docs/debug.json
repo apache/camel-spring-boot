@@ -87,7 +87,8 @@
       "name": "camel.debug.logging-level",
       "type": "org.apache.camel.LoggingLevel",
       "description": "The debugger logging level to use when logging activity.",
-      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties"
+      "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
+      "defaultValue": "info"
     },
     {
       "name": "camel.debug.single-step-include-start-end",

@@ -105,7 +105,8 @@
       "name": "camel.component.aws2-cw.proxy-protocol",
       "type": "software.amazon.awssdk.core.Protocol",
       "description": "To define a proxy protocol when instantiating the CW client",
-      "sourceType": "org.apache.camel.component.aws2.cw.springboot.Cw2ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.cw.springboot.Cw2ComponentConfiguration",
+      "defaultValue": "https"
     },
     {
       "name": "camel.component.aws2-cw.region",
