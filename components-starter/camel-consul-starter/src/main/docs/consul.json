@@ -61,7 +61,8 @@
       "name": "camel.cloud.consul.consistency-mode",
       "type": "org.kiwiproject.consul.option.ConsistencyMode",
       "description": "The consistencyMode used for queries, default ConsistencyMode.DEFAULT",
-      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration"
+      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+      "defaultValue": "default"
     },
     {
       "name": "camel.cloud.consul.datacenter",
@@ -239,7 +240,8 @@
       "name": "camel.component.consul.consistency-mode",
       "type": "org.kiwiproject.consul.option.ConsistencyMode",
       "description": "The consistencyMode used for queries, default ConsistencyMode.DEFAULT",
-      "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
+      "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration",
+      "defaultValue": "default"
     },
     {
       "name": "camel.component.consul.consul-client",

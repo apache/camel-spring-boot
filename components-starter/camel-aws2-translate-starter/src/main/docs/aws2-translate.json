@@ -75,7 +75,8 @@
       "name": "camel.component.aws2-translate.operation",
       "type": "org.apache.camel.component.aws2.translate.Translate2Operations",
       "description": "The operation to perform",
-      "sourceType": "org.apache.camel.component.aws2.translate.springboot.Translate2ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.translate.springboot.Translate2ComponentConfiguration",
+      "defaultValue": "translatetext"
     },
     {
       "name": "camel.component.aws2-translate.override-endpoint",
@@ -113,7 +114,8 @@
       "name": "camel.component.aws2-translate.proxy-protocol",
       "type": "software.amazon.awssdk.core.Protocol",
       "description": "To define a proxy protocol when instantiating the Translate client",
-      "sourceType": "org.apache.camel.component.aws2.translate.springboot.Translate2ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.translate.springboot.Translate2ComponentConfiguration",
+      "defaultValue": "https"
     },
     {
       "name": "camel.component.aws2-translate.region",

@@ -75,13 +75,15 @@
       "name": "camel.component.disruptor-vm.default-producer-type",
       "type": "org.apache.camel.component.disruptor.DisruptorProducerType",
       "description": "To configure the default value for DisruptorProducerType The default value is Multi.",
-      "sourceType": "org.apache.camel.component.disruptor.vm.springboot.DisruptorVmComponentConfiguration"
+      "sourceType": "org.apache.camel.component.disruptor.vm.springboot.DisruptorVmComponentConfiguration",
+      "defaultValue": "multi"
     },
     {
       "name": "camel.component.disruptor-vm.default-wait-strategy",
       "type": "org.apache.camel.component.disruptor.DisruptorWaitStrategy",
       "description": "To configure the default value for DisruptorWaitStrategy The default value is Blocking.",
-      "sourceType": "org.apache.camel.component.disruptor.vm.springboot.DisruptorVmComponentConfiguration"
+      "sourceType": "org.apache.camel.component.disruptor.vm.springboot.DisruptorVmComponentConfiguration",
+      "defaultValue": "blocking"
     },
     {
       "name": "camel.component.disruptor-vm.enabled",
@@ -147,13 +149,15 @@
       "name": "camel.component.disruptor.default-producer-type",
       "type": "org.apache.camel.component.disruptor.DisruptorProducerType",
       "description": "To configure the default value for DisruptorProducerType The default value is Multi.",
-      "sourceType": "org.apache.camel.component.disruptor.springboot.DisruptorComponentConfiguration"
+      "sourceType": "org.apache.camel.component.disruptor.springboot.DisruptorComponentConfiguration",
+      "defaultValue": "multi"
     },
     {
       "name": "camel.component.disruptor.default-wait-strategy",
       "type": "org.apache.camel.component.disruptor.DisruptorWaitStrategy",
       "description": "To configure the default value for DisruptorWaitStrategy The default value is Blocking.",
-      "sourceType": "org.apache.camel.component.disruptor.springboot.DisruptorComponentConfiguration"
+      "sourceType": "org.apache.camel.component.disruptor.springboot.DisruptorComponentConfiguration",
+      "defaultValue": "blocking"
     },
     {
       "name": "camel.component.disruptor.enabled",

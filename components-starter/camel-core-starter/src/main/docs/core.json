@@ -742,7 +742,8 @@
       "name": "camel.rest.binding-mode",
       "type": "org.apache.camel.model.rest.RestBindingMode",
       "description": "Sets the binding mode to use. The default value is off",
-      "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
+      "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties",
+      "defaultValue": "off"
     },
     {
       "name": "camel.rest.binding-package-scan",
@@ -823,7 +824,8 @@
       "name": "camel.rest.host-name-resolver",
       "type": "org.apache.camel.model.rest.RestHostNameResolver",
       "description": "If no hostname has been explicit configured, then this resolver is used to compute the hostname the REST service will be using.",
-      "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
+      "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties",
+      "defaultValue": "alllocalip"
     },
     {
       "name": "camel.rest.inline-routes",

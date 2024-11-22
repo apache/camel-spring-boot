@@ -117,7 +117,8 @@
       "name": "camel.component.pulsar.compression-type",
       "type": "org.apache.pulsar.client.api.CompressionType",
       "description": "Compression type to use",
-      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration"
+      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration",
+      "defaultValue": "none"
     },
     {
       "name": "camel.component.pulsar.configuration",
@@ -227,7 +228,8 @@
       "name": "camel.component.pulsar.message-routing-mode",
       "type": "org.apache.pulsar.client.api.MessageRoutingMode",
       "description": "Message Routing Mode to use",
-      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration"
+      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration",
+      "defaultValue": "roundrobinpartition"
     },
     {
       "name": "camel.component.pulsar.negative-ack-redelivery-backoff",
@@ -304,7 +306,8 @@
       "name": "camel.component.pulsar.subscription-initial-position",
       "type": "org.apache.camel.component.pulsar.utils.consumers.SubscriptionInitialPosition",
       "description": "Control the initial position in the topic of a newly created subscription. Default is latest message.",
-      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration"
+      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration",
+      "defaultValue": "latest"
     },
     {
       "name": "camel.component.pulsar.subscription-name",
@@ -317,13 +320,15 @@
       "name": "camel.component.pulsar.subscription-topics-mode",
       "type": "org.apache.pulsar.client.api.RegexSubscriptionMode",
       "description": "Determines to which topics this consumer should be subscribed to - Persistent, Non-Persistent, or both. Only used with pattern subscriptions.",
-      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration"
+      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration",
+      "defaultValue": "persistentonly"
     },
     {
       "name": "camel.component.pulsar.subscription-type",
       "type": "org.apache.camel.component.pulsar.utils.consumers.SubscriptionType",
       "description": "Type of the subscription EXCLUSIVESHAREDFAILOVERKEY_SHARED, defaults to EXCLUSIVE",
-      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration"
+      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration",
+      "defaultValue": "exclusive"
     },
     {
       "name": "camel.component.pulsar.topics-pattern",

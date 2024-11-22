@@ -112,7 +112,8 @@
       "name": "camel.component.aws2-msk.proxy-protocol",
       "type": "software.amazon.awssdk.core.Protocol",
       "description": "To define a proxy protocol when instantiating the MSK client",
-      "sourceType": "org.apache.camel.component.aws2.msk.springboot.MSK2ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.msk.springboot.MSK2ComponentConfiguration",
+      "defaultValue": "https"
     },
     {
       "name": "camel.component.aws2-msk.region",

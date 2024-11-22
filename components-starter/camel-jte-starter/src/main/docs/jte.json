@@ -38,7 +38,8 @@
       "name": "camel.component.jte.content-type",
       "type": "gg.jte.ContentType",
       "description": "Content type the JTE engine should use.",
-      "sourceType": "org.apache.camel.component.jte.springboot.JteComponentConfiguration"
+      "sourceType": "org.apache.camel.component.jte.springboot.JteComponentConfiguration",
+      "defaultValue": "plain"
     },
     {
       "name": "camel.component.jte.customizer.enabled",

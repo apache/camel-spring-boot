@@ -112,7 +112,8 @@
       "name": "camel.component.aws-cloudtrail.proxy-protocol",
       "type": "software.amazon.awssdk.core.Protocol",
       "description": "To define a proxy protocol when instantiating the Cloudtrail client",
-      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration",
+      "defaultValue": "https"
     },
     {
       "name": "camel.component.aws-cloudtrail.region",

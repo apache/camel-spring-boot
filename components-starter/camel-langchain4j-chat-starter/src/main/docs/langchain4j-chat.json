@@ -37,7 +37,8 @@
       "name": "camel.component.langchain4j-chat.chat-operation",
       "type": "org.apache.camel.component.langchain4j.chat.LangChain4jChatOperations",
       "description": "Operation in case of Endpoint of type CHAT. The value is one of the values of org.apache.camel.component.langchain4j.chat.LangChain4jChatOperations",
-      "sourceType": "org.apache.camel.component.langchain4j.chat.springboot.LangChain4jChatComponentConfiguration"
+      "sourceType": "org.apache.camel.component.langchain4j.chat.springboot.LangChain4jChatComponentConfiguration",
+      "defaultValue": "chat-single-message"
     },
     {
       "name": "camel.component.langchain4j-chat.configuration",

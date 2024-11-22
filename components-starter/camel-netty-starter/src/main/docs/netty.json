@@ -134,7 +134,8 @@
       "name": "camel.component.netty.delimiter",
       "type": "org.apache.camel.component.netty.TextLineDelimiter",
       "description": "The delimiter to use for the textline codec. Possible values are LINE and NULL.",
-      "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration"
+      "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration",
+      "defaultValue": "line"
     },
     {
       "name": "camel.component.netty.disconnect",
@@ -263,7 +264,8 @@
       "name": "camel.component.netty.no-reply-log-level",
       "type": "org.apache.camel.LoggingLevel",
       "description": "If sync is enabled this option dictates NettyConsumer which logging level to use when logging a there is no reply to send back.",
-      "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration"
+      "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration",
+      "defaultValue": "warn"
     },
     {
       "name": "camel.component.netty.options",
@@ -301,7 +303,7 @@
     {
       "name": "camel.component.netty.producer-pool-max-total",
       "type": "java.lang.Integer",
-      "description": "Sets the cap on the number of objects that can be allocated by the pool (checked out to clients, or idle awaiting checkout) at a given time. Use a negative value for no limit.",
+      "description": "Sets the cap on the number of objects that can be allocated by the pool (checked out to clients, or idle awaiting checkout) at a given time. Use a negative value for no limit. Be careful to not set this value too low (such as 1) as the pool must have space to create a producer such as when performing retries. Be mindful that the option producerPoolBlockWhenExhausted is default true, and the pool will then block when there is no space, which can lead to the application to hang.",
       "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration",
       "defaultValue": -1
     },
@@ -389,13 +391,15 @@
       "name": "camel.component.netty.server-closed-channel-exception-caught-log-level",
       "type": "org.apache.camel.LoggingLevel",
       "description": "If the server (NettyConsumer) catches an java.nio.channels.ClosedChannelException then its logged using this logging level. This is used to avoid logging the closed channel exceptions, as clients can disconnect abruptly and then cause a flood of closed exceptions in the Netty server.",
-      "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration"
+      "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration",
+      "defaultValue": "debug"
     },
     {
       "name": "camel.component.netty.server-exception-caught-log-level",
       "type": "org.apache.camel.LoggingLevel",
       "description": "If the server (NettyConsumer) catches an exception then its logged using this logging level.",
-      "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration"
+      "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration",
+      "defaultValue": "warn"
     },
     {
       "name": "camel.component.netty.server-initializer-factory",

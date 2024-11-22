@@ -23,7 +23,8 @@
       "name": "camel.component.azure-eventhubs.amqp-transport-type",
       "type": "com.azure.core.amqp.AmqpTransportType",
       "description": "Sets the transport type by which all the communication with Azure Event Hubs occurs.",
-      "sourceType": "org.apache.camel.component.azure.eventhubs.springboot.EventHubsComponentConfiguration"
+      "sourceType": "org.apache.camel.component.azure.eventhubs.springboot.EventHubsComponentConfiguration",
+      "defaultValue": "amqp"
     },
     {
       "name": "camel.component.azure-eventhubs.autowired-enabled",
@@ -106,7 +107,8 @@
       "name": "camel.component.azure-eventhubs.credential-type",
       "type": "org.apache.camel.component.azure.eventhubs.CredentialType",
       "description": "Determines the credential strategy to adopt",
-      "sourceType": "org.apache.camel.component.azure.eventhubs.springboot.EventHubsComponentConfiguration"
+      "sourceType": "org.apache.camel.component.azure.eventhubs.springboot.EventHubsComponentConfiguration",
+      "defaultValue": "connection-string"
     },
     {
       "name": "camel.component.azure-eventhubs.customizer.enabled",

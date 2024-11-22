@@ -112,7 +112,8 @@
       "name": "camel.component.aws-config.proxy-protocol",
       "type": "software.amazon.awssdk.core.Protocol",
       "description": "To define a proxy protocol when instantiating the Config client",
-      "sourceType": "org.apache.camel.component.aws.config.springboot.AWSConfigComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws.config.springboot.AWSConfigComponentConfiguration",
+      "defaultValue": "https"
     },
     {
       "name": "camel.component.aws-config.region",

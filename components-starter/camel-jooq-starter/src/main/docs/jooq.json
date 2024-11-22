@@ -82,7 +82,8 @@
       "name": "camel.component.jooq.operation",
       "type": "org.apache.camel.component.jooq.JooqOperation",
       "description": "Type of operation to execute on query",
-      "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration"
+      "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration",
+      "defaultValue": "none"
     },
     {
       "name": "camel.component.jooq.query",

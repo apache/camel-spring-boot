@@ -251,7 +251,8 @@
       "name": "camel.component.aws2-s3.naming-strategy",
       "type": "org.apache.camel.component.aws2.s3.stream.AWSS3NamingStrategyEnum",
       "description": "The naming strategy to use in streaming upload mode",
-      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": "progressive"
     },
     {
       "name": "camel.component.aws2-s3.operation",
@@ -314,7 +315,8 @@
       "name": "camel.component.aws2-s3.proxy-protocol",
       "type": "software.amazon.awssdk.core.Protocol",
       "description": "To define a proxy protocol when instantiating the S3 client",
-      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": "https"
     },
     {
       "name": "camel.component.aws2-s3.region",
@@ -326,7 +328,8 @@
       "name": "camel.component.aws2-s3.restarting-policy",
       "type": "org.apache.camel.component.aws2.s3.stream.AWSS3RestartingPolicyEnum",
       "description": "The restarting policy to use in streaming upload mode",
-      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": "override"
     },
     {
       "name": "camel.component.aws2-s3.secret-key",

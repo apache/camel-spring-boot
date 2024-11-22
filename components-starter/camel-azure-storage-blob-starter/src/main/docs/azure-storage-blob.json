@@ -50,13 +50,15 @@
       "name": "camel.component.azure-storage-blob.blob-type",
       "type": "org.apache.camel.component.azure.storage.blob.BlobType",
       "description": "The blob type in order to initiate the appropriate settings for each blob type",
-      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": "blockblob"
     },
     {
       "name": "camel.component.azure-storage-blob.block-list-type",
       "type": "com.azure.storage.blob.models.BlockListType",
       "description": "Specifies which type of blocks to return.",
-      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": "committed"
     },
     {
       "name": "camel.component.azure-storage-blob.bridge-error-handler",
@@ -128,7 +130,8 @@
       "name": "camel.component.azure-storage-blob.credential-type",
       "type": "org.apache.camel.component.azure.storage.blob.CredentialType",
       "description": "Determines the credential strategy to adopt",
-      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": "azure-identity"
     },
     {
       "name": "camel.component.azure-storage-blob.credentials",
@@ -203,7 +206,8 @@
       "name": "camel.component.azure-storage-blob.operation",
       "type": "org.apache.camel.component.azure.storage.blob.BlobOperationsDefinition",
       "description": "The blob operation that can be used with this component on the producer",
-      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": "listblobcontainers"
     },
     {
       "name": "camel.component.azure-storage-blob.page-blob-size",

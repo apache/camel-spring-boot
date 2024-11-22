@@ -74,7 +74,8 @@
       "name": "camel.component.aws2-lambda.operation",
       "type": "org.apache.camel.component.aws2.lambda.Lambda2Operations",
       "description": "The operation to perform. It can be listFunctions, getFunction, createFunction, deleteFunction or invokeFunction",
-      "sourceType": "org.apache.camel.component.aws2.lambda.springboot.Lambda2ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.lambda.springboot.Lambda2ComponentConfiguration",
+      "defaultValue": "invokefunction"
     },
     {
       "name": "camel.component.aws2-lambda.override-endpoint",
@@ -112,7 +113,8 @@
       "name": "camel.component.aws2-lambda.proxy-protocol",
       "type": "software.amazon.awssdk.core.Protocol",
       "description": "To define a proxy protocol when instantiating the Lambda client",
-      "sourceType": "org.apache.camel.component.aws2.lambda.springboot.Lambda2ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.lambda.springboot.Lambda2ComponentConfiguration",
+      "defaultValue": "https"
     },
     {
       "name": "camel.component.aws2-lambda.region",

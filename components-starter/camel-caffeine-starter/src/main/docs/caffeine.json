@@ -71,7 +71,8 @@
       "name": "camel.component.caffeine-cache.eviction-type",
       "type": "org.apache.camel.component.caffeine.EvictionType",
       "description": "Set the eviction Type for this cache",
-      "sourceType": "org.apache.camel.component.caffeine.cache.springboot.CaffeineCacheComponentConfiguration"
+      "sourceType": "org.apache.camel.component.caffeine.cache.springboot.CaffeineCacheComponentConfiguration",
+      "defaultValue": "size-based"
     },
     {
       "name": "camel.component.caffeine-cache.expire-after-access-time",
@@ -184,7 +185,8 @@
       "name": "camel.component.caffeine-loadcache.eviction-type",
       "type": "org.apache.camel.component.caffeine.EvictionType",
       "description": "Set the eviction Type for this cache",
-      "sourceType": "org.apache.camel.component.caffeine.load.springboot.CaffeineLoadCacheComponentConfiguration"
+      "sourceType": "org.apache.camel.component.caffeine.load.springboot.CaffeineLoadCacheComponentConfiguration",
+      "defaultValue": "size-based"
     },
     {
       "name": "camel.component.caffeine-loadcache.expire-after-access-time",

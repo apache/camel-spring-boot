@@ -103,7 +103,8 @@
       "name": "camel.component.mllp.exchange-pattern",
       "type": "org.apache.camel.ExchangePattern",
       "description": "Sets the exchange pattern when the consumer creates an exchange.",
-      "sourceType": "org.apache.camel.component.mllp.springboot.MllpComponentConfiguration"
+      "sourceType": "org.apache.camel.component.mllp.springboot.MllpComponentConfiguration",
+      "defaultValue": "inout"
     },
     {
       "name": "camel.component.mllp.hl7-headers",
@@ -122,7 +123,8 @@
       "name": "camel.component.mllp.idle-timeout-strategy",
       "type": "org.apache.camel.component.mllp.MllpIdleTimeoutStrategy",
       "description": "decide what action to take when idle timeout occurs. Possible values are : RESET: set SO_LINGER to 0 and reset the socket CLOSE: close the socket gracefully default is RESET.",
-      "sourceType": "org.apache.camel.component.mllp.springboot.MllpComponentConfiguration"
+      "sourceType": "org.apache.camel.component.mllp.springboot.MllpComponentConfiguration",
+      "defaultValue": "reset"
     },
     {
       "name": "camel.component.mllp.keep-alive",

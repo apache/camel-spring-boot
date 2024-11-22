@@ -63,7 +63,8 @@
       "name": "camel.component.azure-cosmosdb.consistency-level",
       "type": "com.azure.cosmos.ConsistencyLevel",
       "description": "Sets the consistency levels supported for Azure Cosmos DB client operations in the Azure Cosmos DB service. The requested ConsistencyLevel must match or be weaker than that provisioned for the database account. Consistency levels by order of strength are STRONG, BOUNDED_STALENESS, SESSION and EVENTUAL. Refer to consistency level documentation for additional details: https:\/\/docs.microsoft.com\/en-us\/azure\/cosmos-db\/consistency-levels",
-      "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
+      "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration",
+      "defaultValue": "session"
     },
     {
       "name": "camel.component.azure-cosmosdb.container-partition-key-path",
@@ -116,7 +117,8 @@
       "name": "camel.component.azure-cosmosdb.credential-type",
       "type": "org.apache.camel.component.azure.cosmosdb.CredentialType",
       "description": "Determines the credential strategy to adopt",
-      "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
+      "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration",
+      "defaultValue": "shared-account-key"
     },
     {
       "name": "camel.component.azure-cosmosdb.customizer.enabled",
@@ -190,7 +192,8 @@
       "name": "camel.component.azure-cosmosdb.operation",
       "type": "org.apache.camel.component.azure.cosmosdb.CosmosDbOperationsDefinition",
       "description": "The CosmosDB operation that can be used with this component on the producer.",
-      "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
+      "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration",
+      "defaultValue": "listdatabases"
     },
     {
       "name": "camel.component.azure-cosmosdb.preferred-regions",

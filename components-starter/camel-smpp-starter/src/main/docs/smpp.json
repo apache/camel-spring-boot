@@ -266,7 +266,8 @@
       "name": "camel.component.smpp.splitting-policy",
       "type": "org.apache.camel.component.smpp.SmppSplittingPolicy",
       "description": "You can specify a policy for handling long messages: ALLOW - the default, long messages are split to 140 bytes per message TRUNCATE - long messages are split and only the first fragment will be sent to the SMSC. Some carriers drop subsequent fragments so this reduces load on the SMPP connection sending parts of a message that will never be delivered. REJECT - if a message would need to be split, it is rejected with an SMPP NegativeResponseException and the reason code signifying the message is too long.",
-      "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
+      "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
+      "defaultValue": "allow"
     },
     {
       "name": "camel.component.smpp.system-id",

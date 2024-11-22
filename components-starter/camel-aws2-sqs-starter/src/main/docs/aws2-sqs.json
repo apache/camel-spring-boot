@@ -256,7 +256,8 @@
       "name": "camel.component.aws2-sqs.proxy-protocol",
       "type": "software.amazon.awssdk.core.Protocol",
       "description": "To define a proxy protocol when instantiating the SQS client",
-      "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration",
+      "defaultValue": "https"
     },
     {
       "name": "camel.component.aws2-sqs.queue-owner-a-w-s-account-id",

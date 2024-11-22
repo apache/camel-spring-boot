@@ -73,7 +73,8 @@
       "name": "camel.component.box.encryption-algorithm",
       "type": "com.box.sdk.EncryptionAlgorithm",
       "description": "The type of encryption algorithm for JWT. Supported Algorithms: RSA_SHA_256 RSA_SHA_384 RSA_SHA_512",
-      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration"
+      "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration",
+      "defaultValue": "rsa-sha-256"
     },
     {
       "name": "camel.component.box.enterprise-id",

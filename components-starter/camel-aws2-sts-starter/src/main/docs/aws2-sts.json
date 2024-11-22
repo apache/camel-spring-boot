@@ -54,7 +54,8 @@
       "name": "camel.component.aws2-sts.operation",
       "type": "org.apache.camel.component.aws2.sts.STS2Operations",
       "description": "The operation to perform",
-      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration",
+      "defaultValue": "assumerole"
     },
     {
       "name": "camel.component.aws2-sts.override-endpoint",
@@ -92,7 +93,8 @@
       "name": "camel.component.aws2-sts.proxy-protocol",
       "type": "software.amazon.awssdk.core.Protocol",
       "description": "To define a proxy protocol when instantiating the STS client",
-      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.aws2.sts.springboot.STS2ComponentConfiguration",
+      "defaultValue": "https"
     },
     {
       "name": "camel.component.aws2-sts.region",

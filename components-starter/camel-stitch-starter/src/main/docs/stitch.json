@@ -66,7 +66,8 @@
       "name": "camel.component.stitch.region",
       "type": "org.apache.camel.component.stitch.client.StitchRegion",
       "description": "Stitch account region, e.g: europe",
-      "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
+      "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration",
+      "defaultValue": "europe"
     },
     {
       "name": "camel.component.stitch.stitch-client",

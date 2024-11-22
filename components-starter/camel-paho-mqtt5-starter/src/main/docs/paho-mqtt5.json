@@ -141,7 +141,8 @@
       "name": "camel.component.paho-mqtt5.persistence",
       "type": "org.apache.camel.component.paho.mqtt5.PahoMqtt5Persistence",
       "description": "Client persistence to be used - memory or file.",
-      "sourceType": "org.apache.camel.component.paho.mqtt5.springboot.PahoMqtt5ComponentConfiguration"
+      "sourceType": "org.apache.camel.component.paho.mqtt5.springboot.PahoMqtt5ComponentConfiguration",
+      "defaultValue": "memory"
     },
     {
       "name": "camel.component.paho-mqtt5.qos",
