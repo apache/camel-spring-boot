@@ -76,7 +76,7 @@
       "type": "java.lang.Boolean",
       "description": "Whether to ignore JAXBElement elements - only needed to be set to false in very special use-cases.",
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration",
-      "defaultValue": false
+      "defaultValue": true
     },
     {
       "name": "camel.dataformat.jaxb.jaxb-provider-properties",
@@ -108,7 +108,7 @@
       "type": "java.lang.Boolean",
       "description": "Whether to allow using ObjectFactory classes to create the POJO classes during marshalling. This only applies to POJO classes that has not been annotated with JAXB and providing jaxb.index descriptor files.",
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration",
-      "defaultValue": false
+      "defaultValue": true
     },
     {
       "name": "camel.dataformat.jaxb.part-class",
@@ -127,7 +127,7 @@
       "type": "java.lang.Boolean",
       "description": "To enable pretty printing output nicely formatted. Is by default false.",
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration",
-      "defaultValue": false
+      "defaultValue": true
     },
     {
       "name": "camel.dataformat.jaxb.schema",

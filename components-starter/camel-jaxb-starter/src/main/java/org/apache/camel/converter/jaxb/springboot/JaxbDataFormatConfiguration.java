@@ -62,18 +62,18 @@ public class JaxbDataFormatConfiguration
     /**
      * To enable pretty printing output nicely formatted. Is by default false.
      */
-    private Boolean prettyPrint = false;
+    private Boolean prettyPrint = true;
     /**
      * Whether to allow using ObjectFactory classes to create the POJO classes
      * during marshalling. This only applies to POJO classes that has not been
      * annotated with JAXB and providing jaxb.index descriptor files.
      */
-    private Boolean objectFactory = false;
+    private Boolean objectFactory = true;
     /**
      * Whether to ignore JAXBElement elements - only needed to be set to false
      * in very special use-cases.
      */
-    private Boolean ignoreJAXBElement = false;
+    private Boolean ignoreJAXBElement = true;
     /**
      * Whether marhsalling must be java objects with JAXB annotations. And if
      * not then it fails. This option can be set to false to relax that, such as
