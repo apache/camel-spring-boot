@@ -129,6 +129,11 @@ public class GoogleCloudStorageComponentConfiguration
      */
     private Boolean moveAfterRead = false;
     /**
+     * The prefix which is used in the BlobListOptions to only consume objects
+     * we are interested in
+     */
+    private String prefix;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -279,6 +284,14 @@ public class GoogleCloudStorageComponentConfiguration
 
     public void setMoveAfterRead(Boolean moveAfterRead) {
         this.moveAfterRead = moveAfterRead;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
     }
 
     public Boolean getLazyStartProducer() {

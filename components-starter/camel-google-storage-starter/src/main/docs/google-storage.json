@@ -131,6 +131,12 @@
       "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
     },
     {
+      "name": "camel.component.google-storage.prefix",
+      "type": "java.lang.String",
+      "description": "The prefix which is used in the BlobListOptions to only consume objects we are interested in",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
+    },
+    {
       "name": "camel.component.google-storage.service-account-key",
       "type": "java.lang.String",
       "description": "The Service account key that can be used as credentials for the Storage client. It can be loaded by default from classpath, but you can prefix with classpath:, file:, or http: to load the resource from different systems.",
