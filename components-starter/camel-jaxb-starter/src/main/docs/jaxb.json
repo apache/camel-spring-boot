@@ -76,7 +76,7 @@
       "type": "java.lang.Boolean",
       "description": "Whether to ignore JAXBElement elements - only needed to be set to false in very special use-cases.",
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration",
-      "defaultValue": false
+      "defaultValue": true
     },
     {
       "name": "camel.dataformat.jaxb.jaxb-provider-properties",

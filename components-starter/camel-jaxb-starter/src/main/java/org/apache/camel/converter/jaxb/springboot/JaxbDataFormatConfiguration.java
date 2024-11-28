@@ -73,7 +73,7 @@ public class JaxbDataFormatConfiguration
      * Whether to ignore JAXBElement elements - only needed to be set to false
      * in very special use-cases.
      */
-    private Boolean ignoreJAXBElement = false;
+    private Boolean ignoreJAXBElement = true;
     /**
      * Whether marhsalling must be java objects with JAXB annotations. And if
      * not then it fails. This option can be set to false to relax that, such as
