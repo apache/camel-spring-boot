@@ -50,6 +50,11 @@ public class CamelMetricsConfiguration {
     private String routePolicyLevel = "all";
 
     /**
+     * Pattern to exclude routes (by id) to capture. Multiple route ids can be separated by comma.
+     */
+    private String routePolicyExcludePattern;
+
+    /**
      * Controls the name style to use for metrics. Default = uses micrometer naming convention. Legacy = uses the
      * classic naming style (camelCase)
      */
@@ -113,6 +118,14 @@ public class CamelMetricsConfiguration {
 
     public void setRoutePolicyLevel(String routePolicyLevel) {
         this.routePolicyLevel = routePolicyLevel;
+    }
+
+    public String getRoutePolicyExcludePattern() {
+        return routePolicyExcludePattern;
+    }
+
+    public void setRoutePolicyExcludePattern(String routePolicyExcludePattern) {
+        this.routePolicyExcludePattern = routePolicyExcludePattern;
     }
 
     public boolean isEnableMessageHistory() {

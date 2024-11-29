@@ -64,6 +64,7 @@ public class CamelMetricsAutoConfiguration {
                 factory.getPolicyConfiguration().setContextEnabled(false);
                 factory.getPolicyConfiguration().setRouteEnabled(true);
             }
+            factory.getPolicyConfiguration().setExcludePattern(configuration.getRoutePolicyExcludePattern());
             camelContext.addRoutePolicyFactory(factory);
         }
 

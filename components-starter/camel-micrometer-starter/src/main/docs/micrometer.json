@@ -85,6 +85,12 @@
       "defaultValue": "default"
     },
     {
+      "name": "camel.metrics.route-policy-exclude-pattern",
+      "type": "java.lang.String",
+      "description": "Pattern to exclude routes (by id) to capture. Multiple route ids can be separated by comma.",
+      "sourceType": "org.apache.camel.component.micrometer.springboot.metrics.CamelMetricsConfiguration"
+    },
+    {
       "name": "camel.metrics.route-policy-level",
       "type": "java.lang.String",
       "description": "Sets the level of information to capture. Possible values are all,route,context. all = both context and routes. route = routes only. context = camel context only.",
