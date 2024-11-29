@@ -79,6 +79,9 @@ public class CamelRequestHandlerMapping extends RequestMappingHandlerMapping imp
         Method m = ReflectionHelper.findMethod(SpringBootPlatformHttpConsumer.class, "service",
                 HttpServletRequest.class, HttpServletResponse.class);
         for (RequestMappingInfo info : requestMappingInfos) {
+            // Needed in case of context reload
+            unregisterMapping(info);
+
             registerMapping(info, model.getConsumer(), m);
         }
     }
