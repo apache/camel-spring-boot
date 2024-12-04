@@ -275,7 +275,6 @@
     <module>camel-jdbc-starter</module>
     <module>camel-jetty-starter</module>
     <module>camel-jfr-starter</module>
-    <module>camel-jgroups-cluster-service-starter</module>
     <module>camel-jgroups-raft-cluster-service-starter</module>
     <module>camel-jgroups-raft-starter</module>
     <module>camel-jgroups-starter</module>

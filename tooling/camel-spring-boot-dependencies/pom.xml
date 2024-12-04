@@ -5394,11 +5394,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-jgroups-cluster-service-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jgroups-raft-cluster-service-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
