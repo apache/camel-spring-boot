@@ -8,7 +8,7 @@
     "firstVersion": "4.8.0",
     "label": "messaging,iot,monitoring",
     "javaType": "org.apache.camel.component.tahu.TahuHostComponent",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-tahu-starter",
     "version": "4.10.0-SNAPSHOT",

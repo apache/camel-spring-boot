@@ -8,7 +8,7 @@
     "firstVersion": "4.8.0",
     "label": "monitoring,search",
     "javaType": "org.apache.camel.component.solr.SolrComponent",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-solr-starter",
     "version": "4.10.0-SNAPSHOT",
