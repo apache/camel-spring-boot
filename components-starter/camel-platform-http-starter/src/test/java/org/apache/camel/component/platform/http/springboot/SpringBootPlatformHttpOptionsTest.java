@@ -18,11 +18,9 @@ package org.apache.camel.component.platform.http.springboot;
 
 import io.restassured.RestAssured;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.spi.RestConfiguration;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration;
@@ -34,17 +32,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.emptyString;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 
 @EnableAutoConfiguration(exclude = {OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
-        SpringBootPlatformHttpCorsTest.class, SpringBootPlatformHttpCorsTest.TestConfiguration.class,
+        SpringBootPlatformHttpOptionsTest.class, SpringBootPlatformHttpOptionsTest.TestConfiguration.class,
         PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class, })
-public class SpringBootPlatformHttpCorsTest {
+public class SpringBootPlatformHttpOptionsTest {
 
     @LocalServerPort
     private Integer port;
@@ -62,103 +58,26 @@ public class SpringBootPlatformHttpCorsTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    restConfiguration().component("platform-http").enableCORS(true);
+                    restConfiguration().component("platform-http").enableCORS(false);
 
                     rest("/rest")
-                            .post().consumes("application/json").to("direct:rest");
+                        .get().to("direct:get")
+                        .post().to("direct:post");
+                    from("direct:get").transform().constant("get");
+                    from("direct:post").transform().constant("post");
 
-                    from("direct:rest")
-                            .setBody(simple("Hello ${body}"));
-
-                    from("platform-http:/cors?httpMethodRestrict=GET,POST")
-                            .transform().constant("cors");
+                    from("platform-http:/restRestricted?httpMethodRestrict=GET,PUT").transform().constant("restricted");
+                    from("platform-http:/restDefault").transform().constant("default");
                 }
             };
         }
     }
 
     @Test
-    public void get() {
-        given()
-            .when()
-            .get("/cors")
-            .then()
-            .statusCode(200);
-    }
-
-    @Test
-    public void post() {
-        given()
-            .header("Content-type","application/json")
-            .when()
-            .post("/rest")
-            .then()
-            .statusCode(200);
-    }
-
-    @Test
-    public void options() {
-        final String origin = "http://custom.origin.springboot";
-        final String method = "POST";
-        final String headers = "X-Requested-With";
-
-        given()
-            .header("Origin", origin)
-            .header("Access-Control-Request-Method", method)
-            .header("Access-Control-Request-Headers", headers)
-            .when()
-            .options("/rest")
-            .then()
-            .statusCode(200)
-            .header("Access-Control-Allow-Origin", "*")
-            .header("Access-Control-Allow-Methods", containsString(method))
-            .header("Access-Control-Allow-Headers", containsString(headers))
-            .header("Access-Control-Max-Age", RestConfiguration.CORS_ACCESS_CONTROL_MAX_AGE)
-            .body(emptyString());
-    }
-
-    @Test
-    public void optionsSecondEndPoint() {
-        final String origin = "http://custom.origin.springboot";
-        final String method = "POST";
-        final String headers = "X-Requested-With";
-
-        given()
-            .header("Origin", origin)
-            .header("Access-Control-Request-Method", method)
-            .header("Access-Control-Request-Headers", headers)
-            .when()
-            .options("/cors")
-            .then()
-            .statusCode(200)
-            .header("Access-Control-Allow-Origin", "*")
-            .header("Access-Control-Allow-Methods", containsString(method))
-            .header("Access-Control-Allow-Headers", containsString(headers))
-            .header("Access-Control-Max-Age", RestConfiguration.CORS_ACCESS_CONTROL_MAX_AGE)
-            .body(emptyString());
-    }
-
-    @Test
-    public void optionNonCORS() {
+    public void optionsRest() {
         given()
             .when()
             .options("/rest")
-            .then()
-            .statusCode(200)
-            .header("Allow", containsString("OPTIONS"))
-            .header("Allow", not(containsString("GET")))
-            .header("Allow", containsString("POST"))
-            .header("Allow", not(containsString("HEAD")))
-            .header("Allow", not(containsString("PATCH")))
-            .header("Allow", not(containsString("PUT")))
-            .header("Allow", not(containsString("DELETE")));
-    }
-
-    @Test
-    public void optionNonCorsSecondEndpoint() {
-        given()
-            .when()
-            .options("/cors")
             .then()
             .statusCode(200)
             .header("Allow", containsString("OPTIONS"))
@@ -168,6 +87,38 @@ public class SpringBootPlatformHttpCorsTest {
             .header("Allow", not(containsString("PATCH")))
             .header("Allow", not(containsString("PUT")))
             .header("Allow", not(containsString("DELETE")));
+    }
+
+    @Test
+    public void optionsRestRestricted() {
+        given()
+            .when()
+            .options("/restRestricted")
+            .then()
+            .statusCode(200)
+            .header("Allow", containsString("OPTIONS"))
+            .header("Allow", containsString("GET"))
+            .header("Allow", not(containsString("POST")))
+            .header("Allow", containsString("HEAD"))
+            .header("Allow", not(containsString("PATCH")))
+            .header("Allow", containsString("PUT"))
+            .header("Allow", not(containsString("DELETE")));
+    }
+
+    @Test
+    public void optionsRestDefault() {
+        given()
+            .when()
+            .options("/restDefault")
+            .then()
+            .statusCode(200)
+            .header("Allow", containsString("OPTIONS"))
+            .header("Allow", containsString("GET"))
+            .header("Allow", containsString("POST"))
+            .header("Allow", containsString("HEAD"))
+            .header("Allow", containsString("PATCH"))
+            .header("Allow", containsString("PUT"))
+            .header("Allow", containsString("DELETE"));
     }
 
 }

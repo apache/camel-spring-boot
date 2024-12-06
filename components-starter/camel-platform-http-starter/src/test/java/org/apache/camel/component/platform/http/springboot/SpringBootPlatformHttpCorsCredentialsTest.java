@@ -22,7 +22,6 @@ import org.apache.camel.spi.RestConfiguration;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration;
@@ -34,17 +33,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.emptyString;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 
 @EnableAutoConfiguration(exclude = {OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
-        SpringBootPlatformHttpCorsTest.class, SpringBootPlatformHttpCorsTest.TestConfiguration.class,
+        SpringBootPlatformHttpCorsCredentialsTest.class, SpringBootPlatformHttpCorsCredentialsTest.TestConfiguration.class,
         PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class, })
-public class SpringBootPlatformHttpCorsTest {
+public class SpringBootPlatformHttpCorsCredentialsTest {
 
     @LocalServerPort
     private Integer port;
@@ -62,16 +59,20 @@ public class SpringBootPlatformHttpCorsTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    restConfiguration().component("platform-http").enableCORS(true);
+                    restConfiguration().component("platform-http")
+                        .enableCORS(true)
+                        .corsAllowCredentials(true)
+                        .corsHeaderProperty("Access-Control-Allow-Origin", "http://custom.origin.springboot");
 
                     rest("/rest")
-                            .post().consumes("application/json").to("direct:rest");
+                        .get().to("direct:restGet")
+                        .post().consumes("application/json").to("direct:restPost");
 
-                    from("direct:rest")
-                            .setBody(simple("Hello ${body}"));
+                    from("direct:restPost")
+                        .transform().constant("corsPost");
 
-                    from("platform-http:/cors?httpMethodRestrict=GET,POST")
-                            .transform().constant("cors");
+                    from("direct:restGet")
+                        .transform().constant("corsGet");
                 }
             };
         }
@@ -81,9 +82,10 @@ public class SpringBootPlatformHttpCorsTest {
     public void get() {
         given()
             .when()
-            .get("/cors")
+            .get("/rest")
             .then()
-            .statusCode(200);
+            .statusCode(200)
+            .body(equalTo("corsGet"));
     }
 
     @Test
@@ -93,7 +95,8 @@ public class SpringBootPlatformHttpCorsTest {
             .when()
             .post("/rest")
             .then()
-            .statusCode(200);
+            .statusCode(200)
+            .body(equalTo("corsPost"));
     }
 
     @Test
@@ -110,55 +113,80 @@ public class SpringBootPlatformHttpCorsTest {
             .options("/rest")
             .then()
             .statusCode(200)
-            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Origin", origin)
             .header("Access-Control-Allow-Methods", containsString(method))
             .header("Access-Control-Allow-Headers", containsString(headers))
+            .header("Access-Control-Allow-Credentials", "true")
             .header("Access-Control-Max-Age", RestConfiguration.CORS_ACCESS_CONTROL_MAX_AGE)
             .body(emptyString());
     }
 
     @Test
-    public void optionsSecondEndPoint() {
-        final String origin = "http://custom.origin.springboot";
-        final String method = "POST";
-        final String headers = "X-Requested-With";
+    public void getForbiddenOrigin() {
+        final String origin = "http://custom2.origin.springboot";
 
         given()
             .header("Origin", origin)
-            .header("Access-Control-Request-Method", method)
-            .header("Access-Control-Request-Headers", headers)
             .when()
-            .options("/cors")
+            .get("/rest")
             .then()
-            .statusCode(200)
-            .header("Access-Control-Allow-Origin", "*")
-            .header("Access-Control-Allow-Methods", containsString(method))
-            .header("Access-Control-Allow-Headers", containsString(headers))
-            .header("Access-Control-Max-Age", RestConfiguration.CORS_ACCESS_CONTROL_MAX_AGE)
-            .body(emptyString());
+            .statusCode(403);
     }
 
     @Test
-    public void optionNonCORS() {
+    public void postForbiddenOrigin() {
+        final String origin = "http://custom2.origin.springboot";
+
         given()
+            .header("Origin", origin)
+            .header("Content-type","application/json")
+            .when()
+            .post("/rest")
+            .then()
+            .statusCode(403);
+    }
+
+    @Test
+    public void optionsForbiddenOrigin() {
+        final String origin = "http://custom2.origin.springboot";
+
+        given()
+            .header("Origin", origin)
             .when()
             .options("/rest")
             .then()
-            .statusCode(200)
-            .header("Allow", containsString("OPTIONS"))
-            .header("Allow", not(containsString("GET")))
-            .header("Allow", containsString("POST"))
-            .header("Allow", not(containsString("HEAD")))
-            .header("Allow", not(containsString("PATCH")))
-            .header("Allow", not(containsString("PUT")))
-            .header("Allow", not(containsString("DELETE")));
+            .header("Access-Control-Allow-Origin", not(containsString(origin)));
     }
 
     @Test
-    public void optionNonCorsSecondEndpoint() {
+    public void optionsForbiddenMethod() {
+        String method = "DELETE";
+
+        given()
+            .header("Access-Control-Request-Method", method)
+            .when()
+            .options("/rest")
+            .then()
+            .header("Access-Control-Allow-Methods", not(containsString(method)));
+    }
+
+    @Test
+    public void optionsForbiddenHeader() {
+        String header = "X-Custom-Header";
+
+        given()
+            .header("Access-Control-Request-Headers", header)
+            .when()
+            .options("/rest")
+            .then()
+            .header("Access-Control-Allow-Headers", not(containsString(header)));
+    }
+
+    @Test
+    public void optionNonCors() {
         given()
             .when()
-            .options("/cors")
+            .options("/rest")
             .then()
             .statusCode(200)
             .header("Allow", containsString("OPTIONS"))
@@ -169,5 +197,5 @@ public class SpringBootPlatformHttpCorsTest {
             .header("Allow", not(containsString("PUT")))
             .header("Allow", not(containsString("DELETE")));
     }
-
+    
 }
