@@ -15,5 +15,5 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentConverter
-org.apache.camel.component.debezium.springboot.DebeziumMongodbComponentAutoConfiguration
+org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConverter
+org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentAutoConfiguration
