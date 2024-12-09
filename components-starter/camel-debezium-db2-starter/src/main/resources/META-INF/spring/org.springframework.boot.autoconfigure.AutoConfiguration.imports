@@ -15,5 +15,5 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentConverter
-org.apache.camel.component.debezium.springboot.DebeziumDb2ComponentAutoConfiguration
+org.apache.camel.component.debezium.db2.springboot.DebeziumDb2ComponentConverter
+org.apache.camel.component.debezium.db2.springboot.DebeziumDb2ComponentAutoConfiguration

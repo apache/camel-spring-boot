@@ -15,5 +15,5 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentConverter
-org.apache.camel.component.debezium.springboot.DebeziumPostgresComponentAutoConfiguration
+org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConverter
+org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentAutoConfiguration

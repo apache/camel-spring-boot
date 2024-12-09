@@ -15,5 +15,5 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentConverter
-org.apache.camel.component.debezium.springboot.DebeziumSqlserverComponentAutoConfiguration
+org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConverter
+org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentAutoConfiguration

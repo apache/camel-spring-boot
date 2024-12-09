@@ -15,5 +15,5 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-org.apache.camel.component.debezium.springboot.DebeziumOracleComponentConverter
-org.apache.camel.component.debezium.springboot.DebeziumOracleComponentAutoConfiguration
+org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConverter
+org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentAutoConfiguration
