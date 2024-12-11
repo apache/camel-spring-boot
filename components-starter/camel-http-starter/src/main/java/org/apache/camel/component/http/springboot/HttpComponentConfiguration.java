@@ -17,6 +17,7 @@
 package org.apache.camel.component.http.springboot;
 
 import javax.net.ssl.HostnameVerifier;
+import org.apache.camel.component.http.HttpActivityListener;
 import org.apache.camel.component.http.HttpClientConfigurer;
 import org.apache.camel.http.common.HttpBinding;
 import org.apache.camel.http.common.HttpConfiguration;
@@ -56,6 +57,12 @@ public class HttpComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * To enable logging HTTP request and response. You can use a custom
+     * LoggingHttpActivityListener as httpActivityListener to control logging
+     * options.
+     */
+    private Boolean logHttpActivity = false;
+    /**
      * Whether to skip mapping all the Camel headers as HTTP request headers. If
      * there are no data from Camel headers needed to be included in the HTTP
      * request then this can avoid parsing overhead with many object allocations
@@ -90,11 +97,20 @@ public class HttpComponentConfiguration
      */
     private Boolean followRedirects = false;
     /**
+     * To use a custom activity listener. The option is a
+     * org.apache.camel.component.http.HttpActivityListener type.
+     */
+    private HttpActivityListener httpActivityListener;
+    /**
      * This threshold in bytes controls whether the response payload should be
      * stored in memory as a byte array or be streaming based. Set this to -1 to
      * always use streaming mode.
      */
     private Integer responsePayloadStreamingThreshold = 8192;
+    /**
+     * To set a custom HTTP User-Agent request header
+     */
+    private String userAgent;
     /**
      * Whether to allow java serialization when a request uses
      * context-type=application/x-java-serialized-object. This is by default
@@ -275,6 +291,14 @@ public class HttpComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public Boolean getLogHttpActivity() {
+        return logHttpActivity;
+    }
+
+    public void setLogHttpActivity(Boolean logHttpActivity) {
+        this.logHttpActivity = logHttpActivity;
+    }
+
     public Boolean getSkipRequestHeaders() {
         return skipRequestHeaders;
     }
@@ -315,6 +339,15 @@ public class HttpComponentConfiguration
         this.followRedirects = followRedirects;
     }
 
+    public HttpActivityListener getHttpActivityListener() {
+        return httpActivityListener;
+    }
+
+    public void setHttpActivityListener(
+            HttpActivityListener httpActivityListener) {
+        this.httpActivityListener = httpActivityListener;
+    }
+
     public Integer getResponsePayloadStreamingThreshold() {
         return responsePayloadStreamingThreshold;
     }
@@ -322,6 +355,14 @@ public class HttpComponentConfiguration
     public void setResponsePayloadStreamingThreshold(
             Integer responsePayloadStreamingThreshold) {
         this.responsePayloadStreamingThreshold = responsePayloadStreamingThreshold;
+    }
+
+    public String getUserAgent() {
+        return userAgent;
+    }
+
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
     }
 
     public Boolean getAllowJavaSerializedObject() {

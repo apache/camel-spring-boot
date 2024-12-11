@@ -40,6 +40,7 @@ public class HttpComponentConverter implements GenericConverter {
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.hc.client5.http.cookie.CookieStore.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.http.HttpActivityListener.class));
         answer.add(new ConvertiblePair(String.class, org.apache.hc.client5.http.io.HttpClientConnectionManager.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.http.common.HttpBinding.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.http.HttpClientConfigurer.class));
@@ -66,6 +67,7 @@ public class HttpComponentConverter implements GenericConverter {
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.apache.hc.client5.http.cookie.CookieStore": return applicationContext.getBean(ref, org.apache.hc.client5.http.cookie.CookieStore.class);
+            case "org.apache.camel.component.http.HttpActivityListener": return applicationContext.getBean(ref, org.apache.camel.component.http.HttpActivityListener.class);
             case "org.apache.hc.client5.http.io.HttpClientConnectionManager": return applicationContext.getBean(ref, org.apache.hc.client5.http.io.HttpClientConnectionManager.class);
             case "org.apache.camel.http.common.HttpBinding": return applicationContext.getBean(ref, org.apache.camel.http.common.HttpBinding.class);
             case "org.apache.camel.component.http.HttpClientConfigurer": return applicationContext.getBean(ref, org.apache.camel.component.http.HttpClientConfigurer.class);

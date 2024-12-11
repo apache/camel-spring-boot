@@ -138,6 +138,12 @@
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
     },
     {
+      "name": "camel.component.http.http-activity-listener",
+      "type": "org.apache.camel.component.http.HttpActivityListener",
+      "description": "To use a custom activity listener. The option is a org.apache.camel.component.http.HttpActivityListener type.",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
+    },
+    {
       "name": "camel.component.http.http-binding",
       "type": "org.apache.camel.http.common.HttpBinding",
       "description": "To use a custom HttpBinding to control the mapping between Camel message and HttpClient. The option is a org.apache.camel.http.common.HttpBinding type.",
@@ -165,6 +171,13 @@
       "name": "camel.component.http.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.http.log-http-activity",
+      "type": "java.lang.Boolean",
+      "description": "To enable logging HTTP request and response. You can use a custom LoggingHttpActivityListener as httpActivityListener to control logging options.",
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration",
       "defaultValue": false
     },
@@ -275,6 +288,12 @@
       "description": "Enable usage of global SSL context parameters.",
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.http.user-agent",
+      "type": "java.lang.String",
+      "description": "To set a custom HTTP User-Agent request header",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
     },
     {
       "name": "camel.component.http.x509-hostname-verifier",
