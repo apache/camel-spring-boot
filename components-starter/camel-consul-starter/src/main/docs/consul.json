@@ -38,20 +38,6 @@
       "defaultValue": 10
     },
     {
-      "name": "camel.cloud.consul.check-interval",
-      "type": "java.lang.Integer",
-      "description": "How often (in seconds) a service has to be marked as healthy if its check is TTL or how often the check should run. Default is 5 seconds.",
-      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
-      "defaultValue": 5
-    },
-    {
-      "name": "camel.cloud.consul.check-ttl",
-      "type": "java.lang.Integer",
-      "description": "The time (in seconds) to live for TTL checks. Default is 1 minute.",
-      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
-      "defaultValue": 60
-    },
-    {
       "name": "camel.cloud.consul.connect-timeout",
       "type": "java.time.Duration",
       "description": "Connect timeout for OkHttpClient",
@@ -69,20 +55,6 @@
       "type": "java.lang.String",
       "description": "The data center",
       "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration"
-    },
-    {
-      "name": "camel.cloud.consul.deregister-after",
-      "type": "java.lang.Integer",
-      "description": "How long (in seconds) to wait to deregister a service in case of unclean shutdown. Default is 1 hour.",
-      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
-      "defaultValue": 3600
-    },
-    {
-      "name": "camel.cloud.consul.deregister-services-on-stop",
-      "type": "java.lang.Boolean",
-      "description": "Should we remove all the registered services know by this registry on stop?",
-      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
-      "defaultValue": true
     },
     {
       "name": "camel.cloud.consul.enabled",
@@ -123,13 +95,6 @@
       "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration"
     },
     {
-      "name": "camel.cloud.consul.override-service-host",
-      "type": "java.lang.Boolean",
-      "description": "Should we override the service host if given ?",
-      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
-      "defaultValue": true
-    },
-    {
       "name": "camel.cloud.consul.password",
       "type": "java.lang.String",
       "description": "Sets the password to be used for basic authentication",
@@ -154,12 +119,6 @@
       "description": "Recursively watch, default false",
       "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
       "defaultValue": false
-    },
-    {
-      "name": "camel.cloud.consul.service-host",
-      "type": "java.lang.String",
-      "description": "Service host.",
-      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration"
     },
     {
       "name": "camel.cloud.consul.ssl-context-parameters",
@@ -368,9 +327,62 @@
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
+      "name": "camel.cloud.consul.check-interval",
+      "type": "java.lang.Integer",
+      "description": "How often (in seconds) a service has to be marked as healthy if its check is TTL or how often the check should run. Default is 5 seconds.",
+      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+      "defaultValue": 5,
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "camel.cloud.consul.check-ttl",
+      "type": "java.lang.Integer",
+      "description": "The time (in seconds) to live for TTL checks. Default is 1 minute.",
+      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+      "defaultValue": 60,
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
       "name": "camel.cloud.consul.dc",
       "type": "java.lang.String",
       "description": "Use datacenter instead",
+      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "camel.cloud.consul.deregister-after",
+      "type": "java.lang.Integer",
+      "description": "How long (in seconds) to wait to deregister a service in case of unclean shutdown. Default is 1 hour.",
+      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+      "defaultValue": 3600,
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "camel.cloud.consul.deregister-services-on-stop",
+      "type": "java.lang.Boolean",
+      "description": "Should we remove all the registered services know by this registry on stop?",
+      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+      "defaultValue": true,
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "camel.cloud.consul.override-service-host",
+      "type": "java.lang.Boolean",
+      "description": "Should we override the service host if given ?",
+      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
+      "defaultValue": true,
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "camel.cloud.consul.service-host",
+      "type": "java.lang.String",
+      "description": "Service host.",
       "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
       "deprecated": true,
       "deprecation": {}

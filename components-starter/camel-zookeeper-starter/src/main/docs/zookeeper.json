@@ -57,13 +57,6 @@
       "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
     },
     {
-      "name": "camel.cloud.zookeeper.deregister-services-on-stop",
-      "type": "java.lang.Boolean",
-      "description": "Should we remove all the registered services know by this registry on stop ? Default is true.",
-      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
-      "defaultValue": true
-    },
-    {
       "name": "camel.cloud.zookeeper.enabled",
       "type": "java.lang.Boolean",
       "description": "Sets if the zookeeper service registry should be enabled or not, default is false.",
@@ -109,13 +102,6 @@
       "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
     },
     {
-      "name": "camel.cloud.zookeeper.override-service-host",
-      "type": "java.lang.Boolean",
-      "description": "Should we override the service host if given ? Default is true.",
-      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
-      "defaultValue": true
-    },
-    {
       "name": "camel.cloud.zookeeper.reconnect-base-sleep-time",
       "type": "java.lang.Long",
       "description": "Initial amount of time to wait between retries.",
@@ -153,12 +139,6 @@
       "name": "camel.cloud.zookeeper.retry-policy",
       "type": "org.apache.curator.RetryPolicy",
       "description": "Retry policy to use.",
-      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
-    },
-    {
-      "name": "camel.cloud.zookeeper.service-host",
-      "type": "java.lang.String",
-      "description": "Service host.",
       "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
     },
     {
@@ -261,6 +241,32 @@
       "description": "The time interval to wait on connection before timing out.",
       "sourceType": "org.apache.camel.component.zookeeper.springboot.ZooKeeperComponentConfiguration",
       "defaultValue": 5000
+    },
+    {
+      "name": "camel.cloud.zookeeper.deregister-services-on-stop",
+      "type": "java.lang.Boolean",
+      "description": "Should we remove all the registered services know by this registry on stop ? Default is true.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": true,
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "camel.cloud.zookeeper.override-service-host",
+      "type": "java.lang.Boolean",
+      "description": "Should we override the service host if given ? Default is true.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": true,
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "camel.cloud.zookeeper.service-host",
+      "type": "java.lang.String",
+      "description": "Service host.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "deprecated": true,
+      "deprecation": {}
     }
   ],
   "hints": []
