@@ -26,6 +26,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.env.Environment;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.List;
@@ -49,9 +50,9 @@ public class SpringBootPlatformHttpAutoConfiguration {
 
         if (executors != null && !executors.isEmpty()) {
             executor = executors.stream()
-                    .filter(e -> e instanceof ThreadPoolTaskExecutor)
+                    .filter(e -> e instanceof ThreadPoolTaskExecutor || e instanceof SimpleAsyncTaskExecutor)
                     .findFirst()
-                    .orElseThrow(() -> new RuntimeException("No ThreadPoolTaskExecutor configured"));
+                    .orElseThrow(() -> new RuntimeException("No ThreadPoolTaskExecutor or SimpleAsyncTaskExecutor configured"));
         } else {
             throw new RuntimeException("No Executor configured");
         }
