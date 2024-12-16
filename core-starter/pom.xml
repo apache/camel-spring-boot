@@ -33,6 +33,5 @@
     <module>camel-spring-boot-starter</module>
     <module>camel-spring-boot-engine-starter</module>
     <module>camel-spring-boot-xml-starter</module>
-    <module>camel-k-starter</module>
   </modules>
 </project>
