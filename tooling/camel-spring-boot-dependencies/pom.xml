@@ -4475,17 +4475,17 @@
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-tracing</artifactId>
-        <version>1.4.0</version>
+        <version>1.4.1</version>
       </dependency>
       <dependency>
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy</artifactId>
-        <version>1.15.10</version>
+        <version>1.15.11</version>
       </dependency>
       <dependency>
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy-agent</artifactId>
-        <version>1.15.10</version>
+        <version>1.15.11</version>
       </dependency>
       <dependency>
         <groupId>org.apache.avro</groupId>
