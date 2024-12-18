@@ -851,7 +851,7 @@
     {
       "name": "camel.main.load-statistics-enabled",
       "type": "java.lang.Boolean",
-      "description": "Sets whether context load statistics is enabled (something like the unix load average). The statistics requires to have camel-management on the classpath as JMX is required. The default value is false.",
+      "description": "Sets whether Camel load (inflight messages, not cpu) statistics is enabled (something like the unix load average). The statistics requires to have camel-management on the classpath as JMX is required. The default value is false.",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
       "defaultValue": false
     },
@@ -2533,7 +2533,7 @@
     {
       "name": "camel.springboot.load-statistics-enabled",
       "type": "java.lang.Boolean",
-      "description": "Sets whether context load statistics is enabled (something like the unix load average). The statistics requires to have camel-management on the classpath as JMX is required. The default value is false.",
+      "description": "Sets whether Camel load (inflight messages, not cpu) statistics is enabled (something like the unix load average). The statistics requires to have camel-management on the classpath as JMX is required. The default value is false.",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Springboot",
       "defaultValue": false,
       "deprecated": true,
