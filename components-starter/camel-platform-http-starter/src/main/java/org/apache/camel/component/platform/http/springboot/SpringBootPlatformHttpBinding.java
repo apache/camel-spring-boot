@@ -42,6 +42,7 @@ import java.nio.ByteBuffer;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Locale;
+import java.util.UUID;
 
 public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
     private static final Logger LOG = LoggerFactory.getLogger(SpringBootPlatformHttpBinding.class);
@@ -76,7 +77,7 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
             File tmpFolder = (File) request.getServletContext().getAttribute(ServletContext.TEMPDIR);
             multipartHttpServletRequest.getFileMap().forEach((name, multipartFile) -> {
                 try {
-                    Path uploadedTmpFile = Paths.get(tmpFolder.getPath(), name);
+                    Path uploadedTmpFile = Paths.get(tmpFolder.getPath(), UUID.randomUUID().toString());
                     multipartFile.transferTo(uploadedTmpFile);
 
                     if (name != null) {
