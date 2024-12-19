@@ -518,7 +518,7 @@ public class DebeziumMySqlComponentConfiguration
      * schema/database will be stored. If set to false, then Debezium will store
      * all incoming DDL statements.
      */
-    private Boolean schemaHistoryInternalStoreOnlyCapturedDatabasesDdl = true;
+    private Boolean schemaHistoryInternalStoreOnlyCapturedDatabasesDdl = false;
     /**
      * Controls what DDL will Debezium store in database schema history. By
      * default (false) Debezium will store all incoming DDL statements. If set

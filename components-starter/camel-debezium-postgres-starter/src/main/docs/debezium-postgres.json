@@ -515,6 +515,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.debezium-postgres.slot-failover",
+      "type": "java.lang.Boolean",
+      "description": "Whether or not to create a failover slot. This is only supported when connecting to a primary server of a Postgres cluster, version 17 or newer. When not specified, or when not connecting to a Postgres 17 primary, no failover slot will be created.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.debezium-postgres.slot-max-retries",
       "type": "java.lang.Integer",
       "description": "How many times to retry connecting to a replication slot when an attempt fails.",

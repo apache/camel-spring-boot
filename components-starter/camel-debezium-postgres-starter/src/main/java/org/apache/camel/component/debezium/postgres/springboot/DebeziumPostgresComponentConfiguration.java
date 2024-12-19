@@ -520,6 +520,13 @@ public class DebeziumPostgresComponentConfiguration
      */
     private Boolean slotDropOnStop = false;
     /**
+     * Whether or not to create a failover slot. This is only supported when
+     * connecting to a primary server of a Postgres cluster, version 17 or
+     * newer. When not specified, or when not connecting to a Postgres 17
+     * primary, no failover slot will be created.
+     */
+    private Boolean slotFailover = false;
+    /**
      * How many times to retry connecting to a replication slot when an attempt
      * fails.
      */
@@ -1377,6 +1384,14 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setSlotDropOnStop(Boolean slotDropOnStop) {
         this.slotDropOnStop = slotDropOnStop;
+    }
+
+    public Boolean getSlotFailover() {
+        return slotFailover;
+    }
+
+    public void setSlotFailover(Boolean slotFailover) {
+        this.slotFailover = slotFailover;
     }
 
     public Integer getSlotMaxRetries() {
