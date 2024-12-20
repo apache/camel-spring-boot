@@ -34,7 +34,7 @@
 
     <properties>
         <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
-        <maven-jar-plugin-version>3.3.0</maven-jar-plugin-version>
+        <maven-jar-plugin-version>3.4.2</maven-jar-plugin-version>
     </properties>
 
     <dependencyManagement>
