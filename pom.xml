@@ -42,7 +42,7 @@
             <email>dev@camel.apache.org</email>
             <url>https://camel.apache.org</url>
             <organization>Apache Software Foundation</organization>
-            <organizationUrl>http://apache.org/</organizationUrl>
+            <organizationUrl>https://apache.org/</organizationUrl>
         </developer>
     </developers>
 
