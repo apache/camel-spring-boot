@@ -91,6 +91,11 @@ public class Kinesis2ComponentConfiguration
      */
     private Integer maxResultsPerRequest = 1;
     /**
+     * The message timestamp to start polling from. Required if iteratorType is
+     * set to AT_TIMESTAMP
+     */
+    private String messageTimestamp;
+    /**
      * The sequence number to start polling from. Required if iteratorType is
      * set to AFTER_SEQUENCE_NUMBER or AT_SEQUENCE_NUMBER
      */
@@ -287,6 +292,14 @@ public class Kinesis2ComponentConfiguration
 
     public void setMaxResultsPerRequest(Integer maxResultsPerRequest) {
         this.maxResultsPerRequest = maxResultsPerRequest;
+    }
+
+    public String getMessageTimestamp() {
+        return messageTimestamp;
+    }
+
+    public void setMessageTimestamp(String messageTimestamp) {
+        this.messageTimestamp = messageTimestamp;
     }
 
     public String getSequenceNumber() {

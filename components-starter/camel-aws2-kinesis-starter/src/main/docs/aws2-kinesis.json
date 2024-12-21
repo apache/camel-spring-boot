@@ -274,6 +274,12 @@
       "defaultValue": 1
     },
     {
+      "name": "camel.component.aws2-kinesis.message-timestamp",
+      "type": "java.lang.String",
+      "description": "The message timestamp to start polling from. Required if iteratorType is set to AT_TIMESTAMP",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
       "name": "camel.component.aws2-kinesis.override-endpoint",
       "type": "java.lang.Boolean",
       "description": "Set the need for overriding the endpoint. This option needs to be used in combination with uriEndpointOverride option",
