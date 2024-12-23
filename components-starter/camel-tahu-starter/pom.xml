@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-tahu-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: tahu</name>
+  <name>Camel SB Starters :: Tahu</name>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>

@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-zeebe-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: camel-zeebe</name>
+  <name>Camel SB Starters :: Zeebe</name>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
