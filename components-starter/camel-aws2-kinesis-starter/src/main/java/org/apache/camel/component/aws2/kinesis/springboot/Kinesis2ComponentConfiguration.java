@@ -24,6 +24,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
 import software.amazon.awssdk.services.cloudwatch.CloudWatchAsyncClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
+import software.amazon.awssdk.services.kinesis.KinesisAsyncClient;
 import software.amazon.awssdk.services.kinesis.KinesisClient;
 import software.amazon.awssdk.services.kinesis.model.ShardIteratorType;
 
@@ -129,10 +130,20 @@ public class Kinesis2ComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Supply a pre-constructed Amazon Kinesis async client to use for the KCL
+     * Consumer. The option is a
+     * software.amazon.awssdk.services.kinesis.KinesisAsyncClient type.
+     */
+    private KinesisAsyncClient amazonKinesisAsyncClient;
+    /**
      * Amazon Kinesis client to use for all requests for this endpoint. The
      * option is a software.amazon.awssdk.services.kinesis.KinesisClient type.
      */
     private KinesisClient amazonKinesisClient;
+    /**
+     * Name of the KCL application. This defaults to the stream name.
+     */
+    private String applicationName;
     /**
      * If we want to a KinesisAsyncClient instance set it to true
      */
@@ -342,12 +353,29 @@ public class Kinesis2ComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public KinesisAsyncClient getAmazonKinesisAsyncClient() {
+        return amazonKinesisAsyncClient;
+    }
+
+    public void setAmazonKinesisAsyncClient(
+            KinesisAsyncClient amazonKinesisAsyncClient) {
+        this.amazonKinesisAsyncClient = amazonKinesisAsyncClient;
+    }
+
     public KinesisClient getAmazonKinesisClient() {
         return amazonKinesisClient;
     }
 
     public void setAmazonKinesisClient(KinesisClient amazonKinesisClient) {
         this.amazonKinesisClient = amazonKinesisClient;
+    }
+
+    public String getApplicationName() {
+        return applicationName;
+    }
+
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
     }
 
     public Boolean getAsyncClient() {

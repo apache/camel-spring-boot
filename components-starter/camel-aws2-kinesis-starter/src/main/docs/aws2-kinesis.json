@@ -171,9 +171,21 @@
       "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
     },
     {
+      "name": "camel.component.aws2-kinesis.amazon-kinesis-async-client",
+      "type": "software.amazon.awssdk.services.kinesis.KinesisAsyncClient",
+      "description": "Supply a pre-constructed Amazon Kinesis async client to use for the KCL Consumer. The option is a software.amazon.awssdk.services.kinesis.KinesisAsyncClient type.",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
       "name": "camel.component.aws2-kinesis.amazon-kinesis-client",
       "type": "software.amazon.awssdk.services.kinesis.KinesisClient",
       "description": "Amazon Kinesis client to use for all requests for this endpoint. The option is a software.amazon.awssdk.services.kinesis.KinesisClient type.",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-kinesis.application-name",
+      "type": "java.lang.String",
+      "description": "Name of the KCL application. This defaults to the stream name.",
       "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration"
     },
     {
