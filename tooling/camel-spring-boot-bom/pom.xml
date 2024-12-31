@@ -1850,6 +1850,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-yaml-io-starter</artifactId>
+        <version>4.10.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-zeebe-starter</artifactId>
         <version>4.10.0-SNAPSHOT</version>
       </dependency>
