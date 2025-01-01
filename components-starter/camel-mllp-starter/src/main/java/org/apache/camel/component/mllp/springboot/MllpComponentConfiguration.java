@@ -21,6 +21,7 @@ import org.apache.camel.component.mllp.MllpComponent;
 import org.apache.camel.component.mllp.MllpConfiguration;
 import org.apache.camel.component.mllp.MllpIdleTimeoutStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -211,6 +212,19 @@ public class MllpComponentConfiguration
      * Sets the SO_SNDBUF option to the specified value (in bytes)
      */
     private Integer sendBufferSize = 8192;
+    /**
+     * Sets the SSLContextParameters for securing TCP connections. If set, the
+     * MLLP component will use SSL/TLS for securing both producer and consumer
+     * TCP connections. This allows the configuration of trust stores, key
+     * stores, protocols, and other SSL/TLS settings. If not set, the MLLP
+     * component will use plain TCP communication. The option is a
+     * org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private SSLContextParameters sslContextParameters;
+    /**
+     * Enable usage of global SSL context parameters.
+     */
+    private Boolean useGlobalSslContextParameters = false;
     /**
      * The approximate idle time allowed before the Client TCP Connection will
      * be reset. A null value or a value less than or equal to zero will disable
@@ -465,6 +479,24 @@ public class MllpComponentConfiguration
 
     public void setSendBufferSize(Integer sendBufferSize) {
         this.sendBufferSize = sendBufferSize;
+    }
+
+    public SSLContextParameters getSslContextParameters() {
+        return sslContextParameters;
+    }
+
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
+        this.sslContextParameters = sslContextParameters;
+    }
+
+    public Boolean getUseGlobalSslContextParameters() {
+        return useGlobalSslContextParameters;
+    }
+
+    public void setUseGlobalSslContextParameters(
+            Boolean useGlobalSslContextParameters) {
+        this.useGlobalSslContextParameters = useGlobalSslContextParameters;
     }
 
     public Integer getIdleTimeout() {
