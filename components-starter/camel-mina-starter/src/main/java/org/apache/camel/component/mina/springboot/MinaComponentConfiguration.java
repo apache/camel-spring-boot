@@ -26,6 +26,7 @@ import org.apache.camel.support.jsse.SSLContextParameters;
 import org.apache.mina.core.filterchain.IoFilter;
 import org.apache.mina.filter.codec.ProtocolCodecFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Socket level networking using TCP or UDP with Apache Mina 2.x.
@@ -146,7 +147,10 @@ public class MinaComponentConfiguration
      * fault body, In headers, Out headers, fault headers, exchange properties,
      * exchange exception. This requires that the objects are serializable.
      * Camel will exclude any non-serializable objects and log it at WARN level.
+     * Also make sure to configure objectCodecPattern to (star) to allow
+     * transferring java objects.
      */
+    @Deprecated
     private Boolean transferExchange = false;
     /**
      * The mina component installs a default codec if both, codec is null and
@@ -181,6 +185,11 @@ public class MinaComponentConfiguration
      * You can set a list of Mina IoFilters to use.
      */
     private List<IoFilter> filters;
+    /**
+     * Accept the wildcard specified classes for Object deserialization, unless
+     * they are otherwise rejected. Multiple patterns can be separated by comma.
+     */
+    private String objectCodecPattern;
     /**
      * Only used for TCP. If no codec is specified, you can use this flag to
      * indicate a text line based codec; if not specified or the value is false,
@@ -331,10 +340,13 @@ public class MinaComponentConfiguration
         this.orderedThreadPoolExecutor = orderedThreadPoolExecutor;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getTransferExchange() {
         return transferExchange;
     }
 
+    @Deprecated
     public void setTransferExchange(Boolean transferExchange) {
         this.transferExchange = transferExchange;
     }
@@ -385,6 +397,14 @@ public class MinaComponentConfiguration
 
     public void setFilters(List<IoFilter> filters) {
         this.filters = filters;
+    }
+
+    public String getObjectCodecPattern() {
+        return objectCodecPattern;
+    }
+
+    public void setObjectCodecPattern(String objectCodecPattern) {
+        this.objectCodecPattern = objectCodecPattern;
     }
 
     public Boolean getTextline() {

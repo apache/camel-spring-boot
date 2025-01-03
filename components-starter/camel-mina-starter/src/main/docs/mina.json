@@ -146,6 +146,12 @@
       "sourceType": "org.apache.camel.component.mina.springboot.MinaComponentConfiguration"
     },
     {
+      "name": "camel.component.mina.object-codec-pattern",
+      "type": "java.lang.String",
+      "description": "Accept the wildcard specified classes for Object deserialization, unless they are otherwise rejected. Multiple patterns can be separated by comma.",
+      "sourceType": "org.apache.camel.component.mina.springboot.MinaComponentConfiguration"
+    },
+    {
       "name": "camel.component.mina.ordered-thread-pool-executor",
       "type": "java.lang.Boolean",
       "description": "Whether to use ordered thread pool, to ensure events are processed orderly on the same channel.",
@@ -186,13 +192,6 @@
       "defaultValue": 30000
     },
     {
-      "name": "camel.component.mina.transfer-exchange",
-      "type": "java.lang.Boolean",
-      "description": "Only used for TCP. You can transfer the exchange over the wire instead of just the body. The following fields are transferred: In body, Out body, fault body, In headers, Out headers, fault headers, exchange properties, exchange exception. This requires that the objects are serializable. Camel will exclude any non-serializable objects and log it at WARN level.",
-      "sourceType": "org.apache.camel.component.mina.springboot.MinaComponentConfiguration",
-      "defaultValue": false
-    },
-    {
       "name": "camel.component.mina.use-global-ssl-context-parameters",
       "type": "java.lang.Boolean",
       "description": "Enable usage of global SSL context parameters.",
@@ -205,6 +204,15 @@
       "description": "Maximum amount of time it should take to send data to the MINA session. Default is 10000 milliseconds.",
       "sourceType": "org.apache.camel.component.mina.springboot.MinaComponentConfiguration",
       "defaultValue": 10000
+    },
+    {
+      "name": "camel.component.mina.transfer-exchange",
+      "type": "java.lang.Boolean",
+      "description": "Only used for TCP. You can transfer the exchange over the wire instead of just the body. The following fields are transferred: In body, Out body, fault body, In headers, Out headers, fault headers, exchange properties, exchange exception. This requires that the objects are serializable. Camel will exclude any non-serializable objects and log it at WARN level. Also make sure to configure objectCodecPattern to (star) to allow transferring java objects.",
+      "sourceType": "org.apache.camel.component.mina.springboot.MinaComponentConfiguration",
+      "defaultValue": false,
+      "deprecated": true,
+      "deprecation": {}
     }
   ],
   "hints": []
