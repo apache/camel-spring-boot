@@ -201,6 +201,11 @@ public class HttpComponentConfiguration
      */
     private Boolean redirectHandlingDisabled = false;
     /**
+     * To use System Properties as fallback for configuration for configuring
+     * HTTP Client
+     */
+    private Boolean useSystemProperties = false;
+    /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
      * org.apache.camel.spi.HeaderFilterStrategy type.
@@ -501,6 +506,14 @@ public class HttpComponentConfiguration
 
     public void setRedirectHandlingDisabled(Boolean redirectHandlingDisabled) {
         this.redirectHandlingDisabled = redirectHandlingDisabled;
+    }
+
+    public Boolean getUseSystemProperties() {
+        return useSystemProperties;
+    }
+
+    public void setUseSystemProperties(Boolean useSystemProperties) {
+        this.useSystemProperties = useSystemProperties;
     }
 
     public HeaderFilterStrategy getHeaderFilterStrategy() {
