@@ -19,13 +19,11 @@ package org.apache.camel.component.micrometer.springboot;
 import io.micrometer.common.KeyValue;
 import io.micrometer.common.KeyValues;
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.camel.CamelContext;
 import org.apache.camel.component.micrometer.springboot.metrics.CamelMetricsConfiguration;
 import org.apache.camel.http.common.CamelServlet;
 import org.apache.camel.http.common.HttpConsumer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -85,42 +83,8 @@ public class MicrometerTagsAutoConfiguration {
                     uri = "";
                 }
 
-                return KeyValue.of("uri", context.getCarrier().getMethod());
+                return KeyValue.of("uri", uri);
             }
-            // @Override
-            // public Iterable<Tag> getTags(HttpServletRequest request, HttpServletResponse response,
-            // Object handler, Throwable exception) {
-            //
-            // String uri = null;
-            // if (servlet.isPresent() && !configuration.isUriTagDynamic()) {
-            // HttpConsumer consumer = servlet.get().getServletResolveConsumerStrategy().resolve(request,
-            // servlet.get().getConsumers());
-            // if (consumer != null) {
-            // uri = consumer.getPath();
-            // }
-            // }
-            //
-            // // the request may not be for camel servlet, so we need to capture uri from request
-            // if (uri == null || uri.isEmpty()) {
-            // // dynamic uri with the actual value from the http request
-            // uri = request.getServletPath();
-            // if (uri == null || uri.isEmpty()) {
-            // uri = request.getPathInfo();
-            // } else {
-            // String p = request.getPathInfo();
-            // if (p != null) {
-            // uri = uri + p;
-            // }
-            // }
-            // }
-            // if (uri == null) {
-            // uri = "";
-            // }
-            // return Tags.concat(
-            // super.getTags(request, response, handler, exception),
-            // Tags.of(Tag.of("uri", uri))
-            // );
-            // }
         };
     }
 }
