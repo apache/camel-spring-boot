@@ -20,6 +20,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import org.junit.jupiter.api.BeforeEach;
 
+import org.assertj.core.api.Assertions;
+import org.assertj.core.api.InstanceOfAssertFactories;
+import org.jolokia.server.core.config.ConfigKey;
 import org.jolokia.support.spring.SpringJolokiaAgent;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,5 +34,16 @@ class JolokiaComponentTestBase {
 	@BeforeEach
 	void checkAgentIsAutoWired() {
 		assertThat(agent).isNotNull();
+	}
+
+	protected void assertDiscoveryEnabled(boolean value) {
+		Assertions.assertThat(agent).as("check Discovery feature configuration")
+				.extracting("serviceManager")
+				.extracting("configuration")
+				.extracting("configMap")
+				.asInstanceOf(InstanceOfAssertFactories.map(ConfigKey.class, String.class))
+				.extractingByKey(ConfigKey.DISCOVERY_ENABLED)
+				.isNotNull()
+				.isEqualTo(String.valueOf(value));
 	}
 }

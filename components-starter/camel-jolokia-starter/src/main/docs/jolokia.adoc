@@ -29,6 +29,7 @@ Moreover, it is possible to configure the Jolokia server accessing to the config
 according to https://jolokia.org/reference/html/manual/agents.html#jvm-agent-installation[Jolokia agent configuration]
 using `camel.component.jolokia.server-config` map configuration,
 i.e. `camel.component.jolokia.server-config.port=8779` or `camel.component.jolokia.server-config.authMode=jaas`
+ The value of the `discoveryEnabled` configuration key is set to `true` on JVM local environment (not on Kubernetes), to allow the Hawtio process to discover the Jolokia agent. It is possible to disable the default configuration by setting `camel.component.jolokia.server-config.discoveryEnabled=false`.
 
 To avoid to expose all the JMX MBeans (see https://jolokia.org/reference/html/manual/security.html[Security] considerations),
 it is provided a default Jolokia https://jolokia.org/reference/html/manual/security.html#security-restrictor[Restrictor]
