@@ -17,6 +17,7 @@
 package org.apache.camel.component.qdrant.springboot;
 
 import java.time.Duration;
+import io.qdrant.client.grpc.Points.Filter;
 import org.apache.camel.component.qdrant.QdrantConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -61,6 +62,10 @@ public class QdrantComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Max results for similarity search
+     */
+    private Integer maxResults = 3;
+    /**
      * The port to connect to.
      */
     private Integer port = 6334;
@@ -82,6 +87,12 @@ public class QdrantComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * Filter of type io.qdrant.client.grpc.Points.Points.Filter for similarity
+     * search. This is for advanced usage. The option is a
+     * io.qdrant.client.grpc.Points.Filter type.
+     */
+    private Filter filter;
 
     public String getApiKey() {
         return apiKey;
@@ -115,6 +126,14 @@ public class QdrantComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public Integer getMaxResults() {
+        return maxResults;
+    }
+
+    public void setMaxResults(Integer maxResults) {
+        this.maxResults = maxResults;
+    }
+
     public Integer getPort() {
         return port;
     }
@@ -145,5 +164,13 @@ public class QdrantComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Filter getFilter() {
+        return filter;
+    }
+
+    public void setFilter(Filter filter) {
+        this.filter = filter;
     }
 }
