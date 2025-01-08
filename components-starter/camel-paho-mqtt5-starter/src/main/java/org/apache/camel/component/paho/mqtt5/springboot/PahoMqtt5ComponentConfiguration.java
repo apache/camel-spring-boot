@@ -218,6 +218,16 @@ public class PahoMqtt5ComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Sets whether to use manual acknowledgements for the client. By default,
+     * this is false and message will be automatically acknowledged upon
+     * received by Camel. If set to true, the acknowledgement is deferred to be
+     * acknowledged by Camel at the end of processing the message. This ensures
+     * that only successfully processed messages is acknowledged, and allows to
+     * rollback and retry the message in case of an error during routing in
+     * Camel.
+     */
+    private Boolean manualAcksEnabled = false;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -488,6 +498,14 @@ public class PahoMqtt5ComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getManualAcksEnabled() {
+        return manualAcksEnabled;
+    }
+
+    public void setManualAcksEnabled(Boolean manualAcksEnabled) {
+        this.manualAcksEnabled = manualAcksEnabled;
     }
 
     public Boolean getLazyStartProducer() {
