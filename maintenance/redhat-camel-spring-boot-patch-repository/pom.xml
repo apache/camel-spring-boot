@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2005-2023 Red Hat, Inc.
+
+     Red Hat licenses this file to you under the Apache License, version
+     2.0 (the "License"); you may not use this file except in compliance
+     with the License.  You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+     implied.  See the License for the specific language governing
+     permissions and limitations under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.redhat.camel.springboot.platform</groupId>
+        <artifactId>redhat-camel-spring-boot-maintenance</artifactId>
+        <version>4.4.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>redhat-camel-spring-boot-patch-repository</artifactId>
+    <packaging>pom</packaging>
+    <name>Camel SB Patch Repository</name>
+
+    <description>
+        Offline repository with patched artifacts and patch metadata for Camel on Spring Boot applications
+    </description>
+
+    <properties>
+        <patch.camel-version>4.4.0</patch.camel-version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.redhat.camel.springboot.platform</groupId>
+            <artifactId>redhat-camel-spring-boot-patch-metadata</artifactId>
+            <version>${project.version}</version>
+            <type>xml</type>
+        </dependency>
+        <!--
+            Dependencies used to create a patch - these most probably use different version than the ones
+            from parent pom and the BOMs declared there. That's why they have to be specified at this level
+        -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+            <version>${patch.camel-version}</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.netty</groupId>-->
+<!--            <artifactId>netty-buffer</artifactId>-->
+<!--            <version>${patch.netty-version}</version>-->
+<!--        </dependency>-->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/patch-repository</outputDirectory>
+                            <useRepositoryLayout>true</useRepositoryLayout>
+                            <copyPom>true</copyPom>
+                            <addParentPoms>true</addParentPoms>
+                            <excludeTransitive>false</excludeTransitive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>create-repository</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/descriptors/repository.xml</descriptor>
+                            </descriptors>
+                            <finalName>${project.artifactId}-${project.version}</finalName>
+                            <appendAssemblyId>false</appendAssemblyId>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2005-2020 Red Hat, Inc.
+
+     Red Hat licenses this file to you under the Apache License, version
+     2.0 (the "License"); you may not use this file except in compliance
+     with the License.  You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+     implied.  See the License for the specific language governing
+     permissions and limitations under the License.
+
+-->
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.1.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 http://maven.apache.org/xsd/assembly-2.1.0.xsd">
+
+    <id>redhat-camel-spring-boot-patch-repository</id>
+
+    <formats>
+        <format>zip</format>
+    </formats>
+
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+    <fileSets>
+        <!--
+            There is only one file set for Camel on Spring Boot patches - a set that creates Maven repository structure.
+            We always have transitive dependencies in target/patch-repository, but this means we may get some Apache
+            or parent poms we don't need.
+            Remember - this file set impacts the content of actual patch and it's important to manage the content
+            properly.
+        -->
+        <fileSet>
+            <outputDirectory>repository</outputDirectory>
+            <directory>${project.build.directory}/patch-repository</directory>
+            <includes>
+                <include>com/redhat/camel/springboot/**</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+
+</assembly>

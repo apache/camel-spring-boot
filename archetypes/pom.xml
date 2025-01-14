@@ -41,7 +41,7 @@
         <profile>
             <id>archetypes-skip-tests</id>
             <activation>
-                <property><name>skipTests</name></property>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <archetype.test.skip>true</archetype.test.skip>

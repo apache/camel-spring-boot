@@ -569,6 +569,26 @@
                         </excludes>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.5.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>3.5.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.plexus</groupId>
+                    <artifactId>plexus-component-metadata</artifactId>
+                    <version>${plexus-component-metadata-plugin-version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${build-helper-maven-plugin-version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -1025,6 +1045,12 @@
                 </plugin>
             </plugins>
             </build>
+        </profile>
+        <profile>
+            <id>maintenance</id>
+            <modules>
+                <module>maintenance</module>
+            </modules>
         </profile>
     </profiles>
 </project>
