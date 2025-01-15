@@ -42,6 +42,10 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
+import org.apache.camel.component.platform.http.springboot.SpringBootPlatformHttpConsumer;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -64,7 +68,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
         SpringBootPlatformHttpCertificationTest.class, SpringBootPlatformHttpCertificationTest.TestConfiguration.class,
-        PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class, })
+        PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class})
 public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
 
     private static final String postRouteId = "SpringBootPlatformHttpRestDSLTest_mypost";
@@ -373,7 +377,6 @@ public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
     }
 
     @Test
-    @Disabled("Test is failing, work in progress")
     public void testAddCookie() throws Exception {
         given()
                 .when()
