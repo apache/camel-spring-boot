@@ -16,15 +16,23 @@
  */
 package org.apache.camel.component.platform.http.springboot;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import org.apache.camel.Exchange;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.Processor;
 import org.apache.camel.Suspendable;
 import org.apache.camel.SuspendableService;
 import org.apache.camel.component.platform.http.PlatformHttpEndpoint;
+import org.apache.camel.component.platform.http.cookie.CookieConfiguration;
+import org.apache.camel.component.platform.http.cookie.CookieHandler;
 import org.apache.camel.component.platform.http.spi.PlatformHttpConsumer;
 import org.apache.camel.http.common.HttpBinding;
 import org.apache.camel.http.common.HttpHelper;
@@ -33,10 +41,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-
 public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements PlatformHttpConsumer, Suspendable, SuspendableService {
 
     private static final Logger LOG = LoggerFactory.getLogger(SpringBootPlatformHttpConsumer.class);
@@ -44,6 +48,7 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
     private HttpBinding binding;
     private final boolean handleWriteResponseError;
     private Executor executor;
+    private CookieConfiguration cookieConfiguration;
 
     public SpringBootPlatformHttpConsumer(PlatformHttpEndpoint endpoint, Processor processor) {
         super(endpoint, processor);
@@ -115,6 +120,10 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         if (contextPath != null && httpPath.startsWith(contextPath)) {
             exchange.getIn().setHeader(Exchange.HTTP_PATH, httpPath.substring(contextPath.length()));
         }
+        if (getEndpoint().isUseCookieHandler()) {
+            cookieConfiguration = getEndpoint().getCookieConfiguration();
+            exchange.setProperty(Exchange.COOKIE_HANDLER, new SpringBootCookieHandler(request, response));
+        }
 
         // we want to handle the UoW
         try {
@@ -173,4 +182,51 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         }
     }
 
+    class SpringBootCookieHandler implements CookieHandler {
+
+        private final HttpServletRequest request;
+        private final HttpServletResponse response;
+
+        public SpringBootCookieHandler(HttpServletRequest request, HttpServletResponse response) {
+            this.request = request;
+            this.response = response;
+        }
+
+        @Override
+        public void addCookie(String cookieName, String cookieValue) {
+            Cookie cookie = new Cookie(cookieName, cookieValue);
+            cookie.setPath(cookieConfiguration.getCookiePath());
+            cookie.setDomain(cookieConfiguration.getCookieDomain());
+            cookie.setSecure(cookieConfiguration.isCookieSecure());
+            cookie.setHttpOnly(cookieConfiguration.isCookieHttpOnly());
+            cookie.setAttribute("SameSite", cookieConfiguration.getCookieSameSite().getValue());
+            if (cookieConfiguration.getCookieMaxAge() != null) {
+                cookie.setMaxAge(Math.toIntExact(cookieConfiguration.getCookieMaxAge()));
+            }
+            response.addCookie(cookie);
+        }
+
+        @Override
+        public String removeCookie(String cookieName) {
+            Cookie cookieToRemove = new Cookie(cookieName, null);
+            cookieToRemove.setPath(cookieConfiguration.getCookiePath());
+            // set max age to 0 to delete the cookie
+            cookieToRemove.setMaxAge(0);
+            response.addCookie(cookieToRemove);
+            return cookieName;
+        }
+
+        @Override
+        public String getCookieValue(String cookieName) {
+            Cookie[] cookie = request.getCookies();
+            for (Cookie c : cookie) {
+                if (c.getName().equals(cookieName)) {
+                    return c.getValue();
+                }
+            }
+            return null;
+        }
+    }
 }
+
+
