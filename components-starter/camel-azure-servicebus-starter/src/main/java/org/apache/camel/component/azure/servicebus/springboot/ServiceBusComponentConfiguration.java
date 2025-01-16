@@ -142,6 +142,10 @@ public class ServiceBusComponentConfiguration
      */
     private ServiceBusReceiveMode serviceBusReceiveMode = ServiceBusReceiveMode.PEEK_LOCK;
     /**
+     * Enable session support
+     */
+    private Boolean sessionEnabled = false;
+    /**
      * Sets the type of the SubQueue to connect to.
      */
     private SubQueue subQueue;
@@ -187,6 +191,10 @@ public class ServiceBusComponentConfiguration
      * com.azure.messaging.servicebus.ServiceBusTransactionContext type.
      */
     private ServiceBusTransactionContext serviceBusTransactionContext;
+    /**
+     * Session ID for session-enabled queues or topics.
+     */
+    private String sessionId;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -329,6 +337,14 @@ public class ServiceBusComponentConfiguration
         this.serviceBusReceiveMode = serviceBusReceiveMode;
     }
 
+    public Boolean getSessionEnabled() {
+        return sessionEnabled;
+    }
+
+    public void setSessionEnabled(Boolean sessionEnabled) {
+        this.sessionEnabled = sessionEnabled;
+    }
+
     public SubQueue getSubQueue() {
         return subQueue;
     }
@@ -393,6 +409,14 @@ public class ServiceBusComponentConfiguration
     public void setServiceBusTransactionContext(
             ServiceBusTransactionContext serviceBusTransactionContext) {
         this.serviceBusTransactionContext = serviceBusTransactionContext;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 
     public Boolean getAutowiredEnabled() {

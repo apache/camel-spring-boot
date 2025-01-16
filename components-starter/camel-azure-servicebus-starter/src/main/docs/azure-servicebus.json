@@ -180,6 +180,19 @@
       "defaultValue": "queue"
     },
     {
+      "name": "camel.component.azure-servicebus.session-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable session support",
+      "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.azure-servicebus.session-id",
+      "type": "java.lang.String",
+      "description": "Session ID for session-enabled queues or topics.",
+      "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration"
+    },
+    {
       "name": "camel.component.azure-servicebus.sub-queue",
       "type": "com.azure.messaging.servicebus.models.SubQueue",
       "description": "Sets the type of the SubQueue to connect to.",
