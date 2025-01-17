@@ -63,7 +63,7 @@ public class TensorFlowServingComponentConfiguration
     private String signatureName;
     /**
      * The target URI of the client. See:
-     * https://grpc.github.io/grpc-java/javadoc/io/grpc/Grpc.html#newChannelBuilder(java.lang.String,io.grpc.ChannelCredentials)
+     * https://grpc.github.io/grpc-java/javadoc/io/grpc/Grpc.html#newChannelBuilder%28java.lang.String,io.grpc.ChannelCredentials%29
      */
     private String target = "localhost:8500";
     /**

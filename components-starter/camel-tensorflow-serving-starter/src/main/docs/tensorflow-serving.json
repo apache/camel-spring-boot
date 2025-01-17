@@ -77,7 +77,7 @@
     {
       "name": "camel.component.tensorflow-serving.target",
       "type": "java.lang.String",
-      "description": "The target URI of the client. See: https:\/\/grpc.github.io\/grpc-java\/javadoc\/io\/grpc\/Grpc.html#newChannelBuilder(java.lang.String,io.grpc.ChannelCredentials)",
+      "description": "The target URI of the client. See: https:\/\/grpc.github.io\/grpc-java\/javadoc\/io\/grpc\/Grpc.html#newChannelBuilder%28java.lang.String,io.grpc.ChannelCredentials%29",
       "sourceType": "org.apache.camel.component.tensorflow.serving.springboot.TensorFlowServingComponentConfiguration",
       "defaultValue": "localhost:8500"
     }
