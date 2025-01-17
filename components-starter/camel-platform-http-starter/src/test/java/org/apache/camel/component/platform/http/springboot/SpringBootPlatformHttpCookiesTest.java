@@ -16,10 +16,14 @@
  */
 package org.apache.camel.component.platform.http.springboot;
 
-import io.restassured.RestAssured;
 import jakarta.servlet.http.Cookie;
+
+import io.restassured.RestAssured;
 import org.apache.camel.CamelContext;
+import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.platform.http.cookie.CookieConfiguration;
+import org.apache.camel.component.platform.http.cookie.CookieHandler;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,9 +39,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
-import java.util.Arrays;
-
 import static io.restassured.RestAssured.given;
+import static io.restassured.matcher.RestAssuredMatchers.detailedCookie;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -72,24 +75,26 @@ public class SpringBootPlatformHttpCookiesTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("platform-http:/add")
+                    getCamelContext().getStreamCachingStrategy().setSpoolEnabled(true);
+                    from("platform-http:/addCookie?useCookieHandler=true")
                             .process(exchange -> {
-                                PlatformHttpMessage message = (PlatformHttpMessage) exchange.getMessage();
-                                message.getResponse().addCookie(new Cookie("foo", "bar"));
+                                exchange.getProperty(Exchange.COOKIE_HANDLER, CookieHandler.class).addCookie("foo", "bar");
                             })
                             .setBody().constant("add");
 
-                    from("platform-http:/remove")
+                    from("platform-http:/removeCookie?useCookieHandler=true")
                             .process(exchange -> {
-                                PlatformHttpMessage message = (PlatformHttpMessage) exchange.getMessage();
-
-                                Cookie cookie = Arrays.stream(message.getRequest().getCookies()).findFirst().get();
-                                cookie.setMaxAge(0);
-                                cookie.setValue(null);
-
-                                message.getResponse().addCookie(cookie);
+                                exchange.getProperty(Exchange.COOKIE_HANDLER, CookieHandler.class).addCookie("foo", "bar");
+                                exchange.getProperty(Exchange.COOKIE_HANDLER, CookieHandler.class).removeCookie("foo");
                             })
                             .setBody().constant("remove");
+
+                    from("platform-http:/getCookieValue?useCookieHandler=true")
+                            .process(exchange -> {
+                                exchange.getProperty(Exchange.COOKIE_HANDLER, CookieHandler.class).addCookie("foo", "bar");
+                                exchange.getProperty(Exchange.COOKIE_HANDLER, CookieHandler.class).getCookieValue("foo");
+                            })
+                            .setBody().constant("get");
 
                     from("platform-http:/replace")
                             .process(exchange -> {
@@ -110,27 +115,45 @@ public class SpringBootPlatformHttpCookiesTest {
     }
 
     @Test
-    public void addCookie() {
+    public void testAddCookie() {
         given()
-                .header("cookie", "foo=bar")
                 .when()
-                .get("/add")
+                .get("/addCookie")
                 .then()
                 .statusCode(200)
-                .header("set-cookie", "foo=bar")
+                .cookie("foo",
+                        detailedCookie()
+                                .value("bar")
+                                .path(CookieConfiguration.DEFAULT_PATH)
+                                .domain((String) null)
+                                .sameSite(CookieConfiguration.DEFAULT_SAME_SITE.getValue()))
                 .body(equalTo("add"));
     }
 
     @Test
-    public void removeCookie() {
+    public void testRemoveCookie() {
         given()
-                .header("cookie", "foo=bar")
                 .when()
-                .get("/remove")
+                .get("/removeCookie")
                 .then()
                 .statusCode(200)
-                .header("set-cookie", startsWith("foo=; Max-Age=0; Expires="))
+                .cookie("foo",
+                        detailedCookie()
+                                .maxAge(equalTo(0L)))
                 .body(equalTo("remove"));
+    }
+
+    @Test
+    public void testGetCookieValue() {
+        given()
+                .when()
+                .get("/getCookieValue")
+                .then()
+                .statusCode(200)
+                .cookie("foo",
+                        detailedCookie()
+                                .value("bar"))
+                .body(equalTo("get"));
     }
 
     @Test

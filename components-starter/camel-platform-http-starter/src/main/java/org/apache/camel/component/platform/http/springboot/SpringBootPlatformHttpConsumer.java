@@ -39,6 +39,7 @@ import org.apache.camel.http.common.HttpHelper;
 import org.apache.camel.support.DefaultConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements PlatformHttpConsumer, Suspendable, SuspendableService {
@@ -217,14 +218,17 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         }
 
         @Override
-        public String getCookieValue(String cookieName) {
+        public String getCookieValue(@CookieValue String cookieName) {
             Cookie[] cookie = request.getCookies();
-            for (Cookie c : cookie) {
-                if (c.getName().equals(cookieName)) {
-                    return c.getValue();
+            // ensure cookies are not null
+            if (cookie != null) {
+                for (Cookie c : cookie) {
+                    if (c.getName().equals(cookieName)) {
+                        return c.getValue();
+                    }
                 }
             }
-            return null;
+            return "Cookie not found";
         }
     }
 }
