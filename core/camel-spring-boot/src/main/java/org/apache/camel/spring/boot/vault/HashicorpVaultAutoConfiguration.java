@@ -37,6 +37,8 @@ public class HashicorpVaultAutoConfiguration {
         answer.setHost(config.getHost());
         answer.setPort(config.getPort());
         answer.setScheme(config.getScheme());
+        answer.setCloud(config.isCloud());
+        answer.setNamespace(config.getNamespace());
         return answer;
     }
 
