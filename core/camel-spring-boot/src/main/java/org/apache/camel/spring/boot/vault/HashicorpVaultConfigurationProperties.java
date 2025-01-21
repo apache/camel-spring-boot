@@ -16,6 +16,7 @@
  */
 package org.apache.camel.spring.boot.vault;
 
+import org.apache.camel.spi.Metadata;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.vault.hashicorp")
@@ -45,6 +46,16 @@ public class HashicorpVaultConfigurationProperties {
      * The Hashicorp Vault Scheme for accessing the service
      */
     private String scheme;
+
+    /**
+     * Determine if the Hashicorp Vault is deployed on Hashicorp Cloud or not
+     */
+    private boolean cloud;
+
+    /**
+     * If the Hashicorp Vault instance is deployed on Hashicorp Cloud, this field will determine the namespace
+     */
+    private String namespace;
 
     public String getToken() {
         return token;
@@ -84,5 +95,21 @@ public class HashicorpVaultConfigurationProperties {
 
     public void setScheme(String scheme) {
         this.scheme = scheme;
+    }
+
+    public boolean isCloud() {
+        return cloud;
+    }
+
+    public void setCloud(boolean cloud) {
+        this.cloud = cloud;
+    }
+
+    public String getNamespace() {
+        return namespace;
+    }
+
+    public void setNamespace(String namespace) {
+        this.namespace = namespace;
     }
 }

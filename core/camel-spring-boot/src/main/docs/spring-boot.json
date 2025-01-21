@@ -1892,6 +1892,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.vault.hashicorp.cloud",
+      "type": "java.lang.Boolean",
+      "description": "Determine if the Hashicorp Vault is deployed on Hashicorp Cloud or not",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.vault.hashicorp.engine",
       "type": "java.lang.String",
       "description": "The Hashicorp Vault Engine for accessing secrets",
@@ -1901,6 +1908,12 @@
       "name": "camel.vault.hashicorp.host",
       "type": "java.lang.String",
       "description": "The Hashicorp Vault Host for accessing the service",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.hashicorp.namespace",
+      "type": "java.lang.String",
+      "description": "If the Hashicorp Vault instance is deployed on Hashicorp Cloud, this field will determine the namespace",
       "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
     },
     {
