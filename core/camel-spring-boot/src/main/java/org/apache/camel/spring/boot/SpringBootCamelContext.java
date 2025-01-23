@@ -16,6 +16,7 @@
  */
 package org.apache.camel.spring.boot;
 
+import org.apache.camel.main.MainListener;
 import org.apache.camel.spring.SpringCamelContext;
 import org.apache.camel.util.StopWatch;
 import org.slf4j.Logger;
@@ -31,20 +32,43 @@ public class SpringBootCamelContext extends SpringCamelContext {
 
     private final StopWatch stopWatch = new StopWatch();
     private final boolean warnOnEarlyShutdown;
+    private final CamelSpringBootApplicationController controller;
 
-    public SpringBootCamelContext(ApplicationContext applicationContext, boolean warnOnEarlyShutdown) {
+    public SpringBootCamelContext(ApplicationContext applicationContext, boolean warnOnEarlyShutdown,
+                                  CamelSpringBootApplicationController controller) {
         super(applicationContext);
         this.warnOnEarlyShutdown = warnOnEarlyShutdown;
+        this.controller = controller;
     }
 
     @Override
     protected void doStart() throws Exception {
+        var listeners = controller.getMain().getMainListeners();
+        if (!listeners.isEmpty()) {
+            for (MainListener listener : listeners) {
+                listener.beforeStart(controller.getMain());
+            }
+        }
+
         stopWatch.restart();
         super.doStart();
+
+        if (!listeners.isEmpty()) {
+            for (MainListener listener : listeners) {
+                listener.afterStart(controller.getMain());
+            }
+        }
     }
 
     @Override
     protected synchronized void doStop() throws Exception {
+        var listeners = controller.getMain().getMainListeners();
+        if (!listeners.isEmpty()) {
+            for (MainListener listener : listeners) {
+                listener.beforeStop(controller.getMain());
+            }
+        }
+
         // if we are stopping very quickly then its likely because the user may not have either spring-boot-web
         // or enabled Camel's main controller, so lets log a WARN about this.
         long taken = stopWatch.taken();
@@ -60,5 +84,11 @@ public class SpringBootCamelContext extends SpringCamelContext {
             }
         }
         super.doStop();
+
+        if (!listeners.isEmpty()) {
+            for (MainListener listener : listeners) {
+                listener.afterStop(controller.getMain());
+            }
+        }
     }
 }

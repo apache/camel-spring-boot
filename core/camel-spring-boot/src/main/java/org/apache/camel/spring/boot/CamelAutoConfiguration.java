@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.CamelContextAware;
 import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.ContextEvents;
 import org.apache.camel.FluentProducerTemplate;
@@ -32,7 +33,9 @@ import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.clock.Clock;
 import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.component.properties.PropertiesParser;
+import org.apache.camel.main.BaseMainSupport;
 import org.apache.camel.main.DefaultConfigurationConfigurer;
+import org.apache.camel.main.MainListener;
 import org.apache.camel.main.RoutesCollector;
 import org.apache.camel.model.Model;
 import org.apache.camel.spi.BeanRepository;
@@ -101,29 +104,45 @@ public class CamelAutoConfiguration {
     @Bean(destroyMethod = "")
     @ConditionalOnMissingBean(CamelContext.class)
     CamelContext camelContext(ApplicationContext applicationContext, CamelConfigurationProperties config,
-                              CamelBeanPostProcessor beanPostProcessor, StartupConditionStrategy startup) throws Exception {
+                              CamelBeanPostProcessor beanPostProcessor, StartupConditionStrategy startup,
+                              CamelSpringBootApplicationController controller) throws Exception {
         Clock clock = new ResetableClock();
         CamelContext camelContext = new SpringBootCamelContext(applicationContext,
-                config.getSpringboot().isWarnOnEarlyShutdown());
+                config.getSpringboot().isWarnOnEarlyShutdown(), controller);
         camelContext.getClock().add(ContextEvents.BOOT, clock);
         // bean post processor is created before CamelContext
         beanPostProcessor.setCamelContext(camelContext);
         camelContext.getCamelContextExtension().addContextPlugin(CamelBeanPostProcessor.class, beanPostProcessor);
         // startup condition is created before CamelContext
         camelContext.getCamelContextExtension().addContextPlugin(StartupConditionStrategy.class, startup);
-        return doConfigureCamelContext(applicationContext, camelContext, config);
+        return doConfigureCamelContext(applicationContext, camelContext, config, controller);
     }
 
     /**
      * Not to be used by Camel end users
      */
     public static CamelContext doConfigureCamelContext(ApplicationContext applicationContext, CamelContext camelContext,
-                                                       CamelConfigurationProperties config) throws Exception {
+                                                       CamelConfigurationProperties config,
+                                                       CamelSpringBootApplicationController controller) throws Exception {
+
+        // inject camel context on controller
+        CamelContextAware.trySetCamelContext(controller, camelContext);
 
         // setup startup recorder before building context
         configureStartupRecorder(camelContext, config);
 
         camelContext.build();
+
+        var listeners = controller.getMain().getMainListeners();
+        if (!listeners.isEmpty()) {
+            for (MainListener listener : listeners) {
+                listener.beforeInitialize(controller.getMain());
+            }
+            // allow doing custom configuration before camel is started
+            for (MainListener listener : listeners) {
+                listener.beforeConfigure(controller.getMain());
+            }
+        }
 
         // initialize properties component eager
         PropertiesComponent pc = applicationContext.getBeanProvider(PropertiesComponent.class).getIfAvailable();
@@ -205,6 +224,10 @@ public class CamelAutoConfiguration {
         // and call after all properties are set
         DefaultConfigurationConfigurer.afterPropertiesSet(camelContext);
 
+        for (MainListener listener : listeners) {
+            listener.afterConfigure(controller.getMain());
+        }
+
         return camelContext;
     }
 
@@ -265,10 +288,20 @@ public class CamelAutoConfiguration {
         }
     }
 
+    /**
+     * Create controller eager
+     */
     @Bean
-    CamelSpringBootApplicationController applicationController(ApplicationContext applicationContext,
-                                                               CamelContext camelContext) {
-        return new CamelSpringBootApplicationController(applicationContext, camelContext);
+    CamelSpringBootApplicationController applicationController(ApplicationContext applicationContext) {
+        CamelSpringBootApplicationController controller = new CamelSpringBootApplicationController(applicationContext);
+
+        // setup main listeners eager on controller
+        final Map<String, MainListener> listeners = applicationContext.getBeansOfType(MainListener.class);
+        for (MainListener listener : listeners.values()) {
+            controller.getMain().addMainListener(listener);
+        }
+
+        return controller;
     }
 
     @Bean

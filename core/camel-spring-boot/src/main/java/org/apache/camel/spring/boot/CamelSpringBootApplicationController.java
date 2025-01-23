@@ -18,6 +18,7 @@ package org.apache.camel.spring.boot;
 
 import jakarta.annotation.PreDestroy;
 import org.apache.camel.CamelContext;
+import org.apache.camel.CamelContextAware;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.main.Main;
 import org.apache.camel.main.MainShutdownStrategy;
@@ -26,14 +27,28 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
-public class CamelSpringBootApplicationController {
+public class CamelSpringBootApplicationController implements CamelContextAware {
     private static final Logger LOG = LoggerFactory.getLogger(CamelSpringBootApplicationController.class);
 
     private final Main main;
+    private CamelContext camelContext;
 
-    public CamelSpringBootApplicationController(final ApplicationContext applicationContext,
-            final CamelContext context) {
-        this.main = new CamelSpringMain(applicationContext, context);
+    public CamelSpringBootApplicationController(final ApplicationContext applicationContext) {
+        this.main = new CamelSpringMain(applicationContext);
+    }
+
+    public Main getMain() {
+        return main;
+    }
+
+    @Override
+    public CamelContext getCamelContext() {
+        return camelContext;
+    }
+
+    @Override
+    public void setCamelContext(CamelContext camelContext) {
+        this.camelContext = camelContext;
     }
 
     public MainShutdownStrategy getMainShutdownStrategy() {
@@ -78,9 +93,8 @@ public class CamelSpringBootApplicationController {
     private static class CamelSpringMain extends Main {
         final ApplicationContext applicationContext;
 
-        public CamelSpringMain(ApplicationContext applicationContext, CamelContext camelContext) {
+        public CamelSpringMain(ApplicationContext applicationContext) {
             this.applicationContext = applicationContext;
-            this.camelContext = camelContext;
 
             // use a simple shutdown strategy that does not install any shutdown hook as spring-boot
             // as spring-boot has its own hook we use

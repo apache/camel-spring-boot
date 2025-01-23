@@ -22,6 +22,7 @@ import org.apache.camel.spi.Injector;
 import org.apache.camel.spring.SpringCamelContext;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.CamelConfigurationProperties;
+import org.apache.camel.spring.boot.CamelSpringBootApplicationController;
 import org.apache.camel.spring.xml.XmlCamelContextConfigurer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,13 +40,15 @@ public class SpringBootXmlCamelContextConfigurer implements XmlCamelContextConfi
     @Override
     public void configure(ApplicationContext applicationContext, SpringCamelContext camelContext) {
         CamelConfigurationProperties config = applicationContext.getBean(CamelConfigurationProperties.class);
+        CamelSpringBootApplicationController controller = new CamelSpringBootApplicationController(applicationContext);
+        controller.setCamelContext(camelContext);
         Injector injector = camelContext.getInjector();
         try {
             LOG.debug("Merging XML based CamelContext with Spring Boot configuration properties");
             // spring boot is not capable at this phase to use an injector that is creating beans
             // via spring-boot itself, so use a default injector instead
             camelContext.setInjector(new DefaultInjector(camelContext));
-            CamelAutoConfiguration.doConfigureCamelContext(applicationContext, camelContext, config);
+            CamelAutoConfiguration.doConfigureCamelContext(applicationContext, camelContext, config, controller);
         } catch (Exception e) {
             throw RuntimeCamelException.wrapRuntimeCamelException(e);
         } finally {
