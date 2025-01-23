@@ -11,6 +11,6 @@
     "metadata": { "routes.language": "js" },
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-js-dsl-starter",
-    "version": "4.8.3-SNAPSHOT"
+    "version": "4.8.4-SNAPSHOT"
   }
 }

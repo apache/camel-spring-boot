@@ -12,7 +12,7 @@
     "metadata": { "protocol": "http" },
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-cxf-soap-starter",
-    "version": "4.8.3-SNAPSHOT",
+    "version": "4.8.4-SNAPSHOT",
     "scheme": "cxf",
     "extendsScheme": "",
     "syntax": "cxf:beanId:address",
