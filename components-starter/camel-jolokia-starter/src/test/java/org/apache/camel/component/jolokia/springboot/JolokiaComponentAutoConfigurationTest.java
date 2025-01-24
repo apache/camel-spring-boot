@@ -21,11 +21,11 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import org.apache.camel.component.jolokia.springboot.restrictor.CamelRestrictor;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
+import org.jolokia.server.core.config.SystemPropertyMode;
 import org.junit.jupiter.api.Test;
 
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.InstanceOfAssertFactories;
-import org.jolokia.support.spring.SystemPropertyMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
