@@ -26,6 +26,7 @@ import org.apache.camel.component.micrometer.messagehistory.MicrometerMessageHis
 import org.apache.camel.component.micrometer.messagehistory.MicrometerMessageHistoryNamingStrategy;
 import org.apache.camel.component.micrometer.routepolicy.MicrometerRoutePolicyFactory;
 import org.apache.camel.component.micrometer.routepolicy.MicrometerRoutePolicyNamingStrategy;
+import org.apache.camel.component.micrometer.spi.InstrumentedThreadPoolFactory;
 import org.apache.camel.spi.ManagementStrategy;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
@@ -100,6 +101,13 @@ public class CamelMetricsAutoConfiguration {
                 factory.setNamingStrategy(MicrometerMessageHistoryNamingStrategy.LEGACY);
             }
             camelContext.setMessageHistoryFactory(factory);
+        }
+
+        if (configuration.isEnableInstrumentedThreadPoolFactory()) {
+            InstrumentedThreadPoolFactory instrumentedThreadPoolFactory = new InstrumentedThreadPoolFactory(
+                    meterRegistry,
+                    camelContext.getExecutorServiceManager().getThreadPoolFactory());
+            camelContext.getExecutorServiceManager().setThreadPoolFactory(instrumentedThreadPoolFactory);
         }
     }
 

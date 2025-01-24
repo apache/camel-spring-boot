@@ -57,6 +57,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.metrics.enable-instrumented-thread-pool-factory",
+      "type": "java.lang.Boolean",
+      "description": "Set whether to gather performance information about Camel Thread Pools by injecting an InstrumentedThreadPoolFactory.",
+      "sourceType": "org.apache.camel.component.micrometer.springboot.metrics.CamelMetricsConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.metrics.enable-message-history",
       "type": "java.lang.Boolean",
       "description": "Set whether to enable the MicrometerMessageHistoryFactory for capturing metrics on individual route node processing times. Depending on the number of configured route nodes, there is the potential to create a large volume of metrics. Therefore, this option is disabled by default.",

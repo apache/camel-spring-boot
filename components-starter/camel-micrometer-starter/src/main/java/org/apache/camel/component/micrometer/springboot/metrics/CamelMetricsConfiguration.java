@@ -80,6 +80,12 @@ public class CamelMetricsConfiguration {
      */
     private boolean enableRouteEventNotifier = true;
 
+    /**
+     * Set whether to gather performance information about Camel Thread Pools by injecting an
+     * InstrumentedThreadPoolFactory.
+     */
+    private boolean enableInstrumentedThreadPoolFactory;
+
     public boolean isUriTagEnabled() {
         return uriTagEnabled;
     }
@@ -150,5 +156,13 @@ public class CamelMetricsConfiguration {
 
     public void setEnableRouteEventNotifier(boolean enableRouteEventNotifier) {
         this.enableRouteEventNotifier = enableRouteEventNotifier;
+    }
+
+    public boolean isEnableInstrumentedThreadPoolFactory() {
+        return enableInstrumentedThreadPoolFactory;
+    }
+
+    public void setEnableInstrumentedThreadPoolFactory(boolean enableInstrumentedThreadPoolFactory) {
+        this.enableInstrumentedThreadPoolFactory = enableInstrumentedThreadPoolFactory;
     }
 }
