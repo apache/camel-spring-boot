@@ -33,7 +33,6 @@ import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.clock.Clock;
 import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.component.properties.PropertiesParser;
-import org.apache.camel.main.BaseMainSupport;
 import org.apache.camel.main.DefaultConfigurationConfigurer;
 import org.apache.camel.main.MainListener;
 import org.apache.camel.main.RoutesCollector;
@@ -104,9 +103,9 @@ public class CamelAutoConfiguration {
     @Bean(destroyMethod = "")
     @ConditionalOnMissingBean(CamelContext.class)
     CamelContext camelContext(ApplicationContext applicationContext, CamelConfigurationProperties config,
-                              CamelBeanPostProcessor beanPostProcessor, StartupConditionStrategy startup,
-                              CamelSpringBootApplicationController controller) throws Exception {
+                              CamelBeanPostProcessor beanPostProcessor, StartupConditionStrategy startup) throws Exception {
         Clock clock = new ResetableClock();
+        CamelSpringBootApplicationController controller = new CamelSpringBootApplicationController(applicationContext);
         CamelContext camelContext = new SpringBootCamelContext(applicationContext,
                 config.getSpringboot().isWarnOnEarlyShutdown(), controller);
         camelContext.getClock().add(ContextEvents.BOOT, clock);
@@ -286,22 +285,6 @@ public class CamelAutoConfiguration {
                 camelContext.getCamelContextExtension().setStartupStepRecorder(fr);
             }
         }
-    }
-
-    /**
-     * Create controller eager
-     */
-    @Bean
-    CamelSpringBootApplicationController applicationController(ApplicationContext applicationContext) {
-        CamelSpringBootApplicationController controller = new CamelSpringBootApplicationController(applicationContext);
-
-        // setup main listeners eager on controller
-        final Map<String, MainListener> listeners = applicationContext.getBeansOfType(MainListener.class);
-        for (MainListener listener : listeners.values()) {
-            controller.getMain().addMainListener(listener);
-        }
-
-        return controller;
     }
 
     @Bean
