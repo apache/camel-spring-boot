@@ -17,8 +17,7 @@
 package org.apache.camel.component.platform.http.springboot;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -41,6 +40,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements PlatformHttpConsumer, Suspendable, SuspendableService {
 
@@ -48,7 +49,6 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
 
     private HttpBinding binding;
     private final boolean handleWriteResponseError;
-    private Executor executor;
     private CookieConfiguration cookieConfiguration;
 
     public SpringBootPlatformHttpConsumer(PlatformHttpEndpoint endpoint, Processor processor) {
@@ -59,12 +59,6 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         this.binding.setFileNameExtWhitelist(endpoint.getFileNameExtWhitelist());
         this.binding.setUseReaderForPayload(!endpoint.isUseStreaming());
         this.handleWriteResponseError = endpoint.isHandleWriteResponseError();
-        this.executor = Executors.newSingleThreadExecutor();
-    }
-
-    public SpringBootPlatformHttpConsumer(PlatformHttpEndpoint endpoint, Processor processor, Executor executor) {
-        this(endpoint, processor);
-        this.executor = executor;
     }
 
     /**
@@ -80,26 +74,29 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
     }
 
     /**
-     * This method is invoked by Spring Boot when invoking Camel via platform-http
+     * This method is invoked by Spring Boot when invoking Camel via platform-http.
+     *
+     * The method is already running asynchronously via AsyncExecutionInterceptor.
+     *
+     * Returns an empty CompletableFuture as per documentation https://spring.io/guides/gs/async-method
      */
     @ResponseBody
     public CompletableFuture<Void> service(HttpServletRequest request, HttpServletResponse response) {
-        return CompletableFuture.runAsync(() -> {
-            LOG.trace("Service: {}", request);
+        LOG.trace("Service: {}", request);
+        try {
+            handleService(request, response);
+        } catch (Exception e) {
+            // do not leak exception back to caller
+            LOG.warn("Error handling request due to: {}", e.getMessage(), e);
             try {
-                handleService(request, response);
-            } catch (Exception e) {
-                // do not leak exception back to caller
-                LOG.warn("Error handling request due to: {}", e.getMessage(), e);
-                try {
-                    if (!response.isCommitted()) {
-                        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                    }
-                } catch (Exception e1) {
-                    // ignore
+                if (!response.isCommitted()) {
+                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 }
+            } catch (Exception e1) {
+                // ignore
             }
-        }, executor);
+        }
+        return CompletableFuture.completedFuture(null);
     }
 
     protected void handleService(HttpServletRequest request, HttpServletResponse response) throws Exception {

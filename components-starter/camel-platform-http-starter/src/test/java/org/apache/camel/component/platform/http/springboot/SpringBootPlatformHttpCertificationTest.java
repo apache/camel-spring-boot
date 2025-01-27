@@ -23,8 +23,15 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -179,8 +186,18 @@ public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
     public void testLoad() throws Exception {
         waitUntilRouteIsStarted(1, getGetRouteId());
 
+        ExecutorService es = Executors.newFixedThreadPool(10);
+        List<CompletableFuture> tasks = new ArrayList();
         for (int i = 0; i < 1_000; i++) {
-            Assertions.assertThat(restTemplate.getForEntity("/myget", String.class).getStatusCode().value()).isEqualTo(200);
+            tasks.add(CompletableFuture.runAsync(() ->
+                    Assertions.assertThat(restTemplate.getForEntity("/myget", String.class)
+                            .getStatusCode().value()).isEqualTo(200), es));
+        }
+        for (CompletableFuture<Void> task : tasks) {
+            task.get();
+            if (task.isCompletedExceptionally()) {
+                org.junit.jupiter.api.Assertions.fail("Exception thrown during execution, check logs");
+            }
         }
     }
 
