@@ -44,7 +44,7 @@ public class SpringBootPlatformHttpEngine implements PlatformHttpEngine {
     @Override
     public PlatformHttpConsumer createConsumer(PlatformHttpEndpoint endpoint, Processor processor) {
         ProxyFactory factory = new ProxyFactory();
-        factory.setTarget(new SpringBootPlatformHttpConsumer(endpoint, processor, executor));
+        factory.setTarget(new SpringBootPlatformHttpConsumer(endpoint, processor));
 
         JdkRegexpMethodPointcut jdkRegexpMethodPointcut = new JdkRegexpMethodPointcut();
         jdkRegexpMethodPointcut.setPattern("org.apache.camel.component.platform.http.springboot.SpringBootPlatformHttpConsumer.service");
