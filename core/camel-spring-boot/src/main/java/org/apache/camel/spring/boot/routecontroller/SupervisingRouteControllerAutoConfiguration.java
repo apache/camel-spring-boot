@@ -61,7 +61,7 @@ public class SupervisingRouteControllerAutoConfiguration {
                 src.setBackOffMaxAttempts(config.getBackOffMaxAttempts());
             }
             if (config.getBackOffMaxDelay() > 0) {
-                src.setBackOffMaxDelay(config.getBackOffDelay());
+                src.setBackOffMaxDelay(config.getBackOffMaxDelay());
             }
             if (config.getBackOffMaxElapsedTime() > 0) {
                 src.setBackOffMaxElapsedTime(config.getBackOffMaxElapsedTime());
