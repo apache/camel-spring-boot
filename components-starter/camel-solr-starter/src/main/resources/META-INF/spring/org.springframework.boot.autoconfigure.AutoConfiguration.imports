@@ -16,3 +16,4 @@
 ## ---------------------------------------------------------------------------
 
 org.apache.camel.component.solr.springboot.SolrComponentAutoConfiguration
+org.apache.camel.component.solr.springboot.SolrComponentConverter

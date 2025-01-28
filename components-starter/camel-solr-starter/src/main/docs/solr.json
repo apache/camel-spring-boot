@@ -21,9 +21,29 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.solr.connection-timeout",
+      "type": "java.lang.Long",
+      "description": "The time in ms to wait before connection will time out.",
+      "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration",
+      "defaultValue": 60000
+    },
+    {
       "name": "camel.component.solr.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.solr.default-collection",
+      "type": "java.lang.String",
+      "description": "Solr default collection name",
+      "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration"
+    },
+    {
+      "name": "camel.component.solr.enable-s-s-l",
+      "type": "java.lang.Boolean",
+      "description": "Enable SSL",
+      "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.solr.enabled",
@@ -32,11 +52,48 @@
       "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration"
     },
     {
+      "name": "camel.component.solr.host",
+      "type": "java.lang.String",
+      "description": "The solr instance host name",
+      "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration"
+    },
+    {
       "name": "camel.component.solr.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
       "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.solr.password",
+      "type": "java.lang.String",
+      "description": "Password for authenticating",
+      "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration"
+    },
+    {
+      "name": "camel.component.solr.port",
+      "type": "java.lang.Integer",
+      "description": "The solr instance port number",
+      "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration"
+    },
+    {
+      "name": "camel.component.solr.request-timeout",
+      "type": "java.lang.Long",
+      "description": "The timeout in ms to wait before the socket will time out.",
+      "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration",
+      "defaultValue": 600000
+    },
+    {
+      "name": "camel.component.solr.solr-client",
+      "type": "org.apache.solr.client.solrj.SolrClient",
+      "description": "To use an existing configured solr client, instead of creating a client per endpoint. This allows customizing the client with specific advanced settings. The option is a org.apache.solr.client.solrj.SolrClient type.",
+      "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration"
+    },
+    {
+      "name": "camel.component.solr.username",
+      "type": "java.lang.String",
+      "description": "Basic authenticate user",
+      "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration"
     }
   ],
   "hints": []

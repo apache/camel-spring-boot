@@ -17,6 +17,7 @@
 package org.apache.camel.component.solr.springboot;
 
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.solr.client.solrj.SolrClient;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -35,6 +36,18 @@ public class SolrComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * The time in ms to wait before connection will time out.
+     */
+    private Long connectionTimeout = 60000L;
+    /**
+     * Solr default collection name
+     */
+    private String defaultCollection;
+    /**
+     * The solr instance host name
+     */
+    private String host;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -46,6 +59,14 @@ public class SolrComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * The solr instance port number
+     */
+    private Integer port;
+    /**
+     * The timeout in ms to wait before the socket will time out.
+     */
+    private Long requestTimeout = 600000L;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -54,6 +75,48 @@ public class SolrComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * To use an existing configured solr client, instead of creating a client
+     * per endpoint. This allows customizing the client with specific advanced
+     * settings. The option is a org.apache.solr.client.solrj.SolrClient type.
+     */
+    private SolrClient solrClient;
+    /**
+     * Enable SSL
+     */
+    private Boolean enableSSL = false;
+    /**
+     * Password for authenticating
+     */
+    private String password;
+    /**
+     * Basic authenticate user
+     */
+    private String username;
+
+    public Long getConnectionTimeout() {
+        return connectionTimeout;
+    }
+
+    public void setConnectionTimeout(Long connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
+    }
+
+    public String getDefaultCollection() {
+        return defaultCollection;
+    }
+
+    public void setDefaultCollection(String defaultCollection) {
+        this.defaultCollection = defaultCollection;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -63,11 +126,59 @@ public class SolrComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public Integer getPort() {
+        return port;
+    }
+
+    public void setPort(Integer port) {
+        this.port = port;
+    }
+
+    public Long getRequestTimeout() {
+        return requestTimeout;
+    }
+
+    public void setRequestTimeout(Long requestTimeout) {
+        this.requestTimeout = requestTimeout;
+    }
+
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public SolrClient getSolrClient() {
+        return solrClient;
+    }
+
+    public void setSolrClient(SolrClient solrClient) {
+        this.solrClient = solrClient;
+    }
+
+    public Boolean getEnableSSL() {
+        return enableSSL;
+    }
+
+    public void setEnableSSL(Boolean enableSSL) {
+        this.enableSSL = enableSSL;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
