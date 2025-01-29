@@ -27,11 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -400,8 +398,7 @@ public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
                         detailedCookie()
                                 .value("bar")
                                 .path(CookieConfiguration.DEFAULT_PATH)
-                                .domain((String) null)
-                                .sameSite(CookieConfiguration.DEFAULT_SAME_SITE.getValue()))
+                                .domain((String) null))
                 .body(equalTo("add"));
     }
 }

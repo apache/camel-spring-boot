@@ -17,7 +17,8 @@
 package org.apache.camel.component.platform.http.springboot;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -40,8 +41,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
 
 public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements PlatformHttpConsumer, Suspendable, SuspendableService {
 
@@ -50,6 +49,7 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
     private HttpBinding binding;
     private final boolean handleWriteResponseError;
     private CookieConfiguration cookieConfiguration;
+    private Executor executor;
 
     public SpringBootPlatformHttpConsumer(PlatformHttpEndpoint endpoint, Processor processor) {
         super(endpoint, processor);
@@ -59,6 +59,12 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         this.binding.setFileNameExtWhitelist(endpoint.getFileNameExtWhitelist());
         this.binding.setUseReaderForPayload(!endpoint.isUseStreaming());
         this.handleWriteResponseError = endpoint.isHandleWriteResponseError();
+        this.executor = Executors.newSingleThreadExecutor();
+    }
+
+    public SpringBootPlatformHttpConsumer(PlatformHttpEndpoint endpoint, Processor processor, Executor executor) {
+        this(endpoint, processor);
+        this.executor = executor;
     }
 
     /**
@@ -82,21 +88,22 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
      */
     @ResponseBody
     public CompletableFuture<Void> service(HttpServletRequest request, HttpServletResponse response) {
-        LOG.trace("Service: {}", request);
-        try {
-            handleService(request, response);
-        } catch (Exception e) {
-            // do not leak exception back to caller
-            LOG.warn("Error handling request due to: {}", e.getMessage(), e);
+        return CompletableFuture.runAsync(() -> {
+            LOG.trace("Service: {}", request);
             try {
-                if (!response.isCommitted()) {
-                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                handleService(request, response);
+            } catch (Exception e) {
+                // do not leak exception back to caller
+                LOG.warn("Error handling request due to: {}", e.getMessage(), e);
+                try {
+                    if (!response.isCommitted()) {
+                        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    }
+                } catch (Exception e1) {
+                    // ignore
                 }
-            } catch (Exception e1) {
-                // ignore
             }
-        }
-        return CompletableFuture.completedFuture(null);
+        }, executor);
     }
 
     protected void handleService(HttpServletRequest request, HttpServletResponse response) throws Exception {

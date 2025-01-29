@@ -20,10 +20,6 @@ import org.apache.camel.Processor;
 import org.apache.camel.component.platform.http.PlatformHttpEndpoint;
 import org.apache.camel.component.platform.http.spi.PlatformHttpConsumer;
 import org.apache.camel.component.platform.http.spi.PlatformHttpEngine;
-import org.springframework.aop.framework.ProxyFactory;
-import org.springframework.aop.interceptor.AsyncExecutionInterceptor;
-import org.springframework.aop.support.DefaultPointcutAdvisor;
-import org.springframework.aop.support.JdkRegexpMethodPointcut;
 
 import java.util.concurrent.Executor;
 
@@ -43,19 +39,7 @@ public class SpringBootPlatformHttpEngine implements PlatformHttpEngine {
 
     @Override
     public PlatformHttpConsumer createConsumer(PlatformHttpEndpoint endpoint, Processor processor) {
-        ProxyFactory factory = new ProxyFactory();
-        factory.setTarget(new SpringBootPlatformHttpConsumer(endpoint, processor));
-
-        JdkRegexpMethodPointcut jdkRegexpMethodPointcut = new JdkRegexpMethodPointcut();
-        jdkRegexpMethodPointcut.setPattern("org.apache.camel.component.platform.http.springboot.SpringBootPlatformHttpConsumer.service");
-
-        DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor();
-        advisor.setAdvice(new AsyncExecutionInterceptor(executor));
-        advisor.setPointcut(jdkRegexpMethodPointcut);
-
-        factory.addAdvisor(advisor);
-
-        return (SpringBootPlatformHttpConsumer) factory.getProxy();
+        return new SpringBootPlatformHttpConsumer(endpoint, processor, executor);
     }
 
     @Override
