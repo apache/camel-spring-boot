@@ -909,13 +909,6 @@
       "defaultValue": false
     },
     {
-      "name": "camel.main.modeline",
-      "type": "java.lang.Boolean",
-      "description": "Whether camel-k style modeline is also enabled when not using camel-k. Enabling this allows to use a camel-k like experience by being able to configure various settings using modeline directly in your route source code.",
-      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
-      "defaultValue": false
-    },
-    {
       "name": "camel.main.name",
       "type": "java.lang.String",
       "description": "Sets the name of the CamelContext.",
@@ -2014,6 +2007,15 @@
       "type": "java.lang.Boolean",
       "description": "Whether to enable Camel info.",
       "defaultValue": true
+    },
+    {
+      "name": "camel.main.modeline",
+      "type": "java.lang.Boolean",
+      "description": "Whether camel-k style modeline is also enabled when not using camel-k. Enabling this allows to use a camel-k like experience by being able to configure various settings using modeline directly in your route source code.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": false,
+      "deprecated": true,
+      "deprecation": {}
     },
     {
       "name": "camel.springboot.allow-use-original-message",
