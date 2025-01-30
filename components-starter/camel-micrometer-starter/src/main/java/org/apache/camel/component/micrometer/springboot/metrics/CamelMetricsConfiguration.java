@@ -29,7 +29,7 @@ public class CamelMetricsConfiguration {
     private boolean uriTagEnabled = true;
 
     /**
-     * Whether to use static or dynamic values for URI tags in captured metrics.
+     * Whether to use static or dynamic values for HTTP uri tags in captured metrics.
      *
      * When using dynamic tags, then a REST service with base URL: /users/{id} will capture metrics with uri tag with
      * the actual dynamic value such as: /users/123. However, this can lead to many tags as the URI is dynamic, so use
