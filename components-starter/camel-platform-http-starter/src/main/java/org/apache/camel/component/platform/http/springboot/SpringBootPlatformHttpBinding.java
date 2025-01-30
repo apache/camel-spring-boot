@@ -167,6 +167,7 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
                         }
                     } finally {
                         IOHelper.close(new Closeable[]{is, os});
+                        stream.close();
                     }
                 } else {
                     if (LOG.isDebugEnabled()) {

@@ -1938,6 +1938,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
 
                 FileUtils.write(target, code, StandardCharsets.UTF_8);
                 getLog().info("Created file: " + target);
+                is.close();
             } catch (Exception e) {
                 throw new MojoFailureException("IOError with file " + target, e);
             }
