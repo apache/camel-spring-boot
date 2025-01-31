@@ -20,6 +20,8 @@ import io.micrometer.core.instrument.MeterRegistry;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.micrometer.eventnotifier.MicrometerExchangeEventNotifier;
 import org.apache.camel.component.micrometer.eventnotifier.MicrometerExchangeEventNotifierNamingStrategy;
+import org.apache.camel.component.micrometer.eventnotifier.MicrometerExchangeEventNotifierNamingStrategyDefault;
+import org.apache.camel.component.micrometer.eventnotifier.MicrometerExchangeEventNotifierNamingStrategyLegacy;
 import org.apache.camel.component.micrometer.eventnotifier.MicrometerRouteEventNotifier;
 import org.apache.camel.component.micrometer.eventnotifier.MicrometerRouteEventNotifierNamingStrategy;
 import org.apache.camel.component.micrometer.messagehistory.MicrometerMessageHistoryFactory;
@@ -75,7 +77,13 @@ public class CamelMetricsAutoConfiguration {
             notifier.setCamelContext(camelContext);
             notifier.setMeterRegistry(meterRegistry);
             if ("legacy".equalsIgnoreCase(configuration.getNamingStrategy())) {
-                notifier.setNamingStrategy(MicrometerExchangeEventNotifierNamingStrategy.LEGACY);
+                notifier.setNamingStrategy(new MicrometerExchangeEventNotifierNamingStrategyLegacy(
+                    configuration.isBaseEndpointUriExchangeEventNotifier()
+                ));
+            } else {
+                notifier.setNamingStrategy(new MicrometerExchangeEventNotifierNamingStrategyDefault(
+                    configuration.isBaseEndpointUriExchangeEventNotifier()
+                ));
             }
             managementStrategy.addEventNotifier(notifier);
         }

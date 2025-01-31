@@ -50,6 +50,13 @@
       "sourceType": "org.apache.camel.component.micrometer.springboot.MicrometerComponentConfiguration"
     },
     {
+      "name": "camel.metrics.base-endpoint-uri-exchange-event-notifier",
+      "type": "java.lang.Boolean",
+      "description": "Set whether to use base endpoint URI when capturing metrics on exchange processing times.",
+      "sourceType": "org.apache.camel.component.micrometer.springboot.metrics.CamelMetricsConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.metrics.enable-exchange-event-notifier",
       "type": "java.lang.Boolean",
       "description": "Set whether to enable the MicrometerExchangeEventNotifier for capturing metrics on exchange processing times.",

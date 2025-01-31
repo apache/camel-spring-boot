@@ -75,6 +75,11 @@ public class CamelMetricsConfiguration {
     private boolean enableExchangeEventNotifier = true;
 
     /**
+     * Set whether to use base endpoint URI when capturing metrics on exchange processing times.
+     */
+    private boolean baseEndpointUriExchangeEventNotifier = true;
+
+    /**
      * Set whether to enable the MicrometerRouteEventNotifier for capturing metrics on the total number of routes and
      * total number of routes running.
      */
@@ -148,6 +153,14 @@ public class CamelMetricsConfiguration {
 
     public void setEnableExchangeEventNotifier(boolean enableExchangeEventNotifier) {
         this.enableExchangeEventNotifier = enableExchangeEventNotifier;
+    }
+
+    public boolean isBaseEndpointUriExchangeEventNotifier() {
+        return baseEndpointUriExchangeEventNotifier;
+    }
+
+    public void setBaseEndpointUriExchangeEventNotifier(boolean baseEndpointUriExchangeEventNotifier) {
+        this.baseEndpointUriExchangeEventNotifier = baseEndpointUriExchangeEventNotifier;
     }
 
     public boolean isEnableRouteEventNotifier() {
