@@ -25,7 +25,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -55,7 +54,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.test.annotation.DirtiesContext;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.matcher.RestAssuredMatchers.detailedCookie;
@@ -64,7 +62,6 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @EnableAutoConfiguration(exclude = {OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class})
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
         SpringBootPlatformHttpCertificationTest.class, SpringBootPlatformHttpCertificationTest.TestConfiguration.class,
@@ -292,26 +289,6 @@ public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
     }
 
     static final class TestBean {
-    }
-
-    @Test
-    public void session() {
-        Map<String, String> cookies = given()
-                .when()
-                .get("/session")
-                .then()
-                .statusCode(200)
-//                .cookie("vertx-web.session",
-//                        detailedCookie()
-//                                .path("/").value(notNullValue())
-//                                .httpOnly(false)
-//                                .secured(false)
-//                                .sameSite("Strict"))
-//                .header("cookie", nullValue())
-                .body(equalTo("session"))
-                .extract().cookies();
-
-        System.out.println(cookies);
     }
 
     @Autowired
