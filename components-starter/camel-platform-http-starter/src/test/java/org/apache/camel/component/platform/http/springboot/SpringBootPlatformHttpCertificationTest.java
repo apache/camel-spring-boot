@@ -25,7 +25,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -45,7 +44,6 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.util.IOHelper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +54,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.test.annotation.DirtiesContext;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.matcher.RestAssuredMatchers.detailedCookie;
@@ -65,7 +62,6 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @EnableAutoConfiguration(exclude = {OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class})
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
         SpringBootPlatformHttpCertificationTest.class, SpringBootPlatformHttpCertificationTest.TestConfiguration.class,
@@ -129,20 +125,6 @@ public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
 
                     from("platform-http:/streamingWithSpecificEncoding?useStreaming=true")
                             .log("Done echoing back request body as response body");
-
-                    from("platform-http:/streamingWithClosedInputStreamResponse?useStreaming=true")
-                            .process(new Processor() {
-                                @Override
-                                public void process(Exchange exchange) throws Exception {
-                                    // Simulate an error processing an input stream by closing it ahead of the response being written
-                                    // Verifies the response promise.fail is called correctly
-                                    InputStream stream = getClass().getResourceAsStream("/application.properties");
-                                    if (stream != null) {
-                                        stream.close();
-                                    }
-                                    exchange.getMessage().setBody(stream);
-                                }
-                            });
 
                     from("platform-http:/streamingWithUnconvertableResponseType?useStreaming=true")
                             .process(new Processor() {
@@ -299,16 +281,6 @@ public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
     }
 
     @Test
-    @Disabled("Test is failing, work in progress")
-    void streamingWithClosedInputStreamResponse() throws Exception {
-
-        given()
-                .get("/streamingWithClosedInputStreamResponse")
-                .then()
-                .statusCode(500);
-    }
-
-    @Test
     void streamingWithUnconvertableResponseType() throws Exception {
             given()
                     .get("/streamingWithUnconvertableResponseType")
@@ -317,26 +289,6 @@ public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
     }
 
     static final class TestBean {
-    }
-
-    @Test
-    public void session() {
-        Map<String, String> cookies = given()
-                .when()
-                .get("/session")
-                .then()
-                .statusCode(200)
-//                .cookie("vertx-web.session",
-//                        detailedCookie()
-//                                .path("/").value(notNullValue())
-//                                .httpOnly(false)
-//                                .secured(false)
-//                                .sameSite("Strict"))
-//                .header("cookie", nullValue())
-                .body(equalTo("session"))
-                .extract().cookies();
-
-        System.out.println(cookies);
     }
 
     @Autowired

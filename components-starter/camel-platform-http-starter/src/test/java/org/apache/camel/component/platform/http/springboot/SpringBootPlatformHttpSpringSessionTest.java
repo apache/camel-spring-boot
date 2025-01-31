@@ -28,10 +28,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.session.hazelcast.HazelcastIndexedSessionRepository;
 import org.springframework.session.hazelcast.PrincipalNameExtractor;
 import org.springframework.session.hazelcast.config.annotation.web.http.EnableHazelcastHttpSession;
-import org.springframework.test.annotation.DirtiesContext;
 
 @EnableAutoConfiguration
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
         SpringBootPlatformHttpSpringSessionTest.class, SpringBootPlatformHttpSpringSessionTest.TestConfiguration.class,

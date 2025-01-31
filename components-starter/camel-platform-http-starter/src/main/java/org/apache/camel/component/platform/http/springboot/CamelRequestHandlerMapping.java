@@ -37,9 +37,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class CamelRequestHandlerMapping extends RequestMappingHandlerMapping implements PlatformHttpListener {
 
@@ -191,8 +188,17 @@ public class CamelRequestHandlerMapping extends RequestMappingHandlerMapping imp
             methods = new RequestMethod[]{rm};
         }
 
+        SpringBootPlatformHttpConsumer consumer = (SpringBootPlatformHttpConsumer) model.getConsumer();
+
+        String uri = model.getUri();
+        if (consumer.getEndpoint().isMatchOnUriPrefix()) {
+            // rewrite the uri so that PathPattern is used
+            uri += uri.endsWith("/") ? "" : "/";
+            uri += "{*matchOnUriPrefix}";
+        }
+
         RequestMappingInfo.Builder info = RequestMappingInfo
-                .paths(model.getUri())
+                .paths(uri)
                 .methods(methods)
                 .options(this.getBuilderConfiguration());
 

@@ -35,13 +35,13 @@ public class PlatformHttpMessage extends DefaultMessage {
     private boolean requestRead;
 
     public PlatformHttpMessage(Exchange exchange, HttpBinding binding, HttpServletRequest request,
-            HttpServletResponse response) {
+                               HttpServletResponse response) {
         super(exchange);
         this.init(exchange, binding, request, response);
     }
 
     private PlatformHttpMessage(HttpServletRequest request, HttpServletResponse response, Exchange exchange,
-            HttpBinding binding, boolean requestRead) {
+                                HttpBinding binding, boolean requestRead) {
         super(exchange);
         this.request = request;
         this.response = response;

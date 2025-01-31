@@ -19,7 +19,6 @@ package org.apache.camel.component.platform.http.springboot;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
-import io.restassured.specification.RequestSpecification;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.platform.http.spi.Method;
@@ -29,7 +28,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.hamcrest.Matcher;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -40,15 +38,15 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.emptyString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
 @EnableAutoConfiguration(exclude = {OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class})
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
         SpringBootPlatformHttpValidationTest.class, SpringBootPlatformHttpValidationTest.TestConfiguration.class,
@@ -132,9 +130,13 @@ public class SpringBootPlatformHttpValidationTest {
     }
 
     @Test
-    @Disabled("Test is failing, work in progress")
     public void requestBodyAllowed() {
         for (Method method : Method.values()) {
+            if (method == Method.TRACE || method == Method.CONNECT) {
+                // These methods are not supported OOB in tomcat
+                continue;
+            }
+
             ValidatableResponse validatableResponse = given()
                     .contentType(ContentType.JSON)
                     .when()
@@ -154,23 +156,38 @@ public class SpringBootPlatformHttpValidationTest {
     }
 
     @Test
-    @Disabled("Test is failing, work in progress")
     public void requestBodyAllowedFormUrlEncoded() {
         final List<Method> methodsWithBodyAllowed = List.of(Method.POST, Method.PUT, Method.PATCH, Method.DELETE);
 
-        RequestSpecification request = given()
+        given()
                 .when()
-                .contentType(ContentType.URLENC);
+                .contentType(ContentType.URLENC)
+                .body("method=" + "PUT" + "&test=value")
+                .request("PUT", "/test")
+                .then()
+                .statusCode(200)
+                .body(equalTo("Hello PUT"));
 
         for (Method method : Method.values()) {
+            if (method == Method.TRACE || method == Method.CONNECT) {
+                // These methods are not supported OOB in tomcat
+                continue;
+            }
+
             if (methodsWithBodyAllowed.contains(method)) {
-                request.body("method=" + method)
+                given()
+                        .when()
+                        .contentType(ContentType.URLENC)
+                        .body("method=" + method + "&test=value")
                         .request(method.name(), "/test")
                         .then()
                         .statusCode(200)
                         .body(equalTo("Hello " + method));
             } else {
-                request.body(method)
+                given()
+                        .when()
+                        .contentType(ContentType.URLENC)
+                        .body(method)
                         .request(method.name(), "/test")
                         .then()
                         .statusCode(500);

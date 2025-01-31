@@ -111,4 +111,15 @@
     </dependency>
     <!--END OF GENERATED CODE-->
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <forkedProcessExitTimeoutInSeconds>5</forkedProcessExitTimeoutInSeconds>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

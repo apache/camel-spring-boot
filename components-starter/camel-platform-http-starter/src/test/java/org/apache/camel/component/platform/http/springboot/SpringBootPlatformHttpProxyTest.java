@@ -25,7 +25,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,7 +36,6 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.test.annotation.DirtiesContext;
 import org.wiremock.spring.ConfigureWireMock;
 import org.wiremock.spring.EnableWireMock;
 
@@ -46,7 +44,6 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 
 @EnableAutoConfiguration(exclude = {OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class})
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
         SpringBootPlatformHttpProxyTest.class, SpringBootPlatformHttpProxyTest.TestConfiguration.class,
@@ -92,16 +89,15 @@ public class SpringBootPlatformHttpProxyTest {
     }
 
     @Test
-    @Disabled("Test is failing, work in progress")
     public void httpProxy() {
         final var proxyURI = "http://localhost:" + RestAssured.port;
 
         final var originURI = wiremockUrl;
 
         given()
-                .proxy(proxyURI)
+                .proxy(originURI)
                 .contentType(ContentType.JSON)
-                .when().get(originURI)
+                .when().get(proxyURI)
                 .then()
                 .statusCode(200)
                 .body(containsString("{\"message\": \"Hello World\"}"));
