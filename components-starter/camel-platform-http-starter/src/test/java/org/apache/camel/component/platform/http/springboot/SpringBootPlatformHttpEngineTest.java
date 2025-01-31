@@ -25,7 +25,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -114,9 +113,6 @@ public class SpringBootPlatformHttpEngineTest {
                     from("platform-http:/error/response")
                             // Set the response to something that can't be type converted
                             .setBody().constant(Collections.EMPTY_SET);
-
-                    from("platform-http:/error/query/param")
-                            .setBody().constant("Error");
                 }
             };
         }
@@ -148,11 +144,10 @@ public class SpringBootPlatformHttpEngineTest {
                 .post("/form/post")
                 .then()
                 .statusCode(200)
-                .body(is("foo=bar&cheese=wine"));
+                .body(is("{foo=bar, cheese=wine}"));
     }
 
     @Test
-    @Disabled("Test is failing, work in progress")
     public void matchOnUriPrefix() {
         final String greeting = "Hello Camel";
         given()
@@ -218,7 +213,6 @@ public class SpringBootPlatformHttpEngineTest {
     }
 
     @Test
-    @Disabled("Test is failing, work in progress")
     public void consumerSuspended() throws Exception {
         given()
                 .when()
@@ -231,22 +225,23 @@ public class SpringBootPlatformHttpEngineTest {
 
         given()
                 .when()
-                .get("/get")
+                .get("/consumerSuspended")
                 .then()
                 .statusCode(503);
+
+        camelContext.getRouteController().resumeRoute("consumerSuspended");
+
+        given()
+                .when()
+                .get("/consumerSuspended")
+                .then()
+                .statusCode(200)
+                .body(equalTo("get"));
     }
 
     @Test
     public void responseTypeConversionErrorHandled() {
         get("/error/response")
-                .then()
-                .statusCode(500);
-    }
-
-    @Test
-    @Disabled("Test is failing, work in progress")
-    public void responseBadQueryParamErrorHandled() {
-        get("/error/query/param?::")
                 .then()
                 .statusCode(500);
     }

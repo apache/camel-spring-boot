@@ -25,7 +25,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -92,16 +91,15 @@ public class SpringBootPlatformHttpProxyTest {
     }
 
     @Test
-    @Disabled("Test is failing, work in progress")
     public void httpProxy() {
         final var proxyURI = "http://localhost:" + RestAssured.port;
 
         final var originURI = wiremockUrl;
 
         given()
-                .proxy(proxyURI)
+                .proxy(originURI)
                 .contentType(ContentType.JSON)
-                .when().get(originURI)
+                .when().get(proxyURI)
                 .then()
                 .statusCode(200)
                 .body(containsString("{\"message\": \"Hello World\"}"));

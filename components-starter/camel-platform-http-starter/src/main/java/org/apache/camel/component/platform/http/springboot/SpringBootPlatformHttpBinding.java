@@ -21,31 +21,50 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.camel.*;
+import org.apache.camel.Exchange;
+import org.apache.camel.InvalidPayloadException;
+import org.apache.camel.Message;
+import org.apache.camel.NoTypeConversionAvailableException;
+import org.apache.camel.RuntimeCamelException;
+import org.apache.camel.StreamCache;
+import org.apache.camel.TypeConverter;
 import org.apache.camel.attachment.AttachmentMessage;
 import org.apache.camel.attachment.CamelFileDataSource;
 import org.apache.camel.component.platform.http.PlatformHttpEndpoint;
+import org.apache.camel.component.platform.http.spi.Method;
 import org.apache.camel.converter.stream.CachedOutputStream;
 import org.apache.camel.http.base.HttpHelper;
 import org.apache.camel.http.common.DefaultHttpBinding;
 import org.apache.camel.support.ExchangeHelper;
 import org.apache.camel.util.FileUtil;
 import org.apache.camel.util.IOHelper;
+import org.apache.camel.util.URISupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
 
-import java.io.*;
-import java.nio.Buffer;
+import java.io.ByteArrayOutputStream;
+import java.io.Closeable;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
+import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
 public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
     private static final Logger LOG = LoggerFactory.getLogger(SpringBootPlatformHttpBinding.class);
+
+    private static final String CONTENT_TYPE_FORM_URLENCODED = "application/x-www-form-urlencoded";
+    private static final List<Method> METHODS_WITH_BODY_ALLOWED = List.of(Method.POST,
+            Method.PUT, Method.PATCH, Method.DELETE);
 
     protected void populateRequestParameters(HttpServletRequest request, Message message) {
         super.populateRequestParameters(request, message);
@@ -117,6 +136,31 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
         }
 
         return super.parseBody(request, message);
+    }
+
+    @Override
+    public void readRequest(HttpServletRequest request, Message message) {
+        super.readRequest(request, message);
+
+        if (METHODS_WITH_BODY_ALLOWED.contains(Method.valueOf(request.getMethod())) &&
+                message.getBody() instanceof StreamCache &&
+                request.getContentType() != null &&
+                request.getContentType().contains(CONTENT_TYPE_FORM_URLENCODED)) {
+            // FormContentFilter is NOT executed for POST requests
+            if ("POST".equals(request.getMethod())) {
+                String body = message.getBody(String.class);
+                try {
+                    message.setBody(URISupport.parseQuery(body));
+                } catch (URISyntaxException e) {
+                    LOG.error("Cannot parse body: {}", body, e);
+                    throw new RuntimeCamelException(e);
+                }
+            } else {
+                // FormContentFilter is executed, the request.getReader is already read
+                // and the parameters can be found in the parameterMap
+                message.setBody(request.getParameterMap());
+            }
+        }
     }
 
     protected void doWriteDirectResponse(Message message, HttpServletResponse response, Exchange exchange) throws IOException {
