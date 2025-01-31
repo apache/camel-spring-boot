@@ -33,11 +33,11 @@ import java.util.Map;
 public class CamelSpringBootApplicationController implements CamelContextAware {
     private static final Logger LOG = LoggerFactory.getLogger(CamelSpringBootApplicationController.class);
 
-    private final Main main;
+    private final CamelSpringMain main;
     private CamelContext camelContext;
 
     public CamelSpringBootApplicationController(final ApplicationContext applicationContext) {
-        this.main = new CamelSpringMain(applicationContext);
+        this.main = new CamelSpringMain(applicationContext, this);
         // inject main listeners
         final Map<String, MainListener> listeners = applicationContext.getBeansOfType(MainListener.class);
         for (MainListener listener : listeners.values()) {
@@ -100,9 +100,11 @@ public class CamelSpringBootApplicationController implements CamelContextAware {
 
     private static class CamelSpringMain extends Main {
         final ApplicationContext applicationContext;
+        final CamelSpringBootApplicationController controller;
 
-        public CamelSpringMain(ApplicationContext applicationContext) {
+        public CamelSpringMain(ApplicationContext applicationContext, CamelSpringBootApplicationController controller) {
             this.applicationContext = applicationContext;
+            this.controller = controller;
 
             // use a simple shutdown strategy that does not install any shutdown hook as spring-boot
             // as spring-boot has its own hook we use
@@ -120,7 +122,7 @@ public class CamelSpringBootApplicationController implements CamelContextAware {
 
         @Override
         protected CamelContext createCamelContext() {
-            return camelContext;
+            return controller.camelContext;
         }
 
         @Override
