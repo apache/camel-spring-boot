@@ -45,7 +45,6 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.util.IOHelper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,20 +128,6 @@ public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
 
                     from("platform-http:/streamingWithSpecificEncoding?useStreaming=true")
                             .log("Done echoing back request body as response body");
-
-                    from("platform-http:/streamingWithClosedInputStreamResponse?useStreaming=true")
-                            .process(new Processor() {
-                                @Override
-                                public void process(Exchange exchange) throws Exception {
-                                    // Simulate an error processing an input stream by closing it ahead of the response being written
-                                    // Verifies the response promise.fail is called correctly
-                                    InputStream stream = getClass().getResourceAsStream("/application.properties");
-                                    if (stream != null) {
-                                        stream.close();
-                                    }
-                                    exchange.getMessage().setBody(stream);
-                                }
-                            });
 
                     from("platform-http:/streamingWithUnconvertableResponseType?useStreaming=true")
                             .process(new Processor() {
@@ -296,16 +281,6 @@ public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
         }
 
         assertEquals(fileContent, Files.readString(output, StandardCharsets.ISO_8859_1));
-    }
-
-    @Test
-    @Disabled("Test is failing, work in progress")
-    void streamingWithClosedInputStreamResponse() throws Exception {
-
-        given()
-                .get("/streamingWithClosedInputStreamResponse")
-                .then()
-                .statusCode(500);
     }
 
     @Test
