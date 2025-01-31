@@ -33,6 +33,7 @@ import org.apache.camel.attachment.CamelFileDataSource;
 import org.apache.camel.component.platform.http.PlatformHttpEndpoint;
 import org.apache.camel.component.platform.http.spi.Method;
 import org.apache.camel.converter.stream.CachedOutputStream;
+import org.apache.camel.converter.stream.ReaderCache;
 import org.apache.camel.http.base.HttpHelper;
 import org.apache.camel.http.common.DefaultHttpBinding;
 import org.apache.camel.support.ExchangeHelper;
@@ -57,6 +58,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.UUID;
 
 public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
@@ -65,6 +67,8 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
     private static final String CONTENT_TYPE_FORM_URLENCODED = "application/x-www-form-urlencoded";
     private static final List<Method> METHODS_WITH_BODY_ALLOWED = List.of(Method.POST,
             Method.PUT, Method.PATCH, Method.DELETE);
+    private static final List<Method> METHODS_WITH_REQUEST_ALREADY_READ = List.of(Method.PUT,
+            Method.PATCH, Method.DELETE);
 
     protected void populateRequestParameters(HttpServletRequest request, Message message) {
         super.populateRequestParameters(request, message);
@@ -131,7 +135,9 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
     }
 
     public Object parseBody(HttpServletRequest request, Message message) throws IOException {
-        if (request instanceof StandardMultipartHttpServletRequest) {
+        if (request instanceof StandardMultipartHttpServletRequest ||
+                // In case of Spring FormContentFilter
+                requestAlreadyRead(request)) {
             return null;
         }
 
@@ -143,7 +149,8 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
         super.readRequest(request, message);
 
         if (METHODS_WITH_BODY_ALLOWED.contains(Method.valueOf(request.getMethod())) &&
-                message.getBody() instanceof StreamCache &&
+                (message.getBody() instanceof StreamCache ||
+                        (message.getBody() == null && !"POST".equals(request.getMethod()))) &&
                 request.getContentType() != null &&
                 request.getContentType().contains(CONTENT_TYPE_FORM_URLENCODED)) {
             // FormContentFilter is NOT executed for POST requests
@@ -161,6 +168,12 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
                 message.setBody(request.getParameterMap());
             }
         }
+    }
+
+    private boolean requestAlreadyRead(HttpServletRequest request) {
+        return Objects.nonNull(request.getContentType()) &&
+                request.getContentType().contains(CONTENT_TYPE_FORM_URLENCODED) &&
+                METHODS_WITH_REQUEST_ALREADY_READ.contains(Method.valueOf(request.getMethod()));
     }
 
     protected void doWriteDirectResponse(Message message, HttpServletResponse response, Exchange exchange) throws IOException {

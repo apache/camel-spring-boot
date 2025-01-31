@@ -38,7 +38,6 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.List;
 
@@ -48,7 +47,6 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 @EnableAutoConfiguration(exclude = {OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class})
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
         SpringBootPlatformHttpValidationTest.class, SpringBootPlatformHttpValidationTest.TestConfiguration.class,
@@ -88,10 +86,7 @@ public class SpringBootPlatformHttpValidationTest {
                     from("platform-http:/echo")
                             .setBody().simple("${body}");
 
-                    from("platform-http:/test?useStreaming=true")
-                            .process(exchange -> {
-                                System.out.println("<<<<<<<<<<<<<< " + exchange.getIn().getBody(String.class) + " >>>>>>>>>>>>>");
-                            })
+                    from("platform-http:/test")
                             .setBody().simple("Hello ${body[method]}");
 
                     rest("/invalidContentTypeClientRequestValidation")
@@ -163,6 +158,15 @@ public class SpringBootPlatformHttpValidationTest {
     @Test
     public void requestBodyAllowedFormUrlEncoded() {
         final List<Method> methodsWithBodyAllowed = List.of(Method.POST, Method.PUT, Method.PATCH, Method.DELETE);
+
+        given()
+                .when()
+                .contentType(ContentType.URLENC)
+                .body("method=" + "PUT" + "&test=value")
+                .request("PUT", "/test")
+                .then()
+                .statusCode(200)
+                .body(equalTo("Hello PUT"));
 
         for (Method method : Method.values()) {
             if (method == Method.TRACE || method == Method.CONNECT) {
