@@ -15,5 +15,5 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-org.apache.camel.component.solr.springboot.SolrComponentAutoConfiguration
 org.apache.camel.component.solr.springboot.SolrComponentConverter
+org.apache.camel.component.solr.springboot.SolrComponentAutoConfiguration

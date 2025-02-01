@@ -26,12 +26,12 @@
   </parent>
   <artifactId>camel-solr-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: Solr</name>
-  <description>Spring-Boot Starter for Camel Solr Support</description>
+  <name>Camel SB Starters :: solr</name>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
+      <version>${spring-boot-version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
