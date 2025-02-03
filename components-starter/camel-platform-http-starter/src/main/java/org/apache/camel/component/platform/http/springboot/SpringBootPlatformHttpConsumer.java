@@ -27,6 +27,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.ExchangePattern;
+import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.Suspendable;
 import org.apache.camel.SuspendableService;
@@ -116,7 +117,9 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         Exchange exchange = createExchange(true);
         exchange.setPattern(ExchangePattern.InOut);
         HttpHelper.setCharsetFromContentType(request.getContentType(), exchange);
-        exchange.setIn(new PlatformHttpMessage(exchange, binding, request, response));
+        PlatformHttpMessage msg = new PlatformHttpMessage(request, response, exchange,binding, false);
+        exchange.setIn(msg);
+        msg.init(exchange, binding, request, response);
         String contextPath = getEndpoint().getPath();
         exchange.getIn().setHeader(SpringBootPlatformHttpConstants.CONTEXT_PATH, contextPath);
         // set context path as header

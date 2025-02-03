@@ -40,7 +40,7 @@ public class PlatformHttpMessage extends DefaultMessage {
         this.init(exchange, binding, request, response);
     }
 
-    private PlatformHttpMessage(HttpServletRequest request, HttpServletResponse response, Exchange exchange,
+    public PlatformHttpMessage(HttpServletRequest request, HttpServletResponse response, Exchange exchange,
                                 HttpBinding binding, boolean requestRead) {
         super(exchange);
         this.request = request;
@@ -51,6 +51,7 @@ public class PlatformHttpMessage extends DefaultMessage {
 
     public void init(Exchange exchange, HttpBinding binding, HttpServletRequest request, HttpServletResponse response) {
         this.setExchange(exchange);
+        exchange.setIn(this);
         this.requestRead = false;
         this.binding = binding;
         this.request = request;
