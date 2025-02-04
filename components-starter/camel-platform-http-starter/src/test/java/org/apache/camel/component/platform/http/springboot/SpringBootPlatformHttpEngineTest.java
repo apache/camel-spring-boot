@@ -24,6 +24,7 @@ import org.apache.camel.attachment.AttachmentMessage;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +38,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.File;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.emptyOrNullString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
@@ -68,6 +74,8 @@ public class SpringBootPlatformHttpEngineTest {
         RestAssured.port = port;
     }
 
+    private static final List<String> attachmentIds = new ArrayList<>();
+
     @Configuration
     public static class TestConfiguration {
 
@@ -77,14 +85,29 @@ public class SpringBootPlatformHttpEngineTest {
                 @Override
                 public void configure() {
                     rest()
-                        .post("upload").to("direct:upload");
+                        .post("uploadSingle").to("direct:uploadSingle")
+                        .post("uploadMulti").to("direct:uploadMulti");
 
-                    from("direct:upload")
+                    from("direct:uploadSingle")
                         .process(exchange -> {
                             AttachmentMessage message = exchange.getMessage(AttachmentMessage.class);
                             DataHandler attachment = message.getAttachment(attachmentId);
-                            message.setBody(attachment.getContent());
+                            exchange.getMessage().setHeader("myDataHandler", attachment);
+                            exchange.getMessage().setBody(attachment.getContent());
                         });
+
+                    from("direct:uploadMulti")
+                            .process(exchange -> {
+                                AttachmentMessage message = exchange.getMessage(AttachmentMessage.class);
+
+                                String result = "";
+                                for (String attachmentId : attachmentIds) {
+                                    DataHandler attachment = message.getAttachment(attachmentId);
+                                    result += IOUtils.toString(attachment.getInputStream(), Charset.defaultCharset());
+                                }
+
+                                exchange.getIn().setHeader("ConcatFileContent", result);
+                            });
 
                     from("platform-http:/form/post")
                             .convertBodyTo(String.class);
@@ -117,7 +140,7 @@ public class SpringBootPlatformHttpEngineTest {
     }
 
     @Test
-    public void testAttachment() throws Exception {
+    public void testSingleAttachment() throws Exception {
         final String attachmentId = "myTestFile";
         final String fileContent = "Test multipart upload content";
         final File tempFile = File.createTempFile("platform-http", ".txt");
@@ -127,10 +150,45 @@ public class SpringBootPlatformHttpEngineTest {
         given()
                 .multiPart(attachmentId, tempFile)
                 .when()
-                .post("/upload")
+                .post("/uploadSingle")
                 .then()
                 .statusCode(200)
+                // Assert that the attachment is a DataHandler
+                .header("myDataHandler", containsString("jakarta.activation.DataHandler"))
                 .body(is(fileContent));
+    }
+
+    @Test
+    public void testMultiAttachments() throws Exception {
+        attachmentIds.add("myFirstTestFile");
+        attachmentIds.add("mySecondTestFile");
+
+        String tmpDirectory = null;
+        List<File> tempFiles = new ArrayList<>(attachmentIds.size());
+        for (String attachmentId : attachmentIds) {
+            final String fileContent = "Test multipart upload content " + attachmentId;
+            File tempFile;
+            if (tmpDirectory == null) {
+                tempFile = File.createTempFile("platform-http-" + attachmentId, ".txt");
+            } else {
+                tempFile = File.createTempFile("platform-http-" + attachmentId, ".txt", new File(tmpDirectory));
+            }
+
+            tempFiles.add(tempFile);
+            tmpDirectory = tempFile.getParent();
+            Files.write(tempFile.toPath(), fileContent.getBytes(StandardCharsets.UTF_8));
+        }
+
+        given()
+                .multiPart(attachmentIds.get(0), tempFiles.get(0))
+                .multiPart(attachmentIds.get(1), tempFiles.get(1))
+                .when()
+                .post("/uploadMulti")
+                .then()
+                .statusCode(204)
+                .body(emptyOrNullString())
+                .header("ConcatFileContent",
+                        is("Test multipart upload content myFirstTestFileTest multipart upload content mySecondTestFile"));
     }
 
     @Test
