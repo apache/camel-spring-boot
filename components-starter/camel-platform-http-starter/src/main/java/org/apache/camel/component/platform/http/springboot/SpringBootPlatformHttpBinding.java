@@ -98,6 +98,8 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
         // check if there is multipart files, if so will put it into DataHandler
         if (request instanceof MultipartHttpServletRequest multipartHttpServletRequest) {
             File tmpFolder = (File) request.getServletContext().getAttribute(ServletContext.TEMPDIR);
+            boolean isSingleAttachment = multipartHttpServletRequest.getFileMap() != null &&
+                    multipartHttpServletRequest.getFileMap().keySet().size() == 1;
             multipartHttpServletRequest.getFileMap().forEach((name, multipartFile) -> {
                 try {
                     Path uploadedTmpFile = Paths.get(tmpFolder.getPath(), UUID.randomUUID().toString());
@@ -122,6 +124,12 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
                     if (accepted) {
                         AttachmentMessage am = message.getExchange().getMessage(AttachmentMessage.class);
                         am.addAttachment(name, new DataHandler(new CamelFileDataSource(uploadedTmpFile.toFile(), name)));
+
+                        // populate body in case there is only one attachment
+                        if (isSingleAttachment) {
+                            message.setHeader(Exchange.FILE_NAME, name);
+                            message.setBody(uploadedTmpFile);
+                        }
                     } else {
                         LOG.debug(
                                 "Cannot add file as attachment: {} because the file is not accepted according to fileNameExtWhitelist: {}",
