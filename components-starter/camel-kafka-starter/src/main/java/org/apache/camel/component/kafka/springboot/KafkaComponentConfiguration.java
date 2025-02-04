@@ -147,6 +147,17 @@ public class KafkaComponentConfiguration
      */
     private Boolean batching = false;
     /**
+     * In consumer batching mode, then this option is specifying a time in
+     * millis, to trigger batch completion eager when the current batch size has
+     * not reached the maximum size defined by maxPollRecords. Notice the
+     * trigger is not exact at the given interval, as this can only happen
+     * between kafka polls (see pollTimeoutMs option). So for example setting
+     * this to 10000, then the trigger happens in the interval 10000
+     * pollTimeoutMs. The default value for pollTimeoutMs is 5000, so this would
+     * mean a trigger interval at about every 15 seconds.
+     */
+    private Integer batchingIntervalMs;
+    /**
      * This options controls what happens when a consumer is processing an
      * exchange and it fails. If the option is false then the consumer continues
      * to the next message and processes it. If the option is true then the
@@ -1020,6 +1031,14 @@ public class KafkaComponentConfiguration
 
     public void setBatching(Boolean batching) {
         this.batching = batching;
+    }
+
+    public Integer getBatchingIntervalMs() {
+        return batchingIntervalMs;
+    }
+
+    public void setBatchingIntervalMs(Integer batchingIntervalMs) {
+        this.batchingIntervalMs = batchingIntervalMs;
     }
 
     public Boolean getBreakOnFirstError() {
