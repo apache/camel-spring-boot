@@ -43,26 +43,14 @@ public class Neo4jComponentConfiguration
      */
     private String alias;
     /**
-     * Kerberos Authentication encoded base64 ticket
-     */
-    private String base64;
-    /**
      * The configuration;. The option is a
      * org.apache.camel.component.neo4j.Neo4jConfiguration type.
      */
     private Neo4jConfiguration configuration;
     /**
-     * Basic authentication database password
-     */
-    private String dbPassword;
-    /**
      * URI of the Neo4j server - used for Authentication
      */
     private String dbUri;
-    /**
-     * Basic authentication database user
-     */
-    private String dbUser;
     /**
      * Detach a relationship - set true if want to delete a node and detach its
      * relationships to other nodes at same time
@@ -100,17 +88,9 @@ public class Neo4jComponentConfiguration
      */
     private String query;
     /**
-     * Basic authentication database realm
-     */
-    private String realm;
-    /**
      * Similarity Function of Vector Index
      */
     private Neo4jSimilarityFunction similarityFunction = Neo4jSimilarityFunction.cosine;
-    /**
-     * Bearer authentication database realm
-     */
-    private String token;
     /**
      * Vector Index Name
      */
@@ -128,6 +108,26 @@ public class Neo4jComponentConfiguration
      * Advanced - Driver. The option is a org.neo4j.driver.Driver type.
      */
     private Driver driver;
+    /**
+     * Kerberos Authentication encoded base64 ticket
+     */
+    private String base64;
+    /**
+     * Basic authentication database password
+     */
+    private String dbPassword;
+    /**
+     * Basic authentication database user
+     */
+    private String dbUser;
+    /**
+     * Basic authentication database realm
+     */
+    private String realm;
+    /**
+     * Bearer authentication database realm
+     */
+    private String token;
 
     public String getAlias() {
         return alias;
@@ -135,14 +135,6 @@ public class Neo4jComponentConfiguration
 
     public void setAlias(String alias) {
         this.alias = alias;
-    }
-
-    public String getBase64() {
-        return base64;
-    }
-
-    public void setBase64(String base64) {
-        this.base64 = base64;
     }
 
     public Neo4jConfiguration getConfiguration() {
@@ -153,28 +145,12 @@ public class Neo4jComponentConfiguration
         this.configuration = configuration;
     }
 
-    public String getDbPassword() {
-        return dbPassword;
-    }
-
-    public void setDbPassword(String dbPassword) {
-        this.dbPassword = dbPassword;
-    }
-
     public String getDbUri() {
         return dbUri;
     }
 
     public void setDbUri(String dbUri) {
         this.dbUri = dbUri;
-    }
-
-    public String getDbUser() {
-        return dbUser;
-    }
-
-    public void setDbUser(String dbUser) {
-        this.dbUser = dbUser;
     }
 
     public Boolean getDetachRelationship() {
@@ -233,28 +209,12 @@ public class Neo4jComponentConfiguration
         this.query = query;
     }
 
-    public String getRealm() {
-        return realm;
-    }
-
-    public void setRealm(String realm) {
-        this.realm = realm;
-    }
-
     public Neo4jSimilarityFunction getSimilarityFunction() {
         return similarityFunction;
     }
 
     public void setSimilarityFunction(Neo4jSimilarityFunction similarityFunction) {
         this.similarityFunction = similarityFunction;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public String getVectorIndexName() {
@@ -279,5 +239,45 @@ public class Neo4jComponentConfiguration
 
     public void setDriver(Driver driver) {
         this.driver = driver;
+    }
+
+    public String getBase64() {
+        return base64;
+    }
+
+    public void setBase64(String base64) {
+        this.base64 = base64;
+    }
+
+    public String getDbPassword() {
+        return dbPassword;
+    }
+
+    public void setDbPassword(String dbPassword) {
+        this.dbPassword = dbPassword;
+    }
+
+    public String getDbUser() {
+        return dbUser;
+    }
+
+    public void setDbUser(String dbUser) {
+        this.dbUser = dbUser;
+    }
+
+    public String getRealm() {
+        return realm;
+    }
+
+    public void setRealm(String realm) {
+        this.realm = realm;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
