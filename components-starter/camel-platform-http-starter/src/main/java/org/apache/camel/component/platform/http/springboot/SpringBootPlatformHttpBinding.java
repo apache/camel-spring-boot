@@ -33,7 +33,6 @@ import org.apache.camel.attachment.CamelFileDataSource;
 import org.apache.camel.component.platform.http.PlatformHttpEndpoint;
 import org.apache.camel.component.platform.http.spi.Method;
 import org.apache.camel.converter.stream.CachedOutputStream;
-import org.apache.camel.converter.stream.ReaderCache;
 import org.apache.camel.http.base.HttpHelper;
 import org.apache.camel.http.common.DefaultHttpBinding;
 import org.apache.camel.support.ExchangeHelper;
@@ -128,6 +127,9 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
                         // populate body in case there is only one attachment
                         if (isSingleAttachment) {
                             message.setHeader(Exchange.FILE_NAME, name);
+                            if (multipartFile.getContentType() != null) {
+                                message.setHeader(Exchange.CONTENT_TYPE, multipartFile.getContentType());
+                            }
                             message.setBody(uploadedTmpFile);
                         }
                     } else {
@@ -156,7 +158,12 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
     public void readRequest(HttpServletRequest request, Message message) {
         super.readRequest(request, message);
 
-        if (METHODS_WITH_BODY_ALLOWED.contains(Method.valueOf(request.getMethod())) &&
+        populateMultiFormData(request, message);
+    }
+
+    private static void populateMultiFormData(HttpServletRequest request, Message message) {
+        if (((PlatformHttpEndpoint) message.getExchange().getFromEndpoint()).isPopulateBodyWithForm() &&
+                METHODS_WITH_BODY_ALLOWED.contains(Method.valueOf(request.getMethod())) &&
                 (message.getBody() instanceof StreamCache ||
                         (message.getBody() == null && !"POST".equals(request.getMethod()))) &&
                 request.getContentType() != null &&

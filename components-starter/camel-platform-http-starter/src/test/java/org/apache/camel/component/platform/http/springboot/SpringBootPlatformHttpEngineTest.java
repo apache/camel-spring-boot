@@ -20,6 +20,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import jakarta.activation.DataHandler;
 import org.apache.camel.CamelContext;
+import org.apache.camel.Exchange;
 import org.apache.camel.attachment.AttachmentMessage;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
@@ -93,6 +94,8 @@ public class SpringBootPlatformHttpEngineTest {
                             AttachmentMessage message = exchange.getMessage(AttachmentMessage.class);
                             DataHandler attachment = message.getAttachment(attachmentId);
                             exchange.getMessage().setHeader("myDataHandler", attachment);
+                            exchange.getMessage().setHeader("singleFileContentType",
+                                    exchange.getIn().getHeader(Exchange.CONTENT_TYPE));
                             exchange.getMessage().setBody(attachment.getContent());
                         });
 
@@ -147,14 +150,17 @@ public class SpringBootPlatformHttpEngineTest {
 
         Files.write(tempFile.toPath(), fileContent.getBytes(StandardCharsets.UTF_8));
 
+        String dummyMimeType = "custom/mime-type";
+
         given()
-                .multiPart(attachmentId, tempFile)
+                .multiPart(attachmentId, tempFile, dummyMimeType)
                 .when()
                 .post("/uploadSingle")
                 .then()
                 .statusCode(200)
                 // Assert that the attachment is a DataHandler
                 .header("myDataHandler", containsString("jakarta.activation.DataHandler"))
+                .header("singleFileContentType", is(dummyMimeType))
                 .body(is(fileContent));
     }
 

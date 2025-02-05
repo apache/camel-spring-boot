@@ -40,6 +40,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.emptyOrNullString;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -111,6 +113,28 @@ public class PlatformHttpStreamingTest {
     }
 
     @Test
+    void testHeaderAndBodyWithFormUrlEncodedBody() throws Exception {
+        given().contentType(ContentType.URLENC).formParam("foo", "bar")
+                .post("/headerAndBodyUrlEncoded")
+                .then()
+                .statusCode(200)
+                .header("foo", "bar")
+                .header("BodyClass", containsString("HashMap"))
+                .body(is("{foo=bar}"));
+    }
+
+    @Test
+    void testOnlyHeaderWithFormUrlEncodedBody() throws Exception {
+        given().contentType(ContentType.URLENC).formParam("foo", "bar")
+                .post("/headerUrlEncoded")
+                .then()
+                .statusCode(200)
+                .header("foo", "bar")
+                .header("BodyClass", containsString("ReaderCache"))
+                .body(is("foo=bar"));
+    }
+
+    @Test
     void testStreamingWithSpecificEncoding() throws Exception {
         Path input = Files.createTempFile("platform-http-input", "dat");
         Path output = Files.createTempFile("platform-http-output", "dat");
@@ -148,6 +172,14 @@ public class PlatformHttpStreamingTest {
                     from("platform-http:/nonStreaming").transform().simple("Hello ${body}");
                     from("platform-http:/nonStreamingFile").log("Done processing request");
                     from("platform-http:/nonStreamingUrlEncoded").setBody().simple("foo=${header.foo}");
+                    from("platform-http:/headerAndBodyUrlEncoded")
+                            .process(exchange ->
+                                    exchange.getMessage().setHeader("BodyClass", exchange.getIn().getBody().getClass().getName()))
+                            .convertBodyTo(String.class);
+                    from("platform-http:/headerUrlEncoded?populateBodyWithForm=false")
+                            .process(exchange ->
+                                    exchange.getMessage().setHeader("BodyClass", exchange.getIn().getBody().getClass().getName()))
+                            .log("Done processing request");
                 }
             };
         }
