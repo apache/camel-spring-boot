@@ -99,6 +99,7 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
             File tmpFolder = (File) request.getServletContext().getAttribute(ServletContext.TEMPDIR);
             boolean isSingleAttachment = multipartHttpServletRequest.getFileMap() != null &&
                     multipartHttpServletRequest.getFileMap().keySet().size() == 1;
+            message.setHeader(Exchange.ATTACHMENTS_SIZE, multipartHttpServletRequest.getFileMap().keySet().size());
             multipartHttpServletRequest.getFileMap().forEach((name, multipartFile) -> {
                 try {
                     Path uploadedTmpFile = Paths.get(tmpFolder.getPath(), UUID.randomUUID().toString());
@@ -122,13 +123,16 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
 
                     if (accepted) {
                         AttachmentMessage am = message.getExchange().getMessage(AttachmentMessage.class);
-                        am.addAttachment(name, new DataHandler(new CamelFileDataSource(uploadedTmpFile.toFile(), name)));
+                        File uploadedFile = uploadedTmpFile.toFile();
+                        am.addAttachment(name, new DataHandler(new CamelFileDataSource(uploadedFile, name)));
 
                         // populate body in case there is only one attachment
                         if (isSingleAttachment) {
+                            message.setHeader(Exchange.FILE_PATH, uploadedFile.getAbsolutePath());
+                            message.setHeader(Exchange.FILE_LENGTH, multipartFile.getSize());
                             message.setHeader(Exchange.FILE_NAME, multipartFile.getOriginalFilename());
                             if (multipartFile.getContentType() != null) {
-                                message.setHeader(Exchange.CONTENT_TYPE, multipartFile.getContentType());
+                                message.setHeader(Exchange.FILE_CONTENT_TYPE, multipartFile.getContentType());
                             }
                             message.setBody(uploadedTmpFile);
                         }
