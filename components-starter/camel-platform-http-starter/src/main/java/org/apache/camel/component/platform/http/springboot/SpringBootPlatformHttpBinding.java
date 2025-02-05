@@ -127,6 +127,9 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
                         // populate body in case there is only one attachment
                         if (isSingleAttachment) {
                             message.setHeader(Exchange.FILE_NAME, name);
+                            if (multipartFile.getContentType() != null) {
+                                message.setHeader(Exchange.CONTENT_TYPE, multipartFile.getContentType());
+                            }
                             message.setBody(uploadedTmpFile);
                         }
                     } else {
