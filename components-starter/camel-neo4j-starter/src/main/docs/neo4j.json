@@ -1,0 +1,148 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.neo4j",
+      "type": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
+      "name": "camel.component.neo4j.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.neo4j.alias",
+      "type": "java.lang.String",
+      "description": "Node alias",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
+      "name": "camel.component.neo4j.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.neo4j.base64",
+      "type": "java.lang.String",
+      "description": "Kerberos Authentication encoded base64 ticket",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
+      "name": "camel.component.neo4j.configuration",
+      "type": "org.apache.camel.component.neo4j.Neo4jConfiguration",
+      "description": "The configuration;. The option is a org.apache.camel.component.neo4j.Neo4jConfiguration type.",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
+      "name": "camel.component.neo4j.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.neo4j.db-password",
+      "type": "java.lang.String",
+      "description": "Basic authentication database password",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
+      "name": "camel.component.neo4j.db-uri",
+      "type": "java.lang.String",
+      "description": "URI of the Neo4j server - used for Authentication",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
+      "name": "camel.component.neo4j.db-user",
+      "type": "java.lang.String",
+      "description": "Basic authentication database user",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
+      "name": "camel.component.neo4j.detach-relationship",
+      "type": "java.lang.Boolean",
+      "description": "Detach a relationship - set true if want to delete a node and detach its relationships to other nodes at same time",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.neo4j.dimension",
+      "type": "java.lang.Integer",
+      "description": "Dimension of Vector Index",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
+      "name": "camel.component.neo4j.driver",
+      "type": "org.neo4j.driver.Driver",
+      "description": "Advanced - Driver. The option is a org.neo4j.driver.Driver type.",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
+      "name": "camel.component.neo4j.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the neo4j component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
+      "name": "camel.component.neo4j.label",
+      "type": "java.lang.String",
+      "description": "Node Label",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
+      "name": "camel.component.neo4j.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.neo4j.max-results",
+      "type": "java.lang.Integer",
+      "description": "Maximum results for Vector Similarity search",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration",
+      "defaultValue": 3
+    },
+    {
+      "name": "camel.component.neo4j.min-score",
+      "type": "java.lang.Double",
+      "description": "Minimum score for Vector Similarity search",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
+      "name": "camel.component.neo4j.query",
+      "type": "java.lang.String",
+      "description": "Cypher Query",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
+      "name": "camel.component.neo4j.realm",
+      "type": "java.lang.String",
+      "description": "Basic authentication database realm",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
+      "name": "camel.component.neo4j.similarity-function",
+      "type": "org.apache.camel.component.neo4j.Neo4jSimilarityFunction",
+      "description": "Similarity Function of Vector Index",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration",
+      "defaultValue": "cosine"
+    },
+    {
+      "name": "camel.component.neo4j.token",
+      "type": "java.lang.String",
+      "description": "Bearer authentication database realm",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
+      "name": "camel.component.neo4j.vector-index-name",
+      "type": "java.lang.String",
+      "description": "Vector Index Name",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    }
+  ],
+  "hints": []
+}
