@@ -27,12 +27,6 @@
       "defaultValue": true
     },
     {
-      "name": "camel.component.neo4j.base64",
-      "type": "java.lang.String",
-      "description": "Kerberos Authentication encoded base64 ticket",
-      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
-    },
-    {
       "name": "camel.component.neo4j.configuration",
       "type": "org.apache.camel.component.neo4j.Neo4jConfiguration",
       "description": "The configuration;. The option is a org.apache.camel.component.neo4j.Neo4jConfiguration type.",
@@ -44,21 +38,9 @@
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
-      "name": "camel.component.neo4j.db-password",
+      "name": "camel.component.neo4j.database-url",
       "type": "java.lang.String",
-      "description": "Basic authentication database password",
-      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
-    },
-    {
-      "name": "camel.component.neo4j.db-uri",
-      "type": "java.lang.String",
-      "description": "URI of the Neo4j server - used for Authentication",
-      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
-    },
-    {
-      "name": "camel.component.neo4j.db-user",
-      "type": "java.lang.String",
-      "description": "Basic authentication database user",
+      "description": "Url for connecting to Neo database",
       "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
     },
     {
@@ -84,6 +66,12 @@
       "name": "camel.component.neo4j.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the neo4j component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
+      "name": "camel.component.neo4j.kerberos-auth-ticket",
+      "type": "java.lang.String",
+      "description": "Kerberos Authentication encoded base64 ticket",
       "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
     },
     {
@@ -113,6 +101,12 @@
       "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
     },
     {
+      "name": "camel.component.neo4j.password",
+      "type": "java.lang.String",
+      "description": "Basic authentication database password",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
       "name": "camel.component.neo4j.query",
       "type": "java.lang.String",
       "description": "Cypher Query",
@@ -135,6 +129,12 @@
       "name": "camel.component.neo4j.token",
       "type": "java.lang.String",
       "description": "Bearer authentication database realm",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
+      "name": "camel.component.neo4j.username",
+      "type": "java.lang.String",
+      "description": "Basic authentication database user",
       "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
     },
     {

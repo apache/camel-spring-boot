@@ -48,9 +48,9 @@ public class Neo4jComponentConfiguration
      */
     private Neo4jConfiguration configuration;
     /**
-     * URI of the Neo4j server - used for Authentication
+     * Url for connecting to Neo database
      */
-    private String dbUri;
+    private String databaseUrl;
     /**
      * Detach a relationship - set true if want to delete a node and detach its
      * relationships to other nodes at same time
@@ -111,15 +111,11 @@ public class Neo4jComponentConfiguration
     /**
      * Kerberos Authentication encoded base64 ticket
      */
-    private String base64;
+    private String kerberosAuthTicket;
     /**
      * Basic authentication database password
      */
-    private String dbPassword;
-    /**
-     * Basic authentication database user
-     */
-    private String dbUser;
+    private String password;
     /**
      * Basic authentication database realm
      */
@@ -128,6 +124,10 @@ public class Neo4jComponentConfiguration
      * Bearer authentication database realm
      */
     private String token;
+    /**
+     * Basic authentication database user
+     */
+    private String username;
 
     public String getAlias() {
         return alias;
@@ -145,12 +145,12 @@ public class Neo4jComponentConfiguration
         this.configuration = configuration;
     }
 
-    public String getDbUri() {
-        return dbUri;
+    public String getDatabaseUrl() {
+        return databaseUrl;
     }
 
-    public void setDbUri(String dbUri) {
-        this.dbUri = dbUri;
+    public void setDatabaseUrl(String databaseUrl) {
+        this.databaseUrl = databaseUrl;
     }
 
     public Boolean getDetachRelationship() {
@@ -241,28 +241,20 @@ public class Neo4jComponentConfiguration
         this.driver = driver;
     }
 
-    public String getBase64() {
-        return base64;
+    public String getKerberosAuthTicket() {
+        return kerberosAuthTicket;
     }
 
-    public void setBase64(String base64) {
-        this.base64 = base64;
+    public void setKerberosAuthTicket(String kerberosAuthTicket) {
+        this.kerberosAuthTicket = kerberosAuthTicket;
     }
 
-    public String getDbPassword() {
-        return dbPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setDbPassword(String dbPassword) {
-        this.dbPassword = dbPassword;
-    }
-
-    public String getDbUser() {
-        return dbUser;
-    }
-
-    public void setDbUser(String dbUser) {
-        this.dbUser = dbUser;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRealm() {
@@ -279,5 +271,13 @@ public class Neo4jComponentConfiguration
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
