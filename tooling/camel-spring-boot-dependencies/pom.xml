@@ -4500,27 +4500,27 @@
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-commons</artifactId>
-        <version>1.14.3</version>
+        <version>1.14.4</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-observation</artifactId>
-        <version>1.14.3</version>
+        <version>1.14.4</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-registry-jmx</artifactId>
-        <version>1.14.3</version>
+        <version>1.14.4</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-registry-prometheus</artifactId>
-        <version>1.14.3</version>
+        <version>1.14.4</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-tracing</artifactId>
-        <version>1.4.2</version>
+        <version>1.4.3</version>
       </dependency>
       <dependency>
         <groupId>net.bytebuddy</groupId>
@@ -8387,6 +8387,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-telegram</artifactId>
+        <version>4.11.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-telemetry</artifactId>
         <version>4.11.0-SNAPSHOT</version>
       </dependency>
       <dependency>
