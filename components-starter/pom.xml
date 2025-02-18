@@ -423,6 +423,7 @@
     <module>camel-tahu-starter</module>
     <module>camel-tarfile-starter</module>
     <module>camel-telegram-starter</module>
+    <module>camel-telemetry-dev-starter</module>
     <module>camel-tensorflow-serving-starter</module>
     <module>camel-thrift-starter</module>
     <module>camel-thymeleaf-starter</module>
