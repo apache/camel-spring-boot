@@ -1054,6 +1054,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-ibm-secrets-manager-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ical-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -3107,6 +3112,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-huaweicloud-smn</artifactId>
+        <version>4.11.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-ibm-secrets-manager</artifactId>
         <version>4.11.0-SNAPSHOT</version>
       </dependency>
       <dependency>
