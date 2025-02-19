@@ -253,6 +253,7 @@
     <module>camel-huaweicloud-imagerecognition-starter</module>
     <module>camel-huaweicloud-obs-starter</module>
     <module>camel-huaweicloud-smn-starter</module>
+    <module>camel-ibm-secrets-manager-starter</module>
     <module>camel-ical-starter</module>
     <module>camel-iec60870-starter</module>
     <module>camel-ignite-starter</module>
