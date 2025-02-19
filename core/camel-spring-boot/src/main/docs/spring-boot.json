@@ -560,6 +560,12 @@
       "defaultValue": true
     },
     {
+      "name": "camel.main.auto-startup-exclude-pattern",
+      "type": "java.lang.String",
+      "description": "Used for exclusive filtering of routes to not automatically start with Camel starts. The pattern support matching by route id or endpoint urls. Multiple patterns can be specified separated by comma, as example, to exclude all the routes starting from kafka or jms use: kafka,jms.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main"
+    },
+    {
       "name": "camel.main.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. Default is true.",
@@ -2038,6 +2044,17 @@
       "deprecated": true,
       "deprecation": {
         "replacement": "camel.main.auto-startup",
+        "since": "4.5.0"
+      }
+    },
+    {
+      "name": "camel.springboot.auto-startup-exclude-pattern",
+      "type": "java.lang.String",
+      "description": "Used for exclusive filtering of routes to not automatically start with Camel starts. The pattern support matching by route id or endpoint urls. Multiple patterns can be specified separated by comma, as example, to exclude all the routes starting from kafka or jms use: kafka,jms.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Springboot",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "camel.main.auto-startup-exclude-pattern",
         "since": "4.5.0"
       }
     },
