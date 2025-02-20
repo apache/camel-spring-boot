@@ -57,29 +57,6 @@
                 <version>${avro-version}</version>
             </dependency>
 
-
-            <!-- Add a uniform jackson 1 (version from Camel) -->
-            <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-core-asl</artifactId>
-                <version>${jackson-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-jaxrs</artifactId>
-                <version>${jackson-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-mapper-asl</artifactId>
-                <version>${jackson-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-xc</artifactId>
-                <version>${jackson-version}</version>
-            </dependency>
-
             <!-- Dependencies from Camel parent at the end -->
             <dependency>
                 <groupId>org.apache.camel</groupId>
