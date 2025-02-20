@@ -19,8 +19,10 @@ package org.apache.camel.component.kamelet.springboot;
 import org.apache.camel.CamelContext;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.spi.CamelContextCustomizer;
 import org.apache.camel.spi.Resource;
 import org.apache.camel.spi.RoutesBuilderLoader;
+import org.apache.camel.spring.boot.CamelContextConfiguration;
 import org.junit.jupiter.api.Test;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.EndpointInject;
@@ -45,12 +47,19 @@ public class KameletLocationTest {
     @EndpointInject("mock:result")
     MockEndpoint mock;
 
-    @Autowired
-    private CamelContext context;
+    @Bean
+    protected CamelContextConfiguration camelContextConfiguration() {
+        return new CamelContextConfiguration() {
+            @Override
+            public void beforeApplicationStart(CamelContext camelContext) {
+                camelContext.getRegistry().bind("routes-builder-loader-xml", new MyRoutesLoader());
+            }
 
-    protected CamelContext createCamelContext() throws Exception {
-        context.getRegistry().bind("routes-builder-loader-xml", new MyRoutesLoader());
-        return context;
+            @Override
+            public void afterApplicationStart(CamelContext camelContext) {
+
+            }
+        };
     }
 
     @Test
@@ -77,14 +86,16 @@ public class KameletLocationTest {
     // and use this class that has the route template hardcoded from java
     public class MyRoutesLoader implements RoutesBuilderLoader {
 
+        private CamelContext camelContext;
+
         @Override
         public CamelContext getCamelContext() {
-            return context;
+            return camelContext;
         }
 
         @Override
         public void setCamelContext(CamelContext camelContext) {
-            context = camelContext;
+            this.camelContext = camelContext;
         }
 
         @Override
@@ -98,9 +109,6 @@ public class KameletLocationTest {
                 @Override
                 public void configure() {
                     routeTemplate("upper").from("kamelet:source").transform().simple("${body.toUpperCase()}");
-
-                    from("direct:start").kamelet("upper?location=file:resource:classpath:upper-kamelet.xml")
-                            .to("mock:result");
                 }
             };
         }
@@ -127,7 +135,8 @@ public class KameletLocationTest {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                from("direct:start").kamelet("upper?location=file:src/test/resources/upper-kamelet.xml")
+                from("direct:start")
+                        .kamelet("upper?location=file:src/test/resources/upper-kamelet.xml")
                         .to("mock:result");
             }
         };

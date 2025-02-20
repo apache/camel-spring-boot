@@ -84,12 +84,9 @@ public class S3MoveAfterReadConsumerTest extends BaseS3 {
 
         // wait for finish
         Awaitility.await().atMost(10, TimeUnit.SECONDS).until(() -> {
-            List<S3Object> results = template.request("direct:listObjects", new Processor() {
-                @Override
-                public void process(Exchange exchange) {
-                    exchange.getIn().setHeader(AWS2S3Constants.BUCKET_NAME, "already-read");
-                    exchange.getIn().setHeader(AWS2S3Constants.S3_OPERATION, AWS2S3Operations.listObjects);
-                }
+            List<S3Object> results = template.request("direct:listObjects", exchange -> {
+                exchange.getIn().setHeader(AWS2S3Constants.OVERRIDE_BUCKET_NAME, "already-read");
+                exchange.getIn().setHeader(AWS2S3Constants.S3_OPERATION, AWS2S3Operations.listObjects);
             }).getMessage().getBody(List.class);
 
             return results.size() == 3 && "movedPrefixtest.txtmovedSuffix".equals(results.get(0).key());
