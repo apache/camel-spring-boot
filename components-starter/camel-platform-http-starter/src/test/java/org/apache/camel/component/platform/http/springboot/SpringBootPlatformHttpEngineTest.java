@@ -95,7 +95,7 @@ public class SpringBootPlatformHttpEngineTest {
                             DataHandler attachment = message.getAttachment(attachmentId);
                             exchange.getMessage().setHeader("myDataHandler", attachment);
                             exchange.getMessage().setHeader("singleFileContentType",
-                                    exchange.getIn().getHeader(Exchange.CONTENT_TYPE));
+                                    exchange.getIn().getHeader(Exchange.FILE_CONTENT_TYPE));
                             exchange.getMessage().setBody(attachment.getContent());
                         });
 
