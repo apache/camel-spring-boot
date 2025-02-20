@@ -231,6 +231,7 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
         loggingImpl.add("org.slf4j:slf4j-log4j13");
         loggingImpl.add("org.slf4j:slf4j-nop");
         loggingImpl.add("org.slf4j:slf4j-simple");
+        loggingImpl.add("org.slf4j:slf4j-reload4j");
 
         // excluded dependencies
         Set<String> configExclusions = new HashSet<>();

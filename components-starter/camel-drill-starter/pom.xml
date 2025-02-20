@@ -28,6 +28,34 @@
   <packaging>jar</packaging>
   <name>Camel SB Starters :: Drill</name>
   <description>Spring-Boot Starter for Camel Apache Drill support</description>
+  <properties>
+    <jackson-version>1.9.13</jackson-version>
+  </properties>
+  <dependencyManagement>
+    <dependencies>
+      <!-- drill dependencies mess with Spring Boot ones -->
+      <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-core-asl</artifactId>
+        <version>${jackson-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-mapper-asl</artifactId>
+        <version>${jackson-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-jaxrs</artifactId>
+        <version>${jackson-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-xc</artifactId>
+        <version>${jackson-version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -38,6 +66,22 @@
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-drill</artifactId>
       <version>${camel-version}</version>
+      <!--START OF GENERATED CODE-->
+      <exclusions>
+        <exclusion>
+          <groupId>commons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+        </exclusion>
+      </exclusions>
+      <!--END OF GENERATED CODE-->
     </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>

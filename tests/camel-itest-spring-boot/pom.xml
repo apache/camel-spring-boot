@@ -35,6 +35,7 @@
     <properties>
         <shrinkwrap-version>1.2.6</shrinkwrap-version>
         <shrinkwrap-resolver-version>3.1.4</shrinkwrap-resolver-version>
+        <shrinkwrap-plexus-version>3.2.1</shrinkwrap-plexus-version>
     </properties>
 
 
@@ -63,6 +64,12 @@
             <groupId>org.jboss.shrinkwrap</groupId>
             <artifactId>shrinkwrap-impl-base</artifactId>
             <version>${shrinkwrap-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-utils</artifactId>
+            <version>${shrinkwrap-plexus-version}</version>
         </dependency>
 
         <dependency>
