@@ -28,34 +28,6 @@
   <packaging>jar</packaging>
   <name>Camel SB Starters :: Drill</name>
   <description>Spring-Boot Starter for Camel Apache Drill support</description>
-  <properties>
-    <jackson-version>1.9.13</jackson-version>
-  </properties>
-  <dependencyManagement>
-    <dependencies>
-      <!-- drill dependencies mess with Spring Boot ones -->
-      <dependency>
-        <groupId>org.codehaus.jackson</groupId>
-        <artifactId>jackson-core-asl</artifactId>
-        <version>${jackson-version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.codehaus.jackson</groupId>
-        <artifactId>jackson-mapper-asl</artifactId>
-        <version>${jackson-version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.codehaus.jackson</groupId>
-        <artifactId>jackson-jaxrs</artifactId>
-        <version>${jackson-version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.codehaus.jackson</groupId>
-        <artifactId>jackson-xc</artifactId>
-        <version>${jackson-version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
