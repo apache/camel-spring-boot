@@ -741,6 +741,13 @@
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
     },
     {
+      "name": "camel.component.kafka.subscribe-consumer-topic-must-exists",
+      "type": "java.lang.Boolean",
+      "description": "Whether when a Camel Kafka consumer is subscribing to a Kafka broker then check whether a topic already exist on the broker, and fail if it does not. Otherwise, the Camel Kafka consumer will keep attempt to consume from the topic, until it's created on the Kafka broker; and until then the Camel Kafka consumer will fail and log a WARN about UNKNOWN_TOPIC_OR_PARTITION. The option subscribeConsumerBackoffMaxAttempts can be configured to give up trying to subscribe after a given number of attempts.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.kafka.synchronous",
       "type": "java.lang.Boolean",
       "description": "Sets whether synchronous processing should be strictly used",

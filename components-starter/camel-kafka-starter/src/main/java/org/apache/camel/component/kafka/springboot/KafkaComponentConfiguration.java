@@ -430,6 +430,17 @@ public class KafkaComponentConfiguration
      */
     private Integer subscribeConsumerBackoffMaxAttempts;
     /**
+     * Whether when a Camel Kafka consumer is subscribing to a Kafka broker then
+     * check whether a topic already exist on the broker, and fail if it does
+     * not. Otherwise, the Camel Kafka consumer will keep attempt to consume
+     * from the topic, until it's created on the Kafka broker; and until then
+     * the Camel Kafka consumer will fail and log a WARN about
+     * UNKNOWN_TOPIC_OR_PARTITION. The option
+     * subscribeConsumerBackoffMaxAttempts can be configured to give up trying
+     * to subscribe after a given number of attempts.
+     */
+    private Boolean subscribeConsumerTopicMustExists = false;
+    /**
      * If this feature is enabled and a single element of a batch is an Exchange
      * or Message, the producer will generate individual kafka header values for
      * it by using the batch Message to determine the values. Normal behavior
@@ -1318,6 +1329,15 @@ public class KafkaComponentConfiguration
     public void setSubscribeConsumerBackoffMaxAttempts(
             Integer subscribeConsumerBackoffMaxAttempts) {
         this.subscribeConsumerBackoffMaxAttempts = subscribeConsumerBackoffMaxAttempts;
+    }
+
+    public Boolean getSubscribeConsumerTopicMustExists() {
+        return subscribeConsumerTopicMustExists;
+    }
+
+    public void setSubscribeConsumerTopicMustExists(
+            Boolean subscribeConsumerTopicMustExists) {
+        this.subscribeConsumerTopicMustExists = subscribeConsumerTopicMustExists;
     }
 
     public Boolean getBatchWithIndividualHeaders() {
