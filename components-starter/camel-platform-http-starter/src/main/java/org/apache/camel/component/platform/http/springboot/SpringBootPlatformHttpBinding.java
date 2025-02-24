@@ -30,6 +30,7 @@ import org.apache.camel.StreamCache;
 import org.apache.camel.TypeConverter;
 import org.apache.camel.attachment.AttachmentMessage;
 import org.apache.camel.attachment.CamelFileDataSource;
+import org.apache.camel.attachment.DefaultAttachmentMessage;
 import org.apache.camel.component.platform.http.PlatformHttpEndpoint;
 import org.apache.camel.component.platform.http.spi.Method;
 import org.apache.camel.converter.stream.CachedOutputStream;
@@ -122,7 +123,7 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
                     }
 
                     if (accepted) {
-                        AttachmentMessage am = message.getExchange().getMessage(AttachmentMessage.class);
+                        AttachmentMessage am = new DefaultAttachmentMessage(message);
                         File uploadedFile = uploadedTmpFile.toFile();
                         am.addAttachment(name, new DataHandler(new CamelFileDataSource(uploadedFile, name)));
 
