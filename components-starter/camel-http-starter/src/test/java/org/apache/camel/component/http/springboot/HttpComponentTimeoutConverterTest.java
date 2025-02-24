@@ -65,10 +65,12 @@ class HttpComponentTimeoutConverterTest {
 
     @BeforeAll
     public static void setUp() throws Exception {
-        localServer = ServerBootstrap.bootstrap().register("/checkSoTimeout", (request, response, ctx) -> {
-            response.setCode(HttpStatus.SC_OK);
-            assertNotNull(currentContext);
-            response.setEntity(new StringEntity(
+        localServer = ServerBootstrap.bootstrap()
+            .setCanonicalHostName("localhost")
+            .register("/checkSoTimeout", (request, response, ctx) -> {
+                response.setCode(HttpStatus.SC_OK);
+                assertNotNull(currentContext);
+                response.setEntity(new StringEntity(
                     String.valueOf(currentContext.getComponent("http", HttpComponent.class).getSoTimeout().toSeconds()),
                     StandardCharsets.US_ASCII));
         }).create();
