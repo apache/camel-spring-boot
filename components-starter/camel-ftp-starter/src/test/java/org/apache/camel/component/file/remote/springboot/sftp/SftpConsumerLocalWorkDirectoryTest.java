@@ -109,7 +109,7 @@ public class SftpConsumerLocalWorkDirectoryTest extends BaseSftp {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from(getFtpUrl()).routeId("myRoute").noAutoStartup().process(new Processor() {
+                    from(getFtpUrl()).routeId("myRoute").autoStartup(false).process(new Processor() {
                         public void process(Exchange exchange) {
                             File body = exchange.getIn().getBody(File.class);
                             assertNotNull(body);

@@ -129,14 +129,14 @@ public class JsonPathCBRTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start").streamCaching().choice().when().jsonpath("$.store.book[?(@.price < 10)]")
+                    from("direct:start").streamCache("true").choice().when().jsonpath("$.store.book[?(@.price < 10)]")
                             .to("mock:cheap").when().jsonpath("$.store.book[?(@.price < 30)]").to("mock:average")
                             .otherwise().to("mock:expensive");
 
-                    from("direct:bicycle").streamCaching().choice().when().method(new BeanPredicate()).to("mock:cheap")
+                    from("direct:bicycle").streamCache("true").choice().when().method(new BeanPredicate()).to("mock:cheap")
                             .otherwise().to("mock:expensive");
 
-                    from("direct:bicycle2").streamCaching().choice()
+                    from("direct:bicycle2").streamCache("true").choice()
                             .when(PredicateBuilder.isLessThan(
                                     ExpressionBuilder.languageExpression("jsonpath", "$.store.bicycle.price"),
                                     ExpressionBuilder.constantExpression(100)))

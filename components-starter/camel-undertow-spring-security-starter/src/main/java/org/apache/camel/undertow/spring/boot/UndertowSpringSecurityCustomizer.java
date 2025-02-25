@@ -85,9 +85,18 @@ public class UndertowSpringSecurityCustomizer implements ComponentCustomizer {
 
         @Bean
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-            http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                    .authorizeHttpRequests().anyRequest().authenticated().and().oauth2ResourceServer().jwt()
-                    .jwtAuthenticationConverter(getProvider().getJwtAuthenticationConverter());
+            http.sessionManagement(sessionManagement -> {
+                sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+            })
+            .authorizeHttpRequests(authorizeRequests -> {
+                authorizeRequests.anyRequest().authenticated();
+            })
+            .oauth2ResourceServer(oauth2ResourceServer -> {
+                oauth2ResourceServer.jwt(jwtConfigurer -> {
+                    jwtConfigurer.jwtAuthenticationConverter(getProvider().getJwtAuthenticationConverter());
+                });
+            });
+
             return http.build();
         }
     }

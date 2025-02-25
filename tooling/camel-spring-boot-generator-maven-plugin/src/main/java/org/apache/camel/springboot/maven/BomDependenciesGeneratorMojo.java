@@ -16,19 +16,36 @@
  */
 package org.apache.camel.springboot.maven;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import org.apache.camel.maven.bom.generator.DependencyMatcher;
+import org.apache.camel.maven.bom.generator.DependencySet;
+import org.apache.camel.maven.bom.generator.ExternalBomConflictCheck;
+import org.apache.camel.maven.bom.generator.ExternalBomConflictCheckSet;
+import org.apache.commons.io.IOUtils;
+import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.repository.ArtifactRepository;
+import org.apache.maven.execution.MavenSession;
+import org.apache.maven.model.Dependency;
+import org.apache.maven.model.DependencyManagement;
+import org.apache.maven.model.Exclusion;
+import org.apache.maven.model.Model;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.project.DefaultProjectBuildingRequest;
+import org.apache.maven.project.MavenProject;
+import org.apache.maven.project.ProjectBuildingRequest;
+import org.apache.maven.repository.RepositorySystem;
+import org.apache.maven.shared.transfer.artifact.resolve.ArtifactResolver;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import javax.inject.Inject;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -42,35 +59,19 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import org.apache.camel.maven.bom.generator.DependencyMatcher;
-import org.apache.camel.maven.bom.generator.DependencySet;
-import org.apache.camel.maven.bom.generator.ExternalBomConflictCheck;
-import org.apache.camel.maven.bom.generator.ExternalBomConflictCheckSet;
-import org.apache.commons.io.IOUtils;
-import org.apache.maven.artifact.Artifact;
-import org.apache.maven.artifact.factory.ArtifactFactory;
-import org.apache.maven.artifact.repository.ArtifactRepository;
-import org.apache.maven.execution.MavenSession;
-import org.apache.maven.model.Dependency;
-import org.apache.maven.model.DependencyManagement;
-import org.apache.maven.model.Exclusion;
-import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.Component;
-import org.apache.maven.plugins.annotations.LifecyclePhase;
-import org.apache.maven.plugins.annotations.Mojo;
-import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.project.DefaultProjectBuildingRequest;
-import org.apache.maven.project.MavenProject;
-import org.apache.maven.project.ProjectBuildingRequest;
-import org.apache.maven.shared.transfer.artifact.resolve.ArtifactResolver;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Generate BOM by flattening the current project's dependency management section and applying exclusions.
@@ -117,14 +118,14 @@ public class BomDependenciesGeneratorMojo extends AbstractMojo {
     /**
      * Used to look up Artifacts in the remote repository.
      */
-    @Component
-    protected ArtifactFactory artifactFactory;
+    @Inject
+    protected ArtifactResolver artifactResolver;
 
     /**
      * Used to look up Artifacts in the remote repository.
      */
-    @Component
-    protected ArtifactResolver artifactResolver;
+    @Inject
+    protected RepositorySystem repositorySystem;
 
     /**
      * List of Remote Repositories used by the resolver
@@ -182,7 +183,7 @@ public class BomDependenciesGeneratorMojo extends AbstractMojo {
         for (Dependency dep : dependencyList) {
             boolean accept = inclusions.matches(dep) && !exclusions.matches(dep)
                     && !(dep.getGroupId().equals("org.apache.camel.springboot")
-                            && dep.getArtifactId().startsWith("camel-") && dep.getArtifactId().endsWith("-starter"));
+                    && dep.getArtifactId().startsWith("camel-") && dep.getArtifactId().endsWith("-starter"));
             getLog().debug(dep + (accept ? " included in the BOM" : " excluded from BOM"));
 
             if (dep.getArtifactId().startsWith("camel-") && dep.getArtifactId().endsWith("-parent")) {
@@ -494,7 +495,7 @@ public class BomDependenciesGeneratorMojo extends AbstractMojo {
     }
 
     private Set<String> getProvidedDependencyManagement(String groupId, String artifactId, String version,
-            Set<String> gaChecked) throws Exception {
+                                                        Set<String> gaChecked) throws Exception {
         String ga = groupId + ":" + artifactId;
         gaChecked.add(ga);
         Artifact bom = resolveArtifact(groupId, artifactId, version, "pom");
@@ -545,8 +546,7 @@ public class BomDependenciesGeneratorMojo extends AbstractMojo {
     }
 
     private Artifact resolveArtifact(String groupId, String artifactId, String version, String type) throws Exception {
-
-        Artifact art = artifactFactory.createArtifact(groupId, artifactId, version, "runtime", type);
+        Artifact art = repositorySystem.createArtifact(groupId, artifactId, version, "runtime", type);
 
         ProjectBuildingRequest buildingRequest = new DefaultProjectBuildingRequest(session.getProjectBuildingRequest());
         buildingRequest.setRemoteRepositories(remoteRepositories).setLocalRepository(localRepository);

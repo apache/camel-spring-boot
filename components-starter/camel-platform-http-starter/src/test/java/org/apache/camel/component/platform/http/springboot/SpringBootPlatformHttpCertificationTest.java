@@ -45,6 +45,7 @@ import org.apache.camel.util.IOHelper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperties;
 import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -295,8 +296,12 @@ public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
     CamelContext camelContext;
 
     @Test
-    @DisabledIfSystemProperty(named = "ci.env.name", matches = "apache.org",
-            disabledReason = "File too large for Apache CI")
+    @DisabledIfSystemProperties({
+            @DisabledIfSystemProperty(named = "ci.env.name", matches = "apache.org",
+                    disabledReason = "File too large for Apache CI"),
+            @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com",
+                    disabledReason = "File too large for GitHub CI")
+    })
     void streamingWithLargeRequestAndResponseBody() throws Exception {
         camelContext.getStreamCachingStrategy().setSpoolEnabled(true);
 

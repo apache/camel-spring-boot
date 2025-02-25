@@ -69,7 +69,7 @@ public class JsonPathBeanStreamCachingTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:start").streamCaching().bean(FullNameBean.class).to("mock:result");
+                    from("direct:start").streamCache("true").bean(FullNameBean.class).to("mock:result");
                 }
             };
         }
