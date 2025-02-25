@@ -624,13 +624,6 @@ public class KafkaComponentConfiguration
      */
     private Integer reconnectBackoffMs = 50;
     /**
-     * Whether the producer should store the RecordMetadata results from sending
-     * to Kafka. The results are stored in a List containing the RecordMetadata
-     * metadata's. The list is stored on a header with the key
-     * KafkaConstants#KAFKA_RECORDMETA
-     */
-    private Boolean recordMetadata = true;
-    /**
      * The number of acknowledgments the producer requires the leader to have
      * received before considering a request complete. This controls the
      * durability of records that are sent. The following settings are allowed:
@@ -713,6 +706,13 @@ public class KafkaComponentConfiguration
      * it from KafkaProducer using asynchronous non-blocking processing.
      */
     private Integer workerPoolMaxSize = 20;
+    /**
+     * Whether the producer should store the RecordMetadata results from sending
+     * to Kafka. The results are stored in a List containing the RecordMetadata
+     * metadata's. The list is stored on a header with the key
+     * KafkaConstants#KAFKA_RECORDMETA
+     */
+    private Boolean recordMetadata = false;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -1520,14 +1520,6 @@ public class KafkaComponentConfiguration
         this.reconnectBackoffMs = reconnectBackoffMs;
     }
 
-    public Boolean getRecordMetadata() {
-        return recordMetadata;
-    }
-
-    public void setRecordMetadata(Boolean recordMetadata) {
-        this.recordMetadata = recordMetadata;
-    }
-
     public String getRequestRequiredAcks() {
         return requestRequiredAcks;
     }
@@ -1598,6 +1590,14 @@ public class KafkaComponentConfiguration
 
     public void setWorkerPoolMaxSize(Integer workerPoolMaxSize) {
         this.workerPoolMaxSize = workerPoolMaxSize;
+    }
+
+    public Boolean getRecordMetadata() {
+        return recordMetadata;
+    }
+
+    public void setRecordMetadata(Boolean recordMetadata) {
+        this.recordMetadata = recordMetadata;
     }
 
     public Boolean getAutowiredEnabled() {
