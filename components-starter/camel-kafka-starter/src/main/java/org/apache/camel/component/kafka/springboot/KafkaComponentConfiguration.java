@@ -638,7 +638,7 @@ public class KafkaComponentConfiguration
      * Whether the producer should store the RecordMetadata results from sending
      * to Kafka. The results are stored in a List containing the RecordMetadata
      * metadata's. The list is stored on a header with the key
-     * KafkaConstants#KAFKA_RECORDMETA
+     * KafkaConstants#KAFKA_RECORD_META
      */
     private Boolean recordMetadata = true;
     /**
