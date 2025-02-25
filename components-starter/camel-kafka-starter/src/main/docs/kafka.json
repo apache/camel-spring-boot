@@ -530,7 +530,7 @@
       "type": "java.lang.Boolean",
       "description": "Whether the producer should store the RecordMetadata results from sending to Kafka. The results are stored in a List containing the RecordMetadata metadata's. The list is stored on a header with the key KafkaConstants#KAFKA_RECORD_META",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
-      "defaultValue": true
+      "defaultValue": false
     },
     {
       "name": "camel.component.kafka.request-required-acks",
