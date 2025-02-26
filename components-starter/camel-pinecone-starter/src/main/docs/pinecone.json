@@ -75,6 +75,25 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.pinecone.proxy-host",
+      "type": "java.lang.String",
+      "description": "Set the proxy host",
+      "sourceType": "org.apache.camel.component.pinecone.springboot.PineconeVectorDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.pinecone.proxy-port",
+      "type": "java.lang.Integer",
+      "description": "Set the proxy port",
+      "sourceType": "org.apache.camel.component.pinecone.springboot.PineconeVectorDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.pinecone.tls",
+      "type": "java.lang.Boolean",
+      "description": "Whether the client uses Transport Layer Security (TLS) to secure communications",
+      "sourceType": "org.apache.camel.component.pinecone.springboot.PineconeVectorDbComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.pinecone.token",
       "type": "java.lang.String",
       "description": "Sets the API key to use for authentication",

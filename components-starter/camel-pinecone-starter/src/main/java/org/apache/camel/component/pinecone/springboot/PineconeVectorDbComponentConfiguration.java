@@ -73,6 +73,19 @@ public class PineconeVectorDbComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Set the proxy host
+     */
+    private String proxyHost;
+    /**
+     * Set the proxy port
+     */
+    private Integer proxyPort;
+    /**
+     * Whether the client uses Transport Layer Security (TLS) to secure
+     * communications
+     */
+    private Boolean tls = true;
+    /**
      * Sets the API key to use for authentication
      */
     private String token;
@@ -140,6 +153,30 @@ public class PineconeVectorDbComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
+
+    public Boolean getTls() {
+        return tls;
+    }
+
+    public void setTls(Boolean tls) {
+        this.tls = tls;
     }
 
     public String getToken() {
