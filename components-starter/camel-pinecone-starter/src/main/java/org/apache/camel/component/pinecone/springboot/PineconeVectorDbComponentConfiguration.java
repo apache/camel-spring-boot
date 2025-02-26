@@ -36,10 +36,31 @@ public class PineconeVectorDbComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Sets the cloud type to use (aws/gcp/azure)
+     */
+    private String cloud;
+    /**
+     * Sets the cloud region
+     */
+    private String cloudRegion;
+    /**
+     * Sets the Collection Dimension to use (1-1536)
+     */
+    private Integer collectionDimension;
+    /**
+     * Sets the Collection Similarity Metric to use
+     * (cosine/euclidean/dotproduct)
+     */
+    private String collectionSimilarityMetric;
+    /**
      * The configuration;. The option is a
      * org.apache.camel.component.pinecone.PineconeVectorDbConfiguration type.
      */
     private PineconeVectorDbConfiguration configuration;
+    /**
+     * Sets the index name to use
+     */
+    private String indexName;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -65,12 +86,52 @@ public class PineconeVectorDbComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
 
+    public String getCloud() {
+        return cloud;
+    }
+
+    public void setCloud(String cloud) {
+        this.cloud = cloud;
+    }
+
+    public String getCloudRegion() {
+        return cloudRegion;
+    }
+
+    public void setCloudRegion(String cloudRegion) {
+        this.cloudRegion = cloudRegion;
+    }
+
+    public Integer getCollectionDimension() {
+        return collectionDimension;
+    }
+
+    public void setCollectionDimension(Integer collectionDimension) {
+        this.collectionDimension = collectionDimension;
+    }
+
+    public String getCollectionSimilarityMetric() {
+        return collectionSimilarityMetric;
+    }
+
+    public void setCollectionSimilarityMetric(String collectionSimilarityMetric) {
+        this.collectionSimilarityMetric = collectionSimilarityMetric;
+    }
+
     public PineconeVectorDbConfiguration getConfiguration() {
         return configuration;
     }
 
     public void setConfiguration(PineconeVectorDbConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getIndexName() {
+        return indexName;
+    }
+
+    public void setIndexName(String indexName) {
+        this.indexName = indexName;
     }
 
     public Boolean getLazyStartProducer() {

@@ -21,6 +21,30 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.pinecone.cloud",
+      "type": "java.lang.String",
+      "description": "Sets the cloud type to use (aws\/gcp\/azure)",
+      "sourceType": "org.apache.camel.component.pinecone.springboot.PineconeVectorDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.pinecone.cloud-region",
+      "type": "java.lang.String",
+      "description": "Sets the cloud region",
+      "sourceType": "org.apache.camel.component.pinecone.springboot.PineconeVectorDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.pinecone.collection-dimension",
+      "type": "java.lang.Integer",
+      "description": "Sets the Collection Dimension to use (1-1536)",
+      "sourceType": "org.apache.camel.component.pinecone.springboot.PineconeVectorDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.pinecone.collection-similarity-metric",
+      "type": "java.lang.String",
+      "description": "Sets the Collection Similarity Metric to use (cosine\/euclidean\/dotproduct)",
+      "sourceType": "org.apache.camel.component.pinecone.springboot.PineconeVectorDbComponentConfiguration"
+    },
+    {
       "name": "camel.component.pinecone.configuration",
       "type": "org.apache.camel.component.pinecone.PineconeVectorDbConfiguration",
       "description": "The configuration;. The option is a org.apache.camel.component.pinecone.PineconeVectorDbConfiguration type.",
@@ -35,6 +59,12 @@
       "name": "camel.component.pinecone.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the pinecone component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.pinecone.springboot.PineconeVectorDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.pinecone.index-name",
+      "type": "java.lang.String",
+      "description": "Sets the index name to use",
       "sourceType": "org.apache.camel.component.pinecone.springboot.PineconeVectorDbComponentConfiguration"
     },
     {
