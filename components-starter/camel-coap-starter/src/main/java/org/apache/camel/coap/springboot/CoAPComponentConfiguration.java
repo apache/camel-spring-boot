@@ -36,6 +36,11 @@ public class CoAPComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Name of COAP configuration file to load and use. Will by default load
+     * from classpath, so use file: as prefix to load from file system.
+     */
+    private String configurationFile;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions (if possible) occurred while the Camel consumer
      * is trying to pickup incoming messages, or the likes, will now be
@@ -69,6 +74,14 @@ public class CoAPComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+
+    public String getConfigurationFile() {
+        return configurationFile;
+    }
+
+    public void setConfigurationFile(String configurationFile) {
+        this.configurationFile = configurationFile;
+    }
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
