@@ -36,7 +36,8 @@
       "name": "camel.component.pinecone.collection-dimension",
       "type": "java.lang.Integer",
       "description": "Sets the Collection Dimension to use (1-1536)",
-      "sourceType": "org.apache.camel.component.pinecone.springboot.PineconeVectorDbComponentConfiguration"
+      "sourceType": "org.apache.camel.component.pinecone.springboot.PineconeVectorDbComponentConfiguration",
+      "defaultValue": 1536
     },
     {
       "name": "camel.component.pinecone.collection-similarity-metric",
@@ -59,6 +60,12 @@
       "name": "camel.component.pinecone.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the pinecone component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.pinecone.springboot.PineconeVectorDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.pinecone.host",
+      "type": "java.lang.String",
+      "description": "Sets a custom host URL to connect to",
       "sourceType": "org.apache.camel.component.pinecone.springboot.PineconeVectorDbComponentConfiguration"
     },
     {

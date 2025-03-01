@@ -46,7 +46,7 @@ public class PineconeVectorDbComponentConfiguration
     /**
      * Sets the Collection Dimension to use (1-1536)
      */
-    private Integer collectionDimension;
+    private Integer collectionDimension = 1536;
     /**
      * Sets the Collection Similarity Metric to use
      * (cosine/euclidean/dotproduct)
@@ -57,6 +57,10 @@ public class PineconeVectorDbComponentConfiguration
      * org.apache.camel.component.pinecone.PineconeVectorDbConfiguration type.
      */
     private PineconeVectorDbConfiguration configuration;
+    /**
+     * Sets a custom host URL to connect to
+     */
+    private String host;
     /**
      * Sets the index name to use
      */
@@ -137,6 +141,14 @@ public class PineconeVectorDbComponentConfiguration
 
     public void setConfiguration(PineconeVectorDbConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
     }
 
     public String getIndexName() {
