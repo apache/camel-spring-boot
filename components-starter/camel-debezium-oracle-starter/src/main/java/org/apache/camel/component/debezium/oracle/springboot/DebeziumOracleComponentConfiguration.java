@@ -326,14 +326,18 @@ public class DebeziumOracleComponentConfiguration
      */
     private Long logMiningBatchSizeDefault = 20000L;
     /**
+     * Active batch size will be also increased/decreased by this amount for
+     * tuning connector throughput when needed.
+     */
+    private Long logMiningBatchSizeIncrement = 20000L;
+    /**
      * The maximum SCN interval size that this connector will use when reading
      * from redo/archive logs.
      */
     private Long logMiningBatchSizeMax = 100000L;
     /**
      * The minimum SCN interval size that this connector will try to read from
-     * redo/archive logs. Active batch size will be also increased/decreased by
-     * this amount for tuning connector throughput when needed.
+     * redo/archive logs.
      */
     private Long logMiningBatchSizeMin = 1000L;
     /**
@@ -600,9 +604,9 @@ public class DebeziumOracleComponentConfiguration
     private Boolean schemaHistoryInternalSkipUnparseableDdl = false;
     /**
      * Controls what DDL will Debezium store in database schema history. By
-     * default (true) only DDL that manipulates a table from captured
-     * schema/database will be stored. If set to false, then Debezium will store
-     * all incoming DDL statements.
+     * default (false) Debezium will store all incoming DDL statements. If set
+     * to true, then only DDL that manipulates a table from captured
+     * schema/database will be stored.
      */
     private Boolean schemaHistoryInternalStoreOnlyCapturedDatabasesDdl = false;
     /**
@@ -1208,6 +1212,14 @@ public class DebeziumOracleComponentConfiguration
 
     public void setLogMiningBatchSizeDefault(Long logMiningBatchSizeDefault) {
         this.logMiningBatchSizeDefault = logMiningBatchSizeDefault;
+    }
+
+    public Long getLogMiningBatchSizeIncrement() {
+        return logMiningBatchSizeIncrement;
+    }
+
+    public void setLogMiningBatchSizeIncrement(Long logMiningBatchSizeIncrement) {
+        this.logMiningBatchSizeIncrement = logMiningBatchSizeIncrement;
     }
 
     public Long getLogMiningBatchSizeMax() {

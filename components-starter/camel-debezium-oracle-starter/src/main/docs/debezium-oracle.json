@@ -281,6 +281,13 @@
       "defaultValue": 20000
     },
     {
+      "name": "camel.component.debezium-oracle.log-mining-batch-size-increment",
+      "type": "java.lang.Long",
+      "description": "Active batch size will be also increased\/decreased by this amount for tuning connector throughput when needed.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 20000
+    },
+    {
       "name": "camel.component.debezium-oracle.log-mining-batch-size-max",
       "type": "java.lang.Long",
       "description": "The maximum SCN interval size that this connector will use when reading from redo\/archive logs.",
@@ -290,7 +297,7 @@
     {
       "name": "camel.component.debezium-oracle.log-mining-batch-size-min",
       "type": "java.lang.Long",
-      "description": "The minimum SCN interval size that this connector will try to read from redo\/archive logs. Active batch size will be also increased\/decreased by this amount for tuning connector throughput when needed.",
+      "description": "The minimum SCN interval size that this connector will try to read from redo\/archive logs.",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": 1000
     },
@@ -649,7 +656,7 @@
     {
       "name": "camel.component.debezium-oracle.schema-history-internal-store-only-captured-databases-ddl",
       "type": "java.lang.Boolean",
-      "description": "Controls what DDL will Debezium store in database schema history. By default (true) only DDL that manipulates a table from captured schema\/database will be stored. If set to false, then Debezium will store all incoming DDL statements.",
+      "description": "Controls what DDL will Debezium store in database schema history. By default (false) Debezium will store all incoming DDL statements. If set to true, then only DDL that manipulates a table from captured schema\/database will be stored.",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": false
     },
