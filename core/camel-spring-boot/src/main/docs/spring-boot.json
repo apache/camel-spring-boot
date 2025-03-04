@@ -162,6 +162,11 @@
       "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
     },
     {
+      "name": "camel.vault.ibm",
+      "type": "org.apache.camel.spring.boot.vault.IBMVaultConfigurationProperties",
+      "sourceType": "org.apache.camel.spring.boot.vault.IBMVaultConfigurationProperties"
+    },
+    {
       "name": "camel.vault.kubernetes",
       "type": "org.apache.camel.spring.boot.vault.KubernetesVaultConfigurationProperties",
       "sourceType": "org.apache.camel.spring.boot.vault.KubernetesVaultConfigurationProperties"
@@ -1925,6 +1930,18 @@
       "type": "java.lang.String",
       "description": "The Hashicorp Vault Token for accessing the service",
       "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.ibm.service-url",
+      "type": "java.lang.String",
+      "description": "The IBM Secrets Manager Service URL",
+      "sourceType": "org.apache.camel.spring.boot.vault.IBMVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.ibm.token",
+      "type": "java.lang.String",
+      "description": "The IBM Secrets Manager Token",
+      "sourceType": "org.apache.camel.spring.boot.vault.IBMVaultConfigurationProperties"
     },
     {
       "name": "camel.vault.kubernetes.refresh-enabled",
