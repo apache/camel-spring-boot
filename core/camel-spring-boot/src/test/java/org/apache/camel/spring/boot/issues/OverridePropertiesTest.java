@@ -31,15 +31,14 @@ import org.springframework.core.env.PropertiesPropertySource;
 public class OverridePropertiesTest extends CamelSpringTestSupport {
 
     @Override
-    protected Properties useOverridePropertiesWithPropertiesComponent() {
-        Properties prop = new Properties();
-        prop.put("name", "Donald Duck");
-        return prop;
-    }
-
-    @Override
     protected CamelContext createCamelContext() throws Exception {
         CamelContext context = super.createCamelContext();
+
+        Properties prop = new Properties();
+        prop.put("name", "Donald Duck");
+        camelContextConfiguration.
+                withUseOverridePropertiesWithPropertiesComponent(prop);
+
         PropertiesComponent pc = (PropertiesComponent) context.getPropertiesComponent();
         pc.setPropertiesParser(new SpringPropertiesParser(applicationContext.getEnvironment()));
         return context;

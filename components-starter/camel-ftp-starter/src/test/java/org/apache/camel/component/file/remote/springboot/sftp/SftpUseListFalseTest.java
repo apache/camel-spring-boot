@@ -82,7 +82,7 @@ public class SftpUseListFalseTest extends BaseSftp {
                 public void configure() {
                     from("sftp://localhost:" + getPort() + "/" + getRootDir()
                             + "?username=admin&password=admin&delay=10000&disconnect=true&stepwise=false&useList=false&fileName=report.txt&delete=true")
-                                    .routeId("foo").noAutoStartup().to("mock:result");
+                                    .routeId("foo").autoStartup(false).to("mock:result");
                 }
             };
         }

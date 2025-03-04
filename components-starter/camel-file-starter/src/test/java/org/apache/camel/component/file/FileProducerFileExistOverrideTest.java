@@ -61,7 +61,7 @@ public class FileProducerFileExistOverrideTest extends BaseFile {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from(fileUri("?noop=true&initialDelay=0&delay=10")).noAutoStartup().convertBodyTo(String.class)
+                    from(fileUri("?noop=true&initialDelay=0&delay=10")).autoStartup(false).convertBodyTo(String.class)
                             .to("mock:result");
                 }
             };

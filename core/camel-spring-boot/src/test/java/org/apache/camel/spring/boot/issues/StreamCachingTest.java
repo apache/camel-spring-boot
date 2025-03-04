@@ -47,7 +47,7 @@ public class StreamCachingTest extends CamelTestSupport {
                 context.getTypeConverterRegistry().addFallbackTypeConverter(
                         springTypeConverter(context, new ConversionService[] { new DefaultConversionService() }), true);
 
-                from("direct:foo").streamCaching().bean(MyBean.class).to(URI_END_OF_ROUTE);
+                from("direct:foo").streamCache("true").bean(MyBean.class).to(URI_END_OF_ROUTE);
             }
         };
     }

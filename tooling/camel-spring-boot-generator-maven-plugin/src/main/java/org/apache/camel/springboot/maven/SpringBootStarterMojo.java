@@ -28,6 +28,7 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
+import javax.inject.Inject;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -46,7 +47,6 @@ import org.apache.maven.artifact.Artifact;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -82,10 +82,10 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
     @Parameter(defaultValue = "${basedir}")
     protected File baseDir;
 
-    @Component
+    @Inject
     private ProjectDependenciesResolver projectDependenciesResolver;
 
-    @Component
+    @Inject
     private ProjectBuilder projectBuilder;
 
     @Override

@@ -132,7 +132,7 @@ public class JasyptEncryptedPropertiesUtils {
     static <T> T loadClass(String className) {
         try {
             final Class clazz = Thread.currentThread().getContextClassLoader().loadClass(className);
-            return (T) clazz.newInstance();
+            return (T) clazz.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             throw new EncryptionInitializationException(e);
         }

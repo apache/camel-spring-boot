@@ -51,7 +51,7 @@ public class KubernetesClusterServiceAutoConfiguration {
         Optional.ofNullable(configuration.getAttributes()).ifPresent(service::setAttributes);
         Optional.ofNullable(configuration.getClusterLabels()).ifPresent(service::setClusterLabels);
         Optional.ofNullable(configuration.getKubernetesNamespace()).ifPresent(service::setKubernetesNamespace);
-        Optional.ofNullable(configuration.getConfigMapName()).ifPresent(service::setConfigMapName);
+        Optional.ofNullable(configuration.getConfigMapName()).ifPresent(service::setKubernetesResourceName);
         Optional.ofNullable(configuration.getConnectionTimeoutMillis()).ifPresent(service::setConnectionTimeoutMillis);
         Optional.ofNullable(configuration.getJitterFactor()).ifPresent(service::setJitterFactor);
         Optional.ofNullable(configuration.getLeaseDurationMillis()).ifPresent(service::setLeaseDurationMillis);

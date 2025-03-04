@@ -81,7 +81,7 @@ public class FtpConsumerMaxMessagesPerPollTest extends BaseFtp {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from(getFtpUrl()).noAutoStartup().routeId("foo").to("mock:result");
+                    from(getFtpUrl()).autoStartup(false).routeId("foo").to("mock:result");
                 }
             };
         }
