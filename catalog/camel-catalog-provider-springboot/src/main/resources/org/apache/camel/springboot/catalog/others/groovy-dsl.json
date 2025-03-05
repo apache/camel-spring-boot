@@ -11,6 +11,6 @@
     "metadata": { "routes.language": "groovy" },
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-groovy-dsl-starter",
-    "version": "4.8.4-SNAPSHOT"
+    "version": "4.8.5-SNAPSHOT"
   }
 }
