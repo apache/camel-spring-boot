@@ -8,7 +8,7 @@
     "javaType": "org.apache.camel.component.google.calendar.transform.GoogleCalendarStreamCloudEventDataTypeTransformer",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-google-calendar-starter",
-    "version": "4.10.1-SNAPSHOT"
+    "version": "4.10.2-SNAPSHOT"
   }
 }
 

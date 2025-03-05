@@ -8,7 +8,7 @@
     "javaType": "org.apache.camel.component.azure.storage.queue.transform.AzureStorageQueueCloudEventDataTypeTransformer",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-azure-storage-queue-starter",
-    "version": "4.10.1-SNAPSHOT"
+    "version": "4.10.2-SNAPSHOT"
   }
 }
 
