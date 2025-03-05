@@ -1,0 +1,14 @@
+{
+  "other": {
+    "kind": "other",
+    "name": "observability-services",
+    "title": "Observability Services",
+    "description": "Camel Observability Services",
+    "deprecated": false,
+    "firstVersion": "4.9.0",
+    "supportLevel": "Preview",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-observability-services-starter",
+    "version": "4.11.0-SNAPSHOT"
+  }
+}
