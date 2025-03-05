@@ -94,8 +94,6 @@ public class SqlProducerUseMessageBodyForSqlTest extends BaseSql {
                 resultInsertEndpoint.getReceivedExchanges().get(0).getIn().getBody());
         assertEquals("insert into projects(id, project, license) values(:?id,:?project,:?lic)", origSql);
 
-        assertEquals(null, resultInsertEndpoint.getReceivedExchanges().get(0).getOut().getBody());
-
         // Clear and then use route2 to verify result of above insert select
         context.removeRoute(context.getRoutes().get(0).getId());
 

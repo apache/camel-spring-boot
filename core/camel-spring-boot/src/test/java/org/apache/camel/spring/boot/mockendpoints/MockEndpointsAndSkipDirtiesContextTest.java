@@ -20,6 +20,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.SpringRouteBuilder;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
@@ -51,7 +52,7 @@ public class MockEndpointsAndSkipDirtiesContextTest {
     private CamelContext context;
 
     @Configuration
-    public static class Config extends SpringRouteBuilder {
+    public static class Config extends RouteBuilder {
 
         @Override
         public void configure() throws Exception {

@@ -78,7 +78,7 @@ public class FileConsumerQuartzSchedulerRestartTest extends FromFileBase {
                 public void configure() {
                     from(fileUri(
                             "?scheduler=quartz&scheduler.cron=0/2+*+*+*+*+?&scheduler.triggerGroup=myGroup&scheduler.triggerId=myId"))
-                                    .routeId("foo").noAutoStartup().to("mock:result");
+                                    .routeId("foo").autoStartup(false).to("mock:result");
                 }
             };
         }

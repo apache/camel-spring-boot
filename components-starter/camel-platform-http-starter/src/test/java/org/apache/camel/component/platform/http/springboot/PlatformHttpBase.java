@@ -23,6 +23,7 @@ import org.awaitility.Awaitility;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpStatusCode;
 
 import java.util.concurrent.TimeUnit;
 
@@ -40,7 +41,7 @@ abstract class PlatformHttpBase {
     public void testGet() throws Exception {
         waitUntilRouteIsStarted(1, getGetRouteId());
 
-        Assertions.assertThat(restTemplate.getForEntity("/myget", String.class).getStatusCodeValue()).isEqualTo(200);
+        Assertions.assertThat(restTemplate.getForEntity("/myget", String.class).getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
     }
 
     @Test

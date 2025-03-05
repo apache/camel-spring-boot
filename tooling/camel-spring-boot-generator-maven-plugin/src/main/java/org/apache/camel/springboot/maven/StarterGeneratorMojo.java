@@ -24,15 +24,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.apache.commons.io.FileUtils;
-import org.apache.maven.artifact.factory.ArtifactFactory;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+import org.apache.maven.repository.RepositorySystem;
+
+import javax.inject.Inject;
 
 @Mojo(name = "generate-starter", threadSafe = true, defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
 public class StarterGeneratorMojo extends AbstractMojo {
@@ -40,8 +41,8 @@ public class StarterGeneratorMojo extends AbstractMojo {
     /**
      * Used to look up Artifacts in the remote repository.
      */
-    @Component
-    protected ArtifactFactory artifactFactory;
+    @Inject
+    protected RepositorySystem artifactFactory;
 
     /**
      * The maven project.

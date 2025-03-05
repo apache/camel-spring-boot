@@ -57,7 +57,7 @@ import java.util.concurrent.TimeUnit;
 class SqsOperationsTest extends BaseSqs {
 
     private static final String queueName = "Aws2SqsTest_queue_"
-            + RandomStringUtils.randomAlphanumeric(49).toLowerCase(Locale.ROOT);
+            + RandomStringUtils.secure().nextAlphanumeric(49).toLowerCase(Locale.ROOT);
 
     private static String queueUrl;
 

@@ -31,7 +31,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import java.io.File;
 
 /**
- * Unit tests for {@link AntPathMatcherGenericFileFilter}.
+ * Unit tests for {@link AntFilter}.
  */
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
@@ -60,8 +60,8 @@ public class AntPathMatcherGenericFileFilterTest extends BaseFile {
     @Configuration
     public class TestConfiguration {
         @Bean(value = "filter")
-        public GenericFileFilter filter() {
-            return new AntPathMatcherGenericFileFilter<File>("**/c*");
+        public AntFilter filter() {
+            return new AntFilter("**/c*");
         }
 
         @Bean

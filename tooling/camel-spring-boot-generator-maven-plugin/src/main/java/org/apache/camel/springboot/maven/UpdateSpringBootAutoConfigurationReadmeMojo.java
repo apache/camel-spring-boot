@@ -40,12 +40,13 @@ import org.apache.camel.util.json.Jsoner;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.build.BuildContext;
 import org.mvel2.templates.TemplateRuntime;
+
+import javax.inject.Inject;
 
 /**
  * For all the Camel components that has Spring Boot starter JAR, their documentation .adoc files in their component
@@ -70,7 +71,7 @@ public class UpdateSpringBootAutoConfigurationReadmeMojo extends AbstractMojo {
     /**
      * build context to check changed files and mark them for refresh (used for m2e compatibility)
      */
-    @Component
+    @Inject
     private BuildContext buildContext;
 
     @Override

@@ -99,7 +99,7 @@ public class SqlConsumerDynamicParameterTest extends BaseSql {
                 @Override
                 public void configure() throws Exception {
                     from("sql:select * from projects where id = :#${bean:myIdGenerator.nextId}?initialDelay=0&delay=50")
-                            .routeId("foo").noAutoStartup().to("mock:result");
+                            .routeId("foo").autoStartup(false).to("mock:result");
                 }
             };
         }

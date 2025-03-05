@@ -84,7 +84,7 @@ public class KameletConsumerUoWIssueTest {
                             }
                         }).to("kamelet:sink");
 
-                from("kamelet:tick").noAutoStartup().routeId("tick").to("mock:foo");
+                from("kamelet:tick").autoStartup(false).routeId("tick").to("mock:foo");
             }
         };
     }
