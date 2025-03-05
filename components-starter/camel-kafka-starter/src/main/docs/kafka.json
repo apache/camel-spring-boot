@@ -708,6 +708,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.kafka.use-iterator",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether sending to kafka should send the message body as a single record, or use a java.util.Iterator to send multiple records to kafka (if the message body can be iterated).",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.kafka.value-deserializer",
       "type": "java.lang.String",
       "description": "Deserializer class for value that implements the Deserializer interface.",
