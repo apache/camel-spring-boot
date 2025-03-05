@@ -41,3 +41,4 @@ org.apache.camel.spring.boot.vault.AzureVaultAutoConfiguration
 org.apache.camel.spring.boot.vault.HashicorpVaultAutoConfiguration
 org.apache.camel.spring.boot.vault.KubernetesVaultAutoConfiguration
 org.apache.camel.spring.boot.vault.KubernetesConfigMapVaultAutoConfiguration
+org.apache.camel.spring.boot.vault.IBMVaultAutoConfiguration
