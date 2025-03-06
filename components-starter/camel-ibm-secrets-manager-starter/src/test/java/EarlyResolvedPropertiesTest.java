@@ -104,7 +104,7 @@ public class EarlyResolvedPropertiesTest {
 
         DeleteSecretOptions.Builder deleteSecretOptionsBuilder = new DeleteSecretOptions.Builder();
         deleteSecretOptionsBuilder.id(secretId);
-        client.deleteSecret(deleteSecretOptionsBuilder.build());
+        client.deleteSecret(deleteSecretOptionsBuilder.build()).execute();
     }
 
     @Value("${early.resolved.property}")
