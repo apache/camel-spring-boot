@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.apache.camel.springboot</groupId>
     <artifactId>components-starter</artifactId>
-    <version>4.10.2-SNAPSHOT</version>
+    <version>4.10.3-SNAPSHOT</version>
   </parent>
   <artifactId>camel-langchain4j-tools-starter</artifactId>
   <packaging>jar</packaging>
