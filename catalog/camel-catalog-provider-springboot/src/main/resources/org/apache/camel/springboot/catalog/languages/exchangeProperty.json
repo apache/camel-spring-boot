@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-core-languages",
-    "version": "4.10.3-SNAPSHOT",
+    "version": "4.10.2",
     "modelName": "exchangeProperty",
     "modelJavaType": "org.apache.camel.model.language.ExchangePropertyExpression"
   },
