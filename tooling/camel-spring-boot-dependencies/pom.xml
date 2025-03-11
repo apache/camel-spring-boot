@@ -220,27 +220,27 @@
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-commons</artifactId>
-        <version>1.14.4</version>
+        <version>1.14.5</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-observation</artifactId>
-        <version>1.14.4</version>
+        <version>1.14.5</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-registry-jmx</artifactId>
-        <version>1.14.4</version>
+        <version>1.14.5</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-registry-prometheus</artifactId>
-        <version>1.14.4</version>
+        <version>1.14.5</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-tracing</artifactId>
-        <version>1.4.3</version>
+        <version>1.4.4</version>
       </dependency>
       <dependency>
         <groupId>net.bytebuddy</groupId>
@@ -1545,6 +1545,11 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-opentelemetry-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-opentelemetry2-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
