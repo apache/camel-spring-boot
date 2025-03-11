@@ -285,6 +285,13 @@
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {
+      "name": "camel.component.salesforce.initial-reply-id-timeout",
+      "type": "java.lang.Integer",
+      "description": "Timeout in seconds to validate when a custom pubSubReplayId has been configured, when starting the Camel Salesforce consumer.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": 30
+    },
+    {
       "name": "camel.component.salesforce.instance-id",
       "type": "java.lang.String",
       "description": "Salesforce1 Analytics report execution instance ID",
