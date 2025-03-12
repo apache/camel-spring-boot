@@ -40,8 +40,6 @@ public class CamelDevConsoleAutoConfiguration {
     @ConditionalOnClass(CamelContext.class)
     @ConditionalOnMissingBean
     public CamelDevConsoleEndpoint devConsoleEndpoint(CamelContext camelContext) {
-        // turn on dev console
-        camelContext.setDevConsole(true);
         return new CamelDevConsoleEndpoint(camelContext);
     }
 
