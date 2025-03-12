@@ -41,6 +41,9 @@ public class CamelDevConsoleEndpoint {
 
     @ReadOperation
     public JsonObject getConsoles() {
+        if (!camelContext.isDevConsole()) {
+            return null;
+        }
         DevConsoleRegistry dcr = camelContext.getCamelContextExtension().getContextPlugin(DevConsoleRegistry.class);
         if (dcr == null || !dcr.isEnabled()) {
             return null;
@@ -60,6 +63,9 @@ public class CamelDevConsoleEndpoint {
 
     @ReadOperation
     public JsonObject getConsoleById(@Selector String id) {
+        if (!camelContext.isDevConsole()) {
+            return null;
+        }
         DevConsoleRegistry dcr = camelContext.getCamelContextExtension().getContextPlugin(DevConsoleRegistry.class);
         if (dcr == null || !dcr.isEnabled()) {
             return null;
