@@ -54,7 +54,7 @@ public class BaseSns {
     }
 
     @AfterAll
-    private static void closeClient() {
+    public static void closeClient() throws Exception {
         service.close();
     }
 
