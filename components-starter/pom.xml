@@ -208,7 +208,6 @@
     <module>camel-ehcache-starter</module>
     <module>camel-elasticsearch-rest-client-starter</module>
     <module>camel-elasticsearch-starter</module>
-    <module>camel-etcd3-starter</module>
     <module>camel-exec-starter</module>
     <module>camel-fastjson-starter</module>
     <module>camel-fhir-starter</module>
