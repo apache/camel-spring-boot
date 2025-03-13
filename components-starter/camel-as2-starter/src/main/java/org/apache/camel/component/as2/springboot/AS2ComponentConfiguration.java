@@ -18,6 +18,7 @@ package org.apache.camel.component.as2.springboot;
 
 import org.apache.camel.component.as2.AS2Configuration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -74,6 +75,15 @@ public class AS2ComponentConfiguration
      * org.apache.camel.component.as2.AS2Configuration type.
      */
     private AS2Configuration configuration;
+    /**
+     * To configure security using SSLContextParameters. The option is a
+     * org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private SSLContextParameters sslContextParameters;
+    /**
+     * Enable usage of global SSL context parameters.
+     */
+    private Boolean useGlobalSslContextParameters = false;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -105,5 +115,23 @@ public class AS2ComponentConfiguration
 
     public void setConfiguration(AS2Configuration configuration) {
         this.configuration = configuration;
+    }
+
+    public SSLContextParameters getSslContextParameters() {
+        return sslContextParameters;
+    }
+
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
+        this.sslContextParameters = sslContextParameters;
+    }
+
+    public Boolean getUseGlobalSslContextParameters() {
+        return useGlobalSslContextParameters;
+    }
+
+    public void setUseGlobalSslContextParameters(
+            Boolean useGlobalSslContextParameters) {
+        this.useGlobalSslContextParameters = useGlobalSslContextParameters;
     }
 }
