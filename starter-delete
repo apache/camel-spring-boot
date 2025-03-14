@@ -20,4 +20,4 @@
 
 name=$1
 shift
-./mvnw --file tooling/camel-spring-boot-starter-generator org.apache.camel.springboot:camel-spring-boot-generator-maven-plugin:generate-starter -Daction=delete -Dname=$name $@
+./mvnw --file tooling/camel-spring-boot-starter-generator org.apache.camel.springboot:camel-spring-boot-generator-maven-plugin:generate-starter -Daction=delete -DcomponentName=$name $@
