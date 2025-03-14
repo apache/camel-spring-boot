@@ -48,7 +48,7 @@ import org.springframework.test.annotation.DirtiesContext;
 @EnableAutoConfiguration
 @SpringBootTest(classes = { CamelAutoConfigurationTest.TestConfig.class, CamelAutoConfigurationTest.class,
         RouteConfigWithCamelContextInjected.class }, properties = { "camel.springboot.consumerTemplateCacheSize=100",
-                "camel.springboot.jmxEnabled=true", "camel.springboot.name=customName",
+                "camel.springboot.jmxEnabled=true", "camel.main.name=customName",
                 "camel.springboot.typeConversion=true",
                 "camel.springboot.threadNamePattern=customThreadName #counter#" })
 public class CamelAutoConfigurationTest extends org.junit.jupiter.api.Assertions {
