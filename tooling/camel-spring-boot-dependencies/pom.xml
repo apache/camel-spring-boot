@@ -829,11 +829,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-etcd3-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-exec-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2867,11 +2862,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-endpointdsl-support</artifactId>
-        <version>4.11.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-etcd3</artifactId>
         <version>4.11.0-SNAPSHOT</version>
       </dependency>
       <dependency>
