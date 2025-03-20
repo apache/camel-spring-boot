@@ -19,7 +19,8 @@ package org.apache.camel.component.platform.http.springboot;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.platform.http.PlatformHttpComponent;
 import org.apache.camel.component.platform.http.spi.PlatformHttpEngine;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -36,33 +37,41 @@ import java.util.concurrent.Executor;
 @AutoConfigureAfter(name = { "org.apache.camel.component.servlet.springboot.PlatformHttpComponentAutoConfiguration",
         "org.apache.camel.component.servlet.springboot.PlatformHttpComponentConverter" })
 public class SpringBootPlatformHttpAutoConfiguration {
-
-    @Autowired
-    CamelContext camelContext;
-
-    @Autowired
-    List<Executor> executors;
+    private static final Logger LOG = LoggerFactory.getLogger(SpringBootPlatformHttpAutoConfiguration.class);
 
     @Bean(name = "platform-http-engine")
     @ConditionalOnMissingBean(PlatformHttpEngine.class)
-    public PlatformHttpEngine springBootPlatformHttpEngine(Environment env) {
+    public PlatformHttpEngine springBootPlatformHttpEngine(Environment env, List<Executor> executors) {
         Executor executor;
 
         if (executors != null && !executors.isEmpty()) {
+            executors.forEach(e -> LOG.debug("Analyzing executor: {}", e.getClass().getName()));
             executor = executors.stream()
-                    .filter(e -> e instanceof ThreadPoolTaskExecutor || e instanceof SimpleAsyncTaskExecutor)
-                    .findFirst()
-                    .orElseThrow(() -> new RuntimeException("No ThreadPoolTaskExecutor or SimpleAsyncTaskExecutor configured"));
+                    .filter(e -> {
+                        try {
+                            return Class.forName("org.springframework.security.task.DelegatingSecurityContextAsyncTaskExecutor").isInstance(e);
+                        } catch (ClassNotFoundException ex) {
+                            // No problem, spring-security is not configured
+                            return false;
+                        }
+                    }).findAny().orElseGet(() ->
+                            executors.stream()
+                                    .filter(e -> e instanceof ThreadPoolTaskExecutor || e instanceof SimpleAsyncTaskExecutor)
+                                    .findFirst()
+                                    .orElseThrow(() -> new RuntimeException("No ThreadPoolTaskExecutor, SimpleAsyncTaskExecutor or DelegatingSecurityContextAsyncTaskExecutor configured"))
+                    );
         } else {
             throw new RuntimeException("No Executor configured");
         }
+
+        LOG.debug("Using executor: {}", executor.getClass().getName());
         int port = Integer.parseInt(env.getProperty("server.port", "8080"));
         return new SpringBootPlatformHttpEngine(port, executor);
     }
 
     @Bean
     @DependsOn("configurePlatformHttpComponent")
-    public CamelRequestHandlerMapping platformHttpEngineRequestMapping(PlatformHttpEngine engine) {
+    public CamelRequestHandlerMapping platformHttpEngineRequestMapping(PlatformHttpEngine engine, CamelContext camelContext) {
         PlatformHttpComponent component = camelContext.getComponent("platform-http", PlatformHttpComponent.class);
         CamelRequestHandlerMapping answer = new CamelRequestHandlerMapping(component, engine);
         return answer;
