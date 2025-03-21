@@ -33,6 +33,8 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
 import org.junit.jupiter.api.Test;
 
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,7 +136,7 @@ public class ComplexTypesTest {
                 .collect(Collectors.joining("\n"));
         is.close();
 
-        assertEquals(expected, json);
+        JSONAssert.assertEquals(expected, json, JSONCompareMode.STRICT);
     }
 
     private BeanConfig getBeanConfig(String apiVersion) {
