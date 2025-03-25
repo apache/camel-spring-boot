@@ -361,6 +361,11 @@ public class SalesforceComponentConfiguration
      */
     private ReplayPreset replayPreset = ReplayPreset.LATEST;
     /**
+     * Timeout in seconds to validate when a custom pubSubReplayId has been
+     * configured, when starting the Camel Salesforce consumer.
+     */
+    private Integer initialReplyIdTimeout = 30;
+    /**
      * Composite API option to indicate to rollback all records if any are not
      * successful.
      */
@@ -1077,6 +1082,14 @@ public class SalesforceComponentConfiguration
 
     public void setReplayPreset(ReplayPreset replayPreset) {
         this.replayPreset = replayPreset;
+    }
+
+    public Integer getInitialReplyIdTimeout() {
+        return initialReplyIdTimeout;
+    }
+
+    public void setInitialReplyIdTimeout(Integer initialReplyIdTimeout) {
+        this.initialReplyIdTimeout = initialReplyIdTimeout;
     }
 
     public Boolean getAllOrNone() {

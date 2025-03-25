@@ -108,7 +108,7 @@
         <compiler.fork>false</compiler.fork>
 
         <!-- Spring-Boot target version -->
-        <spring-boot-version>3.4.3</spring-boot-version>
+        <spring-boot-version>3.4.4</spring-boot-version>
 
         <!-- Camel target version -->
         <camel-version>4.10.3-SNAPSHOT</camel-version>
@@ -131,7 +131,7 @@
         <swagger-parser-v3-version>2.1.10</swagger-parser-v3-version>
         <cyclonedx-maven-plugin-version>2.9.1</cyclonedx-maven-plugin-version>
         <wiremock-spring-boot-version>3.4.0</wiremock-spring-boot-version>
-        <spring-session-hazelcast-version>3.3.2</spring-session-hazelcast-version>
+        <spring-session-hazelcast-version>3.4.2</spring-session-hazelcast-version>
     </properties>
 
 
