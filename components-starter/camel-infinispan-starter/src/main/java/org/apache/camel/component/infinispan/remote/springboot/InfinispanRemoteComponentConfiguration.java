@@ -24,6 +24,7 @@ import org.apache.camel.component.infinispan.remote.InfinispanRemoteComponent;
 import org.apache.camel.component.infinispan.remote.InfinispanRemoteConfiguration;
 import org.apache.camel.component.infinispan.remote.InfinispanRemoteCustomListener;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.infinispan.api.annotations.indexing.option.VectorSimilarity;
 import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.infinispan.client.hotrod.configuration.Configuration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -120,6 +121,38 @@ public class InfinispanRemoteComponentConfiguration
      * java.lang.Object type.
      */
     private Object value;
+    /**
+     * The dimension size used to store vector embeddings. This should be equal
+     * to the dimension size of the model used to create the vector embeddings.
+     * This option is mandatory if the embedding store is enabled.
+     */
+    private Integer embeddingStoreDimension;
+    /**
+     * The distance to use for kNN search queries in relation to the configured
+     * vector similarity.
+     */
+    private Integer embeddingStoreDistance = 3;
+    /**
+     * Whether to enable the embedding store. When enabled, the embedding store
+     * will be configured automatically when Camel starts. Note that this
+     * feature requires camel-langchain4j-embeddings to be on the classpath.
+     */
+    private Boolean embeddingStoreEnabled = true;
+    /**
+     * Whether to automatically register the proto schema for the types required
+     * by embedding store cache put and query operations.
+     */
+    private Boolean embeddingStoreRegisterSchema = true;
+    /**
+     * The name of the type used to store embeddings. The default is
+     * 'InfinispanRemoteEmbedding' suffixed with the value of the
+     * embeddingStoreDimension option. E.g. CamelInfinispanRemoteEmbedding384.
+     */
+    private String embeddingStoreTypeName;
+    /**
+     * The vector similarity algorithm used to store embeddings.
+     */
+    private VectorSimilarity embeddingStoreVectorSimilarity = VectorSimilarity.COSINE;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -287,6 +320,56 @@ public class InfinispanRemoteComponentConfiguration
 
     public void setValue(Object value) {
         this.value = value;
+    }
+
+    public Integer getEmbeddingStoreDimension() {
+        return embeddingStoreDimension;
+    }
+
+    public void setEmbeddingStoreDimension(Integer embeddingStoreDimension) {
+        this.embeddingStoreDimension = embeddingStoreDimension;
+    }
+
+    public Integer getEmbeddingStoreDistance() {
+        return embeddingStoreDistance;
+    }
+
+    public void setEmbeddingStoreDistance(Integer embeddingStoreDistance) {
+        this.embeddingStoreDistance = embeddingStoreDistance;
+    }
+
+    public Boolean getEmbeddingStoreEnabled() {
+        return embeddingStoreEnabled;
+    }
+
+    public void setEmbeddingStoreEnabled(Boolean embeddingStoreEnabled) {
+        this.embeddingStoreEnabled = embeddingStoreEnabled;
+    }
+
+    public Boolean getEmbeddingStoreRegisterSchema() {
+        return embeddingStoreRegisterSchema;
+    }
+
+    public void setEmbeddingStoreRegisterSchema(
+            Boolean embeddingStoreRegisterSchema) {
+        this.embeddingStoreRegisterSchema = embeddingStoreRegisterSchema;
+    }
+
+    public String getEmbeddingStoreTypeName() {
+        return embeddingStoreTypeName;
+    }
+
+    public void setEmbeddingStoreTypeName(String embeddingStoreTypeName) {
+        this.embeddingStoreTypeName = embeddingStoreTypeName;
+    }
+
+    public VectorSimilarity getEmbeddingStoreVectorSimilarity() {
+        return embeddingStoreVectorSimilarity;
+    }
+
+    public void setEmbeddingStoreVectorSimilarity(
+            VectorSimilarity embeddingStoreVectorSimilarity) {
+        this.embeddingStoreVectorSimilarity = embeddingStoreVectorSimilarity;
     }
 
     public Boolean getAutowiredEnabled() {
