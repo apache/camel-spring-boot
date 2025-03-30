@@ -93,6 +93,46 @@
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
+      "name": "camel.component.infinispan.embedding-store-dimension",
+      "type": "java.lang.Integer",
+      "description": "The dimension size used to store vector embeddings. This should be equal to the dimension size of the model used to create the vector embeddings. This option is mandatory if the embedding store is enabled.",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration"
+    },
+    {
+      "name": "camel.component.infinispan.embedding-store-distance",
+      "type": "java.lang.Integer",
+      "description": "The distance to use for kNN search queries in relation to the configured vector similarity.",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration",
+      "defaultValue": 3
+    },
+    {
+      "name": "camel.component.infinispan.embedding-store-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable the embedding store. When enabled, the embedding store will be configured automatically when Camel starts. Note that this feature requires camel-langchain4j-embeddings to be on the classpath.",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.infinispan.embedding-store-register-schema",
+      "type": "java.lang.Boolean",
+      "description": "Whether to automatically register the proto schema for the types required by embedding store cache put and query operations.",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.infinispan.embedding-store-type-name",
+      "type": "java.lang.String",
+      "description": "The name of the type used to store embeddings. The default is 'InfinispanRemoteEmbedding' suffixed with the value of the embeddingStoreDimension option. E.g. CamelInfinispanRemoteEmbedding384.",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration"
+    },
+    {
+      "name": "camel.component.infinispan.embedding-store-vector-similarity",
+      "type": "org.infinispan.api.annotations.indexing.option.VectorSimilarity",
+      "description": "The vector similarity algorithm used to store embeddings.",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration",
+      "defaultValue": "cosine"
+    },
+    {
       "name": "camel.component.infinispan.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the infinispan component. This is enabled by default.",
