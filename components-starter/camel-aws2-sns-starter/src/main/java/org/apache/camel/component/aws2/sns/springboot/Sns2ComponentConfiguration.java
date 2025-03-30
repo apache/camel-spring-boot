@@ -43,6 +43,10 @@ public class Sns2ComponentConfiguration
      */
     private Boolean autoCreateTopic = false;
     /**
+     * Define if we are publishing a single message or a batch
+     */
+    private Boolean batchEnabled = false;
+    /**
      * Component configuration. The option is a
      * org.apache.camel.component.aws2.sns.Sns2Configuration type.
      */
@@ -203,6 +207,14 @@ public class Sns2ComponentConfiguration
 
     public void setAutoCreateTopic(Boolean autoCreateTopic) {
         this.autoCreateTopic = autoCreateTopic;
+    }
+
+    public Boolean getBatchEnabled() {
+        return batchEnabled;
+    }
+
+    public void setBatchEnabled(Boolean batchEnabled) {
+        this.batchEnabled = batchEnabled;
     }
 
     public Sns2Configuration getConfiguration() {

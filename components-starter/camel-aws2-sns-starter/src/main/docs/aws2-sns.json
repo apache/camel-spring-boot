@@ -40,6 +40,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.aws2-sns.batch-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Define if we are publishing a single message or a batch",
+      "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.aws2-sns.configuration",
       "type": "org.apache.camel.component.aws2.sns.Sns2Configuration",
       "description": "Component configuration. The option is a org.apache.camel.component.aws2.sns.Sns2Configuration type.",
