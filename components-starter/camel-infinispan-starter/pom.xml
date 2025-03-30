@@ -27,6 +27,17 @@
   <artifactId>camel-infinispan-starter</artifactId>
   <packaging>jar</packaging>
   <name>Camel SB Starters :: Infinispan</name>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.infinispan</groupId>
+        <artifactId>infinispan-bom</artifactId>
+        <version>${infinispan-version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
