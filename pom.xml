@@ -124,7 +124,7 @@
         <maven-compiler-plugin-version>3.14.0</maven-compiler-plugin-version>
         <maven.compiler.release>${jdk.version}</maven.compiler.release>
         <maven-javadoc-plugin-version>3.11.2</maven-javadoc-plugin-version>
-        <maven-surefire-plugin-version>3.5.2</maven-surefire-plugin-version>
+        <maven-surefire-plugin-version>3.5.3</maven-surefire-plugin-version>
         <mycila-license-version>4.6</mycila-license-version>
         <springdoc-version>2.2.0</springdoc-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
