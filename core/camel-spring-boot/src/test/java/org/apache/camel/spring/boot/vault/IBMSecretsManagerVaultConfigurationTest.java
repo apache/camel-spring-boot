@@ -30,7 +30,12 @@ import org.springframework.test.annotation.DirtiesContext;
 @EnableAutoConfiguration
 @SpringBootTest(classes = { IBMSecretsManagerVaultConfigurationTest.class }, properties = {
         "camel.vault.ibm.token=myToken",
-        "camel.vault.ibm.service-url=http://myHost" })
+        "camel.vault.ibm.service-url=http://myHost",
+"camel.vault.ibm.event-stream-bootstrap-servers=http://myServer",
+"camel.vault.ibm.event-stream-group-id=sec-group-id",
+"camel.vault.ibm.event-stream-topic=sec-topic",
+"camel.vault.ibm.event-stream-username=username",
+"camel.vault.ibm.event-stream-password=password"})
 public class IBMSecretsManagerVaultConfigurationTest {
 
     @Autowired
@@ -40,5 +45,11 @@ public class IBMSecretsManagerVaultConfigurationTest {
     public void testIBMSecretsManagerVault() throws Exception {
         Assertions.assertEquals("myToken", camelContext.getVaultConfiguration().ibmSecretsManager().getToken());
         Assertions.assertEquals("http://myHost", camelContext.getVaultConfiguration().ibmSecretsManager().getServiceUrl());
+        Assertions.assertEquals("http://myServer", camelContext.getVaultConfiguration().ibmSecretsManager().getEventStreamBootstrapServers());
+        Assertions.assertEquals("sec-topic", camelContext.getVaultConfiguration().ibmSecretsManager().getEventStreamTopic());
+        Assertions.assertEquals("sec-group-id", camelContext.getVaultConfiguration().ibmSecretsManager().getEventStreamGroupId());
+        Assertions.assertEquals("username", camelContext.getVaultConfiguration().ibmSecretsManager().getEventStreamUsername());
+        Assertions.assertEquals("password", camelContext.getVaultConfiguration().ibmSecretsManager().getEventStreamPassword());
+        Assertions.assertEquals(3000L, camelContext.getVaultConfiguration().ibmSecretsManager().getEventStreamConsumerPollTimeout());
     }
 }

@@ -35,6 +35,12 @@ public class IBMVaultAutoConfiguration {
         IBMSecretsManagerVaultConfiguration answer = new IBMSecretsManagerVaultConfiguration();
         answer.setToken(config.getToken());
         answer.setServiceUrl(config.getServiceUrl());
+        answer.setEventStreamTopic(config.getEventStreamTopic());
+        answer.setEventStreamBootstrapServers(config.getEventStreamBootstrapServers());
+        answer.setEventStreamUsername(config.getEventStreamUsername());
+        answer.setEventStreamPassword(config.getEventStreamPassword());
+        answer.setEventStreamGroupId(config.getEventStreamGroupId());
+        answer.setEventStreamConsumerPollTimeout(config.getEventStreamConsumerPollTimeout());
         return answer;
     }
 
