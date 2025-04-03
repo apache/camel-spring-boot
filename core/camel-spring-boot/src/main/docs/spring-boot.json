@@ -1932,6 +1932,43 @@
       "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
     },
     {
+      "name": "camel.vault.ibm.event-stream-bootstrap-servers",
+      "type": "java.lang.String",
+      "description": "Specify the Bootstrap servers for consuming notification on IBM Event Stream. Multiple servers can be separated by comma.",
+      "sourceType": "org.apache.camel.spring.boot.vault.IBMVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.ibm.event-stream-consumer-poll-timeout",
+      "type": "java.lang.Long",
+      "description": "Specify the Consumer Poll Timeout while consuming from IBM Event Stream Topic",
+      "sourceType": "org.apache.camel.spring.boot.vault.IBMVaultConfigurationProperties",
+      "defaultValue": 3000
+    },
+    {
+      "name": "camel.vault.ibm.event-stream-group-id",
+      "type": "java.lang.String",
+      "description": "Specify the Consumer Group ID to access IBM Event Stream",
+      "sourceType": "org.apache.camel.spring.boot.vault.IBMVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.ibm.event-stream-password",
+      "type": "java.lang.String",
+      "description": "Specify the password to access IBM Event Stream",
+      "sourceType": "org.apache.camel.spring.boot.vault.IBMVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.ibm.event-stream-topic",
+      "type": "java.lang.String",
+      "description": "Specify the topic name for consuming notification on IBM Event Stream",
+      "sourceType": "org.apache.camel.spring.boot.vault.IBMVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.ibm.event-stream-username",
+      "type": "java.lang.String",
+      "description": "Specify the username to access IBM Event Stream",
+      "sourceType": "org.apache.camel.spring.boot.vault.IBMVaultConfigurationProperties"
+    },
+    {
       "name": "camel.vault.ibm.service-url",
       "type": "java.lang.String",
       "description": "The IBM Secrets Manager Service URL",

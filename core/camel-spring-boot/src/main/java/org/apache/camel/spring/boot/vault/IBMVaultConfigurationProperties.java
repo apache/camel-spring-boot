@@ -16,6 +16,7 @@
  */
 package org.apache.camel.spring.boot.vault;
 
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.vault.ibm")
@@ -31,6 +32,37 @@ public class IBMVaultConfigurationProperties {
      */
     private String serviceUrl;
 
+    /**
+     * Specify the topic name for consuming notification on IBM Event Stream
+     */
+    private String eventStreamTopic;
+
+    /**
+     * Specify the Bootstrap servers for consuming notification on IBM Event Stream. Multiple servers can be separated
+     * by comma.
+     */
+    private String eventStreamBootstrapServers;
+
+    /**
+     * Specify the username to access IBM Event Stream
+     */
+    private String eventStreamUsername;
+
+    /**
+     * Specify the password to access IBM Event Stream
+     */
+    private String eventStreamPassword;
+
+    /**
+     * Specify the Consumer Group ID to access IBM Event Stream
+     */
+    private String eventStreamGroupId;
+
+    /**
+     * Specify the Consumer Poll Timeout while consuming from IBM Event Stream Topic
+     */
+    private long eventStreamConsumerPollTimeout = 3000;
+
     public String getToken() {
         return token;
     }
@@ -45,5 +77,53 @@ public class IBMVaultConfigurationProperties {
 
     public void setServiceUrl(String serviceUrl) {
         this.serviceUrl = serviceUrl;
+    }
+
+    public String getEventStreamTopic() {
+        return eventStreamTopic;
+    }
+
+    public void setEventStreamTopic(String eventStreamTopic) {
+        this.eventStreamTopic = eventStreamTopic;
+    }
+
+    public String getEventStreamBootstrapServers() {
+        return eventStreamBootstrapServers;
+    }
+
+    public void setEventStreamBootstrapServers(String eventStreamBootstrapServers) {
+        this.eventStreamBootstrapServers = eventStreamBootstrapServers;
+    }
+
+    public String getEventStreamUsername() {
+        return eventStreamUsername;
+    }
+
+    public void setEventStreamUsername(String eventStreamUsername) {
+        this.eventStreamUsername = eventStreamUsername;
+    }
+
+    public String getEventStreamPassword() {
+        return eventStreamPassword;
+    }
+
+    public void setEventStreamPassword(String eventStreamPassword) {
+        this.eventStreamPassword = eventStreamPassword;
+    }
+
+    public String getEventStreamGroupId() {
+        return eventStreamGroupId;
+    }
+
+    public void setEventStreamGroupId(String eventStreamGroupId) {
+        this.eventStreamGroupId = eventStreamGroupId;
+    }
+
+    public long getEventStreamConsumerPollTimeout() {
+        return eventStreamConsumerPollTimeout;
+    }
+
+    public void setEventStreamConsumerPollTimeout(long eventStreamConsumerPollTimeout) {
+        this.eventStreamConsumerPollTimeout = eventStreamConsumerPollTimeout;
     }
 }
