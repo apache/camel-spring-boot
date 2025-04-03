@@ -17,6 +17,8 @@
 package org.apache.camel.spring.boot.actuate.health;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
+
 import org.apache.camel.health.HealthCheck;
 import org.slf4j.Logger;
 
@@ -34,9 +36,12 @@ public final class CamelProbesHelper {
                 log.warn("Probe in group '{}', with id '{}' failed with message '{}'", result.getCheck().getGroup(),
                         result.getCheck().getId(), result.getMessage().orElse(""));
                 result.getError().ifPresent(error -> log.warn(error.getMessage(), error));
+                log.debug("Probe in group '{}', with id '{}' failed with message '{}' details: \n {}", result.getCheck().getGroup(),
+                        result.getMessage().orElse(""), result.getCheck().getId(), result.getDetails().entrySet().stream()
+                                .map(x -> x.getKey() + ": " + x.getValue())
+                                .collect(Collectors.joining("\n")));
             }
         }
-
         return isUp;
     }
 }
