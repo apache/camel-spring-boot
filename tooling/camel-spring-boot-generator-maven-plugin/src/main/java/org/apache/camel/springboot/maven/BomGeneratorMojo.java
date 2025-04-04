@@ -230,7 +230,7 @@ public class BomGeneratorMojo extends AbstractMojo {
         dep = new Dependency();
         dep.setGroupId("org.apache.camel.springboot");
         dep.setArtifactId("camel-yaml-io-starter");
-        dep.setVersion(project.getVersion());
+        dep.setVersion(productizedArtifacts.containsKey("camel-yaml-io-starter") ? "${project.version}" : camelCommunityVersion);
         outDependencies.add(dep);
         dep = new Dependency();
         dep.setGroupId("org.apache.camel.springboot");
