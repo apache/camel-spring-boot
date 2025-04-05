@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.platform.http.springboot;
 
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -306,16 +307,16 @@ public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
         camelContext.getStreamCachingStrategy().setSpoolEnabled(true);
 
         Path input = createLargeFile();
-        Path output = Files.createTempFile("platform-http-output", "dat");
+        Path output = Files.createTempFile(Path.of("target"), "platform-http-output", "dat");
 
         InputStream response = given()
                 .body(new FileInputStream(input.toFile()))
-                .post("/streaming")
+                .post("/streamingWithLargeRequestAndResponseBody")
                 .then()
                 .extract()
                 .asInputStream();
 
-        try (FileOutputStream fos = new FileOutputStream(output.toFile())) {
+        try (BufferedOutputStream fos = new BufferedOutputStream(new FileOutputStream(output.toFile())); response) {
             IOHelper.copy(response, fos);
         }
 
@@ -324,7 +325,7 @@ public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
 
     private Path createLargeFile() throws IOException {
         // Create a 4GB file containing random data
-        Path path = Files.createTempFile("platform-http-input", "dat");
+        Path path = Files.createTempFile(Path.of("target"), "platform-http-input", "dat");
         try (FileOutputStream fos = new FileOutputStream(path.toFile())) {
             Random random = new Random();
             long targetFileSize = (long) (4 * Math.pow(1024, 3));
