@@ -2,6 +2,7 @@ target
 *.iml
 *.ipr
 *.iws
+build.metadata
 .idea
 .DS_Store
 .classpath
