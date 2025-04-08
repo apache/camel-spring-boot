@@ -1590,6 +1590,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-spring-cloud-config-starter</artifactId>
+        <version>4.12.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-jdbc-starter</artifactId>
         <version>4.12.0-SNAPSHOT</version>
       </dependency>
