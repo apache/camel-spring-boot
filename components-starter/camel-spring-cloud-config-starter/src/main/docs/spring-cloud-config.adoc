@@ -1,0 +1,10 @@
+= Spring Cloud Config
+//Manually maintained attributes
+:artifactid: camel-spring-cloud-config
+:shortname: spring-cloud-config
+:camel-spring-boot-name: spring-cloud-config
+
+The Spring Cloud Config component provides integration between Apache Camel and Spring Cloud Config,
+allowing applications to retrieve configuration properties from a centralized Spring Cloud Config Server.
+This component includes a Properties Function implementation that allows Apache Camel to resolve property placeholders
+directly from Spring Cloud Config.
