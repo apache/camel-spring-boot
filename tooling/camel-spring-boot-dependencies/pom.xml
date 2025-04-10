@@ -1129,6 +1129,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-jandex-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jasypt-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -3197,6 +3202,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-jacksonxml</artifactId>
+        <version>4.12.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-jandex</artifactId>
         <version>4.12.0-SNAPSHOT</version>
       </dependency>
       <dependency>
