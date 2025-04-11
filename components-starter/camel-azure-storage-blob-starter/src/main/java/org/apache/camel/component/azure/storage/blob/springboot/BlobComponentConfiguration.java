@@ -89,6 +89,17 @@ public class BlobComponentConfiguration
      */
     private String fileDir;
     /**
+     * Sets whether a lease should be acquired when accessing the blob. When set
+     * to true, the component will acquire a lease before performing blob
+     * operations that require exclusive access.
+     */
+    private Boolean leaseBlob = false;
+    /**
+     * Sets the lease duration in seconds. Use -1 for infinite or a value
+     * between 15 and 60 for fixed leases.
+     */
+    private Integer leaseDurationInSeconds = 60;
+    /**
      * Specifies the maximum number of blobs to return, including all BlobPrefix
      * elements. If the request does not specify maxResultsPerPage or specifies
      * a value greater than 5,000, the server will return up to 5,000 items.
@@ -321,6 +332,22 @@ public class BlobComponentConfiguration
 
     public void setFileDir(String fileDir) {
         this.fileDir = fileDir;
+    }
+
+    public Boolean getLeaseBlob() {
+        return leaseBlob;
+    }
+
+    public void setLeaseBlob(Boolean leaseBlob) {
+        this.leaseBlob = leaseBlob;
+    }
+
+    public Integer getLeaseDurationInSeconds() {
+        return leaseDurationInSeconds;
+    }
+
+    public void setLeaseDurationInSeconds(Integer leaseDurationInSeconds) {
+        this.leaseDurationInSeconds = leaseDurationInSeconds;
     }
 
     public Integer getMaxResultsPerPage() {

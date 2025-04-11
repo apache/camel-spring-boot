@@ -190,6 +190,20 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.azure-storage-blob.lease-blob",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether a lease should be acquired when accessing the blob. When set to true, the component will acquire a lease before performing blob operations that require exclusive access.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.azure-storage-blob.lease-duration-in-seconds",
+      "type": "java.lang.Integer",
+      "description": "Sets the lease duration in seconds. Use -1 for infinite or a value between 15 and 60 for fixed leases.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": 60
+    },
+    {
       "name": "camel.component.azure-storage-blob.max-results-per-page",
       "type": "java.lang.Integer",
       "description": "Specifies the maximum number of blobs to return, including all BlobPrefix elements. If the request does not specify maxResultsPerPage or specifies a value greater than 5,000, the server will return up to 5,000 items.",
