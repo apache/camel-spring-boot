@@ -1,0 +1,85 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.weaviate",
+      "type": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration",
+      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.weaviate.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.weaviate.api-key",
+      "type": "java.lang.String",
+      "description": "API Key to authenticate to weaviate with",
+      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.weaviate.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.weaviate.configuration",
+      "type": "org.apache.camel.component.weaviate.WeaviateVectorDbConfiguration",
+      "description": "The configuration;. The option is a org.apache.camel.component.weaviate.WeaviateVectorDbConfiguration type.",
+      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.weaviate.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.weaviate.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the weaviate component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.weaviate.host",
+      "type": "java.lang.String",
+      "description": "Weaviate server host to connect to",
+      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.weaviate.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.weaviate.proxy-host",
+      "type": "java.lang.String",
+      "description": "Proxy host to connect to weaviate through",
+      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.weaviate.proxy-port",
+      "type": "java.lang.Integer",
+      "description": "Proxy port to connect to weaviate through",
+      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.weaviate.proxy-scheme",
+      "type": "java.lang.String",
+      "description": "Proxy scheme to connect to weaviate through",
+      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.weaviate.scheme",
+      "type": "java.lang.String",
+      "description": "Scheme used to connect to weaviate",
+      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration"
+    }
+  ],
+  "hints": []
+}
