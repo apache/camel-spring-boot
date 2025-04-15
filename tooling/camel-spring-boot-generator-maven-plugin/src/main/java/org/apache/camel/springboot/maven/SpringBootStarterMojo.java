@@ -117,9 +117,10 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
 
     private void fixAdditionalDependencies(Document pom) throws Exception {
         Properties properties = new Properties();
-        InputStream is = getClass().getResourceAsStream("/spring-boot-fix-dependencies.properties");
-        properties.load(is);
-        is.close();
+        try (InputStream is = getClass().getResourceAsStream("/spring-boot-fix-dependencies.properties")) {
+            properties.load(is);
+            is.close();
+        }
 
         Set<String> deps = new TreeSet<>(csvToSet(properties.getProperty(getMainDepArtifactId())));
 
@@ -236,9 +237,10 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
         // excluded dependencies
         Set<String> configExclusions = new HashSet<>();
         Properties properties = new Properties();
-        InputStream is = getClass().getResourceAsStream("/spring-boot-fix-dependencies.properties");
-        properties.load(is);
-        is.close();
+        try (InputStream is = getClass().getResourceAsStream("/spring-boot-fix-dependencies.properties")) {
+            properties.load(is);
+            is.close();
+        }
 
         String artExcl = properties.getProperty("exclude_" + getMainDepArtifactId());
         getLog().debug("Configured exclusions: " + artExcl);

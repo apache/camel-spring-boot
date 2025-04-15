@@ -1926,8 +1926,8 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             }
         } else {
             // create new file
-            try {
-                InputStream is = getClass().getClassLoader().getResourceAsStream("license-header.txt");
+            try (InputStream is = getClass().getClassLoader().getResourceAsStream("license-header.txt")) {
+                ;
                 String header = PackageHelper.loadText(is);
                 String code = lineToAdd;
                 // add empty new line after header
