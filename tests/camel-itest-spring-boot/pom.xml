@@ -38,7 +38,6 @@
         <shrinkwrap-plexus-version>3.2.1</shrinkwrap-plexus-version>
     </properties>
 
-
     <dependencies>
 
         <dependency>
