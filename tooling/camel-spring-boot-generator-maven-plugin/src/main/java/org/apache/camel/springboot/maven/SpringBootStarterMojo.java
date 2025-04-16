@@ -119,7 +119,6 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
         Properties properties = new Properties();
         try (InputStream is = getClass().getResourceAsStream("/spring-boot-fix-dependencies.properties")) {
             properties.load(is);
-            is.close();
         }
 
         Set<String> deps = new TreeSet<>(csvToSet(properties.getProperty(getMainDepArtifactId())));
@@ -239,7 +238,6 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
         Properties properties = new Properties();
         try (InputStream is = getClass().getResourceAsStream("/spring-boot-fix-dependencies.properties")) {
             properties.load(is);
-            is.close();
         }
 
         String artExcl = properties.getProperty("exclude_" + getMainDepArtifactId());
