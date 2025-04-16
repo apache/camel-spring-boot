@@ -67,17 +67,17 @@
             <artifactId>#{module}-starter</artifactId>
         </dependency>
 
-	 <!-- Required by the integration tests to run in Junit5 -->
+	    <!-- Required by the integration tests to run in Junit5 -->
         <dependency>
-        	<groupId>org.junit.jupiter</groupId>
-        	<artifactId>junit-jupiter</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
         <!--  Required for UnitTestCommand -->
         <dependency>
-        	<groupId>org.junit.platform</groupId>
-        	<artifactId>junit-platform-launcher</artifactId>
-             <scope>test</scope>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <!-- DEPENDENCIES -->

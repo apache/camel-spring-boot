@@ -37,6 +37,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.apache.camel.itest.springboot.ITestConfig;
 import org.apache.camel.itest.springboot.ITestConfigBuilder;
@@ -216,9 +217,15 @@ public final class ArquillianPackager {
         }
 
         // Remove duplicates between test and runtime dependencies
+        Set<MavenResolvedArtifact> jUnitDependenciesDuplicates =
+                getJUnitDependenciesDuplicates(runtimeDependencies, testProvidedDependenciesPom);
+
         runtimeDependencies.addAll(testProvidedDependenciesPom);
         List<MavenResolvedArtifact> dependencyArtifacts = new LinkedList<>(runtimeDependencies);
         lookForVersionMismatch(config, dependencyArtifacts);
+
+        // Remove duplicates after the version mismatch analysis
+        dependencyArtifacts.removeAll(jUnitDependenciesDuplicates);
 
         List<File> dependencies = new LinkedList<>();
         for (MavenResolvedArtifact a : dependencyArtifacts) {
@@ -273,6 +280,42 @@ public final class ArquillianPackager {
         }
 
         return external.build();
+    }
+
+    /**
+     * In case Camel and Camel Spring Boot declare different JUnit versions, use the Spring Boot one to prevent issues
+     *
+     * @param runtimeDependencies
+     * @param testProvidedDependencies
+     * @return
+     */
+    private static Set<MavenResolvedArtifact> getJUnitDependenciesDuplicates(Set<MavenResolvedArtifact> runtimeDependencies, Set<MavenResolvedArtifact> testProvidedDependencies) {
+        Set<MavenResolvedArtifact> junitRuntimeDependencies =
+                runtimeDependencies.stream()
+                        .filter(d -> d.getCoordinate().getArtifactId().startsWith("junit"))
+                        .collect(Collectors.toSet());
+
+        // For each JUnit runtime (Spring Boot) dependency, find test dependencies with same artifactId and groupId but different version
+        return junitRuntimeDependencies.stream()
+                .flatMap(junitDep -> testProvidedDependencies.stream()
+                        .filter(testDep -> isSameArtifactWithDifferentVersion(junitDep, testDep)))
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Checks if two artifacts have the same artifactId and groupId but different versions.
+     *
+     * @param artifact1 First artifact to compare
+     * @param artifact2 Second artifact to compare
+     * @return true if artifacts have same artifactId and groupId but different versions
+     */
+    private static boolean isSameArtifactWithDifferentVersion(
+            MavenResolvedArtifact artifact1,
+            MavenResolvedArtifact artifact2) {
+
+        return artifact1.getCoordinate().getArtifactId().equals(artifact2.getCoordinate().getArtifactId()) &&
+                artifact1.getCoordinate().getGroupId().equals(artifact2.getCoordinate().getGroupId()) &&
+                !artifact1.getCoordinate().getVersion().equals(artifact2.getCoordinate().getVersion());
     }
 
     private static void lookForVersionMismatch(ITestConfig config, List<MavenResolvedArtifact> dependencyArtifacts) {
