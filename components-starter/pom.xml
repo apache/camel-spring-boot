@@ -363,6 +363,7 @@
     <module>camel-pinecone-starter</module>
     <module>camel-platform-http-starter</module>
     <module>camel-plc4x-starter</module>
+    <module>camel-pqc-starter</module>
     <module>camel-printer-starter</module>
     <module>camel-protobuf-starter</module>
     <module>camel-pubnub-starter</module>
