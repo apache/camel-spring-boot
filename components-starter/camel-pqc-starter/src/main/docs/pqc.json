@@ -52,6 +52,18 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.pqc.key-encapsulation-algorithm",
+      "type": "java.lang.String",
+      "description": "In case there is no keyGenerator, we specify an algorithm to build the KeyGenerator",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration"
+    },
+    {
+      "name": "camel.component.pqc.key-generator",
+      "type": "javax.crypto.KeyGenerator",
+      "description": "The Key Generator to be used in encapsulation and extraction. The option is a javax.crypto.KeyGenerator type.",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration"
+    },
+    {
       "name": "camel.component.pqc.key-pair",
       "type": "java.security.KeyPair",
       "description": "The KeyPair to be used. The option is a java.security.KeyPair type.",
@@ -81,6 +93,19 @@
       "type": "java.security.Signature",
       "description": "The Signer to be used. The option is a java.security.Signature type.",
       "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration"
+    },
+    {
+      "name": "camel.component.pqc.symmetric-key-algorithm",
+      "type": "java.lang.String",
+      "description": "In case we are using KEM operations, we need a Symmetric algorithm to be defined for the flow to work.",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration"
+    },
+    {
+      "name": "camel.component.pqc.symmetric-key-length",
+      "type": "java.lang.Integer",
+      "description": "The required length of the symmetric key used",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration",
+      "defaultValue": 128
     }
   ],
   "hints": []

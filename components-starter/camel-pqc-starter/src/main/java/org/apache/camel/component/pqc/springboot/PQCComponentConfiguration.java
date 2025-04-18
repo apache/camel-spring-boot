@@ -18,6 +18,7 @@ package org.apache.camel.component.pqc.springboot;
 
 import java.security.KeyPair;
 import java.security.Signature;
+import javax.crypto.KeyGenerator;
 import org.apache.camel.component.pqc.PQCConfiguration;
 import org.apache.camel.component.pqc.PQCOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -68,6 +69,16 @@ public class PQCComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * In case there is no keyGenerator, we specify an algorithm to build the
+     * KeyGenerator
+     */
+    private String keyEncapsulationAlgorithm;
+    /**
+     * The Key Generator to be used in encapsulation and extraction. The option
+     * is a javax.crypto.KeyGenerator type.
+     */
+    private KeyGenerator keyGenerator;
+    /**
      * The KeyPair to be used. The option is a java.security.KeyPair type.
      */
     private KeyPair keyPair;
@@ -80,6 +91,15 @@ public class PQCComponentConfiguration
      * The Signer to be used. The option is a java.security.Signature type.
      */
     private Signature signer;
+    /**
+     * In case we are using KEM operations, we need a Symmetric algorithm to be
+     * defined for the flow to work.
+     */
+    private String symmetricKeyAlgorithm;
+    /**
+     * The required length of the symmetric key used
+     */
+    private Integer symmetricKeyLength = 128;
     /**
      * Used for enabling or disabling all consumer based health checks from this
      * component
@@ -125,6 +145,22 @@ public class PQCComponentConfiguration
         this.autowiredEnabled = autowiredEnabled;
     }
 
+    public String getKeyEncapsulationAlgorithm() {
+        return keyEncapsulationAlgorithm;
+    }
+
+    public void setKeyEncapsulationAlgorithm(String keyEncapsulationAlgorithm) {
+        this.keyEncapsulationAlgorithm = keyEncapsulationAlgorithm;
+    }
+
+    public KeyGenerator getKeyGenerator() {
+        return keyGenerator;
+    }
+
+    public void setKeyGenerator(KeyGenerator keyGenerator) {
+        this.keyGenerator = keyGenerator;
+    }
+
     public KeyPair getKeyPair() {
         return keyPair;
     }
@@ -147,6 +183,22 @@ public class PQCComponentConfiguration
 
     public void setSigner(Signature signer) {
         this.signer = signer;
+    }
+
+    public String getSymmetricKeyAlgorithm() {
+        return symmetricKeyAlgorithm;
+    }
+
+    public void setSymmetricKeyAlgorithm(String symmetricKeyAlgorithm) {
+        this.symmetricKeyAlgorithm = symmetricKeyAlgorithm;
+    }
+
+    public Integer getSymmetricKeyLength() {
+        return symmetricKeyLength;
+    }
+
+    public void setSymmetricKeyLength(Integer symmetricKeyLength) {
+        this.symmetricKeyLength = symmetricKeyLength;
     }
 
     public Boolean getHealthCheckConsumerEnabled() {
