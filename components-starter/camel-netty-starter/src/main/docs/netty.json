@@ -408,6 +408,13 @@
       "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration"
     },
     {
+      "name": "camel.component.netty.shutdown-timeout",
+      "type": "java.lang.Integer",
+      "description": "Shutdown await timeout in milliseconds",
+      "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration",
+      "defaultValue": 100
+    },
+    {
       "name": "camel.component.netty.ssl",
       "type": "java.lang.Boolean",
       "description": "Setting to specify whether SSL encryption is applied to this endpoint",

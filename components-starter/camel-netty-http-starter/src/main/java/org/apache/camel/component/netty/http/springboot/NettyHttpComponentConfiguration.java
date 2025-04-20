@@ -346,6 +346,10 @@ public class NettyHttpComponentConfiguration
      */
     private Integer sendBufferSize = 65536;
     /**
+     * Shutdown await timeout in milliseconds
+     */
+    private Integer shutdownTimeout = 100;
+    /**
      * Only used for TCP. You can transfer the exchange over the wire instead of
      * just the body. The following fields are transferred: In body, Out body,
      * fault body, In headers, Out headers, fault headers, exchange properties,
@@ -825,6 +829,14 @@ public class NettyHttpComponentConfiguration
 
     public void setSendBufferSize(Integer sendBufferSize) {
         this.sendBufferSize = sendBufferSize;
+    }
+
+    public Integer getShutdownTimeout() {
+        return shutdownTimeout;
+    }
+
+    public void setShutdownTimeout(Integer shutdownTimeout) {
+        this.shutdownTimeout = shutdownTimeout;
     }
 
     public Boolean getTransferExchange() {
