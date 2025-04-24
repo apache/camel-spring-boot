@@ -8,7 +8,7 @@
     "javaType": "org.apache.camel.component.cloudevents.transformer.CloudEventHttpDataTypeTransformer",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-cloudevents-starter",
-    "version": "4.8.6-SNAPSHOT"
+    "version": "4.8.7-SNAPSHOT"
   }
 }
 
