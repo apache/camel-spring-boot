@@ -12,7 +12,7 @@
     "metadata": { "protocol": "http" },
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-spring-ws-starter",
-    "version": "4.8.6-SNAPSHOT",
+    "version": "4.8.7-SNAPSHOT",
     "scheme": "spring-ws",
     "extendsScheme": "",
     "syntax": "spring-ws:type:lookupKey:webServiceEndpointUri",
