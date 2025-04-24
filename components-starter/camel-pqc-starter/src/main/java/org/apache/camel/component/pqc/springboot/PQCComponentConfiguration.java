@@ -92,6 +92,11 @@ public class PQCComponentConfiguration
      */
     private Signature signer;
     /**
+     * In the context of extractSecretKeyFromEncapsulation operation, this
+     * option define if we want to have the key set as header
+     */
+    private Boolean storeExtractedSecretKeyAsHeader = false;
+    /**
      * In case we are using KEM operations, we need a Symmetric algorithm to be
      * defined for the flow to work.
      */
@@ -183,6 +188,15 @@ public class PQCComponentConfiguration
 
     public void setSigner(Signature signer) {
         this.signer = signer;
+    }
+
+    public Boolean getStoreExtractedSecretKeyAsHeader() {
+        return storeExtractedSecretKeyAsHeader;
+    }
+
+    public void setStoreExtractedSecretKeyAsHeader(
+            Boolean storeExtractedSecretKeyAsHeader) {
+        this.storeExtractedSecretKeyAsHeader = storeExtractedSecretKeyAsHeader;
     }
 
     public String getSymmetricKeyAlgorithm() {

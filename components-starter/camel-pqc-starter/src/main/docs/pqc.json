@@ -95,6 +95,13 @@
       "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration"
     },
     {
+      "name": "camel.component.pqc.store-extracted-secret-key-as-header",
+      "type": "java.lang.Boolean",
+      "description": "In the context of extractSecretKeyFromEncapsulation operation, this option define if we want to have the key set as header",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.pqc.symmetric-key-algorithm",
       "type": "java.lang.String",
       "description": "In case we are using KEM operations, we need a Symmetric algorithm to be defined for the flow to work.",
