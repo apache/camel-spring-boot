@@ -549,6 +549,12 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private Long streamingDelayMs = 0L;
     /**
+     * Specifies the maximum number of rows that should be read in one go from
+     * each table while streaming. The connector will read the table contents in
+     * multiple batches of this size. Defaults to 0 which means no limit.
+     */
+    private Integer streamingFetchSize = 0;
+    /**
      * A comma-separated list of regular expressions that match the
      * fully-qualified names of tables to be excluded from monitoring
      */
@@ -1251,6 +1257,14 @@ public class DebeziumSqlserverComponentConfiguration
 
     public void setStreamingDelayMs(Long streamingDelayMs) {
         this.streamingDelayMs = streamingDelayMs;
+    }
+
+    public Integer getStreamingFetchSize() {
+        return streamingFetchSize;
+    }
+
+    public void setStreamingFetchSize(Integer streamingFetchSize) {
+        this.streamingFetchSize = streamingFetchSize;
     }
 
     public String getTableExcludeList() {

@@ -549,6 +549,13 @@
       "defaultValue": 0
     },
     {
+      "name": "camel.component.debezium-sqlserver.streaming-fetch-size",
+      "type": "java.lang.Integer",
+      "description": "Specifies the maximum number of rows that should be read in one go from each table while streaming. The connector will read the table contents in multiple batches of this size. Defaults to 0 which means no limit.",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
       "name": "camel.component.debezium-sqlserver.table-exclude-list",
       "type": "java.lang.String",
       "description": "A comma-separated list of regular expressions that match the fully-qualified names of tables to be excluded from monitoring",
