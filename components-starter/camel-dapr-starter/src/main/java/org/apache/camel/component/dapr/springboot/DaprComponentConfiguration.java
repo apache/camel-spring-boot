@@ -17,7 +17,11 @@
 package org.apache.camel.component.dapr.springboot;
 
 import io.dapr.client.domain.HttpExtension;
+import io.dapr.client.domain.StateOptions.Concurrency;
+import io.dapr.client.domain.StateOptions.Consistency;
+import org.apache.camel.component.dapr.DaprComponent;
 import org.apache.camel.component.dapr.DaprConfiguration;
+import org.apache.camel.component.dapr.StateOperation;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -37,10 +41,23 @@ public class DaprComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Concurrency mode to use with state operations
+     */
+    private Concurrency concurrency;
+    /**
      * The component configurations. The option is a
      * org.apache.camel.component.dapr.DaprConfiguration type.
      */
     private DaprConfiguration configuration;
+    /**
+     * Consistency level to use with state operations
+     */
+    private Consistency consistency;
+    /**
+     * The eTag for optimistic concurrency during state save or delete
+     * operations
+     */
+    private String eTag;
     /**
      * HTTP method to use when invoking the service. Accepts verbs like GET,
      * POST, PUT, DELETE, etc. Creates a minimal HttpExtension with no headers
@@ -48,6 +65,11 @@ public class DaprComponentConfiguration
      * io.dapr.client.domain.HttpExtension type.
      */
     private HttpExtension httpExtension;
+    /**
+     * The key used to identify the state object within the specified state
+     * store
+     */
+    private String key;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -69,6 +91,16 @@ public class DaprComponentConfiguration
      */
     private String serviceToInvoke;
     /**
+     * The state operation to perform on the state store. Required for
+     * DaprOperation.state operation
+     */
+    private StateOperation stateOperation = StateOperation.get;
+    /**
+     * The name of the Dapr state store to interact with, defined in
+     * statestore.yaml config
+     */
+    private String stateStore;
+    /**
      * The HTTP verb to use for invoking the method
      */
     private String verb = "POST";
@@ -82,6 +114,14 @@ public class DaprComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
 
+    public Concurrency getConcurrency() {
+        return concurrency;
+    }
+
+    public void setConcurrency(Concurrency concurrency) {
+        this.concurrency = concurrency;
+    }
+
     public DaprConfiguration getConfiguration() {
         return configuration;
     }
@@ -90,12 +130,36 @@ public class DaprComponentConfiguration
         this.configuration = configuration;
     }
 
+    public Consistency getConsistency() {
+        return consistency;
+    }
+
+    public void setConsistency(Consistency consistency) {
+        this.consistency = consistency;
+    }
+
+    public String getETag() {
+        return eTag;
+    }
+
+    public void setETag(String eTag) {
+        this.eTag = eTag;
+    }
+
     public HttpExtension getHttpExtension() {
         return httpExtension;
     }
 
     public void setHttpExtension(HttpExtension httpExtension) {
         this.httpExtension = httpExtension;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public Boolean getLazyStartProducer() {
@@ -120,6 +184,22 @@ public class DaprComponentConfiguration
 
     public void setServiceToInvoke(String serviceToInvoke) {
         this.serviceToInvoke = serviceToInvoke;
+    }
+
+    public StateOperation getStateOperation() {
+        return stateOperation;
+    }
+
+    public void setStateOperation(StateOperation stateOperation) {
+        this.stateOperation = stateOperation;
+    }
+
+    public String getStateStore() {
+        return stateStore;
+    }
+
+    public void setStateStore(String stateStore) {
+        this.stateStore = stateStore;
     }
 
     public String getVerb() {

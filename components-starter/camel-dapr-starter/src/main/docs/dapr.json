@@ -21,15 +21,33 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.dapr.concurrency",
+      "type": "io.dapr.client.domain.StateOptions$Concurrency",
+      "description": "Concurrency mode to use with state operations",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
       "name": "camel.component.dapr.configuration",
       "type": "org.apache.camel.component.dapr.DaprConfiguration",
       "description": "The component configurations. The option is a org.apache.camel.component.dapr.DaprConfiguration type.",
       "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
     },
     {
+      "name": "camel.component.dapr.consistency",
+      "type": "io.dapr.client.domain.StateOptions$Consistency",
+      "description": "Consistency level to use with state operations",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
       "name": "camel.component.dapr.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.dapr.e-tag",
+      "type": "java.lang.String",
+      "description": "The eTag for optimistic concurrency during state save or delete operations",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
     },
     {
       "name": "camel.component.dapr.enabled",
@@ -41,6 +59,12 @@
       "name": "camel.component.dapr.http-extension",
       "type": "io.dapr.client.domain.HttpExtension",
       "description": "HTTP method to use when invoking the service. Accepts verbs like GET, POST, PUT, DELETE, etc. Creates a minimal HttpExtension with no headers or query params. Takes precedence over verb. The option is a io.dapr.client.domain.HttpExtension type.",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
+      "name": "camel.component.dapr.key",
+      "type": "java.lang.String",
+      "description": "The key used to identify the state object within the specified state store",
       "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
     },
     {
@@ -60,6 +84,19 @@
       "name": "camel.component.dapr.service-to-invoke",
       "type": "java.lang.String",
       "description": "Target service to invoke. Can be a Dapr App ID, a named HTTPEndpoint, or a FQDN\/public URL",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
+      "name": "camel.component.dapr.state-operation",
+      "type": "org.apache.camel.component.dapr.StateOperation",
+      "description": "The state operation to perform on the state store. Required for DaprOperation.state operation",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration",
+      "defaultValue": "get"
+    },
+    {
+      "name": "camel.component.dapr.state-store",
+      "type": "java.lang.String",
+      "description": "The name of the Dapr state store to interact with, defined in statestore.yaml config",
       "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
     },
     {
