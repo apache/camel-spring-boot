@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.dapr.springboot;
 
+import io.dapr.client.DaprPreviewClient;
 import io.dapr.client.domain.HttpExtension;
 import io.dapr.client.domain.StateOptions.Concurrency;
 import io.dapr.client.domain.StateOptions.Consistency;
@@ -41,14 +42,48 @@ public class DaprComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Concurrency mode to use with state operations
-     */
-    private Concurrency concurrency;
-    /**
      * The component configurations. The option is a
      * org.apache.camel.component.dapr.DaprConfiguration type.
      */
     private DaprConfiguration configuration;
+    /**
+     * The contentType for the Pub/Sub component to use.
+     */
+    private String contentType;
+    /**
+     * The name of the Dapr Pub/Sub component to use. This identifies which
+     * underlying messaging system Dapr will interact with for publishing or
+     * subscribing to events.
+     */
+    private String pubSubName;
+    /**
+     * The name of the topic to subscribe to. The topic must exist in the
+     * Pub/Sub component configured under the given pubsubName.
+     */
+    private String topic;
+    /**
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions (if possible) occurred while the Camel consumer
+     * is trying to pickup incoming messages, or the likes, will now be
+     * processed as a message and handled by the routing Error Handler.
+     * Important: This is only possible if the 3rd party component allows Camel
+     * to be alerted if an exception was thrown. Some components handle this
+     * internally only, and therefore bridgeErrorHandler is not possible. In
+     * other situations we may improve the Camel component to hook into the 3rd
+     * party component and make this possible for future releases. By default
+     * the consumer will use the org.apache.camel.spi.ExceptionHandler to deal
+     * with exceptions, that will be logged at WARN or ERROR level and ignored.
+     */
+    private Boolean bridgeErrorHandler = false;
+    /**
+     * The client to consume messages by the consumer. The option is a
+     * io.dapr.client.DaprPreviewClient type.
+     */
+    private DaprPreviewClient previewClient;
+    /**
+     * Concurrency mode to use with state operations
+     */
+    private Concurrency concurrency;
     /**
      * Consistency level to use with state operations
      */
@@ -114,20 +149,60 @@ public class DaprComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
 
-    public Concurrency getConcurrency() {
-        return concurrency;
-    }
-
-    public void setConcurrency(Concurrency concurrency) {
-        this.concurrency = concurrency;
-    }
-
     public DaprConfiguration getConfiguration() {
         return configuration;
     }
 
     public void setConfiguration(DaprConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public String getPubSubName() {
+        return pubSubName;
+    }
+
+    public void setPubSubName(String pubSubName) {
+        this.pubSubName = pubSubName;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public DaprPreviewClient getPreviewClient() {
+        return previewClient;
+    }
+
+    public void setPreviewClient(DaprPreviewClient previewClient) {
+        this.previewClient = previewClient;
+    }
+
+    public Concurrency getConcurrency() {
+        return concurrency;
+    }
+
+    public void setConcurrency(Concurrency concurrency) {
+        this.concurrency = concurrency;
     }
 
     public Consistency getConsistency() {
