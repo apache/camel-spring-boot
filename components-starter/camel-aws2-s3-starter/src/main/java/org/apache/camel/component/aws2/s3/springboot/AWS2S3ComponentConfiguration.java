@@ -186,6 +186,16 @@ public class AWS2S3ComponentConfiguration
      */
     private Boolean moveAfterRead = false;
     /**
+     * Remove the contents of the prefix configuration string from the new
+     * S3Object key before copying. For example, if prefix is set to
+     * 'demo/notify' and the destinationBucketPrefix is set to 'demo/archive',
+     * an S3Object with a key of 'demo/notify/example.txt' will be copied to
+     * 'demo/archive/example.txt', rather than the default behavior where the
+     * new key is 'demo/archive/demo/notify/example.txt'. Only applicable when
+     * moveAfterRead is true.
+     */
+    private Boolean removePrefixOnMove = false;
+    /**
      * If this option is true and includeBody is false, then the
      * S3Object.close() method will be called on exchange completion. This
      * option is strongly related to includeBody option. In case of setting
@@ -559,6 +569,14 @@ public class AWS2S3ComponentConfiguration
 
     public void setMoveAfterRead(Boolean moveAfterRead) {
         this.moveAfterRead = moveAfterRead;
+    }
+
+    public Boolean getRemovePrefixOnMove() {
+        return removePrefixOnMove;
+    }
+
+    public void setRemovePrefixOnMove(Boolean removePrefixOnMove) {
+        this.removePrefixOnMove = removePrefixOnMove;
     }
 
     public Boolean getAutocloseBody() {
