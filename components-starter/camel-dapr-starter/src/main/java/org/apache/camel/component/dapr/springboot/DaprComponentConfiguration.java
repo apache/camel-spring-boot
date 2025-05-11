@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.dapr.springboot;
 
+import java.util.List;
 import io.dapr.client.DaprPreviewClient;
 import io.dapr.client.domain.HttpExtension;
 import io.dapr.client.domain.StateOptions.Concurrency;
@@ -41,6 +42,15 @@ public class DaprComponentConfiguration
      * enabled by default.
      */
     private Boolean enabled;
+    /**
+     * List of keys for configuration operation
+     */
+    private List<String> configKeys;
+    /**
+     * The name of the Dapr configuration store to interact with, defined in
+     * statestore.yaml config
+     */
+    private String configStore;
     /**
      * The component configurations. The option is a
      * org.apache.camel.component.dapr.DaprConfiguration type.
@@ -81,6 +91,14 @@ public class DaprComponentConfiguration
      */
     private DaprPreviewClient previewClient;
     /**
+     * The name of the Dapr binding to invoke
+     */
+    private String bindingName;
+    /**
+     * The operation to perform on the binding
+     */
+    private String bindingOperation;
+    /**
      * Concurrency mode to use with state operations
      */
     private Concurrency concurrency;
@@ -101,8 +119,8 @@ public class DaprComponentConfiguration
      */
     private HttpExtension httpExtension;
     /**
-     * The key used to identify the state object within the specified state
-     * store
+     * The key used to identify the state/secret object within the specified
+     * state/secret store
      */
     private String key;
     /**
@@ -120,6 +138,11 @@ public class DaprComponentConfiguration
      * The name of the method or route to invoke on the target service
      */
     private String methodToInvoke;
+    /**
+     * The name of the Dapr secret store to interact with, defined in
+     * local-secret-store.yaml config
+     */
+    private String secretStore;
     /**
      * Target service to invoke. Can be a Dapr App ID, a named HTTPEndpoint, or
      * a FQDN/public URL
@@ -148,6 +171,22 @@ public class DaprComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+
+    public List<String> getConfigKeys() {
+        return configKeys;
+    }
+
+    public void setConfigKeys(List<String> configKeys) {
+        this.configKeys = configKeys;
+    }
+
+    public String getConfigStore() {
+        return configStore;
+    }
+
+    public void setConfigStore(String configStore) {
+        this.configStore = configStore;
+    }
 
     public DaprConfiguration getConfiguration() {
         return configuration;
@@ -195,6 +234,22 @@ public class DaprComponentConfiguration
 
     public void setPreviewClient(DaprPreviewClient previewClient) {
         this.previewClient = previewClient;
+    }
+
+    public String getBindingName() {
+        return bindingName;
+    }
+
+    public void setBindingName(String bindingName) {
+        this.bindingName = bindingName;
+    }
+
+    public String getBindingOperation() {
+        return bindingOperation;
+    }
+
+    public void setBindingOperation(String bindingOperation) {
+        this.bindingOperation = bindingOperation;
     }
 
     public Concurrency getConcurrency() {
@@ -251,6 +306,14 @@ public class DaprComponentConfiguration
 
     public void setMethodToInvoke(String methodToInvoke) {
         this.methodToInvoke = methodToInvoke;
+    }
+
+    public String getSecretStore() {
+        return secretStore;
+    }
+
+    public void setSecretStore(String secretStore) {
+        this.secretStore = secretStore;
     }
 
     public String getServiceToInvoke() {
