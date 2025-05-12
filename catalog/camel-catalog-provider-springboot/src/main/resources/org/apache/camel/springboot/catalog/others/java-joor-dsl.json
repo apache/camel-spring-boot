@@ -11,6 +11,6 @@
     "metadata": { "routes.language": "java" },
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-java-joor-dsl-starter",
-    "version": "4.10.4-SNAPSHOT"
+    "version": "4.10.5-SNAPSHOT"
   }
 }
