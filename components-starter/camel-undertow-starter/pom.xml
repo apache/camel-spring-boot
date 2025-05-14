@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-undertow-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: Undertow</name>
+  <name>Camel SB Starters :: Undertow (deprecated)</name>
   <description>Spring-Boot Starter for Camel Components</description>
   <dependencies>
     <dependency>

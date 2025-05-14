@@ -4,7 +4,7 @@
     "name": "undertow",
     "title": "Undertow",
     "description": "Expose HTTP and WebSocket endpoints and access external HTTP\/WebSocket servers.",
-    "deprecated": false,
+    "deprecated": true,
     "firstVersion": "2.16.0",
     "label": "http,networking",
     "javaType": "org.apache.camel.component.undertow.UndertowComponent",
