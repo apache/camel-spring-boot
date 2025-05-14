@@ -62,14 +62,15 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
             throws MojoExecutionException, MojoFailureException, IOException {
         try (JarFile jar = getJarFile(groupId, artifactId)) {
             if (jar != null) {
+                boolean deprecated = isDeprecated();
                 Map<String, Supplier<String>> files = getJSonFiles(jar);
-                executeOthers(jar, files);
-                executeComponents(jar, files);
-                executeDataFormats(jar, files);
-                executeLanguages(jar, files);
-                executeTransformers(jar, files);
-                executeDevConsoles(jar, files);
-                executeBeans(jar, files);
+                executeOthers(jar, files, deprecated);
+                executeComponents(jar, files, deprecated);
+                executeDataFormats(jar, files, deprecated);
+                executeLanguages(jar, files, deprecated);
+                executeTransformers(jar, files, deprecated);
+                executeDevConsoles(jar, files, deprecated);
+                executeBeans(jar, files, deprecated);
             }
         }
         // special to include core languages
@@ -77,10 +78,15 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
             try (JarFile jar = getJarFile("org.apache.camel", "camel-core-languages")) {
                 if (jar != null) {
                     Map<String, Supplier<String>> files = getJSonFiles(jar);
-                    executeLanguages(jar, files);
+                    // cannot be deprecated
+                    executeLanguages(jar, files, false);
                 }
             }
         }
+    }
+
+    protected boolean isDeprecated() {
+        return project.getName() != null && project.getName().contains("(deprecated)");
     }
 
     @Override
@@ -88,7 +94,7 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
         return Arrays.asList(IGNORE_MODULES).contains(artifactId);
     }
 
-    protected void executeComponents(JarFile componentJar, Map<String, Supplier<String>> jsonFiles)
+    protected void executeComponents(JarFile componentJar, Map<String, Supplier<String>> jsonFiles, boolean deprecated)
             throws MojoExecutionException, MojoFailureException, IOException {
         List<String> componentNames = findComponentNames(componentJar);
         if (!componentNames.isEmpty()) {
@@ -104,6 +110,9 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
                                     "\"artifactId\": \"" + project.getArtifactId() + "\"")
                             .replace("\"version\": \"" + getMainDepVersion() + "\"",
                                     "\"version\": \"" + project.getVersion() + "\"");
+                    if (deprecated) {
+                            json = json.replaceFirst("\"deprecated\": false", "\"deprecated\": true");
+                    }
                     writeIfChanged(json,
                             new File(catalogDir, "src/main/resources/org/apache/camel/springboot/catalog/components/"
                                     + componentName + ".json"));
@@ -119,7 +128,7 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
         }
     }
 
-    protected void executeDataFormats(JarFile componentJar, Map<String, Supplier<String>> jsonFiles)
+    protected void executeDataFormats(JarFile componentJar, Map<String, Supplier<String>> jsonFiles, boolean deprecated)
             throws MojoExecutionException, MojoFailureException, IOException {
         List<String> dataFormatNames = findDataFormatNames(componentJar);
         if (!dataFormatNames.isEmpty()) {
@@ -135,6 +144,9 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
                                     "\"artifactId\": \"" + project.getArtifactId() + "\"")
                             .replace("\"version\": \"" + getMainDepVersion() + "\"",
                                     "\"version\": \"" + project.getVersion() + "\"");
+                    if (deprecated) {
+                        json = json.replaceFirst("\"deprecated\": false", "\"deprecated\": true");
+                    }
                     writeIfChanged(json,
                             new File(catalogDir, "src/main/resources/org/apache/camel/springboot/catalog/dataformats/"
                                     + dataformatName + ".json"));
@@ -150,7 +162,7 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
         }
     }
 
-    protected void executeLanguages(JarFile componentJar, Map<String, Supplier<String>> jsonFiles)
+    protected void executeLanguages(JarFile componentJar, Map<String, Supplier<String>> jsonFiles, boolean deprecated)
             throws MojoExecutionException, MojoFailureException, IOException {
         List<String> languageNames = findLanguageNames(componentJar);
         if (!languageNames.isEmpty()) {
@@ -166,6 +178,9 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
                                     "\"artifactId\": \"" + project.getArtifactId() + "\"")
                             .replace("\"version\": \"" + getMainDepVersion() + "\"",
                                     "\"version\": \"" + project.getVersion() + "\"");
+                    if (deprecated) {
+                        json = json.replaceFirst("\"deprecated\": false", "\"deprecated\": true");
+                    }
                     writeIfChanged(json,
                             new File(catalogDir, "src/main/resources/org/apache/camel/springboot/catalog/languages/"
                                     + languageName + ".json"));
@@ -181,7 +196,7 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
         }
     }
 
-    protected void executeOthers(JarFile componentJar, Map<String, Supplier<String>> jsonFiles)
+    protected void executeOthers(JarFile componentJar, Map<String, Supplier<String>> jsonFiles, boolean deprecated)
             throws MojoExecutionException, MojoFailureException, IOException {
         // The json files for 'other' components are in the root of the jars
         List<String> otherNames = findNames(componentJar, "").stream()
@@ -203,6 +218,9 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
                                     "\"artifactId\": \"" + project.getArtifactId() + "\"")
                             .replace("\"version\": \"" + getMainDepVersion() + "\"",
                                     "\"version\": \"" + project.getVersion() + "\"");
+                    if (deprecated) {
+                        json = json.replaceFirst("\"deprecated\": false", "\"deprecated\": true");
+                    }
                     writeIfChanged(json, new File(catalogDir,
                             "src/main/resources/org/apache/camel/springboot/catalog/others/" + otherName + ".json"));
                     actual.add(otherName);
@@ -217,7 +235,7 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
         }
     }
 
-    protected void executeTransformers(JarFile componentJar, Map<String, Supplier<String>> jsonFiles)
+    protected void executeTransformers(JarFile componentJar, Map<String, Supplier<String>> jsonFiles, boolean deprecated)
             throws MojoExecutionException, MojoFailureException, IOException {
         List<String> transformerNames = findTransformerNames(componentJar);
         if (!transformerNames.isEmpty()) {
@@ -233,6 +251,9 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
                                     "\"artifactId\": \"" + project.getArtifactId() + "\"")
                             .replace("\"version\": \"" + getMainDepVersion() + "\"",
                                     "\"version\": \"" + project.getVersion() + "\"");
+                    if (deprecated) {
+                        json = json.replaceFirst("\"deprecated\": false", "\"deprecated\": true");
+                    }
                     writeIfChanged(json,
                             new File(catalogDir, "src/main/resources/org/apache/camel/springboot/catalog/transformers/"
                                                  + transformerName + ".json"));
@@ -248,7 +269,7 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
         }
     }
 
-    protected void executeDevConsoles(JarFile componentJar, Map<String, Supplier<String>> jsonFiles)
+    protected void executeDevConsoles(JarFile componentJar, Map<String, Supplier<String>> jsonFiles, boolean deprecated)
             throws MojoExecutionException, MojoFailureException, IOException {
         List<String> names = findDevConsoleNames(componentJar);
         if (!names.isEmpty()) {
@@ -264,6 +285,9 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
                                     "\"artifactId\": \"" + project.getArtifactId() + "\"")
                             .replace("\"version\": \"" + getMainDepVersion() + "\"",
                                     "\"version\": \"" + project.getVersion() + "\"");
+                    if (deprecated) {
+                        json = json.replaceFirst("\"deprecated\": false", "\"deprecated\": true");
+                    }
                     writeIfChanged(json,
                             new File(catalogDir, "src/main/resources/org/apache/camel/springboot/catalog/dev-consoles/"
                                                  + name + ".json"));
@@ -279,7 +303,7 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
         }
     }
 
-    protected void executeBeans(JarFile componentJar, Map<String, Supplier<String>> jsonFiles)
+    protected void executeBeans(JarFile componentJar, Map<String, Supplier<String>> jsonFiles, boolean deprecated)
             throws MojoExecutionException, MojoFailureException, IOException {
         List<String> names = findBeanNames(componentJar);
         if (!names.isEmpty()) {
@@ -295,6 +319,9 @@ public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
                                     "\"artifactId\": \"" + project.getArtifactId() + "\"")
                             .replace("\"version\": \"" + getMainDepVersion() + "\"",
                                     "\"version\": \"" + project.getVersion() + "\"");
+                    if (deprecated) {
+                        json = json.replaceFirst("\"deprecated\": false", "\"deprecated\": true");
+                    }
                     writeIfChanged(json,
                             new File(catalogDir, "src/main/resources/org/apache/camel/springboot/catalog/beans/"
                                                  + name + ".json"));
