@@ -131,8 +131,7 @@
       "name": "camel.component.rest-openapi.specification-uri",
       "type": "java.lang.String",
       "description": "Path to the OpenApi specification file. The scheme, host base path are taken from this specification, but these can be overridden with properties on the component or endpoint level. If not given the component tries to load openapi.json resource. Note that the host defined on the component and endpoint of this Component should contain the scheme, hostname and optionally the port in the URI syntax (i.e. https:\/\/api.example.com:8080). Can be overridden in endpoint configuration.",
-      "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration",
-      "defaultValue": "openapi.json"
+      "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration"
     },
     {
       "name": "camel.component.rest-openapi.ssl-context-parameters",
