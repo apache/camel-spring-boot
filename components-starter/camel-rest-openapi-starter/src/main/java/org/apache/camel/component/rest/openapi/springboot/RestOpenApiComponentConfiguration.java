@@ -51,7 +51,7 @@ public class RestOpenApiComponentConfiguration
      * https://api.example.com:8080). Can be overridden in endpoint
      * configuration.
      */
-    private String specificationUri = "openapi.json";
+    private String specificationUri;
     /**
      * Sets the context-path to use for servicing the OpenAPI specification
      */
