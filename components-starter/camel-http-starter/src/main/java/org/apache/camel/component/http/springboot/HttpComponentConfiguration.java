@@ -220,7 +220,7 @@ public class HttpComponentConfiguration
      */
     private String proxyAuthHost;
     /**
-     * Proxy authentication method to use
+     * Proxy authentication method to use (NTLM is deprecated)
      */
     private String proxyAuthMethod;
     /**

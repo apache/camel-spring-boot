@@ -203,7 +203,7 @@
     {
       "name": "camel.component.http.proxy-auth-method",
       "type": "java.lang.String",
-      "description": "Proxy authentication method to use",
+      "description": "Proxy authentication method to use (NTLM is deprecated)",
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
     },
     {
