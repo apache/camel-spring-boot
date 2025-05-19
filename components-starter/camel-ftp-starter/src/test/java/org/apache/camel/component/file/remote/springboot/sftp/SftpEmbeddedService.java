@@ -159,6 +159,11 @@ public class SftpEmbeddedService extends AbstractTestService implements FtpServi
         return port;
     }
 
+    @Override
+    public int port() {
+        return port;
+    }
+
     public static boolean hasRequiredAlgorithms() {
         try {
             FileKeyPairProvider provider = new FileKeyPairProvider(Paths.get("src/test/resources/hostkey.pem"));

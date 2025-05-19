@@ -192,6 +192,11 @@ public class FtpEmbeddedService extends AbstractTestService implements FtpServic
         return port;
     }
 
+    @Override
+    public int port() {
+        return port;
+    }
+
     public int countConnections() {
         int count = 0;
 
