@@ -70,6 +70,24 @@
       "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration"
     },
     {
+      "name": "camel.component.pqc.key-pair-alias",
+      "type": "java.lang.String",
+      "description": "A KeyPair alias to use in combination with KeyStore parameter",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration"
+    },
+    {
+      "name": "camel.component.pqc.key-store",
+      "type": "java.security.KeyStore",
+      "description": "A KeyStore where we could get Cryptographic material. The option is a java.security.KeyStore type.",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration"
+    },
+    {
+      "name": "camel.component.pqc.key-store-password",
+      "type": "java.lang.String",
+      "description": "The KeyStore password to use in combination with KeyStore Parameter",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration"
+    },
+    {
       "name": "camel.component.pqc.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",

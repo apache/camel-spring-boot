@@ -17,6 +17,7 @@
 package org.apache.camel.component.pqc.springboot;
 
 import java.security.KeyPair;
+import java.security.KeyStore;
 import java.security.Signature;
 import javax.crypto.KeyGenerator;
 import org.apache.camel.component.pqc.PQCConfiguration;
@@ -82,6 +83,19 @@ public class PQCComponentConfiguration
      * The KeyPair to be used. The option is a java.security.KeyPair type.
      */
     private KeyPair keyPair;
+    /**
+     * A KeyPair alias to use in combination with KeyStore parameter
+     */
+    private String keyPairAlias;
+    /**
+     * A KeyStore where we could get Cryptographic material. The option is a
+     * java.security.KeyStore type.
+     */
+    private KeyStore keyStore;
+    /**
+     * The KeyStore password to use in combination with KeyStore Parameter
+     */
+    private String keyStorePassword;
     /**
      * In case there is no signer, we specify an algorithm to build the KeyPair
      * or the Signer
@@ -172,6 +186,30 @@ public class PQCComponentConfiguration
 
     public void setKeyPair(KeyPair keyPair) {
         this.keyPair = keyPair;
+    }
+
+    public String getKeyPairAlias() {
+        return keyPairAlias;
+    }
+
+    public void setKeyPairAlias(String keyPairAlias) {
+        this.keyPairAlias = keyPairAlias;
+    }
+
+    public KeyStore getKeyStore() {
+        return keyStore;
+    }
+
+    public void setKeyStore(KeyStore keyStore) {
+        this.keyStore = keyStore;
+    }
+
+    public String getKeyStorePassword() {
+        return keyStorePassword;
+    }
+
+    public void setKeyStorePassword(String keyStorePassword) {
+        this.keyStorePassword = keyStorePassword;
     }
 
     public String getSignatureAlgorithm() {
