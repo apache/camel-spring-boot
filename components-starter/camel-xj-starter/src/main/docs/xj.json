@@ -102,5 +102,8 @@
       "sourceType": "org.apache.camel.component.xj.springboot.XJComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

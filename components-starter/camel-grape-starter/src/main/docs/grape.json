@@ -45,5 +45,8 @@
       "sourceType": "org.apache.camel.component.grape.springboot.GrapeComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

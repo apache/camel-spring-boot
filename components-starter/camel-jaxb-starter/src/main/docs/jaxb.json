@@ -155,5 +155,8 @@
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

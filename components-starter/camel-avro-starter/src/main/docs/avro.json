@@ -31,5 +31,8 @@
       "sourceType": "org.apache.camel.dataformat.avro.springboot.AvroDataFormatConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

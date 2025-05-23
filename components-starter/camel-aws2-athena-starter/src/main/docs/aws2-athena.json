@@ -258,5 +258,8 @@
       "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

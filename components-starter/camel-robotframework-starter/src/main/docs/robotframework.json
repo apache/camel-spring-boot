@@ -344,5 +344,8 @@
       "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

@@ -58,5 +58,8 @@
       "sourceType": "org.apache.camel.component.guava.eventbus.springboot.GuavaEventBusComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

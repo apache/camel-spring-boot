@@ -293,5 +293,8 @@
       "sourceType": "org.apache.camel.component.google.calendar.springboot.GoogleCalendarComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

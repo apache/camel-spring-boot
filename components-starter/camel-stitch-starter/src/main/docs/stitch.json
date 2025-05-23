@@ -88,5 +88,8 @@
       "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

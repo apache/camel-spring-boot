@@ -260,5 +260,8 @@
       "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

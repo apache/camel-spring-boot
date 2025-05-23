@@ -96,5 +96,8 @@
       "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

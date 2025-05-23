@@ -66,5 +66,8 @@
       "sourceType": "org.apache.camel.component.github.springboot.GitHubComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

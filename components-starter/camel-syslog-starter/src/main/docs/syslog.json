@@ -25,5 +25,8 @@
       "sourceType": "org.apache.camel.component.syslog.springboot.SyslogDataFormatConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

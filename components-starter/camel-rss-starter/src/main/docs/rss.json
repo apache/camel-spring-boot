@@ -61,5 +61,8 @@
       "sourceType": "org.apache.camel.dataformat.rss.springboot.RssDataFormatConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

@@ -77,5 +77,8 @@
       "sourceType": "org.apache.camel.component.whatsapp.springboot.WhatsAppComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

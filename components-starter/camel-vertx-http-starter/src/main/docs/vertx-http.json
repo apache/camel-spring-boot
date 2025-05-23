@@ -144,5 +144,8 @@
       "sourceType": "org.apache.camel.component.vertx.http.springboot.VertxHttpComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

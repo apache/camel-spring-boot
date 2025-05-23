@@ -463,5 +463,8 @@
       "sourceType": "org.apache.camel.component.netty.http.springboot.NettyHttpComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

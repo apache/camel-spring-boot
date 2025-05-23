@@ -145,5 +145,8 @@
       "defaultValue": "milliseconds"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

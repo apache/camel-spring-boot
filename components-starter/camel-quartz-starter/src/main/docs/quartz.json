@@ -104,5 +104,8 @@
       "sourceType": "org.apache.camel.component.quartz.springboot.QuartzComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

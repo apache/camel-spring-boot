@@ -45,5 +45,8 @@
       "defaultValue": "preferred_username"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

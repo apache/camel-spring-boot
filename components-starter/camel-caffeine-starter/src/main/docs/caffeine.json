@@ -253,5 +253,8 @@
       "sourceType": "org.apache.camel.component.caffeine.load.springboot.CaffeineLoadCacheComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

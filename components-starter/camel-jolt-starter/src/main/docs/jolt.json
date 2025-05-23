@@ -52,5 +52,8 @@
       "sourceType": "org.apache.camel.component.jolt.springboot.JoltComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

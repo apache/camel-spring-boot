@@ -800,5 +800,8 @@
       "defaultValue": 100
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

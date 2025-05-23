@@ -51,5 +51,8 @@
       "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

@@ -39,5 +39,8 @@
       "sourceType": "org.apache.camel.component.atom.springboot.AtomComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

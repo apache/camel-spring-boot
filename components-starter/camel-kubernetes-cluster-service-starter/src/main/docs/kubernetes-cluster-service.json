@@ -93,5 +93,8 @@
       "sourceType": "org.apache.camel.component.kubernetes.springboot.cluster.KubernetesClusterServiceConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

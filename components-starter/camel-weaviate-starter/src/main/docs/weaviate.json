@@ -81,5 +81,8 @@
       "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

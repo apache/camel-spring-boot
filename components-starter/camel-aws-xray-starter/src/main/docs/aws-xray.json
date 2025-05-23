@@ -28,5 +28,8 @@
       "defaultValue": "default"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

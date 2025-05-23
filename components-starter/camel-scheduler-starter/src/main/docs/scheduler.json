@@ -67,5 +67,8 @@
       "defaultValue": 1
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

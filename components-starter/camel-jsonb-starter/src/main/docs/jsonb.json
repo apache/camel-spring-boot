@@ -44,5 +44,8 @@
       "sourceType": "org.apache.camel.component.jsonb.springboot.JsonbDataFormatConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

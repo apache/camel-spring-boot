@@ -87,5 +87,8 @@
       "sourceType": "org.apache.camel.component.google.pubsublite.springboot.GooglePubsubLiteComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

@@ -262,5 +262,8 @@
       "sourceType": "org.apache.camel.component.web3j.springboot.Web3jComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

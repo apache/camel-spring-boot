@@ -184,5 +184,8 @@
       "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

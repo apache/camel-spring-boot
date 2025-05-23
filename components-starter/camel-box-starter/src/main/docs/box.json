@@ -145,5 +145,8 @@
       "sourceType": "org.apache.camel.component.box.springboot.BoxComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

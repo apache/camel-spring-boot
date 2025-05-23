@@ -78,5 +78,8 @@
       "sourceType": "org.apache.camel.component.zeebe.springboot.ZeebeComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

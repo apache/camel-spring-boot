@@ -85,5 +85,8 @@
       "defaultValue": "CamelReactiveStreamsWorker"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

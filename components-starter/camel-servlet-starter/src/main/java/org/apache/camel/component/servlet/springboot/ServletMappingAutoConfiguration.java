@@ -62,7 +62,7 @@ public class ServletMappingAutoConfiguration {
         mapping.addUrlMappings(config.getContextPath());
         mapping.setName(config.getServletName());
         mapping.setLoadOnStartup(1);
-        if (multipartProperties != null && multipartProperties.getEnabled()) {
+        if (multipartProperties != null && multipartProperties.isEnabled()) {
             mapping.setMultipartConfig(multipartProperties.createMultipartConfig());
         }
         return mapping;

@@ -45,5 +45,8 @@
       "sourceType": "org.apache.camel.component.cron.springboot.CronComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

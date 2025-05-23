@@ -136,5 +136,8 @@
       "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

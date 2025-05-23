@@ -76,5 +76,8 @@
       "sourceType": "org.apache.camel.component.webhook.springboot.WebhookComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

@@ -165,5 +165,8 @@
       "sourceType": "org.apache.camel.component.ehcache.springboot.EhcacheComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

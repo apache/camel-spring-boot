@@ -83,5 +83,8 @@
       "sourceType": "org.apache.camel.component.vertx.springboot.VertxComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

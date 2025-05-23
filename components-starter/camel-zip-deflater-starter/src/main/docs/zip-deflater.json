@@ -54,5 +54,8 @@
       "sourceType": "org.apache.camel.dataformat.deflater.springboot.ZipDeflaterDataFormatConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

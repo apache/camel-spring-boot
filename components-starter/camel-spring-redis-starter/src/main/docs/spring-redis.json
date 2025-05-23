@@ -52,5 +52,8 @@
       "sourceType": "org.apache.camel.component.redis.springboot.RedisComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

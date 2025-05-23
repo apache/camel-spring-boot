@@ -51,5 +51,8 @@
       "sourceType": "org.apache.camel.component.gson.springboot.GsonDataFormatConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

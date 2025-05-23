@@ -104,5 +104,8 @@
       "defaultValue": "CamelServlet"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

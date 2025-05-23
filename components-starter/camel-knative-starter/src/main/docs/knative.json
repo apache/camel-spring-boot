@@ -166,5 +166,8 @@
       "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

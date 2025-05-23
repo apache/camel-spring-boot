@@ -82,5 +82,8 @@
       "sourceType": "org.apache.camel.component.dhis2.springboot.Dhis2ComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

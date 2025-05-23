@@ -107,5 +107,8 @@
       "sourceType": "org.apache.camel.component.pinecone.springboot.PineconeVectorDbComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

@@ -92,5 +92,8 @@
       "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

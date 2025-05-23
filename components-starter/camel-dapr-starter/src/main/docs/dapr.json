@@ -168,5 +168,8 @@
       "defaultValue": "POST"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

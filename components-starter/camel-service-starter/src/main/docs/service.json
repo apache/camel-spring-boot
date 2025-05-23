@@ -51,5 +51,8 @@
       "sourceType": "org.apache.camel.component.service.springboot.ServiceComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

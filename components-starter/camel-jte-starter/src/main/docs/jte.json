@@ -74,5 +74,8 @@
       "defaultValue": "jte-classes"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

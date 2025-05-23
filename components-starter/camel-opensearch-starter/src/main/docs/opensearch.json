@@ -112,5 +112,8 @@
       "sourceType": "org.apache.camel.component.opensearch.springboot.OpensearchComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

@@ -242,5 +242,8 @@
       "sourceType": "org.apache.camel.component.paho.mqtt5.springboot.PahoMqtt5ComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

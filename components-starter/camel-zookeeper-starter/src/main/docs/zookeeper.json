@@ -269,5 +269,8 @@
       "deprecation": {}
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

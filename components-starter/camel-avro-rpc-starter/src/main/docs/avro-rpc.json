@@ -90,5 +90,8 @@
       "sourceType": "org.apache.camel.component.avro.springboot.AvroComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

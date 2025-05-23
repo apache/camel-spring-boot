@@ -63,5 +63,8 @@
       "sourceType": "org.apache.camel.component.master.springboot.MasterComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

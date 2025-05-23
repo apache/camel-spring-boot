@@ -609,5 +609,8 @@
       "defaultValue": "io.debezium.pipeline.txmetadata.DefaultTransactionMetadataFactory"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

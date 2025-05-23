@@ -108,5 +108,8 @@
       "sourceType": "org.apache.camel.component.stomp.springboot.StompComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

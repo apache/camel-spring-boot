@@ -885,5 +885,8 @@
       "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

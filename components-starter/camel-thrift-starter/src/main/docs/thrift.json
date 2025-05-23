@@ -95,5 +95,8 @@
       "sourceType": "org.apache.camel.dataformat.thrift.springboot.ThriftDataFormatConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

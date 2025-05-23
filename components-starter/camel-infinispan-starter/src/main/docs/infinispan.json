@@ -226,5 +226,8 @@
       "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

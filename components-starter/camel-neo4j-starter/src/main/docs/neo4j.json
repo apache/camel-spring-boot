@@ -144,5 +144,8 @@
       "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

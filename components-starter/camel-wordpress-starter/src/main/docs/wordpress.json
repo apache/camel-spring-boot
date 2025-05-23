@@ -116,5 +116,8 @@
       "sourceType": "org.apache.camel.component.wordpress.springboot.WordpressComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

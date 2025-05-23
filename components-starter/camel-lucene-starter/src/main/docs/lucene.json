@@ -69,5 +69,8 @@
       "sourceType": "org.apache.camel.component.lucene.springboot.LuceneComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

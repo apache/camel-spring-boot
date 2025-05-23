@@ -20,5 +20,8 @@
       "sourceType": "org.apache.camel.opentelemetry2.starter.OpenTelemetry2ConfigurationProperties"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

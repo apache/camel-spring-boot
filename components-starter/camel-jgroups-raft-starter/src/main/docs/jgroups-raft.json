@@ -71,5 +71,8 @@
       "sourceType": "org.apache.camel.component.jgroups.raft.springboot.JGroupsRaftComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

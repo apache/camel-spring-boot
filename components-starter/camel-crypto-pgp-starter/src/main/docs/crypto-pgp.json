@@ -111,5 +111,8 @@
       "sourceType": "org.apache.camel.converter.crypto.springboot.PGPDataFormatConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

@@ -877,5 +877,8 @@
       "defaultValue": "__debezium_unavailable_value"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

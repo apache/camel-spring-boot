@@ -115,5 +115,8 @@
       "sourceType": "org.apache.camel.component.jira.springboot.JiraComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

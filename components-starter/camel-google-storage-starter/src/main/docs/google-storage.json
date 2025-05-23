@@ -162,5 +162,8 @@
       "defaultValue": "US-EAST1"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

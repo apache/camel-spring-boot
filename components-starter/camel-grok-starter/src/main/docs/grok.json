@@ -52,5 +52,8 @@
       "sourceType": "org.apache.camel.component.grok.springboot.GrokDataFormatConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

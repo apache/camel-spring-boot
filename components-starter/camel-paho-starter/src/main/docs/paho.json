@@ -227,5 +227,8 @@
       "sourceType": "org.apache.camel.component.paho.springboot.PahoComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

@@ -71,5 +71,8 @@
       "sourceType": "org.apache.camel.component.milvus.springboot.MilvusComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

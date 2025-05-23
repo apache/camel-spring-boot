@@ -309,5 +309,8 @@
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

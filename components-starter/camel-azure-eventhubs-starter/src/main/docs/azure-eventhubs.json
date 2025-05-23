@@ -178,5 +178,8 @@
       "sourceType": "org.apache.camel.component.azure.eventhubs.springboot.EventHubsComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

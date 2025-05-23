@@ -45,5 +45,8 @@
       "sourceType": "org.apache.camel.dataformat.parquet.avro.springboot.ParquetAvroDataFormatConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

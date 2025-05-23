@@ -98,5 +98,8 @@
       "sourceType": "org.apache.camel.component.vertx.websocket.springboot.VertxWebsocketComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

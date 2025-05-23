@@ -78,5 +78,8 @@
       "defaultValue": "localhost:2181"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

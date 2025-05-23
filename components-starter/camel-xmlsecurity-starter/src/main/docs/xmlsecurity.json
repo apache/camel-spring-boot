@@ -453,5 +453,8 @@
       "defaultValue": "AES-256-GCM"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

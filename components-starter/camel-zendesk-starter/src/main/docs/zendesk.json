@@ -88,5 +88,8 @@
       "sourceType": "org.apache.camel.component.zendesk.springboot.ZendeskComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

@@ -165,5 +165,8 @@
       "sourceType": "org.apache.camel.component.docker.springboot.DockerComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

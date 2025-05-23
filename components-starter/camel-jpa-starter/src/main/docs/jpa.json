@@ -92,5 +92,8 @@
       "sourceType": "org.apache.camel.component.jpa.springboot.JpaComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

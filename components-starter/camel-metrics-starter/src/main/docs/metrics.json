@@ -45,5 +45,8 @@
       "sourceType": "org.apache.camel.component.metrics.springboot.MetricsComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

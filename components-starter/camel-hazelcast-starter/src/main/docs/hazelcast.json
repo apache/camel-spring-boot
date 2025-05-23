@@ -598,5 +598,8 @@
       "defaultValue": false
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

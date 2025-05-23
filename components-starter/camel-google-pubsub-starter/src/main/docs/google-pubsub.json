@@ -89,5 +89,8 @@
       "sourceType": "org.apache.camel.component.google.pubsub.springboot.GooglePubsubComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

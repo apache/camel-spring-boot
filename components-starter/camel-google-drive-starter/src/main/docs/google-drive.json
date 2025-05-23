@@ -106,5 +106,8 @@
       "sourceType": "org.apache.camel.component.google.drive.springboot.GoogleDriveComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

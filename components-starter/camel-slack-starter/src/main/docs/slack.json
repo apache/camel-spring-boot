@@ -72,5 +72,8 @@
       "sourceType": "org.apache.camel.component.slack.springboot.SlackComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

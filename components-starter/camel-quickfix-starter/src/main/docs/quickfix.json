@@ -78,5 +78,8 @@
       "sourceType": "org.apache.camel.component.quickfixj.springboot.QuickfixjComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

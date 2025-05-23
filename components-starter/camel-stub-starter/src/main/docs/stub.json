@@ -106,5 +106,8 @@
       "sourceType": "org.apache.camel.component.stub.springboot.StubComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

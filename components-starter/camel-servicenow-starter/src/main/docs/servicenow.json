@@ -324,5 +324,8 @@
       "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

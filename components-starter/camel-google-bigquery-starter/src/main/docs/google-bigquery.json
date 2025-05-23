@@ -105,5 +105,8 @@
       "sourceType": "org.apache.camel.component.google.bigquery.springboot.GoogleBigQueryComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

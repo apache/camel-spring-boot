@@ -121,5 +121,8 @@
       "sourceType": "org.apache.camel.dataformat.flatpack.springboot.FlatpackDataFormatConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

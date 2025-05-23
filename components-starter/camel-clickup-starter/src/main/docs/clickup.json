@@ -39,5 +39,8 @@
       "sourceType": "org.apache.camel.component.clickup.springboot.ClickUpComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

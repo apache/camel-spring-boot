@@ -60,5 +60,8 @@
       "defaultValue": 30000
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

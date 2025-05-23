@@ -227,5 +227,8 @@
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

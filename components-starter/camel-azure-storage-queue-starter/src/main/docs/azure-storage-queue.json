@@ -141,5 +141,8 @@
       "sourceType": "org.apache.camel.component.azure.storage.queue.springboot.QueueComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

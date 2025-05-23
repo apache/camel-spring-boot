@@ -77,5 +77,8 @@
       "sourceType": "org.apache.camel.component.xslt.springboot.XsltComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

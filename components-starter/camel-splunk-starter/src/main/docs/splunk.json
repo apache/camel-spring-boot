@@ -66,5 +66,8 @@
       "sourceType": "org.apache.camel.component.splunk.springboot.SplunkComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

@@ -79,5 +79,8 @@
       "sourceType": "org.apache.camel.dataformat.dfdl.springboot.DfdlDataFormatConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

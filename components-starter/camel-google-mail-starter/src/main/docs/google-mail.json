@@ -250,5 +250,8 @@
       "sourceType": "org.apache.camel.component.google.mail.springboot.GoogleMailComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

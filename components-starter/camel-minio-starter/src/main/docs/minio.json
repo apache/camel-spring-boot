@@ -341,5 +341,8 @@
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

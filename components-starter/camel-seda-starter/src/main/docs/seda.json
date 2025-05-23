@@ -93,5 +93,8 @@
       "defaultValue": 1000
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

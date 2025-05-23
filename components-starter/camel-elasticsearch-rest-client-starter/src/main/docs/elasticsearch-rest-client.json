@@ -104,5 +104,8 @@
       "sourceType": "org.apache.camel.component.elasticsearch.rest.client.springboot.ElasticsearchRestClientComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

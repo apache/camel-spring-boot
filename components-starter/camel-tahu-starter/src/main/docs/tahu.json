@@ -203,5 +203,8 @@
       "sourceType": "org.apache.camel.component.tahu.springboot.TahuHostComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

@@ -125,5 +125,8 @@
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

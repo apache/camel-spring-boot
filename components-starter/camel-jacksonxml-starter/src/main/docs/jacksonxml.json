@@ -127,5 +127,8 @@
       "sourceType": "org.apache.camel.component.jacksonxml.springboot.JacksonXMLDataFormatConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

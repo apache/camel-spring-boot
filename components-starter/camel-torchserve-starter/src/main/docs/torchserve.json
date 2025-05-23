@@ -165,5 +165,8 @@
       "sourceType": "org.apache.camel.component.torchserve.springboot.TorchServeComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

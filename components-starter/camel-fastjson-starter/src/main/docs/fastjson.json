@@ -38,5 +38,8 @@
       "sourceType": "org.apache.camel.component.fastjson.springboot.FastjsonDataFormatConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

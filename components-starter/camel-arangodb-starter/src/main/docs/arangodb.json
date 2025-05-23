@@ -111,5 +111,8 @@
       "sourceType": "org.apache.camel.component.arangodb.springboot.ArangoDbComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

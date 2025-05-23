@@ -49,5 +49,8 @@
       "sourceType": "org.apache.camel.dataformat.barcode.springboot.BarcodeDataFormatConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

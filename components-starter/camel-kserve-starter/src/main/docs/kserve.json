@@ -84,5 +84,8 @@
       "defaultValue": "localhost:8001"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

@@ -20,5 +20,8 @@
       "sourceType": "org.apache.camel.observation.starter.ObservationConfigurationProperties"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

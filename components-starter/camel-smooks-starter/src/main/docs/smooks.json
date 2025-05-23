@@ -73,5 +73,8 @@
       "sourceType": "org.apache.camel.dataformat.smooks.springboot.SmooksDataFormatConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

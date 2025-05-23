@@ -68,5 +68,8 @@
       "defaultValue": "org.jasypt.salt.RandomSaltGenerator"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

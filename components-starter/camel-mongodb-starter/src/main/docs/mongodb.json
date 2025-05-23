@@ -52,5 +52,8 @@
       "sourceType": "org.apache.camel.component.mongodb.springboot.MongoDbComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

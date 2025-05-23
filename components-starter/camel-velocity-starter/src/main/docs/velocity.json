@@ -59,5 +59,8 @@
       "sourceType": "org.apache.camel.component.velocity.springboot.VelocityComponentConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

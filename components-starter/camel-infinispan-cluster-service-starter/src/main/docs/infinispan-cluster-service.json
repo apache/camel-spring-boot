@@ -93,5 +93,8 @@
       "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }
