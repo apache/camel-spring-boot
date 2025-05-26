@@ -61,6 +61,17 @@ public class SedaComponentConfiguration
      */
     private Integer defaultPollTimeout = 1000;
     /**
+     * Whether the producer should be started lazy (on the first message). By
+     * starting lazy you can use this to allow CamelContext and routes to
+     * startup in situations where a producer may otherwise fail during starting
+     * and cause the route to fail being started. By deferring this startup to
+     * be lazy then the startup failure can be handled during routing messages
+     * via Camel's routing error handlers. Beware that when the first message is
+     * processed then creating and starting the producer may take a little time
+     * and prolong the total processing time of the processing.
+     */
+    private Boolean lazyStartProducer = false;
+    /**
      * Whether a thread that sends messages to a full SEDA queue will block
      * until the queue's capacity is no longer exhausted. By default, an
      * exception will be thrown stating that the queue is full. By enabling this
@@ -80,20 +91,9 @@ public class SedaComponentConfiguration
      * until the queue's capacity is no longer exhausted. By default, an
      * exception will be thrown stating that the queue is full. By enabling this
      * option, where a configured timeout can be added to the block case. Using
-     * the .offer(timeout) method of the underlining java queue
+     * the offer(timeout) method of the underlining java queue
      */
     private Long defaultOfferTimeout;
-    /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
-     */
-    private Boolean lazyStartProducer = false;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -138,6 +138,14 @@ public class SedaComponentConfiguration
         this.defaultPollTimeout = defaultPollTimeout;
     }
 
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
+    }
+
     public Boolean getDefaultBlockWhenFull() {
         return defaultBlockWhenFull;
     }
@@ -160,14 +168,6 @@ public class SedaComponentConfiguration
 
     public void setDefaultOfferTimeout(Long defaultOfferTimeout) {
         this.defaultOfferTimeout = defaultOfferTimeout;
-    }
-
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getAutowiredEnabled() {

@@ -159,7 +159,7 @@
     {
       "name": "camel.component.servicenow.models",
       "type": "java.util.Map<java.lang.String,java.lang.Class<java.lang.Object>>",
-      "description": "Defines both request and response models",
+      "description": "Defines both request and response models. This is a multi-value option with prefix: model.",
       "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
     },
     {
@@ -233,7 +233,7 @@
     {
       "name": "camel.component.servicenow.request-models",
       "type": "java.util.Map<java.lang.String,java.lang.Class<java.lang.Object>>",
-      "description": "Defines the request model",
+      "description": "Defines the request model. This is a multi-value option with prefix: request-model.",
       "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
     },
     {
@@ -245,7 +245,7 @@
     {
       "name": "camel.component.servicenow.response-models",
       "type": "java.util.Map<java.lang.String,java.lang.Class<java.lang.Object>>",
-      "description": "Defines the response model",
+      "description": "Defines the response model. This is a multi-value option with prefix: response-model.",
       "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
     },
     {

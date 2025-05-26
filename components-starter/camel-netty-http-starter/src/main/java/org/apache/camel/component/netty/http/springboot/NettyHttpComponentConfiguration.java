@@ -35,6 +35,7 @@ import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Netty HTTP server and client using the Netty 4.x.
@@ -58,7 +59,6 @@ public class NettyHttpComponentConfiguration
     private NettyConfiguration configuration;
     /**
      * Whether or not to disconnect(close) from Netty Channel right after use.
-     * Can be used for both consumer and producer.
      */
     private Boolean disconnect = false;
     /**
@@ -77,12 +77,12 @@ public class NettyHttpComponentConfiguration
      * not returned to the connection pool until the Exchange is done; or
      * disconnected if the disconnect option is set to true. The reused Channel
      * is stored on the Exchange as an exchange property with the key
-     * NettyConstants#NETTY_CHANNEL which allows you to obtain the channel
-     * during routing and use it as well.
+     * CamelNettyChannel which allows you to obtain the channel during routing
+     * and use it as well.
      */
     private Boolean reuseChannel = false;
     /**
-     * Setting to set endpoint as one-way or request-response
+     * Setting to set endpoint as one-way (false) or request-response (true)
      */
     private Boolean sync = true;
     /**
@@ -134,7 +134,7 @@ public class NettyHttpComponentConfiguration
      */
     private Boolean disconnectOnNoReply = true;
     /**
-     * To use the given EventExecutorGroup. The option is a
+     * To use the given custom EventExecutorGroup. The option is a
      * io.netty.util.concurrent.EventExecutorGroup type.
      */
     private EventExecutorGroup executorService;
@@ -300,7 +300,7 @@ public class NettyHttpComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * To use a explicit ChannelGroup. The option is a
+     * To use an explicit ChannelGroup. The option is a
      * io.netty.channel.group.ChannelGroup type.
      */
     private ChannelGroup channelGroup;
@@ -325,9 +325,9 @@ public class NettyHttpComponentConfiguration
     private NettyHttpBinding nettyHttpBinding;
     /**
      * Allows to configure additional netty options using option. as prefix. For
-     * example option.child.keepAlive=false to set the netty option
-     * child.keepAlive=false. See the Netty documentation for possible options
-     * that can be used.
+     * example option.child.keepAlive=false. See the Netty documentation for
+     * possible options that can be used. This is a multi-value option with
+     * prefix: option.
      */
     private Map<String, Object> options;
     /**
@@ -400,6 +400,7 @@ public class NettyHttpComponentConfiguration
     /**
      * Client side certificate keystore to be used for encryption
      */
+    @Deprecated
     private File keyStoreFile;
     /**
      * Keystore format to be used for payload encryption. Defaults to JKS if not
@@ -458,6 +459,7 @@ public class NettyHttpComponentConfiguration
     /**
      * Server side certificate keystore to be used for encryption
      */
+    @Deprecated
     private File trustStoreFile;
     /**
      * Server side certificate keystore to be used for encryption. Is loaded by
@@ -903,10 +905,13 @@ public class NettyHttpComponentConfiguration
         this.hostnameVerification = hostnameVerification;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public File getKeyStoreFile() {
         return keyStoreFile;
     }
 
+    @Deprecated
     public void setKeyStoreFile(File keyStoreFile) {
         this.keyStoreFile = keyStoreFile;
     }
@@ -993,10 +998,13 @@ public class NettyHttpComponentConfiguration
         this.sslHandler = sslHandler;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public File getTrustStoreFile() {
         return trustStoreFile;
     }
 
+    @Deprecated
     public void setTrustStoreFile(File trustStoreFile) {
         this.trustStoreFile = trustStoreFile;
     }

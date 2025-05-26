@@ -118,7 +118,8 @@ public class ServiceNowComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Defines both request and response models
+     * Defines both request and response models. This is a multi-value option
+     * with prefix: model.
      */
     private Map<String, Class<Object>> models;
     /**
@@ -132,7 +133,8 @@ public class ServiceNowComponentConfiguration
      */
     private ServiceNowRelease release = ServiceNowRelease.HELSINKI;
     /**
-     * Defines the request model
+     * Defines the request model. This is a multi-value option with prefix:
+     * request-model.
      */
     private Map<String, Class<Object>> requestModels;
     /**
@@ -140,7 +142,8 @@ public class ServiceNowComponentConfiguration
      */
     private String resource;
     /**
-     * Defines the response model
+     * Defines the response model. This is a multi-value option with prefix:
+     * response-model.
      */
     private Map<String, Class<Object>> responseModels;
     /**

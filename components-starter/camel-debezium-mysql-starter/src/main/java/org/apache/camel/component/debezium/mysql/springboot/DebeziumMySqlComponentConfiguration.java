@@ -42,7 +42,7 @@ public class DebeziumMySqlComponentConfiguration
      * properties needed by Debezium engine, for example setting
      * KafkaOffsetBackingStore), the properties have to be prefixed with
      * additionalProperties.. E.g:
-     * additionalProperties.transactional.id=12345&additionalProperties.schema.registry.url=http://localhost:8811/avro
+     * additionalProperties.transactional.id=12345&additionalProperties.schema.registry.url=http://localhost:8811/avro. This is a multi-value option with prefix: additionalProperties.
      */
     private Map<String, Object> additionalProperties;
     /**

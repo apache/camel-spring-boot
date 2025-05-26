@@ -64,9 +64,8 @@ public class DataSetTestComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * Sets a custom ExchangeFormatter to convert the Exchange to a String
-     * suitable for logging. If not specified, we default to
-     * DefaultExchangeFormatter. The option is a
+     * To use a custom ExchangeFormatter to format the Exchange into a String
+     * suitable for logging. The option is a
      * org.apache.camel.spi.ExchangeFormatter type.
      */
     private ExchangeFormatter exchangeFormatter;

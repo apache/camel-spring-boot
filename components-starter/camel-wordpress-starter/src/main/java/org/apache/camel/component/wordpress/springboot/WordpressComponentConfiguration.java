@@ -47,7 +47,8 @@ public class WordpressComponentConfiguration
      */
     private WordpressConfiguration configuration;
     /**
-     * The criteria to use with complex searches.
+     * The criteria to use with complex searches. This is a multi-value option
+     * with prefix: criteria.
      */
     private Map<String, Object> criteria;
     /**

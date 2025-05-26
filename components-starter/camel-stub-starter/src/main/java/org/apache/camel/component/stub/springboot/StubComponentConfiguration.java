@@ -37,17 +37,6 @@ public class StubComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * If shadow is enabled then the stub component will register a shadow
-     * endpoint with the actual uri that refers to the stub endpoint, meaning
-     * you can lookup the endpoint via both stub:kafka:cheese and kafka:cheese.
-     */
-    private Boolean shadow = false;
-    /**
-     * If shadow is enabled then this pattern can be used to filter which
-     * components to match. Multiple patterns can be separated by comma.
-     */
-    private String shadowPattern;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions (if possible) occurred while the Camel consumer
      * is trying to pickup incoming messages, or the likes, will now be
@@ -72,6 +61,17 @@ public class StubComponentConfiguration
      */
     private Integer defaultPollTimeout = 1000;
     /**
+     * Whether the producer should be started lazy (on the first message). By
+     * starting lazy you can use this to allow CamelContext and routes to
+     * startup in situations where a producer may otherwise fail during starting
+     * and cause the route to fail being started. By deferring this startup to
+     * be lazy then the startup failure can be handled during routing messages
+     * via Camel's routing error handlers. Beware that when the first message is
+     * processed then creating and starting the producer may take a little time
+     * and prolong the total processing time of the processing.
+     */
+    private Boolean lazyStartProducer = false;
+    /**
      * Whether a thread that sends messages to a full SEDA queue will block
      * until the queue's capacity is no longer exhausted. By default, an
      * exception will be thrown stating that the queue is full. By enabling this
@@ -91,20 +91,9 @@ public class StubComponentConfiguration
      * until the queue's capacity is no longer exhausted. By default, an
      * exception will be thrown stating that the queue is full. By enabling this
      * option, where a configured timeout can be added to the block case. Using
-     * the .offer(timeout) method of the underlining java queue
+     * the offer(timeout) method of the underlining java queue
      */
     private Long defaultOfferTimeout;
-    /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
-     */
-    private Boolean lazyStartProducer = false;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -124,22 +113,17 @@ public class StubComponentConfiguration
      * messages it can hold).
      */
     private Integer queueSize = 1000;
-
-    public Boolean getShadow() {
-        return shadow;
-    }
-
-    public void setShadow(Boolean shadow) {
-        this.shadow = shadow;
-    }
-
-    public String getShadowPattern() {
-        return shadowPattern;
-    }
-
-    public void setShadowPattern(String shadowPattern) {
-        this.shadowPattern = shadowPattern;
-    }
+    /**
+     * If shadow is enabled then the stub component will register a shadow
+     * endpoint with the actual uri that refers to the stub endpoint, meaning
+     * you can lookup the endpoint via both stub:kafka:cheese and kafka:cheese.
+     */
+    private Boolean shadow = false;
+    /**
+     * If shadow is enabled then this pattern can be used to filter which
+     * components to match. Multiple patterns can be separated by comma.
+     */
+    private String shadowPattern;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -163,6 +147,14 @@ public class StubComponentConfiguration
 
     public void setDefaultPollTimeout(Integer defaultPollTimeout) {
         this.defaultPollTimeout = defaultPollTimeout;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getDefaultBlockWhenFull() {
@@ -189,14 +181,6 @@ public class StubComponentConfiguration
         this.defaultOfferTimeout = defaultOfferTimeout;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
-    }
-
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
@@ -220,5 +204,21 @@ public class StubComponentConfiguration
 
     public void setQueueSize(Integer queueSize) {
         this.queueSize = queueSize;
+    }
+
+    public Boolean getShadow() {
+        return shadow;
+    }
+
+    public void setShadow(Boolean shadow) {
+        this.shadow = shadow;
+    }
+
+    public String getShadowPattern() {
+        return shadowPattern;
+    }
+
+    public void setShadowPattern(String shadowPattern) {
+        this.shadowPattern = shadowPattern;
     }
 }

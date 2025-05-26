@@ -16,7 +16,7 @@
     {
       "name": "camel.component.debezium-db2.additional-properties",
       "type": "java.util.Map<java.lang.String,java.lang.Object>",
-      "description": "Additional properties for debezium components in case they can't be set directly on the camel configurations (e.g: setting Kafka Connect properties needed by Debezium engine, for example setting KafkaOffsetBackingStore), the properties have to be prefixed with additionalProperties.. E.g: additionalProperties.transactional.id=12345&additionalProperties.schema.registry.url=http:\/\/localhost:8811\/avro",
+      "description": "Additional properties for debezium components in case they can't be set directly on the camel configurations (e.g: setting Kafka Connect properties needed by Debezium engine, for example setting KafkaOffsetBackingStore), the properties have to be prefixed with additionalProperties.. E.g: additionalProperties.transactional.id=12345&additionalProperties.schema.registry.url=http:\/\/localhost:8811\/avro. This is a multi-value option with prefix: additionalProperties.",
       "sourceType": "org.apache.camel.component.debezium.db2.springboot.DebeziumDb2ComponentConfiguration"
     },
     {

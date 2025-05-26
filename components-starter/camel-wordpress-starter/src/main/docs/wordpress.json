@@ -43,7 +43,7 @@
     {
       "name": "camel.component.wordpress.criteria",
       "type": "java.util.Map<java.lang.String,java.lang.Object>",
-      "description": "The criteria to use with complex searches.",
+      "description": "The criteria to use with complex searches. This is a multi-value option with prefix: criteria.",
       "sourceType": "org.apache.camel.component.wordpress.springboot.WordpressComponentConfiguration"
     },
     {

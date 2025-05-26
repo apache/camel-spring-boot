@@ -77,7 +77,7 @@
     {
       "name": "camel.component.netty.channel-group",
       "type": "io.netty.channel.group.ChannelGroup",
-      "description": "To use a explicit ChannelGroup. The option is a io.netty.channel.group.ChannelGroup type.",
+      "description": "To use an explicit ChannelGroup. The option is a io.netty.channel.group.ChannelGroup type.",
       "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration"
     },
     {
@@ -140,7 +140,7 @@
     {
       "name": "camel.component.netty.disconnect",
       "type": "java.lang.Boolean",
-      "description": "Whether or not to disconnect(close) from Netty Channel right after use. Can be used for both consumer and producer.",
+      "description": "Whether or not to disconnect(close) from Netty Channel right after use.",
       "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration",
       "defaultValue": false
     },
@@ -179,7 +179,7 @@
     {
       "name": "camel.component.netty.executor-service",
       "type": "io.netty.util.concurrent.EventExecutorGroup",
-      "description": "To use the given EventExecutorGroup. The option is a io.netty.util.concurrent.EventExecutorGroup type.",
+      "description": "To use the given custom EventExecutorGroup. The option is a io.netty.util.concurrent.EventExecutorGroup type.",
       "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration"
     },
     {
@@ -195,12 +195,6 @@
       "description": "Setting to ensure socket is not closed due to inactivity",
       "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration",
       "defaultValue": true
-    },
-    {
-      "name": "camel.component.netty.key-store-file",
-      "type": "java.io.File",
-      "description": "Client side certificate keystore to be used for encryption",
-      "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration"
     },
     {
       "name": "camel.component.netty.key-store-format",
@@ -270,7 +264,7 @@
     {
       "name": "camel.component.netty.options",
       "type": "java.util.Map<java.lang.String,java.lang.Object>",
-      "description": "Allows to configure additional netty options using option. as prefix. For example option.child.keepAlive=false to set the netty option child.keepAlive=false. See the Netty documentation for possible options that can be used.",
+      "description": "Allows to configure additional netty options using option. as prefix. For example option.child.keepAlive=false. See the Netty documentation for possible options that can be used. This is a multi-value option with prefix: option.",
       "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration"
     },
     {
@@ -370,7 +364,7 @@
     {
       "name": "camel.component.netty.reuse-channel",
       "type": "java.lang.Boolean",
-      "description": "This option allows producers and consumers (in client mode) to reuse the same Netty Channel for the lifecycle of processing the Exchange. This is useful if you need to call a server multiple times in a Camel route and want to use the same network connection. When using this, the channel is not returned to the connection pool until the Exchange is done; or disconnected if the disconnect option is set to true. The reused Channel is stored on the Exchange as an exchange property with the key NettyConstants#NETTY_CHANNEL which allows you to obtain the channel during routing and use it as well.",
+      "description": "This option allows producers and consumers (in client mode) to reuse the same Netty Channel for the lifecycle of processing the Exchange. This is useful if you need to call a server multiple times in a Camel route and want to use the same network connection. When using this, the channel is not returned to the connection pool until the Exchange is done; or disconnected if the disconnect option is set to true. The reused Channel is stored on the Exchange as an exchange property with the key CamelNettyChannel which allows you to obtain the channel during routing and use it as well.",
       "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration",
       "defaultValue": false
     },
@@ -443,7 +437,7 @@
     {
       "name": "camel.component.netty.sync",
       "type": "java.lang.Boolean",
-      "description": "Setting to set endpoint as one-way or request-response",
+      "description": "Setting to set endpoint as one-way (false) or request-response (true)",
       "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration",
       "defaultValue": true
     },
@@ -467,12 +461,6 @@
       "description": "Only used for TCP. You can transfer the exchange over the wire instead of just the body. The following fields are transferred: In body, Out body, fault body, In headers, Out headers, fault headers, exchange properties, exchange exception. This requires that the objects are serializable. Camel will exclude any non-serializable objects and log it at WARN level.",
       "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration",
       "defaultValue": false
-    },
-    {
-      "name": "camel.component.netty.trust-store-file",
-      "type": "java.io.File",
-      "description": "Server side certificate keystore to be used for encryption",
-      "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration"
     },
     {
       "name": "camel.component.netty.trust-store-resource",
@@ -532,6 +520,22 @@
       "type": "io.netty.channel.EventLoopGroup",
       "description": "To use a explicit EventLoopGroup as the boss thread pool. For example to share a thread pool with multiple consumers or producers. By default each consumer or producer has their own worker pool with 2 x cpu count core threads. The option is a io.netty.channel.EventLoopGroup type.",
       "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration"
+    },
+    {
+      "name": "camel.component.netty.key-store-file",
+      "type": "java.io.File",
+      "description": "Client side certificate keystore to be used for encryption",
+      "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "camel.component.netty.trust-store-file",
+      "type": "java.io.File",
+      "description": "Server side certificate keystore to be used for encryption",
+      "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration",
+      "deprecated": true,
+      "deprecation": {}
     }
   ],
   "hints": [],
