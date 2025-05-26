@@ -4683,7 +4683,7 @@
       <dependency>
         <groupId>org.xmlunit</groupId>
         <artifactId>xmlunit-assertj3</artifactId>
-        <version>2.10.1</version>
+        <version>2.10.2</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
