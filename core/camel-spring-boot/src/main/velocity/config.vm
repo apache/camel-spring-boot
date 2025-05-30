@@ -53,27 +53,13 @@ public class CamelConfigurationProperties  {
     //
 
     @NestedConfigurationProperty
-    private final Springboot springboot = new Springboot();
-
-    @NestedConfigurationProperty
     private final Main main = new Main();
-
-    public Springboot getSpringboot() {
-        return springboot;
-    }
 
     public Main getMain() {
         return main;
     }
 
     public class Main extends InnerCamelConfigurationProperties {
-
-    }
-
-    @SuppressWarnings("unused")
-    public class Springboot extends InnerDeprecatedCamelConfigurationProperties {
-        // Spring Boot only Properties
-        // ---------------------------
 
         /**
          * Whether to use the main run controller to ensure the Spring-Boot application
