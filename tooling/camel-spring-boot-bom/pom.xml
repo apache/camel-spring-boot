@@ -22,12 +22,12 @@
   <parent>
     <groupId>org.apache.camel.springboot</groupId>
     <artifactId>spring-boot</artifactId>
-    <version>4.10.5-SNAPSHOT</version>
+    <version>4.10.5</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
   <groupId>org.apache.camel.springboot</groupId>
   <artifactId>camel-spring-boot-bom</artifactId>
-  <version>4.10.5-SNAPSHOT</version>
+  <version>4.10.5</version>
   <packaging>pom</packaging>
   <name>Camel SB Tooling :: BOM</name>
   <description>Camel Spring-Boot BOM</description>
@@ -36,1872 +36,1872 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-activemq-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-activemq6-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-amqp-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-arangodb-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-as2-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-asn1-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-asterisk-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-atmosphere-websocket-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-atom-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-avro-rpc-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-avro-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws-bedrock-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws-cloudtrail-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws-config-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws-secrets-manager-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws-xray-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-athena-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-cw-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-ddb-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-ec2-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-ecs-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-eks-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-eventbridge-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-iam-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-kinesis-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-kms-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-lambda-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-mq-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-msk-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-redshift-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-s3-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-ses-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-sns-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-sqs-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-step-functions-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-sts-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-timestream-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-translate-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-azure-cosmosdb-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-azure-eventhubs-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-azure-files-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-azure-key-vault-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-azure-servicebus-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-azure-storage-blob-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-azure-storage-datalake-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-azure-storage-queue-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-barcode-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-base64-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-bean-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-bean-validator-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-beanio-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-bindy-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-bonita-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-box-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-braintree-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-browse-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-caffeine-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-cassandraql-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-cbor-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-chatscript-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-chunk-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-cli-connector-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-clickup-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-cloudevents-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-cm-sms-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-coap-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-cometd-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-componentdsl-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-console-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-consul-cluster-service-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-consul-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-controlbus-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-core-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-couchbase-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-couchdb-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-cron-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-crypto-pgp-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-crypto-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-csimple-joor-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-csv-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-cxf-rest-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-cxf-soap-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-cxf-transport-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-dataformat-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-dataset-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-datasonnet-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-debezium-db2-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-debezium-mongodb-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-debezium-mysql-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-debezium-oracle-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-debezium-postgres-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-debezium-sqlserver-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-debug-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-dhis2-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-digitalocean-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-direct-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-disruptor-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-djl-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-dns-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-docker-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-drill-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-dropbox-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-dsl-modeline-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-dynamic-router-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ehcache-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-elasticsearch-rest-client-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-elasticsearch-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-endpointdsl-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-etcd3-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-exec-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-fastjson-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-fhir-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-file-cluster-service-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-file-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-file-watch-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-flatpack-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-flink-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-flowable-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-fop-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-freemarker-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ftp-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-fury-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-geocoder-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-git-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-github-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-google-bigquery-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-google-calendar-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-google-drive-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-google-functions-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-google-mail-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-google-pubsub-lite-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-google-pubsub-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-google-secret-manager-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-google-sheets-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-google-storage-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-grape-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-graphql-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-grok-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-groovy-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-grpc-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-gson-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-guava-eventbus-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-hashicorp-vault-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-hazelcast-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-hl7-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-http-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-huaweicloud-dms-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-huaweicloud-frs-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-huaweicloud-functiongraph-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-huaweicloud-iam-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-huaweicloud-imagerecognition-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-huaweicloud-obs-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-huaweicloud-smn-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ical-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-iec60870-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ignite-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-infinispan-cluster-service-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-infinispan-embedded-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-infinispan-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-influxdb-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-influxdb2-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-irc-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ironmq-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jackson-avro-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jackson-protobuf-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jackson-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jacksonxml-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jasypt-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-java-joor-dsl-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-javascript-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jaxb-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jcache-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jcr-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jdbc-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jetty-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jfr-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jgroups-raft-cluster-service-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jgroups-raft-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jgroups-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jira-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jms-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jmx-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jolokia-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jolt-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jooq-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-joor-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jpa-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jq-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jsch-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jslt-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-json-patch-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-json-validator-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jsonapi-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jsonata-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jsonb-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jsonpath-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jt400-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jte-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-kafka-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-kamelet-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-knative-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-kserve-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-kubernetes-cluster-service-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-kubernetes-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-kudu-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-langchain4j-chat-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-langchain4j-embeddings-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-langchain4j-tools-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-langchain4j-web-search-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-language-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ldap-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ldif-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-leveldb-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-log-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-lra-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-lucene-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-lumberjack-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-lzf-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-mail-microsoft-oauth-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-mail-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-management-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-mapstruct-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-master-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-metrics-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-micrometer-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-milvus-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-mina-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-minio-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-mllp-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-mock-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-mongodb-gridfs-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-mongodb-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-mustache-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-mvel-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-mybatis-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-nats-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-neo4j-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-netty-http-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-netty-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-nitrite-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-oaipmh-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-observability-services-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-observation-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ognl-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-olingo2-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-olingo4-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-openapi-java-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-openapi-validator-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-opensearch-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-openstack-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-opentelemetry-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-optaplanner-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-paho-mqtt5-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-paho-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-parquet-avro-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-pdf-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-pg-replication-slot-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-pgevent-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-pinecone-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-platform-http-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-plc4x-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-printer-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-protobuf-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-pubnub-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-pulsar-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-python-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-qdrant-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-quartz-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-quickfix-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-reactive-streams-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-reactor-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ref-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-resilience4j-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-rest-openapi-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-rest-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-robotframework-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-rocketmq-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-rss-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-rxjava-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-saga-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-salesforce-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-sap-netweaver-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-saxon-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-scheduler-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-schematron-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-seda-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-service-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-servicenow-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-servlet-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-shiro-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-sjms-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-sjms2-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-slack-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-smb-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-smooks-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-smpp-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-snakeyaml-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-snmp-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-soap-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-solr-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-splunk-hec-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-splunk-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-batch-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-boot</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-boot-engine-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-boot-generator-maven-plugin</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-boot-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-boot-xml</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-boot-xml-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-jdbc-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-ldap-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-rabbitmq-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-redis-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-security-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-ws-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-springdoc-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-sql-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ssh-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-stax-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-stitch-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-stomp-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-stream-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-stringtemplate-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-stub-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-swift-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-syslog-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-tahu-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-tarfile-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-telegram-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-tensorflow-serving-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-thrift-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-thymeleaf-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-tika-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-timer-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-torchserve-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-twilio-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-twitter-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-undertow-spring-security-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-undertow-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-univocity-parsers-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-validator-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-velocity-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-vertx-http-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-vertx-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-vertx-websocket-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-wasm-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-weather-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-web3j-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-webhook-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-whatsapp-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-wordpress-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-workday-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-xchange-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-xj-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-xml-io-dsl-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-xml-jaxb-dsl-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-xml-jaxb-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-xml-jaxp-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-xmlsecurity-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-xmpp-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-xpath-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-xslt-saxon-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-xslt-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-yaml-dsl-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-yaml-io-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-zeebe-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-zendesk-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-zip-deflater-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-zipfile-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-zookeeper-cluster-service-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-zookeeper-master-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-zookeeper-starter</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-test-spring-junit5</artifactId>
-        <version>4.10.5-SNAPSHOT</version>
+        <version>4.10.5</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
