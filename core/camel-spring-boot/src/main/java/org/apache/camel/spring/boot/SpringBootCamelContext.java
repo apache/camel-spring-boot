@@ -79,7 +79,7 @@ public class SpringBootCamelContext extends SpringCamelContext {
             if (!junit && !starterWeb) {
                 LOG.warn(
                         "CamelContext has only been running for less than a second. If you intend to run Camel for a longer time "
-                                + "then you can set the property camel.springboot.main-run-controller=true in application.properties"
+                                + "then you can set the property camel.main.run-controller=true in application.properties"
                                 + " or add spring-boot-starter-web JAR to the classpath.");
             }
         }
