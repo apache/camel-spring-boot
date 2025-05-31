@@ -39,7 +39,7 @@ import org.springframework.test.annotation.DirtiesContext;
 @EnableAutoConfiguration
 @SpringBootTest(classes = { CamelAutoConfiguration.class,
         SupervisingRouteControllerRestartTest.TestConfiguration.class }, properties = {
-                "camel.springboot.main-run-controller = true", "camel.routecontroller.enabled = true",
+                "camel.main.run-controller = true", "camel.routecontroller.enabled = true",
                 "camel.routecontroller.initialDelay = 500", "camel.routecontroller.backoffDelay = 1000",
                 "camel.routecontroller.backoffMaxAttempts = 5", })
 public class SupervisingRouteControllerRestartTest {

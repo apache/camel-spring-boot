@@ -107,7 +107,7 @@ public class CamelAutoConfiguration {
         Clock clock = new ResetableClock();
         CamelSpringBootApplicationController controller = new CamelSpringBootApplicationController(applicationContext);
         CamelContext camelContext = new SpringBootCamelContext(applicationContext,
-                config.getSpringboot().isWarnOnEarlyShutdown(), controller);
+                config.getMain().isWarnOnEarlyShutdown(), controller);
         camelContext.getClock().add(ContextEvents.BOOT, clock);
         controller.setCamelContext(camelContext);
         // bean post processor is created before CamelContext
@@ -292,7 +292,7 @@ public class CamelAutoConfiguration {
     @ConditionalOnMissingBean(RoutesCollector.class)
     @ConditionalOnMissingClass("org.apache.camel.spring.boot.endpointdsl.EndpointDslRouteCollector")
     RoutesCollector routesCollector(ApplicationContext applicationContext, CamelConfigurationProperties config) {
-        return new CamelSpringBootRoutesCollector(applicationContext, config.getSpringboot().isIncludeNonSingletons());
+        return new CamelSpringBootRoutesCollector(applicationContext, config.getMain().isIncludeNonSingletons());
     }
 
     @Bean

@@ -311,11 +311,11 @@ keeping the application alive by preventing JVM termination.
 It means that after you start a Camel application with Spring Boot, your
 application waits for a `Ctrl+C` signal and does not exit immediately.
 
-The controller thread can be activated using the `camel.springboot.main-run-controller` to `true`.
+The controller thread can be activated using the `camel.main.run-controller` to `true`.
 
 [source,properties]
 ----
-camel.springboot.main-run-controller = true
+camel.main.run-controller = true
 ----
 
 Applications using web modules (e.g. importing the `org.springframework.boot:spring-boot-web-starter` module),

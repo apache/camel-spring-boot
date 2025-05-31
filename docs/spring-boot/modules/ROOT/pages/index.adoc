@@ -70,12 +70,12 @@ with a Camel component.
 
 == Making sure Camel context is running in standalone Spring Boot
 
-To ensure the Spring Boot application keeps running until being stopped or the JVM terminated, typically only need when running Spring Boot standalone, i.e. not with `spring-boot-starter-web` when the web container keeps the JVM running, set the `camel.springboot.main-run-controller=true` property in your configuration. For example in `application.properties`.
+To ensure the Spring Boot application keeps running until being stopped or the JVM terminated, typically only need when running Spring Boot standalone, i.e. not with `spring-boot-starter-web` when the web container keeps the JVM running, set the `camel.main.run-controller=true` property in your configuration. For example in `application.properties`.
 
 [source]
 ----
 # to keep the JVM running
-camel.springboot.main-run-controller = true
+camel.main.run-controller = true
 ----
 
 == Spring Boot configuration support

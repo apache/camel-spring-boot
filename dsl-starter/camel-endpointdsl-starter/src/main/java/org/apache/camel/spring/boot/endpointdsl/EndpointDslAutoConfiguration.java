@@ -34,7 +34,7 @@ public class EndpointDslAutoConfiguration {
     @Bean
     RoutesCollector endpointDslRoutesCollector(ApplicationContext applicationContext,
             CamelConfigurationProperties config) {
-        return new EndpointDslRouteCollector(applicationContext, config.getSpringboot().isIncludeNonSingletons());
+        return new EndpointDslRouteCollector(applicationContext, config.getMain().isIncludeNonSingletons());
     }
 
 }

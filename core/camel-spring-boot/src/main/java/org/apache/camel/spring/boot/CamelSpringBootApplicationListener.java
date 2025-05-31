@@ -110,7 +110,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                     camelContextConfiguration.beforeApplicationStart(camelContext);
                 }
 
-                if (configurationProperties.getSpringboot().isMainRunController()) {
+                if (configurationProperties.getMain().isMainRunController()) {
                     CamelMainRunController controller = new CamelMainRunController(applicationContext, camelContext);
 
                     if (configurationProperties.getMain().getDurationMaxMessages() > 0
