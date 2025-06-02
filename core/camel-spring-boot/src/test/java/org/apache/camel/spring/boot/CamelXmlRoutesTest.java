@@ -31,7 +31,7 @@ import org.springframework.test.annotation.DirtiesContext;
 @CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootTest(classes = { CamelXmlRoutesTest.class, RouteConfigWithCamelContextInjected.class }, properties = {
-        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/foo.xml,file:src/test/resources/routes/bar.xml" })
+        "camel.main.routes-include-pattern=file:src/test/resources/routes/foo.xml,file:src/test/resources/routes/bar.xml" })
 public class CamelXmlRoutesTest {
 
     // Collaborators fixtures

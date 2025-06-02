@@ -32,9 +32,9 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext
 @CamelSpringBootTest
 @SpringBootTest(classes = { CamelAutoConfiguration.class, GlobalOptionsTest.TestConfiguration.class }, properties = {
-        "camel.springboot.global-options[foo] = 123", "camel.springboot.global-options[bar] = true",
-        "camel.springboot.globalOptions[baz] = 999", "camel.springboot.globalOptions[cheese] = Gauda",
-        "camel.springboot.global-options[drink] = Wine", })
+        "camel.main.global-options[foo] = 123", "camel.main.global-options[bar] = true",
+        "camel.main.globalOptions[baz] = 999", "camel.main.globalOptions[cheese] = Gauda",
+        "camel.main.global-options[drink] = Wine", })
 public class GlobalOptionsTest {
     @Autowired
     private CamelContext context;

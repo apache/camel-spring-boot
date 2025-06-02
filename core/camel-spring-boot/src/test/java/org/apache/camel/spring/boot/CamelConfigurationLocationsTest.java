@@ -32,7 +32,7 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(properties = "camel.springboot.file-configurations=file:src/test/secret/*.properties")
+@SpringBootTest(properties = "camel.main.file-configurations=file:src/test/secret/*.properties")
 public class CamelConfigurationLocationsTest {
 
     @Configuration

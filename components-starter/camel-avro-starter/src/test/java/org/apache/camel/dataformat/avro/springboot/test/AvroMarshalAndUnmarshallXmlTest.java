@@ -39,7 +39,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 @DirtiesContext
 @CamelSpringBootTest
 @SpringBootTest(classes = { CamelAutoConfiguration.class, AvroMarshalAndUnmarshallXmlTest.class }, properties = {
-        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/springDataFormat.xml" })
+        "camel.main.routes-include-pattern=file:src/test/resources/routes/springDataFormat.xml" })
 public class AvroMarshalAndUnmarshallXmlTest {
 
     @Autowired

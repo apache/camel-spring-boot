@@ -43,7 +43,7 @@ import org.springframework.test.annotation.DirtiesContext;
 @CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootTest(classes = { CamelRestTest.class, CamelRestTest.TestConfiguration.class }, properties = { "debug=false",
-        "camel.springboot.routes-include-pattern=false", "camel.rest.enabled=true", "camel.rest.component=dummy-rest",
+        "camel.main.routes-include-pattern=false", "camel.rest.enabled=true", "camel.rest.component=dummy-rest",
         "camel.rest.host=localhost", "camel.rest.data-format-property.prettyPrint=true",
         "camel.rest.api-property.api.title=My cool API", "camel.rest.api-property.api.version=1.0.0",
         "camel.rest.api-property.cors=true", "camel.rest.cors-headers.foo=123", "camel.rest.cors-headers.bar=456" })

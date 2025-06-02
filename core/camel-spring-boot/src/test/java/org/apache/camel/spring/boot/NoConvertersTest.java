@@ -31,7 +31,7 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(classes = NoConvertersTest.class, properties = "camel.springboot.typeConversion=false")
+@SpringBootTest(classes = NoConvertersTest.class, properties = "camel.main.typeConversion=false")
 public class NoConvertersTest {
 
     @Autowired

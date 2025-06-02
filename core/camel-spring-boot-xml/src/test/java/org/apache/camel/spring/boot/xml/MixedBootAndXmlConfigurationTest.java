@@ -29,8 +29,8 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(properties = { "camel.main.name = camel-spring-boot", "camel.springboot.tracing = true",
-        "camel.springboot.shutdownTimeout = 5" })
+@SpringBootTest(properties = { "camel.main.name = camel-spring-boot", "camel.main.tracing = true",
+        "camel.main.shutdownTimeout = 5" })
 public class MixedBootAndXmlConfigurationTest {
 
     @Autowired

@@ -41,7 +41,7 @@ import io.swagger.v3.oas.models.OpenAPI;
 @CamelSpringBootTest
 @SpringBootTest(classes = { CamelAutoConfiguration.class, SpringRestOpenApiReaderModelApiSecurityTest.class,
         DummyUserService.class, DummyRestConsumerFactory.class }, properties = {
-                "camel.springboot.routes-include-pattern=file:src/test/resources/org/apache/camel/openapi/SpringRestOpenApiReaderModelApiSecurityTest.xml" })
+                "camel.main.routes-include-pattern=file:src/test/resources/org/apache/camel/openapi/SpringRestOpenApiReaderModelApiSecurityTest.xml" })
 public class SpringRestOpenApiReaderModelApiSecurityTest {
 
     private final Logger log = LoggerFactory.getLogger(getClass());

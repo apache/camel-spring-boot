@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @CamelSpringBootTest
 @SpringBootTest(classes = { CamelAutoConfiguration.class, SwiftMxDataFormatTest.class,
         SwiftMxDataFormatTest.Config.class }, properties = {
-                "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SwiftMxDataFormatTest.xml" })
+                "camel.main.routes-include-pattern=file:src/test/resources/routes/SwiftMxDataFormatTest.xml" })
 class SwiftMxDataFormatTest {
 
     @EndpointInject("mock:unmarshal")

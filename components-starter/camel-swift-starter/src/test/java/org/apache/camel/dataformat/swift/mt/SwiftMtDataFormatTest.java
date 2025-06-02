@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @DirtiesContext
 @CamelSpringBootTest
 @SpringBootTest(classes = { CamelAutoConfiguration.class, SwiftMtDataFormatTest.class }, properties = {
-        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SwiftMtDataFormatTest.xml" })
+        "camel.main.routes-include-pattern=file:src/test/resources/routes/SwiftMtDataFormatTest.xml" })
 class SwiftMtDataFormatTest {
 
     @EndpointInject("mock:unmarshal")

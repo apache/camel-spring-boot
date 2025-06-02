@@ -35,8 +35,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 @DirtiesContext
 @CamelSpringBootTest
 @SpringBootTest(classes = { CamelAutoConfiguration.class, SpringJsonPathTransformHeaderNameTest.class }, properties = {
-        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringJsonPathTransformHeaderNameTest.xml" }
-
+        "camel.main.routes-include-pattern=file:src/test/resources/routes/SpringJsonPathTransformHeaderNameTest.xml" }
 )
 public class SpringJsonPathTransformHeaderNameTest {
 

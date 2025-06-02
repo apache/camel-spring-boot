@@ -245,8 +245,8 @@ following Spring properties:
 
 [source,properties]
 ----
-camel.springboot.consumer-template-cache-size = 100
-camel.springboot.producer-template-cache-size = 200
+camel.main.consumer-template-cache-size = 100
+camel.main.producer-template-cache-size = 200
 ----
 [[typeconverter]]
 == Auto-configured TypeConverter
@@ -331,9 +331,9 @@ this off using the configuration option
 [source,properties]
 ----
 # turn off
-camel.springboot.routes-include-pattern = false
+camel.main.routes-include-pattern = false
 # scan only in the com/foo/routes classpath
-camel.springboot.routes-include-pattern = classpath:com/foo/routes/*.xml
+camel.main.routes-include-pattern = classpath:com/foo/routes/*.xml
 ----
 
 The XML files should be Camel XML routes (*not* `<CamelContext>`) such as

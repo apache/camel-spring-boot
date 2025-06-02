@@ -44,8 +44,8 @@ import java.util.stream.Collectors;
         "camel.routecontroller.initial-delay=100",
         "camel.routecontroller.back-off-delay=100",
         "camel.routecontroller.back-off-max-attempts=3",
-        "camel.springboot.routes-exclude-pattern=*",
-        "camel.springboot.routes-collector-enabled=true"}
+        "camel.main.routes-exclude-pattern=*",
+        "camel.main.routes-collector-enabled=true"}
 )
 public class CamelRoutesEndpointControllerRouteTest {
 

@@ -35,7 +35,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 @DirtiesContext
 @CamelSpringBootTest
 @SpringBootTest(classes = { CamelAutoConfiguration.class, SpringJsonPathCBRTest.class }, properties = {
-        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringJsonPathCBTTest.xml" }
+        "camel.main.routes-include-pattern=file:src/test/resources/routes/SpringJsonPathCBTTest.xml" }
 
 )
 public class SpringJsonPathCBRTest {

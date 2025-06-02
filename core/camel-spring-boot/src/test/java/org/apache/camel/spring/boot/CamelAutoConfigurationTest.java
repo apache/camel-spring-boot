@@ -47,10 +47,10 @@ import org.springframework.test.annotation.DirtiesContext;
 @CamelSpringBootTest
 @EnableAutoConfiguration
 @SpringBootTest(classes = { CamelAutoConfigurationTest.TestConfig.class, CamelAutoConfigurationTest.class,
-        RouteConfigWithCamelContextInjected.class }, properties = { "camel.springboot.consumerTemplateCacheSize=100",
-                "camel.springboot.jmxEnabled=true", "camel.main.name=customName",
-                "camel.springboot.typeConversion=true",
-                "camel.springboot.threadNamePattern=customThreadName #counter#" })
+        RouteConfigWithCamelContextInjected.class }, properties = { "camel.main.consumerTemplateCacheSize=100",
+                "camel.main.jmxEnabled=true", "camel.main.name=customName",
+                "camel.main.typeConversion=true",
+                "camel.main.threadNamePattern=customThreadName #counter#" })
 public class CamelAutoConfigurationTest extends org.junit.jupiter.api.Assertions {
 
     // Collaborators fixtures

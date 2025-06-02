@@ -31,8 +31,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 @DirtiesContext
 @CamelSpringBootTest
 @SpringBootTest(classes = { CamelAutoConfiguration.class, SpringJsonPathSuppressTest.class }, properties = {
-        "camel.springboot.routes-include-pattern=file:src/test/resources/routes/SpringJsonPathSuppressTest.xml" }
-
+        "camel.main.routes-include-pattern=file:src/test/resources/routes/SpringJsonPathSuppressTest.xml" }
 )
 public class SpringJsonPathSuppressTest {
 

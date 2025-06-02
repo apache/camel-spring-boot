@@ -33,7 +33,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(properties = { "camel.springboot.routes-include-pattern=classpath:camel-xml-io-dsl.xml",
+@SpringBootTest(properties = { "camel.main.routes-include-pattern=classpath:camel-xml-io-dsl.xml",
         "spring.main.allow-circular-references=true" })
 public class MixedRestDslTest {
 

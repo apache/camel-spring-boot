@@ -774,6 +774,13 @@
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main"
     },
     {
+      "name": "camel.main.include-non-singletons",
+      "type": "java.lang.Boolean",
+      "description": "Whether to include non-singleton beans (prototypes) when scanning for RouteBuilder instances. By default only singleton beans is included in the context scan.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": false
+    },
+    {
       "name": "camel.main.inflight-repository-browse-enabled",
       "type": "java.lang.Boolean",
       "description": "Sets whether the inflight repository should allow browsing each inflight exchange. This is by default disabled as there is a very slight performance overhead when enabled.",
@@ -892,6 +899,13 @@
       "type": "java.lang.String",
       "description": "The global name to use for Log EIP The name is default the routeId or the source:line if source location is enabled. You can also specify the name using tokens: <br\/> ${class} - the logger class name (org.apache.camel.processor.LogProcessor) <br\/> ${contextId} - the camel context id <br\/> ${routeId} - the route id <br\/> ${groupId} - the route group id <br\/> ${nodeId} - the node id <br\/> ${nodePrefixId} - the node prefix id <br\/> ${source} - the source:line (source location must be enabled) <br\/> ${source.name} - the source filename (source location must be enabled) <br\/> ${source.line} - the source line number (source location must be enabled) For example to use the route and node id you can specify the name as: ${routeId}\/${nodeId}",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main"
+    },
+    {
+      "name": "camel.main.main-run-controller",
+      "type": "java.lang.Boolean",
+      "description": "Whether to use the main run controller to ensure the Spring-Boot application keeps running until being stopped or the JVM terminated. You typically only need this if you run Spring-Boot standalone. If you run Spring-Boot with spring-boot-starter-web then the web container keeps the JVM running.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": false
     },
     {
       "name": "camel.main.mdc-logging-keys-pattern",
@@ -1255,6 +1269,13 @@
       "defaultValue": "default"
     },
     {
+      "name": "camel.main.warn-on-early-shutdown",
+      "type": "java.lang.Boolean",
+      "description": "Whether to log a WARN if Camel on Spring Boot was immediately shutdown after starting which very likely is because there is no JVM thread to keep the application running.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": true
+    },
+    {
       "name": "camel.routecontroller.back-off-delay",
       "type": "java.lang.Long",
       "description": "Backoff delay in millis when restarting a route that failed to startup.",
@@ -1341,27 +1362,6 @@
       "type": "java.util.List<java.util.Map<java.lang.String,java.lang.String>>",
       "description": "Route template configurations",
       "sourceType": "org.apache.camel.spring.boot.routetemplate.CamelRouteTemplateConfigurationProperties"
-    },
-    {
-      "name": "camel.main.include-non-singletons",
-      "type": "java.lang.Boolean",
-      "description": "Whether to include non-singleton beans (prototypes) when scanning for RouteBuilder instances. By default only singleton beans is included in the context scan.",
-      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.main.run-controller",
-      "type": "java.lang.Boolean",
-      "description": "Whether to use the main run controller to ensure the Spring-Boot application keeps running until being stopped or the JVM terminated. You typically only need this if you run Spring-Boot standalone. If you run Spring-Boot with spring-boot-starter-web then the web container keeps the JVM running.",
-      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.main.warn-on-early-shutdown",
-      "type": "java.lang.Boolean",
-      "description": "Whether to log a WARN if Camel on Spring Boot was immediately shutdown after starting which very likely is because there is no JVM thread to keep the application running.",
-      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
-      "defaultValue": true
     },
     {
       "name": "camel.ssl.cert-alias",

@@ -32,7 +32,7 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(properties = "camel.springboot.typeConversion=true")
+@SpringBootTest(properties = "camel.main.typeConversion=true")
 public class SpringConverterDelegationTest {
 
     @Autowired

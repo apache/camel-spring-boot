@@ -34,7 +34,7 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(properties = { "camel.springboot.consumerTemplateCacheSize=100", "camel.main.name=customName" })
+@SpringBootTest(properties = { "camel.main.consumerTemplateCacheSize=100", "camel.main.name=customName" })
 public class CamelAutoConfigurationWithCompatPrefixTest {
 
     // Collaborators fixtures
