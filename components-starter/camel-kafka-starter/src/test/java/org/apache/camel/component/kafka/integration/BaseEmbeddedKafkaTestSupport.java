@@ -94,6 +94,8 @@ public abstract class BaseEmbeddedKafkaTestSupport {
                     KafkaComponent kafka = new KafkaComponent(context);
                     kafka.init();
                     kafka.getConfiguration().setBrokers(BaseEmbeddedKafkaTestSupport.service.getBootstrapServers());
+                    kafka.getConfiguration().setRecordMetadata(true);
+
                     context.addComponent("kafka", kafka);
                 }
 
