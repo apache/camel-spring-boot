@@ -298,10 +298,8 @@ public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
 
     @Test
     @DisabledIfSystemProperties({
-            @DisabledIfSystemProperty(named = "ci.env.name", matches = "apache.org",
-                    disabledReason = "File too large for Apache CI"),
-            @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com",
-                    disabledReason = "File too large for GitHub CI")
+            @DisabledIfSystemProperty(named = "ci.env.name", matches = ".*",
+                    disabledReason = "File too large for CI"),
     })
     void streamingWithLargeRequestAndResponseBody() throws Exception {
         camelContext.getStreamCachingStrategy().setSpoolEnabled(true);
