@@ -122,12 +122,6 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         msg.init(exchange, binding, request, response);
         String contextPath = getEndpoint().getPath();
         exchange.getIn().setHeader(SpringBootPlatformHttpConstants.CONTEXT_PATH, contextPath);
-        // set context path as header
-        String httpPath = (String) exchange.getIn().getHeader(Exchange.HTTP_PATH);
-        // here we just remove the CamelServletContextPath part from the HTTP_PATH
-        if (contextPath != null && httpPath.startsWith(contextPath)) {
-            exchange.getIn().setHeader(Exchange.HTTP_PATH, httpPath.substring(contextPath.length()));
-        }
         if (getEndpoint().isUseCookieHandler()) {
             cookieConfiguration = getEndpoint().getCookieConfiguration();
             exchange.setProperty(Exchange.COOKIE_HANDLER, new SpringBootCookieHandler(request, response));
