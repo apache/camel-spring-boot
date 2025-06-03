@@ -60,6 +60,10 @@ public class PlatformHttpComponentConfiguration
      */
     private Boolean handleWriteResponseError = false;
     /**
+     * The period in milliseconds after which the request should be timed out.
+     */
+    private Long requestTimeout;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -94,6 +98,14 @@ public class PlatformHttpComponentConfiguration
 
     public void setHandleWriteResponseError(Boolean handleWriteResponseError) {
         this.handleWriteResponseError = handleWriteResponseError;
+    }
+
+    public Long getRequestTimeout() {
+        return requestTimeout;
+    }
+
+    public void setRequestTimeout(Long requestTimeout) {
+        this.requestTimeout = requestTimeout;
     }
 
     public Boolean getAutowiredEnabled() {

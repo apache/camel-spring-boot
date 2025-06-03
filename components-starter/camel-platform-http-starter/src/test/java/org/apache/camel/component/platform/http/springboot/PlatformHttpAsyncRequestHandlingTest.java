@@ -23,7 +23,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -93,7 +93,11 @@ public class PlatformHttpAsyncRequestHandlingTest extends PlatformHttpBase {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("platform-http:/myget").id(getRouteId).setBody().constant("get");
+                    from("platform-http:/myget").id(getRouteId)
+                            .process(exchange -> {
+                                Thread.sleep(2000);
+                            })
+                            .setBody().constant("get");
                     from("platform-http:/mypost").id(postRouteId).transform().body(String.class, b -> b.toUpperCase());
                 }
             };
