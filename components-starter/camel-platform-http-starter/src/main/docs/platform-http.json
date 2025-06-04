@@ -56,6 +56,12 @@
       "type": "org.apache.camel.spi.HeaderFilterStrategy",
       "description": "To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type.",
       "sourceType": "org.apache.camel.component.platform.http.springboot.PlatformHttpComponentConfiguration"
+    },
+    {
+      "name": "camel.component.platform-http.request-timeout",
+      "type": "java.lang.Long",
+      "description": "The period in milliseconds after which the request should be timed out.",
+      "sourceType": "org.apache.camel.component.platform.http.springboot.PlatformHttpComponentConfiguration"
     }
   ],
   "hints": []
