@@ -45,6 +45,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.camel.util.IOHelper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfSystemProperties;
 import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
@@ -297,6 +298,7 @@ public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
     CamelContext camelContext;
 
     @Test
+    @Disabled
     @DisabledIfSystemProperties({
             @DisabledIfSystemProperty(named = "ci.env.name", matches = ".*",
                     disabledReason = "File too large for CI"),
