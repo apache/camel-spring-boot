@@ -63,16 +63,20 @@ public class HttpComponentConfiguration
      */
     private Boolean logHttpActivity = false;
     /**
-     * Whether to skip mapping all the Camel headers as HTTP request headers. If
-     * there are no data from Camel headers needed to be included in the HTTP
-     * request then this can avoid parsing overhead with many object allocations
-     * for the JVM garbage collector.
+     * Whether to skip Camel control headers (CamelHttp... headers) to influence
+     * this endpoint. Control headers from previous HTTP components can
+     * influence how this Camel component behaves such as CamelHttpPath,
+     * CamelHttpQuery, etc.
+     */
+    private Boolean skipControlHeaders = false;
+    /**
+     * Whether to skip mapping all the Camel headers as HTTP request headers.
+     * This is useful when you know that calling the HTTP service should not
+     * include any custom headers.
      */
     private Boolean skipRequestHeaders = false;
     /**
      * Whether to skip mapping all the HTTP response headers to Camel headers.
-     * If there are no data needed from HTTP headers then this can avoid parsing
-     * overhead with many object allocations for the JVM garbage collector.
      */
     private Boolean skipResponseHeaders = false;
     /**
@@ -302,6 +306,14 @@ public class HttpComponentConfiguration
 
     public void setLogHttpActivity(Boolean logHttpActivity) {
         this.logHttpActivity = logHttpActivity;
+    }
+
+    public Boolean getSkipControlHeaders() {
+        return skipControlHeaders;
+    }
+
+    public void setSkipControlHeaders(Boolean skipControlHeaders) {
+        this.skipControlHeaders = skipControlHeaders;
     }
 
     public Boolean getSkipRequestHeaders() {

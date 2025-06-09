@@ -257,16 +257,23 @@
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
     },
     {
+      "name": "camel.component.http.skip-control-headers",
+      "type": "java.lang.Boolean",
+      "description": "Whether to skip Camel control headers (CamelHttp... headers) to influence this endpoint. Control headers from previous HTTP components can influence how this Camel component behaves such as CamelHttpPath, CamelHttpQuery, etc.",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.http.skip-request-headers",
       "type": "java.lang.Boolean",
-      "description": "Whether to skip mapping all the Camel headers as HTTP request headers. If there are no data from Camel headers needed to be included in the HTTP request then this can avoid parsing overhead with many object allocations for the JVM garbage collector.",
+      "description": "Whether to skip mapping all the Camel headers as HTTP request headers. This is useful when you know that calling the HTTP service should not include any custom headers.",
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.http.skip-response-headers",
       "type": "java.lang.Boolean",
-      "description": "Whether to skip mapping all the HTTP response headers to Camel headers. If there are no data needed from HTTP headers then this can avoid parsing overhead with many object allocations for the JVM garbage collector.",
+      "description": "Whether to skip mapping all the HTTP response headers to Camel headers.",
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration",
       "defaultValue": false
     },
