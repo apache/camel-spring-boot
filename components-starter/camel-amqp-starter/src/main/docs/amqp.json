@@ -124,12 +124,6 @@
       "defaultValue": true
     },
     {
-      "name": "camel.component.amqp.broker-url",
-      "type": "java.lang.String",
-      "description": "Remote URL to broker. The URL is used to setup connection factory and is broker specific (such as ActiveMQ).",
-      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
-    },
-    {
       "name": "camel.component.amqp.browse-limit",
       "type": "java.lang.Integer",
       "description": "Maximum number of messages to keep in memory available for browsing. Use 0 for unlimited.",

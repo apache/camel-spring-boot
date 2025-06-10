@@ -46,11 +46,6 @@ public class AMQPComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Remote URL to broker. The URL is used to setup connection factory and is
-     * broker specific (such as ActiveMQ).
-     */
-    private String brokerUrl;
-    /**
      * Sets the JMS client ID to use. Note that this value, if specified, must
      * be unique and can only be used by a single JMS connection instance. It is
      * typically only required for durable topic subscriptions with JMS 1.1.
@@ -893,14 +888,6 @@ public class AMQPComponentConfiguration
      * mode.
      */
     private Integer transactionTimeout = -1;
-
-    public String getBrokerUrl() {
-        return brokerUrl;
-    }
-
-    public void setBrokerUrl(String brokerUrl) {
-        this.brokerUrl = brokerUrl;
-    }
 
     public String getClientId() {
         return clientId;

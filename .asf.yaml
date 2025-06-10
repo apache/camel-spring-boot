@@ -27,3 +27,7 @@ github:
     - spring-boot
 notifications:
   pullrequests: commits@camel.apache.org
+camel:
+  component:
+    kafka:
+      brokers: localhost:9092
