@@ -29,8 +29,8 @@
     },
     {
       "name": "camel.component.langchain4j-chat.chat-model",
-      "type": "dev.langchain4j.model.chat.ChatLanguageModel",
-      "description": "Chat Language Model of type dev.langchain4j.model.chat.ChatLanguageModel. The option is a dev.langchain4j.model.chat.ChatLanguageModel type.",
+      "type": "dev.langchain4j.model.chat.ChatModel",
+      "description": "Chat Model of type dev.langchain4j.model.chat.ChatModel. The option is a dev.langchain4j.model.chat.ChatModel type.",
       "sourceType": "org.apache.camel.component.langchain4j.chat.springboot.LangChain4jChatComponentConfiguration"
     },
     {

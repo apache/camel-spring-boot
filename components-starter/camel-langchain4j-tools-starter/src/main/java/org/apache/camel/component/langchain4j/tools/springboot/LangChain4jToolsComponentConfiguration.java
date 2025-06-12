@@ -16,7 +16,7 @@
  */
 package org.apache.camel.component.langchain4j.tools.springboot;
 
-import dev.langchain4j.model.chat.ChatLanguageModel;
+import dev.langchain4j.model.chat.ChatModel;
 import org.apache.camel.component.langchain4j.tools.LangChain4jToolsConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -76,10 +76,10 @@ public class LangChain4jToolsComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * Chat Language Model of type dev.langchain4j.model.chat.ChatLanguageModel.
-     * The option is a dev.langchain4j.model.chat.ChatLanguageModel type.
+     * Chat Model of type dev.langchain4j.model.chat.ChatModel. The option is a
+     * dev.langchain4j.model.chat.ChatModel type.
      */
-    private ChatLanguageModel chatModel;
+    private ChatModel chatModel;
 
     public LangChain4jToolsConfiguration getConfiguration() {
         return configuration;
@@ -113,11 +113,11 @@ public class LangChain4jToolsComponentConfiguration
         this.autowiredEnabled = autowiredEnabled;
     }
 
-    public ChatLanguageModel getChatModel() {
+    public ChatModel getChatModel() {
         return chatModel;
     }
 
-    public void setChatModel(ChatLanguageModel chatModel) {
+    public void setChatModel(ChatModel chatModel) {
         this.chatModel = chatModel;
     }
 }

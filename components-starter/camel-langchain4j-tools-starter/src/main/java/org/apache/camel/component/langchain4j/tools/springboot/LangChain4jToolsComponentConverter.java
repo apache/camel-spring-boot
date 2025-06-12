@@ -40,7 +40,7 @@ public class LangChain4jToolsComponentConverter implements GenericConverter {
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.langchain4j.tools.LangChain4jToolsConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, dev.langchain4j.model.chat.ChatLanguageModel.class));
+        answer.add(new ConvertiblePair(String.class, dev.langchain4j.model.chat.ChatModel.class));
         return answer;
     }
 
@@ -58,7 +58,7 @@ public class LangChain4jToolsComponentConverter implements GenericConverter {
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.apache.camel.component.langchain4j.tools.LangChain4jToolsConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.langchain4j.tools.LangChain4jToolsConfiguration.class);
-            case "dev.langchain4j.model.chat.ChatLanguageModel": return applicationContext.getBean(ref, dev.langchain4j.model.chat.ChatLanguageModel.class);
+            case "dev.langchain4j.model.chat.ChatModel": return applicationContext.getBean(ref, dev.langchain4j.model.chat.ChatModel.class);
         }
         return null;
     }
