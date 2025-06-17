@@ -153,6 +153,14 @@ public class RestConfigurationDefinitionProperties {
      */
     private Boolean clientRequestValidation = false;
     /**
+     * Whether to check what Camel is returning as response to the client: 1)
+     * Status-code and Content-Type matches Rest DSL response messages. 2) Check
+     * whether expected headers is included according to the Rest DSL repose
+     * message headers. 3) If the response body is JSon then check whether its
+     * valid JSon. Returns 500 if validation error detected.
+     */
+    private Boolean clientResponseValidation = false;
+    /**
      * Whether to enable CORS headers in the HTTP response. The default value is
      * false.
      */
@@ -362,6 +370,14 @@ public class RestConfigurationDefinitionProperties {
 
     public void setClientRequestValidation(Boolean clientRequestValidation) {
         this.clientRequestValidation = clientRequestValidation;
+    }
+
+    public Boolean getClientResponseValidation() {
+        return clientResponseValidation;
+    }
+
+    public void setClientResponseValidation(Boolean clientResponseValidation) {
+        this.clientResponseValidation = clientResponseValidation;
     }
 
     public Boolean getEnableCors() {

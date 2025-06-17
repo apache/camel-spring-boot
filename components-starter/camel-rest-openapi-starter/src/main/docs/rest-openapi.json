@@ -53,6 +53,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.rest-openapi.client-response-validation",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable validation of the client request to check if the outgoing response from Camel is valid according to the OpenAPI specification",
+      "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.rest-openapi.component-name",
       "type": "java.lang.String",
       "description": "Name of the Camel component that will perform the requests. The component must be present in Camel registry and it must implement RestProducerFactory service provider interface. If not set CLASSPATH is searched for single component that implements RestProducerFactory SPI. Can be overridden in endpoint configuration.",

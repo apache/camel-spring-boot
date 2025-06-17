@@ -76,6 +76,12 @@ public class RestOpenApiComponentConfiguration
      */
     private Boolean clientRequestValidation = false;
     /**
+     * Whether to enable validation of the client request to check if the
+     * outgoing response from Camel is valid according to the OpenAPI
+     * specification
+     */
+    private Boolean clientResponseValidation = false;
+    /**
      * Whether the consumer should fail,ignore or return a mock response for
      * OpenAPI operations that are not mapped to a corresponding route.
      */
@@ -214,6 +220,14 @@ public class RestOpenApiComponentConfiguration
 
     public void setClientRequestValidation(Boolean clientRequestValidation) {
         this.clientRequestValidation = clientRequestValidation;
+    }
+
+    public Boolean getClientResponseValidation() {
+        return clientResponseValidation;
+    }
+
+    public void setClientResponseValidation(Boolean clientResponseValidation) {
+        this.clientResponseValidation = clientResponseValidation;
     }
 
     public String getMissingOperation() {
