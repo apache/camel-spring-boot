@@ -65,7 +65,8 @@ public class RestConfigurationDefinitionAutoConfiguration {
         properties.remove("dataFormatProperty");
         properties.remove("endpointProperty");
         properties.remove("corsHeaders");
-        
+        properties.remove("validationLevels");
+
         RestConfiguration definition = new RestConfiguration();
         CamelPropertiesHelper.setCamelProperties(camelContext, definition, properties, true);
         
@@ -93,6 +94,12 @@ public class RestConfigurationDefinitionAutoConfiguration {
             Map<String, String> target = new HashMap<>();
             map.forEach((k, v) -> target.put(k, v.toString()));
             definition.setCorsHeaders(target);
+        }
+        if (config.getValidationLevels() != null) {
+            Map<String, Object> map = CollectionHelper.flattenKeysInMap(config.getValidationLevels(), ".");
+            Map<String, String> target = new HashMap<>();
+            map.forEach((k, v) -> target.put(k, v.toString()));
+            definition.setValidationLevels(target);
         }
         return definition;
     }

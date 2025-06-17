@@ -886,6 +886,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.rest.validation-levels",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "Allows to configure custom validation levels when using camel-openapi-validator with client request\/response validator.",
+      "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
+    },
+    {
       "name": "camel.rest.xml-data-format",
       "type": "java.lang.String",
       "description": "Name of specific XML data format to use. By default jaxb will be used. Important: This option is only for setting a custom name of the data format, not to refer to an existing data format instance.",

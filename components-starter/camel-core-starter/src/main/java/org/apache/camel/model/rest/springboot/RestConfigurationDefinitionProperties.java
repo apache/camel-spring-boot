@@ -227,6 +227,11 @@ public class RestConfigurationDefinitionProperties {
      * Allows to configure custom CORS headers.
      */
     private Map<String, Object> corsHeaders;
+    /**
+     * Allows to configure custom validation levels when using
+     * camel-openapi-validator with client request/response validator.
+     */
+    private Map<String, Object> validationLevels;
 
     public String getComponent() {
         return component;
@@ -466,5 +471,13 @@ public class RestConfigurationDefinitionProperties {
 
     public void setCorsHeaders(Map<String, Object> corsHeaders) {
         this.corsHeaders = corsHeaders;
+    }
+
+    public Map<String, Object> getValidationLevels() {
+        return validationLevels;
+    }
+
+    public void setValidationLevels(Map<String, Object> validationLevels) {
+        this.validationLevels = validationLevels;
     }
 }
