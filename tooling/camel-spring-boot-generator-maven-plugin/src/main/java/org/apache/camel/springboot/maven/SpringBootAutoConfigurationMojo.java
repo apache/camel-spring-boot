@@ -460,7 +460,8 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 + "properties.remove(\"enableCors\");\n" + "properties.remove(\"apiProperty\");\n"
                 + "properties.remove(\"componentProperty\");\n" + "properties.remove(\"consumerProperty\");\n"
                 + "properties.remove(\"dataFormatProperty\");\n" + "properties.remove(\"endpointProperty\");\n"
-                + "properties.remove(\"corsHeaders\");\n" + "\n"
+                + "properties.remove(\"corsHeaders\");\n" + "properties.remove(\"validationLevels\");\n"
+                + "\n"
                 + "RestConfiguration definition = new RestConfiguration();\n"
                 + "CamelPropertiesHelper.setCamelProperties(camelContext, definition, properties, true);\n" + "\n"
                 + "// Workaround for spring-boot properties name as It would appear\n"
@@ -480,7 +481,14 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 + "    Map<String, Object> map = CollectionHelper.flattenKeysInMap(config.getCorsHeaders(), \".\");\n"
                 + "    Map<String, String> target = new HashMap<>();\n"
                 + "    map.forEach((k, v) -> target.put(k, v.toString()));\n"
-                + "    definition.setCorsHeaders(target);\n" + "}\n" + "return definition;");
+                + "    definition.setCorsHeaders(target);\n"
+                + "}\n" + "if (config.getValidationLevels() != null) {\n"
+                + "    Map<String, Object> map = CollectionHelper.flattenKeysInMap(config.getValidationLevels(), \".\");\n"
+                + "    Map<String, String> target = new HashMap<>();\n"
+                + "    map.forEach((k, v) -> target.put(k, v.toString()));\n"
+                + "    definition.setValidationLevels(target);\n"
+                + "}\n"
+                + "return definition;");
 
         String fileName = packageName.replaceAll("\\.", "\\/") + "/" + name + ".java";
         writeSourceIfChanged(javaClass, fileName, true);

@@ -66,7 +66,7 @@ public class RestConfigurationDefinitionAutoConfiguration {
         properties.remove("endpointProperty");
         properties.remove("corsHeaders");
         properties.remove("validationLevels");
-
+        
         RestConfiguration definition = new RestConfiguration();
         CamelPropertiesHelper.setCamelProperties(camelContext, definition, properties, true);
         
