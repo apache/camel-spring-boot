@@ -220,6 +220,7 @@
     <module>camel-flink-starter</module>
     <module>camel-flowable-starter</module>
     <module>camel-fop-starter</module>
+    <module>camel-fory-starter</module>
     <module>camel-freemarker-starter</module>
     <module>camel-ftp-starter</module>
     <module>camel-geocoder-starter</module>
