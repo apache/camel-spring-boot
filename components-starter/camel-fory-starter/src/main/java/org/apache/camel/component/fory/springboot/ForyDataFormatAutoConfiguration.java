@@ -14,10 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.component.fury.springboot;
+package org.apache.camel.component.fory.springboot;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.component.fury.FuryDataFormat;
+import org.apache.camel.component.fory.ForyDataFormat;
 import org.apache.camel.spi.DataFormat;
 import org.apache.camel.spi.DataFormatCustomizer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
@@ -42,24 +42,24 @@ import org.springframework.context.annotation.Lazy;
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
-@EnableConfigurationProperties({DataFormatConfigurationProperties.class,FuryDataFormatConfiguration.class})
-@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.fury"})
-public class FuryDataFormatAutoConfiguration {
+@EnableConfigurationProperties({DataFormatConfigurationProperties.class,ForyDataFormatConfiguration.class})
+@ConditionalOnHierarchicalProperties({"camel.dataformat", "camel.dataformat.fory"})
+public class ForyDataFormatAutoConfiguration {
 
     @Autowired
     private ApplicationContext applicationContext;
     private final CamelContext camelContext;
     @Autowired
-    private FuryDataFormatConfiguration configuration;
+    private ForyDataFormatConfiguration configuration;
 
-    public FuryDataFormatAutoConfiguration(
+    public ForyDataFormatAutoConfiguration(
             org.apache.camel.CamelContext camelContext) {
         this.camelContext = camelContext;
     }
 
     @Lazy
     @Bean
-    public DataFormatCustomizer configureFuryDataFormatFactory() {
+    public DataFormatCustomizer configureForyDataFormatFactory() {
         return new DataFormatCustomizer() {
             @Override
             public void configure(String name, DataFormat target) {
@@ -70,8 +70,8 @@ public class FuryDataFormatAutoConfiguration {
                 return HierarchicalPropertiesEvaluator.evaluate(
                         applicationContext,
                         "camel.dataformat.customizer",
-                        "camel.dataformat.fury.customizer")
-                    && target instanceof FuryDataFormat;
+                        "camel.dataformat.fory.customizer")
+                    && target instanceof ForyDataFormat;
             }
         };
     }

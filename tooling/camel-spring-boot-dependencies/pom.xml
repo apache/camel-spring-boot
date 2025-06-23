@@ -889,17 +889,17 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-fory-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-freemarker-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ftp-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-fury-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -2961,17 +2961,17 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-fory</artifactId>
+        <version>4.13.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-freemarker</artifactId>
         <version>4.13.0-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-ftp</artifactId>
-        <version>4.13.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-fury</artifactId>
         <version>4.13.0-SNAPSHOT</version>
       </dependency>
       <dependency>
