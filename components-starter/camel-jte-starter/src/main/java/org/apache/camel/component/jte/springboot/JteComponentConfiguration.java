@@ -52,6 +52,10 @@ public class JteComponentConfiguration
      */
     private Boolean allowTemplateFromHeader = false;
     /**
+     * Sets whether to use resource content cache or not
+     */
+    private Boolean contentCache = true;
+    /**
      * Content type the JTE engine should use.
      */
     private ContentType contentType = ContentType.Plain;
@@ -101,6 +105,14 @@ public class JteComponentConfiguration
 
     public void setAllowTemplateFromHeader(Boolean allowTemplateFromHeader) {
         this.allowTemplateFromHeader = allowTemplateFromHeader;
+    }
+
+    public Boolean getContentCache() {
+        return contentCache;
+    }
+
+    public void setContentCache(Boolean contentCache) {
+        this.contentCache = contentCache;
     }
 
     public ContentType getContentType() {

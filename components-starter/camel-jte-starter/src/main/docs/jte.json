@@ -35,6 +35,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.jte.content-cache",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether to use resource content cache or not",
+      "sourceType": "org.apache.camel.component.jte.springboot.JteComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.jte.content-type",
       "type": "gg.jte.ContentType",
       "description": "Content type the JTE engine should use.",

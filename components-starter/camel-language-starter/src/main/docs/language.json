@@ -14,9 +14,23 @@
   ],
   "properties": [
     {
+      "name": "camel.component.language.allow-template-from-header",
+      "type": "java.lang.Boolean",
+      "description": "Whether to allow to use resource template from header or not (default false). Enabling this allows to specify dynamic templates via message header. However this can be seen as a potential security vulnerability if the header is coming from a malicious user, so use this with care.",
+      "sourceType": "org.apache.camel.component.language.springboot.LanguageComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.language.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.language.springboot.LanguageComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.language.content-cache",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether to use resource content cache or not",
       "sourceType": "org.apache.camel.component.language.springboot.LanguageComponentConfiguration",
       "defaultValue": true
     },

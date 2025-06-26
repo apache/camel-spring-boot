@@ -28,6 +28,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.jolt.content-cache",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether to use resource content cache or not",
+      "sourceType": "org.apache.camel.component.jolt.springboot.JoltComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.jolt.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"

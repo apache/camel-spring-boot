@@ -35,6 +35,21 @@ public class ThymeleafComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Sets whether the context map should allow access to all details. By
+     * default only the message body and headers can be accessed. This option
+     * can be enabled for full access to the current Exchange and CamelContext.
+     * Doing so impose a potential security risk as this opens access to the
+     * full power of CamelContext API.
+     */
+    private Boolean allowContextMapAll = false;
+    /**
+     * Whether to allow to use resource template from header or not (default
+     * false). Enabling this allows to specify dynamic templates via message
+     * header. However this can be seen as a potential security vulnerability if
+     * the header is coming from a malicious user, so use this with care.
+     */
+    private Boolean allowTemplateFromHeader = false;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -54,6 +69,22 @@ public class ThymeleafComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+
+    public Boolean getAllowContextMapAll() {
+        return allowContextMapAll;
+    }
+
+    public void setAllowContextMapAll(Boolean allowContextMapAll) {
+        this.allowContextMapAll = allowContextMapAll;
+    }
+
+    public Boolean getAllowTemplateFromHeader() {
+        return allowTemplateFromHeader;
+    }
+
+    public void setAllowTemplateFromHeader(Boolean allowTemplateFromHeader) {
+        this.allowTemplateFromHeader = allowTemplateFromHeader;
+    }
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;

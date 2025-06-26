@@ -43,6 +43,10 @@ public class JoltComponentConfiguration
      */
     private Boolean allowTemplateFromHeader = false;
     /**
+     * Sets whether to use resource content cache or not
+     */
+    private Boolean contentCache = true;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -75,6 +79,14 @@ public class JoltComponentConfiguration
 
     public void setAllowTemplateFromHeader(Boolean allowTemplateFromHeader) {
         this.allowTemplateFromHeader = allowTemplateFromHeader;
+    }
+
+    public Boolean getContentCache() {
+        return contentCache;
+    }
+
+    public void setContentCache(Boolean contentCache) {
+        this.contentCache = contentCache;
     }
 
     public Boolean getLazyStartProducer() {

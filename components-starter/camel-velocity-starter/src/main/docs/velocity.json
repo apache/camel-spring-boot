@@ -35,6 +35,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.velocity.content-cache",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether to use resource content cache or not",
+      "sourceType": "org.apache.camel.component.velocity.springboot.VelocityComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.velocity.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"

@@ -36,6 +36,17 @@ public class JsonataComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Whether to allow to use resource template from header or not (default
+     * false). Enabling this allows to specify dynamic templates via message
+     * header. However this can be seen as a potential security vulnerability if
+     * the header is coming from a malicious user, so use this with care.
+     */
+    private Boolean allowTemplateFromHeader = false;
+    /**
+     * Sets whether to use resource content cache or not
+     */
+    private Boolean contentCache = true;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -60,6 +71,22 @@ public class JsonataComponentConfiguration
      * is a org.apache.camel.component.jsonata.JsonataFrameBinding type.
      */
     private JsonataFrameBinding frameBinding;
+
+    public Boolean getAllowTemplateFromHeader() {
+        return allowTemplateFromHeader;
+    }
+
+    public void setAllowTemplateFromHeader(Boolean allowTemplateFromHeader) {
+        this.allowTemplateFromHeader = allowTemplateFromHeader;
+    }
+
+    public Boolean getContentCache() {
+        return contentCache;
+    }
+
+    public void setContentCache(Boolean contentCache) {
+        this.contentCache = contentCache;
+    }
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;

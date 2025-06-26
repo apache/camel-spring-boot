@@ -35,6 +35,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.chunk.content-cache",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether to use resource content cache or not",
+      "sourceType": "org.apache.camel.component.chunk.springboot.ChunkComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.chunk.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"

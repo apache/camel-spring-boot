@@ -21,6 +21,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.json-validator.content-cache",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether to use resource content cache or not",
+      "sourceType": "org.apache.camel.component.jsonvalidator.springboot.JsonValidatorComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.json-validator.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"

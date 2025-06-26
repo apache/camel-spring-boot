@@ -35,6 +35,10 @@ public class JsonValidatorComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Sets whether to use resource content cache or not
+     */
+    private Boolean contentCache = true;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -62,6 +66,14 @@ public class JsonValidatorComponentConfiguration
      * Lookup and use the existing ObjectMapper with the given id.
      */
     private String objectMapper;
+
+    public Boolean getContentCache() {
+        return contentCache;
+    }
+
+    public void setContentCache(Boolean contentCache) {
+        this.contentCache = contentCache;
+    }
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;

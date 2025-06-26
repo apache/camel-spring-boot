@@ -41,6 +41,13 @@
       "sourceType": "org.apache.camel.component.freemarker.springboot.FreemarkerComponentConfiguration"
     },
     {
+      "name": "camel.component.freemarker.content-cache",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether to use resource content cache or not",
+      "sourceType": "org.apache.camel.component.freemarker.springboot.FreemarkerComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.freemarker.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
