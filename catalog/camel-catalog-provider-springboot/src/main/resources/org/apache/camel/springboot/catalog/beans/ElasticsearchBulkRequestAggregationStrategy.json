@@ -9,7 +9,7 @@
     "deprecated": false,
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-elasticsearch-starter",
-    "version": "4.10.6-SNAPSHOT"
+    "version": "4.10.7-SNAPSHOT"
   }
 }
 

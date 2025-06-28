@@ -11,6 +11,6 @@
     "metadata": { "routes.language": "xml" },
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-xml-io-dsl-starter",
-    "version": "4.10.6-SNAPSHOT"
+    "version": "4.10.7-SNAPSHOT"
   }
 }

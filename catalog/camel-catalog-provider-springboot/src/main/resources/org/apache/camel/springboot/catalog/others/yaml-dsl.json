@@ -11,6 +11,6 @@
     "metadata": { "routes.language": "yaml" },
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-yaml-dsl-starter",
-    "version": "4.10.6-SNAPSHOT"
+    "version": "4.10.7-SNAPSHOT"
   }
 }
