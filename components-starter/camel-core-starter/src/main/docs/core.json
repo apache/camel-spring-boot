@@ -656,7 +656,7 @@
     {
       "name": "camel.resilience4j.throw-exception-when-half-open-or-open-state",
       "type": "java.lang.Boolean",
-      "description": "Whether to throw io.github.resilience4j.circuitbreaker.CallNotPermittedException when the call is rejected due circuit breaker is half open or open.",
+      "description": "Whether to throw io.github.resilience4j.circuitbreaker.CallNotPermittedException when the call is rejected due circuit breaker is half open (and was not attempted but rejected immediately) or open (always rejected). This option is only in use when there is NOT a fallback configured on the circuit breaker. When there is a fallback then the fallback is always executed and CallNotPermittedException is not thrown.",
       "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
       "defaultValue": false
     },
