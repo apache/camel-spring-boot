@@ -71,7 +71,7 @@ public class MasterComponentConfiguration
      * the consumer until the consumer is successfully started or max attempts
      * reached. This option is the maximum number of attempts to try.
      */
-    private Long backOffMaxAttempts;
+    private Integer backOffMaxAttempts;
     /**
      * Inject the service to use. The option is a
      * org.apache.camel.cluster.CamelClusterService type.
@@ -108,11 +108,11 @@ public class MasterComponentConfiguration
         this.backOffDelay = backOffDelay;
     }
 
-    public Long getBackOffMaxAttempts() {
+    public Integer getBackOffMaxAttempts() {
         return backOffMaxAttempts;
     }
 
-    public void setBackOffMaxAttempts(Long backOffMaxAttempts) {
+    public void setBackOffMaxAttempts(Integer backOffMaxAttempts) {
         this.backOffMaxAttempts = backOffMaxAttempts;
     }
 

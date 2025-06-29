@@ -28,7 +28,7 @@
     },
     {
       "name": "camel.component.master.back-off-max-attempts",
-      "type": "java.lang.Long",
+      "type": "java.lang.Integer",
       "description": "When the master becomes leader then backoff is in use to repeat starting the consumer until the consumer is successfully started or max attempts reached. This option is the maximum number of attempts to try.",
       "sourceType": "org.apache.camel.component.master.springboot.MasterComponentConfiguration"
     },
