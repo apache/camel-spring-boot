@@ -14,6 +14,13 @@
   ],
   "properties": [
     {
+      "name": "camel.component.rocketmq.access-channel",
+      "type": "java.lang.String",
+      "description": "Access channel of RocketMQ cluster. LOCAL or CLOUD, LOCAL by default",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
+      "defaultValue": "LOCAL"
+    },
+    {
       "name": "camel.component.rocketmq.access-key",
       "type": "java.lang.String",
       "description": "Access key for RocketMQ ACL.",
@@ -45,6 +52,13 @@
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
+      "name": "camel.component.rocketmq.enable-trace",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable trace.",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.rocketmq.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the rocketmq component. This is enabled by default.",
@@ -56,6 +70,19 @@
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.rocketmq.message-selector-type",
+      "type": "java.lang.String",
+      "description": "Message Selector Type, TAG or SQL TAG by default",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
+      "defaultValue": "tag"
+    },
+    {
+      "name": "camel.component.rocketmq.namespace",
+      "type": "java.lang.String",
+      "description": "Namespace of RocketMQ cluster. You need to specify this if you are using serverless version of RocketMQ.",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
     },
     {
       "name": "camel.component.rocketmq.namesrv-addr",
@@ -107,6 +134,13 @@
       "type": "java.lang.String",
       "description": "Each message would be sent with this tag.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
+    },
+    {
+      "name": "camel.component.rocketmq.subscribe-sql",
+      "type": "java.lang.String",
+      "description": "Subscribe SQL of consumer. See https:\/\/rocketmq.apache.org\/docs\/featureBehavior\/07messagefilter\/#attribute-based-sql-filtering for more details.",
+      "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
+      "defaultValue": "1 = 1"
     },
     {
       "name": "camel.component.rocketmq.subscribe-tags",

@@ -35,6 +35,19 @@ public class RocketMQComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Access channel of RocketMQ cluster. LOCAL or CLOUD, LOCAL by default
+     */
+    private String accessChannel = "LOCAL";
+    /**
+     * Whether to enable trace.
+     */
+    private Boolean enableTrace = false;
+    /**
+     * Namespace of RocketMQ cluster. You need to specify this if you are using
+     * serverless version of RocketMQ.
+     */
+    private String namespace;
+    /**
      * Name server address of RocketMQ cluster.
      */
     private String namesrvAddr = "localhost:9876";
@@ -60,6 +73,15 @@ public class RocketMQComponentConfiguration
      * Consumer group name.
      */
     private String consumerGroup;
+    /**
+     * Message Selector Type, TAG or SQL TAG by default
+     */
+    private String messageSelectorType = "tag";
+    /**
+     * Subscribe SQL of consumer. See
+     * https://rocketmq.apache.org/docs/featureBehavior/07messagefilter/#attribute-based-sql-filtering for more details.
+     */
+    private String subscribeSql = "1 = 1";
     /**
      * Subscribe tags of consumer. Multiple tags could be split by , such as
      * TagATagB
@@ -118,6 +140,30 @@ public class RocketMQComponentConfiguration
      */
     private String secretKey;
 
+    public String getAccessChannel() {
+        return accessChannel;
+    }
+
+    public void setAccessChannel(String accessChannel) {
+        this.accessChannel = accessChannel;
+    }
+
+    public Boolean getEnableTrace() {
+        return enableTrace;
+    }
+
+    public void setEnableTrace(Boolean enableTrace) {
+        this.enableTrace = enableTrace;
+    }
+
+    public String getNamespace() {
+        return namespace;
+    }
+
+    public void setNamespace(String namespace) {
+        this.namespace = namespace;
+    }
+
     public String getNamesrvAddr() {
         return namesrvAddr;
     }
@@ -148,6 +194,22 @@ public class RocketMQComponentConfiguration
 
     public void setConsumerGroup(String consumerGroup) {
         this.consumerGroup = consumerGroup;
+    }
+
+    public String getMessageSelectorType() {
+        return messageSelectorType;
+    }
+
+    public void setMessageSelectorType(String messageSelectorType) {
+        this.messageSelectorType = messageSelectorType;
+    }
+
+    public String getSubscribeSql() {
+        return subscribeSql;
+    }
+
+    public void setSubscribeSql(String subscribeSql) {
+        this.subscribeSql = subscribeSql;
     }
 
     public String getSubscribeTags() {
