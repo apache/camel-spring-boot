@@ -762,6 +762,19 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.kafka.transacted",
+      "type": "java.lang.Boolean",
+      "description": "Indicates to create a transactional.id kafka property by using the endpoint id and route id. This property is ignored in case there is transactional.id kafka property or the transactionalId parameter.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.kafka.transactional-id",
+      "type": "java.lang.String",
+      "description": "Enable the kafka producer to be a transactional one by setting the transactional.id property. In case this property is used, the transacted parameter is ignored.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
+    },
+    {
       "name": "camel.component.kafka.use-global-ssl-context-parameters",
       "type": "java.lang.Boolean",
       "description": "Enable usage of global SSL context parameters.",

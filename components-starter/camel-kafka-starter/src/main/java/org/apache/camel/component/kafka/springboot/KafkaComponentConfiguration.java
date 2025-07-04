@@ -687,6 +687,18 @@ public class KafkaComponentConfiguration
      */
     private Integer sendBufferBytes = 131072;
     /**
+     * Indicates to create a transactional.id kafka property by using the
+     * endpoint id and route id. This property is ignored in case there is
+     * transactional.id kafka property or the transactionalId parameter.
+     */
+    private Boolean transacted = false;
+    /**
+     * Enable the kafka producer to be a transactional one by setting the
+     * transactional.id property. In case this property is used, the transacted
+     * parameter is ignored.
+     */
+    private String transactionalId;
+    /**
      * Sets whether sending to kafka should send the message body as a single
      * record, or use a java.util.Iterator to send multiple records to kafka (if
      * the message body can be iterated).
@@ -1570,6 +1582,22 @@ public class KafkaComponentConfiguration
 
     public void setSendBufferBytes(Integer sendBufferBytes) {
         this.sendBufferBytes = sendBufferBytes;
+    }
+
+    public Boolean getTransacted() {
+        return transacted;
+    }
+
+    public void setTransacted(Boolean transacted) {
+        this.transacted = transacted;
+    }
+
+    public String getTransactionalId() {
+        return transactionalId;
+    }
+
+    public void setTransactionalId(String transactionalId) {
+        this.transactionalId = transactionalId;
     }
 
     public Boolean getUseIterator() {
