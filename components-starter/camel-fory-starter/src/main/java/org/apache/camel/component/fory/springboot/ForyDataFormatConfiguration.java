@@ -43,7 +43,7 @@ public class ForyDataFormatConfiguration
      */
     private Boolean requireClassRegistration = true;
     /**
-     * Whether to use the threadsafe fory
+     * Whether to use the threadsafe Fory
      */
     private Boolean threadSafe = true;
     /**

@@ -41,7 +41,7 @@
     {
       "name": "camel.dataformat.fory.thread-safe",
       "type": "java.lang.Boolean",
-      "description": "Whether to use the threadsafe fory",
+      "description": "Whether to use the threadsafe Fory",
       "sourceType": "org.apache.camel.component.fory.springboot.ForyDataFormatConfiguration",
       "defaultValue": true
     },
