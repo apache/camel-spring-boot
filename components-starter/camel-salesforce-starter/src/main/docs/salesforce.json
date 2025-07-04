@@ -152,6 +152,13 @@
       "defaultValue": -1
     },
     {
+      "name": "camel.component.salesforce.fallback-to-latest-replay-id",
+      "type": "java.lang.Boolean",
+      "description": "Whether the pub\/sub consumer needs to fallback to the latest replay id when the provided id is not valid. If set to false, the component will keep retrying; in order to treat this as an exception you can use BridgeExceptionHandlerToErrorHandler and handle the exception in the route.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.salesforce.format",
       "type": "org.apache.camel.component.salesforce.internal.PayloadFormat",
       "description": "Payload format to use for Salesforce API calls, either JSON or XML, defaults to JSON. As of Camel 3.12, this option only applies to the Raw operation.",

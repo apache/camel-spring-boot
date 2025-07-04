@@ -344,6 +344,14 @@ public class SalesforceComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Whether the pub/sub consumer needs to fallback to the latest replay id
+     * when the provided id is not valid. If set to false, the component will
+     * keep retrying; in order to treat this as an exception you can use
+     * BridgeExceptionHandlerToErrorHandler and handle the exception in the
+     * route.
+     */
+    private Boolean fallbackToLatestReplayId = false;
+    /**
      * Max number of events to receive in a batch from the Pub/Sub API.
      */
     private Integer pubSubBatchSize = 100;
@@ -1049,6 +1057,14 @@ public class SalesforceComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getFallbackToLatestReplayId() {
+        return fallbackToLatestReplayId;
+    }
+
+    public void setFallbackToLatestReplayId(Boolean fallbackToLatestReplayId) {
+        this.fallbackToLatestReplayId = fallbackToLatestReplayId;
     }
 
     public Integer getPubSubBatchSize() {
