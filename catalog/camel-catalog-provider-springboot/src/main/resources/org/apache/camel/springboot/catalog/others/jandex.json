@@ -7,7 +7,7 @@
     "deprecated": false,
     "firstVersion": "4.12.0",
     "label": "core",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-jandex-starter",
     "version": "4.14.0-SNAPSHOT"
