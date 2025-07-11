@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.CamelContextAware;
@@ -83,7 +84,7 @@ import org.springframework.core.env.MutablePropertySources;
 
 @ImportRuntimeHints(CamelRuntimeHints.class)
 @Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties({CamelConfigurationProperties.class, CamelStartupConditionConfigurationProperties.class})
+@EnableConfigurationProperties({CamelConfigurationProperties.class, CamelStartupConditionConfigurationProperties.class, PropertiesComponentConfiguration.class})
 @Import(TypeConversionConfiguration.class)
 @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
 public class CamelAutoConfiguration {
@@ -383,9 +384,46 @@ public class CamelAutoConfiguration {
     // (PropertiesComponent extends ServiceSupport) would be used for bean
     // destruction. And we want Camel to handle the lifecycle.
     @Bean(destroyMethod = "")
-    PropertiesComponent properties(PropertiesParser parser) {
+    PropertiesComponent properties(ApplicationContext applicationContext, PropertiesParser parser, PropertiesComponentConfiguration configuration) {
         PropertiesComponent pc = new PropertiesComponent();
-        pc.setPropertiesParser(parser);
+        if (configuration.getAutoDiscoverPropertiesSources() != null) {
+            pc.setAutoDiscoverPropertiesSources(configuration.getAutoDiscoverPropertiesSources());
+        }
+        if (configuration.getDefaultFallbackEnabled() != null) {
+            pc.setDefaultFallbackEnabled(configuration.getDefaultFallbackEnabled());
+        }
+        if (configuration.getEncoding() != null) {
+            pc.setEncoding(configuration.getEncoding());
+        }
+        if (configuration.getEnvironmentVariableMode() != null) {
+            pc.setEnvironmentVariableMode(configuration.getEnvironmentVariableMode());
+        }
+        if (configuration.getSystemPropertiesMode() != null) {
+            pc.setSystemPropertiesMode(configuration.getSystemPropertiesMode());
+        }
+        if (configuration.getIgnoreMissingLocation() != null) {
+            pc.setIgnoreMissingLocation(configuration.getIgnoreMissingLocation());
+        }
+        if (configuration.getNestedPlaceholder() != null) {
+            pc.setNestedPlaceholder(configuration.getNestedPlaceholder());
+        }
+        if (configuration.getLocation() != null) {
+            pc.setLocation(configuration.getLocation());
+        }
+        if (configuration.getInitialProperties() != null) {
+            Properties prop = applicationContext.getBean(configuration.getInitialProperties(), Properties.class);
+            pc.setInitialProperties(prop);
+        }
+        if (configuration.getOverrideProperties() != null) {
+            Properties prop = applicationContext.getBean(configuration.getOverrideProperties(), Properties.class);
+            pc.setOverrideProperties(prop);
+        }
+        if (configuration.getPropertiesParser() != null) {
+            PropertiesParser pp = applicationContext.getBean(configuration.getPropertiesParser(), PropertiesParser.class);
+            pc.setPropertiesParser(pp);
+        } else {
+            pc.setPropertiesParser(parser);
+        }
         return pc;
     }
 
