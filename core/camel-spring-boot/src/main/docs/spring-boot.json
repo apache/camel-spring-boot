@@ -774,6 +774,13 @@
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main"
     },
     {
+      "name": "camel.main.groovy-script-pattern",
+      "type": "java.lang.String",
+      "description": "Directories to scan for groovy source to be pre-compiled. For example: scripts\/*.groovy will scan inside the classpath folder scripts for all groovy source files. By default, sources are scanned from the classpath, but you can prefix with file: to use file system. The directories are using Ant-path style pattern, and multiple directories can be specified separated by comma. This requires having camel-groovy JAR on the classpath.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": "classpath:camel-groovy\/*"
+    },
+    {
       "name": "camel.main.include-non-singletons",
       "type": "java.lang.Boolean",
       "description": "Whether to include non-singleton beans (prototypes) when scanning for RouteBuilder instances. By default only singleton beans is included in the context scan.",
