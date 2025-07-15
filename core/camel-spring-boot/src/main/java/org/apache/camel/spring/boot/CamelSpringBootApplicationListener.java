@@ -25,8 +25,6 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.camel.CamelContext;
-import org.apache.camel.CamelContextAware;
-import org.apache.camel.ExtendedCamelContext;
 import org.apache.camel.StartupListener;
 import org.apache.camel.main.MainDurationEventNotifier;
 import org.apache.camel.main.MainShutdownStrategy;
@@ -111,7 +109,7 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
                     camelContextConfiguration.beforeApplicationStart(camelContext);
                 }
 
-                if (configurationProperties.getMain().isMainRunController()) {
+                if (configurationProperties.getMain().isRunController() || configurationProperties.getMain().isMainRunController()) {
                     CamelMainRunController controller = new CamelMainRunController(applicationContext, camelContext);
 
                     if (configurationProperties.getMain().getDurationMaxMessages() > 0

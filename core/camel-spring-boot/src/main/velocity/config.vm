@@ -30,28 +30,6 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "camel")
 public class CamelConfigurationProperties  {
 
-    //
-    // Notes: the configuration is split into two classes,
-    // the springboot one and the main one.  The springboot classes,
-    // for historical reasons, duplicates all properties from the camel-main
-    // configuration.  Those {@code camel.springboot.*} properties have
-    // been deprecated in 4.5.0 in favor of {@code camel.main.*} properties.
-    //
-    // When the migration window is closed, the Springboot class can
-    // stop extending the InnerDeprecatedCamelConfigurationProperties class
-    // and that one removed.
-    //
-    // Note that due to the fact that camel-main properties are not set up
-    // as native spring properties, and the fact that the spring annotation
-    // processor which generates the documentation, only reads javadoc on the
-    // fields, the InnerCamelConfigurationProperties needs to duplicate all the
-    // fields from the DefaultConfigurationProperties.
-    //
-    // So both InnerCamelConfigurationProperties and InnerDeprecatedCamelConfigurationProperties
-    // classes contains redefinitions of properties from camel-main, hence
-    // the need to generate this whole file using a velocity template.
-    //
-
     @NestedConfigurationProperty
     private final Main main = new Main();
 
@@ -67,6 +45,15 @@ public class CamelConfigurationProperties  {
          * You typically only need this if you run Spring-Boot standalone.
          * If you run Spring-Boot with spring-boot-starter-web then the web container keeps the JVM running.
          */
+        private boolean runController;
+
+        /**
+         * Whether to use the main run controller to ensure the Spring-Boot application
+         * keeps running until being stopped or the JVM terminated.
+         * You typically only need this if you run Spring-Boot standalone.
+         * If you run Spring-Boot with spring-boot-starter-web then the web container keeps the JVM running.
+         */
+        @Deprecated
         private boolean mainRunController;
 
         /**
@@ -81,10 +68,21 @@ public class CamelConfigurationProperties  {
          */
         private boolean warnOnEarlyShutdown = true;
 
+        public boolean isRunController() {
+            return runController;
+        }
+
+        public void setRunController(boolean runController) {
+            this.runController = runController;
+        }
+
+        @DeprecatedConfigurationProperty(replacement = "camel.main.run-controller", since = "4.14.0")
+        @Deprecated
         public boolean isMainRunController() {
             return mainRunController;
         }
 
+        @Deprecated
         public void setMainRunController(boolean mainRunController) {
             this.mainRunController = mainRunController;
         }
@@ -105,24 +103,6 @@ public class CamelConfigurationProperties  {
             this.warnOnEarlyShutdown = warnOnEarlyShutdown;
         }
 
-    }
-
-    class InnerDeprecatedCamelConfigurationProperties extends InnerCamelConfigurationProperties {
-
-#foreach( $opt in $options )
-        @DeprecatedConfigurationProperty(replacement = "camel.main.${opt.propName}", since = "4.5.0")
-        @Deprecated
-        @Override
-        public ${opt.javaType} ${opt.getterName}() {
-            return main.${opt.getterName}();
-        }
-        @Deprecated
-        @Override
-        public void ${opt.setterName}(${opt.javaType} ${opt.fieldName}) {
-            main.${opt.setterName}(${opt.fieldName});
-        }
-
-#end
     }
 
     @SuppressWarnings("all")

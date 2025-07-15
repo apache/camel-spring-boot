@@ -908,13 +908,6 @@
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main"
     },
     {
-      "name": "camel.main.main-run-controller",
-      "type": "java.lang.Boolean",
-      "description": "Whether to use the main run controller to ensure the Spring-Boot application keeps running until being stopped or the JVM terminated. You typically only need this if you run Spring-Boot standalone. If you run Spring-Boot with spring-boot-starter-web then the web container keeps the JVM running.",
-      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
-      "defaultValue": false
-    },
-    {
       "name": "camel.main.mdc-logging-keys-pattern",
       "type": "java.lang.String",
       "description": "Sets the pattern used for determine which custom MDC keys to propagate during message routing when the routing engine continues routing asynchronously for the given message. Setting this pattern to * will propagate all custom keys. Or setting the pattern to foo*,bar* will propagate any keys starting with either foo or bar. Notice that a set of standard Camel MDC keys are always propagated which starts with camel. as key name. The match rules are applied in this order (case insensitive): 1. exact match, returns true 2. wildcard match (pattern ends with a * and the name starts with the pattern), returns true 3. regular expression match, returns true 4. otherwise returns false",
@@ -1024,6 +1017,13 @@
       "name": "camel.main.routes-reload-restart-duration",
       "type": "java.lang.Boolean",
       "description": "Whether to restart max duration when routes are reloaded. For example if max duration is 60 seconds, and a route is reloaded after 25 seconds, then this will restart the count and wait 60 seconds again.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.main.run-controller",
+      "type": "java.lang.Boolean",
+      "description": "Whether to use the main run controller to ensure the Spring-Boot application keeps running until being stopped or the JVM terminated. You typically only need this if you run Spring-Boot standalone. If you run Spring-Boot with spring-boot-starter-web then the web container keeps the JVM running.",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
       "defaultValue": false
     },
@@ -2068,6 +2068,18 @@
       "type": "java.lang.Boolean",
       "description": "Whether to enable Camel info.",
       "defaultValue": true
+    },
+    {
+      "name": "camel.main.main-run-controller",
+      "type": "java.lang.Boolean",
+      "description": "Whether to use the main run controller to ensure the Spring-Boot application keeps running until being stopped or the JVM terminated. You typically only need this if you run Spring-Boot standalone. If you run Spring-Boot with spring-boot-starter-web then the web container keeps the JVM running.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": false,
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "camel.main.run-controller",
+        "since": "4.14.0"
+      }
     },
     {
       "name": "management.endpoint.camel.enabled",
