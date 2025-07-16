@@ -82,24 +82,24 @@ public class KafkaProducerFullIT extends BaseEmbeddedKafkaTestSupport {
     private static KafkaConsumer<String, String> stringsConsumerConn;
     private static KafkaConsumer<byte[], byte[]> bytesConsumerConn;
 
-    private final String toStrings = "kafka:" + TOPIC_STRINGS + "?requestRequiredAcks=-1";
+    private final String toStrings = "kafka:" + TOPIC_STRINGS + "?requestRequiredAcks=-1&recordMetadata=true";
 
-    private final String toStrings2 = "kafka:" + TOPIC_STRINGS + "?requestRequiredAcks=-1&partitionKey=0";
+    private final String toStrings2 = "kafka:" + TOPIC_STRINGS + "?requestRequiredAcks=-1&partitionKey=0&recordMetadata=true";
 
     private final String toStringsWithInterceptor = "kafka:" + TOPIC_INTERCEPTED + "?requestRequiredAcks=-1"
-            + "&interceptorClasses=org.apache.camel.component.kafka.integration.MockProducerInterceptor";
+            + "&interceptorClasses=org.apache.camel.component.kafka.integration.MockProducerInterceptor&recordMetadata=true";
 
     @EndpointInject("mock:kafkaAck")
     private MockEndpoint mockEndpoint;
 
     private final String toBytes = "kafka:" + TOPIC_BYTES + "?requestRequiredAcks=-1"
             + "&valueSerializer=org.apache.kafka.common.serialization.ByteArraySerializer&"
-            + "keySerializer=org.apache.kafka.common.serialization.ByteArraySerializer";
+            + "keySerializer=org.apache.kafka.common.serialization.ByteArraySerializer&recordMetadata=true";
 
-    private final String toPropagatedHeaders = "kafka:" + TOPIC_PROPAGATED_HEADERS + "?requestRequiredAcks=-1";
+    private final String toPropagatedHeaders = "kafka:" + TOPIC_PROPAGATED_HEADERS + "?requestRequiredAcks=-1&recordMetadata=true";
 
     private final String toNoRecordSpecificHeaders = "kafka:" + TOPIC_NO_RECORD_SPECIFIC_HEADERS
-            + "?requestRequiredAcks=-1";
+            + "?requestRequiredAcks=-1&recordMetadata=true";
 
     @Produce("direct:startStrings")
     private ProducerTemplate stringsTemplate;
