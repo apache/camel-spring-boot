@@ -129,9 +129,9 @@ public class GoogleMailStreamComponentConfiguration
      */
     private String clientSecret;
     /**
-     * OAuth 2 refresh token. Using this, the Google Calendar component can
-     * obtain a new accessToken whenever the current one expires - a necessity
-     * if the application is long-lived.
+     * OAuth 2 refresh token. Using this, the Google Mail component can obtain a
+     * new accessToken whenever the current one expires - a necessity if the
+     * application is long-lived.
      */
     private String refreshToken;
     /**
