@@ -97,6 +97,12 @@
       "sourceType": "org.apache.camel.component.jackson.springboot.JacksonDataFormatConfiguration"
     },
     {
+      "name": "camel.dataformat.jackson.max-string-length",
+      "type": "java.lang.Integer",
+      "description": "Jackson. Sets the maximum string length (in chars or bytes, depending on input context). The default is 20,000,000. This limit is not exact, the limit is applied when we increase internal buffer sizes and an exception will happen at sizes greater than this limit. Some text values that are a little bigger than the limit may be treated as valid but no text values with sizes less than or equal to this limit will be treated as invalid.",
+      "sourceType": "org.apache.camel.component.jackson.springboot.JacksonDataFormatConfiguration"
+    },
+    {
       "name": "camel.dataformat.jackson.module-class-names",
       "type": "java.lang.String",
       "description": "To use custom Jackson modules com.fasterxml.jackson.databind.Module specified as a String with FQN class names. Multiple classes can be separated by comma.",
