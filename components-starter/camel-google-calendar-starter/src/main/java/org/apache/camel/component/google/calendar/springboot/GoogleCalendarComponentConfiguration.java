@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.google.calendar.springboot;
 
-import java.util.List;
 import org.apache.camel.component.google.calendar.GoogleCalendarClientFactory;
 import org.apache.camel.component.google.calendar.GoogleCalendarConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -58,10 +57,11 @@ public class GoogleCalendarComponentConfiguration
     private String delegate;
     /**
      * Specifies the level of permissions you want a calendar application to
-     * have to a user account. You can separate multiple scopes by comma. See
-     * https://developers.google.com/google-apps/calendar/auth for more info.
+     * have to a user account. See
+     * https://developers.google.com/identity/protocols/googlescopes for more
+     * info. Multiple scopes can be separated by comma.
      */
-    private List<String> scopes;
+    private String scopes = "https://www.googleapis.com/auth/calendar";
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions (if possible) occurred while the Camel consumer
@@ -171,11 +171,11 @@ public class GoogleCalendarComponentConfiguration
         this.delegate = delegate;
     }
 
-    public List<String> getScopes() {
+    public String getScopes() {
         return scopes;
     }
 
-    public void setScopes(List<String> scopes) {
+    public void setScopes(String scopes) {
         this.scopes = scopes;
     }
 

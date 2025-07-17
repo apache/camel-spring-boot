@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.google.mail.stream.springboot;
 
-import java.util.List;
 import org.apache.camel.component.google.mail.GoogleMailClientFactory;
 import org.apache.camel.component.google.mail.stream.GoogleMailStreamConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -85,9 +84,12 @@ public class GoogleMailStreamComponentConfiguration
      */
     private Boolean raw = false;
     /**
-     * GMail scopes
+     * Specifies the level of permissions you want a calendar application to
+     * have to a user account. See
+     * https://developers.google.com/identity/protocols/googlescopes for more
+     * info. Multiple scopes can be separated by comma.
      */
-    private List<String> scopes;
+    private String scopes;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -211,11 +213,11 @@ public class GoogleMailStreamComponentConfiguration
         this.raw = raw;
     }
 
-    public List<String> getScopes() {
+    public String getScopes() {
         return scopes;
     }
 
-    public void setScopes(List<String> scopes) {
+    public void setScopes(String scopes) {
         this.scopes = scopes;
     }
 

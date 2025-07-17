@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.google.mail.springboot;
 
-import java.util.Collection;
 import org.apache.camel.component.google.mail.GoogleMailClientFactory;
 import org.apache.camel.component.google.mail.GoogleMailConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -55,9 +54,12 @@ public class GoogleMailComponentConfiguration
      */
     private String delegate;
     /**
-     * GMail scopes
+     * Specifies the level of permissions you want a calendar application to
+     * have to a user account. See
+     * https://developers.google.com/identity/protocols/googlescopes for more
+     * info. Multiple scopes can be separated by comma.
      */
-    private Collection<String> scopes;
+    private String scopes;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions (if possible) occurred while the Camel consumer
@@ -151,11 +153,11 @@ public class GoogleMailComponentConfiguration
         this.delegate = delegate;
     }
 
-    public Collection<String> getScopes() {
+    public String getScopes() {
         return scopes;
     }
 
-    public void setScopes(Collection<String> scopes) {
+    public void setScopes(String scopes) {
         this.scopes = scopes;
     }
 

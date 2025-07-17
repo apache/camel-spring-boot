@@ -95,8 +95,8 @@
     },
     {
       "name": "camel.component.google-drive.scopes",
-      "type": "java.util.List<java.lang.String>",
-      "description": "Specifies the level of permissions you want a drive application to have to a user account. See https:\/\/developers.google.com\/drive\/web\/scopes for more info.",
+      "type": "java.lang.String",
+      "description": "Specifies the level of permissions you want a calendar application to have to a user account. See https:\/\/developers.google.com\/identity\/protocols\/googlescopes for more info. Multiple scopes can be separated by comma.",
       "sourceType": "org.apache.camel.component.google.drive.springboot.GoogleDriveComponentConfiguration"
     },
     {

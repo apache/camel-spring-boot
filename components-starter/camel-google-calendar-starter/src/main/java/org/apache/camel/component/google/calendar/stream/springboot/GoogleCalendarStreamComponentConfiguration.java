@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.google.calendar.stream.springboot;
 
-import java.util.List;
 import org.apache.camel.component.google.calendar.GoogleCalendarClientFactory;
 import org.apache.camel.component.google.calendar.stream.GoogleCalendarStreamConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -92,10 +91,11 @@ public class GoogleCalendarStreamComponentConfiguration
     private String query;
     /**
      * Specifies the level of permissions you want a calendar application to
-     * have to a user account. See https://developers.google.com/calendar/auth
-     * for more info.
+     * have to a user account. See
+     * https://developers.google.com/identity/protocols/googlescopes for more
+     * info. Multiple scopes can be separated by comma.
      */
-    private List<String> scopes;
+    private String scopes;
     /**
      * Sync events, see https://developers.google.com/calendar/v3/sync Note: not
      * compatible with: 'query' and 'considerLastUpdate' parameters
@@ -243,11 +243,11 @@ public class GoogleCalendarStreamComponentConfiguration
         this.query = query;
     }
 
-    public List<String> getScopes() {
+    public String getScopes() {
         return scopes;
     }
 
-    public void setScopes(List<String> scopes) {
+    public void setScopes(String scopes) {
         this.scopes = scopes;
     }
 

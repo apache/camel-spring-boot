@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.google.drive.springboot;
 
-import java.util.List;
 import org.apache.camel.component.google.drive.GoogleDriveClientFactory;
 import org.apache.camel.component.google.drive.GoogleDriveConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -55,11 +54,12 @@ public class GoogleDriveComponentConfiguration
      */
     private String delegate;
     /**
-     * Specifies the level of permissions you want a drive application to have
-     * to a user account. See https://developers.google.com/drive/web/scopes for
-     * more info.
+     * Specifies the level of permissions you want a calendar application to
+     * have to a user account. See
+     * https://developers.google.com/identity/protocols/googlescopes for more
+     * info. Multiple scopes can be separated by comma.
      */
-    private List<String> scopes;
+    private String scopes;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions (if possible) occurred while the Camel consumer
@@ -153,11 +153,11 @@ public class GoogleDriveComponentConfiguration
         this.delegate = delegate;
     }
 
-    public List<String> getScopes() {
+    public String getScopes() {
         return scopes;
     }
 
-    public void setScopes(List<String> scopes) {
+    public void setScopes(String scopes) {
         this.scopes = scopes;
     }
 

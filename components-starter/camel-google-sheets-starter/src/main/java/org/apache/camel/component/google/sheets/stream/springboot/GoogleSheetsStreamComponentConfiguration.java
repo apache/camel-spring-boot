@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.google.sheets.stream.springboot;
 
-import java.util.Collection;
 import org.apache.camel.component.google.sheets.GoogleSheetsClientFactory;
 import org.apache.camel.component.google.sheets.stream.GoogleSheetsStreamConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -90,9 +89,9 @@ public class GoogleSheetsStreamComponentConfiguration
      * Specifies the level of permissions you want a sheets application to have
      * to a user account. See
      * https://developers.google.com/identity/protocols/googlescopes for more
-     * info.
+     * info. Multiple scopes can be separated by comma.
      */
-    private Collection<String> scopes;
+    private String scopes;
     /**
      * True if value range result should be split into rows or columns to
      * process each of them individually. When true each row or column is
@@ -223,11 +222,11 @@ public class GoogleSheetsStreamComponentConfiguration
         this.range = range;
     }
 
-    public Collection<String> getScopes() {
+    public String getScopes() {
         return scopes;
     }
 
-    public void setScopes(Collection<String> scopes) {
+    public void setScopes(String scopes) {
         this.scopes = scopes;
     }
 

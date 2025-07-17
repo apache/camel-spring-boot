@@ -139,8 +139,8 @@
     },
     {
       "name": "camel.component.google-sheets-stream.scopes",
-      "type": "java.util.Collection<java.lang.String>",
-      "description": "Specifies the level of permissions you want a sheets application to have to a user account. See https:\/\/developers.google.com\/identity\/protocols\/googlescopes for more info.",
+      "type": "java.lang.String",
+      "description": "Specifies the level of permissions you want a sheets application to have to a user account. See https:\/\/developers.google.com\/identity\/protocols\/googlescopes for more info. Multiple scopes can be separated by comma.",
       "sourceType": "org.apache.camel.component.google.sheets.stream.springboot.GoogleSheetsStreamComponentConfiguration"
     },
     {

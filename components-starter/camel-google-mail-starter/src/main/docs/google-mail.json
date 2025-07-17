@@ -147,8 +147,8 @@
     },
     {
       "name": "camel.component.google-mail-stream.scopes",
-      "type": "java.util.List<java.lang.String>",
-      "description": "GMail scopes",
+      "type": "java.lang.String",
+      "description": "Specifies the level of permissions you want a calendar application to have to a user account. See https:\/\/developers.google.com\/identity\/protocols\/googlescopes for more info. Multiple scopes can be separated by comma.",
       "sourceType": "org.apache.camel.component.google.mail.stream.springboot.GoogleMailStreamComponentConfiguration"
     },
     {
@@ -239,8 +239,8 @@
     },
     {
       "name": "camel.component.google-mail.scopes",
-      "type": "java.util.Collection<java.lang.String>",
-      "description": "GMail scopes",
+      "type": "java.lang.String",
+      "description": "Specifies the level of permissions you want a calendar application to have to a user account. See https:\/\/developers.google.com\/identity\/protocols\/googlescopes for more info. Multiple scopes can be separated by comma.",
       "sourceType": "org.apache.camel.component.google.mail.springboot.GoogleMailComponentConfiguration"
     },
     {
