@@ -47,7 +47,7 @@
     },
     {
       "name": "camel.component.dapr.config-keys",
-      "type": "java.util.List<java.lang.String>",
+      "type": "java.lang.String",
       "description": "List of keys for configuration operation",
       "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
     },

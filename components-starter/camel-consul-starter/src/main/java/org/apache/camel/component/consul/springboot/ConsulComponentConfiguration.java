@@ -18,7 +18,6 @@ package org.apache.camel.component.consul.springboot;
 
 import java.math.BigInteger;
 import java.time.Duration;
-import java.util.List;
 import org.apache.camel.component.consul.ConsulComponent;
 import org.apache.camel.component.consul.ConsulConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -137,9 +136,9 @@ public class ConsulComponentConfiguration
      */
     private String nearNode;
     /**
-     * The note meta-data to use for queries.
+     * The comma separated node meta-data to use for queries.
      */
-    private List<String> nodeMeta;
+    private String nodeMeta;
     /**
      * Sets the ACL token to be used with Consul
      */
@@ -312,11 +311,11 @@ public class ConsulComponentConfiguration
         this.nearNode = nearNode;
     }
 
-    public List<String> getNodeMeta() {
+    public String getNodeMeta() {
         return nodeMeta;
     }
 
-    public void setNodeMeta(List<String> nodeMeta) {
+    public void setNodeMeta(String nodeMeta) {
         this.nodeMeta = nodeMeta;
     }
 

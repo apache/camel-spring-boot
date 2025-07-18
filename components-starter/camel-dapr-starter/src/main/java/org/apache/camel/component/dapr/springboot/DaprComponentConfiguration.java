@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.dapr.springboot;
 
-import java.util.List;
 import io.dapr.client.DaprPreviewClient;
 import io.dapr.client.domain.HttpExtension;
 import io.dapr.client.domain.StateOptions.Concurrency;
@@ -45,7 +44,7 @@ public class DaprComponentConfiguration
     /**
      * List of keys for configuration operation
      */
-    private List<String> configKeys;
+    private String configKeys;
     /**
      * The name of the Dapr configuration store to interact with, defined in
      * statestore.yaml config
@@ -172,11 +171,11 @@ public class DaprComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
 
-    public List<String> getConfigKeys() {
+    public String getConfigKeys() {
         return configKeys;
     }
 
-    public void setConfigKeys(List<String> configKeys) {
+    public void setConfigKeys(String configKeys) {
         this.configKeys = configKeys;
     }
 

@@ -84,8 +84,13 @@
     },
     {
       "name": "camel.cloud.consul.node-meta",
-      "type": "java.util.List<java.lang.String>",
+      "type": "java.lang.String",
       "description": "The note meta-data to use for queries.",
+      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration"
+    },
+    {
+      "name": "camel.cloud.consul.node-metas-as-list",
+      "type": "java.util.Collection<java.lang.String>",
       "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration"
     },
     {
@@ -252,8 +257,8 @@
     },
     {
       "name": "camel.component.consul.node-meta",
-      "type": "java.util.List<java.lang.String>",
-      "description": "The note meta-data to use for queries.",
+      "type": "java.lang.String",
+      "description": "The comma separated node meta-data to use for queries.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
