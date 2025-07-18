@@ -25,6 +25,7 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
@@ -48,12 +49,12 @@ public class FatJarPackageScanResourceResolver extends DefaultPackageScanResourc
     private static final String SPRING_BOOT_WEB_INF_CLASSES_ROOT = "WEB-INF/classes/";
 
     @Override
-    protected List<String> doLoadImplementationsInJar(String packageName, InputStream stream, String urlPath) {
-        return doLoadImplementationsInJar(packageName, stream, urlPath, true, true);
+    protected List<String> doLoadImplementationsInJar(String packageName, InputStream stream, String urlPath, Predicate<String> filter) {
+        return doLoadImplementationsInJar(packageName, stream, urlPath, true, true, filter);
     }
 
     protected List<String> doLoadImplementationsInJar(String packageName, InputStream stream, String urlPath,
-            boolean inspectNestedJars, boolean closeStream) {
+            boolean inspectNestedJars, boolean closeStream, Predicate<String> filter) {
         List<String> entries = new ArrayList<>();
 
         JarInputStream jarStream = null;
@@ -67,13 +68,23 @@ public class FatJarPackageScanResourceResolver extends DefaultPackageScanResourc
                     String nestedUrl = urlPath + "!/" + name;
                     LOG.trace("Inspecting nested jar: {}", nestedUrl);
                     List<String> nestedEntries = doLoadImplementationsInJar(packageName, jarStream, nestedUrl, false,
-                            false);
+                            false, filter);
                     entries.addAll(nestedEntries);
-                } else if (!entry.isDirectory() && !name.endsWith(".class")) {
-                    name = cleanupSpringBootClassName(name);
-                    // name is FQN so it must start with package name
-                    if (name.startsWith(packageName)) {
-                        entries.add(name);
+                } else if (!entry.isDirectory()) {
+                    boolean accept;
+                    if (filter != null) {
+                        // use filter to accept or not
+                        accept = filter.test(name);
+                    } else {
+                        // skip class files by default
+                        accept = !name.endsWith(".class");
+                    }
+                    if (accept) {
+                        name = cleanupSpringBootClassName(name);
+                        // name is FQN so it must start with package name
+                        if (name.startsWith(packageName)) {
+                            entries.add(name);
+                        }
                     }
                 }
             }

@@ -774,11 +774,18 @@
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main"
     },
     {
+      "name": "camel.main.groovy-preload-compiled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to preload existing compiled Groovy sources from the compileWorkDir option on startup. This can be enabled to avoid compiling sources that already has been compiled during a build phase.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": false
+    },
+    {
       "name": "camel.main.groovy-script-pattern",
       "type": "java.lang.String",
       "description": "Directories to scan for groovy source to be pre-compiled. For example: scripts\/*.groovy will scan inside the classpath folder scripts for all groovy source files. By default, sources are scanned from the classpath, but you can prefix with file: to use file system. The directories are using Ant-path style pattern, and multiple directories can be specified separated by comma. This requires having camel-groovy JAR on the classpath.",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
-      "defaultValue": "classpath:camel-groovy\/*"
+      "defaultValue": "classpath:camel-groovy\/*,classpath:camel-groovy-compiled\/*"
     },
     {
       "name": "camel.main.include-non-singletons",
