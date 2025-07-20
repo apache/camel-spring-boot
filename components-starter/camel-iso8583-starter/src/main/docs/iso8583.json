@@ -1,0 +1,52 @@
+{
+  "groups": [
+    {
+      "name": "camel.dataformat.iso8583",
+      "type": "org.apache.camel.dataformat.iso8583.springboot.Iso8583DataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.iso8583.springboot.Iso8583DataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.iso8583.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.iso8583.springboot.Iso8583DataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.dataformat.iso8583.allow-auto-wired-message-format",
+      "type": "java.lang.Boolean",
+      "description": "Whether to auto-discover com.solab.iso8583.MessageFactory from the registry",
+      "sourceType": "org.apache.camel.dataformat.iso8583.springboot.Iso8583DataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.iso8583.config-file",
+      "type": "java.lang.String",
+      "description": "The j8583 configuration file to load from classpath",
+      "sourceType": "org.apache.camel.dataformat.iso8583.springboot.Iso8583DataFormatConfiguration",
+      "defaultValue": "j8583-config.xml"
+    },
+    {
+      "name": "camel.dataformat.iso8583.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.iso8583.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the iso8583 data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.iso8583.springboot.Iso8583DataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.iso8583.iso-type",
+      "type": "java.lang.String",
+      "description": "The default ISO-Type to use",
+      "sourceType": "org.apache.camel.dataformat.iso8583.springboot.Iso8583DataFormatConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

@@ -1114,6 +1114,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-iso8583-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jackson-avro-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -3207,6 +3212,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-ironmq</artifactId>
+        <version>4.14.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-iso8583</artifactId>
         <version>4.14.0-SNAPSHOT</version>
       </dependency>
       <dependency>
