@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.apache.camel.component.http.springboot;
 
 import java.nio.charset.StandardCharsets;
@@ -71,7 +70,7 @@ class HttpComponentTimeoutConverterTest {
             response.setCode(HttpStatus.SC_OK);
             assertNotNull(currentContext);
             response.setEntity(new StringEntity(
-                    String.valueOf(currentContext.getComponent("http", HttpComponent.class).getSoTimeout().toSeconds()),
+                    String.valueOf(currentContext.getComponent("http", HttpComponent.class).getSoTimeout()),
                     StandardCharsets.US_ASCII));
         }).create();
         localServer.start();
@@ -99,7 +98,7 @@ class HttpComponentTimeoutConverterTest {
         assertNull(exchange.getException());
         Message out = exchange.getMessage();
         assertNotNull(out);
-        assertEquals("30", out.getBody(String.class));
+        assertEquals("30000", out.getBody(String.class));
     }
 
     // *************************************

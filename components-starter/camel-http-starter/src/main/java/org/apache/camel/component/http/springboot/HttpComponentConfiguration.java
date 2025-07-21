@@ -27,7 +27,6 @@ import org.apache.camel.support.jsse.SSLContextParameters;
 import org.apache.hc.client5.http.cookie.CookieStore;
 import org.apache.hc.client5.http.io.HttpClientConnectionManager;
 import org.apache.hc.core5.http.protocol.HttpContext;
-import org.apache.hc.core5.util.Timeout;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -266,31 +265,29 @@ public class HttpComponentConfiguration
      */
     private HostnameVerifier x509HostnameVerifier;
     /**
-     * Returns the connection lease request timeout used when requesting a
-     * connection from the connection manager. A timeout value of zero is
-     * interpreted as a disabled timeout. The option is a
-     * org.apache.hc.core5.util.Timeout type.
+     * Returns the connection lease request timeout (in millis) used when
+     * requesting a connection from the connection manager. A timeout value of
+     * zero is interpreted as a disabled timeout.
      */
-    private Timeout connectionRequestTimeout;
+    private Long connectionRequestTimeout = 180000L;
     /**
-     * Determines the timeout until a new connection is fully established. A
-     * timeout value of zero is interpreted as an infinite timeout. The option
-     * is a org.apache.hc.core5.util.Timeout type.
+     * Determines the timeout (in millis) until a new connection is fully
+     * established. A timeout value of zero is interpreted as an infinite
+     * timeout.
      */
-    private Timeout connectTimeout;
+    private Long connectTimeout = 180000L;
     /**
-     * Determines the timeout until arrival of a response from the opposite
-     * endpoint. A timeout value of zero is interpreted as an infinite timeout.
-     * Please note that response timeout may be unsupported by HTTP transports
-     * with message multiplexing. The option is a
-     * org.apache.hc.core5.util.Timeout type.
+     * Determines the timeout (in millis) until arrival of a response from the
+     * opposite endpoint. A timeout value of zero is interpreted as an infinite
+     * timeout. Please note that response timeout may be unsupported by HTTP
+     * transports with message multiplexing.
      */
-    private Timeout responseTimeout;
+    private Long responseTimeout;
     /**
-     * Determines the default socket timeout value for blocking I/O operations.
-     * The option is a org.apache.hc.core5.util.Timeout type.
+     * Determines the default socket timeout (in millis) value for blocking I/O
+     * operations.
      */
-    private Timeout soTimeout;
+    private Long soTimeout = 180000L;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -627,35 +624,35 @@ public class HttpComponentConfiguration
         this.x509HostnameVerifier = x509HostnameVerifier;
     }
 
-    public Timeout getConnectionRequestTimeout() {
+    public Long getConnectionRequestTimeout() {
         return connectionRequestTimeout;
     }
 
-    public void setConnectionRequestTimeout(Timeout connectionRequestTimeout) {
+    public void setConnectionRequestTimeout(Long connectionRequestTimeout) {
         this.connectionRequestTimeout = connectionRequestTimeout;
     }
 
-    public Timeout getConnectTimeout() {
+    public Long getConnectTimeout() {
         return connectTimeout;
     }
 
-    public void setConnectTimeout(Timeout connectTimeout) {
+    public void setConnectTimeout(Long connectTimeout) {
         this.connectTimeout = connectTimeout;
     }
 
-    public Timeout getResponseTimeout() {
+    public Long getResponseTimeout() {
         return responseTimeout;
     }
 
-    public void setResponseTimeout(Timeout responseTimeout) {
+    public void setResponseTimeout(Long responseTimeout) {
         this.responseTimeout = responseTimeout;
     }
 
-    public Timeout getSoTimeout() {
+    public Long getSoTimeout() {
         return soTimeout;
     }
 
-    public void setSoTimeout(Timeout soTimeout) {
+    public void setSoTimeout(Long soTimeout) {
         this.soTimeout = soTimeout;
     }
 }

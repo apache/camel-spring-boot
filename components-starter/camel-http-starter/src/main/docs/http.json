@@ -49,15 +49,17 @@
     },
     {
       "name": "camel.component.http.connect-timeout",
-      "type": "org.apache.hc.core5.util.Timeout",
-      "description": "Determines the timeout until a new connection is fully established. A timeout value of zero is interpreted as an infinite timeout. The option is a org.apache.hc.core5.util.Timeout type.",
-      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
+      "type": "java.lang.Long",
+      "description": "Determines the timeout (in millis) until a new connection is fully established. A timeout value of zero is interpreted as an infinite timeout.",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration",
+      "defaultValue": 180000
     },
     {
       "name": "camel.component.http.connection-request-timeout",
-      "type": "org.apache.hc.core5.util.Timeout",
-      "description": "Returns the connection lease request timeout used when requesting a connection from the connection manager. A timeout value of zero is interpreted as a disabled timeout. The option is a org.apache.hc.core5.util.Timeout type.",
-      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
+      "type": "java.lang.Long",
+      "description": "Returns the connection lease request timeout (in millis) used when requesting a connection from the connection manager. A timeout value of zero is interpreted as a disabled timeout.",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration",
+      "defaultValue": 180000
     },
     {
       "name": "camel.component.http.connection-state-disabled",
@@ -252,8 +254,8 @@
     },
     {
       "name": "camel.component.http.response-timeout",
-      "type": "org.apache.hc.core5.util.Timeout",
-      "description": "Determines the timeout until arrival of a response from the opposite endpoint. A timeout value of zero is interpreted as an infinite timeout. Please note that response timeout may be unsupported by HTTP transports with message multiplexing. The option is a org.apache.hc.core5.util.Timeout type.",
+      "type": "java.lang.Long",
+      "description": "Determines the timeout (in millis) until arrival of a response from the opposite endpoint. A timeout value of zero is interpreted as an infinite timeout. Please note that response timeout may be unsupported by HTTP transports with message multiplexing.",
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
     },
     {
@@ -279,9 +281,10 @@
     },
     {
       "name": "camel.component.http.so-timeout",
-      "type": "org.apache.hc.core5.util.Timeout",
-      "description": "Determines the default socket timeout value for blocking I\/O operations. The option is a org.apache.hc.core5.util.Timeout type.",
-      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
+      "type": "java.lang.Long",
+      "description": "Determines the default socket timeout (in millis) value for blocking I\/O operations.",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration",
+      "defaultValue": 180000
     },
     {
       "name": "camel.component.http.ssl-context-parameters",

@@ -49,7 +49,6 @@ public class HttpComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         answer.add(new ConvertiblePair(String.class, javax.net.ssl.HostnameVerifier.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.hc.core5.util.Timeout.class));
         return answer;
     }
 
@@ -76,7 +75,6 @@ public class HttpComponentConverter implements GenericConverter {
             case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
             case "org.apache.camel.support.jsse.SSLContextParameters": return applicationContext.getBean(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
             case "javax.net.ssl.HostnameVerifier": return applicationContext.getBean(ref, javax.net.ssl.HostnameVerifier.class);
-            case "org.apache.hc.core5.util.Timeout": return applicationContext.getBean(ref, org.apache.hc.core5.util.Timeout.class);
         }
         return null;
     }
