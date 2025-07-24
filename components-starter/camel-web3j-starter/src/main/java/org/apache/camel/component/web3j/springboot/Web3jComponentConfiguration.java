@@ -17,7 +17,6 @@
 package org.apache.camel.component.web3j.springboot;
 
 import java.math.BigInteger;
-import java.util.List;
 import org.apache.camel.component.web3j.Web3jConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -39,9 +38,9 @@ public class Web3jComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Contract address or a list of addresses.
+     * Contract address or a comma separated list of addresses.
      */
-    private List<String> addresses;
+    private String addresses;
     /**
      * Default configuration. The option is a
      * org.apache.camel.component.web3j.Web3jConfiguration type.
@@ -67,9 +66,10 @@ public class Web3jComponentConfiguration
      */
     private BigInteger gasLimit;
     /**
-     * A transaction privateFor nodes with public keys in a Quorum network
+     * A comma separated transaction privateFor nodes with public keys in a
+     * Quorum network
      */
-    private List<String> privateFor;
+    private String privateFor;
     /**
      * If true, this will support Quorum API.
      */
@@ -230,11 +230,11 @@ public class Web3jComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
 
-    public List<String> getAddresses() {
+    public String getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List<String> addresses) {
+    public void setAddresses(String addresses) {
         this.addresses = addresses;
     }
 
@@ -278,11 +278,11 @@ public class Web3jComponentConfiguration
         this.gasLimit = gasLimit;
     }
 
-    public List<String> getPrivateFor() {
+    public String getPrivateFor() {
         return privateFor;
     }
 
-    public void setPrivateFor(List<String> privateFor) {
+    public void setPrivateFor(String privateFor) {
         this.privateFor = privateFor;
     }
 

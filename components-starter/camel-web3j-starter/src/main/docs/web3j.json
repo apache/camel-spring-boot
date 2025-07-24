@@ -21,8 +21,8 @@
     },
     {
       "name": "camel.component.web3j.addresses",
-      "type": "java.util.List<java.lang.String>",
-      "description": "Contract address or a list of addresses.",
+      "type": "java.lang.String",
+      "description": "Contract address or a comma separated list of addresses.",
       "sourceType": "org.apache.camel.component.web3j.springboot.Web3jComponentConfiguration"
     },
     {
@@ -189,8 +189,8 @@
     },
     {
       "name": "camel.component.web3j.private-for",
-      "type": "java.util.List<java.lang.String>",
-      "description": "A transaction privateFor nodes with public keys in a Quorum network",
+      "type": "java.lang.String",
+      "description": "A comma separated transaction privateFor nodes with public keys in a Quorum network",
       "sourceType": "org.apache.camel.component.web3j.springboot.Web3jComponentConfiguration"
     },
     {

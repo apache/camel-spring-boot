@@ -132,8 +132,13 @@
       "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration"
     },
     {
+      "name": "camel.cloud.consul.tag-as-set",
+      "type": "java.util.Collection<java.lang.String>",
+      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration"
+    },
+    {
       "name": "camel.cloud.consul.tags",
-      "type": "java.util.Set<java.lang.String>",
+      "type": "java.lang.String",
       "description": "Set tags. You can separate multiple tags by comma.",
       "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration"
     },
