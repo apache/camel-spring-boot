@@ -36,6 +36,7 @@
     <spring.boot-version>${spring-boot-version}</spring.boot-version>
     <surefire.plugin.version>3.5.0</surefire.plugin.version>
     <jkube.generator.from>registry.access.redhat.com/ubi9/openjdk-17:latest</jkube.generator.from>
+    <jkube.build.switchToDeployment>true</jkube.build.switchToDeployment>
   </properties>
 
   <dependencyManagement>
@@ -160,6 +161,38 @@
                 <goals>
                   <goal>resource</goal>
                   <goal>build</goal>
+                  <goal>apply</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>microshift</id>
+      <properties>
+        <jkube.build.strategy>jib</jkube.build.strategy>
+        <jkube.docker.registry>myregistry.io/myorg</jkube.docker.registry>
+        <jkube.docker.username>myregistry-user</jkube.docker.username>
+        <jkube.docker.password>myregistry-password</jkube.docker.password>
+        <!-- optional -->
+        <jkube.imagePullPolicy>Always</jkube.imagePullPolicy>
+        <jkube.docker.push.retries>3</jkube.docker.push.retries>
+      </properties>
+      <build>
+        <defaultGoal>install</defaultGoal>
+        <plugins>
+          <plugin>
+            <groupId>org.eclipse.jkube</groupId>
+            <artifactId>openshift-maven-plugin</artifactId>
+            <version>${openshift-maven-plugin-version}</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>resource</goal>
+                  <goal>build</goal>
+                  <goal>push</goal>
                   <goal>apply</goal>
                 </goals>
               </execution>

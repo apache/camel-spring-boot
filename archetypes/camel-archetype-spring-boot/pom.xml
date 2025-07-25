@@ -35,6 +35,8 @@
 
     <properties>
          <archetype.test.settingsFile>src/test/resources/settings.xml</archetype.test.settingsFile> <!-- Needed to download camel-spring-boot snapshots -->
+         <skip.ocp.tests>true</skip.ocp.tests>
+         <skip.microshift.tests>true</skip.microshift.tests>
     </properties>
 
     <build>
@@ -70,5 +72,32 @@
             </testResource>
         </testResources>
     </build>
+
+    <profiles>
+        <profile>
+            <id>openshift</id>
+            <activation>
+                <property>
+                    <name>archetype-cluster</name>
+                    <value>openshift</value>
+                </property>
+            </activation>
+            <properties>
+                <skip.ocp.tests>false</skip.ocp.tests>
+            </properties>
+        </profile>
+        <profile>
+            <id>microshift</id>
+            <activation>
+                <property>
+                    <name>archetype-cluster</name>
+                    <value>microshift</value>
+                </property>
+            </activation>
+            <properties>
+                <skip.microshift.tests>false</skip.microshift.tests>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

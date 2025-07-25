@@ -1,0 +1,1 @@
+install -Dmaven.test.skip=true -P openshift -Djkube.skip=${skip.ocp.tests}

@@ -1,0 +1,1 @@
+install -Dmaven.test.skip=true -P microshift -Djkube.skip=${skip.microshift.tests} -Djkube.docker.registry=${jkube.docker.registry} -Djkube.docker.username=${jkube.docker.username} -Djkube.docker.password=${jkube.docker.password}
