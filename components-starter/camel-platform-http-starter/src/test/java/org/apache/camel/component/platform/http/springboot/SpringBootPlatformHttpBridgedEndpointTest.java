@@ -26,7 +26,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -39,7 +38,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 
-@EnableAutoConfiguration(exclude = {OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class})
+@EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
         SpringBootPlatformHttpBridgedEndpointTest.class, SpringBootPlatformHttpBridgedEndpointTest.TestConfiguration.class,
@@ -75,7 +74,8 @@ public class SpringBootPlatformHttpBridgedEndpointTest {
                     from("direct:mock")
                             .setHeader("wiremockUrl", () -> wiremockUrl)
                             .log("${headers}")
-                            .toD("${headers.wiremockUrl}/backend?skipControlHeaders=true&bridgeEndpoint=true");
+                            .removeHeader("CamelHttpPath")
+                            .toD("${headers.wiremockUrl}/backend?bridgeEndpoint=true");
                 }
             };
         }
