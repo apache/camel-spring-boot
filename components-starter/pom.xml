@@ -308,6 +308,7 @@
     <module>camel-kubernetes-cluster-service-starter</module>
     <module>camel-kubernetes-starter</module>
     <module>camel-kudu-starter</module>
+    <module>camel-langchain4j-agent-starter</module>
     <module>camel-langchain4j-chat-starter</module>
     <module>camel-langchain4j-embeddings-starter</module>
     <module>camel-langchain4j-tools-starter</module>
