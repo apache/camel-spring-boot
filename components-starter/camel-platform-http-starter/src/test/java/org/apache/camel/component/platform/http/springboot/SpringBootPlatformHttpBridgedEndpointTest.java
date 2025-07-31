@@ -75,7 +75,7 @@ public class SpringBootPlatformHttpBridgedEndpointTest {
                     from("direct:mock")
                             .setHeader("wiremockUrl", () -> wiremockUrl)
                             .log("${headers}")
-                            .toD("${headers.wiremockUrl}/backend?bridgeEndpoint=true");
+                            .toD("${headers.wiremockUrl}/backend?skipControlHeaders=true&bridgeEndpoint=true");
                 }
             };
         }
