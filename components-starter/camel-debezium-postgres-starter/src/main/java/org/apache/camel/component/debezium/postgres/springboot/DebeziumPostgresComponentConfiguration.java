@@ -152,6 +152,11 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String columnPropagateSourceType;
     /**
+     * The maximum time in milliseconds to wait for connection validation to
+     * complete. Defaults to 60 seconds. The option is a long type.
+     */
+    private Long connectionValidationTimeoutMs = 60000L;
+    /**
      * Optional list of custom converters that would be used instead of default
      * ones. The converters are defined using '.type' config option and
      * configured using options '.'
@@ -276,6 +281,11 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String eventProcessingFailureHandlingMode = "fail";
     /**
+     * The maximum time in milliseconds to wait for task executor to shut down.
+     * The option is a long type.
+     */
+    private Long executorShutdownTimeoutMs = 4000L;
+    /**
      * Boolean to determine if Debezium should flush LSN in the source postgres
      * database. If set to false, user will have to flush the LSN manually
      * outside Debezium.
@@ -339,6 +349,19 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String intervalHandlingMode = "numeric";
     /**
+     * Action to take when an LSN flush timeout occurs. Options include: 'fail'
+     * (default) to fail the connector; 'warn' to log a warning and continue
+     * processing; 'ignore' to continue processing and ignore the timeout.
+     */
+    private String lsnFlushTimeoutAction = "fail";
+    /**
+     * Maximum time in milliseconds to wait for LSN flush operation to complete.
+     * If the flush operation does not complete within this timeout, the action
+     * specified by lsn.flush.timeout.action will be taken. Defaults to 30
+     * seconds. The option is a long type.
+     */
+    private Long lsnFlushTimeoutMs = 30000L;
+    /**
      * Maximum size of each batch of source records. Defaults to 2048.
      */
     private Integer maxBatchSize = 2048;
@@ -387,6 +410,33 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String notificationSinkTopicName;
     /**
+     * Path to OpenLineage file configuration. See
+     * https://openlineage.io/docs/client/java/configuration
+     */
+    private String openlineageIntegrationConfigFilePath = "./openlineage.yml";
+    /**
+     * Enable Debezium to emit data lineage metadata through OpenLineage API
+     */
+    private Boolean openlineageIntegrationEnabled = false;
+    /**
+     * The job's description emitted by Debezium
+     */
+    private String openlineageIntegrationJobDescription = "Debezium change data capture job";
+    /**
+     * The job's namespace emitted by Debezium
+     */
+    private String openlineageIntegrationJobNamespace;
+    /**
+     * The job's owners emitted by Debezium. A comma-separated list of key-value
+     * pairs.For example: k1=v1,k2=v2
+     */
+    private String openlineageIntegrationJobOwners;
+    /**
+     * The job's tags emitted by Debezium. A comma-separated list of key-value
+     * pairs.For example: k1=v1,k2=v2
+     */
+    private String openlineageIntegrationJobTags;
+    /**
      * The name of the Postgres logical decoding plugin installed on the server.
      * Supported values are 'decoderbufs' and 'pgoutput'. Defaults to
      * 'decoderbufs'.
@@ -427,6 +477,12 @@ public class DebeziumPostgresComponentConfiguration
      * plugin. Defaults to 'dbz_publication'
      */
     private String publicationName = "dbz_publication";
+    /**
+     * A boolean that determines whether the connector should publish changes
+     * via the partition root. When true, changes are published through
+     * partition root. When false, changes are published directly.
+     */
+    private Boolean publishViaPartitionRoot = false;
     /**
      * The maximum number of records that should be loaded into memory while
      * streaming. A value of '0' uses the default JDBC fetch size.
@@ -922,6 +978,15 @@ public class DebeziumPostgresComponentConfiguration
         this.columnPropagateSourceType = columnPropagateSourceType;
     }
 
+    public Long getConnectionValidationTimeoutMs() {
+        return connectionValidationTimeoutMs;
+    }
+
+    public void setConnectionValidationTimeoutMs(
+            Long connectionValidationTimeoutMs) {
+        this.connectionValidationTimeoutMs = connectionValidationTimeoutMs;
+    }
+
     public String getConverters() {
         return converters;
     }
@@ -1084,6 +1149,14 @@ public class DebeziumPostgresComponentConfiguration
         this.eventProcessingFailureHandlingMode = eventProcessingFailureHandlingMode;
     }
 
+    public Long getExecutorShutdownTimeoutMs() {
+        return executorShutdownTimeoutMs;
+    }
+
+    public void setExecutorShutdownTimeoutMs(Long executorShutdownTimeoutMs) {
+        this.executorShutdownTimeoutMs = executorShutdownTimeoutMs;
+    }
+
     public Boolean getFlushLsnSource() {
         return flushLsnSource;
     }
@@ -1166,6 +1239,22 @@ public class DebeziumPostgresComponentConfiguration
         this.intervalHandlingMode = intervalHandlingMode;
     }
 
+    public String getLsnFlushTimeoutAction() {
+        return lsnFlushTimeoutAction;
+    }
+
+    public void setLsnFlushTimeoutAction(String lsnFlushTimeoutAction) {
+        this.lsnFlushTimeoutAction = lsnFlushTimeoutAction;
+    }
+
+    public Long getLsnFlushTimeoutMs() {
+        return lsnFlushTimeoutMs;
+    }
+
+    public void setLsnFlushTimeoutMs(Long lsnFlushTimeoutMs) {
+        this.lsnFlushTimeoutMs = lsnFlushTimeoutMs;
+    }
+
     public Integer getMaxBatchSize() {
         return maxBatchSize;
     }
@@ -1231,6 +1320,60 @@ public class DebeziumPostgresComponentConfiguration
         this.notificationSinkTopicName = notificationSinkTopicName;
     }
 
+    public String getOpenlineageIntegrationConfigFilePath() {
+        return openlineageIntegrationConfigFilePath;
+    }
+
+    public void setOpenlineageIntegrationConfigFilePath(
+            String openlineageIntegrationConfigFilePath) {
+        this.openlineageIntegrationConfigFilePath = openlineageIntegrationConfigFilePath;
+    }
+
+    public Boolean getOpenlineageIntegrationEnabled() {
+        return openlineageIntegrationEnabled;
+    }
+
+    public void setOpenlineageIntegrationEnabled(
+            Boolean openlineageIntegrationEnabled) {
+        this.openlineageIntegrationEnabled = openlineageIntegrationEnabled;
+    }
+
+    public String getOpenlineageIntegrationJobDescription() {
+        return openlineageIntegrationJobDescription;
+    }
+
+    public void setOpenlineageIntegrationJobDescription(
+            String openlineageIntegrationJobDescription) {
+        this.openlineageIntegrationJobDescription = openlineageIntegrationJobDescription;
+    }
+
+    public String getOpenlineageIntegrationJobNamespace() {
+        return openlineageIntegrationJobNamespace;
+    }
+
+    public void setOpenlineageIntegrationJobNamespace(
+            String openlineageIntegrationJobNamespace) {
+        this.openlineageIntegrationJobNamespace = openlineageIntegrationJobNamespace;
+    }
+
+    public String getOpenlineageIntegrationJobOwners() {
+        return openlineageIntegrationJobOwners;
+    }
+
+    public void setOpenlineageIntegrationJobOwners(
+            String openlineageIntegrationJobOwners) {
+        this.openlineageIntegrationJobOwners = openlineageIntegrationJobOwners;
+    }
+
+    public String getOpenlineageIntegrationJobTags() {
+        return openlineageIntegrationJobTags;
+    }
+
+    public void setOpenlineageIntegrationJobTags(
+            String openlineageIntegrationJobTags) {
+        this.openlineageIntegrationJobTags = openlineageIntegrationJobTags;
+    }
+
     public String getPluginName() {
         return pluginName;
     }
@@ -1277,6 +1420,14 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setPublicationName(String publicationName) {
         this.publicationName = publicationName;
+    }
+
+    public Boolean getPublishViaPartitionRoot() {
+        return publishViaPartitionRoot;
+    }
+
+    public void setPublishViaPartitionRoot(Boolean publishViaPartitionRoot) {
+        this.publishViaPartitionRoot = publishViaPartitionRoot;
     }
 
     public Integer getQueryFetchSize() {

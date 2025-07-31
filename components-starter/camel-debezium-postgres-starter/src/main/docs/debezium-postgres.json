@@ -65,6 +65,13 @@
       "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-postgres.connection-validation-timeout-ms",
+      "type": "java.lang.Long",
+      "description": "The maximum time in milliseconds to wait for connection validation to complete. Defaults to 60 seconds. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": 60000
+    },
+    {
       "name": "camel.component.debezium-postgres.converters",
       "type": "java.lang.String",
       "description": "Optional list of custom converters that would be used instead of default ones. The converters are defined using '.type' config option and configured using options '.'",
@@ -203,6 +210,13 @@
       "defaultValue": "fail"
     },
     {
+      "name": "camel.component.debezium-postgres.executor-shutdown-timeout-ms",
+      "type": "java.lang.Long",
+      "description": "The maximum time in milliseconds to wait for task executor to shut down. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": 4000
+    },
+    {
       "name": "camel.component.debezium-postgres.flush-lsn-source",
       "type": "java.lang.Boolean",
       "description": "Boolean to determine if Debezium should flush LSN in the source postgres database. If set to false, user will have to flush the LSN manually outside Debezium.",
@@ -284,6 +298,20 @@
       "description": "Specify how INTERVAL columns should be represented in change events, including: 'string' represents values as an exact ISO formatted string; 'numeric' (default) represents values using the inexact conversion into microseconds",
       "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
       "defaultValue": "numeric"
+    },
+    {
+      "name": "camel.component.debezium-postgres.lsn-flush-timeout-action",
+      "type": "java.lang.String",
+      "description": "Action to take when an LSN flush timeout occurs. Options include: 'fail' (default) to fail the connector; 'warn' to log a warning and continue processing; 'ignore' to continue processing and ignore the timeout.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": "fail"
+    },
+    {
+      "name": "camel.component.debezium-postgres.lsn-flush-timeout-ms",
+      "type": "java.lang.Long",
+      "description": "Maximum time in milliseconds to wait for LSN flush operation to complete. If the flush operation does not complete within this timeout, the action specified by lsn.flush.timeout.action will be taken. Defaults to 30 seconds. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": 30000
     },
     {
       "name": "camel.component.debezium-postgres.max-batch-size",
@@ -388,6 +416,45 @@
       "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-postgres.openlineage-integration-config-file-path",
+      "type": "java.lang.String",
+      "description": "Path to OpenLineage file configuration. See https:\/\/openlineage.io\/docs\/client\/java\/configuration",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": ".\/openlineage.yml"
+    },
+    {
+      "name": "camel.component.debezium-postgres.openlineage-integration-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable Debezium to emit data lineage metadata through OpenLineage API",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-postgres.openlineage-integration-job-description",
+      "type": "java.lang.String",
+      "description": "The job's description emitted by Debezium",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": "Debezium change data capture job"
+    },
+    {
+      "name": "camel.component.debezium-postgres.openlineage-integration-job-namespace",
+      "type": "java.lang.String",
+      "description": "The job's namespace emitted by Debezium",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-postgres.openlineage-integration-job-owners",
+      "type": "java.lang.String",
+      "description": "The job's owners emitted by Debezium. A comma-separated list of key-value pairs.For example: k1=v1,k2=v2",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-postgres.openlineage-integration-job-tags",
+      "type": "java.lang.String",
+      "description": "The job's tags emitted by Debezium. A comma-separated list of key-value pairs.For example: k1=v1,k2=v2",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration"
+    },
+    {
       "name": "camel.component.debezium-postgres.plugin-name",
       "type": "java.lang.String",
       "description": "The name of the Postgres logical decoding plugin installed on the server. Supported values are 'decoderbufs' and 'pgoutput'. Defaults to 'decoderbufs'.",
@@ -427,6 +494,13 @@
       "description": "The name of the Postgres 10 publication used for streaming changes from a plugin. Defaults to 'dbz_publication'",
       "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
       "defaultValue": "dbz_publication"
+    },
+    {
+      "name": "camel.component.debezium-postgres.publish-via-partition-root",
+      "type": "java.lang.Boolean",
+      "description": "A boolean that determines whether the connector should publish changes via the partition root. When true, changes are published through partition root. When false, changes are published directly.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.debezium-postgres.query-fetch-size",

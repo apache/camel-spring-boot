@@ -147,6 +147,11 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String collectionIncludeList;
     /**
+     * The maximum time in milliseconds to wait for connection validation to
+     * complete. Defaults to 60 seconds. The option is a long type.
+     */
+    private Long connectionValidationTimeoutMs = 60000L;
+    /**
      * Optional list of custom converters that would be used instead of default
      * ones. The converters are defined using '.type' config option and
      * configured using options '.'
@@ -188,6 +193,11 @@ public class DebeziumMongodbComponentConfiguration
      * problematic event will be skipped.
      */
     private String eventProcessingFailureHandlingMode = "fail";
+    /**
+     * The maximum time in milliseconds to wait for task executor to shut down.
+     * The option is a long type.
+     */
+    private Long executorShutdownTimeoutMs = 4000L;
     /**
      * A comma-separated list of the fully-qualified names of fields that should
      * be excluded from change event message values
@@ -299,6 +309,33 @@ public class DebeziumMongodbComponentConfiguration
      * 'sink' is in the list of enabled channels
      */
     private String notificationSinkTopicName;
+    /**
+     * Path to OpenLineage file configuration. See
+     * https://openlineage.io/docs/client/java/configuration
+     */
+    private String openlineageIntegrationConfigFilePath = "./openlineage.yml";
+    /**
+     * Enable Debezium to emit data lineage metadata through OpenLineage API
+     */
+    private Boolean openlineageIntegrationEnabled = false;
+    /**
+     * The job's description emitted by Debezium
+     */
+    private String openlineageIntegrationJobDescription = "Debezium change data capture job";
+    /**
+     * The job's namespace emitted by Debezium
+     */
+    private String openlineageIntegrationJobNamespace;
+    /**
+     * The job's owners emitted by Debezium. A comma-separated list of key-value
+     * pairs.For example: k1=v1,k2=v2
+     */
+    private String openlineageIntegrationJobOwners;
+    /**
+     * The job's tags emitted by Debezium. A comma-separated list of key-value
+     * pairs.For example: k1=v1,k2=v2
+     */
+    private String openlineageIntegrationJobTags;
     /**
      * Time to wait for new change events to appear after receiving no events,
      * given in milliseconds. Defaults to 500 ms. The option is a long type.
@@ -607,6 +644,15 @@ public class DebeziumMongodbComponentConfiguration
         this.collectionIncludeList = collectionIncludeList;
     }
 
+    public Long getConnectionValidationTimeoutMs() {
+        return connectionValidationTimeoutMs;
+    }
+
+    public void setConnectionValidationTimeoutMs(
+            Long connectionValidationTimeoutMs) {
+        this.connectionValidationTimeoutMs = connectionValidationTimeoutMs;
+    }
+
     public String getConverters() {
         return converters;
     }
@@ -662,6 +708,14 @@ public class DebeziumMongodbComponentConfiguration
     public void setEventProcessingFailureHandlingMode(
             String eventProcessingFailureHandlingMode) {
         this.eventProcessingFailureHandlingMode = eventProcessingFailureHandlingMode;
+    }
+
+    public Long getExecutorShutdownTimeoutMs() {
+        return executorShutdownTimeoutMs;
+    }
+
+    public void setExecutorShutdownTimeoutMs(Long executorShutdownTimeoutMs) {
+        this.executorShutdownTimeoutMs = executorShutdownTimeoutMs;
     }
 
     public String getFieldExcludeList() {
@@ -835,6 +889,60 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setNotificationSinkTopicName(String notificationSinkTopicName) {
         this.notificationSinkTopicName = notificationSinkTopicName;
+    }
+
+    public String getOpenlineageIntegrationConfigFilePath() {
+        return openlineageIntegrationConfigFilePath;
+    }
+
+    public void setOpenlineageIntegrationConfigFilePath(
+            String openlineageIntegrationConfigFilePath) {
+        this.openlineageIntegrationConfigFilePath = openlineageIntegrationConfigFilePath;
+    }
+
+    public Boolean getOpenlineageIntegrationEnabled() {
+        return openlineageIntegrationEnabled;
+    }
+
+    public void setOpenlineageIntegrationEnabled(
+            Boolean openlineageIntegrationEnabled) {
+        this.openlineageIntegrationEnabled = openlineageIntegrationEnabled;
+    }
+
+    public String getOpenlineageIntegrationJobDescription() {
+        return openlineageIntegrationJobDescription;
+    }
+
+    public void setOpenlineageIntegrationJobDescription(
+            String openlineageIntegrationJobDescription) {
+        this.openlineageIntegrationJobDescription = openlineageIntegrationJobDescription;
+    }
+
+    public String getOpenlineageIntegrationJobNamespace() {
+        return openlineageIntegrationJobNamespace;
+    }
+
+    public void setOpenlineageIntegrationJobNamespace(
+            String openlineageIntegrationJobNamespace) {
+        this.openlineageIntegrationJobNamespace = openlineageIntegrationJobNamespace;
+    }
+
+    public String getOpenlineageIntegrationJobOwners() {
+        return openlineageIntegrationJobOwners;
+    }
+
+    public void setOpenlineageIntegrationJobOwners(
+            String openlineageIntegrationJobOwners) {
+        this.openlineageIntegrationJobOwners = openlineageIntegrationJobOwners;
+    }
+
+    public String getOpenlineageIntegrationJobTags() {
+        return openlineageIntegrationJobTags;
+    }
+
+    public void setOpenlineageIntegrationJobTags(
+            String openlineageIntegrationJobTags) {
+        this.openlineageIntegrationJobTags = openlineageIntegrationJobTags;
     }
 
     public Long getPollIntervalMs() {

@@ -65,6 +65,13 @@
       "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-sqlserver.connection-validation-timeout-ms",
+      "type": "java.lang.Long",
+      "description": "The maximum time in milliseconds to wait for connection validation to complete. Defaults to 60 seconds. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": 60000
+    },
+    {
       "name": "camel.component.debezium-sqlserver.converters",
       "type": "java.lang.String",
       "description": "Optional list of custom converters that would be used instead of default ones. The converters are defined using '.type' config option and configured using options '.'",
@@ -164,6 +171,13 @@
       "description": "Specify how failures during processing of events (i.e. when encountering a corrupted event) should be handled, including: 'fail' (the default) an exception indicating the problematic event and its position is raised, causing the connector to be stopped; 'warn' the problematic event and its position will be logged and the event will be skipped; 'ignore' the problematic event will be skipped.",
       "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": "fail"
+    },
+    {
+      "name": "camel.component.debezium-sqlserver.executor-shutdown-timeout-ms",
+      "type": "java.lang.Long",
+      "description": "The maximum time in milliseconds to wait for task executor to shut down. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": 4000
     },
     {
       "name": "camel.component.debezium-sqlserver.heartbeat-action-query",
@@ -336,6 +350,45 @@
       "name": "camel.component.debezium-sqlserver.offset-storage-topic",
       "type": "java.lang.String",
       "description": "The name of the Kafka topic where offsets are to be stored. Required when offset.storage is set to the KafkaOffsetBackingStore.",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-sqlserver.openlineage-integration-config-file-path",
+      "type": "java.lang.String",
+      "description": "Path to OpenLineage file configuration. See https:\/\/openlineage.io\/docs\/client\/java\/configuration",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": ".\/openlineage.yml"
+    },
+    {
+      "name": "camel.component.debezium-sqlserver.openlineage-integration-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable Debezium to emit data lineage metadata through OpenLineage API",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-sqlserver.openlineage-integration-job-description",
+      "type": "java.lang.String",
+      "description": "The job's description emitted by Debezium",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": "Debezium change data capture job"
+    },
+    {
+      "name": "camel.component.debezium-sqlserver.openlineage-integration-job-namespace",
+      "type": "java.lang.String",
+      "description": "The job's namespace emitted by Debezium",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-sqlserver.openlineage-integration-job-owners",
+      "type": "java.lang.String",
+      "description": "The job's owners emitted by Debezium. A comma-separated list of key-value pairs.For example: k1=v1,k2=v2",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-sqlserver.openlineage-integration-job-tags",
+      "type": "java.lang.String",
+      "description": "The job's tags emitted by Debezium. A comma-separated list of key-value pairs.For example: k1=v1,k2=v2",
       "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
