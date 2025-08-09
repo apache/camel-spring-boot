@@ -39,10 +39,9 @@ public class LangChain4jAgentComponentConverter implements GenericConverter {
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.langchain4j.agent.api.Agent.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.langchain4j.agent.api.AgentFactory.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.langchain4j.agent.LangChain4jAgentConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, dev.langchain4j.memory.chat.ChatMemoryProvider.class));
-        answer.add(new ConvertiblePair(String.class, dev.langchain4j.model.chat.ChatModel.class));
-        answer.add(new ConvertiblePair(String.class, dev.langchain4j.rag.RetrievalAugmentor.class));
         return answer;
     }
 
@@ -59,10 +58,9 @@ public class LangChain4jAgentComponentConverter implements GenericConverter {
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
+            case "org.apache.camel.component.langchain4j.agent.api.Agent": return applicationContext.getBean(ref, org.apache.camel.component.langchain4j.agent.api.Agent.class);
+            case "org.apache.camel.component.langchain4j.agent.api.AgentFactory": return applicationContext.getBean(ref, org.apache.camel.component.langchain4j.agent.api.AgentFactory.class);
             case "org.apache.camel.component.langchain4j.agent.LangChain4jAgentConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.langchain4j.agent.LangChain4jAgentConfiguration.class);
-            case "dev.langchain4j.memory.chat.ChatMemoryProvider": return applicationContext.getBean(ref, dev.langchain4j.memory.chat.ChatMemoryProvider.class);
-            case "dev.langchain4j.model.chat.ChatModel": return applicationContext.getBean(ref, dev.langchain4j.model.chat.ChatModel.class);
-            case "dev.langchain4j.rag.RetrievalAugmentor": return applicationContext.getBean(ref, dev.langchain4j.rag.RetrievalAugmentor.class);
         }
         return null;
     }
