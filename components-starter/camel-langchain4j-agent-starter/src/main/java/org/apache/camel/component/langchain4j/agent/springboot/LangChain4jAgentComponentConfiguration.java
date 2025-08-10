@@ -16,10 +16,9 @@
  */
 package org.apache.camel.component.langchain4j.agent.springboot;
 
-import dev.langchain4j.memory.chat.ChatMemoryProvider;
-import dev.langchain4j.model.chat.ChatModel;
-import dev.langchain4j.rag.RetrievalAugmentor;
 import org.apache.camel.component.langchain4j.agent.LangChain4jAgentConfiguration;
+import org.apache.camel.component.langchain4j.agent.api.Agent;
+import org.apache.camel.component.langchain4j.agent.api.AgentFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -39,15 +38,21 @@ public class LangChain4jAgentComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * The agent to use for the component. The option is a
+     * org.apache.camel.component.langchain4j.agent.api.Agent type.
+     */
+    private Agent agent;
+    /**
+     * The agent factory to use for creating agents if no Agent is provided. The
+     * option is a org.apache.camel.component.langchain4j.agent.api.AgentFactory
+     * type.
+     */
+    private AgentFactory agentFactory;
+    /**
      * The configuration. The option is a
      * org.apache.camel.component.langchain4j.agent.LangChain4jAgentConfiguration type.
      */
     private LangChain4jAgentConfiguration configuration;
-    /**
-     * Comma-separated list of input guardrail class names to validate user
-     * input before sending to LLM
-     */
-    private String inputGuardrails;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -59,11 +64,6 @@ public class LangChain4jAgentComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
-    /**
-     * Comma-separated list of output guardrail class names to validate LLM
-     * responses
-     */
-    private String outputGuardrails;
     /**
      * Tags for discovering and calling Camel route tools
      */
@@ -77,26 +77,22 @@ public class LangChain4jAgentComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
-    /**
-     * Chat Memory Provider of type dev.langchain4j.memory.ChatMemoryProvider.
-     * Note for this to be successful, you need to use a reliable
-     * ChatMemoryStore. This provider supposes that a user has multiple
-     * sessions, if need only a single session, use a default memoryId. The
-     * option is a dev.langchain4j.memory.chat.ChatMemoryProvider type.
-     */
-    private ChatMemoryProvider chatMemoryProvider;
-    /**
-     * Chat Model of type dev.langchain4j.model.chat.ChatModel. The option is a
-     * dev.langchain4j.model.chat.ChatModel type.
-     */
-    private ChatModel chatModel;
-    /**
-     * Retrieval Augmentor for advanced RAG of type
-     * dev.langchain4j.rag.RetrievalAugmentor. This allows using RAG on both
-     * Naive and Advanced RAG. The option is a
-     * dev.langchain4j.rag.RetrievalAugmentor type.
-     */
-    private RetrievalAugmentor retrievalAugmentor;
+
+    public Agent getAgent() {
+        return agent;
+    }
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
+
+    public AgentFactory getAgentFactory() {
+        return agentFactory;
+    }
+
+    public void setAgentFactory(AgentFactory agentFactory) {
+        this.agentFactory = agentFactory;
+    }
 
     public LangChain4jAgentConfiguration getConfiguration() {
         return configuration;
@@ -106,28 +102,12 @@ public class LangChain4jAgentComponentConfiguration
         this.configuration = configuration;
     }
 
-    public String getInputGuardrails() {
-        return inputGuardrails;
-    }
-
-    public void setInputGuardrails(String inputGuardrails) {
-        this.inputGuardrails = inputGuardrails;
-    }
-
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public String getOutputGuardrails() {
-        return outputGuardrails;
-    }
-
-    public void setOutputGuardrails(String outputGuardrails) {
-        this.outputGuardrails = outputGuardrails;
     }
 
     public String getTags() {
@@ -144,29 +124,5 @@ public class LangChain4jAgentComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
-    }
-
-    public ChatMemoryProvider getChatMemoryProvider() {
-        return chatMemoryProvider;
-    }
-
-    public void setChatMemoryProvider(ChatMemoryProvider chatMemoryProvider) {
-        this.chatMemoryProvider = chatMemoryProvider;
-    }
-
-    public ChatModel getChatModel() {
-        return chatModel;
-    }
-
-    public void setChatModel(ChatModel chatModel) {
-        this.chatModel = chatModel;
-    }
-
-    public RetrievalAugmentor getRetrievalAugmentor() {
-        return retrievalAugmentor;
-    }
-
-    public void setRetrievalAugmentor(RetrievalAugmentor retrievalAugmentor) {
-        this.retrievalAugmentor = retrievalAugmentor;
     }
 }
