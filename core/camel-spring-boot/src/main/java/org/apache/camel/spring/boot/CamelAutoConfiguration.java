@@ -34,10 +34,12 @@ import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.clock.Clock;
 import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.component.properties.PropertiesParser;
+import org.apache.camel.main.DebuggerConfigurationProperties;
 import org.apache.camel.main.DefaultConfigurationConfigurer;
 import org.apache.camel.main.MainListener;
 import org.apache.camel.main.RoutesCollector;
 import org.apache.camel.model.Model;
+import org.apache.camel.spi.BacklogDebugger;
 import org.apache.camel.spi.BeanRepository;
 import org.apache.camel.spi.CliConnector;
 import org.apache.camel.spi.CliConnectorFactory;
@@ -202,6 +204,8 @@ public class CamelAutoConfiguration {
             }
         }
 
+        // setup debugger eager
+        configureDebugger(applicationContext, camelContext);
         // setup cli connector eager
         configureCliConnector(applicationContext, camelContext);
 
@@ -251,8 +255,18 @@ public class CamelAutoConfiguration {
         return answer;
     }
 
-    static void configureCliConnector(ApplicationContext applicationContext, CamelContext camelContext) {
+    static void configureDebugger(ApplicationContext applicationContext, CamelContext camelContext) {
+        try {
+            DebuggerConfigurationProperties debug = applicationContext.getBean(DebuggerConfigurationProperties.class);
+            DefaultConfigurationConfigurer.configureBacklogDebugger(camelContext, debug);
+        } catch (BeansException e) {
+            // optional so ignore
+        } catch (Exception e) {
+            throw RuntimeCamelException.wrapRuntimeException(e);
+        }
+    }
 
+    static void configureCliConnector(ApplicationContext applicationContext, CamelContext camelContext) {
         // factory is bound eager into spring bean registry
         try {
             CliConnectorFactory ccf = applicationContext.getBean(CliConnectorFactory.class);
