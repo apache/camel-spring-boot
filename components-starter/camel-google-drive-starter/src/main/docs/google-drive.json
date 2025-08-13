@@ -88,6 +88,18 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.google-drive.proxy-host",
+      "type": "java.lang.String",
+      "description": "Proxy server host",
+      "sourceType": "org.apache.camel.component.google.drive.springboot.GoogleDriveComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-drive.proxy-port",
+      "type": "java.lang.Integer",
+      "description": "Proxy server port",
+      "sourceType": "org.apache.camel.component.google.drive.springboot.GoogleDriveComponentConfiguration"
+    },
+    {
       "name": "camel.component.google-drive.refresh-token",
       "type": "java.lang.String",
       "description": "OAuth 2 refresh token. Using this, the Google Drive component can obtain a new accessToken whenever the current one expires - a necessity if the application is long-lived.",

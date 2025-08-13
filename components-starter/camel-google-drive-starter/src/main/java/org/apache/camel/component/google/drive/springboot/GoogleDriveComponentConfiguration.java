@@ -101,6 +101,14 @@ public class GoogleDriveComponentConfiguration
      */
     private GoogleDriveClientFactory clientFactory;
     /**
+     * Proxy server host
+     */
+    private String proxyHost;
+    /**
+     * Proxy server port
+     */
+    private Integer proxyPort;
+    /**
      * OAuth 2 access token. This typically expires after an hour so
      * refreshToken is recommended for long term usage.
      */
@@ -191,6 +199,22 @@ public class GoogleDriveComponentConfiguration
 
     public void setClientFactory(GoogleDriveClientFactory clientFactory) {
         this.clientFactory = clientFactory;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
     }
 
     public String getAccessToken() {
