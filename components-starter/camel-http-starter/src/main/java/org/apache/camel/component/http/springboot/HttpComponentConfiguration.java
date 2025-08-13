@@ -28,6 +28,7 @@ import org.apache.hc.client5.http.cookie.CookieStore;
 import org.apache.hc.client5.http.io.HttpClientConnectionManager;
 import org.apache.hc.core5.http.protocol.HttpContext;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Send requests to external HTTP servers using Apache HTTP Client 5.x.
@@ -215,37 +216,48 @@ public class HttpComponentConfiguration
      */
     private HeaderFilterStrategy headerFilterStrategy;
     /**
-     * Proxy authentication domain to use
+     * Proxy authentication domain to use with NTLM
      */
     private String proxyAuthDomain;
     /**
-     * Proxy authentication host
+     * Proxy server host
      */
+    @Deprecated
     private String proxyAuthHost;
     /**
      * Proxy authentication method to use (NTLM is deprecated)
      */
     private String proxyAuthMethod;
     /**
-     * Proxy authentication domain (workstation name) to use with NTML
+     * Proxy authentication domain (workstation name) to use with NTLM (NTLM is
+     * deprecated)
      */
     private String proxyAuthNtHost;
     /**
-     * Proxy authentication password
+     * Proxy server password
      */
     private String proxyAuthPassword;
     /**
-     * Proxy authentication port
+     * Proxy server port
      */
+    @Deprecated
     private Integer proxyAuthPort;
     /**
-     * Proxy authentication protocol scheme
+     * Proxy server authentication protocol scheme to use
      */
     private String proxyAuthScheme;
     /**
-     * Proxy authentication username
+     * Proxy server username
      */
     private String proxyAuthUsername;
+    /**
+     * Proxy server host
+     */
+    private String proxyHost;
+    /**
+     * Proxy server port
+     */
+    private Integer proxyPort;
     /**
      * To configure security using SSLContextParameters. Important: Only one
      * instance of org.apache.camel.support.jsse.SSLContextParameters is
@@ -542,10 +554,13 @@ public class HttpComponentConfiguration
         this.proxyAuthDomain = proxyAuthDomain;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public String getProxyAuthHost() {
         return proxyAuthHost;
     }
 
+    @Deprecated
     public void setProxyAuthHost(String proxyAuthHost) {
         this.proxyAuthHost = proxyAuthHost;
     }
@@ -574,10 +589,13 @@ public class HttpComponentConfiguration
         this.proxyAuthPassword = proxyAuthPassword;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Integer getProxyAuthPort() {
         return proxyAuthPort;
     }
 
+    @Deprecated
     public void setProxyAuthPort(Integer proxyAuthPort) {
         this.proxyAuthPort = proxyAuthPort;
     }
@@ -596,6 +614,22 @@ public class HttpComponentConfiguration
 
     public void setProxyAuthUsername(String proxyAuthUsername) {
         this.proxyAuthUsername = proxyAuthUsername;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
     }
 
     public SSLContextParameters getSslContextParameters() {

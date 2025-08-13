@@ -193,13 +193,7 @@
     {
       "name": "camel.component.http.proxy-auth-domain",
       "type": "java.lang.String",
-      "description": "Proxy authentication domain to use",
-      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
-    },
-    {
-      "name": "camel.component.http.proxy-auth-host",
-      "type": "java.lang.String",
-      "description": "Proxy authentication host",
+      "description": "Proxy authentication domain to use with NTLM",
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
     },
     {
@@ -211,31 +205,37 @@
     {
       "name": "camel.component.http.proxy-auth-nt-host",
       "type": "java.lang.String",
-      "description": "Proxy authentication domain (workstation name) to use with NTML",
+      "description": "Proxy authentication domain (workstation name) to use with NTLM (NTLM is deprecated)",
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
     },
     {
       "name": "camel.component.http.proxy-auth-password",
       "type": "java.lang.String",
-      "description": "Proxy authentication password",
-      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
-    },
-    {
-      "name": "camel.component.http.proxy-auth-port",
-      "type": "java.lang.Integer",
-      "description": "Proxy authentication port",
+      "description": "Proxy server password",
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
     },
     {
       "name": "camel.component.http.proxy-auth-scheme",
       "type": "java.lang.String",
-      "description": "Proxy authentication protocol scheme",
+      "description": "Proxy server authentication protocol scheme to use",
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
     },
     {
       "name": "camel.component.http.proxy-auth-username",
       "type": "java.lang.String",
-      "description": "Proxy authentication username",
+      "description": "Proxy server username",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
+    },
+    {
+      "name": "camel.component.http.proxy-host",
+      "type": "java.lang.String",
+      "description": "Proxy server host",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
+    },
+    {
+      "name": "camel.component.http.proxy-port",
+      "type": "java.lang.Integer",
+      "description": "Proxy server port",
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
     },
     {
@@ -317,6 +317,22 @@
       "type": "javax.net.ssl.HostnameVerifier",
       "description": "To use a custom X509HostnameVerifier such as DefaultHostnameVerifier or NoopHostnameVerifier. The option is a javax.net.ssl.HostnameVerifier type.",
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
+    },
+    {
+      "name": "camel.component.http.proxy-auth-host",
+      "type": "java.lang.String",
+      "description": "Proxy server host",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "camel.component.http.proxy-auth-port",
+      "type": "java.lang.Integer",
+      "description": "Proxy server port",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration",
+      "deprecated": true,
+      "deprecation": {}
     }
   ],
   "hints": [],
