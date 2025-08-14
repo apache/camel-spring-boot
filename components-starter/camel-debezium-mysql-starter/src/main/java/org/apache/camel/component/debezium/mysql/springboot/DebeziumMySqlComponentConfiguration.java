@@ -343,6 +343,12 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Long executorShutdownTimeoutMs = 4000L;
     /**
+     * Enable/Disable Debezium context headers that provides essential metadata
+     * for tracking and identifying the source of CDC events in downstream
+     * processing systems.
+     */
+    private Boolean extendedHeadersEnabled = true;
+    /**
      * The source UUIDs used to exclude GTID ranges when determine the starting
      * position in the MySQL server's binlog.
      */
@@ -1193,6 +1199,14 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setExecutorShutdownTimeoutMs(Long executorShutdownTimeoutMs) {
         this.executorShutdownTimeoutMs = executorShutdownTimeoutMs;
+    }
+
+    public Boolean getExtendedHeadersEnabled() {
+        return extendedHeadersEnabled;
+    }
+
+    public void setExtendedHeadersEnabled(Boolean extendedHeadersEnabled) {
+        this.extendedHeadersEnabled = extendedHeadersEnabled;
     }
 
     public String getGtidSourceExcludes() {

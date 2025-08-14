@@ -286,6 +286,12 @@ public class DebeziumPostgresComponentConfiguration
      */
     private Long executorShutdownTimeoutMs = 4000L;
     /**
+     * Enable/Disable Debezium context headers that provides essential metadata
+     * for tracking and identifying the source of CDC events in downstream
+     * processing systems.
+     */
+    private Boolean extendedHeadersEnabled = true;
+    /**
      * Boolean to determine if Debezium should flush LSN in the source postgres
      * database. If set to false, user will have to flush the LSN manually
      * outside Debezium.
@@ -1155,6 +1161,14 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setExecutorShutdownTimeoutMs(Long executorShutdownTimeoutMs) {
         this.executorShutdownTimeoutMs = executorShutdownTimeoutMs;
+    }
+
+    public Boolean getExtendedHeadersEnabled() {
+        return extendedHeadersEnabled;
+    }
+
+    public void setExtendedHeadersEnabled(Boolean extendedHeadersEnabled) {
+        this.extendedHeadersEnabled = extendedHeadersEnabled;
     }
 
     public Boolean getFlushLsnSource() {

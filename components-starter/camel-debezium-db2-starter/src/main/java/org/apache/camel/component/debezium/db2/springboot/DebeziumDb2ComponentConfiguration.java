@@ -234,6 +234,12 @@ public class DebeziumDb2ComponentConfiguration
      */
     private Long executorShutdownTimeoutMs = 4000L;
     /**
+     * Enable/Disable Debezium context headers that provides essential metadata
+     * for tracking and identifying the source of CDC events in downstream
+     * processing systems.
+     */
+    private Boolean extendedHeadersEnabled = true;
+    /**
      * Length of an interval in milli-seconds in in which the connector
      * periodically sends heartbeat messages to a heartbeat topic. Use 0 to
      * disable heartbeat messages. Disabled by default. The option is a int
@@ -832,6 +838,14 @@ public class DebeziumDb2ComponentConfiguration
 
     public void setExecutorShutdownTimeoutMs(Long executorShutdownTimeoutMs) {
         this.executorShutdownTimeoutMs = executorShutdownTimeoutMs;
+    }
+
+    public Boolean getExtendedHeadersEnabled() {
+        return extendedHeadersEnabled;
+    }
+
+    public void setExtendedHeadersEnabled(Boolean extendedHeadersEnabled) {
+        this.extendedHeadersEnabled = extendedHeadersEnabled;
     }
 
     public Integer getHeartbeatIntervalMs() {

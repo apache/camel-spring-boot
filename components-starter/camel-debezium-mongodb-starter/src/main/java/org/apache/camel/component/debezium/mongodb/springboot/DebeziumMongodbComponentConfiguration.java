@@ -199,6 +199,12 @@ public class DebeziumMongodbComponentConfiguration
      */
     private Long executorShutdownTimeoutMs = 4000L;
     /**
+     * Enable/Disable Debezium context headers that provides essential metadata
+     * for tracking and identifying the source of CDC events in downstream
+     * processing systems.
+     */
+    private Boolean extendedHeadersEnabled = true;
+    /**
      * A comma-separated list of the fully-qualified names of fields that should
      * be excluded from change event message values
      */
@@ -716,6 +722,14 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setExecutorShutdownTimeoutMs(Long executorShutdownTimeoutMs) {
         this.executorShutdownTimeoutMs = executorShutdownTimeoutMs;
+    }
+
+    public Boolean getExtendedHeadersEnabled() {
+        return extendedHeadersEnabled;
+    }
+
+    public void setExtendedHeadersEnabled(Boolean extendedHeadersEnabled) {
+        this.extendedHeadersEnabled = extendedHeadersEnabled;
     }
 
     public String getFieldExcludeList() {

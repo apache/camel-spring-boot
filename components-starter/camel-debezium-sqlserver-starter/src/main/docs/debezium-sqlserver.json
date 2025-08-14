@@ -180,6 +180,13 @@
       "defaultValue": 4000
     },
     {
+      "name": "camel.component.debezium-sqlserver.extended-headers-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable\/Disable Debezium context headers that provides essential metadata for tracking and identifying the source of CDC events in downstream processing systems.",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.debezium-sqlserver.heartbeat-action-query",
       "type": "java.lang.String",
       "description": "The query executed with every heartbeat.",

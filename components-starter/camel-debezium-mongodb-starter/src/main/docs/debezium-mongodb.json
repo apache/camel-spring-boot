@@ -128,6 +128,13 @@
       "defaultValue": 4000
     },
     {
+      "name": "camel.component.debezium-mongodb.extended-headers-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable\/Disable Debezium context headers that provides essential metadata for tracking and identifying the source of CDC events in downstream processing systems.",
+      "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.debezium-mongodb.field-exclude-list",
       "type": "java.lang.String",
       "description": "A comma-separated list of the fully-qualified names of fields that should be excluded from change event message values",

@@ -279,6 +279,13 @@
       "defaultValue": 4000
     },
     {
+      "name": "camel.component.debezium-mysql.extended-headers-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable\/Disable Debezium context headers that provides essential metadata for tracking and identifying the source of CDC events in downstream processing systems.",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.debezium-mysql.gtid-source-excludes",
       "type": "java.lang.String",
       "description": "The source UUIDs used to exclude GTID ranges when determine the starting position in the MySQL server's binlog.",

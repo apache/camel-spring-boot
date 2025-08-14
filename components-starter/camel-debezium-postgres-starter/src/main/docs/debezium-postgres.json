@@ -217,6 +217,13 @@
       "defaultValue": 4000
     },
     {
+      "name": "camel.component.debezium-postgres.extended-headers-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable\/Disable Debezium context headers that provides essential metadata for tracking and identifying the source of CDC events in downstream processing systems.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.debezium-postgres.flush-lsn-source",
       "type": "java.lang.Boolean",
       "description": "Boolean to determine if Debezium should flush LSN in the source postgres database. If set to false, user will have to flush the LSN manually outside Debezium.",
