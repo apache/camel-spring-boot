@@ -88,6 +88,11 @@ public class NettyComponentConfiguration
      */
     private Boolean tcpNoDelay = true;
     /**
+     * When using UDP then this option can be used to specify a network
+     * interface by its name, such as eth0 to join a multicast group.
+     */
+    private String networkInterface;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions (if possible) occurred while the Camel consumer
      * is trying to pickup incoming messages, or the likes, will now be
@@ -166,11 +171,6 @@ public class NettyComponentConfiguration
      * org.apache.camel.component.netty.NettyServerBootstrapFactory type.
      */
     private NettyServerBootstrapFactory nettyServerBootstrapFactory;
-    /**
-     * When using UDP then this option can be used to specify a network
-     * interface by its name, such as eth0 to join a multicast group.
-     */
-    private String networkInterface;
     /**
      * If sync is enabled this option dictates NettyConsumer which logging level
      * to use when logging a there is no reply to send back.
@@ -575,6 +575,14 @@ public class NettyComponentConfiguration
         this.tcpNoDelay = tcpNoDelay;
     }
 
+    public String getNetworkInterface() {
+        return networkInterface;
+    }
+
+    public void setNetworkInterface(String networkInterface) {
+        this.networkInterface = networkInterface;
+    }
+
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
     }
@@ -670,14 +678,6 @@ public class NettyComponentConfiguration
     public void setNettyServerBootstrapFactory(
             NettyServerBootstrapFactory nettyServerBootstrapFactory) {
         this.nettyServerBootstrapFactory = nettyServerBootstrapFactory;
-    }
-
-    public String getNetworkInterface() {
-        return networkInterface;
-    }
-
-    public void setNetworkInterface(String networkInterface) {
-        this.networkInterface = networkInterface;
     }
 
     public LoggingLevel getNoReplyLogLevel() {
