@@ -77,6 +77,12 @@
       "sourceType": "org.apache.camel.component.snakeyaml.springboot.SnakeYAMLDataFormatConfiguration"
     },
     {
+      "name": "camel.dataformat.snake-yaml.type-filter",
+      "type": "java.lang.String",
+      "description": "Set the types SnakeYAML is allowed to un-marshall. Multiple types can be separated by comma.",
+      "sourceType": "org.apache.camel.component.snakeyaml.springboot.SnakeYAMLDataFormatConfiguration"
+    },
+    {
       "name": "camel.dataformat.snake-yaml.unmarshal-type",
       "type": "java.lang.String",
       "description": "Class name of the java type to use when unmarshalling",

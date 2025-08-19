@@ -16,6 +16,7 @@
  */
 package org.apache.camel.dataformat.soap.springboot;
 
+import java.util.Map;
 import org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -59,9 +60,10 @@ public class SoapDataFormatConfiguration
      * generated the web service stub code with cxf-codegen or a similar tool
      * then you probably will want to use the ServiceInterfaceStrategy. In the
      * case you have no annotated service interface you should use QNameStrategy
-     * or TypeNameStrategy.
+     * or TypeNameStrategy. The option is a
+     * org.apache.camel.dataformat.soap.name.ElementNameStrategy type.
      */
-    private String elementNameStrategyRef;
+    private String elementNameStrategy;
     /**
      * SOAP version should either be 1.1 or 1.2. Is by default 1.1
      */
@@ -72,7 +74,7 @@ public class SoapDataFormatConfiguration
      * control this mapping, Camel allows you to refer to a map which contains
      * the desired mapping.
      */
-    private String namespacePrefixRef;
+    private Map namespacePrefix;
     /**
      * To validate against an existing schema. Your can use the prefix
      * classpath:, file: or http: to specify how the resource should be
@@ -80,6 +82,13 @@ public class SoapDataFormatConfiguration
      * character.
      */
     private String schema;
+    /**
+     * Whether to ignore headers that was not unmarshalled. By default, headers
+     * which could not be unmarshalled is recorded in the
+     * org.apache.camel.dataformat.soap.UNMARSHALLED_HEADER_LIST header which
+     * allows to inspect any problematic header.
+     */
+    private Boolean ignoreUnmarshalledHeaders = false;
 
     public String getContextPath() {
         return contextPath;
@@ -97,12 +106,12 @@ public class SoapDataFormatConfiguration
         this.encoding = encoding;
     }
 
-    public String getElementNameStrategyRef() {
-        return elementNameStrategyRef;
+    public String getElementNameStrategy() {
+        return elementNameStrategy;
     }
 
-    public void setElementNameStrategyRef(String elementNameStrategyRef) {
-        this.elementNameStrategyRef = elementNameStrategyRef;
+    public void setElementNameStrategy(String elementNameStrategy) {
+        this.elementNameStrategy = elementNameStrategy;
     }
 
     public String getVersion() {
@@ -113,12 +122,12 @@ public class SoapDataFormatConfiguration
         this.version = version;
     }
 
-    public String getNamespacePrefixRef() {
-        return namespacePrefixRef;
+    public Map getNamespacePrefix() {
+        return namespacePrefix;
     }
 
-    public void setNamespacePrefixRef(String namespacePrefixRef) {
-        this.namespacePrefixRef = namespacePrefixRef;
+    public void setNamespacePrefix(Map namespacePrefix) {
+        this.namespacePrefix = namespacePrefix;
     }
 
     public String getSchema() {
@@ -127,5 +136,13 @@ public class SoapDataFormatConfiguration
 
     public void setSchema(String schema) {
         this.schema = schema;
+    }
+
+    public Boolean getIgnoreUnmarshalledHeaders() {
+        return ignoreUnmarshalledHeaders;
+    }
+
+    public void setIgnoreUnmarshalledHeaders(Boolean ignoreUnmarshalledHeaders) {
+        this.ignoreUnmarshalledHeaders = ignoreUnmarshalledHeaders;
     }
 }

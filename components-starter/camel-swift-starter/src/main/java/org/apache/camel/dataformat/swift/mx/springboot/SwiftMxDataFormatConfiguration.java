@@ -35,32 +35,27 @@ public class SwiftMxDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * Refers to a specific configuration to use when marshalling a message to
-     * lookup from the registry.
-     */
-    private String writeConfigRef;
-    /**
      * The flag indicating that messages must be marshalled in a JSON format.
      */
     private Boolean writeInJson = false;
     /**
      * The type of MX message to produce when unmarshalling an input stream. If
-     * not set, it will be automatically detected from the namespace used.
+     * not set, it will be automatically detected from the namespace used. The
+     * option is a com.prowidesoftware.swift.model.MxId type.
      */
     private String readMessageId;
     /**
      * Refers to a specific configuration to use when unmarshalling an input
-     * stream to lookup from the registry.
+     * stream to lookup from the registry. The option is a
+     * com.prowidesoftware.swift.model.mx.MxReadConfiguration type.
      */
-    private String readConfigRef;
-
-    public String getWriteConfigRef() {
-        return writeConfigRef;
-    }
-
-    public void setWriteConfigRef(String writeConfigRef) {
-        this.writeConfigRef = writeConfigRef;
-    }
+    private String readConfig;
+    /**
+     * Refers to a specific configuration to use when marshalling a message to
+     * lookup from the registry. The option is a
+     * com.prowidesoftware.swift.model.mx.MxWriteConfiguration type.
+     */
+    private String writeConfig;
 
     public Boolean getWriteInJson() {
         return writeInJson;
@@ -78,11 +73,19 @@ public class SwiftMxDataFormatConfiguration
         this.readMessageId = readMessageId;
     }
 
-    public String getReadConfigRef() {
-        return readConfigRef;
+    public String getReadConfig() {
+        return readConfig;
     }
 
-    public void setReadConfigRef(String readConfigRef) {
-        this.readConfigRef = readConfigRef;
+    public void setReadConfig(String readConfig) {
+        this.readConfig = readConfig;
+    }
+
+    public String getWriteConfig() {
+        return writeConfig;
+    }
+
+    public void setWriteConfig(String writeConfig) {
+        this.writeConfig = writeConfig;
     }
 }

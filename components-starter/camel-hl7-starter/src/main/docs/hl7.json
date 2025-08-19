@@ -36,6 +36,12 @@
       "sourceType": "org.apache.camel.component.hl7.springboot.HL7DataFormatConfiguration"
     },
     {
+      "name": "camel.dataformat.hl7.parser",
+      "type": "java.lang.String",
+      "description": "To use a custom HL7 parser. The option is a ca.uhn.hl7v2.parser.Parser type.",
+      "sourceType": "org.apache.camel.component.hl7.springboot.HL7DataFormatConfiguration"
+    },
+    {
       "name": "camel.dataformat.hl7.validate",
       "type": "java.lang.Boolean",
       "description": "Whether to validate the HL7 message Is by default true.",

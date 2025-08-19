@@ -109,9 +109,9 @@
       "defaultValue": true
     },
     {
-      "name": "camel.dataformat.flatpack.parser-factory-ref",
+      "name": "camel.dataformat.flatpack.parser-factory",
       "type": "java.lang.String",
-      "description": "References to a custom parser factory to lookup in the registry",
+      "description": "References to a custom parser factory to lookup in the registry. The option is a net.sf.flatpack.ParserFactory type.",
       "sourceType": "org.apache.camel.dataformat.flatpack.springboot.FlatpackDataFormatConfiguration"
     },
     {

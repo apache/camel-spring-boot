@@ -40,9 +40,10 @@ public class CryptoDataFormatConfiguration
      */
     private String algorithm;
     /**
-     * Refers to the secret key to lookup from the register to use.
+     * Refers to the secret key to lookup from the register to use. The option
+     * is a java.security.Key type.
      */
-    private String keyRef;
+    private String key;
     /**
      * The name of the JCE Security Provider that should be used.
      */
@@ -51,13 +52,14 @@ public class CryptoDataFormatConfiguration
      * Refers to a byte array containing the Initialization Vector that will be
      * used to initialize the Cipher.
      */
-    private String initVectorRef;
+    private byte[] initVector;
     /**
      * A JCE AlgorithmParameterSpec used to initialize the Cipher. Will lookup
      * the type using the given name as a
+     * java.security.spec.AlgorithmParameterSpec type. The option is a
      * java.security.spec.AlgorithmParameterSpec type.
      */
-    private String algorithmParameterRef;
+    private String algorithmParameterSpec;
     /**
      * The size of the buffer used in the signature process.
      */
@@ -85,12 +87,12 @@ public class CryptoDataFormatConfiguration
         this.algorithm = algorithm;
     }
 
-    public String getKeyRef() {
-        return keyRef;
+    public String getKey() {
+        return key;
     }
 
-    public void setKeyRef(String keyRef) {
-        this.keyRef = keyRef;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getCryptoProvider() {
@@ -101,20 +103,20 @@ public class CryptoDataFormatConfiguration
         this.cryptoProvider = cryptoProvider;
     }
 
-    public String getInitVectorRef() {
-        return initVectorRef;
+    public byte[] getInitVector() {
+        return initVector;
     }
 
-    public void setInitVectorRef(String initVectorRef) {
-        this.initVectorRef = initVectorRef;
+    public void setInitVector(byte[] initVector) {
+        this.initVector = initVector;
     }
 
-    public String getAlgorithmParameterRef() {
-        return algorithmParameterRef;
+    public String getAlgorithmParameterSpec() {
+        return algorithmParameterSpec;
     }
 
-    public void setAlgorithmParameterRef(String algorithmParameterRef) {
-        this.algorithmParameterRef = algorithmParameterRef;
+    public void setAlgorithmParameterSpec(String algorithmParameterSpec) {
+        this.algorithmParameterSpec = algorithmParameterSpec;
     }
 
     public Integer getBufferSize() {

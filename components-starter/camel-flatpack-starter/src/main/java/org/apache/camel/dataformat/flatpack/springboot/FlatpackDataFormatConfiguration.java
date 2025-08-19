@@ -69,9 +69,10 @@ public class FlatpackDataFormatConfiguration
      */
     private String textQualifier;
     /**
-     * References to a custom parser factory to lookup in the registry
+     * References to a custom parser factory to lookup in the registry. The
+     * option is a net.sf.flatpack.ParserFactory type.
      */
-    private String parserFactoryRef;
+    private String parserFactory;
 
     public String getDefinition() {
         return definition;
@@ -129,11 +130,11 @@ public class FlatpackDataFormatConfiguration
         this.textQualifier = textQualifier;
     }
 
-    public String getParserFactoryRef() {
-        return parserFactoryRef;
+    public String getParserFactory() {
+        return parserFactory;
     }
 
-    public void setParserFactoryRef(String parserFactoryRef) {
-        this.parserFactoryRef = parserFactoryRef;
+    public void setParserFactory(String parserFactory) {
+        this.parserFactory = parserFactory;
     }
 }

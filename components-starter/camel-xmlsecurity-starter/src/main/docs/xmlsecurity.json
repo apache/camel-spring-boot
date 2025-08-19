@@ -396,9 +396,9 @@
       "defaultValue": "RSA_OAEP"
     },
     {
-      "name": "camel.dataformat.xml-security.key-or-trust-store-parameters-ref",
+      "name": "camel.dataformat.xml-security.key-or-trust-store-parameters",
       "type": "java.lang.String",
-      "description": "Refers to a KeyStore instance to lookup in the registry, which is used for configuration options for creating and loading a KeyStore instance that represents the sender's trustStore or recipient's keyStore.",
+      "description": "Refers to a KeyStore instance to lookup in the registry, which is used for configuration options for creating and loading a KeyStore instance that represents the sender's trustStore or recipient's keyStore. The option is a org.apache.camel.support.jsse.KeyStoreParameters type.",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
     },
     {
@@ -413,6 +413,12 @@
       "description": "The MGF Algorithm to use with the RSA OAEP algorithm. The available choices are: EncryptionConstants.MGF1_SHA1 EncryptionConstants.MGF1_SHA256 EncryptionConstants.MGF1_SHA512 The default value is EncryptionConstants.MGF1_SHA1",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
       "defaultValue": "MGF1_SHA1"
+    },
+    {
+      "name": "camel.dataformat.xml-security.namespace",
+      "type": "java.util.Map",
+      "description": "Refers to a Map XML Namespaces of prefix - uri mappings",
+      "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.xml-security.pass-phrase",

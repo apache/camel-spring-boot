@@ -16,6 +16,7 @@
  */
 package org.apache.camel.converter.jaxb.springboot;
 
+import java.util.Map;
 import org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -110,11 +111,11 @@ public class JaxbDataFormatConfiguration
     private String partNamespace;
     /**
      * When marshalling using JAXB or SOAP then the JAXB implementation will
-     * automatic assign namespace prefixes, such as ns2, ns3, ns4 etc. To
+     * automatically assign namespace prefixes, such as ns2, ns3, ns4 etc. To
      * control this mapping, Camel allows you to refer to a map which contains
      * the desired mapping.
      */
-    private String namespacePrefixRef;
+    private Map namespacePrefix;
     /**
      * To use a custom xml stream writer.
      */
@@ -253,12 +254,12 @@ public class JaxbDataFormatConfiguration
         this.partNamespace = partNamespace;
     }
 
-    public String getNamespacePrefixRef() {
-        return namespacePrefixRef;
+    public Map getNamespacePrefix() {
+        return namespacePrefix;
     }
 
-    public void setNamespacePrefixRef(String namespacePrefixRef) {
-        this.namespacePrefixRef = namespacePrefixRef;
+    public void setNamespacePrefix(Map namespacePrefix) {
+        this.namespacePrefix = namespacePrefix;
     }
 
     public String getXmlStreamWriterWrapper() {

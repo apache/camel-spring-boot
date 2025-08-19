@@ -37,19 +37,19 @@ public class BarcodeDataFormatConfiguration
     /**
      * Barcode format such as QR-Code
      */
-    private String barcodeFormat;
+    private String barcodeFormat = "QR_CODE";
     /**
      * Image type of the barcode such as png
      */
-    private String imageType;
+    private String imageType = "PNG";
     /**
      * Width of the barcode
      */
-    private Integer width;
+    private Integer width = 100;
     /**
      * Height of the barcode
      */
-    private Integer height;
+    private Integer height = 100;
 
     public String getBarcodeFormat() {
         return barcodeFormat;

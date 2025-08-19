@@ -92,9 +92,9 @@
       "defaultValue": false
     },
     {
-      "name": "camel.dataformat.jaxb.namespace-prefix-ref",
-      "type": "java.lang.String",
-      "description": "When marshalling using JAXB or SOAP then the JAXB implementation will automatic assign namespace prefixes, such as ns2, ns3, ns4 etc. To control this mapping, Camel allows you to refer to a map which contains the desired mapping.",
+      "name": "camel.dataformat.jaxb.namespace-prefix",
+      "type": "java.util.Map",
+      "description": "When marshalling using JAXB or SOAP then the JAXB implementation will automatically assign namespace prefixes, such as ns2, ns3, ns4 etc. To control this mapping, Camel allows you to refer to a map which contains the desired mapping.",
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration"
     },
     {

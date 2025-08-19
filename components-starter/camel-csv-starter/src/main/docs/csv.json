@@ -71,22 +71,16 @@
       "defaultValue": false
     },
     {
-      "name": "camel.dataformat.csv.format-name",
+      "name": "camel.dataformat.csv.format",
       "type": "java.lang.String",
-      "description": "The name of the format to use, the default value is CSVFormat.DEFAULT",
+      "description": "The format to use.",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration",
       "defaultValue": "DEFAULT"
     },
     {
-      "name": "camel.dataformat.csv.format-ref",
-      "type": "java.lang.String",
-      "description": "The reference format to use, it will be updated with the other format options, the default value is CSVFormat.DEFAULT",
-      "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration"
-    },
-    {
       "name": "camel.dataformat.csv.header",
-      "type": "java.util.List<java.lang.String>",
-      "description": "To configure the CSV headers",
+      "type": "java.lang.String",
+      "description": "To configure the CSV headers. Multiple headers can be separated by comma.",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration"
     },
     {

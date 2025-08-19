@@ -17,7 +17,8 @@
       "name": "camel.dataformat.barcode.barcode-format",
       "type": "java.lang.String",
       "description": "Barcode format such as QR-Code",
-      "sourceType": "org.apache.camel.dataformat.barcode.springboot.BarcodeDataFormatConfiguration"
+      "sourceType": "org.apache.camel.dataformat.barcode.springboot.BarcodeDataFormatConfiguration",
+      "defaultValue": "QR_CODE"
     },
     {
       "name": "camel.dataformat.barcode.customizer.enabled",
@@ -34,19 +35,22 @@
       "name": "camel.dataformat.barcode.height",
       "type": "java.lang.Integer",
       "description": "Height of the barcode",
-      "sourceType": "org.apache.camel.dataformat.barcode.springboot.BarcodeDataFormatConfiguration"
+      "sourceType": "org.apache.camel.dataformat.barcode.springboot.BarcodeDataFormatConfiguration",
+      "defaultValue": 100
     },
     {
       "name": "camel.dataformat.barcode.image-type",
       "type": "java.lang.String",
       "description": "Image type of the barcode such as png",
-      "sourceType": "org.apache.camel.dataformat.barcode.springboot.BarcodeDataFormatConfiguration"
+      "sourceType": "org.apache.camel.dataformat.barcode.springboot.BarcodeDataFormatConfiguration",
+      "defaultValue": "PNG"
     },
     {
       "name": "camel.dataformat.barcode.width",
       "type": "java.lang.Integer",
       "description": "Width of the barcode",
-      "sourceType": "org.apache.camel.dataformat.barcode.springboot.BarcodeDataFormatConfiguration"
+      "sourceType": "org.apache.camel.dataformat.barcode.springboot.BarcodeDataFormatConfiguration",
+      "defaultValue": 100
     }
   ],
   "hints": [],

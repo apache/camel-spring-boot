@@ -16,6 +16,7 @@
  */
 package org.apache.camel.dataformat.xmlsecurity.springboot;
 
+import java.util.Map;
 import org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -85,9 +86,10 @@ public class XMLSecurityDataFormatConfiguration
     /**
      * Refers to a KeyStore instance to lookup in the registry, which is used
      * for configuration options for creating and loading a KeyStore instance
-     * that represents the sender's trustStore or recipient's keyStore.
+     * that represents the sender's trustStore or recipient's keyStore. The
+     * option is a org.apache.camel.support.jsse.KeyStoreParameters type.
      */
-    private String keyOrTrustStoreParametersRef;
+    private String keyOrTrustStoreParameters;
     /**
      * The password to be used for retrieving the private key from the KeyStore.
      * This key is used for asymmetric decryption.
@@ -111,6 +113,10 @@ public class XMLSecurityDataFormatConfiguration
      * KeyValue in the EncryptedKey structure or not.
      */
     private Boolean addKeyValueForEncryptedKey = true;
+    /**
+     * Refers to a Map XML Namespaces of prefix - uri mappings
+     */
+    private Map namespace;
 
     public String getXmlCipherAlgorithm() {
         return xmlCipherAlgorithm;
@@ -168,13 +174,12 @@ public class XMLSecurityDataFormatConfiguration
         this.recipientKeyAlias = recipientKeyAlias;
     }
 
-    public String getKeyOrTrustStoreParametersRef() {
-        return keyOrTrustStoreParametersRef;
+    public String getKeyOrTrustStoreParameters() {
+        return keyOrTrustStoreParameters;
     }
 
-    public void setKeyOrTrustStoreParametersRef(
-            String keyOrTrustStoreParametersRef) {
-        this.keyOrTrustStoreParametersRef = keyOrTrustStoreParametersRef;
+    public void setKeyOrTrustStoreParameters(String keyOrTrustStoreParameters) {
+        this.keyOrTrustStoreParameters = keyOrTrustStoreParameters;
     }
 
     public String getKeyPassword() {
@@ -207,5 +212,13 @@ public class XMLSecurityDataFormatConfiguration
 
     public void setAddKeyValueForEncryptedKey(Boolean addKeyValueForEncryptedKey) {
         this.addKeyValueForEncryptedKey = addKeyValueForEncryptedKey;
+    }
+
+    public Map getNamespace() {
+        return namespace;
+    }
+
+    public void setNamespace(Map namespace) {
+        this.namespace = namespace;
     }
 }

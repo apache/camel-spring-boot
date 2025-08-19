@@ -16,7 +16,6 @@
  */
 package org.apache.camel.dataformat.csv.springboot;
 
-import java.util.List;
 import org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -36,14 +35,9 @@ public class CsvDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * The reference format to use, it will be updated with the other format
-     * options, the default value is CSVFormat.DEFAULT
+     * The format to use.
      */
-    private String formatRef;
-    /**
-     * The name of the format to use, the default value is CSVFormat.DEFAULT
-     */
-    private String formatName = "DEFAULT";
+    private String format = "DEFAULT";
     /**
      * Disables the comment marker of the reference format.
      */
@@ -69,9 +63,9 @@ public class CsvDataFormatConfiguration
      */
     private Boolean headerDisabled = false;
     /**
-     * To configure the CSV headers
+     * To configure the CSV headers. Multiple headers can be separated by comma.
      */
-    private List<String> header;
+    private String header;
     /**
      * Whether to allow missing column names.
      */
@@ -162,20 +156,12 @@ public class CsvDataFormatConfiguration
      */
     private Boolean captureHeaderRecord = false;
 
-    public String getFormatRef() {
-        return formatRef;
+    public String getFormat() {
+        return format;
     }
 
-    public void setFormatRef(String formatRef) {
-        this.formatRef = formatRef;
-    }
-
-    public String getFormatName() {
-        return formatName;
-    }
-
-    public void setFormatName(String formatName) {
-        this.formatName = formatName;
+    public void setFormat(String format) {
+        this.format = format;
     }
 
     public Boolean getCommentMarkerDisabled() {
@@ -226,11 +212,11 @@ public class CsvDataFormatConfiguration
         this.headerDisabled = headerDisabled;
     }
 
-    public List<String> getHeader() {
+    public String getHeader() {
         return header;
     }
 
-    public void setHeader(List<String> header) {
+    public void setHeader(String header) {
         this.header = header;
     }
 

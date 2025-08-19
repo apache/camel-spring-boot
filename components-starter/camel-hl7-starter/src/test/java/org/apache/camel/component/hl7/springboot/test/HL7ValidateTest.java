@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.hl7.springboot.test;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.CamelExecutionException;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
@@ -57,6 +58,9 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 @SpringBootTest(classes = { CamelAutoConfiguration.class, HL7ValidateTest.class,
         HL7ValidateTest.TestConfiguration.class })
 public class HL7ValidateTest extends HL7TestSupport {
+
+    @Autowired
+    CamelContext camelContext;
 
     @Autowired
     ProducerTemplate template;
@@ -147,7 +151,7 @@ public class HL7ValidateTest extends HL7TestSupport {
     // *************************************
 
     @Configuration
-    public static class TestConfiguration {
+    public class TestConfiguration {
 
         @Bean
         public RouteBuilder routeBuilder() {
@@ -173,12 +177,14 @@ public class HL7ValidateTest extends HL7TestSupport {
             HapiContext customContext = new DefaultHapiContext(customValidationContext);
             final Parser customParser = new GenericParser(customContext);
 
+            camelContext.getRegistry().bind("myParser", customParser);
+
             return new RouteBuilder() {
                 public void configure() throws Exception {
                     from("direct:unmarshalFailed").unmarshal().hl7().to("mock:unmarshal");
                     from("direct:unmarshalOk").unmarshal().hl7(false).to("mock:unmarshal");
                     from("direct:unmarshalOkCustom").unmarshal(hl7).to("mock:unmarshal");
-                    from("direct:start1").marshal().hl7(customParser).to("mock:end");
+                    from("direct:start1").marshal().hl7("myParser").to("mock:end");
                     from("direct:start2").marshal().hl7(true).to("mock:end");
 
                 }

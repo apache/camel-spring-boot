@@ -173,9 +173,9 @@
       "sourceType": "org.apache.camel.converter.crypto.springboot.CryptoDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.crypto.algorithm-parameter-ref",
+      "name": "camel.dataformat.crypto.algorithm-parameter-spec",
       "type": "java.lang.String",
-      "description": "A JCE AlgorithmParameterSpec used to initialize the Cipher. Will lookup the type using the given name as a java.security.spec.AlgorithmParameterSpec type.",
+      "description": "A JCE AlgorithmParameterSpec used to initialize the Cipher. Will lookup the type using the given name as a java.security.spec.AlgorithmParameterSpec type. The option is a java.security.spec.AlgorithmParameterSpec type.",
       "sourceType": "org.apache.camel.converter.crypto.springboot.CryptoDataFormatConfiguration"
     },
     {
@@ -203,8 +203,8 @@
       "sourceType": "org.apache.camel.converter.crypto.springboot.CryptoDataFormatConfiguration"
     },
     {
-      "name": "camel.dataformat.crypto.init-vector-ref",
-      "type": "java.lang.String",
+      "name": "camel.dataformat.crypto.init-vector",
+      "type": "java.lang.Byte[]",
       "description": "Refers to a byte array containing the Initialization Vector that will be used to initialize the Cipher.",
       "sourceType": "org.apache.camel.converter.crypto.springboot.CryptoDataFormatConfiguration"
     },
@@ -216,9 +216,9 @@
       "defaultValue": false
     },
     {
-      "name": "camel.dataformat.crypto.key-ref",
+      "name": "camel.dataformat.crypto.key",
       "type": "java.lang.String",
-      "description": "Refers to the secret key to lookup from the register to use.",
+      "description": "Refers to the secret key to lookup from the register to use. The option is a java.security.Key type.",
       "sourceType": "org.apache.camel.converter.crypto.springboot.CryptoDataFormatConfiguration"
     },
     {

@@ -36,9 +36,22 @@ public class HL7DataFormatConfiguration
      */
     private Boolean enabled;
     /**
+     * To use a custom HL7 parser. The option is a ca.uhn.hl7v2.parser.Parser
+     * type.
+     */
+    private String parser;
+    /**
      * Whether to validate the HL7 message Is by default true.
      */
     private Boolean validate = true;
+
+    public String getParser() {
+        return parser;
+    }
+
+    public void setParser(String parser) {
+        this.parser = parser;
+    }
 
     public Boolean getValidate() {
         return validate;

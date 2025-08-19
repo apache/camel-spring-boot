@@ -68,6 +68,11 @@ public class SnakeYAMLDataFormatConfiguration
      */
     private Boolean allowAnyType = false;
     /**
+     * Set the types SnakeYAML is allowed to un-marshall. Multiple types can be
+     * separated by comma.
+     */
+    private String typeFilter;
+    /**
      * Set the maximum amount of aliases allowed for collections.
      */
     private Integer maxAliasesForCollections = 50;
@@ -139,6 +144,14 @@ public class SnakeYAMLDataFormatConfiguration
 
     public void setAllowAnyType(Boolean allowAnyType) {
         this.allowAnyType = allowAnyType;
+    }
+
+    public String getTypeFilter() {
+        return typeFilter;
+    }
+
+    public void setTypeFilter(String typeFilter) {
+        this.typeFilter = typeFilter;
     }
 
     public Integer getMaxAliasesForCollections() {
