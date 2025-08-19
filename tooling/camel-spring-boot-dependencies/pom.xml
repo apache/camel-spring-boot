@@ -245,12 +245,12 @@
       <dependency>
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy</artifactId>
-        <version>1.17.6</version>
+        <version>1.17.7</version>
       </dependency>
       <dependency>
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy-agent</artifactId>
-        <version>1.17.6</version>
+        <version>1.17.7</version>
       </dependency>
       <dependency>
         <groupId>org.apache.avro</groupId>
@@ -4557,7 +4557,7 @@
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.11.2</version>
+        <version>3.11.3</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.reporting</groupId>
