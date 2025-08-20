@@ -125,6 +125,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.paho.manual-acks-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether to use manual acknowledgements for the client. By default, this is false and message will be automatically acknowledged. If set to true, the acknowledgement is added in the exchange's completion callback.",
+      "sourceType": "org.apache.camel.component.paho.springboot.PahoComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.paho.max-inflight",
       "type": "java.lang.Integer",
       "description": "Sets the max inflight. please increase this value in a high traffic environment. The default value is 10",

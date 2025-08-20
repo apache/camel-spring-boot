@@ -201,6 +201,12 @@ public class PahoComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Sets whether to use manual acknowledgements for the client. By default,
+     * this is false and message will be automatically acknowledged. If set to
+     * true, the acknowledgement is added in the exchange's completion callback.
+     */
+    private Boolean manualAcksEnabled = false;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -464,6 +470,14 @@ public class PahoComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getManualAcksEnabled() {
+        return manualAcksEnabled;
+    }
+
+    public void setManualAcksEnabled(Boolean manualAcksEnabled) {
+        this.manualAcksEnabled = manualAcksEnabled;
     }
 
     public Boolean getLazyStartProducer() {
