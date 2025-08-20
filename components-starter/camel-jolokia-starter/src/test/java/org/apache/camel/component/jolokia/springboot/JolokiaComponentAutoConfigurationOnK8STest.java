@@ -66,7 +66,7 @@ public class JolokiaComponentAutoConfigurationOnK8STest extends JolokiaComponent
 				.hasFieldOrProperty("config").isNotNull()
 				.extracting("config")
 				.hasFieldOrPropertyWithValue("protocol", "https")
-				.hasFieldOrPropertyWithValue("context", "/jolokia/")
+				.hasFieldOrPropertyWithValue("context", "/jolokia")
 				.hasFieldOrPropertyWithValue("useSslClientAuthentication", true)
 				.hasFieldOrProperty("caCert").isNotNull();
 

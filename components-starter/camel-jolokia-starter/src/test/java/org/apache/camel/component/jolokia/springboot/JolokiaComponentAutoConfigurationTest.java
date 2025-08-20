@@ -89,7 +89,7 @@ public class JolokiaComponentAutoConfigurationTest extends JolokiaComponentTestB
 				.hasFieldOrProperty("config").isNotNull()
 				.extracting("config")
 					.hasFieldOrPropertyWithValue("protocol", "http")
-					.hasFieldOrPropertyWithValue("context", "/jolokia/");
+					.hasFieldOrPropertyWithValue("context", "/jolokia");
 
 		assertDiscoveryEnabled(true);
 	}
