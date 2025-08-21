@@ -16,6 +16,7 @@
  */
 package org.apache.camel.spring.boot;
 
+import org.apache.camel.component.properties.PropertiesComponent;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -51,7 +52,7 @@ public class PropertiesComponentConfiguration {
      * Whether to support nested property placeholders. A nested placeholder, means that a placeholder, has also a
      * placeholder, that should be resolved (recursively).
      */
-    private Boolean nestedPlaceholder = false;
+    private Boolean nestedPlaceholder = true;
     /**
      * Sets initial properties which will be used before any locations are resolved. The option is a
      * java.util.Properties type.
@@ -67,13 +68,13 @@ public class PropertiesComponentConfiguration {
      * system properties if present, and override any existing properties. OS environment variable mode is checked
      * before JVM system property mode
      */
-    private Integer systemPropertiesMode = 2;
+    private Integer systemPropertiesMode = PropertiesComponent.SYSTEM_PROPERTIES_MODE_OVERRIDE;
     /**
      * Sets the OS environment variables mode (0 = never, 1 = fallback, 2 = override). The default mode (override) is to
      * use OS environment variables if present, and override any existing properties. OS environment variable mode is
      * checked before JVM system property mode
      */
-    private Integer environmentVariableMode = 2;
+    private Integer environmentVariableMode = PropertiesComponent.ENVIRONMENT_VARIABLES_MODE_OVERRIDE;
     /**
      * Whether to automatically discovery instances of PropertiesSource from registry and service factory.
      */
