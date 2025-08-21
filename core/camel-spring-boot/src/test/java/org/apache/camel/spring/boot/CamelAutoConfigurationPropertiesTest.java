@@ -42,6 +42,9 @@ public class CamelAutoConfigurationPropertiesTest {
     @Value("${from}")
     String from;
 
+    @Value("${from}-nested")
+    String fromNested;
+
     // Collaborators fixtures
 
     @Autowired
@@ -64,6 +67,8 @@ public class CamelAutoConfigurationPropertiesTest {
                 @Override
                 public void configure() throws Exception {
                     from(from).to("{{to}}");
+
+                    from("direct:test-nested").to("{{nested.to}}");
                 }
             };
         }
@@ -76,9 +81,24 @@ public class CamelAutoConfigurationPropertiesTest {
         // Given
         MockEndpoint mockEndpoint = camelContext.getEndpoint("mock:test", MockEndpoint.class);
         mockEndpoint.expectedMessageCount(1);
+        mockEndpoint.reset();
 
         // When
         producerTemplate.sendBody(from, "msg");
+
+        // Then
+        mockEndpoint.assertIsSatisfied();
+    }
+
+    @Test
+    public void shouldResolveNestedCamelPlaceholder() throws InterruptedException {
+        // Given
+        MockEndpoint mockEndpoint = camelContext.getEndpoint("mock:test", MockEndpoint.class);
+        mockEndpoint.expectedMessageCount(1);
+        mockEndpoint.reset();
+
+        // When
+        producerTemplate.sendBody(fromNested, "msg");
 
         // Then
         mockEndpoint.assertIsSatisfied();
