@@ -1628,8 +1628,7 @@
       "name": "camel.trace.body-max-chars",
       "type": "java.lang.Integer",
       "description": "To limit the message body to a maximum size in the traced message. Use 0 or negative value to use unlimited size.",
-      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties",
-      "defaultValue": 0
+      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties"
     },
     {
       "name": "camel.trace.enabled",
