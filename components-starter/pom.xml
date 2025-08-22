@@ -240,6 +240,7 @@
     <module>camel-graphql-starter</module>
     <module>camel-grok-starter</module>
     <module>camel-groovy-starter</module>
+    <module>camel-groovy-xml-starter</module>
     <module>camel-grpc-starter</module>
     <module>camel-gson-starter</module>
     <module>camel-guava-eventbus-starter</module>

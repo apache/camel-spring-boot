@@ -1,0 +1,32 @@
+{
+  "groups": [
+    {
+      "name": "camel.dataformat.groovy-xml",
+      "type": "org.apache.camel.groovy.xml.springboot.GroovyXmlDataFormatConfiguration",
+      "sourceType": "org.apache.camel.groovy.xml.springboot.GroovyXmlDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.groovy-xml.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.groovy.xml.springboot.GroovyXmlDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.dataformat.groovy-xml.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.groovy-xml.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the groovyXml data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.groovy.xml.springboot.GroovyXmlDataFormatConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
