@@ -16,3 +16,4 @@
 ## ---------------------------------------------------------------------------
 
 org.apache.camel.component.graphql.springboot.GraphqlComponentAutoConfiguration
+org.apache.camel.component.graphql.springboot.GraphqlComponentConverter

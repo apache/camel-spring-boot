@@ -17,6 +17,7 @@
 package org.apache.camel.component.graphql.springboot;
 
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.hc.client5.http.classic.HttpClient;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -54,6 +55,13 @@ public class GraphqlComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * To use a custom pre-existing Http Client. Beware that when using this,
+     * then other configurations such as proxy, access token, is not applied and
+     * all this must be pre-configured on the Http Client. The option is a
+     * org.apache.hc.client5.http.classic.HttpClient type.
+     */
+    private HttpClient httpClient;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -69,5 +77,13 @@ public class GraphqlComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public HttpClient getHttpClient() {
+        return httpClient;
+    }
+
+    public void setHttpClient(HttpClient httpClient) {
+        this.httpClient = httpClient;
     }
 }
