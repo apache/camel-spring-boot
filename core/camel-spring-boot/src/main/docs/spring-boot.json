@@ -543,6 +543,12 @@
       "defaultValue": true
     },
     {
+      "name": "camel.main.additional-sensitive-keywords",
+      "type": "java.lang.String",
+      "description": "Camel comes with a default set of sensitive keywords which are automatically masked. This option allows to add additional custom keywords to be masked as well. Multiple keywords can be separated by comma.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main"
+    },
+    {
       "name": "camel.main.allow-use-original-message",
       "type": "java.lang.Boolean",
       "description": "Sets whether to allow access to the original message from Camel's error handler, or from org.apache.camel.spi.UnitOfWork.getOriginalInMessage(). Turning this off can optimize performance, as defensive copy of the original message is not needed. Default is false.",
