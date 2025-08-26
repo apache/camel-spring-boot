@@ -20,7 +20,7 @@ To start the Jolokia endpoint it is enough to add the dependency:
 </dependency>
 ----
 
-This will expose the Jolokia endpoint at `http://0.0.0.0:8778/jolokia/` ,
+This will expose the Jolokia endpoint at `http://0.0.0.0:8778/jolokia` ,
 the agent can be configured according to the https://jolokia.org/reference/html/manual/spring.html#_support_for_spring_framework_in_jolokia[Jolokia Spring support page]
 using the property prefix `camel.component.jolokia` i.e. it is possible to configure something like
 `camel.component.jolokia.lookup-config=true`.
@@ -100,7 +100,7 @@ logging.level.org.jolokia = TRACE
 The starter also provides some default configurations in case of the environment is a
 Kubernetes cluster. The starter checks the existence of a specific file to use as
 certification authority (`/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt`) and, if this file exists, it initializes the server using
-TLS protocol and client authentication. So the endpoint become `https://0.0.0.0:8778/jolokia/`
+TLS protocol and client authentication. So the endpoint become `https://0.0.0.0:8778/jolokia`
 It is possible to avoid this behaviour with the property `camel.component.jolokia.kubernetes-discover=false`
 
 The wrapped library `Jolokia Spring Support` provides the integration with
