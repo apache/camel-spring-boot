@@ -1100,6 +1100,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-langchain4j-tokenizer-starter</artifactId>
+        <version>4.15.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-langchain4j-tools-starter</artifactId>
         <version>4.15.0-SNAPSHOT</version>
       </dependency>
