@@ -1,0 +1,28 @@
+{
+  "groups": [
+    {
+      "name": "camel.micrometer.observability",
+      "type": "org.apache.camel.micrometer.observability.starter.MicrometerObservabilityConfigurationProperties",
+      "sourceType": "org.apache.camel.micrometer.observability.starter.MicrometerObservabilityConfigurationProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.micrometer.observability.exclude-patterns",
+      "type": "java.lang.String",
+      "description": "Sets exclude pattern(s) that will disable observability for Camel messages that matches the pattern. Multiple patterns can be separated by comma.",
+      "sourceType": "org.apache.camel.micrometer.observability.starter.MicrometerObservabilityConfigurationProperties"
+    },
+    {
+      "name": "camel.micrometer.observability.trace-processors",
+      "type": "java.lang.Boolean",
+      "description": "Enable tracing for inner Camel processors.",
+      "sourceType": "org.apache.camel.micrometer.observability.starter.MicrometerObservabilityConfigurationProperties",
+      "defaultValue": false
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
