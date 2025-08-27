@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.netty.http.springboot;
 
-import java.io.File;
 import java.util.Map;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.group.ChannelGroup;
@@ -35,7 +34,6 @@ import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Netty HTTP server and client using the Netty 4.x.
@@ -398,11 +396,6 @@ public class NettyHttpComponentConfiguration
      */
     private Boolean hostnameVerification = false;
     /**
-     * Client side certificate keystore to be used for encryption
-     */
-    @Deprecated
-    private File keyStoreFile;
-    /**
      * Keystore format to be used for payload encryption. Defaults to JKS if not
      * set
      */
@@ -456,11 +449,6 @@ public class NettyHttpComponentConfiguration
      * option is a io.netty.handler.ssl.SslHandler type.
      */
     private SslHandler sslHandler;
-    /**
-     * Server side certificate keystore to be used for encryption
-     */
-    @Deprecated
-    private File trustStoreFile;
     /**
      * Server side certificate keystore to be used for encryption. Is loaded by
      * default from classpath, but you can prefix with classpath:, file:, or
@@ -905,17 +893,6 @@ public class NettyHttpComponentConfiguration
         this.hostnameVerification = hostnameVerification;
     }
 
-    @Deprecated
-    @DeprecatedConfigurationProperty
-    public File getKeyStoreFile() {
-        return keyStoreFile;
-    }
-
-    @Deprecated
-    public void setKeyStoreFile(File keyStoreFile) {
-        this.keyStoreFile = keyStoreFile;
-    }
-
     public String getKeyStoreFormat() {
         return keyStoreFormat;
     }
@@ -996,17 +973,6 @@ public class NettyHttpComponentConfiguration
 
     public void setSslHandler(SslHandler sslHandler) {
         this.sslHandler = sslHandler;
-    }
-
-    @Deprecated
-    @DeprecatedConfigurationProperty
-    public File getTrustStoreFile() {
-        return trustStoreFile;
-    }
-
-    @Deprecated
-    public void setTrustStoreFile(File trustStoreFile) {
-        this.trustStoreFile = trustStoreFile;
     }
 
     public String getTrustStoreResource() {
