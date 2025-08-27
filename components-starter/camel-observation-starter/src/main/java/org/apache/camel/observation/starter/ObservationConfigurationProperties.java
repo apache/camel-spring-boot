@@ -16,8 +16,6 @@
  */
 package org.apache.camel.observation.starter;
 
-import java.util.Set;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.observation")

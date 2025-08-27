@@ -16,8 +16,12 @@
  */
 package org.apache.camel.observation.starter;
 
+import io.micrometer.core.instrument.observation.MeterObservationHandler;
+import io.micrometer.observation.Observation;
 import io.micrometer.observation.ObservationRegistry;
 import io.micrometer.tracing.Tracer;
+import io.micrometer.tracing.handler.TracingAwareMeterObservationHandler;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.observation.MicrometerObservationTracer;
 
@@ -58,4 +62,18 @@ public class ObservationAutoConfiguration {
 
         return micrometerObservationTracer;
     }
+
+    @Bean
+    // No-op version to suppress metric creation which may explode the length
+    // of actuator as seen in CAMEL-22349
+    public TracingAwareMeterObservationHandler<Observation.Context> tracingAwareMeterObservationHandler(Tracer tracer) {
+        return new TracingAwareMeterObservationHandler<>(
+            new MeterObservationHandler<Observation.Context>() {},
+            tracer
+        ) {
+            @Override
+            public void onEvent(Observation.Event event, Observation.Context context) {}
+        };
+    }
+
 }
