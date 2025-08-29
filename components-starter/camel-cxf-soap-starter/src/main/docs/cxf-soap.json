@@ -17,7 +17,8 @@
       "name": "camel.component.cxf.allow-streaming",
       "type": "java.lang.Boolean",
       "description": "This option controls whether the CXF component, when running in PAYLOAD mode, will DOM parse the incoming messages into DOM Elements or keep the payload as a javax.xml.transform.Source object that would allow streaming in some cases.",
-      "sourceType": "org.apache.camel.component.cxf.jaxws.springboot.CxfComponentConfiguration"
+      "sourceType": "org.apache.camel.component.cxf.jaxws.springboot.CxfComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.cxf.autowired-enabled",

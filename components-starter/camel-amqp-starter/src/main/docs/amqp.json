@@ -763,13 +763,15 @@
       "name": "camel.component.amqp.use-ssl",
       "type": "java.lang.Boolean",
       "description": "Whether to enable SSL when connecting to the AMQP Broker.",
-      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.amqp.use-topic-prefix",
       "type": "java.lang.Boolean",
       "description": "Whether to configure topics with a topic:\/\/ prefix.",
-      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.amqp.username",

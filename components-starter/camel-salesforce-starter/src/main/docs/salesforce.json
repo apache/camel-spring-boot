@@ -283,7 +283,8 @@
       "name": "camel.component.salesforce.include-details",
       "type": "java.lang.Boolean",
       "description": "Include details in Salesforce1 Analytics report, defaults to false.",
-      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.salesforce.initial-replay-id-map",
@@ -403,25 +404,29 @@
       "name": "camel.component.salesforce.notify-for-operation-create",
       "type": "java.lang.Boolean",
       "description": "Notify for create operation, defaults to false (API version &gt;= 29.0)",
-      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.salesforce.notify-for-operation-delete",
       "type": "java.lang.Boolean",
       "description": "Notify for delete operation, defaults to false (API version &gt;= 29.0)",
-      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.salesforce.notify-for-operation-undelete",
       "type": "java.lang.Boolean",
       "description": "Notify for un-delete operation, defaults to false (API version &gt;= 29.0)",
-      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.salesforce.notify-for-operation-update",
       "type": "java.lang.Boolean",
       "description": "Notify for update operation, defaults to false (API version &gt;= 29.0)",
-      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.salesforce.notify-for-operations",
@@ -451,7 +456,8 @@
       "name": "camel.component.salesforce.pk-chunking",
       "type": "java.lang.Boolean",
       "description": "Use PK Chunking. Only for use in original Bulk API. Bulk 2.0 API performs PK chunking automatically, if necessary.",
-      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.salesforce.pk-chunking-chunk-size",

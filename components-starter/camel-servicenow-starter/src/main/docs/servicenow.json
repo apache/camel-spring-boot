@@ -81,13 +81,15 @@
       "name": "camel.component.servicenow.exclude-reference-link",
       "type": "java.lang.Boolean",
       "description": "True to exclude Table API links for reference fields (default: false)",
-      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.servicenow.favorites",
       "type": "java.lang.Boolean",
       "description": "Set this parameter to true to return only scorecards that are favorites of the querying user.",
-      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.servicenow.http-client-policy",
@@ -99,37 +101,43 @@
       "name": "camel.component.servicenow.include-aggregates",
       "type": "java.lang.Boolean",
       "description": "Set this parameter to true to always return all available aggregates for an indicator, including when an aggregate has already been applied. If a value is not specified, this parameter defaults to false and returns no aggregates.",
-      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.servicenow.include-available-aggregates",
       "type": "java.lang.Boolean",
       "description": "Set this parameter to true to return all available aggregates for an indicator when no aggregate has been applied. If a value is not specified, this parameter defaults to false and returns no aggregates.",
-      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.servicenow.include-available-breakdowns",
       "type": "java.lang.Boolean",
       "description": "Set this parameter to true to return all available breakdowns for an indicator. If a value is not specified, this parameter defaults to false and returns no breakdowns.",
-      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.servicenow.include-score-notes",
       "type": "java.lang.Boolean",
       "description": "Set this parameter to true to return all notes associated with the score. The note element contains the note text as well as the author and timestamp when the note was added.",
-      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.servicenow.include-scores",
       "type": "java.lang.Boolean",
       "description": "Set this parameter to true to return all scores for a scorecard. If a value is not specified, this parameter defaults to false and returns only the most recent score value.",
-      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.servicenow.input-display-value",
       "type": "java.lang.Boolean",
       "description": "True to set raw value of input fields (default: false)",
-      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.servicenow.instance-name",
@@ -141,7 +149,8 @@
       "name": "camel.component.servicenow.key",
       "type": "java.lang.Boolean",
       "description": "Set this parameter to true to return only scorecards for key indicators.",
-      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.servicenow.lazy-start-producer",
@@ -277,13 +286,15 @@
       "name": "camel.component.servicenow.suppress-auto-sys-field",
       "type": "java.lang.Boolean",
       "description": "True to suppress auto generation of system fields (default: false)",
-      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.servicenow.suppress-pagination-header",
       "type": "java.lang.Boolean",
       "description": "Set this value to true to remove the Link header from the response. The Link header allows you to request additional pages of data when the number of records matching your query exceeds the query limit",
-      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.servicenow.table",
@@ -295,7 +306,8 @@
       "name": "camel.component.servicenow.target",
       "type": "java.lang.Boolean",
       "description": "Set this parameter to true to return only scorecards that have a target.",
-      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.servicenow.time-format",
@@ -308,7 +320,8 @@
       "name": "camel.component.servicenow.top-level-only",
       "type": "java.lang.Boolean",
       "description": "Gets only those categories whose parent is a catalog.",
-      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.servicenow.use-global-ssl-context-parameters",
