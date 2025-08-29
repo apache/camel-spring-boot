@@ -61,51 +61,51 @@ public class ServiceNowComponentConfiguration
     /**
      * True to exclude Table API links for reference fields (default: false)
      */
-    private Boolean excludeReferenceLink;
+    private Boolean excludeReferenceLink = false;
     /**
      * Set this parameter to true to return only scorecards that are favorites
      * of the querying user.
      */
-    private Boolean favorites;
+    private Boolean favorites = false;
     /**
      * Set this parameter to true to always return all available aggregates for
      * an indicator, including when an aggregate has already been applied. If a
      * value is not specified, this parameter defaults to false and returns no
      * aggregates.
      */
-    private Boolean includeAggregates;
+    private Boolean includeAggregates = false;
     /**
      * Set this parameter to true to return all available aggregates for an
      * indicator when no aggregate has been applied. If a value is not
      * specified, this parameter defaults to false and returns no aggregates.
      */
-    private Boolean includeAvailableAggregates;
+    private Boolean includeAvailableAggregates = false;
     /**
      * Set this parameter to true to return all available breakdowns for an
      * indicator. If a value is not specified, this parameter defaults to false
      * and returns no breakdowns.
      */
-    private Boolean includeAvailableBreakdowns;
+    private Boolean includeAvailableBreakdowns = false;
     /**
      * Set this parameter to true to return all notes associated with the score.
      * The note element contains the note text as well as the author and
      * timestamp when the note was added.
      */
-    private Boolean includeScoreNotes;
+    private Boolean includeScoreNotes = false;
     /**
      * Set this parameter to true to return all scores for a scorecard. If a
      * value is not specified, this parameter defaults to false and returns only
      * the most recent score value.
      */
-    private Boolean includeScores;
+    private Boolean includeScores = false;
     /**
      * True to set raw value of input fields (default: false)
      */
-    private Boolean inputDisplayValue;
+    private Boolean inputDisplayValue = false;
     /**
      * Set this parameter to true to return only scorecards for key indicators.
      */
-    private Boolean key;
+    private Boolean key = false;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -160,13 +160,13 @@ public class ServiceNowComponentConfiguration
     /**
      * True to suppress auto generation of system fields (default: false)
      */
-    private Boolean suppressAutoSysField;
+    private Boolean suppressAutoSysField = false;
     /**
      * Set this value to true to remove the Link header from the response. The
      * Link header allows you to request additional pages of data when the
      * number of records matching your query exceeds the query limit
      */
-    private Boolean suppressPaginationHeader;
+    private Boolean suppressPaginationHeader = false;
     /**
      * The default table, can be overridden by header CamelServiceNowTable
      */
@@ -174,11 +174,11 @@ public class ServiceNowComponentConfiguration
     /**
      * Set this parameter to true to return only scorecards that have a target.
      */
-    private Boolean target;
+    private Boolean target = false;
     /**
      * Gets only those categories whose parent is a catalog.
      */
-    private Boolean topLevelOnly;
+    private Boolean topLevelOnly = false;
     /**
      * The ServiceNow REST API version, default latest
      */

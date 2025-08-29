@@ -53,11 +53,11 @@ public class DataLakeComponentConfiguration
      * Whether or not a file changed event raised indicates completion (true) or
      * modification (false)
      */
-    private Boolean close;
+    private Boolean close = false;
     /**
      * check for closing stream after read
      */
-    private Boolean closeStreamAfterRead;
+    private Boolean closeStreamAfterRead = false;
     /**
      * configuration object for data lake. The option is a
      * org.apache.camel.component.azure.storage.datalake.DataLakeConfiguration
@@ -124,7 +124,7 @@ public class DataLakeComponentConfiguration
     /**
      * recursively include all paths
      */
-    private Boolean recursive;
+    private Boolean recursive = false;
     /**
      * regular expression for matching file names
      */
@@ -132,7 +132,7 @@ public class DataLakeComponentConfiguration
     /**
      * Whether or not uncommitted data is to be retained after the operation
      */
-    private Boolean retainUncommitedData;
+    private Boolean retainUncommitedData = false;
     /**
      * data lake service client for azure storage data lake. The option is a
      * com.azure.storage.file.datalake.DataLakeServiceClient type.
@@ -158,7 +158,7 @@ public class DataLakeComponentConfiguration
     /**
      * whether or not to use upn
      */
-    private Boolean userPrincipalNameReturned;
+    private Boolean userPrincipalNameReturned = false;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions (if possible) occurred while the Camel consumer

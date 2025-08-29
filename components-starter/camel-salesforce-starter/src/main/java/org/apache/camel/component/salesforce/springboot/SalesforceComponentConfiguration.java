@@ -123,7 +123,7 @@ public class SalesforceComponentConfiguration
     /**
      * Include details in Salesforce1 Analytics report, defaults to false.
      */
-    private Boolean includeDetails;
+    private Boolean includeDetails = false;
     /**
      * Replay IDs to start from per channel name.
      */
@@ -175,11 +175,11 @@ public class SalesforceComponentConfiguration
     /**
      * Notify for create operation, defaults to false (API version &gt;= 29.0)
      */
-    private Boolean notifyForOperationCreate;
+    private Boolean notifyForOperationCreate = false;
     /**
      * Notify for delete operation, defaults to false (API version &gt;= 29.0)
      */
-    private Boolean notifyForOperationDelete;
+    private Boolean notifyForOperationDelete = false;
     /**
      * Notify for operations, options are ALL, CREATE, EXTENDED, UPDATE (API
      * version &lt; 29.0)
@@ -189,11 +189,11 @@ public class SalesforceComponentConfiguration
      * Notify for un-delete operation, defaults to false (API version &gt;=
      * 29.0)
      */
-    private Boolean notifyForOperationUndelete;
+    private Boolean notifyForOperationUndelete = false;
     /**
      * Notify for update operation, defaults to false (API version &gt;= 29.0)
      */
-    private Boolean notifyForOperationUpdate;
+    private Boolean notifyForOperationUpdate = false;
     /**
      * Custom Jackson ObjectMapper to use when serializing/deserializing
      * Salesforce objects. The option is a
@@ -211,7 +211,7 @@ public class SalesforceComponentConfiguration
      * Use PK Chunking. Only for use in original Bulk API. Bulk 2.0 API performs
      * PK chunking automatically, if necessary.
      */
-    private Boolean pkChunking;
+    private Boolean pkChunking = false;
     /**
      * Chunk size for use with PK Chunking. If unspecified, salesforce default
      * is 100,000. Maximum size is 250,000.

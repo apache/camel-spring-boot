@@ -132,11 +132,11 @@ public class AMQPComponentConfiguration
     /**
      * Whether to enable SSL when connecting to the AMQP Broker.
      */
-    private Boolean useSsl;
+    private Boolean useSsl = false;
     /**
      * Whether to configure topics with a topic:// prefix.
      */
-    private Boolean useTopicPrefix;
+    private Boolean useTopicPrefix = false;
     /**
      * The JMS acknowledgement name, which is one of: SESSION_TRANSACTED,
      * CLIENT_ACKNOWLEDGE, AUTO_ACKNOWLEDGE, DUPS_OK_ACKNOWLEDGE

@@ -71,7 +71,7 @@ public class CxfComponentConfiguration
      * payload as a javax.xml.transform.Source object that would allow streaming
      * in some cases.
      */
-    private Boolean allowStreaming;
+    private Boolean allowStreaming = false;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
