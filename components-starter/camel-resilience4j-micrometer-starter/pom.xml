@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-resilience4j-micrometer-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: resilience4j-micrometer</name>
+  <name>Camel SB Starters :: Resilience4j Micrometer</name>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
