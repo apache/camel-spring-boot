@@ -16,6 +16,9 @@
  */
 package org.apache.camel.component.resilience4j.micrometer;
 
+import java.util.Optional;
+
+import io.micrometer.core.instrument.MeterRegistry;
 import org.apache.camel.CamelContext;
 import org.apache.camel.spi.Resilience4jMicrometerFactory;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
@@ -30,8 +33,12 @@ import org.springframework.context.annotation.Configuration;
 public class Resilience4jMicrometerAutoConfiguration {
 
     @Bean
-    public Resilience4jMicrometerFactory resilience4jMicrometerFactory(CamelContext camelContext) throws Exception {
+    public Resilience4jMicrometerFactory resilience4jMicrometerFactory(CamelContext camelContext,
+                                                                       Optional<MeterRegistry> registry) throws Exception {
         Resilience4jMicrometerFactory factory = new DefaultResilience4jMicrometerFactory();
+        if (registry != null && registry.isPresent()) {
+            factory.setMeterRegistry(registry.get());
+        }
         factory.setCamelContext(camelContext);
         camelContext.addService(factory);
         return factory;
