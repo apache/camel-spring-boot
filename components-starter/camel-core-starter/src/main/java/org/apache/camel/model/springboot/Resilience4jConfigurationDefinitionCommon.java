@@ -168,6 +168,11 @@ public class Resilience4jConfigurationDefinitionCommon {
      */
     private Boolean timeoutCancelRunningFuture = true;
     /**
+     * Whether to enable collecting statistics using Micrometer. This requires
+     * adding camel-resilience4j-micrometer JAR to the classpath.
+     */
+    private Boolean micrometerEnabled = false;
+    /**
      * Configure a list of exceptions that are recorded as a failure and thus
      * increase the failure rate. Any exception matching or inheriting from one
      * of the list counts as a failure, unless explicitly ignored via
@@ -343,6 +348,14 @@ public class Resilience4jConfigurationDefinitionCommon {
 
     public void setTimeoutCancelRunningFuture(Boolean timeoutCancelRunningFuture) {
         this.timeoutCancelRunningFuture = timeoutCancelRunningFuture;
+    }
+
+    public Boolean getMicrometerEnabled() {
+        return micrometerEnabled;
+    }
+
+    public void setMicrometerEnabled(Boolean micrometerEnabled) {
+        this.micrometerEnabled = micrometerEnabled;
     }
 
     public List<String> getRecordException() {

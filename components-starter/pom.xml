@@ -330,8 +330,8 @@
     <module>camel-mapstruct-starter</module>
     <module>camel-master-starter</module>
     <module>camel-metrics-starter</module>
-    <module>camel-micrometer-starter</module>
     <module>camel-micrometer-observability-starter</module>
+    <module>camel-micrometer-starter</module>
     <module>camel-milvus-starter</module>
     <module>camel-mina-starter</module>
     <module>camel-minio-starter</module>
@@ -381,6 +381,7 @@
     <module>camel-reactive-streams-starter</module>
     <module>camel-reactor-starter</module>
     <module>camel-ref-starter</module>
+    <module>camel-resilience4j-micrometer-starter</module>
     <module>camel-resilience4j-starter</module>
     <module>camel-rest-openapi-starter</module>
     <module>camel-rest-starter</module>
