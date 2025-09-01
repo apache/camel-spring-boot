@@ -264,4 +264,68 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <!-- Profile for JDK 21+ features like Virtual Threads -->
+        <profile>
+            <id>jdk21</id>
+            <activation>
+                <jdk>[21,)</jdk>
+            </activation>
+            <properties>
+                <jdk.version>21</jdk.version>
+            </properties>
+            <build>
+                <plugins>
+                    <!-- Add java21 test sources when using JDK 21+ -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>3.6.1</version>
+                        <executions>
+                            <execution>
+                                <id>add-java21-test-sources</id>
+                                <phase>generate-test-sources</phase>
+                                <goals>
+                                    <goal>add-test-source</goal>
+                                </goals>
+                                <configuration>
+                                    <sources>
+                                        <source>${basedir}/src/test/java21</source>
+                                    </sources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    
+                    <!-- Configure compiler for JDK 21 compatibility in this profile -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>${maven-compiler-plugin-version}</version>
+                        <configuration>
+                            <source>21</source>
+                            <target>21</target>
+                            <fork>true</fork>
+                            <parameters>true</parameters>
+                        </configuration>
+                    </plugin>
+
+                    <!-- Configure surefire to run JDK 21 specific tests -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${maven-surefire-plugin-version}</version>
+                        <configuration>
+                            <!-- Set virtual thread properties only for these specific tests -->
+                            <systemPropertyVariables>
+                                <spring.threads.virtual.enabled>true</spring.threads.virtual.enabled>
+                                <camel.threads.virtual.enabled>true</camel.threads.virtual.enabled>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

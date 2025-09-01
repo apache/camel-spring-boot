@@ -21,22 +21,24 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
 /**
  * receives a spring-context and make it available to classes outside the spring scope.
  */
 @Component
 public class ApplicationContextHolder implements ApplicationContextAware {
 
+    private static final CountDownLatch contextLatch = new CountDownLatch(1);
     private static ApplicationContext context;
 
     private static long contextMaxWaitTime = 60000L;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        synchronized (ApplicationContextHolder.class) {
-            ApplicationContextHolder.context = applicationContext;
-            ApplicationContextHolder.class.notifyAll();
-        }
+        ApplicationContextHolder.context = applicationContext;
+        contextLatch.countDown();
     }
 
     public static ApplicationContext getApplicationContext() throws InterruptedException {
@@ -46,18 +48,7 @@ public class ApplicationContextHolder implements ApplicationContextAware {
 
     private static void waitForContextReady() throws InterruptedException {
         long maxWait = contextMaxWaitTime;
-        long deadline = System.currentTimeMillis() + maxWait;
-        synchronized (ApplicationContextHolder.class) {
-            long time = System.currentTimeMillis();
-            while (time < deadline && context == null) {
-                ApplicationContextHolder.class.wait(deadline - time);
-                time = System.currentTimeMillis();
-            }
-
-            if (context == null) {
-                throw new IllegalStateException("No spring context available after " + maxWait + " millis");
-            }
-        }
+        contextLatch.await(maxWait, TimeUnit.MILLISECONDS);
     }
 
     public static long getContextMaxWaitTime() {

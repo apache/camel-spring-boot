@@ -455,3 +455,139 @@ management.endpoint.health.probes.enabled=true
 ----
 
 Finally, http://localhost:8080/actuator/health/liveness will show the updated probe.
+
+== Virtual Threads Support
+
+Camel Spring Boot provides comprehensive support for JDK 21+ Virtual Threads, offering significant performance improvements for I/O-intensive applications. Virtual threads are lightweight threads that can dramatically reduce memory overhead and improve scalability compared to traditional platform threads.
+
+=== Enabling Virtual Threads
+
+To enable virtual threads in your Camel Spring Boot application, simply set the Spring Boot virtual threads property:
+
+[source,properties]
+----
+spring.threads.virtual.enabled=true
+----
+
+When this property is set to `true`, Camel Spring Boot automatically:
+
+1. **Enables Camel Virtual Threads**: Automatically sets `camel.threads.virtual.enabled=true`
+2. **Optimizes Executors**: Configures components to use `SimpleAsyncTaskExecutor` which is optimized for virtual threads
+3. **Updates Component Configurations**: Automatically configures supported components for optimal virtual thread performance
+
+=== Automatic Configuration
+
+When virtual threads are enabled, Camel Spring Boot provides automatic configuration for several components:
+
+==== Platform HTTP Component
+
+The Platform HTTP component automatically uses `SimpleAsyncTaskExecutor` when virtual threads are enabled, providing better performance for HTTP endpoints:
+
+[source,java]
+----
+@Component
+public class MyRoute extends RouteBuilder {
+    @Override
+    public void configure() {
+        from("platform-http:/api/data")
+            .to("http://external-service/api")  // Benefits from virtual threads
+            .setBody(constant("Response processed"));
+    }
+}
+----
+
+==== JMS and AMQP Components
+
+JMS and AMQP components benefit from virtual threads through the global virtual thread configuration. When `spring.threads.virtual.enabled=true` is set, these components will use virtual threads for message processing through the standard Spring Boot virtual thread integration:
+
+[source,properties]
+----
+spring.threads.virtual.enabled=true
+# JMS and AMQP components will automatically benefit from virtual threads
+----
+
+=== Manual Configuration
+
+If you need to manually configure specific components for virtual threads, you can use the `VirtualThreadAwareExecutorFactory`:
+
+[source,java]
+----
+@Configuration
+public class VirtualThreadConfig {
+    
+    @Bean
+    @ConditionalOnProperty(name = "spring.threads.virtual.enabled", havingValue = "true")
+    public TaskExecutor customTaskExecutor() {
+        return VirtualThreadAwareExecutorFactory.createOptimalExecutor();
+    }
+}
+----
+
+=== Performance Benefits
+
+Virtual threads provide several performance advantages:
+
+- **Reduced Memory Overhead**: Virtual threads use significantly less memory than platform threads
+- **Higher Concurrency**: Support for millions of concurrent virtual threads
+- **Better Resource Utilization**: Reduced thread pool contention and context switching
+- **Simplified Programming Model**: No need for complex async/reactive programming patterns
+
+=== Best Practices
+
+When using virtual threads with Camel Spring Boot:
+
+1. **Avoid Thread Pinning**: Minimize use of `synchronized` blocks in route processing
+2. **Use Simple Async Executors**: Let Camel Spring Boot auto-configure optimal executors
+3. **Monitor Performance**: Use Spring Boot Actuator to monitor virtual thread usage
+4. **Test Thoroughly**: Validate behavior under load with virtual threads enabled
+
+=== Example Application
+
+Here's a complete example of a Camel Spring Boot application optimized for virtual threads:
+
+[source,properties]
+----
+# application.properties
+spring.threads.virtual.enabled=true
+camel.main.routes-include-pattern=classpath:routes/*
+----
+
+[source,java]
+----
+@SpringBootApplication
+public class VirtualThreadsApplication {
+    
+    public static void main(String[] args) {
+        SpringApplication.run(VirtualThreadsApplication.class, args);
+    }
+    
+    @Component
+    public static class ApiRoutes extends RouteBuilder {
+        @Override
+        public void configure() {
+            from("platform-http:/api/process")
+                .log("Processing request with virtual thread: ${threadName}")
+                .to("http://external-api/data")
+                .transform(body().prepend("Processed: "))
+                .setHeader("X-Thread-Type", constant("virtual"));
+        }
+    }
+}
+----
+
+=== Compatibility
+
+Virtual threads support requires:
+
+- **JDK 21+**: Virtual threads are a JDK 21+ feature
+- **Spring Boot 3.2+**: Spring Boot virtual thread support
+- **Camel 4.0+**: Camel virtual thread integration
+
+=== Troubleshooting
+
+If you encounter issues with virtual threads:
+
+1. **Check JDK Version**: Ensure you're running JDK 21 or later
+2. **Verify Property Setting**: Confirm `spring.threads.virtual.enabled=true` is set
+3. **Review Logs**: Check for virtual thread configuration messages in startup logs
+4. **Monitor Thread Usage**: Use JVM monitoring tools to observe virtual thread behavior
