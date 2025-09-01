@@ -23,6 +23,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * The {@link org.apache.camel.CamelContext} created by Spring Boot.
  */
@@ -33,6 +35,7 @@ public class SpringBootCamelContext extends SpringCamelContext {
     private final StopWatch stopWatch = new StopWatch();
     private final boolean warnOnEarlyShutdown;
     private final CamelSpringBootApplicationController controller;
+    private final ReentrantLock reentrantLock = new ReentrantLock();
 
     public SpringBootCamelContext(ApplicationContext applicationContext, boolean warnOnEarlyShutdown,
                                   CamelSpringBootApplicationController controller) {
@@ -61,34 +64,39 @@ public class SpringBootCamelContext extends SpringCamelContext {
     }
 
     @Override
-    protected synchronized void doStop() throws Exception {
-        var listeners = controller.getMain().getMainListeners();
-        if (!listeners.isEmpty()) {
-            for (MainListener listener : listeners) {
-                listener.beforeStop(controller.getMain());
+    protected void doStop() throws Exception {
+        reentrantLock.lock();
+        try {
+            var listeners = controller.getMain().getMainListeners();
+            if (!listeners.isEmpty()) {
+                for (MainListener listener : listeners) {
+                    listener.beforeStop(controller.getMain());
+                }
             }
-        }
 
-        // if we are stopping very quickly then its likely because the user may not have either spring-boot-web
-        // or enabled Camel's main controller, so lets log a WARN about this.
-        long taken = stopWatch.taken();
-        if (warnOnEarlyShutdown && taken < 1200) { // give it a bit of slack
-            String cp = System.getProperty("java.class.path");
-            boolean junit = cp != null && cp.contains("junit-");
-            boolean starterWeb = cp != null && cp.contains("spring-boot-starter-web");
-            if (!junit && !starterWeb) {
-                LOG.warn(
-                        "CamelContext has only been running for less than a second. If you intend to run Camel for a longer time "
-                                + "then you can set the property camel.main.run-controller=true in application.properties"
-                                + " or add spring-boot-starter-web JAR to the classpath.");
+            // if we are stopping very quickly then its likely because the user may not have either spring-boot-web
+            // or enabled Camel's main controller, so lets log a WARN about this.
+            long taken = stopWatch.taken();
+            if (warnOnEarlyShutdown && taken < 1200) { // give it a bit of slack
+                String cp = System.getProperty("java.class.path");
+                boolean junit = cp != null && cp.contains("junit-");
+                boolean starterWeb = cp != null && cp.contains("spring-boot-starter-web");
+                if (!junit && !starterWeb) {
+                    LOG.warn(
+                            "CamelContext has only been running for less than a second. If you intend to run Camel for a longer time "
+                                    + "then you can set the property camel.main.run-controller=true in application.properties"
+                                    + " or add spring-boot-starter-web JAR to the classpath.");
+                }
             }
-        }
-        super.doStop();
+            super.doStop();
 
-        if (!listeners.isEmpty()) {
-            for (MainListener listener : listeners) {
-                listener.afterStop(controller.getMain());
+            if (!listeners.isEmpty()) {
+                for (MainListener listener : listeners) {
+                    listener.afterStop(controller.getMain());
+                }
             }
+        } finally {
+            reentrantLock.unlock();
         }
     }
 }

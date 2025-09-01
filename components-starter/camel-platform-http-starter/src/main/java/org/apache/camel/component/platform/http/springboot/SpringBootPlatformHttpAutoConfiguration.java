@@ -50,6 +50,10 @@ public class SpringBootPlatformHttpAutoConfiguration {
 
         if (executors != null && !executors.isEmpty()) {
             executors.forEach(e -> LOG.debug("Analyzing executor: {}", e.getClass().getName()));
+            
+            // Check if virtual threads are enabled
+            boolean virtualThreadsEnabled = Boolean.parseBoolean(env.getProperty("spring.threads.virtual.enabled", "false"));
+            
             executor = executors.stream()
                     .filter(e -> {
                         try {
@@ -58,17 +62,35 @@ public class SpringBootPlatformHttpAutoConfiguration {
                             // No problem, spring-security is not configured
                             return false;
                         }
-                    }).findAny().orElseGet(() ->
-                            executors.stream()
+                    }).findAny().orElseGet(() -> {
+                        if (virtualThreadsEnabled) {
+                            // Prefer SimpleAsyncTaskExecutor when virtual threads are enabled
+                            return executors.stream()
+                                    .filter(e -> e instanceof SimpleAsyncTaskExecutor)
+                                    .findFirst()
+                                    .orElseGet(() -> 
+                                            executors.stream()
+                                                    .filter(e -> e instanceof ThreadPoolTaskExecutor)
+                                                    .findFirst()
+                                                    .orElseThrow(() -> new RuntimeException("No SimpleAsyncTaskExecutor or ThreadPoolTaskExecutor configured"))
+                                    );
+                        } else {
+                            // Traditional behavior: prefer ThreadPoolTaskExecutor
+                            return executors.stream()
                                     .filter(e -> e instanceof ThreadPoolTaskExecutor || e instanceof SimpleAsyncTaskExecutor)
                                     .findFirst()
-                                    .orElseThrow(() -> new RuntimeException("No ThreadPoolTaskExecutor, SimpleAsyncTaskExecutor or DelegatingSecurityContextAsyncTaskExecutor configured"))
-                    );
+                                    .orElseThrow(() -> new RuntimeException("No ThreadPoolTaskExecutor, SimpleAsyncTaskExecutor or DelegatingSecurityContextAsyncTaskExecutor configured"));
+                        }
+                    });
         } else {
             throw new RuntimeException("No Executor configured");
         }
 
-        LOG.debug("Using executor: {}", executor.getClass().getName());
+        if (Boolean.parseBoolean(env.getProperty("spring.threads.virtual.enabled", "false"))) {
+            LOG.info("Virtual threads enabled - using executor: {} for platform-http", executor.getClass().getName());
+        } else {
+            LOG.debug("Using executor: {}", executor.getClass().getName());
+        }
         int port = Integer.parseInt(env.getProperty("server.port", "8080"));
         return new SpringBootPlatformHttpEngine(port, executor);
     }
