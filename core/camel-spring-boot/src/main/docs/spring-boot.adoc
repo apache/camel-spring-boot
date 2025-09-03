@@ -496,6 +496,57 @@ public class MyRoute extends RouteBuilder {
 }
 ----
 
+===== Undertow Metrics
+
+When using the Platform HTTP component with Undertow as the underlying web server, comprehensive metrics are automatically available through Spring Boot Actuator. To enable Undertow metrics:
+
+1. Exclude Tomcat from Spring Boot Web starter in your `pom.xml`:
++
+[source,xml]
+----
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+    <exclusions>
+        <exclusion>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+----
+
+2. Add Spring Boot Undertow starter:
++
+[source,xml]
+----
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-undertow</artifactId>
+</dependency>
+----
+
+3. Include Spring Boot Actuator:
++
+[source,xml]
+----
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+----
+
+4. Expose actuator metrics and enable Undertow session statistics
++
+[source,properties]
+----
+server.undertow.options.server.ENABLE_STATISTICS=true
+management.endpoints.web.exposure.include=metrics,health,info
+----
+
+With this configuration, Undertow-specific metrics will be automatically exposed under `/actuator/metrics`, providing detailed insights into HTTP server including: session management, connection pools and thread usage
+These metrics help monitor the health and performance of your Platform HTTP endpoints running on Undertow.
+
 ==== JMS and AMQP Components
 
 JMS and AMQP components benefit from virtual threads through the global virtual thread configuration. When `spring.threads.virtual.enabled=true` is set, these components will use virtual threads for message processing through the standard Spring Boot virtual thread integration:
