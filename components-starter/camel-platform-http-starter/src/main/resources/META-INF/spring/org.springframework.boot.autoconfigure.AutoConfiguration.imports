@@ -19,3 +19,4 @@ org.apache.camel.component.platform.http.springboot.PlatformHttpComponentConvert
 org.apache.camel.component.platform.http.springboot.PlatformHttpComponentAutoConfiguration
 org.apache.camel.component.platform.http.springboot.SpringBootPlatformHttpAutoConfiguration
 org.apache.camel.component.platform.http.springboot.SpringBootPlatformWebMvcConfiguration
+org.apache.camel.component.platform.http.springboot.actuate.metrics.undertow.UndertowMetricsAutoConfiguration
