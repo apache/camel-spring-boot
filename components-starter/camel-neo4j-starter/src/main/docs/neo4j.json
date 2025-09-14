@@ -46,7 +46,7 @@
     {
       "name": "camel.component.neo4j.detach-relationship",
       "type": "java.lang.Boolean",
-      "description": "Detach a relationship - set true if want to delete a node and detach its relationships to other nodes at same time",
+      "description": "Detach a relationship - set true if you want to delete a node and detach its relationships to other nodes at same time",
       "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration",
       "defaultValue": false
     },

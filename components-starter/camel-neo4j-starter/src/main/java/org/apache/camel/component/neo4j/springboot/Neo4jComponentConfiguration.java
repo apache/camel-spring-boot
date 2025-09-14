@@ -52,8 +52,8 @@ public class Neo4jComponentConfiguration
      */
     private String databaseUrl;
     /**
-     * Detach a relationship - set true if want to delete a node and detach its
-     * relationships to other nodes at same time
+     * Detach a relationship - set true if you want to delete a node and detach
+     * its relationships to other nodes at same time
      */
     private Boolean detachRelationship = false;
     /**
