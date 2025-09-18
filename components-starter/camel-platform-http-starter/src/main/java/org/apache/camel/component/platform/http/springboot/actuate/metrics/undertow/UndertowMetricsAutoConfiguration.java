@@ -34,7 +34,7 @@ import org.springframework.context.annotation.Bean;
  */
 @AutoConfiguration(after = CompositeMeterRegistryAutoConfiguration.class)
 @ConditionalOnWebApplication
-@ConditionalOnClass({ Undertow.class, MeterBinder.class })
+@ConditionalOnClass({ Undertow.class, MeterBinder.class, CompositeMeterRegistryAutoConfiguration.class })
 public class UndertowMetricsAutoConfiguration {
 
     @Bean
