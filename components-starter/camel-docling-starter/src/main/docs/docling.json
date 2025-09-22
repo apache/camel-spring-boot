@@ -1,0 +1,120 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.docling",
+      "type": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.docling.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.docling.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.docling.configuration",
+      "type": "org.apache.camel.component.docling.DoclingConfiguration",
+      "description": "The configuration for the Docling Endpoint. The option is a org.apache.camel.component.docling.DoclingConfiguration type.",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.docling.content-in-body",
+      "type": "java.lang.Boolean",
+      "description": "Include the content of the output file in the exchange body and delete the output file",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.docling.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.docling.docling-command",
+      "type": "java.lang.String",
+      "description": "Path to Docling Python executable or command",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.docling.enable-o-c-r",
+      "type": "java.lang.Boolean",
+      "description": "Enable OCR processing for scanned documents",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.docling.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the docling component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.docling.include-layout-info",
+      "type": "java.lang.Boolean",
+      "description": "Show layout information with bounding boxes",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.docling.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.docling.max-file-size",
+      "type": "java.lang.Long",
+      "description": "Maximum file size in bytes for processing",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": 52428800
+    },
+    {
+      "name": "camel.component.docling.ocr-language",
+      "type": "java.lang.String",
+      "description": "Language code for OCR processing",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": "en"
+    },
+    {
+      "name": "camel.component.docling.operation",
+      "type": "org.apache.camel.component.docling.DoclingOperations",
+      "description": "The operation to perform",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": "convert-to-markdown"
+    },
+    {
+      "name": "camel.component.docling.output-format",
+      "type": "java.lang.String",
+      "description": "Output format for document conversion",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": "markdown"
+    },
+    {
+      "name": "camel.component.docling.process-timeout",
+      "type": "java.lang.Long",
+      "description": "Timeout for Docling process execution in milliseconds",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": 30000
+    },
+    {
+      "name": "camel.component.docling.working-directory",
+      "type": "java.lang.String",
+      "description": "Working directory for Docling execution",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
