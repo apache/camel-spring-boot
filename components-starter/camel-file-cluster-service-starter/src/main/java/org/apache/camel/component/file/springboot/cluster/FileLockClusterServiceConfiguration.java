@@ -53,6 +53,14 @@ public class FileLockClusterServiceConfiguration {
     private Map<String, Object> attributes;
 
     /**
+     * Multiplier applied to the cluster leader acquireLockInterval to determine how long followers should wait
+     * before considering the leader "stale".
+     * For example, if the leader updates its heartbeat every 2 seconds and the heartbeatTimeoutMultiplier is 3,
+     * followers will tolerate up to  2s * 3 = 6s of silence before declaring the leader unavailable.
+     */
+    private Integer heartbeatTimeoutMultiplier;
+
+    /**
      * Service lookup order/priority.
      */
     private Integer order;
@@ -111,5 +119,13 @@ public class FileLockClusterServiceConfiguration {
 
     public void setOrder(Integer order) {
         this.order = order;
+    }
+
+    public Integer getHeartbeatTimeoutMultiplier() {
+        return heartbeatTimeoutMultiplier;
+    }
+
+    public void setHeartbeatTimeoutMultiplier(Integer heartbeatTimeoutMultiplier) {
+        this.heartbeatTimeoutMultiplier = heartbeatTimeoutMultiplier;
     }
 }
