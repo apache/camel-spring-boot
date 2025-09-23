@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.azure.servicebus.springboot;
 
-import java.time.Duration;
 import java.time.OffsetDateTime;
 import com.azure.core.amqp.AmqpRetryOptions;
 import com.azure.core.amqp.AmqpTransportType;
@@ -112,11 +111,12 @@ public class ServiceBusComponentConfiguration
      */
     private Boolean enableDeadLettering = false;
     /**
-     * Sets the amount of time to continue auto-renewing the lock. Setting ZERO
-     * disables auto-renewal. For ServiceBus receive mode (RECEIVE_AND_DELETE
-     * RECEIVE_AND_DELETE), auto-renewal is disabled.
+     * Sets the amount of time (millis) to continue auto-renewing the lock.
+     * Setting ZERO disables auto-renewal. For ServiceBus receive mode
+     * (RECEIVE_AND_DELETE RECEIVE_AND_DELETE), auto-renewal is disabled. The
+     * option is a long type.
      */
-    private Duration maxAutoLockRenewDuration;
+    private Long maxAutoLockRenewDuration = 300000L;
     /**
      * Sets maximum number of concurrent calls
      */
@@ -296,11 +296,11 @@ public class ServiceBusComponentConfiguration
         this.enableDeadLettering = enableDeadLettering;
     }
 
-    public Duration getMaxAutoLockRenewDuration() {
+    public Long getMaxAutoLockRenewDuration() {
         return maxAutoLockRenewDuration;
     }
 
-    public void setMaxAutoLockRenewDuration(Duration maxAutoLockRenewDuration) {
+    public void setMaxAutoLockRenewDuration(Long maxAutoLockRenewDuration) {
         this.maxAutoLockRenewDuration = maxAutoLockRenewDuration;
     }
 
