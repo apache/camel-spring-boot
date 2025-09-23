@@ -744,8 +744,8 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                     // the value should be a Long number
                     String value = option.getDefaultValue() + "L";
                     prop.getField().setLiteralInitializer(value);
-                } else if ("integer".equals(option.getType()) || "java.lang.Integer".equals(option.getJavaType())
-                        || "boolean".equals(option.getType()) || "java.lang.Boolean".equals(option.getJavaType())) {
+                } else if ("integer".equals(option.getType()) || "java.lang.Integer".equals(option.getJavaType()) || "int".equals(option.getJavaType())
+                        || "boolean".equals(option.getType()) || "java.lang.Boolean".equals(option.getJavaType()) || "boolean".equals(option.getJavaType())) {
                     prop.getField().setLiteralInitializer(option.getDefaultValue().toString());
                 } else if (!isBlank(option.getEnums())) {
                     String enumShortName = type.substring(type.lastIndexOf(".") + 1);
