@@ -39,7 +39,6 @@ import org.apache.camel.main.DefaultConfigurationConfigurer;
 import org.apache.camel.main.MainListener;
 import org.apache.camel.main.RoutesCollector;
 import org.apache.camel.model.Model;
-import org.apache.camel.spi.BacklogDebugger;
 import org.apache.camel.spi.BeanRepository;
 import org.apache.camel.spi.CliConnector;
 import org.apache.camel.spi.CliConnectorFactory;
@@ -53,7 +52,6 @@ import org.apache.camel.spring.boot.aot.CamelRuntimeHints;
 import org.apache.camel.spring.spi.ApplicationContextBeanRepository;
 import org.apache.camel.spring.spi.CamelBeanPostProcessor;
 import org.apache.camel.support.DefaultRegistry;
-import org.apache.camel.support.LanguageSupport;
 import org.apache.camel.support.ResetableClock;
 import org.apache.camel.support.ResourceHelper;
 import org.apache.camel.support.service.ServiceHelper;
@@ -191,13 +189,10 @@ public class CamelAutoConfiguration {
                     VariableRepository repo = camelContext.getCamelContextExtension()
                             .getContextPlugin(VariableRepositoryFactory.class).getVariableRepository(id);
                     // it may be a resource to load from disk then
-                    if (value.startsWith(LanguageSupport.RESOURCE)) {
-                        value = value.substring(9);
-                        if (ResourceHelper.hasScheme(value)) {
-                            InputStream is = ResourceHelper.resolveMandatoryResourceAsInputStream(camelContext, value);
-                            value = IOHelper.loadText(is);
-                            IOHelper.close(is);
-                        }
+                    if (ResourceHelper.hasScheme(value)) {
+                        InputStream is = ResourceHelper.resolveMandatoryResourceAsInputStream(camelContext, value);
+                        value = IOHelper.loadText(is);
+                        IOHelper.close(is);
                     }
                     repo.setVariable(key, value);
                 }
