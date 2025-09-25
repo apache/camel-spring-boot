@@ -370,6 +370,27 @@
       "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration"
     },
     {
+      "name": "camel.component.aws2-s3.timestamp-grouping-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable timestamp-based grouping of messages into time windows for file creation. When enabled, messages are grouped by their timestamp header into time windows.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-s3.timestamp-header-name",
+      "type": "java.lang.String",
+      "description": "The name of the message header containing the timestamp for grouping. Default is CamelMessageTimestamp.",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": "CamelMessageTimestamp"
+    },
+    {
+      "name": "camel.component.aws2-s3.timestamp-window-size-millis",
+      "type": "java.lang.Long",
+      "description": "The size of the time window in milliseconds for timestamp-based grouping. Messages within the same time window will be written to the same file. Default is 300000 (5 minutes).",
+      "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
+      "defaultValue": 300000
+    },
+    {
       "name": "camel.component.aws2-s3.trust-all-certificates",
       "type": "java.lang.Boolean",
       "description": "If we want to trust all certificates in case of overriding the endpoint",

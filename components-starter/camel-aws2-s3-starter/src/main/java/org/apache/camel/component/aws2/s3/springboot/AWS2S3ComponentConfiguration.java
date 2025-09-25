@@ -277,6 +277,23 @@ public class AWS2S3ComponentConfiguration
      */
     private Long streamingUploadTimeout;
     /**
+     * Enable timestamp-based grouping of messages into time windows for file
+     * creation. When enabled, messages are grouped by their timestamp header
+     * into time windows.
+     */
+    private Boolean timestampGroupingEnabled = false;
+    /**
+     * The name of the message header containing the timestamp for grouping.
+     * Default is CamelMessageTimestamp.
+     */
+    private String timestampHeaderName = "CamelMessageTimestamp";
+    /**
+     * The size of the time window in milliseconds for timestamp-based grouping.
+     * Messages within the same time window will be written to the same file.
+     * Default is 300000 (5 minutes).
+     */
+    private Long timestampWindowSizeMillis = 300000L;
+    /**
      * Define the id of KMS key to use in case KMS is enabled
      */
     private String awsKMSKeyId;
@@ -697,6 +714,30 @@ public class AWS2S3ComponentConfiguration
 
     public void setStreamingUploadTimeout(Long streamingUploadTimeout) {
         this.streamingUploadTimeout = streamingUploadTimeout;
+    }
+
+    public Boolean getTimestampGroupingEnabled() {
+        return timestampGroupingEnabled;
+    }
+
+    public void setTimestampGroupingEnabled(Boolean timestampGroupingEnabled) {
+        this.timestampGroupingEnabled = timestampGroupingEnabled;
+    }
+
+    public String getTimestampHeaderName() {
+        return timestampHeaderName;
+    }
+
+    public void setTimestampHeaderName(String timestampHeaderName) {
+        this.timestampHeaderName = timestampHeaderName;
+    }
+
+    public Long getTimestampWindowSizeMillis() {
+        return timestampWindowSizeMillis;
+    }
+
+    public void setTimestampWindowSizeMillis(Long timestampWindowSizeMillis) {
+        this.timestampWindowSizeMillis = timestampWindowSizeMillis;
     }
 
     public String getAwsKMSKeyId() {
