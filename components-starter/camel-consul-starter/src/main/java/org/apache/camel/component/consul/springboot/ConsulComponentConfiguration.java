@@ -46,11 +46,6 @@ public class ConsulComponentConfiguration
      */
     private Duration connectTimeout;
     /**
-     * Reference to a org.kiwiproject.consul.Consul in the registry. The option
-     * is a org.kiwiproject.consul.Consul type.
-     */
-    private Consul consulClient;
-    /**
      * The default key. Can be overridden by CamelConsulKey
      */
     private String key;
@@ -71,6 +66,11 @@ public class ConsulComponentConfiguration
      * The Consul agent URL
      */
     private String url;
+    /**
+     * Default to transform values retrieved from Consul i.e. on KV endpoint to
+     * string.
+     */
+    private Boolean valueAsString = false;
     /**
      * Write timeout for OkHttpClient
      */
@@ -105,11 +105,6 @@ public class ConsulComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Default to transform values retrieved from Consul i.e. on KV endpoint to
-     * string.
-     */
-    private Boolean valueAsString = false;
-    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -127,6 +122,11 @@ public class ConsulComponentConfiguration
      * The consistencyMode used for queries, default ConsistencyMode.DEFAULT
      */
     private ConsistencyMode consistencyMode = ConsistencyMode.DEFAULT;
+    /**
+     * The consul client to use. The option is a org.kiwiproject.consul.Consul
+     * type.
+     */
+    private Consul consulClient;
     /**
      * The data center
      */
@@ -183,14 +183,6 @@ public class ConsulComponentConfiguration
         this.connectTimeout = connectTimeout;
     }
 
-    public Consul getConsulClient() {
-        return consulClient;
-    }
-
-    public void setConsulClient(Consul consulClient) {
-        this.consulClient = consulClient;
-    }
-
     public String getKey() {
         return key;
     }
@@ -231,6 +223,14 @@ public class ConsulComponentConfiguration
         this.url = url;
     }
 
+    public Boolean getValueAsString() {
+        return valueAsString;
+    }
+
+    public void setValueAsString(Boolean valueAsString) {
+        this.valueAsString = valueAsString;
+    }
+
     public Duration getWriteTimeout() {
         return writeTimeout;
     }
@@ -263,14 +263,6 @@ public class ConsulComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getValueAsString() {
-        return valueAsString;
-    }
-
-    public void setValueAsString(Boolean valueAsString) {
-        this.valueAsString = valueAsString;
-    }
-
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
@@ -293,6 +285,14 @@ public class ConsulComponentConfiguration
 
     public void setConsistencyMode(ConsistencyMode consistencyMode) {
         this.consistencyMode = consistencyMode;
+    }
+
+    public Consul getConsulClient() {
+        return consulClient;
+    }
+
+    public void setConsulClient(Consul consulClient) {
+        this.consulClient = consulClient;
     }
 
     public String getDatacenter() {

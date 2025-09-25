@@ -466,8 +466,8 @@ public class NettyComponentConfiguration
      */
     private Boolean needClientAuth = false;
     /**
-     * Password setting to use in order to encrypt/decrypt payloads sent using
-     * SSH
+     * Password to use for the keyStore and trustStore. The same password must
+     * be configured for both resources.
      */
     private String passphrase;
     /**

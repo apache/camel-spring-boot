@@ -215,7 +215,7 @@
     {
       "name": "camel.component.consul.consul-client",
       "type": "org.kiwiproject.consul.Consul",
-      "description": "Reference to a org.kiwiproject.consul.Consul in the registry. The option is a org.kiwiproject.consul.Consul type.",
+      "description": "The consul client to use. The option is a org.kiwiproject.consul.Consul type.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
