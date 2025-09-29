@@ -1210,6 +1210,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-mdc-starter</artifactId>
+        <version>4.15.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-metrics-starter</artifactId>
         <version>4.15.0-SNAPSHOT</version>
       </dependency>

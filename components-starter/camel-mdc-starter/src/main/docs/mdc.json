@@ -1,0 +1,34 @@
+{
+  "groups": [
+    {
+      "name": "camel.mdc",
+      "type": "org.apache.camel.mdc.starter.MDCConfigurationProperties",
+      "sourceType": "org.apache.camel.mdc.starter.MDCConfigurationProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.mdc.custom-exchange-headers",
+      "type": "java.lang.String",
+      "description": "Provide the headers you would like to use in the logging. Use `*` value to include all available headers.",
+      "sourceType": "org.apache.camel.mdc.starter.MDCConfigurationProperties"
+    },
+    {
+      "name": "camel.mdc.custom-exchange-properties",
+      "type": "java.lang.String",
+      "description": "Provide the properties you would like to use in the logging. Use `*` value to include all available properties.",
+      "sourceType": "org.apache.camel.mdc.starter.MDCConfigurationProperties"
+    },
+    {
+      "name": "camel.mdc.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable the MDC service.",
+      "sourceType": "org.apache.camel.mdc.starter.MDCConfigurationProperties",
+      "defaultValue": false
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
