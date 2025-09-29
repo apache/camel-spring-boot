@@ -1901,7 +1901,7 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-test-spring-junit5</artifactId>
-        <version>4.10.7</version>
+        <version>4.10.8-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
