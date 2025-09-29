@@ -307,6 +307,7 @@
     <module>camel-jte-starter</module>
     <module>camel-kafka-starter</module>
     <module>camel-kamelet-starter</module>
+    <module>camel-keycloak-starter</module>
     <module>camel-knative-starter</module>
     <module>camel-kserve-starter</module>
     <module>camel-kubernetes-cluster-service-starter</module>
