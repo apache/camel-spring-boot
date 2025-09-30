@@ -1,0 +1,107 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.keycloak",
+      "type": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.keycloak.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.keycloak.client-id",
+      "type": "java.lang.String",
+      "description": "Keycloak client ID",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.client-secret",
+      "type": "java.lang.String",
+      "description": "Keycloak client secret",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.configuration",
+      "type": "org.apache.camel.component.keycloak.KeycloakConfiguration",
+      "description": "Component configuration. The option is a org.apache.camel.component.keycloak.KeycloakConfiguration type.",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.keycloak.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the keycloak component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.keycloak-client",
+      "type": "org.keycloak.admin.client.Keycloak",
+      "description": "To use an existing configured Keycloak admin client. The option is a org.keycloak.admin.client.Keycloak type.",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.keycloak.operation",
+      "type": "org.apache.camel.component.keycloak.KeycloakOperations",
+      "description": "The operation to perform",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.password",
+      "type": "java.lang.String",
+      "description": "Keycloak password",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.pojo-request",
+      "type": "java.lang.Boolean",
+      "description": "If we want to use a POJO request as body or not",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.keycloak.realm",
+      "type": "java.lang.String",
+      "description": "Keycloak realm",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.server-url",
+      "type": "java.lang.String",
+      "description": "Keycloak server URL",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.username",
+      "type": "java.lang.String",
+      "description": "Keycloak username",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
