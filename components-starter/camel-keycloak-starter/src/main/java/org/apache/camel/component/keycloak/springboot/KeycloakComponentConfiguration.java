@@ -79,9 +79,10 @@ public class KeycloakComponentConfiguration
      */
     private Boolean pojoRequest = false;
     /**
-     * Keycloak realm
+     * Keycloak realm, the default is master because usually all the operations
+     * are done starting from the master realm
      */
-    private String realm;
+    private String realm = "master";
     /**
      * Keycloak server URL
      */

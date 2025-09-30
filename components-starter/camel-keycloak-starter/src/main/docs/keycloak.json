@@ -84,8 +84,9 @@
     {
       "name": "camel.component.keycloak.realm",
       "type": "java.lang.String",
-      "description": "Keycloak realm",
-      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+      "description": "Keycloak realm, the default is master because usually all the operations are done starting from the master realm",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration",
+      "defaultValue": "master"
     },
     {
       "name": "camel.component.keycloak.server-url",
