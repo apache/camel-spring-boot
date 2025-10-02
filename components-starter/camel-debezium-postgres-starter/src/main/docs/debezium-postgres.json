@@ -231,6 +231,20 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.debezium-postgres.guardrail-collections-limit-action",
+      "type": "java.lang.String",
+      "description": "Specify the action to take when a guardrail collections limit is exceeded: 'warn' (the default) logs a warning message and continues processing; 'fail' stops the connector with an error.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": "warn"
+    },
+    {
+      "name": "camel.component.debezium-postgres.guardrail-collections-max",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of collections or tables that can be captured by the connector. When this limit is exceeded, the action specified by 'guardrail.collections.limit.action' will be taken. Set to 0 to disable this guardrail.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
       "name": "camel.component.debezium-postgres.heartbeat-action-query",
       "type": "java.lang.String",
       "description": "The query executed with every heartbeat.",
@@ -428,6 +442,12 @@
       "description": "Path to OpenLineage file configuration. See https:\/\/openlineage.io\/docs\/client\/java\/configuration",
       "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
       "defaultValue": ".\/openlineage.yml"
+    },
+    {
+      "name": "camel.component.debezium-postgres.openlineage-integration-dataset-kafka-bootstrap-servers",
+      "type": "java.lang.String",
+      "description": "The Kafka bootstrap server address used as input\/output namespace\/",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-postgres.openlineage-integration-enabled",

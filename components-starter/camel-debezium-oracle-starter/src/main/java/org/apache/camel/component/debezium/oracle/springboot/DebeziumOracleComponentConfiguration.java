@@ -269,6 +269,19 @@ public class DebeziumOracleComponentConfiguration
      */
     private Boolean extendedHeadersEnabled = true;
     /**
+     * Specify the action to take when a guardrail collections limit is
+     * exceeded: 'warn' (the default) logs a warning message and continues
+     * processing; 'fail' stops the connector with an error.
+     */
+    private String guardrailCollectionsLimitAction = "warn";
+    /**
+     * The maximum number of collections or tables that can be captured by the
+     * connector. When this limit is exceeded, the action specified by
+     * 'guardrail.collections.limit.action' will be taken. Set to 0 to disable
+     * this guardrail.
+     */
+    private Integer guardrailCollectionsMax = 0;
+    /**
      * The query executed with every heartbeat.
      */
     private String heartbeatActionQuery;
@@ -317,6 +330,10 @@ public class DebeziumOracleComponentConfiguration
      * microseconds
      */
     private String intervalHandlingMode = "numeric";
+    /**
+     * Uses the legacy decimal handling behavior before DBZ-7882
+     */
+    private Boolean legacyDecimalHandlingStrategy = false;
     /**
      * When set to 'false', the default, LOB fields will not be captured nor
      * emitted. When set to 'true', the connector will capture LOB fields and
@@ -448,6 +465,11 @@ public class DebeziumOracleComponentConfiguration
      */
     private Boolean logMiningIncludeRedoSql = false;
     /**
+     * This is required when using the connector against a read-only database
+     * replica.
+     */
+    private String logMiningPathDictionary;
+    /**
      * Specifies how the filter configuration is applied to the LogMiner
      * database query. none - The query does not apply any schema or table
      * filters, all filtering is at runtime by the connector. in - The query
@@ -456,6 +478,11 @@ public class DebeziumOracleComponentConfiguration
      * schema or table filters.
      */
     private String logMiningQueryFilterMode = "none";
+    /**
+     * The hostname the connector will use to connect and perform read-only
+     * operations for the the replica.
+     */
+    private String logMiningReadonlyHostname;
     /**
      * Debezium opens a database connection and keeps that connection open
      * throughout the entire streaming phase. In some situations, this can lead
@@ -571,6 +598,10 @@ public class DebeziumOracleComponentConfiguration
      * https://openlineage.io/docs/client/java/configuration
      */
     private String openlineageIntegrationConfigFilePath = "./openlineage.yml";
+    /**
+     * The Kafka bootstrap server address used as input/output namespace/
+     */
+    private String openlineageIntegrationDatasetKafkaBootstrapServers;
     /**
      * Enable Debezium to emit data lineage metadata through OpenLineage API
      */
@@ -1199,6 +1230,23 @@ public class DebeziumOracleComponentConfiguration
         this.extendedHeadersEnabled = extendedHeadersEnabled;
     }
 
+    public String getGuardrailCollectionsLimitAction() {
+        return guardrailCollectionsLimitAction;
+    }
+
+    public void setGuardrailCollectionsLimitAction(
+            String guardrailCollectionsLimitAction) {
+        this.guardrailCollectionsLimitAction = guardrailCollectionsLimitAction;
+    }
+
+    public Integer getGuardrailCollectionsMax() {
+        return guardrailCollectionsMax;
+    }
+
+    public void setGuardrailCollectionsMax(Integer guardrailCollectionsMax) {
+        this.guardrailCollectionsMax = guardrailCollectionsMax;
+    }
+
     public String getHeartbeatActionQuery() {
         return heartbeatActionQuery;
     }
@@ -1254,6 +1302,15 @@ public class DebeziumOracleComponentConfiguration
 
     public void setIntervalHandlingMode(String intervalHandlingMode) {
         this.intervalHandlingMode = intervalHandlingMode;
+    }
+
+    public Boolean getLegacyDecimalHandlingStrategy() {
+        return legacyDecimalHandlingStrategy;
+    }
+
+    public void setLegacyDecimalHandlingStrategy(
+            Boolean legacyDecimalHandlingStrategy) {
+        this.legacyDecimalHandlingStrategy = legacyDecimalHandlingStrategy;
     }
 
     public Boolean getLobEnabled() {
@@ -1463,12 +1520,28 @@ public class DebeziumOracleComponentConfiguration
         this.logMiningIncludeRedoSql = logMiningIncludeRedoSql;
     }
 
+    public String getLogMiningPathDictionary() {
+        return logMiningPathDictionary;
+    }
+
+    public void setLogMiningPathDictionary(String logMiningPathDictionary) {
+        this.logMiningPathDictionary = logMiningPathDictionary;
+    }
+
     public String getLogMiningQueryFilterMode() {
         return logMiningQueryFilterMode;
     }
 
     public void setLogMiningQueryFilterMode(String logMiningQueryFilterMode) {
         this.logMiningQueryFilterMode = logMiningQueryFilterMode;
+    }
+
+    public String getLogMiningReadonlyHostname() {
+        return logMiningReadonlyHostname;
+    }
+
+    public void setLogMiningReadonlyHostname(String logMiningReadonlyHostname) {
+        this.logMiningReadonlyHostname = logMiningReadonlyHostname;
     }
 
     public Boolean getLogMiningRestartConnection() {
@@ -1629,6 +1702,15 @@ public class DebeziumOracleComponentConfiguration
     public void setOpenlineageIntegrationConfigFilePath(
             String openlineageIntegrationConfigFilePath) {
         this.openlineageIntegrationConfigFilePath = openlineageIntegrationConfigFilePath;
+    }
+
+    public String getOpenlineageIntegrationDatasetKafkaBootstrapServers() {
+        return openlineageIntegrationDatasetKafkaBootstrapServers;
+    }
+
+    public void setOpenlineageIntegrationDatasetKafkaBootstrapServers(
+            String openlineageIntegrationDatasetKafkaBootstrapServers) {
+        this.openlineageIntegrationDatasetKafkaBootstrapServers = openlineageIntegrationDatasetKafkaBootstrapServers;
     }
 
     public Boolean getOpenlineageIntegrationEnabled() {

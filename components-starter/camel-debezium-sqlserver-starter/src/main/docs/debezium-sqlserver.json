@@ -187,6 +187,20 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.debezium-sqlserver.guardrail-collections-limit-action",
+      "type": "java.lang.String",
+      "description": "Specify the action to take when a guardrail collections limit is exceeded: 'warn' (the default) logs a warning message and continues processing; 'fail' stops the connector with an error.",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": "warn"
+    },
+    {
+      "name": "camel.component.debezium-sqlserver.guardrail-collections-max",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of collections or tables that can be captured by the connector. When this limit is exceeded, the action specified by 'guardrail.collections.limit.action' will be taken. Set to 0 to disable this guardrail.",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
       "name": "camel.component.debezium-sqlserver.heartbeat-action-query",
       "type": "java.lang.String",
       "description": "The query executed with every heartbeat.",
@@ -365,6 +379,12 @@
       "description": "Path to OpenLineage file configuration. See https:\/\/openlineage.io\/docs\/client\/java\/configuration",
       "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
       "defaultValue": ".\/openlineage.yml"
+    },
+    {
+      "name": "camel.component.debezium-sqlserver.openlineage-integration-dataset-kafka-bootstrap-servers",
+      "type": "java.lang.String",
+      "description": "The Kafka bootstrap server address used as input\/output namespace\/",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-sqlserver.openlineage-integration-enabled",

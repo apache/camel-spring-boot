@@ -365,6 +365,19 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String gtidSourceIncludes;
     /**
+     * Specify the action to take when a guardrail collections limit is
+     * exceeded: 'warn' (the default) logs a warning message and continues
+     * processing; 'fail' stops the connector with an error.
+     */
+    private String guardrailCollectionsLimitAction = "warn";
+    /**
+     * The maximum number of collections or tables that can be captured by the
+     * connector. When this limit is exceeded, the action specified by
+     * 'guardrail.collections.limit.action' will be taken. Set to 0 to disable
+     * this guardrail.
+     */
+    private Integer guardrailCollectionsMax = 0;
+    /**
      * The query executed with every heartbeat.
      */
     private String heartbeatActionQuery;
@@ -491,6 +504,10 @@ public class DebeziumMySqlComponentConfiguration
      * https://openlineage.io/docs/client/java/configuration
      */
     private String openlineageIntegrationConfigFilePath = "./openlineage.yml";
+    /**
+     * The Kafka bootstrap server address used as input/output namespace/
+     */
+    private String openlineageIntegrationDatasetKafkaBootstrapServers;
     /**
      * Enable Debezium to emit data lineage metadata through OpenLineage API
      */
@@ -1233,6 +1250,23 @@ public class DebeziumMySqlComponentConfiguration
         this.gtidSourceIncludes = gtidSourceIncludes;
     }
 
+    public String getGuardrailCollectionsLimitAction() {
+        return guardrailCollectionsLimitAction;
+    }
+
+    public void setGuardrailCollectionsLimitAction(
+            String guardrailCollectionsLimitAction) {
+        this.guardrailCollectionsLimitAction = guardrailCollectionsLimitAction;
+    }
+
+    public Integer getGuardrailCollectionsMax() {
+        return guardrailCollectionsMax;
+    }
+
+    public void setGuardrailCollectionsMax(Integer guardrailCollectionsMax) {
+        this.guardrailCollectionsMax = guardrailCollectionsMax;
+    }
+
     public String getHeartbeatActionQuery() {
         return heartbeatActionQuery;
     }
@@ -1381,6 +1415,15 @@ public class DebeziumMySqlComponentConfiguration
     public void setOpenlineageIntegrationConfigFilePath(
             String openlineageIntegrationConfigFilePath) {
         this.openlineageIntegrationConfigFilePath = openlineageIntegrationConfigFilePath;
+    }
+
+    public String getOpenlineageIntegrationDatasetKafkaBootstrapServers() {
+        return openlineageIntegrationDatasetKafkaBootstrapServers;
+    }
+
+    public void setOpenlineageIntegrationDatasetKafkaBootstrapServers(
+            String openlineageIntegrationDatasetKafkaBootstrapServers) {
+        this.openlineageIntegrationDatasetKafkaBootstrapServers = openlineageIntegrationDatasetKafkaBootstrapServers;
     }
 
     public Boolean getOpenlineageIntegrationEnabled() {

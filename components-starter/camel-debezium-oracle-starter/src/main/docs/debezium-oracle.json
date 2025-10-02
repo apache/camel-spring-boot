@@ -212,6 +212,20 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.debezium-oracle.guardrail-collections-limit-action",
+      "type": "java.lang.String",
+      "description": "Specify the action to take when a guardrail collections limit is exceeded: 'warn' (the default) logs a warning message and continues processing; 'fail' stops the connector with an error.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "warn"
+    },
+    {
+      "name": "camel.component.debezium-oracle.guardrail-collections-max",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of collections or tables that can be captured by the connector. When this limit is exceeded, the action specified by 'guardrail.collections.limit.action' will be taken. Set to 0 to disable this guardrail.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
       "name": "camel.component.debezium-oracle.heartbeat-action-query",
       "type": "java.lang.String",
       "description": "The query executed with every heartbeat.",
@@ -272,6 +286,13 @@
       "description": "Specify how INTERVAL columns should be represented in change events, including: 'string' represents values as an exact ISO formatted string; 'numeric' (default) represents values using the inexact conversion into microseconds",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": "numeric"
+    },
+    {
+      "name": "camel.component.debezium-oracle.legacy-decimal-handling-strategy",
+      "type": "java.lang.Boolean",
+      "description": "Uses the legacy decimal handling behavior before DBZ-7882",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.debezium-oracle.lob-enabled",
@@ -430,11 +451,23 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.debezium-oracle.log-mining-path-dictionary",
+      "type": "java.lang.String",
+      "description": "This is required when using the connector against a read-only database replica.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
       "name": "camel.component.debezium-oracle.log-mining-query-filter-mode",
       "type": "java.lang.String",
       "description": "Specifies how the filter configuration is applied to the LogMiner database query. none - The query does not apply any schema or table filters, all filtering is at runtime by the connector. in - The query uses SQL in-clause expressions to specify the schema or table filters. regex - The query uses Oracle REGEXP_LIKE expressions to specify the schema or table filters.",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": "none"
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-readonly-hostname",
+      "type": "java.lang.String",
+      "description": "The hostname the connector will use to connect and perform read-only operations for the the replica.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-oracle.log-mining-restart-connection",
@@ -614,6 +647,12 @@
       "description": "Path to OpenLineage file configuration. See https:\/\/openlineage.io\/docs\/client\/java\/configuration",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": ".\/openlineage.yml"
+    },
+    {
+      "name": "camel.component.debezium-oracle.openlineage-integration-dataset-kafka-bootstrap-servers",
+      "type": "java.lang.String",
+      "description": "The Kafka bootstrap server address used as input\/output namespace\/",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-oracle.openlineage-integration-enabled",
