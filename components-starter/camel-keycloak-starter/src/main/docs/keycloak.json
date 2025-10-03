@@ -14,11 +14,55 @@
   ],
   "properties": [
     {
+      "name": "camel.component.keycloak.auth-client",
+      "type": "java.lang.String",
+      "description": "Filter admin events by authentication client ID",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.auth-ip-address",
+      "type": "java.lang.String",
+      "description": "Filter admin events by authentication IP address",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.auth-realm",
+      "type": "java.lang.String",
+      "description": "Keycloak realm to authenticate against. If not specified, the realm parameter is used for authentication. This is useful when you want to authenticate against one realm (e.g., master) but perform operations on another realm.",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration",
+      "defaultValue": "master"
+    },
+    {
+      "name": "camel.component.keycloak.auth-realm-filter",
+      "type": "java.lang.String",
+      "description": "Filter admin events by authentication realm",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.auth-user",
+      "type": "java.lang.String",
+      "description": "Filter admin events by authentication user ID",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
       "name": "camel.component.keycloak.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
       "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.component.keycloak.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.keycloak.client",
+      "type": "java.lang.String",
+      "description": "Filter events by client ID",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
     },
     {
       "name": "camel.component.keycloak.client-id",
@@ -44,9 +88,41 @@
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
+      "name": "camel.component.keycloak.date-from",
+      "type": "java.lang.String",
+      "description": "Filter events by start date\/time in milliseconds since epoch",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.date-to",
+      "type": "java.lang.String",
+      "description": "Filter events by end date\/time in milliseconds since epoch",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
       "name": "camel.component.keycloak.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the keycloak component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.event-type",
+      "type": "java.lang.String",
+      "description": "Type of events to consume: events or admin-events",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration",
+      "defaultValue": "events"
+    },
+    {
+      "name": "camel.component.keycloak.first",
+      "type": "java.lang.Integer",
+      "description": "Offset for pagination (first result index)",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.keycloak.ip-address",
+      "type": "java.lang.String",
+      "description": "Filter events by IP address",
       "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
     },
     {
@@ -63,9 +139,22 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.keycloak.max-results",
+      "type": "java.lang.Integer",
+      "description": "Maximum number of events to retrieve per poll",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration",
+      "defaultValue": 100
+    },
+    {
       "name": "camel.component.keycloak.operation",
       "type": "org.apache.camel.component.keycloak.KeycloakOperations",
       "description": "The operation to perform",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.operation-types",
+      "type": "java.lang.String",
+      "description": "Filter admin events by operation types (comma-separated list, e.g., CREATE,UPDATE,DELETE)",
       "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
     },
     {
@@ -89,9 +178,27 @@
       "defaultValue": "master"
     },
     {
+      "name": "camel.component.keycloak.resource-path",
+      "type": "java.lang.String",
+      "description": "Filter admin events by resource path",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
       "name": "camel.component.keycloak.server-url",
       "type": "java.lang.String",
       "description": "Keycloak server URL",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.types",
+      "type": "java.lang.String",
+      "description": "Filter events by event types (comma-separated list, e.g., LOGIN,LOGOUT)",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.user",
+      "type": "java.lang.String",
+      "description": "Filter events by user ID",
       "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
     },
     {

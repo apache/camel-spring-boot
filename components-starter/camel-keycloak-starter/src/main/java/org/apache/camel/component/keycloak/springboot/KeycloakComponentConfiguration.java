@@ -38,6 +38,33 @@ public class KeycloakComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Filter admin events by authentication client ID
+     */
+    private String authClient;
+    /**
+     * Filter admin events by authentication IP address
+     */
+    private String authIpAddress;
+    /**
+     * Keycloak realm to authenticate against. If not specified, the realm
+     * parameter is used for authentication. This is useful when you want to
+     * authenticate against one realm (e.g., master) but perform operations on
+     * another realm.
+     */
+    private String authRealm = "master";
+    /**
+     * Filter admin events by authentication realm
+     */
+    private String authRealmFilter;
+    /**
+     * Filter admin events by authentication user ID
+     */
+    private String authUser;
+    /**
+     * Filter events by client ID
+     */
+    private String client;
+    /**
      * Keycloak client ID
      */
     private String clientId;
@@ -51,25 +78,43 @@ public class KeycloakComponentConfiguration
      */
     private KeycloakConfiguration configuration;
     /**
+     * Filter events by start date/time in milliseconds since epoch
+     */
+    private String dateFrom;
+    /**
+     * Filter events by end date/time in milliseconds since epoch
+     */
+    private String dateTo;
+    /**
+     * Type of events to consume: events or admin-events
+     */
+    private String eventType = "events";
+    /**
+     * Offset for pagination (first result index)
+     */
+    private Integer first = 0;
+    /**
+     * Filter events by IP address
+     */
+    private String ipAddress;
+    /**
      * To use an existing configured Keycloak admin client. The option is a
      * org.keycloak.admin.client.Keycloak type.
      */
     private Keycloak keycloakClient;
     /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
+     * Maximum number of events to retrieve per poll
      */
-    private Boolean lazyStartProducer = false;
+    private Integer maxResults = 100;
     /**
      * The operation to perform
      */
     private KeycloakOperations operation;
+    /**
+     * Filter admin events by operation types (comma-separated list, e.g.,
+     * CREATE,UPDATE,DELETE)
+     */
+    private String operationTypes;
     /**
      * Keycloak password
      */
@@ -84,13 +129,50 @@ public class KeycloakComponentConfiguration
      */
     private String realm = "master";
     /**
+     * Filter admin events by resource path
+     */
+    private String resourcePath;
+    /**
      * Keycloak server URL
      */
     private String serverUrl;
     /**
+     * Filter events by event types (comma-separated list, e.g., LOGIN,LOGOUT)
+     */
+    private String types;
+    /**
+     * Filter events by user ID
+     */
+    private String user;
+    /**
      * Keycloak username
      */
     private String username;
+    /**
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions (if possible) occurred while the Camel consumer
+     * is trying to pickup incoming messages, or the likes, will now be
+     * processed as a message and handled by the routing Error Handler.
+     * Important: This is only possible if the 3rd party component allows Camel
+     * to be alerted if an exception was thrown. Some components handle this
+     * internally only, and therefore bridgeErrorHandler is not possible. In
+     * other situations we may improve the Camel component to hook into the 3rd
+     * party component and make this possible for future releases. By default
+     * the consumer will use the org.apache.camel.spi.ExceptionHandler to deal
+     * with exceptions, that will be logged at WARN or ERROR level and ignored.
+     */
+    private Boolean bridgeErrorHandler = false;
+    /**
+     * Whether the producer should be started lazy (on the first message). By
+     * starting lazy you can use this to allow CamelContext and routes to
+     * startup in situations where a producer may otherwise fail during starting
+     * and cause the route to fail being started. By deferring this startup to
+     * be lazy then the startup failure can be handled during routing messages
+     * via Camel's routing error handlers. Beware that when the first message is
+     * processed then creating and starting the producer may take a little time
+     * and prolong the total processing time of the processing.
+     */
+    private Boolean lazyStartProducer = false;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -100,6 +182,54 @@ public class KeycloakComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+
+    public String getAuthClient() {
+        return authClient;
+    }
+
+    public void setAuthClient(String authClient) {
+        this.authClient = authClient;
+    }
+
+    public String getAuthIpAddress() {
+        return authIpAddress;
+    }
+
+    public void setAuthIpAddress(String authIpAddress) {
+        this.authIpAddress = authIpAddress;
+    }
+
+    public String getAuthRealm() {
+        return authRealm;
+    }
+
+    public void setAuthRealm(String authRealm) {
+        this.authRealm = authRealm;
+    }
+
+    public String getAuthRealmFilter() {
+        return authRealmFilter;
+    }
+
+    public void setAuthRealmFilter(String authRealmFilter) {
+        this.authRealmFilter = authRealmFilter;
+    }
+
+    public String getAuthUser() {
+        return authUser;
+    }
+
+    public void setAuthUser(String authUser) {
+        this.authUser = authUser;
+    }
+
+    public String getClient() {
+        return client;
+    }
+
+    public void setClient(String client) {
+        this.client = client;
+    }
 
     public String getClientId() {
         return clientId;
@@ -125,6 +255,46 @@ public class KeycloakComponentConfiguration
         this.configuration = configuration;
     }
 
+    public String getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(String dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public String getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(String dateTo) {
+        this.dateTo = dateTo;
+    }
+
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
+    }
+
+    public Integer getFirst() {
+        return first;
+    }
+
+    public void setFirst(Integer first) {
+        this.first = first;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
     public Keycloak getKeycloakClient() {
         return keycloakClient;
     }
@@ -133,12 +303,12 @@ public class KeycloakComponentConfiguration
         this.keycloakClient = keycloakClient;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
+    public Integer getMaxResults() {
+        return maxResults;
     }
 
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
+    public void setMaxResults(Integer maxResults) {
+        this.maxResults = maxResults;
     }
 
     public KeycloakOperations getOperation() {
@@ -147,6 +317,14 @@ public class KeycloakComponentConfiguration
 
     public void setOperation(KeycloakOperations operation) {
         this.operation = operation;
+    }
+
+    public String getOperationTypes() {
+        return operationTypes;
+    }
+
+    public void setOperationTypes(String operationTypes) {
+        this.operationTypes = operationTypes;
     }
 
     public String getPassword() {
@@ -173,6 +351,14 @@ public class KeycloakComponentConfiguration
         this.realm = realm;
     }
 
+    public String getResourcePath() {
+        return resourcePath;
+    }
+
+    public void setResourcePath(String resourcePath) {
+        this.resourcePath = resourcePath;
+    }
+
     public String getServerUrl() {
         return serverUrl;
     }
@@ -181,12 +367,44 @@ public class KeycloakComponentConfiguration
         this.serverUrl = serverUrl;
     }
 
+    public String getTypes() {
+        return types;
+    }
+
+    public void setTypes(String types) {
+        this.types = types;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public Boolean getAutowiredEnabled() {
