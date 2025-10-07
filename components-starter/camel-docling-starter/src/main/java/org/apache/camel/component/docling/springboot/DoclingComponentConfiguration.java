@@ -48,10 +48,6 @@ public class DoclingComponentConfiguration
      */
     private Boolean contentInBody = false;
     /**
-     * Docling-serve API URL (e.g., http://localhost:5001)
-     */
-    private String doclingServeUrl = "http://localhost:5001";
-    /**
      * Enable OCR processing for scanned documents
      */
     private Boolean enableOCR = true;
@@ -82,10 +78,6 @@ public class DoclingComponentConfiguration
      * Output format for document conversion
      */
     private String outputFormat = "markdown";
-    /**
-     * Use docling-serve API instead of CLI command
-     */
-    private Boolean useDoclingServe = false;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -126,14 +118,6 @@ public class DoclingComponentConfiguration
 
     public void setContentInBody(Boolean contentInBody) {
         this.contentInBody = contentInBody;
-    }
-
-    public String getDoclingServeUrl() {
-        return doclingServeUrl;
-    }
-
-    public void setDoclingServeUrl(String doclingServeUrl) {
-        this.doclingServeUrl = doclingServeUrl;
     }
 
     public Boolean getEnableOCR() {
@@ -182,14 +166,6 @@ public class DoclingComponentConfiguration
 
     public void setOutputFormat(String outputFormat) {
         this.outputFormat = outputFormat;
-    }
-
-    public Boolean getUseDoclingServe() {
-        return useDoclingServe;
-    }
-
-    public void setUseDoclingServe(Boolean useDoclingServe) {
-        this.useDoclingServe = useDoclingServe;
     }
 
     public Boolean getAutowiredEnabled() {
