@@ -8,7 +8,7 @@
     "javaType": "org.apache.camel.component.google.mail.stream.transform.GoogleMailStreamCloudEventDataTypeTransformer",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-google-mail-starter",
-    "version": "4.14.1-SNAPSHOT"
+    "version": "4.14.2-SNAPSHOT"
   }
 }
 

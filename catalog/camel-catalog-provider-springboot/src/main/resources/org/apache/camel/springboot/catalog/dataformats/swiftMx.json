@@ -11,7 +11,7 @@
     "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-swift-starter",
-    "version": "4.14.1-SNAPSHOT",
+    "version": "4.14.2-SNAPSHOT",
     "modelName": "swiftMx",
     "modelJavaType": "org.apache.camel.model.dataformat.SwiftMxDataFormat"
   },
