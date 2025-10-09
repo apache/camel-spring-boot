@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.docling.springboot;
 
+import org.apache.camel.component.docling.AuthenticationScheme;
 import org.apache.camel.component.docling.DoclingComponent;
 import org.apache.camel.component.docling.DoclingConfiguration;
 import org.apache.camel.component.docling.DoclingOperations;
@@ -96,6 +97,10 @@ public class DoclingComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * Docling-serve API convert endpoint path
+     */
+    private String convertEndpoint = "/v1/convert/source";
+    /**
      * Path to Docling Python executable or command
      */
     private String doclingCommand;
@@ -107,6 +112,18 @@ public class DoclingComponentConfiguration
      * Working directory for Docling execution
      */
     private String workingDirectory;
+    /**
+     * Header name for API key authentication
+     */
+    private String apiKeyHeader = "X-API-Key";
+    /**
+     * Authentication scheme (BEARER, API_KEY, NONE)
+     */
+    private AuthenticationScheme authenticationScheme = AuthenticationScheme.NONE;
+    /**
+     * Authentication token for docling-serve API (Bearer token or API key)
+     */
+    private String authenticationToken;
     /**
      * Maximum file size in bytes for processing
      */
@@ -200,6 +217,14 @@ public class DoclingComponentConfiguration
         this.autowiredEnabled = autowiredEnabled;
     }
 
+    public String getConvertEndpoint() {
+        return convertEndpoint;
+    }
+
+    public void setConvertEndpoint(String convertEndpoint) {
+        this.convertEndpoint = convertEndpoint;
+    }
+
     public String getDoclingCommand() {
         return doclingCommand;
     }
@@ -222,6 +247,31 @@ public class DoclingComponentConfiguration
 
     public void setWorkingDirectory(String workingDirectory) {
         this.workingDirectory = workingDirectory;
+    }
+
+    public String getApiKeyHeader() {
+        return apiKeyHeader;
+    }
+
+    public void setApiKeyHeader(String apiKeyHeader) {
+        this.apiKeyHeader = apiKeyHeader;
+    }
+
+    public AuthenticationScheme getAuthenticationScheme() {
+        return authenticationScheme;
+    }
+
+    public void setAuthenticationScheme(
+            AuthenticationScheme authenticationScheme) {
+        this.authenticationScheme = authenticationScheme;
+    }
+
+    public String getAuthenticationToken() {
+        return authenticationToken;
+    }
+
+    public void setAuthenticationToken(String authenticationToken) {
+        this.authenticationToken = authenticationToken;
     }
 
     public Long getMaxFileSize() {

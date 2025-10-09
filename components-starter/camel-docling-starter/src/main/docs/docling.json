@@ -14,6 +14,26 @@
   ],
   "properties": [
     {
+      "name": "camel.component.docling.api-key-header",
+      "type": "java.lang.String",
+      "description": "Header name for API key authentication",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": "X-API-Key"
+    },
+    {
+      "name": "camel.component.docling.authentication-scheme",
+      "type": "org.apache.camel.component.docling.AuthenticationScheme",
+      "description": "Authentication scheme (BEARER, API_KEY, NONE)",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": "none"
+    },
+    {
+      "name": "camel.component.docling.authentication-token",
+      "type": "java.lang.String",
+      "description": "Authentication token for docling-serve API (Bearer token or API key)",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
+    },
+    {
       "name": "camel.component.docling.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
@@ -32,6 +52,13 @@
       "description": "Include the content of the output file in the exchange body and delete the output file",
       "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.docling.convert-endpoint",
+      "type": "java.lang.String",
+      "description": "Docling-serve API convert endpoint path",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": "\/v1\/convert\/source"
     },
     {
       "name": "camel.component.docling.customizer.enabled",
