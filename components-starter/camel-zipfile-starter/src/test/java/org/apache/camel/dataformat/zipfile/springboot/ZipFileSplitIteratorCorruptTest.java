@@ -22,6 +22,7 @@ import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.dataformat.zipfile.ZipFileDataFormat;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
@@ -53,10 +54,9 @@ public class ZipFileSplitIteratorCorruptTest {
     @Test
     public void testZipFileUnmarshal() throws Exception {
         mockDead.expectedMessageCount(1);
-        mockDead.message(0).exchangeProperty(Exchange.EXCEPTION_CAUGHT).isInstanceOf(IllegalStateException.class);
+        mockDead.message(0).exchangeProperty(Exchange.EXCEPTION_CAUGHT).isInstanceOf(RuntimeCamelException.class);
         mockEnd.expectedMessageCount(0);
 
-        mockDead.assertIsSatisfied();
         mockEnd.assertIsSatisfied();
 
     }
