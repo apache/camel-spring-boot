@@ -103,6 +103,33 @@
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {
+      "name": "camel.component.salesforce.consumer-worker-pool-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Use thread pool for processing received Salesforce events, for example to process events in parallel.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.salesforce.consumer-worker-pool-executor-service",
+      "type": "java.util.concurrent.ExecutorService",
+      "description": "To use a custom thread pool for processing received Salesforce events, for example to process events in parallel. The option is a java.util.concurrent.ExecutorService type.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.salesforce.consumer-worker-pool-max-size",
+      "type": "java.lang.Integer",
+      "description": "Maximum thread pool size size for consumer worker pool.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": 20
+    },
+    {
+      "name": "camel.component.salesforce.consumer-worker-pool-size",
+      "type": "java.lang.Integer",
+      "description": "Core thread pool size size for consumer worker pool.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": 10
+    },
+    {
       "name": "camel.component.salesforce.content-type",
       "type": "org.apache.camel.component.salesforce.api.dto.bulk.ContentType",
       "description": "Bulk API content type, one of XML, CSV, ZIP_XML, ZIP_CSV",

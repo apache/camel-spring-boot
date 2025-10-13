@@ -43,6 +43,7 @@ public class SalesforceComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, com.fasterxml.jackson.databind.ObjectMapper.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.api.dto.analytics.reports.ReportMetadata.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.SalesforceEndpointConfig.class));
+        answer.add(new ConvertiblePair(String.class, java.util.concurrent.ExecutorService.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.KeyStoreParameters.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.SalesforceLoginConfig.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
@@ -66,6 +67,7 @@ public class SalesforceComponentConverter implements GenericConverter {
             case "com.fasterxml.jackson.databind.ObjectMapper": return applicationContext.getBean(ref, com.fasterxml.jackson.databind.ObjectMapper.class);
             case "org.apache.camel.component.salesforce.api.dto.analytics.reports.ReportMetadata": return applicationContext.getBean(ref, org.apache.camel.component.salesforce.api.dto.analytics.reports.ReportMetadata.class);
             case "org.apache.camel.component.salesforce.SalesforceEndpointConfig": return applicationContext.getBean(ref, org.apache.camel.component.salesforce.SalesforceEndpointConfig.class);
+            case "java.util.concurrent.ExecutorService": return applicationContext.getBean(ref, java.util.concurrent.ExecutorService.class);
             case "org.apache.camel.support.jsse.KeyStoreParameters": return applicationContext.getBean(ref, org.apache.camel.support.jsse.KeyStoreParameters.class);
             case "org.apache.camel.component.salesforce.SalesforceLoginConfig": return applicationContext.getBean(ref, org.apache.camel.component.salesforce.SalesforceLoginConfig.class);
             case "org.apache.camel.support.jsse.SSLContextParameters": return applicationContext.getBean(ref, org.apache.camel.support.jsse.SSLContextParameters.class);

@@ -18,6 +18,7 @@ package org.apache.camel.component.salesforce.springboot;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.salesforce.eventbus.protobuf.ReplayPreset;
 import org.apache.camel.component.salesforce.AuthenticationType;
@@ -368,6 +369,25 @@ public class SalesforceComponentConfiguration
      * Replay preset for Pub/Sub API.
      */
     private ReplayPreset replayPreset = ReplayPreset.LATEST;
+    /**
+     * Use thread pool for processing received Salesforce events, for example to
+     * process events in parallel.
+     */
+    private Boolean consumerWorkerPoolEnabled = false;
+    /**
+     * To use a custom thread pool for processing received Salesforce events,
+     * for example to process events in parallel. The option is a
+     * java.util.concurrent.ExecutorService type.
+     */
+    private ExecutorService consumerWorkerPoolExecutorService;
+    /**
+     * Maximum thread pool size size for consumer worker pool.
+     */
+    private Integer consumerWorkerPoolMaxSize = 20;
+    /**
+     * Core thread pool size size for consumer worker pool.
+     */
+    private Integer consumerWorkerPoolSize = 10;
     /**
      * Timeout in seconds to validate when a custom pubSubReplayId has been
      * configured, when starting the Camel Salesforce consumer.
@@ -1098,6 +1118,39 @@ public class SalesforceComponentConfiguration
 
     public void setReplayPreset(ReplayPreset replayPreset) {
         this.replayPreset = replayPreset;
+    }
+
+    public Boolean getConsumerWorkerPoolEnabled() {
+        return consumerWorkerPoolEnabled;
+    }
+
+    public void setConsumerWorkerPoolEnabled(Boolean consumerWorkerPoolEnabled) {
+        this.consumerWorkerPoolEnabled = consumerWorkerPoolEnabled;
+    }
+
+    public ExecutorService getConsumerWorkerPoolExecutorService() {
+        return consumerWorkerPoolExecutorService;
+    }
+
+    public void setConsumerWorkerPoolExecutorService(
+            ExecutorService consumerWorkerPoolExecutorService) {
+        this.consumerWorkerPoolExecutorService = consumerWorkerPoolExecutorService;
+    }
+
+    public Integer getConsumerWorkerPoolMaxSize() {
+        return consumerWorkerPoolMaxSize;
+    }
+
+    public void setConsumerWorkerPoolMaxSize(Integer consumerWorkerPoolMaxSize) {
+        this.consumerWorkerPoolMaxSize = consumerWorkerPoolMaxSize;
+    }
+
+    public Integer getConsumerWorkerPoolSize() {
+        return consumerWorkerPoolSize;
+    }
+
+    public void setConsumerWorkerPoolSize(Integer consumerWorkerPoolSize) {
+        this.consumerWorkerPoolSize = consumerWorkerPoolSize;
     }
 
     public Integer getInitialReplyIdTimeout() {
