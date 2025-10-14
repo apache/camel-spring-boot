@@ -851,8 +851,9 @@
     {
       "name": "camel.rest.json-data-format",
       "type": "java.lang.String",
-      "description": "Name of specific json data format to use. By default jackson will be used. Important: This option is only for setting a custom name of the data format, not to refer to an existing data format instance.",
-      "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
+      "description": "Name of specific json data format to use. By default, jackson will be used. Important: This option is only for setting a custom name of the data format, not to refer to an existing data format instance.",
+      "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties",
+      "defaultValue": "jackson"
     },
     {
       "name": "camel.rest.port",
@@ -901,8 +902,9 @@
     {
       "name": "camel.rest.xml-data-format",
       "type": "java.lang.String",
-      "description": "Name of specific XML data format to use. By default jaxb will be used. Important: This option is only for setting a custom name of the data format, not to refer to an existing data format instance.",
-      "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
+      "description": "Name of specific XML data format to use. By default jaxb will be used, but jacksonXml is also supported. Important: This option is only for setting a custom name of the data format, not to refer to an existing data format instance.",
+      "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties",
+      "defaultValue": "jaxb"
     }
   ],
   "hints": [],
