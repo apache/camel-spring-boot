@@ -14,6 +14,12 @@
   ],
   "properties": [
     {
+      "name": "camel.component.keycloak.access-token",
+      "type": "java.lang.String",
+      "description": "Pre-obtained access token for authentication. When provided, this token will be used directly instead of obtaining one through username\/password or client credentials flow.",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
       "name": "camel.component.keycloak.auth-client",
       "type": "java.lang.String",
       "description": "Filter admin events by authentication client ID",

@@ -38,6 +38,12 @@ public class KeycloakComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Pre-obtained access token for authentication. When provided, this token
+     * will be used directly instead of obtaining one through username/password
+     * or client credentials flow.
+     */
+    private String accessToken;
+    /**
      * Filter admin events by authentication client ID
      */
     private String authClient;
@@ -182,6 +188,14 @@ public class KeycloakComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
 
     public String getAuthClient() {
         return authClient;
