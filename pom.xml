@@ -105,6 +105,11 @@
 
         <site-repo-url>scpexe://people.apache.org/www/camel.apache.org/maven/</site-repo-url>
         <jdk.version>17</jdk.version>
+        <!-- These two are here only to prevent the versions for the Apache parent pom from leaking-->
+        <maven.compiler.source>${jdk.version}</maven.compiler.source>
+        <maven.compiler.target>${jdk.version}</maven.compiler.target>
+        <maven.compiler.release>${jdk.version}</maven.compiler.release>
+        <minimalJavaBuildVersion>${jdk.version}</minimalJavaBuildVersion>
         <compiler.fork>false</compiler.fork>
 
         <!-- spring-boot-version is now maintained in camel/parent/pom.xml https://github.com/apache/camel/blob/main/parent/pom.xml#L484 -->
@@ -121,7 +126,6 @@
         <jakarta-jaxb-version>4.0.2</jakarta-jaxb-version>
         <jaxb-version>2.3.0</jaxb-version>
         <maven-compiler-plugin-version>3.14.1</maven-compiler-plugin-version>
-        <maven.compiler.release>${jdk.version}</maven.compiler.release>
         <maven-javadoc-plugin-version>3.12.0</maven-javadoc-plugin-version>
         <maven-surefire-plugin-version>3.5.4</maven-surefire-plugin-version>
         <mycila-license-version>5.0.0</mycila-license-version>
