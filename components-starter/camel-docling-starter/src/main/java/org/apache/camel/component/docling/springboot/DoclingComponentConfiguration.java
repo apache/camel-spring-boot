@@ -88,6 +88,18 @@ public class DoclingComponentConfiguration
      */
     private Boolean useDoclingServe = false;
     /**
+     * API request timeout in milliseconds
+     */
+    private Long apiTimeout = 60000L;
+    /**
+     * Polling interval for async conversion status in milliseconds
+     */
+    private Long asyncPollInterval = 2000L;
+    /**
+     * Maximum time to wait for async conversion completion in milliseconds
+     */
+    private Long asyncTimeout = 300000L;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -108,6 +120,10 @@ public class DoclingComponentConfiguration
      * Timeout for Docling process execution in milliseconds
      */
     private Long processTimeout = 30000L;
+    /**
+     * Use asynchronous conversion mode (docling-serve API only)
+     */
+    private Boolean useAsyncMode = false;
     /**
      * Working directory for Docling execution
      */
@@ -209,6 +225,30 @@ public class DoclingComponentConfiguration
         this.useDoclingServe = useDoclingServe;
     }
 
+    public Long getApiTimeout() {
+        return apiTimeout;
+    }
+
+    public void setApiTimeout(Long apiTimeout) {
+        this.apiTimeout = apiTimeout;
+    }
+
+    public Long getAsyncPollInterval() {
+        return asyncPollInterval;
+    }
+
+    public void setAsyncPollInterval(Long asyncPollInterval) {
+        this.asyncPollInterval = asyncPollInterval;
+    }
+
+    public Long getAsyncTimeout() {
+        return asyncTimeout;
+    }
+
+    public void setAsyncTimeout(Long asyncTimeout) {
+        this.asyncTimeout = asyncTimeout;
+    }
+
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
@@ -239,6 +279,14 @@ public class DoclingComponentConfiguration
 
     public void setProcessTimeout(Long processTimeout) {
         this.processTimeout = processTimeout;
+    }
+
+    public Boolean getUseAsyncMode() {
+        return useAsyncMode;
+    }
+
+    public void setUseAsyncMode(Boolean useAsyncMode) {
+        this.useAsyncMode = useAsyncMode;
     }
 
     public String getWorkingDirectory() {

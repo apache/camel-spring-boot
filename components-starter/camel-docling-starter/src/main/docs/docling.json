@@ -21,6 +21,27 @@
       "defaultValue": "X-API-Key"
     },
     {
+      "name": "camel.component.docling.api-timeout",
+      "type": "java.lang.Long",
+      "description": "API request timeout in milliseconds",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": 60000
+    },
+    {
+      "name": "camel.component.docling.async-poll-interval",
+      "type": "java.lang.Long",
+      "description": "Polling interval for async conversion status in milliseconds",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": 2000
+    },
+    {
+      "name": "camel.component.docling.async-timeout",
+      "type": "java.lang.Long",
+      "description": "Maximum time to wait for async conversion completion in milliseconds",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": 300000
+    },
+    {
       "name": "camel.component.docling.authentication-scheme",
       "type": "org.apache.camel.component.docling.AuthenticationScheme",
       "description": "Authentication scheme (BEARER, API_KEY, NONE)",
@@ -139,6 +160,13 @@
       "description": "Timeout for Docling process execution in milliseconds",
       "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
       "defaultValue": 30000
+    },
+    {
+      "name": "camel.component.docling.use-async-mode",
+      "type": "java.lang.Boolean",
+      "description": "Use asynchronous conversion mode (docling-serve API only)",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.docling.use-docling-serve",

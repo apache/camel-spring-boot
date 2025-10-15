@@ -80,6 +80,11 @@ public class HttpComponentConfiguration
      */
     private Boolean skipResponseHeaders = false;
     /**
+     * Whether the Content-Type header should automatic include charset for
+     * string based content.
+     */
+    private Boolean contentTypeCharsetEnabled = true;
+    /**
      * To use a custom org.apache.hc.client5.http.cookie.CookieStore. By default
      * the org.apache.hc.client5.http.cookie.BasicCookieStore is used which is
      * an in-memory only cookie store. Notice if bridgeEndpoint=true then the
@@ -339,6 +344,14 @@ public class HttpComponentConfiguration
 
     public void setSkipResponseHeaders(Boolean skipResponseHeaders) {
         this.skipResponseHeaders = skipResponseHeaders;
+    }
+
+    public Boolean getContentTypeCharsetEnabled() {
+        return contentTypeCharsetEnabled;
+    }
+
+    public void setContentTypeCharsetEnabled(Boolean contentTypeCharsetEnabled) {
+        this.contentTypeCharsetEnabled = contentTypeCharsetEnabled;
     }
 
     public CookieStore getCookieStore() {
