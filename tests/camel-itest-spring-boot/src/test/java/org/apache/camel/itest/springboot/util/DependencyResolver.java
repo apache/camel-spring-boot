@@ -88,6 +88,17 @@ public final class DependencyResolver {
         if (property != null && !isResolved(property)) {
             property = resolveCamelProperty(property);
         }
+        if (property != null && !isResolved(property)) {
+            property = resolveSpringBootSystemProperty(property);
+        }
+
+        return property;
+    }
+
+    private static String resolveSpringBootSystemProperty(String property) {
+        if (property.contains("spring-boot-version")) {
+            return System.getProperty("itest.springboot.springBootVersion");
+        }
 
         return property;
     }
