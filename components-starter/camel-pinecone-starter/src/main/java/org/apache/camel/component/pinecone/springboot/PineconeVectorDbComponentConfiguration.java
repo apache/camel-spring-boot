@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.pinecone.springboot;
 
+import org.apache.camel.component.pinecone.PineconeVectorDbAction;
 import org.apache.camel.component.pinecone.PineconeVectorDbConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -35,6 +36,10 @@ public class PineconeVectorDbComponentConfiguration
      * enabled by default.
      */
     private Boolean enabled;
+    /**
+     * Action to perform.
+     */
+    private PineconeVectorDbAction action;
     /**
      * Sets the cloud type to use (aws/gcp/azure)
      */
@@ -85,15 +90,6 @@ public class PineconeVectorDbComponentConfiguration
      */
     private Integer proxyPort;
     /**
-     * Whether the client uses Transport Layer Security (TLS) to secure
-     * communications
-     */
-    private Boolean tls = true;
-    /**
-     * Sets the API key to use for authentication
-     */
-    private String token;
-    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -102,6 +98,23 @@ public class PineconeVectorDbComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * Whether the client uses Transport Layer Security (TLS) to secure
+     * communications
+     */
+    private Boolean tls = true;
+    /**
+     * Sets the API key to use for authentication
+     */
+    private String token;
+
+    public PineconeVectorDbAction getAction() {
+        return action;
+    }
+
+    public void setAction(PineconeVectorDbAction action) {
+        this.action = action;
+    }
 
     public String getCloud() {
         return cloud;
@@ -183,6 +196,14 @@ public class PineconeVectorDbComponentConfiguration
         this.proxyPort = proxyPort;
     }
 
+    public Boolean getAutowiredEnabled() {
+        return autowiredEnabled;
+    }
+
+    public void setAutowiredEnabled(Boolean autowiredEnabled) {
+        this.autowiredEnabled = autowiredEnabled;
+    }
+
     public Boolean getTls() {
         return tls;
     }
@@ -197,13 +218,5 @@ public class PineconeVectorDbComponentConfiguration
 
     public void setToken(String token) {
         this.token = token;
-    }
-
-    public Boolean getAutowiredEnabled() {
-        return autowiredEnabled;
-    }
-
-    public void setAutowiredEnabled(Boolean autowiredEnabled) {
-        this.autowiredEnabled = autowiredEnabled;
     }
 }

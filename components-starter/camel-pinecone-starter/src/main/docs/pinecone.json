@@ -14,6 +14,12 @@
   ],
   "properties": [
     {
+      "name": "camel.component.pinecone.action",
+      "type": "org.apache.camel.component.pinecone.PineconeVectorDbAction",
+      "description": "Action to perform.",
+      "sourceType": "org.apache.camel.component.pinecone.springboot.PineconeVectorDbComponentConfiguration"
+    },
+    {
       "name": "camel.component.pinecone.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
