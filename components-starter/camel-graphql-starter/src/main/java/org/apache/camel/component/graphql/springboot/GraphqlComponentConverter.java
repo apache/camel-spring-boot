@@ -40,6 +40,7 @@ public class GraphqlComponentConverter implements GenericConverter {
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.hc.client5.http.classic.HttpClient.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
         return answer;
     }
 
@@ -57,6 +58,7 @@ public class GraphqlComponentConverter implements GenericConverter {
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.apache.hc.client5.http.classic.HttpClient": return applicationContext.getBean(ref, org.apache.hc.client5.http.classic.HttpClient.class);
+            case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
         }
         return null;
     }

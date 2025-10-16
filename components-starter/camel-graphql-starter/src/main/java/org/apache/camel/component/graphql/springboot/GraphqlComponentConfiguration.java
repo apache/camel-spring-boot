@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.graphql.springboot;
 
+import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.hc.client5.http.classic.HttpClient;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -47,6 +48,12 @@ public class GraphqlComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Option to disable throwing the HttpOperationFailedException in case of
+     * failed responses from the remote server. This allows you to get all
+     * responses regardless of the HTTP status code.
+     */
+    private Boolean throwExceptionOnFailure = true;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -62,6 +69,12 @@ public class GraphqlComponentConfiguration
      * org.apache.hc.client5.http.classic.HttpClient type.
      */
     private HttpClient httpClient;
+    /**
+     * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
+     * header to and from Camel message. The option is a
+     * org.apache.camel.spi.HeaderFilterStrategy type.
+     */
+    private HeaderFilterStrategy headerFilterStrategy;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -69,6 +82,14 @@ public class GraphqlComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getThrowExceptionOnFailure() {
+        return throwExceptionOnFailure;
+    }
+
+    public void setThrowExceptionOnFailure(Boolean throwExceptionOnFailure) {
+        this.throwExceptionOnFailure = throwExceptionOnFailure;
     }
 
     public Boolean getAutowiredEnabled() {
@@ -85,5 +106,14 @@ public class GraphqlComponentConfiguration
 
     public void setHttpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
+    }
+
+    public HeaderFilterStrategy getHeaderFilterStrategy() {
+        return headerFilterStrategy;
+    }
+
+    public void setHeaderFilterStrategy(
+            HeaderFilterStrategy headerFilterStrategy) {
+        this.headerFilterStrategy = headerFilterStrategy;
     }
 }
