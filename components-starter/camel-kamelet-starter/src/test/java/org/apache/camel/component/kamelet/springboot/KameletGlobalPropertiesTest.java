@@ -43,7 +43,6 @@ import java.util.Properties;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @CamelSpringBootTest
 @SpringBootTest(classes = { CamelAutoConfiguration.class, KameletGlobalPropertiesTest.class })
-
 public class KameletGlobalPropertiesTest {
 
     @Autowired
@@ -58,8 +57,12 @@ public class KameletGlobalPropertiesTest {
     // **********************************************
     @UseOverridePropertiesWithPropertiesComponent
     public static Properties useOverridePropertiesWithPropertiesComponent() {
-        return asProperties("proxy.usr", "u+sr", "proxy.pwd", "p+wd", "raw.proxy.usr", "RAW(u+sr)", "raw.proxy.pwd",
-                "RAW(p+wd)", "bodyValue", "from-uri", Kamelet.PROPERTIES_PREFIX + "setBody.bodyValue", "from-template",
+        return asProperties("proxy.usr", "u+sr",
+                "proxy.pwd", "p+wd",
+                "raw.proxy.usr", "RAW(u+sr)",
+                "raw.proxy.pwd", "RAW(p+wd)",
+                "bodyValue", "from-uri",
+                Kamelet.PROPERTIES_PREFIX + "setBody.bodyValue", "from-template",
                 Kamelet.PROPERTIES_PREFIX + "setBody.test.bodyValue", "from-route",
                 Kamelet.PROPERTIES_PREFIX + "setBody.someId.bodyValue", "from-route-someId");
     }
@@ -134,11 +137,11 @@ public class KameletGlobalPropertiesTest {
 
     @Test
     public void urlEncodingIsRespected() {
-        assertThat(context.getEndpoint("kamelet:timer-source?message=Hello+Kamelets&period=1000", KameletEndpoint.class)
+        assertThat(context.getEndpoint("kamelet:timer-source?message=Hello Kamelets&period=1000", KameletEndpoint.class)
                 .getKameletProperties()).containsEntry("message", "Hello Kamelets");
-        assertThat(context.getEndpoint("kamelet:timer-source?message=Hi%20Kamelets&period=1000", KameletEndpoint.class)
+        assertThat(context.getEndpoint("kamelet:timer-source?message=Hi Kamelets&period=1000", KameletEndpoint.class)
                 .getKameletProperties()).containsEntry("message", "Hi Kamelets");
-        assertThat(context.getEndpoint("kamelet:timer-source?message=messaging.knative.dev%2Fv1beta1&period=1000",
+        assertThat(context.getEndpoint("kamelet:timer-source?message=messaging.knative.dev/v1beta1&period=1000",
                 KameletEndpoint.class).getKameletProperties()).containsEntry("message",
                         "messaging.knative.dev/v1beta1");
     }
