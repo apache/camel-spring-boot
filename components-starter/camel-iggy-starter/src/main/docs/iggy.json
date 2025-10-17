@@ -1,0 +1,212 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.iggy",
+      "type": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
+    },
+    {
+      "name": "camel.component.iggy.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.iggy.auto-commit",
+      "type": "java.lang.Boolean",
+      "description": "Controls message acknowledgment behavior. When true, messages are automatically marked as processed after consumption. When false, enables manual offset management and allows setting a custom starting offset position",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.iggy.auto-create-stream",
+      "type": "java.lang.Boolean",
+      "description": "Whether to automatically create stream if it does not exist",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.iggy.auto-create-topic",
+      "type": "java.lang.Boolean",
+      "description": "Whether to automatically create topic if it does not exist",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.iggy.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.iggy.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.iggy.client-transport",
+      "type": "java.lang.String",
+      "description": "Polling strategy",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": "TCP"
+    },
+    {
+      "name": "camel.component.iggy.compression-algorithm",
+      "type": "org.apache.iggy.topic.CompressionAlgorithm",
+      "description": "Compression algorithm for message payload",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": "none"
+    },
+    {
+      "name": "camel.component.iggy.configuration",
+      "type": "org.apache.camel.component.iggy.IggyConfiguration",
+      "description": "Allows to pre-configure the Iggy component with common options that the endpoints will reuse. The option is a org.apache.camel.component.iggy.IggyConfiguration type.",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
+    },
+    {
+      "name": "camel.component.iggy.consumer-group-name",
+      "type": "java.lang.String",
+      "description": "The name of the consumer group",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
+    },
+    {
+      "name": "camel.component.iggy.consumers-count",
+      "type": "java.lang.Integer",
+      "description": "Camel Iggy consumers count",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": 1
+    },
+    {
+      "name": "camel.component.iggy.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.iggy.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the iggy component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
+    },
+    {
+      "name": "camel.component.iggy.host",
+      "type": "java.lang.String",
+      "description": "Iggy server hostname or IP address",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": "localhost"
+    },
+    {
+      "name": "camel.component.iggy.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.iggy.max-topic-size",
+      "type": "java.lang.Long",
+      "description": "Maximum topic size in bytes (0 means unlimited)",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.iggy.message-expiry",
+      "type": "java.lang.Long",
+      "description": "Message expiry time in seconds (0 means no expiry)",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.iggy.partition-id",
+      "type": "java.lang.Long",
+      "description": "The consumer partition id",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
+    },
+    {
+      "name": "camel.component.iggy.partitioning",
+      "type": "org.apache.iggy.message.Partitioning",
+      "description": "Partitioning strategy for message distribution. The option is a org.apache.iggy.message.Partitioning type.",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
+    },
+    {
+      "name": "camel.component.iggy.partitions-count",
+      "type": "java.lang.Long",
+      "description": "Number of partitions for the topic",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": 1
+    },
+    {
+      "name": "camel.component.iggy.password",
+      "type": "java.lang.String",
+      "description": "Iggy password",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
+    },
+    {
+      "name": "camel.component.iggy.poll-batch-size",
+      "type": "java.lang.Long",
+      "description": "The consumer poll batch size",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": 10
+    },
+    {
+      "name": "camel.component.iggy.polling-strategy",
+      "type": "java.lang.String",
+      "description": "Polling strategy",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": "next"
+    },
+    {
+      "name": "camel.component.iggy.port",
+      "type": "java.lang.Integer",
+      "description": "Iggy server port number",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": 8090
+    },
+    {
+      "name": "camel.component.iggy.replication-factor",
+      "type": "java.lang.Short",
+      "description": "Replication factor for the topic",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
+    },
+    {
+      "name": "camel.component.iggy.shutdown-timeout",
+      "type": "java.lang.Integer",
+      "description": "Camel Iggy shutdown timeout",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": 30000
+    },
+    {
+      "name": "camel.component.iggy.starting-offset",
+      "type": "java.lang.Long",
+      "description": "Defines the initial message offset position when autoCommit is disabled. Use 0 to start from the beginning of the stream, or specify a custom offset to resume from a particular point",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.iggy.stream-id",
+      "type": "java.lang.Long",
+      "description": "Stream identifier",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
+    },
+    {
+      "name": "camel.component.iggy.stream-name",
+      "type": "java.lang.String",
+      "description": "Stream name",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
+    },
+    {
+      "name": "camel.component.iggy.username",
+      "type": "java.lang.String",
+      "description": "Iggy username",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
