@@ -21,6 +21,7 @@ import org.apache.camel.component.flink.DataStreamCallback;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Send DataSet jobs to an Apache Flink cluster.
@@ -41,6 +42,7 @@ public class FlinkComponentConfiguration
      * Function performing action against a DataSet. The option is a
      * org.apache.camel.component.flink.DataSetCallback type.
      */
+    @Deprecated
     private DataSetCallback dataSetCallback;
     /**
      * DataStream to compute against. The option is a
@@ -73,10 +75,13 @@ public class FlinkComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public DataSetCallback getDataSetCallback() {
         return dataSetCallback;
     }
 
+    @Deprecated
     public void setDataSetCallback(DataSetCallback dataSetCallback) {
         this.dataSetCallback = dataSetCallback;
     }
