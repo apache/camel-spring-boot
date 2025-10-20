@@ -19,23 +19,28 @@ package org.apache.camel.component.jira.springboot.test;
 import static org.apache.camel.component.jira.JiraConstants.JIRA_REST_CLIENT_FACTORY;
 import static org.apache.camel.component.jira.springboot.test.JiraTestConstants.PROJECT;
 import static org.apache.camel.component.jira.springboot.test.Utils.createIssue;
+import static org.apache.camel.component.jira.springboot.test.Utils.createIssueWithCreationDate;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.atlassian.jira.rest.client.api.IssueRestClient;
 import com.atlassian.jira.rest.client.api.JiraRestClient;
 import com.atlassian.jira.rest.client.api.JiraRestClientFactory;
 import com.atlassian.jira.rest.client.api.SearchRestClient;
+import com.atlassian.jira.rest.client.api.UserRestClient;
 import com.atlassian.jira.rest.client.api.domain.Issue;
 import com.atlassian.jira.rest.client.api.domain.SearchResult;
 
+import com.atlassian.jira.rest.client.api.domain.User;
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;
@@ -46,12 +51,14 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.CamelContextConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 
+import org.joda.time.DateTime;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import io.atlassian.util.concurrent.Promise;
 import io.atlassian.util.concurrent.Promises;
 
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -82,15 +89,17 @@ public class NewIssuesConsumerTest {
 
     static IssueRestClient issueRestClient;
 
+    static UserRestClient userRestClient;
+
     static SearchRestClient searchRestClient;
 
     static List<Issue> issues = new ArrayList<>();
 
     @BeforeAll
     public static void beforeAll() {
-        issues.add(createIssue(1L));
-        issues.add(createIssue(2L));
-        issues.add(createIssue(3L));
+        issues.add(createIssueWithCreationDate(3L, DateTime.now().minusMinutes(10)));
+        issues.add(createIssueWithCreationDate(2L, DateTime.now().minusMinutes(8)));
+        issues.add(createIssueWithCreationDate(1L, DateTime.now().minusMinutes(6)));
     }
 
     @Bean
@@ -103,13 +112,20 @@ public class NewIssuesConsumerTest {
                 jiraClient = mock(JiraRestClient.class);
                 issueRestClient = mock(IssueRestClient.class);
                 searchRestClient = mock(SearchRestClient.class);
+                userRestClient = mock(UserRestClient.class);
                 SearchResult result = new SearchResult(0, 50, 100, issues);
                 Promise<SearchResult> promiseSearchResult = Promises.promise(result);
+                User user = new User(
+                        null, "admin", null, null, true, null,
+                        Map.of("48x48", URI.create("")), DateTime.now().getZone().getID());
+                Promise<User> promiseUserResult = Promises.promise(user);
 
                 when(jiraClient.getSearchClient()).thenReturn(searchRestClient);
+                when(jiraClient.getUserClient()).thenReturn(userRestClient);
                 when(jiraRestClientFactory.createWithBasicHttpAuthentication(any(), any(), any()))
                         .thenReturn(jiraClient);
                 when(searchRestClient.searchJql(any(), any(), any(), any())).thenReturn(promiseSearchResult);
+                when(userRestClient.getUser(any(URI.class))).thenReturn(promiseUserResult);
                 camelContext.getRegistry().bind(JIRA_REST_CLIENT_FACTORY, jiraRestClientFactory);
             }
 
@@ -128,7 +144,7 @@ public class NewIssuesConsumerTest {
 
     @Test
     public void singleIssueTest() throws Exception {
-        Issue issue = createIssue(11);
+        Issue issue = createIssueWithCreationDate(11, DateTime.now());
 
         reset(searchRestClient);
         AtomicBoolean searched = new AtomicBoolean();
@@ -147,9 +163,9 @@ public class NewIssuesConsumerTest {
 
     @Test
     public void multipleIssuesTest() throws Exception {
-        Issue issue1 = createIssue(21);
-        Issue issue2 = createIssue(22);
-        Issue issue3 = createIssue(23);
+        Issue issue1 = createIssueWithCreationDate(21, DateTime.now());
+        Issue issue2 = createIssueWithCreationDate(22, DateTime.now());
+        Issue issue3 = createIssueWithCreationDate(23, DateTime.now());
 
         reset(searchRestClient);
         AtomicBoolean searched = new AtomicBoolean();
