@@ -66,6 +66,15 @@ public final class Utils {
         return createIssueWithComments(id, 0);
     }
 
+    public static Issue createIssueWithCreationDate(long id, DateTime dateTime) {
+        URI selfUri = URI.create(TEST_JIRA_URL + "/rest/api/latest/issue/" + id);
+        return new Issue(
+                "jira summary test " + id, selfUri, KEY + "-" + id, id, null, issueType, null, "Description " + id,
+                null, null, null, null, userAssignee, dateTime, null, null, null, null, null, null, null, null, null,
+                null,
+                null, null, null, null, null, null, null, null, null);
+    }
+
     public static Issue createIssue(long id, String summary, String key, IssueType issueType, String description,
             BasicPriority priority, User assignee, Collection<BasicComponent> components, BasicWatchers watchers) {
         URI selfUri = URI.create(TEST_JIRA_URL + "/rest/api/latest/issue/" + id);
