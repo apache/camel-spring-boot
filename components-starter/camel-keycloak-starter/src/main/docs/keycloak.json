@@ -126,6 +126,20 @@
       "defaultValue": 0
     },
     {
+      "name": "camel.component.keycloak.introspection-cache-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable caching of token introspection results to reduce API calls to Keycloak",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.keycloak.introspection-cache-ttl",
+      "type": "java.lang.Long",
+      "description": "Time-to-live for cached introspection results in seconds",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration",
+      "defaultValue": 60
+    },
+    {
       "name": "camel.component.keycloak.ip-address",
       "type": "java.lang.String",
       "description": "Filter events by IP address",
@@ -200,6 +214,13 @@
       "type": "java.lang.String",
       "description": "Filter events by event types (comma-separated list, e.g., LOGIN,LOGOUT)",
       "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration"
+    },
+    {
+      "name": "camel.component.keycloak.use-token-introspection",
+      "type": "java.lang.Boolean",
+      "description": "Enable OAuth 2.0 token introspection for real-time token validation. When enabled, tokens are validated by calling Keycloak's introspection endpoint instead of local JWT parsing. This allows detecting revoked tokens before expiration.",
+      "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.keycloak.user",

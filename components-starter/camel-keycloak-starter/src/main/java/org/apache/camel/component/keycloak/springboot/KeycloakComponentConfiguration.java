@@ -100,6 +100,15 @@ public class KeycloakComponentConfiguration
      */
     private Integer first = 0;
     /**
+     * Enable caching of token introspection results to reduce API calls to
+     * Keycloak
+     */
+    private Boolean introspectionCacheEnabled = true;
+    /**
+     * Time-to-live for cached introspection results in seconds
+     */
+    private Long introspectionCacheTtl = 60L;
+    /**
      * Filter events by IP address
      */
     private String ipAddress;
@@ -154,6 +163,13 @@ public class KeycloakComponentConfiguration
      * Keycloak username
      */
     private String username;
+    /**
+     * Enable OAuth 2.0 token introspection for real-time token validation. When
+     * enabled, tokens are validated by calling Keycloak's introspection
+     * endpoint instead of local JWT parsing. This allows detecting revoked
+     * tokens before expiration.
+     */
+    private Boolean useTokenIntrospection = false;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions (if possible) occurred while the Camel consumer
@@ -301,6 +317,22 @@ public class KeycloakComponentConfiguration
         this.first = first;
     }
 
+    public Boolean getIntrospectionCacheEnabled() {
+        return introspectionCacheEnabled;
+    }
+
+    public void setIntrospectionCacheEnabled(Boolean introspectionCacheEnabled) {
+        this.introspectionCacheEnabled = introspectionCacheEnabled;
+    }
+
+    public Long getIntrospectionCacheTtl() {
+        return introspectionCacheTtl;
+    }
+
+    public void setIntrospectionCacheTtl(Long introspectionCacheTtl) {
+        this.introspectionCacheTtl = introspectionCacheTtl;
+    }
+
     public String getIpAddress() {
         return ipAddress;
     }
@@ -403,6 +435,14 @@ public class KeycloakComponentConfiguration
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Boolean getUseTokenIntrospection() {
+        return useTokenIntrospection;
+    }
+
+    public void setUseTokenIntrospection(Boolean useTokenIntrospection) {
+        this.useTokenIntrospection = useTokenIntrospection;
     }
 
     public Boolean getBridgeErrorHandler() {
