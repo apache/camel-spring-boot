@@ -109,6 +109,19 @@ public class DoclingComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * Connection request timeout in milliseconds (timeout when requesting
+     * connection from pool)
+     */
+    private Integer connectionRequestTimeout = 30000;
+    /**
+     * Connection timeout in milliseconds
+     */
+    private Integer connectionTimeout = 30000;
+    /**
+     * Time to live for connections in milliseconds (-1 for infinite)
+     */
+    private Long connectionTimeToLive = -1L;
+    /**
      * Docling-serve API convert endpoint path
      */
     private String convertEndpoint = "/v1/convert/source";
@@ -117,13 +130,37 @@ public class DoclingComponentConfiguration
      */
     private String doclingCommand;
     /**
+     * Enable eviction of idle connections from the pool
+     */
+    private Boolean evictIdleConnections = true;
+    /**
+     * Maximum connections per route in the connection pool
+     */
+    private Integer maxConnectionsPerRoute = 10;
+    /**
+     * Maximum idle time for connections in milliseconds before eviction
+     */
+    private Long maxIdleTime = 60000L;
+    /**
+     * Maximum total connections in the connection pool
+     */
+    private Integer maxTotalConnections = 20;
+    /**
      * Timeout for Docling process execution in milliseconds
      */
     private Long processTimeout = 30000L;
     /**
+     * Socket timeout in milliseconds
+     */
+    private Integer socketTimeout = 60000;
+    /**
      * Use asynchronous conversion mode (docling-serve API only)
      */
     private Boolean useAsyncMode = false;
+    /**
+     * Validate connections after inactivity in milliseconds
+     */
+    private Integer validateAfterInactivity = 2000;
     /**
      * Working directory for Docling execution
      */
@@ -257,6 +294,30 @@ public class DoclingComponentConfiguration
         this.autowiredEnabled = autowiredEnabled;
     }
 
+    public Integer getConnectionRequestTimeout() {
+        return connectionRequestTimeout;
+    }
+
+    public void setConnectionRequestTimeout(Integer connectionRequestTimeout) {
+        this.connectionRequestTimeout = connectionRequestTimeout;
+    }
+
+    public Integer getConnectionTimeout() {
+        return connectionTimeout;
+    }
+
+    public void setConnectionTimeout(Integer connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
+    }
+
+    public Long getConnectionTimeToLive() {
+        return connectionTimeToLive;
+    }
+
+    public void setConnectionTimeToLive(Long connectionTimeToLive) {
+        this.connectionTimeToLive = connectionTimeToLive;
+    }
+
     public String getConvertEndpoint() {
         return convertEndpoint;
     }
@@ -273,6 +334,38 @@ public class DoclingComponentConfiguration
         this.doclingCommand = doclingCommand;
     }
 
+    public Boolean getEvictIdleConnections() {
+        return evictIdleConnections;
+    }
+
+    public void setEvictIdleConnections(Boolean evictIdleConnections) {
+        this.evictIdleConnections = evictIdleConnections;
+    }
+
+    public Integer getMaxConnectionsPerRoute() {
+        return maxConnectionsPerRoute;
+    }
+
+    public void setMaxConnectionsPerRoute(Integer maxConnectionsPerRoute) {
+        this.maxConnectionsPerRoute = maxConnectionsPerRoute;
+    }
+
+    public Long getMaxIdleTime() {
+        return maxIdleTime;
+    }
+
+    public void setMaxIdleTime(Long maxIdleTime) {
+        this.maxIdleTime = maxIdleTime;
+    }
+
+    public Integer getMaxTotalConnections() {
+        return maxTotalConnections;
+    }
+
+    public void setMaxTotalConnections(Integer maxTotalConnections) {
+        this.maxTotalConnections = maxTotalConnections;
+    }
+
     public Long getProcessTimeout() {
         return processTimeout;
     }
@@ -281,12 +374,28 @@ public class DoclingComponentConfiguration
         this.processTimeout = processTimeout;
     }
 
+    public Integer getSocketTimeout() {
+        return socketTimeout;
+    }
+
+    public void setSocketTimeout(Integer socketTimeout) {
+        this.socketTimeout = socketTimeout;
+    }
+
     public Boolean getUseAsyncMode() {
         return useAsyncMode;
     }
 
     public void setUseAsyncMode(Boolean useAsyncMode) {
         this.useAsyncMode = useAsyncMode;
+    }
+
+    public Integer getValidateAfterInactivity() {
+        return validateAfterInactivity;
+    }
+
+    public void setValidateAfterInactivity(Integer validateAfterInactivity) {
+        this.validateAfterInactivity = validateAfterInactivity;
     }
 
     public String getWorkingDirectory() {

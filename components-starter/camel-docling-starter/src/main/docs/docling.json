@@ -68,6 +68,27 @@
       "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
     },
     {
+      "name": "camel.component.docling.connection-request-timeout",
+      "type": "java.lang.Integer",
+      "description": "Connection request timeout in milliseconds (timeout when requesting connection from pool)",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": 30000
+    },
+    {
+      "name": "camel.component.docling.connection-time-to-live",
+      "type": "java.lang.Long",
+      "description": "Time to live for connections in milliseconds (-1 for infinite)",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": -1
+    },
+    {
+      "name": "camel.component.docling.connection-timeout",
+      "type": "java.lang.Integer",
+      "description": "Connection timeout in milliseconds",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": 30000
+    },
+    {
       "name": "camel.component.docling.content-in-body",
       "type": "java.lang.Boolean",
       "description": "Include the content of the output file in the exchange body and delete the output file",
@@ -113,6 +134,13 @@
       "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
     },
     {
+      "name": "camel.component.docling.evict-idle-connections",
+      "type": "java.lang.Boolean",
+      "description": "Enable eviction of idle connections from the pool",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.docling.include-layout-info",
       "type": "java.lang.Boolean",
       "description": "Show layout information with bounding boxes",
@@ -127,11 +155,32 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.docling.max-connections-per-route",
+      "type": "java.lang.Integer",
+      "description": "Maximum connections per route in the connection pool",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": 10
+    },
+    {
       "name": "camel.component.docling.max-file-size",
       "type": "java.lang.Long",
       "description": "Maximum file size in bytes for processing",
       "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
       "defaultValue": 52428800
+    },
+    {
+      "name": "camel.component.docling.max-idle-time",
+      "type": "java.lang.Long",
+      "description": "Maximum idle time for connections in milliseconds before eviction",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": 60000
+    },
+    {
+      "name": "camel.component.docling.max-total-connections",
+      "type": "java.lang.Integer",
+      "description": "Maximum total connections in the connection pool",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": 20
     },
     {
       "name": "camel.component.docling.ocr-language",
@@ -162,6 +211,13 @@
       "defaultValue": 30000
     },
     {
+      "name": "camel.component.docling.socket-timeout",
+      "type": "java.lang.Integer",
+      "description": "Socket timeout in milliseconds",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": 60000
+    },
+    {
       "name": "camel.component.docling.use-async-mode",
       "type": "java.lang.Boolean",
       "description": "Use asynchronous conversion mode (docling-serve API only)",
@@ -174,6 +230,13 @@
       "description": "Use docling-serve API instead of CLI command",
       "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.docling.validate-after-inactivity",
+      "type": "java.lang.Integer",
+      "description": "Validate connections after inactivity in milliseconds",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": 2000
     },
     {
       "name": "camel.component.docling.working-directory",
