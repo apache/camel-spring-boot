@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(ArquillianExtension.class)
-public class CamelJsonataTest extends AbstractSpringBootTestSupport {
+public class CamelMiloTest extends AbstractSpringBootTestSupport {
 
     @Deployment
     public static Archive<?> createSpringBootPackage() throws Exception {
@@ -32,12 +32,14 @@ public class CamelJsonataTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder().module(inferModuleName(CamelJsonataTest.class)).build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelMiloTest.class)).build();
     }
 
     @Test
     public void componentTests() throws Exception {
-        this.runComponentTest(config);
+        this.runComponentTest(config, "milo-browse");
+        this.runComponentTest(config, "milo-client");
+        this.runComponentTest(config, "milo-server");
         this.runModuleUnitTestsIfEnabled(config);
     }
 

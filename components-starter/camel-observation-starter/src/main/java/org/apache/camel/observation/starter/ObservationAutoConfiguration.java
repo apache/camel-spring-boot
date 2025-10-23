@@ -26,7 +26,6 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.observation.MicrometerObservationTracer;
 
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.boot.actuate.autoconfigure.tracing.MicrometerTracingAutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -35,16 +34,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
-@AutoConfigureAfter(value = {
-        org.springframework.boot.actuate.autoconfigure.observation.ObservationAutoConfiguration.class,
-        MicrometerTracingAutoConfiguration.class })
+@AutoConfigureAfter(name = {
+        "org.springframework.boot.actuate.autoconfigure.observation.ObservationAutoConfiguration",
+        "org.springframework.boot.actuate.autoconfigure.tracing.MicrometerTracingAutoConfiguration"
+})
 @EnableConfigurationProperties(ObservationConfigurationProperties.class)
 @ConditionalOnProperty(value = "camel.observation.enabled", matchIfMissing = true)
 public class ObservationAutoConfiguration {
 
     @Bean(initMethod = "", destroyMethod = "")
     // Camel handles the lifecycle of this bean
-    @ConditionalOnMissingBean(MicrometerObservationTracer.class)
+    @ConditionalOnMissingBean(value = { MicrometerObservationTracer.class })
     MicrometerObservationTracer micrometerObservationTracer(CamelContext camelContext,
             ObservationConfigurationProperties config, ObjectProvider<Tracer> tracer,
             ObjectProvider<ObservationRegistry> observationRegistry) {
@@ -66,10 +66,10 @@ public class ObservationAutoConfiguration {
     @Bean
     // No-op version to suppress metric creation which may explode the length
     // of actuator as seen in CAMEL-22349
-    public TracingAwareMeterObservationHandler<Observation.Context> tracingAwareMeterObservationHandler(Tracer tracer) {
+    public TracingAwareMeterObservationHandler<Observation.Context> tracingAwareMeterObservationHandler(ObjectProvider<Tracer> tracer) {
         return new TracingAwareMeterObservationHandler<>(
             new MeterObservationHandler<Observation.Context>() {},
-            tracer
+            tracer.getIfAvailable()
         ) {
             @Override
             public void onEvent(Observation.Event event, Observation.Context context) {}
