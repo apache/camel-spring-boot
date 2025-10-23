@@ -10,6 +10,17 @@
       "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
       "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration",
       "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.dataformat.pqc",
+      "type": "org.apache.camel.component.pqc.dataformat.springboot.PQCDataFormatConfiguration",
+      "sourceType": "org.apache.camel.component.pqc.dataformat.springboot.PQCDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.pqc.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.pqc.dataformat.springboot.PQCDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
     }
   ],
   "properties": [
@@ -130,6 +141,63 @@
       "type": "java.lang.Integer",
       "description": "The required length of the symmetric key used",
       "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration",
+      "defaultValue": 128
+    },
+    {
+      "name": "camel.dataformat.pqc.buffer-size",
+      "type": "java.lang.Integer",
+      "description": "The size of the buffer used for streaming encryption\/decryption.",
+      "sourceType": "org.apache.camel.component.pqc.dataformat.springboot.PQCDataFormatConfiguration",
+      "defaultValue": 4096
+    },
+    {
+      "name": "camel.dataformat.pqc.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.pqc.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the pqc data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.pqc.dataformat.springboot.PQCDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.pqc.key-encapsulation-algorithm",
+      "type": "java.lang.String",
+      "description": "The Post-Quantum KEM algorithm to use for key encapsulation. Supported values: MLKEM, BIKE, HQC, CMCE, SABER, FRODO, NTRU, NTRULPRime, SNTRUPrime, KYBER",
+      "sourceType": "org.apache.camel.component.pqc.dataformat.springboot.PQCDataFormatConfiguration",
+      "defaultValue": "MLKEM"
+    },
+    {
+      "name": "camel.dataformat.pqc.key-generator",
+      "type": "java.lang.String",
+      "description": "Refers to a custom KeyGenerator to lookup from the register for KEM operations. The option is a javax.crypto.KeyGenerator type.",
+      "sourceType": "org.apache.camel.component.pqc.dataformat.springboot.PQCDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.pqc.key-pair",
+      "type": "java.lang.String",
+      "description": "Refers to the KeyPair to lookup from the register to use for KEM operations. The option is a java.security.KeyPair type.",
+      "sourceType": "org.apache.camel.component.pqc.dataformat.springboot.PQCDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.pqc.provider",
+      "type": "java.lang.String",
+      "description": "The JCE security provider to use.",
+      "sourceType": "org.apache.camel.component.pqc.dataformat.springboot.PQCDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.pqc.symmetric-key-algorithm",
+      "type": "java.lang.String",
+      "description": "The symmetric encryption algorithm to use with the shared secret. Supported values: AES, ARIA, RC2, RC5, CAMELLIA, CAST5, CAST6, CHACHA7539, etc.",
+      "sourceType": "org.apache.camel.component.pqc.dataformat.springboot.PQCDataFormatConfiguration",
+      "defaultValue": "AES"
+    },
+    {
+      "name": "camel.dataformat.pqc.symmetric-key-length",
+      "type": "java.lang.Integer",
+      "description": "The length (in bits) of the symmetric key.",
+      "sourceType": "org.apache.camel.component.pqc.dataformat.springboot.PQCDataFormatConfiguration",
       "defaultValue": 128
     }
   ],
