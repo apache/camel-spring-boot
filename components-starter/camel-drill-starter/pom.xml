@@ -38,6 +38,31 @@
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-drill</artifactId>
       <version>${camel-version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.drill.exec</groupId>
+          <artifactId>drill-jdbc-all</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.drill.exec</groupId>
+      <artifactId>drill-jdbc</artifactId>
+      <version>${drill-jdbc-version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.code.findbugs</groupId>
+          <artifactId>jsr305</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.sun.xml.bind</groupId>
+          <artifactId>jaxb-impl</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>log4j-over-slf4j</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
