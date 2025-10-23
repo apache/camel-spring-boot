@@ -544,12 +544,7 @@ public final class ArquillianPackager {
     }
 
     private static ClassLoader getExtensionClassloader() {
-        ClassLoader cl = AccessController.doPrivileged(new PrivilegedAction<ClassLoader>() {
-            @Override
-            public ClassLoader run() {
-                return Thread.currentThread().getContextClassLoader();
-            }
-        });
+        ClassLoader cl = Thread.currentThread().getContextClassLoader();
         if (cl == null) {
             cl = ClassLoader.getSystemClassLoader();
         }

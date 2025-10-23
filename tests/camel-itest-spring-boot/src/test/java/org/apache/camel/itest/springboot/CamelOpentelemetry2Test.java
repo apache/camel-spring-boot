@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(ArquillianExtension.class)
-public class CamelJsonataTest extends AbstractSpringBootTestSupport {
+public class CamelOpentelemetry2Test extends AbstractSpringBootTestSupport {
 
     @Deployment
     public static Archive<?> createSpringBootPackage() throws Exception {
@@ -32,12 +32,12 @@ public class CamelJsonataTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder().module(inferModuleName(CamelJsonataTest.class)).build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelOpentelemetry2Test.class)).build();
     }
 
     @Test
     public void componentTests() throws Exception {
-        this.runComponentTest(config);
+        // opentelemetry is a tracer (other), not a component, so we only run unit tests
         this.runModuleUnitTestsIfEnabled(config);
     }
 
