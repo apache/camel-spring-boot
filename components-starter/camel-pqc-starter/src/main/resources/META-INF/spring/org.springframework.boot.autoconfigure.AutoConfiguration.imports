@@ -17,3 +17,4 @@
 
 org.apache.camel.component.pqc.springboot.PQCComponentConverter
 org.apache.camel.component.pqc.springboot.PQCComponentAutoConfiguration
+org.apache.camel.component.pqc.dataformat.springboot.PQCDataFormatAutoConfiguration
