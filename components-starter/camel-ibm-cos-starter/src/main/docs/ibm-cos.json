@@ -1,0 +1,220 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.ibm-cos",
+      "type": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-cos.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.ibm-cos.api-key",
+      "type": "java.lang.String",
+      "description": "IBM Cloud API Key for authentication",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-cos.auto-create-bucket",
+      "type": "java.lang.Boolean",
+      "description": "Automatically create the bucket if it doesn't exist",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ibm-cos.autoclose-body",
+      "type": "java.lang.Boolean",
+      "description": "Whether to automatically close the object input stream after processing",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ibm-cos.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ibm-cos.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ibm-cos.configuration",
+      "type": "org.apache.camel.component.ibm.cos.IBMCOSConfiguration",
+      "description": "The component configuration. The option is a org.apache.camel.component.ibm.cos.IBMCOSConfiguration type.",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-cos.cos-client",
+      "type": "com.ibm.cloud.objectstorage.services.s3.AmazonS3",
+      "description": "Reference to an IBM COS Client instance in the registry. The option is a com.ibm.cloud.objectstorage.services.s3.AmazonS3 type.",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-cos.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.ibm-cos.delete-after-read",
+      "type": "java.lang.Boolean",
+      "description": "Delete the object from IBM COS after it has been retrieved",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ibm-cos.delete-after-write",
+      "type": "java.lang.Boolean",
+      "description": "Delete the object from the local filesystem after uploading",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ibm-cos.delimiter",
+      "type": "java.lang.String",
+      "description": "The delimiter to use for listing objects",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-cos.destination-bucket",
+      "type": "java.lang.String",
+      "description": "The destination bucket to move objects to",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-cos.destination-bucket-prefix",
+      "type": "java.lang.String",
+      "description": "The prefix to add to objects in the destination bucket",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-cos.destination-bucket-suffix",
+      "type": "java.lang.String",
+      "description": "The suffix to add to objects in the destination bucket",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-cos.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the ibm-cos component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-cos.endpoint-url",
+      "type": "java.lang.String",
+      "description": "IBM COS Endpoint URL (e.g., https:\/\/s3.us-south.cloud-object-storage.appdomain.cloud)",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-cos.file-name",
+      "type": "java.lang.String",
+      "description": "To get the object from the bucket with the given file name",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-cos.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ibm-cos.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ibm-cos.include-body",
+      "type": "java.lang.Boolean",
+      "description": "Include the object body in the exchange",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ibm-cos.include-folders",
+      "type": "java.lang.Boolean",
+      "description": "Include folders\/directories when listing objects",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ibm-cos.key-name",
+      "type": "java.lang.String",
+      "description": "The key name for the object",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-cos.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ibm-cos.location",
+      "type": "java.lang.String",
+      "description": "IBM COS Location\/Region (e.g., us-south, eu-gb)",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-cos.move-after-read",
+      "type": "java.lang.Boolean",
+      "description": "Move the object to a different bucket after it has been retrieved",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ibm-cos.multi-part-upload",
+      "type": "java.lang.Boolean",
+      "description": "Use multi-part upload for large files",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ibm-cos.operation",
+      "type": "org.apache.camel.component.ibm.cos.IBMCOSOperations",
+      "description": "The operation to perform",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-cos.part-size",
+      "type": "java.lang.Long",
+      "description": "Part size for multi-part uploads (default 25MB)",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration",
+      "defaultValue": 26214400
+    },
+    {
+      "name": "camel.component.ibm-cos.prefix",
+      "type": "java.lang.String",
+      "description": "The prefix to use for listing objects",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-cos.service-instance-id",
+      "type": "java.lang.String",
+      "description": "IBM COS Service Instance ID (CRN)",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-cos.storage-class",
+      "type": "java.lang.String",
+      "description": "The storage class to use when storing objects (e.g., STANDARD, VAULT, COLD, FLEX)",
+      "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

@@ -1089,6 +1089,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-ibm-cos-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ibm-secrets-manager-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
