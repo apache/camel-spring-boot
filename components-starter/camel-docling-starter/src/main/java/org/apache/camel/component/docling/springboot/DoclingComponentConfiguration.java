@@ -166,6 +166,29 @@ public class DoclingComponentConfiguration
      */
     private String workingDirectory;
     /**
+     * Fail entire batch on first error (true) or continue processing remaining
+     * documents (false)
+     */
+    private Boolean batchFailOnFirstError = true;
+    /**
+     * Number of parallel threads for batch processing
+     */
+    private Integer batchParallelism = 4;
+    /**
+     * Maximum number of documents to process in a single batch (batch
+     * operations only)
+     */
+    private Integer batchSize = 10;
+    /**
+     * Maximum time to wait for batch completion in milliseconds
+     */
+    private Long batchTimeout = 300000L;
+    /**
+     * Split batch results into individual exchanges (one per document) instead
+     * of single BatchProcessingResults
+     */
+    private Boolean splitBatchResults = false;
+    /**
      * Header name for API key authentication
      */
     private String apiKeyHeader = "X-API-Key";
@@ -404,6 +427,46 @@ public class DoclingComponentConfiguration
 
     public void setWorkingDirectory(String workingDirectory) {
         this.workingDirectory = workingDirectory;
+    }
+
+    public Boolean getBatchFailOnFirstError() {
+        return batchFailOnFirstError;
+    }
+
+    public void setBatchFailOnFirstError(Boolean batchFailOnFirstError) {
+        this.batchFailOnFirstError = batchFailOnFirstError;
+    }
+
+    public Integer getBatchParallelism() {
+        return batchParallelism;
+    }
+
+    public void setBatchParallelism(Integer batchParallelism) {
+        this.batchParallelism = batchParallelism;
+    }
+
+    public Integer getBatchSize() {
+        return batchSize;
+    }
+
+    public void setBatchSize(Integer batchSize) {
+        this.batchSize = batchSize;
+    }
+
+    public Long getBatchTimeout() {
+        return batchTimeout;
+    }
+
+    public void setBatchTimeout(Long batchTimeout) {
+        this.batchTimeout = batchTimeout;
+    }
+
+    public Boolean getSplitBatchResults() {
+        return splitBatchResults;
+    }
+
+    public void setSplitBatchResults(Boolean splitBatchResults) {
+        this.splitBatchResults = splitBatchResults;
     }
 
     public String getApiKeyHeader() {
