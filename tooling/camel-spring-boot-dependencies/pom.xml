@@ -1099,6 +1099,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-ibm-watson-discovery-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ical-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -3266,6 +3271,16 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-ibm-watson-discovery</artifactId>
+        <version>4.16.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-ibm-watson-language</artifactId>
+        <version>4.16.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-ical</artifactId>
         <version>4.16.0-SNAPSHOT</version>
       </dependency>
@@ -4682,7 +4697,7 @@
       <dependency>
         <groupId>org.apache.maven.plugin-tools</groupId>
         <artifactId>maven-plugin-annotations</artifactId>
-        <version>3.15.1</version>
+        <version>3.15.2</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
@@ -4838,7 +4853,7 @@
       <dependency>
         <groupId>org.xmlunit</groupId>
         <artifactId>xmlunit-assertj3</artifactId>
-        <version>2.10.4</version>
+        <version>2.11.0</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
