@@ -402,6 +402,12 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.aws-bedrock.bedrock-runtime-async-client",
+      "type": "software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeAsyncClient",
+      "description": "To use an existing configured AWS Bedrock Runtime Async client for streaming operations. The option is a software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeAsyncClient type.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
+    },
+    {
       "name": "camel.component.aws-bedrock.bedrock-runtime-client",
       "type": "software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeClient",
       "description": "To use an existing configured AWS Bedrock Runtime client. The option is a software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeClient type.",
@@ -435,6 +441,13 @@
       "name": "camel.component.aws-bedrock.health-check-producer-enabled",
       "type": "java.lang.Boolean",
       "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws-bedrock.include-streaming-metadata",
+      "type": "java.lang.Boolean",
+      "description": "Whether to include streaming metadata in the response headers (completion reason, token count, chunk count)",
       "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
       "defaultValue": true
     },
@@ -514,6 +527,13 @@
       "type": "java.lang.String",
       "description": "Amazon AWS Session Token used when the user needs to assume an IAM role",
       "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock.stream-output-mode",
+      "type": "java.lang.String",
+      "description": "The streaming output mode (complete or chunks). In complete mode, the full response is accumulated and returned as a single message. In chunks mode, each chunk is emitted as a separate exchange.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
+      "defaultValue": "complete"
     },
     {
       "name": "camel.component.aws-bedrock.trust-all-certificates",
