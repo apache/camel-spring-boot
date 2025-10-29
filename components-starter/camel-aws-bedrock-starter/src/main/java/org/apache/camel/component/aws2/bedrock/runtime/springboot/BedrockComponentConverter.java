@@ -40,6 +40,7 @@ public class BedrockComponentConverter implements GenericConverter {
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.bedrock.runtime.BedrockConfiguration.class));
+        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeAsyncClient.class));
         answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeClient.class));
         return answer;
     }
@@ -58,6 +59,7 @@ public class BedrockComponentConverter implements GenericConverter {
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.apache.camel.component.aws2.bedrock.runtime.BedrockConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.aws2.bedrock.runtime.BedrockConfiguration.class);
+            case "software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeAsyncClient": return applicationContext.getBean(ref, software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeAsyncClient.class);
             case "software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeClient": return applicationContext.getBean(ref, software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeClient.class);
         }
         return null;

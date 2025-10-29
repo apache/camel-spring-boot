@@ -22,6 +22,7 @@ import org.apache.camel.component.aws2.bedrock.runtime.BedrockOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeAsyncClient;
 import software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeClient;
 
 /**
@@ -45,6 +46,11 @@ public class BedrockComponentConfiguration
      * type.
      */
     private BedrockConfiguration configuration;
+    /**
+     * Whether to include streaming metadata in the response headers (completion
+     * reason, token count, chunk count)
+     */
+    private Boolean includeStreamingMetadata = true;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -86,6 +92,12 @@ public class BedrockComponentConfiguration
      */
     private String region;
     /**
+     * The streaming output mode (complete or chunks). In complete mode, the
+     * full response is accumulated and returned as a single message. In chunks
+     * mode, each chunk is emitted as a separate exchange.
+     */
+    private String streamOutputMode = "complete";
+    /**
      * Set the overriding uri endpoint. This option needs to be used in
      * combination with overrideEndpoint option
      */
@@ -110,6 +122,13 @@ public class BedrockComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * To use an existing configured AWS Bedrock Runtime Async client for
+     * streaming operations. The option is a
+     * software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeAsyncClient
+     * type.
+     */
+    private BedrockRuntimeAsyncClient bedrockRuntimeAsyncClient;
     /**
      * To use an existing configured AWS Bedrock Runtime client. The option is a
      * software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeClient type.
@@ -170,6 +189,14 @@ public class BedrockComponentConfiguration
         this.configuration = configuration;
     }
 
+    public Boolean getIncludeStreamingMetadata() {
+        return includeStreamingMetadata;
+    }
+
+    public void setIncludeStreamingMetadata(Boolean includeStreamingMetadata) {
+        this.includeStreamingMetadata = includeStreamingMetadata;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
@@ -226,6 +253,14 @@ public class BedrockComponentConfiguration
         this.region = region;
     }
 
+    public String getStreamOutputMode() {
+        return streamOutputMode;
+    }
+
+    public void setStreamOutputMode(String streamOutputMode) {
+        this.streamOutputMode = streamOutputMode;
+    }
+
     public String getUriEndpointOverride() {
         return uriEndpointOverride;
     }
@@ -258,6 +293,15 @@ public class BedrockComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public BedrockRuntimeAsyncClient getBedrockRuntimeAsyncClient() {
+        return bedrockRuntimeAsyncClient;
+    }
+
+    public void setBedrockRuntimeAsyncClient(
+            BedrockRuntimeAsyncClient bedrockRuntimeAsyncClient) {
+        this.bedrockRuntimeAsyncClient = bedrockRuntimeAsyncClient;
     }
 
     public BedrockRuntimeClient getBedrockRuntimeClient() {
