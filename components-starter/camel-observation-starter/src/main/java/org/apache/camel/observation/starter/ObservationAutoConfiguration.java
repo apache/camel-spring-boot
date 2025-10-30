@@ -24,8 +24,8 @@ import io.micrometer.tracing.handler.TracingAwareMeterObservationHandler;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.observation.MicrometerObservationTracer;
-
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.actuate.autoconfigure.tracing.MicrometerTracingAutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -34,10 +34,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
-@AutoConfigureAfter(name = {
-        "org.springframework.boot.actuate.autoconfigure.observation.ObservationAutoConfiguration",
-        "org.springframework.boot.actuate.autoconfigure.tracing.MicrometerTracingAutoConfiguration"
-})
+@AutoConfigureAfter(value =
+    { org.springframework.boot.actuate.autoconfigure.observation.ObservationAutoConfiguration.class, MicrometerTracingAutoConfiguration.class})
 @EnableConfigurationProperties(ObservationConfigurationProperties.class)
 @ConditionalOnProperty(value = "camel.observation.enabled", matchIfMissing = true)
 public class ObservationAutoConfiguration {
@@ -66,7 +64,7 @@ public class ObservationAutoConfiguration {
     @Bean
     // No-op version to suppress metric creation which may explode the length
     // of actuator as seen in CAMEL-22349
-    public TracingAwareMeterObservationHandler<Observation.Context> tracingAwareMeterObservationHandler(ObjectProvider<Tracer> tracer) {
+    public TracingAwareMeterObservationHandler<Observation.Context> camelTracingAwareMeterObservationHandler(ObjectProvider<Tracer> tracer) {
         return new TracingAwareMeterObservationHandler<>(
             new MeterObservationHandler<Observation.Context>() {},
             tracer.getIfAvailable()
