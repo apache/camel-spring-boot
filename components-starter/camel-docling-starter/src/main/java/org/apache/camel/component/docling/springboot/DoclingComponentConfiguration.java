@@ -189,6 +189,18 @@ public class DoclingComponentConfiguration
      */
     private Boolean splitBatchResults = false;
     /**
+     * Extract all available metadata fields including custom/raw fields
+     */
+    private Boolean extractAllMetadata = false;
+    /**
+     * Include metadata in message headers when extracting metadata
+     */
+    private Boolean includeMetadataInHeaders = true;
+    /**
+     * Include raw metadata as returned by the parser
+     */
+    private Boolean includeRawMetadata = false;
+    /**
      * Header name for API key authentication
      */
     private String apiKeyHeader = "X-API-Key";
@@ -467,6 +479,30 @@ public class DoclingComponentConfiguration
 
     public void setSplitBatchResults(Boolean splitBatchResults) {
         this.splitBatchResults = splitBatchResults;
+    }
+
+    public Boolean getExtractAllMetadata() {
+        return extractAllMetadata;
+    }
+
+    public void setExtractAllMetadata(Boolean extractAllMetadata) {
+        this.extractAllMetadata = extractAllMetadata;
+    }
+
+    public Boolean getIncludeMetadataInHeaders() {
+        return includeMetadataInHeaders;
+    }
+
+    public void setIncludeMetadataInHeaders(Boolean includeMetadataInHeaders) {
+        this.includeMetadataInHeaders = includeMetadataInHeaders;
+    }
+
+    public Boolean getIncludeRawMetadata() {
+        return includeRawMetadata;
+    }
+
+    public void setIncludeRawMetadata(Boolean includeRawMetadata) {
+        this.includeRawMetadata = includeRawMetadata;
     }
 
     public String getApiKeyHeader() {
