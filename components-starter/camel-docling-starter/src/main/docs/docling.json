@@ -169,9 +169,30 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.docling.extract-all-metadata",
+      "type": "java.lang.Boolean",
+      "description": "Extract all available metadata fields including custom\/raw fields",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.docling.include-layout-info",
       "type": "java.lang.Boolean",
       "description": "Show layout information with bounding boxes",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.docling.include-metadata-in-headers",
+      "type": "java.lang.Boolean",
+      "description": "Include metadata in message headers when extracting metadata",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.docling.include-raw-metadata",
+      "type": "java.lang.Boolean",
+      "description": "Include raw metadata as returned by the parser",
       "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
       "defaultValue": false
     },
