@@ -40,6 +40,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.dapr.client",
+      "type": "io.dapr.client.DaprClient",
+      "description": "The Dapr Client. The option is a io.dapr.client.DaprClient type.",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
       "name": "camel.component.dapr.concurrency",
       "type": "io.dapr.client.domain.StateOptions$Concurrency",
       "description": "Concurrency mode to use with state operations",
@@ -93,6 +99,12 @@
       "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
     },
     {
+      "name": "camel.component.dapr.expiry-in-seconds",
+      "type": "java.lang.Integer",
+      "description": "The expiry time in seconds for the lock",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
       "name": "camel.component.dapr.http-extension",
       "type": "io.dapr.client.domain.HttpExtension",
       "description": "HTTP method to use when invoking the service. Accepts verbs like GET, POST, PUT, DELETE, etc. Creates a minimal HttpExtension with no headers or query params. Takes precedence over verb. The option is a io.dapr.client.domain.HttpExtension type.",
@@ -112,6 +124,19 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.dapr.lock-operation",
+      "type": "org.apache.camel.component.dapr.LockOperation",
+      "description": "The lock operation to perform on the store. Required for DaprOperation.lock operation",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration",
+      "defaultValue": "trylock"
+    },
+    {
+      "name": "camel.component.dapr.lock-owner",
+      "type": "java.lang.String",
+      "description": "The lock owner identifier for the lock",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
       "name": "camel.component.dapr.method-to-invoke",
       "type": "java.lang.String",
       "description": "The name of the method or route to invoke on the target service",
@@ -120,13 +145,19 @@
     {
       "name": "camel.component.dapr.preview-client",
       "type": "io.dapr.client.DaprPreviewClient",
-      "description": "The client to consume messages by the consumer. The option is a io.dapr.client.DaprPreviewClient type.",
+      "description": "The Dapr Preview Cliet. The option is a io.dapr.client.DaprPreviewClient type.",
       "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
     },
     {
       "name": "camel.component.dapr.pub-sub-name",
       "type": "java.lang.String",
       "description": "The name of the Dapr Pub\/Sub component to use. This identifies which underlying messaging system Dapr will interact with for publishing or subscribing to events.",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
+      "name": "camel.component.dapr.resource-id",
+      "type": "java.lang.String",
+      "description": "The resource Id for the lock",
       "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
     },
     {
@@ -152,6 +183,12 @@
       "name": "camel.component.dapr.state-store",
       "type": "java.lang.String",
       "description": "The name of the Dapr state store to interact with, defined in statestore.yaml config",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
+      "name": "camel.component.dapr.store-name",
+      "type": "java.lang.String",
+      "description": "The lock store name",
       "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
     },
     {

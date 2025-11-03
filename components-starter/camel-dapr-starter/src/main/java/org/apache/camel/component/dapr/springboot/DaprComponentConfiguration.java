@@ -16,12 +16,14 @@
  */
 package org.apache.camel.component.dapr.springboot;
 
+import io.dapr.client.DaprClient;
 import io.dapr.client.DaprPreviewClient;
 import io.dapr.client.domain.HttpExtension;
 import io.dapr.client.domain.StateOptions.Concurrency;
 import io.dapr.client.domain.StateOptions.Consistency;
 import org.apache.camel.component.dapr.DaprComponent;
 import org.apache.camel.component.dapr.DaprConfiguration;
+import org.apache.camel.component.dapr.LockOperation;
 import org.apache.camel.component.dapr.StateOperation;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -41,6 +43,10 @@ public class DaprComponentConfiguration
      * enabled by default.
      */
     private Boolean enabled;
+    /**
+     * The Dapr Client. The option is a io.dapr.client.DaprClient type.
+     */
+    private DaprClient client;
     /**
      * List of keys for configuration operation
      */
@@ -85,8 +91,8 @@ public class DaprComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
-     * The client to consume messages by the consumer. The option is a
-     * io.dapr.client.DaprPreviewClient type.
+     * The Dapr Preview Cliet. The option is a io.dapr.client.DaprPreviewClient
+     * type.
      */
     private DaprPreviewClient previewClient;
     /**
@@ -111,6 +117,10 @@ public class DaprComponentConfiguration
      */
     private String eTag;
     /**
+     * The expiry time in seconds for the lock
+     */
+    private Integer expiryInSeconds;
+    /**
      * HTTP method to use when invoking the service. Accepts verbs like GET,
      * POST, PUT, DELETE, etc. Creates a minimal HttpExtension with no headers
      * or query params. Takes precedence over verb. The option is a
@@ -134,9 +144,22 @@ public class DaprComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * The lock operation to perform on the store. Required for
+     * DaprOperation.lock operation
+     */
+    private LockOperation lockOperation = LockOperation.tryLock;
+    /**
+     * The lock owner identifier for the lock
+     */
+    private String lockOwner;
+    /**
      * The name of the method or route to invoke on the target service
      */
     private String methodToInvoke;
+    /**
+     * The resource Id for the lock
+     */
+    private String resourceId;
     /**
      * The name of the Dapr secret store to interact with, defined in
      * local-secret-store.yaml config
@@ -158,6 +181,10 @@ public class DaprComponentConfiguration
      */
     private String stateStore;
     /**
+     * The lock store name
+     */
+    private String storeName;
+    /**
      * The HTTP verb to use for invoking the method
      */
     private String verb = "POST";
@@ -170,6 +197,14 @@ public class DaprComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+
+    public DaprClient getClient() {
+        return client;
+    }
+
+    public void setClient(DaprClient client) {
+        this.client = client;
+    }
 
     public String getConfigKeys() {
         return configKeys;
@@ -275,6 +310,14 @@ public class DaprComponentConfiguration
         this.eTag = eTag;
     }
 
+    public Integer getExpiryInSeconds() {
+        return expiryInSeconds;
+    }
+
+    public void setExpiryInSeconds(Integer expiryInSeconds) {
+        this.expiryInSeconds = expiryInSeconds;
+    }
+
     public HttpExtension getHttpExtension() {
         return httpExtension;
     }
@@ -299,12 +342,36 @@ public class DaprComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public LockOperation getLockOperation() {
+        return lockOperation;
+    }
+
+    public void setLockOperation(LockOperation lockOperation) {
+        this.lockOperation = lockOperation;
+    }
+
+    public String getLockOwner() {
+        return lockOwner;
+    }
+
+    public void setLockOwner(String lockOwner) {
+        this.lockOwner = lockOwner;
+    }
+
     public String getMethodToInvoke() {
         return methodToInvoke;
     }
 
     public void setMethodToInvoke(String methodToInvoke) {
         this.methodToInvoke = methodToInvoke;
+    }
+
+    public String getResourceId() {
+        return resourceId;
+    }
+
+    public void setResourceId(String resourceId) {
+        this.resourceId = resourceId;
     }
 
     public String getSecretStore() {
@@ -337,6 +404,14 @@ public class DaprComponentConfiguration
 
     public void setStateStore(String stateStore) {
         this.stateStore = stateStore;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
     }
 
     public String getVerb() {
