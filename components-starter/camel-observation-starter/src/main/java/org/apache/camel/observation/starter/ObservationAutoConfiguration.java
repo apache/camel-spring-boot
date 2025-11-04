@@ -25,17 +25,20 @@ import io.micrometer.tracing.handler.TracingAwareMeterObservationHandler;
 import org.apache.camel.CamelContext;
 import org.apache.camel.observation.MicrometerObservationTracer;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.boot.actuate.autoconfigure.tracing.MicrometerTracingAutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
-@AutoConfigureAfter(value =
-    { org.springframework.boot.actuate.autoconfigure.observation.ObservationAutoConfiguration.class, MicrometerTracingAutoConfiguration.class})
+@ConditionalOnMissingClass({ "org.springframework.boot.actuate.autoconfigure.observation.ObservationAutoConfiguration",
+        "org.springframework.boot.actuate.autoconfigure.tracing.MicrometerTracingAutoConfiguration" })
+@AutoConfigureAfter(name = {
+        "org.springframework.boot.actuate.autoconfigure.observation.ObservationAutoConfiguration",
+            "org.springframework.boot.actuate.autoconfigure.tracing.MicrometerTracingAutoConfiguration" })
 @EnableConfigurationProperties(ObservationConfigurationProperties.class)
 @ConditionalOnProperty(value = "camel.observation.enabled", matchIfMissing = true)
 public class ObservationAutoConfiguration {
