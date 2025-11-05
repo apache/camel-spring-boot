@@ -187,6 +187,7 @@
     <module>camel-cxf-rest-starter</module>
     <module>camel-cxf-soap-starter</module>
     <module>camel-cxf-transport-starter</module>
+    <module>camel-cyberark-vault-starter</module>
     <module>camel-dapr-starter</module>
     <module>camel-dataformat-starter</module>
     <module>camel-dataset-starter</module>
