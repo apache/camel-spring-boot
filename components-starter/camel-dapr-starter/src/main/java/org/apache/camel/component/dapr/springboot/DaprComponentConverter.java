@@ -43,6 +43,7 @@ public class DaprComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.dapr.DaprConfiguration.class));
         answer.add(new ConvertiblePair(String.class, io.dapr.client.DaprPreviewClient.class));
         answer.add(new ConvertiblePair(String.class, io.dapr.client.domain.HttpExtension.class));
+        answer.add(new ConvertiblePair(String.class, io.dapr.workflows.client.DaprWorkflowClient.class));
         return answer;
     }
 
@@ -63,6 +64,7 @@ public class DaprComponentConverter implements GenericConverter {
             case "org.apache.camel.component.dapr.DaprConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.dapr.DaprConfiguration.class);
             case "io.dapr.client.DaprPreviewClient": return applicationContext.getBean(ref, io.dapr.client.DaprPreviewClient.class);
             case "io.dapr.client.domain.HttpExtension": return applicationContext.getBean(ref, io.dapr.client.domain.HttpExtension.class);
+            case "io.dapr.workflows.client.DaprWorkflowClient": return applicationContext.getBean(ref, io.dapr.workflows.client.DaprWorkflowClient.class);
         }
         return null;
     }

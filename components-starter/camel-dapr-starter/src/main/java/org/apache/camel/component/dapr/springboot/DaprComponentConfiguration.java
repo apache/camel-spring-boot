@@ -16,15 +16,19 @@
  */
 package org.apache.camel.component.dapr.springboot;
 
+import java.time.Duration;
+import java.time.Instant;
 import io.dapr.client.DaprClient;
 import io.dapr.client.DaprPreviewClient;
 import io.dapr.client.domain.HttpExtension;
 import io.dapr.client.domain.StateOptions.Concurrency;
 import io.dapr.client.domain.StateOptions.Consistency;
+import io.dapr.workflows.client.DaprWorkflowClient;
 import org.apache.camel.component.dapr.DaprComponent;
 import org.apache.camel.component.dapr.DaprConfiguration;
 import org.apache.camel.component.dapr.LockOperation;
 import org.apache.camel.component.dapr.StateOperation;
+import org.apache.camel.component.dapr.WorkflowOperation;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -66,6 +70,11 @@ public class DaprComponentConfiguration
      */
     private String contentType;
     /**
+     * The Dapr Preview Client. The option is a io.dapr.client.DaprPreviewClient
+     * type.
+     */
+    private DaprPreviewClient previewClient;
+    /**
      * The name of the Dapr Pub/Sub component to use. This identifies which
      * underlying messaging system Dapr will interact with for publishing or
      * subscribing to events.
@@ -91,11 +100,6 @@ public class DaprComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
-     * The Dapr Preview Cliet. The option is a io.dapr.client.DaprPreviewClient
-     * type.
-     */
-    private DaprPreviewClient previewClient;
-    /**
      * The name of the Dapr binding to invoke
      */
     private String bindingName;
@@ -117,9 +121,18 @@ public class DaprComponentConfiguration
      */
     private String eTag;
     /**
+     * The name of the event. Event names are case-insensitive
+     */
+    private String eventName;
+    /**
      * The expiry time in seconds for the lock
      */
     private Integer expiryInSeconds;
+    /**
+     * Set true to fetch the workflow instance's inputs, outputs, and custom
+     * status, or false to omit
+     */
+    private Boolean getWorkflowIO = false;
     /**
      * HTTP method to use when invoking the service. Accepts verbs like GET,
      * POST, PUT, DELETE, etc. Creates a minimal HttpExtension with no headers
@@ -157,6 +170,10 @@ public class DaprComponentConfiguration
      */
     private String methodToInvoke;
     /**
+     * Reason for suspending/resuming the workflow instance
+     */
+    private String reason;
+    /**
      * The resource Id for the lock
      */
     private String resourceId;
@@ -185,9 +202,39 @@ public class DaprComponentConfiguration
      */
     private String storeName;
     /**
+     * The amount of time to wait for the workflow instance to start/complete
+     */
+    private Duration timeout;
+    /**
      * The HTTP verb to use for invoking the method
      */
     private String verb = "POST";
+    /**
+     * The FQCN of the class which implements io.dapr.workflows.Workflow
+     */
+    private String workflowClass;
+    /**
+     * The Dapr Workflow Client. The option is a
+     * io.dapr.workflows.client.DaprWorkflowClient type.
+     */
+    private DaprWorkflowClient workflowClient;
+    /**
+     * The instance ID of the workflow
+     */
+    private String workflowInstanceId;
+    /**
+     * The workflow operation to perform. Required for DaprOperation.workflow
+     * operation
+     */
+    private WorkflowOperation workflowOperation = WorkflowOperation.scheduleNew;
+    /**
+     * The start time of the new workflow
+     */
+    private Instant workflowStartTime;
+    /**
+     * The version of the workflow to start
+     */
+    private String workflowVersion;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -238,6 +285,14 @@ public class DaprComponentConfiguration
         this.contentType = contentType;
     }
 
+    public DaprPreviewClient getPreviewClient() {
+        return previewClient;
+    }
+
+    public void setPreviewClient(DaprPreviewClient previewClient) {
+        this.previewClient = previewClient;
+    }
+
     public String getPubSubName() {
         return pubSubName;
     }
@@ -260,14 +315,6 @@ public class DaprComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
-    }
-
-    public DaprPreviewClient getPreviewClient() {
-        return previewClient;
-    }
-
-    public void setPreviewClient(DaprPreviewClient previewClient) {
-        this.previewClient = previewClient;
     }
 
     public String getBindingName() {
@@ -310,12 +357,28 @@ public class DaprComponentConfiguration
         this.eTag = eTag;
     }
 
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
     public Integer getExpiryInSeconds() {
         return expiryInSeconds;
     }
 
     public void setExpiryInSeconds(Integer expiryInSeconds) {
         this.expiryInSeconds = expiryInSeconds;
+    }
+
+    public Boolean getGetWorkflowIO() {
+        return getWorkflowIO;
+    }
+
+    public void setGetWorkflowIO(Boolean getWorkflowIO) {
+        this.getWorkflowIO = getWorkflowIO;
     }
 
     public HttpExtension getHttpExtension() {
@@ -366,6 +429,14 @@ public class DaprComponentConfiguration
         this.methodToInvoke = methodToInvoke;
     }
 
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
     public String getResourceId() {
         return resourceId;
     }
@@ -414,12 +485,68 @@ public class DaprComponentConfiguration
         this.storeName = storeName;
     }
 
+    public Duration getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(Duration timeout) {
+        this.timeout = timeout;
+    }
+
     public String getVerb() {
         return verb;
     }
 
     public void setVerb(String verb) {
         this.verb = verb;
+    }
+
+    public String getWorkflowClass() {
+        return workflowClass;
+    }
+
+    public void setWorkflowClass(String workflowClass) {
+        this.workflowClass = workflowClass;
+    }
+
+    public DaprWorkflowClient getWorkflowClient() {
+        return workflowClient;
+    }
+
+    public void setWorkflowClient(DaprWorkflowClient workflowClient) {
+        this.workflowClient = workflowClient;
+    }
+
+    public String getWorkflowInstanceId() {
+        return workflowInstanceId;
+    }
+
+    public void setWorkflowInstanceId(String workflowInstanceId) {
+        this.workflowInstanceId = workflowInstanceId;
+    }
+
+    public WorkflowOperation getWorkflowOperation() {
+        return workflowOperation;
+    }
+
+    public void setWorkflowOperation(WorkflowOperation workflowOperation) {
+        this.workflowOperation = workflowOperation;
+    }
+
+    public Instant getWorkflowStartTime() {
+        return workflowStartTime;
+    }
+
+    public void setWorkflowStartTime(Instant workflowStartTime) {
+        this.workflowStartTime = workflowStartTime;
+    }
+
+    public String getWorkflowVersion() {
+        return workflowVersion;
+    }
+
+    public void setWorkflowVersion(String workflowVersion) {
+        this.workflowVersion = workflowVersion;
     }
 
     public Boolean getAutowiredEnabled() {

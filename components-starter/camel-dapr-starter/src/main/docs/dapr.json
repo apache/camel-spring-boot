@@ -99,10 +99,23 @@
       "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
     },
     {
+      "name": "camel.component.dapr.event-name",
+      "type": "java.lang.String",
+      "description": "The name of the event. Event names are case-insensitive",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
       "name": "camel.component.dapr.expiry-in-seconds",
       "type": "java.lang.Integer",
       "description": "The expiry time in seconds for the lock",
       "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
+      "name": "camel.component.dapr.get-workflow-i-o",
+      "type": "java.lang.Boolean",
+      "description": "Set true to fetch the workflow instance's inputs, outputs, and custom status, or false to omit",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.dapr.http-extension",
@@ -145,13 +158,19 @@
     {
       "name": "camel.component.dapr.preview-client",
       "type": "io.dapr.client.DaprPreviewClient",
-      "description": "The Dapr Preview Cliet. The option is a io.dapr.client.DaprPreviewClient type.",
+      "description": "The Dapr Preview Client. The option is a io.dapr.client.DaprPreviewClient type.",
       "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
     },
     {
       "name": "camel.component.dapr.pub-sub-name",
       "type": "java.lang.String",
       "description": "The name of the Dapr Pub\/Sub component to use. This identifies which underlying messaging system Dapr will interact with for publishing or subscribing to events.",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
+      "name": "camel.component.dapr.reason",
+      "type": "java.lang.String",
+      "description": "Reason for suspending\/resuming the workflow instance",
       "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
     },
     {
@@ -192,6 +211,12 @@
       "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
     },
     {
+      "name": "camel.component.dapr.timeout",
+      "type": "java.time.Duration",
+      "description": "The amount of time to wait for the workflow instance to start\/complete",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
       "name": "camel.component.dapr.topic",
       "type": "java.lang.String",
       "description": "The name of the topic to subscribe to. The topic must exist in the Pub\/Sub component configured under the given pubsubName.",
@@ -203,6 +228,43 @@
       "description": "The HTTP verb to use for invoking the method",
       "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration",
       "defaultValue": "POST"
+    },
+    {
+      "name": "camel.component.dapr.workflow-class",
+      "type": "java.lang.String",
+      "description": "The FQCN of the class which implements io.dapr.workflows.Workflow",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
+      "name": "camel.component.dapr.workflow-client",
+      "type": "io.dapr.workflows.client.DaprWorkflowClient",
+      "description": "The Dapr Workflow Client. The option is a io.dapr.workflows.client.DaprWorkflowClient type.",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
+      "name": "camel.component.dapr.workflow-instance-id",
+      "type": "java.lang.String",
+      "description": "The instance ID of the workflow",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
+      "name": "camel.component.dapr.workflow-operation",
+      "type": "org.apache.camel.component.dapr.WorkflowOperation",
+      "description": "The workflow operation to perform. Required for DaprOperation.workflow operation",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration",
+      "defaultValue": "schedulenew"
+    },
+    {
+      "name": "camel.component.dapr.workflow-start-time",
+      "type": "java.time.Instant",
+      "description": "The start time of the new workflow",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
+      "name": "camel.component.dapr.workflow-version",
+      "type": "java.lang.String",
+      "description": "The version of the workflow to start",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
     }
   ],
   "hints": [],
