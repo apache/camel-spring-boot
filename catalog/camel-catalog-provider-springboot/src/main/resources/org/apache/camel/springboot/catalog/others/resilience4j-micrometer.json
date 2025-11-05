@@ -7,7 +7,7 @@
     "deprecated": false,
     "firstVersion": "4.15.0",
     "label": "eip,microservice",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-resilience4j-micrometer-starter",
     "version": "4.17.0-SNAPSHOT"

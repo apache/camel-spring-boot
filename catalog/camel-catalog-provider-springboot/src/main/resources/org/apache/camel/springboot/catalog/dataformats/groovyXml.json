@@ -8,7 +8,7 @@
     "firstVersion": "4.15.0",
     "label": "dataformat,transformation,xml",
     "javaType": "org.apache.camel.groovy.xml.GroovyXmlDataFormat",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-groovy-xml-starter",
     "version": "4.17.0-SNAPSHOT",
