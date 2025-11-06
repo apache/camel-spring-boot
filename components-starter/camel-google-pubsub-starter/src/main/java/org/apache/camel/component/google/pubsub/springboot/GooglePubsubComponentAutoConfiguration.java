@@ -42,7 +42,7 @@ import org.springframework.context.annotation.Lazy;
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,GooglePubsubComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.google-pubsub"})
-@AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfigureAfter({CamelAutoConfiguration.class, GooglePubsubComponentConverter.class})
 public class GooglePubsubComponentAutoConfiguration {
 
     @Autowired
