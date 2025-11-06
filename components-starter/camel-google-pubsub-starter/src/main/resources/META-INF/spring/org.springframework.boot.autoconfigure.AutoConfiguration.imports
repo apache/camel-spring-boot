@@ -16,3 +16,4 @@
 ## ---------------------------------------------------------------------------
 
 org.apache.camel.component.google.pubsub.springboot.GooglePubsubComponentAutoConfiguration
+org.apache.camel.component.google.pubsub.springboot.GooglePubsubComponentConverter

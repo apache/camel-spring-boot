@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.google.pubsub.springboot;
 
+import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -103,6 +104,12 @@ public class GooglePubsubComponentConfiguration
      * How many milliseconds should a producer be allowed to terminate.
      */
     private Integer publisherTerminationTimeout;
+    /**
+     * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
+     * header to and from Camel message. The option is a
+     * org.apache.camel.spi.HeaderFilterStrategy type.
+     */
+    private HeaderFilterStrategy headerFilterStrategy;
 
     public Boolean getAuthenticate() {
         return authenticate;
@@ -184,5 +191,14 @@ public class GooglePubsubComponentConfiguration
     public void setPublisherTerminationTimeout(
             Integer publisherTerminationTimeout) {
         this.publisherTerminationTimeout = publisherTerminationTimeout;
+    }
+
+    public HeaderFilterStrategy getHeaderFilterStrategy() {
+        return headerFilterStrategy;
+    }
+
+    public void setHeaderFilterStrategy(
+            HeaderFilterStrategy headerFilterStrategy) {
+        this.headerFilterStrategy = headerFilterStrategy;
     }
 }

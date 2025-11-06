@@ -16,7 +16,9 @@
  */
 package org.apache.camel.component.cyberark.vault.springboot;
 
+import org.apache.camel.component.cyberark.vault.CyberArkVaultComponent;
 import org.apache.camel.component.cyberark.vault.CyberArkVaultConfiguration;
+import org.apache.camel.component.cyberark.vault.CyberArkVaultOperations;
 import org.apache.camel.component.cyberark.vault.client.ConjurClient;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -66,6 +68,10 @@ public class CyberArkVaultComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * The operation to perform. It can be getSecret or createSecret
+     */
+    private CyberArkVaultOperations operation = CyberArkVaultOperations.getSecret;
     /**
      * The secret ID to retrieve from CyberArk Conjur
      */
@@ -142,6 +148,14 @@ public class CyberArkVaultComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public CyberArkVaultOperations getOperation() {
+        return operation;
+    }
+
+    public void setOperation(CyberArkVaultOperations operation) {
+        this.operation = operation;
     }
 
     public String getSecretId() {

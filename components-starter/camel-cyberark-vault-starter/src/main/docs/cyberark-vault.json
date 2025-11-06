@@ -75,6 +75,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.cyberark-vault.operation",
+      "type": "org.apache.camel.component.cyberark.vault.CyberArkVaultOperations",
+      "description": "The operation to perform. It can be getSecret or createSecret",
+      "sourceType": "org.apache.camel.component.cyberark.vault.springboot.CyberArkVaultComponentConfiguration",
+      "defaultValue": "getsecret"
+    },
+    {
       "name": "camel.component.cyberark-vault.password",
       "type": "java.lang.String",
       "description": "The password for authentication with CyberArk Conjur",
