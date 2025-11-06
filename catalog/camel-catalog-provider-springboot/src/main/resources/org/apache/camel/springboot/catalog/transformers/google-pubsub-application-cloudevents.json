@@ -8,7 +8,7 @@
     "javaType": "org.apache.camel.component.google.pubsub.transform.GooglePubsubCloudEventDataTypeTransformer",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-google-pubsub-starter",
-    "version": "4.14.2-SNAPSHOT"
+    "version": "4.14.3-SNAPSHOT"
   }
 }
 

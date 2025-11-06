@@ -10,6 +10,6 @@
     "supportLevel": "Preview",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-telemetry-dev-starter",
-    "version": "4.14.2-SNAPSHOT"
+    "version": "4.14.3-SNAPSHOT"
   }
 }
