@@ -220,22 +220,22 @@
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-commons</artifactId>
-        <version>1.15.5</version>
+        <version>1.16.0</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-observation</artifactId>
-        <version>1.15.5</version>
+        <version>1.16.0</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-registry-jmx</artifactId>
-        <version>1.15.5</version>
+        <version>1.16.0</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-registry-prometheus</artifactId>
-        <version>1.15.5</version>
+        <version>1.16.0</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
