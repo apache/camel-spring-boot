@@ -52,6 +52,11 @@
         </exclusions>
       </dependency>
       <dependency>
+        <groupId>com.openai</groupId>
+        <artifactId>openai-java</artifactId>
+        <version>4.7.1</version>
+      </dependency>
+      <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-all</artifactId>
         <version>1.76.0</version>
@@ -3907,6 +3912,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-olingo4-api</artifactId>
+        <version>4.17.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-openai</artifactId>
         <version>4.17.0-SNAPSHOT</version>
       </dependency>
       <dependency>
