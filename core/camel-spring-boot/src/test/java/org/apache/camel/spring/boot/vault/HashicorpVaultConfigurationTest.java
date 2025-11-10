@@ -31,17 +31,21 @@ import org.springframework.test.annotation.DirtiesContext;
 @SpringBootTest(classes = { HashicorpVaultConfigurationTest.class }, properties = {
         "camel.vault.hashicorp.token=myToken",
         "camel.vault.hashicorp.host=myHost", "camel.vault.hashicorp.port=myPort",
-        "camel.vault.hashicorp.scheme=myScheme" })
+        "camel.vault.hashicorp.scheme=myScheme", "camel.vault.hashicorp.refreshEnabled=true",
+        "camel.vault.hashicorp.refreshPeriod=10000", "camel.vault.hashicorp.secrets=secret1,secret2" })
 public class HashicorpVaultConfigurationTest {
 
     @Autowired
     private CamelContext camelContext;
 
     @Test
-    public void testAwsVault() throws Exception {
+    public void testHashicorpVault() throws Exception {
         Assertions.assertEquals("myToken", camelContext.getVaultConfiguration().hashicorp().getToken());
         Assertions.assertEquals("myHost", camelContext.getVaultConfiguration().hashicorp().getHost());
         Assertions.assertEquals("myPort", camelContext.getVaultConfiguration().hashicorp().getPort());
         Assertions.assertEquals("myScheme", camelContext.getVaultConfiguration().hashicorp().getScheme());
+        Assertions.assertEquals(true, camelContext.getVaultConfiguration().hashicorp().isRefreshEnabled());
+        Assertions.assertEquals(10000, camelContext.getVaultConfiguration().hashicorp().getRefreshPeriod());
+        Assertions.assertEquals("secret1,secret2", camelContext.getVaultConfiguration().hashicorp().getSecrets());
     }
 }

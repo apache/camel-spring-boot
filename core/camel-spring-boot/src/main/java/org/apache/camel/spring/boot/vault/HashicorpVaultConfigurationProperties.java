@@ -28,11 +28,6 @@ public class HashicorpVaultConfigurationProperties {
     private String token;
 
     /**
-     * The Hashicorp Vault Engine for accessing secrets
-     */
-    private String engine;
-
-    /**
      * The Hashicorp Vault Host for accessing the service
      */
     private String host;
@@ -57,20 +52,27 @@ public class HashicorpVaultConfigurationProperties {
      */
     private String namespace;
 
+    /**
+     * Whether to automatically reload Camel upon secrets being updated in Hashicorp Vault
+     */
+    private boolean refreshEnabled;
+
+    /**
+     * The period (millis) between checking Hashicorp Vault for updated secrets
+     */
+    private long refreshPeriod = 60000;
+
+    /**
+     * Specify the secret names (or pattern) to check for updates. Multiple secrets can be separated by comma
+     */
+    private String secrets;
+
     public String getToken() {
         return token;
     }
 
     public void setToken(String token) {
         this.token = token;
-    }
-
-    public String getEngine() {
-        return engine;
-    }
-
-    public void setEngine(String engine) {
-        this.engine = engine;
     }
 
     public String getHost() {
@@ -111,5 +113,29 @@ public class HashicorpVaultConfigurationProperties {
 
     public void setNamespace(String namespace) {
         this.namespace = namespace;
+    }
+
+    public boolean isRefreshEnabled() {
+        return refreshEnabled;
+    }
+
+    public void setRefreshEnabled(boolean refreshEnabled) {
+        this.refreshEnabled = refreshEnabled;
+    }
+
+    public long getRefreshPeriod() {
+        return refreshPeriod;
+    }
+
+    public void setRefreshPeriod(long refreshPeriod) {
+        this.refreshPeriod = refreshPeriod;
+    }
+
+    public String getSecrets() {
+        return secrets;
+    }
+
+    public void setSecrets(String secrets) {
+        this.secrets = secrets;
     }
 }
