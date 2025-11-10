@@ -1974,12 +1974,6 @@
       "defaultValue": false
     },
     {
-      "name": "camel.vault.hashicorp.engine",
-      "type": "java.lang.String",
-      "description": "The Hashicorp Vault Engine for accessing secrets",
-      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
-    },
-    {
       "name": "camel.vault.hashicorp.host",
       "type": "java.lang.String",
       "description": "The Hashicorp Vault Host for accessing the service",
@@ -1998,9 +1992,29 @@
       "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
     },
     {
+      "name": "camel.vault.hashicorp.refresh-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to automatically reload Camel upon secrets being updated in Hashicorp Vault",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.vault.hashicorp.refresh-period",
+      "type": "java.lang.Long",
+      "description": "The period (millis) between checking Hashicorp Vault for updated secrets",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties",
+      "defaultValue": 60000
+    },
+    {
       "name": "camel.vault.hashicorp.scheme",
       "type": "java.lang.String",
       "description": "The Hashicorp Vault Scheme for accessing the service",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.hashicorp.secrets",
+      "type": "java.lang.String",
+      "description": "Specify the secret names (or pattern) to check for updates. Multiple secrets can be separated by comma",
       "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
     },
     {

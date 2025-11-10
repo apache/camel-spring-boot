@@ -39,6 +39,9 @@ public class HashicorpVaultAutoConfiguration {
         answer.setScheme(config.getScheme());
         answer.setCloud(config.isCloud());
         answer.setNamespace(config.getNamespace());
+        answer.setRefreshEnabled(config.isRefreshEnabled());
+        answer.setRefreshPeriod(config.getRefreshPeriod());
+        answer.setSecrets(config.getSecrets());
         return answer;
     }
 
