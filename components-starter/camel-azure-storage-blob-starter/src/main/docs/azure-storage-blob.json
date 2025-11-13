@@ -27,6 +27,24 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.azure-storage-blob.azure-client-id",
+      "type": "java.lang.String",
+      "description": "Azure Client ID for authentication with Azure Identity",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.azure-client-secret",
+      "type": "java.lang.String",
+      "description": "Azure Client Secret for authentication with Azure Identity",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.azure-tenant-id",
+      "type": "java.lang.String",
+      "description": "Azure Tenant ID for authentication with Azure Identity",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
       "name": "camel.component.azure-storage-blob.blob-name",
       "type": "java.lang.String",
       "description": "The blob name, to consume specific blob from a container. However, on producer it is only required for the operations on the blob level",
