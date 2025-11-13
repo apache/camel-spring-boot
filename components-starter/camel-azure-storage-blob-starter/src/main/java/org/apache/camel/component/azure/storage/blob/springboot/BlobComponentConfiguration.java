@@ -256,6 +256,18 @@ public class BlobComponentConfiguration
      */
     private String accessKey;
     /**
+     * Azure Client ID for authentication with Azure Identity
+     */
+    private String azureClientId;
+    /**
+     * Azure Client Secret for authentication with Azure Identity
+     */
+    private String azureClientSecret;
+    /**
+     * Azure Tenant ID for authentication with Azure Identity
+     */
+    private String azureTenantId;
+    /**
      * Source Blob Access Key: for copyblob operation, sadly, we need to have an
      * accessKey for the source blob we want to copy Passing an accessKey as
      * header, it's unsafe so we could set as key.
@@ -548,6 +560,30 @@ public class BlobComponentConfiguration
 
     public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
+    }
+
+    public String getAzureClientId() {
+        return azureClientId;
+    }
+
+    public void setAzureClientId(String azureClientId) {
+        this.azureClientId = azureClientId;
+    }
+
+    public String getAzureClientSecret() {
+        return azureClientSecret;
+    }
+
+    public void setAzureClientSecret(String azureClientSecret) {
+        this.azureClientSecret = azureClientSecret;
+    }
+
+    public String getAzureTenantId() {
+        return azureTenantId;
+    }
+
+    public void setAzureTenantId(String azureTenantId) {
+        this.azureTenantId = azureTenantId;
     }
 
     public String getSourceBlobAccessKey() {
