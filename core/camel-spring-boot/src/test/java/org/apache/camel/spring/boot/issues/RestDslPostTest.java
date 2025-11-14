@@ -68,8 +68,7 @@ public class RestDslPostTest {
         resultEndpointCountry.expectedBodiesReceived(country);
         resultEndpointCountry.expectedMessageCount(1);
 
-        ExchangeBuilder builder = ExchangeBuilder.anExchange(context).withHeader(Exchange.HTTP_METHOD, HttpMethod.POST)
-                .withHeader(Exchange.ACCEPT_CONTENT_TYPE, MediaType.APPLICATION_JSON);
+        ExchangeBuilder builder = ExchangeBuilder.anExchange(context).withHeader(Exchange.HTTP_METHOD, HttpMethod.POST);
         Exchange outExchangeUser = builder.withBody("{\"id\": 1, \"name\": \"My Name\"}").build();
         Exchange outExchangeCountry = builder.withBody("{\"iso\": \"EN\", \"country\": \"England\"}").build();
 

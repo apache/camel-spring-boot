@@ -1,0 +1,84 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.spring-ai-vector-store",
+      "type": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration",
+      "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spring-ai-vector-store.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.spring-ai-vector-store.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.spring-ai-vector-store.configuration",
+      "type": "org.apache.camel.component.springai.vectorstore.SpringAiVectorStoreConfiguration",
+      "description": "The configuration. The option is a org.apache.camel.component.springai.vectorstore.SpringAiVectorStoreConfiguration type.",
+      "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spring-ai-vector-store.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.spring-ai-vector-store.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the spring-ai-vector-store component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spring-ai-vector-store.filter-expression",
+      "type": "java.lang.String",
+      "description": "Filter expression for metadata-based filtering in searches.",
+      "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spring-ai-vector-store.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.spring-ai-vector-store.operation",
+      "type": "org.apache.camel.component.springai.vectorstore.SpringAiVectorStoreOperation",
+      "description": "The operation to perform on the vector store (ADD, DELETE, SIMILARITY_SEARCH).",
+      "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration",
+      "defaultValue": "add"
+    },
+    {
+      "name": "camel.component.spring-ai-vector-store.similarity-threshold",
+      "type": "java.lang.Double",
+      "description": "The minimum similarity score threshold (0-1) for similarity search.",
+      "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spring-ai-vector-store.top-k",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of similar documents to return for similarity search.",
+      "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration",
+      "defaultValue": 5
+    },
+    {
+      "name": "camel.component.spring-ai-vector-store.vector-store",
+      "type": "org.springframework.ai.vectorstore.VectorStore",
+      "description": "The VectorStore to use for vector operations. The option is a org.springframework.ai.vectorstore.VectorStore type.",
+      "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

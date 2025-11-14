@@ -427,6 +427,10 @@
     <module>camel-solr-starter</module>
     <module>camel-splunk-hec-starter</module>
     <module>camel-splunk-starter</module>
+    <module>camel-spring-ai-chat-starter</module>
+    <module>camel-spring-ai-embeddings-starter</module>
+    <module>camel-spring-ai-tools-starter</module>
+    <module>camel-spring-ai-vector-store-starter</module>
     <module>camel-spring-batch-starter</module>
     <module>camel-spring-cloud-config-starter</module>
     <module>camel-spring-jdbc-starter</module>
