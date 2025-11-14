@@ -431,6 +431,26 @@
       "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
     },
     {
+      "name": "camel.component.aws-bedrock.guardrail-identifier",
+      "type": "java.lang.String",
+      "description": "The identifier (ID or ARN) for the guardrail to apply to the model invocation",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock.guardrail-trace",
+      "type": "java.lang.Boolean",
+      "description": "Whether to return trace information from the guardrail",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws-bedrock.guardrail-version",
+      "type": "java.lang.String",
+      "description": "The version of the guardrail to use. Defaults to DRAFT.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
+      "defaultValue": "DRAFT"
+    },
+    {
       "name": "camel.component.aws-bedrock.health-check-consumer-enabled",
       "type": "java.lang.Boolean",
       "description": "Used for enabling or disabling all consumer based health checks from this component",
