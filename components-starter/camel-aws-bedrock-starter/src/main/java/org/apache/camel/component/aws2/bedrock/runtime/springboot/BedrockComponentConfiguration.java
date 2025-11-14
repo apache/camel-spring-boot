@@ -47,6 +47,19 @@ public class BedrockComponentConfiguration
      */
     private BedrockConfiguration configuration;
     /**
+     * The identifier (ID or ARN) for the guardrail to apply to the model
+     * invocation
+     */
+    private String guardrailIdentifier;
+    /**
+     * Whether to return trace information from the guardrail
+     */
+    private Boolean guardrailTrace = false;
+    /**
+     * The version of the guardrail to use. Defaults to DRAFT.
+     */
+    private String guardrailVersion = "DRAFT";
+    /**
      * Whether to include streaming metadata in the response headers (completion
      * reason, token count, chunk count)
      */
@@ -187,6 +200,30 @@ public class BedrockComponentConfiguration
 
     public void setConfiguration(BedrockConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getGuardrailIdentifier() {
+        return guardrailIdentifier;
+    }
+
+    public void setGuardrailIdentifier(String guardrailIdentifier) {
+        this.guardrailIdentifier = guardrailIdentifier;
+    }
+
+    public Boolean getGuardrailTrace() {
+        return guardrailTrace;
+    }
+
+    public void setGuardrailTrace(Boolean guardrailTrace) {
+        this.guardrailTrace = guardrailTrace;
+    }
+
+    public String getGuardrailVersion() {
+        return guardrailVersion;
+    }
+
+    public void setGuardrailVersion(String guardrailVersion) {
+        this.guardrailVersion = guardrailVersion;
     }
 
     public Boolean getIncludeStreamingMetadata() {
