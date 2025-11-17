@@ -1,0 +1,83 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.azure-eventgrid",
+      "type": "org.apache.camel.component.azure.eventgrid.springboot.EventGridComponentConfiguration",
+      "sourceType": "org.apache.camel.component.azure.eventgrid.springboot.EventGridComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-eventgrid.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.azure.eventgrid.springboot.EventGridComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.azure-eventgrid.access-key",
+      "type": "java.lang.String",
+      "description": "The access key for the Event Grid topic. Required when using ACCESS_KEY credential type.",
+      "sourceType": "org.apache.camel.component.azure.eventgrid.springboot.EventGridComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-eventgrid.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.azure.eventgrid.springboot.EventGridComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.azure-eventgrid.azure-key-credential",
+      "type": "com.azure.core.credential.AzureKeyCredential",
+      "description": "The Azure Key Credential for authentication. This is automatically created from the accessKey if not provided. The option is a com.azure.core.credential.AzureKeyCredential type.",
+      "sourceType": "org.apache.camel.component.azure.eventgrid.springboot.EventGridComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-eventgrid.configuration",
+      "type": "org.apache.camel.component.azure.eventgrid.EventGridConfiguration",
+      "description": "The component configurations. The option is a org.apache.camel.component.azure.eventgrid.EventGridConfiguration type.",
+      "sourceType": "org.apache.camel.component.azure.eventgrid.springboot.EventGridComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-eventgrid.credential-type",
+      "type": "org.apache.camel.component.azure.eventgrid.CredentialType",
+      "description": "Determines the credential strategy to adopt",
+      "sourceType": "org.apache.camel.component.azure.eventgrid.springboot.EventGridComponentConfiguration",
+      "defaultValue": "access-key"
+    },
+    {
+      "name": "camel.component.azure-eventgrid.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.azure-eventgrid.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the azure-eventgrid component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.azure.eventgrid.springboot.EventGridComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-eventgrid.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.azure.eventgrid.springboot.EventGridComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.azure-eventgrid.publisher-client",
+      "type": "com.azure.messaging.eventgrid.EventGridPublisherClient<com.azure.core.models.CloudEvent>",
+      "description": "The EventGrid publisher client. If provided, it will be used instead of creating a new one. The option is a com.azure.messaging.eventgrid.EventGridPublisherClient<com.azure.core.models.CloudEvent> type.",
+      "sourceType": "org.apache.camel.component.azure.eventgrid.springboot.EventGridComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-eventgrid.token-credential",
+      "type": "com.azure.core.credential.TokenCredential",
+      "description": "Provide custom authentication credentials using an implementation of TokenCredential. The option is a com.azure.core.credential.TokenCredential type.",
+      "sourceType": "org.apache.camel.component.azure.eventgrid.springboot.EventGridComponentConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
