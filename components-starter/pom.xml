@@ -264,6 +264,7 @@
     <module>camel-ibm-secrets-manager-starter</module>
     <module>camel-ibm-watson-discovery-starter</module>
     <module>camel-ibm-watson-language-starter</module>
+    <module>camel-ibm-watson-text-to-speech-starter</module>
     <module>camel-ical-starter</module>
     <module>camel-iec60870-starter</module>
     <module>camel-ignite-starter</module>
