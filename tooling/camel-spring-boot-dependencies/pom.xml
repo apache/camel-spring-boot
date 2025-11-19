@@ -1124,6 +1124,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-ibm-watson-speech-to-text-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ibm-watson-text-to-speech-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -3321,6 +3326,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-ibm-watson-speech-to-text</artifactId>
+        <version>4.17.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-ibm-watson-text-to-speech</artifactId>
         <version>4.17.0-SNAPSHOT</version>
       </dependency>
@@ -4747,7 +4757,7 @@
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
-        <version>3.20.0</version>
+        <version>3.19.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.plugin-tools</groupId>
