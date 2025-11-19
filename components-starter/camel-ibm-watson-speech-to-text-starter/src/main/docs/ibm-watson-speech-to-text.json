@@ -1,0 +1,119 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.ibm-watson-speech-to-text",
+      "type": "org.apache.camel.component.ibm.watson.stt.springboot.WatsonSpeechToTextComponentConfiguration",
+      "sourceType": "org.apache.camel.component.ibm.watson.stt.springboot.WatsonSpeechToTextComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watson-speech-to-text.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.ibm.watson.stt.springboot.WatsonSpeechToTextComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.ibm-watson-speech-to-text.api-key",
+      "type": "java.lang.String",
+      "description": "The IBM Cloud API key for authentication",
+      "sourceType": "org.apache.camel.component.ibm.watson.stt.springboot.WatsonSpeechToTextComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watson-speech-to-text.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.ibm.watson.stt.springboot.WatsonSpeechToTextComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ibm-watson-speech-to-text.configuration",
+      "type": "org.apache.camel.component.ibm.watson.stt.WatsonSpeechToTextConfiguration",
+      "description": "Component configuration. The option is a org.apache.camel.component.ibm.watson.stt.WatsonSpeechToTextConfiguration type.",
+      "sourceType": "org.apache.camel.component.ibm.watson.stt.springboot.WatsonSpeechToTextComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watson-speech-to-text.content-type",
+      "type": "java.lang.String",
+      "description": "The audio format (MIME type). Default is audio\/wav. Supported formats: audio\/wav, audio\/mp3, audio\/flac, audio\/ogg, audio\/webm",
+      "sourceType": "org.apache.camel.component.ibm.watson.stt.springboot.WatsonSpeechToTextComponentConfiguration",
+      "defaultValue": "audio\/wav"
+    },
+    {
+      "name": "camel.component.ibm-watson-speech-to-text.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.ibm-watson-speech-to-text.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the ibm-watson-speech-to-text component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.ibm.watson.stt.springboot.WatsonSpeechToTextComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watson-speech-to-text.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.ibm.watson.stt.springboot.WatsonSpeechToTextComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ibm-watson-speech-to-text.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
+      "sourceType": "org.apache.camel.component.ibm.watson.stt.springboot.WatsonSpeechToTextComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ibm-watson-speech-to-text.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.ibm.watson.stt.springboot.WatsonSpeechToTextComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ibm-watson-speech-to-text.model",
+      "type": "java.lang.String",
+      "description": "The language model to use for recognition. Default is en-US_BroadbandModel. Examples: en-US_NarrowbandModel, en-GB_BroadbandModel, es-ES_BroadbandModel, fr-FR_BroadbandModel",
+      "sourceType": "org.apache.camel.component.ibm.watson.stt.springboot.WatsonSpeechToTextComponentConfiguration",
+      "defaultValue": "en-US_BroadbandModel"
+    },
+    {
+      "name": "camel.component.ibm-watson-speech-to-text.operation",
+      "type": "org.apache.camel.component.ibm.watson.stt.WatsonSpeechToTextOperations",
+      "description": "The operation to perform",
+      "sourceType": "org.apache.camel.component.ibm.watson.stt.springboot.WatsonSpeechToTextComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watson-speech-to-text.service-url",
+      "type": "java.lang.String",
+      "description": "The service endpoint URL. If not specified, the default URL will be used.",
+      "sourceType": "org.apache.camel.component.ibm.watson.stt.springboot.WatsonSpeechToTextComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watson-speech-to-text.speaker-labels",
+      "type": "java.lang.Boolean",
+      "description": "Whether to identify different speakers in the audio. Default is false.",
+      "sourceType": "org.apache.camel.component.ibm.watson.stt.springboot.WatsonSpeechToTextComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ibm-watson-speech-to-text.timestamps",
+      "type": "java.lang.Boolean",
+      "description": "Whether to include timestamps for each word in the transcription. Default is false.",
+      "sourceType": "org.apache.camel.component.ibm.watson.stt.springboot.WatsonSpeechToTextComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ibm-watson-speech-to-text.word-confidence",
+      "type": "java.lang.Boolean",
+      "description": "Whether to include confidence scores for each word. Default is false.",
+      "sourceType": "org.apache.camel.component.ibm.watson.stt.springboot.WatsonSpeechToTextComponentConfiguration",
+      "defaultValue": false
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
