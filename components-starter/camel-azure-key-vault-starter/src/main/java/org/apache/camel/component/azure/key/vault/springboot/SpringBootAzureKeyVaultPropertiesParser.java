@@ -49,7 +49,7 @@ public class SpringBootAzureKeyVaultPropertiesParser implements ApplicationListe
             String clientId = environment.getProperty("camel.vault.azure.clientId");
             String clientSecret = environment.getProperty("camel.vault.azure.clientSecret");
             String tenantId = environment.getProperty("camel.vault.azure.tenantId");
-            boolean azureIdentityEnabled = Boolean.parseBoolean(System.getenv("camel.vault.azure.azureIdentityEnabled"));
+            boolean azureIdentityEnabled = Boolean.parseBoolean(System.getenv("CAMEL_VAULT_AZURE_IDENTITY_ENABLED"));
             if (ObjectHelper.isNotEmpty(vaultName) && ObjectHelper.isNotEmpty(clientId) && ObjectHelper.isNotEmpty(clientSecret)
                     && ObjectHelper.isNotEmpty(tenantId) && !azureIdentityEnabled) {
                 String keyVaultUri = "https://" + vaultName + ".vault.azure.net";
