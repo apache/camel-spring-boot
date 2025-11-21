@@ -45,8 +45,8 @@
     },
     {
       "name": "camel.component.qdrant.filter",
-      "type": "io.qdrant.client.grpc.Points$Filter",
-      "description": "Filter of type io.qdrant.client.grpc.Points.Points.Filter for similarity search. This is for advanced usage. The option is a io.qdrant.client.grpc.Points.Filter type.",
+      "type": "io.qdrant.client.grpc.Common$Filter",
+      "description": "Filter for similarity search. The option is a io.qdrant.client.grpc.Common.Filter type.",
       "sourceType": "org.apache.camel.component.qdrant.springboot.QdrantComponentConfiguration"
     },
     {

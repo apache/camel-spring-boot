@@ -17,7 +17,7 @@
 package org.apache.camel.component.qdrant.springboot;
 
 import java.time.Duration;
-import io.qdrant.client.grpc.Points.Filter;
+import io.qdrant.client.grpc.Common.Filter;
 import org.apache.camel.component.qdrant.QdrantConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -37,10 +37,6 @@ public class QdrantComponentConfiguration
      * enabled by default.
      */
     private Boolean enabled;
-    /**
-     * Sets the API key to use for authentication
-     */
-    private String apiKey;
     /**
      * The configuration;. The option is a
      * org.apache.camel.component.qdrant.QdrantConfiguration type.
@@ -74,11 +70,6 @@ public class QdrantComponentConfiguration
      */
     private Duration timeout;
     /**
-     * Whether the client uses Transport Layer Security (TLS) to secure
-     * communications
-     */
-    private Boolean tls = false;
-    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -88,19 +79,19 @@ public class QdrantComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * Filter of type io.qdrant.client.grpc.Points.Points.Filter for similarity
-     * search. This is for advanced usage. The option is a
-     * io.qdrant.client.grpc.Points.Filter type.
+     * Filter for similarity search. The option is a
+     * io.qdrant.client.grpc.Common.Filter type.
      */
     private Filter filter;
-
-    public String getApiKey() {
-        return apiKey;
-    }
-
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-    }
+    /**
+     * Sets the API key to use for authentication
+     */
+    private String apiKey;
+    /**
+     * Whether the client uses Transport Layer Security (TLS) to secure
+     * communications
+     */
+    private Boolean tls = false;
 
     public QdrantConfiguration getConfiguration() {
         return configuration;
@@ -150,14 +141,6 @@ public class QdrantComponentConfiguration
         this.timeout = timeout;
     }
 
-    public Boolean getTls() {
-        return tls;
-    }
-
-    public void setTls(Boolean tls) {
-        this.tls = tls;
-    }
-
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
@@ -172,5 +155,21 @@ public class QdrantComponentConfiguration
 
     public void setFilter(Filter filter) {
         this.filter = filter;
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    public Boolean getTls() {
+        return tls;
+    }
+
+    public void setTls(Boolean tls) {
+        this.tls = tls;
     }
 }
