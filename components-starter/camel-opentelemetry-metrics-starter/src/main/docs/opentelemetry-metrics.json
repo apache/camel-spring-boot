@@ -1,0 +1,105 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.opentelemetry-metrics",
+      "type": "org.apache.camel.opentelemetry.metrics.springboot.OpenTelemetryComponentConfiguration",
+      "sourceType": "org.apache.camel.opentelemetry.metrics.springboot.OpenTelemetryComponentConfiguration"
+    },
+    {
+      "name": "camel.component.opentelemetry-metrics.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.opentelemetry.metrics.springboot.OpenTelemetryComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.opentelemetry.metrics",
+      "type": "org.apache.camel.opentelemetry.metrics.springboot.CamelMetricsConfiguration",
+      "sourceType": "org.apache.camel.opentelemetry.metrics.springboot.CamelMetricsConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.opentelemetry-metrics.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.opentelemetry.metrics.springboot.OpenTelemetryComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.opentelemetry-metrics.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.opentelemetry-metrics.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the opentelemetry-metrics component. This is enabled by default.",
+      "sourceType": "org.apache.camel.opentelemetry.metrics.springboot.OpenTelemetryComponentConfiguration"
+    },
+    {
+      "name": "camel.component.opentelemetry-metrics.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.opentelemetry.metrics.springboot.OpenTelemetryComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.opentelemetry-metrics.meter",
+      "type": "io.opentelemetry.api.metrics.Meter",
+      "description": "To use a custom configured Meter. The option is a io.opentelemetry.api.metrics.Meter type.",
+      "sourceType": "org.apache.camel.opentelemetry.metrics.springboot.OpenTelemetryComponentConfiguration"
+    },
+    {
+      "name": "camel.opentelemetry.metrics.base-endpoint-uri-exchange-event-notifier",
+      "type": "java.lang.Boolean",
+      "description": "Whether to use static or dynamic values for Endpoint Name tags in captured metrics. By default, static values are used. When using dynamic tags, then a dynamic to (toD) can compute many different endpoint URIs that, can lead to many tags as the URI is dynamic, so use this with care if setting this option to false.",
+      "sourceType": "org.apache.camel.opentelemetry.metrics.springboot.CamelMetricsConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.opentelemetry.metrics.enable-exchange-event-notifier",
+      "type": "java.lang.Boolean",
+      "description": "Set whether to enable the MicrometerExchangeEventNotifier for capturing metrics on exchange processing times.",
+      "sourceType": "org.apache.camel.opentelemetry.metrics.springboot.CamelMetricsConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.opentelemetry.metrics.enable-message-history",
+      "type": "java.lang.Boolean",
+      "description": "Set whether to enable the MicrometerMessageHistoryFactory for capturing metrics on individual route node processing times. Depending on the number of configured route nodes, there is the potential to create a large volume of metrics. Therefore, this option is disabled by default.",
+      "sourceType": "org.apache.camel.opentelemetry.metrics.springboot.CamelMetricsConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.opentelemetry.metrics.enable-route-event-notifier",
+      "type": "java.lang.Boolean",
+      "description": "Set whether to enable the MicrometerRouteEventNotifier for capturing metrics on the total number of routes and total number of routes running.",
+      "sourceType": "org.apache.camel.opentelemetry.metrics.springboot.CamelMetricsConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.opentelemetry.metrics.enable-route-policy",
+      "type": "java.lang.Boolean",
+      "description": "Set whether to enable the MicrometerRoutePolicyFactory for capturing metrics on route processing times.",
+      "sourceType": "org.apache.camel.opentelemetry.metrics.springboot.CamelMetricsConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.opentelemetry.metrics.route-policy-exclude-pattern",
+      "type": "java.lang.String",
+      "description": "Pattern to exclude routes (by id) to capture. Multiple route ids can be separated by comma.",
+      "sourceType": "org.apache.camel.opentelemetry.metrics.springboot.CamelMetricsConfiguration"
+    },
+    {
+      "name": "camel.opentelemetry.metrics.route-policy-level",
+      "type": "java.lang.String",
+      "description": "Sets the level of information to capture. Possible values are all,route,context. all = both context and routes. route = routes only. context = camel context only.",
+      "sourceType": "org.apache.camel.opentelemetry.metrics.springboot.CamelMetricsConfiguration",
+      "defaultValue": "all"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
