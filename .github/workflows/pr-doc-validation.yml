@@ -40,13 +40,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout camel-spring-boot repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
           submodules: recursive
           path: camel-spring-boot
       - name: Checkout camel-website repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: apache/camel-website
           path: camel-website
