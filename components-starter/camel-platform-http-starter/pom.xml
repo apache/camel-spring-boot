@@ -51,10 +51,19 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security-oauth2-client</artifactId>
+      <version>${spring-boot-version}</version>
+    </dependency>
+    <!-- TODO reintroduce once spring-boot-starter-undertow will be available -->
+    <!-- AND CHERRY PICK -->
+    <!-- https://github.com/apache/camel-spring-boot/commit/1bb2b737a4cc1301945a1084e5a5cbb2e4744690 -->
+    <!-- https://github.com/apache/camel-spring-boot/commit/16e8983051d473638701edcbb8b333022ac2eb90 -->
+    <!--dependency>
+      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-undertow</artifactId>
       <version>${spring-boot-version}</version>
       <optional>true</optional>
-    </dependency>
+    </dependency-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
@@ -83,6 +92,24 @@
       <groupId>org.springframework.session</groupId>
       <artifactId>spring-session-hazelcast</artifactId>
       <version>${spring-session-hazelcast-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-restclient</artifactId>
+      <version>${spring-boot-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-resttestclient</artifactId>
+      <version>${spring-boot-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-webmvc-test</artifactId>
+      <version>${spring-boot-version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

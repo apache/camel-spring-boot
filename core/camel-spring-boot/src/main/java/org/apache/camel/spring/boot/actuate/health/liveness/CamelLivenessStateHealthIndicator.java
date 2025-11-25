@@ -23,10 +23,10 @@ import org.apache.camel.health.HealthCheckHelper;
 import org.apache.camel.spring.boot.actuate.health.CamelProbesHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.actuate.availability.LivenessStateHealthIndicator;
 import org.springframework.boot.availability.ApplicationAvailability;
 import org.springframework.boot.availability.AvailabilityState;
 import org.springframework.boot.availability.LivenessState;
+import org.springframework.boot.health.application.LivenessStateHealthIndicator;
 
 public class CamelLivenessStateHealthIndicator extends LivenessStateHealthIndicator {
 

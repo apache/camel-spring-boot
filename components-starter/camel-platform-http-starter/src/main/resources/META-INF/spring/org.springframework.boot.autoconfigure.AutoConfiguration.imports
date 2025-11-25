@@ -19,5 +19,9 @@ org.apache.camel.component.platform.http.springboot.PlatformHttpComponentConvert
 org.apache.camel.component.platform.http.springboot.PlatformHttpComponentAutoConfiguration
 org.apache.camel.component.platform.http.springboot.SpringBootPlatformHttpAutoConfiguration
 org.apache.camel.component.platform.http.springboot.SpringBootPlatformWebMvcConfiguration
-org.apache.camel.component.platform.http.springboot.actuate.metrics.undertow.UndertowMetricsAutoConfiguration
-org.apache.camel.component.platform.http.springboot.customizer.UndertowAccessLogConfiguration
+## TODO reintroduce once spring-boot-starter-undertow will be available
+## AND CHERRY PICK
+## https://github.com/apache/camel-spring-boot/commit/1bb2b737a4cc1301945a1084e5a5cbb2e4744690
+## https://github.com/apache/camel-spring-boot/commit/16e8983051d473638701edcbb8b333022ac2eb90
+##org.apache.camel.component.platform.http.springboot.actuate.metrics.undertow.UndertowMetricsAutoConfiguration
+##org.apache.camel.component.platform.http.springboot.customizer.UndertowAccessLogConfiguration

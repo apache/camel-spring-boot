@@ -16,16 +16,16 @@
  */
 package org.apache.camel.spring.boot.actuate.health;
 
-import java.util.Collection;
-import java.util.Map;
 import org.apache.camel.CamelContext;
 import org.apache.camel.health.HealthCheck;
 import org.apache.camel.health.HealthCheckHelper;
 import org.apache.camel.impl.health.AbstractHealthCheck;
-import org.springframework.boot.actuate.health.AbstractHealthIndicator;
-import org.springframework.boot.actuate.health.Health;
-import org.springframework.boot.actuate.health.HealthIndicator;
+import org.springframework.boot.health.contributor.AbstractHealthIndicator;
+import org.springframework.boot.health.contributor.Health;
 import org.springframework.context.ApplicationContext;
+
+import java.util.Collection;
+import java.util.Map;
 
 /**
  * Camel {@link HealthIndicator}.

@@ -103,6 +103,12 @@
 
         <!-- Testing dependencies -->
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-restclient</artifactId>
+            <version>${spring-boot-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-spring-xml</artifactId>
             <scope>test</scope>
