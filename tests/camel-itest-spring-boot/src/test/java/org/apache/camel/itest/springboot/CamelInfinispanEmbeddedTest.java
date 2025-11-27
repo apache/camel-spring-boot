@@ -25,6 +25,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(ArquillianExtension.class)
 public class CamelInfinispanEmbeddedTest extends AbstractSpringBootTestSupport {
+    static final String INFINISPAN_VERSION = System.getProperty("itest.infinispan.version");
+    static final String PROTOSTREAM_VERSION = System.getProperty("itest.infinispan-protostream.version");
 
     @Deployment
     public static Archive<?> createSpringBootPackage() throws Exception {
@@ -32,7 +34,25 @@ public class CamelInfinispanEmbeddedTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder().module(inferModuleName(CamelInfinispanEmbeddedTest.class)).build();
+        return new ITestConfigBuilder().module(inferModuleName(CamelInfinispanTest.class))
+                .dependency(infinispanDependency("infinispan-api"))
+                .dependency(infinispanDependency("infinispan-client-hotrod"))
+                .dependency(infinispanDependency("infinispan-commons"))
+                .dependency(infinispanDependency("infinispan-component-annotations"))
+                .dependency(infinispanDependency("infinispan-core"))
+                .dependency(infinispanDependency("infinispan-counter-api"))
+                .dependency(infinispanDependency("infinispan-query"))
+                .dependency(protostreamDependency("protostream"))
+                .dependency(protostreamDependency("protostream-types"))
+                .build();
+    }
+
+    static String infinispanDependency(String artifactId) {
+        return "org.infinispan:%s:%s".formatted(artifactId, INFINISPAN_VERSION);
+    }
+
+    static String protostreamDependency(String artifactId) {
+        return "org.infinispan.protostream:%s:%s".formatted(artifactId, PROTOSTREAM_VERSION);
     }
 
     @Test
