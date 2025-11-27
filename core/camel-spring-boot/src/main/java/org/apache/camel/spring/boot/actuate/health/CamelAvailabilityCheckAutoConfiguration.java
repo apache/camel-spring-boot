@@ -21,12 +21,12 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.actuate.health.liveness.CamelLivenessStateHealthIndicator;
 import org.apache.camel.spring.boot.actuate.health.readiness.CamelReadinessStateHealthIndicator;
 
-import org.springframework.boot.actuate.availability.LivenessStateHealthIndicator;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.availability.ApplicationAvailabilityAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.availability.ApplicationAvailability;
+import org.springframework.boot.health.application.LivenessStateHealthIndicator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
