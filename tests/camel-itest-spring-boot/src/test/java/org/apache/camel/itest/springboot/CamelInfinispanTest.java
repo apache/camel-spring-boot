@@ -25,6 +25,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(ArquillianExtension.class)
 public class CamelInfinispanTest extends AbstractSpringBootTestSupport {
+    static final String INFINISPAN_VERSION = System.getProperty("itest.infinispan.version");
+    static final String PROTOSTREAM_VERSION = System.getProperty("itest.infinispan-protostream.version");
 
     @Deployment
     public static Archive<?> createSpringBootPackage() throws Exception {
@@ -33,17 +35,24 @@ public class CamelInfinispanTest extends AbstractSpringBootTestSupport {
 
     public static ITestConfig createTestConfig() {
         return new ITestConfigBuilder().module(inferModuleName(CamelInfinispanTest.class))
-                .dependency("org.infinispan:infinispan-client-hotrod:14.0.21.Final")
-                .dependency("org.infinispan:infinispan-commons:14.0.21.Final")
-                .dependency("org.infinispan:infinispan-component-annotations:14.0.21.Final")
-                .dependency("org.infinispan:infinispan-core:14.0.21.Final")
-                .dependency("org.infinispan:infinispan-query-dsl:14.0.21.Final")
-                .dependency("org.infinispan:infinispan-jboss-marshalling:14.0.21.Final")
-                .dependency("org.infinispan:infinispan-marshaller-protostuff:14.0.21.Final")
-                .dependency("org.infinispan:infinispan-remote-query-client:14.0.21.Final")
-                .dependency("org.infinispan.protostream:protostream-types:4.6.5.Final")
-                .dependency("org.infinispan.protostream:protostream:4.6.5.Final").disableJmx("org.infinispan:*")
+                .dependency(infinispanDependency("infinispan-api"))
+                .dependency(infinispanDependency("infinispan-client-hotrod"))
+                .dependency(infinispanDependency("infinispan-commons"))
+                .dependency(infinispanDependency("infinispan-counter-api"))
+                .dependency(infinispanDependency("infinispan-core"))
+                .dependency(infinispanDependency("infinispan-query"))
+                .dependency(protostreamDependency("protostream"))
+                .dependency(protostreamDependency("protostream-types"))
+                .disableJmx("org.infinispan:*")
                 .build();
+    }
+
+    static String infinispanDependency(String artifactId) {
+        return "org.infinispan:%s:%s".formatted(artifactId, INFINISPAN_VERSION);
+    }
+
+    static String protostreamDependency(String artifactId) {
+        return "org.infinispan.protostream:%s:%s".formatted(artifactId, PROTOSTREAM_VERSION);
     }
 
     @Test

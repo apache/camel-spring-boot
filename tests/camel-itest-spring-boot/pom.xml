@@ -25,7 +25,7 @@
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>tests</artifactId>
         <version>4.17.0-SNAPSHOT</version>
-        <relativePath>..</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>camel-itest-spring-boot</artifactId>
@@ -223,6 +223,10 @@
                         <itest.springboot.springBootVersion>${spring-boot-version}</itest.springboot.springBootVersion>
                         <!-- To remove once all version conflicts are fixed -->
                         <itest.springboot.failOnRelatedLibraryMismatch>false</itest.springboot.failOnRelatedLibraryMismatch>
+
+                        <!-- Version properties to look up in tests -->
+                        <itest.infinispan.version>${infinispan-version}</itest.infinispan.version>
+                        <itest.infinispan-protostream.version>${infinispan-protostream-version}</itest.infinispan-protostream.version>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
