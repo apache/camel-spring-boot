@@ -198,6 +198,12 @@
       "defaultValue": 200
     },
     {
+      "name": "camel.component.http.non-proxy-hosts",
+      "type": "java.lang.String",
+      "description": "Comma-separated list of hosts that should bypass the proxy. Supports wildcards, e.g., localhost,.example.com,192.168..",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
+    },
+    {
       "name": "camel.component.http.proxy-auth-domain",
       "type": "java.lang.String",
       "description": "Proxy authentication domain to use with NTLM",

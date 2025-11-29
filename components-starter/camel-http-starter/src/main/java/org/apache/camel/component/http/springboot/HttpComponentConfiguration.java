@@ -221,6 +221,11 @@ public class HttpComponentConfiguration
      */
     private HeaderFilterStrategy headerFilterStrategy;
     /**
+     * Comma-separated list of hosts that should bypass the proxy. Supports
+     * wildcards, e.g., localhost,.example.com,192.168..
+     */
+    private String nonProxyHosts;
+    /**
      * Proxy authentication domain to use with NTLM
      */
     private String proxyAuthDomain;
@@ -557,6 +562,14 @@ public class HttpComponentConfiguration
     public void setHeaderFilterStrategy(
             HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
+    }
+
+    public String getNonProxyHosts() {
+        return nonProxyHosts;
+    }
+
+    public void setNonProxyHosts(String nonProxyHosts) {
+        this.nonProxyHosts = nonProxyHosts;
     }
 
     public String getProxyAuthDomain() {
