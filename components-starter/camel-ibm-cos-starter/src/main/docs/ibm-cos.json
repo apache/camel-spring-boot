@@ -111,7 +111,7 @@
     {
       "name": "camel.component.ibm-cos.endpoint-url",
       "type": "java.lang.String",
-      "description": "IBM COS Endpoint URL (e.g., https:\/\/s3.us-south.cloud-object-storage.appdomain.cloud)",
+      "description": "IBM COS Endpoint URL (e.g., https:\/\/s3.us-south.cloud-object-storage.appdomain.cloud) Note that some operations requires to use a regional endpoint URL instead of a cross-region one.",
       "sourceType": "org.apache.camel.component.ibm.cos.springboot.IBMCOSComponentConfiguration"
     },
     {
