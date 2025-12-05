@@ -372,9 +372,9 @@
     <module>camel-openapi-validator-starter</module>
     <module>camel-opensearch-starter</module>
     <module>camel-openstack-starter</module>
+    <module>camel-opentelemetry-metrics-starter</module>
     <module>camel-opentelemetry-starter</module>
     <module>camel-opentelemetry2-starter</module>
-    <module>camel-opentelemetry-metrics-starter</module>
     <module>camel-optaplanner-starter</module>
     <module>camel-paho-mqtt5-starter</module>
     <module>camel-paho-starter</module>
@@ -449,6 +449,7 @@
     <module>camel-stomp-starter</module>
     <module>camel-stream-starter</module>
     <module>camel-stringtemplate-starter</module>
+    <module>camel-stripe-starter</module>
     <module>camel-stub-starter</module>
     <module>camel-swift-starter</module>
     <module>camel-syslog-starter</module>
