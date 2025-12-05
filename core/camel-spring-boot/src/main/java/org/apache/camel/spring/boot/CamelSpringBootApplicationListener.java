@@ -26,13 +26,19 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.camel.CamelContext;
 import org.apache.camel.StartupListener;
+import org.apache.camel.impl.debugger.DefaultBacklogDebugger;
 import org.apache.camel.main.MainDurationEventNotifier;
 import org.apache.camel.main.MainShutdownStrategy;
 import org.apache.camel.main.RoutesCollector;
 import org.apache.camel.main.RoutesConfigurer;
 import org.apache.camel.main.SimpleMainShutdownStrategy;
+import org.apache.camel.spi.BacklogDebugger;
 import org.apache.camel.spi.CamelEvent;
 import org.apache.camel.spi.CamelEvent.Type;
+import org.apache.camel.spi.CliConnector;
+import org.apache.camel.spi.CliConnectorFactory;
+import org.apache.camel.spi.Debugger;
+import org.apache.camel.spi.DebuggerFactory;
 import org.apache.camel.spi.EventNotifier;
 import org.apache.camel.support.EventNotifierSupport;
 import org.apache.camel.support.LifecycleStrategySupport;
@@ -89,6 +95,44 @@ public class CamelSpringBootApplicationListener implements ApplicationListener<C
 
             RoutesConfigurer configurer = new RoutesConfigurer(camelContext);
             try {
+                // setup cli-connector if not already done (before debugger)
+                if (camelContext.hasService(CliConnector.class) == null) {
+                    CliConnectorFactory ccf = camelContext.getCamelContextExtension().getContextPlugin(CliConnectorFactory.class);
+                    if (ccf != null && ccf.isEnabled()) {
+                        CliConnector connector = ccf.createConnector();
+                        camelContext.addService(connector, true);
+                        // force start cli connector early as otherwise it will be deferred until context is started
+                        // but, we want status available during startup phase
+                        ServiceHelper.startService(connector);
+                    }
+                }
+
+                // auto-detect camel-debug on classpath (if debugger has not been explicit added)
+                // this is needed to do before collecting routes as debugger must be initialized before routes are parsed
+                boolean debuggerDetected = false;
+                if (camelContext.hasService(BacklogDebugger.class) == null) {
+                    // detect if camel-debug is on classpath that enables debugging
+                    DebuggerFactory df = camelContext.getCamelContextExtension().getBootstrapFactoryFinder()
+                            .newInstance(Debugger.FACTORY, DebuggerFactory.class).orElse(null);
+                    if (df != null) {
+                        debuggerDetected = true;
+                        LOG.info("Detected: {} JAR (Enabling Camel Debugging)", df);
+                        camelContext.setDebugging(true);
+                        Debugger newDebugger = df.createDebugger(camelContext);
+                        if (newDebugger != null) {
+                            camelContext.setDebugger(newDebugger);
+                        }
+                    }
+                }
+                if (!debuggerDetected && (camelContext.isDebugging() || camelContext.isDebugStandby())) {
+                    if (camelContext.hasService(BacklogDebugger.class) == null) {
+                        // debugging enabled but camel-debug was not auto-detected from classpath
+                        // so install default debugger
+                        BacklogDebugger backlog = DefaultBacklogDebugger.createDebugger(camelContext);
+                        camelContext.addService(backlog, true, true);
+                    }
+                }
+
                 // we can use the default routes configurer
                 ServiceHelper.startService(configurer);
 
