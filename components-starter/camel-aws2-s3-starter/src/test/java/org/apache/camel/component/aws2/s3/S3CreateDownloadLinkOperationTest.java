@@ -24,6 +24,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,9 +32,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import software.amazon.awssdk.services.s3.S3Client;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 //Based on S3CreateDownloadLinkOperationIT
 @DirtiesContext
@@ -75,8 +73,8 @@ public class S3CreateDownloadLinkOperationTest extends BaseS3 {
             }
         });
 
-        assertNotNull(ex1.getMessage().getBody());
-        assertNull(ex2.getMessage().getBody());
+        Assertions.assertThat(ex1.getMessage().getBody()).isNotNull();
+        Assertions.assertThat(ex2.getMessage().getBody()).isNull();
         assertMockEndpointsSatisfied();
     }
 
