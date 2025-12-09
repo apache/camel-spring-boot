@@ -68,8 +68,9 @@
     {
       "name": "camel.component.pulsar.batcher-builder",
       "type": "org.apache.pulsar.client.api.BatcherBuilder",
-      "description": "Control batching method used by the producer. The option is a org.apache.pulsar.client.api.BatcherBuilder type.",
-      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration"
+      "description": "Control batching method used by the producer.",
+      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration",
+      "defaultValue": "default"
     },
     {
       "name": "camel.component.pulsar.batching-enabled",

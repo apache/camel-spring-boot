@@ -42,7 +42,6 @@ public class PulsarComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.pulsar.PulsarConfiguration.class));
         answer.add(new ConvertiblePair(String.class, org.apache.pulsar.client.api.RedeliveryBackoff.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.pulsar.PulsarMessageReceiptFactory.class));
-        answer.add(new ConvertiblePair(String.class, org.apache.pulsar.client.api.BatcherBuilder.class));
         answer.add(new ConvertiblePair(String.class, org.apache.pulsar.client.api.MessageRouter.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.pulsar.utils.AutoConfiguration.class));
         answer.add(new ConvertiblePair(String.class, org.apache.pulsar.client.api.PulsarClient.class));
@@ -65,7 +64,6 @@ public class PulsarComponentConverter implements GenericConverter {
             case "org.apache.camel.component.pulsar.PulsarConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.pulsar.PulsarConfiguration.class);
             case "org.apache.pulsar.client.api.RedeliveryBackoff": return applicationContext.getBean(ref, org.apache.pulsar.client.api.RedeliveryBackoff.class);
             case "org.apache.camel.component.pulsar.PulsarMessageReceiptFactory": return applicationContext.getBean(ref, org.apache.camel.component.pulsar.PulsarMessageReceiptFactory.class);
-            case "org.apache.pulsar.client.api.BatcherBuilder": return applicationContext.getBean(ref, org.apache.pulsar.client.api.BatcherBuilder.class);
             case "org.apache.pulsar.client.api.MessageRouter": return applicationContext.getBean(ref, org.apache.pulsar.client.api.MessageRouter.class);
             case "org.apache.camel.component.pulsar.utils.AutoConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.pulsar.utils.AutoConfiguration.class);
             case "org.apache.pulsar.client.api.PulsarClient": return applicationContext.getBean(ref, org.apache.pulsar.client.api.PulsarClient.class);

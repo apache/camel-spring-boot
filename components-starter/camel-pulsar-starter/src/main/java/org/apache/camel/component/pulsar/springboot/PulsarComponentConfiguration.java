@@ -202,10 +202,9 @@ public class PulsarComponentConfiguration
      */
     private PulsarMessageReceiptFactory pulsarMessageReceiptFactory;
     /**
-     * Control batching method used by the producer. The option is a
-     * org.apache.pulsar.client.api.BatcherBuilder type.
+     * Control batching method used by the producer.
      */
-    private BatcherBuilder batcherBuilder;
+    private BatcherBuilder batcherBuilder = BatcherBuilder.DEFAULT;
     /**
      * Control whether automatic batching of messages is enabled for the
      * producer.
