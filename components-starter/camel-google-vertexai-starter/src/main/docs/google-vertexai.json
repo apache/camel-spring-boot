@@ -1,0 +1,150 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.google-vertexai",
+      "type": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-vertexai.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.google-vertexai.anthropic-version",
+      "type": "java.lang.String",
+      "description": "Anthropic API version for Claude models. Required when publisher is 'anthropic'.",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration",
+      "defaultValue": "vertex-2023-10-16"
+    },
+    {
+      "name": "camel.component.google-vertexai.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-vertexai.candidate-count",
+      "type": "java.lang.Integer",
+      "description": "Number of candidate responses to generate",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration",
+      "defaultValue": 1
+    },
+    {
+      "name": "camel.component.google-vertexai.client",
+      "type": "com.google.genai.Client",
+      "description": "The Google GenAI client for Vertex AI. The option is a com.google.genai.Client type.",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-vertexai.configuration",
+      "type": "org.apache.camel.component.google.vertexai.GoogleVertexAIConfiguration",
+      "description": "The component configuration. The option is a org.apache.camel.component.google.vertexai.GoogleVertexAIConfiguration type.",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-vertexai.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.google-vertexai.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the google-vertexai component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-vertexai.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-vertexai.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-vertexai.json-mode",
+      "type": "java.lang.Boolean",
+      "description": "Whether to use JSON request\/response format",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.google-vertexai.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.google-vertexai.max-output-tokens",
+      "type": "java.lang.Integer",
+      "description": "Maximum number of output tokens",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration",
+      "defaultValue": 1024
+    },
+    {
+      "name": "camel.component.google-vertexai.operation",
+      "type": "org.apache.camel.component.google.vertexai.GoogleVertexAIOperations",
+      "description": "Set the operation for the producer",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-vertexai.prediction-service-client",
+      "type": "com.google.cloud.aiplatform.v1.PredictionServiceClient",
+      "description": "The Google Cloud AI Platform Prediction Service client for rawPredict operations. The option is a com.google.cloud.aiplatform.v1.PredictionServiceClient type.",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-vertexai.publisher",
+      "type": "java.lang.String",
+      "description": "Publisher name for partner models (e.g., anthropic, meta, mistralai). Required for rawPredict operations.",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-vertexai.service-account-key",
+      "type": "java.lang.String",
+      "description": "The Service account key that can be used as credentials for the Vertex AI client. It can be loaded by default from classpath, but you can prefix with classpath:, file:, or http: to load the resource from different systems.",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-vertexai.stream-output-mode",
+      "type": "java.lang.String",
+      "description": "Streaming output mode: complete (default) or chunks",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration",
+      "defaultValue": "complete"
+    },
+    {
+      "name": "camel.component.google-vertexai.temperature",
+      "type": "java.lang.Float",
+      "description": "Temperature parameter for generation (0.0-1.0)",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-vertexai.top-k",
+      "type": "java.lang.Integer",
+      "description": "Top-K parameter for generation",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration",
+      "defaultValue": 40
+    },
+    {
+      "name": "camel.component.google-vertexai.top-p",
+      "type": "java.lang.Float",
+      "description": "Top-P parameter for nucleus sampling",
+      "sourceType": "org.apache.camel.component.google.vertexai.springboot.GoogleVertexAIComponentConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
