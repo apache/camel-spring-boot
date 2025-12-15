@@ -53,6 +53,12 @@
       <version>${jcip-annotations-version}</version>
       <scope>test</scope>
     </dependency>
+    <!-- test dependencies -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <scope>test</scope>
+    </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
