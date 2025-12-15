@@ -281,18 +281,6 @@
                         <version>${maven-compiler-plugin-version}</version>
                         <executions>
                             <execution>
-                                <id>compile-java-21</id>
-                                <phase>compile</phase>
-                                <goals>
-                                    <goal>compile</goal>
-                                </goals>
-                                <configuration>
-                                    <release>21</release>
-                                    <compileSourceRoots>${project.basedir}/src/main/java21</compileSourceRoots>
-                                    <multiReleaseOutput>true</multiReleaseOutput>
-                                </configuration>
-                            </execution>
-                            <execution>
                                 <id>testCompile-java-21</id>
                                 <phase>test-compile</phase>
                                 <goals>
@@ -306,51 +294,16 @@
                         </executions>
                     </plugin>
 
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-jar-plugin</artifactId>
-                        <configuration>
-                            <archive>
-                                <manifestEntries>
-                                    <Multi-Release>true</Multi-Release>
-                                </manifestEntries>
-                            </archive>
-                        </configuration>
-                    </plugin>
-
-                    <!-- Add resources21 folder when building with JDK 21 -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>copy-resources21</id>
-                                <phase>process-resources</phase>
-                                <goals>
-                                    <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${project.build.outputDirectory}</outputDirectory>
-                                    <resources>
-                                        <resource>
-                                            <directory>${basedir}/src/main/resources21</directory>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
                     <!-- Configure surefire to run JDK 21 specific tests -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>${maven-surefire-plugin-version}</version>
                         <configuration>
-                            <!-- Set virtual thread properties only for these specific tests -->
+                            <!-- Enable Spring virtual threads - the CamelVirtualThreadEnvironmentPostProcessor
+                                 will automatically set camel.threads.virtual.enabled=true -->
                             <systemPropertyVariables>
                                 <spring.threads.virtual.enabled>true</spring.threads.virtual.enabled>
-                                <camel.threads.virtual.enabled>true</camel.threads.virtual.enabled>
                             </systemPropertyVariables>
                         </configuration>
                     </plugin>

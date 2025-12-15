@@ -34,15 +34,25 @@ public class CamelVirtualThreadEnvironmentPostProcessor implements EnvironmentPo
 
     private static final Logger LOG = LoggerFactory.getLogger(CamelVirtualThreadEnvironmentPostProcessor.class);
 
+    private static final int VIRTUAL_THREADS_MIN_JAVA_VERSION = 21;
+
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
         // Check if Spring Boot virtual threads are enabled
         String springVirtualThreads = environment.getProperty("spring.threads.virtual.enabled");
-        
+
         if ("true".equalsIgnoreCase(springVirtualThreads)) {
+            // Verify we're running on JDK 21+ where virtual threads are available
+            int javaVersion = Runtime.version().feature();
+            if (javaVersion < VIRTUAL_THREADS_MIN_JAVA_VERSION) {
+                LOG.debug("spring.threads.virtual.enabled=true but running on JDK {} (virtual threads require JDK 21+)",
+                        javaVersion);
+                return;
+            }
+
             // Set the Camel virtual threads system property early, before Camel classes are loaded
             String existingCamelProperty = System.getProperty("camel.threads.virtual.enabled");
-            
+
             if (existingCamelProperty == null) {
                 System.setProperty("camel.threads.virtual.enabled", "true");
                 LOG.info("Spring virtual threads enabled - automatically setting camel.threads.virtual.enabled=true");
