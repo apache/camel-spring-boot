@@ -43,11 +43,6 @@ import static org.assertj.core.api.Assertions.assertThat;
                 properties = { "spring.threads.virtual.enabled=true" })
 public class CamelVirtualThreadsTest {
 
-    // Ensure camel.threads.virtual.enabled is set before any Camel classes are loaded
-    static {
-        System.setProperty("camel.threads.virtual.enabled", "true");
-    }
-
     @Autowired
     CamelContext context;
 

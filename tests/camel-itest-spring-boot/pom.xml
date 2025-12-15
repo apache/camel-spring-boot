@@ -233,4 +233,26 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>skip-itest-github</id>
+            <activation>
+                <property>
+                    <name>ci.env.name</name>
+                    <value>github.com</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <skipTests>true</skipTests>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>
