@@ -20,7 +20,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spi.ThreadPoolProfile;
 import org.apache.camel.spring.boot.threadpool.CamelThreadPoolAutoConfiguration;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.apache.camel.util.concurrent.ThreadPoolRejectedPolicy;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

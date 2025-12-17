@@ -27,7 +27,7 @@ import org.apache.camel.impl.engine.DefaultShutdownStrategy;
 import org.apache.camel.spi.RouteStartupOrder;
 import org.apache.camel.spi.ShutdownStrategy;
 import org.apache.camel.spring.SpringRouteBuilder;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

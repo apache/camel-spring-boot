@@ -25,7 +25,7 @@ import com.ibm.cloud.secrets_manager_sdk.secrets_manager.v2.model.KVSecretProtot
 import com.ibm.cloud.secrets_manager_sdk.secrets_manager.v2.model.Secret;
 import org.apache.camel.component.ibm.secrets.manager.IBMSecretsManagerConstants;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.apache.camel.util.ObjectHelper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterAll;

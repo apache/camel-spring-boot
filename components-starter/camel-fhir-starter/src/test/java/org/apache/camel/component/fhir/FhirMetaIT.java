@@ -23,7 +23,7 @@ import org.apache.camel.component.fhir.api.ExtraParameters;
 import org.apache.camel.component.fhir.internal.FhirApiCollection;
 import org.apache.camel.component.fhir.internal.FhirMetaApiMethod;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.hl7.fhir.instance.model.api.IBaseMetaType;
 import org.hl7.fhir.r4.model.Meta;
 import org.hl7.fhir.r4.model.Patient;
