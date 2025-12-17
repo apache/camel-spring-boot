@@ -16,8 +16,8 @@
  */
 package org.apache.camel.language.xquery.springboot;
 
-import static org.apache.camel.test.junit5.TestSupport.assertFileExists;
-import static org.apache.camel.test.junit5.TestSupport.assertFileNotExists;
+import static org.apache.camel.test.junit6.TestSupport.assertFileExists;
+import static org.apache.camel.test.junit6.TestSupport.assertFileNotExists;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
@@ -35,7 +35,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import org.junit.jupiter.api.Test;
 
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest

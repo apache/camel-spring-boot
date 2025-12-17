@@ -42,8 +42,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
-import org.apache.camel.test.junit5.TestSupport;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.junit6.TestSupport;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest

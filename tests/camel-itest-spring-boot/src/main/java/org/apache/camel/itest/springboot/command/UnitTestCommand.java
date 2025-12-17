@@ -194,6 +194,7 @@ public class UnitTestCommand extends AbstractTestCommand implements Command {
                 logger.debug("Checking class " + testClass.getName());
                 for (Annotation annotation : testClass.getAnnotations()) {
                     if (annotation.toString().contains("org.apache.camel.test.spring.junit5.CamelSpringBootTest")
+			    || annotation.toString().contains("org.apache.camel.test.spring.junit6.CamelSpringBootTest")
                             || annotation.toString().contains("org.springframework.boot.test.context.SpringBootTest")) {
                         return FilterResult.excluded("Not admissable");
                     }

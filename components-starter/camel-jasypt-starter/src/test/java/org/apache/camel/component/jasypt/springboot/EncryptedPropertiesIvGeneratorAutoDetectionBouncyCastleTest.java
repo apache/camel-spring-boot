@@ -16,7 +16,7 @@
  */
 package org.apache.camel.component.jasypt.springboot;
 
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.jasypt.registry.AlgorithmRegistry;
 import org.junit.jupiter.api.BeforeEach;

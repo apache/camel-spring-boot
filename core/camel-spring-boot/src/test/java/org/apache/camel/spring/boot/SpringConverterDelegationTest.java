@@ -19,7 +19,7 @@ package org.apache.camel.spring.boot;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.camel.TypeConverter;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

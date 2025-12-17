@@ -64,7 +64,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-test-spring-junit5</artifactId>
+      <artifactId>camel-test-spring-junit6</artifactId>
       <version>${camel-version}</version>
       <scope>test</scope>
     </dependency>
@@ -324,7 +324,9 @@
     <module>camel-jsonpath-starter</module>
     <module>camel-jt400-starter</module>
     <module>camel-jte-starter</module>
+<!--
     <module>camel-kafka-starter</module>
+-->
     <module>camel-kamelet-starter</module>
     <module>camel-keycloak-starter</module>
     <module>camel-knative-starter</module>

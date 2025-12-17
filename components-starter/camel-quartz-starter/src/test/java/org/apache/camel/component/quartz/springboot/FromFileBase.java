@@ -16,7 +16,7 @@
  */
 package org.apache.camel.component.quartz.springboot;
 
-import static org.apache.camel.test.junit5.TestSupport.deleteDirectory;
+import static org.apache.camel.test.junit6.TestSupport.deleteDirectory;
 
 import java.io.IOException;
 import java.nio.file.Files;
