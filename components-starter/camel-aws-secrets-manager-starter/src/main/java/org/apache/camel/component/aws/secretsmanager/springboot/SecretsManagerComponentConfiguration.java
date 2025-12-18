@@ -150,7 +150,7 @@ public class SecretsManagerComponentConfiguration
      */
     private Boolean trustAllCertificates = false;
     /**
-     * Set whether the Translate client should expect to load credentials
+     * Set whether the Secrets Manager client should expect to load credentials
      * through a default credentials provider or to expect static credentials to
      * be passed in.
      */

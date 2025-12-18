@@ -88,7 +88,7 @@ public class Transcribe2ComponentConfiguration
     /**
      * To define a proxy protocol when instantiating the Transcribe client
      */
-    private String proxyProtocol = "HTTPS";
+    private Protocol proxyProtocol = Protocol.HTTPS;
     /**
      * The region in which Transcribe client needs to work. When using this
      * parameter, the configuration will expect the lowercase name of the region
@@ -228,11 +228,11 @@ public class Transcribe2ComponentConfiguration
         this.proxyPort = proxyPort;
     }
 
-    public String getProxyProtocol() {
+    public Protocol getProxyProtocol() {
         return proxyProtocol;
     }
 
-    public void setProxyProtocol(String proxyProtocol) {
+    public void setProxyProtocol(Protocol proxyProtocol) {
         this.proxyProtocol = proxyProtocol;
     }
 

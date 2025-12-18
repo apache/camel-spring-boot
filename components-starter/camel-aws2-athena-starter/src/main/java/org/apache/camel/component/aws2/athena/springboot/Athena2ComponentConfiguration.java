@@ -108,6 +108,11 @@ public class Athena2ComponentConfiguration
      */
     private Athena2OutputType outputType = Athena2OutputType.StreamList;
     /**
+     * Set the need for overriding the endpoint. This option needs to be used in
+     * combination with the uriEndpointOverride option
+     */
+    private Boolean overrideEndpoint = false;
+    /**
      * The unique ID identifying the query execution.
      */
     private String queryExecutionId;
@@ -141,6 +146,11 @@ public class Athena2ComponentConfiguration
      * Waiting for Query Completion and Retrying Failed Queries to learn more.
      */
     private String retry = "never";
+    /**
+     * Set the overriding uri endpoint. This option needs to be used in
+     * combination with overrideEndpoint option
+     */
+    private String uriEndpointOverride;
     /**
      * Optional max wait time in millis to wait for a successful query
      * completion. See the section Waiting for Query Completion and Retrying
@@ -225,6 +235,10 @@ public class Athena2ComponentConfiguration
      * Amazon AWS Session Token used when the user needs to assume an IAM role
      */
     private String sessionToken;
+    /**
+     * If we want to trust all certificates in case of overriding the endpoint
+     */
+    private Boolean trustAllCertificates = false;
     /**
      * Set whether the Athena client should expect to load credentials through a
      * default credentials provider or to expect static credentials to be passed
@@ -331,6 +345,14 @@ public class Athena2ComponentConfiguration
         this.outputType = outputType;
     }
 
+    public Boolean getOverrideEndpoint() {
+        return overrideEndpoint;
+    }
+
+    public void setOverrideEndpoint(Boolean overrideEndpoint) {
+        this.overrideEndpoint = overrideEndpoint;
+    }
+
     public String getQueryExecutionId() {
         return queryExecutionId;
     }
@@ -369,6 +391,14 @@ public class Athena2ComponentConfiguration
 
     public void setRetry(String retry) {
         this.retry = retry;
+    }
+
+    public String getUriEndpointOverride() {
+        return uriEndpointOverride;
+    }
+
+    public void setUriEndpointOverride(String uriEndpointOverride) {
+        this.uriEndpointOverride = uriEndpointOverride;
     }
 
     public Long getWaitTimeout() {
@@ -505,6 +535,14 @@ public class Athena2ComponentConfiguration
 
     public void setSessionToken(String sessionToken) {
         this.sessionToken = sessionToken;
+    }
+
+    public Boolean getTrustAllCertificates() {
+        return trustAllCertificates;
+    }
+
+    public void setTrustAllCertificates(Boolean trustAllCertificates) {
+        this.trustAllCertificates = trustAllCertificates;
     }
 
     public Boolean getUseDefaultCredentialsProvider() {

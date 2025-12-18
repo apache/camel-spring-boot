@@ -155,6 +155,13 @@
       "defaultValue": "streamlist"
     },
     {
+      "name": "camel.component.aws2-athena.override-endpoint",
+      "type": "java.lang.Boolean",
+      "description": "Set the need for overriding the endpoint. This option needs to be used in combination with the uriEndpointOverride option",
+      "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.aws2-athena.profile-credentials-name",
       "type": "java.lang.String",
       "description": "If using a profile credentials provider, this parameter will set the profile name",
@@ -221,6 +228,19 @@
       "name": "camel.component.aws2-athena.session-token",
       "type": "java.lang.String",
       "description": "Amazon AWS Session Token used when the user needs to assume an IAM role",
+      "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-athena.trust-all-certificates",
+      "type": "java.lang.Boolean",
+      "description": "If we want to trust all certificates in case of overriding the endpoint",
+      "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-athena.uri-endpoint-override",
+      "type": "java.lang.String",
+      "description": "Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option",
       "sourceType": "org.apache.camel.component.aws2.athena.springboot.Athena2ComponentConfiguration"
     },
     {

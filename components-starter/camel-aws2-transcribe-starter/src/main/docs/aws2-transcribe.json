@@ -103,10 +103,10 @@
     },
     {
       "name": "camel.component.aws2-transcribe.proxy-protocol",
-      "type": "java.lang.String",
+      "type": "software.amazon.awssdk.core.Protocol",
       "description": "To define a proxy protocol when instantiating the Transcribe client",
       "sourceType": "org.apache.camel.component.aws2.transcribe.springboot.Transcribe2ComponentConfiguration",
-      "defaultValue": "HTTPS"
+      "defaultValue": "https"
     },
     {
       "name": "camel.component.aws2-transcribe.proxy-username",

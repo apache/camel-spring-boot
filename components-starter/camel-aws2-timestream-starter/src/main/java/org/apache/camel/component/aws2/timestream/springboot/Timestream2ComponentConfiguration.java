@@ -158,6 +158,16 @@ public class Timestream2ComponentConfiguration
      * Amazon AWS Secret Key
      */
     private String secretKey;
+    /**
+     * Amazon AWS Session Token used when the user needs to assume an IAM role
+     */
+    private String sessionToken;
+    /**
+     * Set whether the Timestream client should expect to use Session
+     * Credentials. This is useful in a situation in which the user needs to
+     * assume an IAM role for doing operations in Timestream.
+     */
+    private Boolean useSessionCredentials = false;
 
     public Timestream2Configuration getConfiguration() {
         return configuration;
@@ -329,5 +339,21 @@ public class Timestream2ComponentConfiguration
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public String getSessionToken() {
+        return sessionToken;
+    }
+
+    public void setSessionToken(String sessionToken) {
+        this.sessionToken = sessionToken;
+    }
+
+    public Boolean getUseSessionCredentials() {
+        return useSessionCredentials;
+    }
+
+    public void setUseSessionCredentials(Boolean useSessionCredentials) {
+        this.useSessionCredentials = useSessionCredentials;
     }
 }

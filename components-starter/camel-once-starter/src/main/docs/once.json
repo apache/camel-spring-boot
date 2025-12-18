@@ -1,0 +1,60 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.once",
+      "type": "org.apache.camel.component.once.springboot.OnceComponentConfiguration",
+      "sourceType": "org.apache.camel.component.once.springboot.OnceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.once.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.once.springboot.OnceComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.once.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.once.springboot.OnceComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.once.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.once.springboot.OnceComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.once.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.once.delay",
+      "type": "java.lang.Long",
+      "description": "The number of milliseconds to wait before triggering. Use 0 or negative to fire as soon as possible. The default value is 1000.",
+      "sourceType": "org.apache.camel.component.once.springboot.OnceComponentConfiguration",
+      "defaultValue": 1000
+    },
+    {
+      "name": "camel.component.once.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the once component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.once.springboot.OnceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.once.languages",
+      "type": "java.lang.Boolean",
+      "description": "Whether Camel languages are supported such as simple,groovy.",
+      "sourceType": "org.apache.camel.component.once.springboot.OnceComponentConfiguration",
+      "defaultValue": true
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
