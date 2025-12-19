@@ -21,26 +21,34 @@ import io.micrometer.core.instrument.observation.DefaultMeterObservationHandler;
 import io.micrometer.observation.Observation;
 import io.micrometer.observation.ObservationRegistry;
 import io.micrometer.tracing.Tracer;
+import io.micrometer.tracing.handler.DefaultTracingObservationHandler;
 import io.micrometer.tracing.handler.TracingAwareMeterObservationHandler;
+import io.micrometer.tracing.otel.bridge.OtelCurrentTraceContext;
+import io.micrometer.tracing.otel.bridge.OtelTracer;
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.context.propagation.ContextPropagators;
+import io.opentelemetry.sdk.trace.SdkTracerProvider;
 
-import org.springframework.boot.actuate.autoconfigure.observation.ObservationRegistryCustomizer;
+import org.springframework.boot.micrometer.observation.autoconfigure.ObservationRegistryCustomizer;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.observation.MicrometerObservationTracer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalManagementPort;
-import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.boot.restclient.RestTemplateBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -109,7 +117,7 @@ public class ObservationAutoConfigurationTest {
         ResponseEntity<String> metricsResponse = restTemplateBuilder
                 .rootUri("http://localhost:" + managementPort + "/actuator")
                 .build()
-                .exchange("/metrics", HttpMethod.GET, new HttpEntity<>(null), String.class);
+                .exchange("/metrics", HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), String.class);
 
         assertThat(metricsResponse.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
         assertThat(metricsResponse.getBody()).contains("camel.component");
@@ -118,7 +126,7 @@ public class ObservationAutoConfigurationTest {
         ResponseEntity<String> camelMetricResponse = restTemplateBuilder
                 .rootUri("http://localhost:" + managementPort + "/actuator")
                 .build()
-                .exchange("/metrics/camel.component", HttpMethod.GET, new HttpEntity<>(null), String.class);
+                .exchange("/metrics/camel.component", HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), String.class);
 
         assertThat(camelMetricResponse.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
         assertThat(camelMetricResponse.getBody()).contains("camel.component", "camel-direct");
@@ -141,18 +149,35 @@ public class ObservationAutoConfigurationTest {
         }
 
         /**
-         * Customizer to register a real MeterObservationHandler that records metrics.
+         * Provide a Tracer bean for testing purposes using OpenTelemetry.
+         */
+        @Bean
+        public Tracer tracer() {
+            SdkTracerProvider sdkTracerProvider = SdkTracerProvider.builder().build();
+            io.opentelemetry.api.trace.Tracer otelTracer = sdkTracerProvider.get("test");
+            ContextPropagators contextPropagators = ContextPropagators.noop();
+            OtelCurrentTraceContext otelCurrentTraceContext = new OtelCurrentTraceContext();
+            return new OtelTracer(otelTracer, otelCurrentTraceContext, null);
+        }
+
+        /**
+         * Customizer to register observation handlers for both tracing and metrics.
          * This replaces the no-op handler from ObservationAutoConfiguration for testing purposes.
          */
         @Bean
         public ObservationRegistryCustomizer<ObservationRegistry> metricsObservationRegistryCustomizer(
                 MeterRegistry meterRegistry, Tracer tracer) {
             return registry -> {
-                TracingAwareMeterObservationHandler<Observation.Context> handler = new TracingAwareMeterObservationHandler<>(
+                // Register TracingObservationHandler first to set up tracing context
+                registry.observationConfig()
+                    .observationHandler(new DefaultTracingObservationHandler(tracer));
+
+                // Then register TracingAwareMeterObservationHandler for metrics
+                TracingAwareMeterObservationHandler<Observation.Context> meterHandler = new TracingAwareMeterObservationHandler<>(
                     new DefaultMeterObservationHandler(meterRegistry),
                     tracer
                 );
-                registry.observationConfig().observationHandler(handler);
+                registry.observationConfig().observationHandler(meterHandler);
             };
         }
     }

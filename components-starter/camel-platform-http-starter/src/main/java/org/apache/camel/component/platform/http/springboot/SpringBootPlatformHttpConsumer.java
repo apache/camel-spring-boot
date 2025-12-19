@@ -210,7 +210,7 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
 
         @Override
         public String removeCookie(String cookieName) {
-            Cookie cookieToRemove = new Cookie(cookieName, null);
+            Cookie cookieToRemove = new Cookie(cookieName, "");
             cookieToRemove.setPath(cookieConfiguration.getCookiePath());
             // set max age to 0 to delete the cookie
             cookieToRemove.setMaxAge(0);

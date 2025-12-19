@@ -34,11 +34,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass(name = { "org.springframework.boot.actuate.autoconfigure.observation.ObservationAutoConfiguration",
-        "org.springframework.boot.actuate.autoconfigure.tracing.MicrometerTracingAutoConfiguration" })
+@ConditionalOnClass(name = { "org.springframework.boot.micrometer.observation.autoconfigure.ObservationAutoConfiguration" })
 @AutoConfigureAfter(name = {
-        "org.springframework.boot.actuate.autoconfigure.observation.ObservationAutoConfiguration",
-            "org.springframework.boot.actuate.autoconfigure.tracing.MicrometerTracingAutoConfiguration" })
+        "org.springframework.boot.micrometer.observation.autoconfigure.ObservationAutoConfiguration" })
 @EnableConfigurationProperties(ObservationConfigurationProperties.class)
 @ConditionalOnProperty(value = "camel.observation.enabled", matchIfMissing = true)
 public class ObservationAutoConfiguration {
