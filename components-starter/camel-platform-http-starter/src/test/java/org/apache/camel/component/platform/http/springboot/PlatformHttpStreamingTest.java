@@ -25,12 +25,12 @@ import org.apache.camel.util.IOHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.security.autoconfigure.SecurityAutoConfiguration;
-import org.springframework.boot.security.oauth2.client.autoconfigure.OAuth2ClientAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -45,7 +45,7 @@ import static org.hamcrest.Matchers.emptyOrNullString;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@EnableAutoConfiguration(exclude = {OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class})
+@EnableAutoConfiguration
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
         SpringBootPlatformHttpTest.class, PlatformHttpStreamingTest.TestConfiguration.class,
@@ -157,6 +157,14 @@ public class PlatformHttpStreamingTest {
 
     @Configuration
     public static class TestConfiguration {
+
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+            http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+                .csrf(csrf -> csrf.disable());
+            return http.build();
+        }
+
         @Bean
         public RouteBuilder routeBuilder() {
             return new RouteBuilder() {

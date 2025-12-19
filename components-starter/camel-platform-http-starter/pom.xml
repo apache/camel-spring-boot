@@ -84,6 +84,12 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <version>${spring-boot-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
       <version>${spring-boot-version}</version>
       <scope>test</scope>
@@ -108,6 +114,11 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-restclient-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-webmvc-test</artifactId>
       <version>${spring-boot-version}</version>
       <scope>test</scope>
@@ -121,6 +132,11 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-aop</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>

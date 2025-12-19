@@ -31,9 +31,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.resttestclient.TestRestTemplate;
-import org.springframework.boot.security.autoconfigure.SecurityAutoConfiguration;
-import org.springframework.boot.security.oauth2.client.autoconfigure.OAuth2ClientAutoConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
+import org.springframework.test.web.servlet.client.RestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
@@ -46,15 +47,16 @@ import static org.hamcrest.Matchers.emptyString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
-@EnableAutoConfiguration(exclude = {OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class})
+@EnableAutoConfiguration
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
         SpringBootPlatformHttpValidationTest.class, SpringBootPlatformHttpValidationTest.TestConfiguration.class,
         PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class, })
+@AutoConfigureRestTestClient
 public class SpringBootPlatformHttpValidationTest {
 
     @Autowired
-    TestRestTemplate restTemplate;
+    RestTestClient restTestClient;
 
     @Autowired
     CamelContext camelContext;
@@ -69,6 +71,13 @@ public class SpringBootPlatformHttpValidationTest {
 
     @Configuration
     public static class TestConfiguration {
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+            http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+                .csrf(csrf -> csrf.disable());
+            return http.build();
+        }
+
 
         @Bean
         public RouteBuilder springBootPlatformHttpRestDSLRouteBuilder() {

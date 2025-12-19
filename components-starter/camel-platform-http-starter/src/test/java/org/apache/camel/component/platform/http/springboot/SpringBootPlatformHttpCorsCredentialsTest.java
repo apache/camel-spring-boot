@@ -24,17 +24,17 @@ import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.security.oauth2.client.autoconfigure.OAuth2ClientAutoConfiguration;
-import org.springframework.boot.security.autoconfigure.SecurityAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-@EnableAutoConfiguration(exclude = {OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class})
+@EnableAutoConfiguration
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
         SpringBootPlatformHttpCorsCredentialsTest.class, SpringBootPlatformHttpCorsCredentialsTest.TestConfiguration.class,
@@ -52,6 +52,14 @@ public class SpringBootPlatformHttpCorsCredentialsTest {
 
     @Configuration
     public static class TestConfiguration {
+
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+            http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+                .csrf(csrf -> csrf.disable());
+            return http.build();
+        }
+
         @Bean
         public RouteBuilder springBootPlatformHttpRestDSLRouteBuilder() {
             return new RouteBuilder() {
