@@ -62,6 +62,13 @@
       "type": "java.lang.Long",
       "description": "The period in milliseconds after which the request should be timed out.",
       "sourceType": "org.apache.camel.component.platform.http.springboot.PlatformHttpComponentConfiguration"
+    },
+    {
+      "name": "camel.component.platform-http.server-request-validation",
+      "type": "java.lang.Boolean",
+      "description": "Whether HTTP server should do preliminary validation of incoming requests, validating if Content-Type\/Accept header, matches what is allowed according to consumes\/produces configuration (if set). If validation fails HTTP Status 415\/406 is returned. The HTTP server performs this validation before Camel is involved, and as such if validation fails then Camel is never activated. Setting this option to false, allows Camel to process any incoming requests such as to do custom validation or all requests must be handled by Camel.",
+      "sourceType": "org.apache.camel.component.platform.http.springboot.PlatformHttpComponentConfiguration",
+      "defaultValue": true
     }
   ],
   "hints": [],

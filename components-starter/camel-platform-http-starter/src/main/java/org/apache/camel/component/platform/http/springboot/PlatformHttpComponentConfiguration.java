@@ -64,6 +64,17 @@ public class PlatformHttpComponentConfiguration
      */
     private Long requestTimeout;
     /**
+     * Whether HTTP server should do preliminary validation of incoming
+     * requests, validating if Content-Type/Accept header, matches what is
+     * allowed according to consumes/produces configuration (if set). If
+     * validation fails HTTP Status 415/406 is returned. The HTTP server
+     * performs this validation before Camel is involved, and as such if
+     * validation fails then Camel is never activated. Setting this option to
+     * false, allows Camel to process any incoming requests such as to do custom
+     * validation or all requests must be handled by Camel.
+     */
+    private Boolean serverRequestValidation = true;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -106,6 +117,14 @@ public class PlatformHttpComponentConfiguration
 
     public void setRequestTimeout(Long requestTimeout) {
         this.requestTimeout = requestTimeout;
+    }
+
+    public Boolean getServerRequestValidation() {
+        return serverRequestValidation;
+    }
+
+    public void setServerRequestValidation(Boolean serverRequestValidation) {
+        this.serverRequestValidation = serverRequestValidation;
     }
 
     public Boolean getAutowiredEnabled() {

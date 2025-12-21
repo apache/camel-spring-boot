@@ -59,7 +59,7 @@ public class CamelRequestHandlerMapping extends RequestMappingHandlerMapping imp
     @Override
     protected String[] getCandidateBeanNames() {
         // no candidates
-        return new String[] {};
+        return new String[]{};
     }
 
     @Override
@@ -202,12 +202,14 @@ public class CamelRequestHandlerMapping extends RequestMappingHandlerMapping imp
                 .methods(methods)
                 .options(this.getBuilderConfiguration());
 
-        if (model.getConsumes() != null
+        if (component.isServerRequestValidation()) {
+            if (model.getConsumes() != null && rm != null
                 && (RequestMethod.POST.name().equals(rm.name()) || RequestMethod.PUT.name().equals(rm.name()) || RequestMethod.PATCH.name().equals(rm.name()))) {
-            info.consumes(model.getConsumes().split(","));
-        }
-        if (model.getProduces() != null) {
-            info.produces(model.getProduces().split(","));
+                info.consumes(model.getConsumes().split(","));
+            }
+            if (model.getProduces() != null) {
+                info.produces(model.getProduces().split(","));
+            }
         }
 
         result.add(info.build());
