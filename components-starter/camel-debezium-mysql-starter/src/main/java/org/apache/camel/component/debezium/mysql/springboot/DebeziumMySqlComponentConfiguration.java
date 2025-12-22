@@ -195,6 +195,12 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String customMetricTags;
     /**
+     * Regular expression identifying configuration keys whose values should be
+     * masked. When set, this custom pattern replaces Debeziums default password
+     * masking pattern.
+     */
+    private String customSanitizePattern = "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret";
+    /**
      * A comma-separated list of regular expressions that match database names
      * to be excluded from monitoring
      */
@@ -597,7 +603,9 @@ public class DebeziumMySqlComponentConfiguration
     private String schemaNameAdjustmentMode = "none";
     /**
      * The name of the data collection that is used to send signals/commands to
-     * Debezium. Signaling is disabled when not set.
+     * Debezium. For multi-partition mode connectors, multiple signal data
+     * collections can be specified as a comma-separated list. Signaling is
+     * disabled when not set.
      */
     private String signalDataCollection;
     /**
@@ -1019,6 +1027,14 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setCustomMetricTags(String customMetricTags) {
         this.customMetricTags = customMetricTags;
+    }
+
+    public String getCustomSanitizePattern() {
+        return customSanitizePattern;
+    }
+
+    public void setCustomSanitizePattern(String customSanitizePattern) {
+        this.customSanitizePattern = customSanitizePattern;
     }
 
     public String getDatabaseExcludeList() {

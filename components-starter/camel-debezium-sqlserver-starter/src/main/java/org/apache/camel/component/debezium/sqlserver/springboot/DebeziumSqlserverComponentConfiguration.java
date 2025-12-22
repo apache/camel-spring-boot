@@ -170,6 +170,12 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private String customMetricTags;
     /**
+     * Regular expression identifying configuration keys whose values should be
+     * masked. When set, this custom pattern replaces Debeziums default password
+     * masking pattern.
+     */
+    private String customSanitizePattern = "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret";
+    /**
      * Resolvable hostname or IP address of the database server.
      */
     private String databaseHostname;
@@ -201,12 +207,12 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private String databaseUser;
     /**
-     * Controls how the connector queries CDC data. The default is 'function',
-     * which means the data is queried by means of calling
-     * cdc.fn_cdc_get_all_changes_# function. The value of 'direct' makes the
-     * connector to query the change tables directly.
+     * Controls how the connector queries CDC data. The default is 'direct',
+     * which makes the connector to query the change tables directly. The value
+     * of 'function' means the data is queried by means of calling
+     * cdc.fn_cdc_get_all_changes_# function.
      */
-    private String dataQueryMode = "function";
+    private String dataQueryMode = "direct";
     /**
      * A comma-separated list of regular expressions matching the
      * database-specific data type names that adds the data type's original type
@@ -461,7 +467,9 @@ public class DebeziumSqlserverComponentConfiguration
     private String schemaNameAdjustmentMode = "none";
     /**
      * The name of the data collection that is used to send signals/commands to
-     * Debezium. Signaling is disabled when not set.
+     * Debezium. For multi-partition mode connectors, multiple signal data
+     * collections can be specified as a comma-separated list. Signaling is
+     * disabled when not set.
      */
     private String signalDataCollection;
     /**
@@ -834,6 +842,14 @@ public class DebeziumSqlserverComponentConfiguration
 
     public void setCustomMetricTags(String customMetricTags) {
         this.customMetricTags = customMetricTags;
+    }
+
+    public String getCustomSanitizePattern() {
+        return customSanitizePattern;
+    }
+
+    public void setCustomSanitizePattern(String customSanitizePattern) {
+        this.customSanitizePattern = customSanitizePattern;
     }
 
     public String getDatabaseHostname() {

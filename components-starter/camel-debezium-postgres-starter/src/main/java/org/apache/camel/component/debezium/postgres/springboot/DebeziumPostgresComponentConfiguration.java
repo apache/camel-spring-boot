@@ -170,6 +170,12 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String customMetricTags;
     /**
+     * Regular expression identifying configuration keys whose values should be
+     * masked. When set, this custom pattern replaces Debeziums default password
+     * masking pattern.
+     */
+    private String customSanitizePattern = "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret";
+    /**
      * The name of the database from which the connector should capture changes
      */
     private String databaseDbname;
@@ -292,12 +298,6 @@ public class DebeziumPostgresComponentConfiguration
      */
     private Boolean extendedHeadersEnabled = true;
     /**
-     * Boolean to determine if Debezium should flush LSN in the source postgres
-     * database. If set to false, user will have to flush the LSN manually
-     * outside Debezium.
-     */
-    private Boolean flushLsnSource = true;
-    /**
      * Specify the action to take when a guardrail collections limit is
      * exceeded: 'warn' (the default) logs a warning message and continues
      * processing; 'fail' stops the connector with an error.
@@ -367,6 +367,16 @@ public class DebeziumPostgresComponentConfiguration
      * microseconds
      */
     private String intervalHandlingMode = "numeric";
+    /**
+     * Determines the LSN flushing strategy. Options include: 'connector'
+     * (default) for Debezium managed LSN flushing (replaces deprecated
+     * flush.lsn.source=true); 'manual' for externally managed LSN flushing
+     * (replaces deprecated flush.lsn.source=false); 'connector_and_driver' for
+     * Debezium managed LSN flushing with the pgjdbc driver flushing unmonitored
+     * LSNsusing server keepalive LSN, which prevents WAL growth on low-activity
+     * databases.
+     */
+    private String lsnFlushMode;
     /**
      * Action to take when an LSN flush timeout occurs. Options include: 'fail'
      * (default) to fail the connector; 'warn' to log a warning and continue
@@ -572,7 +582,9 @@ public class DebeziumPostgresComponentConfiguration
     private String schemaRefreshMode = "columns_diff";
     /**
      * The name of the data collection that is used to send signals/commands to
-     * Debezium. Signaling is disabled when not set.
+     * Debezium. For multi-partition mode connectors, multiple signal data
+     * collections can be specified as a comma-separated list. Signaling is
+     * disabled when not set.
      */
     private String signalDataCollection;
     /**
@@ -1026,6 +1038,14 @@ public class DebeziumPostgresComponentConfiguration
         this.customMetricTags = customMetricTags;
     }
 
+    public String getCustomSanitizePattern() {
+        return customSanitizePattern;
+    }
+
+    public void setCustomSanitizePattern(String customSanitizePattern) {
+        this.customSanitizePattern = customSanitizePattern;
+    }
+
     public String getDatabaseDbname() {
         return databaseDbname;
     }
@@ -1188,14 +1208,6 @@ public class DebeziumPostgresComponentConfiguration
         this.extendedHeadersEnabled = extendedHeadersEnabled;
     }
 
-    public Boolean getFlushLsnSource() {
-        return flushLsnSource;
-    }
-
-    public void setFlushLsnSource(Boolean flushLsnSource) {
-        this.flushLsnSource = flushLsnSource;
-    }
-
     public String getGuardrailCollectionsLimitAction() {
         return guardrailCollectionsLimitAction;
     }
@@ -1285,6 +1297,14 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setIntervalHandlingMode(String intervalHandlingMode) {
         this.intervalHandlingMode = intervalHandlingMode;
+    }
+
+    public String getLsnFlushMode() {
+        return lsnFlushMode;
+    }
+
+    public void setLsnFlushMode(String lsnFlushMode) {
+        this.lsnFlushMode = lsnFlushMode;
     }
 
     public String getLsnFlushTimeoutAction() {
