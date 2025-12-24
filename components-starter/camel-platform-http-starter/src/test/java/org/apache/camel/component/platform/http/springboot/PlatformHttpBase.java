@@ -22,17 +22,20 @@ import org.assertj.core.api.Assertions;
 import org.awaitility.Awaitility;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
+import org.springframework.test.web.servlet.client.RestTestClient;
+import org.springframework.test.web.servlet.client.EntityExchangeResult;
 
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@AutoConfigureRestTestClient
 abstract class PlatformHttpBase {
 
     @Autowired
-    TestRestTemplate restTemplate;
+    RestTestClient restTestClient;
 
     @Autowired
     CamelContext camelContext;
@@ -41,14 +44,23 @@ abstract class PlatformHttpBase {
     public void testGet() throws Exception {
         waitUntilRouteIsStarted(1, getGetRouteId());
 
-        Assertions.assertThat(restTemplate.getForEntity("/myget", String.class).getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
+        EntityExchangeResult<String> result = restTestClient.get().uri("/myget")
+                .exchange()
+                .expectBody(String.class)
+                .returnResult();
+        Assertions.assertThat(result.getStatus()).isEqualTo(HttpStatusCode.valueOf(200));
     }
 
     @Test
     public void testPost() throws Exception {
         waitUntilRouteIsStarted(1, getPostRouteId());
 
-        Assertions.assertThat(restTemplate.postForEntity("/mypost", "test", String.class).getBody()).isEqualTo("TEST");
+        EntityExchangeResult<String> result = restTestClient.post().uri("/mypost")
+                .body("test")
+                .exchange()
+                .expectBody(String.class)
+                .returnResult();
+        Assertions.assertThat(result.getResponseBody()).isEqualTo("TEST");
     }
 
     protected void waitUntilRouteIsStarted(int atMostSeconds, String routeId) {

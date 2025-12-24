@@ -22,10 +22,10 @@ import org.apache.camel.component.springrabbit.MessagePropertiesConverter;
 import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.amqp.core.AmqpAdmin;
+import org.springframework.amqp.rabbit.config.StatelessRetryOperationsInterceptor;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.retry.interceptor.RetryOperationsInterceptor;
 import org.springframework.util.ErrorHandler;
 
 /**
@@ -153,9 +153,9 @@ public class SpringRabbitMQComponentConfiguration
      * Custom retry configuration to use. If this is configured then the other
      * settings such as maximumRetryAttempts for retry are not in use. The
      * option is a
-     * org.springframework.retry.interceptor.RetryOperationsInterceptor type.
+     * org.springframework.amqp.rabbit.config.StatelessRetryOperationsInterceptor type.
      */
-    private RetryOperationsInterceptor retry;
+    private StatelessRetryOperationsInterceptor retry;
     /**
      * The time to wait for workers in milliseconds after the container is
      * stopped. If any workers are active when the shutdown signal comes they
@@ -388,11 +388,11 @@ public class SpringRabbitMQComponentConfiguration
         this.prefetchCount = prefetchCount;
     }
 
-    public RetryOperationsInterceptor getRetry() {
+    public StatelessRetryOperationsInterceptor getRetry() {
         return retry;
     }
 
-    public void setRetry(RetryOperationsInterceptor retry) {
+    public void setRetry(StatelessRetryOperationsInterceptor retry) {
         this.retry = retry;
     }
 
