@@ -394,7 +394,11 @@ public final class ArquillianPackager {
         ignore.add("org.scala-lang");
         ignore.add("org.datanucleus");
         ignore.add("org.apache.hive");
-
+        ignore.add("org.junit.platform");
+        ignore.add("org.junit.jupiter");
+        ignore.add("org.apache.logging.log4j");
+        ignore.add("commons-codec");
+        
         // these are from camel-spring-boot and not camel repo so ignore them
         ignore.add("org.apache.camel:camel-spring-boot");
 
