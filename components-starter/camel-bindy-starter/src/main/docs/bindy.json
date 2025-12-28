@@ -54,6 +54,13 @@
       "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
+      "name": "camel.dataformat.bindy-csv.default-value-string-as-null",
+      "type": "java.lang.Boolean",
+      "description": "To change the default value for string types to be null instead of an empty string.",
+      "sourceType": "org.apache.camel.dataformat.bindy.csv.springboot.BindyCsvDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.dataformat.bindy-csv.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the bindyCsv data format. This is enabled by default.",
@@ -97,6 +104,13 @@
       "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
+      "name": "camel.dataformat.bindy-fixed.default-value-string-as-null",
+      "type": "java.lang.Boolean",
+      "description": "To change the default value for string types to be null instead of an empty string.",
+      "sourceType": "org.apache.camel.dataformat.bindy.fixed.springboot.BindyFixedLengthDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.dataformat.bindy-fixed.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the bindyFixed data format. This is enabled by default.",
@@ -138,6 +152,13 @@
       "name": "camel.dataformat.bindy-kvp.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.bindy-kvp.default-value-string-as-null",
+      "type": "java.lang.Boolean",
+      "description": "To change the default value for string types to be null instead of an empty string.",
+      "sourceType": "org.apache.camel.dataformat.bindy.kvp.springboot.BindyKeyValuePairDataFormatConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.dataformat.bindy-kvp.enabled",

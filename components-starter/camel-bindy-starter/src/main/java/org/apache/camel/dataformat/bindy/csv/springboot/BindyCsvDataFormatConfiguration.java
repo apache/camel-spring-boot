@@ -44,6 +44,11 @@ public class BindyCsvDataFormatConfiguration
      */
     private String classType;
     /**
+     * To change the default value for string types to be null instead of an
+     * empty string.
+     */
+    private Boolean defaultValueStringAsNull = false;
+    /**
      * Whether to allow empty streams in the unmarshal process. If true, no
      * exception will be thrown when a body without records is provided.
      */
@@ -73,6 +78,14 @@ public class BindyCsvDataFormatConfiguration
 
     public void setClassType(String classType) {
         this.classType = classType;
+    }
+
+    public Boolean getDefaultValueStringAsNull() {
+        return defaultValueStringAsNull;
+    }
+
+    public void setDefaultValueStringAsNull(Boolean defaultValueStringAsNull) {
+        this.defaultValueStringAsNull = defaultValueStringAsNull;
     }
 
     public Boolean getAllowEmptyStream() {
