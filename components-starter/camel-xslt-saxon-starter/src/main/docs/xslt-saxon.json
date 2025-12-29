@@ -100,6 +100,13 @@
       "type": "org.apache.camel.component.xslt.XsltUriResolverFactory",
       "description": "To use a custom UriResolver which depends on a dynamic endpoint resource URI. Should not be used together with the option 'uriResolver'. The option is a org.apache.camel.component.xslt.XsltUriResolverFactory type.",
       "sourceType": "org.apache.camel.component.xslt.saxon.springboot.XsltSaxonComponentConfiguration"
+    },
+    {
+      "name": "camel.component.xslt-saxon.xpath-total-op-limit",
+      "type": "java.lang.Integer",
+      "description": "Limits the total number of XPath operators in an XSL Stylesheet. The default (from JDK) is 10000. Configuring this corresponds to setting JVM system property: jdk.xml.xpathTotalOpLimit",
+      "sourceType": "org.apache.camel.component.xslt.saxon.springboot.XsltSaxonComponentConfiguration",
+      "defaultValue": 10000
     }
   ],
   "hints": [],
