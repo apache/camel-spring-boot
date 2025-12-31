@@ -202,7 +202,7 @@
     {
       "name": "camel.component.consul.connect-timeout",
       "type": "java.time.Duration",
-      "description": "Connect timeout for OkHttpClient",
+      "description": "Connect timeout",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
@@ -282,7 +282,7 @@
     {
       "name": "camel.component.consul.read-timeout",
       "type": "java.time.Duration",
-      "description": "Read timeout for OkHttpClient",
+      "description": "Read timeout",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
@@ -333,7 +333,7 @@
     {
       "name": "camel.component.consul.write-timeout",
       "type": "java.time.Duration",
-      "description": "Write timeout for OkHttpClient",
+      "description": "Write timeout",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
@@ -351,14 +351,6 @@
       "description": "The time (in seconds) to live for TTL checks. Default is 1 minute.",
       "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
       "defaultValue": 60,
-      "deprecated": true,
-      "deprecation": {}
-    },
-    {
-      "name": "camel.cloud.consul.dc",
-      "type": "java.lang.String",
-      "description": "Use datacenter instead",
-      "sourceType": "org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryConfiguration",
       "deprecated": true,
       "deprecation": {}
     },

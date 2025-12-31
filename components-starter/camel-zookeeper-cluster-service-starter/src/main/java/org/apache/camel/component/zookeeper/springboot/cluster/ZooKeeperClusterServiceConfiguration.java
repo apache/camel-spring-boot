@@ -83,13 +83,13 @@ public class ZooKeeperClusterServiceConfiguration extends ZooKeeperCuratorConfig
     //
     // Fields copied from ZooKeeperCuratorConfiguration to add
     // javadoc which is used by spring-boot-configuration-processor
-    // to generate descritpions for inherited properties
+    // to generate descriptions for inherited properties
     // ------------------------------------------
 
     /**
      * The Zookeeper server hosts (multiple servers can be separated by comma).
      */
-    private List<String> nodes;
+    private String nodes;
 
     /**
      * The base path to store in ZooKeeper.
@@ -107,11 +107,6 @@ public class ZooKeeperClusterServiceConfiguration extends ZooKeeperCuratorConfig
     private long reconnectBaseSleepTime;
 
     /**
-     * ReconnectBaseSleepTime TimeUnit. Default is TimeUnit.MILLISECONDS.
-     */
-    private TimeUnit reconnectBaseSleepTimeUnit = TimeUnit.MILLISECONDS;
-
-    /**
      * Max number of times to retry.
      */
     private int reconnectMaxRetries = 3;
@@ -122,19 +117,9 @@ public class ZooKeeperClusterServiceConfiguration extends ZooKeeperCuratorConfig
     private long reconnectMaxSleepTime = Integer.MAX_VALUE;
 
     /**
-     * ReconnectMaxSleepTimeUnit TimeUnit. Default is TimeUnit.MILLISECONDS.
-     */
-    private TimeUnit reconnectMaxSleepTimeUnit = TimeUnit.MILLISECONDS;
-
-    /**
      * Session timeout.
      */
     private long sessionTimeout = 60000;
-
-    /**
-     * Session timeout TimeUnit. Default is TimeUnit.MILLISECONDS.
-     */
-    private TimeUnit sessionTimeoutUnit = TimeUnit.MILLISECONDS;
 
     /**
      * Connection timeout.
@@ -142,29 +127,14 @@ public class ZooKeeperClusterServiceConfiguration extends ZooKeeperCuratorConfig
     private long connectionTimeout = 15000;
 
     /**
-     * Connection timeout TimeUnit. Default is TimeUnit.MILLISECONDS.
-     */
-    private TimeUnit connectionTimeoutUnit = TimeUnit.MILLISECONDS;
-
-    /**
      * Time to wait during close to join background threads.
      */
     private long maxCloseWait = 1000;
 
     /**
-     * MaxCloseWait TimeUnit. Default is TimeUnit.MILLISECONDS.
-     */
-    private TimeUnit maxCloseWaitUnit = TimeUnit.MILLISECONDS;
-
-    /**
      * Zookeeper CuratorFramework-style client.
      */
     private CuratorFramework curatorFramework;
-
-    /**
-     * List of AuthInfo objects with scheme and auth.
-     */
-    private List<AuthInfo> authInfoList;
 
     /**
      * Retry policy to use.

@@ -51,16 +51,16 @@ public class ConsulClusterServiceAutoConfiguration {
         Optional.ofNullable(configuration.getAclToken()).ifPresent(service::setAclToken);
         Optional.ofNullable(configuration.getDatacenter()).ifPresent(service::setDatacenter);
         Optional.ofNullable(configuration.getBlockSeconds()).ifPresent(service::setBlockSeconds);
-        Optional.ofNullable(configuration.getConnectTimeout()).ifPresent(service::setConnectTimeout);
+        Optional.ofNullable(configuration.getConnectTimeout()).ifPresent(d -> service.setConnectTimeout((int) d.toMillis()));
         Optional.ofNullable(configuration.getUrl()).ifPresent(service::setUrl);
-        Optional.ofNullable(configuration.getSessionLockDelay()).ifPresent(service::setLockDelay);
+        Optional.of(configuration.getSessionLockDelay()).ifPresent(service::setSessionLockDelay);
         Optional.ofNullable(configuration.getPassword()).ifPresent(service::setPassword);
-        Optional.ofNullable(configuration.getReadTimeout()).ifPresent(service::setReadTimeout);
+        Optional.ofNullable(configuration.getReadTimeout()).ifPresent(d -> service.setReadTimeout((int) d.toMillis()));
         Optional.ofNullable(configuration.getRootPath()).ifPresent(service::setRootPath);
         Optional.ofNullable(configuration.getSslContextParameters()).ifPresent(service::setSslContextParameters);
-        Optional.ofNullable(configuration.getSessionTtl()).ifPresent(service::setTtl);
+        Optional.of(configuration.getSessionTtl()).ifPresent(service::setSessionTtl);
         Optional.ofNullable(configuration.getUserName()).ifPresent(service::setUserName);
-        Optional.ofNullable(configuration.getWriteTimeout()).ifPresent(service::setWriteTimeout);
+        Optional.ofNullable(configuration.getWriteTimeout()).ifPresent(d -> service.setWriteTimeout((int) d.toMillis()));
         service.setConfiguration(configuration);
 
         return service;

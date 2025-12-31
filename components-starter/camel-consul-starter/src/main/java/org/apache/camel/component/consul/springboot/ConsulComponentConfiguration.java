@@ -42,7 +42,7 @@ public class ConsulComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Connect timeout for OkHttpClient
+     * Connect timeout
      */
     private Duration connectTimeout;
     /**
@@ -55,7 +55,7 @@ public class ConsulComponentConfiguration
      */
     private Boolean pingInstance = true;
     /**
-     * Read timeout for OkHttpClient
+     * Read timeout
      */
     private Duration readTimeout;
     /**
@@ -72,7 +72,7 @@ public class ConsulComponentConfiguration
      */
     private Boolean valueAsString = false;
     /**
-     * Write timeout for OkHttpClient
+     * Write timeout
      */
     private Duration writeTimeout;
     /**

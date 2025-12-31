@@ -71,8 +71,8 @@ public class KubernetesClusterServiceAutoConfigurationTest {
 
                     assertEquals("myid1", clusterService.getId());
                     assertEquals("http://myurl:9000", clusterService.getMasterUrl());
-                    assertEquals(Integer.valueOf(1234), clusterService.getConnectionTimeoutMillis());
-                    assertEquals("ns1", clusterService.getKubernetesNamespace());
+                    assertEquals(Integer.valueOf(1234), clusterService.getConnectionTimeout());
+                    assertEquals("ns1", clusterService.getNamespace());
                     assertEquals("cm", clusterService.getKubernetesResourceName());
                     assertEquals("mypod1", clusterService.getPodName());
 

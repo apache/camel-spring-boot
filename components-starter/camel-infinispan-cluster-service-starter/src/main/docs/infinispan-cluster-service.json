@@ -29,6 +29,11 @@
       "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
     },
     {
+      "name": "camel.cluster.infinispan.remote.configuration-uri",
+      "type": "java.lang.String",
+      "sourceType": "org.apache.camel.component.infinispan.remote.springboot.cluster.InfinispanRemoteClusterServiceConfiguration"
+    },
+    {
       "name": "camel.cluster.infinispan.remote.enabled",
       "type": "java.lang.Boolean",
       "description": "Sets if the zookeeper cluster service should be enabled or not, default is true.",

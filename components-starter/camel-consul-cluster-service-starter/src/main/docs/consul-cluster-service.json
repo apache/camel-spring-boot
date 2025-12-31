@@ -176,14 +176,6 @@
       "type": "java.time.Duration",
       "description": "Write timeout for OkHttpClient",
       "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration"
-    },
-    {
-      "name": "camel.cluster.consul.dc",
-      "type": "java.lang.String",
-      "description": "Use datacenter instead",
-      "sourceType": "org.apache.camel.component.consul.springboot.cluster.ConsulClusterServiceConfiguration",
-      "deprecated": true,
-      "deprecation": {}
     }
   ],
   "hints": [],

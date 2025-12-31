@@ -16,7 +16,6 @@
     {
       "name": "camel.cluster.zookeeper.auth-info-list",
       "type": "java.util.List<org.apache.curator.framework.AuthInfo>",
-      "description": "List of AuthInfo objects with scheme and auth.",
       "sourceType": "org.apache.camel.component.zookeeper.springboot.cluster.ZooKeeperClusterServiceConfiguration"
     },
     {
@@ -35,9 +34,7 @@
     {
       "name": "camel.cluster.zookeeper.connection-timeout-unit",
       "type": "java.util.concurrent.TimeUnit",
-      "description": "Connection timeout TimeUnit. Default is TimeUnit.MILLISECONDS.",
-      "sourceType": "org.apache.camel.component.zookeeper.springboot.cluster.ZooKeeperClusterServiceConfiguration",
-      "defaultValue": "milliseconds"
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cluster.ZooKeeperClusterServiceConfiguration"
     },
     {
       "name": "camel.cluster.zookeeper.curator-framework",
@@ -68,9 +65,7 @@
     {
       "name": "camel.cluster.zookeeper.max-close-wait-unit",
       "type": "java.util.concurrent.TimeUnit",
-      "description": "MaxCloseWait TimeUnit. Default is TimeUnit.MILLISECONDS.",
-      "sourceType": "org.apache.camel.component.zookeeper.springboot.cluster.ZooKeeperClusterServiceConfiguration",
-      "defaultValue": "milliseconds"
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cluster.ZooKeeperClusterServiceConfiguration"
     },
     {
       "name": "camel.cluster.zookeeper.namespace",
@@ -100,9 +95,7 @@
     {
       "name": "camel.cluster.zookeeper.reconnect-base-sleep-time-unit",
       "type": "java.util.concurrent.TimeUnit",
-      "description": "ReconnectBaseSleepTime TimeUnit. Default is TimeUnit.MILLISECONDS.",
-      "sourceType": "org.apache.camel.component.zookeeper.springboot.cluster.ZooKeeperClusterServiceConfiguration",
-      "defaultValue": "milliseconds"
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cluster.ZooKeeperClusterServiceConfiguration"
     },
     {
       "name": "camel.cluster.zookeeper.reconnect-max-retries",
@@ -120,9 +113,7 @@
     {
       "name": "camel.cluster.zookeeper.reconnect-max-sleep-time-unit",
       "type": "java.util.concurrent.TimeUnit",
-      "description": "ReconnectMaxSleepTimeUnit TimeUnit. Default is TimeUnit.MILLISECONDS.",
-      "sourceType": "org.apache.camel.component.zookeeper.springboot.cluster.ZooKeeperClusterServiceConfiguration",
-      "defaultValue": "milliseconds"
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cluster.ZooKeeperClusterServiceConfiguration"
     },
     {
       "name": "camel.cluster.zookeeper.retry-policy",
@@ -140,9 +131,7 @@
     {
       "name": "camel.cluster.zookeeper.session-timeout-unit",
       "type": "java.util.concurrent.TimeUnit",
-      "description": "Session timeout TimeUnit. Default is TimeUnit.MILLISECONDS.",
-      "sourceType": "org.apache.camel.component.zookeeper.springboot.cluster.ZooKeeperClusterServiceConfiguration",
-      "defaultValue": "milliseconds"
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cluster.ZooKeeperClusterServiceConfiguration"
     }
   ],
   "hints": [],

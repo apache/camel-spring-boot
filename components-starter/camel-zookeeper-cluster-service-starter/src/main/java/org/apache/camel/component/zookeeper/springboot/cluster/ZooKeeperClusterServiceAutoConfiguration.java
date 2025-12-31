@@ -50,20 +50,14 @@ public class ZooKeeperClusterServiceAutoConfiguration {
         Optional.ofNullable(configuration.getAttributes()).ifPresent(service::setAttributes);
         Optional.ofNullable(configuration.getBasePath()).ifPresent(service::setBasePath);
         Optional.ofNullable(configuration.getNamespace()).ifPresent(service::setNamespace);
-        Optional.ofNullable(configuration.getAuthInfoList()).ifPresent(service::setAuthInfoList);
-        Optional.of(configuration.getConnectionTimeout()).ifPresent(service::setConnectionTimeout);
-        Optional.ofNullable(configuration.getConnectionTimeoutUnit()).ifPresent(service::setConnectionTimeoutUnit);
+        Optional.of(configuration.getConnectionTimeout()).ifPresent(service::setConnectTimeout);
         Optional.ofNullable(configuration.getCuratorFramework()).ifPresent(service::setCuratorFramework);
         Optional.of(configuration.getMaxCloseWait()).ifPresent(service::setMaxCloseWait);
-        Optional.ofNullable(configuration.getMaxCloseWaitUnit()).ifPresent(service::setMaxCloseWaitUnit);
-        Optional.ofNullable(configuration.getNodes()).ifPresent(service::setNodes);
+        Optional.ofNullable(configuration.getNodes()).ifPresent(n -> service.setNodes(String.join(",", n)));
         Optional.of(configuration.getReconnectBaseSleepTime()).ifPresent(service::setReconnectBaseSleepTime);
-        Optional.ofNullable(configuration.getReconnectBaseSleepTimeUnit())
-                .ifPresent(service::setReconnectBaseSleepTimeUnit);
         Optional.of(configuration.getReconnectMaxRetries()).ifPresent(service::setReconnectMaxRetries);
         Optional.ofNullable(configuration.getRetryPolicy()).ifPresent(service::setRetryPolicy);
         Optional.of(configuration.getSessionTimeout()).ifPresent(service::setSessionTimeout);
-        Optional.ofNullable(configuration.getSessionTimeoutUnit()).ifPresent(service::setSessionTimeoutUnit);
         service.setConfiguration(configuration);
 
         return service;
