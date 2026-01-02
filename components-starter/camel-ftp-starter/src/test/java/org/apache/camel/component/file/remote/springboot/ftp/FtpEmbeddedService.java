@@ -47,7 +47,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
-import static org.apache.camel.test.junit5.TestSupport.createCleanDirectory;
+import static org.apache.camel.test.junit6.TestSupport.createCleanDirectory;
 
 public class FtpEmbeddedService extends AbstractTestService implements FtpService {
     protected static final String DEFAULT_LISTENER = "default";

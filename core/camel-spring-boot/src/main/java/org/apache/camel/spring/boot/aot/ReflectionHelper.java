@@ -36,6 +36,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.core.type.ClassMetadata;
@@ -246,6 +247,11 @@ public final class ReflectionHelper {
                 LOG.debug("Could not get the metadata of the resource {}", resource);
             }
             return DEFAULT;
+        }
+
+        @Override
+        public ResourceLoader getResourceLoader() {
+            return delegate.getResourceLoader();
         }
     }
 }
