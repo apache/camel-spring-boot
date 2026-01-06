@@ -134,6 +134,7 @@
     <module>camel-aws2-mq-starter</module>
     <module>camel-aws2-msk-starter</module>
     <module>camel-aws2-redshift-starter</module>
+    <module>camel-aws2-rekognition-starter</module>
     <module>camel-aws2-s3-starter</module>
     <module>camel-aws2-s3-vectors-starter</module>
     <module>camel-aws2-ses-starter</module>
