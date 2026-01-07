@@ -54,7 +54,7 @@
       <dependency>
         <groupId>com.openai</groupId>
         <artifactId>openai-java</artifactId>
-        <version>4.13.0</version>
+        <version>4.14.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
@@ -630,6 +630,11 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-chatscript-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-chroma-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -2776,6 +2781,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-chatscript</artifactId>
+        <version>4.17.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-chroma</artifactId>
         <version>4.17.0-SNAPSHOT</version>
       </dependency>
       <dependency>
