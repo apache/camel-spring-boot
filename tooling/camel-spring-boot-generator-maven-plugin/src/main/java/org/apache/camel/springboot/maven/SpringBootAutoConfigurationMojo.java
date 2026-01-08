@@ -1903,52 +1903,82 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
 
         deleteFileOnMainArtifact(target);
 
-        if (target.exists()) {
-            try {
-                // is the auto configuration already in the file
-                boolean found = false;
+        try {
+            // Use LinkedHashSet to preserve insertion order and avoid duplicates
+            Set<String> allEntries = new LinkedHashSet<>();
+            String header = null;
+            
+            // Read and preserve existing entries if file exists
+            if (target.exists()) {
                 List<String> lines = Files.readAllLines(target.toPath(), StandardCharsets.UTF_8);
+                StringBuilder headerBuilder = new StringBuilder();
+                boolean inHeader = true;
+                
                 for (String line : lines) {
-                    if (line.contains(name)) {
-                        found = true;
-                        break;
+                    String trimmedLine = line.trim();
+                    
+                    // Identify header (lines starting with ## or empty lines at the beginning)
+                    if (inHeader && (trimmedLine.startsWith("##") || trimmedLine.isEmpty())) {
+                        headerBuilder.append(line).append("\n");
+                    } else {
+                        inHeader = false;
+                        // Add only non-empty lines that are not comments
+                        if (!trimmedLine.isEmpty() && !trimmedLine.startsWith("#")) {
+                            allEntries.add(trimmedLine);
+                        }
                     }
                 }
+                
+                if (headerBuilder.length() > 0) {
+                    header = headerBuilder.toString();
+                }
+            }
+            
+            // Add new entry if it doesn't exist
+            boolean isNew = allEntries.add(lineToAdd);
+            if (isNew) {
+                getLog().info("Added new AutoConfiguration entry: " + lineToAdd);
+            } else {
+                getLog().debug("AutoConfiguration entry already exists: " + lineToAdd);
+            }
+            
+            // Only proceed with file write if there are changes
+            if (!isNew && target.exists()) {
+                getLog().debug("No changes to existing file: " + target);
+                return;
+            }
 
-                if (found) {
-                    getLog().debug("No changes to existing file: " + target);
-                } else {
-                    lines.add(lineToAdd);
-
-                    StringBuilder code = new StringBuilder();
-                    for (String line : lines) {
-                        code.append(line).append("\n");
+            // Load header from template if not found in existing file
+            if (header == null) {
+                try (InputStream is = getClass().getClassLoader().getResourceAsStream("license-header.txt")) {
+                    if (is != null) {
+                        header = PackageHelper.loadText(is);
                     }
-
-                    // update
-                    FileUtils.write(target, code.toString(), StandardCharsets.UTF_8, false);
-                    getLog().info("Updated existing file: " + target);
                 }
-            } catch (Exception e) {
-                throw new MojoFailureException("IOError with file " + target, e);
             }
-        } else {
-            // create new file
-            try (InputStream is = getClass().getClassLoader().getResourceAsStream("license-header.txt")) {
-                String header = PackageHelper.loadText(is);
-                String code = lineToAdd;
-                // add empty new line after header
-                code = header + "\n" + code;
-                if (getLog().isDebugEnabled()) {
-                    getLog().debug("Source code generated:\n" + code);
-                }
 
-                FileUtils.write(target, code, StandardCharsets.UTF_8);
-                getLog().info("Created file: " + target);
-                is.close();
-            } catch (Exception e) {
-                throw new MojoFailureException("IOError with file " + target, e);
+            // Fallback if header is still null
+            if (header == null || header.isEmpty()) {
+                throw new MojoFailureException("Could not load license header template (license-header.txt not found in classpath)");
             }
+
+            // Build final content
+            StringBuilder content = new StringBuilder(header);
+            if (!header.endsWith("\n")) {
+                content.append("\n");
+            }
+
+            // Write all entries (preserve insertion order)
+            for (String entry : allEntries) {
+                content.append(entry).append("\n");
+            }
+
+            // Write file
+            FileUtils.write(target, content.toString(), StandardCharsets.UTF_8, false);
+            getLog().info("Updated " + target + " with " + allEntries.size() + " AutoConfiguration entries");
+            
+        } catch (Exception e) {
+            throw new MojoFailureException("Error updating AutoConfiguration.imports file: " + target, e);
         }
     }
 
