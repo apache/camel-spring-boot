@@ -19,6 +19,7 @@ package org.apache.camel.component.aws2.cw.springboot;
 import java.time.Instant;
 import org.apache.camel.component.aws2.cw.Cw2Component;
 import org.apache.camel.component.aws2.cw.Cw2Configuration;
+import org.apache.camel.component.aws2.cw.Cw2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
@@ -59,6 +60,10 @@ public class Cw2ComponentConfiguration
      * The metric name
      */
     private String name;
+    /**
+     * The operation to perform. Defaults to putMetricData.
+     */
+    private Cw2Operations operation = Cw2Operations.putMetricData;
     /**
      * Set the need for overriding the endpoint. This option needs to be used in
      * combination with the uriEndpointOverride option
@@ -186,6 +191,14 @@ public class Cw2ComponentConfiguration
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Cw2Operations getOperation() {
+        return operation;
+    }
+
+    public void setOperation(Cw2Operations operation) {
+        this.operation = operation;
     }
 
     public Boolean getOverrideEndpoint() {

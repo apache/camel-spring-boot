@@ -77,6 +77,13 @@
       "sourceType": "org.apache.camel.component.aws2.cw.springboot.Cw2ComponentConfiguration"
     },
     {
+      "name": "camel.component.aws2-cw.operation",
+      "type": "org.apache.camel.component.aws2.cw.Cw2Operations",
+      "description": "The operation to perform. Defaults to putMetricData.",
+      "sourceType": "org.apache.camel.component.aws2.cw.springboot.Cw2ComponentConfiguration",
+      "defaultValue": "putmetricdata"
+    },
+    {
       "name": "camel.component.aws2-cw.override-endpoint",
       "type": "java.lang.Boolean",
       "description": "Set the need for overriding the endpoint. This option needs to be used in combination with the uriEndpointOverride option",
