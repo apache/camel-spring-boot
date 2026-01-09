@@ -166,6 +166,12 @@ public class BlobComponentConfiguration
      */
     private BlockListType blockListType = BlockListType.COMMITTED;
     /**
+     * The block size in bytes to use for chunked uploads with
+     * uploadBlockBlobChunked operation. Default is 4MB (4194304). Maximum is
+     * 4000MB. Must be greater than 0.
+     */
+    private Long blockSize;
+    /**
      * When using getChangeFeed producer operation, this gives additional
      * context that is passed through the Http pipeline during the service call.
      * The option is a com.azure.core.util.Context type.
@@ -220,6 +226,19 @@ public class BlobComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * The maximum number of parallel requests to use during upload with
+     * uploadBlockBlobChunked operation. Default is determined by the Azure SDK
+     * based on available processors.
+     */
+    private Integer maxConcurrency;
+    /**
+     * The maximum size in bytes for a single upload request with
+     * uploadBlockBlobChunked operation. Files smaller than this will be
+     * uploaded in a single request. Files larger will use chunked upload with
+     * blocks of size blockSize. Default is 256MB.
+     */
+    private Long maxSingleUploadSize;
     /**
      * The blob operation that can be used with this component on the producer
      */
@@ -442,6 +461,14 @@ public class BlobComponentConfiguration
         this.blockListType = blockListType;
     }
 
+    public Long getBlockSize() {
+        return blockSize;
+    }
+
+    public void setBlockSize(Long blockSize) {
+        this.blockSize = blockSize;
+    }
+
     public Context getChangeFeedContext() {
         return changeFeedContext;
     }
@@ -512,6 +539,22 @@ public class BlobComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Integer getMaxConcurrency() {
+        return maxConcurrency;
+    }
+
+    public void setMaxConcurrency(Integer maxConcurrency) {
+        this.maxConcurrency = maxConcurrency;
+    }
+
+    public Long getMaxSingleUploadSize() {
+        return maxSingleUploadSize;
+    }
+
+    public void setMaxSingleUploadSize(Long maxSingleUploadSize) {
+        this.maxSingleUploadSize = maxSingleUploadSize;
     }
 
     public BlobOperationsDefinition getOperation() {

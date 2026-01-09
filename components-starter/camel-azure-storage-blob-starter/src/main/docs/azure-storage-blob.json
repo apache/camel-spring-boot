@@ -79,6 +79,12 @@
       "defaultValue": "committed"
     },
     {
+      "name": "camel.component.azure-storage-blob.block-size",
+      "type": "java.lang.Long",
+      "description": "The block size in bytes to use for chunked uploads with uploadBlockBlobChunked operation. Default is 4MB (4194304). Maximum is 4000MB. Must be greater than 0.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
       "name": "camel.component.azure-storage-blob.bridge-error-handler",
       "type": "java.lang.Boolean",
       "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
@@ -222,6 +228,12 @@
       "defaultValue": 60
     },
     {
+      "name": "camel.component.azure-storage-blob.max-concurrency",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of parallel requests to use during upload with uploadBlockBlobChunked operation. Default is determined by the Azure SDK based on available processors.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
       "name": "camel.component.azure-storage-blob.max-results-per-page",
       "type": "java.lang.Integer",
       "description": "Specifies the maximum number of blobs to return, including all BlobPrefix elements. If the request does not specify maxResultsPerPage or specifies a value greater than 5,000, the server will return up to 5,000 items.",
@@ -233,6 +245,12 @@
       "description": "Specifies the maximum number of additional HTTP Get requests that will be made while reading the data from a response body.",
       "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
       "defaultValue": 0
+    },
+    {
+      "name": "camel.component.azure-storage-blob.max-single-upload-size",
+      "type": "java.lang.Long",
+      "description": "The maximum size in bytes for a single upload request with uploadBlockBlobChunked operation. Files smaller than this will be uploaded in a single request. Files larger will use chunked upload with blocks of size blockSize. Default is 256MB.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
     },
     {
       "name": "camel.component.azure-storage-blob.operation",
