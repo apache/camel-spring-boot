@@ -24,7 +24,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Ordered;
 import org.apache.camel.component.ehcache.EhcacheComponent;
 import org.apache.camel.spi.ComponentCustomizer;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.ehcache.config.CacheConfiguration;
 import org.ehcache.config.builders.CacheConfigurationBuilder;
 import org.ehcache.config.builders.ResourcePoolsBuilder;

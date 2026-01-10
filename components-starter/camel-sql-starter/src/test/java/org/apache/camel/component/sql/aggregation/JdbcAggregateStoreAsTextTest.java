@@ -22,7 +22,7 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.component.sql.BaseSql;
 import org.apache.camel.processor.aggregate.jdbc.JdbcAggregationRepository;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

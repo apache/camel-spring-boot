@@ -39,7 +39,7 @@ import org.apache.camel.component.kafka.serde.DefaultKafkaHeaderSerializer;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.support.DefaultHeaderFilterStrategy;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -57,7 +57,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
-import static org.apache.camel.test.junit5.TestSupport.assertIsInstanceOf;
+import static org.apache.camel.test.junit6.TestSupport.assertIsInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

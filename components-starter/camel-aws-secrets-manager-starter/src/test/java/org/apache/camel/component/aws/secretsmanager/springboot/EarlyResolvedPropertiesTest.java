@@ -17,7 +17,7 @@
 package org.apache.camel.component.aws.secretsmanager.springboot;
 
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
