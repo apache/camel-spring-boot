@@ -35,10 +35,22 @@ public class FileLanguageConfiguration
      */
     private Boolean enabled;
     /**
+     * To pretty format the output (only JSon or XML supported)
+     */
+    private Boolean pretty = false;
+    /**
      * Whether to trim the value to remove leading and trailing whitespaces and
      * line breaks
      */
     private Boolean trim = true;
+
+    public Boolean getPretty() {
+        return pretty;
+    }
+
+    public void setPretty(Boolean pretty) {
+        this.pretty = pretty;
+    }
 
     public Boolean getTrim() {
         return trim;
