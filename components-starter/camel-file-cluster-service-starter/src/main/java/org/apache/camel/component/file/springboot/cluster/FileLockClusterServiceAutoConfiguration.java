@@ -55,6 +55,8 @@ public class FileLockClusterServiceAutoConfiguration {
         Optional.ofNullable(configuration.getAcquireLockInterval()).map(TimePatternConverter::toMilliSeconds)
                 .ifPresent(v -> service.setAcquireLockInterval(v, TimeUnit.MILLISECONDS));
         Optional.ofNullable(configuration.getHeartbeatTimeoutMultiplier()).ifPresent(service::setHeartbeatTimeoutMultiplier);
+        Optional.ofNullable(configuration.getClusterDataTaskMaxAttempts()).ifPresent(service::setClusterDataTaskMaxAttempts);
+        Optional.ofNullable(configuration.getClusterDataTaskTimeout()).ifPresent(service::setClusterDataTaskTimeout);
 
         return service;
     }
