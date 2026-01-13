@@ -38,12 +38,15 @@ public class FileLockClusterServiceConfiguration {
     private String root;
 
     /**
-     * The time to wait before starting to try to acquire lock.
+     * The time to wait before starting to try to acquire the cluster lock. Note that if FileLockClusterService
+     * determines no cluster members are running or cannot reliably determine the cluster state, the initial delay is
+     * computed from the acquireLockInterval.
      */
     private String acquireLockDelay;
 
     /**
-     * The time to wait between attempts to try to acquire lock.
+     * The time to wait between attempts to try to acquire the cluster lock evaluated using wall-clock time. All cluster
+     * members must use the same value so leadership checks and leader liveness detection remain consistent.
      */
     private String acquireLockInterval;
 
@@ -59,6 +62,23 @@ public class FileLockClusterServiceConfiguration {
      * followers will tolerate up to  2s * 3 = 6s of silence before declaring the leader unavailable.
      */
     private Integer heartbeatTimeoutMultiplier;
+
+    /**
+     * The number of times a cluster data task will run, counting both the first execution and subsequent retries in
+     * case of failure or timeout.
+     * <p>
+     * This can be useful when the cluster data root is on network based file storage, where I/O operations may
+     * occasionally block for long or unpredictable periods.
+     */
+    private Integer clusterDataTaskMaxAttempts;
+
+    /**
+     * The timeout for a cluster data task (reading or writing cluster data).
+     * <p>
+     * Timeouts are useful when the cluster data root is on network storage, where I/O operations may occasionally block
+     * for long or unpredictable periods.
+     */
+    private Long clusterDataTaskTimeout;
 
     /**
      * Service lookup order/priority.
@@ -127,5 +147,21 @@ public class FileLockClusterServiceConfiguration {
 
     public void setHeartbeatTimeoutMultiplier(Integer heartbeatTimeoutMultiplier) {
         this.heartbeatTimeoutMultiplier = heartbeatTimeoutMultiplier;
+    }
+
+    public Integer getClusterDataTaskMaxAttempts() {
+        return clusterDataTaskMaxAttempts;
+    }
+
+    public void setClusterDataTaskMaxAttempts(Integer clusterDataTaskMaxAttempts) {
+        this.clusterDataTaskMaxAttempts = clusterDataTaskMaxAttempts;
+    }
+
+    public Long getClusterDataTaskTimeout() {
+        return clusterDataTaskTimeout;
+    }
+
+    public void setClusterDataTaskTimeout(Long clusterDataTaskTimeout) {
+        this.clusterDataTaskTimeout = clusterDataTaskTimeout;
     }
 }
