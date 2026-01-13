@@ -10,19 +10,31 @@
     {
       "name": "camel.cluster.file.acquire-lock-delay",
       "type": "java.lang.String",
-      "description": "The time to wait before starting to try to acquire lock.",
+      "description": "The time to wait before starting to try to acquire the cluster lock. Note that if FileLockClusterService determines no cluster members are running or cannot reliably determine the cluster state, the initial delay is computed from the acquireLockInterval.",
       "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
     },
     {
       "name": "camel.cluster.file.acquire-lock-interval",
       "type": "java.lang.String",
-      "description": "The time to wait between attempts to try to acquire lock.",
+      "description": "The time to wait between attempts to try to acquire the cluster lock evaluated using wall-clock time. All cluster members must use the same value so leadership checks and leader liveness detection remain consistent.",
       "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
     },
     {
       "name": "camel.cluster.file.attributes",
       "type": "java.util.Map<java.lang.String,java.lang.Object>",
       "description": "Custom service attributes.",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.file.cluster-data-task-max-attempts",
+      "type": "java.lang.Integer",
+      "description": "The number of times a cluster data task will run, counting both the first execution and subsequent retries in case of failure or timeout. <p> This can be useful when the cluster data root is on network based file storage, where I\/O operations may occasionally block for long or unpredictable periods.",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.file.cluster-data-task-timeout",
+      "type": "java.lang.Long",
+      "description": "The timeout for a cluster data task (reading or writing cluster data). <p> Timeouts are useful when the cluster data root is on network storage, where I\/O operations may occasionally block for long or unpredictable periods.",
       "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
     },
     {
