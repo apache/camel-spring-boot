@@ -32,23 +32,35 @@ The following configuration options are available under the `camel.cluster.file`
 
 | root
 | 
-| The root path for file-based cluster coordination.
+| The root path.
 
 | acquire-lock-delay
-| 1000
-| The time to wait before acquiring a lock (in milliseconds).
+| 
+| The time to wait before starting to try to acquire the cluster lock. Note that if FileLockClusterService determines no cluster members are running or cannot reliably determine the cluster state, the initial delay is computed from the acquireLockInterval.
 
 | acquire-lock-interval
-| 10000
-| The interval for trying to acquire a lock (in milliseconds).
-
-| order
 | 
-| Service lookup order/priority.
+| The time to wait between attempts to try to acquire the cluster lock evaluated using wall-clock time. All cluster members must use the same value so leadership checks and leader liveness detection remain consistent.
 
 | attributes
 | 
 | Custom service attributes.
+
+| heartbeat-timeout-multiplier
+| 
+| Multiplier applied to the cluster leader acquireLockInterval to determine how long followers should wait before considering the leader "stale". For example, if the leader updates its heartbeat every 2 seconds and the heartbeatTimeoutMultiplier is 3, followers will tolerate up to 2s * 3 = 6s of silence before declaring the leader unavailable.
+
+| cluster-data-task-max-attempts
+| 
+| The number of times a cluster data task will run, counting both the first execution and subsequent retries in case of failure or timeout. This can be useful when the cluster data root is on network based file storage, where I/O operations may occasionally block for long or unpredictable periods.
+
+| cluster-data-task-timeout
+| 
+| The timeout for a cluster data task (reading or writing cluster data). Timeouts are useful when the cluster data root is on network storage, where I/O operations may occasionally block for long or unpredictable periods.
+
+| order
+| 
+| Service lookup order/priority.
 |===
 
 == Usage Example
