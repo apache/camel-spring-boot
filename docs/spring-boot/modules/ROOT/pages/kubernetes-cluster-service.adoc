@@ -1,0 +1,79 @@
+﻿= Kubernetes Cluster Service
+
+The Kubernetes Cluster Service starter provides a cluster service implementation using Kubernetes native mechanisms for clustering in Camel Spring Boot applications.
+
+This implementation uses Kubernetes ConfigMaps or Leases for leader election.
+
+== Maven Dependency
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.apache.camel.springboot</groupId>
+    <artifactId>camel-kubernetes-cluster-service-starter</artifactId>
+</dependency>
+----
+
+== Configuration Options
+
+The following configuration options are available under the `camel.cluster.kubernetes` prefix:
+
+[cols="3,2,5",options="header"]
+|===
+| Option | Default | Description
+
+| enabled
+| true
+| Sets if the kubernetes cluster service should be enabled or not.
+
+| id
+| 
+| Cluster Service ID.
+
+| kubernetes-namespace
+| 
+| The Kubernetes namespace for cluster coordination resources.
+
+| config-map-name
+| 
+| The name of the ConfigMap used for leader election.
+
+| pod-name
+| 
+| The name of the current pod.
+
+| cluster-labels
+| 
+| Labels used to identify cluster members.
+
+| lease-duration-millis
+| 15000
+| The lease duration in milliseconds.
+
+| renew-deadline-millis
+| 10000
+| The renew deadline in milliseconds.
+
+| retry-period-millis
+| 2000
+| The retry period in milliseconds.
+
+| order
+| 
+| Service lookup order/priority.
+
+| attributes
+| 
+| Custom service attributes.
+|===
+
+== Usage Example
+
+Configure in `application.properties`:
+
+[source,properties]
+----
+camel.cluster.kubernetes.enabled=true
+camel.cluster.kubernetes.kubernetes-namespace=camel-cluster
+camel.cluster.kubernetes.config-map-name=camel-leader
+----

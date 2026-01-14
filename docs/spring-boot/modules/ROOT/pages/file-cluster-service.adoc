@@ -1,0 +1,62 @@
+﻿= File Cluster Service
+
+The File Cluster Service starter provides a cluster service implementation using file-based locking for simple clustering scenarios in Camel Spring Boot applications.
+
+This is suitable for single-machine clustering or shared filesystem scenarios.
+
+== Maven Dependency
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.apache.camel.springboot</groupId>
+    <artifactId>camel-file-cluster-service-starter</artifactId>
+</dependency>
+----
+
+== Configuration Options
+
+The following configuration options are available under the `camel.cluster.file` prefix:
+
+[cols="3,2,5",options="header"]
+|===
+| Option | Default | Description
+
+| enabled
+| true
+| Sets if the file cluster service should be enabled or not.
+
+| id
+| 
+| Cluster Service ID.
+
+| root
+| 
+| The root path for file-based cluster coordination.
+
+| acquire-lock-delay
+| 1000
+| The time to wait before acquiring a lock (in milliseconds).
+
+| acquire-lock-interval
+| 10000
+| The interval for trying to acquire a lock (in milliseconds).
+
+| order
+| 
+| Service lookup order/priority.
+
+| attributes
+| 
+| Custom service attributes.
+|===
+
+== Usage Example
+
+Configure in `application.properties`:
+
+[source,properties]
+----
+camel.cluster.file.enabled=true
+camel.cluster.file.root=/var/camel/cluster
+----

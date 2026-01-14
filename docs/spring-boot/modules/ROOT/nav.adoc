@@ -2,6 +2,11 @@
 * xref:spring-boot.adoc[Camel Context starter]
 * xref:list.adoc[List of starters]
 * xref:starter-configuration.adoc[Starter Configuration]
+* Cluster Services
+** xref:consul-cluster-service.adoc[Consul]
+** xref:file-cluster-service.adoc[File]
+** xref:infinispan-cluster-service.adoc[Infinispan]
+** xref:jgroups-raft-cluster-service.adoc[JGroups Raft]
+** xref:kubernetes-cluster-service.adoc[Kubernetes]
+** xref:zookeeper-cluster-service.adoc[Zookeeper]
 * xref:contributing.adoc[Contributing]
-//* xref:_list-old.adoc[old List of starters]
-
