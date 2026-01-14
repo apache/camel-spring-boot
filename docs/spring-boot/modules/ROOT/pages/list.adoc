@@ -5,7 +5,8 @@
 :base-deprecated-query: {base-query},attributes='camel-spring-boot-name,deprecated'
 :base-missing-query: {base-query},attributes=!camel-spring-boot-name
 
-include::indexcount$[component=components,module=spring-boot,family=example,queries='existing=']
+// Count all starter JSON files excluding cluster service starters
+include::indexcount$[component=components,module=spring-boot,family=example,exclude='*-cluster-service.json',queries='existing=']
 include::indexuniquecount$[component=components,module=*,attributes=camel-spring-boot-name,formats='used=camelSpringBootName']
 
 ifeval::[{used} != {existing}]
@@ -29,9 +30,11 @@ There are {existing} spring boot starter json files.
 
 Of these {used} are used in components, dataformats, etc.
 
+NOTE: Cluster service starters (consul, file, infinispan, jgroups-raft, kubernetes, zookeeper) are documented in the <<Cluster Services>> section below.
+
 === Unused spring-boot-starter names
 
-[indexBlock, 'resourceid=$resourceid,sbname=util.extractSBName($resourceid)',component=components,module=spring-boot,family=example,requires={requires}]
+[indexBlock, 'resourceid=$resourceid,sbname=util.extractSBName($resourceid)',component=components,module=spring-boot,family=example,exclude='*-cluster-service.json',requires={requires}]
 ----
 
 %include::indexcount$[component=components,module=*,attributes='camel-spring-boot-name={sbname}',queries='using=']
@@ -133,3 +136,37 @@ ifdef::sb-statistics[]
 |===
 indexTable::[{cellformats},{requires},module=others,{base-missing-query}]
 endif::[]
+
+== Cluster Services
+
+The following cluster service starters provide high-availability clustering support for Camel applications.
+These are infrastructure starters that do not directly map to a Camel component but provide clustering capabilities.
+
+[width="100%",cols="4,3,6",options="header"]
+|===
+| Cluster Service | Artifact | Description
+
+| xref:consul-cluster-service.adoc[Consul Cluster Service]
+| camel-consul-cluster-service-starter
+| Cluster service implementation using HashiCorp Consul for distributed coordination and leader election.
+
+| xref:file-cluster-service.adoc[File Cluster Service]
+| camel-file-cluster-service-starter
+| Cluster service implementation using file-based locking for simple clustering scenarios.
+
+| xref:infinispan-cluster-service.adoc[Infinispan Cluster Service]
+| camel-infinispan-cluster-service-starter
+| Cluster service implementation using Infinispan distributed cache for clustering.
+
+| xref:jgroups-raft-cluster-service.adoc[JGroups Raft Cluster Service]
+| camel-jgroups-raft-cluster-service-starter
+| Cluster service implementation using JGroups with Raft consensus protocol.
+
+| xref:kubernetes-cluster-service.adoc[Kubernetes Cluster Service]
+| camel-kubernetes-cluster-service-starter
+| Cluster service implementation using Kubernetes native mechanisms for clustering.
+
+| xref:zookeeper-cluster-service.adoc[Zookeeper Cluster Service]
+| camel-zookeeper-cluster-service-starter
+| Cluster service implementation using Apache Zookeeper for distributed coordination.
+|===

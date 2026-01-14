@@ -1,0 +1,97 @@
+﻿= Consul Cluster Service
+
+The Consul Cluster Service starter provides a cluster service implementation using https://www.consul.io/[HashiCorp Consul] for distributed coordination and leader election in Camel Spring Boot applications.
+
+== Maven Dependency
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.apache.camel.springboot</groupId>
+    <artifactId>camel-consul-cluster-service-starter</artifactId>
+</dependency>
+----
+
+== Configuration Options
+
+The following configuration options are available under the `camel.cluster.consul` prefix:
+
+[cols="3,2,5",options="header"]
+|===
+| Option | Default | Description
+
+| enabled
+| true
+| Sets if the consul cluster service should be enabled or not.
+
+| id
+| 
+| Cluster Service ID.
+
+| url
+| 
+| The Consul agent URL.
+
+| acl-token
+| 
+| Sets the ACL token to be used with Consul.
+
+| user-name
+| 
+| Sets the username to be used for basic authentication.
+
+| password
+| 
+| Sets the password to be used for basic authentication.
+
+| datacenter
+| 
+| The data center.
+
+| root-path
+| /camel
+| Consul root path.
+
+| session-ttl
+| 60
+| The value of TTL (in seconds).
+
+| session-lock-delay
+| 5
+| The value for lockDelay (in seconds).
+
+| session-refresh-interval
+| 5
+| The value of wait attribute (in seconds).
+
+| block-seconds
+| 10
+| The time (in seconds) to wait for a watch event.
+
+| order
+| 
+| Service lookup order/priority.
+
+| attributes
+| 
+| Custom service attributes.
+|===
+
+== Usage Example
+
+[source,java]
+----
+@Configuration
+public class ClusterConfig {
+    // The cluster service is auto-configured when the starter is on the classpath
+    // and camel.cluster.consul.enabled=true (default)
+}
+----
+
+Configure in `application.properties`:
+
+[source,properties]
+----
+camel.cluster.consul.url=http://localhost:8500
+camel.cluster.consul.root-path=/camel/cluster
+----

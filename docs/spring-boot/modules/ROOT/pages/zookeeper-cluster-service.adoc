@@ -1,0 +1,81 @@
+﻿= Zookeeper Cluster Service
+
+The Zookeeper Cluster Service starter provides a cluster service implementation using https://zookeeper.apache.org/[Apache Zookeeper] for distributed coordination in Camel Spring Boot applications.
+
+== Maven Dependency
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.apache.camel.springboot</groupId>
+    <artifactId>camel-zookeeper-cluster-service-starter</artifactId>
+</dependency>
+----
+
+== Configuration Options
+
+The following configuration options are available under the `camel.cluster.zookeeper` prefix:
+
+[cols="3,2,5",options="header"]
+|===
+| Option | Default | Description
+
+| enabled
+| true
+| Sets if the zookeeper cluster service should be enabled or not.
+
+| id
+| 
+| Cluster Service ID.
+
+| nodes
+| 
+| The Zookeeper server nodes (comma-separated list of host:port).
+
+| namespace
+| 
+| The Zookeeper namespace.
+
+| base-path
+| /camel/cluster
+| The base path for cluster coordination.
+
+| reconnect-base-sleep-time
+| 1000
+| Initial amount of time to wait between retries (in milliseconds).
+
+| reconnect-max-sleep-time
+| 
+| Max time to sleep on each retry (in milliseconds).
+
+| reconnect-max-retries
+| 3
+| Max number of times to retry.
+
+| session-timeout
+| 60000
+| Session timeout (in milliseconds).
+
+| connection-timeout
+| 15000
+| Connection timeout (in milliseconds).
+
+| order
+| 
+| Service lookup order/priority.
+
+| attributes
+| 
+| Custom service attributes.
+|===
+
+== Usage Example
+
+Configure in `application.properties`:
+
+[source,properties]
+----
+camel.cluster.zookeeper.enabled=true
+camel.cluster.zookeeper.nodes=localhost:2181
+camel.cluster.zookeeper.base-path=/camel/cluster
+----
