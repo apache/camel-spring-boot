@@ -1,0 +1,244 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.ibm-watsonx-ai",
+      "type": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.ibm-watsonx-ai.api-key",
+      "type": "java.lang.String",
+      "description": "IBM Cloud API key for authentication",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.base-url",
+      "type": "java.lang.String",
+      "description": "The watsonx.ai base URL (e.g., https:\/\/us-south.ml.cloud.ibm.com)",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.configuration",
+      "type": "org.apache.camel.component.ibm.watsonx.ai.WatsonxAiConfiguration",
+      "description": "The component configuration. The option is a org.apache.camel.component.ibm.watsonx.ai.WatsonxAiConfiguration type.",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.cos-url",
+      "type": "java.lang.String",
+      "description": "Cloud Object Storage URL",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.deployment-id",
+      "type": "java.lang.String",
+      "description": "Deployed model ID (for deployment operations)",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.detect-hap",
+      "type": "java.lang.Boolean",
+      "description": "Whether to detect HAP (Harmful, Abusive, Profane content)",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.detect-pii",
+      "type": "java.lang.Boolean",
+      "description": "Whether to detect PII (Personal Identifiable Information)",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.detection-threshold",
+      "type": "java.lang.Double",
+      "description": "Detection threshold (0.0 to 1.0)",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.document-bucket",
+      "type": "java.lang.String",
+      "description": "COS bucket for document storage",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.document-connection-id",
+      "type": "java.lang.String",
+      "description": "COS connection ID for document storage",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the ibm-watsonx-ai component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.frequency-penalty",
+      "type": "java.lang.Double",
+      "description": "Frequency penalty for chat",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.log-requests",
+      "type": "java.lang.Boolean",
+      "description": "Whether to log HTTP requests to the watsonx.ai API",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.log-responses",
+      "type": "java.lang.Boolean",
+      "description": "Whether to log HTTP responses from the watsonx.ai API",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.max-completion-tokens",
+      "type": "java.lang.Integer",
+      "description": "Maximum completion tokens for chat",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.max-new-tokens",
+      "type": "java.lang.Integer",
+      "description": "Maximum new tokens to generate",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.model-id",
+      "type": "java.lang.String",
+      "description": "Foundation model ID (e.g., ibm\/granite-13b-instruct-v2)",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.operation",
+      "type": "org.apache.camel.component.ibm.watsonx.ai.WatsonxAiOperations",
+      "description": "The operation to perform",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.presence-penalty",
+      "type": "java.lang.Double",
+      "description": "Presence penalty for chat",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.project-id",
+      "type": "java.lang.String",
+      "description": "IBM Cloud project ID",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.repetition-penalty",
+      "type": "java.lang.Double",
+      "description": "Repetition penalty",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.rerank-top-n",
+      "type": "java.lang.Integer",
+      "description": "Number of top results to return for reranking",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.result-bucket",
+      "type": "java.lang.String",
+      "description": "COS bucket for result storage",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.result-connection-id",
+      "type": "java.lang.String",
+      "description": "COS connection ID for result storage",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.return-documents",
+      "type": "java.lang.Boolean",
+      "description": "Whether to return documents in rerank response",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.space-id",
+      "type": "java.lang.String",
+      "description": "IBM Cloud deployment space ID (alternative to projectId)",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.temperature",
+      "type": "java.lang.Double",
+      "description": "Temperature for randomness (0.0 to 2.0)",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.timeout",
+      "type": "java.lang.Long",
+      "description": "Request timeout in milliseconds",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.top-k",
+      "type": "java.lang.Integer",
+      "description": "Top K (top-k sampling)",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.top-p",
+      "type": "java.lang.Double",
+      "description": "Top P (nucleus sampling)",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.truncate-input-tokens",
+      "type": "java.lang.Integer",
+      "description": "Maximum number of tokens accepted per input for embeddings. Truncates from the end if exceeded.",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.verify-ssl",
+      "type": "java.lang.Boolean",
+      "description": "Whether to verify SSL certificates",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ibm-watsonx-ai.wx-url",
+      "type": "java.lang.String",
+      "description": "The watsonx.ai WX platform URL for tool operations (e.g., https:\/\/api.dataplatform.cloud.ibm.com\/wx)",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
