@@ -271,6 +271,7 @@
     <module>camel-ibm-watson-language-starter</module>
     <module>camel-ibm-watson-speech-to-text-starter</module>
     <module>camel-ibm-watson-text-to-speech-starter</module>
+    <module>camel-ibm-watsonx-ai-starter</module>
     <module>camel-ical-starter</module>
     <module>camel-iec60870-starter</module>
     <module>camel-iggy-starter</module>
