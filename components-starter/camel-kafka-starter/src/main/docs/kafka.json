@@ -432,6 +432,30 @@
       "defaultValue": 2
     },
     {
+      "name": "camel.component.kafka.oauth-client-id",
+      "type": "java.lang.String",
+      "description": "OAuth client ID. Used when saslAuthType is set to OAUTH.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.kafka.oauth-client-secret",
+      "type": "java.lang.String",
+      "description": "OAuth client secret. Used when saslAuthType is set to OAUTH.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.kafka.oauth-scope",
+      "type": "java.lang.String",
+      "description": "OAuth scope. Used when saslAuthType is set to OAUTH.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.kafka.oauth-token-endpoint-uri",
+      "type": "java.lang.String",
+      "description": "OAuth token endpoint URI. Used when saslAuthType is set to OAUTH.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
+    },
+    {
       "name": "camel.component.kafka.offset-repository",
       "type": "org.apache.camel.spi.StateRepository<java.lang.String,java.lang.String>",
       "description": "The offset repository to use to locally store the offset of each partition of the topic. Defining one will disable the autocommit. The option is a org.apache.camel.spi.StateRepository<java.lang.String, java.lang.String> type.",
@@ -567,6 +591,12 @@
       "defaultValue": 100
     },
     {
+      "name": "camel.component.kafka.sasl-auth-type",
+      "type": "org.apache.camel.component.kafka.security.KafkaAuthType",
+      "description": "Simplified authentication type to use. This provides an easier way to configure Kafka authentication without manually setting securityProtocol, saslMechanism, and saslJaasConfig. When set, the appropriate security settings are automatically derived. Note: This is optional. You can still use the traditional approach with explicit securityProtocol, saslMechanism, and saslJaasConfig properties.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
+    },
+    {
       "name": "camel.component.kafka.sasl-jaas-config",
       "type": "java.lang.String",
       "description": "Expose the kafka sasl.jaas.config parameter Example: org.apache.kafka.common.security.plain.PlainLoginModule required username=USERNAME password=PASSWORD;",
@@ -584,6 +614,18 @@
       "description": "The Simple Authentication and Security Layer (SASL) Mechanism used. For the valid values see http:\/\/www.iana.org\/assignments\/sasl-mechanisms\/sasl-mechanisms.xhtml",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
       "defaultValue": "GSSAPI"
+    },
+    {
+      "name": "camel.component.kafka.sasl-password",
+      "type": "java.lang.String",
+      "description": "Password for SASL authentication. Used when saslAuthType is set to PLAIN, SCRAM_SHA_256, or SCRAM_SHA_512.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.kafka.sasl-username",
+      "type": "java.lang.String",
+      "description": "Username for SASL authentication. Used when saslAuthType is set to PLAIN, SCRAM_SHA_256, or SCRAM_SHA_512.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
     },
     {
       "name": "camel.component.kafka.schema-registry-u-r-l",

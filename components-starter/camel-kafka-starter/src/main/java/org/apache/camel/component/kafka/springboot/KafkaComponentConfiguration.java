@@ -25,6 +25,7 @@ import org.apache.camel.component.kafka.PollExceptionStrategy;
 import org.apache.camel.component.kafka.PollOnError;
 import org.apache.camel.component.kafka.SeekPolicy;
 import org.apache.camel.component.kafka.consumer.KafkaManualCommitFactory;
+import org.apache.camel.component.kafka.security.KafkaAuthType;
 import org.apache.camel.component.kafka.serde.KafkaHeaderDeserializer;
 import org.apache.camel.component.kafka.serde.KafkaHeaderSerializer;
 import org.apache.camel.spi.HeaderFilterStrategy;
@@ -821,6 +822,31 @@ public class KafkaComponentConfiguration
      */
     private Double kerberosRenewWindowFactor;
     /**
+     * OAuth client ID. Used when saslAuthType is set to OAUTH.
+     */
+    private String oauthClientId;
+    /**
+     * OAuth client secret. Used when saslAuthType is set to OAUTH.
+     */
+    private String oauthClientSecret;
+    /**
+     * OAuth scope. Used when saslAuthType is set to OAUTH.
+     */
+    private String oauthScope;
+    /**
+     * OAuth token endpoint URI. Used when saslAuthType is set to OAUTH.
+     */
+    private String oauthTokenEndpointUri;
+    /**
+     * Simplified authentication type to use. This provides an easier way to
+     * configure Kafka authentication without manually setting securityProtocol,
+     * saslMechanism, and saslJaasConfig. When set, the appropriate security
+     * settings are automatically derived. Note: This is optional. You can still
+     * use the traditional approach with explicit securityProtocol,
+     * saslMechanism, and saslJaasConfig properties.
+     */
+    private KafkaAuthType saslAuthType;
+    /**
      * Expose the kafka sasl.jaas.config parameter Example:
      * org.apache.kafka.common.security.plain.PlainLoginModule required
      * username=USERNAME password=PASSWORD;
@@ -837,6 +863,16 @@ public class KafkaComponentConfiguration
      * http://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtml
      */
     private String saslMechanism = "GSSAPI";
+    /**
+     * Password for SASL authentication. Used when saslAuthType is set to PLAIN,
+     * SCRAM_SHA_256, or SCRAM_SHA_512.
+     */
+    private String saslPassword;
+    /**
+     * Username for SASL authentication. Used when saslAuthType is set to PLAIN,
+     * SCRAM_SHA_256, or SCRAM_SHA_512.
+     */
+    private String saslUsername;
     /**
      * Protocol used to communicate with brokers. SASL_PLAINTEXT, PLAINTEXT,
      * SASL_SSL and SSL are supported
@@ -1754,6 +1790,46 @@ public class KafkaComponentConfiguration
         this.kerberosRenewWindowFactor = kerberosRenewWindowFactor;
     }
 
+    public String getOauthClientId() {
+        return oauthClientId;
+    }
+
+    public void setOauthClientId(String oauthClientId) {
+        this.oauthClientId = oauthClientId;
+    }
+
+    public String getOauthClientSecret() {
+        return oauthClientSecret;
+    }
+
+    public void setOauthClientSecret(String oauthClientSecret) {
+        this.oauthClientSecret = oauthClientSecret;
+    }
+
+    public String getOauthScope() {
+        return oauthScope;
+    }
+
+    public void setOauthScope(String oauthScope) {
+        this.oauthScope = oauthScope;
+    }
+
+    public String getOauthTokenEndpointUri() {
+        return oauthTokenEndpointUri;
+    }
+
+    public void setOauthTokenEndpointUri(String oauthTokenEndpointUri) {
+        this.oauthTokenEndpointUri = oauthTokenEndpointUri;
+    }
+
+    public KafkaAuthType getSaslAuthType() {
+        return saslAuthType;
+    }
+
+    public void setSaslAuthType(KafkaAuthType saslAuthType) {
+        this.saslAuthType = saslAuthType;
+    }
+
     public String getSaslJaasConfig() {
         return saslJaasConfig;
     }
@@ -1776,6 +1852,22 @@ public class KafkaComponentConfiguration
 
     public void setSaslMechanism(String saslMechanism) {
         this.saslMechanism = saslMechanism;
+    }
+
+    public String getSaslPassword() {
+        return saslPassword;
+    }
+
+    public void setSaslPassword(String saslPassword) {
+        this.saslPassword = saslPassword;
+    }
+
+    public String getSaslUsername() {
+        return saslUsername;
+    }
+
+    public void setSaslUsername(String saslUsername) {
+        this.saslUsername = saslUsername;
     }
 
     public String getSecurityProtocol() {
