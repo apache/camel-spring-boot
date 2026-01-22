@@ -1,0 +1,25 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.http",
+      "type": "org.apache.camel.component.http.springboot.HttpComponentSslBundleConfigurationProperties",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentSslBundleConfigurationProperties",
+      "description": "Spring Boot SSL Bundle configuration for Camel HTTP component."
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.http.ssl-bundle",
+      "type": "java.lang.String",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentSslBundleConfigurationProperties",
+      "description": "The name of the Spring Boot SSL bundle to use for configuring SSL on the HTTP component. When set, the SSL bundle's trust material and key material will be used to create the SSLContext for HTTPS connections."
+    },
+    {
+      "name": "camel.component.http.ssl-bundle-hot-reload",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentSslBundleConfigurationProperties",
+      "description": "Whether to enable hot-reload of SSL certificates when the SSL bundle is updated. When enabled, certificate changes trigger recreation of the connection manager so new connections use the updated certificates. Requires the SSL bundle to have reload-on-update enabled in Spring Boot configuration.",
+      "defaultValue": false
+    }
+  ]
+}

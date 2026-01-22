@@ -18,3 +18,4 @@
 org.apache.camel.component.http.springboot.HttpComponentConverter
 org.apache.camel.component.http.springboot.HttpComponentAutoConfiguration
 org.apache.camel.component.http.springboot.HttpComponentTimeoutConverter
+org.apache.camel.component.http.springboot.HttpComponentSslBundleAutoConfiguration
