@@ -1,0 +1,158 @@
+= Jolokia Starter
+
+The Jolokia Starter integrates https://jolokia.org/[Jolokia] agent configuration in Spring Boot, wrapping the https://jolokia.org/reference/html/manual/spring.html[Jolokia Spring Support] with default configurations to let the application work out-of-the-box without manually declaring Jolokia servers.
+
+This starter can be considered an alternative to the https://jolokia.org/reference/html/manual/agents.html[Jolokia JVM agent]. When enabled, it exposes the Jolokia endpoint at `http://0.0.0.0:8778/jolokia`.
+
+== Maven Dependency
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.apache.camel.springboot</groupId>
+    <artifactId>camel-jolokia-starter</artifactId>
+</dependency>
+----
+
+== Configuration Options
+
+The following configuration options are available under the `camel.component.jolokia` prefix:
+
+[cols="3,2,5",options="header"]
+|===
+| Option | Default | Description
+
+| enabled
+| true
+| Enable the component.
+
+| lookup-config
+| false
+| If true, Spring's application context is searched for additional `SpringJolokiaConfigHolder` beans to configure the agent.
+
+| lookup-services
+| false
+| If true, Spring's application context is searched for additional `JolokiaService` beans to add to Jolokia's internal context.
+
+| system-properties-mode
+| never
+| Specifies how system properties with `jolokia.` prefix affect configuration. Values: `never`, `fallback`, `override`.
+
+| expose-application-context
+| false
+| If true, adds `SpringRequestHandler` to the agent allowing Spring bean operations via Jolokia protocol.
+
+| use-camel-restrictor
+| true
+| Use the Camel restrictor that allows only operations on Camel domain MBeans.
+
+| config-from-properties-first
+| true
+| When using custom bean configuration, prefer values from properties over values from bean.
+
+| kubernetes-discover
+| true
+| Auto-configure for Kubernetes/OpenShift environments (sets protocol=https, enables client authentication).
+
+| kubernetes-use-default-ca
+| true
+| Use the default Kubernetes CA file at `/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt`.
+
+| server-config
+|
+| Map of Jolokia server configuration options (e.g., `server-config.port=8779`).
+|===
+
+For detailed server configuration options, see the https://jolokia.org/reference/html/manual/agents.html#jvm-agent[Jolokia JVM agent configuration documentation].
+
+== Usage Example
+
+[source,java]
+----
+@SpringBootApplication
+public class MyApplication {
+    // The Jolokia agent is auto-configured when the starter is on the classpath
+    // and camel.component.jolokia.enabled=true (default)
+}
+----
+
+Configure in `application.properties`:
+
+[source,properties]
+----
+# Change the default port
+camel.component.jolokia.server-config.port=8779
+
+# Enable discovery for Hawtio
+camel.component.jolokia.server-config.discoveryEnabled=true
+----
+
+== Security Restrictor
+
+To avoid exposing all JMX MBeans (see https://jolokia.org/reference/html/manual/security.html[Security] considerations), a default Jolokia https://jolokia.org/reference/html/manual/security.html#security-restrictor[Restrictor] is provided that allows only Camel related data and some basic information from Java.
+
+You can disable the restrictor with `camel.component.jolokia.use-camel-restrictor=false` or use your own custom one with `camel.component.jolokia.server-config.restrictorClass=org.example.MyRestrictor`.
+
+An example to extend the provided restrictor:
+
+[source,java]
+----
+public class MyRestrictor extends CamelRestrictor {
+
+    @Override
+    protected List<String> getAllowedDomains() {
+        final List<String> newDomains = new ArrayList<>(getDefaultDomains());
+        newDomains.add("my.domain");
+        return newDomains;
+    }
+}
+----
+
+== Custom Configuration
+
+The starter creates a default configuration according to the provided properties, but you can provide a custom `SpringJolokiaConfigHolder` implementation by declaring a Bean named `camelConfigHolder`:
+
+[source,java]
+----
+@Bean("camelConfigHolder")
+public SpringJolokiaConfigHolder myConfigHolder() {
+    final SpringJolokiaConfigHolder myConfig = new SpringJolokiaConfigHolder();
+    myConfig.setConfig(Map.of("threadNr", "5", "executor", "fixed"));
+    return myConfig;
+}
+----
+
+The executor configuration will be taken from the custom Bean if the same properties are not defined in `application.properties`. This behaviour is configurable with `camel.component.jolokia.config-from-properties-first=false`, meaning the configuration uses the Bean value when the key is present in both places. If the keys from properties and beans do not override each other, they will be merged.
+
+== Logging Configuration
+
+The starter provides a log configuration using the `slf4j` implementation. You can change this by providing a Bean named `camelLogHandlerHolder`:
+
+[source,java]
+----
+@Bean
+@ConditionalOnMissingBean(name = "camelLogHandlerHolder")
+public SpringJolokiaLogHandlerHolder myLogHandlerHolder() {
+    final SpringJolokiaLogHandlerHolder stdoutHandlerHolder = new SpringJolokiaLogHandlerHolder();
+    stdoutHandlerHolder.setType("stdout");
+    return stdoutHandlerHolder;
+}
+----
+
+The logging category for the Camel Spring Boot starter is `org.apache.camel.component.jolokia`, while the core Jolokia server uses `org.jolokia`:
+
+[source,properties]
+----
+logging.level.org.apache.camel.component.jolokia=TRACE
+logging.level.org.jolokia=TRACE
+----
+
+== Kubernetes Support
+
+The starter provides default configurations for Kubernetes environments. It checks for the existence of a certification authority file at `/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt` and, if present, initializes the server using TLS protocol and client authentication. The endpoint becomes `https://0.0.0.0:8778/jolokia`.
+
+You can disable this behaviour with `camel.component.jolokia.kubernetes-discover=false`.
+
+== Spring Boot Actuator Integration
+
+The wrapped https://jolokia.org/reference/html/manual/spring.html#_registering_agent_servlet_under_spring_boot_actuator[Jolokia Spring Support] library provides integration with Spring Boot Actuator, where it is possible to retrieve information about the Jolokia server. As with any other actuator endpoint, it can be excluded or disabled.
