@@ -634,11 +634,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-chroma-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-chunk-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2786,11 +2781,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-chatscript</artifactId>
-        <version>4.18.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-chroma</artifactId>
         <version>4.18.0-SNAPSHOT</version>
       </dependency>
       <dependency>
