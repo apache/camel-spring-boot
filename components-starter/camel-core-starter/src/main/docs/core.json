@@ -381,7 +381,7 @@
     {
       "name": "camel.language.constant.trim",
       "type": "java.lang.Boolean",
-      "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
+      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks. For example when using DSLs where the source will span across multiple lines and there may be additional line breaks at both the beginning and end.",
       "sourceType": "org.apache.camel.language.constant.springboot.ConstantLanguageConfiguration",
       "defaultValue": true
     },
@@ -406,9 +406,16 @@
     {
       "name": "camel.language.csimple.trim",
       "type": "java.lang.Boolean",
-      "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
+      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks. For example when using DSLs where the source will span across multiple lines and there may be additional line breaks at both the beginning and end.",
       "sourceType": "org.apache.camel.language.csimple.springboot.CSimpleLanguageConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.language.csimple.trim-result",
+      "type": "java.lang.Boolean",
+      "description": "Whether to trim the returned values when this language are in use. For example the output result may contain unwanted line breaks at the beginning and end such as when using Java DSL with multi-line blocks. Is default false to be backwards compatible with existing behavior.",
+      "sourceType": "org.apache.camel.language.csimple.springboot.CSimpleLanguageConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.language.exchange-property.customizer.enabled",
@@ -424,7 +431,7 @@
     {
       "name": "camel.language.exchange-property.trim",
       "type": "java.lang.Boolean",
-      "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
+      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks. For example when using DSLs where the source will span across multiple lines and there may be additional line breaks at both the beginning and end.",
       "sourceType": "org.apache.camel.language.property.springboot.ExchangePropertyLanguageConfiguration",
       "defaultValue": true
     },
@@ -449,9 +456,16 @@
     {
       "name": "camel.language.file.trim",
       "type": "java.lang.Boolean",
-      "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
+      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks. For example when using DSLs where the source will span across multiple lines and there may be additional line breaks at both the beginning and end.",
       "sourceType": "org.apache.camel.language.simple.springboot.FileLanguageConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.language.file.trim-result",
+      "type": "java.lang.Boolean",
+      "description": "Whether to trim the returned values when this language are in use. For example the output result may contain unwanted line breaks at the beginning and end such as when using Java DSL with multi-line blocks. Is default false to be backwards compatible with existing behavior.",
+      "sourceType": "org.apache.camel.language.simple.springboot.FileLanguageConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.language.header.customizer.enabled",
@@ -467,7 +481,7 @@
     {
       "name": "camel.language.header.trim",
       "type": "java.lang.Boolean",
-      "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
+      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks. For example when using DSLs where the source will span across multiple lines and there may be additional line breaks at both the beginning and end.",
       "sourceType": "org.apache.camel.language.header.springboot.HeaderLanguageConfiguration",
       "defaultValue": true
     },
@@ -485,7 +499,7 @@
     {
       "name": "camel.language.ref.trim",
       "type": "java.lang.Boolean",
-      "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
+      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks. For example when using DSLs where the source will span across multiple lines and there may be additional line breaks at both the beginning and end.",
       "sourceType": "org.apache.camel.language.ref.springboot.RefLanguageConfiguration",
       "defaultValue": true
     },
@@ -510,9 +524,16 @@
     {
       "name": "camel.language.simple.trim",
       "type": "java.lang.Boolean",
-      "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
+      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks. For example when using DSLs where the source will span across multiple lines and there may be additional line breaks at both the beginning and end.",
       "sourceType": "org.apache.camel.language.simple.springboot.SimpleLanguageConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.language.simple.trim-result",
+      "type": "java.lang.Boolean",
+      "description": "Whether to trim the returned values when this language are in use. For example the output result may contain unwanted line breaks at the beginning and end such as when using Java DSL with multi-line blocks. Is default false to be backwards compatible with existing behavior.",
+      "sourceType": "org.apache.camel.language.simple.springboot.SimpleLanguageConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.language.tokenize.customizer.enabled",
@@ -540,7 +561,7 @@
     {
       "name": "camel.language.tokenize.trim",
       "type": "java.lang.Boolean",
-      "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
+      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks. For example when using DSLs where the source will span across multiple lines and there may be additional line breaks at both the beginning and end.",
       "sourceType": "org.apache.camel.language.tokenizer.springboot.TokenizeLanguageConfiguration",
       "defaultValue": true
     },
@@ -558,7 +579,7 @@
     {
       "name": "camel.language.variable.trim",
       "type": "java.lang.Boolean",
-      "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
+      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks. For example when using DSLs where the source will span across multiple lines and there may be additional line breaks at both the beginning and end.",
       "sourceType": "org.apache.camel.language.variable.springboot.VariableLanguageConfiguration",
       "defaultValue": true
     },

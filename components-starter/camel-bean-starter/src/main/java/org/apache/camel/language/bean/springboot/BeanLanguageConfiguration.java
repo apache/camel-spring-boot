@@ -56,8 +56,10 @@ public class BeanLanguageConfiguration
      */
     private Boolean validate = true;
     /**
-     * Whether to trim the value to remove leading and trailing whitespaces and
-     * line breaks
+     * Whether to trim the source code to remove leading and trailing
+     * whitespaces and line breaks. For example when using DSLs where the source
+     * will span across multiple lines and there may be additional line breaks
+     * at both the beginning and end.
      */
     private Boolean trim = true;
 
