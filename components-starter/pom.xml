@@ -170,7 +170,6 @@
     <module>camel-cassandraql-starter</module>
     <module>camel-cbor-starter</module>
     <module>camel-chatscript-starter</module>
-    <module>camel-chroma-starter</module>
     <module>camel-chunk-starter</module>
     <module>camel-clickup-starter</module>
     <module>camel-cloudevents-starter</module>
