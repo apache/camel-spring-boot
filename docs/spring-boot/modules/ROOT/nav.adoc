@@ -2,6 +2,7 @@
 * xref:spring-boot.adoc[Camel Context starter]
 * xref:list.adoc[List of starters]
 * xref:starter-configuration.adoc[Starter Configuration]
+* xref:jolokia.adoc[Jolokia]
 * Cluster Services
 ** xref:consul-cluster-service.adoc[Consul]
 ** xref:file-cluster-service.adoc[File]
