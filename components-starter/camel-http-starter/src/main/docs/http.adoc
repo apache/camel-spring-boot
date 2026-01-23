@@ -1,0 +1,44 @@
+= HTTP
+//Manually maintained attributes
+:artifactid: camel-http
+:shortname: http
+:camel-spring-boot-name: http
+
+The HTTP starter provides Spring Boot auto-configuration for the Camel HTTP component.
+
+== Spring Boot SSL Bundle Support
+
+This starter supports Spring Boot SSL Bundles (3.1+) for configuring SSL/TLS on HTTP connections by using the configured Bundle.
+
+=== Configuration
+
+[source,yaml]
+----
+spring:
+  ssl:
+    bundle:
+      pem:
+        my-bundle:
+          keystore:
+            certificate: classpath:client.crt
+            private-key: classpath:client.key
+          truststore:
+            certificate: classpath:ca.crt
+
+camel:
+  component:
+    http:
+      ssl-bundle: my-bundle
+      ssl-bundle-hot-reload: true
+----
+
+=== Example Route
+
+[source,java]
+----
+from("timer:tick?period=5000")
+    .to("https://secure-api.example.com/data")
+    .log("${body}");
+----
+
+When `ssl-bundle-hot-reload` is enabled, certificate updates are automatically applied without restart.
