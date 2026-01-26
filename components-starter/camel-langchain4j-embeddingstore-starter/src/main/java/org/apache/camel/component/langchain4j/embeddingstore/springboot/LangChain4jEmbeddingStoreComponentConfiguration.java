@@ -19,6 +19,7 @@ package org.apache.camel.component.langchain4j.embeddingstore.springboot;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.store.embedding.EmbeddingStore;
 import org.apache.camel.component.langchain4j.embeddingstore.EmbeddingStoreFactory;
+import org.apache.camel.component.langchain4j.embeddingstore.LangChain4jEmbeddingStoreAction;
 import org.apache.camel.component.langchain4j.embeddingstore.LangChain4jEmbeddingStoreConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -38,6 +39,10 @@ public class LangChain4jEmbeddingStoreComponentConfiguration
      * component. This is enabled by default.
      */
     private Boolean enabled;
+    /**
+     * The operation to perform: ADD, REMOVE, or SEARCH
+     */
+    private LangChain4jEmbeddingStoreAction action;
     /**
      * The configuration;. The option is a
      * org.apache.camel.component.langchain4j.embeddingstore.LangChain4jEmbeddingStoreConfiguration type.
@@ -66,6 +71,18 @@ public class LangChain4jEmbeddingStoreComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Maximum number of results to return for SEARCH operation
+     */
+    private Integer maxResults = 5;
+    /**
+     * Minimum similarity score threshold for SEARCH operation (0.0 to 1.0)
+     */
+    private Double minScore;
+    /**
+     * When true, SEARCH returns List with text content instead of List
+     */
+    private Boolean returnTextContent = false;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -74,6 +91,14 @@ public class LangChain4jEmbeddingStoreComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+
+    public LangChain4jEmbeddingStoreAction getAction() {
+        return action;
+    }
+
+    public void setAction(LangChain4jEmbeddingStoreAction action) {
+        this.action = action;
+    }
 
     public LangChain4jEmbeddingStoreConfiguration getConfiguration() {
         return configuration;
@@ -107,6 +132,30 @@ public class LangChain4jEmbeddingStoreComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Integer getMaxResults() {
+        return maxResults;
+    }
+
+    public void setMaxResults(Integer maxResults) {
+        this.maxResults = maxResults;
+    }
+
+    public Double getMinScore() {
+        return minScore;
+    }
+
+    public void setMinScore(Double minScore) {
+        this.minScore = minScore;
+    }
+
+    public Boolean getReturnTextContent() {
+        return returnTextContent;
+    }
+
+    public void setReturnTextContent(Boolean returnTextContent) {
+        this.returnTextContent = returnTextContent;
     }
 
     public Boolean getAutowiredEnabled() {

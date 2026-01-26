@@ -32,18 +32,6 @@
       "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
-      "name": "camel.dataformat.ocsf.disable-features",
-      "type": "java.lang.String",
-      "description": "Set of features to disable on the Jackson com.fasterxml.jackson.databind.ObjectMapper. The features should be a name that matches a enum from com.fasterxml.jackson.databind.SerializationFeature, com.fasterxml.jackson.databind.DeserializationFeature, or com.fasterxml.jackson.databind.MapperFeature Multiple features can be separated by comma",
-      "sourceType": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration"
-    },
-    {
-      "name": "camel.dataformat.ocsf.enable-features",
-      "type": "java.lang.String",
-      "description": "Set of features to enable on the Jackson com.fasterxml.jackson.databind.ObjectMapper. The features should be a name that matches a enum from com.fasterxml.jackson.databind.SerializationFeature, com.fasterxml.jackson.databind.DeserializationFeature, or com.fasterxml.jackson.databind.MapperFeature Multiple features can be separated by comma",
-      "sourceType": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration"
-    },
-    {
       "name": "camel.dataformat.ocsf.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the ocsf data format. This is enabled by default.",
