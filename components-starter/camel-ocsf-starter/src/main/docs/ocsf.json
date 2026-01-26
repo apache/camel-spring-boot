@@ -1,0 +1,90 @@
+{
+  "groups": [
+    {
+      "name": "camel.dataformat.ocsf",
+      "type": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.ocsf.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.dataformat.ocsf.allow-unmarshall-type",
+      "type": "java.lang.Boolean",
+      "description": "If enabled then the unmarshal type can be specified via the CamelOcsfUnmarshalType header. This should only be enabled when desired to be used.",
+      "sourceType": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.ocsf.collection-type",
+      "type": "java.lang.String",
+      "description": "Refers to a custom collection type to lookup in the registry to use. This option should rarely be used, but allows to use different collection types than java.util.Collection based as default.",
+      "sourceType": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.ocsf.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.ocsf.disable-features",
+      "type": "java.lang.String",
+      "description": "Set of features to disable on the Jackson com.fasterxml.jackson.databind.ObjectMapper. The features should be a name that matches a enum from com.fasterxml.jackson.databind.SerializationFeature, com.fasterxml.jackson.databind.DeserializationFeature, or com.fasterxml.jackson.databind.MapperFeature Multiple features can be separated by comma",
+      "sourceType": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.ocsf.enable-features",
+      "type": "java.lang.String",
+      "description": "Set of features to enable on the Jackson com.fasterxml.jackson.databind.ObjectMapper. The features should be a name that matches a enum from com.fasterxml.jackson.databind.SerializationFeature, com.fasterxml.jackson.databind.DeserializationFeature, or com.fasterxml.jackson.databind.MapperFeature Multiple features can be separated by comma",
+      "sourceType": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.ocsf.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the ocsf data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.ocsf.object-mapper",
+      "type": "java.lang.String",
+      "description": "Lookup and use the existing ObjectMapper with the given id when using Jackson.",
+      "sourceType": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.ocsf.pretty-print",
+      "type": "java.lang.Boolean",
+      "description": "To enable pretty printing output nicely formatted. Is by default false.",
+      "sourceType": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.ocsf.unmarshal-type",
+      "type": "java.lang.String",
+      "description": "Class name of the OCSF event type to use when unmarshalling. Defaults to OcsfEvent.",
+      "sourceType": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.ocsf.use-default-object-mapper",
+      "type": "java.lang.Boolean",
+      "description": "Whether to lookup and use default Jackson ObjectMapper from the registry.",
+      "sourceType": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.ocsf.use-list",
+      "type": "java.lang.Boolean",
+      "description": "To unmarshal to a List of OCSF events.",
+      "sourceType": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration",
+      "defaultValue": false
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

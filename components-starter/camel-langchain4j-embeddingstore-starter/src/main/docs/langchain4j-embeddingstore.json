@@ -14,12 +14,6 @@
   ],
   "properties": [
     {
-      "name": "camel.component.langchain4j-embeddingstore.action",
-      "type": "org.apache.camel.component.langchain4j.embeddingstore.LangChain4jEmbeddingStoreAction",
-      "description": "The operation to perform: ADD, REMOVE, or SEARCH",
-      "sourceType": "org.apache.camel.component.langchain4j.embeddingstore.springboot.LangChain4jEmbeddingStoreComponentConfiguration"
-    },
-    {
       "name": "camel.component.langchain4j-embeddingstore.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
@@ -59,26 +53,6 @@
       "name": "camel.component.langchain4j-embeddingstore.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
-      "sourceType": "org.apache.camel.component.langchain4j.embeddingstore.springboot.LangChain4jEmbeddingStoreComponentConfiguration",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.component.langchain4j-embeddingstore.max-results",
-      "type": "java.lang.Integer",
-      "description": "Maximum number of results to return for SEARCH operation",
-      "sourceType": "org.apache.camel.component.langchain4j.embeddingstore.springboot.LangChain4jEmbeddingStoreComponentConfiguration",
-      "defaultValue": 5
-    },
-    {
-      "name": "camel.component.langchain4j-embeddingstore.min-score",
-      "type": "java.lang.Double",
-      "description": "Minimum similarity score threshold for SEARCH operation (0.0 to 1.0)",
-      "sourceType": "org.apache.camel.component.langchain4j.embeddingstore.springboot.LangChain4jEmbeddingStoreComponentConfiguration"
-    },
-    {
-      "name": "camel.component.langchain4j-embeddingstore.return-text-content",
-      "type": "java.lang.Boolean",
-      "description": "When true, SEARCH returns List with text content instead of List",
       "sourceType": "org.apache.camel.component.langchain4j.embeddingstore.springboot.LangChain4jEmbeddingStoreComponentConfiguration",
       "defaultValue": false
     }
