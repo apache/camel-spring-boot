@@ -54,7 +54,7 @@
       <dependency>
         <groupId>com.openai</groupId>
         <artifactId>openai-java</artifactId>
-        <version>4.16.1</version>
+        <version>4.16.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
@@ -1660,6 +1660,11 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-observation-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-ocsf-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -4032,6 +4037,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-observation</artifactId>
+        <version>4.18.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-ocsf</artifactId>
         <version>4.18.0-SNAPSHOT</version>
       </dependency>
       <dependency>
