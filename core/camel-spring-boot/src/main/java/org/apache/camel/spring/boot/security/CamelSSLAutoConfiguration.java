@@ -235,7 +235,7 @@ public class CamelSSLAutoConfiguration {
                 }
                 tmp.setTrustManager(TrustAllTrustManager.INSTANCE);
                 LOG.warn(
-                        "Trust all certifications enabled. Using this in production can expose the application to man-in-the-middle attacks");
+                        "Trust all certificates enabled. Using this in production can expose the application to man-in-the-middle attacks");
             }
             return this;
         }
