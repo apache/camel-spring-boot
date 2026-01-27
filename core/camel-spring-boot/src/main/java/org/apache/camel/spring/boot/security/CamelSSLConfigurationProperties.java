@@ -49,6 +49,13 @@ public class CamelSSLConfigurationProperties {
     private TrustManagersParameters trustManagers;
 
     /**
+     * Allows to trust all SSL certificates without performing certificate validation. This can be used in development
+     * environment but may expose the system to security risks. Notice that if the trustAllCertificates option is set to
+     * true then the trustStore/trustStorePassword options are not in use.
+     */
+    private boolean trustAllCertificates;
+
+    /**
      * The optional secure random configuration options to use for constructing the SecureRandom used in the creation of
      * an SSLContext.
      */
@@ -134,6 +141,14 @@ public class CamelSSLConfigurationProperties {
 
     public void setTrustManagers(TrustManagersParameters trustManagers) {
         this.trustManagers = trustManagers;
+    }
+
+    public boolean isTrustAllCertificates() {
+        return trustAllCertificates;
+    }
+
+    public void setTrustAllCertificates(boolean trustAllCertificates) {
+        this.trustAllCertificates = trustAllCertificates;
     }
 
     public SecureRandomParameters getSecureRandom() {

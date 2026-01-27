@@ -19,14 +19,11 @@ package org.apache.camel.spring.boot.security;
 import java.util.Collections;
 import java.util.Map;
 import org.apache.camel.CamelContext;
-import org.apache.camel.main.MainHelper;
-import org.apache.camel.spi.ThreadPoolProfile;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.support.jsse.*;
-import org.apache.camel.util.OrderedLocationProperties;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionMessage;
 import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -44,6 +41,8 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 @AutoConfigureAfter(CamelAutoConfiguration.class)
 @EnableConfigurationProperties(CamelSSLConfigurationProperties.class)
 public class CamelSSLAutoConfiguration {
+
+    private static final Logger LOG = LoggerFactory.getLogger(CamelSSLAutoConfiguration.class);
 
     @Bean
     @ConditionalOnMissingBean
@@ -63,6 +62,7 @@ public class CamelSSLAutoConfiguration {
                 .secureSocketProtocols(properties.getSecureSocketProtocols())
                 .secureSocketProtocolsFilter(properties.getSecureSocketProtocolsFilter())
                 .serverParameters(properties.getServerParameters()).sessionTimeout(properties.getSessionTimeout())
+                .trustAllCertificates(properties.isTrustAllCertificates())
                 .trustManager(properties.getTrustManagers()).build();
 
         return config;
@@ -85,7 +85,7 @@ public class CamelSSLAutoConfiguration {
                     .orElse(Collections.emptyMap());
             sslProperties.remove("config");
             ConditionMessage.Builder message = ConditionMessage.forCondition("camel.ssl");
-            if (sslProperties.size() > 0) {
+            if (!sslProperties.isEmpty()) {
                 return ConditionOutcome.match(message.because("enabled"));
             }
 
@@ -222,6 +222,20 @@ public class CamelSSLAutoConfiguration {
         public SSLContextBuilder trustManager(TrustManagersParameters trustManager) {
             if (trustManager != null) {
                 sslContextParameters.setTrustManagers(trustManager);
+            }
+            return this;
+        }
+
+        public SSLContextBuilder trustAllCertificates(boolean trustAllCertificates) {
+            if (trustAllCertificates) {
+                TrustManagersParameters tmp = sslContextParameters.getTrustManagers();
+                if (tmp == null) {
+                    tmp = new TrustManagersParameters();
+                    sslContextParameters.setTrustManagers(tmp);
+                }
+                tmp.setTrustManager(TrustAllTrustManager.INSTANCE);
+                LOG.warn(
+                        "Trust all certificates enabled. Using this in production can expose the application to man-in-the-middle attacks");
             }
             return this;
         }
