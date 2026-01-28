@@ -77,6 +77,18 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.aws2-polly.lexicon-content",
+      "type": "java.lang.String",
+      "description": "The content of the lexicon in PLS format for putLexicon operation",
+      "sourceType": "org.apache.camel.component.aws2.polly.springboot.Polly2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-polly.lexicon-name",
+      "type": "java.lang.String",
+      "description": "The name of the lexicon to use for getLexicon, putLexicon, or deleteLexicon operations",
+      "sourceType": "org.apache.camel.component.aws2.polly.springboot.Polly2ComponentConfiguration"
+    },
+    {
       "name": "camel.component.aws2-polly.lexicon-names",
       "type": "java.lang.String",
       "description": "Lexicon names to apply during synthesis",
@@ -148,6 +160,18 @@
       "sourceType": "org.apache.camel.component.aws2.polly.springboot.Polly2ComponentConfiguration"
     },
     {
+      "name": "camel.component.aws2-polly.s3-bucket",
+      "type": "java.lang.String",
+      "description": "The S3 bucket name for startSpeechSynthesisTask operation output",
+      "sourceType": "org.apache.camel.component.aws2.polly.springboot.Polly2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-polly.s3-key-prefix",
+      "type": "java.lang.String",
+      "description": "The S3 key prefix for startSpeechSynthesisTask operation output",
+      "sourceType": "org.apache.camel.component.aws2.polly.springboot.Polly2ComponentConfiguration"
+    },
+    {
       "name": "camel.component.aws2-polly.sample-rate",
       "type": "java.lang.String",
       "description": "The sample rate in Hz for the audio output",
@@ -163,6 +187,18 @@
       "name": "camel.component.aws2-polly.session-token",
       "type": "java.lang.String",
       "description": "Amazon AWS Session Token used when the user needs to assume an IAM role",
+      "sourceType": "org.apache.camel.component.aws2.polly.springboot.Polly2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-polly.sns-topic-arn",
+      "type": "java.lang.String",
+      "description": "The SNS topic ARN for startSpeechSynthesisTask notifications",
+      "sourceType": "org.apache.camel.component.aws2.polly.springboot.Polly2ComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-polly.task-id",
+      "type": "java.lang.String",
+      "description": "The task ID for getSpeechSynthesisTask operation",
       "sourceType": "org.apache.camel.component.aws2.polly.springboot.Polly2ComponentConfiguration"
     },
     {
