@@ -1465,6 +1465,13 @@
       "sourceType": "org.apache.camel.spring.boot.security.CamelSSLConfigurationProperties"
     },
     {
+      "name": "camel.ssl.trust-all-certificates",
+      "type": "java.lang.Boolean",
+      "description": "Allows to trust all SSL certificates without performing certificate validation. This can be used in development environment but may expose the system to security risks. Notice that if the trustAllCertificates option is set to true then the trustStore\/trustStorePassword options are not in use.",
+      "sourceType": "org.apache.camel.spring.boot.security.CamelSSLConfigurationProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.ssl.trust-managers",
       "type": "org.apache.camel.support.jsse.TrustManagersParameters",
       "description": "The optional trust manager configuration for creating the TrustManager used in constructing an SSLContext.",
