@@ -115,6 +115,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-aws-security-hub-starter</artifactId>
+        <version>4.18.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws-xray-starter</artifactId>
         <version>4.18.0-SNAPSHOT</version>
       </dependency>
