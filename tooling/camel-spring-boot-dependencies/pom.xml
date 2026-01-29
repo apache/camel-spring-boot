@@ -399,6 +399,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-aws2-comprehend-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-cw-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2516,6 +2521,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-aws2-athena</artifactId>
+        <version>4.18.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-aws2-comprehend</artifactId>
         <version>4.18.0-SNAPSHOT</version>
       </dependency>
       <dependency>

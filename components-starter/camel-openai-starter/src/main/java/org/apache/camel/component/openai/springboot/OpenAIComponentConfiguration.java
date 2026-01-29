@@ -41,7 +41,7 @@ public class OpenAIComponentConfiguration
     /**
      * Default base URL for all endpoints
      */
-    private String baseUrl = "https://api.openai.com/v1";
+    private String baseUrl;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
