@@ -123,6 +123,7 @@
     <module>camel-aws-security-hub-starter</module>
     <module>camel-aws-xray-starter</module>
     <module>camel-aws2-athena-starter</module>
+    <module>camel-aws2-comprehend-starter</module>
     <module>camel-aws2-cw-starter</module>
     <module>camel-aws2-ddb-starter</module>
     <module>camel-aws2-ec2-starter</module>
