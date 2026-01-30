@@ -144,10 +144,6 @@ public class DoclingComponentConfiguration
      */
     private Boolean splitBatchResults = false;
     /**
-     * Extract all available metadata fields including custom/raw fields
-     */
-    private Boolean extractAllMetadata = false;
-    /**
      * Include metadata in message headers when extracting metadata
      */
     private Boolean includeMetadataInHeaders = true;
@@ -346,14 +342,6 @@ public class DoclingComponentConfiguration
 
     public void setSplitBatchResults(Boolean splitBatchResults) {
         this.splitBatchResults = splitBatchResults;
-    }
-
-    public Boolean getExtractAllMetadata() {
-        return extractAllMetadata;
-    }
-
-    public void setExtractAllMetadata(Boolean extractAllMetadata) {
-        this.extractAllMetadata = extractAllMetadata;
     }
 
     public Boolean getIncludeMetadataInHeaders() {
