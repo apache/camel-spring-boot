@@ -60,7 +60,9 @@ final class CamelHealthHelper {
             });
 
             result.getError().ifPresent(error -> {
-                builder.withDetail("error.message", error.getMessage());
+                if (error.getMessage() != null) {
+                    builder.withDetail("error.message", error.getMessage());
+                }
                 final StringWriter stackTraceWriter = new StringWriter();
                 try (final PrintWriter pw = new PrintWriter(stackTraceWriter, true)) {
                     error.printStackTrace(pw);
