@@ -127,13 +127,6 @@
       "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
     },
     {
-      "name": "camel.component.docling.extract-all-metadata",
-      "type": "java.lang.Boolean",
-      "description": "Extract all available metadata fields including custom\/raw fields",
-      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
-      "defaultValue": false
-    },
-    {
       "name": "camel.component.docling.include-layout-info",
       "type": "java.lang.Boolean",
       "description": "Show layout information with bounding boxes",
