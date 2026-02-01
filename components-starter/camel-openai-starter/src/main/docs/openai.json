@@ -30,7 +30,8 @@
       "name": "camel.component.openai.base-url",
       "type": "java.lang.String",
       "description": "Default base URL for all endpoints",
-      "sourceType": "org.apache.camel.component.openai.springboot.OpenAIComponentConfiguration"
+      "sourceType": "org.apache.camel.component.openai.springboot.OpenAIComponentConfiguration",
+      "defaultValue": "https:\/\/api.openai.com\/v1"
     },
     {
       "name": "camel.component.openai.customizer.enabled",
