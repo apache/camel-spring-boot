@@ -189,6 +189,11 @@
       "name": "management.endpoint.camelroutes",
       "type": "org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpointProperties",
       "sourceType": "org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpointProperties"
+    },
+    {
+      "name": "management.server.accesslog",
+      "type": "org.apache.camel.spring.boot.actuate.accesslog.ManagementAccessLogProperties",
+      "sourceType": "org.apache.camel.spring.boot.actuate.accesslog.ManagementAccessLogProperties"
     }
   ],
   "properties": [
@@ -2158,6 +2163,13 @@
       "name": "management.info.camel.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable Camel info.",
+      "defaultValue": true
+    },
+    {
+      "name": "management.server.accesslog.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether access logging is enabled for the management server. When false and using a separate management port, access logs are disabled for actuator endpoints.",
+      "sourceType": "org.apache.camel.spring.boot.actuate.accesslog.ManagementAccessLogProperties",
       "defaultValue": true
     },
     {
