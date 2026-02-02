@@ -68,17 +68,4 @@ public class ManagementAccessLogConfiguration {
         }
     }
 
-    /**
-     * Jetty-specific configuration to disable access logging in the management context.
-     */
-    @Configuration(proxyBeanMethods = false)
-    @ConditionalOnClass(name = "org.eclipse.jetty.server.Server")
-    @ConditionalOnProperty(name = "management.server.accesslog.enabled", havingValue = "false")
-    static class JettyAccessLogCustomizerConfiguration {
-
-        @Bean
-        JettyManagementAccessLogCustomizer jettyManagementAccessLogCustomizer() {
-            return new JettyManagementAccessLogCustomizer();
-        }
-    }
 }
