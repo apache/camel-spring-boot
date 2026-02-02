@@ -68,6 +68,20 @@
             <version>${spring-boot-version}</version>
             <optional>true</optional>
         </dependency>
+        <!-- Optional Undertow support for management access log configuration -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+            <version>${spring-boot-version}</version>
+            <optional>true</optional>
+        </dependency>
+        <!-- Optional Jetty support for management access log configuration -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jetty</artifactId>
+            <version>${spring-boot-version}</version>
+            <optional>true</optional>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.camel</groupId>

@@ -456,6 +456,49 @@ management.endpoint.health.probes.enabled=true
 
 Finally, http://localhost:8080/actuator/health/liveness will show the updated probe.
 
+== Management Access Log Control
+
+When running actuator endpoints on a separate management port, you can disable access logging for the management context while keeping access logs for the main application. This is useful to avoid cluttering access logs with health check requests.
+
+NOTE: This feature requires `management.server.port` to be different from the main application port.
+
+=== Tomcat
+
+[source,properties]
+----
+server.tomcat.accesslog.enabled=true
+server.tomcat.accesslog.directory=logs
+server.tomcat.basedir=./target
+management.server.port=9090
+management.server.accesslog.enabled=false
+----
+
+Result: Main app logs to `./target/logs/access_log.<date>.log`, actuator has no access logs.
+
+=== Undertow
+
+[source,properties]
+----
+server.undertow.accesslog.enabled=true
+server.undertow.accesslog.dir=logs
+management.server.port=9090
+management.server.accesslog.enabled=false
+----
+
+Result: Main app logs to `logs/access_log.log`, actuator has no access logs.
+
+=== Jetty
+
+[source,properties]
+----
+server.jetty.accesslog.enabled=true
+server.jetty.accesslog.filename=./target/logs/jetty_access.log
+management.server.port=9090
+management.server.accesslog.enabled=false
+----
+
+Result: Main app logs to `./target/logs/jetty_access.log`, actuator has no access logs.
+
 == Virtual Threads Support
 
 Camel Spring Boot provides comprehensive support for JDK 21+ Virtual Threads, offering significant performance improvements for I/O-intensive applications. Virtual threads are lightweight threads that can dramatically reduce memory overhead and improve scalability compared to traditional platform threads.
