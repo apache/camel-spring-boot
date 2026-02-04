@@ -39,6 +39,12 @@
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
+      "name": "camel.component.openai.embedding-model",
+      "type": "java.lang.String",
+      "description": "Default model for embeddings endpoints",
+      "sourceType": "org.apache.camel.component.openai.springboot.OpenAIComponentConfiguration"
+    },
+    {
       "name": "camel.component.openai.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the openai component. This is enabled by default.",
@@ -54,7 +60,7 @@
     {
       "name": "camel.component.openai.model",
       "type": "java.lang.String",
-      "description": "Default model for all endpoints",
+      "description": "Default model for chat completion endpoints",
       "sourceType": "org.apache.camel.component.openai.springboot.OpenAIComponentConfiguration"
     }
   ],
