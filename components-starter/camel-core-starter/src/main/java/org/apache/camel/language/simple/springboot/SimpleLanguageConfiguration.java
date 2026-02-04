@@ -46,6 +46,11 @@ public class SimpleLanguageConfiguration
      */
     private Boolean pretty = false;
     /**
+     * If the result is a nested simple expression should this expression be
+     * evaluated as well
+     */
+    private Boolean nested = false;
+    /**
      * Whether to trim the source code to remove leading and trailing
      * whitespaces and line breaks. For example when using DSLs where the source
      * will span across multiple lines and there may be additional line breaks
@@ -67,6 +72,14 @@ public class SimpleLanguageConfiguration
 
     public void setPretty(Boolean pretty) {
         this.pretty = pretty;
+    }
+
+    public Boolean getNested() {
+        return nested;
+    }
+
+    public void setNested(Boolean nested) {
+        this.nested = nested;
     }
 
     public Boolean getTrim() {
