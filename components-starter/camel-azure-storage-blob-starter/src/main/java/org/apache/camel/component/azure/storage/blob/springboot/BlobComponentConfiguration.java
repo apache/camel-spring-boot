@@ -157,6 +157,47 @@ public class BlobComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Delete blobs from Azure after they have been retrieved. The delete is
+     * only performed if the Exchange is committed. If a rollback occurs, the
+     * blob is not deleted. If this option is false, then the same blobs will be
+     * retrieved over and over again in the polls. Therefore, you need to use
+     * the Idempotent Consumer EIP in the route to filter out duplicates. You
+     * can filter using the BlobConstants#BLOB_NAME header, or only the blob
+     * name.
+     */
+    private Boolean deleteAfterRead = false;
+    /**
+     * Define the destination blob prefix to use when a blob must be moved, and
+     * moveAfterRead is set to true.
+     */
+    private String destinationBlobPrefix;
+    /**
+     * Define the destination blob suffix to use when a blob must be moved, and
+     * moveAfterRead is set to true.
+     */
+    private String destinationBlobSuffix;
+    /**
+     * Define the destination container where a blob must be moved when
+     * moveAfterRead is set to true.
+     */
+    private String destinationContainer;
+    /**
+     * Move blobs from the container to a different container after they have
+     * been retrieved. To accomplish the operation, the destinationContainer
+     * option must be set. The copy blob operation is only performed if the
+     * Exchange is committed. If a rollback occurs, the blob is not moved.
+     */
+    private Boolean moveAfterRead = false;
+    /**
+     * Remove the contents of the prefix configuration string from the new blob
+     * name before moving. For example, if prefix is set to 'notify/' and the
+     * destinationBlobPrefix is set to 'archive/', a blob with a name of
+     * 'notify/example.txt' will be moved to 'archive/example.txt', rather than
+     * the default behavior where the new name is 'archive/notify/example.txt'.
+     * Only applicable when moveAfterRead is true.
+     */
+    private Boolean removePrefixOnMove = false;
+    /**
      * A user-controlled value that you can use to track requests. The value of
      * the sequence number must be between 0 and 263 - 1.The default value is 0.
      */
@@ -443,6 +484,54 @@ public class BlobComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getDeleteAfterRead() {
+        return deleteAfterRead;
+    }
+
+    public void setDeleteAfterRead(Boolean deleteAfterRead) {
+        this.deleteAfterRead = deleteAfterRead;
+    }
+
+    public String getDestinationBlobPrefix() {
+        return destinationBlobPrefix;
+    }
+
+    public void setDestinationBlobPrefix(String destinationBlobPrefix) {
+        this.destinationBlobPrefix = destinationBlobPrefix;
+    }
+
+    public String getDestinationBlobSuffix() {
+        return destinationBlobSuffix;
+    }
+
+    public void setDestinationBlobSuffix(String destinationBlobSuffix) {
+        this.destinationBlobSuffix = destinationBlobSuffix;
+    }
+
+    public String getDestinationContainer() {
+        return destinationContainer;
+    }
+
+    public void setDestinationContainer(String destinationContainer) {
+        this.destinationContainer = destinationContainer;
+    }
+
+    public Boolean getMoveAfterRead() {
+        return moveAfterRead;
+    }
+
+    public void setMoveAfterRead(Boolean moveAfterRead) {
+        this.moveAfterRead = moveAfterRead;
+    }
+
+    public Boolean getRemovePrefixOnMove() {
+        return removePrefixOnMove;
+    }
+
+    public void setRemovePrefixOnMove(Boolean removePrefixOnMove) {
+        this.removePrefixOnMove = removePrefixOnMove;
     }
 
     public Long getBlobSequenceNumber() {
