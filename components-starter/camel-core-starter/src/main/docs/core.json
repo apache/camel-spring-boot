@@ -447,6 +447,13 @@
       "sourceType": "org.apache.camel.language.simple.springboot.FileLanguageConfiguration"
     },
     {
+      "name": "camel.language.file.nested",
+      "type": "java.lang.Boolean",
+      "description": "If the result is a nested simple expression should this expression be evaluated as well",
+      "sourceType": "org.apache.camel.language.simple.springboot.FileLanguageConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.language.file.pretty",
       "type": "java.lang.Boolean",
       "description": "To pretty format the output (only JSon or XML supported)",
@@ -513,6 +520,13 @@
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the simple language. This is enabled by default.",
       "sourceType": "org.apache.camel.language.simple.springboot.SimpleLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.simple.nested",
+      "type": "java.lang.Boolean",
+      "description": "If the result is a nested simple expression should this expression be evaluated as well",
+      "sourceType": "org.apache.camel.language.simple.springboot.SimpleLanguageConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.language.simple.pretty",
