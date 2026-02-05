@@ -1,0 +1,63 @@
+= HTTP
+//Manually maintained attributes
+:artifactid: camel-platform-http
+:shortname: platform-http
+:camel-spring-boot-name: platform-http
+
+The Platform HTTP starter provides Spring Boot auto-configuration for the Camel Platform HTTP component.
+
+== Undertow Access Log
+
+You can enable Undertow access log to be managed by whatever logging library you have in your camel application, you have to set the following parameters:
+[source,properties]
+----
+# disable the undertow access log handler
+server.undertow.accesslog.enabled=false
+# optionally sets a log pattern (optional)
+server.undertow.accesslog.pattern="%r" %s (%D ms)
+# enable camel to control the logging
+camel.component.platform-http.server.accesslog.undertow.use-camel-logging=true
+----
+
+The access log category is `io.undertow.accesslog` and is logged at `INFO` level.
+
+This way you can defer the access log control to the same logging framework in your camel application.
+
+Let's say you are using logback, then this is the configuration.
+[source,xml]
+----
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
+----
+
+If you want to control the undertow access log category:
+[source,xml]
+----
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%-15.15thread] %-5level %-30.30logger - %msg%n</pattern>
+        </encoder>
+        <file>undertow-accesslog.log</file>
+    </appender>
+    <logger name="io.undertow.accesslog" level="info" additivity="false">
+        <appender-ref ref="FILE" />
+    </logger>
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
+----

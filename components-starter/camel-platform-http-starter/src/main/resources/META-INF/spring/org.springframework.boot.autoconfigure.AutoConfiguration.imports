@@ -20,3 +20,4 @@ org.apache.camel.component.platform.http.springboot.PlatformHttpComponentAutoCon
 org.apache.camel.component.platform.http.springboot.SpringBootPlatformHttpAutoConfiguration
 org.apache.camel.component.platform.http.springboot.SpringBootPlatformWebMvcConfiguration
 org.apache.camel.component.platform.http.springboot.actuate.metrics.undertow.UndertowMetricsAutoConfiguration
+org.apache.camel.component.platform.http.springboot.customizer.UndertowAccessLogConfiguration
