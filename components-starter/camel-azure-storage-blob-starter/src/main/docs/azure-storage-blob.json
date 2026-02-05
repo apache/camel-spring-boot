@@ -175,6 +175,31 @@
       "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
     },
     {
+      "name": "camel.component.azure-storage-blob.delete-after-read",
+      "type": "java.lang.Boolean",
+      "description": "Delete blobs from Azure after they have been retrieved. The delete is only performed if the Exchange is committed. If a rollback occurs, the blob is not deleted. If this option is false, then the same blobs will be retrieved over and over again in the polls. Therefore, you need to use the Idempotent Consumer EIP in the route to filter out duplicates. You can filter using the BlobConstants#BLOB_NAME header, or only the blob name.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.azure-storage-blob.destination-blob-prefix",
+      "type": "java.lang.String",
+      "description": "Define the destination blob prefix to use when a blob must be moved, and moveAfterRead is set to true.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.destination-blob-suffix",
+      "type": "java.lang.String",
+      "description": "Define the destination blob suffix to use when a blob must be moved, and moveAfterRead is set to true.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.destination-container",
+      "type": "java.lang.String",
+      "description": "Define the destination container where a blob must be moved when moveAfterRead is set to true.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
       "name": "camel.component.azure-storage-blob.download-link-expiration",
       "type": "java.lang.Long",
       "description": "Override the default expiration (millis) of URL download link.",
@@ -253,6 +278,13 @@
       "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
     },
     {
+      "name": "camel.component.azure-storage-blob.move-after-read",
+      "type": "java.lang.Boolean",
+      "description": "Move blobs from the container to a different container after they have been retrieved. To accomplish the operation, the destinationContainer option must be set. The copy blob operation is only performed if the Exchange is committed. If a rollback occurs, the blob is not moved.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.azure-storage-blob.operation",
       "type": "org.apache.camel.component.azure.storage.blob.BlobOperationsDefinition",
       "description": "The blob operation that can be used with this component on the producer",
@@ -277,6 +309,13 @@
       "type": "java.lang.String",
       "description": "Filters the results to return only blobs whose names match the specified regular expression. May be null to return all if both prefix and regex are set, regex takes the priority and prefix is ignored.",
       "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.remove-prefix-on-move",
+      "type": "java.lang.Boolean",
+      "description": "Remove the contents of the prefix configuration string from the new blob name before moving. For example, if prefix is set to 'notify\/' and the destinationBlobPrefix is set to 'archive\/', a blob with a name of 'notify\/example.txt' will be moved to 'archive\/example.txt', rather than the default behavior where the new name is 'archive\/notify\/example.txt'. Only applicable when moveAfterRead is true.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.azure-storage-blob.sas-token",
