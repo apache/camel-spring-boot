@@ -19,6 +19,7 @@ package org.apache.camel.component.vertx.http.springboot;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.net.ProxyType;
+import io.vertx.core.tracing.TracingPolicy;
 import io.vertx.ext.web.client.WebClientOptions;
 import org.apache.camel.component.vertx.http.VertxHttpBinding;
 import org.apache.camel.spi.HeaderFilterStrategy;
@@ -73,6 +74,12 @@ public class VertxHttpComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * The tracing policy used by the HTTP client when integrating with
+     * observability frameworks such as OpenTelemetry. If not specified the HTTP
+     * client applies a default tracing policy of PROPAGATE.
+     */
+    private TracingPolicy tracingPolicy;
     /**
      * To use an existing vertx instead of creating a new instance. The option
      * is a io.vertx.core.Vertx type.
@@ -172,6 +179,14 @@ public class VertxHttpComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public TracingPolicy getTracingPolicy() {
+        return tracingPolicy;
+    }
+
+    public void setTracingPolicy(TracingPolicy tracingPolicy) {
+        this.tracingPolicy = tracingPolicy;
     }
 
     public Vertx getVertx() {
