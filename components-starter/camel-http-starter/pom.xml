@@ -54,6 +54,12 @@
       <artifactId>httpcore5-h2</artifactId>
       <version>${httpcore-version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-test-spring-junit6</artifactId>
+      <version>${camel-version}</version>
+      <scope>test</scope>
+    </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>

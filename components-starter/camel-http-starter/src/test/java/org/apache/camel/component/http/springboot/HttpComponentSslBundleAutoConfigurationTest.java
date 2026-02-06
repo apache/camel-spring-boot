@@ -27,7 +27,7 @@ import javax.net.ssl.SSLContext;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.http.HttpComponent;
 import org.apache.camel.support.jsse.SSLContextParameters;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.apache.hc.client5.http.io.HttpClientConnectionManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

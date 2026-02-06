@@ -40,7 +40,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import org.junit.jupiter.api.Test;
 
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest

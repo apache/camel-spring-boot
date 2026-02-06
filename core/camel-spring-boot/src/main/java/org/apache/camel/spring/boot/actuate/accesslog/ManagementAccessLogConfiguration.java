@@ -22,8 +22,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
+import org.springframework.boot.tomcat.servlet.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,20 +38,6 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 @EnableConfigurationProperties(ManagementAccessLogProperties.class)
 public class ManagementAccessLogConfiguration {
-
-    /**
-     * Undertow-specific configuration to disable access logging in the management context.
-     */
-    @Configuration(proxyBeanMethods = false)
-    @ConditionalOnClass(name = "io.undertow.Undertow")
-    @ConditionalOnProperty(name = "management.server.accesslog.enabled", havingValue = "false")
-    static class UndertowAccessLogCustomizerConfiguration {
-
-        @Bean
-        WebServerFactoryCustomizer<UndertowServletWebServerFactory> undertowManagementAccessLogCustomizer() {
-            return factory -> factory.setAccessLogEnabled(false);
-        }
-    }
 
     /**
      * Tomcat-specific configuration to disable access logging in the management context.

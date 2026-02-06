@@ -29,7 +29,7 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.processor.validation.CatalogLSResourceResolver;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.support.ResourceHelper;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.apache.xml.resolver.CatalogManager;
 import org.apache.xml.resolver.tools.CatalogResolver;
 import org.junit.jupiter.api.BeforeEach;

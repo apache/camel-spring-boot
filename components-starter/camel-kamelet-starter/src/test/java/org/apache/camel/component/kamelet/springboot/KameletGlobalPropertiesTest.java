@@ -28,8 +28,8 @@ import org.apache.camel.component.http.HttpEndpoint;
 import org.apache.camel.component.kamelet.Kamelet;
 import org.apache.camel.component.kamelet.KameletEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-import org.apache.camel.test.spring.junit5.UseOverridePropertiesWithPropertiesComponent;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.UseOverridePropertiesWithPropertiesComponent;
 
 import org.junit.jupiter.api.Test;
 

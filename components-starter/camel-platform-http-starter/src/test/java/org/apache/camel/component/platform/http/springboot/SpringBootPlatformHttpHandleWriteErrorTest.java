@@ -26,12 +26,16 @@ import org.apache.camel.component.platform.http.spi.PlatformHttpConsumer;
 import org.apache.camel.component.platform.http.spi.PlatformHttpEngine;
 import org.apache.camel.http.common.DefaultHttpBinding;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
+import org.springframework.test.web.servlet.client.RestTestClient;
+import org.springframework.test.web.servlet.client.EntityExchangeResult;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,11 +43,12 @@ import org.springframework.core.env.Environment;
 
 import java.io.IOException;
 
-@EnableAutoConfiguration(exclude = {OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class})
+@EnableAutoConfiguration
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
         SpringBootPlatformHttpHandleWriteErrorTest.class, SpringBootPlatformHttpHandleWriteErrorTest.TestConfiguration.class,
         PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class })
+@AutoConfigureRestTestClient
 public class SpringBootPlatformHttpHandleWriteErrorTest extends PlatformHttpBase {
 
     private static final String postRouteId = "SpringBootPlatformHttpHandleWriteErrorTest_mypost";
@@ -67,7 +72,12 @@ public class SpringBootPlatformHttpHandleWriteErrorTest extends PlatformHttpBase
         me.expectedMessageCount(1);
 
         waitUntilRouteIsStarted(1, getPostRouteId());
-        Assertions.assertThat(restTemplate.postForEntity("/mypost", "test", String.class).getStatusCode().value()).isEqualTo(500);
+        EntityExchangeResult<String> result = restTestClient.post().uri("/mypost")
+                .body("test")
+                .exchange()
+                .expectBody(String.class)
+                .returnResult();
+        Assertions.assertThat(result.getStatus().value()).isEqualTo(500);
 
         me.assertIsSatisfied();
     }
@@ -77,6 +87,13 @@ public class SpringBootPlatformHttpHandleWriteErrorTest extends PlatformHttpBase
     // *************************************
     @Configuration
     public static class TestConfiguration {
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+            http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+                .csrf(csrf -> csrf.disable());
+            return http.build();
+        }
+
 
         @Bean(name = "platform-http-engine")
         public PlatformHttpEngine myHttpEngine(Environment env) {

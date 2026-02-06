@@ -63,7 +63,7 @@ public final class CamelRuntimeHints implements RuntimeHintsRegistrar {
      *            loader at the time of actual resource access
      */
     private static void registerCamelServices(RuntimeHints hints, ClassLoader classLoader) {
-        hints.resources().registerPattern("META-INF/services/org/apache/camel/*");
+        hints.resources().registerPattern("META-INF/services/org/apache/camel/**");
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(classLoader);
         try {
             for (Resource resource : resolver.getResources("classpath*:META-INF/services/org/apache/camel/**")) {
