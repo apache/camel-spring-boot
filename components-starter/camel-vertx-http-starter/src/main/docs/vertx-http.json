@@ -113,6 +113,12 @@
       "sourceType": "org.apache.camel.component.vertx.http.springboot.VertxHttpComponentConfiguration"
     },
     {
+      "name": "camel.component.vertx-http.tracing-policy",
+      "type": "io.vertx.core.tracing.TracingPolicy",
+      "description": "The tracing policy used by the HTTP client when integrating with observability frameworks such as OpenTelemetry. If not specified the HTTP client applies a default tracing policy of PROPAGATE.",
+      "sourceType": "org.apache.camel.component.vertx.http.springboot.VertxHttpComponentConfiguration"
+    },
+    {
       "name": "camel.component.vertx-http.use-global-ssl-context-parameters",
       "type": "java.lang.Boolean",
       "description": "Enable usage of global SSL context parameters",
