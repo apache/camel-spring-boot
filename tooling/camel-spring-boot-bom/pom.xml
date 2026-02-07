@@ -1330,6 +1330,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-mina-sftp-starter</artifactId>
+        <version>4.18.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-mina-starter</artifactId>
         <version>4.18.0-SNAPSHOT</version>
       </dependency>
