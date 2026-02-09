@@ -42,7 +42,7 @@ import org.springframework.context.annotation.Lazy;
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,CoAPComponentConfiguration.class})
 @ConditionalOnHierarchicalProperties({"camel.component", "camel.component.coap"})
-@AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfigureAfter({CamelAutoConfiguration.class, CoAPComponentConverter.class})
 public class CoAPComponentAutoConfiguration {
 
     @Autowired

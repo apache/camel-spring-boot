@@ -17,6 +17,7 @@
 package org.apache.camel.coap.springboot;
 
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.eclipse.californium.core.CoapClient;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -66,6 +67,11 @@ public class CoAPComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * To use a shared client for the producers. The option is a
+     * org.eclipse.californium.core.CoapClient type.
+     */
+    private CoapClient client;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -97,6 +103,14 @@ public class CoAPComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public CoapClient getClient() {
+        return client;
+    }
+
+    public void setClient(CoapClient client) {
+        this.client = client;
     }
 
     public Boolean getAutowiredEnabled() {
