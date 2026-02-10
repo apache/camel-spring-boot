@@ -28,6 +28,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.coap.client",
+      "type": "org.eclipse.californium.core.CoapClient",
+      "description": "To use a shared client for the producers. The option is a org.eclipse.californium.core.CoapClient type.",
+      "sourceType": "org.apache.camel.coap.springboot.CoAPComponentConfiguration"
+    },
+    {
       "name": "camel.component.coap.configuration-file",
       "type": "java.lang.String",
       "description": "Name of COAP configuration file to load and use. Will by default load from classpath, so use file: as prefix to load from file system.",
