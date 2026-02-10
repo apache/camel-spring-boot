@@ -21,14 +21,14 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
+//import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-import io.undertow.server.handlers.accesslog.AccessLogHandler;
-import io.undertow.server.handlers.accesslog.JBossLoggingAccessLogReceiver;
+//import io.undertow.server.handlers.accesslog.AccessLogHandler;
+//import io.undertow.server.handlers.accesslog.JBossLoggingAccessLogReceiver;
 
 /**
  * Undertow specific configuration to use camel logging for HTTP access log.
