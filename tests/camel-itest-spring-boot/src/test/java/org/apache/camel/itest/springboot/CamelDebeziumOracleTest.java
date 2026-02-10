@@ -32,7 +32,11 @@ public class CamelDebeziumOracleTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder().module(inferModuleName(CamelDebeziumOracleTest.class)).build();
+        return new ITestConfigBuilder()
+                .module(inferModuleName(CamelDebeziumOracleTest.class))
+                .exclusion("com.oracle.database.xml:xdb")
+                .exclusion("com.oracle.database.xml:xmlparserv2")
+                .build();
     }
 
     @Test
