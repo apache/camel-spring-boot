@@ -1,4 +1,4 @@
-= HTTP
+= Platform HTTP
 //Manually maintained attributes
 :artifactid: camel-platform-http
 :shortname: platform-http
@@ -11,12 +11,12 @@ The Platform HTTP starter provides Spring Boot auto-configuration for the Camel 
 You can enable Undertow access log to be managed by whatever logging library you have in your camel application, you have to set the following parameters:
 [source,properties]
 ----
-# disable the undertow access log handler
+# disable the Undertow's own access log handler.
 server.undertow.accesslog.enabled=false
-# optionally sets a log pattern (optional)
+# sets a log pattern (optional)
 server.undertow.accesslog.pattern="%r" %s (%D ms)
 # enable camel to control the logging
-camel.component.platform-http.server.accesslog.undertow.use-camel-logging=true
+camel.component.platform-http.server.undertow.accesslog.use-camel-logging=true
 ----
 
 The access log category is `io.undertow.accesslog` and is logged at `INFO` level.
@@ -61,3 +61,5 @@ If you want to control the undertow access log category:
     </root>
 </configuration>
 ----
+
+The HTTP access log message pattern may be controlled by the property: `server.undertow.accesslog.pattern` whose default value is `common`.

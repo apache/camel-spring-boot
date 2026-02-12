@@ -29,6 +29,7 @@ public class ManagementAccessLogProperties {
      * access logs are disabled for actuator endpoints.
      */
     private boolean enabled = true;
+    private String pattern = "common";
 
     public boolean isEnabled() {
         return enabled;
@@ -37,4 +38,13 @@ public class ManagementAccessLogProperties {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+    public String getPattern() {
+        return pattern;
+    }
+
+    public void setPattern(String pattern) {
+        this.pattern = pattern;
+    }
+
 }

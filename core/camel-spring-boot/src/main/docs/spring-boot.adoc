@@ -69,7 +69,7 @@ public class MyRoute extends RouteBuilder {
 Then these routes will be started automatically.
 
 You can customize the Camel application in the `application.properties`
-or `application.yml` file. 
+or `application.yml` file.
 
 
 // spring-boot-auto-configure options: START
@@ -152,7 +152,7 @@ to http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-e
 Boot external configuration] (like properties placeholders, OS
 environment variables or system properties) with
 the Camel properties support. It basically means
-that any property defined in `application.properties` file:  
+that any property defined in `application.properties` file:
 
 [source,properties]
 ----
@@ -487,6 +487,21 @@ management.server.accesslog.enabled=false
 
 Result: Main app logs to `logs/access_log.log`, actuator has no access logs.
 
+==== Camel Logging to Control Management Access Log
+
+This is valid only when using `spring-boot-starter-undertow`.
+
+If you want to defer the http access log control to whatever camel logging mechanism, you have to set `management.server.undertow.accesslog.use-camel-logging=true`.
+Optionally you can set a message pattern with `management.server.accesslog.pattern=combined`.
+
+Example:
+[source,properties]
+----
+management.server.undertow.accesslog.use-camel-logging=true
+management.server.accesslog.pattern=combined
+----
+
+
 == Virtual Threads Support
 
 Camel Spring Boot provides comprehensive support for JDK 21+ Virtual Threads, offering significant performance improvements for I/O-intensive applications. Virtual threads are lightweight threads that can dramatically reduce memory overhead and improve scalability compared to traditional platform threads.
@@ -596,7 +611,7 @@ If you need to manually configure specific components for virtual threads, you c
 ----
 @Configuration
 public class VirtualThreadConfig {
-    
+
     @Bean
     @ConditionalOnProperty(name = "spring.threads.virtual.enabled", havingValue = "true")
     public TaskExecutor customTaskExecutor() {
@@ -638,11 +653,11 @@ camel.main.routes-include-pattern=classpath:routes/*
 ----
 @SpringBootApplication
 public class VirtualThreadsApplication {
-    
+
     public static void main(String[] args) {
         SpringApplication.run(VirtualThreadsApplication.class, args);
     }
-    
+
     @Component
     public static class ApiRoutes extends RouteBuilder {
         @Override

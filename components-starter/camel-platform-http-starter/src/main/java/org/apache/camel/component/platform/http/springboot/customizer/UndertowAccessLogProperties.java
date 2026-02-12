@@ -21,7 +21,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * Configuration properties to customize undertow server to use camel logging to log HTTP accesslog.
  */
-@ConfigurationProperties(prefix = "camel.component.platform-http.server.accesslog.undertow")
+@ConfigurationProperties(prefix = "camel.component.platform-http.server.undertow.accesslog")
 public class UndertowAccessLogProperties {
 
     /**
