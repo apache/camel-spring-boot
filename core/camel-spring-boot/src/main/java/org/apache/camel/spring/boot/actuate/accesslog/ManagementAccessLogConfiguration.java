@@ -17,6 +17,7 @@
 package org.apache.camel.spring.boot.actuate.accesslog;
 
 import org.apache.catalina.valves.AccessLogValve;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.autoconfigure.web.ManagementContextConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -27,6 +28,9 @@ import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFa
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import io.undertow.server.handlers.accesslog.AccessLogHandler;
+import io.undertow.server.handlers.accesslog.JBossLoggingAccessLogReceiver;
 
 /**
  * Management context configuration for controlling access logging on the management server.
@@ -41,16 +45,32 @@ import org.springframework.context.annotation.Configuration;
 public class ManagementAccessLogConfiguration {
 
     /**
-     * Undertow-specific configuration to disable access logging in the management context.
+     * Undertow-specific configuration.
      */
     @Configuration(proxyBeanMethods = false)
     @ConditionalOnClass(name = "io.undertow.Undertow")
-    @ConditionalOnProperty(name = "management.server.accesslog.enabled", havingValue = "false")
     static class UndertowAccessLogCustomizerConfiguration {
 
+        /**
+         * Disable access logging in the management context.
+         */
         @Bean
+        @ConditionalOnProperty(name = "management.server.accesslog.enabled", havingValue = "false")
         WebServerFactoryCustomizer<UndertowServletWebServerFactory> undertowManagementAccessLogCustomizer() {
             return factory -> factory.setAccessLogEnabled(false);
+        }
+
+        /**
+         * Undertow HTTP access log is managed by whatever camel logging mechanism.
+         */
+        @Bean
+        @ConditionalOnProperty(name = "management.server.undertow.accesslog.use-camel-logging", havingValue = "true")
+        public WebServerFactoryCustomizer<UndertowServletWebServerFactory> managementAccessLogProvider(
+                @Value("${management.server.accesslog.pattern:common}") String pattern) {
+            return factory -> factory.addDeploymentInfoCustomizers(deploymentInfo -> {
+                deploymentInfo.addInitialHandlerChainWrapper(handler -> new AccessLogHandler(handler,
+                        new JBossLoggingAccessLogReceiver(), pattern, AccessLogHandler.class.getClassLoader()));
+            });
         }
     }
 

@@ -12,7 +12,7 @@
       "sourceMethod": "getCustomizer()"
     },
     {
-      "name": "camel.component.platform-http.server.accesslog.undertow",
+      "name": "camel.component.platform-http.server.undertow.accesslog",
       "type": "org.apache.camel.component.platform.http.springboot.customizer.UndertowAccessLogProperties",
       "sourceType": "org.apache.camel.component.platform.http.springboot.customizer.UndertowAccessLogProperties"
     }
@@ -76,7 +76,7 @@
       "defaultValue": true
     },
     {
-      "name": "camel.component.platform-http.server.accesslog.undertow.use-camel-logging",
+      "name": "camel.component.platform-http.server.undertow.accesslog.use-camel-logging",
       "type": "java.lang.Boolean",
       "description": "Use camel logging for undertow http access log.",
       "sourceType": "org.apache.camel.component.platform.http.springboot.customizer.UndertowAccessLogProperties",

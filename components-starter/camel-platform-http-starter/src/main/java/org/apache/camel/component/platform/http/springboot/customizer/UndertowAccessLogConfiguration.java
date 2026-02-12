@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.platform.http.springboot.customizer;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBooleanProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -37,12 +38,12 @@ import io.undertow.server.handlers.accesslog.JBossLoggingAccessLogReceiver;
 @ConditionalOnClass(name = "io.undertow.Undertow")
 @ConditionalOnProperties( {
     @ConditionalOnProperty(name = "server.undertow.accesslog.enabled", havingValue = "false"),
-    @ConditionalOnProperty(name = "camel.component.platform-http.server.accesslog.undertow.use-camel-logging", havingValue = "true"),
+    @ConditionalOnProperty(name = "camel.component.platform-http.server.undertow.accesslog.use-camel-logging", havingValue = "true"),
 })
 public class UndertowAccessLogConfiguration {
 
     @Bean
-    WebServerFactoryCustomizer<UndertowServletWebServerFactory> undertowManagementAccessLogCustomizer(Environment env) {
+    WebServerFactoryCustomizer<UndertowServletWebServerFactory> undertowServerAccessLogCustomizer(Environment env) {
         return new WebServerFactoryCustomizer<UndertowServletWebServerFactory>() {
             @Override
             public void customize(UndertowServletWebServerFactory factory) {
