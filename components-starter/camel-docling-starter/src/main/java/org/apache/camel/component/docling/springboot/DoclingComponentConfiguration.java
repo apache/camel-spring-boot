@@ -88,6 +88,10 @@ public class DoclingComponentConfiguration
      */
     private Boolean useDoclingServe = false;
     /**
+     * Abort processing on error
+     */
+    private Boolean abortOnError = false;
+    /**
      * Polling interval for async conversion status in milliseconds
      */
     private Long asyncPollInterval = 2000L;
@@ -109,9 +113,78 @@ public class DoclingComponentConfiguration
      */
     private String doclingCommand;
     /**
+     * Enable code enrichment in document processing
+     */
+    private Boolean doCodeEnrichment = false;
+    /**
+     * Document processing timeout in seconds
+     */
+    private Long documentTimeout;
+    /**
+     * Enable formula enrichment in document processing
+     */
+    private Boolean doFormulaEnrichment = false;
+    /**
+     * Enable OCR processing in docling-serve API mode. When not set, the server
+     * uses its own defaults. Set enableOCR to false to explicitly disable OCR.
+     */
+    private Boolean doOcr = false;
+    /**
+     * Enable picture classification in document processing
+     */
+    private Boolean doPictureClassification = false;
+    /**
+     * Enable picture description generation in document processing
+     */
+    private Boolean doPictureDescription = false;
+    /**
+     * Enable table structure recognition
+     */
+    private Boolean doTableStructure = false;
+    /**
+     * Force OCR processing even for digital documents
+     */
+    private Boolean forceOcr = false;
+    /**
+     * Image export mode for referenced images
+     */
+    private String imageExportMode;
+    /**
+     * Scale factor for exported images
+     */
+    private Double imagesScale;
+    /**
+     * Include images in the conversion output
+     */
+    private Boolean includeImages = false;
+    /**
+     * Placeholder string for page breaks in markdown output
+     */
+    private String mdPageBreakPlaceholder;
+    /**
+     * OCR engine to use
+     */
+    private String ocrEngine;
+    /**
+     * PDF parsing backend
+     */
+    private String pdfBackend;
+    /**
+     * Processing pipeline to use
+     */
+    private String pipeline;
+    /**
      * Timeout for Docling process execution in milliseconds
      */
     private Long processTimeout = 30000L;
+    /**
+     * Enable table cell matching post-processing
+     */
+    private Boolean tableCellMatching = false;
+    /**
+     * Table structure recognition mode
+     */
+    private String tableMode;
     /**
      * Use asynchronous conversion mode (docling-serve API only)
      */
@@ -248,6 +321,14 @@ public class DoclingComponentConfiguration
         this.useDoclingServe = useDoclingServe;
     }
 
+    public Boolean getAbortOnError() {
+        return abortOnError;
+    }
+
+    public void setAbortOnError(Boolean abortOnError) {
+        this.abortOnError = abortOnError;
+    }
+
     public Long getAsyncPollInterval() {
         return asyncPollInterval;
     }
@@ -280,12 +361,148 @@ public class DoclingComponentConfiguration
         this.doclingCommand = doclingCommand;
     }
 
+    public Boolean getDoCodeEnrichment() {
+        return doCodeEnrichment;
+    }
+
+    public void setDoCodeEnrichment(Boolean doCodeEnrichment) {
+        this.doCodeEnrichment = doCodeEnrichment;
+    }
+
+    public Long getDocumentTimeout() {
+        return documentTimeout;
+    }
+
+    public void setDocumentTimeout(Long documentTimeout) {
+        this.documentTimeout = documentTimeout;
+    }
+
+    public Boolean getDoFormulaEnrichment() {
+        return doFormulaEnrichment;
+    }
+
+    public void setDoFormulaEnrichment(Boolean doFormulaEnrichment) {
+        this.doFormulaEnrichment = doFormulaEnrichment;
+    }
+
+    public Boolean getDoOcr() {
+        return doOcr;
+    }
+
+    public void setDoOcr(Boolean doOcr) {
+        this.doOcr = doOcr;
+    }
+
+    public Boolean getDoPictureClassification() {
+        return doPictureClassification;
+    }
+
+    public void setDoPictureClassification(Boolean doPictureClassification) {
+        this.doPictureClassification = doPictureClassification;
+    }
+
+    public Boolean getDoPictureDescription() {
+        return doPictureDescription;
+    }
+
+    public void setDoPictureDescription(Boolean doPictureDescription) {
+        this.doPictureDescription = doPictureDescription;
+    }
+
+    public Boolean getDoTableStructure() {
+        return doTableStructure;
+    }
+
+    public void setDoTableStructure(Boolean doTableStructure) {
+        this.doTableStructure = doTableStructure;
+    }
+
+    public Boolean getForceOcr() {
+        return forceOcr;
+    }
+
+    public void setForceOcr(Boolean forceOcr) {
+        this.forceOcr = forceOcr;
+    }
+
+    public String getImageExportMode() {
+        return imageExportMode;
+    }
+
+    public void setImageExportMode(String imageExportMode) {
+        this.imageExportMode = imageExportMode;
+    }
+
+    public Double getImagesScale() {
+        return imagesScale;
+    }
+
+    public void setImagesScale(Double imagesScale) {
+        this.imagesScale = imagesScale;
+    }
+
+    public Boolean getIncludeImages() {
+        return includeImages;
+    }
+
+    public void setIncludeImages(Boolean includeImages) {
+        this.includeImages = includeImages;
+    }
+
+    public String getMdPageBreakPlaceholder() {
+        return mdPageBreakPlaceholder;
+    }
+
+    public void setMdPageBreakPlaceholder(String mdPageBreakPlaceholder) {
+        this.mdPageBreakPlaceholder = mdPageBreakPlaceholder;
+    }
+
+    public String getOcrEngine() {
+        return ocrEngine;
+    }
+
+    public void setOcrEngine(String ocrEngine) {
+        this.ocrEngine = ocrEngine;
+    }
+
+    public String getPdfBackend() {
+        return pdfBackend;
+    }
+
+    public void setPdfBackend(String pdfBackend) {
+        this.pdfBackend = pdfBackend;
+    }
+
+    public String getPipeline() {
+        return pipeline;
+    }
+
+    public void setPipeline(String pipeline) {
+        this.pipeline = pipeline;
+    }
+
     public Long getProcessTimeout() {
         return processTimeout;
     }
 
     public void setProcessTimeout(Long processTimeout) {
         this.processTimeout = processTimeout;
+    }
+
+    public Boolean getTableCellMatching() {
+        return tableCellMatching;
+    }
+
+    public void setTableCellMatching(Boolean tableCellMatching) {
+        this.tableCellMatching = tableCellMatching;
+    }
+
+    public String getTableMode() {
+        return tableMode;
+    }
+
+    public void setTableMode(String tableMode) {
+        this.tableMode = tableMode;
     }
 
     public Boolean getUseAsyncMode() {
