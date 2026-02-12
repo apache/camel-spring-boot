@@ -14,6 +14,13 @@
   ],
   "properties": [
     {
+      "name": "camel.component.docling.abort-on-error",
+      "type": "java.lang.Boolean",
+      "description": "Abort processing on error",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.docling.api-key-header",
       "type": "java.lang.String",
       "description": "Header name for API key authentication",
@@ -101,6 +108,48 @@
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
+      "name": "camel.component.docling.do-code-enrichment",
+      "type": "java.lang.Boolean",
+      "description": "Enable code enrichment in document processing",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.docling.do-formula-enrichment",
+      "type": "java.lang.Boolean",
+      "description": "Enable formula enrichment in document processing",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.docling.do-ocr",
+      "type": "java.lang.Boolean",
+      "description": "Enable OCR processing in docling-serve API mode. When not set, the server uses its own defaults. Set enableOCR to false to explicitly disable OCR.",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.docling.do-picture-classification",
+      "type": "java.lang.Boolean",
+      "description": "Enable picture classification in document processing",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.docling.do-picture-description",
+      "type": "java.lang.Boolean",
+      "description": "Enable picture description generation in document processing",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.docling.do-table-structure",
+      "type": "java.lang.Boolean",
+      "description": "Enable table structure recognition",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.docling.docling-command",
       "type": "java.lang.String",
       "description": "Path to Docling Python executable or command",
@@ -114,6 +163,12 @@
       "defaultValue": "http:\/\/localhost:5001"
     },
     {
+      "name": "camel.component.docling.document-timeout",
+      "type": "java.lang.Long",
+      "description": "Document processing timeout in seconds",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
+    },
+    {
       "name": "camel.component.docling.enable-o-c-r",
       "type": "java.lang.Boolean",
       "description": "Enable OCR processing for scanned documents",
@@ -125,6 +180,32 @@
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the docling component. This is enabled by default.",
       "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.docling.force-ocr",
+      "type": "java.lang.Boolean",
+      "description": "Force OCR processing even for digital documents",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.docling.image-export-mode",
+      "type": "java.lang.String",
+      "description": "Image export mode for referenced images",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.docling.images-scale",
+      "type": "java.lang.Double",
+      "description": "Scale factor for exported images",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.docling.include-images",
+      "type": "java.lang.Boolean",
+      "description": "Include images in the conversion output",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.docling.include-layout-info",
@@ -162,6 +243,18 @@
       "defaultValue": 52428800
     },
     {
+      "name": "camel.component.docling.md-page-break-placeholder",
+      "type": "java.lang.String",
+      "description": "Placeholder string for page breaks in markdown output",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.docling.ocr-engine",
+      "type": "java.lang.String",
+      "description": "OCR engine to use",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
+    },
+    {
       "name": "camel.component.docling.ocr-language",
       "type": "java.lang.String",
       "description": "Language code for OCR processing",
@@ -183,6 +276,18 @@
       "defaultValue": "markdown"
     },
     {
+      "name": "camel.component.docling.pdf-backend",
+      "type": "java.lang.String",
+      "description": "PDF parsing backend",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.docling.pipeline",
+      "type": "java.lang.String",
+      "description": "Processing pipeline to use",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
+    },
+    {
       "name": "camel.component.docling.process-timeout",
       "type": "java.lang.Long",
       "description": "Timeout for Docling process execution in milliseconds",
@@ -195,6 +300,19 @@
       "description": "Split batch results into individual exchanges (one per document) instead of single BatchProcessingResults",
       "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.docling.table-cell-matching",
+      "type": "java.lang.Boolean",
+      "description": "Enable table cell matching post-processing",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.docling.table-mode",
+      "type": "java.lang.String",
+      "description": "Table structure recognition mode",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
     },
     {
       "name": "camel.component.docling.use-async-mode",
