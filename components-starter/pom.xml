@@ -154,6 +154,7 @@
     <module>camel-azure-eventgrid-starter</module>
     <module>camel-azure-eventhubs-starter</module>
     <module>camel-azure-files-starter</module>
+    <module>camel-azure-functions-starter</module>
     <module>camel-azure-key-vault-starter</module>
     <module>camel-azure-servicebus-starter</module>
     <module>camel-azure-storage-blob-starter</module>

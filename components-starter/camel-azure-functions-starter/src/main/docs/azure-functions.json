@@ -1,0 +1,165 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.azure-functions",
+      "type": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-functions.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.azure-functions.app-service-manager",
+      "type": "com.azure.resourcemanager.appservice.AppServiceManager",
+      "description": "An AppServiceManager instance for management operations. The option is a com.azure.resourcemanager.appservice.AppServiceManager type.",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-functions.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.azure-functions.client-id",
+      "type": "java.lang.String",
+      "description": "Azure AD Client ID for service principal authentication",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-functions.client-secret",
+      "type": "java.lang.String",
+      "description": "Azure AD Client Secret for service principal authentication",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-functions.configuration",
+      "type": "org.apache.camel.component.azure.functions.FunctionsConfiguration",
+      "description": "The component configuration. The option is a org.apache.camel.component.azure.functions.FunctionsConfiguration type.",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-functions.connection-timeout",
+      "type": "java.lang.Integer",
+      "description": "Connection timeout in milliseconds for HTTP invocation",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration",
+      "defaultValue": 30000
+    },
+    {
+      "name": "camel.component.azure-functions.credential-type",
+      "type": "org.apache.camel.component.azure.functions.CredentialType",
+      "description": "Determines the credential strategy to adopt",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration",
+      "defaultValue": "azure-identity"
+    },
+    {
+      "name": "camel.component.azure-functions.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.azure-functions.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the azure-functions component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-functions.function-key",
+      "type": "java.lang.String",
+      "description": "The function key for direct HTTP invocation",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-functions.host-key",
+      "type": "java.lang.String",
+      "description": "The host key for the function app (used if function key is not provided)",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-functions.http-method",
+      "type": "java.lang.String",
+      "description": "HTTP method for function invocation (GET, POST, PUT, DELETE, etc.)",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration",
+      "defaultValue": "POST"
+    },
+    {
+      "name": "camel.component.azure-functions.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.azure-functions.location",
+      "type": "java.lang.String",
+      "description": "Azure region for creating function app (e.g., eastus, westeurope)",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-functions.operation",
+      "type": "org.apache.camel.component.azure.functions.FunctionsOperations",
+      "description": "The operation to be performed",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration",
+      "defaultValue": "invokefunction"
+    },
+    {
+      "name": "camel.component.azure-functions.read-timeout",
+      "type": "java.lang.Integer",
+      "description": "Read timeout in milliseconds for HTTP invocation",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration",
+      "defaultValue": 60000
+    },
+    {
+      "name": "camel.component.azure-functions.resource-group",
+      "type": "java.lang.String",
+      "description": "The resource group name containing the function app (required for management operations)",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-functions.runtime",
+      "type": "java.lang.String",
+      "description": "Runtime stack (java, node, python, dotnet)",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-functions.runtime-version",
+      "type": "java.lang.String",
+      "description": "Runtime version",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-functions.storage-account-connection-string",
+      "type": "java.lang.String",
+      "description": "Storage account connection string for function app",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-functions.subscription-id",
+      "type": "java.lang.String",
+      "description": "The Azure subscription ID (required for management operations)",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-functions.tenant-id",
+      "type": "java.lang.String",
+      "description": "Azure AD Tenant ID",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-functions.token-credential",
+      "type": "com.azure.core.credential.TokenCredential",
+      "description": "A TokenCredential instance for Azure AD authentication. The option is a com.azure.core.credential.TokenCredential type.",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
