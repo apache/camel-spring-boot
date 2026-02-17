@@ -8,7 +8,7 @@
     "firstVersion": "4.17.0",
     "label": "monitoring",
     "javaType": "org.apache.camel.opentelemetry.metrics.OpenTelemetryComponent",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-opentelemetry-metrics-starter",
     "version": "4.19.0-SNAPSHOT",

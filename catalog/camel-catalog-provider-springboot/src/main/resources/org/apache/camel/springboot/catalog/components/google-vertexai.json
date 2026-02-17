@@ -8,7 +8,7 @@
     "firstVersion": "4.17.0",
     "label": "ai,cloud",
     "javaType": "org.apache.camel.component.google.vertexai.GoogleVertexAIComponent",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-google-vertexai-starter",
     "version": "4.19.0-SNAPSHOT",
