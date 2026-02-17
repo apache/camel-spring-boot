@@ -750,6 +750,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-google-firestore-starter</artifactId>
+        <version>4.18.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-google-functions-starter</artifactId>
         <version>4.18.0-SNAPSHOT</version>
       </dependency>
