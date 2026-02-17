@@ -11,7 +11,7 @@
     "supportLevel": "Preview",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-aws-security-hub-starter",
-    "version": "4.18.0-SNAPSHOT",
+    "version": "4.18.1-SNAPSHOT",
     "scheme": "aws-security-hub",
     "extendsScheme": "",
     "syntax": "aws-security-hub:label",
