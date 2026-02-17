@@ -24,7 +24,12 @@ import java.io.StringWriter;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -39,14 +44,31 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import org.apache.commons.io.IOUtils;
+import org.apache.maven.RepositoryUtils;
+import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Exclusion;
+import org.apache.maven.model.Model;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+import org.eclipse.aether.RepositorySystem;
+import org.eclipse.aether.RepositorySystemSession;
+import org.eclipse.aether.artifact.DefaultArtifact;
+import org.eclipse.aether.collection.CollectRequest;
+import org.eclipse.aether.resolution.ArtifactDescriptorException;
+import org.eclipse.aether.resolution.ArtifactDescriptorRequest;
+import org.eclipse.aether.resolution.ArtifactDescriptorResult;
+import org.eclipse.aether.resolution.ArtifactRequest;
+import org.eclipse.aether.resolution.ArtifactResult;
+import org.eclipse.aether.resolution.DependencyRequest;
+import org.eclipse.aether.resolution.DependencyResolutionException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -78,6 +100,27 @@ public class BomGeneratorMojo extends AbstractMojo {
 
     @Parameter(defaultValue = "${basedir}/../../components-starter")
     protected File startersDir;
+
+    @Parameter(defaultValue = "${basedir}/../../product/src/main/resources/required-productized-camel-artifacts.txt")
+    protected File requiredProductizedCamelSpringBootArtifactsFile;
+
+    @Parameter(property = "bom.camelCommunityVersion", defaultValue = "${camel-spring-boot-community.version}")
+    protected String camelCommunityVersion;
+
+    @Parameter(property = "bom.narayanaSpringBoootVersion", defaultValue = "${narayana-spring-boot.version}")
+    protected String narayanaSpringBootVersion;
+
+    @Parameter(property = "bom.camelVersion", defaultValue = "${camel-version}")
+    protected String camelVersion;
+
+    @Component
+    protected RepositorySystem repositorySystem;
+
+    @Parameter(defaultValue="${repositorySystemSession}", readonly = true, required = true)
+    protected RepositorySystemSession repoSession;
+
+    @Parameter(property = "project.remoteArtifactRepositories", readonly = true, required = true)
+    protected List<ArtifactRepository> remoteRepositories;
 
     @Override
     public void execute() throws MojoExecutionException {
@@ -192,7 +235,58 @@ public class BomGeneratorMojo extends AbstractMojo {
         dep = new Dependency();
         dep.setGroupId("org.apache.camel.springboot");
         dep.setArtifactId("camel-yaml-dsl-starter");
-        dep.setVersion(project.getVersion());
+        dep.setVersion(productizedArtifacts.containsKey("camel-yaml-dsl-starter") ? "${project.version}" : camelCommunityVersion);
+        outDependencies.add(dep);
+
+        dep = new Dependency();
+        dep.setGroupId("org.fusesource");
+        dep.setArtifactId("camel-sap-starter");
+        dep.setVersion("${project.version}");
+        outDependencies.add(dep);
+        dep = new Dependency();
+        dep.setGroupId("org.fusesource");
+        dep.setArtifactId("camel-cics-starter");
+        dep.setVersion("${project.version}");
+        outDependencies.add(dep);
+
+        // Add Narayana starter and associated artifacts
+        dep = new Dependency();
+        dep.setGroupId("dev.snowdrop");
+        dep.setArtifactId("narayana-spring-boot-starter");
+        dep.setVersion(narayanaSpringBootVersion);
+        outDependencies.add(dep);
+
+        dep = new Dependency();
+        dep.setGroupId("dev.snowdrop");
+        dep.setArtifactId("narayana-spring-boot-core");
+        dep.setVersion(narayanaSpringBootVersion);
+        outDependencies.add(dep);
+
+        dep = new Dependency();
+        dep.setGroupId("dev.snowdrop");
+        dep.setArtifactId("narayana-spring-boot-recovery-controller");
+        dep.setVersion(narayanaSpringBootVersion);
+        outDependencies.add(dep);
+
+        // Add Agroal using the same version used in Narayana tests
+        String agroalVersion = resolveAgroalVersion();
+
+        dep = new Dependency();
+        dep.setGroupId("io.agroal");
+        dep.setArtifactId("agroal-spring-boot-starter");
+        dep.setVersion(agroalVersion);
+        outDependencies.add(dep);
+
+        dep = new Dependency();
+        dep.setGroupId("io.agroal");
+        dep.setArtifactId("agroal-api");
+        dep.setVersion(agroalVersion);
+        outDependencies.add(dep);
+
+        dep = new Dependency();
+        dep.setGroupId("io.agroal");
+        dep.setArtifactId("agroal-pool");
+        dep.setVersion(agroalVersion);
         outDependencies.add(dep);
 
         outDependencies.sort(Comparator.comparing(d -> (d.getGroupId() + ":" + d.getArtifactId())));
@@ -200,11 +294,47 @@ public class BomGeneratorMojo extends AbstractMojo {
         // include some dependencies for testing and management
         dep = new Dependency();
         dep.setGroupId("org.apache.camel");
+        dep.setArtifactId("camel-management");
+        dep.setVersion("${camel-version}");
+        outDependencies.add(dep);
+        dep = new Dependency();
+        dep.setGroupId("org.apache.camel");
         dep.setArtifactId("camel-test-spring-junit6");
-        dep.setVersion(project.getVersion());
+        dep.setVersion("${camel-version}");
         outDependencies.add(dep);
 
         return outDependencies;
+    }
+
+    /**
+     * Retrieves the Map representing the properties of a given artifact
+     */
+    private Map<String, String> resolveArtifactProperties(String projectGroup, String projectArtifactId, String extension, String projectVersion) {
+        DefaultArtifact artifact = new DefaultArtifact(projectGroup, projectArtifactId, extension,
+                projectVersion);
+        ArtifactRequest artifactRequest = new ArtifactRequest();
+        artifactRequest.setArtifact(artifact);
+        artifactRequest.setRepositories(RepositoryUtils.toRepos(remoteRepositories));
+        try {
+            ArtifactResult artifactResult = repositorySystem
+                    .resolveArtifact(repoSession, artifactRequest);
+            MavenXpp3Reader reader = new MavenXpp3Reader();
+            Model model = reader.read(new FileReader(artifactResult.getArtifact().getFile()));
+            return model.getProperties().entrySet().stream().collect(Collectors.toMap(
+                    e -> (String) e.getKey(),
+                    e -> (String) e.getValue()
+            ));
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("unable to resolve properties in %s:$s:%s", projectGroup, projectArtifactId, projectVersion), e);
+        }
+    }
+
+    private String resolveAgroalVersion() {
+        return resolveArtifactProperties("dev.snowdrop", "narayana-spring-boot-parent", "pom",
+                narayanaSpringBootVersion).entrySet().stream().filter(entry -> "agroal.version".equals(entry.getKey()))
+                .map(Map.Entry::getValue)
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("No agroal.version property found in narayana-spring-boot-parent"));
     }
 
     private Document loadBasePom() throws Exception {
@@ -367,6 +497,41 @@ public class BomGeneratorMojo extends AbstractMojo {
             }
 
             dependenciesSection.appendChild(dependencyEl);
+        }
+    }
+
+    /**
+     * Finds dependencies from a project.
+     * E.g.: You may use this to find out witch version of <b>io.agroal:agroal-pool</b> is used by <b>me.snowdrop:narayana-spring-boot-starter-it:3.2.0</b>
+     */
+    private List<ArtifactResult> resolveProjectDependencies(String projectGroup, String projectArtifactId, String projectVersion, Predicate<Artifact> dependenciesFilter) {
+        String artifactStr = String.format("%s:%s:%s", projectGroup, projectArtifactId, projectVersion);
+        org.eclipse.aether.artifact.Artifact artifact = new DefaultArtifact(artifactStr);
+
+        ArtifactDescriptorRequest descriptorRequest = new ArtifactDescriptorRequest();
+        descriptorRequest.setArtifact(artifact);
+        descriptorRequest.setRepositories(RepositoryUtils.toRepos(remoteRepositories));
+        ArtifactDescriptorResult descriptorResult = null;
+        try {
+            descriptorResult = repositorySystem.readArtifactDescriptor(repoSession, descriptorRequest);
+        } catch (ArtifactDescriptorException e) {
+            throw new RuntimeException("Failed to read artifact descriptor", e);
+        }
+
+        CollectRequest collectRequest = new CollectRequest();
+        collectRequest.setRootArtifact(descriptorResult.getArtifact());
+        collectRequest.setDependencies(descriptorResult.getDependencies());
+        collectRequest.setManagedDependencies(descriptorResult.getManagedDependencies());
+        collectRequest.setRepositories(descriptorRequest.getRepositories());
+
+        DependencyRequest dependencyRequest = new DependencyRequest(collectRequest,
+            (node, parents) -> dependenciesFilter.test(RepositoryUtils.toArtifact(node.getArtifact()))
+        );
+
+        try {
+            return repositorySystem.resolveDependencies(repoSession, dependencyRequest).getArtifactResults();
+        } catch (DependencyResolutionException e) {
+            throw new RuntimeException("Failed to resolve dependencies", e);
         }
     }
 

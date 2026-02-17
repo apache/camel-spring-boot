@@ -69,6 +69,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -142,6 +143,15 @@ public class BomDependenciesGeneratorMojo extends AbstractMojo {
     @Parameter(defaultValue = "${basedir}/../../components-starter")
     protected File startersDir;
 
+    @Parameter(defaultValue = "${basedir}/../../product/src/main/resources/required-productized-camel-artifacts.txt")
+    protected File requiredProductizedCamelSpringBootArtifactsFile;
+
+    @Parameter(property = "bom.narayanaSpringBootVersion", defaultValue = "${narayana-spring-boot.version}")
+    protected String narayanaSpringBootVersion;
+
+    @Parameter(property = "bom.camelCommunityVersion", defaultValue = "${camel-spring-boot-community.version}")
+    protected String camelCommunityVersion;
+
     /**
      * The user configuration
      */
@@ -172,6 +182,24 @@ public class BomDependenciesGeneratorMojo extends AbstractMojo {
         } catch (Exception ex) {
             throw new MojoExecutionException("Cannot generate the output BOM file", ex);
         }
+    }
+
+    /*
+     * Method that checks the list of dependencies for an existing entry for the same g:a to avoid
+     * collisions and duplicates.
+     */
+    private boolean dependencyExists(List<Dependency> outDependencies, Dependency depToCheck) {
+        for (Dependency dep : outDependencies) {
+            if ((dep.getGroupId().equals(depToCheck.getGroupId()))
+                && (dep.getArtifactId().equals(depToCheck.getArtifactId()))) {
+                getLog().error("Trying to add " + depToCheck.getGroupId() + ":" + depToCheck.getArtifactId() + ":"
+                    + depToCheck.getVersion() + ":" + depToCheck.getClassifier() + " to the list of dependencies "
+                    + "but " + dep.getGroupId() + ":" + dep.getArtifactId() + ":" + dep.getVersion() + ":" + dep.getClassifier()
+                    + " already was found in the list");
+                return true;
+            }
+        }
+        return false;
     }
 
     private List<Dependency> enhance(List<Dependency> dependencyList) throws IOException {
@@ -210,18 +238,24 @@ public class BomDependenciesGeneratorMojo extends AbstractMojo {
             }
         }
 
-        Files.list(startersDir.toPath()).filter(Files::isDirectory)
+        HashMap<String, Boolean> productizedArtifacts = RequiredProductizedArtifactsReader.getProductizedCSBArtifacts(requiredProductizedCamelSpringBootArtifactsFile);
+
+        Files.list(startersDir.toPath())
+                .filter(Files::isDirectory)
                 // must have a pom.xml to be active
                 .filter(d -> {
                     File pom = new File(d.toFile(), "pom.xml");
                     return pom.isFile() && pom.exists();
-                }).map(dir -> {
+                })
+                .map(dir -> {
                     Dependency dep = new Dependency();
                     dep.setGroupId("org.apache.camel.springboot");
                     dep.setArtifactId(dir.getFileName().toString());
-                    dep.setVersion("${project.version}");
+                    dep.setVersion(productizedArtifacts.containsKey(dir.getFileName().toString()) ? "${project.version}"
+                        : camelCommunityVersion);
                     return dep;
-                }).forEach(outDependencies::add);
+                })
+                .forEach(outDependencies::add);
 
         // include core starters
         Dependency dep = new Dependency();

@@ -89,8 +89,11 @@ public abstract class AbstractSpringBootGenerator extends AbstractMojo {
     }
 
     protected String getMainDepGroupId() {
-        if ("camel-spring-boot-starter".equals(project.getArtifactId())) {
+        String artifactId = project.getArtifactId();
+        if ("camel-spring-boot-starter".equals(artifactId)) {
             return "org.apache.camel.springboot";
+        } else if ("camel-sap-starter".equals(artifactId) || "camel-cics-starter".equals(artifactId)) {
+            return "org.fusesource";
         } else {
             // others are from camel
             return "org.apache.camel";
@@ -123,9 +126,10 @@ public abstract class AbstractSpringBootGenerator extends AbstractMojo {
     protected Map<String, Supplier<String>> getJSonFiles(JarFile componentJar) {
         Artifact mainDep = getMainDep();
         Map<String, Supplier<String>> files;
-        files = componentJar.stream().filter(je -> je.getName().endsWith(".json"))
-                .collect(Collectors.toMap(je -> "jar:" + mainDep.getFile().toURI() + "!" + je.getName(),
-                        je -> cache(() -> loadJson(componentJar, je))));
+        files = componentJar.stream()
+            .filter(je -> je.getName().endsWith(".json"))
+            .collect(Collectors.toMap(je -> "jar:" + mainDep.getFile().toURI().toString() + "!" + je.getName(),
+                    je -> cache(() -> loadJson(componentJar, je))));
         return files;
     }
 
@@ -223,7 +227,8 @@ public abstract class AbstractSpringBootGenerator extends AbstractMojo {
 
     protected String loadJsonOfType(Map<String, Supplier<String>> jsonFiles, String modelName, String type) {
         for (Map.Entry<String, Supplier<String>> entry : jsonFiles.entrySet()) {
-            if (entry.getKey().endsWith("/" + modelName) || entry.getKey().endsWith("!" + modelName)) {
+            if (entry.getKey().endsWith("/" + modelName)
+                    || entry.getKey().endsWith("!" + modelName)) {
                 String json = entry.getValue().get();
                 if (json.contains("\"kind\": \"" + type + "\"")) {
                     return json;

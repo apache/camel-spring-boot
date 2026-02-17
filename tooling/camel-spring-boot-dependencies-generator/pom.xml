@@ -102,6 +102,12 @@
                             <!-- These artifacts should not be included in the final (generated) BOM -->
 
                             <!-- Different versions from the ones provided by spring-boot -->
+                            <exclude>io.micrometer:*</exclude>
+                            <exclude>org.apache.commons:commons-lang3</exclude>
+
+                            <exclude>net.bytebuddy:byte-buddy-agent</exclude>
+                            <exclude>net.bytebuddy:byte-buddy</exclude>
+                            <exclude>org.xmlunit:xmlunit-assertj3</exclude>
                             <exclude>de.flapdoodle*:*</exclude>
                             <exclude>org.apache.activemq:*</exclude>
                             <exclude>org.apache.commons:commons-pool2</exclude>
