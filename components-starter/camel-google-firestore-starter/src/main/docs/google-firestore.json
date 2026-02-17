@@ -1,0 +1,116 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.google-firestore",
+      "type": "org.apache.camel.component.google.firestore.springboot.GoogleFirestoreComponentConfiguration",
+      "sourceType": "org.apache.camel.component.google.firestore.springboot.GoogleFirestoreComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-firestore.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.google.firestore.springboot.GoogleFirestoreComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.google-firestore.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.google.firestore.springboot.GoogleFirestoreComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-firestore.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.google.firestore.springboot.GoogleFirestoreComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.google-firestore.configuration",
+      "type": "org.apache.camel.component.google.firestore.GoogleFirestoreConfiguration",
+      "description": "The component configuration. The option is a org.apache.camel.component.google.firestore.GoogleFirestoreConfiguration type.",
+      "sourceType": "org.apache.camel.component.google.firestore.springboot.GoogleFirestoreComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-firestore.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.google-firestore.database-id",
+      "type": "java.lang.String",
+      "description": "The Firestore database ID. If not specified, the default database '(default)' will be used.",
+      "sourceType": "org.apache.camel.component.google.firestore.springboot.GoogleFirestoreComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-firestore.document-id",
+      "type": "java.lang.String",
+      "description": "The document ID to use for document-specific operations",
+      "sourceType": "org.apache.camel.component.google.firestore.springboot.GoogleFirestoreComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-firestore.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the google-firestore component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.google.firestore.springboot.GoogleFirestoreComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-firestore.firestore-client",
+      "type": "com.google.cloud.firestore.Firestore",
+      "description": "The Firestore client to use for operations. The option is a com.google.cloud.firestore.Firestore type.",
+      "sourceType": "org.apache.camel.component.google.firestore.springboot.GoogleFirestoreComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-firestore.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.google.firestore.springboot.GoogleFirestoreComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-firestore.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
+      "sourceType": "org.apache.camel.component.google.firestore.springboot.GoogleFirestoreComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.google-firestore.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.google.firestore.springboot.GoogleFirestoreComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.google-firestore.operation",
+      "type": "org.apache.camel.component.google.firestore.GoogleFirestoreOperations",
+      "description": "Set the operation for the producer.",
+      "sourceType": "org.apache.camel.component.google.firestore.springboot.GoogleFirestoreComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-firestore.project-id",
+      "type": "java.lang.String",
+      "description": "The Google Cloud project ID. If not specified, it will be determined from the service account key or environment.",
+      "sourceType": "org.apache.camel.component.google.firestore.springboot.GoogleFirestoreComponentConfiguration"
+    },
+    {
+      "name": "camel.component.google-firestore.realtime-updates",
+      "type": "java.lang.Boolean",
+      "description": "When true, the consumer will listen for real-time updates on the collection",
+      "sourceType": "org.apache.camel.component.google.firestore.springboot.GoogleFirestoreComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.google-firestore.service-account-key",
+      "type": "java.lang.String",
+      "description": "The Service account key that can be used as credentials for the Firestore client. It can be loaded by default from classpath, but you can prefix with classpath:, file:, or http: to load the resource from different systems.",
+      "sourceType": "org.apache.camel.component.google.firestore.springboot.GoogleFirestoreComponentConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

@@ -242,6 +242,7 @@
     <module>camel-google-bigquery-starter</module>
     <module>camel-google-calendar-starter</module>
     <module>camel-google-drive-starter</module>
+    <module>camel-google-firestore-starter</module>
     <module>camel-google-functions-starter</module>
     <module>camel-google-mail-starter</module>
     <module>camel-google-pubsub-lite-starter</module>
