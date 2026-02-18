@@ -53,6 +53,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security-oauth2-client</artifactId>
       <version>${spring-boot-version}</version>
+      <optional>true</optional>
     </dependency>
     <!-- TODO reintroduce once spring-boot-starter-undertow will be available -->
     <!-- AND CHERRY PICK -->

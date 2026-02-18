@@ -42,21 +42,22 @@ import org.springframework.core.env.Environment;
 })
 public class UndertowAccessLogConfiguration {
 
-    @Bean
-    WebServerFactoryCustomizer<UndertowServletWebServerFactory> undertowServerAccessLogCustomizer(Environment env) {
-        return new WebServerFactoryCustomizer<UndertowServletWebServerFactory>() {
-            @Override
-            public void customize(UndertowServletWebServerFactory factory) {
-                factory.addDeploymentInfoCustomizers(deploymentInfo -> {
-                    deploymentInfo.addInitialHandlerChainWrapper(handler -> {
-                        JBossLoggingAccessLogReceiver jbossLogReceiver = new JBossLoggingAccessLogReceiver();
+    // TODO reintroduce once spring-boot-starter-undertow will be available
+    //@Bean
+    //WebServerFactoryCustomizer<UndertowServletWebServerFactory> undertowServerAccessLogCustomizer(Environment env) {
+    //    return new WebServerFactoryCustomizer<UndertowServletWebServerFactory>() {
+    //        @Override
+    //        public void customize(UndertowServletWebServerFactory factory) {
+    //            factory.addDeploymentInfoCustomizers(deploymentInfo -> {
+    //                deploymentInfo.addInitialHandlerChainWrapper(handler -> {
+    //                    JBossLoggingAccessLogReceiver jbossLogReceiver = new JBossLoggingAccessLogReceiver();
                         // undertow specific HTTP log message pattern
                         // https://github.com/undertow-io/undertow/blob/2.3.22.Final/core/src/main/java/io/undertow/server/handlers/accesslog/AccessLogHandler.java
-                        String pattern = env.getProperty("server.undertow.accesslog.pattern", "common");
-                        return new AccessLogHandler(handler, jbossLogReceiver, pattern, getClass().getClassLoader());
-                    });
-                });
-            }
-        };
-    }
+    //                    String pattern = env.getProperty("server.undertow.accesslog.pattern", "common");
+    //                    return new AccessLogHandler(handler, jbossLogReceiver, pattern, getClass().getClassLoader());
+    //                });
+    //            });
+    //        }
+    //    };
+    //}
 }
