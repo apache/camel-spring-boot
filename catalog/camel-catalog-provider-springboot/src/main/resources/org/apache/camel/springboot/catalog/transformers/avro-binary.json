@@ -8,7 +8,7 @@
     "javaType": "org.apache.camel.component.jackson.avro.transform.AvroBinaryDataTypeTransformer",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-jackson-avro-starter",
-    "version": "4.14.5-SNAPSHOT"
+    "version": "4.14.6-SNAPSHOT"
   }
 }
 
