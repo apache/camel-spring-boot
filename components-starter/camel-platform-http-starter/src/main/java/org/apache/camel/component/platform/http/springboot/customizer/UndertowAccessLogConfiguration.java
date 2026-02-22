@@ -21,14 +21,14 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
+//import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-import io.undertow.server.handlers.accesslog.AccessLogHandler;
-import io.undertow.server.handlers.accesslog.JBossLoggingAccessLogReceiver;
+//import io.undertow.server.handlers.accesslog.AccessLogHandler;
+//import io.undertow.server.handlers.accesslog.JBossLoggingAccessLogReceiver;
 
 /**
  * Undertow specific configuration to use camel logging for HTTP access log.
@@ -42,21 +42,22 @@ import io.undertow.server.handlers.accesslog.JBossLoggingAccessLogReceiver;
 })
 public class UndertowAccessLogConfiguration {
 
-    @Bean
-    WebServerFactoryCustomizer<UndertowServletWebServerFactory> undertowServerAccessLogCustomizer(Environment env) {
-        return new WebServerFactoryCustomizer<UndertowServletWebServerFactory>() {
-            @Override
-            public void customize(UndertowServletWebServerFactory factory) {
-                factory.addDeploymentInfoCustomizers(deploymentInfo -> {
-                    deploymentInfo.addInitialHandlerChainWrapper(handler -> {
-                        JBossLoggingAccessLogReceiver jbossLogReceiver = new JBossLoggingAccessLogReceiver();
+    // TODO reintroduce once spring-boot-starter-undertow will be available
+    //@Bean
+    //WebServerFactoryCustomizer<UndertowServletWebServerFactory> undertowServerAccessLogCustomizer(Environment env) {
+    //    return new WebServerFactoryCustomizer<UndertowServletWebServerFactory>() {
+    //        @Override
+    //        public void customize(UndertowServletWebServerFactory factory) {
+    //            factory.addDeploymentInfoCustomizers(deploymentInfo -> {
+    //                deploymentInfo.addInitialHandlerChainWrapper(handler -> {
+    //                    JBossLoggingAccessLogReceiver jbossLogReceiver = new JBossLoggingAccessLogReceiver();
                         // undertow specific HTTP log message pattern
                         // https://github.com/undertow-io/undertow/blob/2.3.22.Final/core/src/main/java/io/undertow/server/handlers/accesslog/AccessLogHandler.java
-                        String pattern = env.getProperty("server.undertow.accesslog.pattern", "common");
-                        return new AccessLogHandler(handler, jbossLogReceiver, pattern, getClass().getClassLoader());
-                    });
-                });
-            }
-        };
-    }
+    //                    String pattern = env.getProperty("server.undertow.accesslog.pattern", "common");
+    //                    return new AccessLogHandler(handler, jbossLogReceiver, pattern, getClass().getClassLoader());
+    //                });
+    //            });
+    //        }
+    //    };
+    //}
 }

@@ -2189,42 +2189,6 @@
         "replacement": "camel.main.run-controller",
         "since": "4.14.0"
       }
-    },
-    {
-      "name": "management.endpoint.camel.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Whether to enable the camel endpoint.",
-      "sourceType": "org.apache.camel.spring.boot.actuate.console.CamelDevConsoleEndpoint",
-      "defaultValue": true,
-      "deprecated": true,
-      "deprecation": {
-        "replacement": "management.endpoint.camel.access",
-        "since": "3.4.0"
-      }
-    },
-    {
-      "name": "management.endpoint.camelroutecontroller.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Whether to enable the camelroutecontroller endpoint.",
-      "sourceType": "org.apache.camel.spring.boot.actuate.endpoint.CamelRouteControllerEndpoint",
-      "defaultValue": true,
-      "deprecated": true,
-      "deprecation": {
-        "replacement": "management.endpoint.camelroutecontroller.access",
-        "since": "3.4.0"
-      }
-    },
-    {
-      "name": "management.endpoint.camelroutes.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Whether to enable the camelroutes endpoint.",
-      "sourceType": "org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpoint",
-      "defaultValue": true,
-      "deprecated": true,
-      "deprecation": {
-        "replacement": "management.endpoint.camelroutes.access",
-        "since": "3.4.0"
-      }
     }
   ],
   "hints": [],

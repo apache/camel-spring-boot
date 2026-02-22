@@ -18,13 +18,16 @@ package org.apache.camel.component.platform.http.springboot;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
+import org.springframework.test.web.servlet.client.RestTestClient;
+import org.springframework.test.web.servlet.client.EntityExchangeResult;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,12 +37,13 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-@EnableAutoConfiguration(exclude = {OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class})
+@EnableAutoConfiguration
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
         SpringBootPlatformHttpMultipleExecutorsTest.class, SpringBootPlatformHttpMultipleExecutorsTest.TestConfiguration.class,
         PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class })
 @EnableScheduling
+@AutoConfigureRestTestClient
 public class SpringBootPlatformHttpMultipleExecutorsTest extends PlatformHttpBase {
 
     private static final String postRouteId = "SpringBootPlatformHttpMultipleExecutorsTest_mypost";
@@ -53,6 +57,13 @@ public class SpringBootPlatformHttpMultipleExecutorsTest extends PlatformHttpBas
     // *************************************
     @Configuration
     public static class TestConfiguration {
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+            http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+                .csrf(csrf -> csrf.disable());
+            return http.build();
+        }
+
 
         @Bean(name = "customPoolTaskExecutor")
         public Executor customPoolTaskExecutor() {
@@ -96,7 +107,11 @@ public class SpringBootPlatformHttpMultipleExecutorsTest extends PlatformHttpBas
     public void checkCustomExecutorIsPickedWhenMultipleExecutorsAreDefined() {
         Assertions.assertThat(executors).hasSizeGreaterThan(1);
 
-        Assertions.assertThat(restTemplate.postForEntity("/executor", "test", String.class).getBody())
-                        .contains(THREAD_PREFIX);
+        EntityExchangeResult<String> result = restTestClient.post().uri("/executor")
+                .body("test")
+                .exchange()
+                .expectBody(String.class)
+                .returnResult();
+        Assertions.assertThat(result.getResponseBody()).contains(THREAD_PREFIX);
     }
 }

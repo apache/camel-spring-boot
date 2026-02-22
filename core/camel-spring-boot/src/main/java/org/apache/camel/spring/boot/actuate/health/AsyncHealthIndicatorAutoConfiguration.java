@@ -16,21 +16,22 @@
  */
 package org.apache.camel.spring.boot.actuate.health;
 
-import java.time.Duration;
-import java.time.ZonedDateTime;
 import org.apache.camel.spring.boot.actuate.health.liveness.CamelLivenessStateHealthIndicator;
 import org.apache.camel.spring.boot.actuate.health.readiness.CamelReadinessStateHealthIndicator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.boot.actuate.health.Health;
-import org.springframework.boot.actuate.health.HealthContributorRegistry;
-import org.springframework.boot.actuate.health.HealthIndicator;
-import org.springframework.boot.actuate.health.NamedContributor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.health.contributor.Health;
+import org.springframework.boot.health.contributor.HealthContributors;
+import org.springframework.boot.health.contributor.HealthIndicator;
+import org.springframework.boot.health.registry.HealthContributorRegistry;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+
+import java.time.Duration;
+import java.time.ZonedDateTime;
 
 /**
  * Configuration class that replace synchronous Camel Health Checks with asynchronous ones.
@@ -63,9 +64,9 @@ public class AsyncHealthIndicatorAutoConfiguration implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        for (NamedContributor<?> namedContributor : healthContributorRegistry) {
-            final String name = namedContributor.getName();
-            final Object contributor = namedContributor.getContributor();
+        for (HealthContributors.Entry entryContributor : healthContributorRegistry) {
+            final String name = entryContributor.name();
+            final Object contributor = entryContributor.contributor();
             if (contributor instanceof CamelHealthCheckIndicator
                     || contributor instanceof CamelLivenessStateHealthIndicator
                     || contributor instanceof CamelReadinessStateHealthIndicator) {

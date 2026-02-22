@@ -16,14 +16,14 @@
  */
 package org.apache.camel.spring.boot.actuate.health;
 
+import org.apache.camel.health.HealthCheck;
+import org.springframework.boot.health.contributor.Health;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
-import org.apache.camel.health.HealthCheck;
-import org.springframework.boot.actuate.health.Health;
 
 final class CamelHealthHelper {
 

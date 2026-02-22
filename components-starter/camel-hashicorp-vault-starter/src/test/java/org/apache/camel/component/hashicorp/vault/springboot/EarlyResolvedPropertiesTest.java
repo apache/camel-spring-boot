@@ -19,7 +19,7 @@ package org.apache.camel.component.hashicorp.vault.springboot;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.infra.hashicorp.vault.services.HashicorpServiceFactory;
 import org.apache.camel.test.infra.hashicorp.vault.services.HashicorpVaultService;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

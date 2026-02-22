@@ -37,8 +37,21 @@
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-hashicorp-vault</artifactId>
       <version>${camel-version}</version>
+      <!--START OF GENERATED CODE-->
+      <exclusions>
+        <exclusion>
+          <groupId>commons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
+        </exclusion>
+      </exclusions>
+      <!--END OF GENERATED CODE-->
     </dependency>
     <!-- for testing -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.awaitility</groupId>
       <artifactId>awaitility</artifactId>

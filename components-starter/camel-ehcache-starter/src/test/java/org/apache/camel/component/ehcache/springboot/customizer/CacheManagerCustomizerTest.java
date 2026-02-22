@@ -18,7 +18,7 @@ package org.apache.camel.component.ehcache.springboot.customizer;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.ehcache.EhcacheComponent;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.ehcache.CacheManager;
 import org.ehcache.config.builders.CacheManagerBuilder;
 import org.junit.jupiter.api.Assertions;

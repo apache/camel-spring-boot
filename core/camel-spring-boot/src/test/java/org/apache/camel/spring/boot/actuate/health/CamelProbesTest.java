@@ -16,23 +16,24 @@
  */
 package org.apache.camel.spring.boot.actuate.health;
 
-import java.io.IOException;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.restclient.RestTemplateBuilder;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalManagementPort;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResponseErrorHandler;
+
+import java.io.IOException;
 
 @CamelSpringBootTest
 @EnableAutoConfiguration
@@ -55,15 +56,15 @@ public class CamelProbesTest {
     public void testMetrics() {
         ResponseEntity<String> livenessResponse = restTemplateBuilder
                 .rootUri("http://localhost:" + managementPort + "/actuator").build()
-                .exchange("/health/liveness", HttpMethod.GET, new HttpEntity<>(null), String.class);
+                .exchange("/health/liveness", HttpMethod.GET, HttpEntity.EMPTY, String.class);
 
         ResponseEntity<String> readinessResponse = restTemplateBuilder.errorHandler(new NoOpErrorHandler())
                 .rootUri("http://localhost:" + managementPort + "/actuator").build()
-                .exchange("/health/readiness", HttpMethod.GET, new HttpEntity<>(null), String.class);
+                .exchange("/health/readiness", HttpMethod.GET, HttpEntity.EMPTY, String.class);
 
         ResponseEntity<String> healthResponse = restTemplateBuilder.errorHandler(new NoOpErrorHandler())
                 .rootUri("http://localhost:" + managementPort + "/actuator").build()
-                .exchange("/health", HttpMethod.GET, new HttpEntity<>(null), String.class);
+                .exchange("/health", HttpMethod.GET, HttpEntity.EMPTY, String.class);
 
         Assertions.assertThat(livenessResponse.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
         Assertions.assertThat(livenessResponse.getBody()).isEqualTo("{\"status\":\"UP\"}");

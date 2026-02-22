@@ -38,6 +38,18 @@
         <shrinkwrap-plexus-version>3.2.1</shrinkwrap-plexus-version>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit6-jupiter-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
 
         <dependency>
@@ -74,10 +86,12 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
+            <version>${junit6-jupiter-version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
+            <version>${junit6-jupiter-version}</version>
         </dependency>
       
         <!-- Test dependencies -->
@@ -227,6 +241,10 @@
                         <!-- Version properties to look up in tests -->
                         <itest.infinispan.version>${infinispan-version}</itest.infinispan.version>
                         <itest.infinispan-protostream.version>${infinispan-protostream-version}</itest.infinispan-protostream.version>
+
+                        <!-- Force JDK XML parsers to avoid Oracle XML parser conflicts -->
+                        <javax.xml.parsers.SAXParserFactory>com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl</javax.xml.parsers.SAXParserFactory>
+                        <javax.xml.parsers.DocumentBuilderFactory>com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl</javax.xml.parsers.DocumentBuilderFactory>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

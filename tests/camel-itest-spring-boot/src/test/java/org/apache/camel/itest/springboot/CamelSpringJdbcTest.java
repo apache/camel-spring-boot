@@ -32,7 +32,10 @@ public class CamelSpringJdbcTest extends AbstractSpringBootTestSupport {
     }
 
     public static ITestConfig createTestConfig() {
-        return new ITestConfigBuilder().module(inferModuleName(CamelSpringJdbcTest.class)).build();
+        return new ITestConfigBuilder()
+                .module(inferModuleName(CamelSpringJdbcTest.class))
+                .dependency("com.h2database:h2:2.3.232")
+                .build();
     }
 
     @Test

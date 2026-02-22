@@ -183,7 +183,7 @@ final class JAXBRuntimeHints implements RuntimeHintsRegistrar {
             return;
         }
         // Register all JAXB indexes
-        hints.resources().registerPattern("*/jaxb.index");
+        hints.resources().registerPattern("**/jaxb.index");
 
         hints.reflection().registerTypeIfPresent(classLoader, "jakarta.xml.bind.annotation.W3CDomHandler",
                 MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS);

@@ -24,7 +24,7 @@ import org.apache.camel.component.sql.BaseSql;
 import org.apache.camel.processor.idempotent.jdbc.JdbcCachedMessageIdRepository;
 import org.apache.camel.processor.idempotent.jdbc.JdbcMessageIdRepository;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -41,7 +41,7 @@ import org.apache.camel.component.platform.http.cookie.CookieConfiguration;
 import org.apache.camel.component.platform.http.cookie.CookieHandler;
 import org.apache.camel.model.rest.RestBindingMode;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.apache.camel.util.IOHelper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -51,12 +51,14 @@ import org.junit.jupiter.api.condition.DisabledIfSystemProperties;
 import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.test.web.servlet.client.EntityExchangeResult;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.matcher.RestAssuredMatchers.detailedCookie;
@@ -64,7 +66,8 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@EnableAutoConfiguration(exclude = {OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class})
+@EnableAutoConfiguration
+@AutoConfigureRestTestClient
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
         SpringBootPlatformHttpCertificationTest.class, SpringBootPlatformHttpCertificationTest.TestConfiguration.class,
@@ -84,6 +87,13 @@ public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
 
     @Configuration
     public static class TestConfiguration {
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+            http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+                .csrf(csrf -> csrf.disable());
+            return http.build();
+        }
+
 
         @Bean
         public RouteBuilder springBootPlatformHttpRestDSLRouteBuilder() {
@@ -172,9 +182,13 @@ public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
         ExecutorService es = Executors.newFixedThreadPool(10);
         List<CompletableFuture> tasks = new ArrayList();
         for (int i = 0; i < 1_000; i++) {
-            tasks.add(CompletableFuture.runAsync(() ->
-                    Assertions.assertThat(restTemplate.getForEntity("/myget", String.class)
-                            .getStatusCode().value()).isEqualTo(200), es));
+            tasks.add(CompletableFuture.runAsync(() -> {
+                EntityExchangeResult<String> result = restTestClient.get().uri("/myget")
+                        .exchange()
+                        .expectBody(String.class)
+                        .returnResult();
+                Assertions.assertThat(result.getStatus().value()).isEqualTo(200);
+            }, es));
         }
         for (CompletableFuture<Void> task : tasks) {
             task.get();
