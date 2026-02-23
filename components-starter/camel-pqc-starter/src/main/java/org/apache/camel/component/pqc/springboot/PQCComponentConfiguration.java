@@ -19,6 +19,7 @@ package org.apache.camel.component.pqc.springboot;
 import java.security.KeyPair;
 import java.security.KeyStore;
 import java.security.Signature;
+import javax.crypto.KeyAgreement;
 import javax.crypto.KeyGenerator;
 import org.apache.camel.component.pqc.PQCConfiguration;
 import org.apache.camel.component.pqc.PQCOperations;
@@ -69,6 +70,33 @@ public class PQCComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * The classical key agreement algorithm to use in hybrid KEM operations
+     */
+    private String classicalKEMAlgorithm;
+    /**
+     * The classical KeyAgreement instance to be used in hybrid KEM operations.
+     * The option is a javax.crypto.KeyAgreement type.
+     */
+    private KeyAgreement classicalKeyAgreement;
+    /**
+     * The classical KeyPair to be used in hybrid operations. The option is a
+     * java.security.KeyPair type.
+     */
+    private KeyPair classicalKeyPair;
+    /**
+     * The classical signature algorithm to use in hybrid operations
+     */
+    private String classicalSignatureAlgorithm;
+    /**
+     * The classical Signature instance to be used in hybrid signature
+     * operations. The option is a java.security.Signature type.
+     */
+    private Signature classicalSigner;
+    /**
+     * The KDF algorithm to use for combining secrets in hybrid KEM operations
+     */
+    private String hybridKdfAlgorithm = "HKDF-SHA256";
     /**
      * In case there is no keyGenerator, we specify an algorithm to build the
      * KeyGenerator
@@ -162,6 +190,55 @@ public class PQCComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public String getClassicalKEMAlgorithm() {
+        return classicalKEMAlgorithm;
+    }
+
+    public void setClassicalKEMAlgorithm(String classicalKEMAlgorithm) {
+        this.classicalKEMAlgorithm = classicalKEMAlgorithm;
+    }
+
+    public KeyAgreement getClassicalKeyAgreement() {
+        return classicalKeyAgreement;
+    }
+
+    public void setClassicalKeyAgreement(KeyAgreement classicalKeyAgreement) {
+        this.classicalKeyAgreement = classicalKeyAgreement;
+    }
+
+    public KeyPair getClassicalKeyPair() {
+        return classicalKeyPair;
+    }
+
+    public void setClassicalKeyPair(KeyPair classicalKeyPair) {
+        this.classicalKeyPair = classicalKeyPair;
+    }
+
+    public String getClassicalSignatureAlgorithm() {
+        return classicalSignatureAlgorithm;
+    }
+
+    public void setClassicalSignatureAlgorithm(
+            String classicalSignatureAlgorithm) {
+        this.classicalSignatureAlgorithm = classicalSignatureAlgorithm;
+    }
+
+    public Signature getClassicalSigner() {
+        return classicalSigner;
+    }
+
+    public void setClassicalSigner(Signature classicalSigner) {
+        this.classicalSigner = classicalSigner;
+    }
+
+    public String getHybridKdfAlgorithm() {
+        return hybridKdfAlgorithm;
+    }
+
+    public void setHybridKdfAlgorithm(String hybridKdfAlgorithm) {
+        this.hybridKdfAlgorithm = hybridKdfAlgorithm;
     }
 
     public String getKeyEncapsulationAlgorithm() {

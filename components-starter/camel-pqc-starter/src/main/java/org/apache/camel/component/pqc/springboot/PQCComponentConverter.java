@@ -40,10 +40,11 @@ public class PQCComponentConverter implements GenericConverter {
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.pqc.PQCConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, javax.crypto.KeyGenerator.class));
+        answer.add(new ConvertiblePair(String.class, javax.crypto.KeyAgreement.class));
         answer.add(new ConvertiblePair(String.class, java.security.KeyPair.class));
-        answer.add(new ConvertiblePair(String.class, java.security.KeyStore.class));
         answer.add(new ConvertiblePair(String.class, java.security.Signature.class));
+        answer.add(new ConvertiblePair(String.class, javax.crypto.KeyGenerator.class));
+        answer.add(new ConvertiblePair(String.class, java.security.KeyStore.class));
         return answer;
     }
 
@@ -61,10 +62,11 @@ public class PQCComponentConverter implements GenericConverter {
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.apache.camel.component.pqc.PQCConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.pqc.PQCConfiguration.class);
-            case "javax.crypto.KeyGenerator": return applicationContext.getBean(ref, javax.crypto.KeyGenerator.class);
+            case "javax.crypto.KeyAgreement": return applicationContext.getBean(ref, javax.crypto.KeyAgreement.class);
             case "java.security.KeyPair": return applicationContext.getBean(ref, java.security.KeyPair.class);
-            case "java.security.KeyStore": return applicationContext.getBean(ref, java.security.KeyStore.class);
             case "java.security.Signature": return applicationContext.getBean(ref, java.security.Signature.class);
+            case "javax.crypto.KeyGenerator": return applicationContext.getBean(ref, javax.crypto.KeyGenerator.class);
+            case "java.security.KeyStore": return applicationContext.getBean(ref, java.security.KeyStore.class);
         }
         return null;
     }
