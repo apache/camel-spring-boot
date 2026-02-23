@@ -37,3 +37,5 @@ org.apache.camel.component.hazelcast.atomicnumber.springboot.HazelcastAtomicnumb
 org.apache.camel.component.hazelcast.atomicnumber.springboot.HazelcastAtomicnumberComponentAutoConfiguration
 org.apache.camel.component.hazelcast.instance.springboot.HazelcastInstanceComponentConverter
 org.apache.camel.component.hazelcast.instance.springboot.HazelcastInstanceComponentAutoConfiguration
+org.apache.camel.component.hazelcast.pncounter.springboot.HazelcastPNCounterComponentConverter
+org.apache.camel.component.hazelcast.pncounter.springboot.HazelcastPNCounterComponentAutoConfiguration
