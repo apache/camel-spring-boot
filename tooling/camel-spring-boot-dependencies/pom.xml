@@ -1034,11 +1034,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-google-pubsub-lite-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-google-pubsub-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
