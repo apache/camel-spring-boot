@@ -217,6 +217,27 @@ public class DoclingComponentConfiguration
      */
     private Boolean splitBatchResults = false;
     /**
+     * Include raw text in chunk output
+     */
+    private Boolean chunkingIncludeRawText = false;
+    /**
+     * Maximum number of tokens per chunk for hybrid chunking
+     */
+    private Integer chunkingMaxTokens;
+    /**
+     * Whether to merge peer chunks in hybrid chunking
+     */
+    private Boolean chunkingMergePeers = true;
+    /**
+     * Tokenizer model for hybrid chunking (e.g.
+     * sentence-transformers/all-MiniLM-L6-v2)
+     */
+    private String chunkingTokenizer;
+    /**
+     * Use markdown format for tables in chunk output
+     */
+    private Boolean chunkingUseMarkdownTables = false;
+    /**
      * Include metadata in message headers when extracting metadata
      */
     private Boolean includeMetadataInHeaders = true;
@@ -559,6 +580,46 @@ public class DoclingComponentConfiguration
 
     public void setSplitBatchResults(Boolean splitBatchResults) {
         this.splitBatchResults = splitBatchResults;
+    }
+
+    public Boolean getChunkingIncludeRawText() {
+        return chunkingIncludeRawText;
+    }
+
+    public void setChunkingIncludeRawText(Boolean chunkingIncludeRawText) {
+        this.chunkingIncludeRawText = chunkingIncludeRawText;
+    }
+
+    public Integer getChunkingMaxTokens() {
+        return chunkingMaxTokens;
+    }
+
+    public void setChunkingMaxTokens(Integer chunkingMaxTokens) {
+        this.chunkingMaxTokens = chunkingMaxTokens;
+    }
+
+    public Boolean getChunkingMergePeers() {
+        return chunkingMergePeers;
+    }
+
+    public void setChunkingMergePeers(Boolean chunkingMergePeers) {
+        this.chunkingMergePeers = chunkingMergePeers;
+    }
+
+    public String getChunkingTokenizer() {
+        return chunkingTokenizer;
+    }
+
+    public void setChunkingTokenizer(String chunkingTokenizer) {
+        this.chunkingTokenizer = chunkingTokenizer;
+    }
+
+    public Boolean getChunkingUseMarkdownTables() {
+        return chunkingUseMarkdownTables;
+    }
+
+    public void setChunkingUseMarkdownTables(Boolean chunkingUseMarkdownTables) {
+        this.chunkingUseMarkdownTables = chunkingUseMarkdownTables;
     }
 
     public Boolean getIncludeMetadataInHeaders() {

@@ -90,6 +90,39 @@
       "defaultValue": 300000
     },
     {
+      "name": "camel.component.docling.chunking-include-raw-text",
+      "type": "java.lang.Boolean",
+      "description": "Include raw text in chunk output",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.docling.chunking-max-tokens",
+      "type": "java.lang.Integer",
+      "description": "Maximum number of tokens per chunk for hybrid chunking",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.docling.chunking-merge-peers",
+      "type": "java.lang.Boolean",
+      "description": "Whether to merge peer chunks in hybrid chunking",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.docling.chunking-tokenizer",
+      "type": "java.lang.String",
+      "description": "Tokenizer model for hybrid chunking (e.g. sentence-transformers\/all-MiniLM-L6-v2)",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
+    },
+    {
+      "name": "camel.component.docling.chunking-use-markdown-tables",
+      "type": "java.lang.Boolean",
+      "description": "Use markdown format for tables in chunk output",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.docling.configuration",
       "type": "org.apache.camel.component.docling.DoclingConfiguration",
       "description": "The configuration for the Docling Endpoint. The option is a org.apache.camel.component.docling.DoclingConfiguration type.",
