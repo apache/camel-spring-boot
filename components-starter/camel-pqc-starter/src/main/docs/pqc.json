@@ -32,6 +32,36 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.pqc.classical-k-e-m-algorithm",
+      "type": "java.lang.String",
+      "description": "The classical key agreement algorithm to use in hybrid KEM operations",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration"
+    },
+    {
+      "name": "camel.component.pqc.classical-key-agreement",
+      "type": "javax.crypto.KeyAgreement",
+      "description": "The classical KeyAgreement instance to be used in hybrid KEM operations. The option is a javax.crypto.KeyAgreement type.",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration"
+    },
+    {
+      "name": "camel.component.pqc.classical-key-pair",
+      "type": "java.security.KeyPair",
+      "description": "The classical KeyPair to be used in hybrid operations. The option is a java.security.KeyPair type.",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration"
+    },
+    {
+      "name": "camel.component.pqc.classical-signature-algorithm",
+      "type": "java.lang.String",
+      "description": "The classical signature algorithm to use in hybrid operations",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration"
+    },
+    {
+      "name": "camel.component.pqc.classical-signer",
+      "type": "java.security.Signature",
+      "description": "The classical Signature instance to be used in hybrid signature operations. The option is a java.security.Signature type.",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration"
+    },
+    {
       "name": "camel.component.pqc.configuration",
       "type": "org.apache.camel.component.pqc.PQCConfiguration",
       "description": "Component configuration. The option is a org.apache.camel.component.pqc.PQCConfiguration type.",
@@ -61,6 +91,13 @@
       "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
       "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.component.pqc.hybrid-kdf-algorithm",
+      "type": "java.lang.String",
+      "description": "The KDF algorithm to use for combining secrets in hybrid KEM operations",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration",
+      "defaultValue": "HKDF-SHA256"
     },
     {
       "name": "camel.component.pqc.key-encapsulation-algorithm",
