@@ -43,7 +43,6 @@
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-test-infra-ftp</artifactId>
       <version>${camel-version}</version>
-      <type>test-jar</type>
       <scope>test</scope>
     </dependency>
     <!--START OF GENERATED CODE-->
