@@ -36,8 +36,15 @@
     </dependency>
     <dependency>
       <groupId>org.jolokia</groupId>
-      <artifactId>jolokia-support-springboot3</artifactId>
+      <artifactId>jolokia-support-springboot</artifactId>
       <version>${jolokia-version}</version>
+    </dependency>
+    <!-- Required for Jolokia Spring Boot 4 support - Jolokia 2.5.x has this as 'provided' scope -->
+    <!-- See: https://github.com/jolokia/jolokia/issues/978 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-actuator-autoconfigure</artifactId>
+      <version>${spring-boot-version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
