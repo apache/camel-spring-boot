@@ -2,7 +2,7 @@
   "dataformat": {
     "kind": "dataformat",
     "name": "pgp",
-    "title": "PGP",
+    "title": "PGP (Pretty Good Privacy Cryptographic)",
     "description": "Encrypt and decrypt messages using Java Cryptographic Extension (JCE) and PGP.",
     "deprecated": false,
     "firstVersion": "2.9.0",
