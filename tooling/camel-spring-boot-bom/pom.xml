@@ -885,6 +885,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-huggingface-starter</artifactId>
+        <version>4.19.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ibm-cos-starter</artifactId>
         <version>4.19.0-SNAPSHOT</version>
       </dependency>
