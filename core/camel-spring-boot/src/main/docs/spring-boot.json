@@ -1196,6 +1196,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.main.stream-caching-spool-rules",
+      "type": "java.lang.String",
+      "description": "Sets custom rules (org.apache.camel.spi.StreamCachingStrategy.SpoolRule) for deciding when to spool to disk. Multiple rules can be separated by comma.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main"
+    },
+    {
       "name": "camel.main.stream-caching-spool-threshold",
       "type": "java.lang.Long",
       "description": "Stream caching threshold in bytes when overflow to disk is activated. The default threshold is 128kb. Use -1 to disable overflow to disk.",
