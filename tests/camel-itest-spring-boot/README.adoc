@@ -1,30 +1,229 @@
 = Camel Spring Boot Integration Tests
 
-The camel-itest-spring-boot module provides an integration testing framework for camel components, to check their compatibility with spring-boot.
+Integration tests that verify each Camel Spring Boot starter can be compiled, started, and its components resolved at runtime.
 
-Each test-case defined in `src/test/java/org/apache/camel/itest/springboot` executes the following steps:
+== How it works
 
-* Creates a spring-boot jar by putting the spring-boot loader, some utility classes in the main jar,
-and all other libraries (including the camel component under test) as nested jars;
-** Launches a new JVM including the spring-boot jar and test classes in the classpath, then starts the spring-boot platform;
-** Executes a list of predefined checks in the spring-boot environment to verify that the component has been created correctly:
-checks that the camel context has been created, that the camel components can be activated (including data format and languages).
+Each test class (e.g. `CamelActivemq6IT`) follows these steps:
 
-== Additional options
+. **Archetype generation** -- The `ArchetypeGenerationExtension` JUnit 6 extension generates a minimal Spring Boot project from `camel-archetype-spring-boot`. The generated project is then customized: test-scoped dependencies and the demo `camel-stream-starter` are removed, the starter under test is added, and any extra dependencies or `application.properties` entries from the test config are applied.
+. **Compilation** -- The generated project is compiled via `mvn compile dependency:build-classpath`, which also writes the full runtime classpath to a file for the next step.
+. **Classloader isolation** -- A child `URLClassLoader` is created with the compiled classes and all resolved dependency JARs, parented by the test classloader. Only `camel-api` and `spring-context` live on the parent classloader so that assertion types (`CamelContext`, `Component`, `DataFormat`, `Language`, `CamelClusterService`) are shared.
+. **Spring Boot startup** -- `SpringApplication` is loaded from the child classloader and started via reflection. A `DefaultResourceLoader` pointing at the child classloader ensures the generated project's `application.properties` is picked up. By default, the embedded web server is disabled (`spring.main.web-application-type=none`). When `webRequired` is set to `true`, the web stack is kept and the server binds to a random port (`server.port=0`) to avoid conflicts during parallel execution.
+. **Assertions** -- Tests verify the `CamelContext` is running, components/dataformats/languages can be resolved, and no dependency version mismatches exist.
 
-Test options can be changed from the configuration of the maven-surefire-plugin in the `pom.xml` file.
+=== Class hierarchy
 
-Some useful options include:
+[source]
+----
+AbstractSpringBootBaseTestSupport        archetype generation via @RegisterExtension
+  |                                      compile + start Spring Boot + assertions
+  |                                      inferModuleName / inferStarterDependency / inferComponentName
+  |
+  ├── CamelActivemq6IT                   typical starter test (empty body)
+  ├── CamelKubernetesIT                  starter test with multiple sub-components
+  ├── CamelCxfRestIT                     starter test with custom config override
+  ├── CamelFileClusterServiceIT          cluster service test with registerClusterServices
+  └── ...                                (~370 test classes)
+----
 
-* **itest.springboot.includeTestDependencies (default=true)**: when this option is enabled,
-the integration test will locate the module `pom.xml` file and include in the spring-boot jar also the test-scoped dependencies of the module.
-  The inclusion of other libraries often activates some hidden behaviour of spring-boot.
-* **itest.springboot.unitTestEnabled (default=true)**: when this option is enabled,
-the integration test will locate the test-classes of the module and run the unit tests after the execution of the usual checks.
-  *Note: a full build of each component is required prior to running the unit tests. Test dependencies are implicitly included.*
-* **itest.springboot.failOnRelatedLibraryMismatch (default=false)**:  when this option is enabled,
-the integration test will only print a warning in case of a version conflict between SpringBoot and Camel SpringBoot Boms instead of failing.
-* **itest.springboot.debugEnabled (default=false)**:  when this option is enabled,
-the integration test will print all messages that are helpful for debugging purposes
+=== Key classes
 
-*Note: logging dependencies (eg. `log4j`) are fixed automatically, to prevent conflict with spring-boot logging system.*
+[cols="1,3"]
+|===
+| Class | Purpose
+
+| `ArchetypeGenerationExtension`
+| JUnit 6 extension (`BeforeAllCallback`, `ParameterResolver`) that generates an archetype project, strips it to the `@SpringBootApplication` main class, customizes the POM (adds dependencies, removes test-scoped and stream starters), appends `application.properties` entries, and manages temp directory cleanup via `delete-after-test`
+
+| `AbstractSpringBootBaseTestSupport`
+| Registers the extension and provides naming convention utilities (`inferModuleName`, `inferStarterDependency`, `inferComponentName`). Orchestrates compilation and Spring Boot startup in `@BeforeAll`, exposes `assertComponent()` / `assertDataFormat()` / `assertLanguage()` / `assertNoVersionMismatch()`, bridges `CamelClusterService` beans when `registerClusterServices` is set, tears down context and classloader in `@AfterAll`
+|===
+
+== Inherited tests
+
+Every subclass of `AbstractSpringBootBaseTestSupport` automatically inherits two `@Test` methods:
+
+* **`camelContextIsRunning`** -- Verifies the `CamelContext` bean exists and is started.
+* **`dependencyVersionMismatchTest`** -- Parses the resolved runtime classpath (Maven local repository JAR paths), groups artifacts by `groupId:artifactPrefix`, and fails if the same artifact appears with multiple versions that differ in major or minor (patch-only differences are reported as warnings). Warning reports are written to `target/failsafe-reports/<module>-version-mismatches.txt`.
+
+== Configuration
+
+Tests derive their configuration from the class name by convention:
+
+* `CamelActivemq6IT` -> starter `camel-activemq6-starter`, component name `activemq6`
+* `CamelXsltSaxonIT` -> starter `camel-xslt-saxon-starter`, component name `xslt-saxon`
+
+Most tests need no configuration at all -- an empty class body is sufficient. Tests that need extra dependencies, properties, or flags override `getArchetypeConfig()` using `baseArchetypeConfig()`:
+
+[source,java]
+----
+@Override
+protected ArchetypeConfig getArchetypeConfig() {
+    return baseArchetypeConfig()
+            .dependency("com.h2database:h2:2.3.232")
+            .property("spring.autoconfigure.exclude=...")
+            .registerClusterServices(true)
+            .build();
+}
+----
+
+=== ArchetypeConfig builder options
+
+[cols="1,3"]
+|===
+| Method | Description
+
+| `.dependency(String gav)`
+| Add a dependency to the generated POM in `groupId:artifactId[:version]` format. Version-less dependencies rely on the BOM.
+
+| `.property(String entry)`
+| Append a line to `application.properties` (e.g. `"camel.cluster.file.enabled=true"`).
+
+| `.registerClusterServices(boolean)`
+| Bridge `CamelClusterService` Spring beans into the CamelContext service registry after startup. Required for cluster service tests because the child classloader prevents the normal auto-discovery.
+
+| `.webRequired(boolean)`
+| When `false` (default), all archetype dependencies except `camel-spring-boot-starter` are removed (e.g. `spring-boot-starter-web`, `spring-boot-starter-actuator`). Set to `true` for starters that need the web stack.
+
+| `.sourceFile(String fqcn, String source)`
+| Add a Java source file to the generated project before compilation. The FQCN determines the file path (e.g. `com.example.TestConfig` writes to `src/main/java/com/example/TestConfig.java`). Useful for injecting `@Configuration` classes that provide beans required at startup.
+
+| `.artifactId(String)`
+| Override the generated project's Maven artifactId (defaults to the inferred module name).
+
+| `.mainClassName(String)`
+| Override the main class name (defaults to `MySpringBootApplication`).
+|===
+
+== Running
+
+Build the archetype first (required once):
+
+[source,bash]
+----
+mvn install -pl archetypes/camel-archetype-spring-boot -am -DskipTests
+----
+
+Run all integration tests:
+
+[source,bash]
+----
+mvn verify -pl tests/camel-itest-spring-boot
+----
+
+Run a single test:
+
+[source,bash]
+----
+mvn verify -pl tests/camel-itest-spring-boot -Dit.test=CamelActivemq6IT
+----
+
+=== Useful properties
+
+[cols="1,1,3"]
+|===
+| Property | Default | Description
+
+| `delete-after-test`
+| `true`
+| Delete generated archetype projects after tests complete. Set to `false` to inspect generated projects in `target/archetype-test-*/`.
+
+| `it.test`
+| (all)
+| Run specific test(s), e.g. `-Dit.test=CamelCoreIT,CamelFtpIT`
+|===
+
+== Parallelism
+
+Failsafe is configured with `forkCount=0.5C` and `reuseForks=false`, meaning it runs one forked JVM per two CPU cores, each test in a fresh JVM. This is required because each test creates its own child classloader with an isolated Spring Boot application.
+
+== Catalog coverage test
+
+`CamelCatalogIT` (in `org.apache.camel.itest.springboot.catalog`) uses the Camel Catalog (`DefaultCamelCatalog`) to verify that every component, data format, and language listed in the catalog has a corresponding integration test class, provided a Spring Boot starter exists for it in `components-starter/`.
+
+The test works by:
+
+. Enumerating all components, data formats, and languages via `CamelCatalog.findComponentNames()`, `findDataFormatNames()`, and `findLanguageNames()`.
+. For each entry, resolving the Maven `artifactId` from the catalog model (e.g. `camel-activemq`).
+. Checking whether a starter directory `\{artifactId}-starter` exists under `components-starter/`. Entries without a starter are skipped.
+. Converting the `artifactId` to the expected test class name (e.g. `camel-aws2-s3` to `CamelAws2S3IT`) and verifying the class exists on the classpath.
+
+Run the catalog coverage test alone:
+
+[source,bash]
+----
+mvn verify -pl tests/camel-itest-spring-boot -Dit.test=CamelCatalogIT
+----
+
+When adding a new starter, `CamelCatalogIT` will fail until the corresponding test class is created.
+
+== Adding a new starter test
+
+Generate a skeleton test class using the `generate` profile:
+
+[source,bash]
+----
+mvn -Pgenerate -Dstarter=my-component -pl tests/camel-itest-spring-boot
+----
+
+This creates `CamelMyComponentIT.java` with a `componentTest()` that asserts the component name inferred from the class name. For example:
+
+* `-Dstarter=activemq6` -> `CamelActivemq6IT.java`
+* `-Dstarter=xslt-saxon` -> `CamelXsltSaxonIT.java`
+* `-Dstarter=aws2-s3` -> `CamelAws2S3IT.java`
+
+The inherited tests (`camelContextIsRunning`, `dependencyVersionMismatchTest`) and the generated `componentTest()` run automatically. Add dataformat/language assertions as needed:
+
+[source,java]
+----
+@Test
+void componentTest() {
+    assertComponent("my-component");
+}
+
+@Test
+void dataformatTest() {
+    assertDataFormat("my-dataformat");
+}
+----
+
+If the starter requires a Spring bean that isn't auto-configured, use `.sourceFile()` to inject a `@Configuration` class into the generated project:
+
+[source,java]
+----
+@Override
+protected ArchetypeConfig getArchetypeConfig() {
+    return baseArchetypeConfig()
+            .dependency("io.opentelemetry:opentelemetry-api")
+            .sourceFile("com.example.OpenTelemetryConfig", """
+                    package com.example;
+
+                    import io.opentelemetry.api.OpenTelemetry;
+                    import io.opentelemetry.api.metrics.Meter;
+                    import org.springframework.context.annotation.Bean;
+                    import org.springframework.context.annotation.Configuration;
+
+                    @Configuration
+                    public class OpenTelemetryConfig {
+                        @Bean
+                        public Meter meter() {
+                            return OpenTelemetry.noop().getMeter("camel");
+                        }
+                    }
+                    """)
+            .build();
+}
+----
+
+If the starter has sub-components, list them explicitly:
+
+[source,java]
+----
+@Test
+void componentTest() {
+    assertComponent("kubernetes-pods");
+    assertComponent("kubernetes-services");
+    assertComponent("kubernetes-namespaces");
+}
+----

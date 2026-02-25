@@ -30,16 +30,22 @@
 
     <artifactId>camel-itest-spring-boot</artifactId>
     <name>Camel SB :: Integration Tests</name>
-    <description>Spring-Boot Camel test</description>
+    <description>Spring-Boot Camel integration test</description>
 
     <properties>
-        <shrinkwrap-version>1.2.6</shrinkwrap-version>
-        <shrinkwrap-resolver-version>3.1.4</shrinkwrap-resolver-version>
-        <shrinkwrap-plexus-version>3.2.1</shrinkwrap-plexus-version>
+        <archetype-common-version>3.4.1</archetype-common-version>
+        <delete-after-test>true</delete-after-test>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
@@ -51,200 +57,85 @@
     </dependencyManagement>
 
     <dependencies>
-
         <dependency>
-            <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-spring-boot-starter</artifactId>
+            <groupId>org.apache.maven.archetype</groupId>
+            <artifactId>archetype-common</artifactId>
+            <version>${archetype-common-version}</version>
         </dependency>
-
-        <!-- Dependency needed to incorporate classes in main jar -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-loader</artifactId>
-            <version>${spring-boot-version}</version>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-core</artifactId>
+            <version>${maven-version}</version>
         </dependency>
-
-        <!-- Test dependencies needed also at compile/unitTestEnabled time -->
         <dependency>
-            <groupId>org.jboss.shrinkwrap</groupId>
-            <artifactId>shrinkwrap-api</artifactId>
-            <version>${shrinkwrap-version}</version>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-api</artifactId>
+            <version>${camel-version}</version>
         </dependency>
-
         <dependency>
-            <groupId>org.jboss.shrinkwrap</groupId>
-            <artifactId>shrinkwrap-impl-base</artifactId>
-            <version>${shrinkwrap-version}</version>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-catalog</artifactId>
+            <version>${camel-version}</version>
         </dependency>
-
         <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-utils</artifactId>
-            <version>${shrinkwrap-plexus-version}</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>${junit6-jupiter-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
-            <version>${junit6-jupiter-version}</version>
         </dependency>
-      
-        <!-- Test dependencies -->
+        <!-- to make sure the dependency jar is in local maven repository -->
         <dependency>
-            <groupId>org.eclipse.aether</groupId>
-            <artifactId>aether-impl</artifactId>
-            <version>${aether-version}</version>
-            <scope>test</scope>
+            <groupId>org.apache.camel.archetypes</groupId>
+            <artifactId>camel-archetype-spring-boot</artifactId>
+            <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.eclipse.aether</groupId>
-            <artifactId>aether-transport-file</artifactId>
-            <version>${aether-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.aether</groupId>
-            <artifactId>aether-transport-http</artifactId>
-            <version>${aether-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.aether</groupId>
-            <artifactId>aether-connector-basic</artifactId>
-            <version>${aether-version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.arquillian.junit5</groupId>
-            <artifactId>arquillian-junit5-container</artifactId>
-            <version>${arquillian-version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.arquillian.container</groupId>
-            <artifactId>arquillian-container-test-spi</artifactId>
-            <version>${arquillian-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.arquillian.protocol</groupId>
-            <artifactId>arquillian-protocol-jmx</artifactId>
-            <version>${arquillian-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.arquillian.container</groupId>
-            <artifactId>container-se-api</artifactId>
-            <version>${arquillian-container-se-managed-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.arquillian.container</groupId>
-            <artifactId>container-se-server</artifactId>
-            <version>${arquillian-container-se-managed-version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-api</artifactId>
-            <version>${shrinkwrap-resolver-version}</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.maven.resolver</groupId>
-                    <artifactId>maven-resolver-connector-basic</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-spi</artifactId>
-            <version>${shrinkwrap-resolver-version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-api-maven</artifactId>
-            <version>${shrinkwrap-resolver-version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-spi-maven</artifactId>
-            <version>${shrinkwrap-resolver-version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-api-maven-archive</artifactId>
-            <version>${shrinkwrap-resolver-version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
-            <version>${shrinkwrap-resolver-version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-impl-maven-archive</artifactId>
-            <version>${shrinkwrap-resolver-version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-actuator</artifactId>
-            <version>${spring-boot-version}</version>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <childDelegation>false</childDelegation>
-                    <forkedProcessTimeoutInSeconds>15000</forkedProcessTimeoutInSeconds>
-                    <rerunFailingTestsCount>1</rerunFailingTestsCount>
-                    <includes>
-                        <include>**/*Test.java</include>
-                    </includes>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-surefire-plugin-version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <forkCount>0.5C</forkCount>
+                    <reuseForks>false</reuseForks>
                     <systemPropertyVariables>
-                        <!-- Test configuration -->
-                        <!--
-                        It is better disabling unit testing in surefire, as some of them fail for various reasons
-                        (unrelated to spring-boot) when running in the arquillian jar.
-
-                        Tests are enabled when running from IDE. See org.apache.camel.itest.springboot.ITestConfigBuilder
-                        for property names and defaults values.
-                        -->
-                        <itest.springboot.unitTestEnabled>true</itest.springboot.unitTestEnabled>
-                        <itest.springboot.includeTestDependencies>true</itest.springboot.includeTestDependencies>
-                        <itest.springboot.mavenOfflineResolution>false</itest.springboot.mavenOfflineResolution>
-                        <itest.springboot.springBootVersion>${spring-boot-version}</itest.springboot.springBootVersion>
-                        <!-- To remove once all version conflicts are fixed -->
-                        <itest.springboot.failOnRelatedLibraryMismatch>false</itest.springboot.failOnRelatedLibraryMismatch>
-
-                        <!-- Version properties to look up in tests -->
-                        <itest.infinispan.version>${infinispan-version}</itest.infinispan.version>
-                        <itest.infinispan-protostream.version>${infinispan-protostream-version}</itest.infinispan-protostream.version>
-
-                        <!-- Force JDK XML parsers to avoid Oracle XML parser conflicts -->
-                        <javax.xml.parsers.SAXParserFactory>com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl</javax.xml.parsers.SAXParserFactory>
-                        <javax.xml.parsers.DocumentBuilderFactory>com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl</javax.xml.parsers.DocumentBuilderFactory>
+                        <camel-version>${camel-version}</camel-version>
+                        <spring-boot-version>${spring-boot-version}</spring-boot-version>
+                        <maven-compiler-plugin-version>${maven-compiler-plugin-version}</maven-compiler-plugin-version>
+                        <project-version>${project.version}</project-version>
+                        <project.build.directory>${project.build.directory}</project.build.directory>
+                        <delete-after-test>${delete-after-test}</delete-after-test>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
@@ -253,19 +144,27 @@
 
     <profiles>
         <profile>
-            <id>skip-itest-github</id>
-            <activation>
-                <property>
-                    <name>ci.env.name</name>
-                    <value>github.com</value>
-                </property>
-            </activation>
+            <id>generate</id>
+            <properties>
+                <starter>REQUIRED</starter>
+            </properties>
             <build>
+                <defaultGoal>compile exec:java</defaultGoal>
                 <plugins>
                     <plugin>
-                        <artifactId>maven-surefire-plugin</artifactId>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
                         <configuration>
-                            <skipTests>true</skipTests>
+                            <mainClass>org.apache.camel.itest.springboot.util.CreateTestClass</mainClass>
+                            <arguments>
+                                <argument>camel-${starter}-starter</argument>
+                            </arguments>
+                            <systemProperties>
+                                <systemProperty>
+                                    <key>project.basedir</key>
+                                    <value>${project.basedir}</value>
+                                </systemProperty>
+                            </systemProperties>
                         </configuration>
                     </plugin>
                 </plugins>
