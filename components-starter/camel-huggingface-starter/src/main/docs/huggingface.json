@@ -1,0 +1,167 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.huggingface",
+      "type": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.huggingface.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.huggingface.auth-token",
+      "type": "java.lang.String",
+      "description": "HF API token for private models",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.huggingface.auto-select",
+      "type": "java.lang.Boolean",
+      "description": "If true, auto-select the best label (highest score) for zero-shot classification",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.huggingface.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.huggingface.configuration",
+      "type": "org.apache.camel.component.huggingface.HuggingFaceConfiguration",
+      "description": "The configuration. The option is a org.apache.camel.component.huggingface.HuggingFaceConfiguration type.",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.huggingface.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.huggingface.device",
+      "type": "java.lang.String",
+      "description": "Device for inference (cpu, gpu, auto)",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.huggingface.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the huggingface component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.huggingface.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.huggingface.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.huggingface.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.huggingface.max-tokens",
+      "type": "java.lang.Integer",
+      "description": "Max tokens for generation tasks",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.huggingface.memory-id-header",
+      "type": "java.lang.String",
+      "description": "Header name for conversation memory ID (for multi-user chats)",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration",
+      "defaultValue": "CamelChatMemoryId"
+    },
+    {
+      "name": "camel.component.huggingface.min-length",
+      "type": "java.lang.Integer",
+      "description": "Min tokens for summarization tasks",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.huggingface.model-id",
+      "type": "java.lang.String",
+      "description": "Hugging Face model ID (e.g., distilbert-base-uncased-finetuned-sst-2-english)",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.huggingface.model-loading-timeout",
+      "type": "java.lang.Integer",
+      "description": "Model loading timeout in seconds, if negative then use default (240 seconds)",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.huggingface.multi-label",
+      "type": "java.lang.Boolean",
+      "description": "Allow multi-label classifications for zero-shot tasks",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.huggingface.predict-timeout",
+      "type": "java.lang.Integer",
+      "description": "Predict timeout in seconds, if negative then use default (120 seconds)",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.huggingface.predictor-bean",
+      "type": "java.lang.String",
+      "description": "Bean name of a custom TaskPredictor implementation (for tasks not covered by built-in predictors)",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.huggingface.revision",
+      "type": "java.lang.String",
+      "description": "Model revision or branch (default: main)",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.huggingface.system-prompt",
+      "type": "java.lang.String",
+      "description": "Initial system prompt for chat tasks (e.g., 'You are a helpful assistant named Alan.')",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.huggingface.temperature",
+      "type": "java.lang.Float",
+      "description": "Temperature for sampling (0.0-1.0)",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
+    },
+    {
+      "name": "camel.component.huggingface.top-k",
+      "type": "java.lang.Integer",
+      "description": "Top-k parameter for classification tasks",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration",
+      "defaultValue": 5
+    },
+    {
+      "name": "camel.component.huggingface.user-role",
+      "type": "java.lang.String",
+      "description": "Role for user messages in chat history (e.g., 'user' or 'human')",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration",
+      "defaultValue": "user"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
