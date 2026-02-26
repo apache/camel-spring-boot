@@ -78,7 +78,7 @@ public abstract class AbstractSpringBootBaseTestSupport {
         Path projectDir = archetype.getGeneratedProject().getProjectDir();
 
         List<String> command = new ArrayList<>(List.of(
-                System.getProperty("mvn-command"), "compile", "dependency:build-classpath",
+                System.getProperty("mvn-command"), "-q", "compile", "dependency:build-classpath",
                 "-DincludeScope=runtime",
                 "-Dmdep.outputFile=" + CLASSPATH_FILE,
                 "-B"));
@@ -97,7 +97,7 @@ public abstract class AbstractSpringBootBaseTestSupport {
         int exitCode = process.waitFor();
         if (exitCode != 0) {
             throw new RuntimeException(String.join(" ", command) + " failed (exit code "
-                    + exitCode + ") for " + projectDir + ":\n" + output);
+                    + exitCode + ") for " + projectDir + ":" + System.lineSeparator() + output);
         }
 
         Path classpathFile = projectDir.resolve(CLASSPATH_FILE);
@@ -313,23 +313,23 @@ public abstract class AbstractSpringBootBaseTestSupport {
 
         StringBuilder message = new StringBuilder();
         for (String mismatch : mismatches) {
-            message.append("Version mismatch for ").append(mismatch).append(":\n");
+            message.append("Version mismatch for ").append(mismatch).append(":").append(System.lineSeparator());
             for (Map.Entry<String, Set<String>> entry : status.get(mismatch).entrySet()) {
-                message.append("  - ").append(entry.getKey()).append(" --> ").append(entry.getValue()).append("\n");
+                message.append("  - ").append(entry.getKey()).append(" --> ").append(entry.getValue()).append(System.lineSeparator());
             }
         }
 
         StringBuilder warnings = new StringBuilder();
         for (String mismatch : potentialMismatches) {
-            warnings.append("Potential version mismatch for ").append(mismatch).append(":\n");
+            warnings.append("Potential version mismatch for ").append(mismatch).append(":").append(System.lineSeparator());
             for (Map.Entry<String, Set<String>> entry : status.get(mismatch).entrySet()) {
-                warnings.append("  - ").append(entry.getKey()).append(" --> ").append(entry.getValue()).append("\n");
+                warnings.append("  - ").append(entry.getKey()).append(" --> ").append(entry.getValue()).append(System.lineSeparator());
             }
         }
 
         if (!warnings.isEmpty()) {
             String moduleName = inferModuleName(getClass());
-            String warningText = "=== Potential version mismatches for " + moduleName + " ===\n" + warnings;
+            String warningText = "=== Potential version mismatches for " + moduleName + " ===" + System.lineSeparator() + warnings;
             LOG.warn(warningText);
             try {
                 String reportsDir = System.getProperty("project.build.directory", "target") + "/failsafe-reports";
@@ -342,7 +342,7 @@ public abstract class AbstractSpringBootBaseTestSupport {
         }
 
         Assertions.assertTrue(mismatches.isEmpty(),
-                "Library version mismatches found in runtime dependencies:\n" + message);
+                "Library version mismatches found in runtime dependencies:" + System.lineSeparator() + message);
     }
 
     /**
