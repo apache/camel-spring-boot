@@ -16,6 +16,7 @@
  */
 package org.apache.camel.itest.springboot.common;
 
+import ch.qos.logback.classic.LoggerContext;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.archetype.ArchetypeGenerationRequest;
 import org.apache.maven.archetype.ArchetypeGenerationResult;
@@ -24,15 +25,18 @@ import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.model.io.xpp3.MavenXpp3Writer;
+import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
 import org.codehaus.plexus.DefaultContainerConfiguration;
 import org.codehaus.plexus.DefaultPlexusContainer;
 import org.codehaus.plexus.PlexusConstants;
+import org.eclipse.aether.DefaultRepositorySystemSession;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolver;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.InputStream;
@@ -92,6 +96,7 @@ public class ArchetypeGenerationExtension implements BeforeAllCallback, BeforeEa
 
     private GeneratedProject createProject() {
         try {
+            ((LoggerContext) LoggerFactory.getILoggerFactory()).setName(archetypeConfig.artifactId);
             Path targetDir = Path.of(requireSystemProperty("project.build.directory"));
             Files.createDirectories(targetDir);
             Path outputDir = Files.createTempDirectory(targetDir, "archetype-test-");
@@ -101,6 +106,7 @@ public class ArchetypeGenerationExtension implements BeforeAllCallback, BeforeEa
             DefaultPlexusContainer container = new DefaultPlexusContainer(config);
             ArchetypeGenerator generator = container.lookup(ArchetypeGenerator.class);
 
+            String mavenVersion = requireSystemProperty("maven-version");
             String archetypeVersion = requireSystemProperty("project-version");
             String camelVersion = requireSystemProperty("camel-version");
             String springBootVersion = requireSystemProperty("spring-boot-version");
@@ -116,6 +122,10 @@ public class ArchetypeGenerationExtension implements BeforeAllCallback, BeforeEa
             additionalProperties.setProperty("camel-version", camelVersion);
             additionalProperties.setProperty("spring-boot-version", springBootVersion);
             additionalProperties.setProperty("maven-compiler-plugin-version", mavenCompilerPluginVersion);
+            additionalProperties.setProperty("maven-version", mavenVersion);
+
+            DefaultRepositorySystemSession session = MavenRepositorySystemUtils.newSession();
+            session.setSystemProperties(System.getProperties());
 
             ArchetypeGenerationRequest request = new ArchetypeGenerationRequest()
                     .setArchetypeGroupId(ARCHETYPE_GROUP_ID)
@@ -126,14 +136,19 @@ public class ArchetypeGenerationExtension implements BeforeAllCallback, BeforeEa
                     .setVersion(archetypeConfig.version)
                     .setPackage(archetypeConfig.packageName)
                     .setOutputDirectory(outputDir.toString())
-                    .setProperties(additionalProperties);
+                    .setProperties(additionalProperties)
+                    .setRepositorySession(session);
 
             ArchetypeGenerationResult result = new ArchetypeGenerationResult();
             generator.generateArchetype(request, archetypeFile, result);
 
+            if (result.getCause() != null) {
+                throw result.getCause();
+            }
+
             Path projectDir = outputDir.resolve(archetypeConfig.artifactId);
             customizeArchetype(projectDir, archetypeConfig);
-            return new GeneratedProject(outputDir, projectDir, result);
+            return new GeneratedProject(outputDir, projectDir);
         } catch (Exception e) {
             throw new RuntimeException("Failed to generate archetype project", e);
         }
@@ -252,20 +267,14 @@ public class ArchetypeGenerationExtension implements BeforeAllCallback, BeforeEa
 
         private final Path outputDir;
         private final Path projectDir;
-        private final ArchetypeGenerationResult result;
 
-        GeneratedProject(Path outputDir, Path projectDir, ArchetypeGenerationResult result) {
+        GeneratedProject(Path outputDir, Path projectDir) {
             this.outputDir = outputDir;
             this.projectDir = projectDir;
-            this.result = result;
         }
 
         public Path getProjectDir() {
             return projectDir;
-        }
-
-        public ArchetypeGenerationResult getResult() {
-            return result;
         }
 
         @Override

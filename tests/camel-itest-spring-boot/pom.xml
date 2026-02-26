@@ -35,6 +35,7 @@
     <properties>
         <archetype-common-version>3.4.1</archetype-common-version>
         <delete-after-test>true</delete-after-test>
+        <mvn-command>./mvnw</mvn-command>
     </properties>
 
     <dependencyManagement>
@@ -136,6 +137,9 @@
                         <project-version>${project.version}</project-version>
                         <project.build.directory>${project.build.directory}</project.build.directory>
                         <delete-after-test>${delete-after-test}</delete-after-test>
+                        <maven-version>${maven-version}</maven-version>
+                        <mvn-command>${mvn-command}</mvn-command>
+                        <maven.multiModuleProjectDirectory>${maven.multiModuleProjectDirectory}</maven.multiModuleProjectDirectory>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
