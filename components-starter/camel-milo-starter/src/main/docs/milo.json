@@ -166,6 +166,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.milo-browse.override-port",
+      "type": "java.lang.Boolean",
+      "description": "Override the server reported endpoint port with the port from the endpoint URI.",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.milo-browse.product-uri",
       "type": "java.lang.String",
       "description": "The product URI",
@@ -330,6 +337,13 @@
       "name": "camel.component.milo-client.override-host",
       "type": "java.lang.Boolean",
       "description": "Override the server reported endpoint host with the host from the endpoint URI.",
+      "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.milo-client.override-port",
+      "type": "java.lang.Boolean",
+      "description": "Override the server reported endpoint port with the port from the endpoint URI.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration",
       "defaultValue": false
     },

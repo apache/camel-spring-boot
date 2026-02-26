@@ -16,8 +16,14 @@
  */
 package org.apache.camel.component.nats.springboot;
 
+import io.nats.client.Connection;
+import io.nats.client.api.AckPolicy;
+import io.nats.client.api.ConsumerConfiguration;
+import org.apache.camel.component.nats.NatsComponent;
+import org.apache.camel.component.nats.NatsConfiguration;
 import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -36,6 +42,71 @@ public class NatsComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * To use a shared configuration. The option is a
+     * org.apache.camel.component.nats.NatsConfiguration type.
+     */
+    private NatsConfiguration configuration;
+    /**
+     * Timeout for connection attempts. (in milliseconds)
+     */
+    private Integer connectionTimeout = 2000;
+    /**
+     * Define if we want to flush connection when stopping or not
+     */
+    private Boolean flushConnection = true;
+    /**
+     * Set the flush timeout (in milliseconds)
+     */
+    private Integer flushTimeout = 1000;
+    /**
+     * Sets whether to enable JetStream support for this endpoint.
+     */
+    private Boolean jetstreamEnabled = false;
+    /**
+     * Sets the name of the JetStream stream to use.
+     */
+    private String jetstreamName;
+    /**
+     * maximum number of pings have not received a response allowed by the
+     * client
+     */
+    private Integer maxPingsOut = 2;
+    /**
+     * Max reconnection attempts
+     */
+    private Integer maxReconnectAttempts = 60;
+    /**
+     * Turn off echo. If supported by the gnatsd version you are connecting to
+     * this flag will prevent the server from echoing messages back to the
+     * connection if it has subscriptions on the subject being published to.
+     */
+    private Boolean noEcho = false;
+    /**
+     * Whether or not randomizing the order of servers for the connection
+     * attempts
+     */
+    private Boolean noRandomizeServers = false;
+    /**
+     * Whether or not running in pedantic mode (this affects performance)
+     */
+    private Boolean pedantic = false;
+    /**
+     * Ping interval to be aware if connection is still alive (in milliseconds)
+     */
+    private Integer pingInterval = 120000;
+    /**
+     * Whether or not using reconnection feature
+     */
+    private Boolean reconnect = true;
+    /**
+     * Waiting time before attempts reconnection (in milliseconds)
+     */
+    private Integer reconnectTimeWait = 2000;
+    /**
+     * Interval to clean up cancelled/timed out requests.
+     */
+    private Integer requestCleanupInterval = 5000;
+    /**
      * URLs to one or more NAT servers. Use comma to separate URLs when
      * specifying multiple servers.
      */
@@ -44,6 +115,25 @@ public class NatsComponentConfiguration
      * Whether or not running in verbose mode
      */
     private Boolean verbose = false;
+    /**
+     * Acknowledgement mode. none = Messages are acknowledged as soon as the
+     * server sends them (danger: messages that Camel failed to process is also
+     * ack). Clients do not need to ack. all = All messages with a sequence
+     * number less than the message acked are also acknowledged. E.g. reading a
+     * batch of messages 1..100. Ack on message 100 will acknowledge 1..99 as
+     * well. explicit (default) = Each message is acknowledged individually by
+     * Camel after the message has been processed, this ensures the message is
+     * only ack if success and nack if processing failed due to an exception
+     * during routing. Message can be acked out of sequence and create gaps of
+     * unacknowledged messages in the consumer.
+     */
+    private AckPolicy ackPolicy = AckPolicy.Explicit;
+    /**
+     * After a message is delivered to a consumer, the server waits 30 seconds
+     * (default) for an acknowledgement. If none arrives (timeout), the message
+     * becomes eligible for redelivery.
+     */
+    private Long ackWait = 30000L;
     /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions (if possible) occurred while the Camel consumer
@@ -59,6 +149,60 @@ public class NatsComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Sets the name to assign to the JetStream durable consumer. Setting this
+     * value makes the consumer durable. The value is used to set the durable()
+     * field in the underlying NATS ConsumerConfiguration.Builder.
+     */
+    private String durableName;
+    /**
+     * Maximum number of attempts to deliver a message from Nats to a consumer.
+     * Once MaxDeliver is reached, the NATS server stops attempting to deliver
+     * that specific message. The message is not deleted, it remains in the
+     * stream but is simply skipped. It is recommended to set this option to a
+     * sensible value in case a message is poison and can not successfully be
+     * processed and would always keep failing.
+     */
+    private Long maxDeliver;
+    /**
+     * Stop receiving messages from a topic we are subscribing to after
+     * maxMessages
+     */
+    private String maxMessages;
+    /**
+     * For negative acknowledgements (NAK), redelivery is delayed by 5 seconds
+     * (default). Setting this to 0 or negative makes the redelivery
+     * immediately. Be careful as this can cause the consumer to keep
+     * re-processing the same message over and over again due to intermediate
+     * error that last a while.
+     */
+    private Long nackWait = 5000L;
+    /**
+     * Consumer thread pool size (default is 10)
+     */
+    private Integer poolSize = 10;
+    /**
+     * Sets the consumer subscription type for JetStream. Set to true to use a
+     * Pull Subscription (consumer explicitly requests messages). Set to false
+     * to use a Push Subscription (messages are automatically delivered).
+     */
+    private Boolean pullSubscription = true;
+    /**
+     * The Queue name if we are using nats for a queue configuration
+     */
+    private String queueName;
+    /**
+     * Can be used to turn off sending back reply message in the consumer.
+     */
+    private Boolean replyToDisabled = false;
+    /**
+     * Sets a custom ConsumerConfiguration object for the JetStream consumer.
+     * This is an advanced option typically used when you need to configure
+     * properties not exposed as simple Camel URI parameters. When set, this
+     * object will be used to build the final consumer subscription options. The
+     * option is a io.nats.client.api.ConsumerConfiguration type.
+     */
+    private ConsumerConfiguration consumerConfiguration;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -70,6 +214,14 @@ public class NatsComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * the subject to which subscribers should send response
+     */
+    private String replySubject;
+    /**
+     * Request timeout in milliseconds
+     */
+    private Long requestTimeout = 20000L;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -79,15 +231,164 @@ public class NatsComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
-     * header to and from Camel message. The option is a
+     * Reference an already instantiated connection to Nats server. The option
+     * is a io.nats.client.Connection type.
+     */
+    private Connection connection;
+    /**
+     * To use a custom header filter strategy. The option is a
      * org.apache.camel.spi.HeaderFilterStrategy type.
      */
     private HeaderFilterStrategy headerFilterStrategy;
     /**
+     * Sets whether to operate JetStream requests asynchronously.
+     */
+    private Boolean jetstreamAsync = true;
+    /**
+     * Whether or not connection trace messages should be printed to standard
+     * out for fine grained debugging of connection issues.
+     */
+    private Boolean traceConnection = false;
+    /**
+     * If we use useCredentialsFile to true we'll need to set the
+     * credentialsFilePath option. It can be loaded by default from classpath,
+     * but you can prefix with classpath:, file:, or http: to load the resource
+     * from different systems.
+     */
+    private String credentialsFilePath;
+    /**
+     * Set secure option indicating TLS is required
+     */
+    private Boolean secure = false;
+    /**
+     * To configure security using SSLContextParameters. The option is a
+     * org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private SSLContextParameters sslContextParameters;
+    /**
      * Enable usage of global SSL context parameters.
      */
     private Boolean useGlobalSslContextParameters = false;
+
+    public NatsConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(NatsConfiguration configuration) {
+        this.configuration = configuration;
+    }
+
+    public Integer getConnectionTimeout() {
+        return connectionTimeout;
+    }
+
+    public void setConnectionTimeout(Integer connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
+    }
+
+    public Boolean getFlushConnection() {
+        return flushConnection;
+    }
+
+    public void setFlushConnection(Boolean flushConnection) {
+        this.flushConnection = flushConnection;
+    }
+
+    public Integer getFlushTimeout() {
+        return flushTimeout;
+    }
+
+    public void setFlushTimeout(Integer flushTimeout) {
+        this.flushTimeout = flushTimeout;
+    }
+
+    public Boolean getJetstreamEnabled() {
+        return jetstreamEnabled;
+    }
+
+    public void setJetstreamEnabled(Boolean jetstreamEnabled) {
+        this.jetstreamEnabled = jetstreamEnabled;
+    }
+
+    public String getJetstreamName() {
+        return jetstreamName;
+    }
+
+    public void setJetstreamName(String jetstreamName) {
+        this.jetstreamName = jetstreamName;
+    }
+
+    public Integer getMaxPingsOut() {
+        return maxPingsOut;
+    }
+
+    public void setMaxPingsOut(Integer maxPingsOut) {
+        this.maxPingsOut = maxPingsOut;
+    }
+
+    public Integer getMaxReconnectAttempts() {
+        return maxReconnectAttempts;
+    }
+
+    public void setMaxReconnectAttempts(Integer maxReconnectAttempts) {
+        this.maxReconnectAttempts = maxReconnectAttempts;
+    }
+
+    public Boolean getNoEcho() {
+        return noEcho;
+    }
+
+    public void setNoEcho(Boolean noEcho) {
+        this.noEcho = noEcho;
+    }
+
+    public Boolean getNoRandomizeServers() {
+        return noRandomizeServers;
+    }
+
+    public void setNoRandomizeServers(Boolean noRandomizeServers) {
+        this.noRandomizeServers = noRandomizeServers;
+    }
+
+    public Boolean getPedantic() {
+        return pedantic;
+    }
+
+    public void setPedantic(Boolean pedantic) {
+        this.pedantic = pedantic;
+    }
+
+    public Integer getPingInterval() {
+        return pingInterval;
+    }
+
+    public void setPingInterval(Integer pingInterval) {
+        this.pingInterval = pingInterval;
+    }
+
+    public Boolean getReconnect() {
+        return reconnect;
+    }
+
+    public void setReconnect(Boolean reconnect) {
+        this.reconnect = reconnect;
+    }
+
+    public Integer getReconnectTimeWait() {
+        return reconnectTimeWait;
+    }
+
+    public void setReconnectTimeWait(Integer reconnectTimeWait) {
+        this.reconnectTimeWait = reconnectTimeWait;
+    }
+
+    public Integer getRequestCleanupInterval() {
+        return requestCleanupInterval;
+    }
+
+    public void setRequestCleanupInterval(Integer requestCleanupInterval) {
+        this.requestCleanupInterval = requestCleanupInterval;
+    }
 
     public String getServers() {
         return servers;
@@ -105,12 +406,101 @@ public class NatsComponentConfiguration
         this.verbose = verbose;
     }
 
+    public AckPolicy getAckPolicy() {
+        return ackPolicy;
+    }
+
+    public void setAckPolicy(AckPolicy ackPolicy) {
+        this.ackPolicy = ackPolicy;
+    }
+
+    public Long getAckWait() {
+        return ackWait;
+    }
+
+    public void setAckWait(Long ackWait) {
+        this.ackWait = ackWait;
+    }
+
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
     }
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public String getDurableName() {
+        return durableName;
+    }
+
+    public void setDurableName(String durableName) {
+        this.durableName = durableName;
+    }
+
+    public Long getMaxDeliver() {
+        return maxDeliver;
+    }
+
+    public void setMaxDeliver(Long maxDeliver) {
+        this.maxDeliver = maxDeliver;
+    }
+
+    public String getMaxMessages() {
+        return maxMessages;
+    }
+
+    public void setMaxMessages(String maxMessages) {
+        this.maxMessages = maxMessages;
+    }
+
+    public Long getNackWait() {
+        return nackWait;
+    }
+
+    public void setNackWait(Long nackWait) {
+        this.nackWait = nackWait;
+    }
+
+    public Integer getPoolSize() {
+        return poolSize;
+    }
+
+    public void setPoolSize(Integer poolSize) {
+        this.poolSize = poolSize;
+    }
+
+    public Boolean getPullSubscription() {
+        return pullSubscription;
+    }
+
+    public void setPullSubscription(Boolean pullSubscription) {
+        this.pullSubscription = pullSubscription;
+    }
+
+    public String getQueueName() {
+        return queueName;
+    }
+
+    public void setQueueName(String queueName) {
+        this.queueName = queueName;
+    }
+
+    public Boolean getReplyToDisabled() {
+        return replyToDisabled;
+    }
+
+    public void setReplyToDisabled(Boolean replyToDisabled) {
+        this.replyToDisabled = replyToDisabled;
+    }
+
+    public ConsumerConfiguration getConsumerConfiguration() {
+        return consumerConfiguration;
+    }
+
+    public void setConsumerConfiguration(
+            ConsumerConfiguration consumerConfiguration) {
+        this.consumerConfiguration = consumerConfiguration;
     }
 
     public Boolean getLazyStartProducer() {
@@ -121,12 +511,36 @@ public class NatsComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public String getReplySubject() {
+        return replySubject;
+    }
+
+    public void setReplySubject(String replySubject) {
+        this.replySubject = replySubject;
+    }
+
+    public Long getRequestTimeout() {
+        return requestTimeout;
+    }
+
+    public void setRequestTimeout(Long requestTimeout) {
+        this.requestTimeout = requestTimeout;
+    }
+
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
     }
 
     public HeaderFilterStrategy getHeaderFilterStrategy() {
@@ -136,6 +550,47 @@ public class NatsComponentConfiguration
     public void setHeaderFilterStrategy(
             HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
+    }
+
+    public Boolean getJetstreamAsync() {
+        return jetstreamAsync;
+    }
+
+    public void setJetstreamAsync(Boolean jetstreamAsync) {
+        this.jetstreamAsync = jetstreamAsync;
+    }
+
+    public Boolean getTraceConnection() {
+        return traceConnection;
+    }
+
+    public void setTraceConnection(Boolean traceConnection) {
+        this.traceConnection = traceConnection;
+    }
+
+    public String getCredentialsFilePath() {
+        return credentialsFilePath;
+    }
+
+    public void setCredentialsFilePath(String credentialsFilePath) {
+        this.credentialsFilePath = credentialsFilePath;
+    }
+
+    public Boolean getSecure() {
+        return secure;
+    }
+
+    public void setSecure(Boolean secure) {
+        this.secure = secure;
+    }
+
+    public SSLContextParameters getSslContextParameters() {
+        return sslContextParameters;
+    }
+
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
+        this.sslContextParameters = sslContextParameters;
     }
 
     public Boolean getUseGlobalSslContextParameters() {
