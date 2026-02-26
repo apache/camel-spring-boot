@@ -42,9 +42,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public abstract class AbstractSpringBootBaseTestSupport {
 
@@ -81,7 +78,7 @@ public abstract class AbstractSpringBootBaseTestSupport {
         Path projectDir = archetype.getGeneratedProject().getProjectDir();
 
         List<String> command = new ArrayList<>(List.of(
-                "mvn", "compile", "dependency:build-classpath",
+                System.getProperty("mvn-command"), "compile", "dependency:build-classpath",
                 "-DincludeScope=runtime",
                 "-Dmdep.outputFile=" + CLASSPATH_FILE,
                 "-B"));
@@ -90,6 +87,8 @@ public abstract class AbstractSpringBootBaseTestSupport {
             command.add("-Dmaven.repo.local=" + localRepo);
         }
 
+        LOG.debug("running: {}", String.join(" ", command));
+
         ProcessBuilder pb = new ProcessBuilder(command)
                 .directory(projectDir.toFile())
                 .redirectErrorStream(true);
@@ -97,7 +96,7 @@ public abstract class AbstractSpringBootBaseTestSupport {
         String output = new String(process.getInputStream().readAllBytes());
         int exitCode = process.waitFor();
         if (exitCode != 0) {
-            throw new RuntimeException("mvn compile dependency:build-classpath failed (exit code "
+            throw new RuntimeException(String.join(" ", command) + " failed (exit code "
                     + exitCode + ") for " + projectDir + ":\n" + output);
         }
 
