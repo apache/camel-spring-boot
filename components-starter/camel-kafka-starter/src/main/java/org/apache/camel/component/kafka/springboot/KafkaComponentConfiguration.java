@@ -253,6 +253,19 @@ public class KafkaComponentConfiguration
      */
     private String groupInstanceId;
     /**
+     * The consumer group protocol to use. The classic protocol uses the
+     * traditional partition assignment and rebalancing mechanism. The consumer
+     * protocol enables the new KIP-848 consumer rebalance protocol which
+     * provides faster and more efficient rebalancing.
+     */
+    private String groupProtocol = "classic";
+    /**
+     * The name of the server-side assignor to use when group.protocol is set to
+     * consumer. If not specified, the group coordinator will use the default
+     * assignor configured on the broker (group.consumer.assignors).
+     */
+    private String groupRemoteAssignor;
+    /**
      * To use a custom KafkaHeaderDeserializer to deserialize kafka headers
      * values. The option is a
      * org.apache.camel.component.kafka.serde.KafkaHeaderDeserializer type.
@@ -539,7 +552,7 @@ public class KafkaComponentConfiguration
      * reducing the number of requests sent but would add up to 5ms of latency
      * to records sent in the absence of load.
      */
-    private Integer lingerMs = 0;
+    private Integer lingerMs = 5;
     /**
      * The configuration controls how long the KafkaProducer's send(),
      * partitionsFor(), initTransactions(), sendOffsetsToTransaction(),
@@ -1186,6 +1199,22 @@ public class KafkaComponentConfiguration
 
     public void setGroupInstanceId(String groupInstanceId) {
         this.groupInstanceId = groupInstanceId;
+    }
+
+    public String getGroupProtocol() {
+        return groupProtocol;
+    }
+
+    public void setGroupProtocol(String groupProtocol) {
+        this.groupProtocol = groupProtocol;
+    }
+
+    public String getGroupRemoteAssignor() {
+        return groupRemoteAssignor;
+    }
+
+    public void setGroupRemoteAssignor(String groupRemoteAssignor) {
+        this.groupRemoteAssignor = groupRemoteAssignor;
     }
 
     public KafkaHeaderDeserializer getHeaderDeserializer() {

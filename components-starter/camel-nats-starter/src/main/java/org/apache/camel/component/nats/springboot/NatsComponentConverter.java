@@ -39,7 +39,11 @@ public class NatsComponentConverter implements GenericConverter {
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.nats.NatsConfiguration.class));
+        answer.add(new ConvertiblePair(String.class, io.nats.client.api.ConsumerConfiguration.class));
+        answer.add(new ConvertiblePair(String.class, io.nats.client.Connection.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         return answer;
     }
 
@@ -56,7 +60,11 @@ public class NatsComponentConverter implements GenericConverter {
         }
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
+            case "org.apache.camel.component.nats.NatsConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.nats.NatsConfiguration.class);
+            case "io.nats.client.api.ConsumerConfiguration": return applicationContext.getBean(ref, io.nats.client.api.ConsumerConfiguration.class);
+            case "io.nats.client.Connection": return applicationContext.getBean(ref, io.nats.client.Connection.class);
             case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
+            case "org.apache.camel.support.jsse.SSLContextParameters": return applicationContext.getBean(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
         }
         return null;
     }
