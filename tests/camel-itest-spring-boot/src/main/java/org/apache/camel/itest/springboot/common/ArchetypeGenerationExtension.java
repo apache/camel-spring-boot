@@ -17,19 +17,11 @@
 package org.apache.camel.itest.springboot.common;
 
 import ch.qos.logback.classic.LoggerContext;
-import org.apache.commons.io.FileUtils;
-import org.apache.maven.archetype.ArchetypeGenerationRequest;
-import org.apache.maven.archetype.ArchetypeGenerationResult;
-import org.apache.maven.archetype.generator.ArchetypeGenerator;
+import org.apache.camel.util.FileUtil;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.model.io.xpp3.MavenXpp3Writer;
-import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
-import org.codehaus.plexus.DefaultContainerConfiguration;
-import org.codehaus.plexus.DefaultPlexusContainer;
-import org.codehaus.plexus.PlexusConstants;
-import org.eclipse.aether.DefaultRepositorySystemSession;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -45,6 +37,8 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -101,16 +95,11 @@ public class ArchetypeGenerationExtension implements BeforeAllCallback, BeforeEa
             Files.createDirectories(targetDir);
             Path outputDir = Files.createTempDirectory(targetDir, "archetype-test-");
 
-            DefaultContainerConfiguration config = new DefaultContainerConfiguration();
-            config.setClassPathScanning(PlexusConstants.SCANNING_ON);
-            DefaultPlexusContainer container = new DefaultPlexusContainer(config);
-            ArchetypeGenerator generator = container.lookup(ArchetypeGenerator.class);
-
-            String mavenVersion = requireSystemProperty("maven-version");
             String archetypeVersion = requireSystemProperty("project-version");
             String camelVersion = requireSystemProperty("camel-version");
             String springBootVersion = requireSystemProperty("spring-boot-version");
             String mavenCompilerPluginVersion = requireSystemProperty("maven-compiler-plugin-version");
+            String mavenVersion = requireSystemProperty("maven-version");
 
             File archetypeFile = resolveArchetypeJar(archetypeVersion);
             if (!archetypeFile.exists()) {
@@ -118,32 +107,46 @@ public class ArchetypeGenerationExtension implements BeforeAllCallback, BeforeEa
                         + ". Run 'mvn install -pl archetypes/camel-archetype-spring-boot -am -DskipTests' first.");
             }
 
-            Properties additionalProperties = new Properties();
-            additionalProperties.setProperty("camel-version", camelVersion);
-            additionalProperties.setProperty("spring-boot-version", springBootVersion);
-            additionalProperties.setProperty("maven-compiler-plugin-version", mavenCompilerPluginVersion);
-            additionalProperties.setProperty("maven-version", mavenVersion);
+            // Resolve absolute path to Maven wrapper
+            String mvnwPath = System.getProperty("mvn-command");
+            if (mvnwPath.startsWith("./")) {
+                // Convert relative path to absolute based on multiModuleProjectDirectory
+                String projectRoot = System.getProperty("maven.multiModuleProjectDirectory");
+                if (projectRoot != null) {
+                    mvnwPath = Path.of(projectRoot, mvnwPath.substring(2)).toString();
+                }
+            }
 
-            DefaultRepositorySystemSession session = MavenRepositorySystemUtils.newSession();
-            session.setSystemProperties(System.getProperties());
+            List<String> command = new ArrayList<>(List.of(
+                    mvnwPath, "-q", "archetype:generate",
+                    "-B",
+                    "-DarchetypeGroupId=" + ARCHETYPE_GROUP_ID,
+                    "-DarchetypeArtifactId=" + ARCHETYPE_ARTIFACT_ID,
+                    "-DarchetypeVersion=" + archetypeVersion,
+                    "-DgroupId=" + archetypeConfig.groupId,
+                    "-DartifactId=" + archetypeConfig.artifactId,
+                    "-Dversion=" + archetypeConfig.version,
+                    "-Dpackage=" + archetypeConfig.packageName,
+                    "-Dcamel-version=" + camelVersion,
+                    "-Dspring-boot-version=" + springBootVersion,
+                    "-Dmaven-compiler-plugin-version=" + mavenCompilerPluginVersion,
+                    "-Dmaven-version=" + mavenVersion));
 
-            ArchetypeGenerationRequest request = new ArchetypeGenerationRequest()
-                    .setArchetypeGroupId(ARCHETYPE_GROUP_ID)
-                    .setArchetypeArtifactId(ARCHETYPE_ARTIFACT_ID)
-                    .setArchetypeVersion(archetypeVersion)
-                    .setGroupId(archetypeConfig.groupId)
-                    .setArtifactId(archetypeConfig.artifactId)
-                    .setVersion(archetypeConfig.version)
-                    .setPackage(archetypeConfig.packageName)
-                    .setOutputDirectory(outputDir.toString())
-                    .setProperties(additionalProperties)
-                    .setRepositorySession(session);
+            String localRepo = System.getProperty("maven.repo.local");
+            if (localRepo != null) {
+                command.add("-Dmaven.repo.local=" + localRepo);
+            }
 
-            ArchetypeGenerationResult result = new ArchetypeGenerationResult();
-            generator.generateArchetype(request, archetypeFile, result);
+            ProcessBuilder pb = new ProcessBuilder(command)
+                    .directory(outputDir.toFile())
+                    .redirectOutput(ProcessBuilder.Redirect.DISCARD)
+                    .redirectError(ProcessBuilder.Redirect.DISCARD);
+            Process process = pb.start();
+            int exitCode = process.waitFor();
 
-            if (result.getCause() != null) {
-                throw result.getCause();
+            if (exitCode != 0) {
+                throw new RuntimeException("Archetype generation failed (exit code "
+                        + exitCode + ")");
             }
 
             Path projectDir = outputDir.resolve(archetypeConfig.artifactId);
@@ -184,7 +187,7 @@ public class ArchetypeGenerationExtension implements BeforeAllCallback, BeforeEa
     public static void customizeArchetype(Path projectDir, ArchetypeConfig config) throws Exception {
         String mainClassFile = config.getMainClassName() + ".java";
 
-        FileUtils.deleteQuietly(projectDir.resolve("src/test").toFile());
+        FileUtil.removeDir(projectDir.resolve("src/test").toFile());
 
         Path mainJavaDir = projectDir.resolve("src/main/java");
         if (Files.exists(mainJavaDir)) {
@@ -281,7 +284,7 @@ public class ArchetypeGenerationExtension implements BeforeAllCallback, BeforeEa
         public void close() throws Exception {
             if (Boolean.parseBoolean(System.getProperty("delete-after-test", "true"))
                     && outputDir != null && Files.exists(outputDir)) {
-                FileUtils.deleteQuietly(outputDir.toFile());
+                FileUtil.removeDir(outputDir.toFile());
             }
         }
     }

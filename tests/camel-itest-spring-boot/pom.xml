@@ -33,7 +33,6 @@
     <description>Spring-Boot Camel integration test</description>
 
     <properties>
-        <archetype-common-version>3.4.1</archetype-common-version>
         <delete-after-test>true</delete-after-test>
         <mvn-command>./mvnw</mvn-command>
     </properties>
@@ -59,14 +58,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.maven.archetype</groupId>
-            <artifactId>archetype-common</artifactId>
-            <version>${archetype-common-version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-core</artifactId>
             <version>${maven-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-xml</artifactId>
+            <version>${plexus-xml-version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
