@@ -57,6 +57,18 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.langchain4j-agent.mcp-clients",
+      "type": "java.util.List<dev.langchain4j.mcp.client.McpClient>",
+      "description": "Pre-built MCP (Model Context Protocol) client instances for external tool integration. Reference beans from the registry, e.g., #myMcpClient1,#myMcpClient2",
+      "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration"
+    },
+    {
+      "name": "camel.component.langchain4j-agent.mcp-server",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "MCP server definitions in the form of mcpServer..=. Supported properties: transportType (stdio or http, default: stdio), command (comma-separated, for stdio), url (for http), environment.= (for stdio), timeout (in seconds, default: 60), logRequests, logResponses. This is a multi-value option with prefix: mcpServer.",
+      "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration"
+    },
+    {
       "name": "camel.component.langchain4j-agent.tags",
       "type": "java.lang.String",
       "description": "Tags for discovering and calling Camel route tools",
