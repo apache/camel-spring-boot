@@ -16,6 +16,9 @@
  */
 package org.apache.camel.component.langchain4j.agent.springboot;
 
+import java.util.List;
+import java.util.Map;
+import dev.langchain4j.mcp.client.McpClient;
 import org.apache.camel.component.langchain4j.agent.LangChain4jAgentConfiguration;
 import org.apache.camel.component.langchain4j.agent.api.Agent;
 import org.apache.camel.component.langchain4j.agent.api.AgentFactory;
@@ -77,6 +80,20 @@ public class LangChain4jAgentComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * Pre-built MCP (Model Context Protocol) client instances for external tool
+     * integration. Reference beans from the registry, e.g.,
+     * #myMcpClient1,#myMcpClient2
+     */
+    private List<McpClient> mcpClients;
+    /**
+     * MCP server definitions in the form of mcpServer..=. Supported properties:
+     * transportType (stdio or http, default: stdio), command (comma-separated,
+     * for stdio), url (for http), environment.= (for stdio), timeout (in
+     * seconds, default: 60), logRequests, logResponses. This is a multi-value
+     * option with prefix: mcpServer.
+     */
+    private Map<String, Object> mcpServer;
 
     public Agent getAgent() {
         return agent;
@@ -124,5 +141,21 @@ public class LangChain4jAgentComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public List<McpClient> getMcpClients() {
+        return mcpClients;
+    }
+
+    public void setMcpClients(List<McpClient> mcpClients) {
+        this.mcpClients = mcpClients;
+    }
+
+    public Map<String, Object> getMcpServer() {
+        return mcpServer;
+    }
+
+    public void setMcpServer(Map<String, Object> mcpServer) {
+        this.mcpServer = mcpServer;
     }
 }
