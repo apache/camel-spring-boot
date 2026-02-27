@@ -96,6 +96,7 @@
             <redirectTestOutputToFile>false</redirectTestOutputToFile>
             <systemPropertyVariables>
               <visibleassertions.silence>true</visibleassertions.silence>
+              <kafka.instance.type>local-kafka-container</kafka.instance.type>
             </systemPropertyVariables>
           </configuration>
         </plugin>
@@ -118,21 +119,6 @@
             <artifactId>maven-failsafe-plugin</artifactId>
             <executions>
               <execution>
-                <id>integration-test</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>integration-test</goal>
-                  <goal>verify</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>kafka-3</id>
-                <configuration>
-                  <systemPropertyVariables>
-                    <kafka.instance.type>local-kafka3-container</kafka.instance.type>
-                  </systemPropertyVariables>
-                  <reportNameSuffix>kafka-3</reportNameSuffix>
-                </configuration>
                 <goals>
                   <goal>integration-test</goal>
                   <goal>verify</goal>
@@ -158,21 +144,6 @@
             <artifactId>maven-failsafe-plugin</artifactId>
             <executions>
               <execution>
-                <id>integration-test</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>integration-test</goal>
-                  <goal>verify</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>kafka-3</id>
-                <configuration>
-                  <systemPropertyVariables>
-                    <kafka.instance.type>local-kafka3-container</kafka.instance.type>
-                  </systemPropertyVariables>
-                  <reportNameSuffix>kafka-3</reportNameSuffix>
-                </configuration>
                 <goals>
                   <goal>integration-test</goal>
                   <goal>verify</goal>

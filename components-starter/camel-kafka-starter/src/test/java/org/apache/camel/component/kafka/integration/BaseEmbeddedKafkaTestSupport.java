@@ -38,7 +38,7 @@ import org.springframework.context.annotation.Configuration;
 public abstract class BaseEmbeddedKafkaTestSupport {
 
     @RegisterExtension
-    public static KafkaService service = KafkaServiceFactory.createService();
+    public static KafkaService service = KafkaServiceFactory.createSingletonService();
 
     @Autowired
     protected CamelContext context;
