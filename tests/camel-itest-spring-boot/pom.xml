@@ -97,6 +97,12 @@
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
         </dependency>
+        <!-- needed on parent classloader for components that use Groovy (e.g. camel-grape) -->
+        <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>${groovy-version}</version>
+        </dependency>
         <!-- to make sure the dependency jar is in local maven repository -->
         <dependency>
             <groupId>org.apache.camel.archetypes</groupId>
