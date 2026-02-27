@@ -1679,11 +1679,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-nitrite-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-oaipmh-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -4087,11 +4082,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-netty-http</artifactId>
-        <version>4.19.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-nitrite</artifactId>
         <version>4.19.0-SNAPSHOT</version>
       </dependency>
       <dependency>

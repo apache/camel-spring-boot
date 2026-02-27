@@ -373,7 +373,6 @@
     <module>camel-neo4j-starter</module>
     <module>camel-netty-http-starter</module>
     <module>camel-netty-starter</module>
-    <module>camel-nitrite-starter</module>
     <module>camel-oaipmh-starter</module>
     <module>camel-observability-services-starter</module>
     <module>camel-observation-starter</module>
