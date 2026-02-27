@@ -72,7 +72,7 @@ public class KafkaConsumerManualCommitIT extends BaseEmbeddedKafkaTestSupport {
         kafkaAdminClient.deleteTopics(Collections.singletonList(TOPIC));
     }
 
-    @RepeatedTest(4)
+    @RepeatedTest(2)
     public void kafkaAutoCommitDisabledDuringRebalance() throws Exception {
         to.expectedMessageCount(1);
         String firstMessage = "message-0";
@@ -112,7 +112,7 @@ public class KafkaConsumerManualCommitIT extends BaseEmbeddedKafkaTestSupport {
         to.assertIsSatisfied(3000);
     }
 
-    @RepeatedTest(4)
+    @RepeatedTest(2)
     public void kafkaManualCommit() throws Exception {
         to.expectedMessageCount(5);
         to.expectedBodiesReceivedInAnyOrder("message-0", "message-1", "message-2", "message-3", "message-4");

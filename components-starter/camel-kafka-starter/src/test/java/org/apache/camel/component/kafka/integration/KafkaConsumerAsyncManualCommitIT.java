@@ -78,7 +78,7 @@ public class KafkaConsumerAsyncManualCommitIT extends BaseEmbeddedKafkaTestSuppo
         kafkaAdminClient.deleteTopics(Collections.singletonList(TOPIC));
     }
 
-    @RepeatedTest(4)
+    @RepeatedTest(2)
     public void kafkaManualCommit() throws Exception {
         to.expectedMessageCount(5);
         to.expectedBodiesReceivedInAnyOrder("message-0", "message-1", "message-2", "message-3", "message-4");

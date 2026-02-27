@@ -37,7 +37,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @CamelSpringBootTest
 @SpringBootTest(classes = { CamelAutoConfiguration.class, BaseEmbeddedKafkaTestSupport.DefaulKafkaComponent.class,
         KafkaConsumerTopicIsPatternIT.class, KafkaConsumerTopicIsPatternIT.TestConfiguration.class, })
@@ -48,8 +48,8 @@ public class KafkaConsumerTopicIsPatternIT extends BaseEmbeddedKafkaTestSupport 
     public static final String TOPIC_PATTERN = "v.*d";
 
     private final String from = "kafka:" + TOPIC_PATTERN
-            + "?topicIsPattern=true&groupId=group1&autoOffsetReset=earliest"
-            + "&autoCommitIntervalMs=1000&sessionTimeoutMs=30000&autoCommitEnable=true&interceptorClasses=org.apache.camel.component.kafka.integration.MockConsumerInterceptor";
+            + "?topicIsPattern=true&groupId=KafkaConsumerTopicIsPatternIT&autoOffsetReset=earliest"
+            + "&autoCommitIntervalMs=1000&sessionTimeoutMs=30000&autoCommitEnable=true&pollTimeoutMs=1000&metadataMaxAgeMs=1000&interceptorClasses=org.apache.camel.component.kafka.integration.MockConsumerInterceptor";
 
     @EndpointInject("mock:result")
     private MockEndpoint to;
