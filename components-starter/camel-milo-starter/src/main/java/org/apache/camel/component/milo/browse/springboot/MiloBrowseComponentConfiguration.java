@@ -130,6 +130,11 @@ public class MiloBrowseComponentConfiguration
      */
     private Boolean overrideHost = false;
     /**
+     * Override the server reported endpoint port with the port from the
+     * endpoint URI.
+     */
+    private Boolean overridePort = false;
+    /**
      * The product URI
      */
     private String productUri = "http://camel.apache.org/EclipseMilo";
@@ -301,6 +306,14 @@ public class MiloBrowseComponentConfiguration
 
     public void setOverrideHost(Boolean overrideHost) {
         this.overrideHost = overrideHost;
+    }
+
+    public Boolean getOverridePort() {
+        return overridePort;
+    }
+
+    public void setOverridePort(Boolean overridePort) {
+        this.overridePort = overridePort;
     }
 
     public String getProductUri() {

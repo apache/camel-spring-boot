@@ -112,6 +112,12 @@ public class SshComponentConfiguration
      */
     private SshConfiguration configuration;
     /**
+     * Sets the timeout in milliseconds to wait before the SSH session is closed
+     * due to inactivity. The default value is 0, which means no idle timeout is
+     * applied.
+     */
+    private Long idleTimeout;
+    /**
      * Sets the shellPrompt to be dropped when response is read after command
      * execution
      */
@@ -275,6 +281,14 @@ public class SshComponentConfiguration
 
     public void setConfiguration(SshConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public Long getIdleTimeout() {
+        return idleTimeout;
+    }
+
+    public void setIdleTimeout(Long idleTimeout) {
+        this.idleTimeout = idleTimeout;
     }
 
     public String getShellPrompt() {

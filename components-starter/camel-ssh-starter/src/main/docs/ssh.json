@@ -103,6 +103,12 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.ssh.idle-timeout",
+      "type": "java.lang.Long",
+      "description": "Sets the timeout in milliseconds to wait before the SSH session is closed due to inactivity. The default value is 0, which means no idle timeout is applied.",
+      "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
+    },
+    {
       "name": "camel.component.ssh.kex",
       "type": "java.lang.String",
       "description": "Comma-separated list of allowed\/supported key exchange algorithms in their order of preference.",
