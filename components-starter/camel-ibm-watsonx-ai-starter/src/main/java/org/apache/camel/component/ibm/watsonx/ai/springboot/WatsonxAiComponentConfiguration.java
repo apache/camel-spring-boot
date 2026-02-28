@@ -188,6 +188,13 @@ public class WatsonxAiComponentConfiguration
      * IBM Cloud API key for authentication
      */
     private String apiKey;
+    /**
+     * OAuth profile name for obtaining an access token via the OAuth 2.0 Client
+     * Credentials grant. When set, the token is acquired from the configured
+     * identity provider and used as apiKey. Requires camel-oauth on the
+     * classpath.
+     */
+    private String oauthProfile;
 
     public String getBaseUrl() {
         return baseUrl;
@@ -459,5 +466,13 @@ public class WatsonxAiComponentConfiguration
 
     public void setApiKey(String apiKey) {
         this.apiKey = apiKey;
+    }
+
+    public String getOauthProfile() {
+        return oauthProfile;
+    }
+
+    public void setOauthProfile(String oauthProfile) {
+        this.oauthProfile = oauthProfile;
     }
 }

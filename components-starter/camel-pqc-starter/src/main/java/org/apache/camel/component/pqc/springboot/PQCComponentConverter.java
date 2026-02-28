@@ -44,6 +44,7 @@ public class PQCComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, java.security.KeyPair.class));
         answer.add(new ConvertiblePair(String.class, java.security.Signature.class));
         answer.add(new ConvertiblePair(String.class, javax.crypto.KeyGenerator.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.pqc.lifecycle.KeyLifecycleManager.class));
         answer.add(new ConvertiblePair(String.class, java.security.KeyStore.class));
         return answer;
     }
@@ -66,6 +67,7 @@ public class PQCComponentConverter implements GenericConverter {
             case "java.security.KeyPair": return applicationContext.getBean(ref, java.security.KeyPair.class);
             case "java.security.Signature": return applicationContext.getBean(ref, java.security.Signature.class);
             case "javax.crypto.KeyGenerator": return applicationContext.getBean(ref, javax.crypto.KeyGenerator.class);
+            case "org.apache.camel.component.pqc.lifecycle.KeyLifecycleManager": return applicationContext.getBean(ref, org.apache.camel.component.pqc.lifecycle.KeyLifecycleManager.class);
             case "java.security.KeyStore": return applicationContext.getBean(ref, java.security.KeyStore.class);
         }
         return null;

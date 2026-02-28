@@ -261,6 +261,13 @@ public class DoclingComponentConfiguration
      * Maximum file size in bytes for processing
      */
     private Long maxFileSize = 52428800L;
+    /**
+     * OAuth profile name for obtaining an access token via the OAuth 2.0 Client
+     * Credentials grant. When set, the token is acquired from the configured
+     * identity provider and used as authenticationToken. Requires camel-oauth
+     * on the classpath.
+     */
+    private String oauthProfile;
 
     public DoclingConfiguration getConfiguration() {
         return configuration;
@@ -669,5 +676,13 @@ public class DoclingComponentConfiguration
 
     public void setMaxFileSize(Long maxFileSize) {
         this.maxFileSize = maxFileSize;
+    }
+
+    public String getOauthProfile() {
+        return oauthProfile;
+    }
+
+    public void setOauthProfile(String oauthProfile) {
+        this.oauthProfile = oauthProfile;
     }
 }

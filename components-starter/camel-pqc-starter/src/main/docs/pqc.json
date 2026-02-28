@@ -112,6 +112,12 @@
       "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration"
     },
     {
+      "name": "camel.component.pqc.key-lifecycle-manager",
+      "type": "org.apache.camel.component.pqc.lifecycle.KeyLifecycleManager",
+      "description": "The KeyLifecycleManager to use for key lifecycle operations such as generation, rotation, import\/export, expiration, and revocation. The option is a org.apache.camel.component.pqc.lifecycle.KeyLifecycleManager type.",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration"
+    },
+    {
       "name": "camel.component.pqc.key-pair",
       "type": "java.security.KeyPair",
       "description": "The KeyPair to be used. The option is a java.security.KeyPair type.",
