@@ -23,6 +23,7 @@ import javax.crypto.KeyAgreement;
 import javax.crypto.KeyGenerator;
 import org.apache.camel.component.pqc.PQCConfiguration;
 import org.apache.camel.component.pqc.PQCOperations;
+import org.apache.camel.component.pqc.lifecycle.KeyLifecycleManager;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -107,6 +108,13 @@ public class PQCComponentConfiguration
      * is a javax.crypto.KeyGenerator type.
      */
     private KeyGenerator keyGenerator;
+    /**
+     * The KeyLifecycleManager to use for key lifecycle operations such as
+     * generation, rotation, import/export, expiration, and revocation. The
+     * option is a org.apache.camel.component.pqc.lifecycle.KeyLifecycleManager
+     * type.
+     */
+    private KeyLifecycleManager keyLifecycleManager;
     /**
      * The KeyPair to be used. The option is a java.security.KeyPair type.
      */
@@ -255,6 +263,14 @@ public class PQCComponentConfiguration
 
     public void setKeyGenerator(KeyGenerator keyGenerator) {
         this.keyGenerator = keyGenerator;
+    }
+
+    public KeyLifecycleManager getKeyLifecycleManager() {
+        return keyLifecycleManager;
+    }
+
+    public void setKeyLifecycleManager(KeyLifecycleManager keyLifecycleManager) {
+        this.keyLifecycleManager = keyLifecycleManager;
     }
 
     public KeyPair getKeyPair() {
