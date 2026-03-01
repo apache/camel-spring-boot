@@ -48,7 +48,6 @@ import org.apache.camel.spi.StartupConditionStrategy;
 import org.apache.camel.spi.StartupStepRecorder;
 import org.apache.camel.spi.VariableRepository;
 import org.apache.camel.spi.VariableRepositoryFactory;
-import org.apache.camel.spring.boot.aot.CamelRuntimeHints;
 import org.apache.camel.spring.spi.ApplicationContextBeanRepository;
 import org.apache.camel.spring.spi.CamelBeanPostProcessor;
 import org.apache.camel.support.DefaultRegistry;
@@ -82,7 +81,6 @@ import org.springframework.core.env.EnumerablePropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.MutablePropertySources;
 
-@ImportRuntimeHints(CamelRuntimeHints.class)
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({CamelConfigurationProperties.class, CamelStartupConditionConfigurationProperties.class, PropertiesComponentConfiguration.class})
 @Import(TypeConversionConfiguration.class)
