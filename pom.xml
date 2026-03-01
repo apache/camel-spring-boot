@@ -120,17 +120,16 @@
         <!-- versions -->
         <avro-version>1.12.0</avro-version>
         <graal-sdk-version>25.0.2</graal-sdk-version>
-        <jakarta-jaxb-version>4.0.2</jakarta-jaxb-version>
+        <jakarta-jaxb-version>4.0.5</jakarta-jaxb-version>
         <jaxb-version>2.3.0</jaxb-version>
+        <license-maven-plugin-version>5.0.0</license-maven-plugin-version>
         <maven-compiler-plugin-version>3.15.0</maven-compiler-plugin-version>
         <maven-javadoc-plugin-version>3.12.0</maven-javadoc-plugin-version>
         <maven-surefire-plugin-version>3.5.5</maven-surefire-plugin-version>
-        <mycila-license-version>5.0.0</mycila-license-version>
-        <springdoc-version>3.0.1</springdoc-version>
+        <springdoc-version>3.0.2</springdoc-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
-        <swagger-parser-v3-version>2.1.38</swagger-parser-v3-version>
         <cyclonedx-maven-plugin-version>2.9.1</cyclonedx-maven-plugin-version>
-        <wiremock-spring-boot-version>4.1.0</wiremock-spring-boot-version>
+        <wiremock-spring-boot-version>4.2.0</wiremock-spring-boot-version>
         <spring-session-hazelcast-version>4.0.0-M2</spring-session-hazelcast-version>
     </properties>
 
@@ -814,7 +813,7 @@
                     <plugin>
                         <groupId>com.mycila</groupId>
                         <artifactId>license-maven-plugin</artifactId>
-                        <version>${mycila-license-version}</version>
+                        <version>${license-maven-plugin-version}</version>
                         <configuration>
                             <header>header.txt</header>
                             <excludes>
