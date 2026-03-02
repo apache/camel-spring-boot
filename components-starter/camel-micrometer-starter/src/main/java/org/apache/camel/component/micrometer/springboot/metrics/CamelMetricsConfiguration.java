@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.micrometer.springboot.metrics;
 
-import org.apache.camel.spi.Metadata;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.metrics")
@@ -95,6 +94,17 @@ public class CamelMetricsConfiguration {
      * InstrumentedThreadPoolFactory.
      */
     private boolean enableInstrumentedThreadPoolFactory;
+
+    /**
+     * Log metrics when application is shutting down. (default, `false`).
+    */
+    private boolean logMetricsOnShutdown = false;
+
+    /**
+     * List of metrics (comma separated) to log when application is shutting down. You can use `*` character to log any
+     * metrics containing the wildcard, for example `camel.exchanges.*` (default to all metrics available).
+    */
+    private String logMetricsOnShutdownFilters;
 
     public boolean isUriTagEnabled() {
         return uriTagEnabled;
@@ -182,5 +192,21 @@ public class CamelMetricsConfiguration {
 
     public void setEnableInstrumentedThreadPoolFactory(boolean enableInstrumentedThreadPoolFactory) {
         this.enableInstrumentedThreadPoolFactory = enableInstrumentedThreadPoolFactory;
+    }
+
+    public boolean isLogMetricsOnShutdown() {
+        return logMetricsOnShutdown;
+    }
+
+    public void setLogMetricsOnShutdown(boolean logMetricsOnShutdown) {
+        this.logMetricsOnShutdown = logMetricsOnShutdown;
+    }
+
+    public String getLogMetricsOnShutdownFilters() {
+        return logMetricsOnShutdownFilters;
+    }
+
+    public void setLogMetricsOnShutdownFilters(String logMetricsOnShutdownFilters) {
+        this.logMetricsOnShutdownFilters = logMetricsOnShutdownFilters;
     }
 }
