@@ -16,4 +16,3 @@
 ## ---------------------------------------------------------------------------
 
 org.apache.camel.component.dns.springboot.DnsComponentAutoConfiguration
-org.apache.camel.component.dns.springboot.cloud.DnsCloudAutoConfiguration

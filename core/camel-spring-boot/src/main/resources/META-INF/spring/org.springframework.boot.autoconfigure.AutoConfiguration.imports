@@ -23,11 +23,6 @@ org.apache.camel.spring.boot.actuate.health.AsyncHealthIndicatorAutoConfiguratio
 org.apache.camel.spring.boot.actuate.health.CamelHealthCheckAutoConfiguration
 org.apache.camel.spring.boot.actuate.health.CamelAvailabilityCheckAutoConfiguration
 org.apache.camel.spring.boot.actuate.info.CamelInfoAutoConfiguration
-org.apache.camel.spring.boot.cloud.CamelCloudAutoConfiguration
-org.apache.camel.spring.boot.cloud.CamelCloudServiceCallConfigurationAutoConfiguration
-org.apache.camel.spring.boot.cloud.CamelCloudServiceDiscoveryAutoConfiguration
-org.apache.camel.spring.boot.cloud.CamelCloudServiceFilterAutoConfiguration
-org.apache.camel.spring.boot.cloud.CamelCloudServiceChooserAutoConfiguration
 org.apache.camel.spring.boot.cluster.ClusteredRouteControllerAutoConfiguration
 org.apache.camel.spring.boot.routecontroller.SupervisingRouteControllerAutoConfiguration
 org.apache.camel.spring.boot.security.CamelSSLAutoConfiguration

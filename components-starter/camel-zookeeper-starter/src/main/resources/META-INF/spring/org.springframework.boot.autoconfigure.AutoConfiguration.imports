@@ -17,4 +17,3 @@
 
 org.apache.camel.component.zookeeper.springboot.ZooKeeperComponentConverter
 org.apache.camel.component.zookeeper.springboot.ZooKeeperComponentAutoConfiguration
-org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryAutoConfiguration

@@ -1944,11 +1944,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-service-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-servicenow-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2851,11 +2846,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-clickup</artifactId>
-        <version>4.19.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-cloud</artifactId>
         <version>4.19.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -4417,11 +4407,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-seda</artifactId>
-        <version>4.19.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-service</artifactId>
         <version>4.19.0-SNAPSHOT</version>
       </dependency>
       <dependency>
