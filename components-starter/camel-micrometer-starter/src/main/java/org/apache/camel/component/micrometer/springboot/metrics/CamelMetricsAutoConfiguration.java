@@ -19,7 +19,6 @@ package org.apache.camel.component.micrometer.springboot.metrics;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.micrometer.eventnotifier.MicrometerExchangeEventNotifier;
-import org.apache.camel.component.micrometer.eventnotifier.MicrometerExchangeEventNotifierNamingStrategy;
 import org.apache.camel.component.micrometer.eventnotifier.MicrometerExchangeEventNotifierNamingStrategyDefault;
 import org.apache.camel.component.micrometer.eventnotifier.MicrometerExchangeEventNotifierNamingStrategyLegacy;
 import org.apache.camel.component.micrometer.eventnotifier.MicrometerRouteEventNotifier;
@@ -76,6 +75,11 @@ public class CamelMetricsAutoConfiguration {
             MicrometerExchangeEventNotifier notifier = new MicrometerExchangeEventNotifier();
             notifier.setCamelContext(camelContext);
             notifier.setMeterRegistry(meterRegistry);
+            notifier.setLogMetricsOnShutdown(configuration.isLogMetricsOnShutdown());
+            if (configuration.getLogMetricsOnShutdownFilters() != null){
+                String[] shutdownFilters = configuration.getLogMetricsOnShutdownFilters().split(",");
+                notifier.setLogMetricsOnShutdownFilters(shutdownFilters);
+            }
             if ("legacy".equalsIgnoreCase(configuration.getNamingStrategy())) {
                 notifier.setNamingStrategy(new MicrometerExchangeEventNotifierNamingStrategyLegacy(
                     configuration.isBaseEndpointUriExchangeEventNotifier()

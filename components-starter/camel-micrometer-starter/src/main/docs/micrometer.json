@@ -92,6 +92,19 @@
       "defaultValue": true
     },
     {
+      "name": "camel.metrics.log-metrics-on-shutdown",
+      "type": "java.lang.Boolean",
+      "description": "Log metrics when application is shutting down. (default, `false`).",
+      "sourceType": "org.apache.camel.component.micrometer.springboot.metrics.CamelMetricsConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.metrics.log-metrics-on-shutdown-filters",
+      "type": "java.lang.String",
+      "description": "List of metrics (comma separated) to log when application is shutting down. You can use `*` character to log any metrics containing the wildcard, for example `camel.exchanges.*` (default to all metrics available).",
+      "sourceType": "org.apache.camel.component.micrometer.springboot.metrics.CamelMetricsConfiguration"
+    },
+    {
       "name": "camel.metrics.naming-strategy",
       "type": "java.lang.String",
       "description": "Controls the name style to use for metrics. Default = uses micrometer naming convention. Legacy = uses the classic naming style (camelCase)",
