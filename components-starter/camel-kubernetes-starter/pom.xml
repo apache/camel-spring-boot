@@ -26,7 +26,8 @@
   </parent>
   <artifactId>camel-kubernetes-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: kubernetes</name>
+  <name>Camel SB Starters :: Kubernetes</name>
+  <description>Spring-Boot Starter for Camel Components</description>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -37,6 +38,11 @@
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-kubernetes</artifactId>
       <version>${camel-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>${hibernate-validator-version}</version>
     </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>

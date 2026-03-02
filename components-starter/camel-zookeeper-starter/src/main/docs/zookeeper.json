@@ -1,6 +1,11 @@
 {
   "groups": [
     {
+      "name": "camel.cloud.zookeeper",
+      "type": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
+    },
+    {
       "name": "camel.component.zookeeper",
       "type": "org.apache.camel.component.zookeeper.springboot.ZooKeeperComponentConfiguration",
       "sourceType": "org.apache.camel.component.zookeeper.springboot.ZooKeeperComponentConfiguration"
@@ -13,6 +18,143 @@
     }
   ],
   "properties": [
+    {
+      "name": "camel.cloud.zookeeper.attributes",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "Custom service attributes.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
+    },
+    {
+      "name": "camel.cloud.zookeeper.auth-info-list",
+      "type": "java.util.List<org.apache.curator.framework.AuthInfo>",
+      "description": "List of AuthInfo objects with scheme and auth.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
+    },
+    {
+      "name": "camel.cloud.zookeeper.base-path",
+      "type": "java.lang.String",
+      "description": "The base path to store in ZooKeeper.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
+    },
+    {
+      "name": "camel.cloud.zookeeper.connection-timeout",
+      "type": "java.lang.Long",
+      "description": "Connection timeout.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": 15000
+    },
+    {
+      "name": "camel.cloud.zookeeper.connection-timeout-unit",
+      "type": "java.util.concurrent.TimeUnit",
+      "description": "Connection timeout TimeUnit. Default is TimeUnit.MILLISECONDS.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": "milliseconds"
+    },
+    {
+      "name": "camel.cloud.zookeeper.curator-framework",
+      "type": "org.apache.curator.framework.CuratorFramework",
+      "description": "Zookeeper CuratorFramework-style client.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
+    },
+    {
+      "name": "camel.cloud.zookeeper.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Sets if the zookeeper service registry should be enabled or not, default is false.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.cloud.zookeeper.id",
+      "type": "java.lang.String",
+      "description": "Service Registry ID",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
+    },
+    {
+      "name": "camel.cloud.zookeeper.max-close-wait",
+      "type": "java.lang.Long",
+      "description": "Time to wait during close to join background threads.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": 1000
+    },
+    {
+      "name": "camel.cloud.zookeeper.max-close-wait-unit",
+      "type": "java.util.concurrent.TimeUnit",
+      "description": "MaxCloseWait TimeUnit. Default is TimeUnit.MILLISECONDS.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": "milliseconds"
+    },
+    {
+      "name": "camel.cloud.zookeeper.namespace",
+      "type": "java.lang.String",
+      "description": "ZooKeeper namespace. If a namespace is set here, all paths will get pre-pended with the namespace.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
+    },
+    {
+      "name": "camel.cloud.zookeeper.nodes",
+      "type": "java.util.List<java.lang.String>",
+      "description": "The Zookeeper server hosts (multiple servers can be separated by comma).",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
+    },
+    {
+      "name": "camel.cloud.zookeeper.order",
+      "type": "java.lang.Integer",
+      "description": "Service lookup order\/priority.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
+    },
+    {
+      "name": "camel.cloud.zookeeper.reconnect-base-sleep-time",
+      "type": "java.lang.Long",
+      "description": "Initial amount of time to wait between retries.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.cloud.zookeeper.reconnect-base-sleep-time-unit",
+      "type": "java.util.concurrent.TimeUnit",
+      "description": "ReconnectBaseSleepTime TimeUnit. Default is TimeUnit.MILLISECONDS.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": "milliseconds"
+    },
+    {
+      "name": "camel.cloud.zookeeper.reconnect-max-retries",
+      "type": "java.lang.Integer",
+      "description": "Max number of times to retry.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": 3
+    },
+    {
+      "name": "camel.cloud.zookeeper.reconnect-max-sleep-time",
+      "type": "java.lang.Long",
+      "description": "Max time to sleep on each retry. Default is Integer.MAX_VALUE.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
+    },
+    {
+      "name": "camel.cloud.zookeeper.reconnect-max-sleep-time-unit",
+      "type": "java.util.concurrent.TimeUnit",
+      "description": "ReconnectMaxSleepTimeUnit TimeUnit. Default is TimeUnit.MILLISECONDS.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": "milliseconds"
+    },
+    {
+      "name": "camel.cloud.zookeeper.retry-policy",
+      "type": "org.apache.curator.RetryPolicy",
+      "description": "Retry policy to use.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration"
+    },
+    {
+      "name": "camel.cloud.zookeeper.session-timeout",
+      "type": "java.lang.Long",
+      "description": "Session timeout.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": 60000
+    },
+    {
+      "name": "camel.cloud.zookeeper.session-timeout-unit",
+      "type": "java.util.concurrent.TimeUnit",
+      "description": "Session timeout TimeUnit. Default is TimeUnit.MILLISECONDS.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": "milliseconds"
+    },
     {
       "name": "camel.component.zookeeper.autowired-enabled",
       "type": "java.lang.Boolean",
@@ -99,6 +241,32 @@
       "description": "The time interval to wait on connection before timing out.",
       "sourceType": "org.apache.camel.component.zookeeper.springboot.ZooKeeperComponentConfiguration",
       "defaultValue": 5000
+    },
+    {
+      "name": "camel.cloud.zookeeper.deregister-services-on-stop",
+      "type": "java.lang.Boolean",
+      "description": "Should we remove all the registered services know by this registry on stop ? Default is true.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": true,
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "camel.cloud.zookeeper.override-service-host",
+      "type": "java.lang.Boolean",
+      "description": "Should we override the service host if given ? Default is true.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "defaultValue": true,
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "camel.cloud.zookeeper.service-host",
+      "type": "java.lang.String",
+      "description": "Service host.",
+      "sourceType": "org.apache.camel.component.zookeeper.springboot.cloud.ZooKeeperServiceRegistryConfiguration",
+      "deprecated": true,
+      "deprecation": {}
     }
   ],
   "hints": [],

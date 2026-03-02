@@ -1,0 +1,76 @@
+{
+  "groups": [
+    {
+      "name": "camel.cluster.file",
+      "type": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.cluster.file.acquire-lock-delay",
+      "type": "java.lang.String",
+      "description": "The time to wait before starting to try to acquire the cluster lock. Note that if FileLockClusterService determines no cluster members are running or cannot reliably determine the cluster state, the initial delay is computed from the acquireLockInterval.",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.file.acquire-lock-interval",
+      "type": "java.lang.String",
+      "description": "The time to wait between attempts to try to acquire the cluster lock evaluated using wall-clock time. All cluster members must use the same value so leadership checks and leader liveness detection remain consistent.",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.file.attributes",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "Custom service attributes.",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.file.cluster-data-task-max-attempts",
+      "type": "java.lang.Integer",
+      "description": "The number of times a cluster data task will run, counting both the first execution and subsequent retries in case of failure or timeout. <p> This can be useful when the cluster data root is on network based file storage, where I\/O operations may occasionally block for long or unpredictable periods.",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.file.cluster-data-task-timeout",
+      "type": "java.lang.Long",
+      "description": "The timeout for a cluster data task (reading or writing cluster data). <p> Timeouts are useful when the cluster data root is on network storage, where I\/O operations may occasionally block for long or unpredictable periods.",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.file.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Sets if the file cluster service should be enabled or not, default is true.",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.cluster.file.heartbeat-timeout-multiplier",
+      "type": "java.lang.Integer",
+      "description": "Multiplier applied to the cluster leader acquireLockInterval to determine how long followers should wait before considering the leader \"stale\". For example, if the leader updates its heartbeat every 2 seconds and the heartbeatTimeoutMultiplier is 3, followers will tolerate up to 2s * 3 = 6s of silence before declaring the leader unavailable.",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.file.id",
+      "type": "java.lang.String",
+      "description": "Cluster Service ID",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.file.order",
+      "type": "java.lang.Integer",
+      "description": "Service lookup order\/priority.",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    },
+    {
+      "name": "camel.cluster.file.root",
+      "type": "java.lang.String",
+      "description": "The root path.",
+      "sourceType": "org.apache.camel.component.file.springboot.cluster.FileLockClusterServiceConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

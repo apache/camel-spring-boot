@@ -26,7 +26,8 @@
   </parent>
   <artifactId>camel-dns-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: dns</name>
+  <name>Camel SB Starters :: DNS</name>
+  <description>Spring-Boot Starter for Camel DNS support</description>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
