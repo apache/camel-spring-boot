@@ -181,7 +181,6 @@
     <module>camel-coap-starter</module>
     <module>camel-cometd-starter</module>
     <module>camel-console-starter</module>
-    <module>camel-consul-cluster-service-starter</module>
     <module>camel-consul-starter</module>
     <module>camel-controlbus-starter</module>
     <module>camel-core-starter</module>
@@ -225,7 +224,6 @@
     <module>camel-exec-starter</module>
     <module>camel-fastjson-starter</module>
     <module>camel-fhir-starter</module>
-    <module>camel-file-cluster-service-starter</module>
     <module>camel-file-starter</module>
     <module>camel-file-watch-starter</module>
     <module>camel-flatpack-starter</module>
@@ -281,7 +279,6 @@
     <module>camel-iec60870-starter</module>
     <module>camel-iggy-starter</module>
     <module>camel-ignite-starter</module>
-    <module>camel-infinispan-cluster-service-starter</module>
     <module>camel-infinispan-embedded-starter</module>
     <module>camel-infinispan-starter</module>
     <module>camel-influxdb-starter</module>
@@ -302,7 +299,6 @@
     <module>camel-jdbc-starter</module>
     <module>camel-jetty-starter</module>
     <module>camel-jfr-starter</module>
-    <module>camel-jgroups-raft-cluster-service-starter</module>
     <module>camel-jgroups-raft-starter</module>
     <module>camel-jgroups-starter</module>
     <module>camel-jira-starter</module>
@@ -329,7 +325,6 @@
     <module>camel-keycloak-starter</module>
     <module>camel-knative-starter</module>
     <module>camel-kserve-starter</module>
-    <module>camel-kubernetes-cluster-service-starter</module>
     <module>camel-kubernetes-starter</module>
     <module>camel-kudu-starter</module>
     <module>camel-langchain4j-agent-starter</module>
@@ -426,7 +421,6 @@
     <module>camel-scheduler-starter</module>
     <module>camel-schematron-starter</module>
     <module>camel-seda-starter</module>
-    <module>camel-service-starter</module>
     <module>camel-servicenow-starter</module>
     <module>camel-servlet-starter</module>
     <module>camel-shiro-starter</module>
@@ -508,7 +502,6 @@
     <module>camel-zendesk-starter</module>
     <module>camel-zip-deflater-starter</module>
     <module>camel-zipfile-starter</module>
-    <module>camel-zookeeper-cluster-service-starter</module>
     <module>camel-zookeeper-master-starter</module>
     <module>camel-zookeeper-starter</module>
   </modules>

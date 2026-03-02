@@ -14,8 +14,5 @@
 ## See the License for the specific language governing permissions and
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
-
 org.apache.camel.component.consul.springboot.ConsulComponentConverter
 org.apache.camel.component.consul.springboot.ConsulComponentAutoConfiguration
-org.apache.camel.component.consul.springboot.cloud.ConsulServiceDiscoveryAutoConfiguration
-org.apache.camel.component.consul.springboot.cloud.ConsulServiceRegistryAutoConfiguration

@@ -704,11 +704,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-consul-cluster-service-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-consul-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -930,11 +925,6 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-fhir-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-file-cluster-service-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -1214,11 +1204,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-infinispan-cluster-service-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-infinispan-embedded-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -1320,11 +1305,6 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jfr-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-jgroups-raft-cluster-service-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -1455,11 +1435,6 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-kserve-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-kubernetes-cluster-service-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -1944,11 +1919,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-service-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-servicenow-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2385,11 +2355,6 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-zipfile-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-zookeeper-cluster-service-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -2851,11 +2816,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-clickup</artifactId>
-        <version>4.19.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-cloud</artifactId>
         <version>4.19.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -4417,11 +4377,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-seda</artifactId>
-        <version>4.19.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-service</artifactId>
         <version>4.19.0-SNAPSHOT</version>
       </dependency>
       <dependency>
