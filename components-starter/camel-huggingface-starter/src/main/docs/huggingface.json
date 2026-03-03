@@ -122,6 +122,13 @@
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
     },
     {
+      "name": "camel.component.huggingface.pooling",
+      "type": "java.lang.Boolean",
+      "description": "Whether to pool the predictor (keep the Python process alive) or create a new one for each request",
+      "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.huggingface.predict-timeout",
       "type": "java.lang.Integer",
       "description": "Predict timeout in seconds, if negative then use default (120 seconds)",
