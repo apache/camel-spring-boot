@@ -229,7 +229,7 @@
     {
       "name": "camel.component.kafka.group-protocol",
       "type": "java.lang.String",
-      "description": "The consumer group protocol to use. The classic protocol uses the traditional partition assignment and rebalancing mechanism. The consumer protocol enables the new KIP-848 consumer rebalance protocol which provides faster and more efficient rebalancing.",
+      "description": "The consumer group protocol to use. The classic protocol uses the traditional partition assignment and rebalancing mechanism. The consumer protocol enables the new KIP-848 consumer rebalance protocol which provides faster and more efficient rebalancing. When set to consumer, classic-only properties (heartbeatIntervalMs, sessionTimeoutMs, partitionAssignor) are automatically excluded from the consumer configuration.",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
       "defaultValue": "classic"
     },

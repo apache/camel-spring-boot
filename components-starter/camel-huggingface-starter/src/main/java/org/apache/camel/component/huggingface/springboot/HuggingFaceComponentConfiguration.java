@@ -92,6 +92,11 @@ public class HuggingFaceComponentConfiguration
      */
     private Boolean multiLabel = false;
     /**
+     * Whether to pool the predictor (keep the Python process alive) or create a
+     * new one for each request
+     */
+    private Boolean pooling = true;
+    /**
      * Bean name of a custom TaskPredictor implementation (for tasks not covered
      * by built-in predictors)
      */
@@ -236,6 +241,14 @@ public class HuggingFaceComponentConfiguration
 
     public void setMultiLabel(Boolean multiLabel) {
         this.multiLabel = multiLabel;
+    }
+
+    public Boolean getPooling() {
+        return pooling;
+    }
+
+    public void setPooling(Boolean pooling) {
+        this.pooling = pooling;
     }
 
     public String getPredictorBean() {
