@@ -57,6 +57,21 @@
         <version>4.21.0</version>
       </dependency>
       <dependency>
+        <groupId>eu.maveniverse.maven.mima.runtime</groupId>
+        <artifactId>embedded-maven</artifactId>
+        <version>2.4.39</version>
+      </dependency>
+      <dependency>
+        <groupId>eu.maveniverse.maven.mima.runtime</groupId>
+        <artifactId>standalone-static</artifactId>
+        <version>2.4.39</version>
+      </dependency>
+      <dependency>
+        <groupId>eu.maveniverse.maven.mima</groupId>
+        <artifactId>context</artifactId>
+        <version>2.4.39</version>
+      </dependency>
+      <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-all</artifactId>
         <version>1.79.0</version>
