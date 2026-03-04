@@ -5,9 +5,9 @@
     "title": "Application X Java Object",
     "description": "Transforms from JSon to Java object using Jackson (supports content schema)",
     "deprecated": false,
-    "javaType": "org.apache.camel.component.jackson.transform.JsonPojoDataTypeTransformer",
+    "javaType": "org.apache.camel.component.jackson3.transform.JsonPojoDataTypeTransformer",
     "groupId": "org.apache.camel.springboot",
-    "artifactId": "camel-jackson-starter",
+    "artifactId": "camel-jackson3-starter",
     "version": "4.19.0-SNAPSHOT"
   }
 }
