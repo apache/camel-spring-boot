@@ -19,8 +19,6 @@ package org.apache.camel.component.platform.http.springboot;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
-import org.junit.jupiter.api.condition.DisabledOnJre;
-import org.junit.jupiter.api.condition.JRE;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -34,7 +32,6 @@ import org.springframework.security.web.SecurityFilterChain;
         SpringBootPlatformHttpVirtualThreadsTest.class, SpringBootPlatformHttpVirtualThreadsTest.TestConfiguration.class,
         PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class },
     properties = "spring.threads.virtual.enabled=true")
-@DisabledOnJre({JRE.JAVA_17, JRE.JAVA_18, JRE.JAVA_19, JRE.JAVA_20})
 public class SpringBootPlatformHttpVirtualThreadsTest extends PlatformHttpBase {
 
     private static final String postRouteId = "SpringBootPlatformHttpTest_mypost";

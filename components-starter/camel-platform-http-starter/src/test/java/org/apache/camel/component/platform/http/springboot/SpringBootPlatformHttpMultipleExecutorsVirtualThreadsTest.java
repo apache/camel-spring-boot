@@ -21,8 +21,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.DisabledOnJre;
-import org.junit.jupiter.api.condition.JRE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -48,7 +46,6 @@ import java.util.concurrent.Executor;
         PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class },
     properties = "spring.threads.virtual.enabled=true")
 @EnableScheduling
-@DisabledOnJre({JRE.JAVA_17, JRE.JAVA_18, JRE.JAVA_19, JRE.JAVA_20})
 @AutoConfigureRestTestClient
 public class SpringBootPlatformHttpMultipleExecutorsVirtualThreadsTest extends PlatformHttpBase {
 
