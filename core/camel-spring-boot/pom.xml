@@ -269,53 +269,18 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin-version}</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <spring.threads.virtual.enabled>true</spring.threads.virtual.enabled>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
-    <profiles>
-        <!-- Profile for JDK 21+ features like Virtual Threads -->
-        <profile>
-            <id>jdk21</id>
-            <activation>
-                <jdk>[21,)</jdk>
-            </activation>
-            <build>
-                <plugins>
-                    <!-- Configure compiler for JDK 21 compatibility in this profile -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <version>${maven-compiler-plugin-version}</version>
-                        <executions>
-                            <execution>
-                                <id>testCompile-java-21</id>
-                                <phase>test-compile</phase>
-                                <goals>
-                                    <goal>testCompile</goal>
-                                </goals>
-                                <configuration>
-                                    <release>21</release>
-                                    <compileSourceRoots>${project.basedir}/src/test/java21</compileSourceRoots>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <!-- Configure surefire to run JDK 21 specific tests -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>${maven-surefire-plugin-version}</version>
-                        <configuration>
-                            <!-- Enable Spring virtual threads - the CamelVirtualThreadEnvironmentPostProcessor
-                                 will automatically set camel.threads.virtual.enabled=true -->
-                            <systemPropertyVariables>
-                                <spring.threads.virtual.enabled>true</spring.threads.virtual.enabled>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>

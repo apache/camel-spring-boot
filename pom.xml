@@ -104,7 +104,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <site-repo-url>scpexe://people.apache.org/www/camel.apache.org/maven/</site-repo-url>
-        <jdk.version>17</jdk.version>
+        <jdk.version>21</jdk.version>
         <!-- These two are here only to prevent the versions for the Apache parent pom from leaking-->
         <maven.compiler.source>${jdk.version}</maven.compiler.source>
         <maven.compiler.target>${jdk.version}</maven.compiler.target>
@@ -178,9 +178,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
-                    <source>17</source>
+                    <source>21</source>
                     <additionalOptions>${javadoc.opts}</additionalOptions>
-                    <!-- disable Javadoc linting for buildung the release with Java 11 -->
                     <doclint>none</doclint>
                 </configuration>
             </plugin>
@@ -677,7 +676,7 @@
                                     <goal>jar</goal>
                                 </goals>
                                 <configuration>
-                                    <source>17</source>
+                                    <source>21</source>
                                     <doclint>none</doclint>
                                 </configuration>
                             </execution>
