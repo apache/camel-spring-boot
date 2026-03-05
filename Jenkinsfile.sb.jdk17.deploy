@@ -19,9 +19,9 @@
 
 def LOCAL_REPOSITORY = env.LOCAL_REPOSITORY ?: '/home/jenkins/jenkins-slave/maven-repositories/0'
 def AGENT_LABEL = env.AGENT_LABEL ?: 'ubuntu'
-def JDK_NAME = env.JDK_NAME ?: 'jdk_21_latest'
+def JDK_NAME = env.JDK_NAME ?: 'jdk_17_latest'
 
-def MAVEN_PARAMS = '-U -B -e -fae -V -Dmaven.repo.local=/home/jenkins/.m2/repository -Dmaven.compiler.fork=true'
+def MAVEN_PARAMS = "-U -B -e -fae -V -Dnoassembly -Dmaven.compiler.fork=true "
 
 def spring_boot_itests_result
 
@@ -50,40 +50,29 @@ pipeline {
         disableConcurrentBuilds()
     }
 
-    parameters {
-        booleanParam(name: 'CLEAN', defaultValue: true, description: 'Perform the build in clean workspace')
-    }
-
     stages {
 
-        stage('Clean workspace') {
-             when {
-                 expression { params.CLEAN }
-             }
-             steps {
-                 sh 'git clean -fdx'
-           }
+        stage('Build & Deploy') {
+            when {
+                anyOf {
+                    branch 'camel-spring-boot-4.18.x'
+                    branch 'camel-spring-boot-4.14.x'
+                }
+            }
+            steps {
+                sh "./mvnw $MAVEN_PARAMS -Pdeploy -Dmaven.test.skip.exec=true clean deploy"
+            }
         }
 
-        stage('Build') {
-            steps {
-                script {
-                    spring_boot_itests_result = sh script: "./mvnw $MAVEN_PARAMS -Dmaven.test.failure.ignore=true clean install", returnStatus: true
-                }
-            }
-            post {
-                always {
-                    junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml,**/target/failsafe-reports/*.xml'
-                }
-            }
-        }
     }
 
     post {
         always {
-            script {
-                currentBuild.result = spring_boot_itests_result == 0 ? 'SUCCESS' : 'FAILURE'
-            }
+            emailext(
+                subject: '${DEFAULT_SUBJECT}',
+                body: '${DEFAULT_CONTENT}',
+                recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+            )
         }
     }
 }
