@@ -292,6 +292,9 @@
     <module>camel-jackson-avro-starter</module>
     <module>camel-jackson-protobuf-starter</module>
     <module>camel-jackson-starter</module>
+    <module>camel-jackson3-avro-starter</module>
+    <module>camel-jackson3-protobuf-starter</module>
+    <module>camel-jackson3xml-starter</module>
     <module>camel-jacksonxml-starter</module>
     <module>camel-jandex-starter</module>
     <module>camel-jasypt-starter</module>

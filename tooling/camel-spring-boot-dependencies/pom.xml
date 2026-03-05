@@ -1284,6 +1284,21 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-jackson3-avro-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-jackson3-protobuf-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-jackson3xml-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jacksonxml-starter</artifactId>
         <version>${project.version}</version>
       </dependency>

@@ -568,6 +568,13 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         // find the data format names
         List<String> dataFormatNames = findDataFormatNames(componentJar);
 
+        // special for jackson vs jackson3
+        boolean jackson3 = componentJar.getName().contains("camel-jackson3");
+        if (jackson3) {
+            dataFormatNames.remove("jackson");
+            dataFormatNames.add("jackson3");
+        }
+
         // create auto configuration for the data formats
         if (!dataFormatNames.isEmpty()) {
             getLog().debug("Found " + dataFormatNames.size() + " dataformats");
