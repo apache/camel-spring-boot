@@ -294,6 +294,7 @@
     <module>camel-jackson-starter</module>
     <module>camel-jackson3-avro-starter</module>
     <module>camel-jackson3-protobuf-starter</module>
+    <module>camel-jackson3-starter</module>
     <module>camel-jackson3xml-starter</module>
     <module>camel-jacksonxml-starter</module>
     <module>camel-jandex-starter</module>

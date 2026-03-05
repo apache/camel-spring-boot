@@ -570,10 +570,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
 
         // special for jackson vs jackson3
         boolean jackson3 = componentJar.getName().contains("camel-jackson3");
-        if (jackson3) {
-            dataFormatNames.remove("jackson");
-            dataFormatNames.add("jackson3");
-        }
 
         // create auto configuration for the data formats
         if (!dataFormatNames.isEmpty()) {
@@ -584,6 +580,19 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 String json = loadDataFormatJson(jsonFiles, dataFormatName);
                 if (json != null) {
                     DataFormatModel model = JsonMapper.generateDataFormatModel(json);
+                    if (jackson3 && "camel-jackson3".equals(model.getArtifactId())) {
+                        // for jackson3 we need to update the model to use the jackson3 package name
+                        String fqn = model.getModelJavaType();
+                        fqn = fqn.replace(".jackson.", ".jackson3.");
+                        model.setModelJavaType(fqn);
+                        model.getOptions().forEach(o -> {
+                            String type = o.getJavaType();
+                            if (type != null) {
+                                type = type.replace(".jackson.", ".jackson3.");
+                                o.setJavaType(type);
+                            }
+                        });
+                    }
                     allModels.add(model);
                 }
             }
