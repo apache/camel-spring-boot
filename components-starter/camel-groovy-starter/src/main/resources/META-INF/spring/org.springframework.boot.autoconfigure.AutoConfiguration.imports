@@ -17,3 +17,4 @@
 
 org.apache.camel.language.groovy.springboot.GroovyLanguageAutoConfiguration
 org.apache.camel.groovy.xml.springboot.GroovyXmlDataFormatAutoConfiguration
+org.apache.camel.groovy.json.springboot.GroovyJSonlDataFormatAutoConfiguration
