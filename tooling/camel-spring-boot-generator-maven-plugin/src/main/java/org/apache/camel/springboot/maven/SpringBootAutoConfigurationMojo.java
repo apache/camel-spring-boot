@@ -126,6 +126,14 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     @Parameter(defaultValue = "${basedir}")
     protected File baseDir;
 
+    /**
+     * Map of type replacements to apply during code generation.
+     * Key is the original type (e.g., "org.apache.camel.component.jackson.SchemaResolver"),
+     * Value is the replacement type (e.g., "org.apache.camel.component.jackson3.SchemaResolver").
+     */
+    @Parameter
+    protected Map<String, String> typeReplacements;
+
     DynamicClassLoader projectClassLoader;
 
     JarFile componentJar;
@@ -1451,7 +1459,8 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         Stream<String> s = model.getComponentOptions().stream().filter(this::isComplexType)
                 .map(SpringBootAutoConfigurationMojo::getJavaType).distinct();
         s.forEach(type -> {
-            sb.append("    case \"").append(type).append("\": return applicationContext.getBean(ref, ").append(type)
+            String replacedType = applyTypeReplacement(type);
+            sb.append("    case \"").append(replacedType).append("\": return applicationContext.getBean(ref, ").append(replacedType)
                     .append(".class);\n");
         });
         sb.append("}\n");
@@ -1474,7 +1483,8 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         Stream<String> s = model.getOptions().stream().filter(this::isComplexType)
                 .map(SpringBootAutoConfigurationMojo::getJavaType).distinct();
         s.forEach(type -> {
-            sb.append("    case \"").append(type).append("\": return applicationContext.getBean(ref, ").append(type)
+            String replacedType = applyTypeReplacement(type);
+            sb.append("    case \"").append(replacedType).append("\": return applicationContext.getBean(ref, ").append(replacedType)
                     .append(".class);\n");
         });
         sb.append("}\n");
@@ -1497,7 +1507,8 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         Stream<String> s = model.getOptions().stream().filter(this::isComplexType)
                 .map(SpringBootAutoConfigurationMojo::getJavaType).distinct();
         s.forEach(type -> {
-            sb.append("    case \"").append(type).append("\": return applicationContext.getBean(ref, ").append(type)
+            String replacedType = applyTypeReplacement(type);
+            sb.append("    case \"").append(replacedType).append("\": return applicationContext.getBean(ref, ").append(replacedType)
                     .append(".class);\n");
         });
         sb.append("}\n");
@@ -1512,8 +1523,9 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         Stream<String> s = model.getOptions().stream().filter(this::isComplexType)
                 .map(SpringBootAutoConfigurationMojo::getJavaType).distinct();
         s.forEach(type -> {
+            String replacedType = applyTypeReplacement(type);
             sb.append("answer.add(new ConvertiblePair(String.class, ");
-            sb.append(type);
+            sb.append(replacedType);
             sb.append(".class));\n");
         });
         sb.append("return answer;\n");
@@ -1527,8 +1539,9 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         Stream<String> s = model.getOptions().stream().filter(this::isComplexType)
                 .map(SpringBootAutoConfigurationMojo::getJavaType).distinct();
         s.forEach(type -> {
+            String replacedType = applyTypeReplacement(type);
             sb.append("answer.add(new ConvertiblePair(String.class, ");
-            sb.append(type);
+            sb.append(replacedType);
             sb.append(".class));\n");
         });
         sb.append("return answer;\n");
@@ -1542,8 +1555,9 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         Stream<String> s = model.getOptions().stream().filter(this::isComplexType)
                 .map(SpringBootAutoConfigurationMojo::getJavaType).distinct();
         s.forEach(type -> {
+            String replacedType = applyTypeReplacement(type);
             sb.append("answer.add(new ConvertiblePair(String.class, ");
-            sb.append(type);
+            sb.append(replacedType);
             sb.append(".class));\n");
         });
         sb.append("return answer;\n");
@@ -2003,6 +2017,18 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 throw new IllegalStateException("Cannot delete file " + mainArtifactFile);
             }
         }
+    }
+
+    /**
+     * Apply type replacements configured in the pom.xml.
+     * If a replacement is configured for the given type, return the replacement,
+     * otherwise return the original type.
+     */
+    private String applyTypeReplacement(String type) {
+        if (typeReplacements != null && typeReplacements.containsKey(type)) {
+            return typeReplacements.get(type);
+        }
+        return type;
     }
 
 }
