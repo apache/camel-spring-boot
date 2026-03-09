@@ -250,6 +250,7 @@
     <module>camel-google-sheets-starter</module>
     <module>camel-google-storage-starter</module>
     <module>camel-google-vertexai-starter</module>
+    <module>camel-google-vision-starter</module>
     <module>camel-grape-starter</module>
     <module>camel-graphql-starter</module>
     <module>camel-grok-starter</module>
