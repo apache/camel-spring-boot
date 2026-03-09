@@ -220,6 +220,53 @@ public class CamelSSLAutoConfigurationTest {
     }
 
     @Test
+    public void checkSSLPQCPropertiesPresent() {
+        new ApplicationContextRunner()
+                .withConfiguration(AutoConfigurations.of(CamelSSLAutoConfiguration.class, CamelAutoConfiguration.class))
+                .withPropertyValues(
+                        "camel.ssl.cert-alias=pqc-test",
+                        "camel.ssl.named-groups.named-group[0]=X25519MLKEM768",
+                        "camel.ssl.named-groups.named-group[1]=x25519",
+                        "camel.ssl.named-groups-filter.include[0]=.*MLKEM.*",
+                        "camel.ssl.named-groups-filter.exclude[0]=.*legacy.*",
+                        "camel.ssl.signature-schemes.signature-scheme[0]=ML-DSA",
+                        "camel.ssl.signature-schemes.signature-scheme[1]=ed25519",
+                        "camel.ssl.signature-schemes-filter.include[0]=.*DSA.*",
+                        "camel.ssl.signature-schemes-filter.exclude[0]=.*SHA1.*")
+                .run(context -> {
+                    SSLContextParameters contextParams = context.getBean(SSLContextParameters.class);
+                    assertNotNull(contextParams);
+                    assertEquals("pqc-test", contextParams.getCertAlias());
+
+                    // verify named groups (PQC key exchange)
+                    assertNotNull(contextParams.getNamedGroups());
+                    assertEquals(2, contextParams.getNamedGroups().getNamedGroup().size());
+                    assertEquals("X25519MLKEM768", contextParams.getNamedGroups().getNamedGroup().get(0));
+                    assertEquals("x25519", contextParams.getNamedGroups().getNamedGroup().get(1));
+
+                    // verify named groups filter
+                    assertNotNull(contextParams.getNamedGroupsFilter());
+                    assertEquals(1, contextParams.getNamedGroupsFilter().getInclude().size());
+                    assertEquals(".*MLKEM.*", contextParams.getNamedGroupsFilter().getInclude().get(0));
+                    assertEquals(1, contextParams.getNamedGroupsFilter().getExclude().size());
+                    assertEquals(".*legacy.*", contextParams.getNamedGroupsFilter().getExclude().get(0));
+
+                    // verify signature schemes (PQC signatures)
+                    assertNotNull(contextParams.getSignatureSchemes());
+                    assertEquals(2, contextParams.getSignatureSchemes().getSignatureScheme().size());
+                    assertEquals("ML-DSA", contextParams.getSignatureSchemes().getSignatureScheme().get(0));
+                    assertEquals("ed25519", contextParams.getSignatureSchemes().getSignatureScheme().get(1));
+
+                    // verify signature schemes filter
+                    assertNotNull(contextParams.getSignatureSchemesFilter());
+                    assertEquals(1, contextParams.getSignatureSchemesFilter().getInclude().size());
+                    assertEquals(".*DSA.*", contextParams.getSignatureSchemesFilter().getInclude().get(0));
+                    assertEquals(1, contextParams.getSignatureSchemesFilter().getExclude().size());
+                    assertEquals(".*SHA1.*", contextParams.getSignatureSchemesFilter().getExclude().get(0));
+                });
+    }
+
+    @Test
     public void checkNoSSLPropertiesPresent() {
         new ApplicationContextRunner()
                 .withConfiguration(AutoConfigurations.of(CamelSSLAutoConfiguration.class, CamelAutoConfiguration.class))
