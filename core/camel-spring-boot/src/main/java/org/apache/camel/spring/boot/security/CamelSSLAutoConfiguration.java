@@ -56,6 +56,9 @@ public class CamelSSLAutoConfiguration {
         // override with any camel.ssl props
         SSLContextParameters config = new SSLContextBuilder(sslContext).certAlias(properties.getCertAlias())
                 .cipherSuites(properties.getCipherSuites()).cipherSuitesFilter(properties.getCipherSuitesFilter())
+                .namedGroups(properties.getNamedGroups()).namedGroupsFilter(properties.getNamedGroupsFilter())
+                .signatureSchemes(properties.getSignatureSchemes())
+                .signatureSchemesFilter(properties.getSignatureSchemesFilter())
                 .clientParameters(properties.getClientParameters()).keyManagers(properties.getKeyManagers())
                 .provider(properties.getProvider()).secureRandom(properties.getSecureRandom())
                 .secureSocketProtocol(properties.getSecureSocketProtocol())
@@ -114,6 +117,10 @@ public class CamelSSLAutoConfiguration {
         copy.setCertAlias(sslContextParameters.getCertAlias());
         copy.setCipherSuites(sslContextParameters.getCipherSuites());
         copy.setCipherSuitesFilter(sslContextParameters.getCipherSuitesFilter());
+        copy.setNamedGroups(sslContextParameters.getNamedGroups());
+        copy.setNamedGroupsFilter(sslContextParameters.getNamedGroupsFilter());
+        copy.setSignatureSchemes(sslContextParameters.getSignatureSchemes());
+        copy.setSignatureSchemesFilter(sslContextParameters.getSignatureSchemesFilter());
         copy.setClientParameters(sslContextParameters.getClientParameters());
         copy.setKeyManagers(sslContextParameters.getKeyManagers());
         copy.setProvider(sslContextParameters.getProvider());
@@ -152,6 +159,34 @@ public class CamelSSLAutoConfiguration {
         public SSLContextBuilder cipherSuitesFilter(FilterParameters cipherSuitesFilter) {
             if (cipherSuitesFilter != null) {
                 sslContextParameters.setCipherSuitesFilter(cipherSuitesFilter);
+            }
+            return this;
+        }
+
+        public SSLContextBuilder namedGroups(NamedGroupsParameters namedGroups) {
+            if (namedGroups != null) {
+                sslContextParameters.setNamedGroups(namedGroups);
+            }
+            return this;
+        }
+
+        public SSLContextBuilder namedGroupsFilter(FilterParameters namedGroupsFilter) {
+            if (namedGroupsFilter != null) {
+                sslContextParameters.setNamedGroupsFilter(namedGroupsFilter);
+            }
+            return this;
+        }
+
+        public SSLContextBuilder signatureSchemes(SignatureSchemesParameters signatureSchemes) {
+            if (signatureSchemes != null) {
+                sslContextParameters.setSignatureSchemes(signatureSchemes);
+            }
+            return this;
+        }
+
+        public SSLContextBuilder signatureSchemesFilter(FilterParameters signatureSchemesFilter) {
+            if (signatureSchemesFilter != null) {
+                sslContextParameters.setSignatureSchemesFilter(signatureSchemesFilter);
             }
             return this;
         }

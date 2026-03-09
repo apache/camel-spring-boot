@@ -19,11 +19,13 @@ package org.apache.camel.spring.boot.security;
 import org.apache.camel.support.jsse.CipherSuitesParameters;
 import org.apache.camel.support.jsse.FilterParameters;
 import org.apache.camel.support.jsse.KeyManagersParameters;
+import org.apache.camel.support.jsse.NamedGroupsParameters;
 import org.apache.camel.support.jsse.SSLContextClientParameters;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.apache.camel.support.jsse.SSLContextServerParameters;
 import org.apache.camel.support.jsse.SecureRandomParameters;
 import org.apache.camel.support.jsse.SecureSocketProtocolsParameters;
+import org.apache.camel.support.jsse.SignatureSchemesParameters;
 import org.apache.camel.support.jsse.TrustManagersParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -103,6 +105,30 @@ public class CamelSSLConfigurationProperties {
      * The optional cipher suite filter configuration for this configuration.
      */
     private FilterParameters cipherSuitesFilter;
+
+    /**
+     * The optional explicitly configured named groups (key exchange groups) for this configuration. Named groups control
+     * which key exchange algorithms are available during the TLS handshake, including post-quantum hybrid groups such as
+     * X25519MLKEM768.
+     */
+    private NamedGroupsParameters namedGroups;
+
+    /**
+     * The optional named groups filter configuration for this configuration.
+     */
+    private FilterParameters namedGroupsFilter;
+
+    /**
+     * The optional explicitly configured signature schemes for this configuration. Signature schemes control which
+     * signature algorithms are available during the TLS handshake, including post-quantum signature algorithms such as
+     * ML-DSA.
+     */
+    private SignatureSchemesParameters signatureSchemes;
+
+    /**
+     * The optional signature schemes filter configuration for this configuration.
+     */
+    private FilterParameters signatureSchemesFilter;
 
     /**
      * The optional explicitly configured secure socket protocol names for this configuration.
@@ -213,6 +239,38 @@ public class CamelSSLConfigurationProperties {
 
     public void setCipherSuitesFilter(FilterParameters cipherSuitesFilter) {
         this.cipherSuitesFilter = cipherSuitesFilter;
+    }
+
+    public NamedGroupsParameters getNamedGroups() {
+        return this.namedGroups;
+    }
+
+    public void setNamedGroups(NamedGroupsParameters namedGroups) {
+        this.namedGroups = namedGroups;
+    }
+
+    public FilterParameters getNamedGroupsFilter() {
+        return this.namedGroupsFilter;
+    }
+
+    public void setNamedGroupsFilter(FilterParameters namedGroupsFilter) {
+        this.namedGroupsFilter = namedGroupsFilter;
+    }
+
+    public SignatureSchemesParameters getSignatureSchemes() {
+        return this.signatureSchemes;
+    }
+
+    public void setSignatureSchemes(SignatureSchemesParameters signatureSchemes) {
+        this.signatureSchemes = signatureSchemes;
+    }
+
+    public FilterParameters getSignatureSchemesFilter() {
+        return this.signatureSchemesFilter;
+    }
+
+    public void setSignatureSchemesFilter(FilterParameters signatureSchemesFilter) {
+        this.signatureSchemesFilter = signatureSchemesFilter;
     }
 
     public SecureSocketProtocolsParameters getSecureSocketProtocols() {
