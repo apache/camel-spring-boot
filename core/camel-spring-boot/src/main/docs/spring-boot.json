@@ -1259,6 +1259,18 @@
       "sourceType": "org.apache.camel.spring.boot.security.CamelSSLConfigurationProperties"
     },
     {
+      "name": "camel.ssl.named-groups",
+      "type": "org.apache.camel.support.jsse.NamedGroupsParameters",
+      "description": "The optional explicitly configured named groups (key exchange groups) for this configuration. Named groups control which key exchange algorithms are available during the TLS handshake, including post-quantum hybrid groups such as X25519MLKEM768.",
+      "sourceType": "org.apache.camel.spring.boot.security.CamelSSLConfigurationProperties"
+    },
+    {
+      "name": "camel.ssl.named-groups-filter",
+      "type": "org.apache.camel.support.jsse.FilterParameters",
+      "description": "The optional named groups filter configuration for this configuration.",
+      "sourceType": "org.apache.camel.spring.boot.security.CamelSSLConfigurationProperties"
+    },
+    {
       "name": "camel.ssl.provider",
       "type": "java.lang.String",
       "description": "The optional provider identifier for the JSSE implementation to use when constructing an SSLContext.",
@@ -1298,6 +1310,18 @@
       "name": "camel.ssl.session-timeout",
       "type": "java.lang.String",
       "description": "The optional SSLSessionContext timeout time for javax.net.ssl.SSLSession in seconds.",
+      "sourceType": "org.apache.camel.spring.boot.security.CamelSSLConfigurationProperties"
+    },
+    {
+      "name": "camel.ssl.signature-schemes",
+      "type": "org.apache.camel.support.jsse.SignatureSchemesParameters",
+      "description": "The optional explicitly configured signature schemes for this configuration. Signature schemes control which signature algorithms are available during the TLS handshake, including post-quantum signature algorithms such as ML-DSA.",
+      "sourceType": "org.apache.camel.spring.boot.security.CamelSSLConfigurationProperties"
+    },
+    {
+      "name": "camel.ssl.signature-schemes-filter",
+      "type": "org.apache.camel.support.jsse.FilterParameters",
+      "description": "The optional signature schemes filter configuration for this configuration.",
       "sourceType": "org.apache.camel.spring.boot.security.CamelSSLConfigurationProperties"
     },
     {

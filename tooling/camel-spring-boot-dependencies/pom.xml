@@ -38,12 +38,12 @@
       <dependency>
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-java</artifactId>
-        <version>3.25.5</version>
+        <version>3.25.8</version>
       </dependency>
       <dependency>
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-java-util</artifactId>
-        <version>3.25.5</version>
+        <version>3.25.8</version>
         <exclusions>
           <exclusion>
             <groupId>org.checkerframework</groupId>
@@ -240,47 +240,47 @@
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-commons</artifactId>
-        <version>1.16.3</version>
+        <version>1.16.4</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-observation</artifactId>
-        <version>1.16.3</version>
+        <version>1.16.4</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-registry-jmx</artifactId>
-        <version>1.16.3</version>
+        <version>1.16.4</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-registry-prometheus</artifactId>
-        <version>1.16.3</version>
+        <version>1.16.4</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-tracing</artifactId>
-        <version>1.6.3</version>
+        <version>1.6.4</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-tracing-bridge-otel</artifactId>
-        <version>1.6.3</version>
+        <version>1.6.4</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-tracing-test</artifactId>
-        <version>1.6.3</version>
+        <version>1.6.4</version>
       </dependency>
       <dependency>
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy</artifactId>
-        <version>1.18.4</version>
+        <version>1.18.7</version>
       </dependency>
       <dependency>
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy-agent</artifactId>
-        <version>1.18.4</version>
+        <version>1.18.7</version>
       </dependency>
       <dependency>
         <groupId>org.apache.avro</groupId>
