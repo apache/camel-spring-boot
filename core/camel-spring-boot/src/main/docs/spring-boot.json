@@ -580,6 +580,34 @@
       "defaultValue": false
     },
     {
+      "name": "camel.main.error-registry-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether the error registry is enabled to capture errors during message routing. This is by default disabled.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.main.error-registry-maximum-entries",
+      "type": "java.lang.Integer",
+      "description": "Sets the maximum number of error entries to keep in the error registry. When the limit is exceeded, the oldest entries are evicted. The default value is 100.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": 100
+    },
+    {
+      "name": "camel.main.error-registry-stack-trace-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether to capture stack traces in the error registry. This is enabled by default.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.main.error-registry-time-to-live-seconds",
+      "type": "java.lang.Integer",
+      "description": "Sets the time-to-live in seconds for error entries in the error registry. Entries older than this are evicted. The default value is 3600 (1 hour).",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": 3600
+    },
+    {
       "name": "camel.main.exchange-factory",
       "type": "java.lang.String",
       "description": "Controls whether to pool (reuse) exchanges or create new exchanges (prototype). Using pooled will reduce JVM garbage collection overhead by avoiding to re-create Exchange instances per message each consumer receives. The default is prototype mode.",
