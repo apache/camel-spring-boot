@@ -38,6 +38,8 @@ import org.apache.camel.main.DebuggerConfigurationProperties;
 import org.apache.camel.main.DefaultConfigurationConfigurer;
 import org.apache.camel.main.MainListener;
 import org.apache.camel.main.RoutesCollector;
+import org.apache.camel.main.fatjar.FatJarPackageScanClassResolver;
+import org.apache.camel.main.fatjar.FatJarPackageScanResourceResolver;
 import org.apache.camel.model.Model;
 import org.apache.camel.spi.BeanRepository;
 import org.apache.camel.spi.CliConnector;
