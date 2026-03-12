@@ -1,0 +1,94 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.spring-ai-image",
+      "type": "org.apache.camel.component.springai.image.springboot.SpringAiImageComponentConfiguration",
+      "sourceType": "org.apache.camel.component.springai.image.springboot.SpringAiImageComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spring-ai-image.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.springai.image.springboot.SpringAiImageComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.spring-ai-image.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.springai.image.springboot.SpringAiImageComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.spring-ai-image.configuration",
+      "type": "org.apache.camel.component.springai.image.SpringAiImageConfiguration",
+      "description": "The configuration. The option is a org.apache.camel.component.springai.image.SpringAiImageConfiguration type.",
+      "sourceType": "org.apache.camel.component.springai.image.springboot.SpringAiImageComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spring-ai-image.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.spring-ai-image.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the spring-ai-image component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.springai.image.springboot.SpringAiImageComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spring-ai-image.height",
+      "type": "java.lang.Integer",
+      "description": "Image height in pixels",
+      "sourceType": "org.apache.camel.component.springai.image.springboot.SpringAiImageComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spring-ai-image.image-model",
+      "type": "org.springframework.ai.image.ImageModel",
+      "description": "The ImageModel to use for generating images. The option is a org.springframework.ai.image.ImageModel type.",
+      "sourceType": "org.apache.camel.component.springai.image.springboot.SpringAiImageComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spring-ai-image.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.springai.image.springboot.SpringAiImageComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.spring-ai-image.model",
+      "type": "java.lang.String",
+      "description": "The model to use for image generation",
+      "sourceType": "org.apache.camel.component.springai.image.springboot.SpringAiImageComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spring-ai-image.n",
+      "type": "java.lang.Integer",
+      "description": "Number of images to generate",
+      "sourceType": "org.apache.camel.component.springai.image.springboot.SpringAiImageComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spring-ai-image.response-format",
+      "type": "java.lang.String",
+      "description": "Response format: url or b64_json",
+      "sourceType": "org.apache.camel.component.springai.image.springboot.SpringAiImageComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spring-ai-image.style",
+      "type": "java.lang.String",
+      "description": "Image style (e.g., vivid, natural)",
+      "sourceType": "org.apache.camel.component.springai.image.springboot.SpringAiImageComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spring-ai-image.width",
+      "type": "java.lang.Integer",
+      "description": "Image width in pixels",
+      "sourceType": "org.apache.camel.component.springai.image.springboot.SpringAiImageComponentConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

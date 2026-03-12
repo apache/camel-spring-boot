@@ -2064,6 +2064,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-spring-ai-image-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-ai-tools-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -4547,6 +4552,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-spring-ai-embeddings</artifactId>
+        <version>4.19.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-spring-ai-image</artifactId>
         <version>4.19.0-SNAPSHOT</version>
       </dependency>
       <dependency>

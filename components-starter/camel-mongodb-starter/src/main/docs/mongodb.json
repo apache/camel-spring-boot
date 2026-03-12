@@ -50,6 +50,13 @@
       "type": "com.mongodb.client.MongoClient",
       "description": "Shared client used for connection. All endpoints generated from the component will share this connection client. The option is a com.mongodb.client.MongoClient type.",
       "sourceType": "org.apache.camel.component.mongodb.springboot.MongoDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.mongodb.use-global-ssl-context-parameters",
+      "type": "java.lang.Boolean",
+      "description": "Enable usage of global SSL context parameters.",
+      "sourceType": "org.apache.camel.component.mongodb.springboot.MongoDbComponentConfiguration",
+      "defaultValue": false
     }
   ],
   "hints": [],
