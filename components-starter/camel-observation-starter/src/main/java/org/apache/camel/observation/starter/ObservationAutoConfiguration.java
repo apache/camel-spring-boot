@@ -39,6 +39,7 @@ import org.springframework.context.annotation.Configuration;
         "org.springframework.boot.micrometer.observation.autoconfigure.ObservationAutoConfiguration" })
 @EnableConfigurationProperties(ObservationConfigurationProperties.class)
 @ConditionalOnProperty(value = "camel.observation.enabled", matchIfMissing = true)
+@Deprecated (since = "4.19.0")
 public class ObservationAutoConfiguration {
 
     @Bean(initMethod = "", destroyMethod = "")

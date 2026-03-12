@@ -30,5 +30,6 @@ import org.springframework.context.annotation.Import;
 @Documented
 @Inherited
 @Import(ObservationAutoConfiguration.class)
+@Deprecated (since = "4.19.0")
 public @interface CamelObservation {
 }
