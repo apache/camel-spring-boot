@@ -447,6 +447,7 @@
     <module>camel-splunk-starter</module>
     <module>camel-spring-ai-chat-starter</module>
     <module>camel-spring-ai-embeddings-starter</module>
+    <module>camel-spring-ai-image-starter</module>
     <module>camel-spring-ai-tools-starter</module>
     <module>camel-spring-ai-vector-store-starter</module>
     <module>camel-spring-batch-starter</module>
