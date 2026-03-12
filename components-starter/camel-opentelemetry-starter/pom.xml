@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-opentelemetry-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: OpenTelemetry</name>
+  <name>Camel SB Starters :: OpenTelemetry (deprecated)</name>
   <description>Spring-Boot Starter for Camel Support for Opentelemetry</description>
   <dependencies>
     <dependency>

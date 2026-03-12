@@ -19,6 +19,7 @@ package org.apache.camel.opentelemetry.starter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.opentelemetry")
+@Deprecated (since = "4.19.0")
 public class OpenTelemetryConfigurationProperties {
 
     /**

@@ -31,6 +31,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(OpenTelemetryConfigurationProperties.class)
 @ConditionalOnProperty(value = "camel.opentelemetry.enabled", matchIfMissing = true)
+@Deprecated (since = "4.19.0")
 public class OpenTelemetryAutoConfiguration {
 
     @Autowired(required = false)

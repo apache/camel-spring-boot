@@ -27,5 +27,6 @@ import org.springframework.context.annotation.Import;
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(value = "camel.observation.enabled")
 @Import(ObservationAutoConfiguration.class)
+@Deprecated (since = "4.19.0")
 public class ObservationConditionalAutoConfiguration {
 }

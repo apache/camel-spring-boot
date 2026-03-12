@@ -19,6 +19,7 @@ package org.apache.camel.observation.starter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "camel.observation")
+@Deprecated (since = "4.19.0")
 public class ObservationConfigurationProperties {
 
     /**
