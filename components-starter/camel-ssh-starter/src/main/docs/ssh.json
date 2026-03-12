@@ -14,6 +14,12 @@
   ],
   "properties": [
     {
+      "name": "camel.component.ssh.auth-timeout",
+      "type": "java.lang.Long",
+      "description": "Sets the authentication timeout in milliseconds.",
+      "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
+    },
+    {
       "name": "camel.component.ssh.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
@@ -37,6 +43,12 @@
       "name": "camel.component.ssh.cert-resource-password",
       "type": "java.lang.String",
       "description": "Sets the password to use in loading certResource, if certResource is an encrypted key.",
+      "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ssh.channel-open-timeout",
+      "type": "java.lang.Long",
+      "description": "Sets the timeout in milliseconds for opening a channel.",
       "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
     },
     {
@@ -71,6 +83,12 @@
       "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
     },
     {
+      "name": "camel.component.ssh.connect-timeout",
+      "type": "java.lang.Long",
+      "description": "Sets the socket connection timeout in milliseconds.",
+      "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
+    },
+    {
       "name": "camel.component.ssh.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
@@ -101,6 +119,18 @@
       "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
       "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.component.ssh.heartbeat-interval",
+      "type": "java.lang.Long",
+      "description": "Sets the heartbeat interval in milliseconds. If positive, the component will send keep-alive messages to prevent the SSH session from timing out.",
+      "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ssh.heartbeat-reply-max-wait",
+      "type": "java.lang.Integer",
+      "description": "Sets the maximum number of keep-alive messages without reply before the session is terminated.",
+      "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
     },
     {
       "name": "camel.component.ssh.idle-timeout",

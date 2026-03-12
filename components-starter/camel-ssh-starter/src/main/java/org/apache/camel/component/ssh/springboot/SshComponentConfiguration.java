@@ -84,6 +84,10 @@ public class SshComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Sets the authentication timeout in milliseconds.
+     */
+    private Long authTimeout;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -92,6 +96,10 @@ public class SshComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * Sets the timeout in milliseconds for opening a channel.
+     */
+    private Long channelOpenTimeout;
     /**
      * Sets the channel type to pass to the Channel as part of command
      * execution. Defaults to exec.
@@ -111,6 +119,20 @@ public class SshComponentConfiguration
      * org.apache.camel.component.ssh.SshConfiguration type.
      */
     private SshConfiguration configuration;
+    /**
+     * Sets the socket connection timeout in milliseconds.
+     */
+    private Long connectTimeout;
+    /**
+     * Sets the heartbeat interval in milliseconds. If positive, the component
+     * will send keep-alive messages to prevent the SSH session from timing out.
+     */
+    private Long heartbeatInterval;
+    /**
+     * Sets the maximum number of keep-alive messages without reply before the
+     * session is terminated.
+     */
+    private Integer heartbeatReplyMaxWait;
     /**
      * Sets the timeout in milliseconds to wait before the SSH session is closed
      * due to inactivity. The default value is 0, which means no idle timeout is
@@ -243,12 +265,28 @@ public class SshComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public Long getAuthTimeout() {
+        return authTimeout;
+    }
+
+    public void setAuthTimeout(Long authTimeout) {
+        this.authTimeout = authTimeout;
+    }
+
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Long getChannelOpenTimeout() {
+        return channelOpenTimeout;
+    }
+
+    public void setChannelOpenTimeout(Long channelOpenTimeout) {
+        this.channelOpenTimeout = channelOpenTimeout;
     }
 
     public String getChannelType() {
@@ -281,6 +319,30 @@ public class SshComponentConfiguration
 
     public void setConfiguration(SshConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public Long getConnectTimeout() {
+        return connectTimeout;
+    }
+
+    public void setConnectTimeout(Long connectTimeout) {
+        this.connectTimeout = connectTimeout;
+    }
+
+    public Long getHeartbeatInterval() {
+        return heartbeatInterval;
+    }
+
+    public void setHeartbeatInterval(Long heartbeatInterval) {
+        this.heartbeatInterval = heartbeatInterval;
+    }
+
+    public Integer getHeartbeatReplyMaxWait() {
+        return heartbeatReplyMaxWait;
+    }
+
+    public void setHeartbeatReplyMaxWait(Integer heartbeatReplyMaxWait) {
+        this.heartbeatReplyMaxWait = heartbeatReplyMaxWait;
     }
 
     public Long getIdleTimeout() {
