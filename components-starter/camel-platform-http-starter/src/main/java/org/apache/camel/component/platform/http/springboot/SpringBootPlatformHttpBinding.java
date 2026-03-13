@@ -72,7 +72,7 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
 
     protected void populateRequestParameters(HttpServletRequest request, Message message) {
         super.populateRequestParameters(request, message);
-        String path = request.getRequestURI();
+        String path = getRawPath(request);
         // skip leading slash
         if (path != null && path.startsWith("/")) {
             path = path.substring(1);
