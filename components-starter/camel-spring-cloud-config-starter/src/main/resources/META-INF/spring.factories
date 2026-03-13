@@ -18,5 +18,5 @@
 org.springframework.context.ApplicationListener=\
   org.apache.camel.component.spring.cloud.config.springboot.SpringBootCloudConfigPropertiesParser
 
-org.springframework.boot.env.EnvironmentPostProcessor=\
+org.springframework.boot.EnvironmentPostProcessor=\
   org.apache.camel.component.spring.cloud.config.springboot.CamelCloudConfigEnvironmentPostProcessor
