@@ -20,7 +20,6 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.component.kafka.KafkaComponent;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.kafka.autoconfigure.KafkaAutoConfiguration;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
@@ -170,6 +169,25 @@ class SpringKafkaPropertiesBridgeTest {
                             .getComponent("kafka", KafkaComponent.class);
                     assertThat(kafka.getConfiguration().getClientId())
                             .isEqualTo("my-client");
+                });
+    }
+
+    @Test
+    void shouldNotBridgeWhenDisabled() {
+        contextRunner
+                .withPropertyValues(
+                        "spring.kafka.bootstrap-servers=broker1:9092",
+                        "spring.kafka.security.protocol=SASL_SSL",
+                        "camel.component.kafka.bridge-spring-kafka-properties=false",
+                        "camel.component.kafka.enabled=true")
+                .run(context -> {
+                    KafkaComponent kafka = context.getBean(CamelContext.class)
+                            .getComponent("kafka", KafkaComponent.class);
+                    // Bridge is disabled, so spring.kafka properties should NOT be applied
+                    assertThat(kafka.getConfiguration().getBrokers())
+                            .isNotEqualTo("broker1:9092");
+                    assertThat(kafka.getConfiguration().getSecurityProtocol())
+                            .isEqualTo("PLAINTEXT");
                 });
     }
 }

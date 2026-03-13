@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.bind.Bindable;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.boot.kafka.autoconfigure.KafkaAutoConfiguration;
@@ -42,10 +43,14 @@ import org.springframework.core.io.Resource;
  * <p>
  * If a property is explicitly set under {@code camel.component.kafka.*}, it takes
  * precedence over the corresponding {@code spring.kafka.*} property.
+ * <p>
+ * This bridge is enabled by default. Set {@code camel.component.kafka.bridge-spring-kafka-properties=false}
+ * to disable it.
  */
 @AutoConfiguration(after = KafkaAutoConfiguration.class, before = KafkaComponentAutoConfiguration.class)
 @ConditionalOnClass(KafkaProperties.class)
 @ConditionalOnBean(KafkaProperties.class)
+@ConditionalOnProperty(name = "camel.component.kafka.bridge-spring-kafka-properties", matchIfMissing = true)
 public class SpringKafkaPropertiesAutoConfiguration {
 
     private static final Logger LOG = LoggerFactory.getLogger(SpringKafkaPropertiesAutoConfiguration.class);
