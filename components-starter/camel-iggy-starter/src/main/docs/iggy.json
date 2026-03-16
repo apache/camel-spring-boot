@@ -180,6 +180,12 @@
       "defaultValue": 30000
     },
     {
+      "name": "camel.component.iggy.ssl-context-parameters",
+      "type": "org.apache.camel.support.jsse.SSLContextParameters",
+      "description": "SSL configuration using an org.apache.camel.support.jsse.SSLContextParameters instance. This takes precedence over tlsEnabled and tlsCertificatePath when configured. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
+    },
+    {
       "name": "camel.component.iggy.starting-offset",
       "type": "java.lang.Long",
       "description": "Defines the initial message offset position when autoCommit is disabled. Use 0 to start from the beginning of the stream, or specify a custom offset to resume from a particular point",
@@ -197,6 +203,26 @@
       "type": "java.lang.String",
       "description": "Stream name",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
+    },
+    {
+      "name": "camel.component.iggy.tls-certificate-path",
+      "type": "java.lang.String",
+      "description": "Path to the TLS certificate file for the connection to the Iggy server",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
+    },
+    {
+      "name": "camel.component.iggy.tls-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable TLS for the connection to the Iggy server",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.iggy.use-global-ssl-context-parameters",
+      "type": "java.lang.Boolean",
+      "description": "Enable usage of global SSL context parameters.",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.iggy.username",

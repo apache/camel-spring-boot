@@ -41,6 +41,7 @@ public class IggyComponentConverter implements GenericConverter {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.iggy.IggyConfiguration.class));
         answer.add(new ConvertiblePair(String.class, org.apache.iggy.message.Partitioning.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         return answer;
     }
 
@@ -59,6 +60,7 @@ public class IggyComponentConverter implements GenericConverter {
         switch (targetType.getName()) {
             case "org.apache.camel.component.iggy.IggyConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.iggy.IggyConfiguration.class);
             case "org.apache.iggy.message.Partitioning": return applicationContext.getBean(ref, org.apache.iggy.message.Partitioning.class);
+            case "org.apache.camel.support.jsse.SSLContextParameters": return applicationContext.getBean(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
         }
         return null;
     }

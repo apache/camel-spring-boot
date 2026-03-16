@@ -19,6 +19,7 @@ package org.apache.camel.component.iggy.springboot;
 import org.apache.camel.component.iggy.IggyComponent;
 import org.apache.camel.component.iggy.IggyConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.apache.iggy.message.Partitioning;
 import org.apache.iggy.topic.CompressionAlgorithm;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -172,6 +173,25 @@ public class IggyComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * SSL configuration using an
+     * org.apache.camel.support.jsse.SSLContextParameters instance. This takes
+     * precedence over tlsEnabled and tlsCertificatePath when configured. The
+     * option is a org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private SSLContextParameters sslContextParameters;
+    /**
+     * Path to the TLS certificate file for the connection to the Iggy server
+     */
+    private String tlsCertificatePath;
+    /**
+     * Whether to enable TLS for the connection to the Iggy server
+     */
+    private Boolean tlsEnabled = false;
+    /**
+     * Enable usage of global SSL context parameters.
+     */
+    private Boolean useGlobalSslContextParameters = false;
     /**
      * Iggy username
      */
@@ -384,6 +404,40 @@ public class IggyComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public SSLContextParameters getSslContextParameters() {
+        return sslContextParameters;
+    }
+
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
+        this.sslContextParameters = sslContextParameters;
+    }
+
+    public String getTlsCertificatePath() {
+        return tlsCertificatePath;
+    }
+
+    public void setTlsCertificatePath(String tlsCertificatePath) {
+        this.tlsCertificatePath = tlsCertificatePath;
+    }
+
+    public Boolean getTlsEnabled() {
+        return tlsEnabled;
+    }
+
+    public void setTlsEnabled(Boolean tlsEnabled) {
+        this.tlsEnabled = tlsEnabled;
+    }
+
+    public Boolean getUseGlobalSslContextParameters() {
+        return useGlobalSslContextParameters;
+    }
+
+    public void setUseGlobalSslContextParameters(
+            Boolean useGlobalSslContextParameters) {
+        this.useGlobalSslContextParameters = useGlobalSslContextParameters;
     }
 
     public String getUsername() {
