@@ -251,6 +251,8 @@
     <module>camel-google-storage-starter</module>
     <module>camel-google-vertexai-starter</module>
     <module>camel-google-vision-starter</module>
+    <module>camel-google-speech-to-text-starter</module>
+    <module>camel-google-text-to-speech-starter</module>
     <module>camel-grape-starter</module>
     <module>camel-graphql-starter</module>
     <module>camel-grok-starter</module>
