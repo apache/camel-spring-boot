@@ -54,7 +54,7 @@
       <dependency>
         <groupId>com.openai</groupId>
         <artifactId>openai-java</artifactId>
-        <version>4.26.0</version>
+        <version>4.29.0</version>
       </dependency>
       <dependency>
         <groupId>eu.maveniverse.maven.mima.runtime</groupId>
@@ -74,167 +74,167 @@
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-all</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-alts</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-android</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-api</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-auth</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-benchmarks</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-binder</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-census</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-context</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-core</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-cronet</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-gcp-csm-observability</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-gcp-observability</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-googleapis</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-grpclb</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-inprocess</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-interop-testing</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-netty</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-netty-shaded</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-okhttp</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-opentelemetry</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-protobuf</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-protobuf-lite</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-rls</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-services</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-servlet</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-servlet-jakarta</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-stub</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-testing</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-testing-proto</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-util</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-xds</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>protoc-gen-grpc-java</artifactId>
-        <version>1.79.0</version>
+        <version>1.80.0</version>
         <type>pom</type>
       </dependency>
       <dependency>
@@ -5112,7 +5112,7 @@
       <dependency>
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-artifact</artifactId>
-        <version>3.9.13</version>
+        <version>3.9.14</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
@@ -5124,13 +5124,13 @@
       <dependency>
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-compat</artifactId>
-        <version>3.9.13</version>
+        <version>3.9.14</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-core</artifactId>
-        <version>3.9.13</version>
+        <version>3.9.14</version>
         <scope>provided</scope>
         <exclusions>
           <exclusion>
@@ -5150,13 +5150,13 @@
       <dependency>
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-model</artifactId>
-        <version>3.9.13</version>
+        <version>3.9.14</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-plugin-api</artifactId>
-        <version>3.9.13</version>
+        <version>3.9.14</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
@@ -5180,13 +5180,13 @@
       <dependency>
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-repository-metadata</artifactId>
-        <version>3.9.13</version>
+        <version>3.9.14</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-settings</artifactId>
-        <version>3.9.13</version>
+        <version>3.9.14</version>
         <scope>provided</scope>
       </dependency>
       <dependency>

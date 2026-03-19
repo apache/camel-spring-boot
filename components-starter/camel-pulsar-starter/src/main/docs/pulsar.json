@@ -311,6 +311,13 @@
       "defaultValue": "latest"
     },
     {
+      "name": "camel.component.pulsar.subscription-mode",
+      "type": "org.apache.camel.component.pulsar.utils.consumers.SubscriptionMode",
+      "description": "Determines the subscription mode for the consumer. Durable subscriptions persist the cursor position if the consumer disconnects while non-durable subscriptions do not.",
+      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration",
+      "defaultValue": "durable"
+    },
+    {
       "name": "camel.component.pulsar.subscription-name",
       "type": "java.lang.String",
       "description": "Name of the subscription to use",

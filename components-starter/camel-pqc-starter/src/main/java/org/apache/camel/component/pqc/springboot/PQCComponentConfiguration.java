@@ -147,6 +147,15 @@ public class PQCComponentConfiguration
      */
     private Boolean storeExtractedSecretKeyAsHeader = false;
     /**
+     * Whether to enforce key status checks before cryptographic operations.
+     * When enabled, REVOKED keys are rejected for all operations, EXPIRED keys
+     * are rejected for signing/encapsulation but allowed for
+     * verification/extraction, and DEPRECATED keys produce a warning but still
+     * function. Requires a KeyLifecycleManager and a CamelPQCKeyId header to be
+     * set.
+     */
+    private Boolean strictKeyLifecycle = true;
+    /**
      * In case we are using KEM operations, we need a Symmetric algorithm to be
      * defined for the flow to work.
      */
@@ -328,6 +337,14 @@ public class PQCComponentConfiguration
     public void setStoreExtractedSecretKeyAsHeader(
             Boolean storeExtractedSecretKeyAsHeader) {
         this.storeExtractedSecretKeyAsHeader = storeExtractedSecretKeyAsHeader;
+    }
+
+    public Boolean getStrictKeyLifecycle() {
+        return strictKeyLifecycle;
+    }
+
+    public void setStrictKeyLifecycle(Boolean strictKeyLifecycle) {
+        this.strictKeyLifecycle = strictKeyLifecycle;
     }
 
     public String getSymmetricKeyAlgorithm() {
