@@ -16,6 +16,7 @@
  */
 package org.apache.camel.spring.boot;
 
+import java.lang.reflect.Method;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -25,6 +26,8 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.awaitility.Awaitility;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledForJreRange;
+import org.junit.jupiter.api.condition.JRE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -60,8 +63,8 @@ public class CamelVirtualThreadsTest {
                             // Capture the current thread information
                             Thread currentThread = Thread.currentThread();
                             String threadName = currentThread.getName();
-                            boolean isVirtual = currentThread.isVirtual();
-                            
+                            boolean isVirtual = isVirtualThread(currentThread);
+
                             // Store thread information in exchange properties for assertion
                             exchange.setProperty("threadName", threadName);
                             exchange.setProperty("isVirtual", isVirtual);
@@ -70,6 +73,15 @@ public class CamelVirtualThreadsTest {
                         .to("mock:result");
                 }
             };
+        }
+    }
+
+    private static boolean isVirtualThread(Thread thread) {
+        try {
+            Method isVirtual = Thread.class.getMethod("isVirtual");
+            return (boolean) isVirtual.invoke(thread);
+        } catch (Exception e) {
+            return false;
         }
     }
 
@@ -83,6 +95,7 @@ public class CamelVirtualThreadsTest {
     }
 
     @Test
+    @EnabledForJreRange(min = JRE.JAVA_21)
     public void testRouteExecutesOnVirtualThread() throws Exception {
         CountDownLatch latch = new CountDownLatch(1);
         AtomicReference<Boolean> isVirtualThread = new AtomicReference<>(false);
@@ -96,7 +109,7 @@ public class CamelVirtualThreadsTest {
                     .routeId("virtualTestRoute")
                     .process(exchange -> {
                         Thread currentThread = Thread.currentThread();
-                        isVirtualThread.set(currentThread.isVirtual());
+                        isVirtualThread.set(isVirtualThread(currentThread));
                         threadName.set(currentThread.getName());
                         latch.countDown();
                     });
