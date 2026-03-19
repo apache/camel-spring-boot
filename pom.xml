@@ -108,7 +108,7 @@
         <compiler.fork>false</compiler.fork>
 
         <!-- Spring-Boot target version -->
-        <spring-boot-version>3.5.11</spring-boot-version>
+        <spring-boot-version>3.5.12</spring-boot-version>
 
         <!-- Camel target version -->
         <camel-version>4.14.6-SNAPSHOT</camel-version>
@@ -119,12 +119,12 @@
         <arquillian-version>1.9.4.Final</arquillian-version>
         <avro-version>1.12.0</avro-version>
         <graal-sdk-version>22.3.2</graal-sdk-version>
-        <jakarta-jaxb-version>4.0.2</jakarta-jaxb-version>
+        <jakarta-jaxb-version>4.0.4</jakarta-jaxb-version>
         <jaxb-version>2.3.0</jaxb-version>
-        <maven-compiler-plugin-version>3.14.0</maven-compiler-plugin-version>
+        <maven-compiler-plugin-version>3.14.1</maven-compiler-plugin-version>
         <maven.compiler.release>${jdk.version}</maven.compiler.release>
-        <maven-javadoc-plugin-version>3.11.2</maven-javadoc-plugin-version>
-        <maven-surefire-plugin-version>3.5.3</maven-surefire-plugin-version>
+        <maven-javadoc-plugin-version>3.11.3</maven-javadoc-plugin-version>
+        <maven-surefire-plugin-version>3.5.5</maven-surefire-plugin-version>
         <mycila-license-version>5.0.0</mycila-license-version>
         <springdoc-version>2.2.0</springdoc-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
