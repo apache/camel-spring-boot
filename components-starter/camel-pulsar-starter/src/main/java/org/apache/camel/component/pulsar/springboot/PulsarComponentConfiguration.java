@@ -21,6 +21,7 @@ import org.apache.camel.component.pulsar.PulsarConfiguration;
 import org.apache.camel.component.pulsar.PulsarMessageReceiptFactory;
 import org.apache.camel.component.pulsar.utils.AutoConfiguration;
 import org.apache.camel.component.pulsar.utils.consumers.SubscriptionInitialPosition;
+import org.apache.camel.component.pulsar.utils.consumers.SubscriptionMode;
 import org.apache.camel.component.pulsar.utils.consumers.SubscriptionType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.pulsar.client.api.BatcherBuilder;
@@ -175,6 +176,12 @@ public class PulsarComponentConfiguration
      * subscription. Default is latest message.
      */
     private SubscriptionInitialPosition subscriptionInitialPosition = SubscriptionInitialPosition.LATEST;
+    /**
+     * Determines the subscription mode for the consumer. Durable subscriptions
+     * persist the cursor position if the consumer disconnects while non-durable
+     * subscriptions do not.
+     */
+    private SubscriptionMode subscriptionMode = SubscriptionMode.DURABLE;
     /**
      * Name of the subscription to use
      */
@@ -497,6 +504,14 @@ public class PulsarComponentConfiguration
     public void setSubscriptionInitialPosition(
             SubscriptionInitialPosition subscriptionInitialPosition) {
         this.subscriptionInitialPosition = subscriptionInitialPosition;
+    }
+
+    public SubscriptionMode getSubscriptionMode() {
+        return subscriptionMode;
+    }
+
+    public void setSubscriptionMode(SubscriptionMode subscriptionMode) {
+        this.subscriptionMode = subscriptionMode;
     }
 
     public String getSubscriptionName() {
