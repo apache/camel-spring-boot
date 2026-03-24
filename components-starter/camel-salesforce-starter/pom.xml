@@ -65,6 +65,12 @@
       <version>${squareup-okhttp-version}</version>
       <scope>test</scope>
     </dependency>
+    <!-- force grpc-protobuf version https://issues.apache.org/jira/browse/CAMEL-23217 -->
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+      <version>${protobuf-version}</version>
+    </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
       <groupId>org.apache.camel.springboot</groupId>
