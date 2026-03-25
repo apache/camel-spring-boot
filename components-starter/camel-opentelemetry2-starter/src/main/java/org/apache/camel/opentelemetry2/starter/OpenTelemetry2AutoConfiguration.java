@@ -16,6 +16,8 @@
  */
 package org.apache.camel.opentelemetry2.starter;
 
+import io.opentelemetry.context.Context;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.opentelemetry2.OpenTelemetryTracer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -23,6 +25,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.TaskDecorator;
 
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(OpenTelemetry2ConfigurationProperties.class)
@@ -44,5 +47,18 @@ public class OpenTelemetry2AutoConfiguration {
         ottracer.init(camelContext);
 
         return ottracer;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(TaskDecorator.class)
+    TaskDecorator otelContextPropagatingTaskDecorator() {
+        return runnable -> {
+            Context context = Context.current();
+            return () -> {
+                try (var ignored = context.makeCurrent()) {
+                    runnable.run();
+                }
+            };
+        };
     }
 }
