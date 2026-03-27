@@ -28,6 +28,7 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
@@ -42,7 +43,6 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 import org.apache.commons.io.IOUtils;
-import org.apache.maven.ProjectDependenciesResolver;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -51,8 +51,10 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
+import org.apache.maven.project.DefaultProjectBuildingRequest;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.ProjectBuilder;
+import org.apache.maven.project.ProjectBuildingRequest;
 import org.apache.maven.project.ProjectBuildingResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -81,9 +83,6 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
      */
     @Parameter(defaultValue = "${basedir}")
     protected File baseDir;
-
-    @Inject
-    private ProjectDependenciesResolver projectDependenciesResolver;
 
     @Inject
     private ProjectBuilder projectBuilder;
@@ -297,11 +296,16 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
                 return Collections.emptySet();
             }
 
-            ProjectBuildingResult result = projectBuilder.build(artifact, project.getProjectBuildingRequest());
+            // Create a new ProjectBuildingRequest with dependency resolution explicitly enabled
+            // to ensure we get transitive dependencies, not just direct ones
+            ProjectBuildingRequest request = new DefaultProjectBuildingRequest(session.getProjectBuildingRequest());
+            request.setResolveDependencies(true);
+
+            ProjectBuildingResult result = projectBuilder.build(artifact, request);
             MavenProject prj = result.getProject();
             prj.setRemoteArtifactRepositories(project.getRemoteArtifactRepositories());
-            dependencies = projectDependenciesResolver.resolve(prj, Collections.singleton(Artifact.SCOPE_COMPILE),
-                    session);
+            dependencies = prj.getArtifacts().stream().filter(a -> Artifact.SCOPE_COMPILE.equals(a.getScope()))
+                .collect(Collectors.toSet());
         } catch (Exception e) {
             throw new RuntimeException("Unable to build project dependency tree", e);
         }
