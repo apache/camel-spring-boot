@@ -54,7 +54,7 @@
       <dependency>
         <groupId>com.openai</groupId>
         <artifactId>openai-java</artifactId>
-        <version>4.29.0</version>
+        <version>4.30.0</version>
       </dependency>
       <dependency>
         <groupId>eu.maveniverse.maven.mima.runtime</groupId>
@@ -2710,6 +2710,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-azure-common</artifactId>
+        <version>4.19.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-azure-cosmosdb</artifactId>
         <version>4.19.0-SNAPSHOT</version>
       </dependency>
@@ -3557,6 +3562,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-ibm-watsonx-ai</artifactId>
+        <version>4.19.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-ibm-watsonx-data</artifactId>
         <version>4.19.0-SNAPSHOT</version>
       </dependency>
       <dependency>
