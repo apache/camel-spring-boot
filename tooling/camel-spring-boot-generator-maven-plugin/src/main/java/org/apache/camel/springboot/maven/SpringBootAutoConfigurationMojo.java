@@ -309,7 +309,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             configClass.setPackage(packageName);
             configClass.setName(configName);
             configClass.extendSuperType(commonClass);
-            configClass.addAnnotation(loadClass("org.springframework.boot.context.properties.ConfigurationProperties"))
+            configClass.addAnnotation(loadAnnotationClass("org.springframework.boot.context.properties.ConfigurationProperties"))
                     .setStringValue("prefix", propertiesPrefix);
             configClass.addImport(Map.class);
             configClass.addImport(HashMap.class);
@@ -882,6 +882,28 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             }
         }
         return optionClass;
+    }
+
+    // try loading annotation class, looking for inner classes if needed
+    private Class<? extends java.lang.annotation.Annotation> loadAnnotationClass(String loadClassName) throws MojoFailureException {
+        String currentClassName = loadClassName;
+        ClassNotFoundException lastException = null;
+
+        while (currentClassName != null) {
+            try {
+                return getProjectClassLoader().loadClass(currentClassName).asSubclass(java.lang.annotation.Annotation.class);
+            } catch (ClassNotFoundException e) {
+                lastException = e;
+                int dotIndex = currentClassName.lastIndexOf('.');
+                if (dotIndex == -1) {
+                    currentClassName = null;
+                } else {
+                    currentClassName = currentClassName.substring(0, dotIndex) + "$" + currentClassName.substring(dotIndex + 1);
+                }
+            }
+        }
+
+        throw new MojoFailureException(lastException.getMessage(), lastException);
     }
 
     protected DynamicClassLoader getProjectClassLoader() {
