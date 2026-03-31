@@ -743,11 +743,15 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                     prop.getField().setStringInitializer(option.getDefaultValue().toString());
                 } else if ("duration".equals(option.getType())) {
                     String value = convertDurationToMills(option.getDefaultValue().toString());
-                    // duration is either long or int java type
-                    if ("long".equals(option.getJavaType()) || "java.lang.Long".equals(option.getJavaType())) {
+                    if ("java.time.Duration".equals(option.getJavaType())) {
+                        prop.getField().setLiteralInitializer("Duration.ofMillis(" + value + ")");
+                        javaClass.addImport("java.time.Duration");
+                    } else if ("long".equals(option.getJavaType()) || "java.lang.Long".equals(option.getJavaType())) {
                         value = value + "L";
+                        prop.getField().setLiteralInitializer(value);
+                    } else {
+                        prop.getField().setLiteralInitializer(value);
                     }
-                    prop.getField().setLiteralInitializer(value);
                 } else if ("long".equals(option.getJavaType()) || "java.lang.Long".equals(option.getJavaType())) {
                     // the value should be a Long number
                     String value = option.getDefaultValue() + "L";
