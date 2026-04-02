@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.infinispan.remote.springboot;
 
+import java.time.Duration;
 import java.util.Map;
 import java.util.function.BiFunction;
 import org.apache.camel.component.infinispan.InfinispanOperation;
@@ -143,6 +144,12 @@ public class InfinispanRemoteComponentConfiguration
      * by embedding store cache put and query operations.
      */
     private Boolean embeddingStoreRegisterSchema = true;
+    /**
+     * Maximum time to wait for the Infinispan server to be ready when
+     * registering the embedding store schema. This handles the case where Camel
+     * and the Infinispan server start concurrently.
+     */
+    private Duration embeddingStoreSchemaRegistrationTimeout = Duration.ofMillis(60000);
     /**
      * The name of the type used to store embeddings. The default is
      * 'InfinispanRemoteEmbedding' suffixed with the value of the
@@ -353,6 +360,15 @@ public class InfinispanRemoteComponentConfiguration
     public void setEmbeddingStoreRegisterSchema(
             Boolean embeddingStoreRegisterSchema) {
         this.embeddingStoreRegisterSchema = embeddingStoreRegisterSchema;
+    }
+
+    public Duration getEmbeddingStoreSchemaRegistrationTimeout() {
+        return embeddingStoreSchemaRegistrationTimeout;
+    }
+
+    public void setEmbeddingStoreSchemaRegistrationTimeout(
+            Duration embeddingStoreSchemaRegistrationTimeout) {
+        this.embeddingStoreSchemaRegistrationTimeout = embeddingStoreSchemaRegistrationTimeout;
     }
 
     public String getEmbeddingStoreTypeName() {
