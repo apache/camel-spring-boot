@@ -188,8 +188,11 @@ public class DebeziumOracleComponentConfiguration
     private String customSanitizePattern = "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret";
     /**
      * The adapter to use when capturing changes from the database. Options
-     * include: 'logminer': (the default) to capture changes using native Oracle
-     * LogMiner; 'xstream' to capture changes using Oracle XStreams
+     * include: 'LogMiner': (the default) to capture changes using native Oracle
+     * LogMiner with buffered transactions; 'LogMiner_Unbuffered': to capture
+     * changes using native Oracle LogMiner without buffering; 'XStream': to
+     * capture changes using Oracle XStreams; 'OLR': to capture changes using
+     * OpenLogReplicator
      */
     private String databaseConnectionAdapter = "LogMiner";
     /**
@@ -201,7 +204,7 @@ public class DebeziumOracleComponentConfiguration
      */
     private String databaseHostname;
     /**
-     * Name of the XStream Out server to connect to.
+     * Name of the XStream Outbound server to connect to.
      */
     private String databaseOutServerName;
     /**
@@ -403,6 +406,12 @@ public class DebeziumOracleComponentConfiguration
      */
     private String logMiningBufferEhcacheProcessedtransactionsConfig;
     /**
+     * Specifies the inner body the Ehcache tag for the rollbacks cache, but
+     * should not include the nor the attributes as these are managed by
+     * Debezium.
+     */
+    private String logMiningBufferEhcacheRollbacksConfig;
+    /**
      * Specifies the inner body the Ehcache tag for the schema changes cache,
      * but should not include the nor the attributes as these are managed by
      * Debezium.
@@ -428,6 +437,10 @@ public class DebeziumOracleComponentConfiguration
      */
     private String logMiningBufferInfinispanCacheProcessedTransactions;
     /**
+     * Specifies the XML configuration for the Infinispan 'rollbacks' cache
+     */
+    private String logMiningBufferInfinispanCacheRollbacks;
+    /**
      * Specifies the XML configuration for the Infinispan 'schema-changes' cache
      */
     private String logMiningBufferInfinispanCacheSchemaChanges;
@@ -435,6 +448,13 @@ public class DebeziumOracleComponentConfiguration
      * Specifies the XML configuration for the Infinispan 'transactions' cache
      */
     private String logMiningBufferInfinispanCacheTransactions;
+    /**
+     * This controls whether the 'RS_ID' column values are tracked. When set to
+     * true (the default), the 'RS_ID' values are buffered and provided in
+     * events when available. When set to false, the 'RS_ID' values are not
+     * buffered and can reduce the memory footprint.
+     */
+    private Boolean logMiningBufferTrackRsId = true;
     /**
      * The number of events a transaction can include before the transaction is
      * discarded. This is useful for managing buffer memory and/or space when
@@ -562,6 +582,14 @@ public class DebeziumOracleComponentConfiguration
      * Comma separated list of usernames to include from LogMiner query.
      */
     private String logMiningUsernameIncludeList;
+    /**
+     * The maximum number of milliseconds that the mining window can span. If a
+     * transaction remains open for longer than this duration, the mining window
+     * start SCN will be advanced to minimize the window size, preventing it
+     * from growing indefinitely. Defaults to 0 (disabled). The option is a long
+     * type.
+     */
+    private Long logMiningWindowMaxMs = 0L;
     /**
      * Maximum size of each batch of source records. Defaults to 2048.
      */
@@ -782,6 +810,15 @@ public class DebeziumOracleComponentConfiguration
      */
     private Integer snapshotMaxThreads = 1;
     /**
+     * The factor used to scale the number of snapshot chunks per table. The
+     * default behavior is to take 'row_count/snapshot.max.threads' to compute
+     * the number of rows per chunks. This may not be ideal for larger tables,
+     * and using the multiplier, the formula is adjusted to increase the number
+     * of chunks by using 'row_count/(snapshot.max.threads
+     * snapshot.max.threads.multiplier).
+     */
+    private Integer snapshotMaxThreadsMultiplier = 1;
+    /**
      * The criteria for running a snapshot upon startup of the connector. Select
      * one of the following snapshot options: 'always': The connector runs a
      * snapshot every time that it starts. After the snapshot completes, the
@@ -920,6 +957,10 @@ public class DebeziumOracleComponentConfiguration
      * the original value is unavailable and not provided by the database.
      */
     private String unavailableValuePlaceholder = "__debezium_unavailable_value";
+    /**
+     * Name of the XStream Outbound server to connect to.
+     */
+    private String xstreamOutServerName;
 
     public Map<String, Object> getAdditionalProperties() {
         return additionalProperties;
@@ -1422,6 +1463,15 @@ public class DebeziumOracleComponentConfiguration
         this.logMiningBufferEhcacheProcessedtransactionsConfig = logMiningBufferEhcacheProcessedtransactionsConfig;
     }
 
+    public String getLogMiningBufferEhcacheRollbacksConfig() {
+        return logMiningBufferEhcacheRollbacksConfig;
+    }
+
+    public void setLogMiningBufferEhcacheRollbacksConfig(
+            String logMiningBufferEhcacheRollbacksConfig) {
+        this.logMiningBufferEhcacheRollbacksConfig = logMiningBufferEhcacheRollbacksConfig;
+    }
+
     public String getLogMiningBufferEhcacheSchemachangesConfig() {
         return logMiningBufferEhcacheSchemachangesConfig;
     }
@@ -1467,6 +1517,15 @@ public class DebeziumOracleComponentConfiguration
         this.logMiningBufferInfinispanCacheProcessedTransactions = logMiningBufferInfinispanCacheProcessedTransactions;
     }
 
+    public String getLogMiningBufferInfinispanCacheRollbacks() {
+        return logMiningBufferInfinispanCacheRollbacks;
+    }
+
+    public void setLogMiningBufferInfinispanCacheRollbacks(
+            String logMiningBufferInfinispanCacheRollbacks) {
+        this.logMiningBufferInfinispanCacheRollbacks = logMiningBufferInfinispanCacheRollbacks;
+    }
+
     public String getLogMiningBufferInfinispanCacheSchemaChanges() {
         return logMiningBufferInfinispanCacheSchemaChanges;
     }
@@ -1483,6 +1542,14 @@ public class DebeziumOracleComponentConfiguration
     public void setLogMiningBufferInfinispanCacheTransactions(
             String logMiningBufferInfinispanCacheTransactions) {
         this.logMiningBufferInfinispanCacheTransactions = logMiningBufferInfinispanCacheTransactions;
+    }
+
+    public Boolean getLogMiningBufferTrackRsId() {
+        return logMiningBufferTrackRsId;
+    }
+
+    public void setLogMiningBufferTrackRsId(Boolean logMiningBufferTrackRsId) {
+        this.logMiningBufferTrackRsId = logMiningBufferTrackRsId;
     }
 
     public Long getLogMiningBufferTransactionEventsThreshold() {
@@ -1660,6 +1727,14 @@ public class DebeziumOracleComponentConfiguration
     public void setLogMiningUsernameIncludeList(
             String logMiningUsernameIncludeList) {
         this.logMiningUsernameIncludeList = logMiningUsernameIncludeList;
+    }
+
+    public Long getLogMiningWindowMaxMs() {
+        return logMiningWindowMaxMs;
+    }
+
+    public void setLogMiningWindowMaxMs(Long logMiningWindowMaxMs) {
+        this.logMiningWindowMaxMs = logMiningWindowMaxMs;
     }
 
     public Integer getMaxBatchSize() {
@@ -1989,6 +2064,15 @@ public class DebeziumOracleComponentConfiguration
         this.snapshotMaxThreads = snapshotMaxThreads;
     }
 
+    public Integer getSnapshotMaxThreadsMultiplier() {
+        return snapshotMaxThreadsMultiplier;
+    }
+
+    public void setSnapshotMaxThreadsMultiplier(
+            Integer snapshotMaxThreadsMultiplier) {
+        this.snapshotMaxThreadsMultiplier = snapshotMaxThreadsMultiplier;
+    }
+
     public String getSnapshotMode() {
         return snapshotMode;
     }
@@ -2147,5 +2231,13 @@ public class DebeziumOracleComponentConfiguration
     public void setUnavailableValuePlaceholder(
             String unavailableValuePlaceholder) {
         this.unavailableValuePlaceholder = unavailableValuePlaceholder;
+    }
+
+    public String getXstreamOutServerName() {
+        return xstreamOutServerName;
+    }
+
+    public void setXstreamOutServerName(String xstreamOutServerName) {
+        this.xstreamOutServerName = xstreamOutServerName;
     }
 }

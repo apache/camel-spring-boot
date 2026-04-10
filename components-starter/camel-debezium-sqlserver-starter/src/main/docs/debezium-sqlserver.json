@@ -561,6 +561,13 @@
       "defaultValue": 1
     },
     {
+      "name": "camel.component.debezium-sqlserver.snapshot-max-threads-multiplier",
+      "type": "java.lang.Integer",
+      "description": "The factor used to scale the number of snapshot chunks per table. The default behavior is to take 'row_count\/snapshot.max.threads' to compute the number of rows per chunks. This may not be ideal for larger tables, and using the multiplier, the formula is adjusted to increase the number of chunks by using 'row_count\/(snapshot.max.threads snapshot.max.threads.multiplier).",
+      "sourceType": "org.apache.camel.component.debezium.sqlserver.springboot.DebeziumSqlserverComponentConfiguration",
+      "defaultValue": 1
+    },
+    {
       "name": "camel.component.debezium-sqlserver.snapshot-mode",
       "type": "java.lang.String",
       "description": "The criteria for running a snapshot upon startup of the connector. Select one of the following snapshot options: 'initial' (default): If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures the current full state of the configured tables. After the snapshot completes, the connector begins to stream changes from the transaction log.; 'initial_only': The connector performs a snapshot as it does for the 'initial' option, but after the connector completes the snapshot, it stops, and does not stream changes from the transaction log.; 'schema_only': If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures only the schema (table structures), but not any table data. After the snapshot completes, the connector begins to stream changes from the transaction log.",

@@ -111,7 +111,7 @@
     {
       "name": "camel.component.debezium-oracle.database-connection-adapter",
       "type": "java.lang.String",
-      "description": "The adapter to use when capturing changes from the database. Options include: 'logminer': (the default) to capture changes using native Oracle LogMiner; 'xstream' to capture changes using Oracle XStreams",
+      "description": "The adapter to use when capturing changes from the database. Options include: 'LogMiner': (the default) to capture changes using native Oracle LogMiner with buffered transactions; 'LogMiner_Unbuffered': to capture changes using native Oracle LogMiner without buffering; 'XStream': to capture changes using Oracle XStreams; 'OLR': to capture changes using OpenLogReplicator",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": "LogMiner"
     },
@@ -130,7 +130,7 @@
     {
       "name": "camel.component.debezium-oracle.database-out-server-name",
       "type": "java.lang.String",
-      "description": "Name of the XStream Out server to connect to.",
+      "description": "Name of the XStream Outbound server to connect to.",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
     },
     {
@@ -376,6 +376,12 @@
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-ehcache-rollbacks-config",
+      "type": "java.lang.String",
+      "description": "Specifies the inner body the Ehcache tag for the rollbacks cache, but should not include the nor the attributes as these are managed by Debezium.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
       "name": "camel.component.debezium-oracle.log-mining-buffer-ehcache-schemachanges-config",
       "type": "java.lang.String",
       "description": "Specifies the inner body the Ehcache tag for the schema changes cache, but should not include the nor the attributes as these are managed by Debezium.",
@@ -406,6 +412,12 @@
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-infinispan-cache-rollbacks",
+      "type": "java.lang.String",
+      "description": "Specifies the XML configuration for the Infinispan 'rollbacks' cache",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
       "name": "camel.component.debezium-oracle.log-mining-buffer-infinispan-cache-schema-changes",
       "type": "java.lang.String",
       "description": "Specifies the XML configuration for the Infinispan 'schema-changes' cache",
@@ -416,6 +428,13 @@
       "type": "java.lang.String",
       "description": "Specifies the XML configuration for the Infinispan 'transactions' cache",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-track-rs-id",
+      "type": "java.lang.Boolean",
+      "description": "This controls whether the 'RS_ID' column values are tracked. When set to true (the default), the 'RS_ID' values are buffered and provided in events when available. When set to false, the 'RS_ID' values are not buffered and can reduce the memory footprint.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": true
     },
     {
       "name": "camel.component.debezium-oracle.log-mining-buffer-transaction-events-threshold",
@@ -557,6 +576,13 @@
       "type": "java.lang.String",
       "description": "Comma separated list of usernames to include from LogMiner query.",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-window-max-ms",
+      "type": "java.lang.Long",
+      "description": "The maximum number of milliseconds that the mining window can span. If a transaction remains open for longer than this duration, the mining window start SCN will be advanced to minimize the window size, preventing it from growing indefinitely. Defaults to 0 (disabled). The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 0
     },
     {
       "name": "camel.component.debezium-oracle.max-batch-size",
@@ -867,6 +893,13 @@
       "defaultValue": 1
     },
     {
+      "name": "camel.component.debezium-oracle.snapshot-max-threads-multiplier",
+      "type": "java.lang.Integer",
+      "description": "The factor used to scale the number of snapshot chunks per table. The default behavior is to take 'row_count\/snapshot.max.threads' to compute the number of rows per chunks. This may not be ideal for larger tables, and using the multiplier, the formula is adjusted to increase the number of chunks by using 'row_count\/(snapshot.max.threads snapshot.max.threads.multiplier).",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 1
+    },
+    {
       "name": "camel.component.debezium-oracle.snapshot-mode",
       "type": "java.lang.String",
       "description": "The criteria for running a snapshot upon startup of the connector. Select one of the following snapshot options: 'always': The connector runs a snapshot every time that it starts. After the snapshot completes, the connector begins to stream changes from the redo logs.; 'initial' (default): If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures the current full state of the configured tables. After the snapshot completes, the connector begins to stream changes from the redo logs. 'initial_only': The connector performs a snapshot as it does for the 'initial' option, but after the connector completes the snapshot, it stops, and does not stream changes from the redo logs.; 'schema_only': If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures only the schema (table structures), but not any table data. After the snapshot completes, the connector begins to stream changes from the redo logs.; 'schema_only_recovery': The connector performs a snapshot that captures only the database schema history. The connector then transitions to streaming from the redo logs. Use this setting to restore a corrupted or lost database schema history topic. Do not use if the database schema was modified after the connector stopped.",
@@ -993,6 +1026,12 @@
       "description": "Specify the constant that will be provided by Debezium to indicate that the original value is unavailable and not provided by the database.",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": "__debezium_unavailable_value"
+    },
+    {
+      "name": "camel.component.debezium-oracle.xstream-out-server-name",
+      "type": "java.lang.String",
+      "description": "Name of the XStream Outbound server to connect to.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
     }
   ],
   "hints": [],

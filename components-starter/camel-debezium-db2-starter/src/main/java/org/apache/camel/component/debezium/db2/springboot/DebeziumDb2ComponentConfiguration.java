@@ -472,6 +472,15 @@ public class DebeziumDb2ComponentConfiguration
      */
     private Long snapshotLockTimeoutMs = 10000L;
     /**
+     * The factor used to scale the number of snapshot chunks per table. The
+     * default behavior is to take 'row_count/snapshot.max.threads' to compute
+     * the number of rows per chunks. This may not be ideal for larger tables,
+     * and using the multiplier, the formula is adjusted to increase the number
+     * of chunks by using 'row_count/(snapshot.max.threads
+     * snapshot.max.threads.multiplier).
+     */
+    private Integer snapshotMaxThreadsMultiplier = 1;
+    /**
      * The criteria for running a snapshot upon startup of the connector.
      * Options include: 'initial' (the default) to specify the connector should
      * run a snapshot only when no offsets are available for the logical server
@@ -1208,6 +1217,15 @@ public class DebeziumDb2ComponentConfiguration
 
     public void setSnapshotLockTimeoutMs(Long snapshotLockTimeoutMs) {
         this.snapshotLockTimeoutMs = snapshotLockTimeoutMs;
+    }
+
+    public Integer getSnapshotMaxThreadsMultiplier() {
+        return snapshotMaxThreadsMultiplier;
+    }
+
+    public void setSnapshotMaxThreadsMultiplier(
+            Integer snapshotMaxThreadsMultiplier) {
+        this.snapshotMaxThreadsMultiplier = snapshotMaxThreadsMultiplier;
     }
 
     public String getSnapshotMode() {
