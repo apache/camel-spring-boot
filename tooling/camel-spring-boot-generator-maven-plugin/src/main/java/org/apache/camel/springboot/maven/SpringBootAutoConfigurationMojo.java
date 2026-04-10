@@ -309,7 +309,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             configClass.setPackage(packageName);
             configClass.setName(configName);
             configClass.extendSuperType(commonClass);
-            configClass.addAnnotation(loadClass("org.springframework.boot.context.properties.ConfigurationProperties"))
+            configClass.addAnnotation(loadAnnotationClass("org.springframework.boot.context.properties.ConfigurationProperties"))
                     .setStringValue("prefix", propertiesPrefix);
             configClass.addImport(Map.class);
             configClass.addImport(HashMap.class);
@@ -743,11 +743,15 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                     prop.getField().setStringInitializer(option.getDefaultValue().toString());
                 } else if ("duration".equals(option.getType())) {
                     String value = convertDurationToMills(option.getDefaultValue().toString());
-                    // duration is either long or int java type
-                    if ("long".equals(option.getJavaType()) || "java.lang.Long".equals(option.getJavaType())) {
+                    if ("java.time.Duration".equals(option.getJavaType())) {
+                        prop.getField().setLiteralInitializer("Duration.ofMillis(" + value + ")");
+                        javaClass.addImport("java.time.Duration");
+                    } else if ("long".equals(option.getJavaType()) || "java.lang.Long".equals(option.getJavaType())) {
                         value = value + "L";
+                        prop.getField().setLiteralInitializer(value);
+                    } else {
+                        prop.getField().setLiteralInitializer(value);
                     }
-                    prop.getField().setLiteralInitializer(value);
                 } else if ("long".equals(option.getJavaType()) || "java.lang.Long".equals(option.getJavaType())) {
                     // the value should be a Long number
                     String value = option.getDefaultValue() + "L";
@@ -882,6 +886,28 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             }
         }
         return optionClass;
+    }
+
+    // try loading annotation class, looking for inner classes if needed
+    private Class<? extends java.lang.annotation.Annotation> loadAnnotationClass(String loadClassName) throws MojoFailureException {
+        String currentClassName = loadClassName;
+        ClassNotFoundException lastException = null;
+
+        while (currentClassName != null) {
+            try {
+                return getProjectClassLoader().loadClass(currentClassName).asSubclass(java.lang.annotation.Annotation.class);
+            } catch (ClassNotFoundException e) {
+                lastException = e;
+                int dotIndex = currentClassName.lastIndexOf('.');
+                if (dotIndex == -1) {
+                    currentClassName = null;
+                } else {
+                    currentClassName = currentClassName.substring(0, dotIndex) + "$" + currentClassName.substring(dotIndex + 1);
+                }
+            }
+        }
+
+        throw new MojoFailureException(lastException.getMessage(), lastException);
     }
 
     protected DynamicClassLoader getProjectClassLoader() {

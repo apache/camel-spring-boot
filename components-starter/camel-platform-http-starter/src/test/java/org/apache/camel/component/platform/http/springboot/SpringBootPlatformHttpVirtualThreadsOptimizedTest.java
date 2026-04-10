@@ -25,6 +25,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.task.SimpleAsyncTaskExecutorBuilder;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -59,6 +60,11 @@ public class SpringBootPlatformHttpVirtualThreadsOptimizedTest extends PlatformH
             http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
                 .csrf(csrf -> csrf.disable());
             return http.build();
+        }
+
+        @Bean
+        public SimpleAsyncTaskExecutor simpleAsyncTaskExecutor(SimpleAsyncTaskExecutorBuilder simpleAsyncTaskExecutorBuilder) {
+            return simpleAsyncTaskExecutorBuilder.build();
         }
 
         @Bean

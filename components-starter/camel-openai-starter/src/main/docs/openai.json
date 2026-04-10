@@ -62,6 +62,13 @@
       "type": "java.lang.String",
       "description": "Default model for chat completion endpoints",
       "sourceType": "org.apache.camel.component.openai.springboot.OpenAIComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openai.use-global-ssl-context-parameters",
+      "type": "java.lang.Boolean",
+      "description": "Enable usage of global SSL context parameters",
+      "sourceType": "org.apache.camel.component.openai.springboot.OpenAIComponentConfiguration",
+      "defaultValue": false
     }
   ],
   "hints": [],

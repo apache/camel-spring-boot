@@ -142,6 +142,14 @@ public class PQCComponentConfiguration
      */
     private Signature signer;
     /**
+     * The warning threshold for stateful key exhaustion as a fraction of total
+     * signatures (0.0 to 1.0). When the remaining signatures for a stateful key
+     * (XMSS, XMSSMT, LMS/HSS) drop below this fraction of the total capacity, a
+     * WARN log is emitted. When remaining signatures reach zero, an exception
+     * is thrown to prevent key reuse. Set to 0 to disable warnings.
+     */
+    private Double statefulKeyWarningThreshold;
+    /**
      * In the context of extractSecretKeyFromEncapsulation operation, this
      * option define if we want to have the key set as header
      */
@@ -328,6 +336,15 @@ public class PQCComponentConfiguration
 
     public void setSigner(Signature signer) {
         this.signer = signer;
+    }
+
+    public Double getStatefulKeyWarningThreshold() {
+        return statefulKeyWarningThreshold;
+    }
+
+    public void setStatefulKeyWarningThreshold(
+            Double statefulKeyWarningThreshold) {
+        this.statefulKeyWarningThreshold = statefulKeyWarningThreshold;
     }
 
     public Boolean getStoreExtractedSecretKeyAsHeader() {

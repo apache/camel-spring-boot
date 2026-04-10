@@ -66,7 +66,7 @@ public class TelegramWebhookCallTest extends TelegramTestSupport {
 
     @BeforeAll
     protected static void doPreSetup() {
-        port = AvailablePortFinder.getNextAvailable();
+        port = AvailablePortFinder.find().getPort();
     }
 
     // *************************************

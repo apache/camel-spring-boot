@@ -25,4 +25,10 @@ public class CamelGroovyIT extends AbstractSpringBootBaseTestSupport {
     void languageTest() {
         assertLanguage(inferComponentName(getClass()));
     }
+
+    @Test
+    void dataformatTest() {
+        assertDataFormat("groovyXml");
+        assertDataFormat("groovyJson");
+    }
 }

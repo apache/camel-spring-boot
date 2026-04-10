@@ -57,7 +57,7 @@ public class WebhookHttpBindingTest {
 
     @BeforeAll
     public static void initPort() {
-        port = AvailablePortFinder.getNextAvailable();
+        port = AvailablePortFinder.find().getPort();
     }
 
     @Bean("wb-delegate-component")
