@@ -535,6 +535,15 @@ public class DebeziumSqlserverComponentConfiguration
      */
     private Integer snapshotMaxThreads = 1;
     /**
+     * The factor used to scale the number of snapshot chunks per table. The
+     * default behavior is to take 'row_count/snapshot.max.threads' to compute
+     * the number of rows per chunks. This may not be ideal for larger tables,
+     * and using the multiplier, the formula is adjusted to increase the number
+     * of chunks by using 'row_count/(snapshot.max.threads
+     * snapshot.max.threads.multiplier).
+     */
+    private Integer snapshotMaxThreadsMultiplier = 1;
+    /**
      * The criteria for running a snapshot upon startup of the connector. Select
      * one of the following snapshot options: 'initial' (default): If the
      * connector does not detect any offsets for the logical server name, it
@@ -1343,6 +1352,15 @@ public class DebeziumSqlserverComponentConfiguration
 
     public void setSnapshotMaxThreads(Integer snapshotMaxThreads) {
         this.snapshotMaxThreads = snapshotMaxThreads;
+    }
+
+    public Integer getSnapshotMaxThreadsMultiplier() {
+        return snapshotMaxThreadsMultiplier;
+    }
+
+    public void setSnapshotMaxThreadsMultiplier(
+            Integer snapshotMaxThreadsMultiplier) {
+        this.snapshotMaxThreadsMultiplier = snapshotMaxThreadsMultiplier;
     }
 
     public String getSnapshotMode() {

@@ -146,6 +146,20 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Integer binlogBufferSize = 0;
     /**
+     * The number of seconds to wait for a read from the binlog connection to
+     * complete before the server times out. A value of 0 means use the MySQL
+     * server default. May need to be increased in high-latency network
+     * environments to prevent EOFException during streaming.
+     */
+    private Long binlogNetReadTimeout = 0L;
+    /**
+     * The number of seconds to wait for a write to the binlog connection to
+     * complete before the server times out. A value of 0 means use the MySQL
+     * server default. May need to be increased when large data volumes cause
+     * EOFException during streaming.
+     */
+    private Long binlogNetWriteTimeout = 0L;
+    /**
      * Regular expressions matching columns to exclude from change events
      */
     private String columnExcludeList;
@@ -670,6 +684,15 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Integer snapshotMaxThreads = 1;
     /**
+     * The factor used to scale the number of snapshot chunks per table. The
+     * default behavior is to take 'row_count/snapshot.max.threads' to compute
+     * the number of rows per chunks. This may not be ideal for larger tables,
+     * and using the multiplier, the formula is adjusted to increase the number
+     * of chunks by using 'row_count/(snapshot.max.threads
+     * snapshot.max.threads.multiplier).
+     */
+    private Integer snapshotMaxThreadsMultiplier = 1;
+    /**
      * The criteria for running a snapshot upon startup of the connector. Select
      * one of the following snapshot options: 'when_needed': On startup, the
      * connector runs a snapshot if one is needed.; 'schema_only': If the
@@ -954,6 +977,22 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setBinlogBufferSize(Integer binlogBufferSize) {
         this.binlogBufferSize = binlogBufferSize;
+    }
+
+    public Long getBinlogNetReadTimeout() {
+        return binlogNetReadTimeout;
+    }
+
+    public void setBinlogNetReadTimeout(Long binlogNetReadTimeout) {
+        this.binlogNetReadTimeout = binlogNetReadTimeout;
+    }
+
+    public Long getBinlogNetWriteTimeout() {
+        return binlogNetWriteTimeout;
+    }
+
+    public void setBinlogNetWriteTimeout(Long binlogNetWriteTimeout) {
+        this.binlogNetWriteTimeout = binlogNetWriteTimeout;
     }
 
     public String getColumnExcludeList() {
@@ -1659,6 +1698,15 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setSnapshotMaxThreads(Integer snapshotMaxThreads) {
         this.snapshotMaxThreads = snapshotMaxThreads;
+    }
+
+    public Integer getSnapshotMaxThreadsMultiplier() {
+        return snapshotMaxThreadsMultiplier;
+    }
+
+    public void setSnapshotMaxThreadsMultiplier(
+            Integer snapshotMaxThreadsMultiplier) {
+        this.snapshotMaxThreadsMultiplier = snapshotMaxThreadsMultiplier;
     }
 
     public String getSnapshotMode() {
