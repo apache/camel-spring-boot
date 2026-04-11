@@ -16,3 +16,4 @@
 ## ---------------------------------------------------------------------------
 
 org.apache.camel.coap.springboot.CoAPComponentAutoConfiguration
+org.apache.camel.coap.springboot.CoAPComponentConverter
