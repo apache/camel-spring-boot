@@ -70,7 +70,7 @@ public class SupervisingRouteControllerTest {
 
     @Configuration
     public static class TestConfiguration {
-        private static final int PORT = AvailablePortFinder.getNextAvailable();
+        private static final int PORT = AvailablePortFinder.find().getPort();
 
         @Bean
         public RouteBuilder routeBuilder() {

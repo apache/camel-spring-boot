@@ -25,7 +25,7 @@ public abstract class HL7TestSupport {
 
     @BeforeAll
     public static void initPort() throws Exception {
-        port = AvailablePortFinder.getNextAvailable();
+        port = AvailablePortFinder.find().getPort();
     }
 
     protected static int getPort() {

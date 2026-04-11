@@ -54,7 +54,7 @@ public class UndertowSSLTest {
 
     @BeforeAll
     public static void init() {
-        port = AvailablePortFinder.getNextAvailable();
+        port = AvailablePortFinder.find().getPort();
     }
 
     @Test

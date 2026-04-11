@@ -40,7 +40,7 @@ import org.springframework.http.MediaType;
 @SpringBootTest
 public class RestDslPostTest {
 
-    static final int PORT = AvailablePortFinder.getNextAvailable(20000, 30000);
+    static final int PORT = AvailablePortFinder.find().getPort();
 
     @EndpointInject("mock:user")
     protected MockEndpoint resultEndpointUser;
