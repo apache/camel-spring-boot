@@ -57,7 +57,7 @@ public class ZooKeeperClusterServiceTest {
 
     @Test
     public void testClusterService() throws Exception {
-        final int zkPort = AvailablePortFinder.getNextAvailable();
+        final int zkPort = AvailablePortFinder.find().getPort();
         final File zkDir = temporaryFolder.toFile();
 
         try (TestingServer zkServer = new TestingServer(zkPort, zkDir)) {

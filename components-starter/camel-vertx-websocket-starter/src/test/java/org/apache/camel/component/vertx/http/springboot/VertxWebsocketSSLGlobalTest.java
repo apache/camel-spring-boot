@@ -59,7 +59,7 @@ public class VertxWebsocketSSLGlobalTest {
 
     @BeforeAll
     public static void init() {
-        port = AvailablePortFinder.getNextAvailable();
+        port = AvailablePortFinder.find().getPort();
     }
 
     @Test

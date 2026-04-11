@@ -47,7 +47,7 @@ import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
         SlackProducerTest.TestConfiguration.class })
 public class SlackProducerTest {
 
-    protected static final int UNDERTOW_PORT = AvailablePortFinder.getNextAvailable();
+    protected static final int UNDERTOW_PORT = AvailablePortFinder.find().getPort();
 
     @Autowired
     CamelContext context;

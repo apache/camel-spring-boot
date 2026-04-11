@@ -53,7 +53,7 @@ public class JsonPathPlatformHttpTest {
     public static final String JSON_PATH = "$.room[?(@.temperature > 20)]";
     public static final String RESULT = "HOT";
 
-    private static final int PORT = AvailablePortFinder.getNextAvailable();
+    private static final int PORT = AvailablePortFinder.find().getPort();
 
     @Bean
     CamelContextConfiguration contextConfiguration() {
