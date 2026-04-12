@@ -29,6 +29,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledForJreRange;
 import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.api.parallel.Isolated;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -54,6 +56,8 @@ import static org.assertj.core.api.Assertions.assertThat;
                     "camel.threads.virtual.enabled=true"
                 })
 public class CamelVirtualThreadsIT {
+
+    private static final Logger LOG = LoggerFactory.getLogger(CamelVirtualThreadsIT.class);
 
     @Autowired
     CamelContext context;
@@ -99,13 +103,6 @@ public class CamelVirtualThreadsIT {
         // Verify that the environment post processor set the camel.threads.virtual.enabled property
         String camelVirtualThreadsProperty = System.getProperty("camel.threads.virtual.enabled");
 
-        // Debug output to understand what's happening
-        System.out.println("=== Virtual Thread Configuration Debug ===");
-        System.out.println("System property camel.threads.virtual.enabled: " + camelVirtualThreadsProperty);
-        System.out.println("System property spring.threads.virtual.enabled: " + System.getProperty("spring.threads.virtual.enabled"));
-        System.out.println("Java version: " + System.getProperty("java.version"));
-        System.out.println("==========================================");
-
         assertThat(camelVirtualThreadsProperty)
                 .as("camel.threads.virtual.enabled should be automatically set by EnvironmentPostProcessor when spring.threads.virtual.enabled=true")
                 .isEqualTo("true");
@@ -114,22 +111,14 @@ public class CamelVirtualThreadsIT {
     @Test
     @EnabledForJreRange(min = JRE.JAVA_21)
     public void testRouteExecutesOnVirtualThread() throws Exception {
-        // Debug: Print configuration at test start
-        System.err.println("=== testRouteExecutesOnVirtualThread Debug ===");
-        System.err.println("System property camel.threads.virtual.enabled: " + System.getProperty("camel.threads.virtual.enabled"));
-        System.err.println("System property spring.threads.virtual.enabled: " + System.getProperty("spring.threads.virtual.enabled"));
-        System.err.println("CamelContext name: " + context.getName());
-
         // Check ThreadType.current()
         try {
             Class<?> threadTypeClass = Class.forName("org.apache.camel.util.concurrent.ThreadType");
             Object currentType = threadTypeClass.getMethod("current").invoke(null);
-            System.err.println("ThreadType.current(): " + currentType);
+            LOG.info("ThreadType.current(): {}", currentType);
         } catch (Exception e) {
-            System.err.println("Could not get ThreadType: " + e.getMessage());
+            LOG.debug("Could not get ThreadType: {}", e.getMessage());
         }
-
-        System.err.println("==============================================");
 
         CountDownLatch latch = new CountDownLatch(1);
         AtomicReference<Boolean> isVirtualThread = new AtomicReference<>(false);
@@ -149,11 +138,8 @@ public class CamelVirtualThreadsIT {
                         threadName.set(currentThread.getName());
                         threadClassName.set(currentThread.getClass().getName());
 
-                        System.err.println(">>> Thread executing route:");
-                        System.err.println("    Name: " + currentThread.getName());
-                        System.err.println("    Class: " + currentThread.getClass().getName());
-                        System.err.println("    Is Virtual: " + isVirtual);
-                        System.err.println("    Is Daemon: " + currentThread.isDaemon());
+                        LOG.info("Thread executing route: {} (class={}, virtual={}, daemon={})",
+                                currentThread.getName(), currentThread.getClass().getSimpleName(), isVirtual, currentThread.isDaemon());
 
                         latch.countDown();
                     });
@@ -173,10 +159,8 @@ public class CamelVirtualThreadsIT {
                     .until(() -> latch.getCount() == 0);
             
             // Assert that the route executed on a virtual thread
-            System.err.println(">>> Final assertion check:");
-            System.err.println("    isVirtualThread: " + isVirtualThread.get());
-            System.err.println("    threadName: " + threadName.get());
-            System.err.println("    threadClassName: " + threadClassName.get());
+            LOG.info("Asserting virtual thread: isVirtual={}, name={}, class={}",
+                    isVirtualThread.get(), threadName.get(), threadClassName.get());
 
             assertThat(isVirtualThread.get())
                 .as("Route should execute on a virtual thread when virtual threads are enabled.\n" +
