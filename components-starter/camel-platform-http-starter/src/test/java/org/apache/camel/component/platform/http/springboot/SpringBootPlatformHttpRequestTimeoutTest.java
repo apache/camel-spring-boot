@@ -39,7 +39,7 @@ import org.springframework.http.HttpStatusCode;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
         SpringBootPlatformHttpRequestTimeoutTest.TestConfiguration.class,
         PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class, },
-        properties = {"camel.component.platform-http.request-timeout=500"})
+        properties = {"camel.component.platform-http.request-timeout=100"})
 @AutoConfigureMockMvc
 @AutoConfigureRestTestClient
 public class SpringBootPlatformHttpRequestTimeoutTest {
