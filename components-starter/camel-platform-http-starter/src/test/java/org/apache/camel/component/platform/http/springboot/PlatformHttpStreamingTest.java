@@ -43,6 +43,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.emptyOrNullString;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @EnableAutoConfiguration
@@ -130,7 +131,7 @@ public class PlatformHttpStreamingTest {
                 .then()
                 .statusCode(200)
                 .header("foo", "bar")
-                .header("BodyClass", containsString("ReaderCache"))
+                .header("BodyClass", containsString("[B"))
                 .body(is("foo=bar"));
     }
 
@@ -153,6 +154,73 @@ public class PlatformHttpStreamingTest {
             }
 
         assertEquals(fileContent, Files.readString(output, StandardCharsets.ISO_8859_1));
+    }
+
+    @Test
+    void testNonStreamingWithBinaryData() {
+        byte[] binaryData = new byte[] {0x00, 0x0c, (byte) 0x80, (byte) 0xff, (byte) 0xfe, 0x0f, 0x0e};
+        byte[] response = given()
+                .body(binaryData)
+                .contentType(ContentType.BINARY)
+                .post("/binaryData")
+                .then()
+                .statusCode(200)
+                .extract().body().asByteArray();
+        assertArrayEquals(binaryData, response);
+    }
+
+    @Test
+    void testStreamingWithBinaryData() {
+        byte[] binaryData = new byte[] {0x00, 0x0c, (byte) 0x80, (byte) 0xff, (byte) 0xfe, 0x0f, 0x0e};
+        byte[] response = given()
+                .body(binaryData)
+                .contentType(ContentType.BINARY)
+                .post("/streamingBinaryData")
+                .then()
+                .statusCode(200)
+                .extract().body().asByteArray();
+        assertArrayEquals(binaryData, response);
+    }
+
+    @Test
+    void testNonStreamingWithKnownContentLength() {
+        // When Content-Length is known, the optimized readNBytes(len) path is used
+        // (single byte[] allocation instead of incremental readAllBytes)
+        byte[] largeBody = new byte[8192];
+        for (int i = 0; i < largeBody.length; i++) {
+            largeBody[i] = (byte) (i % 256);
+        }
+        byte[] response = given()
+                .body(largeBody)
+                .contentType(ContentType.BINARY)
+                .post("/binaryData")
+                .then()
+                .statusCode(200)
+                .extract().body().asByteArray();
+        assertArrayEquals(largeBody, response);
+    }
+
+    @Test
+    void testStreamingBodyIsStreamCache() {
+        String requestBody = "streaming body type check";
+        given()
+                .body(requestBody)
+                .post("/streamingBodyType")
+                .then()
+                .statusCode(200)
+                .header("BodyIsStreamCache", "true")
+                .body(is(requestBody));
+    }
+
+    @Test
+    void testNonStreamingBodyIsByteArray() {
+        String requestBody = "non-streaming body type check";
+        given()
+                .body(requestBody)
+                .post("/nonStreamingBodyType")
+                .then()
+                .statusCode(200)
+                .header("BodyIsStreamCache", "false");
     }
 
     @Configuration
@@ -188,6 +256,18 @@ public class PlatformHttpStreamingTest {
                             .process(exchange ->
                                     exchange.getMessage().setHeader("BodyClass", exchange.getIn().getBody().getClass().getName()))
                             .log("Done processing request");
+
+                    from("platform-http:/binaryData").log("Done processing binary request");
+
+                    from("platform-http:/streamingBinaryData?useStreaming=true").log("Done processing streaming binary request");
+                    from("platform-http:/streamingBodyType?useStreaming=true")
+                            .process(exchange -> exchange.getMessage().setHeader("BodyIsStreamCache",
+                                    String.valueOf(exchange.getIn().getBody() instanceof org.apache.camel.StreamCache)))
+                            .log("Done processing streaming body type check");
+                    from("platform-http:/nonStreamingBodyType")
+                            .process(exchange -> exchange.getMessage().setHeader("BodyIsStreamCache",
+                                    String.valueOf(exchange.getIn().getBody() instanceof org.apache.camel.StreamCache)))
+                            .log("Done processing non-streaming body type check");
                 }
             };
         }
