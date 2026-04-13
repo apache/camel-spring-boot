@@ -16,3 +16,4 @@
 ## ---------------------------------------------------------------------------
 
 org.apache.camel.component.exec.springboot.ExecComponentAutoConfiguration
+org.apache.camel.component.exec.springboot.ExecComponentConverter

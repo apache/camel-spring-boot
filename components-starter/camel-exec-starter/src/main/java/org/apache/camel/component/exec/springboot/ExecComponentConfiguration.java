@@ -16,6 +16,8 @@
  */
 package org.apache.camel.component.exec.springboot;
 
+import org.apache.camel.component.exec.ExecBinding;
+import org.apache.camel.component.exec.ExecCommandExecutor;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -46,6 +48,24 @@ public class ExecComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * The timeout, in milliseconds, after which the executable should be
+     * terminated. If execution has not completed within the timeout, the
+     * component will send a termination request.
+     */
+    private Long timeout;
+    /**
+     * The directory in which the command should be executed. If null, the
+     * working directory of the current process will be used.
+     */
+    private String workingDir;
+    /**
+     * Whether to allow to use Camel headers or not (default false). Enabling
+     * this allows to specify dynamic command line arguments via message header.
+     * However this can be seen as a potential security vulnerability if the
+     * header is coming from a malicious user, so use this with care.
+     */
+    private Boolean allowControlHeaders = false;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -54,6 +74,20 @@ public class ExecComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * To use a custom org.apache.commons.exec.ExecBinding for advanced
+     * use-cases. The option is a org.apache.camel.component.exec.ExecBinding
+     * type.
+     */
+    private ExecBinding binding;
+    /**
+     * To use a custom org.apache.commons.exec.ExecCommandExecutor that
+     * customizes the command execution. The default command executor utilizes
+     * the commons-exec library, which adds a shutdown hook for every executed
+     * command. The option is a
+     * org.apache.camel.component.exec.ExecCommandExecutor type.
+     */
+    private ExecCommandExecutor commandExecutor;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -63,11 +97,51 @@ public class ExecComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public Long getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(Long timeout) {
+        this.timeout = timeout;
+    }
+
+    public String getWorkingDir() {
+        return workingDir;
+    }
+
+    public void setWorkingDir(String workingDir) {
+        this.workingDir = workingDir;
+    }
+
+    public Boolean getAllowControlHeaders() {
+        return allowControlHeaders;
+    }
+
+    public void setAllowControlHeaders(Boolean allowControlHeaders) {
+        this.allowControlHeaders = allowControlHeaders;
+    }
+
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public ExecBinding getBinding() {
+        return binding;
+    }
+
+    public void setBinding(ExecBinding binding) {
+        this.binding = binding;
+    }
+
+    public ExecCommandExecutor getCommandExecutor() {
+        return commandExecutor;
+    }
+
+    public void setCommandExecutor(ExecCommandExecutor commandExecutor) {
+        this.commandExecutor = commandExecutor;
     }
 }
