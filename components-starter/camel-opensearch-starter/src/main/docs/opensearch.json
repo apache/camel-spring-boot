@@ -106,6 +106,19 @@
       "defaultValue": 30000
     },
     {
+      "name": "camel.component.opensearch.ssl-context-parameters",
+      "type": "org.apache.camel.support.jsse.SSLContextParameters",
+      "description": "To configure security using SSLContextParameters. When configured, this takes precedence over the certificatePath option. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
+      "sourceType": "org.apache.camel.component.opensearch.springboot.OpensearchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.opensearch.use-global-ssl-context-parameters",
+      "type": "java.lang.Boolean",
+      "description": "Enable usage of global SSL context parameters.",
+      "sourceType": "org.apache.camel.component.opensearch.springboot.OpensearchComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.opensearch.user",
       "type": "java.lang.String",
       "description": "Basic authenticate user",
