@@ -21,12 +21,12 @@ import org.apache.camel.spring.boot.actuate.health.readiness.CamelReadinessState
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.health.contributor.Health;
 import org.springframework.boot.health.contributor.HealthContributors;
 import org.springframework.boot.health.contributor.HealthIndicator;
 import org.springframework.boot.health.registry.HealthContributorRegistry;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
@@ -41,7 +41,7 @@ import java.time.ZonedDateTime;
  *
  * TODO: To be refactored once async health contributors feature will be added in spring boot.
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnProperty(prefix = "camel.health", name = "async-camel-health-check", havingValue = "true")
 public class AsyncHealthIndicatorAutoConfiguration implements InitializingBean {
     private static final Logger log = LoggerFactory.getLogger(AsyncHealthIndicatorAutoConfiguration.class);
@@ -90,7 +90,7 @@ public class AsyncHealthIndicatorAutoConfiguration implements InitializingBean {
 
         private HealthIndicator wrappedHealthIndicator;
 
-        private Health lastHealth;
+        private volatile Health lastHealth;
 
         public WrappedHealthIndicator(HealthIndicator wrappedHealthIndicator) {
             this.wrappedHealthIndicator = wrappedHealthIndicator;

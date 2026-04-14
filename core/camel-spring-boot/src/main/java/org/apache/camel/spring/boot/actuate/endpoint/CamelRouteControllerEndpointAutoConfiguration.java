@@ -19,20 +19,18 @@ package org.apache.camel.spring.boot.actuate.endpoint;
 import org.apache.camel.CamelContext;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.springframework.boot.actuate.autoconfigure.endpoint.condition.ConditionalOnAvailableEndpoint;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /*
  * Auto configuration for the {@link CamelRouteControllerEndpoint}.
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(after = CamelAutoConfiguration.class)
 @ConditionalOnAvailableEndpoint(endpoint = CamelRouteControllerEndpoint.class)
 @ConditionalOnBean(CamelAutoConfiguration.class)
-@AutoConfigureAfter(CamelAutoConfiguration.class)
 public class CamelRouteControllerEndpointAutoConfiguration {
 
     @Bean

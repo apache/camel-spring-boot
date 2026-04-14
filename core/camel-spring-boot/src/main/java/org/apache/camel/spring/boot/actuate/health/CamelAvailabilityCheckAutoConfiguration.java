@@ -21,28 +21,29 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.actuate.health.liveness.CamelLivenessStateHealthIndicator;
 import org.apache.camel.spring.boot.actuate.health.readiness.CamelReadinessStateHealthIndicator;
 
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.availability.ApplicationAvailabilityAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.availability.ApplicationAvailability;
 import org.springframework.boot.health.application.LivenessStateHealthIndicator;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration(proxyBeanMethods = false)
-@AutoConfigureAfter({ CamelAutoConfiguration.class, ApplicationAvailabilityAutoConfiguration.class })
+@AutoConfiguration(after = { CamelAutoConfiguration.class, ApplicationAvailabilityAutoConfiguration.class })
 @ConditionalOnBean(CamelAutoConfiguration.class)
 @ConditionalOnClass(LivenessStateHealthIndicator.class)
 public class CamelAvailabilityCheckAutoConfiguration {
 
     @Bean
+    @ConditionalOnMissingBean
     public CamelLivenessStateHealthIndicator camelLivenessStateHealthIndicator(
             ApplicationAvailability applicationAvailability, CamelContext camelContext) {
         return new CamelLivenessStateHealthIndicator(applicationAvailability, camelContext);
     }
 
     @Bean
+    @ConditionalOnMissingBean
     public CamelReadinessStateHealthIndicator camelReadinessStateHealthIndicator(
             ApplicationAvailability applicationAvailability, CamelContext camelContext) {
         return new CamelReadinessStateHealthIndicator(applicationAvailability, camelContext);

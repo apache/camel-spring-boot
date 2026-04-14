@@ -65,14 +65,13 @@ import org.apache.camel.util.ObjectHelper;
 import org.apache.camel.util.StringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportRuntimeHints;
 import org.springframework.context.annotation.Lazy;
@@ -83,7 +82,7 @@ import org.springframework.core.env.EnumerablePropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.MutablePropertySources;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 @EnableConfigurationProperties({CamelConfigurationProperties.class, CamelStartupConditionConfigurationProperties.class, PropertiesComponentConfiguration.class})
 @Import(TypeConversionConfiguration.class)
 @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
@@ -251,30 +250,28 @@ public class CamelAutoConfiguration {
     }
 
     static void configureDebugger(ApplicationContext applicationContext, CamelContext camelContext) {
-        try {
-            DebuggerConfigurationProperties debug = applicationContext.getBean(DebuggerConfigurationProperties.class);
-            DefaultConfigurationConfigurer.configureBacklogDebugger(camelContext, debug);
-        } catch (BeansException e) {
-            // optional so ignore
-        } catch (Exception e) {
-            throw RuntimeCamelException.wrapRuntimeException(e);
-        }
+        applicationContext.getBeanProvider(DebuggerConfigurationProperties.class).ifAvailable(debug -> {
+            try {
+                DefaultConfigurationConfigurer.configureBacklogDebugger(camelContext, debug);
+            } catch (Exception e) {
+                throw RuntimeCamelException.wrapRuntimeException(e);
+            }
+        });
     }
 
     static void configureCliConnector(ApplicationContext applicationContext, CamelContext camelContext) {
         // factory is bound eager into spring bean registry
-        try {
-            CliConnectorFactory ccf = applicationContext.getBean(CliConnectorFactory.class);
-            CliConnector connector = ccf.createConnector();
-            camelContext.addService(connector, true);
-            // force start cli connector early as otherwise it will be deferred until context is started
-            // but, we want status available during startup phase
-            ServiceHelper.startService(connector);
-        } catch (BeansException e) {
-            // optional so ignore
-        } catch (Exception e) {
-            throw RuntimeCamelException.wrapRuntimeException(e);
-        }
+        applicationContext.getBeanProvider(CliConnectorFactory.class).ifAvailable(ccf -> {
+            try {
+                CliConnector connector = ccf.createConnector();
+                camelContext.addService(connector, true);
+                // force start cli connector early as otherwise it will be deferred until context is started
+                // but, we want status available during startup phase
+                ServiceHelper.startService(connector);
+            } catch (Exception e) {
+                throw RuntimeCamelException.wrapRuntimeException(e);
+            }
+        });
     }
 
     static void configureStartupRecorder(CamelContext camelContext, CamelConfigurationProperties config) {

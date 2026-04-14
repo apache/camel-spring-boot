@@ -122,7 +122,7 @@ public class CamelRoutesEndpoint {
     }
 
     private Route getRoute(String id){
-        return getRoutes().stream().filter(x->x.getId().equals(id)).findAny().get();
+        return getRoutes().stream().filter(x->x.getId().equals(id)).findAny().orElse(null);
     }
 
     private Collection<Route> getRoutes(){

@@ -19,16 +19,14 @@ package org.apache.camel.spring.boot.vault;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.vault.KubernetesConfigMapVaultConfiguration;
 import org.apache.camel.vault.KubernetesVaultConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(after = CamelAutoConfiguration.class)
 @ConditionalOnBean(CamelAutoConfiguration.class)
 @EnableConfigurationProperties(KubernetesConfigMapVaultConfigurationProperties.class)
-@AutoConfigureAfter(CamelAutoConfiguration.class)
 public class KubernetesConfigMapVaultAutoConfiguration {
 
     @Bean
