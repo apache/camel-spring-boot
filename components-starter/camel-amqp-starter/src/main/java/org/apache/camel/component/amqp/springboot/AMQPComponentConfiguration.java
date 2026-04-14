@@ -849,6 +849,19 @@ public class AMQPComponentConfiguration
      */
     private Boolean errorHandlerLogStackTrace = true;
     /**
+     * Sets an ObjectInputFilter pattern (jdk.serialFilter syntax) applied as a
+     * defense-in-depth check on the class of the body returned by
+     * jakarta.jms.ObjectMessage.getObject(). The pattern is evaluated after the
+     * JMS provider has deserialized the payload, so this option alone does not
+     * prevent gadget-chain execution that happens inside the provider's
+     * ObjectInputStream; to block such attacks, also configure the JMS
+     * provider's own deserialization filter and/or the JVM-wide
+     * -Djdk.serialFilter. When this option is not set and no JVM-wide filter is
+     * configured, a conservative default filter allowing java., javax. and
+     * org.apache.camel. is applied.
+     */
+    private String deserializationFilter;
+    /**
      * The SSL keystore password.
      */
     private String keyStorePassword;
@@ -1800,6 +1813,14 @@ public class AMQPComponentConfiguration
 
     public void setErrorHandlerLogStackTrace(Boolean errorHandlerLogStackTrace) {
         this.errorHandlerLogStackTrace = errorHandlerLogStackTrace;
+    }
+
+    public String getDeserializationFilter() {
+        return deserializationFilter;
+    }
+
+    public void setDeserializationFilter(String deserializationFilter) {
+        this.deserializationFilter = deserializationFilter;
     }
 
     public String getKeyStorePassword() {
