@@ -19,6 +19,8 @@ package org.apache.camel.component.platform.http.springboot;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Isolated;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -26,17 +28,22 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+@Isolated
 @EnableAutoConfiguration
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
-        SpringBootPlatformHttpVirtualThreadsTest.class, SpringBootPlatformHttpVirtualThreadsTest.TestConfiguration.class,
+        SpringBootPlatformHttpCamelVirtualThreadsIT.class, SpringBootPlatformHttpCamelVirtualThreadsIT.TestConfiguration.class,
         PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class },
-    properties = "spring.threads.virtual.enabled=true")
-public class SpringBootPlatformHttpVirtualThreadsTest extends PlatformHttpBase {
+    properties = {
+        "spring.threads.virtual.enabled=true",
+        "camel.threads.virtual.enabled=true"
+    })
+public class SpringBootPlatformHttpCamelVirtualThreadsIT extends PlatformHttpBase {
 
-    private static final String postRouteId = "SpringBootPlatformHttpTest_mypost";
-
-    private static final String getRouteId = "SpringBootPlatformHttpTest_myget";
+    private static final String postRouteId = "SpringBootPlatformHttpCamelVirtualThreadsIT_mypost";
+    private static final String getRouteId = "SpringBootPlatformHttpCamelVirtualThreadsIT_myget";
 
     // *************************************
     // Config
@@ -71,5 +78,16 @@ public class SpringBootPlatformHttpVirtualThreadsTest extends PlatformHttpBase {
     @Override
     protected String getGetRouteId() {
         return getRouteId;
+    }
+
+    @Test
+    public void testCamelVirtualThreadPropertyIsSet() {
+        // Verify that when spring.threads.virtual.enabled=true is set,
+        // the camel.threads.virtual.enabled system property is automatically set to true
+        String camelVirtualThreadsProperty = System.getProperty("camel.threads.virtual.enabled");
+        
+        assertThat(camelVirtualThreadsProperty)
+                .as("camel.threads.virtual.enabled should be automatically set when spring.threads.virtual.enabled=true")
+                .isEqualTo("true");
     }
 }

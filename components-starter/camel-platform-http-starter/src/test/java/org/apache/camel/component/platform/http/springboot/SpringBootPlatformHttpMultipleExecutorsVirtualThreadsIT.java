@@ -19,38 +19,65 @@ package org.apache.camel.component.platform.http.springboot;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Isolated;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
+import org.springframework.test.web.servlet.client.RestTestClient;
+import org.springframework.test.web.servlet.client.EntityExchangeResult;
+import org.springframework.boot.task.SimpleAsyncTaskExecutorBuilder;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.List;
+import java.util.concurrent.Executor;
 
+@Isolated
 @EnableAutoConfiguration
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
-        SpringBootPlatformHttpCamelVirtualThreadsTest.class, SpringBootPlatformHttpCamelVirtualThreadsTest.TestConfiguration.class,
+        SpringBootPlatformHttpMultipleExecutorsVirtualThreadsIT.class,
+        SpringBootPlatformHttpMultipleExecutorsVirtualThreadsIT.TestConfiguration.class,
         PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class },
-    properties = "spring.threads.virtual.enabled=true")
-public class SpringBootPlatformHttpCamelVirtualThreadsTest extends PlatformHttpBase {
+    properties = {
+        "spring.threads.virtual.enabled=true",
+        "camel.threads.virtual.enabled=true"
+    })
+@EnableScheduling
+@AutoConfigureRestTestClient
+public class SpringBootPlatformHttpMultipleExecutorsVirtualThreadsIT extends PlatformHttpBase {
 
-    private static final String postRouteId = "SpringBootPlatformHttpCamelVirtualThreadsTest_mypost";
-    private static final String getRouteId = "SpringBootPlatformHttpCamelVirtualThreadsTest_myget";
+    private static final String THREAD_PREFIX = "myThread-";
+
+    private static final String postRouteId = "SpringBootPlatformHttpMultipleExecutorsIT_mypost";
+
+    private static final String getRouteId = "SpringBootPlatformHttpMultipleExecutorsIT_myget";
 
     // *************************************
     // Config
     // *************************************
     @Configuration
     public static class TestConfiguration {
-
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
             http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
                 .csrf(csrf -> csrf.disable());
             return http.build();
+        }
+
+
+        @Bean
+        public SimpleAsyncTaskExecutor simpleAsyncTaskExecutor(SimpleAsyncTaskExecutorBuilder simpleAsyncTaskExecutorBuilder) {
+            return simpleAsyncTaskExecutorBuilder
+                .threadNamePrefix(THREAD_PREFIX)
+                .build();
         }
 
         @Bean
@@ -60,6 +87,8 @@ public class SpringBootPlatformHttpCamelVirtualThreadsTest extends PlatformHttpB
                 public void configure() {
                     from("platform-http:/myget").id(postRouteId).setBody().constant("get");
                     from("platform-http:/mypost").id(getRouteId).transform().body(String.class, b -> b.toUpperCase());
+
+                    from("platform-http:/executor").process(exchange -> exchange.getIn().setBody(Thread.currentThread().getName()));
                 }
             };
         }
@@ -75,14 +104,18 @@ public class SpringBootPlatformHttpCamelVirtualThreadsTest extends PlatformHttpB
         return getRouteId;
     }
 
+    @Autowired
+    List<Executor> executors;
+
     @Test
-    public void testCamelVirtualThreadPropertyIsSet() {
-        // Verify that when spring.threads.virtual.enabled=true is set,
-        // the camel.threads.virtual.enabled system property is automatically set to true
-        String camelVirtualThreadsProperty = System.getProperty("camel.threads.virtual.enabled");
-        
-        assertThat(camelVirtualThreadsProperty)
-                .as("camel.threads.virtual.enabled should be automatically set when spring.threads.virtual.enabled=true")
-                .isEqualTo("true");
+    public void checkCustomExecutorIsPickedWhenMultipleExecutorsAreDefined() {
+        Assertions.assertThat(executors).hasSizeGreaterThan(1);
+
+        EntityExchangeResult<String> result = restTestClient.post().uri("/executor")
+                .body("test")
+                .exchange()
+                .expectBody(String.class)
+                .returnResult();
+        Assertions.assertThat(result.getResponseBody()).contains(THREAD_PREFIX);
     }
 }

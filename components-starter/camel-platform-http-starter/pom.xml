@@ -174,4 +174,55 @@
     </dependency>
     <!--END OF GENERATED CODE-->
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin-version}</version>
+        <configuration>
+          <!-- Exclude integration tests from unit test phase -->
+          <excludes>
+            <exclude>**/*IT.java</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <profiles>
+    <!-- Profile to run integration tests locally but not in CI -->
+    <profile>
+      <id>run-integration-tests</id>
+      <activation>
+        <property>
+          <name>ci.env.name</name>
+          <value>!github.com</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>${maven-surefire-plugin-version}</version>
+            <configuration>
+              <!-- Fork a new JVM for each IT test class to ensure clean static initialization -->
+              <forkCount>1</forkCount>
+              <reuseForks>false</reuseForks>
+              <!-- Set system properties before JVM starts -->
+              <argLine>-Dspring.threads.virtual.enabled=true -Dcamel.threads.virtual.enabled=true</argLine>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

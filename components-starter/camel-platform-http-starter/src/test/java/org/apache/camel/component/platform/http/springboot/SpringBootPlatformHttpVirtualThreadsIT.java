@@ -19,60 +19,41 @@ package org.apache.camel.component.platform.http.springboot;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.jupiter.api.parallel.Isolated;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
-import org.springframework.test.web.servlet.client.RestTestClient;
-import org.springframework.test.web.servlet.client.EntityExchangeResult;
-import org.springframework.boot.task.SimpleAsyncTaskExecutorBuilder;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.task.SimpleAsyncTaskExecutor;
-import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 
-import java.util.List;
-import java.util.concurrent.Executor;
-
+@Isolated
 @EnableAutoConfiguration
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
-        SpringBootPlatformHttpMultipleExecutorsVirtualThreadsTest.class,
-        SpringBootPlatformHttpMultipleExecutorsVirtualThreadsTest.TestConfiguration.class,
+        SpringBootPlatformHttpVirtualThreadsIT.class, SpringBootPlatformHttpVirtualThreadsIT.TestConfiguration.class,
         PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class },
-    properties = "spring.threads.virtual.enabled=true")
-@EnableScheduling
-@AutoConfigureRestTestClient
-public class SpringBootPlatformHttpMultipleExecutorsVirtualThreadsTest extends PlatformHttpBase {
+    properties = {
+        "spring.threads.virtual.enabled=true",
+        "camel.threads.virtual.enabled=true"
+    })
+public class SpringBootPlatformHttpVirtualThreadsIT extends PlatformHttpBase {
 
-    private static final String THREAD_PREFIX = "myThread-";
+    private static final String postRouteId = "SpringBootPlatformHttpIT_mypost";
 
-    private static final String postRouteId = "SpringBootPlatformHttpMultipleExecutorsTest_mypost";
-
-    private static final String getRouteId = "SpringBootPlatformHttpMultipleExecutorsTest_myget";
+    private static final String getRouteId = "SpringBootPlatformHttpIT_myget";
 
     // *************************************
     // Config
     // *************************************
     @Configuration
     public static class TestConfiguration {
+
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
             http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
                 .csrf(csrf -> csrf.disable());
             return http.build();
-        }
-
-
-        @Bean
-        public SimpleAsyncTaskExecutor simpleAsyncTaskExecutor(SimpleAsyncTaskExecutorBuilder simpleAsyncTaskExecutorBuilder) {
-            return simpleAsyncTaskExecutorBuilder
-                .threadNamePrefix(THREAD_PREFIX)
-                .build();
         }
 
         @Bean
@@ -82,8 +63,6 @@ public class SpringBootPlatformHttpMultipleExecutorsVirtualThreadsTest extends P
                 public void configure() {
                     from("platform-http:/myget").id(postRouteId).setBody().constant("get");
                     from("platform-http:/mypost").id(getRouteId).transform().body(String.class, b -> b.toUpperCase());
-
-                    from("platform-http:/executor").process(exchange -> exchange.getIn().setBody(Thread.currentThread().getName()));
                 }
             };
         }
@@ -97,20 +76,5 @@ public class SpringBootPlatformHttpMultipleExecutorsVirtualThreadsTest extends P
     @Override
     protected String getGetRouteId() {
         return getRouteId;
-    }
-
-    @Autowired
-    List<Executor> executors;
-
-    @Test
-    public void checkCustomExecutorIsPickedWhenMultipleExecutorsAreDefined() {
-        Assertions.assertThat(executors).hasSizeGreaterThan(1);
-
-        EntityExchangeResult<String> result = restTestClient.post().uri("/executor")
-                .body("test")
-                .exchange()
-                .expectBody(String.class)
-                .returnResult();
-        Assertions.assertThat(result.getResponseBody()).contains(THREAD_PREFIX);
     }
 }
