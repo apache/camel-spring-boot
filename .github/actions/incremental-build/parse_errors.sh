@@ -21,8 +21,11 @@ set +e
 
 LOG_FILE=$1
 
+# Echo immediately to verify script is being invoked
+echo "" >&2
 echo "============================================================" >&2
 echo "[parse_errors.sh START] $(date '+%Y-%m-%d %H:%M:%S')" >&2
+echo "[parse_errors.sh] PWD: $(pwd)" >&2
 echo "[parse_errors.sh] Processing: $LOG_FILE" >&2
 echo "============================================================" >&2
 
