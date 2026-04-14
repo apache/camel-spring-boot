@@ -20,16 +20,13 @@ import org.apache.camel.impl.engine.DefaultSupervisingRouteController;
 import org.apache.camel.spi.RouteController;
 import org.apache.camel.spi.SupervisingRouteController;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration(proxyBeanMethods = false)
-@AutoConfigureBefore(CamelAutoConfiguration.class)
+@AutoConfiguration(before = CamelAutoConfiguration.class)
 @ConditionalOnProperty(prefix = "camel.routecontroller", name = "enabled")
 @EnableConfigurationProperties(SupervisingRouteControllerConfiguration.class)
 public class SupervisingRouteControllerAutoConfiguration {

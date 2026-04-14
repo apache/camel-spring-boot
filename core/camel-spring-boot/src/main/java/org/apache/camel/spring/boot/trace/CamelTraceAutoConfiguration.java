@@ -19,16 +19,14 @@ package org.apache.camel.spring.boot.trace;
 import org.apache.camel.CamelContext;
 import org.apache.camel.spi.BacklogTracer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(after = CamelAutoConfiguration.class)
 @ConditionalOnBean(CamelAutoConfiguration.class)
 @EnableConfigurationProperties(CamelTraceConfigurationProperties.class)
-@AutoConfigureAfter(CamelAutoConfiguration.class)
 public class CamelTraceAutoConfiguration {
 
     @Bean

@@ -23,7 +23,7 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.support.jsse.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionMessage;
 import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -34,11 +34,9 @@ import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
-@Configuration(proxyBeanMethods = false)
-@AutoConfigureAfter(CamelAutoConfiguration.class)
+@AutoConfiguration(after = CamelAutoConfiguration.class)
 @EnableConfigurationProperties(CamelSSLConfigurationProperties.class)
 public class CamelSSLAutoConfiguration {
 

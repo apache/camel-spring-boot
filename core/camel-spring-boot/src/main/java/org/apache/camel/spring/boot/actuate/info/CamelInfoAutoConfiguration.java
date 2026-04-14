@@ -20,29 +20,23 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.springframework.boot.actuate.autoconfigure.info.ConditionalOnEnabledInfoContributor;
 import org.springframework.boot.actuate.info.InfoContributor;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(after = CamelAutoConfiguration.class)
 @ConditionalOnClass({ InfoContributor.class })
 @ConditionalOnBean(CamelAutoConfiguration.class)
-@AutoConfigureAfter(CamelAutoConfiguration.class)
 public class CamelInfoAutoConfiguration {
 
+    @Bean
     @ConditionalOnClass({ CamelContext.class })
     @ConditionalOnMissingBean(CamelInfoContributor.class)
     @ConditionalOnEnabledInfoContributor(value = "camel")
-    protected static class CamelInfoContributorInitializer {
-
-        @Bean
-        public InfoContributor camelInfoContributor(CamelContext camelContext) {
-            return new CamelInfoContributor(camelContext);
-        }
-
+    public InfoContributor camelInfoContributor(CamelContext camelContext) {
+        return new CamelInfoContributor(camelContext);
     }
 
 }

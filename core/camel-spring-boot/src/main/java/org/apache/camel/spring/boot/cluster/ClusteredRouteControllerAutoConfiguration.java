@@ -17,8 +17,6 @@
 package org.apache.camel.spring.boot.cluster;
 
 import java.time.Duration;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import org.apache.camel.cluster.CamelClusterService;
@@ -29,38 +27,31 @@ import org.apache.camel.impl.cluster.ClusteredRouteFilters;
 import org.apache.camel.spi.RouteController;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.util.ObjectHelper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 
-@Configuration(proxyBeanMethods = false)
-@AutoConfigureBefore(CamelAutoConfiguration.class)
+@AutoConfiguration(before = CamelAutoConfiguration.class)
 @ConditionalOnProperty(prefix = "camel.clustered.controller", name = "enabled")
 @EnableConfigurationProperties(ClusteredRouteControllerConfiguration.class)
 public class ClusteredRouteControllerAutoConfiguration {
 
-    @Autowired(required = false)
-    private List<ClusteredRouteFilter> filters = Collections.emptyList();
-
     @Bean
-    @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
     @ConditionalOnMissingBean
     @ConditionalOnBean(CamelClusterService.class)
-    public RouteController routeController(ClusteredRouteControllerConfiguration configuration) {
+    public RouteController routeController(ClusteredRouteControllerConfiguration configuration,
+            ObjectProvider<ClusteredRouteFilter> filtersProvider) {
         ClusteredRouteController controller = new ClusteredRouteController();
         controller.setNamespace(configuration.getNamespace());
 
         Optional.ofNullable(configuration.getInitialDelay()).map(TimePatternConverter::toMilliSeconds)
                 .map(Duration::ofMillis).ifPresent(controller::setInitialDelay);
 
-        controller.setFilters(filters);
+        controller.setFilters(filtersProvider.orderedStream().toList());
         controller.addFilter(new ClusteredRouteFilters.IsAutoStartup());
 
         if (ObjectHelper.isNotEmpty(configuration.getClusterService())) {
