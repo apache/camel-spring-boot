@@ -20,6 +20,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Isolated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,16 +36,20 @@ import java.util.concurrent.Executor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Isolated
 @EnableAutoConfiguration
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
-        SpringBootPlatformHttpVirtualThreadsOptimizedTest.class, SpringBootPlatformHttpVirtualThreadsOptimizedTest.TestConfiguration.class,
+        SpringBootPlatformHttpVirtualThreadsOptimizedIT.class, SpringBootPlatformHttpVirtualThreadsOptimizedIT.TestConfiguration.class,
         PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class },
-    properties = "spring.threads.virtual.enabled=true")
-public class SpringBootPlatformHttpVirtualThreadsOptimizedTest extends PlatformHttpBase {
+    properties = {
+        "spring.threads.virtual.enabled=true",
+        "camel.threads.virtual.enabled=true"
+    })
+public class SpringBootPlatformHttpVirtualThreadsOptimizedIT extends PlatformHttpBase {
 
-    private static final String postRouteId = "SpringBootPlatformHttpVirtualThreadsOptimizedTest_mypost";
-    private static final String getRouteId = "SpringBootPlatformHttpVirtualThreadsOptimizedTest_myget";
+    private static final String postRouteId = "SpringBootPlatformHttpVirtualThreadsOptimizedIT_mypost";
+    private static final String getRouteId = "SpringBootPlatformHttpVirtualThreadsOptimizedIT_myget";
 
     @Autowired
     private List<Executor> executors;
