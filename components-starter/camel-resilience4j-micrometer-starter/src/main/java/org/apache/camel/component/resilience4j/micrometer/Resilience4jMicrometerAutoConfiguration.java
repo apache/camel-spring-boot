@@ -22,12 +22,12 @@ import io.micrometer.core.instrument.MeterRegistry;
 import org.apache.camel.CamelContext;
 import org.apache.camel.spi.Resilience4jMicrometerFactory;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 @Conditional({ ConditionalOnCamelContextAndAutoConfigurationBeans.class })
 @ConditionalOnProperty(prefix = "camel.resilience4j", name = "micrometerEnabled", havingValue = "true", matchIfMissing = true)
 public class Resilience4jMicrometerAutoConfiguration {

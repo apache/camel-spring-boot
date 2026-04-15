@@ -22,18 +22,16 @@ import org.apache.camel.component.reactive.streams.api.CamelReactiveStreamsServi
 import org.apache.camel.component.reactive.streams.api.CamelReactiveStreamsServiceFactory;
 import org.apache.camel.component.reactive.streams.engine.DefaultCamelReactiveStreamsServiceFactory;
 import org.apache.camel.component.reactive.streams.engine.ReactiveStreamsEngineConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 
-@AutoConfigureAfter(ReactiveStreamsComponentAutoConfiguration.class)
+@AutoConfiguration(after = ReactiveStreamsComponentAutoConfiguration.class)
 @ConditionalOnBean(ReactiveStreamsComponentAutoConfiguration.class)
 @EnableConfigurationProperties(ReactiveStreamsComponentConfiguration.class)
-@Configuration
 public class ReactiveStreamsServiceAutoConfiguration {
 
     @Lazy

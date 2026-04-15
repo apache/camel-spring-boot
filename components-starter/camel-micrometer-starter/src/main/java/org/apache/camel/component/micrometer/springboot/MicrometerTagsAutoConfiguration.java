@@ -24,21 +24,19 @@ import org.apache.camel.http.common.CamelServlet;
 import org.apache.camel.http.common.HttpConsumer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.server.observation.DefaultServerRequestObservationConvention;
 import org.springframework.http.server.observation.ServerRequestObservationContext;
 import org.springframework.http.server.observation.ServerRequestObservationConvention;
 
 import java.util.Optional;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(after = CamelAutoConfiguration.class)
 @Conditional({ ConditionalOnCamelContextAndAutoConfigurationBeans.class })
 @ConditionalOnProperty(prefix = "camel.metrics", name = "uriTagEnabled", havingValue = "true")
-@AutoConfigureAfter({ CamelAutoConfiguration.class })
 public class MicrometerTagsAutoConfiguration {
 
     /**

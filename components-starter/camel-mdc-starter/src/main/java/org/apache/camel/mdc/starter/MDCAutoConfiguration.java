@@ -18,13 +18,13 @@ package org.apache.camel.mdc.starter;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.mdc.MDCService;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 @EnableConfigurationProperties(MDCConfigurationProperties.class)
 @ConditionalOnProperty(value = "camel.mdc.enabled", matchIfMissing = true)
 public class MDCAutoConfiguration {

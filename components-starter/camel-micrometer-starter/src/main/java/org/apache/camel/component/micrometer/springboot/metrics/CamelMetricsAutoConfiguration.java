@@ -31,13 +31,13 @@ import org.apache.camel.component.micrometer.spi.InstrumentedThreadPoolFactory;
 import org.apache.camel.spi.ManagementStrategy;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Conditional;
 
+@AutoConfiguration(after = CamelAutoConfiguration.class)
 @Conditional(ConditionalOnCamelContextAndAutoConfigurationBeans.class)
 @EnableConfigurationProperties({ CamelMetricsConfiguration.class })
-@AutoConfigureAfter({ CamelAutoConfiguration.class })
 public class CamelMetricsAutoConfiguration {
 
     public CamelMetricsAutoConfiguration(CamelContext camelContext, CamelMetricsConfiguration configuration,

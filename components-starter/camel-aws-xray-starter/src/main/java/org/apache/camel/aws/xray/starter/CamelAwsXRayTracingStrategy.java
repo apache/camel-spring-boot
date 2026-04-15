@@ -28,7 +28,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
  * Annotate your custom AWS XRay tracing strategy. Will be used if found. Must implement {@link org.apache.camel.spi.InterceptStrategy}.
  *
  */
-@Target({ ElementType.TYPE, ElementType.FIELD})
+@Target({ ElementType.TYPE, ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Qualifier
 public @interface CamelAwsXRayTracingStrategy {

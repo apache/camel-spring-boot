@@ -18,13 +18,13 @@ package org.apache.camel.opentelemetry2.starter;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.opentelemetry2.OpenTelemetryTracer;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 @EnableConfigurationProperties(OpenTelemetry2ConfigurationProperties.class)
 @ConditionalOnProperty(value = "camel.opentelemetry2.enabled", matchIfMissing = true)
 public class OpenTelemetry2AutoConfiguration {

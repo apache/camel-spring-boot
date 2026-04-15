@@ -23,7 +23,7 @@ import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig;
 import org.jasypt.salt.RandomSaltGenerator;
 import org.jasypt.salt.SaltGenerator;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -35,7 +35,6 @@ import org.springframework.boot.context.properties.bind.handler.IgnoreErrorsBind
 import org.springframework.boot.context.properties.source.ConfigurationPropertySource;
 import org.springframework.boot.convert.ApplicationConversionService;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -53,9 +52,8 @@ import static org.springframework.boot.context.properties.source.ConfigurationPr
 import static org.springframework.core.ResolvableType.forClass;
 import static org.springframework.core.annotation.AnnotationUtils.findAnnotation;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(before = CamelAutoConfiguration.class)
 @ConditionalOnProperty(name = "camel.component.jasypt.enabled", matchIfMissing = true)
-@AutoConfigureBefore(CamelAutoConfiguration.class)
 public class JasyptEncryptedPropertiesAutoconfiguration {
 
     @Bean

@@ -30,32 +30,34 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
 import org.apache.camel.support.PluginHelper;
 import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Resilience auto configuration.
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(after = CamelAutoConfiguration.class)
 @ConditionalOnProperty(name = "camel.resilience4j.enabled", matchIfMissing = true)
 @ConditionalOnBean(value = CamelAutoConfiguration.class)
-@AutoConfigureAfter(value = CamelAutoConfiguration.class)
 @EnableConfigurationProperties(Resilience4jConfigurationDefinitionProperties.class)
 public class ResilienceAutoConfiguration {
-    @Autowired
-    private ConfigurableBeanFactory beanFactory;
-    @Autowired
-    private CamelContext camelContext;
-    @Autowired
-    private Resilience4jConfigurationDefinitionProperties config;
+
+    private final ConfigurableBeanFactory beanFactory;
+    private final CamelContext camelContext;
+    private final Resilience4jConfigurationDefinitionProperties config;
+
+    public ResilienceAutoConfiguration(ConfigurableBeanFactory beanFactory, CamelContext camelContext,
+            Resilience4jConfigurationDefinitionProperties config) {
+        this.beanFactory = beanFactory;
+        this.camelContext = camelContext;
+        this.config = config;
+    }
 
     @Bean(name = ResilienceConstants.DEFAULT_RESILIENCE_CONFIGURATION_ID)
     @ConditionalOnClass(CamelContext.class)

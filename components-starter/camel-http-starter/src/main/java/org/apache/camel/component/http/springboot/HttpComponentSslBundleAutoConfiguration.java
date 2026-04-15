@@ -28,14 +28,13 @@ import org.apache.camel.support.jsse.SSLContextParameters;
 import org.apache.hc.client5.http.io.HttpClientConnectionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.ssl.SslBundle;
 import org.springframework.boot.ssl.SslBundles;
-import org.springframework.context.annotation.Configuration;
 
 import jakarta.annotation.PostConstruct;
 
@@ -55,12 +54,11 @@ import jakarta.annotation.PostConstruct;
  * @see HttpComponentSslBundleConfigurationProperties
  * @see org.springframework.boot.ssl.SslBundles
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(after = {CamelAutoConfiguration.class, HttpComponentAutoConfiguration.class})
 @ConditionalOnClass({SslBundles.class, HttpComponent.class})
 @ConditionalOnBean({SslBundles.class, CamelContext.class})
 @ConditionalOnProperty(prefix = "camel.component.http", name = "ssl-bundle")
 @EnableConfigurationProperties(HttpComponentSslBundleConfigurationProperties.class)
-@AutoConfigureAfter({CamelAutoConfiguration.class, HttpComponentAutoConfiguration.class})
 public class HttpComponentSslBundleAutoConfiguration {
 
     private static final Logger LOG = LoggerFactory.getLogger(HttpComponentSslBundleAutoConfiguration.class);

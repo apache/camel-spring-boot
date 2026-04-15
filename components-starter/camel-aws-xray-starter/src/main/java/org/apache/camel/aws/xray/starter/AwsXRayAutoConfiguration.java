@@ -21,30 +21,28 @@ import org.apache.camel.component.aws.xray.NoopTracingStrategy;
 import org.apache.camel.component.aws.xray.TraceAnnotatedTracingStrategy;
 import org.apache.camel.component.aws.xray.XRayTracer;
 import org.apache.camel.spi.InterceptStrategy;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 @EnableConfigurationProperties(AwsXRayConfigurationProperties.class)
 @ConditionalOnProperty(value = "camel.aws-xray.enabled", matchIfMissing = true)
 public class AwsXRayAutoConfiguration {
 
-    @Autowired(required=false)
-    @CamelAwsXRayTracingStrategy
-    private InterceptStrategy xRayStrategy;
-
     @Bean
     @ConditionalOnMissingBean(XRayTracer.class)
     XRayTracer awsTracer(CamelContext context,
-            AwsXRayConfigurationProperties config) {
+            AwsXRayConfigurationProperties config,
+            @CamelAwsXRayTracingStrategy ObjectProvider<InterceptStrategy> xRayStrategyProvider) {
         XRayTracer tracer = new XRayTracer();
         context.setTracing(true);
         tracer.setCamelContext(context);
-        if(xRayStrategy != null) {
+        InterceptStrategy xRayStrategy = xRayStrategyProvider.getIfAvailable();
+        if (xRayStrategy != null) {
             tracer.setTracingStrategy(xRayStrategy);
         } else if (config.getTracingStrategy() == AwsXRayConfigurationProperties.TracingStrategy.NOOP) {
             tracer.setTracingStrategy(new NoopTracingStrategy());

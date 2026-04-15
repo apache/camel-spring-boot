@@ -20,28 +20,25 @@ import org.apache.camel.cluster.CamelClusterService;
 import org.apache.camel.component.consul.cluster.ConsulClusterService;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.cluster.ClusteredRouteControllerAutoConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 
 import java.util.Optional;
 
-@Configuration(proxyBeanMethods = false)
-@AutoConfigureBefore({ ClusteredRouteControllerAutoConfiguration.class, CamelAutoConfiguration.class })
+@AutoConfiguration(before = { ClusteredRouteControllerAutoConfiguration.class, CamelAutoConfiguration.class })
 @ConditionalOnProperty(prefix = "camel.cluster.consul", name = "enabled", matchIfMissing = true)
 @EnableConfigurationProperties(ConsulClusterServiceConfiguration.class)
 public class ConsulClusterServiceAutoConfiguration {
 
-    @Autowired
-    private ConsulClusterServiceConfiguration configuration;
+    private final ConsulClusterServiceConfiguration configuration;
+
+    public ConsulClusterServiceAutoConfiguration(ConsulClusterServiceConfiguration configuration) {
+        this.configuration = configuration;
+    }
 
     @Bean(name = "consul-cluster-service")
-    @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
     public CamelClusterService consulClusterService() throws Exception {
         ConsulClusterService service = new ConsulClusterService();
 

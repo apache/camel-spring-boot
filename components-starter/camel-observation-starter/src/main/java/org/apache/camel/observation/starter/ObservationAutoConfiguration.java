@@ -25,18 +25,15 @@ import io.micrometer.tracing.handler.TracingAwareMeterObservationHandler;
 import org.apache.camel.CamelContext;
 import org.apache.camel.observation.MicrometerObservationTracer;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(afterName = "org.springframework.boot.micrometer.observation.autoconfigure.ObservationAutoConfiguration")
 @ConditionalOnClass(name = { "org.springframework.boot.micrometer.observation.autoconfigure.ObservationAutoConfiguration" })
-@AutoConfigureAfter(name = {
-        "org.springframework.boot.micrometer.observation.autoconfigure.ObservationAutoConfiguration" })
 @EnableConfigurationProperties(ObservationConfigurationProperties.class)
 @ConditionalOnProperty(value = "camel.observation.enabled", matchIfMissing = true)
 @Deprecated (since = "4.19.0")

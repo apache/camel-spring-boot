@@ -22,26 +22,23 @@ import org.apache.camel.cluster.CamelClusterService;
 import org.apache.camel.component.kubernetes.cluster.KubernetesClusterService;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.cluster.ClusteredRouteControllerAutoConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 
-@Configuration(proxyBeanMethods = false)
-@AutoConfigureBefore({ ClusteredRouteControllerAutoConfiguration.class, CamelAutoConfiguration.class })
+@AutoConfiguration(before = { ClusteredRouteControllerAutoConfiguration.class, CamelAutoConfiguration.class })
 @ConditionalOnProperty(prefix = "camel.cluster.kubernetes", name = "enabled", matchIfMissing = true)
 @EnableConfigurationProperties(KubernetesClusterServiceConfiguration.class)
 public class KubernetesClusterServiceAutoConfiguration {
 
-    @Autowired
-    private KubernetesClusterServiceConfiguration configuration;
+    private final KubernetesClusterServiceConfiguration configuration;
+
+    public KubernetesClusterServiceAutoConfiguration(KubernetesClusterServiceConfiguration configuration) {
+        this.configuration = configuration;
+    }
 
     @Bean(name = "kubernetes-cluster-service")
-    @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
     public CamelClusterService kubernetesClusterService() throws Exception {
         KubernetesClusterService service = new KubernetesClusterService();
 

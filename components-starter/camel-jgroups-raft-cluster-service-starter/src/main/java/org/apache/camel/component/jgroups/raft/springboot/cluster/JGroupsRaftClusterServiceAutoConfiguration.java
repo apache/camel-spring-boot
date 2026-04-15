@@ -20,28 +20,25 @@ import org.apache.camel.cluster.CamelClusterService;
 import org.apache.camel.component.jgroups.raft.cluster.JGroupsRaftClusterService;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.cluster.ClusteredRouteControllerAutoConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 
 import java.util.Optional;
 
-@Configuration(proxyBeanMethods = false)
-@AutoConfigureBefore({ ClusteredRouteControllerAutoConfiguration.class, CamelAutoConfiguration.class })
+@AutoConfiguration(before = { ClusteredRouteControllerAutoConfiguration.class, CamelAutoConfiguration.class })
 @ConditionalOnProperty(prefix = "camel.cluster.jgroups-raft", name = "enabled", matchIfMissing = true)
 @EnableConfigurationProperties(JGroupsRaftClusterServiceConfiguration.class)
 public class JGroupsRaftClusterServiceAutoConfiguration {
 
-    @Autowired
-    private JGroupsRaftClusterServiceConfiguration configuration;
+    private final JGroupsRaftClusterServiceConfiguration configuration;
+
+    public JGroupsRaftClusterServiceAutoConfiguration(JGroupsRaftClusterServiceConfiguration configuration) {
+        this.configuration = configuration;
+    }
 
     @Bean(name = "jgroups-raft-cluster-service")
-    @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
     public CamelClusterService jgroupsRaftClusterService() throws Exception {
         JGroupsRaftClusterService service = new JGroupsRaftClusterService();
 
