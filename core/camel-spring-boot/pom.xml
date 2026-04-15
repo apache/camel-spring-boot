@@ -170,6 +170,14 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-cxf-soap</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <!-- Not needed for tests and pulls in OpenSAML which requires the
+                     Shibboleth repository (often returns 403 Forbidden) -->
+                <exclusion>
+                    <groupId>org.apache.cxf</groupId>
+                    <artifactId>cxf-rt-ws-security</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>
