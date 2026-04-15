@@ -16,48 +16,54 @@
  */
 package org.apache.camel.component.platform.http.springboot;
 
+import io.restassured.RestAssured;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.http.common.HttpHeaderFilterStrategy;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
-import org.springframework.test.web.servlet.client.RestTestClient;
-import org.springframework.test.web.servlet.client.EntityExchangeResult;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 @EnableAutoConfiguration
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
-        SpringBootPlatformHttpRequestTimeoutTest.TestConfiguration.class,
-        PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class, },
-        properties = {"camel.component.platform-http.request-timeout=100"})
-@AutoConfigureMockMvc
-@AutoConfigureRestTestClient
-public class SpringBootPlatformHttpRequestTimeoutTest {
+        SpringBootPlatformHttpHeaderFilterStrategyTest.class,
+        SpringBootPlatformHttpHeaderFilterStrategyTest.TestConfiguration.class,
+        PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class })
+public class SpringBootPlatformHttpHeaderFilterStrategyTest {
 
-    @Autowired
-    RestTestClient restTestClient;
+    @LocalServerPort
+    private Integer port;
+
+    @BeforeEach
+    void setUp() {
+        RestAssured.port = port;
+    }
 
     @Test
-    public void testGetAsync() throws Exception {
-        EntityExchangeResult<String> result = restTestClient.get().uri("/slow-get")
-                .exchange()
-                .expectBody(String.class)
-                .returnResult();
-        Assertions.assertThat(result.getStatus()).isEqualTo(HttpStatusCode.valueOf(503));
+    void customHeaderFilterStrategy() {
+        given()
+                .queryParam("k1", "v1")
+                .queryParam("k2", "v2")
+                .get("/header-filter-strategy")
+                .then()
+                .statusCode(200)
+                .body(equalTo("k1=\nk2=v2"));
     }
 
     @Configuration
     public static class TestConfiguration {
+
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
             http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
@@ -65,19 +71,26 @@ public class SpringBootPlatformHttpRequestTimeoutTest {
             return http.build();
         }
 
+        @Bean("TestHeaderFilterStrategy")
+        public HttpHeaderFilterStrategy testHeaderFilterStrategy() {
+            return new HttpHeaderFilterStrategy() {
+                @Override
+                protected void initialize() {
+                    super.initialize();
+                    getInFilter().add("k1");
+                }
+            };
+        }
 
         @Bean
-        public RouteBuilder platformHttpRouteBuilder() {
+        public RouteBuilder routeBuilder() {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("platform-http:/slow-get").id("slow-route")
-                            .process(exchange -> Thread.sleep(1000))
-                            .setBody().constant("get");
+                    from("platform-http:/header-filter-strategy?httpMethodRestrict=GET&headerFilterStrategy=#TestHeaderFilterStrategy")
+                            .setBody(simple("k1=${header.k1}\nk2=${header.k2}"));
                 }
             };
         }
     }
-
-
 }
