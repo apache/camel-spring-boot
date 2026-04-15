@@ -54,11 +54,12 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
 
     public SpringBootPlatformHttpConsumer(PlatformHttpEndpoint endpoint, Processor processor) {
         super(endpoint, processor);
-        this.binding = new SpringBootPlatformHttpBinding();
+        SpringBootPlatformHttpBinding httpBinding = new SpringBootPlatformHttpBinding();
+        httpBinding.setStreaming(endpoint.isUseStreaming());
+        this.binding = httpBinding;
         this.binding.setHeaderFilterStrategy(endpoint.getHeaderFilterStrategy());
         this.binding.setMuteException(endpoint.isMuteException());
         this.binding.setFileNameExtWhitelist(endpoint.getFileNameExtWhitelist());
-        this.binding.setUseReaderForPayload(!endpoint.isUseStreaming());
         this.handleWriteResponseError = endpoint.isHandleWriteResponseError();
         this.executor = Executors.newSingleThreadExecutor();
     }
@@ -117,7 +118,8 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         Exchange exchange = createExchange(true);
         exchange.setPattern(ExchangePattern.InOut);
         HttpHelper.setCharsetFromContentType(request.getContentType(), exchange);
-        PlatformHttpMessage msg = new PlatformHttpMessage(request, response, exchange,binding, false);
+        boolean streaming = getEndpoint().isUseStreaming();
+        PlatformHttpMessage msg = new PlatformHttpMessage(request, response, exchange, binding, streaming);
         exchange.setIn(msg);
         msg.init(exchange, binding, request, response);
         String contextPath = getEndpoint().getPath();

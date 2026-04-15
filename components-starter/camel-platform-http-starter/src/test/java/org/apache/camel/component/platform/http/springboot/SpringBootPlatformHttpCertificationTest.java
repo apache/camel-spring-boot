@@ -298,7 +298,6 @@ public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
     CamelContext camelContext;
 
     @Test
-    @Disabled
     @DisabledIfSystemProperties({
             @DisabledIfSystemProperty(named = "ci.env.name", matches = ".*",
                     disabledReason = "File too large for CI"),
