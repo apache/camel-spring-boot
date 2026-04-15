@@ -33,6 +33,7 @@ public class PlatformHttpMessage extends DefaultMessage {
     private HttpServletResponse response;
     private HttpBinding binding;
     private boolean requestRead;
+    private boolean streaming;
 
     public PlatformHttpMessage(Exchange exchange, HttpBinding binding, HttpServletRequest request,
                                HttpServletResponse response) {
@@ -41,12 +42,12 @@ public class PlatformHttpMessage extends DefaultMessage {
     }
 
     public PlatformHttpMessage(HttpServletRequest request, HttpServletResponse response, Exchange exchange,
-                                HttpBinding binding, boolean requestRead) {
+                                HttpBinding binding, boolean streaming) {
         super(exchange);
         this.request = request;
         this.response = response;
         this.binding = binding;
-        this.requestRead = requestRead;
+        this.streaming = streaming;
     }
 
     public void init(Exchange exchange, HttpBinding binding, HttpServletRequest request, HttpServletResponse response) {
@@ -62,12 +63,16 @@ public class PlatformHttpMessage extends DefaultMessage {
         if (flag != null && flag) {
             this.setHeader("CamelSkipWwwFormUrlEncoding", Boolean.TRUE);
         }
-        // we need to favor using stream cache so the body can be re-read later when routing the message
-        StreamCache newBody = camelContext.getTypeConverter().tryConvertTo(StreamCache.class,
-                exchange, getBody());
-        if (newBody != null) {
-            setBody(newBody);
+        if (streaming) {
+            // when streaming, use CachedOutputStream via HttpHelper for disk-spoolable large payload support
+            // the body will be an InputStreamCache (re-readable StreamCache)
+            StreamCache newBody = camelContext.getTypeConverter().tryConvertTo(StreamCache.class,
+                    exchange, getBody());
+            if (newBody != null) {
+                setBody(newBody);
+            }
         }
+        // when not streaming, the body is already a byte[] (re-readable, no conversion needed)
         binding.readRequest(request, this);
     }
 
@@ -105,7 +110,7 @@ public class PlatformHttpMessage extends DefaultMessage {
     }
 
     public PlatformHttpMessage newInstance() {
-        PlatformHttpMessage answer = new PlatformHttpMessage(this.request, this.response, this.getExchange(), this.binding, this.requestRead);
+        PlatformHttpMessage answer = new PlatformHttpMessage(this.request, this.response, this.getExchange(), this.binding, this.streaming);
         if (answer.camelContext == null) {
             answer.setCamelContext(this.camelContext);
         }
