@@ -64,6 +64,7 @@ import java.util.UUID;
 public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
     private static final Logger LOG = LoggerFactory.getLogger(SpringBootPlatformHttpBinding.class);
 
+    private boolean streaming;
     private static final String CONTENT_TYPE_FORM_URLENCODED = "application/x-www-form-urlencoded";
     private static final List<Method> METHODS_WITH_BODY_ALLOWED = List.of(Method.POST,
             Method.PUT, Method.PATCH, Method.DELETE);
@@ -149,6 +150,10 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
         }
     }
 
+    public void setStreaming(boolean streaming) {
+        this.streaming = streaming;
+    }
+
     public Object parseBody(HttpServletRequest request, Message message) throws IOException {
         if (request instanceof StandardMultipartHttpServletRequest ||
                 // In case of Spring FormContentFilter
@@ -156,7 +161,24 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
             return null;
         }
 
-        return super.parseBody(request, message);
+        int len = request.getContentLength();
+        if (len == 0) {
+            return null;
+        }
+
+        if (streaming) {
+            // use CachedOutputStream for disk-spoolable large payload support (like Vert.x streaming)
+            return super.parseBody(request, message);
+        } else {
+            // read entire body into byte[] for fast in-memory access (like Vert.x Buffer)
+            if (len > 0) {
+                // known content-length: single allocation, no internal array copies
+                return request.getInputStream().readNBytes(len);
+            }
+            // unknown content-length (-1): fall back to incremental read
+            byte[] body = request.getInputStream().readAllBytes();
+            return body.length == 0 ? null : body;
+        }
     }
 
     @Override
@@ -169,7 +191,7 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
     private static void populateMultiFormData(HttpServletRequest request, Message message) {
         if (((PlatformHttpEndpoint) message.getExchange().getFromEndpoint()).isPopulateBodyWithForm() &&
                 METHODS_WITH_BODY_ALLOWED.contains(Method.valueOf(request.getMethod())) &&
-                (message.getBody() instanceof StreamCache ||
+                (message.getBody() instanceof StreamCache || message.getBody() instanceof byte[] ||
                         (message.getBody() == null && !"POST".equals(request.getMethod()))) &&
                 request.getContentType() != null &&
                 request.getContentType().contains(CONTENT_TYPE_FORM_URLENCODED)) {
