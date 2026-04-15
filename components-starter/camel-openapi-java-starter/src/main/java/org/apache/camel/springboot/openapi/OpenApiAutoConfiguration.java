@@ -29,13 +29,11 @@ import org.apache.camel.spi.RestConfiguration;
 import org.apache.camel.spring.boot.CamelContextConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
 
 import java.util.List;
@@ -46,12 +44,12 @@ import static org.apache.camel.openapi.OpenApiHelper.clearVendorExtensions;
 /**
  * Open API auto-configuration.
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(
+        afterName = "org.apache.camel.spring.boot.CamelAutoConfiguration",
+        beforeName = "org.springdoc.core.SpringDocConfiguration")
 @EnableConfigurationProperties({ OpenApiConfiguration.class })
 @ConditionalOnBean(type = "org.apache.camel.spring.boot.CamelAutoConfiguration")
 @ConditionalOnProperty(name = "camel.openapi.enabled", matchIfMissing = true)
-@AutoConfigureAfter(name = "org.apache.camel.spring.boot.CamelAutoConfiguration")
-@AutoConfigureBefore(name = "org.springdoc.core.SpringDocConfiguration")
 public class OpenApiAutoConfiguration {
 
     private static final Logger LOG = LoggerFactory.getLogger(OpenApiAutoConfiguration.class);

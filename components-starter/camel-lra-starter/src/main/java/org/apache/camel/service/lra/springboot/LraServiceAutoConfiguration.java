@@ -22,24 +22,24 @@ import org.apache.camel.service.lra.LRASagaService;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
 import org.apache.camel.spring.boot.util.GroupCondition;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(after = CamelAutoConfiguration.class)
 @Conditional({ ConditionalOnCamelContextAndAutoConfigurationBeans.class,
         LraServiceAutoConfiguration.GroupConditions.class })
-@AutoConfigureAfter(CamelAutoConfiguration.class)
 @EnableConfigurationProperties({ LraServiceConfiguration.class })
 public class LraServiceAutoConfiguration {
 
-    @Autowired
-    private CamelContext camelContext;
+    private final CamelContext camelContext;
+
+    public LraServiceAutoConfiguration(CamelContext camelContext) {
+        this.camelContext = camelContext;
+    }
 
     static class GroupConditions extends GroupCondition {
         public GroupConditions() {

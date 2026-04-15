@@ -21,37 +21,28 @@ import io.opentelemetry.context.propagation.ContextPropagators;
 import org.apache.camel.CamelContext;
 import org.apache.camel.opentelemetry.OpenTelemetryTracer;
 import org.apache.camel.opentelemetry.OpenTelemetryTracingStrategy;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 @EnableConfigurationProperties(OpenTelemetryConfigurationProperties.class)
 @ConditionalOnProperty(value = "camel.opentelemetry.enabled", matchIfMissing = true)
 @Deprecated (since = "4.19.0")
 public class OpenTelemetryAutoConfiguration {
 
-    @Autowired(required = false)
-    private Tracer tracer;
-
-    @Autowired(required = false)
-    private ContextPropagators contextPropagators;
-
     @Bean(initMethod = "", destroyMethod = "")
     // Camel handles the lifecycle of this bean
     @ConditionalOnMissingBean(OpenTelemetryTracer.class)
     OpenTelemetryTracer openTelemetryEventNotifier(CamelContext camelContext,
-            OpenTelemetryConfigurationProperties config) {
+            OpenTelemetryConfigurationProperties config, ObjectProvider<Tracer> tracer,
+            ObjectProvider<ContextPropagators> contextPropagators) {
         OpenTelemetryTracer ottracer = new OpenTelemetryTracer();
-        if (tracer != null) {
-            ottracer.setTracer(tracer);
-        }
-        if (contextPropagators != null) {
-            ottracer.setContextPropagators(contextPropagators);
-        }
+        tracer.ifAvailable(ottracer::setTracer);
+        contextPropagators.ifAvailable(ottracer::setContextPropagators);
         if (config.getExcludePatterns() != null) {
             ottracer.setExcludePatterns(config.getExcludePatterns());
         }

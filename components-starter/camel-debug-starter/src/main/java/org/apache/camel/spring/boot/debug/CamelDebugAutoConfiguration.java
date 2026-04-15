@@ -17,16 +17,14 @@
 package org.apache.camel.spring.boot.debug;
 
 import org.apache.camel.main.DebuggerConfigurationProperties;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(beforeName = "org.apache.camel.spring.boot.CamelAutoConfiguration") // configure early to have Camel debugger during startup
 @ConditionalOnProperty(name = "camel.debug.enabled", matchIfMissing = true)
-@AutoConfigureBefore(name = "org.apache.camel.spring.boot.CamelAutoConfiguration") // configure early to have Camel debugger during startup
 @EnableConfigurationProperties({ CamelDebugConfigurationProperties.class })
 public class CamelDebugAutoConfiguration {
 

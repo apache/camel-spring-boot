@@ -32,13 +32,11 @@ import org.apache.camel.spring.boot.CamelContextConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
 
 import java.util.HashMap;
@@ -53,12 +51,12 @@ import static org.apache.camel.openapi.OpenApiHelper.clearVendorExtensions;
 /**
  * Springdoc auto-configuration.
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(
+        afterName = "org.apache.camel.spring.boot.CamelAutoConfiguration",
+        beforeName = "org.springdoc.core.SpringdocConfiguration")
 @EnableConfigurationProperties({ SpringdocConfiguration.class })
 @ConditionalOnBean(type = "org.apache.camel.spring.boot.CamelAutoConfiguration")
 @ConditionalOnProperty(name = "camel.springdoc.enabled", matchIfMissing = true)
-@AutoConfigureAfter(name = "org.apache.camel.spring.boot.CamelAutoConfiguration")
-@AutoConfigureBefore(name = "org.springdoc.core.SpringdocConfiguration")
 public class SpringdocAutoConfiguration {
 
     private static final Logger LOG = LoggerFactory.getLogger(SpringdocAutoConfiguration.class);

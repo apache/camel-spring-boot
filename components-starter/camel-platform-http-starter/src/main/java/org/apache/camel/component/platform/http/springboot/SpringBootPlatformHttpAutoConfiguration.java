@@ -22,12 +22,11 @@ import org.apache.camel.component.platform.http.spi.PlatformHttpEngine;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.env.Environment;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
@@ -36,8 +35,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-@Configuration(proxyBeanMethods = false)
-@AutoConfigureAfter(name = { "org.apache.camel.component.servlet.springboot.PlatformHttpComponentAutoConfiguration",
+@AutoConfiguration(afterName = { "org.apache.camel.component.servlet.springboot.PlatformHttpComponentAutoConfiguration",
         "org.apache.camel.component.servlet.springboot.PlatformHttpComponentConverter" })
 @EnableConfigurationProperties({ComponentConfigurationProperties.class,PlatformHttpComponentConfiguration.class, WebMvcProperties.class})
 public class SpringBootPlatformHttpAutoConfiguration {

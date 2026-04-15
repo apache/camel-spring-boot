@@ -22,19 +22,18 @@ import org.jolokia.support.spring.SpringJolokiaConfigHolder;
 import org.jolokia.support.spring.SpringJolokiaLogHandlerHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 @ConditionalOnMissingBean(type = "org.jolokia.support.spring.SpringJolokiaAgent")
 @EnableConfigurationProperties(JolokiaComponentConfiguration.class)
 @ConditionalOnProperty(name = "camel.component.jolokia.enabled", havingValue = "true", matchIfMissing = true)
@@ -44,8 +43,11 @@ public class JolokiaComponentAutoConfiguration {
 
 	protected static final String DEFAULT_CA_ON_K8S = "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt";
 
-	@Autowired
-	private JolokiaComponentConfiguration configuration;
+	private final JolokiaComponentConfiguration configuration;
+
+	public JolokiaComponentAutoConfiguration(JolokiaComponentConfiguration configuration) {
+		this.configuration = configuration;
+	}
 
 	@Bean
 	public SpringJolokiaAgent jolokia(final SpringJolokiaConfigHolder camelConfigHolder,

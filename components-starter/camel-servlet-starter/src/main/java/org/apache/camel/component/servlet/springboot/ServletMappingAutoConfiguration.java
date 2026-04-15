@@ -19,7 +19,7 @@ package org.apache.camel.component.servlet.springboot;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.servlet.CamelHttpTransportServlet;
 import org.apache.camel.component.servlet.ServletComponent;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -28,16 +28,14 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.servlet.autoconfigure.MultipartProperties;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 
 /**
  * Servlet mapping auto-configuration.
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(afterName = "org.apache.camel.spring.boot.CamelAutoConfiguration")
 @ConditionalOnProperty(name = "camel.servlet.mapping.enabled", matchIfMissing = true)
 @ConditionalOnBean(type = "org.apache.camel.spring.boot.CamelAutoConfiguration")
-@AutoConfigureAfter(name = "org.apache.camel.spring.boot.CamelAutoConfiguration")
 @ConditionalOnWebApplication
 @EnableConfigurationProperties({ ServletMappingConfiguration.class, MultipartProperties.class })
 public class ServletMappingAutoConfiguration {
