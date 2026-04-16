@@ -8,7 +8,7 @@
     "firstVersion": "4.18.0",
     "label": "ai,cloud",
     "javaType": "org.apache.camel.component.ibm.watsonx.ai.WatsonxAiComponent",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-ibm-watsonx-ai-starter",
     "version": "4.20.0-SNAPSHOT",

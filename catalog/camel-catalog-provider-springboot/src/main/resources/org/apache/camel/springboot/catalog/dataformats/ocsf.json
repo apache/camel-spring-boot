@@ -8,7 +8,7 @@
     "firstVersion": "4.18.0",
     "label": "dataformat,transformation,json,security",
     "javaType": "org.apache.camel.dataformat.ocsf.OcsfDataFormat",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-ocsf-starter",
     "version": "4.20.0-SNAPSHOT",

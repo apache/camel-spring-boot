@@ -28,6 +28,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.sjms2.client-id",
+      "type": "java.lang.String",
+      "description": "Sets the JMS client ID to use. Note that this value, if specified, must be unique and can only be used by a single JMS connection instance. It is typically only required for durable topic subscriptions. If using Apache ActiveMQ you may prefer to use Virtual Topics instead.",
+      "sourceType": "org.apache.camel.component.sjms2.springboot.Sjms2ComponentConfiguration"
+    },
+    {
       "name": "camel.component.sjms2.connection-factory",
       "type": "jakarta.jms.ConnectionFactory",
       "description": "The connection factory to be use. A connection factory must be configured either on the component or endpoint. The option is a jakarta.jms.ConnectionFactory type.",
@@ -37,6 +43,12 @@
       "name": "camel.component.sjms2.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.sjms2.deserialization-filter",
+      "type": "java.lang.String",
+      "description": "Sets an ObjectInputFilter pattern (jdk.serialFilter syntax) applied as a defense-in-depth check on the class of the body returned by jakarta.jms.ObjectMessage.getObject(). The pattern is evaluated after the JMS provider has deserialized the payload, so this option alone does not prevent gadget-chain execution that happens inside the provider's ObjectInputStream; to block such attacks, also configure the JMS provider's own deserialization filter and\/or the JVM-wide -Djdk.serialFilter. When this option is not set and no JVM-wide filter is configured, a conservative default filter allowing java., javax. and org.apache.camel. is applied.",
+      "sourceType": "org.apache.camel.component.sjms2.springboot.Sjms2ComponentConfiguration"
     },
     {
       "name": "camel.component.sjms2.destination-creation-strategy",
