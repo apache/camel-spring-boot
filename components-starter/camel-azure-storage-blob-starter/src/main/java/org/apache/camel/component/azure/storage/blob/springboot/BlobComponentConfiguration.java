@@ -139,6 +139,14 @@ public class BlobComponentConfiguration
      */
     private BlobServiceClient serviceClient;
     /**
+     * The snapshot identifier used to target a specific blob snapshot on read
+     * operations (getBlob, downloadBlobToFile, downloadLink). When set, the
+     * read targets the snapshot scoped client instead of the live blob. Can
+     * also be provided per-exchange via the CamelAzureStorageBlobSnapshotId
+     * header.
+     */
+    private String snapshotId;
+    /**
      * An optional timeout value beyond which a RuntimeException will be raised.
      */
     private Duration timeout;
@@ -468,6 +476,14 @@ public class BlobComponentConfiguration
 
     public void setServiceClient(BlobServiceClient serviceClient) {
         this.serviceClient = serviceClient;
+    }
+
+    public String getSnapshotId() {
+        return snapshotId;
+    }
+
+    public void setSnapshotId(String snapshotId) {
+        this.snapshotId = snapshotId;
     }
 
     public Duration getTimeout() {
