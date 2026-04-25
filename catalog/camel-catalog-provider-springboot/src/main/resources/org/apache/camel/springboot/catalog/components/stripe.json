@@ -11,7 +11,7 @@
     "supportLevel": "Preview",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-stripe-starter",
-    "version": "4.20.0-SNAPSHOT",
+    "version": "4.21.0-SNAPSHOT",
     "scheme": "stripe",
     "extendsScheme": "",
     "syntax": "stripe:operation",
