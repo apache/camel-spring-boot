@@ -8,7 +8,7 @@
     "firstVersion": "4.19.0",
     "label": "cloud,ai",
     "javaType": "org.apache.camel.component.google.vision.GoogleCloudVisionComponent",
-    "supportLevel": "Stable",
+    "supportLevel": "Preview",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-google-vision-starter",
     "version": "4.21.0-SNAPSHOT",
