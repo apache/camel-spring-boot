@@ -27,10 +27,8 @@ import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 
 public class CamelSecurityPolicyAutoConfigurationTest {
 
-    private final ApplicationContextRunner runner = new ApplicationContextRunner()
-            .withConfiguration(AutoConfigurations.of(
-                    CamelAutoConfiguration.class,
-                    CamelSecurityPolicyAutoConfiguration.class));
+    private final ApplicationContextRunner runner = new ApplicationContextRunner().withConfiguration(
+            AutoConfigurations.of(CamelAutoConfiguration.class, CamelSecurityPolicyAutoConfiguration.class));
 
     @Test
     public void noSecurityPropertiesShouldStartNormally() {
@@ -44,9 +42,7 @@ public class CamelSecurityPolicyAutoConfigurationTest {
 
     @Test
     public void policyAllowShouldIgnoreInsecureConfig() {
-        runner.withPropertyValues(
-                "camel.security.policy=allow",
-                "camel.component.http.trustAllCertificates=true")
+        runner.withPropertyValues("camel.security.policy=allow", "camel.component.http.trustAllCertificates=true")
                 .run(context -> {
                     assertThat(context).hasNotFailed();
                     SecurityPolicyResult result = context.getBean(SecurityPolicyResult.class);
@@ -56,9 +52,7 @@ public class CamelSecurityPolicyAutoConfigurationTest {
 
     @Test
     public void policyWarnShouldStartWithViolations() {
-        runner.withPropertyValues(
-                "camel.security.policy=warn",
-                "camel.component.http.trustAllCertificates=true")
+        runner.withPropertyValues("camel.security.policy=warn", "camel.component.http.trustAllCertificates=true")
                 .run(context -> {
                     assertThat(context).hasNotFailed();
                     SecurityPolicyResult result = context.getBean(SecurityPolicyResult.class);
@@ -70,25 +64,18 @@ public class CamelSecurityPolicyAutoConfigurationTest {
 
     @Test
     public void policyFailShouldPreventStartup() {
-        runner.withPropertyValues(
-                "camel.security.policy=fail",
-                "camel.component.http.trustAllCertificates=true")
+        runner.withPropertyValues("camel.security.policy=fail", "camel.component.http.trustAllCertificates=true")
                 .run(context -> {
                     assertThat(context).hasFailed();
-                    assertThat(context.getStartupFailure())
-                            .rootCause()
-                            .isInstanceOf(RuntimeCamelException.class)
+                    assertThat(context.getStartupFailure()).rootCause().isInstanceOf(RuntimeCamelException.class)
                             .hasMessageContaining("Security policy violations detected");
                 });
     }
 
     @Test
     public void categoryOverrideShouldTakePrecedence() {
-        runner.withPropertyValues(
-                "camel.security.policy=fail",
-                "camel.security.insecure-ssl-policy=allow",
-                "camel.component.http.trustAllCertificates=true")
-                .run(context -> {
+        runner.withPropertyValues("camel.security.policy=fail", "camel.security.insecure-ssl-policy=allow",
+                "camel.component.http.trustAllCertificates=true").run(context -> {
                     assertThat(context).hasNotFailed();
                     SecurityPolicyResult result = context.getBean(SecurityPolicyResult.class);
                     assertThat(result.hasViolations()).isFalse();
@@ -97,26 +84,20 @@ public class CamelSecurityPolicyAutoConfigurationTest {
 
     @Test
     public void categoryOverrideWarnWhileGlobalFail() {
-        runner.withPropertyValues(
-                "camel.security.policy=fail",
-                "camel.security.insecure-ssl-policy=warn",
-                "camel.component.http.trustAllCertificates=true")
-                .run(context -> {
+        runner.withPropertyValues("camel.security.policy=fail", "camel.security.insecure-ssl-policy=warn",
+                "camel.component.http.trustAllCertificates=true").run(context -> {
                     assertThat(context).hasNotFailed();
                     SecurityPolicyResult result = context.getBean(SecurityPolicyResult.class);
                     assertThat(result.hasViolations()).isTrue();
-                    assertThat(result.getViolations()).anyMatch(
-                            v -> "warn".equals(v.policy()));
+                    assertThat(result.getViolations()).anyMatch(v -> "warn".equals(v.policy()));
                 });
     }
 
     @Test
     public void allowedPropertiesShouldExcludeFromChecks() {
-        runner.withPropertyValues(
-                "camel.security.policy=fail",
+        runner.withPropertyValues("camel.security.policy=fail",
                 "camel.security.allowed-properties=camel.component.http.trustAllCertificates",
-                "camel.component.http.trustAllCertificates=true")
-                .run(context -> {
+                "camel.component.http.trustAllCertificates=true").run(context -> {
                     assertThat(context).hasNotFailed();
                     SecurityPolicyResult result = context.getBean(SecurityPolicyResult.class);
                     assertThat(result.hasViolations()).isFalse();
@@ -125,11 +106,8 @@ public class CamelSecurityPolicyAutoConfigurationTest {
 
     @Test
     public void multipleViolationsDetected() {
-        runner.withPropertyValues(
-                "camel.security.policy=warn",
-                "camel.component.http.trustAllCertificates=true",
-                "camel.component.netty.allowJavaSerializedObject=true")
-                .run(context -> {
+        runner.withPropertyValues("camel.security.policy=warn", "camel.component.http.trustAllCertificates=true",
+                "camel.component.netty.allowJavaSerializedObject=true").run(context -> {
                     assertThat(context).hasNotFailed();
                     SecurityPolicyResult result = context.getBean(SecurityPolicyResult.class);
                     assertThat(result.getViolationCount()).isGreaterThanOrEqualTo(2);
@@ -138,22 +116,16 @@ public class CamelSecurityPolicyAutoConfigurationTest {
 
     @Test
     public void insecureDevPolicyOverride() {
-        runner.withPropertyValues(
-                "camel.security.policy=fail",
-                "camel.security.insecure-dev-policy=allow",
-                "camel.main.devConsoleEnabled=true")
-                .run(context -> {
+        runner.withPropertyValues("camel.security.policy=fail", "camel.security.insecure-dev-policy=allow",
+                "camel.main.devConsoleEnabled=true").run(context -> {
                     assertThat(context).hasNotFailed();
                 });
     }
 
     @Test
     public void insecureSerializationPolicyOverride() {
-        runner.withPropertyValues(
-                "camel.security.policy=fail",
-                "camel.security.insecure-serialization-policy=warn",
-                "camel.component.netty.allowJavaSerializedObject=true")
-                .run(context -> {
+        runner.withPropertyValues("camel.security.policy=fail", "camel.security.insecure-serialization-policy=warn",
+                "camel.component.netty.allowJavaSerializedObject=true").run(context -> {
                     assertThat(context).hasNotFailed();
                     SecurityPolicyResult result = context.getBean(SecurityPolicyResult.class);
                     assertThat(result.hasViolations()).isTrue();

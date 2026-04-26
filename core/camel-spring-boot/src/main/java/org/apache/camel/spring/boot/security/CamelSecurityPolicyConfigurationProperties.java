@@ -51,14 +51,14 @@ public class CamelSecurityPolicyConfigurationProperties {
     private String insecureSslPolicy;
 
     /**
-     * Security policy for insecure deserialization configuration. When set, overrides the global policy for options that
-     * enable dangerous deserialization of untrusted data.
+     * Security policy for insecure deserialization configuration. When set, overrides the global policy for options
+     * that enable dangerous deserialization of untrusted data.
      */
     private String insecureSerializationPolicy;
 
     /**
-     * Security policy for development-only features. When set, overrides the global policy for options intended only for
-     * development environments.
+     * Security policy for development-only features. When set, overrides the global policy for options intended only
+     * for development environments.
      */
     private String insecureDevPolicy;
 

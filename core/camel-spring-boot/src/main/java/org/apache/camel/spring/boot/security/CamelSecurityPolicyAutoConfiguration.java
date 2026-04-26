@@ -21,7 +21,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.main.SecurityConfigurationProperties;
@@ -48,19 +47,15 @@ public class CamelSecurityPolicyAutoConfiguration {
     private static final Logger LOG = LoggerFactory.getLogger(CamelSecurityPolicyAutoConfiguration.class);
 
     @Bean
-    SecurityPolicyResult camelSecurityPolicyResult(
-            CamelContext camelContext,
-            CamelSecurityPolicyConfigurationProperties config,
-            Environment environment) {
+    SecurityPolicyResult camelSecurityPolicyResult(CamelContext camelContext,
+            CamelSecurityPolicyConfigurationProperties config, Environment environment) {
 
         SecurityConfigurationProperties securityConfig = applySecurityProperties(camelContext, config);
 
         Map<String, Object> camelProperties = extractCamelProperties(environment);
 
-        List<SecurityViolation> violations = SecurityUtils.detectViolations(
-                camelProperties,
-                (k, v) -> containsSensitive(camelContext, k, v),
-                securityConfig::resolvePolicy,
+        List<SecurityViolation> violations = SecurityUtils.detectViolations(camelProperties,
+                (k, v) -> containsSensitive(camelContext, k, v), securityConfig::resolvePolicy,
                 securityConfig.getAllowedPropertySet());
 
         SecurityPolicyResult result = new SecurityPolicyResult(violations);
@@ -71,14 +66,12 @@ public class CamelSecurityPolicyAutoConfiguration {
         return result;
     }
 
-    private SecurityConfigurationProperties applySecurityProperties(
-            CamelContext camelContext,
+    private SecurityConfigurationProperties applySecurityProperties(CamelContext camelContext,
             CamelSecurityPolicyConfigurationProperties config) {
 
         // get the security config from camel-main's MainConfigurationProperties
         // which is already bound by CamelAutoConfiguration via CamelConfigurationProperties
-        SecurityConfigurationProperties securityConfig
-                = new SecurityConfigurationProperties(null);
+        SecurityConfigurationProperties securityConfig = new SecurityConfigurationProperties(null);
 
         securityConfig.setPolicy(config.getPolicy());
         if (config.getSecretPolicy() != null) {
@@ -143,8 +136,8 @@ public class CamelSecurityPolicyAutoConfiguration {
         if (!failures.isEmpty()) {
             throw new RuntimeCamelException(
                     "Security policy violations detected (policy=fail):\n - " + String.join("\n - ", failures)
-                                            + "\nTo allow specific properties, add them to camel.security.allowed-properties"
-                                            + " or change the policy to 'warn' or 'allow'.");
+                            + "\nTo allow specific properties, add them to camel.security.allowed-properties"
+                            + " or change the policy to 'warn' or 'allow'.");
         }
     }
 

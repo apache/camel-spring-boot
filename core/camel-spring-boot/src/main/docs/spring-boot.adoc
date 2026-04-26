@@ -502,6 +502,75 @@ management.server.accesslog.pattern=combined
 ----
 
 
+== Security Policy
+
+Camel Spring Boot automatically enforces security policies at startup, detecting insecure configuration such as disabled SSL verification, plain-text secrets, enabled Java deserialization, or development-only features.
+
+The global policy controls how Camel reacts when insecure configuration is detected:
+
+[source,properties]
+----
+# allow  — no warnings, allow the configuration
+# warn   — log a warning at startup (default)
+# fail   — throw an exception and prevent startup
+camel.security.policy=warn
+----
+
+=== Category Overrides
+
+Each security category can override the global policy independently:
+
+[source,properties]
+----
+camel.security.policy=fail
+camel.security.insecure-ssl-policy=warn
+camel.security.insecure-serialization-policy=warn
+camel.security.insecure-dev-policy=allow
+camel.security.secret-policy=fail
+----
+
+To exclude specific properties from all checks, use `allowed-properties`:
+
+[source,properties]
+----
+camel.security.allowed-properties=camel.component.http.trustAllCertificates,camel.component.netty.allowJavaSerializedObject
+----
+
+=== Per-Environment Policies with Spring Profiles
+
+Spring profiles allow you to enforce strict security in production while keeping a relaxed policy during development.
+
+In `application-prod.properties`:
+
+[source,properties]
+----
+camel.security.policy=fail
+----
+
+In `application-dev.properties`:
+
+[source,properties]
+----
+camel.security.policy=allow
+----
+
+Activate the profile via `spring.profiles.active`:
+
+[source,properties]
+----
+# application.properties
+spring.profiles.active=dev
+----
+
+Or at runtime:
+
+[source,bash]
+----
+java -Dspring.profiles.active=prod -jar myApp.jar
+----
+
+This way, developers can freely use options like `trustAllCertificates=true` locally, while production deployments will fail fast if any insecure configuration is detected.
+
 == Virtual Threads Support
 
 Camel Spring Boot provides comprehensive support for JDK 21+ Virtual Threads, offering significant performance improvements for I/O-intensive applications. Virtual threads are lightweight threads that can dramatically reduce memory overhead and improve scalability compared to traditional platform threads.
