@@ -28,6 +28,9 @@
   <packaging>jar</packaging>
   <name>Camel SB Starters :: Kafka</name>
   <description>Spring-Boot Starter for Camel Kafka support</description>
+  <properties>
+    <camel.failsafe.forkTimeout>600</camel.failsafe.forkTimeout>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -97,6 +100,7 @@
             <systemPropertyVariables>
               <visibleassertions.silence>true</visibleassertions.silence>
               <kafka.instance.type>local-kafka-container</kafka.instance.type>
+              <ci.env.name>${ci.env.name}</ci.env.name>
             </systemPropertyVariables>
           </configuration>
         </plugin>
@@ -135,6 +139,32 @@
       <activation>
         <property>
           <name>env.DOCKER_HOST</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <!-- activate integration test on Apache CI (Jenkins daily) -->
+    <profile>
+      <id>kafka-integration-tests-ci</id>
+      <activation>
+        <property>
+          <name>ci.env.name</name>
+          <value>apache.org</value>
         </property>
       </activation>
       <build>
