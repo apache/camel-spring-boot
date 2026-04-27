@@ -70,6 +70,11 @@
       "sourceType": "org.apache.camel.spring.boot.routetemplate.CamelRouteTemplateConfigurationProperties"
     },
     {
+      "name": "camel.security",
+      "type": "org.apache.camel.spring.boot.security.CamelSecurityPolicyConfigurationProperties",
+      "sourceType": "org.apache.camel.spring.boot.security.CamelSecurityPolicyConfigurationProperties"
+    },
+    {
       "name": "camel.ssl",
       "type": "org.apache.camel.spring.boot.security.CamelSSLConfigurationProperties",
       "sourceType": "org.apache.camel.spring.boot.security.CamelSSLConfigurationProperties"
@@ -1236,6 +1241,43 @@
       "type": "java.util.List<java.util.Map<java.lang.String,java.lang.String>>",
       "description": "Route template configurations",
       "sourceType": "org.apache.camel.spring.boot.routetemplate.CamelRouteTemplateConfigurationProperties"
+    },
+    {
+      "name": "camel.security.allowed-properties",
+      "type": "java.lang.String",
+      "description": "Comma-separated list of property keys to exclude from security policy checks. Use full property paths (e.g., camel.component.aws2-s3.trustAllCertificates) to allow specific properties regardless of the configured policy.",
+      "sourceType": "org.apache.camel.spring.boot.security.CamelSecurityPolicyConfigurationProperties"
+    },
+    {
+      "name": "camel.security.insecure-dev-policy",
+      "type": "java.lang.String",
+      "description": "Security policy for development-only features. When set, overrides the global policy for options intended only for development environments.",
+      "sourceType": "org.apache.camel.spring.boot.security.CamelSecurityPolicyConfigurationProperties"
+    },
+    {
+      "name": "camel.security.insecure-serialization-policy",
+      "type": "java.lang.String",
+      "description": "Security policy for insecure deserialization configuration. When set, overrides the global policy for options that enable dangerous deserialization of untrusted data.",
+      "sourceType": "org.apache.camel.spring.boot.security.CamelSecurityPolicyConfigurationProperties"
+    },
+    {
+      "name": "camel.security.insecure-ssl-policy",
+      "type": "java.lang.String",
+      "description": "Security policy for insecure SSL\/TLS configuration. When set, overrides the global policy for options that disable certificate validation or hostname verification.",
+      "sourceType": "org.apache.camel.spring.boot.security.CamelSecurityPolicyConfigurationProperties"
+    },
+    {
+      "name": "camel.security.policy",
+      "type": "java.lang.String",
+      "description": "Global security policy applied to all categories unless overridden. Controls how Camel reacts when insecure configuration is detected at startup.",
+      "sourceType": "org.apache.camel.spring.boot.security.CamelSecurityPolicyConfigurationProperties",
+      "defaultValue": "warn"
+    },
+    {
+      "name": "camel.security.secret-policy",
+      "type": "java.lang.String",
+      "description": "Security policy for plain-text secrets. When set, overrides the global policy for properties that contain sensitive values configured as plain text.",
+      "sourceType": "org.apache.camel.spring.boot.security.CamelSecurityPolicyConfigurationProperties"
     },
     {
       "name": "camel.ssl.cert-alias",
