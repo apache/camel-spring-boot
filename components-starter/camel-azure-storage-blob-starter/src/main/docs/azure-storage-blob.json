@@ -346,6 +346,12 @@
       "type": "java.time.Duration",
       "description": "An optional timeout value beyond which a RuntimeException will be raised.",
       "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-storage-blob.version-id",
+      "type": "java.lang.String",
+      "description": "The blob version identifier used to target a specific blob version on read operations (getBlob, downloadBlobToFile, downloadLink). Requires blob versioning to be enabled on the storage account. When set, the read targets the version scoped client instead of the live blob. Can also be provided per-exchange via the CamelAzureStorageBlobVersionId header.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
     }
   ],
   "hints": [],

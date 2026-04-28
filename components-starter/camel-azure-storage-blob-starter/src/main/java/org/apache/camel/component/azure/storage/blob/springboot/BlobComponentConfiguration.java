@@ -151,6 +151,14 @@ public class BlobComponentConfiguration
      */
     private Duration timeout;
     /**
+     * The blob version identifier used to target a specific blob version on
+     * read operations (getBlob, downloadBlobToFile, downloadLink). Requires
+     * blob versioning to be enabled on the storage account. When set, the read
+     * targets the version scoped client instead of the live blob. Can also be
+     * provided per-exchange via the CamelAzureStorageBlobVersionId header.
+     */
+    private String versionId;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions (if possible) occurred while the Camel consumer
      * is trying to pickup incoming messages, or the likes, will now be
@@ -492,6 +500,14 @@ public class BlobComponentConfiguration
 
     public void setTimeout(Duration timeout) {
         this.timeout = timeout;
+    }
+
+    public String getVersionId() {
+        return versionId;
+    }
+
+    public void setVersionId(String versionId) {
+        this.versionId = versionId;
     }
 
     public Boolean getBridgeErrorHandler() {

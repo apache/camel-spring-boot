@@ -1469,6 +1469,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-jsoup-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-jt400-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -3852,6 +3857,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-jsonpath</artifactId>
+        <version>4.21.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-jsoup</artifactId>
         <version>4.21.0-SNAPSHOT</version>
       </dependency>
       <dependency>
