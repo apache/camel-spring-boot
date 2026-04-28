@@ -11,7 +11,7 @@
     "supportLevel": "Preview",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-mina-sftp-starter",
-    "version": "4.18.2-SNAPSHOT",
+    "version": "4.18.3-SNAPSHOT",
     "scheme": "mina-sftp",
     "extendsScheme": "file",
     "syntax": "mina-sftp:host:port\/directoryName",
