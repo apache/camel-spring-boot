@@ -16,6 +16,8 @@
  */
 package org.apache.camel.spring.boot;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -68,6 +70,19 @@ public class SpringTypeConverterTest {
         }
 
         Assertions.assertNull(converter.convertTo(String.class, source));
+    }
+
+    @Test
+    public void testStringToFileInputStreamConversionIsBlocked() {
+        // Spring's ObjectToObjectConverter sees FileInputStream(String) constructor and
+        // treats String content as a file path — must return null so Camel's own converters
+        // handle String -> InputStream correctly
+        Assertions.assertNull(converter.convertTo(FileInputStream.class, null, "some file content"));
+    }
+
+    @Test
+    public void testStringToInputStreamConversionIsBlocked() {
+        Assertions.assertNull(converter.convertTo(InputStream.class, null, "some file content"));
     }
 
     public static class Person {
