@@ -16,6 +16,7 @@
  */
 package org.apache.camel.spring.boot;
 
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +50,13 @@ public class SpringTypeConverter extends TypeConverterSupport {
 
         // do not attempt to convert List -> Map. Ognl expression may use this converter as a fallback expecting null
         if (type.isAssignableFrom(Map.class) && isArrayOrCollection(value)) {
+            return null;
+        }
+
+        // do not attempt to convert String -> InputStream (or subclasses like FileInputStream).
+        // Spring's ObjectToObjectConverter finds FileInputStream(String) constructor and treats
+        // the String value as a file path instead of data content.
+        if (value instanceof String && InputStream.class.isAssignableFrom(type)) {
             return null;
         }
 
