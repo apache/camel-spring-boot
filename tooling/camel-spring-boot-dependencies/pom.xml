@@ -54,7 +54,7 @@
       <dependency>
         <groupId>com.openai</groupId>
         <artifactId>openai-java</artifactId>
-        <version>4.32.0</version>
+        <version>4.33.0</version>
       </dependency>
       <dependency>
         <groupId>eu.maveniverse.maven.mima.runtime</groupId>
@@ -400,11 +400,6 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws-security-hub-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-aws-xray-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -2184,11 +2179,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-stomp-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-stream-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2566,11 +2556,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-aws-security-hub</artifactId>
-        <version>4.21.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-aws-xray</artifactId>
         <version>4.21.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -4697,11 +4682,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-stitch</artifactId>
-        <version>4.21.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-stomp</artifactId>
         <version>4.21.0-SNAPSHOT</version>
       </dependency>
       <dependency>

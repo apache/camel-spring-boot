@@ -204,7 +204,7 @@
     },
     {
       "name": "camel.component.jetty.socket-connectors",
-      "type": "java.util.Map<java.lang.Integer,org.eclipse.jetty.server.Connector>",
+      "type": "java.util.Map<java.lang.Integer,org.eclipse.jetty.server.ServerConnector>",
       "description": "A map which contains per port number specific HTTP connectors. Uses the same principle as sslSocketConnectors.",
       "sourceType": "org.apache.camel.component.jetty12.springboot.JettyHttpComponentConfiguration12"
     },
@@ -234,7 +234,7 @@
     },
     {
       "name": "camel.component.jetty.ssl-socket-connectors",
-      "type": "java.util.Map<java.lang.Integer,org.eclipse.jetty.server.Connector>",
+      "type": "java.util.Map<java.lang.Integer,org.eclipse.jetty.server.ServerConnector>",
       "description": "A map which contains per port number specific SSL connectors.",
       "sourceType": "org.apache.camel.component.jetty12.springboot.JettyHttpComponentConfiguration12"
     },

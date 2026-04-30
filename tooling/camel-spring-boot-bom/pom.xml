@@ -120,11 +120,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-aws-xray-starter</artifactId>
-        <version>4.21.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-aws2-athena-starter</artifactId>
         <version>4.21.0-SNAPSHOT</version>
       </dependency>
@@ -1906,11 +1901,6 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-stitch-starter</artifactId>
-        <version>4.21.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-stomp-starter</artifactId>
         <version>4.21.0-SNAPSHOT</version>
       </dependency>
       <dependency>

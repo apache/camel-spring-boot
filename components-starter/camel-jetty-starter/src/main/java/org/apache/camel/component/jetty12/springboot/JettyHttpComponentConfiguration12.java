@@ -23,9 +23,9 @@ import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.eclipse.jetty.jmx.MBeanContainer;
-import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.RequestLog;
 import org.eclipse.jetty.server.SecureRequestCustomizer;
+import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.handler.ErrorHandler;
 import org.eclipse.jetty.util.thread.ThreadPool;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -225,7 +225,7 @@ public class JettyHttpComponentConfiguration12
      * A map which contains per port number specific HTTP connectors. Uses the
      * same principle as sslSocketConnectors.
      */
-    private Map<Integer, Connector> socketConnectors;
+    private Map<Integer, ServerConnector> socketConnectors;
     /**
      * To configure security using SSLContextParameters. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
@@ -250,7 +250,7 @@ public class JettyHttpComponentConfiguration12
     /**
      * A map which contains per port number specific SSL connectors.
      */
-    private Map<Integer, Connector> sslSocketConnectors;
+    private Map<Integer, ServerConnector> sslSocketConnectors;
     /**
      * Enable usage of global SSL context parameters
      */
@@ -507,11 +507,12 @@ public class JettyHttpComponentConfiguration12
         this.socketConnectorProperties = socketConnectorProperties;
     }
 
-    public Map<Integer, Connector> getSocketConnectors() {
+    public Map<Integer, ServerConnector> getSocketConnectors() {
         return socketConnectors;
     }
 
-    public void setSocketConnectors(Map<Integer, Connector> socketConnectors) {
+    public void setSocketConnectors(
+            Map<Integer, ServerConnector> socketConnectors) {
         this.socketConnectors = socketConnectors;
     }
 
@@ -549,12 +550,12 @@ public class JettyHttpComponentConfiguration12
         this.sslSocketConnectorProperties = sslSocketConnectorProperties;
     }
 
-    public Map<Integer, Connector> getSslSocketConnectors() {
+    public Map<Integer, ServerConnector> getSslSocketConnectors() {
         return sslSocketConnectors;
     }
 
     public void setSslSocketConnectors(
-            Map<Integer, Connector> sslSocketConnectors) {
+            Map<Integer, ServerConnector> sslSocketConnectors) {
         this.sslSocketConnectors = sslSocketConnectors;
     }
 

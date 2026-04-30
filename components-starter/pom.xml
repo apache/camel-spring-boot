@@ -121,7 +121,6 @@
     <module>camel-aws-parameter-store-starter</module>
     <module>camel-aws-secrets-manager-starter</module>
     <module>camel-aws-security-hub-starter</module>
-    <module>camel-aws-xray-starter</module>
     <module>camel-aws2-athena-starter</module>
     <module>camel-aws2-comprehend-starter</module>
     <module>camel-aws2-cw-starter</module>
@@ -467,7 +466,6 @@
     <module>camel-ssh-starter</module>
     <module>camel-stax-starter</module>
     <module>camel-stitch-starter</module>
-    <module>camel-stomp-starter</module>
     <module>camel-stream-starter</module>
     <module>camel-stringtemplate-starter</module>
     <module>camel-stripe-starter</module>
