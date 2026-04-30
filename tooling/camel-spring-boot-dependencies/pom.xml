@@ -83,11 +83,6 @@
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
-        <artifactId>grpc-android</artifactId>
-        <version>1.80.0</version>
-      </dependency>
-      <dependency>
-        <groupId>io.grpc</groupId>
         <artifactId>grpc-api</artifactId>
         <version>1.80.0</version>
       </dependency>
@@ -103,11 +98,6 @@
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
-        <artifactId>grpc-binder</artifactId>
-        <version>1.80.0</version>
-      </dependency>
-      <dependency>
-        <groupId>io.grpc</groupId>
         <artifactId>grpc-census</artifactId>
         <version>1.80.0</version>
       </dependency>
@@ -119,11 +109,6 @@
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-core</artifactId>
-        <version>1.80.0</version>
-      </dependency>
-      <dependency>
-        <groupId>io.grpc</groupId>
-        <artifactId>grpc-cronet</artifactId>
         <version>1.80.0</version>
       </dependency>
       <dependency>
