@@ -40,9 +40,9 @@
       <version>${camel-version}</version>
     </dependency>
     <dependency>
-      <groupId>io.undertow.ee</groupId>
+      <groupId>io.undertow</groupId>
       <artifactId>undertow-servlet</artifactId>
-      <version>${undertow-ee-version}</version>
+      <version>${undertow-servlet-version}</version>
     </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
