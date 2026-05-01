@@ -1,0 +1,1 @@
+This module is here, so `CamelXmlWildcardRoutesIT` will try to load the routes from a jar file. Take a look at CAMEL-23370, when the jar-based loader was broken previously.
