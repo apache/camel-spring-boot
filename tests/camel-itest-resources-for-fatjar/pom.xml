@@ -17,27 +17,19 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>spring-boot-parent</artifactId>
+        <artifactId>tests</artifactId>
         <version>4.21.0-SNAPSHOT</version>
-        <relativePath>../parent/pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>org.apache.camel.springboot</groupId>
-    <artifactId>tests</artifactId>
-    <name>Camel SB :: Tests</name>
-    <description>Camel Spring Boot Tests</description>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>camel-itest-spring-boot</module>
-        <module>camel-itest-resources-for-fatjar</module>
-        <module>camel-itest-spring-boot-farjar</module>
-    </modules>
+    <artifactId>camel-itest-resources-for-fatjar</artifactId>
+    <name>Camel SB :: Resources for FatJar test module</name>
+    <description>Camel Spring Boot Test Resources</description>
 
 </project>
