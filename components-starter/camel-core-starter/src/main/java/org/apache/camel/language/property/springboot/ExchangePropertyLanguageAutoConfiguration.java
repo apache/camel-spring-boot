@@ -60,7 +60,9 @@ public class ExchangePropertyLanguageAutoConfiguration {
         return new LanguageCustomizer() {
             @Override
             public void configure(String name, Language target) {
-                CamelPropertiesHelper.copyProperties(((org.apache.camel.CamelContextAware) target).getCamelContext(), configuration, target);
+                if (target instanceof CamelContextAware cca && cca.getCamelContext() != null) {
+                    CamelPropertiesHelper.copyProperties(cca.getCamelContext(), configuration, target);
+                }
             }
             @Override
             public boolean isEnabled(String name, Language target) {

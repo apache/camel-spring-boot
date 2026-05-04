@@ -1843,7 +1843,9 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     private static String createLanguageBody(String shortJavaType, String name) {
         return new StringBuilder().append("return new LanguageCustomizer() {\n").append("    @Override\n")
                 .append("    public void configure(String name, Language target) {\n")
-                .append("        CamelPropertiesHelper.copyProperties(((org.apache.camel.CamelContextAware) target).getCamelContext(), configuration, target);\n")
+                .append("        if (target instanceof CamelContextAware cca && cca.getCamelContext() != null) {\n")
+                .append("            CamelPropertiesHelper.copyProperties(cca.getCamelContext(), configuration, target);\n")
+                .append("        }\n")
                 .append("    }\n").append("    @Override\n")
                 .append("    public boolean isEnabled(String name, Language target) {\n")
                 .append("        return HierarchicalPropertiesEvaluator.evaluate(\n")
