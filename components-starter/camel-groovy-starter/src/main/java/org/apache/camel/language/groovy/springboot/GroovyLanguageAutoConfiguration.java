@@ -17,6 +17,7 @@
 package org.apache.camel.language.groovy.springboot;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.CamelContextAware;
 import org.apache.camel.language.groovy.GroovyLanguage;
 import org.apache.camel.spi.Language;
 import org.apache.camel.spi.LanguageCustomizer;
@@ -44,15 +45,12 @@ import org.springframework.context.annotation.Lazy;
 public class GroovyLanguageAutoConfiguration {
 
     private final ApplicationContext applicationContext;
-    private final CamelContext camelContext;
     private final GroovyLanguageConfiguration configuration;
 
     public GroovyLanguageAutoConfiguration(
             org.springframework.context.ApplicationContext applicationContext,
-            org.apache.camel.CamelContext camelContext,
             org.apache.camel.language.groovy.springboot.GroovyLanguageConfiguration configuration) {
         this.applicationContext = applicationContext;
-        this.camelContext = camelContext;
         this.configuration = configuration;
     }
 
@@ -62,7 +60,7 @@ public class GroovyLanguageAutoConfiguration {
         return new LanguageCustomizer() {
             @Override
             public void configure(String name, Language target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
+                CamelPropertiesHelper.copyProperties(((org.apache.camel.CamelContextAware) target).getCamelContext(), configuration, target);
             }
             @Override
             public boolean isEnabled(String name, Language target) {

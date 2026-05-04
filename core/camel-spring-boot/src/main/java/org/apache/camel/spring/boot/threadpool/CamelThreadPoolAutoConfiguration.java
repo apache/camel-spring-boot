@@ -24,12 +24,14 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 
 @AutoConfiguration(after = CamelAutoConfiguration.class)
 @ConditionalOnBean(CamelAutoConfiguration.class)
 @EnableConfigurationProperties(CamelThreadPoolConfigurationProperties.class)
 public class CamelThreadPoolAutoConfiguration {
 
+    @Lazy
     @Bean
     public ThreadPoolProfile threadPool(CamelContext camelContext, CamelThreadPoolConfigurationProperties tp) {
         if (tp.isEmpty()) {

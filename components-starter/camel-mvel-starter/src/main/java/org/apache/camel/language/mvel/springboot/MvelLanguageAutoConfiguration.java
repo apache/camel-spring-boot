@@ -17,6 +17,7 @@
 package org.apache.camel.language.mvel.springboot;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.CamelContextAware;
 import org.apache.camel.language.mvel.MvelLanguage;
 import org.apache.camel.spi.Language;
 import org.apache.camel.spi.LanguageCustomizer;
@@ -44,15 +45,12 @@ import org.springframework.context.annotation.Lazy;
 public class MvelLanguageAutoConfiguration {
 
     private final ApplicationContext applicationContext;
-    private final CamelContext camelContext;
     private final MvelLanguageConfiguration configuration;
 
     public MvelLanguageAutoConfiguration(
             org.springframework.context.ApplicationContext applicationContext,
-            org.apache.camel.CamelContext camelContext,
             org.apache.camel.language.mvel.springboot.MvelLanguageConfiguration configuration) {
         this.applicationContext = applicationContext;
-        this.camelContext = camelContext;
         this.configuration = configuration;
     }
 
@@ -62,7 +60,7 @@ public class MvelLanguageAutoConfiguration {
         return new LanguageCustomizer() {
             @Override
             public void configure(String name, Language target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
+                CamelPropertiesHelper.copyProperties(((org.apache.camel.CamelContextAware) target).getCamelContext(), configuration, target);
             }
             @Override
             public boolean isEnabled(String name, Language target) {

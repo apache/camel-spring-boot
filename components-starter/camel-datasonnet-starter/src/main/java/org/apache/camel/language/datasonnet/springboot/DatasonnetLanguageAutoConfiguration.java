@@ -17,6 +17,7 @@
 package org.apache.camel.language.datasonnet.springboot;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.CamelContextAware;
 import org.apache.camel.language.datasonnet.DatasonnetLanguage;
 import org.apache.camel.spi.Language;
 import org.apache.camel.spi.LanguageCustomizer;
@@ -44,15 +45,12 @@ import org.springframework.context.annotation.Lazy;
 public class DatasonnetLanguageAutoConfiguration {
 
     private final ApplicationContext applicationContext;
-    private final CamelContext camelContext;
     private final DatasonnetLanguageConfiguration configuration;
 
     public DatasonnetLanguageAutoConfiguration(
             org.springframework.context.ApplicationContext applicationContext,
-            org.apache.camel.CamelContext camelContext,
             org.apache.camel.language.datasonnet.springboot.DatasonnetLanguageConfiguration configuration) {
         this.applicationContext = applicationContext;
-        this.camelContext = camelContext;
         this.configuration = configuration;
     }
 
@@ -62,7 +60,7 @@ public class DatasonnetLanguageAutoConfiguration {
         return new LanguageCustomizer() {
             @Override
             public void configure(String name, Language target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
+                CamelPropertiesHelper.copyProperties(((org.apache.camel.CamelContextAware) target).getCamelContext(), configuration, target);
             }
             @Override
             public boolean isEnabled(String name, Language target) {
