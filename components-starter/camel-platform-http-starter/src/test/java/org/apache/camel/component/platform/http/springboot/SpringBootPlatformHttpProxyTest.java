@@ -35,7 +35,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.test.web.servlet.client.RestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.core.env.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.wiremock.spring.ConfigureWireMock;
@@ -66,12 +66,12 @@ public class SpringBootPlatformHttpProxyTest {
     @Autowired
     CamelContext camelContext;
 
-    @LocalServerPort
-    private Integer port;
+    @Autowired
+    private Environment env;
 
     @BeforeEach
     void setUp() {
-        RestAssured.port = port;
+        RestAssured.port = env.getRequiredProperty("local.server.port", Integer.class);
         WireMock.stubFor(get(urlPathEqualTo("/"))
                 .willReturn(aResponse()
                         .withBody(

@@ -43,15 +43,12 @@ import org.springframework.context.annotation.Lazy;
 public class GoogleBigQueryComponentAutoConfiguration {
 
     private final ApplicationContext applicationContext;
-    private final CamelContext camelContext;
     private final GoogleBigQueryComponentConfiguration configuration;
 
     public GoogleBigQueryComponentAutoConfiguration(
             org.springframework.context.ApplicationContext applicationContext,
-            org.apache.camel.CamelContext camelContext,
             org.apache.camel.component.google.bigquery.springboot.GoogleBigQueryComponentConfiguration configuration) {
         this.applicationContext = applicationContext;
-        this.camelContext = camelContext;
         this.configuration = configuration;
     }
 
@@ -61,7 +58,7 @@ public class GoogleBigQueryComponentAutoConfiguration {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
+                CamelPropertiesHelper.copyProperties(target.getCamelContext(), configuration, target);
             }
             @Override
             public boolean isEnabled(String name, Component target) {

@@ -43,15 +43,12 @@ import org.springframework.context.annotation.Lazy;
 public class Lambda2ComponentAutoConfiguration {
 
     private final ApplicationContext applicationContext;
-    private final CamelContext camelContext;
     private final Lambda2ComponentConfiguration configuration;
 
     public Lambda2ComponentAutoConfiguration(
             org.springframework.context.ApplicationContext applicationContext,
-            org.apache.camel.CamelContext camelContext,
             org.apache.camel.component.aws2.lambda.springboot.Lambda2ComponentConfiguration configuration) {
         this.applicationContext = applicationContext;
-        this.camelContext = camelContext;
         this.configuration = configuration;
     }
 
@@ -61,7 +58,7 @@ public class Lambda2ComponentAutoConfiguration {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
+                CamelPropertiesHelper.copyProperties(target.getCamelContext(), configuration, target);
             }
             @Override
             public boolean isEnabled(String name, Component target) {

@@ -26,6 +26,7 @@ import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
 import org.apache.camel.spring.boot.util.ConditionalOnHierarchicalProperties;
 import org.apache.camel.spring.boot.util.HierarchicalPropertiesEvaluator;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.convert.ApplicationConversionService;
@@ -44,15 +45,15 @@ import org.springframework.context.annotation.Lazy;
 public class BindyKeyValuePairDataFormatAutoConfiguration {
 
     private final ApplicationContext applicationContext;
-    private final CamelContext camelContext;
+    private final ObjectProvider<CamelContext> camelContextProvider;
     private final BindyKeyValuePairDataFormatConfiguration configuration;
 
     public BindyKeyValuePairDataFormatAutoConfiguration(
             org.springframework.context.ApplicationContext applicationContext,
-            org.apache.camel.CamelContext camelContext,
+            ObjectProvider<org.apache.camel.CamelContext> camelContextProvider,
             org.apache.camel.dataformat.bindy.kvp.springboot.BindyKeyValuePairDataFormatConfiguration configuration) {
         this.applicationContext = applicationContext;
-        this.camelContext = camelContext;
+        this.camelContextProvider = camelContextProvider;
         this.configuration = configuration;
     }
 
@@ -62,7 +63,7 @@ public class BindyKeyValuePairDataFormatAutoConfiguration {
         return new DataFormatCustomizer() {
             @Override
             public void configure(String name, DataFormat target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
+                CamelPropertiesHelper.copyProperties(camelContextProvider.getObject(), configuration, target);
             }
             @Override
             public boolean isEnabled(String name, DataFormat target) {

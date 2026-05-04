@@ -43,15 +43,12 @@ import org.springframework.context.annotation.Lazy;
 public class SecretsManagerComponentAutoConfiguration {
 
     private final ApplicationContext applicationContext;
-    private final CamelContext camelContext;
     private final SecretsManagerComponentConfiguration configuration;
 
     public SecretsManagerComponentAutoConfiguration(
             org.springframework.context.ApplicationContext applicationContext,
-            org.apache.camel.CamelContext camelContext,
             org.apache.camel.component.aws.secretsmanager.springboot.SecretsManagerComponentConfiguration configuration) {
         this.applicationContext = applicationContext;
-        this.camelContext = camelContext;
         this.configuration = configuration;
     }
 
@@ -61,7 +58,7 @@ public class SecretsManagerComponentAutoConfiguration {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
+                CamelPropertiesHelper.copyProperties(target.getCamelContext(), configuration, target);
             }
             @Override
             public boolean isEnabled(String name, Component target) {

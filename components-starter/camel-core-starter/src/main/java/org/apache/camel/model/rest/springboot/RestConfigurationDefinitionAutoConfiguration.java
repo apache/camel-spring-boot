@@ -23,6 +23,7 @@ import org.apache.camel.spi.RestConfiguration;
 import org.apache.camel.spring.boot.util.CamelPropertiesHelper;
 import org.apache.camel.support.PluginHelper;
 import org.apache.camel.util.CollectionHelper;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -41,13 +42,13 @@ import org.springframework.context.annotation.Lazy;
 @EnableConfigurationProperties(RestConfigurationDefinitionProperties.class)
 public class RestConfigurationDefinitionAutoConfiguration {
 
-    private final CamelContext camelContext;
+    private final ObjectProvider<CamelContext> camelContextProvider;
     private final RestConfigurationDefinitionProperties config;
 
     public RestConfigurationDefinitionAutoConfiguration(
-            org.apache.camel.CamelContext camelContext,
+            ObjectProvider<org.apache.camel.CamelContext> camelContextProvider,
             org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties config) {
-        this.camelContext = camelContext;
+        this.camelContextProvider = camelContextProvider;
         this.config = config;
     }
 
@@ -57,6 +58,7 @@ public class RestConfigurationDefinitionAutoConfiguration {
     @ConditionalOnMissingBean
     public RestConfiguration configureRestConfigurationDefinition()
             throws Exception {
+        CamelContext camelContext = this.camelContextProvider.getObject();
         Map<String, Object> properties = new HashMap<>();
         PluginHelper.getBeanIntrospection(camelContext).getProperties(config, properties, null, false);
         // These options is configured specially further below, so remove them first

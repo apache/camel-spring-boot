@@ -443,16 +443,17 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         javaClass.addImport("org.apache.camel.CamelContext");
         javaClass.addImport("org.apache.camel.spi.RestConfiguration");
         javaClass.addImport("org.apache.camel.support.PluginHelper");
+        javaClass.addImport("org.springframework.beans.factory.ObjectProvider");
 
-        javaClass.addField().setName("camelContext").setType(loadClass("org.apache.camel.CamelContext")).setPrivate()
+        javaClass.addField().setName("camelContextProvider").setType(loadType("org.springframework.beans.factory.ObjectProvider<org.apache.camel.CamelContext>")).setPrivate()
                 .setFinal(true);
         javaClass.addField().setName("config").setType(loadClass(packageName + "." + configType)).setPrivate()
                 .setFinal(true);
 
         Method ctr = javaClass.addMethod().setConstructor(true).setPublic().setName(name)
-                .addParameter("org.apache.camel.CamelContext", "camelContext")
+                .addParameter("ObjectProvider<org.apache.camel.CamelContext>", "camelContextProvider")
                 .addParameter(packageName + "." + configType, "config");
-        ctr.setBody("this.camelContext = camelContext;\nthis.config = config;\n");
+        ctr.setBody("this.camelContextProvider = camelContextProvider;\nthis.config = config;\n");
 
         Method method;
 
@@ -466,7 +467,8 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         method.addAnnotation(Bean.class).setLiteralValue("name", "\"rest-configuration\"");
         method.addAnnotation(ConditionalOnClass.class).setLiteralValue("value", "CamelContext.class");
         method.addAnnotation(ConditionalOnMissingBean.class);
-        method.setBody("" + "Map<String, Object> properties = new HashMap<>();\n"
+        method.setBody("" + "CamelContext camelContext = this.camelContextProvider.getObject();\n"
+                + "Map<String, Object> properties = new HashMap<>();\n"
                 + "PluginHelper.getBeanIntrospection(camelContext).getProperties(config, properties, null, false);\n"
                 + "// These options is configured specially further below, so remove them first\n"
                 + "properties.remove(\"enableCors\");\n" + "properties.remove(\"apiProperty\");\n"
@@ -1411,15 +1413,12 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         javaClass.addImport(model.getJavaType());
 
         javaClass.addField().setPrivate().setFinal(true).setName("applicationContext").setType(ApplicationContext.class);
-        javaClass.addField().setPrivate().setFinal(true).setName("camelContext")
-                .setType(loadClass("org.apache.camel.CamelContext"));
         javaClass.addField().setPrivate().setFinal(true).setName("configuration").setType(configClass);
 
         Method ctr = javaClass.addMethod().setConstructor(true).setPublic().setName(name)
                 .addParameter(ApplicationContext.class.getName(), "applicationContext")
-                .addParameter("org.apache.camel.CamelContext", "camelContext")
                 .addParameter(configClass.getName(), "configuration");
-        ctr.setBody("this.applicationContext = applicationContext;\nthis.camelContext = camelContext;\nthis.configuration = configuration;\n");
+        ctr.setBody("this.applicationContext = applicationContext;\nthis.configuration = configuration;\n");
 
         // add method for auto configure
         String body = createComponentBody(model.getShortJavaType(), componentName);
@@ -1627,18 +1626,19 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         javaClass.addImport("org.apache.camel.spring.boot.util.HierarchicalPropertiesEvaluator");
         javaClass.addImport("org.apache.camel.spi.DataFormat");
         javaClass.addImport("org.apache.camel.spi.DataFormatCustomizer");
+        javaClass.addImport("org.springframework.beans.factory.ObjectProvider");
         javaClass.addImport(model.getJavaType());
 
         javaClass.addField().setPrivate().setFinal(true).setName("applicationContext").setType(ApplicationContext.class);
-        javaClass.addField().setPrivate().setFinal(true).setName("camelContext")
-                .setType(loadClass("org.apache.camel.CamelContext"));
+        javaClass.addField().setPrivate().setFinal(true).setName("camelContextProvider")
+                .setType(loadType("org.springframework.beans.factory.ObjectProvider<org.apache.camel.CamelContext>"));
         javaClass.addField().setPrivate().setFinal(true).setName("configuration").setType(configClass);
 
         Method ctr = javaClass.addMethod().setConstructor(true).setPublic().setName(name)
                 .addParameter(ApplicationContext.class.getName(), "applicationContext")
-                .addParameter("org.apache.camel.CamelContext", "camelContext")
+                .addParameter("ObjectProvider<org.apache.camel.CamelContext>", "camelContextProvider")
                 .addParameter(configClass.getName(), "configuration");
-        ctr.setBody("this.applicationContext = applicationContext;\nthis.camelContext = camelContext;\nthis.configuration = configuration;\n");
+        ctr.setBody("this.applicationContext = applicationContext;\nthis.camelContextProvider = camelContextProvider;\nthis.configuration = configuration;\n");
 
         String body = createDataFormatBody(model.getShortJavaType(), dataformatName);
         String methodName = "configure" + model.getShortJavaType() + "Factory";
@@ -1723,20 +1723,18 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         javaClass.addImport("org.apache.camel.spring.boot.util.CamelPropertiesHelper");
         javaClass.addImport("org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans");
         javaClass.addImport("org.apache.camel.spring.boot.util.HierarchicalPropertiesEvaluator");
+        javaClass.addImport("org.apache.camel.CamelContextAware");
         javaClass.addImport("org.apache.camel.spi.Language");
         javaClass.addImport("org.apache.camel.spi.LanguageCustomizer");
         javaClass.addImport(model.getJavaType());
 
         javaClass.addField().setPrivate().setFinal(true).setName("applicationContext").setType(ApplicationContext.class);
-        javaClass.addField().setPrivate().setFinal(true).setName("camelContext")
-                .setType(loadClass("org.apache.camel.CamelContext"));
         javaClass.addField().setPrivate().setFinal(true).setName("configuration").setType(configClass);
 
         Method ctr = javaClass.addMethod().setConstructor(true).setPublic().setName(name)
                 .addParameter(ApplicationContext.class.getName(), "applicationContext")
-                .addParameter("org.apache.camel.CamelContext", "camelContext")
                 .addParameter(configClass.getName(), "configuration");
-        ctr.setBody("this.applicationContext = applicationContext;\nthis.camelContext = camelContext;\nthis.configuration = configuration;\n");
+        ctr.setBody("this.applicationContext = applicationContext;\nthis.configuration = configuration;\n");
 
         String body = createLanguageBody(model.getShortJavaType(), languageName);
         String methodName = "configure" + model.getShortJavaType();
@@ -1817,7 +1815,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     private static String createComponentBody(String shortJavaType, String name) {
         return new StringBuilder().append("return new ComponentCustomizer() {\n").append("    @Override\n")
                 .append("    public void configure(String name, Component target) {\n")
-                .append("        CamelPropertiesHelper.copyProperties(camelContext, configuration, target);\n")
+                .append("        CamelPropertiesHelper.copyProperties(target.getCamelContext(), configuration, target);\n")
                 .append("    }\n").append("    @Override\n")
                 .append("    public boolean isEnabled(String name, Component target) {\n")
                 .append("        return HierarchicalPropertiesEvaluator.evaluate(\n")
@@ -1831,7 +1829,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     private static String createDataFormatBody(String shortJavaType, String name) {
         return new StringBuilder().append("return new DataFormatCustomizer() {\n").append("    @Override\n")
                 .append("    public void configure(String name, DataFormat target) {\n")
-                .append("        CamelPropertiesHelper.copyProperties(camelContext, configuration, target);\n")
+                .append("        CamelPropertiesHelper.copyProperties(camelContextProvider.getObject(), configuration, target);\n")
                 .append("    }\n").append("    @Override\n")
                 .append("    public boolean isEnabled(String name, DataFormat target) {\n")
                 .append("        return HierarchicalPropertiesEvaluator.evaluate(\n")
@@ -1845,7 +1843,11 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
     private static String createLanguageBody(String shortJavaType, String name) {
         return new StringBuilder().append("return new LanguageCustomizer() {\n").append("    @Override\n")
                 .append("    public void configure(String name, Language target) {\n")
-                .append("        CamelPropertiesHelper.copyProperties(camelContext, configuration, target);\n")
+                .append("        if (target instanceof CamelContextAware cca && cca.getCamelContext() != null) {\n")
+                .append("            CamelPropertiesHelper.copyProperties(cca.getCamelContext(), configuration, target);\n")
+                .append("        } else {\n")
+                .append("            org.slf4j.LoggerFactory.getLogger(getClass()).debug(\"Language {} does not implement CamelContextAware, skipping auto-configuration properties\", name);\n")
+                .append("        }\n")
                 .append("    }\n").append("    @Override\n")
                 .append("    public boolean isEnabled(String name, Language target) {\n")
                 .append("        return HierarchicalPropertiesEvaluator.evaluate(\n")

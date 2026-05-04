@@ -55,7 +55,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.core.env.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.web.servlet.client.EntityExchangeResult;
@@ -77,12 +77,12 @@ public class SpringBootPlatformHttpCertificationTest extends PlatformHttpBase {
     private static final String postRouteId = "SpringBootPlatformHttpRestDSLTest_mypost";
     private static final String getRouteId = "SpringBootPlatformHttpRestDSLTest_myget";
 
-    @LocalServerPort
-    private Integer port;
+    @Autowired
+    private Environment env;
 
     @BeforeEach
     void setUp() {
-        RestAssured.port = port;
+        RestAssured.port = env.getRequiredProperty("local.server.port", Integer.class);
     }
 
     @Configuration

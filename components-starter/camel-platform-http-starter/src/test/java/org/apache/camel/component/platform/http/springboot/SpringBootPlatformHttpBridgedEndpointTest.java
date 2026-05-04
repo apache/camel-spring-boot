@@ -28,7 +28,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -49,8 +50,8 @@ import static org.hamcrest.Matchers.containsString;
 @Disabled("WireMock 3.10.6 has Jetty compatibility issues with Spring Boot 4 - requires WireMock upgrade to support Jetty 12")
 public class SpringBootPlatformHttpBridgedEndpointTest {
 
-    @LocalServerPort
-    private Integer port;
+    @Autowired
+    private Environment env;
 
     @BeforeEach
     void setUp() {
@@ -92,7 +93,7 @@ public class SpringBootPlatformHttpBridgedEndpointTest {
 
     @Test
     public void bridgedEndpointTest() {
-        final var proxyURI = "http://localhost:%s/mock".formatted(port);
+        final var proxyURI = "http://localhost:%s/mock".formatted(env.getRequiredProperty("local.server.port"));
 
         given()
                 .contentType(ContentType.JSON)
