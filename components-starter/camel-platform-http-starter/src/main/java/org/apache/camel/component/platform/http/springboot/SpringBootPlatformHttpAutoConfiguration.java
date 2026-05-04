@@ -22,13 +22,13 @@ import org.apache.camel.component.platform.http.spi.PlatformHttpEngine;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.env.Environment;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -74,11 +74,11 @@ public class SpringBootPlatformHttpAutoConfiguration {
     }
 
     @Bean
-    @DependsOn("configurePlatformHttpComponent")
-    public CamelRequestHandlerMapping platformHttpEngineRequestMapping(PlatformHttpEngine engine, CamelContext camelContext) {
+    public CamelRequestHandlerMapping platformHttpEngineRequestMapping(
+            PlatformHttpEngine engine, ObjectProvider<CamelContext> camelContextProvider) {
+        CamelContext camelContext = camelContextProvider.getObject();
         PlatformHttpComponent component = camelContext.getComponent("platform-http", PlatformHttpComponent.class);
-        CamelRequestHandlerMapping answer = new CamelRequestHandlerMapping(component, engine);
-        return answer;
+        return new CamelRequestHandlerMapping(component, engine);
     }
 
 }
