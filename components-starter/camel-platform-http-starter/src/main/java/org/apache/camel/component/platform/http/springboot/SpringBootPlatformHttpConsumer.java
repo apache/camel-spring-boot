@@ -98,7 +98,7 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
                 // do not leak exception back to caller
                 LOG.warn("Error handling request due to: {}", e.getMessage(), e);
                 try {
-                    if (!response.isCommitted()) {
+                    if (!isAsyncRequestNotUsable(e) && !response.isCommitted()) {
                         response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                     }
                 } catch (Exception e1) {
@@ -149,6 +149,7 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
 
     protected void afterProcess(HttpServletResponse response, Exchange exchange) throws Exception {
         boolean writeFailure = false;
+        boolean asyncCompleted = false;
         try {
             // now lets output to the res
             if (LOG.isTraceEnabled()) {
@@ -156,20 +157,35 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
             }
             binding.writeResponse(exchange, response);
         } catch (Exception e) {
-            writeFailure = true;
-            handleFailure(exchange, e);
+            if (isAsyncRequestNotUsable(e)) {
+                asyncCompleted = true;
+                LOG.debug("Async request already completed, response not usable: {}", e.getMessage());
+            } else {
+                writeFailure = true;
+                handleFailure(exchange, e);
+            }
         } finally {
             doneUoW(exchange);
             releaseExchange(exchange, false);
         }
         try {
-            if (writeFailure && !response.isCommitted()) {
+            if (writeFailure && !asyncCompleted && !response.isCommitted()) {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
         } catch (Exception e) {
             // ignore
         }
 
+    }
+
+    static boolean isAsyncRequestNotUsable(Throwable e) {
+        for (Throwable t = e; t != null; t = t.getCause()) {
+            if ("org.springframework.web.context.request.async.AsyncRequestNotUsableException"
+                    .equals(t.getClass().getName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void handleFailure(Exchange exchange, Throwable failure) {
