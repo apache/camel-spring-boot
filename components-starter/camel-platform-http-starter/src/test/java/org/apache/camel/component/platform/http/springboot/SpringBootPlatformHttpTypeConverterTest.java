@@ -30,7 +30,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.test.web.servlet.client.RestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.core.env.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -57,12 +57,12 @@ public class SpringBootPlatformHttpTypeConverterTest {
     @Autowired
     CamelContext camelContext;
 
-    @LocalServerPort
-    private Integer port;
+    @Autowired
+    private Environment env;
 
     @BeforeEach
     void setUp() {
-        RestAssured.port = port;
+        RestAssured.port = env.getRequiredProperty("local.server.port", Integer.class);
     }
 
     @Configuration

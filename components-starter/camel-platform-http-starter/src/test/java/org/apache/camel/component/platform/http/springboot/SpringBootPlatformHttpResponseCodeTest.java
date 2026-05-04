@@ -25,7 +25,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -42,12 +43,12 @@ import static org.hamcrest.Matchers.equalTo;
         PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class })
 public class SpringBootPlatformHttpResponseCodeTest {
 
-    @LocalServerPort
-    private Integer port;
+    @Autowired
+    private Environment env;
 
     @BeforeEach
     void setUp() {
-        RestAssured.port = port;
+        RestAssured.port = env.getRequiredProperty("local.server.port", Integer.class);
     }
 
     @Test
