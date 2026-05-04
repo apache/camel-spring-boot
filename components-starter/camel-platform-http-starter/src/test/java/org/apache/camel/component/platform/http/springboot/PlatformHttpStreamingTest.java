@@ -28,7 +28,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -52,13 +53,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         SpringBootPlatformHttpTest.class, PlatformHttpStreamingTest.TestConfiguration.class,
         PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class })
 public class PlatformHttpStreamingTest {
-
-    @LocalServerPort
-    private int port;
+    @Autowired
+    private Environment environment;
 
     @BeforeEach
     public void setUp() {
-        RestAssured.port = port;
+        RestAssured.port = Integer.parseInt(environment.getRequiredProperty("local.server.port"));
     }
 
     @Test
