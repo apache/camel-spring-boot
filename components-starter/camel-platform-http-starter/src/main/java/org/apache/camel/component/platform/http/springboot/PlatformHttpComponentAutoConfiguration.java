@@ -33,6 +33,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.annotation.Lazy;
 
 /**
@@ -47,13 +48,13 @@ public class PlatformHttpComponentAutoConfiguration {
 
     @Autowired
     private ApplicationContext applicationContext;
-    private final CamelContext camelContext;
+    private final ObjectProvider<CamelContext> camelContextProvider;
     @Autowired
     private PlatformHttpComponentConfiguration configuration;
 
     public PlatformHttpComponentAutoConfiguration(
-            org.apache.camel.CamelContext camelContext) {
-        this.camelContext = camelContext;
+            ObjectProvider<CamelContext> camelContextProvider) {
+        this.camelContextProvider = camelContextProvider;
     }
 
     @Lazy
@@ -62,7 +63,7 @@ public class PlatformHttpComponentAutoConfiguration {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
+                CamelPropertiesHelper.copyProperties(camelContextProvider.getObject(), configuration, target);
             }
             @Override
             public boolean isEnabled(String name, Component target) {
