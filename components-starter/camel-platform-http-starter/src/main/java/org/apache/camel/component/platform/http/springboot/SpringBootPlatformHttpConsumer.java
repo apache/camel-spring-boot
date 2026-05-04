@@ -16,7 +16,6 @@
  */
 package org.apache.camel.component.platform.http.springboot;
 
-import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -40,8 +39,11 @@ import org.apache.camel.http.common.HttpHelper;
 import org.apache.camel.support.DefaultConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.task.AsyncTaskExecutor;
+import org.springframework.scheduling.concurrent.ConcurrentTaskExecutor;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.async.WebAsyncTask;
 
 public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements PlatformHttpConsumer, Suspendable, SuspendableService {
 
@@ -84,11 +86,14 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
     /**
      * This method is invoked by Spring Boot when invoking Camel via platform-http.
      *
-     * Returns a Callable to integrate with Spring MVC async request lifecycle.
+     * Returns a WebAsyncTask to integrate with Spring MVC async lifecycle while preserving the custom executor.
      */
     @ResponseBody
-    public Callable<Void> service(HttpServletRequest request, HttpServletResponse response) {
-        return () -> {
+    public WebAsyncTask<Void> service(HttpServletRequest request, HttpServletResponse response) {
+        AsyncTaskExecutor asyncExecutor = (executor instanceof AsyncTaskExecutor ate)
+                ? ate
+                : new ConcurrentTaskExecutor(executor);
+        WebAsyncTask<Void> task = new WebAsyncTask<>(null, asyncExecutor, () -> {
             LOG.trace("Service: {}", request);
             try {
                 handleService(request, response);
@@ -104,7 +109,14 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
                 }
             }
             return null;
-        };
+        });
+        task.onTimeout(() -> {
+            if (!response.isCommitted()) {
+                response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+            }
+            return null;
+        });
+        return task;
     }
 
     protected void handleService(HttpServletRequest request, HttpServletResponse response) throws Exception {
