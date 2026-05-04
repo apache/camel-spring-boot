@@ -16,7 +16,7 @@
  */
 package org.apache.camel.component.platform.http.springboot;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -84,13 +84,11 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
     /**
      * This method is invoked by Spring Boot when invoking Camel via platform-http.
      *
-     * The method is already running asynchronously via AsyncExecutionInterceptor.
-     *
-     * Returns an empty CompletableFuture as per documentation https://spring.io/guides/gs/async-method
+     * Returns a Callable to integrate with Spring MVC async request lifecycle.
      */
     @ResponseBody
-    public CompletableFuture<Void> service(HttpServletRequest request, HttpServletResponse response) {
-        return CompletableFuture.runAsync(() -> {
+    public Callable<Void> service(HttpServletRequest request, HttpServletResponse response) {
+        return () -> {
             LOG.trace("Service: {}", request);
             try {
                 handleService(request, response);
@@ -105,7 +103,8 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
                     // ignore
                 }
             }
-        }, executor);
+            return null;
+        };
     }
 
     protected void handleService(HttpServletRequest request, HttpServletResponse response) throws Exception {

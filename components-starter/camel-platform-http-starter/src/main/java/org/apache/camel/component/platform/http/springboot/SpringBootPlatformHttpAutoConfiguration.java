@@ -28,7 +28,7 @@ import org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.core.env.Environment;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -96,8 +96,8 @@ public class SpringBootPlatformHttpAutoConfiguration {
     }
 
     @Bean
-    @DependsOn("configurePlatformHttpComponent")
-    public CamelRequestHandlerMapping platformHttpEngineRequestMapping(PlatformHttpEngine engine, CamelContext camelContext) {
+    public CamelRequestHandlerMapping platformHttpEngineRequestMapping(PlatformHttpEngine engine, ObjectProvider<CamelContext> camelContextProvider) {
+        CamelContext camelContext = camelContextProvider.getObject();
         PlatformHttpComponent component = camelContext.getComponent("platform-http", PlatformHttpComponent.class);
         CamelRequestHandlerMapping answer = new CamelRequestHandlerMapping(component, engine);
         return answer;
