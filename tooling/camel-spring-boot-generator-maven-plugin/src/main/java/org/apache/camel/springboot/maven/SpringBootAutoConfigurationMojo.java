@@ -1845,6 +1845,8 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 .append("    public void configure(String name, Language target) {\n")
                 .append("        if (target instanceof CamelContextAware cca && cca.getCamelContext() != null) {\n")
                 .append("            CamelPropertiesHelper.copyProperties(cca.getCamelContext(), configuration, target);\n")
+                .append("        } else {\n")
+                .append("            org.slf4j.LoggerFactory.getLogger(getClass()).debug(\"Language {} does not implement CamelContextAware, skipping auto-configuration properties\", name);\n")
                 .append("        }\n")
                 .append("    }\n").append("    @Override\n")
                 .append("    public boolean isEnabled(String name, Language target) {\n")

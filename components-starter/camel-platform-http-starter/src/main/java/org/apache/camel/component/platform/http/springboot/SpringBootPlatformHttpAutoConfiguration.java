@@ -28,7 +28,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.env.Environment;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -95,7 +94,6 @@ public class SpringBootPlatformHttpAutoConfiguration {
     }
 
     @Bean
-    @DependsOn("configurePlatformHttpComponent")
     public CamelRequestHandlerMapping platformHttpEngineRequestMapping(PlatformHttpEngine engine, ObjectProvider<CamelContext> camelContextProvider) {
         CamelContext camelContext = camelContextProvider.getObject();
         PlatformHttpComponent component = camelContext.getComponent("platform-http", PlatformHttpComponent.class);
