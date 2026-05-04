@@ -31,7 +31,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -57,13 +58,12 @@ public class SpringBootPlatformHttpSessionTest {
 
     @Autowired
     CamelContext camelContext;
-
-    @LocalServerPort
-    private Integer port;
+    @Autowired
+    private Environment environment;
 
     @BeforeEach
     void setUp() {
-        RestAssured.port = port;
+        RestAssured.port = Integer.parseInt(environment.getRequiredProperty("local.server.port"));
     }
 
     @Configuration
