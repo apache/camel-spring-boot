@@ -1099,11 +1099,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-guava-eventbus-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-hashicorp-vault-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -3417,11 +3412,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-gson</artifactId>
-        <version>4.21.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-guava-eventbus</artifactId>
         <version>4.21.0-SNAPSHOT</version>
       </dependency>
       <dependency>
