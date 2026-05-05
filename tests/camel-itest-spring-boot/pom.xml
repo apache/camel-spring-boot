@@ -97,7 +97,7 @@
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
         </dependency>
-        <!-- needed on parent classloader for components that use Groovy (e.g. camel-grape) -->
+        <!-- needed on parent classloader for components that use Groovy -->
         <dependency>
             <groupId>org.apache.groovy</groupId>
             <artifactId>groovy</artifactId>
