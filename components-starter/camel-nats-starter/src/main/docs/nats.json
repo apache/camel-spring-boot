@@ -205,6 +205,20 @@
       "defaultValue": 10
     },
     {
+      "name": "camel.component.nats.pull-batch-size",
+      "type": "java.lang.Integer",
+      "description": "Maximum number of messages to fetch per pull request when using a JetStream Pull Subscription. Only used when {code pullSubscription=true}.",
+      "sourceType": "org.apache.camel.component.nats.springboot.NatsComponentConfiguration",
+      "defaultValue": 10
+    },
+    {
+      "name": "camel.component.nats.pull-fetch-timeout",
+      "type": "java.lang.Long",
+      "description": "Maximum time (in milliseconds) to wait for a batch of messages to be available on the server during a single fetch when using a JetStream Pull Subscription. Only used when {code pullSubscription=true}.",
+      "sourceType": "org.apache.camel.component.nats.springboot.NatsComponentConfiguration",
+      "defaultValue": 1000
+    },
+    {
       "name": "camel.component.nats.pull-subscription",
       "type": "java.lang.Boolean",
       "description": "Sets the consumer subscription type for JetStream. Set to true to use a Pull Subscription (consumer explicitly requests messages). Set to false to use a Push Subscription (messages are automatically delivered).",
