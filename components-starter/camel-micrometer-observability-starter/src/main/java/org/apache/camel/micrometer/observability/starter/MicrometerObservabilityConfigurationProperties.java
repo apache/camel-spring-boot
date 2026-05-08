@@ -22,14 +22,19 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class MicrometerObservabilityConfigurationProperties {
 
     /**
-     * Sets exclude pattern(s) that will disable observability for Camel messages that matches the pattern. Multiple
-     * patterns can be separated by comma.
+     * Sets exclude pattern(s) that will disable tracing for Camel processors that matches the pattern. Multiple patterns
+     * can be separated by comma.
      */
     private String excludePatterns;
     /**
-     * Enable tracing for inner Camel processors.
+     * Setting this to true will create new telemetry spans for each Camel custom Processors. Use the excludePattern
+     * property to filter out Processors.
      */
-    private boolean traceProcessors;
+    private Boolean traceProcessors;
+    /**
+     * Disable any inner core processors (any core DSL processor provided in the route, for example `bean`, `log`, ...).
+     */
+    private boolean disableCoreProcessors;
 
     public String getExcludePatterns() {
         return excludePatterns;
@@ -45,5 +50,13 @@ public class MicrometerObservabilityConfigurationProperties {
 
     public void setTraceProcessors(boolean traceProcessors) {
         this.traceProcessors = traceProcessors;
+    }
+
+    public boolean isDisableCoreProcessors() {
+        return disableCoreProcessors;
+    }
+
+    public void setDisableCoreProcessors(Boolean disableCoreProcessors) {
+        this.disableCoreProcessors = disableCoreProcessors;
     }
 }
