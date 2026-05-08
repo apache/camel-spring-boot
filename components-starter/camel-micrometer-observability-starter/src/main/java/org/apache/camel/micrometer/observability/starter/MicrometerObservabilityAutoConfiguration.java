@@ -59,6 +59,9 @@ public class MicrometerObservabilityAutoConfiguration {
         if (config.isTraceProcessors()) {
             micrometerObservationTracer.setTraceProcessors(config.isTraceProcessors());;
         }
+        if (config.isDisableCoreProcessors()) {
+            micrometerObservationTracer.setDisableCoreProcessors(config.isDisableCoreProcessors());;
+        }
         micrometerObservationTracer.init(camelContext);
 
         return micrometerObservationTracer;
