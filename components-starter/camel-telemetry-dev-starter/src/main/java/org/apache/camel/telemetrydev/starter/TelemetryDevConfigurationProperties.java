@@ -22,19 +22,23 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class TelemetryDevConfigurationProperties {
 
     /**
-     * Global option to enable/disable OpenTelemetry integration, default is true.
+     * Global option to enable/disable telemetry, default is true.
      */
     private boolean enabled = true;
     /**
-     * Sets exclude pattern(s) that will disable tracing for Camel messages that matches the pattern. Multiple patterns
+     * Sets exclude pattern(s) that will disable tracing for Camel processors that matches the pattern. Multiple patterns
      * can be separated by comma.
      */
     private String excludePatterns;
     /**
-     * Setting this to true will create new OpenTelemetry Spans for each Camel Processors. Use the excludePattern
+     * Setting this to true will create new telemetry spans for each Camel custom Processors. Use the excludePattern
      * property to filter out Processors.
      */
     private Boolean traceProcessors;
+    /**
+     * Disable any inner core processors (any core DSL processor provided in the route, for example `bean`, `log`, ...).
+     */
+    private boolean disableCoreProcessors;
     /**
      * The output format for traces.
      */
@@ -46,6 +50,14 @@ public class TelemetryDevConfigurationProperties {
 
     public void setTraceProcessors(Boolean traceProcessors) {
         this.traceProcessors = traceProcessors;
+    }
+
+    public Boolean getDisableCoreProcessors() {
+        return disableCoreProcessors;
+    }
+
+    public void setDisableCoreProcessors(Boolean disableCoreProcessors) {
+        this.disableCoreProcessors = disableCoreProcessors;
     }
 
     public boolean isEnabled() {

@@ -42,6 +42,9 @@ public class TelemetryDevAutoConfiguration {
         if (config.getTraceProcessors() != null && config.getTraceProcessors()) {
             devTracer.setTraceProcessors(config.getTraceProcessors());
         }
+        if (config.getDisableCoreProcessors() != null && config.getDisableCoreProcessors()) {
+            devTracer.setDisableCoreProcessors(config.getDisableCoreProcessors());
+        }
         if (config.getTraceFormat() != null) {
             devTracer.setTraceFormat(config.getTraceFormat());
         }
