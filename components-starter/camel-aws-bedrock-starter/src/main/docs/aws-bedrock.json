@@ -49,6 +49,12 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.aws-bedrock-agent-runtime.bedrock-agent-runtime-async-client",
+      "type": "software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeAsyncClient",
+      "description": "To use an existing configured AWS Bedrock Agent Runtime async client (required for invokeFlow which streams events back). The option is a software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeAsyncClient type.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
       "name": "camel.component.aws-bedrock-agent-runtime.bedrock-agent-runtime-client",
       "type": "software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeClient",
       "description": "To use an existing configured AWS Bedrock Agent Runtime client. The option is a software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeClient type.",
@@ -66,9 +72,28 @@
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
+      "name": "camel.component.aws-bedrock-agent-runtime.enable-trace",
+      "type": "java.lang.Boolean",
+      "description": "Enables tracing for the invokeFlow operation. When enabled, the producer collects FlowTraceEvent entries and publishes them in the CamelAwsBedrockAgentRuntimeFlowTraces header.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.aws-bedrock-agent-runtime.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the aws-bedrock-agent-runtime component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.flow-alias-identifier",
+      "type": "java.lang.String",
+      "description": "The unique identifier of the Bedrock flow alias to invoke (used by the invokeFlow operation). Can be overridden per exchange via the CamelAwsBedrockAgentRuntimeFlowAliasIdentifier header.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.flow-identifier",
+      "type": "java.lang.String",
+      "description": "The unique identifier of the Bedrock flow to invoke (used by the invokeFlow operation). Can be overridden per exchange via the CamelAwsBedrockAgentRuntimeFlowIdentifier header.",
       "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
     },
     {

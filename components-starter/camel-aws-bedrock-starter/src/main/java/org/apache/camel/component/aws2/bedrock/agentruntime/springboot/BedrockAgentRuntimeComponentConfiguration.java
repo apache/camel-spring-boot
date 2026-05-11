@@ -22,6 +22,7 @@ import org.apache.camel.component.aws2.bedrock.agentruntime.BedrockAgentRuntimeO
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import software.amazon.awssdk.core.Protocol;
+import software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeAsyncClient;
 import software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeClient;
 
 /**
@@ -114,11 +115,35 @@ public class BedrockAgentRuntimeComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * To use an existing configured AWS Bedrock Agent Runtime async client
+     * (required for invokeFlow which streams events back). The option is a
+     * software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeAsyncClient type.
+     */
+    private BedrockAgentRuntimeAsyncClient bedrockAgentRuntimeAsyncClient;
+    /**
      * To use an existing configured AWS Bedrock Agent Runtime client. The
      * option is a
      * software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeClient type.
      */
     private BedrockAgentRuntimeClient bedrockAgentRuntimeClient;
+    /**
+     * Enables tracing for the invokeFlow operation. When enabled, the producer
+     * collects FlowTraceEvent entries and publishes them in the
+     * CamelAwsBedrockAgentRuntimeFlowTraces header.
+     */
+    private Boolean enableTrace = false;
+    /**
+     * The unique identifier of the Bedrock flow alias to invoke (used by the
+     * invokeFlow operation). Can be overridden per exchange via the
+     * CamelAwsBedrockAgentRuntimeFlowAliasIdentifier header.
+     */
+    private String flowAliasIdentifier;
+    /**
+     * The unique identifier of the Bedrock flow to invoke (used by the
+     * invokeFlow operation). Can be overridden per exchange via the
+     * CamelAwsBedrockAgentRuntimeFlowIdentifier header.
+     */
+    private String flowIdentifier;
     /**
      * Used for enabling or disabling all consumer based health checks from this
      * component
@@ -275,6 +300,15 @@ public class BedrockAgentRuntimeComponentConfiguration
         this.autowiredEnabled = autowiredEnabled;
     }
 
+    public BedrockAgentRuntimeAsyncClient getBedrockAgentRuntimeAsyncClient() {
+        return bedrockAgentRuntimeAsyncClient;
+    }
+
+    public void setBedrockAgentRuntimeAsyncClient(
+            BedrockAgentRuntimeAsyncClient bedrockAgentRuntimeAsyncClient) {
+        this.bedrockAgentRuntimeAsyncClient = bedrockAgentRuntimeAsyncClient;
+    }
+
     public BedrockAgentRuntimeClient getBedrockAgentRuntimeClient() {
         return bedrockAgentRuntimeClient;
     }
@@ -282,6 +316,30 @@ public class BedrockAgentRuntimeComponentConfiguration
     public void setBedrockAgentRuntimeClient(
             BedrockAgentRuntimeClient bedrockAgentRuntimeClient) {
         this.bedrockAgentRuntimeClient = bedrockAgentRuntimeClient;
+    }
+
+    public Boolean getEnableTrace() {
+        return enableTrace;
+    }
+
+    public void setEnableTrace(Boolean enableTrace) {
+        this.enableTrace = enableTrace;
+    }
+
+    public String getFlowAliasIdentifier() {
+        return flowAliasIdentifier;
+    }
+
+    public void setFlowAliasIdentifier(String flowAliasIdentifier) {
+        this.flowAliasIdentifier = flowAliasIdentifier;
+    }
+
+    public String getFlowIdentifier() {
+        return flowIdentifier;
+    }
+
+    public void setFlowIdentifier(String flowIdentifier) {
+        this.flowIdentifier = flowIdentifier;
     }
 
     public Boolean getHealthCheckConsumerEnabled() {
