@@ -42,6 +42,7 @@ public class BedrockAgentRuntimeComponentConverter
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.aws2.bedrock.agentruntime.BedrockAgentRuntimeConfiguration.class));
+        answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeAsyncClient.class));
         answer.add(new ConvertiblePair(String.class, software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeClient.class));
         return answer;
     }
@@ -60,6 +61,7 @@ public class BedrockAgentRuntimeComponentConverter
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.apache.camel.component.aws2.bedrock.agentruntime.BedrockAgentRuntimeConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.aws2.bedrock.agentruntime.BedrockAgentRuntimeConfiguration.class);
+            case "software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeAsyncClient": return applicationContext.getBean(ref, software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeAsyncClient.class);
             case "software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeClient": return applicationContext.getBean(ref, software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeClient.class);
         }
         return null;
