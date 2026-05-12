@@ -155,6 +155,20 @@ public class NatsComponentConfiguration
      */
     private String durableName;
     /**
+     * Whether to allow doing manual acknowledgment via NatsManualAck. If this
+     * option is enabled then an instance of NatsManualAck is stored on the
+     * org.apache.camel.Exchange message header, which allows end users to
+     * access this API and perform manual ack/nak/term operations via the
+     * JetStream consumer. When enabled, the automatic acknowledgment on
+     * exchange completion is disabled. If the user does not call any ack
+     * method, the message remains unacknowledged and NATS will redeliver it
+     * after the ackWait timeout expires. This option is only applicable when
+     * JetStream is enabled (jetstreamEnabled=true). It has no effect when
+     * ackPolicy=None since the server acknowledges messages automatically on
+     * delivery.
+     */
+    private Boolean manualAck = false;
+    /**
      * Maximum number of attempts to deliver a message from Nats to a consumer.
      * Once MaxDeliver is reached, the NATS server stops attempting to deliver
      * that specific message. The message is not deleted, it remains in the
@@ -447,6 +461,14 @@ public class NatsComponentConfiguration
 
     public void setDurableName(String durableName) {
         this.durableName = durableName;
+    }
+
+    public Boolean getManualAck() {
+        return manualAck;
+    }
+
+    public void setManualAck(Boolean manualAck) {
+        this.manualAck = manualAck;
     }
 
     public Long getMaxDeliver() {

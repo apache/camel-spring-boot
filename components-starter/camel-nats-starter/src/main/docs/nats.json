@@ -137,6 +137,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.nats.manual-ack",
+      "type": "java.lang.Boolean",
+      "description": "Whether to allow doing manual acknowledgment via NatsManualAck. If this option is enabled then an instance of NatsManualAck is stored on the org.apache.camel.Exchange message header, which allows end users to access this API and perform manual ack\/nak\/term operations via the JetStream consumer. When enabled, the automatic acknowledgment on exchange completion is disabled. If the user does not call any ack method, the message remains unacknowledged and NATS will redeliver it after the ackWait timeout expires. This option is only applicable when JetStream is enabled (jetstreamEnabled=true). It has no effect when ackPolicy=None since the server acknowledges messages automatically on delivery.",
+      "sourceType": "org.apache.camel.component.nats.springboot.NatsComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.nats.max-deliver",
       "type": "java.lang.Long",
       "description": "Maximum number of attempts to deliver a message from Nats to a consumer. Once MaxDeliver is reached, the NATS server stops attempting to deliver that specific message. The message is not deleted, it remains in the stream but is simply skipped. It is recommended to set this option to a sensible value in case a message is poison and can not successfully be processed and would always keep failing.",
