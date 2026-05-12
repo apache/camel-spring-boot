@@ -96,6 +96,11 @@ public class DoclingComponentConfiguration
      */
     private Long asyncPollInterval = 2000L;
     /**
+     * Time-to-live for pending async conversion tasks in milliseconds. Tasks
+     * older than this will be evicted from memory to prevent leaks.
+     */
+    private Long asyncTaskTtl = 86400000L;
+    /**
      * Maximum time to wait for async conversion completion in milliseconds
      */
     private Long asyncTimeout = 300000L;
@@ -366,6 +371,14 @@ public class DoclingComponentConfiguration
 
     public void setAsyncPollInterval(Long asyncPollInterval) {
         this.asyncPollInterval = asyncPollInterval;
+    }
+
+    public Long getAsyncTaskTtl() {
+        return asyncTaskTtl;
+    }
+
+    public void setAsyncTaskTtl(Long asyncTaskTtl) {
+        this.asyncTaskTtl = asyncTaskTtl;
     }
 
     public Long getAsyncTimeout() {

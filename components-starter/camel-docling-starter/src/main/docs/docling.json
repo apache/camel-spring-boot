@@ -35,6 +35,13 @@
       "defaultValue": 2000
     },
     {
+      "name": "camel.component.docling.async-task-ttl",
+      "type": "java.lang.Long",
+      "description": "Time-to-live for pending async conversion tasks in milliseconds. Tasks older than this will be evicted from memory to prevent leaks.",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
+      "defaultValue": 86400000
+    },
+    {
       "name": "camel.component.docling.async-timeout",
       "type": "java.lang.Long",
       "description": "Maximum time to wait for async conversion completion in milliseconds",

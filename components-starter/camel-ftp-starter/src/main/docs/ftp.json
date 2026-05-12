@@ -135,6 +135,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.sftp.auto-create-known-hosts-file",
+      "type": "java.lang.Boolean",
+      "description": "If knownHostFile does not exist, then attempt to auto-create the path and file (beware that the file will be created by the current user of the running Java process, which may not have file permission).",
+      "sourceType": "org.apache.camel.component.file.remote.springboot.SftpComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.sftp.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
@@ -174,11 +181,43 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.sftp.known-hosts",
+      "type": "java.lang.Byte[]",
+      "description": "Sets the known_hosts from the byte array globally, so that the SFTP endpoints can do host key verification.",
+      "sourceType": "org.apache.camel.component.file.remote.springboot.SftpComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sftp.known-hosts-file",
+      "type": "java.lang.String",
+      "description": "Sets the known_hosts file globally, so that the SFTP endpoints can do host key verification.",
+      "sourceType": "org.apache.camel.component.file.remote.springboot.SftpComponentConfiguration"
+    },
+    {
+      "name": "camel.component.sftp.known-hosts-uri",
+      "type": "java.lang.String",
+      "description": "Sets the known_hosts file (loaded from classpath by default) globally, so that the SFTP endpoints can do host key verification.",
+      "sourceType": "org.apache.camel.component.file.remote.springboot.SftpComponentConfiguration"
+    },
+    {
       "name": "camel.component.sftp.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
       "sourceType": "org.apache.camel.component.file.remote.springboot.SftpComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.sftp.strict-host-key-checking",
+      "type": "java.lang.String",
+      "description": "Sets whether to use strict host key checking globally for all endpoints. Setting this to 'no' (the default) disables host key verification and makes SFTP connections vulnerable to man-in-the-middle attacks. Use 'yes' in production environments.",
+      "sourceType": "org.apache.camel.component.file.remote.springboot.SftpComponentConfiguration",
+      "defaultValue": "no"
+    },
+    {
+      "name": "camel.component.sftp.use-user-known-hosts-file",
+      "type": "java.lang.Boolean",
+      "description": "If knownHostFile has not been explicit configured then use the host file from System.getProperty(user.home)\/.ssh\/known_hosts",
+      "sourceType": "org.apache.camel.component.file.remote.springboot.SftpComponentConfiguration",
+      "defaultValue": true
     }
   ],
   "hints": [],
