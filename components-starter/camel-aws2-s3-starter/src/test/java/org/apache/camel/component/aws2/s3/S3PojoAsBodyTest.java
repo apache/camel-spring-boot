@@ -28,7 +28,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.ListObjectsRequest;
+import software.amazon.awssdk.services.s3.model.ListObjectsV2Request;
 import software.amazon.awssdk.services.s3.model.S3Object;
 
 import java.util.List;
@@ -59,7 +59,7 @@ public class S3PojoAsBodyTest extends BaseS3 {
 
             @Override
             public void process(Exchange exchange) {
-                exchange.getIn().setBody(ListObjectsRequest.builder().bucket("mycamel").build());
+                exchange.getIn().setBody(ListObjectsV2Request.builder().bucket("mycamel").build());
             }
         });
 
