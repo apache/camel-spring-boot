@@ -133,7 +133,10 @@ public class HttpComponentConfiguration
      */
     private Boolean authCachingDisabled = false;
     /**
-     * Disables automatic request recovery and re-execution
+     * Disables automatic request recovery and re-execution. This is useful when
+     * a server responds with HTTP 429 (Too Many Requests) and includes a long
+     * Retry-After header, which would otherwise cause the client to wait (and
+     * appear to hang) before retrying.
      */
     private Boolean automaticRetriesDisabled = false;
     /**
