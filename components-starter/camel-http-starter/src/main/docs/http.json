@@ -36,7 +36,7 @@
     {
       "name": "camel.component.http.automatic-retries-disabled",
       "type": "java.lang.Boolean",
-      "description": "Disables automatic request recovery and re-execution",
+      "description": "Disables automatic request recovery and re-execution. This is useful when a server responds with HTTP 429 (Too Many Requests) and includes a long Retry-After header, which would otherwise cause the client to wait (and appear to hang) before retrying.",
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration",
       "defaultValue": false
     },
