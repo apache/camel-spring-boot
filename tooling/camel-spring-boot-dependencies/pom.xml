@@ -5201,6 +5201,11 @@
         <version>1.0.0</version>
       </dependency>
       <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-start</artifactId>
+        <version>6.1.0</version>
+      </dependency>
+      <dependency>
         <groupId>org.xmlunit</groupId>
         <artifactId>xmlunit-assertj3</artifactId>
         <version>2.11.0</version>
