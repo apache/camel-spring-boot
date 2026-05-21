@@ -38,12 +38,12 @@
       <dependency>
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-java</artifactId>
-        <version>4.33.2</version>
+        <version>4.35.0</version>
       </dependency>
       <dependency>
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-java-util</artifactId>
-        <version>4.33.2</version>
+        <version>4.35.0</version>
         <exclusions>
           <exclusion>
             <groupId>org.checkerframework</groupId>
@@ -5087,7 +5087,7 @@
       <dependency>
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-artifact</artifactId>
-        <version>3.9.15</version>
+        <version>3.9.16</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
@@ -5099,13 +5099,13 @@
       <dependency>
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-compat</artifactId>
-        <version>3.9.15</version>
+        <version>3.9.16</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-core</artifactId>
-        <version>3.9.15</version>
+        <version>3.9.16</version>
         <scope>provided</scope>
         <exclusions>
           <exclusion>
@@ -5125,13 +5125,13 @@
       <dependency>
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-model</artifactId>
-        <version>3.9.15</version>
+        <version>3.9.16</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-plugin-api</artifactId>
-        <version>3.9.15</version>
+        <version>3.9.16</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
@@ -5155,13 +5155,13 @@
       <dependency>
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-repository-metadata</artifactId>
-        <version>3.9.15</version>
+        <version>3.9.16</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-settings</artifactId>
-        <version>3.9.15</version>
+        <version>3.9.16</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
