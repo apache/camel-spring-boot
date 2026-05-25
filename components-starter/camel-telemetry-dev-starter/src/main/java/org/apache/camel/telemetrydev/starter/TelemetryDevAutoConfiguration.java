@@ -39,6 +39,9 @@ public class TelemetryDevAutoConfiguration {
         if (config.getExcludePatterns() != null) {
             devTracer.setExcludePatterns(config.getExcludePatterns());
         }
+        if (config.getIncludePatterns() != null) {
+            devTracer.setIncludePatterns(config.getIncludePatterns());
+        }
         if (config.getTraceProcessors() != null && config.getTraceProcessors()) {
             devTracer.setTraceProcessors(config.getTraceProcessors());
         }

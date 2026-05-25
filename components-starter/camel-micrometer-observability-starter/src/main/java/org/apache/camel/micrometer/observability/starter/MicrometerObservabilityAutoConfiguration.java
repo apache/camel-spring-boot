@@ -56,6 +56,9 @@ public class MicrometerObservabilityAutoConfiguration {
         if (config.getExcludePatterns() != null) {
             micrometerObservationTracer.setExcludePatterns(config.getExcludePatterns());
         }
+        if (config.getIncludePatterns() != null) {
+            micrometerObservationTracer.setIncludePatterns(config.getIncludePatterns());
+        }
         if (config.isTraceProcessors()) {
             micrometerObservationTracer.setTraceProcessors(config.isTraceProcessors());;
         }
