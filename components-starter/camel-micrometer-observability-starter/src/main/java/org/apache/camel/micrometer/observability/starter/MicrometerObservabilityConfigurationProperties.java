@@ -27,6 +27,11 @@ public class MicrometerObservabilityConfigurationProperties {
      */
     private String excludePatterns;
     /**
+     * Sets include pattern(s) that will explicitly enable tracing for Camel processors that matches the pattern.
+     * Multiple patterns can be separated by comma. All processors included by default if nothing is specified.
+     */
+    private String includePatterns;
+    /**
      * Setting this to true will create new telemetry spans for each Camel custom Processors. Use the excludePattern
      * property to filter out Processors.
      */
@@ -42,6 +47,14 @@ public class MicrometerObservabilityConfigurationProperties {
 
     public void setExcludePatterns(String excludePatterns) {
         this.excludePatterns = excludePatterns;
+    }
+
+    public String getIncludePatterns() {
+        return includePatterns;
+    }
+
+    public void setIncludePatterns(String includePatterns) {
+        this.includePatterns = includePatterns;
     }
 
     public boolean isTraceProcessors() {

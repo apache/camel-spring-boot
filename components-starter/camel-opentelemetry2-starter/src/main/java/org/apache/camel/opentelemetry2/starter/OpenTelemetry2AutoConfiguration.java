@@ -38,6 +38,9 @@ public class OpenTelemetry2AutoConfiguration {
         if (config.getExcludePatterns() != null) {
             ottracer.setExcludePatterns(config.getExcludePatterns());
         }
+        if (config.getIncludePatterns() != null) {
+            ottracer.setIncludePatterns(config.getIncludePatterns());
+        }
         if (config.getTraceProcessors() != null ) {
             ottracer.setTraceProcessors(config.getTraceProcessors());
         }

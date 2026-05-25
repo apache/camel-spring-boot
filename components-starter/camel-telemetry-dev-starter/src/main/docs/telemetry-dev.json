@@ -28,6 +28,12 @@
       "sourceType": "org.apache.camel.telemetrydev.starter.TelemetryDevConfigurationProperties"
     },
     {
+      "name": "camel.telemetrydev.include-patterns",
+      "type": "java.lang.String",
+      "description": "Sets include pattern(s) that will explicitly enable tracing for Camel processors that matches the pattern. Multiple patterns can be separated by comma. All processors included by default if nothing is specified.",
+      "sourceType": "org.apache.camel.telemetrydev.starter.TelemetryDevConfigurationProperties"
+    },
+    {
       "name": "camel.telemetrydev.trace-format",
       "type": "java.lang.String",
       "description": "The output format for traces.",

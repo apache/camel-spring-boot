@@ -21,6 +21,12 @@
       "sourceType": "org.apache.camel.opentelemetry2.starter.OpenTelemetry2ConfigurationProperties"
     },
     {
+      "name": "camel.opentelemetry2.include-patterns",
+      "type": "java.lang.String",
+      "description": "Sets include pattern(s) that will explicitly enable tracing for Camel processors that matches the pattern. Multiple patterns can be separated by comma. All processors included by default if nothing is specified.",
+      "sourceType": "org.apache.camel.opentelemetry2.starter.OpenTelemetry2ConfigurationProperties"
+    },
+    {
       "name": "camel.opentelemetry2.trace-processors",
       "type": "java.lang.Boolean",
       "description": "Setting this to true will create new telemetry spans for each Camel custom Processors. Use the excludePattern property to filter out Processors.",
