@@ -236,7 +236,6 @@
     <module>camel-ftp-starter</module>
     <module>camel-geocoder-starter</module>
     <module>camel-git-starter</module>
-    <module>camel-github-starter</module>
     <module>camel-github2-starter</module>
     <module>camel-google-bigquery-starter</module>
     <module>camel-google-calendar-starter</module>
