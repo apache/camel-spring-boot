@@ -125,6 +125,14 @@ public class PulsarComponentConfiguration
      */
     private String deadLetterTopic;
     /**
+     * When enabled, allows each individual message in a batch to be
+     * acknowledged independently. By default Pulsar redelivers the entire batch
+     * when any single message in the batch is not acknowledged. This option
+     * also requires the Pulsar broker to be configured with
+     * acknowledgmentAtBatchIndexLevelEnabled=true.
+     */
+    private Boolean enableBatchIndexAcknowledgment = false;
+    /**
      * To enable retry letter topic mode. The default retry letter topic uses
      * this format: topicname-subscriptionname-RETRY
      */
@@ -413,6 +421,15 @@ public class PulsarComponentConfiguration
 
     public void setDeadLetterTopic(String deadLetterTopic) {
         this.deadLetterTopic = deadLetterTopic;
+    }
+
+    public Boolean getEnableBatchIndexAcknowledgment() {
+        return enableBatchIndexAcknowledgment;
+    }
+
+    public void setEnableBatchIndexAcknowledgment(
+            Boolean enableBatchIndexAcknowledgment) {
+        this.enableBatchIndexAcknowledgment = enableBatchIndexAcknowledgment;
     }
 
     public Boolean getEnableRetry() {

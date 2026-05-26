@@ -160,6 +160,13 @@
       "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration"
     },
     {
+      "name": "camel.component.pulsar.enable-batch-index-acknowledgment",
+      "type": "java.lang.Boolean",
+      "description": "When enabled, allows each individual message in a batch to be acknowledged independently. By default Pulsar redelivers the entire batch when any single message in the batch is not acknowledged. This option also requires the Pulsar broker to be configured with acknowledgmentAtBatchIndexLevelEnabled=true.",
+      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.pulsar.enable-retry",
       "type": "java.lang.Boolean",
       "description": "To enable retry letter topic mode. The default retry letter topic uses this format: topicname-subscriptionname-RETRY",

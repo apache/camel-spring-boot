@@ -54,7 +54,7 @@
       <dependency>
         <groupId>com.openai</groupId>
         <artifactId>openai-java</artifactId>
-        <version>4.36.0</version>
+        <version>4.37.0</version>
       </dependency>
       <dependency>
         <groupId>eu.maveniverse.maven.mima.runtime</groupId>
@@ -985,11 +985,6 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-git-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-github-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -3292,11 +3287,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-git</artifactId>
-        <version>4.21.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-github</artifactId>
         <version>4.21.0-SNAPSHOT</version>
       </dependency>
       <dependency>

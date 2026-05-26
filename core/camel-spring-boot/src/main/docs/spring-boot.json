@@ -1155,6 +1155,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.main.yaml-dsl-compact-notation-warn",
+      "type": "java.lang.Boolean",
+      "description": "Whether to log a WARN when YAML DSL routes use compact (shorthand) notation instead of the canonical (explicit\/normalized) form. The canonical style is recommended as it is more tooling and AI friendly. Use Camel JBang to normalize existing routes: camel yaml normalize &lt;file&gt;",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": true
+    },
+    {
       "name": "camel.routecontroller.back-off-delay",
       "type": "java.lang.Long",
       "description": "Backoff delay in millis when restarting a route that failed to startup.",
