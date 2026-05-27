@@ -24,6 +24,7 @@ org.apache.camel.spring.boot.actuate.health.CamelHealthCheckAutoConfiguration
 org.apache.camel.spring.boot.actuate.health.CamelAvailabilityCheckAutoConfiguration
 org.apache.camel.spring.boot.actuate.info.CamelInfoAutoConfiguration
 org.apache.camel.spring.boot.cluster.ClusteredRouteControllerAutoConfiguration
+org.apache.camel.spring.boot.errorregistry.CamelErrorRegistryAutoConfiguration
 org.apache.camel.spring.boot.routecontroller.SupervisingRouteControllerAutoConfiguration
 org.apache.camel.spring.boot.security.CamelSecurityPolicyAutoConfiguration
 org.apache.camel.spring.boot.security.CamelSSLAutoConfiguration
