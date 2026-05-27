@@ -794,6 +794,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.main.message-size-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Sets whether message size observation is enabled (default is false). When enabled, Camel will compute the size of message body and headers (in bytes) per endpoint (for both IN and OUT directions) and make this available via JMX MBeans (min\/max\/mean body size and headers size).",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": false
+    },
+    {
       "name": "camel.main.modeline",
       "type": "java.lang.Boolean",
       "description": "Whether to support JBang style \/\/DEPS to specify additional dependencies when running Camel JBang",
