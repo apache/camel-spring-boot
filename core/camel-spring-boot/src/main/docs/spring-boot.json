@@ -346,9 +346,9 @@
     {
       "name": "camel.errorregistry.time-to-live-seconds",
       "type": "java.lang.Integer",
-      "description": "The time-to-live in seconds for error entries. Entries older than this are evicted.",
+      "description": "The time-to-live in seconds for error entries. Entries older than this are evicted. The default value is 0 (disabled).",
       "sourceType": "org.apache.camel.spring.boot.errorregistry.CamelErrorRegistryConfigurationProperties",
-      "defaultValue": 3600
+      "defaultValue": 0
     },
     {
       "name": "camel.health.async-camel-health-check",
