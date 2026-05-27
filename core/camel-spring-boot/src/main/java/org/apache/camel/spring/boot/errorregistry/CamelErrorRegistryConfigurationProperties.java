@@ -35,10 +35,11 @@ public class CamelErrorRegistryConfigurationProperties {
     private int maximumEntries = 100;
 
     /**
-     * The time-to-live in seconds for error entries. Entries older than this are evicted.
+     * The time-to-live in seconds for error entries. Entries older than this are evicted. The default value is 0
+     * (disabled).
      */
-    @Metadata(defaultValue = "3600")
-    private int timeToLiveSeconds = 3600;
+    @Metadata(defaultValue = "0")
+    private int timeToLiveSeconds;
 
     /**
      * To limit the message body to a maximum size in the captured error data. Use 0 or negative value to use unlimited
