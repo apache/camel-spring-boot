@@ -38,6 +38,11 @@
       "sourceMethod": "getCustomizer()"
     },
     {
+      "name": "camel.errorregistry",
+      "type": "org.apache.camel.spring.boot.errorregistry.CamelErrorRegistryConfigurationProperties",
+      "sourceType": "org.apache.camel.spring.boot.errorregistry.CamelErrorRegistryConfigurationProperties"
+    },
+    {
       "name": "camel.health",
       "type": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties",
       "sourceType": "org.apache.camel.spring.boot.actuate.health.CamelHealthCheckConfigurationProperties"
@@ -289,6 +294,61 @@
       "description": "Global option to enable\/disable dataformat auto-configuration, default is true.",
       "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationProperties",
       "defaultValue": true
+    },
+    {
+      "name": "camel.errorregistry.body-include-files",
+      "type": "java.lang.Boolean",
+      "description": "Whether to include the message body of file based messages. The overhead is that the file content has to be read from the file.",
+      "sourceType": "org.apache.camel.spring.boot.errorregistry.CamelErrorRegistryConfigurationProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.errorregistry.body-include-streams",
+      "type": "java.lang.Boolean",
+      "description": "Whether to include the message body of stream based messages. If enabled then beware the stream may not be re-readable later. See more about Stream Caching.",
+      "sourceType": "org.apache.camel.spring.boot.errorregistry.CamelErrorRegistryConfigurationProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.errorregistry.body-max-chars",
+      "type": "java.lang.Integer",
+      "description": "To limit the message body to a maximum size in the captured error data. Use 0 or negative value to use unlimited size.",
+      "sourceType": "org.apache.camel.spring.boot.errorregistry.CamelErrorRegistryConfigurationProperties"
+    },
+    {
+      "name": "camel.errorregistry.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether the error registry is enabled to capture errors during message routing.",
+      "sourceType": "org.apache.camel.spring.boot.errorregistry.CamelErrorRegistryConfigurationProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.errorregistry.include-exchange-properties",
+      "type": "java.lang.Boolean",
+      "description": "Whether to include the exchange properties in the captured error data.",
+      "sourceType": "org.apache.camel.spring.boot.errorregistry.CamelErrorRegistryConfigurationProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.errorregistry.include-exchange-variables",
+      "type": "java.lang.Boolean",
+      "description": "Whether to include the exchange variables in the captured error data.",
+      "sourceType": "org.apache.camel.spring.boot.errorregistry.CamelErrorRegistryConfigurationProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.errorregistry.maximum-entries",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of error entries to keep in the registry. When the limit is exceeded, the oldest entries are evicted.",
+      "sourceType": "org.apache.camel.spring.boot.errorregistry.CamelErrorRegistryConfigurationProperties",
+      "defaultValue": 100
+    },
+    {
+      "name": "camel.errorregistry.time-to-live-seconds",
+      "type": "java.lang.Integer",
+      "description": "The time-to-live in seconds for error entries. Entries older than this are evicted.",
+      "sourceType": "org.apache.camel.spring.boot.errorregistry.CamelErrorRegistryConfigurationProperties",
+      "defaultValue": 3600
     },
     {
       "name": "camel.health.async-camel-health-check",
