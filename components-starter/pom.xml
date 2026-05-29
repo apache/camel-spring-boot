@@ -208,6 +208,7 @@
     <module>camel-debug-starter</module>
     <module>camel-dfdl-starter</module>
     <module>camel-dhis2-starter</module>
+    <module>camel-diagram-starter</module>
     <module>camel-digitalocean-starter</module>
     <module>camel-direct-starter</module>
     <module>camel-disruptor-starter</module>
