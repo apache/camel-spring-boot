@@ -66,7 +66,7 @@ public class FileConsumerIdempotentTest extends BaseFile {
 
         // should NOT consume the file again, let a bit time pass to let the
         // consumer try to consume it but it should not
-        Thread.sleep(100);
+        resultEndpoint.setAssertPeriod(100);
         assertMockEndpointsSatisfied();
 
         FileEndpoint fe = context.getEndpoint(fileUri(), FileEndpoint.class);

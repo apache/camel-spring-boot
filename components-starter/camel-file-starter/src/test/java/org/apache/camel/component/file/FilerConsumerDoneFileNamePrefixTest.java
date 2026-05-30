@@ -49,7 +49,7 @@ public class FilerConsumerDoneFileNamePrefixTest extends BaseFile {
 
         // wait a bit and it should not pickup the written file as there are no
         // done file
-        Thread.sleep(250);
+        resultEndpoint.setAssertPeriod(250);
 
         assertMockEndpointsSatisfied();
         oneExchangeDone.reset();
