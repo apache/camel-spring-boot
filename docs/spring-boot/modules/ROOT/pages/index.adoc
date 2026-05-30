@@ -31,9 +31,9 @@ Get started by adding the Camel and Spring Boot BOMs to your Maven `pom.xml` fil
 
 The `camel-spring-boot-bom` is a basic BOM that only holds the list of Camel Spring Boot starter JARs.
 
-NOTE: It is recommended to import Camel Spring Boot BOM before Spring Boot BOM to ensure Camel dependencies are using supported JARs from the release. However, you can flip the order, and let Spring Boot BOM be first. However, you may encounter some dependency mis-aligments in some rare situations.
+NOTE: It is recommended to import Camel Spring Boot BOM before Spring Boot BOM to ensure Camel dependencies are using supported JARs from the release. However, you can flip the order, and let Spring Boot BOM be first. However, you may encounter some dependency misalignments in some rare situations.
 
-Next, add the xref:spring-boot.adoc[Camel Spring Boot starter] to startup the xref:manual::camelcontext.adoc[Camel Context].
+Next, add the xref:spring-boot.adoc[Camel Spring Boot starter] to start up the xref:manual::camelcontext.adoc[Camel Context].
 
 [source,xml]
 ----
