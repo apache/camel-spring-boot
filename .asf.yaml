@@ -20,11 +20,20 @@ github:
   homepage: https://camel.apache.org
   labels:
     - camel
-    - integration
-    - eip
-    - microservices
-    - java
     - spring-boot
+    - integration
+    - integration-framework
+    - enterprise-integration-patterns
+    - java
+    - cloud-native
+    - kubernetes
+    - kafka
+    - rest-api
+    - yaml
+    - data-transformation
+    - middleware
+    - microservices
+    - mcp
   rulesets:
     - name: "Default Branch Protection"
       type: branch
