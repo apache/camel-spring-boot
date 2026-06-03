@@ -88,7 +88,7 @@
       "type": "java.lang.String",
       "description": "Regular expression identifying configuration keys whose values should be masked. When set, this custom pattern replaces Debeziums default password masking pattern.",
       "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
-      "defaultValue": "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret"
+      "defaultValue": "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$"
     },
     {
       "name": "camel.component.debezium-mongodb.customizer.enabled",

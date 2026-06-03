@@ -174,7 +174,7 @@ public class DebeziumSqlserverComponentConfiguration
      * masked. When set, this custom pattern replaces Debeziums default password
      * masking pattern.
      */
-    private String customSanitizePattern = "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret";
+    private String customSanitizePattern = "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$";
     /**
      * Resolvable hostname or IP address of the database server.
      */

@@ -176,7 +176,7 @@ public class DebeziumDb2ComponentConfiguration
      * masked. When set, this custom pattern replaces Debeziums default password
      * masking pattern.
      */
-    private String customSanitizePattern = "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret";
+    private String customSanitizePattern = "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$";
     /**
      * The name of the database from which the connector should capture changes
      */

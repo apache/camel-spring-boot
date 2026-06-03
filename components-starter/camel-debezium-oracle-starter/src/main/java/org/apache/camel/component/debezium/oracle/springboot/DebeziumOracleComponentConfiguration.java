@@ -185,7 +185,7 @@ public class DebeziumOracleComponentConfiguration
      * masked. When set, this custom pattern replaces Debeziums default password
      * masking pattern.
      */
-    private String customSanitizePattern = "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret";
+    private String customSanitizePattern = "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$";
     /**
      * The adapter to use when capturing changes from the database. Options
      * include: 'LogMiner': (the default) to capture changes using native Oracle
