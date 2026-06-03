@@ -44,6 +44,13 @@ public class HL7DataFormatConfiguration
      * Whether to validate the HL7 message Is by default true.
      */
     private Boolean validate = true;
+    /**
+     * The target format for marshal output and unmarshal result type. By
+     * default, marshal encodes to HL7 ER7, and unmarshal returns a HAPI Message
+     * object. If this is set to XML, marshal encodes to HL7 XML, and unmarshal
+     * returns an XML DOM Document.
+     */
+    private String targetFormat;
 
     public String getParser() {
         return parser;
@@ -59,5 +66,13 @@ public class HL7DataFormatConfiguration
 
     public void setValidate(Boolean validate) {
         this.validate = validate;
+    }
+
+    public String getTargetFormat() {
+        return targetFormat;
+    }
+
+    public void setTargetFormat(String targetFormat) {
+        this.targetFormat = targetFormat;
     }
 }

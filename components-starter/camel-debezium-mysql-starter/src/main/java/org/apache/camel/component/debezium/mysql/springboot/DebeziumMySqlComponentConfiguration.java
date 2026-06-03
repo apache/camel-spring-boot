@@ -213,7 +213,7 @@ public class DebeziumMySqlComponentConfiguration
      * masked. When set, this custom pattern replaces Debeziums default password
      * masking pattern.
      */
-    private String customSanitizePattern = "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret";
+    private String customSanitizePattern = "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$";
     /**
      * A comma-separated list of regular expressions that match database names
      * to be excluded from monitoring

@@ -174,7 +174,7 @@ public class DebeziumMongodbComponentConfiguration
      * masked. When set, this custom pattern replaces Debeziums default password
      * masking pattern.
      */
-    private String customSanitizePattern = "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret";
+    private String customSanitizePattern = "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$";
     /**
      * A comma-separated list of regular expressions or literals that match the
      * database names for which changes are to be excluded
