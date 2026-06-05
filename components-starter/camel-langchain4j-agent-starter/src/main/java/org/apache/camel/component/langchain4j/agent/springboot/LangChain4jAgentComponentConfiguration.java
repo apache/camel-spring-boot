@@ -21,6 +21,7 @@ import java.util.Map;
 import dev.langchain4j.mcp.client.McpClient;
 import org.apache.camel.component.langchain4j.agent.LangChain4jAgentConfiguration;
 import org.apache.camel.component.langchain4j.agent.api.Agent;
+import org.apache.camel.component.langchain4j.agent.api.AgentConfiguration;
 import org.apache.camel.component.langchain4j.agent.api.AgentFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -45,6 +46,14 @@ public class LangChain4jAgentComponentConfiguration
      * org.apache.camel.component.langchain4j.agent.api.Agent type.
      */
     private Agent agent;
+    /**
+     * AgentConfiguration used by Camel to create the agent internally. When
+     * set, Camel creates an AgentWithMemory if a ChatMemoryProvider is
+     * configured, otherwise an AgentWithoutMemory. If an agentFactory is also
+     * configured, the factory takes precedence. The option is a
+     * org.apache.camel.component.langchain4j.agent.api.AgentConfiguration type.
+     */
+    private AgentConfiguration agentConfiguration;
     /**
      * The agent factory to use for creating agents if no Agent is provided. The
      * option is a org.apache.camel.component.langchain4j.agent.api.AgentFactory
@@ -102,6 +111,14 @@ public class LangChain4jAgentComponentConfiguration
 
     public void setAgent(Agent agent) {
         this.agent = agent;
+    }
+
+    public AgentConfiguration getAgentConfiguration() {
+        return agentConfiguration;
+    }
+
+    public void setAgentConfiguration(AgentConfiguration agentConfiguration) {
+        this.agentConfiguration = agentConfiguration;
     }
 
     public AgentFactory getAgentFactory() {

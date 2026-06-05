@@ -20,6 +20,12 @@
       "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration"
     },
     {
+      "name": "camel.component.langchain4j-agent.agent-configuration",
+      "type": "org.apache.camel.component.langchain4j.agent.api.AgentConfiguration",
+      "description": "AgentConfiguration used by Camel to create the agent internally. When set, Camel creates an AgentWithMemory if a ChatMemoryProvider is configured, otherwise an AgentWithoutMemory. If an agentFactory is also configured, the factory takes precedence. The option is a org.apache.camel.component.langchain4j.agent.api.AgentConfiguration type.",
+      "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration"
+    },
+    {
       "name": "camel.component.langchain4j-agent.agent-factory",
       "type": "org.apache.camel.component.langchain4j.agent.api.AgentFactory",
       "description": "The agent factory to use for creating agents if no Agent is provided. The option is a org.apache.camel.component.langchain4j.agent.api.AgentFactory type.",
