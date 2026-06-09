@@ -835,7 +835,7 @@
     {
       "name": "camel.main.modeline",
       "type": "java.lang.Boolean",
-      "description": "Whether to support JBang style \/\/DEPS to specify additional dependencies when running Camel JBang",
+      "description": "Whether to support JBang style \/\/DEPS to specify additional dependencies when running Camel CLI",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
       "defaultValue": false
     },
@@ -1196,7 +1196,7 @@
     {
       "name": "camel.main.yaml-dsl-compact-notation-warn",
       "type": "java.lang.Boolean",
-      "description": "Whether to log a WARN when YAML DSL routes use compact (shorthand) notation instead of the canonical (explicit\/normalized) form. The canonical style is recommended as it is more tooling and AI friendly. Use Camel JBang to normalize existing routes: camel yaml normalize &lt;file&gt;",
+      "description": "Whether to log a WARN when YAML DSL routes use compact (shorthand) notation instead of the canonical (explicit\/normalized) form. The canonical style is recommended as it is more tooling and AI friendly. Use Camel CLI to normalize existing routes: camel yaml normalize &lt;file&gt;",
       "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
       "defaultValue": true
     },
