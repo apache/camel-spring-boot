@@ -66,6 +66,11 @@ public class LangChain4jAgentComponentConfiguration
      */
     private LangChain4jAgentConfiguration configuration;
     /**
+     * JSON schema for structured output validation. This option works only when
+     * using agentConfiguration (inline agent creation mode).
+     */
+    private String jsonSchema;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -135,6 +140,14 @@ public class LangChain4jAgentComponentConfiguration
 
     public void setConfiguration(LangChain4jAgentConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getJsonSchema() {
+        return jsonSchema;
+    }
+
+    public void setJsonSchema(String jsonSchema) {
+        this.jsonSchema = jsonSchema;
     }
 
     public Boolean getLazyStartProducer() {
