@@ -118,6 +118,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.dapr.header-filter-strategy",
+      "type": "org.apache.camel.spi.HeaderFilterStrategy",
+      "description": "To use a custom HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type.",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
       "name": "camel.component.dapr.http-extension",
       "type": "io.dapr.client.domain.HttpExtension",
       "description": "HTTP method to use when invoking the service. Accepts verbs like GET, POST, PUT, DELETE, etc. Creates a minimal HttpExtension with no headers or query params. Takes precedence over verb. The option is a io.dapr.client.domain.HttpExtension type.",

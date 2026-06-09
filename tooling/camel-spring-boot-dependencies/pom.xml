@@ -54,7 +54,7 @@
       <dependency>
         <groupId>com.openai</groupId>
         <artifactId>openai-java</artifactId>
-        <version>4.38.0</version>
+        <version>4.39.1</version>
       </dependency>
       <dependency>
         <groupId>eu.maveniverse.maven.mima.runtime</groupId>
@@ -256,6 +256,11 @@
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-tracing-test</artifactId>
         <version>1.6.5</version>
+      </dependency>
+      <dependency>
+        <groupId>io.opentelemetry.proto</groupId>
+        <artifactId>opentelemetry-proto</artifactId>
+        <version>1.9.0-alpha</version>
       </dependency>
       <dependency>
         <groupId>net.bytebuddy</groupId>
@@ -5168,7 +5173,7 @@
       <dependency>
         <groupId>org.codehaus.plexus</groupId>
         <artifactId>plexus-archiver</artifactId>
-        <version>4.11.0</version>
+        <version>4.12.0</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.plexus</groupId>
