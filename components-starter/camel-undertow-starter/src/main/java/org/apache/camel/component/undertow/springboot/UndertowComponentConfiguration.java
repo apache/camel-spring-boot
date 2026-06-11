@@ -57,7 +57,7 @@ public class UndertowComponentConfiguration
      * If enabled and an Exchange failed processing on the consumer side the
      * response's body won't contain the exception's stack trace.
      */
-    private Boolean muteException = false;
+    private Boolean muteException = true;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
