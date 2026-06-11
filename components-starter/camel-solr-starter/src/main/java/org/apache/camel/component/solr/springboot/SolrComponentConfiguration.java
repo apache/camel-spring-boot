@@ -17,6 +17,7 @@
 package org.apache.camel.component.solr.springboot;
 
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.apache.solr.client.solrj.SolrClient;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -89,6 +90,16 @@ public class SolrComponentConfiguration
      * Password for authenticating
      */
     private String password;
+    /**
+     * To configure security using SSLContextParameters. When configured, this
+     * takes precedence over the certificatePath option. The option is a
+     * org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private SSLContextParameters sslContextParameters;
+    /**
+     * Enable usage of global SSL context parameters.
+     */
+    private Boolean useGlobalSslContextParameters = false;
     /**
      * Basic authenticate user
      */
@@ -172,6 +183,24 @@ public class SolrComponentConfiguration
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public SSLContextParameters getSslContextParameters() {
+        return sslContextParameters;
+    }
+
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
+        this.sslContextParameters = sslContextParameters;
+    }
+
+    public Boolean getUseGlobalSslContextParameters() {
+        return useGlobalSslContextParameters;
+    }
+
+    public void setUseGlobalSslContextParameters(
+            Boolean useGlobalSslContextParameters) {
+        this.useGlobalSslContextParameters = useGlobalSslContextParameters;
     }
 
     public String getUsername() {
