@@ -42,6 +42,7 @@ public class ElasticsearchRestClientComponentConverter
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.elasticsearch.client.RestClient.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         return answer;
     }
 
@@ -59,6 +60,7 @@ public class ElasticsearchRestClientComponentConverter
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.elasticsearch.client.RestClient": return applicationContext.getBean(ref, org.elasticsearch.client.RestClient.class);
+            case "org.apache.camel.support.jsse.SSLContextParameters": return applicationContext.getBean(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
         }
         return null;
     }

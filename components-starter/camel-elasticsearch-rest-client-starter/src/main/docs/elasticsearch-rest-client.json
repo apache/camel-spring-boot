@@ -98,6 +98,19 @@
       "defaultValue": 30000
     },
     {
+      "name": "camel.component.elasticsearch-rest-client.ssl-context-parameters",
+      "type": "org.apache.camel.support.jsse.SSLContextParameters",
+      "description": "To configure security using SSLContextParameters. When configured, this takes precedence over the certificatePath option. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
+      "sourceType": "org.apache.camel.component.elasticsearch.rest.client.springboot.ElasticsearchRestClientComponentConfiguration"
+    },
+    {
+      "name": "camel.component.elasticsearch-rest-client.use-global-ssl-context-parameters",
+      "type": "java.lang.Boolean",
+      "description": "Enable usage of global SSL context parameters.",
+      "sourceType": "org.apache.camel.component.elasticsearch.rest.client.springboot.ElasticsearchRestClientComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.elasticsearch-rest-client.user",
       "type": "java.lang.String",
       "description": "Username",

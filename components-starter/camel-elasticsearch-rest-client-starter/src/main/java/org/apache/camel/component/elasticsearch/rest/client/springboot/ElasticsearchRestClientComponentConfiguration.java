@@ -17,6 +17,7 @@
 package org.apache.camel.component.elasticsearch.rest.client.springboot;
 
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.elasticsearch.client.RestClient;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -93,6 +94,16 @@ public class ElasticsearchRestClientComponentConfiguration
      * Password
      */
     private String password;
+    /**
+     * To configure security using SSLContextParameters. When configured, this
+     * takes precedence over the certificatePath option. The option is a
+     * org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private SSLContextParameters sslContextParameters;
+    /**
+     * Enable usage of global SSL context parameters.
+     */
+    private Boolean useGlobalSslContextParameters = false;
     /**
      * Username
      */
@@ -184,6 +195,24 @@ public class ElasticsearchRestClientComponentConfiguration
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public SSLContextParameters getSslContextParameters() {
+        return sslContextParameters;
+    }
+
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
+        this.sslContextParameters = sslContextParameters;
+    }
+
+    public Boolean getUseGlobalSslContextParameters() {
+        return useGlobalSslContextParameters;
+    }
+
+    public void setUseGlobalSslContextParameters(
+            Boolean useGlobalSslContextParameters) {
+        this.useGlobalSslContextParameters = useGlobalSslContextParameters;
     }
 
     public String getUser() {

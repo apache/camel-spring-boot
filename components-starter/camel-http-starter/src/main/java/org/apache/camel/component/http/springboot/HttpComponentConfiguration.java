@@ -19,6 +19,7 @@ package org.apache.camel.component.http.springboot;
 import javax.net.ssl.HostnameVerifier;
 import org.apache.camel.component.http.HttpActivityListener;
 import org.apache.camel.component.http.HttpClientConfigurer;
+import org.apache.camel.component.http.HttpComponent;
 import org.apache.camel.http.common.HttpBinding;
 import org.apache.camel.http.common.HttpConfiguration;
 import org.apache.camel.spi.HeaderFilterStrategy;
@@ -26,6 +27,7 @@ import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.apache.hc.client5.http.cookie.CookieStore;
 import org.apache.hc.client5.http.io.HttpClientConnectionManager;
+import org.apache.hc.client5.http.ssl.HostnameVerificationPolicy;
 import org.apache.hc.core5.http.protocol.HttpContext;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
@@ -271,6 +273,18 @@ public class HttpComponentConfiguration
      * Proxy server port
      */
     private Integer proxyPort;
+    /**
+     * Controls how hostname verification is performed during the TLS handshake.
+     * CLIENT (default) delegates entirely to the configured
+     * x509HostnameVerifier, preserving the behaviour of httpclient 5.5 and
+     * earlier a NoopHostnameVerifier will disable verification. BUILTIN uses
+     * the JDK SSLParameters hostname check only, ignoring the configured
+     * verifier. BOTH runs the JDK built-in check first and then the configured
+     * verifier; a NoopHostnameVerifier cannot bypass the built-in check under
+     * BUILTIN or BOTH. Prefer BOTH when no custom verifier semantics are needed
+     * for stronger out-of-the-box security.
+     */
+    private HostnameVerificationPolicy hostnameVerificationPolicy = HostnameVerificationPolicy.CLIENT;
     /**
      * To configure security using SSLContextParameters. Important: Only one
      * instance of org.apache.camel.support.jsse.SSLContextParameters is
@@ -659,6 +673,15 @@ public class HttpComponentConfiguration
 
     public void setProxyPort(Integer proxyPort) {
         this.proxyPort = proxyPort;
+    }
+
+    public HostnameVerificationPolicy getHostnameVerificationPolicy() {
+        return hostnameVerificationPolicy;
+    }
+
+    public void setHostnameVerificationPolicy(
+            HostnameVerificationPolicy hostnameVerificationPolicy) {
+        this.hostnameVerificationPolicy = hostnameVerificationPolicy;
     }
 
     public SSLContextParameters getSslContextParameters() {
