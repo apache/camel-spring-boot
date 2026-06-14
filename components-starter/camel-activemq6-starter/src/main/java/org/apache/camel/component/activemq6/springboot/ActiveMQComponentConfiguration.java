@@ -701,6 +701,17 @@ public class ActiveMQComponentConfiguration
      */
     private Boolean messageTimestampEnabled = true;
     /**
+     * Whether to enable sending and receiving JMS ObjectMessage. By default
+     * this is disabled because Java object serialization is a known source of
+     * security vulnerabilities. Enable this option only if you trust the source
+     * of the messages and need to send or receive Java serialized objects via
+     * JMS. When disabled, Camel will refuse to create or read JMS ObjectMessage
+     * instances. Options that rely on ObjectMessage internally (such as
+     * transferExchange and transferException) require this option to be
+     * enabled.
+     */
+    private Boolean objectMessageEnabled = false;
+    /**
      * Specifies whether to inhibit the delivery of messages published by its
      * own connection.
      */
@@ -1574,6 +1585,14 @@ public class ActiveMQComponentConfiguration
 
     public void setMessageTimestampEnabled(Boolean messageTimestampEnabled) {
         this.messageTimestampEnabled = messageTimestampEnabled;
+    }
+
+    public Boolean getObjectMessageEnabled() {
+        return objectMessageEnabled;
+    }
+
+    public void setObjectMessageEnabled(Boolean objectMessageEnabled) {
+        this.objectMessageEnabled = objectMessageEnabled;
     }
 
     public Boolean getPubSubNoLocal() {

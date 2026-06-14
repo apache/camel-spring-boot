@@ -107,7 +107,7 @@ public class NettyHttpComponentConfiguration
      * If enabled and an Exchange failed processing on the consumer side the
      * response's body won't contain the exception's stack trace.
      */
-    private Boolean muteException = false;
+    private Boolean muteException = true;
     /**
      * Allows to configure a backlog for netty consumer (server). Note the
      * backlog is just a best effort depending on the OS. Setting this option to
