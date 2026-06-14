@@ -212,6 +212,32 @@ public class MailComponentConfiguration
      */
     private String to;
     /**
+     * Whether message headers From and Sender override the sender
+     * pre-configured in the endpoint URI. Defaults to true. Set to false to
+     * always use the endpoint URI sender, ignoring any From or Sender headers
+     * from the message.
+     */
+    private Boolean useHeaderFrom = true;
+    /**
+     * Whether message headers To, CC, and BCC override the recipients
+     * pre-configured in the endpoint URI. Defaults to true. Set to false to
+     * always use the endpoint URI recipients, ignoring any recipient headers
+     * from the message.
+     */
+    private Boolean useHeaderRecipients = true;
+    /**
+     * Whether message header Reply-To overrides the replyTo pre-configured in
+     * the endpoint URI. Defaults to true. Set to false to always use the
+     * endpoint URI replyTo, ignoring any Reply-To header from the message.
+     */
+    private Boolean useHeaderReplyTo = true;
+    /**
+     * Whether message header Subject overrides the subject pre-configured in
+     * the endpoint URI. Defaults to true. Set to false to always use the
+     * endpoint URI subject, ignoring any Subject header from the message.
+     */
+    private Boolean useHeaderSubject = true;
+    /**
      * To use a custom org.apache.camel.component.mail.JavaMailSender for
      * sending emails. The option is a
      * org.apache.camel.component.mail.JavaMailSender type.
@@ -559,6 +585,38 @@ public class MailComponentConfiguration
 
     public void setTo(String to) {
         this.to = to;
+    }
+
+    public Boolean getUseHeaderFrom() {
+        return useHeaderFrom;
+    }
+
+    public void setUseHeaderFrom(Boolean useHeaderFrom) {
+        this.useHeaderFrom = useHeaderFrom;
+    }
+
+    public Boolean getUseHeaderRecipients() {
+        return useHeaderRecipients;
+    }
+
+    public void setUseHeaderRecipients(Boolean useHeaderRecipients) {
+        this.useHeaderRecipients = useHeaderRecipients;
+    }
+
+    public Boolean getUseHeaderReplyTo() {
+        return useHeaderReplyTo;
+    }
+
+    public void setUseHeaderReplyTo(Boolean useHeaderReplyTo) {
+        this.useHeaderReplyTo = useHeaderReplyTo;
+    }
+
+    public Boolean getUseHeaderSubject() {
+        return useHeaderSubject;
+    }
+
+    public void setUseHeaderSubject(Boolean useHeaderSubject) {
+        this.useHeaderSubject = useHeaderSubject;
     }
 
     public JavaMailSender getJavaMailSender() {
