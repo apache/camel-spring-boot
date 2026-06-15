@@ -27,7 +27,6 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.infra.aws2.clients.AWSSDKClientUtils;
 import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -68,12 +67,12 @@ public class SqsProducerAutoCreateQueueTest extends BaseSqs {
 
         template.send("direct:start", ExchangePattern.InOnly, new Processor() {
             public void process(Exchange exchange) {
-                Collection c = new ArrayList<Integer>();
-                c.add("1");
-                c.add("2");
-                c.add("3");
-                c.add("4");
-                c.add("5");
+                Collection<Integer> c = new ArrayList<Integer>();
+                c.add(1);
+                c.add(2);
+                c.add(3);
+                c.add(4);
+                c.add(5);
                 exchange.getIn().setBody(c);
             }
         });
@@ -89,10 +88,6 @@ public class SqsProducerAutoCreateQueueTest extends BaseSqs {
     public class TestConfiguration extends BaseSqs.TestConfiguration {
         @Bean
         public RouteBuilder routeBuilder() {
-            final String sqsEndpointUri = String.format(
-                    "aws2-sqs://%s?messageRetentionPeriod=%s&maximumMessageSize=%s&visibilityTimeout=%s&policy=%s&autoCreateQueue=true",
-                    sharedNameGenerator.getName(), "1209600", "65536", "60",
-                    "file:src/test/resources/org/apache/camel/component/aws2/sqs/policy.txt");
             return new RouteBuilder() {
                 @Override
                 public void configure() {

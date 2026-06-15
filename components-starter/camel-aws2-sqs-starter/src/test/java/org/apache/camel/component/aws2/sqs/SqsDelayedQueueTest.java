@@ -31,11 +31,7 @@ import software.amazon.awssdk.services.sqs.model.ListQueuesResponse;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import static org.hamcrest.Matchers.anyOf;
-import static org.hamcrest.Matchers.is;
 
 @DirtiesContext
 @CamelSpringBootTest
@@ -58,7 +54,7 @@ public class SqsDelayedQueueTest extends BaseSqs {
         String delayedQueueuName = sharedNameGenerator.getName() + "_delayed";
         Instant start = Instant.now();
         // create delayed queue
-        List<String> queues = producerTemplate.requestBody(
+        producerTemplate.requestBody(
                 String.format("aws2-sqs://%s?autoCreateQueue=true&delayQueue=true&delaySeconds=%d&operation=listQueues",
                         delayedQueueuName, delay),
                 null, ListQueuesResponse.class).queueUrls();
