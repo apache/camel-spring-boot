@@ -5201,6 +5201,11 @@
         <version>3.0.1</version>
       </dependency>
       <dependency>
+        <groupId>org.jooq</groupId>
+        <artifactId>jooq</artifactId>
+        <version>3.19.30</version>
+      </dependency>
+      <dependency>
         <groupId>org.jspecify</groupId>
         <artifactId>jspecify</artifactId>
         <version>1.0.0</version>
