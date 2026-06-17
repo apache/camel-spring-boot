@@ -38,12 +38,12 @@
       <dependency>
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-java</artifactId>
-        <version>4.35.1</version>
+        <version>4.34.2</version>
       </dependency>
       <dependency>
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-java-util</artifactId>
-        <version>4.35.1</version>
+        <version>4.34.2</version>
         <exclusions>
           <exclusion>
             <groupId>org.checkerframework</groupId>
@@ -2419,6 +2419,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-a2a</artifactId>
+        <version>4.21.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-activemq</artifactId>
         <version>4.21.0-SNAPSHOT</version>
       </dependency>
@@ -3637,6 +3642,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-jasypt</artifactId>
+        <version>4.21.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-java-io</artifactId>
         <version>4.21.0-SNAPSHOT</version>
       </dependency>
       <dependency>
