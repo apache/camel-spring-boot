@@ -58,7 +58,7 @@
     {
       "name": "camel.component.langchain4j-agent.json-schema",
       "type": "java.lang.String",
-      "description": "JSON schema for structured output validation. This option works only when using agentConfiguration (inline agent creation mode).",
+      "description": "JSON schema for structured output validation. Only supported in inline agent creation mode: agentConfiguration must be set and neither agent nor agentFactory may be configured. Mutually exclusive with outputClass.",
       "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration"
     },
     {
@@ -78,6 +78,12 @@
       "name": "camel.component.langchain4j-agent.mcp-server",
       "type": "java.util.Map<java.lang.String,java.lang.Object>",
       "description": "MCP server definitions in the form of mcpServer..=. Supported properties: transportType (stdio, http, streamableHttp, or sse, default: stdio), command (comma-separated, for stdio), url (for http\/sse), environment.= (for stdio), timeout (in seconds, default: 60), logRequests, logResponses, oauthProfile (OAuth profile for HTTP auth, requires camel-oauth). This is a multi-value option with prefix: mcpServer.",
+      "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration"
+    },
+    {
+      "name": "camel.component.langchain4j-agent.output-class",
+      "type": "java.lang.Class<java.lang.Object>",
+      "description": "Java class to use for structured output. Camel derives the JSON schema from the class and instructs the model to produce matching JSON; the response body is left as a raw JSON string. Only supported in inline agent creation mode: agentConfiguration must be set and neither agent nor agentFactory may be configured. The class must be a POJO with public fields or getters; simple types, enums, and collections are not supported. Mutually exclusive with jsonSchema.",
       "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration"
     },
     {
