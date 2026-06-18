@@ -66,8 +66,9 @@ public class LangChain4jAgentComponentConfiguration
      */
     private LangChain4jAgentConfiguration configuration;
     /**
-     * JSON schema for structured output validation. This option works only when
-     * using agentConfiguration (inline agent creation mode).
+     * JSON schema for structured output validation. Only supported in inline
+     * agent creation mode: agentConfiguration must be set and neither agent nor
+     * agentFactory may be configured. Mutually exclusive with outputClass.
      */
     private String jsonSchema;
     /**
@@ -81,6 +82,16 @@ public class LangChain4jAgentComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Java class to use for structured output. Camel derives the JSON schema
+     * from the class and instructs the model to produce matching JSON; the
+     * response body is left as a raw JSON string. Only supported in inline
+     * agent creation mode: agentConfiguration must be set and neither agent nor
+     * agentFactory may be configured. The class must be a POJO with public
+     * fields or getters; simple types, enums, and collections are not
+     * supported. Mutually exclusive with jsonSchema.
+     */
+    private Class<Object> outputClass;
     /**
      * Tags for discovering and calling Camel route tools
      */
@@ -156,6 +167,14 @@ public class LangChain4jAgentComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Class<Object> getOutputClass() {
+        return outputClass;
+    }
+
+    public void setOutputClass(Class<Object> outputClass) {
+        this.outputClass = outputClass;
     }
 
     public String getTags() {
