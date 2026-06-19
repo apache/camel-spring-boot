@@ -78,12 +78,36 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
         String title = determineTitle(baseName, entries);
         String description = determineDescription(entries);
 
-        String page = generatePage(starterArtifactId, baseName, title, description, entries, properties);
+        // load optional hand-written sections from src/main/doc/
+        String intro = loadSection("intro.adoc");
+        String usage = loadSection("usage.adoc");
+        String configuration = loadSection("configuration.adoc");
+        String limitations = loadSection("limitations.adoc");
+
+        String page = generatePage(starterArtifactId, baseName, title, description, entries, properties,
+                intro, usage, configuration, limitations);
 
         Path targetPath = multiModuleDir.toPath()
                 .resolve("docs/spring-boot/modules/ROOT/pages/starters/" + baseName + ".adoc");
         writeIfChanged(page, targetPath.toFile());
         getLog().info("Generated starter doc page: starters/" + baseName + ".adoc");
+    }
+
+    private String loadSection(String fileName) {
+        Path docDir = project.getBasedir().toPath().resolve("src/main/doc");
+        Path sectionFile = docDir.resolve(fileName);
+        if (Files.isRegularFile(sectionFile)) {
+            try {
+                String content = Files.readString(sectionFile).trim();
+                if (!content.isEmpty()) {
+                    getLog().debug("Loaded section: " + fileName);
+                    return content;
+                }
+            } catch (IOException e) {
+                getLog().warn("Failed to read section file: " + sectionFile, e);
+            }
+        }
+        return null;
     }
 
     private String starterBaseName(String artifactId) {
@@ -201,7 +225,8 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
 
     private String generatePage(
             String starterArtifactId, String baseName, String title,
-            String description, List<CatalogEntry> entries, List<SBProperty> properties) {
+            String description, List<CatalogEntry> entries, List<SBProperty> properties,
+            String intro, String usage, String configuration, String limitations) {
 
         StringBuilder sb = new StringBuilder();
         sb.append("// Do not edit directly!\n");
@@ -210,7 +235,11 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
         sb.append(":artifactid: ").append(starterArtifactId).append("\n");
         sb.append("\n");
 
-        if (description != null && !description.isEmpty()) {
+        // intro.adoc overrides the auto-discovered description
+        if (intro != null) {
+            sb.append(intro).append("\n");
+            sb.append("\n");
+        } else if (description != null && !description.isEmpty()) {
             sb.append(description).append("\n");
             sb.append("\n");
         }
@@ -244,10 +273,33 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
         sb.append("----\n");
         sb.append("\n");
 
+        // Usage section (from src/main/doc/usage.adoc)
+        if (usage != null) {
+            sb.append("== Usage\n");
+            sb.append("\n");
+            sb.append(usage).append("\n");
+            sb.append("\n");
+        }
+
+        // Limitations section (from src/main/doc/limitations.adoc)
+        if (limitations != null) {
+            sb.append("== Limitations\n");
+            sb.append("\n");
+            sb.append(limitations).append("\n");
+            sb.append("\n");
+        }
+
         // Spring Boot Auto-Configuration
         if (!properties.isEmpty()) {
             sb.append("== Spring Boot Auto-Configuration\n");
             sb.append("\n");
+
+            // Additional configuration notes (from src/main/doc/configuration.adoc)
+            if (configuration != null) {
+                sb.append(configuration).append("\n");
+                sb.append("\n");
+            }
+
             sb.append("The starter supports ").append(properties.size()).append(" options, which are listed below.\n");
             sb.append("\n");
             sb.append("[width=\"100%\",cols=\"2,5,^1,2\",options=\"header\"]\n");
