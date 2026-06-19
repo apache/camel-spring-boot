@@ -432,8 +432,8 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
             String suffix = artifactId.contains("jackson3") ? "3" : "2";
             return name + suffix;
         }
-        // Bindy variants share a single doc page via modelName
-        if (model.getModelName() != null && !model.getModelName().equals(name)) {
+        // Bindy variants (bindyCsv, bindyFixed, bindyKvp) share a single doc page "bindy"
+        if (artifactId != null && artifactId.equals("camel-bindy") && model.getModelName() != null) {
             return model.getModelName();
         }
         return name;
