@@ -1,0 +1,11 @@
+To use this cluster service, enable the clustered route controller and configure routes with `routePolicy=ClusteredRoutePolicy`:
+
+[source,properties]
+----
+# enable the cluster service
+camel.cluster.consul.enabled = true
+camel.cluster.consul.url = http://localhost:8500
+
+# enable the clustered route controller
+camel.clustered.controller.enabled = true
+----

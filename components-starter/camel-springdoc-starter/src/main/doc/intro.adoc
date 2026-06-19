@@ -1,0 +1,3 @@
+Spring Boot auto-configuration for Camel Springdoc integration.
+
+This starter integrates Camel REST DSL routes with https://springdoc.org[Springdoc OpenAPI], making Camel REST endpoints appear in the Springdoc-generated OpenAPI specification alongside Spring MVC or WebFlux endpoints.

@@ -1,0 +1,5 @@
+Spring Boot auto-configuration for Camel Jolokia integration.
+
+The Jolokia Starter integrates https://jolokia.org/[Jolokia] agent configuration in Spring Boot, wrapping the https://jolokia.org/reference/html/manual/spring.html[Jolokia Spring Support] with default configurations to let the application work out-of-the-box without manually declaring Jolokia servers.
+
+This starter can be considered an alternative to the https://jolokia.org/reference/html/manual/agents.html[Jolokia JVM agent]. When enabled, it exposes the Jolokia endpoint at `http://0.0.0.0:8778/jolokia`.

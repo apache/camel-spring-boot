@@ -1,0 +1,5 @@
+Spring Boot auto-configuration for Camel Observation.
+
+This starter integrates Camel with Spring Boot's `ObservationAutoConfiguration`, providing distributed tracing and metrics for Camel routes via the Micrometer Observation API using the Spring Boot native observation infrastructure.
+
+Use the `@CamelObservation` annotation on your Spring Boot main class or configuration to enable.

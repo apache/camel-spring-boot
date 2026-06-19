@@ -47,7 +47,7 @@ Next, add the xref:spring-boot.adoc[Camel Spring Boot starter] to start up the x
     </dependencies>
 ----
 
-Also add any xref:list.adoc[component starters] your Spring Boot application requires. For example this adds the xref:components::jms-component.adoc#_spring_boot_auto_configuration[auto-configuration starter] for the xref:components::jms-component.adoc[JMS component].
+Also add any xref:list.adoc[component starters] your Spring Boot application requires. For example this adds the xref:starters/jms.adoc[auto-configuration starter] for the xref:components::jms-component.adoc[JMS component].
 
 [source,xml]
 ----

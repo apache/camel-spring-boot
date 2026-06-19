@@ -1,0 +1,3 @@
+Spring Boot auto-configuration for Resilience4j Micrometer metrics in Camel.
+
+This starter adds https://micrometer.io[Micrometer] metrics instrumentation to Camel's Resilience4j Circuit Breaker EIP, exposing circuit breaker state, call counts, and latency metrics.

@@ -1,0 +1,14 @@
+Add encrypted values to your `application.properties` using the `ENC(...)` syntax:
+
+[source,properties]
+----
+my.secret = ENC(encrypted-value-here)
+camel.component.jasypt.password = the-master-password
+----
+
+Use Camel's Jasypt tooling to encrypt values:
+
+[source,bash]
+----
+camel jasypt encrypt --password=the-master-password --input=my-secret-value
+----

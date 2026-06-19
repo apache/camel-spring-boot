@@ -1,0 +1,6 @@
+Once the starter is on the classpath, MDC logging is enabled automatically. Add MDC keys to your logging pattern:
+
+[source,properties]
+----
+logging.pattern.console = %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - camel.exchangeId=%X{camel.exchangeId} camel.routeId=%X{camel.routeId} - %msg%n
+----

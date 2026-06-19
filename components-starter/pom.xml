@@ -95,6 +95,7 @@
             <id>readme</id>
             <goals>
               <goal>update-spring-boot-auto-configuration-readme</goal>
+              <goal>update-starter-doc-page</goal>
             </goals>
             <phase>package</phase>
           </execution>

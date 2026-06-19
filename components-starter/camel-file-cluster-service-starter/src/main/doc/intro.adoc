@@ -1,0 +1,3 @@
+Spring Boot auto-configuration for the Camel File Lock Cluster Service.
+
+This starter provides leader election for Camel routes using file locks on a shared filesystem. It integrates with Camel's `CamelClusterService` SPI and the clustered route controller to ensure only one instance of a route runs at a time across multiple JVMs sharing the same filesystem.

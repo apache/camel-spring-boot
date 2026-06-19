@@ -3,7 +3,6 @@
 //Manually maintained attributes
 :artifactid: camel-spring-boot
 :shortname: spring-boot
-:camel-spring-boot-name: spring-boot
 
 Spring Boot component provides auto-configuration for Apache Camel. Our
 opinionated auto-configuration of the Camel context auto-detects Camel
@@ -72,9 +71,9 @@ You can customize the Camel application in the `application.properties`
 or `application.yml` file.
 
 
-// spring-boot-auto-configure options: START
-include::{page-component-version}@components:spring-boot:partial$starter.adoc[]
-// spring-boot-auto-configure options: END
+== Spring Boot Auto-Configuration
+
+The Spring Boot auto-configuration options are documented in the xref:starters/core.adoc[Core starter] page.
 
 == Auto-configured Camel context
 
