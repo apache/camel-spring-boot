@@ -3,6 +3,10 @@
 = Mdc
 :artifactid: camel-mdc-starter
 
+Spring Boot auto-configuration for Camel MDC (Mapped Diagnostic Context) logging.
+
+This starter automatically configures Camel's MDC support so that logging frameworks (Logback, Log4j2) include Camel context information such as exchange ID, route ID, and message ID in every log line. This makes it easy to correlate log entries across routes and exchanges.
+
 == Maven coordinates
 
 [source,xml]
@@ -11,6 +15,15 @@
     <groupId>org.apache.camel.springboot</groupId>
     <artifactId>camel-mdc-starter</artifactId>
 </dependency>
+----
+
+== Usage
+
+Once the starter is on the classpath, MDC logging is enabled automatically. Add MDC keys to your logging pattern:
+
+[source,properties]
+----
+logging.pattern.console = %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - camel.exchangeId=%X{camel.exchangeId} camel.routeId=%X{camel.routeId} - %msg%n
 ----
 
 == Spring Boot Auto-Configuration

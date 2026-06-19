@@ -3,6 +3,10 @@
 = Debug
 :artifactid: camel-debug-starter
 
+Spring Boot auto-configuration for the Camel Debugger.
+
+This starter enables the Camel Debugger in your Spring Boot application, allowing you to set breakpoints and step through Camel routes during development. The debugger integrates with IDEs and tooling through JMX.
+
 == Maven coordinates
 
 [source,xml]

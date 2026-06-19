@@ -3,6 +3,10 @@
 = Undertow Spring Security
 :artifactid: camel-undertow-spring-security-starter
 
+Spring Boot auto-configuration for Camel Undertow with Spring Security.
+
+This starter secures Camel HTTP endpoints served by the Undertow component using Spring Security. It supports OAuth2/OpenID Connect providers (such as Keycloak) for authentication and authorization of incoming HTTP requests to Camel routes.
+
 == Maven coordinates
 
 [source,xml]

@@ -3,6 +3,10 @@
 = Resilience4j
 :artifactid: camel-resilience4j-starter
 
+Spring Boot auto-configuration for Camel Resilience4j Circuit Breaker.
+
+This starter integrates https://resilience4j.readme.io[Resilience4j] with Camel's Circuit Breaker EIP, providing fault tolerance patterns (circuit breaker, bulkhead, timeout) for Camel routes.
+
 == Maven coordinates
 
 [source,xml]
