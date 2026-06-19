@@ -1,0 +1,3 @@
+Spring Boot auto-configuration for Camel Jasypt encrypted properties.
+
+This starter integrates http://www.jasypt.org[Jasypt] with both Camel's property placeholder mechanism and Spring Boot's `Environment`, so that encrypted values in `application.properties` (or YAML) are decrypted transparently at runtime. Encrypted values use the `ENC(...)` syntax.

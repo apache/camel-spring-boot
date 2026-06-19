@@ -1,0 +1,5 @@
+Spring Boot auto-configuration for Camel OpenTelemetry2.
+
+This starter integrates Camel with https://opentelemetry.io[OpenTelemetry] to provide distributed tracing for Camel routes. It is the newer replacement for `camel-opentelemetry-starter` with improved trace context propagation and better alignment with OpenTelemetry semantic conventions.
+
+Use the `@CamelOpenTelemetry2` annotation on your Spring Boot main class or configuration to enable.

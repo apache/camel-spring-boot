@@ -3,6 +3,10 @@
 = Jasypt
 :artifactid: camel-jasypt-starter
 
+Spring Boot auto-configuration for Camel Jasypt encrypted properties.
+
+This starter integrates http://www.jasypt.org[Jasypt] with both Camel's property placeholder mechanism and Spring Boot's `Environment`, so that encrypted values in `application.properties` (or YAML) are decrypted transparently at runtime. Encrypted values use the `ENC(...)` syntax.
+
 == Maven coordinates
 
 [source,xml]
@@ -11,6 +15,23 @@
     <groupId>org.apache.camel.springboot</groupId>
     <artifactId>camel-jasypt-starter</artifactId>
 </dependency>
+----
+
+== Usage
+
+Add encrypted values to your `application.properties` using the `ENC(...)` syntax:
+
+[source,properties]
+----
+my.secret = ENC(encrypted-value-here)
+camel.component.jasypt.password = the-master-password
+----
+
+Use Camel's Jasypt tooling to encrypt values:
+
+[source,bash]
+----
+camel jasypt encrypt --password=the-master-password --input=my-secret-value
 ----
 
 == Spring Boot Auto-Configuration

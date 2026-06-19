@@ -1,0 +1,3 @@
+Spring Boot auto-configuration for the Camel ZooKeeper Cluster Service.
+
+This starter provides leader election and cluster coordination for Camel routes using https://zookeeper.apache.org[Apache ZooKeeper] as the distributed backend. It integrates with Camel's `CamelClusterService` SPI so you can use the clustered route controller to ensure only one instance of a route runs across a cluster.

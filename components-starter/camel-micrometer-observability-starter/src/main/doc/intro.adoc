@@ -1,0 +1,5 @@
+Spring Boot auto-configuration for Camel Micrometer Observability.
+
+This starter integrates Camel with https://micrometer.io[Micrometer Observation API] to provide distributed tracing and metrics for Camel routes. It auto-configures a `MicrometerObservabilityService` that creates observations (spans and metrics) for each Camel processor.
+
+Use the `@CamelMicrometerObservability` annotation on your Spring Boot main class or configuration to enable.

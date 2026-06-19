@@ -64,25 +64,31 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
 
     @Override
     protected void executeAll() throws MojoExecutionException, MojoFailureException, IOException {
-        if (getMainDep() == null) {
-            getLog().debug("Skipping starter with no main dependency: " + project.getArtifactId());
-            return;
-        }
-
         String starterArtifactId = project.getArtifactId();
         String baseName = starterBaseName(starterArtifactId);
 
-        List<CatalogEntry> entries = discoverCatalogEntries();
+        List<CatalogEntry> entries;
+        if (getMainDep() != null) {
+            entries = discoverCatalogEntries();
+        } else {
+            entries = List.of();
+        }
         List<SBProperty> properties = readSpringBootProperties(baseName);
-
-        String title = determineTitle(baseName, entries);
-        String description = determineDescription(entries);
 
         // load optional hand-written sections from src/main/doc/
         String intro = loadSection("intro.adoc");
         String usage = loadSection("usage.adoc");
         String configuration = loadSection("configuration.adoc");
         String limitations = loadSection("limitations.adoc");
+
+        // skip starters with no catalog entries, no properties, and no hand-written sections
+        if (entries.isEmpty() && properties.isEmpty() && intro == null && usage == null) {
+            getLog().debug("Skipping starter with no content: " + starterArtifactId);
+            return;
+        }
+
+        String title = determineTitle(baseName, entries);
+        String description = determineDescription(entries);
 
         String page = generatePage(starterArtifactId, baseName, title, description, entries, properties,
                 intro, usage, configuration, limitations);

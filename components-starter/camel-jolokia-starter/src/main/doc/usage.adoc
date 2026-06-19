@@ -1,0 +1,6 @@
+Once the starter is on the classpath, Jolokia is available at `http://localhost:8778/jolokia/` by default. You can query Camel MBeans via HTTP:
+
+[source,bash]
+----
+curl http://localhost:8778/jolokia/read/org.apache.camel:type=context,*
+----

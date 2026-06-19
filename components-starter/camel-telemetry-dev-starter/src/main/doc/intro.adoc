@@ -1,0 +1,5 @@
+Spring Boot auto-configuration for Camel Telemetry Dev Console.
+
+This starter provides a development-time telemetry console that displays trace and span information directly in the application logs. It is intended for local development and debugging, not for production use.
+
+Use the `@CamelTelemetryDev` annotation on your Spring Boot main class or configuration to enable.

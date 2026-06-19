@@ -1,0 +1,3 @@
+Spring Boot auto-configuration for the Camel Jolokia integration.
+
+This starter embeds a https://jolokia.org[Jolokia] JMX-HTTP bridge agent into your Spring Boot application, giving remote HTTP/JSON access to Camel's JMX MBeans. It auto-configures the Jolokia agent with a Camel-aware restrictor that limits access to Camel-related MBeans only.
