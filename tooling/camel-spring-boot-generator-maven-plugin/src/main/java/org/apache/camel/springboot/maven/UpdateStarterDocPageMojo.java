@@ -301,7 +301,7 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
             sb.append(intro).append("\n");
             sb.append("\n");
         } else if (description != null && !description.isEmpty()) {
-            sb.append(description).append("\n");
+            sb.append(escapeAdocAttributes(description)).append("\n");
             sb.append("\n");
         }
 
@@ -313,7 +313,7 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
                 String xref = buildXref(entry);
                 sb.append("* ").append(xref);
                 if ("component".equals(entry.kind) && entry.syntax != null) {
-                    sb.append(", URI syntax: `").append(entry.syntax).append("`");
+                    sb.append(", URI syntax: `").append(escapeAdocAttributes(entry.syntax)).append("`");
                 }
                 sb.append("\n");
             }
@@ -392,12 +392,18 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
         };
     }
 
+    private static String escapeAdocAttributes(String text) {
+        if (text == null || text.isEmpty()) {
+            return text;
+        }
+        return text.replace("{", "\\{");
+    }
+
     private static String escapeCell(String text) {
         if (text == null || text.isEmpty()) {
             return "";
         }
-        // escape pipe characters in AsciiDoc table cells
-        return text.replace("|", "\\|");
+        return text.replace("|", "\\|").replace("{", "\\{");
     }
 
     private static String javaSimpleName(String fqcn) {
