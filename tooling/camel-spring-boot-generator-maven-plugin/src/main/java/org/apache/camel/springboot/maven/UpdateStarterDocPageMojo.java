@@ -216,7 +216,7 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
                 String json = loadDataFormatJson(files, name);
                 if (json != null) {
                     DataFormatModel model = JsonMapper.generateDataFormatModel(json);
-                    String docPage = model.getModelName() != null ? model.getModelName() : name;
+                    String docPage = resolveDataFormatDocPage(model);
                     entries.add(new CatalogEntry(name, model.getTitle(), model.getDescription(), "dataformat", null, docPage));
                 }
             }
@@ -416,6 +416,21 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
             return artIdBase;
         }
         return scheme;
+    }
+
+    private static String resolveDataFormatDocPage(DataFormatModel model) {
+        String name = model.getName();
+        String artifactId = model.getArtifactId();
+        // Jackson variants have versioned doc pages (e.g. jackson2, jacksonXml3, avroJackson2)
+        if (artifactId != null && artifactId.contains("jackson")) {
+            String suffix = artifactId.contains("jackson3") ? "3" : "2";
+            return name + suffix;
+        }
+        // Bindy variants share a single doc page via modelName
+        if (model.getModelName() != null && !model.getModelName().equals(name)) {
+            return model.getModelName();
+        }
+        return name;
     }
 
     private record CatalogEntry(String name, String title, String description, String kind, String syntax,

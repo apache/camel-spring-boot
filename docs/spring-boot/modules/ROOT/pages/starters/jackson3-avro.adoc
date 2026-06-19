@@ -7,7 +7,7 @@ Marshal POJOs to Avro and back using Jackson.
 
 == What's inside
 
-* xref:{csb-camel-components}:dataformats:avroJackson-dataformat.adoc[Avro Jackson data format]
+* xref:{csb-camel-components}:dataformats:avroJackson3-dataformat.adoc[Avro Jackson data format]
 
 Please refer to the above links for usage and configuration details.
 

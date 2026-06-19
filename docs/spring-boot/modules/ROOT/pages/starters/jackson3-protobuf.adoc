@@ -7,7 +7,7 @@ Marshal POJOs to Protobuf and back using Jackson.
 
 == What's inside
 
-* xref:{csb-camel-components}:dataformats:protobufJackson-dataformat.adoc[Protobuf Jackson data format]
+* xref:{csb-camel-components}:dataformats:protobufJackson3-dataformat.adoc[Protobuf Jackson data format]
 
 Please refer to the above links for usage and configuration details.
 
