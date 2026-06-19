@@ -3,7 +3,6 @@
 //Manually maintained attributes
 :artifactid: camel-spring-boot
 :shortname: spring-boot
-:camel-spring-boot-name: spring-boot
 
 Spring Boot component provides auto-configuration for Apache Camel. Our
 opinionated auto-configuration of the Camel context auto-detects Camel
