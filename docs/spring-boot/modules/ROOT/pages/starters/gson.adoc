@@ -7,7 +7,7 @@ Marshal POJOs to JSON and back using Gson
 
 == What's inside
 
-* xref:{csb-camel-components}:dataformats:gson-dataformat.adoc[JSON Gson data format]
+* xref:{csb-camel-components}:dataformats:json-dataformat.adoc[JSON Gson data format]
 
 Please refer to the above links for usage and configuration details.
 

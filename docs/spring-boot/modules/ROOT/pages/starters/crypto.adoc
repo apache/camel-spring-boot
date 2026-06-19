@@ -30,7 +30,7 @@ The starter supports 32 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | camel.component.crypto.algorithm | Sets the JCE name of the Algorithm that should be used for the signer. | SHA256withRSA | String
-| camel.component.crypto.alias | Sets the alias used to query the KeyStore for keys and {link java.security.cert.Certificate Certificates} to be used in signing and verifying exchanges. This value can be provided at runtime via the message header org.apache.camel.component.crypto.DigitalSignatureConstants#KEYSTORE_ALIAS |  | String
+| camel.component.crypto.alias | Sets the alias used to query the KeyStore for keys and \{link java.security.cert.Certificate Certificates} to be used in signing and verifying exchanges. This value can be provided at runtime via the message header org.apache.camel.component.crypto.DigitalSignatureConstants#KEYSTORE_ALIAS |  | String
 | camel.component.crypto.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.crypto.buffer-size | Set the size of the buffer used to read in the Exchange payload data. | 2048 | Integer
 | camel.component.crypto.certificate | Set the Certificate that should be used to verify the signature in the exchange based on its payload. The option is a java.security.cert.Certificate type. |  | Certificate

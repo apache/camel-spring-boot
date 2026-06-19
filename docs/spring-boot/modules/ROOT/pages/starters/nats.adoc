@@ -57,8 +57,8 @@ The starter supports 45 options, which are listed below.
 | camel.component.nats.pedantic | Whether or not running in pedantic mode (this affects performance) | false | Boolean
 | camel.component.nats.ping-interval | Ping interval to be aware if connection is still alive (in milliseconds) | 120000 | Integer
 | camel.component.nats.pool-size | Consumer thread pool size (default is 10) | 10 | Integer
-| camel.component.nats.pull-batch-size | Maximum number of messages to fetch per pull request when using a JetStream Pull Subscription. Only used when {code pullSubscription=true}. | 10 | Integer
-| camel.component.nats.pull-fetch-timeout | Maximum time (in milliseconds) to wait for a batch of messages to be available on the server during a single fetch when using a JetStream Pull Subscription. Only used when {code pullSubscription=true}. | 1000 | Long
+| camel.component.nats.pull-batch-size | Maximum number of messages to fetch per pull request when using a JetStream Pull Subscription. Only used when \{code pullSubscription=true}. | 10 | Integer
+| camel.component.nats.pull-fetch-timeout | Maximum time (in milliseconds) to wait for a batch of messages to be available on the server during a single fetch when using a JetStream Pull Subscription. Only used when \{code pullSubscription=true}. | 1000 | Long
 | camel.component.nats.pull-subscription | Sets the consumer subscription type for JetStream. Set to true to use a Pull Subscription (consumer explicitly requests messages). Set to false to use a Push Subscription (messages are automatically delivered). | true | Boolean
 | camel.component.nats.queue-name | The Queue name if we are using nats for a queue configuration |  | String
 | camel.component.nats.reconnect | Whether or not using reconnection feature | true | Boolean

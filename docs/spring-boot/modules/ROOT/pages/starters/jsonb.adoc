@@ -7,7 +7,7 @@ Marshal POJOs to JSON and back using JSON-B.
 
 == What's inside
 
-* xref:{csb-camel-components}:dataformats:jsonb-dataformat.adoc[JSON JSON-B data format]
+* xref:{csb-camel-components}:dataformats:json-dataformat.adoc[JSON JSON-B data format]
 
 Please refer to the above links for usage and configuration details.
 
