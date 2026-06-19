@@ -7,7 +7,7 @@ Expose HTTP endpoints using the HTTP server available in the current platform.
 
 == What's inside
 
-* xref:components::platform-http-component.adoc[Platform HTTP component], URI syntax: `platform-http:path`
+* xref:{csb-camel-components}::platform-http-component.adoc[Platform HTTP component], URI syntax: `platform-http:path`
 
 Please refer to the above links for usage and configuration details.
 

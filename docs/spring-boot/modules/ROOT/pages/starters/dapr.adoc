@@ -7,7 +7,7 @@ Dapr component which interfaces with Dapr Building Blocks.
 
 == What's inside
 
-* xref:components::dapr-component.adoc[Dapr component], URI syntax: `dapr:operation`
+* xref:{csb-camel-components}::dapr-component.adoc[Dapr component], URI syntax: `dapr:operation`
 
 Please refer to the above links for usage and configuration details.
 

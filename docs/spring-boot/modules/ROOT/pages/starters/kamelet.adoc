@@ -7,7 +7,7 @@ To call Kamelets
 
 == What's inside
 
-* xref:components::kamelet-component.adoc[Kamelet component], URI syntax: `kamelet:templateId/routeId`
+* xref:{csb-camel-components}::kamelet-component.adoc[Kamelet component], URI syntax: `kamelet:templateId/routeId`
 
 Please refer to the above links for usage and configuration details.
 

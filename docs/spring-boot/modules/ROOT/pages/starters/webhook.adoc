@@ -7,7 +7,7 @@ Expose webhook endpoints to receive push notifications for other Camel component
 
 == What's inside
 
-* xref:components::webhook-component.adoc[Webhook component], URI syntax: `webhook:endpointUri`
+* xref:{csb-camel-components}::webhook-component.adoc[Webhook component], URI syntax: `webhook:endpointUri`
 
 Please refer to the above links for usage and configuration details.
 

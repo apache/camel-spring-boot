@@ -7,7 +7,7 @@ Manage and monitor Camel routes.
 
 == What's inside
 
-* xref:components::controlbus-component.adoc[Control Bus component], URI syntax: `controlbus:command:language`
+* xref:{csb-camel-components}::controlbus-component.adoc[Control Bus component], URI syntax: `controlbus:command:language`
 
 Please refer to the above links for usage and configuration details.
 

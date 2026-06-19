@@ -7,7 +7,7 @@ Transforms XML payload using an XSLT template.
 
 == What's inside
 
-* xref:components::xslt-component.adoc[XSLT component], URI syntax: `xslt:resourceUri`
+* xref:{csb-camel-components}::xslt-component.adoc[XSLT component], URI syntax: `xslt:resourceUri`
 
 Please refer to the above links for usage and configuration details.
 

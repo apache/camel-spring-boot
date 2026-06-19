@@ -7,7 +7,7 @@ Receives events from ClickUp
 
 == What's inside
 
-* xref:components::clickup-component.adoc[ClickUp component], URI syntax: `clickup:workspaceId`
+* xref:{csb-camel-components}::clickup-component.adoc[ClickUp component], URI syntax: `clickup:workspaceId`
 
 Please refer to the above links for usage and configuration details.
 

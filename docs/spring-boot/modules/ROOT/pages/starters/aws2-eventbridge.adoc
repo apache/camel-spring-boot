@@ -7,7 +7,7 @@ Manage AWS EventBridge cluster instances and consume events via SQS-backed polli
 
 == What's inside
 
-* xref:components::aws2-eventbridge-component.adoc[AWS Eventbridge component], URI syntax: `aws2-eventbridge://eventbusNameOrArn`
+* xref:{csb-camel-components}::aws2-eventbridge-component.adoc[AWS Eventbridge component], URI syntax: `aws2-eventbridge://eventbusNameOrArn`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Send print jobs to printers.
 
 == What's inside
 
-* xref:components::lpr-component.adoc[Printer component], URI syntax: `lpr:hostname:port/printername`
+* xref:{csb-camel-components}::lpr-component.adoc[Printer component], URI syntax: `lpr:hostname:port/printername`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Perform operations on AWS Redshift using Redshift Data API.
 
 == What's inside
 
-* xref:components::aws2-redshift-data-component.adoc[AWS RedshiftData component], URI syntax: `aws2-redshift-data:label`
+* xref:{csb-camel-components}::aws2-redshift-data-component.adoc[AWS RedshiftData component], URI syntax: `aws2-redshift-data:label`
 
 Please refer to the above links for usage and configuration details.
 

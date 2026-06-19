@@ -7,7 +7,7 @@ Open a Financial Interchange (FIX) session using an embedded QuickFix/J engine.
 
 == What's inside
 
-* xref:components::quickfix-component.adoc[QuickFix component], URI syntax: `quickfix:configurationName`
+* xref:{csb-camel-components}::quickfix-component.adoc[QuickFix component], URI syntax: `quickfix:configurationName`
 
 Please refer to the above links for usage and configuration details.
 

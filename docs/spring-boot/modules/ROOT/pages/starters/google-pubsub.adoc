@@ -7,7 +7,7 @@ Send and receive messages to/from Google Cloud Platform PubSub Service.
 
 == What's inside
 
-* xref:components::google-pubsub-component.adoc[Google Pubsub component], URI syntax: `google-pubsub:projectId:destinationName`
+* xref:{csb-camel-components}::google-pubsub-component.adoc[Google Pubsub component], URI syntax: `google-pubsub:projectId:destinationName`
 
 Please refer to the above links for usage and configuration details.
 

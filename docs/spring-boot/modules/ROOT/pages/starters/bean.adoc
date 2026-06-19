@@ -7,9 +7,9 @@ Invoke methods of Java beans stored in Camel registry.
 
 == What's inside
 
-* xref:components::bean-component.adoc[Bean component], URI syntax: `bean:beanName`
-* xref:components:languages:bean-language.adoc[Bean Method language]
-* xref:components::class-component.adoc[Class component], URI syntax: `class:beanName`
+* xref:{csb-camel-components}::bean-component.adoc[Bean component], URI syntax: `bean:beanName`
+* xref:{csb-camel-components}:languages:bean-language.adoc[Bean Method language]
+* xref:{csb-camel-components}::class-component.adoc[Class component], URI syntax: `class:beanName`
 
 Please refer to the above links for usage and configuration details.
 

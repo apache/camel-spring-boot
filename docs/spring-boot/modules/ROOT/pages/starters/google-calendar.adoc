@@ -7,8 +7,8 @@ Perform various operations on a Google Calendar.
 
 == What's inside
 
-* xref:components::google-calendar-component.adoc[Google Calendar component], URI syntax: `google-calendar:apiName/methodName`
-* xref:components::google-calendar-stream-component.adoc[Google Calendar Stream component], URI syntax: `google-calendar-stream:index`
+* xref:{csb-camel-components}::google-calendar-component.adoc[Google Calendar component], URI syntax: `google-calendar:apiName/methodName`
+* xref:{csb-camel-components}::google-calendar-stream-component.adoc[Google Calendar Stream component], URI syntax: `google-calendar-stream:index`
 
 Please refer to the above links for usage and configuration details.
 

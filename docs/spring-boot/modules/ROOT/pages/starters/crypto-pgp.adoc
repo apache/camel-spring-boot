@@ -7,7 +7,7 @@ Encrypt and decrypt messages using Java Cryptographic Extension (JCE) and PGP.
 
 == What's inside
 
-* xref:components:dataformats:pgp-dataformat.adoc[PGP (Pretty Good Privacy Cryptographic) data format]
+* xref:{csb-camel-components}:dataformats:pgp-dataformat.adoc[PGP (Pretty Good Privacy Cryptographic) data format]
 
 Please refer to the above links for usage and configuration details.
 

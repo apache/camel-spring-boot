@@ -7,7 +7,7 @@ Use a Camel Data Format as a regular Camel Component.
 
 == What's inside
 
-* xref:components::dataformat-component.adoc[Data Format component], URI syntax: `dataformat:name:operation`
+* xref:{csb-camel-components}::dataformat-component.adoc[Data Format component], URI syntax: `dataformat:name:operation`
 
 Please refer to the above links for usage and configuration details.
 

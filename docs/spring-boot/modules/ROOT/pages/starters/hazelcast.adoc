@@ -7,18 +7,18 @@ Increment, decrement, set, etc. Hazelcast atomic number (a grid wide number).
 
 == What's inside
 
-* xref:components::hazelcast-atomicvalue-component.adoc[Hazelcast Atomic Number component], URI syntax: `hazelcast-atomicvalue:cacheName`
-* xref:components::hazelcast-instance-component.adoc[Hazelcast Instance component], URI syntax: `hazelcast-instance:cacheName`
-* xref:components::hazelcast-list-component.adoc[Hazelcast List component], URI syntax: `hazelcast-list:cacheName`
-* xref:components::hazelcast-map-component.adoc[Hazelcast Map component], URI syntax: `hazelcast-map:cacheName`
-* xref:components::hazelcast-multimap-component.adoc[Hazelcast Multimap component], URI syntax: `hazelcast-multimap:cacheName`
-* xref:components::hazelcast-pncounter-component.adoc[Hazelcast PN Counter component], URI syntax: `hazelcast-pncounter:cacheName`
-* xref:components::hazelcast-queue-component.adoc[Hazelcast Queue component], URI syntax: `hazelcast-queue:cacheName`
-* xref:components::hazelcast-replicatedmap-component.adoc[Hazelcast Replicated Map component], URI syntax: `hazelcast-replicatedmap:cacheName`
-* xref:components::hazelcast-ringbuffer-component.adoc[Hazelcast Ringbuffer component], URI syntax: `hazelcast-ringbuffer:cacheName`
-* xref:components::hazelcast-seda-component.adoc[Hazelcast SEDA component], URI syntax: `hazelcast-seda:cacheName`
-* xref:components::hazelcast-set-component.adoc[Hazelcast Set component], URI syntax: `hazelcast-set:cacheName`
-* xref:components::hazelcast-topic-component.adoc[Hazelcast Topic component], URI syntax: `hazelcast-topic:cacheName`
+* xref:{csb-camel-components}::hazelcast-atomicvalue-component.adoc[Hazelcast Atomic Number component], URI syntax: `hazelcast-atomicvalue:cacheName`
+* xref:{csb-camel-components}::hazelcast-instance-component.adoc[Hazelcast Instance component], URI syntax: `hazelcast-instance:cacheName`
+* xref:{csb-camel-components}::hazelcast-list-component.adoc[Hazelcast List component], URI syntax: `hazelcast-list:cacheName`
+* xref:{csb-camel-components}::hazelcast-map-component.adoc[Hazelcast Map component], URI syntax: `hazelcast-map:cacheName`
+* xref:{csb-camel-components}::hazelcast-multimap-component.adoc[Hazelcast Multimap component], URI syntax: `hazelcast-multimap:cacheName`
+* xref:{csb-camel-components}::hazelcast-pncounter-component.adoc[Hazelcast PN Counter component], URI syntax: `hazelcast-pncounter:cacheName`
+* xref:{csb-camel-components}::hazelcast-queue-component.adoc[Hazelcast Queue component], URI syntax: `hazelcast-queue:cacheName`
+* xref:{csb-camel-components}::hazelcast-replicatedmap-component.adoc[Hazelcast Replicated Map component], URI syntax: `hazelcast-replicatedmap:cacheName`
+* xref:{csb-camel-components}::hazelcast-ringbuffer-component.adoc[Hazelcast Ringbuffer component], URI syntax: `hazelcast-ringbuffer:cacheName`
+* xref:{csb-camel-components}::hazelcast-seda-component.adoc[Hazelcast SEDA component], URI syntax: `hazelcast-seda:cacheName`
+* xref:{csb-camel-components}::hazelcast-set-component.adoc[Hazelcast Set component], URI syntax: `hazelcast-set:cacheName`
+* xref:{csb-camel-components}::hazelcast-topic-component.adoc[Hazelcast Topic component], URI syntax: `hazelcast-topic:cacheName`
 
 Please refer to the above links for usage and configuration details.
 

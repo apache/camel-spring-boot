@@ -7,8 +7,8 @@ Perform caching operations using Caffeine Cache.
 
 == What's inside
 
-* xref:components::caffeine-cache-component.adoc[Caffeine Cache component], URI syntax: `caffeine-cache:cacheName`
-* xref:components::caffeine-loadcache-component.adoc[Caffeine LoadCache component], URI syntax: `caffeine-loadcache:cacheName`
+* xref:{csb-camel-components}::caffeine-cache-component.adoc[Caffeine Cache component], URI syntax: `caffeine-cache:cacheName`
+* xref:{csb-camel-components}::caffeine-loadcache-component.adoc[Caffeine LoadCache component], URI syntax: `caffeine-loadcache:cacheName`
 
 Please refer to the above links for usage and configuration details.
 

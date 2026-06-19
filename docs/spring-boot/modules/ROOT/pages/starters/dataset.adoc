@@ -7,8 +7,8 @@ Extends the mock component by pulling messages from another endpoint on startup 
 
 == What's inside
 
-* xref:components::dataset-test-component.adoc[DataSet Test component], URI syntax: `dataset-test:name`
-* xref:components::dataset-component.adoc[Dataset component], URI syntax: `dataset:name`
+* xref:{csb-camel-components}::dataset-test-component.adoc[DataSet Test component], URI syntax: `dataset-test:name`
+* xref:{csb-camel-components}::dataset-component.adoc[Dataset component], URI syntax: `dataset:name`
 
 Please refer to the above links for usage and configuration details.
 

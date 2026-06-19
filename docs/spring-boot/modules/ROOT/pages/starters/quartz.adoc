@@ -7,7 +7,7 @@ Schedule sending of messages using the Quartz 2.x scheduler.
 
 == What's inside
 
-* xref:components::quartz-component.adoc[Quartz component], URI syntax: `quartz:groupName/triggerName`
+* xref:{csb-camel-components}::quartz-component.adoc[Quartz component], URI syntax: `quartz:groupName/triggerName`
 
 Please refer to the above links for usage and configuration details.
 

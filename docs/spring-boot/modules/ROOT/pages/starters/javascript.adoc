@@ -7,7 +7,7 @@ Evaluates a JavaScript expression.
 
 == What's inside
 
-* xref:components:languages:js-language.adoc[JavaScript language]
+* xref:{csb-camel-components}:languages:js-language.adoc[JavaScript language]
 
 Please refer to the above links for usage and configuration details.
 

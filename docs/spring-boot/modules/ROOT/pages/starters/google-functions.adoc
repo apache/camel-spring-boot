@@ -7,7 +7,7 @@ Manage and invoke Google Cloud Functions
 
 == What's inside
 
-* xref:components::google-functions-component.adoc[Google Cloud Functions component], URI syntax: `google-functions:functionName`
+* xref:{csb-camel-components}::google-functions-component.adoc[Google Cloud Functions component], URI syntax: `google-functions:functionName`
 
 Please refer to the above links for usage and configuration details.
 

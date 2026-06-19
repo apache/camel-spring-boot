@@ -7,7 +7,7 @@ Consume events from Amazon Cloudtrail using AWS SDK version 2.x.
 
 == What's inside
 
-* xref:components::aws-cloudtrail-component.adoc[AWS Cloudtrail component], URI syntax: `aws-cloudtrail:label`
+* xref:{csb-camel-components}::aws-cloudtrail-component.adoc[AWS Cloudtrail component], URI syntax: `aws-cloudtrail:label`
 
 Please refer to the above links for usage and configuration details.
 

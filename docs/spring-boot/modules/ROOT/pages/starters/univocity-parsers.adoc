@@ -7,9 +7,9 @@ Marshal and unmarshal Java objects from and to CSV (Comma Separated Values) usin
 
 == What's inside
 
-* xref:components:dataformats:univocityCsv-dataformat.adoc[uniVocity CSV data format]
-* xref:components:dataformats:univocityFixed-dataformat.adoc[uniVocity Fixed Length data format]
-* xref:components:dataformats:univocityTsv-dataformat.adoc[uniVocity TSV data format]
+* xref:{csb-camel-components}:dataformats:univocityCsv-dataformat.adoc[uniVocity CSV data format]
+* xref:{csb-camel-components}:dataformats:univocityFixed-dataformat.adoc[uniVocity Fixed Length data format]
+* xref:{csb-camel-components}:dataformats:univocityTsv-dataformat.adoc[uniVocity TSV data format]
 
 Please refer to the above links for usage and configuration details.
 

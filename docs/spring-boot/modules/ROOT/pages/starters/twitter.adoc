@@ -7,9 +7,9 @@ Send and receive Twitter direct messages.
 
 == What's inside
 
-* xref:components::twitter-directmessage-component.adoc[Twitter Direct Message component], URI syntax: `twitter-directmessage:user`
-* xref:components::twitter-search-component.adoc[Twitter Search component], URI syntax: `twitter-search:keywords`
-* xref:components::twitter-timeline-component.adoc[Twitter Timeline component], URI syntax: `twitter-timeline:timelineType`
+* xref:{csb-camel-components}::twitter-directmessage-component.adoc[Twitter Direct Message component], URI syntax: `twitter-directmessage:user`
+* xref:{csb-camel-components}::twitter-search-component.adoc[Twitter Search component], URI syntax: `twitter-search:keywords`
+* xref:{csb-camel-components}::twitter-timeline-component.adoc[Twitter Timeline component], URI syntax: `twitter-timeline:timelineType`
 
 Please refer to the above links for usage and configuration details.
 

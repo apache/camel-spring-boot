@@ -7,7 +7,7 @@ Transform messages using Chunk templating engine.
 
 == What's inside
 
-* xref:components::chunk-component.adoc[Chunk component], URI syntax: `chunk:resourceUri`
+* xref:{csb-camel-components}::chunk-component.adoc[Chunk component], URI syntax: `chunk:resourceUri`
 
 Please refer to the above links for usage and configuration details.
 

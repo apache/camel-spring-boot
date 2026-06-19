@@ -7,7 +7,7 @@ Send requests to external HTTP servers using Vert.x
 
 == What's inside
 
-* xref:components::vertx-http-component.adoc[Vert.x HTTP Client component], URI syntax: `vertx-http:httpUri`
+* xref:{csb-camel-components}::vertx-http-component.adoc[Vert.x HTTP Client component], URI syntax: `vertx-http:httpUri`
 
 Please refer to the above links for usage and configuration details.
 

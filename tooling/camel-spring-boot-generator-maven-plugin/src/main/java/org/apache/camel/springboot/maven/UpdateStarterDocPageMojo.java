@@ -382,13 +382,13 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
     private String buildXref(CatalogEntry entry) {
         return switch (entry.kind) {
             case "component" ->
-                    "xref:components::" + entry.docPage + "-component.adoc[" + entry.title + " component]";
+                    "xref:{csb-camel-components}::" + entry.docPage + "-component.adoc[" + entry.title + " component]";
             case "dataformat" ->
-                    "xref:components:dataformats:" + entry.docPage + "-dataformat.adoc[" + entry.title + " data format]";
+                    "xref:{csb-camel-components}:dataformats:" + entry.docPage + "-dataformat.adoc[" + entry.title + " data format]";
             case "language" ->
-                    "xref:components:languages:" + entry.name + "-language.adoc[" + entry.title + " language]";
+                    "xref:{csb-camel-components}:languages:" + entry.name + "-language.adoc[" + entry.title + " language]";
             default ->
-                    "xref:components:others:" + entry.name + ".adoc[" + entry.title + "]";
+                    "xref:{csb-camel-components}:others:" + entry.name + ".adoc[" + entry.title + "]";
         };
     }
 

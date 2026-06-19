@@ -7,7 +7,7 @@ Capture changes from a DB2 database.
 
 == What's inside
 
-* xref:components::debezium-db2-component.adoc[Debezium DB2 Connector component], URI syntax: `debezium-db2:name`
+* xref:{csb-camel-components}::debezium-db2-component.adoc[Debezium DB2 Connector component], URI syntax: `debezium-db2:name`
 
 Please refer to the above links for usage and configuration details.
 

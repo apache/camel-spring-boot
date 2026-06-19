@@ -7,8 +7,8 @@ Call and expose remote procedures (RPC) with Apache Thrift data format and seria
 
 == What's inside
 
-* xref:components::thrift-component.adoc[Thrift component], URI syntax: `thrift:host:port/service`
-* xref:components:dataformats:thrift-dataformat.adoc[Thrift data format]
+* xref:{csb-camel-components}::thrift-component.adoc[Thrift component], URI syntax: `thrift:host:port/service`
+* xref:{csb-camel-components}:dataformats:thrift-dataformat.adoc[Thrift data format]
 
 Please refer to the above links for usage and configuration details.
 

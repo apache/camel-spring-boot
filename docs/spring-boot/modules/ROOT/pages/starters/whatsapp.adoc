@@ -7,7 +7,7 @@ Send messages to WhatsApp.
 
 == What's inside
 
-* xref:components::whatsapp-component.adoc[WhatsApp component], URI syntax: `whatsapp:phoneNumberId`
+* xref:{csb-camel-components}::whatsapp-component.adoc[WhatsApp component], URI syntax: `whatsapp:phoneNumberId`
 
 Please refer to the above links for usage and configuration details.
 

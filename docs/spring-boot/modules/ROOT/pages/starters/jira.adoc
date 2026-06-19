@@ -7,7 +7,7 @@ Interact with JIRA issue tracker.
 
 == What's inside
 
-* xref:components::jira-component.adoc[Jira component], URI syntax: `jira:type`
+* xref:{csb-camel-components}::jira-component.adoc[Jira component], URI syntax: `jira:type`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Access AWS Athena.
 
 == What's inside
 
-* xref:components::aws2-athena-component.adoc[AWS Athena component], URI syntax: `aws2-athena:label`
+* xref:{csb-camel-components}::aws2-athena-component.adoc[AWS Athena component], URI syntax: `aws2-athena:label`
 
 Please refer to the above links for usage and configuration details.
 

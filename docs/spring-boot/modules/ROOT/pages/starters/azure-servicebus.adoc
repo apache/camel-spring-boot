@@ -7,7 +7,7 @@ Send and receive messages to/from Azure Service Bus.
 
 == What's inside
 
-* xref:components::azure-servicebus-component.adoc[Azure ServiceBus component], URI syntax: `azure-servicebus:topicOrQueueName`
+* xref:{csb-camel-components}::azure-servicebus-component.adoc[Azure ServiceBus component], URI syntax: `azure-servicebus:topicOrQueueName`
 
 Please refer to the above links for usage and configuration details.
 

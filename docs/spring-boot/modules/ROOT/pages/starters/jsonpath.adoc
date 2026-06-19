@@ -7,7 +7,7 @@ Evaluates a JSONPath expression against a JSON message body.
 
 == What's inside
 
-* xref:components:languages:jsonpath-language.adoc[JSONPath language]
+* xref:{csb-camel-components}:languages:jsonpath-language.adoc[JSONPath language]
 
 Please refer to the above links for usage and configuration details.
 

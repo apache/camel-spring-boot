@@ -7,7 +7,7 @@ Execute commands on remote hosts using SSH.
 
 == What's inside
 
-* xref:components::ssh-component.adoc[SSH component], URI syntax: `ssh:host:port`
+* xref:{csb-camel-components}::ssh-component.adoc[SSH component], URI syntax: `ssh:host:port`
 
 Please refer to the above links for usage and configuration details.
 

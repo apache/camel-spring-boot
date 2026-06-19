@@ -7,8 +7,8 @@ Store and retrieve data from AWS DynamoDB.
 
 == What's inside
 
-* xref:components::aws2-ddb-component.adoc[AWS DynamoDB component], URI syntax: `aws2-ddb:tableName`
-* xref:components::aws2-ddbstream-component.adoc[AWS DynamoDB Streams component], URI syntax: `aws2-ddbstream:tableName`
+* xref:{csb-camel-components}::aws2-ddb-component.adoc[AWS DynamoDB component], URI syntax: `aws2-ddb:tableName`
+* xref:{csb-camel-components}::aws2-ddbstream-component.adoc[AWS DynamoDB Streams component], URI syntax: `aws2-ddbstream:tableName`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Unmarshal a CBOR payload to POJO and back.
 
 == What's inside
 
-* xref:components:dataformats:cbor-dataformat.adoc[CBOR data format]
+* xref:{csb-camel-components}:dataformats:cbor-dataformat.adoc[CBOR data format]
 
 Please refer to the above links for usage and configuration details.
 

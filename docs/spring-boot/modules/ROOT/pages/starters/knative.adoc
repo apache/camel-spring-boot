@@ -7,7 +7,7 @@ Send and receive events from Knative.
 
 == What's inside
 
-* xref:components::knative-component.adoc[Knative component], URI syntax: `knative:type/typeId`
+* xref:{csb-camel-components}::knative-component.adoc[Knative component], URI syntax: `knative:type/typeId`
 
 Please refer to the above links for usage and configuration details.
 

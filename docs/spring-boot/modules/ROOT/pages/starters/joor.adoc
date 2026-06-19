@@ -7,8 +7,8 @@ Evaluates a Java (Java compiled once at runtime) expression.
 
 == What's inside
 
-* xref:components:languages:java-language.adoc[Java language]
-* xref:components:languages:joor-language.adoc[jOOR language]
+* xref:{csb-camel-components}:languages:java-language.adoc[Java language]
+* xref:{csb-camel-components}:languages:joor-language.adoc[jOOR language]
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Manage AWS EKS cluster instances.
 
 == What's inside
 
-* xref:components::aws2-eks-component.adoc[AWS Elastic Kubernetes Service (EKS) component], URI syntax: `aws2-eks:label`
+* xref:{csb-camel-components}::aws2-eks-component.adoc[AWS Elastic Kubernetes Service (EKS) component], URI syntax: `aws2-eks:label`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ To integrate with a fully managed, high-performance message queuing service on H
 
 == What's inside
 
-* xref:components::hwcloud-dms-component.adoc[Huawei Distributed Message Service (DMS) component], URI syntax: `hwcloud-dms:operation`
+* xref:{csb-camel-components}::hwcloud-dms-component.adoc[Huawei Distributed Message Service (DMS) component], URI syntax: `hwcloud-dms:operation`
 
 Please refer to the above links for usage and configuration details.
 

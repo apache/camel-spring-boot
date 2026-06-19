@@ -7,7 +7,7 @@ Store and retrieve objects from AWS S3 Storage Service.
 
 == What's inside
 
-* xref:components::aws2-s3-component.adoc[AWS S3 Storage Service component], URI syntax: `aws2-s3://bucketNameOrArn`
+* xref:{csb-camel-components}::aws2-s3-component.adoc[AWS S3 Storage Service component], URI syntax: `aws2-s3://bucketNameOrArn`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Store and query vector embeddings using AWS S3 Vectors with similarity search.
 
 == What's inside
 
-* xref:components::aws2-s3-vectors-component.adoc[AWS S3 Vectors component], URI syntax: `aws2-s3-vectors://vectorBucketName`
+* xref:{csb-camel-components}::aws2-s3-vectors-component.adoc[AWS S3 Vectors component], URI syntax: `aws2-s3-vectors://vectorBucketName`
 
 Please refer to the above links for usage and configuration details.
 

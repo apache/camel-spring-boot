@@ -7,7 +7,7 @@ Interact with Ethereum nodes using web3j client API.
 
 == What's inside
 
-* xref:components::web3j-component.adoc[Web3j Ethereum Blockchain component], URI syntax: `web3j:nodeAddress`
+* xref:{csb-camel-components}::web3j-component.adoc[Web3j Ethereum Blockchain component], URI syntax: `web3j:nodeAddress`
 
 Please refer to the above links for usage and configuration details.
 

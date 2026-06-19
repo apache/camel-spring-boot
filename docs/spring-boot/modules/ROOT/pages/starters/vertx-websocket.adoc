@@ -7,7 +7,7 @@ Expose WebSocket endpoints and connect to remote WebSocket servers using Vert.x
 
 == What's inside
 
-* xref:components::vertx-websocket-component.adoc[Vert.x WebSocket component], URI syntax: `vertx-websocket:host:port/path`
+* xref:{csb-camel-components}::vertx-websocket-component.adoc[Vert.x WebSocket component], URI syntax: `vertx-websocket:host:port/path`
 
 Please refer to the above links for usage and configuration details.
 

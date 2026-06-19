@@ -7,8 +7,8 @@ Consume and produce records from and to AWS Kinesis Streams.
 
 == What's inside
 
-* xref:components::aws2-kinesis-component.adoc[AWS Kinesis component], URI syntax: `aws2-kinesis:streamName`
-* xref:components::aws2-kinesis-firehose-component.adoc[AWS Kinesis Firehose component], URI syntax: `aws2-kinesis-firehose:streamName`
+* xref:{csb-camel-components}::aws2-kinesis-component.adoc[AWS Kinesis component], URI syntax: `aws2-kinesis:streamName`
+* xref:{csb-camel-components}::aws2-kinesis-firehose-component.adoc[AWS Kinesis Firehose component], URI syntax: `aws2-kinesis-firehose:streamName`
 
 Please refer to the above links for usage and configuration details.
 

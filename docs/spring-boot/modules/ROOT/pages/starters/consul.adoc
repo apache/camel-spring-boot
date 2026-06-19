@@ -7,7 +7,7 @@ Integrate with Consul service discovery and configuration store.
 
 == What's inside
 
-* xref:components::consul-component.adoc[Consul component], URI syntax: `consul:apiEndpoint`
+* xref:{csb-camel-components}::consul-component.adoc[Consul component], URI syntax: `consul:apiEndpoint`
 
 Please refer to the above links for usage and configuration details.
 

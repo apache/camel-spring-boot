@@ -7,8 +7,8 @@ Sparkplug B Edge Node and Device support over MQTT using Eclipse Tahu
 
 == What's inside
 
-* xref:components::tahu-edge-component.adoc[Tahu Edge Node / Device component], URI syntax: `tahu-edge:groupId/edgeNode`
-* xref:components::tahu-host-component.adoc[Tahu Host Application component], URI syntax: `tahu-host:hostId`
+* xref:{csb-camel-components}::tahu-edge-component.adoc[Tahu Edge Node / Device component], URI syntax: `tahu-edge:groupId/edgeNode`
+* xref:{csb-camel-components}::tahu-host-component.adoc[Tahu Host Application component], URI syntax: `tahu-host:hostId`
 
 Please refer to the above links for usage and configuration details.
 

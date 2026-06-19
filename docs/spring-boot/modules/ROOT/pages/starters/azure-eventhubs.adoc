@@ -7,7 +7,7 @@ Send and receive events to/from Azure Event Hubs using AMQP protocol.
 
 == What's inside
 
-* xref:components::azure-eventhubs-component.adoc[Azure Event Hubs component], URI syntax: `azure-eventhubs:namespace/eventHubName`
+* xref:{csb-camel-components}::azure-eventhubs-component.adoc[Azure Event Hubs component], URI syntax: `azure-eventhubs:namespace/eventHubName`
 
 Please refer to the above links for usage and configuration details.
 

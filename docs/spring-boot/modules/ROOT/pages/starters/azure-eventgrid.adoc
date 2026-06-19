@@ -7,7 +7,7 @@ Send events to Azure Event Grid topics.
 
 == What's inside
 
-* xref:components::azure-eventgrid-component.adoc[Azure Event Grid component], URI syntax: `azure-eventgrid:topicEndpoint`
+* xref:{csb-camel-components}::azure-eventgrid-component.adoc[Azure Event Grid component], URI syntax: `azure-eventgrid:topicEndpoint`
 
 Please refer to the above links for usage and configuration details.
 

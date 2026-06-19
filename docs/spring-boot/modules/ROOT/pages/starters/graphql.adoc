@@ -7,7 +7,7 @@ Send GraphQL queries and mutations to external systems.
 
 == What's inside
 
-* xref:components::graphql-component.adoc[GraphQL component], URI syntax: `graphql:httpUri`
+* xref:{csb-camel-components}::graphql-component.adoc[GraphQL component], URI syntax: `graphql:httpUri`
 
 Please refer to the above links for usage and configuration details.
 

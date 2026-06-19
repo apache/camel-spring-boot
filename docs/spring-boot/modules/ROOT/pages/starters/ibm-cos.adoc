@@ -7,7 +7,7 @@ Store and retrieve objects from IBM Cloud Object Storage.
 
 == What's inside
 
-* xref:components::ibm-cos-component.adoc[IBM Cloud Object Storage component], URI syntax: `ibm-cos:bucketName`
+* xref:{csb-camel-components}::ibm-cos-component.adoc[IBM Cloud Object Storage component], URI syntax: `ibm-cos:bucketName`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Expose HTTP and WebSocket endpoints and access external HTTP/WebSocket servers.
 
 == What's inside
 
-* xref:components::undertow-component.adoc[Undertow component], URI syntax: `undertow:httpURI`
+* xref:{csb-camel-components}::undertow-component.adoc[Undertow component], URI syntax: `undertow:httpURI`
 
 Please refer to the above links for usage and configuration details.
 

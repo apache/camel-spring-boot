@@ -7,7 +7,7 @@ Perform operations on git repositories.
 
 == What's inside
 
-* xref:components::git-component.adoc[Git component], URI syntax: `git:localPath`
+* xref:{csb-camel-components}::git-component.adoc[Git component], URI syntax: `git:localPath`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Solve planning problems with OptaPlanner.
 
 == What's inside
 
-* xref:components::optaplanner-component.adoc[OptaPlanner component], URI syntax: `optaplanner:problemName`
+* xref:{csb-camel-components}::optaplanner-component.adoc[OptaPlanner component], URI syntax: `optaplanner:problemName`
 
 Please refer to the above links for usage and configuration details.
 

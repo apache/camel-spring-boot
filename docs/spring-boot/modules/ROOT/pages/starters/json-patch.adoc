@@ -7,7 +7,7 @@ Transforms JSON using JSON patch (RFC 6902).
 
 == What's inside
 
-* xref:components::json-patch-component.adoc[JsonPatch component], URI syntax: `json-patch:resourceUri`
+* xref:{csb-camel-components}::json-patch-component.adoc[JsonPatch component], URI syntax: `json-patch:resourceUri`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Invoke and manage Azure Functions.
 
 == What's inside
 
-* xref:components::azure-functions-component.adoc[Azure Functions component], URI syntax: `azure-functions:functionApp/functionName`
+* xref:{csb-camel-components}::azure-functions-component.adoc[Azure Functions component], URI syntax: `azure-functions:functionApp/functionName`
 
 Please refer to the above links for usage and configuration details.
 

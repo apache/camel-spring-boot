@@ -7,7 +7,7 @@ Interact with InfluxDB v1, a time series database.
 
 == What's inside
 
-* xref:components::influxdb-component.adoc[InfluxDB component], URI syntax: `influxdb:connectionBean`
+* xref:{csb-camel-components}::influxdb-component.adoc[InfluxDB component], URI syntax: `influxdb:connectionBean`
 
 Please refer to the above links for usage and configuration details.
 

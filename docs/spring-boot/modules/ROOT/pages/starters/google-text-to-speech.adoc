@@ -7,7 +7,7 @@ Synthesize speech from text using the Google Cloud Text-to-Speech API
 
 == What's inside
 
-* xref:components::google-text-to-speech-component.adoc[Google Cloud Text To Speech component], URI syntax: `google-text-to-speech:operation`
+* xref:{csb-camel-components}::google-text-to-speech-component.adoc[Google Cloud Text To Speech component], URI syntax: `google-text-to-speech:operation`
 
 Please refer to the above links for usage and configuration details.
 

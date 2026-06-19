@@ -7,7 +7,7 @@ Type Conversion using Mapstruct
 
 == What's inside
 
-* xref:components::mapstruct-component.adoc[MapStruct component], URI syntax: `mapstruct:className`
+* xref:{csb-camel-components}::mapstruct-component.adoc[MapStruct component], URI syntax: `mapstruct:className`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Send e-mails through AWS SES service.
 
 == What's inside
 
-* xref:components::aws2-ses-component.adoc[AWS Simple Email Service (SES) component], URI syntax: `aws2-ses:from`
+* xref:{csb-camel-components}::aws2-ses-component.adoc[AWS Simple Email Service (SES) component], URI syntax: `aws2-ses:from`
 
 Please refer to the above links for usage and configuration details.
 

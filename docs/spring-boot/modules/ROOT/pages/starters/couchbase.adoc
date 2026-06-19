@@ -7,7 +7,7 @@ Query Couchbase databases using SQL (N1QL) queries or MapReduce Views with a pol
 
 == What's inside
 
-* xref:components::couchbase-component.adoc[Couchbase component], URI syntax: `couchbase:protocol://hostname:port`
+* xref:{csb-camel-components}::couchbase-component.adoc[Couchbase component], URI syntax: `couchbase:protocol://hostname:port`
 
 Please refer to the above links for usage and configuration details.
 

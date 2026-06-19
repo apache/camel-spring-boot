@@ -7,7 +7,7 @@ Sending metrics to AWS CloudWatch.
 
 == What's inside
 
-* xref:components::aws2-cw-component.adoc[AWS CloudWatch component], URI syntax: `aws2-cw:namespace`
+* xref:{csb-camel-components}::aws2-cw-component.adoc[AWS CloudWatch component], URI syntax: `aws2-cw:namespace`
 
 Please refer to the above links for usage and configuration details.
 

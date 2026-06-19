@@ -7,7 +7,7 @@ Transform messages using a Mustache template.
 
 == What's inside
 
-* xref:components::mustache-component.adoc[Mustache component], URI syntax: `mustache:resourceUri`
+* xref:{csb-camel-components}::mustache-component.adoc[Mustache component], URI syntax: `mustache:resourceUri`
 
 Please refer to the above links for usage and configuration details.
 

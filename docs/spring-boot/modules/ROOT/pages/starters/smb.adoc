@@ -7,7 +7,7 @@ Read and write files to Server Message Block (SMB) file shares.
 
 == What's inside
 
-* xref:components::smb-component.adoc[SMB component], URI syntax: `smb:hostname:port/shareName/path`
+* xref:{csb-camel-components}::smb-component.adoc[SMB component], URI syntax: `smb:hostname:port/shareName/path`
 
 Please refer to the above links for usage and configuration details.
 

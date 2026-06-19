@@ -7,7 +7,7 @@ Interact with Asterisk PBX Server (VoIP).
 
 == What's inside
 
-* xref:components::asterisk-component.adoc[Asterisk component], URI syntax: `asterisk:name`
+* xref:{csb-camel-components}::asterisk-component.adoc[Asterisk component], URI syntax: `asterisk:name`
 
 Please refer to the above links for usage and configuration details.
 

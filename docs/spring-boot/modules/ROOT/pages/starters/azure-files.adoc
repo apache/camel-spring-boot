@@ -7,7 +7,7 @@ Send and receive files to Azure storage file share
 
 == What's inside
 
-* xref:components::azure-files-component.adoc[Azure Files component], URI syntax: `azure-files:account/share`
+* xref:{csb-camel-components}::azure-files-component.adoc[Azure Files component], URI syntax: `azure-files:account/share`
 
 Please refer to the above links for usage and configuration details.
 

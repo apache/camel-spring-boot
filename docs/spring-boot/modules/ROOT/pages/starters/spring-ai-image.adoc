@@ -7,7 +7,7 @@ Spring AI Image Generation
 
 == What's inside
 
-* xref:components::spring-ai-image-component.adoc[Spring AI Image component], URI syntax: `spring-ai-image:imageId`
+* xref:{csb-camel-components}::spring-ai-image-component.adoc[Spring AI Image component], URI syntax: `spring-ai-image:imageId`
 
 Please refer to the above links for usage and configuration details.
 

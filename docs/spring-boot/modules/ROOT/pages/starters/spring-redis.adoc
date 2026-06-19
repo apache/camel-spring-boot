@@ -7,7 +7,7 @@ Send and receive messages from Redis.
 
 == What's inside
 
-* xref:components::spring-redis-component.adoc[Spring Redis component], URI syntax: `spring-redis:host:port`
+* xref:{csb-camel-components}::spring-redis-component.adoc[Spring Redis component], URI syntax: `spring-redis:host:port`
 
 Please refer to the above links for usage and configuration details.
 

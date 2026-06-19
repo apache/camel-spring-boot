@@ -7,7 +7,7 @@ Transforms JSON payload using JSONata transformation.
 
 == What's inside
 
-* xref:components::jsonata-component.adoc[JSONata component], URI syntax: `jsonata:resourceUri`
+* xref:{csb-camel-components}::jsonata-component.adoc[JSONata component], URI syntax: `jsonata:resourceUri`
 
 Please refer to the above links for usage and configuration details.
 

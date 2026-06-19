@@ -7,7 +7,7 @@ Manage parameters using AWS Systems Manager (SSM) Parameter Store.
 
 == What's inside
 
-* xref:components::aws-parameter-store-component.adoc[AWS Parameter Store component], URI syntax: `aws-parameter-store:label`
+* xref:{csb-camel-components}::aws-parameter-store-component.adoc[AWS Parameter Store component], URI syntax: `aws-parameter-store:label`
 
 Please refer to the above links for usage and configuration details.
 

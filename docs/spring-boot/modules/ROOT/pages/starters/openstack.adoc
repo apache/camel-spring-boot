@@ -7,12 +7,12 @@ Access data in OpenStack Cinder block storage.
 
 == What's inside
 
-* xref:components::openstack-cinder-component.adoc[OpenStack Cinder component], URI syntax: `openstack-cinder:host`
-* xref:components::openstack-glance-component.adoc[OpenStack Glance component], URI syntax: `openstack-glance:host`
-* xref:components::openstack-keystone-component.adoc[OpenStack Keystone component], URI syntax: `openstack-keystone:host`
-* xref:components::openstack-neutron-component.adoc[OpenStack Neutron component], URI syntax: `openstack-neutron:host`
-* xref:components::openstack-nova-component.adoc[OpenStack Nova component], URI syntax: `openstack-nova:host`
-* xref:components::openstack-swift-component.adoc[OpenStack Swift component], URI syntax: `openstack-swift:host`
+* xref:{csb-camel-components}::openstack-cinder-component.adoc[OpenStack Cinder component], URI syntax: `openstack-cinder:host`
+* xref:{csb-camel-components}::openstack-glance-component.adoc[OpenStack Glance component], URI syntax: `openstack-glance:host`
+* xref:{csb-camel-components}::openstack-keystone-component.adoc[OpenStack Keystone component], URI syntax: `openstack-keystone:host`
+* xref:{csb-camel-components}::openstack-neutron-component.adoc[OpenStack Neutron component], URI syntax: `openstack-neutron:host`
+* xref:{csb-camel-components}::openstack-nova-component.adoc[OpenStack Nova component], URI syntax: `openstack-nova:host`
+* xref:{csb-camel-components}::openstack-swift-component.adoc[OpenStack Swift component], URI syntax: `openstack-swift:host`
 
 Please refer to the above links for usage and configuration details.
 

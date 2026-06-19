@@ -7,7 +7,7 @@ Perform operations on the Neo4j Graph Database
 
 == What's inside
 
-* xref:components::neo4j-component.adoc[Neo4j component], URI syntax: `neo4j:name`
+* xref:{csb-camel-components}::neo4j-component.adoc[Neo4j component], URI syntax: `neo4j:name`
 
 Please refer to the above links for usage and configuration details.
 

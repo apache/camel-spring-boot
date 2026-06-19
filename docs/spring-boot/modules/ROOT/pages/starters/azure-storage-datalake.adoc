@@ -7,7 +7,7 @@ Sends and receives files to/from Azure Data Lake Storage.
 
 == What's inside
 
-* xref:components::azure-storage-datalake-component.adoc[Azure Storage Data Lake Service component], URI syntax: `azure-storage-datalake:accountName/fileSystemName`
+* xref:{csb-camel-components}::azure-storage-datalake-component.adoc[Azure Storage Data Lake Service component], URI syntax: `azure-storage-datalake:accountName/fileSystemName`
 
 Please refer to the above links for usage and configuration details.
 

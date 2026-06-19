@@ -7,9 +7,9 @@ Encrypt and decrypt XML payloads using Apache Santuario.
 
 == What's inside
 
-* xref:components:dataformats:xmlSecurity-dataformat.adoc[XML Security data format]
-* xref:components::xmlsecurity-sign-component.adoc[XML Security Sign component], URI syntax: `xmlsecurity-sign:name`
-* xref:components::xmlsecurity-verify-component.adoc[XML Security Verify component], URI syntax: `xmlsecurity-verify:name`
+* xref:{csb-camel-components}:dataformats:xmlSecurity-dataformat.adoc[XML Security data format]
+* xref:{csb-camel-components}::xmlsecurity-sign-component.adoc[XML Security Sign component], URI syntax: `xmlsecurity-sign:name`
+* xref:{csb-camel-components}::xmlsecurity-verify-component.adoc[XML Security Verify component], URI syntax: `xmlsecurity-verify:name`
 
 Please refer to the above links for usage and configuration details.
 

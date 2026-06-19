@@ -7,7 +7,7 @@ Leverages the DHIS2 Java SDK to integrate Apache Camel with the DHIS2 Web API.
 
 == What's inside
 
-* xref:components::dhis2-component.adoc[DHIS2 component], URI syntax: `dhis2:apiName/methodName`
+* xref:{csb-camel-components}::dhis2-component.adoc[DHIS2 component], URI syntax: `dhis2:apiName/methodName`
 
 Please refer to the above links for usage and configuration details.
 

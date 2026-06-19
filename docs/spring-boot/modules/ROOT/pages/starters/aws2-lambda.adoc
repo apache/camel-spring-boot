@@ -7,7 +7,7 @@ Manage and invoke AWS Lambda functions.
 
 == What's inside
 
-* xref:components::aws2-lambda-component.adoc[AWS Lambda component], URI syntax: `aws2-lambda:function`
+* xref:{csb-camel-components}::aws2-lambda-component.adoc[AWS Lambda component], URI syntax: `aws2-lambda:function`
 
 Please refer to the above links for usage and configuration details.
 

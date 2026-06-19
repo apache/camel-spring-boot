@@ -7,7 +7,7 @@ Route messages to an endpoint looked up dynamically by name in the Camel Registr
 
 == What's inside
 
-* xref:components::ref-component.adoc[Ref component], URI syntax: `ref:name`
+* xref:{csb-camel-components}::ref-component.adoc[Ref component], URI syntax: `ref:name`
 
 Please refer to the above links for usage and configuration details.
 

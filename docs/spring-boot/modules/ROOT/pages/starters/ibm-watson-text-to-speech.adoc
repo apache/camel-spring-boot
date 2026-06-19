@@ -7,7 +7,7 @@ Convert text to natural-sounding speech using IBM Watson Text to Speech
 
 == What's inside
 
-* xref:components::ibm-watson-text-to-speech-component.adoc[IBM Watson Text to Speech component], URI syntax: `ibm-watson-text-to-speech:label`
+* xref:{csb-camel-components}::ibm-watson-text-to-speech-component.adoc[IBM Watson Text to Speech component], URI syntax: `ibm-watson-text-to-speech:label`
 
 Please refer to the above links for usage and configuration details.
 

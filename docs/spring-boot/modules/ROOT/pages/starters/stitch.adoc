@@ -7,7 +7,7 @@ Stitch is a cloud ETL service that integrates various data sources into a centra
 
 == What's inside
 
-* xref:components::stitch-component.adoc[Stitch component], URI syntax: `stitch:tableName`
+* xref:{csb-camel-components}::stitch-component.adoc[Stitch component], URI syntax: `stitch:tableName`
 
 Please refer to the above links for usage and configuration details.
 

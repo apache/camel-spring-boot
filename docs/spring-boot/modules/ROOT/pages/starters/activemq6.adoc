@@ -7,7 +7,7 @@ Send messages to (or consume from) Apache ActiveMQ 6.x. This component extends t
 
 == What's inside
 
-* xref:components::activemq6-component.adoc[ActiveMQ 6.x component], URI syntax: `activemq6:destinationType:destinationName`
+* xref:{csb-camel-components}::activemq6-component.adoc[ActiveMQ 6.x component], URI syntax: `activemq6:destinationType:destinationName`
 
 Please refer to the above links for usage and configuration details.
 

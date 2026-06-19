@@ -7,7 +7,7 @@ Get notified about file events in a directory using java.nio.file.WatchService.
 
 == What's inside
 
-* xref:components::file-watch-component.adoc[File Watch component], URI syntax: `file-watch:path`
+* xref:{csb-camel-components}::file-watch-component.adoc[File Watch component], URI syntax: `file-watch:path`
 
 Please refer to the above links for usage and configuration details.
 

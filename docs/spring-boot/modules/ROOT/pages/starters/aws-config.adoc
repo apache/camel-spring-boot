@@ -7,7 +7,7 @@ Manage AWS Config service.
 
 == What's inside
 
-* xref:components::aws-config-component.adoc[AWS Config Service component], URI syntax: `aws-config:label`
+* xref:{csb-camel-components}::aws-config-component.adoc[AWS Config Service component], URI syntax: `aws-config:label`
 
 Please refer to the above links for usage and configuration details.
 

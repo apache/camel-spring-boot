@@ -7,8 +7,8 @@ The Dynamic Router component routes exchanges to recipients, and the recipients 
 
 == What's inside
 
-* xref:components::dynamic-router-component.adoc[Dynamic Router component], URI syntax: `dynamic-router:channel`
-* xref:components::dynamic-router-control-component.adoc[Dynamic Router Control component], URI syntax: `dynamic-router-control:controlAction`
+* xref:{csb-camel-components}::dynamic-router-component.adoc[Dynamic Router component], URI syntax: `dynamic-router:channel`
+* xref:{csb-camel-components}::dynamic-router-control-component.adoc[Dynamic Router Control component], URI syntax: `dynamic-router-control:controlAction`
 
 Please refer to the above links for usage and configuration details.
 

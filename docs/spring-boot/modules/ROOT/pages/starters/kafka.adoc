@@ -7,7 +7,7 @@ Send and receive messages to/from an Apache Kafka broker.
 
 == What's inside
 
-* xref:components::kafka-component.adoc[Kafka component], URI syntax: `kafka:topic`
+* xref:{csb-camel-components}::kafka-component.adoc[Kafka component], URI syntax: `kafka:topic`
 
 Please refer to the above links for usage and configuration details.
 

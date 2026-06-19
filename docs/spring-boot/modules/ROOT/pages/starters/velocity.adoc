@@ -7,7 +7,7 @@ Transform messages using a Velocity template.
 
 == What's inside
 
-* xref:components::velocity-component.adoc[Velocity component], URI syntax: `velocity:resourceUri`
+* xref:{csb-camel-components}::velocity-component.adoc[Velocity component], URI syntax: `velocity:resourceUri`
 
 Please refer to the above links for usage and configuration details.
 

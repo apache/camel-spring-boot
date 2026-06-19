@@ -7,7 +7,7 @@ Evaluates an OGNL expression (Apache Commons OGNL).
 
 == What's inside
 
-* xref:components:languages:ognl-language.adoc[OGNL language]
+* xref:{csb-camel-components}:languages:ognl-language.adoc[OGNL language]
 
 Please refer to the above links for usage and configuration details.
 

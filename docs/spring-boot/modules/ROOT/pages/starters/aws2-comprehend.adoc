@@ -7,7 +7,7 @@ Perform natural language processing using AWS Comprehend and AWS SDK version 2.x
 
 == What's inside
 
-* xref:components::aws2-comprehend-component.adoc[AWS Comprehend component], URI syntax: `aws2-comprehend:label`
+* xref:{csb-camel-components}::aws2-comprehend-component.adoc[AWS Comprehend component], URI syntax: `aws2-comprehend:label`
 
 Please refer to the above links for usage and configuration details.
 

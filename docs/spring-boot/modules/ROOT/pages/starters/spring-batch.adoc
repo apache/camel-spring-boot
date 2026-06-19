@@ -7,7 +7,7 @@ Send messages to Spring Batch for further processing.
 
 == What's inside
 
-* xref:components::spring-batch-component.adoc[Spring Batch component], URI syntax: `spring-batch:jobName`
+* xref:{csb-camel-components}::spring-batch-component.adoc[Spring Batch component], URI syntax: `spring-batch:jobName`
 
 Please refer to the above links for usage and configuration details.
 

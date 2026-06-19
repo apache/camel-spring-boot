@@ -7,7 +7,7 @@ Zeebe component which integrates with Camunda Zeebe to interact with the API.
 
 == What's inside
 
-* xref:components::zeebe-component.adoc[Zeebe component], URI syntax: `zeebe:operationName`
+* xref:{csb-camel-components}::zeebe-component.adoc[Zeebe component], URI syntax: `zeebe:operationName`
 
 Please refer to the above links for usage and configuration details.
 

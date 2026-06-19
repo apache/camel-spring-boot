@@ -7,7 +7,7 @@ Store and retrieve objects from Minio Storage Service using Minio SDK.
 
 == What's inside
 
-* xref:components::minio-component.adoc[Minio component], URI syntax: `minio:bucketName`
+* xref:{csb-camel-components}::minio-component.adoc[Minio component], URI syntax: `minio:bucketName`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Manage posts and users using the WordPress API.
 
 == What's inside
 
-* xref:components::wordpress-component.adoc[WordPress component], URI syntax: `wordpress:operation`
+* xref:{csb-camel-components}::wordpress-component.adoc[WordPress component], URI syntax: `wordpress:operation`
 
 Please refer to the above links for usage and configuration details.
 

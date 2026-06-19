@@ -7,7 +7,7 @@ Capture changes from a MongoDB database.
 
 == What's inside
 
-* xref:components::debezium-mongodb-component.adoc[Debezium MongoDB Connector component], URI syntax: `debezium-mongodb:name`
+* xref:{csb-camel-components}::debezium-mongodb-component.adoc[Debezium MongoDB Connector component], URI syntax: `debezium-mongodb:name`
 
 Please refer to the above links for usage and configuration details.
 

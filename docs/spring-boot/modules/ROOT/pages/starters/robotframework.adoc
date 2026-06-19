@@ -7,7 +7,7 @@ Pass camel exchanges to acceptance test written in Robot DSL.
 
 == What's inside
 
-* xref:components::robotframework-component.adoc[Robot Framework component], URI syntax: `robotframework:resourceUri`
+* xref:{csb-camel-components}::robotframework-component.adoc[Robot Framework component], URI syntax: `robotframework:resourceUri`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Manage secrets in Hashicorp Vault Service
 
 == What's inside
 
-* xref:components::hashicorp-vault-component.adoc[Hashicorp Vault component], URI syntax: `hashicorp-vault:secretsEngine`
+* xref:{csb-camel-components}::hashicorp-vault-component.adoc[Hashicorp Vault component], URI syntax: `hashicorp-vault:secretsEngine`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Process documents using Docling library for parsing and conversion.
 
 == What's inside
 
-* xref:components::docling-component.adoc[Docling component], URI syntax: `docling:operationId`
+* xref:{csb-camel-components}::docling-component.adoc[Docling component], URI syntax: `docling:operationId`
 
 Please refer to the above links for usage and configuration details.
 

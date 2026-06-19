@@ -7,7 +7,7 @@ Convert speech audio to text using IBM Watson Speech to Text
 
 == What's inside
 
-* xref:components::ibm-watson-speech-to-text-component.adoc[IBM Watson Speech to Text component], URI syntax: `ibm-watson-speech-to-text:label`
+* xref:{csb-camel-components}::ibm-watson-speech-to-text-component.adoc[IBM Watson Speech to Text component], URI syntax: `ibm-watson-speech-to-text:label`
 
 Please refer to the above links for usage and configuration details.
 

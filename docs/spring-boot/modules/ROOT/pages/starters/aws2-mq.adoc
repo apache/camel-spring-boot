@@ -7,7 +7,7 @@ Send messages to AWS MQ.
 
 == What's inside
 
-* xref:components::aws2-mq-component.adoc[AWS MQ component], URI syntax: `aws2-mq:label`
+* xref:{csb-camel-components}::aws2-mq-component.adoc[AWS MQ component], URI syntax: `aws2-mq:label`
 
 Please refer to the above links for usage and configuration details.
 

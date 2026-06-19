@@ -7,7 +7,7 @@ Send and receive PostgreSQL events via LISTEN and NOTIFY commands.
 
 == What's inside
 
-* xref:components::pgevent-component.adoc[PostgresSQL Event component], URI syntax: `pgevent:host:port/database/channel`
+* xref:{csb-camel-components}::pgevent-component.adoc[PostgresSQL Event component], URI syntax: `pgevent:host:port/database/channel`
 
 Please refer to the above links for usage and configuration details.
 

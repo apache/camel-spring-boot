@@ -7,7 +7,7 @@ Perform chat operations using Spring AI.
 
 == What's inside
 
-* xref:components::spring-ai-chat-component.adoc[Spring AI Chat component], URI syntax: `spring-ai-chat:chatId`
+* xref:{csb-camel-components}::spring-ai-chat-component.adoc[Spring AI Chat component], URI syntax: `spring-ai-chat:chatId`
 
 Please refer to the above links for usage and configuration details.
 

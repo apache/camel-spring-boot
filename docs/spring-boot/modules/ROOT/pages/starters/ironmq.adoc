@@ -7,7 +7,7 @@ Send and receive messages to/from IronMQ an elastic and durable hosted message q
 
 == What's inside
 
-* xref:components::ironmq-component.adoc[IronMQ component], URI syntax: `ironmq:queueName`
+* xref:{csb-camel-components}::ironmq-component.adoc[IronMQ component], URI syntax: `ironmq:queueName`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Send and receive messages to/from Slack.
 
 == What's inside
 
-* xref:components::slack-component.adoc[Slack component], URI syntax: `slack:channel`
+* xref:{csb-camel-components}::slack-component.adoc[Slack component], URI syntax: `slack:channel`
 
 Please refer to the above links for usage and configuration details.
 

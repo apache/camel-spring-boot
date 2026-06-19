@@ -7,7 +7,7 @@ Expose SOAP WebServices using Apache CXF or connect to external WebServices usin
 
 == What's inside
 
-* xref:components::cxf-component.adoc[CXF component], URI syntax: `cxf:beanId:address`
+* xref:{csb-camel-components}::cxf-component.adoc[CXF component], URI syntax: `cxf:beanId:address`
 
 Please refer to the above links for usage and configuration details.
 

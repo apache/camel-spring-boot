@@ -7,7 +7,7 @@ Provide access to TensorFlow Serving model servers to run inference with TensorF
 
 == What's inside
 
-* xref:components::tensorflow-serving-component.adoc[TensorFlow Serving component], URI syntax: `tensorflow-serving:api`
+* xref:{csb-camel-components}::tensorflow-serving-component.adoc[TensorFlow Serving component], URI syntax: `tensorflow-serving:api`
 
 Please refer to the above links for usage and configuration details.
 

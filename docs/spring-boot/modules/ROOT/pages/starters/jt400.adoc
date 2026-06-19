@@ -7,7 +7,7 @@ Exchanges messages with an IBM i system using data queues, message queues, or pr
 
 == What's inside
 
-* xref:components::jt400-component.adoc[JT400 component], URI syntax: `jt400:userID:password@systemName/QSYS.LIB/objectPath.type`
+* xref:{csb-camel-components}::jt400-component.adoc[JT400 component], URI syntax: `jt400:userID:password@systemName/QSYS.LIB/objectPath.type`
 
 Please refer to the above links for usage and configuration details.
 

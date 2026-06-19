@@ -7,7 +7,7 @@ Create, edit and read ISO-8583 messages.
 
 == What's inside
 
-* xref:components:dataformats:iso8583-dataformat.adoc[ISO-8583 data format]
+* xref:{csb-camel-components}:dataformats:iso8583-dataformat.adoc[ISO-8583 data format]
 
 Please refer to the above links for usage and configuration details.
 

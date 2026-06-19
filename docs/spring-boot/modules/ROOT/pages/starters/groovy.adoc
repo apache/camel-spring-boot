@@ -7,9 +7,9 @@ Evaluates a Groovy script.
 
 == What's inside
 
-* xref:components:languages:groovy-language.adoc[Groovy language]
-* xref:components:dataformats:groovyJson-dataformat.adoc[Groovy JSon data format]
-* xref:components:dataformats:groovyXml-dataformat.adoc[Groovy XML data format]
+* xref:{csb-camel-components}:languages:groovy-language.adoc[Groovy language]
+* xref:{csb-camel-components}:dataformats:groovyJson-dataformat.adoc[Groovy JSon data format]
+* xref:{csb-camel-components}:dataformats:groovyXml-dataformat.adoc[Groovy XML data format]
 
 Please refer to the above links for usage and configuration details.
 

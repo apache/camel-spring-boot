@@ -7,7 +7,7 @@ Messaging with AMQP protocol using Apache QPid Client.
 
 == What's inside
 
-* xref:components::amqp-component.adoc[AMQP component], URI syntax: `amqp:destinationType:destinationName`
+* xref:{csb-camel-components}::amqp-component.adoc[AMQP component], URI syntax: `amqp:destinationType:destinationName`
 
 Please refer to the above links for usage and configuration details.
 

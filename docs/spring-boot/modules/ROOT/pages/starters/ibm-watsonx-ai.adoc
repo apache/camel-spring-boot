@@ -7,7 +7,7 @@ Interact with IBM watsonx.ai foundation models for text generation, chat, embedd
 
 == What's inside
 
-* xref:components::ibm-watsonx-ai-component.adoc[IBM watsonx.ai component], URI syntax: `ibm-watsonx-ai:label`
+* xref:{csb-camel-components}::ibm-watsonx-ai-component.adoc[IBM watsonx.ai component], URI syntax: `ibm-watsonx-ai:label`
 
 Please refer to the above links for usage and configuration details.
 

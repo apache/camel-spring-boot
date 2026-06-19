@@ -7,8 +7,8 @@ Use Smooks to transform, route, and bind both XML and non-XML data, including ED
 
 == What's inside
 
-* xref:components::smooks-component.adoc[Smooks component], URI syntax: `smooks:smooksConfig`
-* xref:components:dataformats:smooks-dataformat.adoc[Smooks data format]
+* xref:{csb-camel-components}::smooks-component.adoc[Smooks component], URI syntax: `smooks:smooksConfig`
+* xref:{csb-camel-components}:dataformats:smooks-dataformat.adoc[Smooks data format]
 
 Please refer to the above links for usage and configuration details.
 

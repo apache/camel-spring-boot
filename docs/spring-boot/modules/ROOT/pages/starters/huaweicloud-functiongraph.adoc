@@ -7,7 +7,7 @@ To call serverless functions on Huawei Cloud
 
 == What's inside
 
-* xref:components::hwcloud-functiongraph-component.adoc[Huawei FunctionGraph component], URI syntax: `hwcloud-functiongraph:operation`
+* xref:{csb-camel-components}::hwcloud-functiongraph-component.adoc[Huawei FunctionGraph component], URI syntax: `hwcloud-functiongraph:operation`
 
 Please refer to the above links for usage and configuration details.
 

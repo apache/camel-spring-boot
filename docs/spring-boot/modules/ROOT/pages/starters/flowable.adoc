@@ -7,7 +7,7 @@ Send and receive messages from the Flowable BPMN and CMMN engines.
 
 == What's inside
 
-* xref:components::flowable-component.adoc[Flowable component], URI syntax: `flowable:channelKey`
+* xref:{csb-camel-components}::flowable-component.adoc[Flowable component], URI syntax: `flowable:channelKey`
 
 Please refer to the above links for usage and configuration details.
 

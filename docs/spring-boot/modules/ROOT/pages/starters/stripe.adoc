@@ -7,7 +7,7 @@ Interact with the Stripe payment platform.
 
 == What's inside
 
-* xref:components::stripe-component.adoc[Stripe component], URI syntax: `stripe:operation`
+* xref:{csb-camel-components}::stripe-component.adoc[Stripe component], URI syntax: `stripe:operation`
 
 Please refer to the above links for usage and configuration details.
 

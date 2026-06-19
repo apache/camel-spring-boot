@@ -7,7 +7,7 @@ Prints data form the routed message (such as body and headers) to the logger.
 
 == What's inside
 
-* xref:components::log-component.adoc[Log Data component], URI syntax: `log:loggerName`
+* xref:{csb-camel-components}::log-component.adoc[Log Data component], URI syntax: `log:loggerName`
 
 Please refer to the above links for usage and configuration details.
 

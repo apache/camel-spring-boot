@@ -7,7 +7,7 @@ Send and receive messages from/to Apache Pulsar messaging system.
 
 == What's inside
 
-* xref:components::pulsar-component.adoc[Pulsar component], URI syntax: `pulsar:persistence://tenant/namespace/topic`
+* xref:{csb-camel-components}::pulsar-component.adoc[Pulsar component], URI syntax: `pulsar:persistence://tenant/namespace/topic`
 
 Please refer to the above links for usage and configuration details.
 

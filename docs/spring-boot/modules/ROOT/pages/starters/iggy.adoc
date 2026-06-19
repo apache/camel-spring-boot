@@ -7,7 +7,7 @@ Send and receive message to Apache Iggy streaming platform.
 
 == What's inside
 
-* xref:components::iggy-component.adoc[Iggy component], URI syntax: `iggy:topicName`
+* xref:{csb-camel-components}::iggy-component.adoc[Iggy component], URI syntax: `iggy:topicName`
 
 Please refer to the above links for usage and configuration details.
 

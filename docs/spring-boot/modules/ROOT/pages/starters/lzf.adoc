@@ -7,7 +7,7 @@ Compress and decompress streams using LZF deflate algorithm.
 
 == What's inside
 
-* xref:components:dataformats:lzf-dataformat.adoc[LZF Deflate Compression data format]
+* xref:{csb-camel-components}:dataformats:lzf-dataformat.adoc[LZF Deflate Compression data format]
 
 Please refer to the above links for usage and configuration details.
 

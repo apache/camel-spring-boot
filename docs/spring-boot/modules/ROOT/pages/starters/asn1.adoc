@@ -7,7 +7,7 @@ Encode and decode data structures using Abstract Syntax Notation One (ASN.1).
 
 == What's inside
 
-* xref:components:dataformats:asn1-dataformat.adoc[ASN.1 File data format]
+* xref:{csb-camel-components}:dataformats:asn1-dataformat.adoc[ASN.1 File data format]
 
 Please refer to the above links for usage and configuration details.
 

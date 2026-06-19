@@ -7,7 +7,7 @@ Exchange messages with JGroups clusters.
 
 == What's inside
 
-* xref:components::jgroups-component.adoc[JGroups component], URI syntax: `jgroups:clusterName`
+* xref:{csb-camel-components}::jgroups-component.adoc[JGroups component], URI syntax: `jgroups:clusterName`
 
 Please refer to the above links for usage and configuration details.
 

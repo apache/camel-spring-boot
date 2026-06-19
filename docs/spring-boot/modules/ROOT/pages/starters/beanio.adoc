@@ -7,7 +7,7 @@ Marshal and unmarshal Java beans to and from flat files (such as CSV, delimited,
 
 == What's inside
 
-* xref:components:dataformats:beanio-dataformat.adoc[BeanIO data format]
+* xref:{csb-camel-components}:dataformats:beanio-dataformat.adoc[BeanIO data format]
 
 Please refer to the above links for usage and configuration details.
 

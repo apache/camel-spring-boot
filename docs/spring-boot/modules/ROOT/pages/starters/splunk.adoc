@@ -7,7 +7,7 @@ Publish or search for events in Splunk.
 
 == What's inside
 
-* xref:components::splunk-component.adoc[Splunk component], URI syntax: `splunk:name`
+* xref:{csb-camel-components}::splunk-component.adoc[Splunk component], URI syntax: `splunk:name`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Socket level networking using TCP or UDP with Apache Mina 2.x.
 
 == What's inside
 
-* xref:components::mina-component.adoc[Mina component], URI syntax: `mina:protocol:host:port`
+* xref:{csb-camel-components}::mina-component.adoc[Mina component], URI syntax: `mina:protocol:host:port`
 
 Please refer to the above links for usage and configuration details.
 

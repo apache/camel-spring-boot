@@ -7,7 +7,7 @@ Store and retrieve objects from Google Cloud Storage Service using the google-cl
 
 == What's inside
 
-* xref:components::google-storage-component.adoc[Google Storage component], URI syntax: `google-storage:bucketName`
+* xref:{csb-camel-components}::google-storage-component.adoc[Google Storage component], URI syntax: `google-storage:bucketName`
 
 Please refer to the above links for usage and configuration details.
 

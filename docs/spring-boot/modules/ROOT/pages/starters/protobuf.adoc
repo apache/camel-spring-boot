@@ -7,7 +7,7 @@ Serialize and deserialize Java objects using Google's Protocol buffers.
 
 == What's inside
 
-* xref:components:dataformats:protobuf-dataformat.adoc[Protobuf data format]
+* xref:{csb-camel-components}:dataformats:protobuf-dataformat.adoc[Protobuf data format]
 
 Please refer to the above links for usage and configuration details.
 

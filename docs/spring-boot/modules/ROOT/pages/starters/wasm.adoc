@@ -7,8 +7,8 @@ Invoke Wasm functions.
 
 == What's inside
 
-* xref:components::wasm-component.adoc[Wasm component], URI syntax: `wasm:functionName`
-* xref:components:languages:wasm-language.adoc[Wasm language]
+* xref:{csb-camel-components}::wasm-component.adoc[Wasm component], URI syntax: `wasm:functionName`
+* xref:{csb-camel-components}:languages:wasm-language.adoc[Wasm language]
 
 Please refer to the above links for usage and configuration details.
 

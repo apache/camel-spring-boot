@@ -7,7 +7,7 @@ LangChain4j Agent component
 
 == What's inside
 
-* xref:components::langchain4j-agent-component.adoc[LangChain4j Agent component], URI syntax: `langchain4j-agent:agentId`
+* xref:{csb-camel-components}::langchain4j-agent-component.adoc[LangChain4j Agent component], URI syntax: `langchain4j-agent:agentId`
 
 Please refer to the above links for usage and configuration details.
 

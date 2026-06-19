@@ -7,7 +7,7 @@ Upload, download and manage files, folders, groups, collaborations, etc. on box.
 
 == What's inside
 
-* xref:components::box-component.adoc[Box component], URI syntax: `box:apiName/methodName`
+* xref:{csb-camel-components}::box-component.adoc[Box component], URI syntax: `box:apiName/methodName`
 
 Please refer to the above links for usage and configuration details.
 

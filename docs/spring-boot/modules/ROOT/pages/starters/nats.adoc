@@ -7,7 +7,7 @@ Send and receive messages from NATS messaging system.
 
 == What's inside
 
-* xref:components::nats-component.adoc[Nats component], URI syntax: `nats:topic`
+* xref:{csb-camel-components}::nats-component.adoc[Nats component], URI syntax: `nats:topic`
 
 Please refer to the above links for usage and configuration details.
 

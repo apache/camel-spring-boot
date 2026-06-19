@@ -7,8 +7,8 @@ Sign and verify exchanges using the Signature Service of the Java Cryptographic 
 
 == What's inside
 
-* xref:components::crypto-component.adoc[Crypto (JCE) component], URI syntax: `crypto:cryptoOperation:name`
-* xref:components:dataformats:crypto-dataformat.adoc[Crypto (Java Cryptographic Extension) data format]
+* xref:{csb-camel-components}::crypto-component.adoc[Crypto (JCE) component], URI syntax: `crypto:cryptoOperation:name`
+* xref:{csb-camel-components}:dataformats:crypto-dataformat.adoc[Crypto (Java Cryptographic Extension) data format]
 
 Please refer to the above links for usage and configuration details.
 

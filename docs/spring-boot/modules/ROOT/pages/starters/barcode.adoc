@@ -7,7 +7,7 @@ Transform strings to various 1D/2D barcode bitmap formats and back.
 
 == What's inside
 
-* xref:components:dataformats:barcode-dataformat.adoc[Barcode data format]
+* xref:{csb-camel-components}:dataformats:barcode-dataformat.adoc[Barcode data format]
 
 Please refer to the above links for usage and configuration details.
 

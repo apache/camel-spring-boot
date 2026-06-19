@@ -7,7 +7,7 @@ Automatically convert speech to text using AWS Transcribe service
 
 == What's inside
 
-* xref:components::aws2-transcribe-component.adoc[AWS Transcribe component], URI syntax: `aws2-transcribe:label`
+* xref:{csb-camel-components}::aws2-transcribe-component.adoc[AWS Transcribe component], URI syntax: `aws2-transcribe:label`
 
 Please refer to the above links for usage and configuration details.
 

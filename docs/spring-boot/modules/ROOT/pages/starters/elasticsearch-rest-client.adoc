@@ -7,7 +7,7 @@ Perform queries and other operations on Elasticsearch or OpenSearch (uses low-le
 
 == What's inside
 
-* xref:components::elasticsearch-rest-client-component.adoc[Elasticsearch Low level Rest Client component], URI syntax: `elasticsearch-rest-client:clusterName`
+* xref:{csb-camel-components}::elasticsearch-rest-client-component.adoc[Elasticsearch Low level Rest Client component], URI syntax: `elasticsearch-rest-client:clusterName`
 
 Please refer to the above links for usage and configuration details.
 

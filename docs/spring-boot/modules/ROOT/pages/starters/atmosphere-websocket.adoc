@@ -7,7 +7,7 @@ Expose WebSocket endpoints using the Atmosphere framework.
 
 == What's inside
 
-* xref:components::atmosphere-websocket-component.adoc[Atmosphere Websocket component], URI syntax: `atmosphere-websocket:servicePath`
+* xref:{csb-camel-components}::atmosphere-websocket-component.adoc[Atmosphere Websocket component], URI syntax: `atmosphere-websocket:servicePath`
 
 Please refer to the above links for usage and configuration details.
 

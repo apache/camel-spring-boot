@@ -7,7 +7,7 @@ To read and write records to the CosmosDB database on Azure cloud platform.
 
 == What's inside
 
-* xref:components::azure-cosmosdb-component.adoc[Azure CosmosDB component], URI syntax: `azure-cosmosdb:databaseName/containerName`
+* xref:{csb-camel-components}::azure-cosmosdb-component.adoc[Azure CosmosDB component], URI syntax: `azure-cosmosdb:databaseName/containerName`
 
 Please refer to the above links for usage and configuration details.
 

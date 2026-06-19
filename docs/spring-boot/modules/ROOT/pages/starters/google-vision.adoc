@@ -7,7 +7,7 @@ Detect labels, text, faces, logos and more on images through Google Cloud Vision
 
 == What's inside
 
-* xref:components::google-vision-component.adoc[Google Cloud Vision component], URI syntax: `google-vision:operation`
+* xref:{csb-camel-components}::google-vision-component.adoc[Google Cloud Vision component], URI syntax: `google-vision:operation`
 
 Please refer to the above links for usage and configuration details.
 

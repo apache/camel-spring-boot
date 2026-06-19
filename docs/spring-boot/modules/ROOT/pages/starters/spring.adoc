@@ -7,8 +7,8 @@ Evaluates a Spring expression (SpEL).
 
 == What's inside
 
-* xref:components:languages:spel-language.adoc[SpEL language]
-* xref:components::spring-event-component.adoc[Spring Event component], URI syntax: `spring-event:name`
+* xref:{csb-camel-components}:languages:spel-language.adoc[SpEL language]
+* xref:{csb-camel-components}::spring-event-component.adoc[Spring Event component], URI syntax: `spring-event:name`
 
 Please refer to the above links for usage and configuration details.
 

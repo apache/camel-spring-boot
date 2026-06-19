@@ -7,8 +7,8 @@ Manage messages in Google Mail.
 
 == What's inside
 
-* xref:components::google-mail-component.adoc[Google Mail component], URI syntax: `google-mail:apiName/methodName`
-* xref:components::google-mail-stream-component.adoc[Google Mail Stream component], URI syntax: `google-mail-stream:index`
+* xref:{csb-camel-components}::google-mail-component.adoc[Google Mail component], URI syntax: `google-mail:apiName/methodName`
+* xref:{csb-camel-components}::google-mail-stream-component.adoc[Google Mail Stream component], URI syntax: `google-mail-stream:index`
 
 Please refer to the above links for usage and configuration details.
 

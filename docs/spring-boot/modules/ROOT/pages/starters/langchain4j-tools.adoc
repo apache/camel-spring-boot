@@ -7,7 +7,7 @@ LangChain4j Tools and Function Calling Features
 
 == What's inside
 
-* xref:components::langchain4j-tools-component.adoc[LangChain4j Tools component], URI syntax: `langchain4j-tools:toolId`
+* xref:{csb-camel-components}::langchain4j-tools-component.adoc[LangChain4j Tools component], URI syntax: `langchain4j-tools:toolId`
 
 Please refer to the above links for usage and configuration details.
 

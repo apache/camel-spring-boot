@@ -7,9 +7,9 @@ Invoke Model of AWS Bedrock service.
 
 == What's inside
 
-* xref:components::aws-bedrock-component.adoc[AWS Bedrock component], URI syntax: `aws-bedrock:label`
-* xref:components::aws-bedrock-agent-component.adoc[AWS Bedrock Agent component], URI syntax: `aws-bedrock-agent:label`
-* xref:components::aws-bedrock-agent-runtime-component.adoc[AWS Bedrock Agent Runtime component], URI syntax: `aws-bedrock-agent-runtime:label`
+* xref:{csb-camel-components}::aws-bedrock-component.adoc[AWS Bedrock component], URI syntax: `aws-bedrock:label`
+* xref:{csb-camel-components}::aws-bedrock-agent-component.adoc[AWS Bedrock Agent component], URI syntax: `aws-bedrock-agent:label`
+* xref:{csb-camel-components}::aws-bedrock-agent-runtime-component.adoc[AWS Bedrock Agent Runtime component], URI syntax: `aws-bedrock-agent-runtime:label`
 
 Please refer to the above links for usage and configuration details.
 

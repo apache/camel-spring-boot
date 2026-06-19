@@ -7,7 +7,7 @@ Extract text and data from documents using AWS Textract and AWS SDK version 2.x.
 
 == What's inside
 
-* xref:components::aws2-textract-component.adoc[AWS Textract component], URI syntax: `aws2-textract:label`
+* xref:{csb-camel-components}::aws2-textract-component.adoc[AWS Textract component], URI syntax: `aws2-textract:label`
 
 Please refer to the above links for usage and configuration details.
 

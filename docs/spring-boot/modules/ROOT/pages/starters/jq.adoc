@@ -7,7 +7,7 @@ Evaluates a JQ expression against a JSON message body.
 
 == What's inside
 
-* xref:components:languages:jq-language.adoc[JQ language]
+* xref:{csb-camel-components}:languages:jq-language.adoc[JQ language]
 
 Please refer to the above links for usage and configuration details.
 

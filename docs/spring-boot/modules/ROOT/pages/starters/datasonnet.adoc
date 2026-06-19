@@ -7,7 +7,7 @@ To use DataSonnet scripts for message transformations.
 
 == What's inside
 
-* xref:components:languages:datasonnet-language.adoc[DataSonnet language]
+* xref:{csb-camel-components}:languages:datasonnet-language.adoc[DataSonnet language]
 
 Please refer to the above links for usage and configuration details.
 

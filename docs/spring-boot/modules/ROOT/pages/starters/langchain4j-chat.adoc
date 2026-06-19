@@ -7,7 +7,7 @@ LangChain4j Chat component
 
 == What's inside
 
-* xref:components::langchain4j-chat-component.adoc[LangChain4j Chat component], URI syntax: `langchain4j-chat:chatId`
+* xref:{csb-camel-components}::langchain4j-chat-component.adoc[LangChain4j Chat component], URI syntax: `langchain4j-chat:chatId`
 
 Please refer to the above links for usage and configuration details.
 

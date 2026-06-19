@@ -7,7 +7,7 @@ Perform operations against Apache Lucene Solr.
 
 == What's inside
 
-* xref:components::solr-component.adoc[Solr component], URI syntax: `solr:host:port/basePath`
+* xref:{csb-camel-components}::solr-component.adoc[Solr component], URI syntax: `solr:host:port/basePath`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Receive logs messages using the Lumberjack protocol.
 
 == What's inside
 
-* xref:components::lumberjack-component.adoc[Lumberjack component], URI syntax: `lumberjack:host:port`
+* xref:{csb-camel-components}::lumberjack-component.adoc[Lumberjack component], URI syntax: `lumberjack:host:port`
 
 Please refer to the above links for usage and configuration details.
 

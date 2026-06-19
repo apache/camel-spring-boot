@@ -7,7 +7,7 @@ Read and write to PLC devices
 
 == What's inside
 
-* xref:components::plc4x-component.adoc[PLC4X component], URI syntax: `plc4x:driver`
+* xref:{csb-camel-components}::plc4x-component.adoc[PLC4X component], URI syntax: `plc4x:driver`
 
 Please refer to the above links for usage and configuration details.
 

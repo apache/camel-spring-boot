@@ -7,7 +7,7 @@ Spring AI Tools and Function Calling Features
 
 == What's inside
 
-* xref:components::spring-ai-tools-component.adoc[Spring AI Tools component], URI syntax: `spring-ai-tools:toolId`
+* xref:{csb-camel-components}::spring-ai-tools-component.adoc[Spring AI Tools component], URI syntax: `spring-ai-tools:toolId`
 
 Please refer to the above links for usage and configuration details.
 

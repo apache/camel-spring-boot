@@ -7,7 +7,7 @@ LangChain4j Embeddings
 
 == What's inside
 
-* xref:components::langchain4j-embeddings-component.adoc[LangChain4j Embeddings component], URI syntax: `langchain4j-embeddings:embeddingId`
+* xref:{csb-camel-components}::langchain4j-embeddings-component.adoc[LangChain4j Embeddings component], URI syntax: `langchain4j-embeddings:embeddingId`
 
 Please refer to the above links for usage and configuration details.
 

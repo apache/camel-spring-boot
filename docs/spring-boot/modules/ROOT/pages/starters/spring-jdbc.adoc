@@ -7,7 +7,7 @@ Access databases through SQL and JDBC with Spring Transaction support.
 
 == What's inside
 
-* xref:components::spring-jdbc-component.adoc[Spring JDBC component], URI syntax: `spring-jdbc:dataSourceName`
+* xref:{csb-camel-components}::spring-jdbc-component.adoc[Spring JDBC component], URI syntax: `spring-jdbc:dataSourceName`
 
 Please refer to the above links for usage and configuration details.
 

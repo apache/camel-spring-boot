@@ -7,7 +7,7 @@ Evaluates a Python expression.
 
 == What's inside
 
-* xref:components:languages:python-language.adoc[Python language]
+* xref:{csb-camel-components}:languages:python-language.adoc[Python language]
 
 Please refer to the above links for usage and configuration details.
 

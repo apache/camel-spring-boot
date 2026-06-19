@@ -7,7 +7,7 @@ Collect various metrics directly from Camel routes using the DropWizard metrics 
 
 == What's inside
 
-* xref:components::metrics-component.adoc[Metrics component], URI syntax: `metrics:metricsType:metricsName`
+* xref:{csb-camel-components}::metrics-component.adoc[Metrics component], URI syntax: `metrics:metricsType:metricsName`
 
 Please refer to the above links for usage and configuration details.
 

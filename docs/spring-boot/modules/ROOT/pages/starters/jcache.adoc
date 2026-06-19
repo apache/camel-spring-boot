@@ -7,7 +7,7 @@ Perform caching operations against JSR107/JCache.
 
 == What's inside
 
-* xref:components::jcache-component.adoc[JCache component], URI syntax: `jcache:cacheName`
+* xref:{csb-camel-components}::jcache-component.adoc[JCache component], URI syntax: `jcache:cacheName`
 
 Please refer to the above links for usage and configuration details.
 

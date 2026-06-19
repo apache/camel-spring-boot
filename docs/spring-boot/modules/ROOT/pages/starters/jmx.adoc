@@ -7,7 +7,7 @@ Receive JMX notifications.
 
 == What's inside
 
-* xref:components::jmx-component.adoc[JMX component], URI syntax: `jmx:serverURL`
+* xref:{csb-camel-components}::jmx-component.adoc[JMX component], URI syntax: `jmx:serverURL`
 
 Please refer to the above links for usage and configuration details.
 

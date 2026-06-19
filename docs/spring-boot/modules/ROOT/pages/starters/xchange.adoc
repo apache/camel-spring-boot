@@ -7,7 +7,7 @@ Access market data and trade on Bitcoin and Altcoin exchanges.
 
 == What's inside
 
-* xref:components::xchange-component.adoc[XChange component], URI syntax: `xchange:name`
+* xref:{csb-camel-components}::xchange-component.adoc[XChange component], URI syntax: `xchange:name`
 
 Please refer to the above links for usage and configuration details.
 

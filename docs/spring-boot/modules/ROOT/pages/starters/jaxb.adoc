@@ -7,7 +7,7 @@ Unmarshal XML payloads to POJOs and back using JAXB2 XML marshalling standard.
 
 == What's inside
 
-* xref:components:dataformats:jaxb-dataformat.adoc[JAXB data format]
+* xref:{csb-camel-components}:dataformats:jaxb-dataformat.adoc[JAXB data format]
 
 Please refer to the above links for usage and configuration details.
 

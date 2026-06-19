@@ -7,7 +7,7 @@ Archive files into tarballs or extract files from tarballs.
 
 == What's inside
 
-* xref:components:dataformats:tarFile-dataformat.adoc[Tar File data format]
+* xref:{csb-camel-components}:dataformats:tarFile-dataformat.adoc[Tar File data format]
 
 Please refer to the above links for usage and configuration details.
 

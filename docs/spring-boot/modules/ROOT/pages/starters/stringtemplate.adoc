@@ -7,7 +7,7 @@ Transform messages using StringTemplate engine.
 
 == What's inside
 
-* xref:components::string-template-component.adoc[String Template component], URI syntax: `string-template:resourceUri`
+* xref:{csb-camel-components}::string-template-component.adoc[String Template component], URI syntax: `string-template:resourceUri`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ JSON to JSON transformation using JOLT.
 
 == What's inside
 
-* xref:components::jolt-component.adoc[JOLT component], URI syntax: `jolt:resourceUri`
+* xref:{csb-camel-components}::jolt-component.adoc[JOLT component], URI syntax: `jolt:resourceUri`
 
 Please refer to the above links for usage and configuration details.
 

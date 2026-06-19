@@ -7,7 +7,7 @@ Expose HTTP endpoints using Jetty 12.
 
 == What's inside
 
-* xref:components::jetty-component.adoc[Jetty component], URI syntax: `jetty:httpUri`
+* xref:{csb-camel-components}::jetty-component.adoc[Jetty component], URI syntax: `jetty:httpUri`
 
 Please refer to the above links for usage and configuration details.
 

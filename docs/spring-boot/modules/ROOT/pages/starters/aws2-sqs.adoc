@@ -7,7 +7,7 @@ Send and receive messages to/from AWS SQS.
 
 == What's inside
 
-* xref:components::aws2-sqs-component.adoc[AWS Simple Queue Service (SQS) component], URI syntax: `aws2-sqs:queueNameOrArn`
+* xref:{csb-camel-components}::aws2-sqs-component.adoc[AWS Simple Queue Service (SQS) component], URI syntax: `aws2-sqs:queueNameOrArn`
 
 Please refer to the above links for usage and configuration details.
 

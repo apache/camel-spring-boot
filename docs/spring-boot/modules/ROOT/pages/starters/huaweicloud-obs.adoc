@@ -7,7 +7,7 @@ To provide stable, secure, efficient, and easy-to-use cloud storage service on H
 
 == What's inside
 
-* xref:components::hwcloud-obs-component.adoc[Huawei Object Storage Service (OBS) component], URI syntax: `hwcloud-obs:operation`
+* xref:{csb-camel-components}::hwcloud-obs-component.adoc[Huawei Object Storage Service (OBS) component], URI syntax: `hwcloud-obs:operation`
 
 Please refer to the above links for usage and configuration details.
 

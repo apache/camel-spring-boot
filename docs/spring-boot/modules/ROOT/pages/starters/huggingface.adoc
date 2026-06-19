@@ -7,7 +7,7 @@ Integration with Hugging Face's Model Hub by using the Deep Java Library (DJL) P
 
 == What's inside
 
-* xref:components::huggingface-component.adoc[Hugging Face component], URI syntax: `huggingface:task`
+* xref:{csb-camel-components}::huggingface-component.adoc[Hugging Face component], URI syntax: `huggingface:task`
 
 Please refer to the above links for usage and configuration details.
 

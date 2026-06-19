@@ -7,7 +7,7 @@ Manage and interact with AWS Security Hub for security findings.
 
 == What's inside
 
-* xref:components::aws-security-hub-component.adoc[AWS Security Hub component], URI syntax: `aws-security-hub:label`
+* xref:{csb-camel-components}::aws-security-hub-component.adoc[AWS Security Hub component], URI syntax: `aws-security-hub:label`
 
 Please refer to the above links for usage and configuration details.
 

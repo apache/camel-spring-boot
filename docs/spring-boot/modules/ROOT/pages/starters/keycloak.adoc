@@ -7,7 +7,7 @@ Manage Keycloak instances via Admin API.
 
 == What's inside
 
-* xref:components::keycloak-component.adoc[Keycloak component], URI syntax: `keycloak:label`
+* xref:{csb-camel-components}::keycloak-component.adoc[Keycloak component], URI syntax: `keycloak:label`
 
 Please refer to the above links for usage and configuration details.
 

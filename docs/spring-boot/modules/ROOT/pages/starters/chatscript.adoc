@@ -7,7 +7,7 @@ Chat with a ChatScript Server.
 
 == What's inside
 
-* xref:components::chatscript-component.adoc[ChatScript component], URI syntax: `chatscript:host:port/botName`
+* xref:{csb-camel-components}::chatscript-component.adoc[ChatScript component], URI syntax: `chatscript:host:port/botName`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Interact with the GitHub API.
 
 == What's inside
 
-* xref:components::github2-component.adoc[GitHub2 component], URI syntax: `github2:type/branchName`
+* xref:{csb-camel-components}::github2-component.adoc[GitHub2 component], URI syntax: `github2:type/branchName`
 
 Please refer to the above links for usage and configuration details.
 

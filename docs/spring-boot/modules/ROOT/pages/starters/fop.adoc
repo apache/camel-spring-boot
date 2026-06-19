@@ -7,7 +7,7 @@ Render messages into PDF and other output formats supported by Apache FOP.
 
 == What's inside
 
-* xref:components::fop-component.adoc[FOP component], URI syntax: `fop:outputType`
+* xref:{csb-camel-components}::fop-component.adoc[FOP component], URI syntax: `fop:outputType`
 
 Please refer to the above links for usage and configuration details.
 

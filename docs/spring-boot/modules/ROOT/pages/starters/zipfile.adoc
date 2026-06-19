@@ -7,7 +7,7 @@ Compression and decompress streams using java.util.zip.ZipStream.
 
 == What's inside
 
-* xref:components:dataformats:zipFile-dataformat.adoc[Zip File data format]
+* xref:{csb-camel-components}:dataformats:zipFile-dataformat.adoc[Zip File data format]
 
 Please refer to the above links for usage and configuration details.
 

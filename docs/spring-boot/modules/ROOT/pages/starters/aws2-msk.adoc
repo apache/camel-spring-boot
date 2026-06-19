@@ -7,7 +7,7 @@ Manage AWS MSK instances.
 
 == What's inside
 
-* xref:components::aws2-msk-component.adoc[AWS Managed Streaming for Apache Kafka (MSK) component], URI syntax: `aws2-msk:label`
+* xref:{csb-camel-components}::aws2-msk-component.adoc[AWS Managed Streaming for Apache Kafka (MSK) component], URI syntax: `aws2-msk:label`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,8 +7,8 @@ Compress and decompress messages using java.util.zip.GZIPStream.
 
 == What's inside
 
-* xref:components:dataformats:gzipDeflater-dataformat.adoc[GZip Deflater data format]
-* xref:components:dataformats:zipDeflater-dataformat.adoc[Zip Deflater data format]
+* xref:{csb-camel-components}:dataformats:gzipDeflater-dataformat.adoc[GZip Deflater data format]
+* xref:{csb-camel-components}:dataformats:zipDeflater-dataformat.adoc[Zip Deflater data format]
 
 Please refer to the above links for usage and configuration details.
 

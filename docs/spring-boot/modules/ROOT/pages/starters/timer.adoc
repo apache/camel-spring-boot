@@ -7,7 +7,7 @@ Generate messages in specified intervals using java.util.Timer.
 
 == What's inside
 
-* xref:components::timer-component.adoc[Timer component], URI syntax: `timer:timerName`
+* xref:{csb-camel-components}::timer-component.adoc[Timer component], URI syntax: `timer:timerName`
 
 Please refer to the above links for usage and configuration details.
 

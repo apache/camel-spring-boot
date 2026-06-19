@@ -7,7 +7,7 @@ Produce or consume Apache Avro RPC services.
 
 == What's inside
 
-* xref:components::avro-component.adoc[Avro RPC component], URI syntax: `avro:transport:host:port/messageName`
+* xref:{csb-camel-components}::avro-component.adoc[Avro RPC component], URI syntax: `avro:transport:host:port/messageName`
 
 Please refer to the above links for usage and configuration details.
 

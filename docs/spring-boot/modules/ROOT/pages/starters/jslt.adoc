@@ -7,7 +7,7 @@ Query or transform JSON payloads using JSLT.
 
 == What's inside
 
-* xref:components::jslt-component.adoc[JSLT component], URI syntax: `jslt:resourceUri`
+* xref:{csb-camel-components}::jslt-component.adoc[JSLT component], URI syntax: `jslt:resourceUri`
 
 Please refer to the above links for usage and configuration details.
 

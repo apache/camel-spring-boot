@@ -7,7 +7,7 @@ Spring AI Embeddings
 
 == What's inside
 
-* xref:components::spring-ai-embeddings-component.adoc[Spring AI Embeddings component], URI syntax: `spring-ai-embeddings:embeddingId`
+* xref:{csb-camel-components}::spring-ai-embeddings-component.adoc[Spring AI Embeddings component], URI syntax: `spring-ai-embeddings:embeddingId`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Manage and invoke AWS Step functions.
 
 == What's inside
 
-* xref:components::aws2-step-functions-component.adoc[AWS StepFunctions component], URI syntax: `aws2-step-functions:label`
+* xref:{csb-camel-components}::aws2-step-functions-component.adoc[AWS StepFunctions component], URI syntax: `aws2-step-functions:label`
 
 Please refer to the above links for usage and configuration details.
 

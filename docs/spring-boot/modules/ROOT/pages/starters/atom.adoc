@@ -7,7 +7,7 @@ Poll Atom RSS feeds.
 
 == What's inside
 
-* xref:components::atom-component.adoc[Atom component], URI syntax: `atom:feedUri`
+* xref:{csb-camel-components}::atom-component.adoc[Atom component], URI syntax: `atom:feedUri`
 
 Please refer to the above links for usage and configuration details.
 

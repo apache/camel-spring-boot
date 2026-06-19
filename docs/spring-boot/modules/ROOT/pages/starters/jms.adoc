@@ -7,7 +7,7 @@ Send and receive messages to/from JMS message brokers.
 
 == What's inside
 
-* xref:components::jms-component.adoc[JMS component], URI syntax: `jms:destinationType:destinationName`
+* xref:{csb-camel-components}::jms-component.adoc[JMS component], URI syntax: `jms:destinationType:destinationName`
 
 Please refer to the above links for usage and configuration details.
 

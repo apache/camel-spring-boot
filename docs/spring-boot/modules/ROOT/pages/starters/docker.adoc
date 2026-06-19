@@ -7,7 +7,7 @@ Manage Docker containers.
 
 == What's inside
 
-* xref:components::docker-component.adoc[Docker component], URI syntax: `docker:operation`
+* xref:{csb-camel-components}::docker-component.adoc[Docker component], URI syntax: `docker:operation`
 
 Please refer to the above links for usage and configuration details.
 

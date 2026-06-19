@@ -7,7 +7,7 @@ Retrieve secrets from CyberArk Conjur Vault.
 
 == What's inside
 
-* xref:components::cyberark-vault-component.adoc[CyberArk Vault component], URI syntax: `cyberark-vault:label`
+* xref:{csb-camel-components}::cyberark-vault-component.adoc[CyberArk Vault component], URI syntax: `cyberark-vault:label`
 
 Please refer to the above links for usage and configuration details.
 

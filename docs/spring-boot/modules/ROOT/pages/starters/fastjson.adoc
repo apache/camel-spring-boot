@@ -7,7 +7,7 @@ Marshal POJOs to JSON and back using Fastjson
 
 == What's inside
 
-* xref:components:dataformats:fastjson-dataformat.adoc[JSON Fastjson data format]
+* xref:{csb-camel-components}:dataformats:fastjson-dataformat.adoc[JSON Fastjson data format]
 
 Please refer to the above links for usage and configuration details.
 

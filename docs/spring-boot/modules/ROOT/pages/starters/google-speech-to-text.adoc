@@ -7,7 +7,7 @@ Transcribe audio to text using Google Cloud Speech-to-Text API
 
 == What's inside
 
-* xref:components::google-speech-to-text-component.adoc[Google Cloud Speech To Text component], URI syntax: `google-speech-to-text:operation`
+* xref:{csb-camel-components}::google-speech-to-text-component.adoc[Google Cloud Speech To Text component], URI syntax: `google-speech-to-text:operation`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Send and receive messages to/from and IRC chat.
 
 == What's inside
 
-* xref:components::irc-component.adoc[IRC component], URI syntax: `irc:hostname:port`
+* xref:{csb-camel-components}::irc-component.adoc[IRC component], URI syntax: `irc:hostname:port`
 
 Please refer to the above links for usage and configuration details.
 

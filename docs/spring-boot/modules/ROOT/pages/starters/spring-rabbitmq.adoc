@@ -7,7 +7,7 @@ Send and receive messages from RabbitMQ using the Spring RabbitMQ client.
 
 == What's inside
 
-* xref:components::spring-rabbitmq-component.adoc[Spring RabbitMQ component], URI syntax: `spring-rabbitmq:exchangeName`
+* xref:{csb-camel-components}::spring-rabbitmq-component.adoc[Spring RabbitMQ component], URI syntax: `spring-rabbitmq:exchangeName`
 
 Please refer to the above links for usage and configuration details.
 

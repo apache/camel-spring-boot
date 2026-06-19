@@ -7,8 +7,8 @@ Manage spreadsheets in Google Sheets.
 
 == What's inside
 
-* xref:components::google-sheets-component.adoc[Google Sheets component], URI syntax: `google-sheets:apiName/methodName`
-* xref:components::google-sheets-stream-component.adoc[Google Sheets Stream component], URI syntax: `google-sheets-stream:spreadsheetId`
+* xref:{csb-camel-components}::google-sheets-component.adoc[Google Sheets component], URI syntax: `google-sheets:apiName/methodName`
+* xref:{csb-camel-components}::google-sheets-stream-component.adoc[Google Sheets Stream component], URI syntax: `google-sheets-stream:spreadsheetId`
 
 Please refer to the above links for usage and configuration details.
 

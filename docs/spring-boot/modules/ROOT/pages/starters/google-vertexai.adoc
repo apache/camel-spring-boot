@@ -7,7 +7,7 @@ Interact with Google Cloud Vertex AI generative models.
 
 == What's inside
 
-* xref:components::google-vertexai-component.adoc[Google Vertex AI component], URI syntax: `google-vertexai:projectId:location:modelId`
+* xref:{csb-camel-components}::google-vertexai-component.adoc[Google Vertex AI component], URI syntax: `google-vertexai:projectId:location:modelId`
 
 Please refer to the above links for usage and configuration details.
 

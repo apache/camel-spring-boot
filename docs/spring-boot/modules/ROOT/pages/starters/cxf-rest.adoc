@@ -7,7 +7,7 @@ Expose JAX-RS REST services using Apache CXF or connect to external REST service
 
 == What's inside
 
-* xref:components::cxfrs-component.adoc[CXF-RS component], URI syntax: `cxfrs:beanId:address`
+* xref:{csb-camel-components}::cxfrs-component.adoc[CXF-RS component], URI syntax: `cxfrs:beanId:address`
 
 Please refer to the above links for usage and configuration details.
 

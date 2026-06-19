@@ -7,7 +7,7 @@ To identify objects, scenes, and concepts in images on Huawei Cloud
 
 == What's inside
 
-* xref:components::hwcloud-imagerecognition-component.adoc[Huawei Cloud Image Recognition component], URI syntax: `hwcloud-imagerecognition:operation`
+* xref:{csb-camel-components}::hwcloud-imagerecognition-component.adoc[Huawei Cloud Image Recognition component], URI syntax: `hwcloud-imagerecognition:operation`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Harvest metadata using OAI-PMH protocol
 
 == What's inside
 
-* xref:components::oaipmh-component.adoc[OAI-PMH component], URI syntax: `oaipmh:baseUrl`
+* xref:{csb-camel-components}::oaipmh-component.adoc[OAI-PMH component], URI syntax: `oaipmh:baseUrl`
 
 Please refer to the above links for usage and configuration details.
 

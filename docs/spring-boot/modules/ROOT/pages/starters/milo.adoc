@@ -7,9 +7,9 @@ Connect to OPC UA servers using the binary protocol for browsing the node tree.
 
 == What's inside
 
-* xref:components::milo-browse-component.adoc[OPC UA Browser component], URI syntax: `milo-browse:endpointUri`
-* xref:components::milo-client-component.adoc[OPC UA Client component], URI syntax: `milo-client:endpointUri`
-* xref:components::milo-server-component.adoc[OPC UA Server component], URI syntax: `milo-server:itemId`
+* xref:{csb-camel-components}::milo-browse-component.adoc[OPC UA Browser component], URI syntax: `milo-browse:endpointUri`
+* xref:{csb-camel-components}::milo-client-component.adoc[OPC UA Client component], URI syntax: `milo-client:endpointUri`
+* xref:{csb-camel-components}::milo-server-component.adoc[OPC UA Server component], URI syntax: `milo-server:itemId`
 
 Please refer to the above links for usage and configuration details.
 

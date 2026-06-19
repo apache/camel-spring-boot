@@ -7,7 +7,7 @@ Store and retrieve data from Google Cloud Firestore NoSQL database.
 
 == What's inside
 
-* xref:components::google-firestore-component.adoc[Google Firestore component], URI syntax: `google-firestore:collectionName`
+* xref:{csb-camel-components}::google-firestore-component.adoc[Google Firestore component], URI syntax: `google-firestore:collectionName`
 
 Please refer to the above links for usage and configuration details.
 

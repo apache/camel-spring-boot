@@ -7,7 +7,7 @@ Manage secrets and keys in Azure Key Vault Service
 
 == What's inside
 
-* xref:components::azure-key-vault-component.adoc[Azure Key Vault component], URI syntax: `azure-key-vault:vaultName`
+* xref:{csb-camel-components}::azure-key-vault-component.adoc[Azure Key Vault component], URI syntax: `azure-key-vault:vaultName`
 
 Please refer to the above links for usage and configuration details.
 

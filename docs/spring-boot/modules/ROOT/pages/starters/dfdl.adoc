@@ -7,8 +7,8 @@ Transforms fixed format data such as EDI message from/to XML using a Data Format
 
 == What's inside
 
-* xref:components::dfdl-component.adoc[DFDL component], URI syntax: `dfdl:schemaUri`
-* xref:components:dataformats:dfdl-dataformat.adoc[DFDL data format]
+* xref:{csb-camel-components}::dfdl-component.adoc[DFDL component], URI syntax: `dfdl:schemaUri`
+* xref:{csb-camel-components}:dataformats:dfdl-dataformat.adoc[DFDL data format]
 
 Please refer to the above links for usage and configuration details.
 

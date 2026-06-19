@@ -7,8 +7,8 @@ Google BigQuery data warehouse for analytics.
 
 == What's inside
 
-* xref:components::google-bigquery-component.adoc[Google BigQuery component], URI syntax: `google-bigquery:projectId:datasetId:tableId`
-* xref:components::google-bigquery-sql-component.adoc[Google BigQuery Standard SQL component], URI syntax: `google-bigquery-sql:projectId:queryString`
+* xref:{csb-camel-components}::google-bigquery-component.adoc[Google BigQuery component], URI syntax: `google-bigquery:projectId:datasetId:tableId`
+* xref:{csb-camel-components}::google-bigquery-sql-component.adoc[Google BigQuery Standard SQL component], URI syntax: `google-bigquery-sql:projectId:queryString`
 
 Please refer to the above links for usage and configuration details.
 

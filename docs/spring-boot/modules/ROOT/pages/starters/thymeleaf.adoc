@@ -7,7 +7,7 @@ Transform messages using a Thymeleaf template.
 
 == What's inside
 
-* xref:components::thymeleaf-component.adoc[Thymeleaf component], URI syntax: `thymeleaf:resourceUri`
+* xref:{csb-camel-components}::thymeleaf-component.adoc[Thymeleaf component], URI syntax: `thymeleaf:resourceUri`
 
 Please refer to the above links for usage and configuration details.
 

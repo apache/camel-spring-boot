@@ -7,7 +7,7 @@ Test routes and mediation rules using mocks.
 
 == What's inside
 
-* xref:components::mock-component.adoc[Mock component], URI syntax: `mock:name`
+* xref:{csb-camel-components}::mock-component.adoc[Mock component], URI syntax: `mock:name`
 
 Please refer to the above links for usage and configuration details.
 

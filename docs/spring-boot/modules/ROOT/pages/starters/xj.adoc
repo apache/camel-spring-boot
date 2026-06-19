@@ -7,7 +7,7 @@ Transform JSON and XML message using a XSLT.
 
 == What's inside
 
-* xref:components::xj-component.adoc[XJ component], URI syntax: `xj:resourceUri`
+* xref:{csb-camel-components}::xj-component.adoc[XJ component], URI syntax: `xj:resourceUri`
 
 Please refer to the above links for usage and configuration details.
 

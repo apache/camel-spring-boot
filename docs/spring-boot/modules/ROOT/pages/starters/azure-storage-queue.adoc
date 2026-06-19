@@ -7,7 +7,7 @@ Stores and retrieves messages to/from Azure Storage Queue.
 
 == What's inside
 
-* xref:components::azure-storage-queue-component.adoc[Azure Storage Queue Service component], URI syntax: `azure-storage-queue:accountName/queueName`
+* xref:{csb-camel-components}::azure-storage-queue-component.adoc[Azure Storage Queue Service component], URI syntax: `azure-storage-queue:accountName/queueName`
 
 Please refer to the above links for usage and configuration details.
 

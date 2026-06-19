@@ -7,7 +7,7 @@ To securely manage users on Huawei Cloud
 
 == What's inside
 
-* xref:components::hwcloud-iam-component.adoc[Huawei Identity and Access Management (IAM) component], URI syntax: `hwcloud-iam:operation`
+* xref:{csb-camel-components}::hwcloud-iam-component.adoc[Huawei Identity and Access Management (IAM) component], URI syntax: `hwcloud-iam:operation`
 
 Please refer to the above links for usage and configuration details.
 

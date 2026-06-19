@@ -7,8 +7,8 @@ Parse fixed width and delimited files using the FlatPack library.
 
 == What's inside
 
-* xref:components::flatpack-component.adoc[Flatpack component], URI syntax: `flatpack:type:resourceUri`
-* xref:components:dataformats:flatpack-dataformat.adoc[Flatpack data format]
+* xref:{csb-camel-components}::flatpack-component.adoc[Flatpack component], URI syntax: `flatpack:type:resourceUri`
+* xref:{csb-camel-components}:dataformats:flatpack-dataformat.adoc[Flatpack data format]
 
 Please refer to the above links for usage and configuration details.
 

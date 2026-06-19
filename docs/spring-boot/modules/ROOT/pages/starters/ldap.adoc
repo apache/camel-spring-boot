@@ -7,7 +7,7 @@ Perform searches on LDAP servers.
 
 == What's inside
 
-* xref:components::ldap-component.adoc[LDAP component], URI syntax: `ldap:dirContextName`
+* xref:{csb-camel-components}::ldap-component.adoc[LDAP component], URI syntax: `ldap:dirContextName`
 
 Please refer to the above links for usage and configuration details.
 

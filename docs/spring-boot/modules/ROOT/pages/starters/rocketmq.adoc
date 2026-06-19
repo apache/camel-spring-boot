@@ -7,7 +7,7 @@ Send and receive messages from RocketMQ cluster.
 
 == What's inside
 
-* xref:components::rocketmq-component.adoc[RocketMQ component], URI syntax: `rocketmq:topicName`
+* xref:{csb-camel-components}::rocketmq-component.adoc[RocketMQ component], URI syntax: `rocketmq:topicName`
 
 Please refer to the above links for usage and configuration details.
 

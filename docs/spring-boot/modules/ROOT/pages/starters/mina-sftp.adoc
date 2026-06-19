@@ -7,7 +7,7 @@ Upload and download files to/from SFTP servers using Apache MINA SSHD.
 
 == What's inside
 
-* xref:components::mina-sftp-component.adoc[MINA SFTP component], URI syntax: `mina-sftp:host:port/directoryName`
+* xref:{csb-camel-components}::mina-sftp-component.adoc[MINA SFTP component], URI syntax: `mina-sftp:host:port/directoryName`
 
 Please refer to the above links for usage and configuration details.
 

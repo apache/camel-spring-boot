@@ -7,7 +7,7 @@ To call and expose REST services using OpenAPI specification as contract.
 
 == What's inside
 
-* xref:components::rest-openapi-component.adoc[REST OpenApi component], URI syntax: `rest-openapi:specificationUri#operationId`
+* xref:{csb-camel-components}::rest-openapi-component.adoc[REST OpenApi component], URI syntax: `rest-openapi:specificationUri#operationId`
 
 Please refer to the above links for usage and configuration details.
 

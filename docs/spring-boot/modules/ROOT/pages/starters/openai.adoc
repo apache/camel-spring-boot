@@ -7,7 +7,7 @@ OpenAI endpoint for chat completion, embeddings, and audio transcription.
 
 == What's inside
 
-* xref:components::openai-component.adoc[OpenAI component], URI syntax: `openai:operation`
+* xref:{csb-camel-components}::openai-component.adoc[OpenAI component], URI syntax: `openai:operation`
 
 Please refer to the above links for usage and configuration details.
 

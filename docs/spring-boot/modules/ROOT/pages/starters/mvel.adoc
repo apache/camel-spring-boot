@@ -7,8 +7,8 @@ Transform messages using an MVEL template.
 
 == What's inside
 
-* xref:components::mvel-component.adoc[MVEL component], URI syntax: `mvel:resourceUri`
-* xref:components:languages:mvel-language.adoc[MVEL language]
+* xref:{csb-camel-components}::mvel-component.adoc[MVEL component], URI syntax: `mvel:resourceUri`
+* xref:{csb-camel-components}:languages:mvel-language.adoc[MVEL language]
 
 Please refer to the above links for usage and configuration details.
 

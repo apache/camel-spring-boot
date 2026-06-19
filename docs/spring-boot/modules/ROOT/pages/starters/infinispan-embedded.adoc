@@ -7,7 +7,7 @@ Read and write from/to Infinispan distributed key/value store and data grid.
 
 == What's inside
 
-* xref:components::infinispan-embedded-component.adoc[Infinispan Embedded component], URI syntax: `infinispan-embedded:cacheName`
+* xref:{csb-camel-components}::infinispan-embedded-component.adoc[Infinispan Embedded component], URI syntax: `infinispan-embedded:cacheName`
 
 Please refer to the above links for usage and configuration details.
 

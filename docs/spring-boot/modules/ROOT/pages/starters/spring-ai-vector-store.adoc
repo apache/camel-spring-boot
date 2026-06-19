@@ -7,7 +7,7 @@ Spring AI Vector Store
 
 == What's inside
 
-* xref:components::spring-ai-vector-store-component.adoc[Spring AI Vector Store component], URI syntax: `spring-ai-vector-store:storeId`
+* xref:{csb-camel-components}::spring-ai-vector-store-component.adoc[Spring AI Vector Store component], URI syntax: `spring-ai-vector-store:storeId`
 
 Please refer to the above links for usage and configuration details.
 

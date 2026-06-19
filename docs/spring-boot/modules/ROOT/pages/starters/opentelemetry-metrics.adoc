@@ -7,7 +7,7 @@ Camel metrics based on the Camel Telemetry spec
 
 == What's inside
 
-* xref:components::opentelemetry-metrics-component.adoc[OpenTelemetry Metrics component], URI syntax: `opentelemetry-metrics:metricType:metricName`
+* xref:{csb-camel-components}::opentelemetry-metrics-component.adoc[OpenTelemetry Metrics component], URI syntax: `opentelemetry-metrics:metricType:metricName`
 
 Please refer to the above links for usage and configuration details.
 

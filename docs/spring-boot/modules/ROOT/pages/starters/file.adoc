@@ -7,7 +7,7 @@ Read and write files.
 
 == What's inside
 
-* xref:components::file-component.adoc[File component], URI syntax: `file:directoryName`
+* xref:{csb-camel-components}::file-component.adoc[File component], URI syntax: `file:directoryName`
 
 Please refer to the above links for usage and configuration details.
 

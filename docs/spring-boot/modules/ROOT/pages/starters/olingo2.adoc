@@ -7,7 +7,7 @@ Communicate with OData 2.0 services using Apache Olingo.
 
 == What's inside
 
-* xref:components::olingo2-component.adoc[Olingo2 component], URI syntax: `olingo2:apiName/methodName`
+* xref:{csb-camel-components}::olingo2-component.adoc[Olingo2 component], URI syntax: `olingo2:apiName/methodName`
 
 Please refer to the above links for usage and configuration details.
 

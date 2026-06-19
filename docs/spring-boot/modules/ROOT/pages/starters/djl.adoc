@@ -7,7 +7,7 @@ Infer Deep Learning models from message exchanges data using Deep Java Library (
 
 == What's inside
 
-* xref:components::djl-component.adoc[Deep Java Library component], URI syntax: `djl:application`
+* xref:{csb-camel-components}::djl-component.adoc[Deep Java Library component], URI syntax: `djl:application`
 
 Please refer to the above links for usage and configuration details.
 

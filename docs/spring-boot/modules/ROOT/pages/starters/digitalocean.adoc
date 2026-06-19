@@ -7,7 +7,7 @@ Manage Droplets and resources within the DigitalOcean cloud.
 
 == What's inside
 
-* xref:components::digitalocean-component.adoc[DigitalOcean component], URI syntax: `digitalocean:operation`
+* xref:{csb-camel-components}::digitalocean-component.adoc[DigitalOcean component], URI syntax: `digitalocean:operation`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Provide access to AI model servers with the KServe standard to run inference wit
 
 == What's inside
 
-* xref:components::kserve-component.adoc[KServe component], URI syntax: `kserve:api`
+* xref:{csb-camel-components}::kserve-component.adoc[KServe component], URI syntax: `kserve:api`
 
 Please refer to the above links for usage and configuration details.
 

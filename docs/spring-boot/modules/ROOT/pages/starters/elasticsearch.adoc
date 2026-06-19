@@ -7,7 +7,7 @@ Send requests to ElasticSearch via Java Client API.
 
 == What's inside
 
-* xref:components::elasticsearch-component.adoc[Elasticsearch component], URI syntax: `elasticsearch:clusterName`
+* xref:{csb-camel-components}::elasticsearch-component.adoc[Elasticsearch component], URI syntax: `elasticsearch:clusterName`
 
 Please refer to the above links for usage and configuration details.
 

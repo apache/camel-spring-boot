@@ -7,7 +7,7 @@ Manage ZooKeeper clusters.
 
 == What's inside
 
-* xref:components::zookeeper-component.adoc[ZooKeeper component], URI syntax: `zookeeper:serverUrls/path`
+* xref:{csb-camel-components}::zookeeper-component.adoc[ZooKeeper component], URI syntax: `zookeeper:serverUrls/path`
 
 Please refer to the above links for usage and configuration details.
 

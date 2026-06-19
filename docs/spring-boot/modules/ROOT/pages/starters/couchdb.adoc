@@ -7,7 +7,7 @@ Consume changesets for inserts, updates and deletes in a CouchDB database, as we
 
 == What's inside
 
-* xref:components::couchdb-component.adoc[CouchDB component], URI syntax: `couchdb:protocol:hostname:port/database`
+* xref:{csb-camel-components}::couchdb-component.adoc[CouchDB component], URI syntax: `couchdb:protocol:hostname:port/database`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Face Recognition Service (FRS) is an intelligent service that uses computers to 
 
 == What's inside
 
-* xref:components::hwcloud-frs-component.adoc[Huawei Cloud Face Recognition Service (FRS) component], URI syntax: `hwcloud-frs:operation`
+* xref:{csb-camel-components}::hwcloud-frs-component.adoc[Huawei Cloud Face Recognition Service (FRS) component], URI syntax: `hwcloud-frs:operation`
 
 Please refer to the above links for usage and configuration details.
 

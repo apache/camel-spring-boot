@@ -7,7 +7,7 @@ Perform operations on ArangoDb when used as a Document Database, or as a Graph D
 
 == What's inside
 
-* xref:components::arangodb-component.adoc[ArangoDb component], URI syntax: `arangodb:database`
+* xref:{csb-camel-components}::arangodb-component.adoc[ArangoDb component], URI syntax: `arangodb:database`
 
 Please refer to the above links for usage and configuration details.
 

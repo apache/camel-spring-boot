@@ -7,7 +7,7 @@ Copy files to/from remote hosts using the secure copy protocol (SCP).
 
 == What's inside
 
-* xref:components::scp-component.adoc[SCP component], URI syntax: `scp:host:port/directoryName`
+* xref:{csb-camel-components}::scp-component.adoc[SCP component], URI syntax: `scp:host:port/directoryName`
 
 Please refer to the above links for usage and configuration details.
 

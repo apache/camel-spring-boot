@@ -7,7 +7,7 @@ Send requests to OpenSearch via Java Client API.
 
 == What's inside
 
-* xref:components::opensearch-component.adoc[OpenSearch component], URI syntax: `opensearch:clusterName`
+* xref:{csb-camel-components}::opensearch-component.adoc[OpenSearch component], URI syntax: `opensearch:clusterName`
 
 Please refer to the above links for usage and configuration details.
 

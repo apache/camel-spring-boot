@@ -7,7 +7,7 @@ Capture changes from an Oracle database.
 
 == What's inside
 
-* xref:components::debezium-oracle-component.adoc[Debezium Oracle Connector component], URI syntax: `debezium-oracle:name`
+* xref:{csb-camel-components}::debezium-oracle-component.adoc[Debezium Oracle Connector component], URI syntax: `debezium-oracle:name`
 
 Please refer to the above links for usage and configuration details.
 

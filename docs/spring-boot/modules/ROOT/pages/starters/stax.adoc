@@ -7,8 +7,8 @@ Process XML payloads by a SAX ContentHandler.
 
 == What's inside
 
-* xref:components::stax-component.adoc[StAX component], URI syntax: `stax:contentHandlerClass`
-* xref:components:languages:xtokenize-language.adoc[XML Tokenize language]
+* xref:{csb-camel-components}::stax-component.adoc[StAX component], URI syntax: `stax:contentHandlerClass`
+* xref:{csb-camel-components}:languages:xtokenize-language.adoc[XML Tokenize language]
 
 Please refer to the above links for usage and configuration details.
 

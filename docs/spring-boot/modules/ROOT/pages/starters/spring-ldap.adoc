@@ -7,7 +7,7 @@ Perform searches in LDAP servers using filters as the message payload.
 
 == What's inside
 
-* xref:components::spring-ldap-component.adoc[Spring LDAP component], URI syntax: `spring-ldap:templateName`
+* xref:{csb-camel-components}::spring-ldap-component.adoc[Spring LDAP component], URI syntax: `spring-ldap:templateName`
 
 Please refer to the above links for usage and configuration details.
 

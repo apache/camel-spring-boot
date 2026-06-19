@@ -7,7 +7,7 @@ Read and write nodes to/from a JCR compliant content repository.
 
 == What's inside
 
-* xref:components::jcr-component.adoc[JCR component], URI syntax: `jcr:host/base`
+* xref:{csb-camel-components}::jcr-component.adoc[JCR component], URI syntax: `jcr:host/base`
 
 Please refer to the above links for usage and configuration details.
 

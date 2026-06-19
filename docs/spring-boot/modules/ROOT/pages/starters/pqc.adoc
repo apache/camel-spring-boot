@@ -7,8 +7,8 @@ Encrypt and decrypt messages using Post-Quantum Cryptography Key Encapsulation M
 
 == What's inside
 
-* xref:components:dataformats:pqc-dataformat.adoc[PQC (Post-Quantum Cryptography) data format]
-* xref:components::pqc-component.adoc[PQC Algorithms component], URI syntax: `pqc:label`
+* xref:{csb-camel-components}:dataformats:pqc-dataformat.adoc[PQC (Post-Quantum Cryptography) data format]
+* xref:{csb-camel-components}::pqc-component.adoc[PQC Algorithms component], URI syntax: `pqc:label`
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Synthesize speech using AWS Polly and AWS SDK version 2.x.
 
 == What's inside
 
-* xref:components::aws2-polly-component.adoc[AWS Polly component], URI syntax: `aws2-polly:label`
+* xref:{csb-camel-components}::aws2-polly-component.adoc[AWS Polly component], URI syntax: `aws2-polly:label`
 
 Please refer to the above links for usage and configuration details.
 

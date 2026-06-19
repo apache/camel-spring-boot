@@ -7,8 +7,8 @@ Marshal and unmarshal HL7 (Health Care) model objects using the HL7 MLLP codec.
 
 == What's inside
 
-* xref:components:dataformats:hl7-dataformat.adoc[HL7 data format]
-* xref:components:languages:hl7terser-language.adoc[HL7 Terser language]
+* xref:{csb-camel-components}:dataformats:hl7-dataformat.adoc[HL7 data format]
+* xref:{csb-camel-components}:languages:hl7terser-language.adoc[HL7 Terser language]
 
 Please refer to the above links for usage and configuration details.
 

@@ -7,7 +7,7 @@ Trigger a single message only once at startup (useful for development and testin
 
 == What's inside
 
-* xref:components::once-component.adoc[Once component], URI syntax: `once:name`
+* xref:{csb-camel-components}::once-component.adoc[Once component], URI syntax: `once:name`
 
 Please refer to the above links for usage and configuration details.
 

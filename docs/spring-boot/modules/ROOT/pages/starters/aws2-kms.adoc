@@ -7,7 +7,7 @@ Manage keys stored in AWS KMS instances.
 
 == What's inside
 
-* xref:components::aws2-kms-component.adoc[AWS Key Management Service (KMS) component], URI syntax: `aws2-kms:label`
+* xref:{csb-camel-components}::aws2-kms-component.adoc[AWS Key Management Service (KMS) component], URI syntax: `aws2-kms:label`
 
 Please refer to the above links for usage and configuration details.
 

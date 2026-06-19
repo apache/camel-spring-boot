@@ -7,7 +7,7 @@ Perform operations on the Weaviate Vector Database.
 
 == What's inside
 
-* xref:components::weaviate-component.adoc[weaviate component], URI syntax: `weaviate:collection`
+* xref:{csb-camel-components}::weaviate-component.adoc[weaviate component], URI syntax: `weaviate:collection`
 
 Please refer to the above links for usage and configuration details.
 

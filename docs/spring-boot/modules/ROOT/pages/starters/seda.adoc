@@ -7,7 +7,7 @@ Asynchronously call another endpoint from any Camel Context in the same JVM.
 
 == What's inside
 
-* xref:components::seda-component.adoc[SEDA component], URI syntax: `seda:name`
+* xref:{csb-camel-components}::seda-component.adoc[SEDA component], URI syntax: `seda:name`
 
 Please refer to the above links for usage and configuration details.
 

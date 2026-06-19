@@ -7,7 +7,7 @@ Communicate with external systems using the MLLP protocol.
 
 == What's inside
 
-* xref:components::mllp-component.adoc[MLLP component], URI syntax: `mllp:hostname:port`
+* xref:{csb-camel-components}::mllp-component.adoc[MLLP component], URI syntax: `mllp:hostname:port`
 
 Please refer to the above links for usage and configuration details.
 

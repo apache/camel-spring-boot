@@ -7,7 +7,7 @@ Send and receive messages to/from Vert.x Event Bus.
 
 == What's inside
 
-* xref:components::vertx-component.adoc[Vert.x component], URI syntax: `vertx:address`
+* xref:{csb-camel-components}::vertx-component.adoc[Vert.x component], URI syntax: `vertx:address`
 
 Please refer to the above links for usage and configuration details.
 

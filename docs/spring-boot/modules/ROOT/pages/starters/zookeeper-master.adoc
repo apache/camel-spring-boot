@@ -7,7 +7,7 @@ Have only a single consumer in a cluster consuming from a given endpoint; with a
 
 == What's inside
 
-* xref:components::zookeeper-master-component.adoc[ZooKeeper Master component], URI syntax: `zookeeper-master:groupName:consumerEndpointUri`
+* xref:{csb-camel-components}::zookeeper-master-component.adoc[ZooKeeper Master component], URI syntax: `zookeeper-master:groupName:consumerEndpointUri`
 
 Please refer to the above links for usage and configuration details.
 

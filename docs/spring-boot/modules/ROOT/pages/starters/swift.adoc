@@ -7,8 +7,8 @@ Encode and decode SWIFT MT messages.
 
 == What's inside
 
-* xref:components:dataformats:swiftMt-dataformat.adoc[SWIFT MT data format]
-* xref:components:dataformats:swiftMx-dataformat.adoc[SWIFT MX data format]
+* xref:{csb-camel-components}:dataformats:swiftMt-dataformat.adoc[SWIFT MT data format]
+* xref:{csb-camel-components}:dataformats:swiftMx-dataformat.adoc[SWIFT MX data format]
 
 Please refer to the above links for usage and configuration details.
 
