@@ -3,6 +3,9 @@
 * xref:list.adoc[List of starters]
 * xref:starter-configuration.adoc[Starter Configuration]
 * xref:jolokia.adoc[Jolokia]
+* Starters
+// starters: START
+// starters: END
 * Cluster Services
 ** xref:consul-cluster-service.adoc[Consul]
 ** xref:file-cluster-service.adoc[File]
