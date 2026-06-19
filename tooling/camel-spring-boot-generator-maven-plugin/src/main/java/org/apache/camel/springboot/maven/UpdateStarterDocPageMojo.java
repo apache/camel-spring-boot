@@ -208,21 +208,23 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
                 if (json != null) {
                     ComponentModel model = JsonMapper.generateComponentModel(json);
                     String syntax = model.getSyntax() != null ? model.getSyntax() : model.getScheme() + ":destination";
-                    entries.add(new CatalogEntry(name, model.getTitle(), model.getDescription(), "component", syntax));
+                    String docPage = resolveComponentDocPage(model);
+                    entries.add(new CatalogEntry(name, model.getTitle(), model.getDescription(), "component", syntax, docPage));
                 }
             }
             for (String name : findDataFormatNames(jar)) {
                 String json = loadDataFormatJson(files, name);
                 if (json != null) {
                     DataFormatModel model = JsonMapper.generateDataFormatModel(json);
-                    entries.add(new CatalogEntry(name, model.getTitle(), model.getDescription(), "dataformat", null));
+                    String docPage = model.getModelName() != null ? model.getModelName() : name;
+                    entries.add(new CatalogEntry(name, model.getTitle(), model.getDescription(), "dataformat", null, docPage));
                 }
             }
             for (String name : findLanguageNames(jar)) {
                 String json = loadLanguageJson(files, name);
                 if (json != null) {
                     LanguageModel model = JsonMapper.generateLanguageModel(json);
-                    entries.add(new CatalogEntry(name, model.getTitle(), model.getDescription(), "language", null));
+                    entries.add(new CatalogEntry(name, model.getTitle(), model.getDescription(), "language", null, name));
                 }
             }
         }
@@ -380,9 +382,9 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
     private String buildXref(CatalogEntry entry) {
         return switch (entry.kind) {
             case "component" ->
-                    "xref:components::" + entry.name + "-component.adoc[" + entry.title + " component]";
+                    "xref:components::" + entry.docPage + "-component.adoc[" + entry.title + " component]";
             case "dataformat" ->
-                    "xref:components:dataformats:" + entry.name + "-dataformat.adoc[" + entry.title + " data format]";
+                    "xref:components:dataformats:" + entry.docPage + "-dataformat.adoc[" + entry.title + " data format]";
             case "language" ->
                     "xref:components:languages:" + entry.name + "-language.adoc[" + entry.title + " language]";
             default ->
@@ -406,7 +408,18 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
         return idx >= 0 ? fqcn.substring(idx + 1) : fqcn;
     }
 
-    private record CatalogEntry(String name, String title, String description, String kind, String syntax) {
+    private static String resolveComponentDocPage(ComponentModel model) {
+        String scheme = model.getScheme();
+        String artIdBase = model.getArtifactId() != null ? model.getArtifactId().replaceFirst("^camel-", "") : scheme;
+        if (model.getAlternativeSchemes() != null && !model.getAlternativeSchemes().isEmpty()
+                && !scheme.equals(artIdBase)) {
+            return artIdBase;
+        }
+        return scheme;
+    }
+
+    private record CatalogEntry(String name, String title, String description, String kind, String syntax,
+                                String docPage) {
     }
 
     private record SBProperty(String name, String description, String type, Object defaultValue) {

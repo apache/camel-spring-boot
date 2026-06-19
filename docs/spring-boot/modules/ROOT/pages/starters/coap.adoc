@@ -8,9 +8,9 @@ Send and receive messages to/from CoAP (Constrained Application Protocol) capabl
 == What's inside
 
 * xref:components::coap-component.adoc[CoAP component], URI syntax: `coap:uri`
-* xref:components::coap+tcp-component.adoc[CoAP component], URI syntax: `coap+tcp:uri`
-* xref:components::coaps+tcp-component.adoc[CoAP component], URI syntax: `coaps+tcp:uri`
-* xref:components::coaps-component.adoc[CoAP (Secure) component], URI syntax: `coaps:uri`
+* xref:components::coap-component.adoc[CoAP component], URI syntax: `coap+tcp:uri`
+* xref:components::coap-component.adoc[CoAP component], URI syntax: `coaps+tcp:uri`
+* xref:components::coap-component.adoc[CoAP (Secure) component], URI syntax: `coaps:uri`
 
 Please refer to the above links for usage and configuration details.
 
