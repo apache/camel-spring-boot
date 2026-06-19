@@ -18,6 +18,7 @@ package org.apache.camel.springboot.maven;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 import java.util.jar.JarFile;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.camel.tooling.model.ComponentModel;
 import org.apache.camel.tooling.model.DataFormatModel;
@@ -97,6 +100,8 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
                 .resolve("docs/spring-boot/modules/ROOT/pages/starters/" + baseName + ".adoc");
         writeIfChanged(page, targetPath.toFile());
         getLog().info("Generated starter doc page: starters/" + baseName + ".adoc");
+
+        updateNavFile();
     }
 
     private String loadSection(String fileName) {
@@ -114,6 +119,54 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
             }
         }
         return null;
+    }
+
+    private void updateNavFile() throws IOException {
+        Path navPath = multiModuleDir.toPath()
+                .resolve("docs/spring-boot/modules/ROOT/nav.adoc");
+        if (!Files.isRegularFile(navPath)) {
+            return;
+        }
+
+        Path startersDir = multiModuleDir.toPath()
+                .resolve("docs/spring-boot/modules/ROOT/pages/starters");
+        if (!Files.isDirectory(startersDir)) {
+            return;
+        }
+
+        // collect all starter pages with their titles
+        List<String> navEntries = new ArrayList<>();
+        Pattern titlePattern = Pattern.compile("^= (.+)$", Pattern.MULTILINE);
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(startersDir, "*.adoc")) {
+            for (Path file : stream) {
+                String name = file.getFileName().toString().replace(".adoc", "");
+                String content = Files.readString(file);
+                Matcher m = titlePattern.matcher(content);
+                String displayTitle = m.find() ? m.group(1) : name;
+                navEntries.add("** xref:starters/" + name + ".adoc[" + displayTitle + "]");
+            }
+        }
+        navEntries.sort(String.CASE_INSENSITIVE_ORDER);
+
+        // replace content between markers
+        String navContent = Files.readString(navPath);
+        String startMarker = "// starters: START";
+        String endMarker = "// starters: END";
+        int startIdx = navContent.indexOf(startMarker);
+        int endIdx = navContent.indexOf(endMarker);
+        if (startIdx < 0 || endIdx < 0) {
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(navContent, 0, startIdx + startMarker.length());
+        sb.append("\n");
+        for (String entry : navEntries) {
+            sb.append(entry).append("\n");
+        }
+        sb.append(navContent.substring(endIdx));
+
+        writeIfChanged(sb.toString(), navPath.toFile());
     }
 
     private String starterBaseName(String artifactId) {
