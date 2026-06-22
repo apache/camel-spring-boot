@@ -127,7 +127,7 @@
         <maven-surefire-plugin-version>3.5.6</maven-surefire-plugin-version>
         <springdoc-version>3.0.2</springdoc-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
-        <cyclonedx-maven-plugin-version>2.9.1</cyclonedx-maven-plugin-version>
+        <cyclonedx-maven-plugin-version>2.9.2</cyclonedx-maven-plugin-version>
         <wiremock-spring-boot-version>4.2.0</wiremock-spring-boot-version>
         <spring-session-hazelcast-version>4.0.0-M2</spring-session-hazelcast-version>
     </properties>
