@@ -16,7 +16,7 @@
     {
       "name": "camel.dataformat.jaxb.access-external-schema-protocols",
       "type": "java.lang.String",
-      "description": "Only in use if schema validation has been enabled. Restrict access to the protocols specified for external reference set by the schemaLocation attribute, Import and Include element. Examples of protocols are file, http, jar:file. empty, false or none to deny all access to external references; a specific protocol, such as file, to give permission to only the protocol; the keyword all to grant permission to all protocols.",
+      "description": "Only in use if schema validation has been enabled. Restrict access to the protocols specified for external reference set by the schemaLocation attribute, Import and Include element.",
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration"
     },
     {
@@ -53,20 +53,20 @@
     {
       "name": "camel.dataformat.jaxb.encoding",
       "type": "java.lang.String",
-      "description": "To overrule and use a specific encoding",
+      "description": "To overrule and use a specific encoding.",
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.jaxb.filter-non-xml-chars",
       "type": "java.lang.Boolean",
-      "description": "To ignore non xml characheters and replace them with an empty space.",
+      "description": "To ignore non xml characters and replace them with an empty space.",
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.dataformat.jaxb.fragment",
       "type": "java.lang.Boolean",
-      "description": "To turn on marshalling XML fragment trees. By default JAXB looks for XmlRootElement annotation on given class to operate on whole XML tree. This is useful but not always - sometimes generated code does not have XmlRootElement annotation, sometimes you need unmarshall only part of tree. In that case you can use partial unmarshalling. To enable this behaviours you need set property partClass. Camel will pass this class to JAXB's unmarshaler.",
+      "description": "To turn on marshalling XML fragment trees. This is useful when generated code does not have XmlRootElement annotation and you need to unmarshall only part of the tree.",
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration",
       "defaultValue": false
     },
@@ -86,7 +86,7 @@
     {
       "name": "camel.dataformat.jaxb.must-be-j-a-x-b-element",
       "type": "java.lang.Boolean",
-      "description": "Whether marhsalling must be java objects with JAXB annotations. And if not then it fails. This option can be set to false to relax that, such as when the data is already in XML format.",
+      "description": "Whether marshalling must be java objects with JAXB annotations. And if not then it fails. This option can be set to false to relax that, such as when the data is already in XML format.",
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration",
       "defaultValue": false
     },
@@ -99,26 +99,26 @@
     {
       "name": "camel.dataformat.jaxb.no-namespace-schema-location",
       "type": "java.lang.String",
-      "description": "To define the location of the namespaceless schema",
+      "description": "To define the location of the namespaceless schema.",
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.jaxb.object-factory",
       "type": "java.lang.Boolean",
-      "description": "Whether to allow using ObjectFactory classes to create the POJO classes during marshalling. This only applies to POJO classes that has not been annotated with JAXB and providing jaxb.index descriptor files.",
+      "description": "Whether to allow using ObjectFactory classes to create the POJO classes during marshalling.",
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.dataformat.jaxb.part-class",
       "type": "java.lang.String",
-      "description": "Name of class used for fragment parsing. See more details at the fragment option.",
+      "description": "Name of class used for fragment parsing.",
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.jaxb.part-namespace",
       "type": "java.lang.String",
-      "description": "XML namespace to use for fragment parsing. See more details at the fragment option.",
+      "description": "XML namespace to use for fragment parsing.",
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration"
     },
     {
@@ -131,19 +131,19 @@
     {
       "name": "camel.dataformat.jaxb.schema",
       "type": "java.lang.String",
-      "description": "To validate against an existing schema. Your can use the prefix classpath:, file: or http: to specify how the resource should be resolved. You can separate multiple schema files by using the ',' character.",
+      "description": "To validate against an existing schema. You can use the prefix classpath:, file: or http: to specify how the resource should be resolved. You can separate multiple schema files by using the comma character.",
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.jaxb.schema-location",
       "type": "java.lang.String",
-      "description": "To define the location of the schema",
+      "description": "To define the location of the schema.",
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.jaxb.schema-severity-level",
       "type": "java.lang.Integer",
-      "description": "Sets the schema severity level to use when validating against a schema. This level determines the minimum severity error that triggers JAXB to stop continue parsing. The default value of 0 (warning) means that any error (warning, error or fatal error) will trigger JAXB to stop. There are the following three levels: 0=warning, 1=error, 2=fatal error.",
+      "description": "Sets the schema severity level to use when validating against a schema. The default value of 0 (warning) means that any error will trigger JAXB to stop. There are the following three levels: 0=warning, 1=error, 2=fatal error.",
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration",
       "defaultValue": 0
     },

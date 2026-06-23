@@ -35,7 +35,7 @@ public class ICalDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * Whether to validate.
+     * Whether to validate the iCal document.
      */
     private Boolean validating = false;
 

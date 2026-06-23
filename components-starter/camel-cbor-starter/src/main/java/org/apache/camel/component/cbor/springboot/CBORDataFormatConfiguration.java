@@ -45,13 +45,11 @@ public class CBORDataFormatConfiguration
      */
     private Boolean useDefaultObjectMapper = true;
     /**
-     * Class name of the java type to use when unmarshalling
+     * Class name of the java type to use when unmarshalling.
      */
     private String unmarshalType;
     /**
-     * Refers to a custom collection type to lookup in the registry to use. This
-     * option should rarely be used, but allows to use different collection
-     * types than java.util.Collection based as default.
+     * Refers to a custom collection type to lookup in the registry to use.
      */
     private String collectionType;
     /**
@@ -60,8 +58,7 @@ public class CBORDataFormatConfiguration
     private Boolean useList = false;
     /**
      * If enabled then Jackson CBOR is allowed to attempt to use the
-     * CamelCBORUnmarshalType header during the unmarshalling. This should only
-     * be enabled when desired to be used.
+     * CamelCBORUnmarshalType header during the unmarshalling.
      */
     private Boolean allowUnmarshallType = false;
     /**
@@ -74,23 +71,13 @@ public class CBORDataFormatConfiguration
      */
     private Boolean allowJmsType = false;
     /**
-     * Set of features to enable on the Jackson
-     * com.fasterxml.jackson.databind.ObjectMapper. The features should be a
-     * name that matches a enum from
-     * com.fasterxml.jackson.databind.SerializationFeature,
-     * com.fasterxml.jackson.databind.DeserializationFeature, or
-     * com.fasterxml.jackson.databind.MapperFeature Multiple features can be
-     * separated by comma
+     * Set of features to enable on the Jackson ObjectMapper. Multiple features
+     * can be separated by comma.
      */
     private String enableFeatures;
     /**
-     * Set of features to disable on the Jackson
-     * com.fasterxml.jackson.databind.ObjectMapper. The features should be a
-     * name that matches a enum from
-     * com.fasterxml.jackson.databind.SerializationFeature,
-     * com.fasterxml.jackson.databind.DeserializationFeature, or
-     * com.fasterxml.jackson.databind.MapperFeature Multiple features can be
-     * separated by comma
+     * Set of features to disable on the Jackson ObjectMapper. Multiple features
+     * can be separated by comma.
      */
     private String disableFeatures;
 

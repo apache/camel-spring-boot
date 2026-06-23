@@ -51,22 +51,21 @@ public class OcsfDataFormatConfiguration
     private String unmarshalType;
     /**
      * Refers to a custom collection type to lookup in the registry to use. This
-     * option should rarely be used, but allows to use different collection
-     * types than java.util.Collection based as default.
+     * option should rarely be used, but allows using different collection types
+     * than java.util.Collection based as default.
      */
     private String collectionType;
     /**
-     * To unmarshal to a List of OCSF events.
+     * Whether to unmarshal to a List of OCSF events.
      */
     private Boolean useList = false;
     /**
-     * If enabled then the unmarshal type can be specified via the
-     * CamelOcsfUnmarshalType header. This should only be enabled when desired
-     * to be used.
+     * Whether to allow the unmarshal type to be specified via the
+     * CamelOcsfUnmarshalType header.
      */
     private Boolean allowUnmarshallType = false;
     /**
-     * To enable pretty printing output nicely formatted. Is by default false.
+     * Whether to enable pretty printing output nicely formatted.
      */
     private Boolean prettyPrint = false;
 

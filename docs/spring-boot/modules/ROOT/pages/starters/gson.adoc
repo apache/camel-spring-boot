@@ -32,5 +32,5 @@ The starter supports 5 options, which are listed below.
 | camel.dataformat.gson.date-format-pattern | To configure the date format while marshall or unmarshall Date fields in JSON using Gson |  | String
 | camel.dataformat.gson.enabled | Whether to enable auto configuration of the gson data format. This is enabled by default. |  | Boolean
 | camel.dataformat.gson.pretty-print | To enable pretty printing output nicely formatted. Is by default false. | false | Boolean
-| camel.dataformat.gson.unmarshal-type | Class name of the java type to use when unmarshalling |  | String
+| camel.dataformat.gson.unmarshal-type | Class name of the java type to use when unmarshalling. |  | String
 |===

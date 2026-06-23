@@ -39,9 +39,8 @@ public class ASN1DataFormatConfiguration
      */
     private String unmarshalType;
     /**
-     * If the asn1 file has more than one entry, the setting this option to
-     * true, allows working with the splitter EIP, to split the data using an
-     * iterator in a streaming mode.
+     * If the asn1 file has more than one entry, the setting this option to true
+     * allows working with the splitter EIP to split each entry individually.
      */
     private Boolean usingIterator = false;
 

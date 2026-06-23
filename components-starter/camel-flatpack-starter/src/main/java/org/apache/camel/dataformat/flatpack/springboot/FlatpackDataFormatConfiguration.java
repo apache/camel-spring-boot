@@ -41,11 +41,11 @@ public class FlatpackDataFormatConfiguration
      */
     private String definition;
     /**
-     * Delimited or fixed. Is by default false = delimited
+     * Delimited or fixed. Is by default false = delimited.
      */
     private Boolean fixed = false;
     /**
-     * The delimiter char (could be ; , or similar)
+     * The delimiter char (could be ; , or similar).
      */
     private String delimiter = ",";
     /**
@@ -55,7 +55,7 @@ public class FlatpackDataFormatConfiguration
     private Boolean ignoreFirstRecord = true;
     /**
      * Allows for lines to be shorter than expected and ignores the extra
-     * characters
+     * characters.
      */
     private Boolean allowShortLines = false;
     /**

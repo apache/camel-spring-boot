@@ -58,10 +58,10 @@ The starter supports 35 options, which are listed below.
 | camel.component.pqc.symmetric-key-length | The required length of the symmetric key used | 128 | Integer
 | camel.dataformat.pqc.buffer-size | The size of the buffer used for streaming encryption/decryption. | 4096 | Integer
 | camel.dataformat.pqc.enabled | Whether to enable auto configuration of the pqc data format. This is enabled by default. |  | Boolean
-| camel.dataformat.pqc.key-encapsulation-algorithm | The Post-Quantum KEM algorithm to use for key encapsulation. Supported values: MLKEM, BIKE, HQC, CMCE, SABER, FRODO, NTRU, NTRULPRime, SNTRUPrime, KYBER | MLKEM | String
-| camel.dataformat.pqc.key-generator | Refers to a custom KeyGenerator to lookup from the register for KEM operations. The option is a javax.crypto.KeyGenerator type. |  | String
-| camel.dataformat.pqc.key-pair | Refers to the KeyPair to lookup from the register to use for KEM operations. The option is a java.security.KeyPair type. |  | String
+| camel.dataformat.pqc.key-encapsulation-algorithm | The Post-Quantum KEM algorithm to use for key encapsulation. | MLKEM | String
+| camel.dataformat.pqc.key-generator | Refers to a custom KeyGenerator to lookup from the registry for KEM operations. The option is a javax.crypto.KeyGenerator type. |  | String
+| camel.dataformat.pqc.key-pair | Refers to the KeyPair to lookup from the registry to use for KEM operations. The option is a java.security.KeyPair type. |  | String
 | camel.dataformat.pqc.provider | The JCE security provider to use. |  | String
-| camel.dataformat.pqc.symmetric-key-algorithm | The symmetric encryption algorithm to use with the shared secret. Supported values: AES, ARIA, RC2, RC5, CAMELLIA, CAST5, CAST6, CHACHA7539, etc. | AES | String
+| camel.dataformat.pqc.symmetric-key-algorithm | The symmetric encryption algorithm to use with the shared secret. | AES | String
 | camel.dataformat.pqc.symmetric-key-length | The length (in bits) of the symmetric key. | 128 | Integer
 |===

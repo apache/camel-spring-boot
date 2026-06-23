@@ -35,14 +35,13 @@ public class ProtobufDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * Name of class to use when unmarshalling
+     * Name of class to use when unmarshalling.
      */
     private String instanceClass;
     /**
      * Defines a content type format in which protobuf message will be
      * serialized/deserialized from(to) the Java been. The format can either be
      * native or json for either native protobuf or json fields representation.
-     * The default value is native.
      */
     private String contentTypeFormat = "native";
     /**

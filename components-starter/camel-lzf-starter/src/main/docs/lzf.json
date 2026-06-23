@@ -27,7 +27,7 @@
     {
       "name": "camel.dataformat.lzf.using-parallel-compression",
       "type": "java.lang.Boolean",
-      "description": "Enable encoding (compress) using multiple processing cores.",
+      "description": "Whether to enable encoding (compress) using multiple processing cores.",
       "sourceType": "org.apache.camel.dataformat.lzf.springboot.LZFDataFormatConfiguration",
       "defaultValue": false
     }

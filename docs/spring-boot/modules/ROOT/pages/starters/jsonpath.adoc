@@ -29,12 +29,12 @@ The starter supports 9 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | camel.language.jsonpath.allow-easy-predicate | Whether to allow using the easy predicate parser to pre-parse predicates. | true | Boolean
-| camel.language.jsonpath.allow-simple | Whether to allow in inlined Simple exceptions in the JSONPath expression | true | Boolean
+| camel.language.jsonpath.allow-simple | Whether to allow in inlined Simple exceptions in the JSONPath expression. | true | Boolean
 | camel.language.jsonpath.enabled | Whether to enable auto configuration of the jsonpath language. This is enabled by default. |  | Boolean
 | camel.language.jsonpath.option | To configure additional options on JSONPath. Multiple values can be separated by comma. |  | String
 | camel.language.jsonpath.source | Source to use, instead of message body. You can prefix with variable:, header:, or property: to specify kind of source. Otherwise, the source is assumed to be a variable. Use empty or null to use default source, which is the message body. |  | String
 | camel.language.jsonpath.suppress-exceptions | Whether to suppress exceptions such as PathNotFoundException. | false | Boolean
-| camel.language.jsonpath.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. For example when using DSLs where the source will span across multiple lines and there may be additional line breaks at both the beginning and end. | true | Boolean
+| camel.language.jsonpath.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. | true | Boolean
 | camel.language.jsonpath.unpack-array | Whether to unpack a single element json-array into an object. | false | Boolean
 | camel.language.jsonpath.write-as-string | Whether to write the output of each row/element as a JSON String value instead of a Map/POJO value. | false | Boolean
 |===

@@ -48,9 +48,7 @@ public class TokenizeLanguageConfiguration
     private String source;
     /**
      * Whether to trim the source code to remove leading and trailing
-     * whitespaces and line breaks. For example when using DSLs where the source
-     * will span across multiple lines and there may be additional line breaks
-     * at both the beginning and end.
+     * whitespaces and line breaks.
      */
     private Boolean trim = true;
 

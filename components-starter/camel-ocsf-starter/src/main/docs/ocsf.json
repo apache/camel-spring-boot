@@ -16,14 +16,14 @@
     {
       "name": "camel.dataformat.ocsf.allow-unmarshall-type",
       "type": "java.lang.Boolean",
-      "description": "If enabled then the unmarshal type can be specified via the CamelOcsfUnmarshalType header. This should only be enabled when desired to be used.",
+      "description": "Whether to allow the unmarshal type to be specified via the CamelOcsfUnmarshalType header.",
       "sourceType": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.dataformat.ocsf.collection-type",
       "type": "java.lang.String",
-      "description": "Refers to a custom collection type to lookup in the registry to use. This option should rarely be used, but allows to use different collection types than java.util.Collection based as default.",
+      "description": "Refers to a custom collection type to lookup in the registry to use. This option should rarely be used, but allows using different collection types than java.util.Collection based as default.",
       "sourceType": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration"
     },
     {
@@ -46,7 +46,7 @@
     {
       "name": "camel.dataformat.ocsf.pretty-print",
       "type": "java.lang.Boolean",
-      "description": "To enable pretty printing output nicely formatted. Is by default false.",
+      "description": "Whether to enable pretty printing output nicely formatted.",
       "sourceType": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration",
       "defaultValue": false
     },
@@ -66,7 +66,7 @@
     {
       "name": "camel.dataformat.ocsf.use-list",
       "type": "java.lang.Boolean",
-      "description": "To unmarshal to a List of OCSF events.",
+      "description": "Whether to unmarshal to a List of OCSF events.",
       "sourceType": "org.apache.camel.dataformat.ocsf.springboot.OcsfDataFormatConfiguration",
       "defaultValue": false
     }

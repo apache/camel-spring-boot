@@ -35,11 +35,11 @@ public class DatasonnetLanguageConfiguration
      */
     private Boolean enabled;
     /**
-     * The String representation of the message's body MediaType
+     * The media type of the message body, such as application/json.
      */
     private String bodyMediaType;
     /**
-     * The String representation of the MediaType to output
+     * The media type to use for the output result.
      */
     private String outputMediaType;
     /**
@@ -51,9 +51,7 @@ public class DatasonnetLanguageConfiguration
     private String source;
     /**
      * Whether to trim the source code to remove leading and trailing
-     * whitespaces and line breaks. For example when using DSLs where the source
-     * will span across multiple lines and there may be additional line breaks
-     * at both the beginning and end.
+     * whitespaces and line breaks.
      */
     private Boolean trim = true;
 

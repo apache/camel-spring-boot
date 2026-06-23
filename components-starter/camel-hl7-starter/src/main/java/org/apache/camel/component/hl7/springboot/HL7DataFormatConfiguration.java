@@ -41,14 +41,14 @@ public class HL7DataFormatConfiguration
      */
     private String parser;
     /**
-     * Whether to validate the HL7 message Is by default true.
+     * Whether to validate the HL7 message.
      */
     private Boolean validate = true;
     /**
      * The target format for marshal output and unmarshal result type. By
-     * default, marshal encodes to HL7 ER7, and unmarshal returns a HAPI Message
-     * object. If this is set to XML, marshal encodes to HL7 XML, and unmarshal
-     * returns an XML DOM Document.
+     * default, marshal encodes to HL7 ER7 and unmarshal returns a HAPI Message
+     * object. If set to XML, marshal encodes to HL7 XML and unmarshal returns
+     * an XML DOM Document.
      */
     private String targetFormat;
 

@@ -46,18 +46,17 @@ public class JaxbDataFormatConfiguration
      */
     private Boolean contextPathIsClassName = false;
     /**
-     * To validate against an existing schema. Your can use the prefix
+     * To validate against an existing schema. You can use the prefix
      * classpath:, file: or http: to specify how the resource should be
-     * resolved. You can separate multiple schema files by using the ','
+     * resolved. You can separate multiple schema files by using the comma
      * character.
      */
     private String schema;
     /**
      * Sets the schema severity level to use when validating against a schema.
-     * This level determines the minimum severity error that triggers JAXB to
-     * stop continue parsing. The default value of 0 (warning) means that any
-     * error (warning, error or fatal error) will trigger JAXB to stop. There
-     * are the following three levels: 0=warning, 1=error, 2=fatal error.
+     * The default value of 0 (warning) means that any error will trigger JAXB
+     * to stop. There are the following three levels: 0=warning, 1=error,
+     * 2=fatal error.
      */
     private Integer schemaSeverityLevel = 0;
     /**
@@ -66,8 +65,7 @@ public class JaxbDataFormatConfiguration
     private Boolean prettyPrint = true;
     /**
      * Whether to allow using ObjectFactory classes to create the POJO classes
-     * during marshalling. This only applies to POJO classes that has not been
-     * annotated with JAXB and providing jaxb.index descriptor files.
+     * during marshalling.
      */
     private Boolean objectFactory = true;
     /**
@@ -76,37 +74,31 @@ public class JaxbDataFormatConfiguration
      */
     private Boolean ignoreJAXBElement = true;
     /**
-     * Whether marhsalling must be java objects with JAXB annotations. And if
+     * Whether marshalling must be java objects with JAXB annotations. And if
      * not then it fails. This option can be set to false to relax that, such as
      * when the data is already in XML format.
      */
     private Boolean mustBeJAXBElement = false;
     /**
-     * To ignore non xml characheters and replace them with an empty space.
+     * To ignore non xml characters and replace them with an empty space.
      */
     private Boolean filterNonXmlChars = false;
     /**
-     * To overrule and use a specific encoding
+     * To overrule and use a specific encoding.
      */
     private String encoding;
     /**
-     * To turn on marshalling XML fragment trees. By default JAXB looks for
-     * XmlRootElement annotation on given class to operate on whole XML tree.
-     * This is useful but not always - sometimes generated code does not have
-     * XmlRootElement annotation, sometimes you need unmarshall only part of
-     * tree. In that case you can use partial unmarshalling. To enable this
-     * behaviours you need set property partClass. Camel will pass this class to
-     * JAXB's unmarshaler.
+     * To turn on marshalling XML fragment trees. This is useful when generated
+     * code does not have XmlRootElement annotation and you need to unmarshall
+     * only part of the tree.
      */
     private Boolean fragment = false;
     /**
-     * Name of class used for fragment parsing. See more details at the fragment
-     * option.
+     * Name of class used for fragment parsing.
      */
     private String partClass;
     /**
-     * XML namespace to use for fragment parsing. See more details at the
-     * fragment option.
+     * XML namespace to use for fragment parsing.
      */
     private String partNamespace;
     /**
@@ -121,11 +113,11 @@ public class JaxbDataFormatConfiguration
      */
     private String xmlStreamWriterWrapper;
     /**
-     * To define the location of the schema
+     * To define the location of the schema.
      */
     private String schemaLocation;
     /**
-     * To define the location of the namespaceless schema
+     * To define the location of the namespaceless schema.
      */
     private String noNamespaceSchemaLocation;
     /**
@@ -143,10 +135,7 @@ public class JaxbDataFormatConfiguration
     /**
      * Only in use if schema validation has been enabled. Restrict access to the
      * protocols specified for external reference set by the schemaLocation
-     * attribute, Import and Include element. Examples of protocols are file,
-     * http, jar:file. empty, false or none to deny all access to external
-     * references; a specific protocol, such as file, to give permission to only
-     * the protocol; the keyword all to grant permission to all protocols.
+     * attribute, Import and Include element.
      */
     private String accessExternalSchemaProtocols;
 

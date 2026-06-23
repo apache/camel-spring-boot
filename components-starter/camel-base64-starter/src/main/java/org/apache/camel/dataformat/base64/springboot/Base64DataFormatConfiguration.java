@@ -40,13 +40,12 @@ public class Base64DataFormatConfiguration
      */
     private Integer lineLength = 76;
     /**
-     * The line separators to use. Uses new line characters (CRLF) by default.
+     * The line separators to use. By default \r\n is used.
      */
     private String lineSeparator;
     /**
-     * Instead of emitting '' and '/' we emit '-' and '_' respectively. urlSafe
-     * is only applied to encode operations. Decoding seamlessly handles both
-     * modes. Is by default false.
+     * Instead of emitting and / we emit - and _ respectively. urlSafe is only
+     * applied to encode operations. Decoding seamlessly handles both modes.
      */
     private Boolean urlSafe = false;
 

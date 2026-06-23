@@ -175,7 +175,7 @@
     {
       "name": "camel.dataformat.crypto.algorithm-parameter-spec",
       "type": "java.lang.String",
-      "description": "A JCE AlgorithmParameterSpec used to initialize the Cipher. Will lookup the type using the given name as a java.security.spec.AlgorithmParameterSpec type. The option is a java.security.spec.AlgorithmParameterSpec type.",
+      "description": "A JCE AlgorithmParameterSpec used to initialize the Cipher. The option is a java.security.spec.AlgorithmParameterSpec type.",
       "sourceType": "org.apache.camel.converter.crypto.springboot.CryptoDataFormatConfiguration"
     },
     {

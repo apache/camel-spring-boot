@@ -34,13 +34,13 @@
     {
       "name": "camel.dataformat.base64.line-separator",
       "type": "java.lang.String",
-      "description": "The line separators to use. Uses new line characters (CRLF) by default.",
+      "description": "The line separators to use. By default \\r\\n is used.",
       "sourceType": "org.apache.camel.dataformat.base64.springboot.Base64DataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.base64.url-safe",
       "type": "java.lang.Boolean",
-      "description": "Instead of emitting '' and '\/' we emit '-' and '_' respectively. urlSafe is only applied to encode operations. Decoding seamlessly handles both modes. Is by default false.",
+      "description": "Instead of emitting and \/ we emit - and _ respectively. urlSafe is only applied to encode operations. Decoding seamlessly handles both modes.",
       "sourceType": "org.apache.camel.dataformat.base64.springboot.Base64DataFormatConfiguration",
       "defaultValue": false
     }

@@ -35,14 +35,13 @@ public class ThriftDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * Name of class to use when unmarshalling
+     * Name of class to use when unmarshalling.
      */
     private String instanceClass;
     /**
-     * Defines a content type format in which thrift message will be
-     * serialized/deserialized from(to) the Java been. The format can either be
-     * native or json for either native binary thrift, json or simple json
-     * fields representation. The default value is binary.
+     * The content type format in which thrift message will be
+     * serialized/deserialized. The format can be native binary, json, or simple
+     * json.
      */
     private String contentTypeFormat = "binary";
     /**

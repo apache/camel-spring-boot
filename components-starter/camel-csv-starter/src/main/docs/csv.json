@@ -23,7 +23,7 @@
     {
       "name": "camel.dataformat.csv.capture-header-record",
       "type": "java.lang.Boolean",
-      "description": "Whether the unmarshalling should capture the header record and store it in the message header",
+      "description": "Whether the unmarshalling should capture the header record and store it in the message header.",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration",
       "defaultValue": false
     },
@@ -48,7 +48,7 @@
     {
       "name": "camel.dataformat.csv.delimiter",
       "type": "java.lang.String",
-      "description": "Sets the delimiter to use. The default value is , (comma)",
+      "description": "The delimiter to use. The default value is , (comma).",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration"
     },
     {
@@ -60,13 +60,13 @@
     {
       "name": "camel.dataformat.csv.escape",
       "type": "java.lang.String",
-      "description": "Sets the escape character to use",
+      "description": "Sets the escape character to use.",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.csv.escape-disabled",
       "type": "java.lang.Boolean",
-      "description": "Use for disabling using escape character",
+      "description": "Whether to disable the escape character.",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration",
       "defaultValue": false
     },
@@ -86,7 +86,7 @@
     {
       "name": "camel.dataformat.csv.header-disabled",
       "type": "java.lang.Boolean",
-      "description": "Use for disabling headers",
+      "description": "Whether to disable headers.",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration",
       "defaultValue": false
     },
@@ -100,14 +100,14 @@
     {
       "name": "camel.dataformat.csv.ignore-header-case",
       "type": "java.lang.Boolean",
-      "description": "Sets whether or not to ignore case when accessing header names.",
+      "description": "Whether to ignore case when accessing header names.",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.dataformat.csv.ignore-surrounding-spaces",
       "type": "java.lang.Boolean",
-      "description": "Whether to ignore surrounding spaces",
+      "description": "Whether to ignore surrounding spaces.",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration",
       "defaultValue": false
     },
@@ -121,39 +121,39 @@
     {
       "name": "camel.dataformat.csv.marshaller-factory-ref",
       "type": "java.lang.String",
-      "description": "Sets the implementation of the CsvMarshallerFactory interface which is able to customize marshalling\/unmarshalling behavior by extending CsvMarshaller or creating it from scratch.",
+      "description": "Sets the implementation of the CsvMarshallerFactory interface which is able to customize marshalling\/unmarshalling behavior.",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.csv.null-string",
       "type": "java.lang.String",
-      "description": "Sets the null string",
+      "description": "Sets the null string.",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.csv.null-string-disabled",
       "type": "java.lang.Boolean",
-      "description": "Used to disable null strings",
+      "description": "Whether to disable null string handling.",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.dataformat.csv.quote",
       "type": "java.lang.String",
-      "description": "Sets the quote to use which by default is double-quote character",
+      "description": "The quote character to use. The default is double-quote character.",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.csv.quote-disabled",
       "type": "java.lang.Boolean",
-      "description": "Used to disable quotes",
+      "description": "Whether to disable quoting.",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.dataformat.csv.quote-mode",
       "type": "java.lang.String",
-      "description": "Sets the quote mode",
+      "description": "Sets the quote mode.",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration"
     },
     {
@@ -165,40 +165,41 @@
     {
       "name": "camel.dataformat.csv.record-separator",
       "type": "java.lang.String",
-      "description": "Sets the record separator (aka new line) which by default is new line characters (CRLF)",
+      "description": "The record separator (aka new line) which by default is new line characters (CRLF).",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.csv.record-separator-disabled",
-      "type": "java.lang.String",
-      "description": "Used for disabling record separator",
-      "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration"
+      "type": "java.lang.Boolean",
+      "description": "Whether to disable the record separator.",
+      "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.dataformat.csv.skip-header-record",
       "type": "java.lang.Boolean",
-      "description": "Whether to skip the header record in the output",
+      "description": "Whether to skip the header record in the output.",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.dataformat.csv.trailing-delimiter",
       "type": "java.lang.Boolean",
-      "description": "Sets whether or not to add a trailing delimiter.",
+      "description": "Whether to add a trailing delimiter.",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.dataformat.csv.trim",
       "type": "java.lang.Boolean",
-      "description": "Sets whether or not to trim leading and trailing blanks.",
+      "description": "Whether to trim leading and trailing blanks.",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.dataformat.csv.use-maps",
       "type": "java.lang.Boolean",
-      "description": "Whether the unmarshalling should produce maps (HashMap)for the lines values instead of lists. It requires to have header (either defined or collected).",
+      "description": "Whether the unmarshalling should produce maps (HashMap) for the lines values instead of lists. It requires to have header (either defined or collected).",
       "sourceType": "org.apache.camel.dataformat.csv.springboot.CsvDataFormatConfiguration",
       "defaultValue": false
     },

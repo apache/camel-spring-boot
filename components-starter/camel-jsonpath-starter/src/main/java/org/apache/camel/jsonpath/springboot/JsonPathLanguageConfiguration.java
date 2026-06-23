@@ -39,7 +39,7 @@ public class JsonPathLanguageConfiguration
      */
     private Boolean suppressExceptions = false;
     /**
-     * Whether to allow in inlined Simple exceptions in the JSONPath expression
+     * Whether to allow in inlined Simple exceptions in the JSONPath expression.
      */
     private Boolean allowSimple = true;
     /**
@@ -69,9 +69,7 @@ public class JsonPathLanguageConfiguration
     private String source;
     /**
      * Whether to trim the source code to remove leading and trailing
-     * whitespaces and line breaks. For example when using DSLs where the source
-     * will span across multiple lines and there may be additional line breaks
-     * at both the beginning and end.
+     * whitespaces and line breaks.
      */
     private Boolean trim = true;
 

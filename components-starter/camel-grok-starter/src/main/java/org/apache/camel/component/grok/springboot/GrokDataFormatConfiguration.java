@@ -35,22 +35,23 @@ public class GrokDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * The grok pattern to match lines of input
+     * The grok pattern to match lines of input.
      */
     private String pattern;
     /**
-     * Turns on flattened mode. In flattened mode the exception is thrown when
-     * there are multiple pattern matches with same key.
+     * Whether to use flattened mode. In flattened mode an exception is thrown
+     * when there are multiple pattern matches with the same key.
      */
     private Boolean flattened = false;
     /**
-     * If false, every line of input is matched for pattern only once. Otherwise
-     * the line can be scanned multiple times when non-terminal pattern is used.
+     * Whether to allow multiple matches per line. If false, every line of input
+     * is matched for the pattern only once. Otherwise the line can be scanned
+     * multiple times when a non-terminal pattern is used.
      */
     private Boolean allowMultipleMatchesPerLine = true;
     /**
      * Whether to capture named expressions only or not (i.e. %{IP:ip} but not
-     * ${IP})
+     * ${IP}).
      */
     private Boolean namedOnly = false;
 

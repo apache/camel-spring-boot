@@ -36,45 +36,42 @@ public class UniVocityFixedDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * The padding character. The default value is a space
+     * The padding character. The default value is a space.
      */
     private String padding;
     /**
-     * Whether or not the trailing characters until new line must be ignored.
-     * The default value is false
+     * Whether to skip trailing characters until a new line is found.
      */
     private Boolean skipTrailingCharsUntilNewline = false;
     /**
-     * Whether or not the record ends on new line. The default value is false
+     * Whether the record ends on a new line.
      */
     private Boolean recordEndsOnNewline = false;
     /**
-     * The string representation of a null value. The default value is null
+     * The string representation of a null value.
      */
     private String nullValue;
     /**
-     * Whether or not the empty lines must be ignored. The default value is true
+     * Whether or not the empty lines must be ignored.
      */
     private Boolean skipEmptyLines = true;
     /**
-     * Whether or not the trailing white spaces must be ignored. The default
-     * value is true
+     * Whether or not the trailing white spaces must be ignored.
      */
     private Boolean ignoreTrailingWhitespaces = true;
     /**
-     * Whether or not the leading white spaces must be ignored. The default
-     * value is true
+     * Whether or not the leading white spaces must be ignored.
      */
     private Boolean ignoreLeadingWhitespaces = true;
     /**
      * Whether or not the headers are disabled. When defined, this option
      * explicitly sets the headers as null which indicates that there is no
-     * header. The default value is false
+     * header.
      */
     private Boolean headersDisabled = false;
     /**
      * Whether or not the header must be read in the first line of the test
-     * document. The default value is false
+     * document.
      */
     private Boolean headerExtractionEnabled = false;
     /**
@@ -87,7 +84,7 @@ public class UniVocityFixedDataFormatConfiguration
     private String emptyValue;
     /**
      * The line separator of the files. The default value is to use the JVM
-     * platform line separator
+     * platform line separator.
      */
     private String lineSeparator;
     /**
@@ -96,19 +93,18 @@ public class UniVocityFixedDataFormatConfiguration
      */
     private String normalizedLineSeparator;
     /**
-     * The comment symbol. The default value is #
+     * The comment symbol.
      */
     private String comment = "#";
     /**
      * Whether the unmarshalling should produce an iterator that reads the lines
-     * on the fly or if all the lines must be read at once. The default value is
-     * false
+     * on the fly or if all the lines must be read at once.
      */
     private Boolean lazyLoad = false;
     /**
      * Whether the unmarshalling should produce maps for the lines values
      * instead of lists. It requires to have header (either defined or
-     * collected). The default value is false
+     * collected).
      */
     private Boolean asMap = false;
 

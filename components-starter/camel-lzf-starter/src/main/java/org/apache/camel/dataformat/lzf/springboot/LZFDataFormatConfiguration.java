@@ -35,7 +35,7 @@ public class LZFDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * Enable encoding (compress) using multiple processing cores.
+     * Whether to enable encoding (compress) using multiple processing cores.
      */
     private Boolean usingParallelCompression = false;
 

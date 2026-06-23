@@ -77,7 +77,7 @@
     {
       "name": "camel.language.xquery.configuration-ref",
       "type": "java.lang.String",
-      "description": "Reference to a saxon configuration instance in the registry to use for xquery (requires camel-saxon). This may be needed to add custom functions to a saxon configuration, so these custom functions can be used in xquery expressions.",
+      "description": "Reference to a saxon configuration instance in the registry to use for xquery (requires camel-saxon).",
       "sourceType": "org.apache.camel.language.xquery.springboot.XQueryLanguageConfiguration"
     },
     {
@@ -94,7 +94,7 @@
     {
       "name": "camel.language.xquery.namespace",
       "type": "java.util.List<org.apache.camel.model.PropertyDefinition>",
-      "description": "Injects the XML Namespaces of prefix - uri mappings",
+      "description": "Injects the XML Namespaces of prefix to uri mappings.",
       "sourceType": "org.apache.camel.language.xquery.springboot.XQueryLanguageConfiguration"
     },
     {
@@ -106,7 +106,7 @@
     {
       "name": "camel.language.xquery.trim",
       "type": "java.lang.Boolean",
-      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks. For example when using DSLs where the source will span across multiple lines and there may be additional line breaks at both the beginning and end.",
+      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks.",
       "sourceType": "org.apache.camel.language.xquery.springboot.XQueryLanguageConfiguration",
       "defaultValue": true
     }

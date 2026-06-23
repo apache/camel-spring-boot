@@ -38,14 +38,14 @@ public class XMLTokenizeLanguageConfiguration
     private Boolean enabled;
     /**
      * The extraction mode. The available extraction modes are: i - injecting
-     * the contextual namespace bindings into the extracted token (default) w -
-     * wrapping the extracted token in its ancestor context u - unwrapping the
-     * extracted token to its child content t - extracting the text content of
-     * the specified element
+     * the contextual namespace bindings into the extracted token (default), w -
+     * wrapping the extracted token in its ancestor context, u - unwrapping the
+     * extracted token to its child content, t - extracting the text content of
+     * the specified element.
      */
     private String mode = "i";
     /**
-     * Injects the XML Namespaces of prefix - uri mappings
+     * Injects the XML Namespaces of prefix to uri mappings.
      */
     private List<PropertyDefinition> namespace;
     /**
@@ -57,9 +57,7 @@ public class XMLTokenizeLanguageConfiguration
     private String source;
     /**
      * Whether to trim the source code to remove leading and trailing
-     * whitespaces and line breaks. For example when using DSLs where the source
-     * will span across multiple lines and there may be additional line breaks
-     * at both the beginning and end.
+     * whitespaces and line breaks.
      */
     private Boolean trim = true;
 

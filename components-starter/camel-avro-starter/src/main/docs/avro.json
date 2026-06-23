@@ -27,7 +27,7 @@
     {
       "name": "camel.dataformat.avro.instance-class-name",
       "type": "java.lang.String",
-      "description": "Class name to use for marshal and unmarshalling",
+      "description": "Class name to use for marshal and unmarshalling.",
       "sourceType": "org.apache.camel.dataformat.avro.springboot.AvroDataFormatConfiguration"
     }
   ],

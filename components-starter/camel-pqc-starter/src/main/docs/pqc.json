@@ -220,20 +220,20 @@
     {
       "name": "camel.dataformat.pqc.key-encapsulation-algorithm",
       "type": "java.lang.String",
-      "description": "The Post-Quantum KEM algorithm to use for key encapsulation. Supported values: MLKEM, BIKE, HQC, CMCE, SABER, FRODO, NTRU, NTRULPRime, SNTRUPrime, KYBER",
+      "description": "The Post-Quantum KEM algorithm to use for key encapsulation.",
       "sourceType": "org.apache.camel.component.pqc.dataformat.springboot.PQCDataFormatConfiguration",
       "defaultValue": "MLKEM"
     },
     {
       "name": "camel.dataformat.pqc.key-generator",
       "type": "java.lang.String",
-      "description": "Refers to a custom KeyGenerator to lookup from the register for KEM operations. The option is a javax.crypto.KeyGenerator type.",
+      "description": "Refers to a custom KeyGenerator to lookup from the registry for KEM operations. The option is a javax.crypto.KeyGenerator type.",
       "sourceType": "org.apache.camel.component.pqc.dataformat.springboot.PQCDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.pqc.key-pair",
       "type": "java.lang.String",
-      "description": "Refers to the KeyPair to lookup from the register to use for KEM operations. The option is a java.security.KeyPair type.",
+      "description": "Refers to the KeyPair to lookup from the registry to use for KEM operations. The option is a java.security.KeyPair type.",
       "sourceType": "org.apache.camel.component.pqc.dataformat.springboot.PQCDataFormatConfiguration"
     },
     {
@@ -245,7 +245,7 @@
     {
       "name": "camel.dataformat.pqc.symmetric-key-algorithm",
       "type": "java.lang.String",
-      "description": "The symmetric encryption algorithm to use with the shared secret. Supported values: AES, ARIA, RC2, RC5, CAMELLIA, CAST5, CAST6, CHACHA7539, etc.",
+      "description": "The symmetric encryption algorithm to use with the shared secret.",
       "sourceType": "org.apache.camel.component.pqc.dataformat.springboot.PQCDataFormatConfiguration",
       "defaultValue": "AES"
     },

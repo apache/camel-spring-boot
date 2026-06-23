@@ -16,7 +16,7 @@
     {
       "name": "camel.dataformat.snake-yaml.allow-any-type",
       "type": "java.lang.Boolean",
-      "description": "Allow any class to be un-marshaled",
+      "description": "Allow any class to be un-marshaled.",
       "sourceType": "org.apache.camel.component.snakeyaml.springboot.SnakeYAMLDataFormatConfiguration",
       "defaultValue": false
     },
@@ -73,7 +73,7 @@
     {
       "name": "camel.dataformat.snake-yaml.resolver",
       "type": "java.lang.String",
-      "description": "Resolver to detect implicit type",
+      "description": "Resolver to detect implicit type.",
       "sourceType": "org.apache.camel.component.snakeyaml.springboot.SnakeYAMLDataFormatConfiguration"
     },
     {
@@ -85,13 +85,13 @@
     {
       "name": "camel.dataformat.snake-yaml.unmarshal-type",
       "type": "java.lang.String",
-      "description": "Class name of the java type to use when unmarshalling",
+      "description": "Class name of the java type to use when unmarshalling.",
       "sourceType": "org.apache.camel.component.snakeyaml.springboot.SnakeYAMLDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.snake-yaml.use-application-context-class-loader",
       "type": "java.lang.Boolean",
-      "description": "Use ApplicationContextClassLoader as custom ClassLoader",
+      "description": "Use ApplicationContextClassLoader as custom ClassLoader.",
       "sourceType": "org.apache.camel.component.snakeyaml.springboot.SnakeYAMLDataFormatConfiguration",
       "defaultValue": true
     }

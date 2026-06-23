@@ -36,15 +36,11 @@ public class PQCDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * The Post-Quantum KEM algorithm to use for key encapsulation. Supported
-     * values: MLKEM, BIKE, HQC, CMCE, SABER, FRODO, NTRU, NTRULPRime,
-     * SNTRUPrime, KYBER
+     * The Post-Quantum KEM algorithm to use for key encapsulation.
      */
     private String keyEncapsulationAlgorithm = "MLKEM";
     /**
      * The symmetric encryption algorithm to use with the shared secret.
-     * Supported values: AES, ARIA, RC2, RC5, CAMELLIA, CAST5, CAST6,
-     * CHACHA7539, etc.
      */
     private String symmetricKeyAlgorithm = "AES";
     /**
@@ -52,7 +48,7 @@ public class PQCDataFormatConfiguration
      */
     private Integer symmetricKeyLength = 128;
     /**
-     * Refers to the KeyPair to lookup from the register to use for KEM
+     * Refers to the KeyPair to lookup from the registry to use for KEM
      * operations. The option is a java.security.KeyPair type.
      */
     private String keyPair;
@@ -65,7 +61,7 @@ public class PQCDataFormatConfiguration
      */
     private String provider;
     /**
-     * Refers to a custom KeyGenerator to lookup from the register for KEM
+     * Refers to a custom KeyGenerator to lookup from the registry for KEM
      * operations. The option is a javax.crypto.KeyGenerator type.
      */
     private String keyGenerator;

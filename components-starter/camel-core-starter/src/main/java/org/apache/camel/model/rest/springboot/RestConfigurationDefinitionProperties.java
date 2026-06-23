@@ -32,29 +32,20 @@ public class RestConfigurationDefinitionProperties {
 
     /**
      * The Camel Rest component to use for the REST transport (consumer), such
-     * as netty-http, jetty, servlet, undertow. If no component has been
-     * explicit configured, then Camel will lookup if there is a Camel component
-     * that integrates with the Rest DSL, or if a
-     * org.apache.camel.spi.RestConsumerFactory is registered in the registry.
-     * If either one is found, then that is being used.
+     * as netty-http, jetty, servlet, undertow.
      */
     private String component;
     /**
-     * The name of the Camel component to use as the REST API. If no API
-     * Component has been explicit configured, then Camel will lookup if there
-     * is a Camel component responsible for servicing and generating the REST
-     * API documentation, or if a org.apache.camel.spi.RestApiProcessorFactory
-     * is registered in the registry. If either one is found, then that is being
-     * used.
+     * The name of the Camel component to use as the REST API (such as OpenApi).
      */
     private String apiComponent;
     /**
-     * Sets the name of the Camel component to use as the REST producer
+     * Sets the name of the Camel component to use as the REST producer.
      */
     private String producerComponent;
     /**
      * The scheme to use for exposing the REST service. Usually http or https is
-     * supported. The default value is http
+     * supported.
      */
     private String scheme;
     /**
@@ -62,49 +53,35 @@ public class RestConfigurationDefinitionProperties {
      */
     private String host;
     /**
-     * The port number to use for exposing the REST service. Notice if you use
-     * servlet component then the port number configured here does not apply, as
-     * the port number in use is the actual port number the servlet component is
-     * using. eg if using Apache Tomcat its the tomcat http port, if using
-     * Apache Karaf its the HTTP service in Karaf that uses port 8181 by default
-     * etc. Though in those situations setting the port number here, allows
-     * tooling and JMX to know the port number, so its recommended to set the
-     * port number to the number that the servlet engine uses.
+     * The port number to use for exposing the REST service.
      */
     private String port;
     /**
      * To use a specific hostname for the API documentation (such as swagger or
-     * openapi) This can be used to override the generated host with this
-     * configured hostname
+     * openapi). This can be used to override the generated host with this
+     * configured hostname.
      */
     private String apiHost;
     /**
      * Whether to use X-Forward headers to set host etc. for OpenApi. This may
      * be needed in special cases involving reverse-proxy and networking going
-     * from HTTP to HTTPS etc. Then the proxy can send X-Forward headers
-     * (X-Forwarded-Proto) that influences the host names in the OpenAPI schema
-     * that camel-openapi-java generates from Rest DSL routes.
+     * from HTTP to HTTPS etc.
      */
     private Boolean useXForwardHeaders = false;
     /**
      * Sets the location of the api document the REST producer will use to
      * validate the REST uri and query parameters are valid accordingly to the
-     * api document. The location of the api document is loaded from classpath
-     * by default, but you can use file: or http: to refer to resources to load
-     * from file or http url.
+     * api document.
      */
     private String producerApiDoc;
     /**
      * Sets a leading context-path the REST services will be using. This can be
      * used when using components such as camel-servlet where the deployed web
-     * application is deployed using a context-path. Or for components such as
-     * camel-jetty or camel-netty-http that includes a HTTP server.
+     * application is deployed using a context-path.
      */
     private String contextPath;
     /**
-     * Sets a leading context-path the REST API will be using. This can be used
-     * when using components such as camel-servlet where the deployed web
-     * application is deployed using a context-path.
+     * Sets a leading context-path the REST API will be using.
      */
     private String apiContextPath;
     /**
@@ -115,9 +92,7 @@ public class RestConfigurationDefinitionProperties {
     /**
      * Whether vendor extension is enabled in the Rest APIs. If enabled then
      * Camel will include additional information as vendor extension (eg keys
-     * starting with x-) such as route ids, class names etc. Not all 3rd party
-     * API gateways and tools supports vendor-extensions when importing your API
-     * docs.
+     * starting with x-) such as route ids, class names etc.
      */
     private Boolean apiVendorExtension = false;
     /**
@@ -126,7 +101,11 @@ public class RestConfigurationDefinitionProperties {
      */
     private RestHostNameResolver hostNameResolver = RestHostNameResolver.allLocalIp;
     /**
-     * Sets the binding mode to use. The default value is off
+     * Sets the binding mode for automatic marshalling and unmarshalling of
+     * request and response bodies. off (default) disables binding. auto detects
+     * JSON or XML from the Content-Type header. json binds using a JSON data
+     * format only. xml binds using an XML data format only. json_xml supports
+     * both JSON and XML.
      */
     private RestBindingMode bindingMode = RestBindingMode.off;
     /**
@@ -142,56 +121,42 @@ public class RestConfigurationDefinitionProperties {
      */
     private Boolean skipBindingOnErrorCode = false;
     /**
-     * Whether to enable validation of the client request to check: 1)
-     * Content-Type header matches what the Rest DSL consumes; returns HTTP
-     * Status 415 if validation error. 2) Accept header matches what the Rest
-     * DSL produces; returns HTTP Status 406 if validation error. 3) Missing
-     * required data (query parameters, HTTP headers, body); returns HTTP Status
-     * 400 if validation error. 4) Parsing error of the message body (JSon, XML
-     * or Auto binding mode must be enabled); returns HTTP Status 400 if
-     * validation error.
+     * Whether to enable validation of the client request to check whether
+     * Content-Type/Accept headers, required parameters, and message body are
+     * valid.
      */
     private Boolean clientRequestValidation = false;
     /**
-     * Whether to check what Camel is returning as response to the client: 1)
-     * Status-code and Content-Type matches Rest DSL response messages. 2) Check
-     * whether expected headers is included according to the Rest DSL repose
-     * message headers. 3) If the response body is JSon then check whether its
-     * valid JSon. Returns 500 if validation error detected.
+     * Whether to validate what Camel is returning as response to the client,
+     * such as checking status-code, Content-Type, and headers match the Rest
+     * DSL response definition.
      */
     private Boolean clientResponseValidation = false;
     /**
-     * Whether to enable CORS headers in the HTTP response. The default value is
-     * false.
+     * Whether to enable CORS headers in the HTTP response.
      */
     private Boolean enableCors = false;
     /**
      * Whether to return HTTP 204 with an empty body when a response contains an
-     * empty JSON object or XML root object. The default value is false.
+     * empty JSON object or XML root object.
      */
     private Boolean enableNoContentResponse = false;
     /**
-     * Inline routes in rest-dsl which are linked using direct endpoints. Each
-     * service in Rest DSL is an individual route, meaning that you would have
-     * at least two routes per service (rest-dsl, and the route linked from
-     * rest-dsl). By inlining (default) allows Camel to optimize and inline this
-     * as a single route, however this requires to use direct endpoints, which
-     * must be unique per service. If a route is not using direct endpoint then
-     * the rest-dsl is not inlined, and will become an individual route. This
-     * option is default true.
+     * Inline routes in rest-dsl which are linked using direct endpoints. By
+     * inlining, Camel can optimize and inline this as a single route, however
+     * this requires to use direct endpoints, which must be unique per service.
      */
     private Boolean inlineRoutes = true;
     /**
-     * Name of specific json data format to use. By default, jackson will be
+     * Name of specific json data format to use. By default jackson will be
      * used. Important: This option is only for setting a custom name of the
      * data format, not to refer to an existing data format instance.
      */
     private String jsonDataFormat = "jackson";
     /**
-     * Name of specific XML data format to use. By default jaxb will be used,
-     * but jacksonXml is also supported. Important: This option is only for
-     * setting a custom name of the data format, not to refer to an existing
-     * data format instance.
+     * Name of specific XML data format to use. By default jaxb will be used.
+     * Important: This option is only for setting a custom name of the data
+     * format, not to refer to an existing data format instance.
      */
     private String xmlDataFormat = "jaxb";
     /**
@@ -212,16 +177,12 @@ public class RestConfigurationDefinitionProperties {
     /**
      * Allows to configure as many additional properties for the data formats in
      * use. For example set property prettyPrint to true to have json outputted
-     * in pretty mode. The properties can be prefixed to denote the option is
-     * only for either JSON or XML and for either the IN or the OUT. The
-     * prefixes are: json.in. json.out. xml.in. xml.out. For example a key with
-     * value xml.out.mustBeJAXBElement is only for the XML data format for the
-     * outgoing. A key without a prefix is a common key for all situations.
+     * in pretty mode.
      */
     private Map<String, Object> dataFormatProperty;
     /**
      * Allows to configure as many additional properties for the api
-     * documentation. For example set property api.title to my cool stuff
+     * documentation.
      */
     private Map<String, Object> apiProperty;
     /**

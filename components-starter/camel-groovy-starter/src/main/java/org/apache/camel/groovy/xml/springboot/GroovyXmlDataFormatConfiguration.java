@@ -35,9 +35,8 @@ public class GroovyXmlDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * To turn on or off attribute mapping. When enabled then keys that start
-     * with _ or character will be mapped to an XML attribute, and vise versa.
-     * This rule is what Jackson and other XML or JSon libraries uses.
+     * Whether to enable attribute mapping. When enabled, keys that start with _
+     * or character will be mapped to an XML attribute, and vice versa.
      */
     private Boolean attributeMapping = true;
 

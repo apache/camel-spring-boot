@@ -47,19 +47,19 @@ public class CsvDataFormatConfiguration
      */
     private String commentMarker;
     /**
-     * Sets the delimiter to use. The default value is , (comma)
+     * The delimiter to use. The default value is , (comma).
      */
     private String delimiter;
     /**
-     * Use for disabling using escape character
+     * Whether to disable the escape character.
      */
     private Boolean escapeDisabled = false;
     /**
-     * Sets the escape character to use
+     * Sets the escape character to use.
      */
     private String escape;
     /**
-     * Use for disabling headers
+     * Whether to disable headers.
      */
     private Boolean headerDisabled = false;
     /**
@@ -75,58 +75,57 @@ public class CsvDataFormatConfiguration
      */
     private Boolean ignoreEmptyLines = false;
     /**
-     * Whether to ignore surrounding spaces
+     * Whether to ignore surrounding spaces.
      */
     private Boolean ignoreSurroundingSpaces = false;
     /**
-     * Used to disable null strings
+     * Whether to disable null string handling.
      */
     private Boolean nullStringDisabled = false;
     /**
-     * Sets the null string
+     * Sets the null string.
      */
     private String nullString;
     /**
-     * Used to disable quotes
+     * Whether to disable quoting.
      */
     private Boolean quoteDisabled = false;
     /**
-     * Sets the quote to use which by default is double-quote character
+     * The quote character to use. The default is double-quote character.
      */
     private String quote;
     /**
-     * Used for disabling record separator
+     * Whether to disable the record separator.
      */
-    private String recordSeparatorDisabled;
+    private Boolean recordSeparatorDisabled = false;
     /**
-     * Sets the record separator (aka new line) which by default is new line
-     * characters (CRLF)
+     * The record separator (aka new line) which by default is new line
+     * characters (CRLF).
      */
     private String recordSeparator;
     /**
-     * Whether to skip the header record in the output
+     * Whether to skip the header record in the output.
      */
     private Boolean skipHeaderRecord = false;
     /**
-     * Sets the quote mode
+     * Sets the quote mode.
      */
     private String quoteMode;
     /**
-     * Sets whether or not to ignore case when accessing header names.
+     * Whether to ignore case when accessing header names.
      */
     private Boolean ignoreHeaderCase = false;
     /**
-     * Sets whether or not to trim leading and trailing blanks.
+     * Whether to trim leading and trailing blanks.
      */
     private Boolean trim = false;
     /**
-     * Sets whether or not to add a trailing delimiter.
+     * Whether to add a trailing delimiter.
      */
     private Boolean trailingDelimiter = false;
     /**
      * Sets the implementation of the CsvMarshallerFactory interface which is
-     * able to customize marshalling/unmarshalling behavior by extending
-     * CsvMarshaller or creating it from scratch.
+     * able to customize marshalling/unmarshalling behavior.
      */
     private String marshallerFactoryRef;
     /**
@@ -135,7 +134,7 @@ public class CsvDataFormatConfiguration
      */
     private Boolean lazyLoad = false;
     /**
-     * Whether the unmarshalling should produce maps (HashMap)for the lines
+     * Whether the unmarshalling should produce maps (HashMap) for the lines
      * values instead of lists. It requires to have header (either defined or
      * collected).
      */
@@ -152,7 +151,7 @@ public class CsvDataFormatConfiguration
     private String recordConverterRef;
     /**
      * Whether the unmarshalling should capture the header record and store it
-     * in the message header
+     * in the message header.
      */
     private Boolean captureHeaderRecord = false;
 
@@ -276,11 +275,11 @@ public class CsvDataFormatConfiguration
         this.quote = quote;
     }
 
-    public String getRecordSeparatorDisabled() {
+    public Boolean getRecordSeparatorDisabled() {
         return recordSeparatorDisabled;
     }
 
-    public void setRecordSeparatorDisabled(String recordSeparatorDisabled) {
+    public void setRecordSeparatorDisabled(Boolean recordSeparatorDisabled) {
         this.recordSeparatorDisabled = recordSeparatorDisabled;
     }
 

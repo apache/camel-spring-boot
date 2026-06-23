@@ -35,25 +35,24 @@ public class FhirJsonDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * The version of FHIR to use. Possible values are:
-     * DSTU2,DSTU2_HL7ORG,DSTU2_1,DSTU3,R4,R5
+     * The version of FHIR to use. Possible values are: DSTU2, DSTU2_HL7ORG,
+     * DSTU2_1, DSTU3, R4, R5.
      */
     private String fhirVersion = "R4";
     /**
      * To use a custom fhir context. Reference to object of type
-     * ca.uhn.fhir.context.FhirContext
+     * ca.uhn.fhir.context.FhirContext.
      */
     private String fhirContext;
     /**
      * Sets the pretty print flag, meaning that the parser will encode resources
-     * with human-readable spacing and newlines between elements instead of
-     * condensing output as much as possible.
+     * with human-readable spacing and newlines between elements.
      */
     private Boolean prettyPrint = false;
     /**
      * Registers an error handler which will be invoked when any parse errors
      * are found. Reference to object of type
-     * ca.uhn.fhir.parser.IParserErrorHandler
+     * ca.uhn.fhir.parser.IParserErrorHandler.
      */
     private String parserErrorHandler;
     /**
@@ -64,17 +63,13 @@ public class FhirJsonDataFormatConfiguration
     private String parserOptions;
     /**
      * If set (FQN class names), when parsing resources the parser will try to
-     * use the given types when possible, in the order that they are provided
-     * (from highest to lowest priority). For example, if a custom type which
-     * declares to implement the Patient resource is passed in here, and the
-     * parser is parsing a Bundle containing a Patient resource, the parser will
-     * use the given custom type. Multiple class names can be separated by
-     * comma.
+     * use the given types when possible. Multiple class names can be separated
+     * by comma.
      */
     private String preferTypes;
     /**
      * When encoding, force this resource ID to be encoded as the resource ID.
-     * Reference to object of type org.hl7.fhir.instance.model.api.IIdType
+     * Reference to object of type org.hl7.fhir.instance.model.api.IIdType.
      */
     private String forceResourceId;
     /**
@@ -85,62 +80,34 @@ public class FhirJsonDataFormatConfiguration
     private String serverBaseUrl;
     /**
      * If set to true (default is false) the ID of any resources being encoded
-     * will not be included in the output. Note that this does not apply to
-     * contained resources, only to root resources. In other words, if this is
-     * set to true, contained resources will still have local IDs but the
-     * outer/containing ID will not have an ID.
+     * will not be included in the output.
      */
     private Boolean omitResourceId = false;
     /**
      * If set to true (default is false), the values supplied to
-     * setEncodeElements(Set) will not be applied to the root resource
-     * (typically a Bundle), but will be applied to any sub-resources contained
-     * within it (i.e. search result resources in that bundle)
+     * setEncodeElements will not be applied to the root resource (typically a
+     * Bundle), but will be applied to any sub-resources contained within it.
      */
     private Boolean encodeElementsAppliesToChildResourcesOnly = false;
     /**
      * If provided, specifies the elements which should be encoded, to the
-     * exclusion of all others. Multiple elements can be separated by comma when
-     * using String parameter. Valid values for this field would include:
-     * Patient - Encode patient and all its children Patient.name - Encode only
-     * the patient's name Patient.name.family - Encode only the patient's family
-     * name .text - Encode the text element on any resource (only the very first
-     * position may contain a wildcard) .(mandatory) - This is a special case
-     * which causes any mandatory fields (min 0) to be encoded
+     * exclusion of all others. Multiple elements can be separated by comma.
      */
     private String encodeElements;
     /**
      * If provided, specifies the elements which should NOT be encoded. Multiple
-     * elements can be separated by comma when using String parameter. Valid
-     * values for this field would include: Patient - Don't encode patient and
-     * all its children Patient.name - Don't encode the patient's name
-     * Patient.name.family - Don't encode the patient's family name .text -
-     * Don't encode the text element on any resource (only the very first
-     * position may contain a wildcard) DSTU2 note: Note that values including
-     * meta, such as Patient.meta will work for DSTU2 parsers, but values with
-     * subelements on meta such as Patient.meta.lastUpdated will only work in
-     * DSTU3 mode.
+     * elements can be separated by comma.
      */
     private String dontEncodeElements;
     /**
      * If set to true (which is the default), resource references containing a
-     * version will have the version removed when the resource is encoded. This
-     * is generally good behaviour because in most situations, references from
-     * one resource to another should be to the resource by ID, not by ID and
-     * version. In some cases though, it may be desirable to preserve the
-     * version in resource links. In that case, this value should be set to
-     * false. This method provides the ability to globally disable reference
-     * encoding. If finer-grained control is needed, use
-     * setDontStripVersionsFromReferencesAtPaths(List)
+     * version will have the version removed when the resource is encoded.
      */
     private Boolean stripVersionsFromReferences = false;
     /**
      * If set to true (which is the default), the Bundle.entry.fullUrl will
      * override the Bundle.entry.resource's resource id if the fullUrl is
-     * defined. This behavior happens when parsing the source data into a Bundle
-     * object. Set this to false if this is not the desired behavior (e.g. the
-     * client code wishes to perform additional validation checks between the
-     * fullUrl and the resource id).
+     * defined.
      */
     private Boolean overrideResourceIdWithBundleEntryFullUrl = false;
     /**
@@ -156,13 +123,8 @@ public class FhirJsonDataFormatConfiguration
     /**
      * If supplied value(s), any resource references at the specified paths will
      * have their resource versions encoded instead of being automatically
-     * stripped during the encoding process. This setting has no effect on the
-     * parsing process. Multiple elements can be separated by comma when using
-     * String parameter. This method provides a finer-grained level of control
-     * than setStripVersionsFromReferences(String) and any paths specified by
-     * this method will be encoded even if
-     * setStripVersionsFromReferences(String) has been set to true (which is the
-     * default)
+     * stripped during the encoding process. Multiple elements can be separated
+     * by comma.
      */
     private String dontStripVersionsFromReferencesAtPaths;
     /**

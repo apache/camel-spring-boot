@@ -63,14 +63,14 @@
     {
       "name": "camel.language.xtokenize.mode",
       "type": "java.lang.String",
-      "description": "The extraction mode. The available extraction modes are: i - injecting the contextual namespace bindings into the extracted token (default) w - wrapping the extracted token in its ancestor context u - unwrapping the extracted token to its child content t - extracting the text content of the specified element",
+      "description": "The extraction mode. The available extraction modes are: i - injecting the contextual namespace bindings into the extracted token (default), w - wrapping the extracted token in its ancestor context, u - unwrapping the extracted token to its child content, t - extracting the text content of the specified element.",
       "sourceType": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration",
       "defaultValue": "i"
     },
     {
       "name": "camel.language.xtokenize.namespace",
       "type": "java.util.List<org.apache.camel.model.PropertyDefinition>",
-      "description": "Injects the XML Namespaces of prefix - uri mappings",
+      "description": "Injects the XML Namespaces of prefix to uri mappings.",
       "sourceType": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration"
     },
     {
@@ -82,7 +82,7 @@
     {
       "name": "camel.language.xtokenize.trim",
       "type": "java.lang.Boolean",
-      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks. For example when using DSLs where the source will span across multiple lines and there may be additional line breaks at both the beginning and end.",
+      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks.",
       "sourceType": "org.apache.camel.language.xtokenizer.springboot.XMLTokenizeLanguageConfiguration",
       "defaultValue": true
     }

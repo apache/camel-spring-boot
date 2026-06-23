@@ -27,7 +27,7 @@
     {
       "name": "camel.dataformat.ical.validating",
       "type": "java.lang.Boolean",
-      "description": "Whether to validate.",
+      "description": "Whether to validate the iCal document.",
       "sourceType": "org.apache.camel.component.ical.springboot.ICalDataFormatConfiguration",
       "defaultValue": false
     }

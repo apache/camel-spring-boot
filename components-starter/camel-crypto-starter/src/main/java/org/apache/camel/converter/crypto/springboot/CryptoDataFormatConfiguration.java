@@ -54,10 +54,8 @@ public class CryptoDataFormatConfiguration
      */
     private byte[] initVector;
     /**
-     * A JCE AlgorithmParameterSpec used to initialize the Cipher. Will lookup
-     * the type using the given name as a
-     * java.security.spec.AlgorithmParameterSpec type. The option is a
-     * java.security.spec.AlgorithmParameterSpec type.
+     * A JCE AlgorithmParameterSpec used to initialize the Cipher. The option is
+     * a java.security.spec.AlgorithmParameterSpec type.
      */
     private String algorithmParameterSpec;
     /**

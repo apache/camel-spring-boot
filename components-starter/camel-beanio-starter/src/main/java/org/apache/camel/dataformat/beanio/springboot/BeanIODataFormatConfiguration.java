@@ -64,16 +64,12 @@ public class BeanIODataFormatConfiguration
     /**
      * To use a custom org.apache.camel.dataformat.beanio.BeanIOErrorHandler as
      * error handler while parsing. Configure the fully qualified class name of
-     * the error handler. Notice the options ignoreUnidentifiedRecords,
-     * ignoreUnexpectedRecords, and ignoreInvalidRecords may not be in use when
-     * you use a custom error handler.
+     * the error handler.
      */
     private String beanReaderErrorHandlerType;
     /**
-     * This options controls whether to unmarshal as a list of objects or as a
-     * single object only. The former is the default mode, and the latter is
-     * only intended in special use-cases where beanio maps the Camel message to
-     * a single POJO bean.
+     * This option controls whether to unmarshal as a list of objects or as a
+     * single object only.
      */
     private Boolean unmarshalSingleObject = false;
 

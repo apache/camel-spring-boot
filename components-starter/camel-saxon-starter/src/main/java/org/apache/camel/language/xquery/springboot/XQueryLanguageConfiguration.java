@@ -38,13 +38,11 @@ public class XQueryLanguageConfiguration
     private Boolean enabled;
     /**
      * Reference to a saxon configuration instance in the registry to use for
-     * xquery (requires camel-saxon). This may be needed to add custom functions
-     * to a saxon configuration, so these custom functions can be used in xquery
-     * expressions.
+     * xquery (requires camel-saxon).
      */
     private String configurationRef;
     /**
-     * Injects the XML Namespaces of prefix - uri mappings
+     * Injects the XML Namespaces of prefix to uri mappings.
      */
     private List<PropertyDefinition> namespace;
     /**
@@ -56,9 +54,7 @@ public class XQueryLanguageConfiguration
     private String source;
     /**
      * Whether to trim the source code to remove leading and trailing
-     * whitespaces and line breaks. For example when using DSLs where the source
-     * will span across multiple lines and there may be additional line breaks
-     * at both the beginning and end.
+     * whitespaces and line breaks.
      */
     private Boolean trim = true;
 

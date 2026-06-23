@@ -388,7 +388,7 @@
     {
       "name": "camel.dataformat.mime-multipart.binary-content",
       "type": "java.lang.Boolean",
-      "description": "Defines whether the content of binary parts in the MIME multipart is binary (true) or Base-64 encoded (false) Default is false.",
+      "description": "Whether the content of binary parts in the MIME multipart is binary (true) or Base-64 encoded (false).",
       "sourceType": "org.apache.camel.dataformat.mime.multipart.springboot.MimeMultipartDataFormatConfiguration",
       "defaultValue": false
     },
@@ -406,27 +406,27 @@
     {
       "name": "camel.dataformat.mime-multipart.headers-inline",
       "type": "java.lang.Boolean",
-      "description": "Defines whether the MIME-Multipart headers are part of the message body (true) or are set as Camel headers (false). Default is false.",
+      "description": "Whether the MIME-Multipart headers are part of the message body (true) or are set as Camel headers (false).",
       "sourceType": "org.apache.camel.dataformat.mime.multipart.springboot.MimeMultipartDataFormatConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.dataformat.mime-multipart.include-headers",
       "type": "java.lang.String",
-      "description": "A regex that defines which Camel headers are also included as MIME headers into the MIME multipart. This will only work if headersInline is set to true. Default is to include no headers",
+      "description": "A regex that defines which Camel headers are also included as MIME headers into the MIME multipart. This only works if headersInline is set to true.",
       "sourceType": "org.apache.camel.dataformat.mime.multipart.springboot.MimeMultipartDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.mime-multipart.multipart-sub-type",
       "type": "java.lang.String",
-      "description": "Specify the subtype of the MIME Multipart. Default is mixed.",
+      "description": "Specify the subtype of the MIME Multipart.",
       "sourceType": "org.apache.camel.dataformat.mime.multipart.springboot.MimeMultipartDataFormatConfiguration",
       "defaultValue": "mixed"
     },
     {
       "name": "camel.dataformat.mime-multipart.multipart-without-attachment",
       "type": "java.lang.Boolean",
-      "description": "Defines whether a message without attachment is also marshaled into a MIME Multipart (with only one body part). Default is false.",
+      "description": "Whether a message without attachment is also marshaled into a MIME Multipart (with only one body part).",
       "sourceType": "org.apache.camel.dataformat.mime.multipart.springboot.MimeMultipartDataFormatConfiguration",
       "defaultValue": false
     }

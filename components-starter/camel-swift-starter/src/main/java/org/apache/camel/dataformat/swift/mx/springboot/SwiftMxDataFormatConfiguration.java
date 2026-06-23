@@ -35,7 +35,7 @@ public class SwiftMxDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * The flag indicating that messages must be marshalled in a JSON format.
+     * Whether to marshal messages in JSON format.
      */
     private Boolean writeInJson = false;
     /**

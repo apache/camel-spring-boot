@@ -35,7 +35,7 @@ public class GroovyJSonlDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * To pretty printing output nicely formatted. Is by default true.
+     * Whether to pretty print output nicely formatted.
      */
     private Boolean prettyPrint = true;
 

@@ -23,28 +23,28 @@
     {
       "name": "camel.dataformat.avro-jackson.allow-unmarshall-type",
       "type": "java.lang.Boolean",
-      "description": "If enabled then Jackson is allowed to attempt to use the CamelJacksonUnmarshalType header during the unmarshalling. This should only be enabled when desired to be used.",
+      "description": "If enabled then Jackson is allowed to attempt to use the CamelJacksonUnmarshalType header during the unmarshalling.",
       "sourceType": "org.apache.camel.component.jackson3.avro.springboot.JacksonAvroDataFormatConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.dataformat.avro-jackson.auto-discover-object-mapper",
       "type": "java.lang.Boolean",
-      "description": "If set to true then Jackson will lookup for an objectMapper into the registry",
+      "description": "If set to true then Jackson will lookup for an objectMapper into the registry.",
       "sourceType": "org.apache.camel.component.jackson3.avro.springboot.JacksonAvroDataFormatConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.dataformat.avro-jackson.auto-discover-schema-resolver",
       "type": "java.lang.Boolean",
-      "description": "When not disabled, the SchemaResolver will be looked up into the registry",
+      "description": "When not disabled, the SchemaResolver will be looked up into the registry.",
       "sourceType": "org.apache.camel.component.jackson3.avro.springboot.JacksonAvroDataFormatConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.dataformat.avro-jackson.collection-type",
       "type": "java.lang.String",
-      "description": "Refers to a custom collection type to lookup in the registry to use. This option should rarely be used, but allows to use different collection types than java.util.Collection based as default.",
+      "description": "Refers to a custom collection type to lookup in the registry to use.",
       "sourceType": "org.apache.camel.component.jackson3.avro.springboot.JacksonAvroDataFormatConfiguration"
     },
     {
@@ -80,13 +80,13 @@
     {
       "name": "camel.dataformat.avro-jackson.include",
       "type": "java.lang.String",
-      "description": "If you want to marshal a pojo to JSON, and the pojo has some fields with null values. And you want to skip these null values, you can set this option to NON_NULL",
+      "description": "If you want to marshal a pojo to JSON, and the pojo has some fields with null values. And you want to skip these null values, you can set this option to NON_NULL.",
       "sourceType": "org.apache.camel.component.jackson3.avro.springboot.JacksonAvroDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.avro-jackson.json-view",
       "type": "java.lang.String",
-      "description": "When marshalling a POJO to JSON you might want to exclude certain fields from the JSON output. With Jackson you can use JSON views to accomplish this. This option is to refer to the class which has JsonView annotations",
+      "description": "When marshalling a POJO to JSON you might want to exclude certain fields from the JSON output. With Jackson you can use JSON views to accomplish this. This option is to refer to the class which has JsonView annotations.",
       "sourceType": "org.apache.camel.component.jackson3.avro.springboot.JacksonAvroDataFormatConfiguration"
     },
     {
@@ -122,7 +122,7 @@
     {
       "name": "camel.dataformat.avro-jackson.unmarshal-type",
       "type": "java.lang.String",
-      "description": "Class name of the java type to use when unmarshalling",
+      "description": "Class name of the java type to use when unmarshalling.",
       "sourceType": "org.apache.camel.component.jackson3.avro.springboot.JacksonAvroDataFormatConfiguration"
     },
     {

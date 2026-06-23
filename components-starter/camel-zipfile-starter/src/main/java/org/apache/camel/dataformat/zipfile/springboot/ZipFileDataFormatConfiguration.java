@@ -42,7 +42,7 @@ public class ZipFileDataFormatConfiguration
     private Boolean usingIterator = false;
     /**
      * If the zip file has more than one entry, setting this option to true,
-     * allows to get the iterator even if the directory is empty
+     * allows to get the iterator even if the directory is empty.
      */
     private Boolean allowEmptyDirectory = false;
     /**
@@ -52,8 +52,7 @@ public class ZipFileDataFormatConfiguration
     private Boolean preservePathElements = false;
     /**
      * Set the maximum decompressed size of a zip file (in bytes). The default
-     * value if not specified corresponds to 1 gigabyte. An IOException will be
-     * thrown if the decompressed size exceeds this amount. Set to -1 to disable
+     * value if not specified corresponds to 1 gigabyte. Set to -1 to disable
      * setting a maximum decompressed size.
      */
     private Long maxDecompressedSize = 1073741824L;

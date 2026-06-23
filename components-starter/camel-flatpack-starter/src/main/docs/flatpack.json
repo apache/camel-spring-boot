@@ -59,7 +59,7 @@
     {
       "name": "camel.dataformat.flatpack.allow-short-lines",
       "type": "java.lang.Boolean",
-      "description": "Allows for lines to be shorter than expected and ignores the extra characters",
+      "description": "Allows for lines to be shorter than expected and ignores the extra characters.",
       "sourceType": "org.apache.camel.dataformat.flatpack.springboot.FlatpackDataFormatConfiguration",
       "defaultValue": false
     },
@@ -77,7 +77,7 @@
     {
       "name": "camel.dataformat.flatpack.delimiter",
       "type": "java.lang.String",
-      "description": "The delimiter char (could be ; , or similar)",
+      "description": "The delimiter char (could be ; , or similar).",
       "sourceType": "org.apache.camel.dataformat.flatpack.springboot.FlatpackDataFormatConfiguration",
       "defaultValue": ","
     },
@@ -90,7 +90,7 @@
     {
       "name": "camel.dataformat.flatpack.fixed",
       "type": "java.lang.Boolean",
-      "description": "Delimited or fixed. Is by default false = delimited",
+      "description": "Delimited or fixed. Is by default false = delimited.",
       "sourceType": "org.apache.camel.dataformat.flatpack.springboot.FlatpackDataFormatConfiguration",
       "defaultValue": false
     },

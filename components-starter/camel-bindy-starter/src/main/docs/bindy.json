@@ -69,7 +69,7 @@
     {
       "name": "camel.dataformat.bindy-csv.locale",
       "type": "java.lang.String",
-      "description": "To configure a default locale to use, such as us for united states. To use the JVM platform default locale then use the name default",
+      "description": "To configure a default locale to use, such as us for united states. To use the JVM platform default locale then use the name default.",
       "sourceType": "org.apache.camel.dataformat.bindy.csv.springboot.BindyCsvDataFormatConfiguration"
     },
     {
@@ -119,7 +119,7 @@
     {
       "name": "camel.dataformat.bindy-fixed.locale",
       "type": "java.lang.String",
-      "description": "To configure a default locale to use, such as us for united states. To use the JVM platform default locale then use the name default",
+      "description": "To configure a default locale to use, such as us for united states. To use the JVM platform default locale then use the name default.",
       "sourceType": "org.apache.camel.dataformat.bindy.fixed.springboot.BindyFixedLengthDataFormatConfiguration"
     },
     {
@@ -169,7 +169,7 @@
     {
       "name": "camel.dataformat.bindy-kvp.locale",
       "type": "java.lang.String",
-      "description": "To configure a default locale to use, such as us for united states. To use the JVM platform default locale then use the name default",
+      "description": "To configure a default locale to use, such as us for united states. To use the JVM platform default locale then use the name default.",
       "sourceType": "org.apache.camel.dataformat.bindy.kvp.springboot.BindyKeyValuePairDataFormatConfiguration"
     },
     {

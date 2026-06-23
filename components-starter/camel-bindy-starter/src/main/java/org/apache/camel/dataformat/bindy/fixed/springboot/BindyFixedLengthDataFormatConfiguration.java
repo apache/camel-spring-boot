@@ -60,7 +60,7 @@ public class BindyFixedLengthDataFormatConfiguration
     private Boolean unwrapSingleInstance = true;
     /**
      * To configure a default locale to use, such as us for united states. To
-     * use the JVM platform default locale then use the name default
+     * use the JVM platform default locale then use the name default.
      */
     private String locale;
 

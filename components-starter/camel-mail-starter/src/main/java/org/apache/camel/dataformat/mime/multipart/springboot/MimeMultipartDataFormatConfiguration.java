@@ -36,28 +36,28 @@ public class MimeMultipartDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * Specify the subtype of the MIME Multipart. Default is mixed.
+     * Specify the subtype of the MIME Multipart.
      */
     private String multipartSubType = "mixed";
     /**
-     * Defines whether a message without attachment is also marshaled into a
-     * MIME Multipart (with only one body part). Default is false.
+     * Whether a message without attachment is also marshaled into a MIME
+     * Multipart (with only one body part).
      */
     private Boolean multipartWithoutAttachment = false;
     /**
-     * Defines whether the MIME-Multipart headers are part of the message body
-     * (true) or are set as Camel headers (false). Default is false.
+     * Whether the MIME-Multipart headers are part of the message body (true) or
+     * are set as Camel headers (false).
      */
     private Boolean headersInline = false;
     /**
      * A regex that defines which Camel headers are also included as MIME
-     * headers into the MIME multipart. This will only work if headersInline is
-     * set to true. Default is to include no headers
+     * headers into the MIME multipart. This only works if headersInline is set
+     * to true.
      */
     private String includeHeaders;
     /**
-     * Defines whether the content of binary parts in the MIME multipart is
-     * binary (true) or Base-64 encoded (false) Default is false.
+     * Whether the content of binary parts in the MIME multipart is binary
+     * (true) or Base-64 encoded (false).
      */
     private Boolean binaryContent = false;
 

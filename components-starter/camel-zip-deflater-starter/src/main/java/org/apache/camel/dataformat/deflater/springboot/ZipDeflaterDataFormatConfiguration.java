@@ -36,8 +36,8 @@ public class ZipDeflaterDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * To specify a specific compression between 0-9. -1 is default compression,
-     * 0 is no compression, and 9 is the best compression.
+     * Compression level to use (0-9). -1 is default compression, 0 is no
+     * compression, and 9 is the best compression.
      */
     private Integer compressionLevel = -1;
 

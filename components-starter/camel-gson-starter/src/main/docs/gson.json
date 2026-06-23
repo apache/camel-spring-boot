@@ -47,7 +47,7 @@
     {
       "name": "camel.dataformat.gson.unmarshal-type",
       "type": "java.lang.String",
-      "description": "Class name of the java type to use when unmarshalling",
+      "description": "Class name of the java type to use when unmarshalling.",
       "sourceType": "org.apache.camel.component.gson.springboot.GsonDataFormatConfiguration"
     }
   ],

@@ -35,19 +35,19 @@ public class BarcodeDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * Barcode format such as QR-Code
+     * Barcode format such as QR-Code.
      */
     private String barcodeFormat = "QR_CODE";
     /**
-     * Image type of the barcode such as png
+     * Image type of the barcode such as png.
      */
     private String imageType = "PNG";
     /**
-     * Width of the barcode
+     * Width of the barcode.
      */
     private Integer width = 100;
     /**
-     * Height of the barcode
+     * Height of the barcode.
      */
     private Integer height = 100;
 

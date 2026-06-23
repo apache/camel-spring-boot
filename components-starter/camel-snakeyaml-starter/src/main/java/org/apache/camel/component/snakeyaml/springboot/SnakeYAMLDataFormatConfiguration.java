@@ -35,7 +35,7 @@ public class SnakeYAMLDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * Class name of the java type to use when unmarshalling
+     * Class name of the java type to use when unmarshalling.
      */
     private String unmarshalType;
     /**
@@ -51,11 +51,11 @@ public class SnakeYAMLDataFormatConfiguration
      */
     private String dumperOptions;
     /**
-     * Resolver to detect implicit type
+     * Resolver to detect implicit type.
      */
     private String resolver;
     /**
-     * Use ApplicationContextClassLoader as custom ClassLoader
+     * Use ApplicationContextClassLoader as custom ClassLoader.
      */
     private Boolean useApplicationContextClassLoader = true;
     /**
@@ -64,7 +64,7 @@ public class SnakeYAMLDataFormatConfiguration
      */
     private Boolean prettyFlow = false;
     /**
-     * Allow any class to be un-marshaled
+     * Allow any class to be un-marshaled.
      */
     private Boolean allowAnyType = false;
     /**

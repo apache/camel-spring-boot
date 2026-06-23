@@ -52,7 +52,7 @@ The starter supports 32 options, which are listed below.
 | camel.component.crypto.secure-random-name | Sets the reference name for a SecureRandom that can be found in the registry. |  | String
 | camel.component.crypto.signature-header-name | Set the name of the message header that should be used to store the base64 encoded signature. This defaults to 'CamelDigitalSignature' |  | String
 | camel.dataformat.crypto.algorithm | The JCE algorithm name indicating the cryptographic algorithm that will be used. |  | String
-| camel.dataformat.crypto.algorithm-parameter-spec | A JCE AlgorithmParameterSpec used to initialize the Cipher. Will lookup the type using the given name as a java.security.spec.AlgorithmParameterSpec type. The option is a java.security.spec.AlgorithmParameterSpec type. |  | String
+| camel.dataformat.crypto.algorithm-parameter-spec | A JCE AlgorithmParameterSpec used to initialize the Cipher. The option is a java.security.spec.AlgorithmParameterSpec type. |  | String
 | camel.dataformat.crypto.buffer-size | The size of the buffer used in the signature process. | 4096 | Integer
 | camel.dataformat.crypto.crypto-provider | The name of the JCE Security Provider that should be used. |  | String
 | camel.dataformat.crypto.enabled | Whether to enable auto configuration of the crypto data format. This is enabled by default. |  | Boolean

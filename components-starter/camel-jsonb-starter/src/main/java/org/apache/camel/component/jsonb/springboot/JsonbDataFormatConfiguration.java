@@ -43,7 +43,7 @@ public class JsonbDataFormatConfiguration
      */
     private Boolean prettyPrint = false;
     /**
-     * Class name of the java type to use when unmarshalling
+     * Class name of the java type to use when unmarshalling.
      */
     private String unmarshalType;
 

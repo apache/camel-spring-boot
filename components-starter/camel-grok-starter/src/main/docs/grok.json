@@ -16,7 +16,7 @@
     {
       "name": "camel.dataformat.grok.allow-multiple-matches-per-line",
       "type": "java.lang.Boolean",
-      "description": "If false, every line of input is matched for pattern only once. Otherwise the line can be scanned multiple times when non-terminal pattern is used.",
+      "description": "Whether to allow multiple matches per line. If false, every line of input is matched for the pattern only once. Otherwise the line can be scanned multiple times when a non-terminal pattern is used.",
       "sourceType": "org.apache.camel.component.grok.springboot.GrokDataFormatConfiguration",
       "defaultValue": true
     },
@@ -34,21 +34,21 @@
     {
       "name": "camel.dataformat.grok.flattened",
       "type": "java.lang.Boolean",
-      "description": "Turns on flattened mode. In flattened mode the exception is thrown when there are multiple pattern matches with same key.",
+      "description": "Whether to use flattened mode. In flattened mode an exception is thrown when there are multiple pattern matches with the same key.",
       "sourceType": "org.apache.camel.component.grok.springboot.GrokDataFormatConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.dataformat.grok.named-only",
       "type": "java.lang.Boolean",
-      "description": "Whether to capture named expressions only or not (i.e. %{IP:ip} but not ${IP})",
+      "description": "Whether to capture named expressions only or not (i.e. %{IP:ip} but not ${IP}).",
       "sourceType": "org.apache.camel.component.grok.springboot.GrokDataFormatConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.dataformat.grok.pattern",
       "type": "java.lang.String",
-      "description": "The grok pattern to match lines of input",
+      "description": "The grok pattern to match lines of input.",
       "sourceType": "org.apache.camel.component.grok.springboot.GrokDataFormatConfiguration"
     }
   ],

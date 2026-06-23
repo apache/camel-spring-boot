@@ -37,25 +37,15 @@ public class XMLSecurityDataFormatConfiguration
     private Boolean enabled;
     /**
      * The cipher algorithm to be used for encryption/decryption of the XML
-     * message content. The available choices are: XMLCipher.TRIPLEDES
-     * XMLCipher.AES_128 XMLCipher.AES_128_GCM XMLCipher.AES_192
-     * XMLCipher.AES_192_GCM XMLCipher.AES_256 XMLCipher.AES_256_GCM
-     * XMLCipher.SEED_128 XMLCipher.CAMELLIA_128 XMLCipher.CAMELLIA_192
-     * XMLCipher.CAMELLIA_256 The default value is XMLCipher.AES_256_GCM
+     * message content.
      */
     private String xmlCipherAlgorithm = "AES-256-GCM";
     /**
-     * A String used as passPhrase to encrypt/decrypt content. The passPhrase
-     * has to be provided. The passPhrase needs to be put together in
-     * conjunction with the appropriate encryption algorithm. For example using
-     * TRIPLEDES the passPhase can be a Only another 24 Byte key
+     * A String used as passPhrase to encrypt/decrypt content.
      */
     private String passPhrase;
     /**
-     * A byte used as passPhrase to encrypt/decrypt content. The passPhrase has
-     * to be provided. The passPhrase needs to be put together in conjunction
-     * with the appropriate encryption algorithm. For example using TRIPLEDES
-     * the passPhase can be a Only another 24 Byte key
+     * A byte used as passPhrase to encrypt/decrypt content.
      */
     private byte[] passPhraseByte;
     /**
@@ -66,15 +56,13 @@ public class XMLSecurityDataFormatConfiguration
     private String secureTag;
     /**
      * A boolean value to specify whether the XML Element is to be encrypted or
-     * the contents of the XML Element. false = Element Level. true = Element
+     * the contents of the XML Element. false = Element Level, true = Element
      * Content Level.
      */
     private Boolean secureTagContents = false;
     /**
      * The cipher algorithm to be used for encryption/decryption of the
-     * asymmetric key. The available choices are: XMLCipher.RSA_v1dot5
-     * XMLCipher.RSA_OAEP XMLCipher.RSA_OAEP_11 The default value is
-     * XMLCipher.RSA_OAEP
+     * asymmetric key.
      */
     private String keyCipherAlgorithm = "RSA_OAEP";
     /**
@@ -96,16 +84,11 @@ public class XMLSecurityDataFormatConfiguration
      */
     private String keyPassword;
     /**
-     * The digest algorithm to use with the RSA OAEP algorithm. The available
-     * choices are: XMLCipher.SHA1 XMLCipher.SHA256 XMLCipher.SHA512 The default
-     * value is XMLCipher.SHA1
+     * The digest algorithm to use with the RSA OAEP algorithm.
      */
     private String digestAlgorithm = "SHA1";
     /**
-     * The MGF Algorithm to use with the RSA OAEP algorithm. The available
-     * choices are: EncryptionConstants.MGF1_SHA1
-     * EncryptionConstants.MGF1_SHA256 EncryptionConstants.MGF1_SHA512 The
-     * default value is EncryptionConstants.MGF1_SHA1
+     * The MGF Algorithm to use with the RSA OAEP algorithm.
      */
     private String mgfAlgorithm = "MGF1_SHA1";
     /**
@@ -114,7 +97,7 @@ public class XMLSecurityDataFormatConfiguration
      */
     private Boolean addKeyValueForEncryptedKey = true;
     /**
-     * Refers to a Map XML Namespaces of prefix - uri mappings
+     * Refers to a Map of XML Namespaces of prefix to uri mappings.
      */
     private Map namespace;
 

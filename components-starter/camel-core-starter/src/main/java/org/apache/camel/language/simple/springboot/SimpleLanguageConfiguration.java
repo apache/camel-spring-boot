@@ -35,26 +35,21 @@ public class SimpleLanguageConfiguration
      */
     private Boolean enabled;
     /**
-     * Whether to trim the returned values when this language are in use. For
-     * example the output result may contain unwanted line breaks at the
-     * beginning and end such as when using Java DSL with multi-line blocks. Is
-     * default false to be backwards compatible with existing behavior.
+     * Whether to trim the returned values when this language is in use.
      */
     private Boolean trimResult = false;
     /**
-     * To pretty format the output (only JSon or XML supported)
+     * To pretty format the output (only JSon or XML supported).
      */
     private Boolean pretty = false;
     /**
      * If the result is a nested simple expression should this expression be
-     * evaluated as well
+     * evaluated as well.
      */
     private Boolean nested = false;
     /**
      * Whether to trim the source code to remove leading and trailing
-     * whitespaces and line breaks. For example when using DSLs where the source
-     * will span across multiple lines and there may be additional line breaks
-     * at both the beginning and end.
+     * whitespaces and line breaks.
      */
     private Boolean trim = true;
 

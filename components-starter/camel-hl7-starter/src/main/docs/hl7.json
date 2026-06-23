@@ -44,13 +44,13 @@
     {
       "name": "camel.dataformat.hl7.target-format",
       "type": "java.lang.String",
-      "description": "The target format for marshal output and unmarshal result type. By default, marshal encodes to HL7 ER7, and unmarshal returns a HAPI Message object. If this is set to XML, marshal encodes to HL7 XML, and unmarshal returns an XML DOM Document.",
+      "description": "The target format for marshal output and unmarshal result type. By default, marshal encodes to HL7 ER7 and unmarshal returns a HAPI Message object. If set to XML, marshal encodes to HL7 XML and unmarshal returns an XML DOM Document.",
       "sourceType": "org.apache.camel.component.hl7.springboot.HL7DataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.hl7.validate",
       "type": "java.lang.Boolean",
-      "description": "Whether to validate the HL7 message Is by default true.",
+      "description": "Whether to validate the HL7 message.",
       "sourceType": "org.apache.camel.component.hl7.springboot.HL7DataFormatConfiguration",
       "defaultValue": true
     },
@@ -74,7 +74,7 @@
     {
       "name": "camel.language.hl7terser.trim",
       "type": "java.lang.Boolean",
-      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks. For example when using DSLs where the source will span across multiple lines and there may be additional line breaks at both the beginning and end.",
+      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks.",
       "sourceType": "org.apache.camel.component.hl7.springboot.Hl7TerserLanguageConfiguration",
       "defaultValue": true
     }

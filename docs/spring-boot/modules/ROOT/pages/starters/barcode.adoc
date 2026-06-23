@@ -28,9 +28,9 @@ The starter supports 5 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| camel.dataformat.barcode.barcode-format | Barcode format such as QR-Code | QR_CODE | String
+| camel.dataformat.barcode.barcode-format | Barcode format such as QR-Code. | QR_CODE | String
 | camel.dataformat.barcode.enabled | Whether to enable auto configuration of the barcode data format. This is enabled by default. |  | Boolean
-| camel.dataformat.barcode.height | Height of the barcode | 100 | Integer
-| camel.dataformat.barcode.image-type | Image type of the barcode such as png | PNG | String
-| camel.dataformat.barcode.width | Width of the barcode | 100 | Integer
+| camel.dataformat.barcode.height | Height of the barcode. | 100 | Integer
+| camel.dataformat.barcode.image-type | Image type of the barcode such as png. | PNG | String
+| camel.dataformat.barcode.width | Width of the barcode. | 100 | Integer
 |===

@@ -40,44 +40,45 @@ public class JacksonXMLDataFormatConfiguration
      */
     private String xmlMapper;
     /**
-     * To enable pretty printing output nicely formatted. Is by default false.
+     * Whether to enable pretty printing output nicely formatted. Is by default
+     * false.
      */
     private Boolean prettyPrint = false;
     /**
-     * Class name of the java type to use when unmarshalling
+     * Class name of the java type to use when unmarshalling.
      */
     private String unmarshalType;
     /**
-     * If enabled then Jackson is allowed to attempt to use the
-     * CamelJacksonUnmarshalType header during the unmarshalling. This should
-     * only be enabled when desired to be used.
+     * Whether to allow Jackson to use the CamelJacksonUnmarshalType header
+     * during unmarshalling. Should only be enabled when desired.
      */
     private Boolean allowUnmarshallType = false;
     /**
      * When marshalling a POJO to JSON you might want to exclude certain fields
      * from the JSON output. With Jackson you can use JSON views to accomplish
-     * this. This option is to refer to the class which has JsonView annotations
+     * this. This option is to refer to the class which has JsonView
+     * annotations.
      */
     private String jsonView;
     /**
-     * If you want to marshal a pojo to JSON, and the pojo has some fields with
+     * If you want to marshal a POJO to JSON, and the POJO has some fields with
      * null values. And you want to skip these null values, you can set this
-     * option to NON_NULL
+     * option to NON_NULL.
      */
     private String include;
     /**
-     * Used for JMS users to allow the JMSType header from the JMS spec to
-     * specify a FQN classname to use to unmarshal to.
+     * Whether to allow the JMSType header from the JMS spec to specify a FQN
+     * classname to use to unmarshal to.
      */
     private Boolean allowJmsType = false;
     /**
      * Refers to a custom collection type to lookup in the registry to use. This
-     * option should rarely be used, but allows to use different collection
-     * types than java.util.Collection based as default.
+     * option should rarely be used, but allows using different collection types
+     * than java.util.Collection based as default.
      */
     private String collectionType;
     /**
-     * To unmarshal to a List of Map or a List of Pojo.
+     * Whether to unmarshal to a List of Map or a List of Pojo.
      */
     private Boolean useList = false;
     /**
@@ -85,7 +86,7 @@ public class JacksonXMLDataFormatConfiguration
      */
     private String timezone;
     /**
-     * Whether to enable the JAXB annotations module when using jackson. When
+     * Whether to enable the JAXB annotations module when using Jackson. When
      * enabled then JAXB annotations can be used by Jackson.
      */
     private Boolean enableJaxbAnnotationModule = false;
@@ -103,21 +104,17 @@ public class JacksonXMLDataFormatConfiguration
     /**
      * Set of features to enable on the Jackson
      * com.fasterxml.jackson.databind.ObjectMapper. The features should be a
-     * name that matches a enum from
-     * com.fasterxml.jackson.databind.SerializationFeature,
-     * com.fasterxml.jackson.databind.DeserializationFeature, or
-     * com.fasterxml.jackson.databind.MapperFeature Multiple features can be
-     * separated by comma
+     * name that matches a enum from SerializationFeature,
+     * DeserializationFeature, or MapperFeature. Multiple features can be
+     * separated by comma.
      */
     private String enableFeatures;
     /**
      * Set of features to disable on the Jackson
      * com.fasterxml.jackson.databind.ObjectMapper. The features should be a
-     * name that matches a enum from
-     * com.fasterxml.jackson.databind.SerializationFeature,
-     * com.fasterxml.jackson.databind.DeserializationFeature, or
-     * com.fasterxml.jackson.databind.MapperFeature Multiple features can be
-     * separated by comma
+     * name that matches a enum from SerializationFeature,
+     * DeserializationFeature, or MapperFeature. Multiple features can be
+     * separated by comma.
      */
     private String disableFeatures;
     /**
@@ -128,12 +125,8 @@ public class JacksonXMLDataFormatConfiguration
      */
     private Boolean contentTypeHeader = true;
     /**
-     * Sets the maximum string length (in chars or bytes, depending on input
-     * context). The default is 20,000,000. This limit is not exact, the limit
-     * is applied when we increase internal buffer sizes and an exception will
-     * happen at sizes greater than this limit. Some text values that are a
-     * little bigger than the limit may be treated as valid but no text values
-     * with sizes less than or equal to this limit will be treated as invalid.
+     * Maximum allowed string length when deserializing (in chars or bytes,
+     * depending on input context). The default is 20,000,000.
      */
     private Integer maxStringLength;
 

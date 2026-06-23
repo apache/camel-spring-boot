@@ -38,7 +38,7 @@
     {
       "name": "camel.dataformat.swift-mt.write-in-json",
       "type": "java.lang.Boolean",
-      "description": "The flag indicating that messages must be marshalled in a JSON format.",
+      "description": "Whether to marshal messages in JSON format.",
       "sourceType": "org.apache.camel.dataformat.swift.mt.springboot.SwiftMtDataFormatConfiguration",
       "defaultValue": false
     },
@@ -74,7 +74,7 @@
     {
       "name": "camel.dataformat.swift-mx.write-in-json",
       "type": "java.lang.Boolean",
-      "description": "The flag indicating that messages must be marshalled in a JSON format.",
+      "description": "Whether to marshal messages in JSON format.",
       "sourceType": "org.apache.camel.dataformat.swift.mx.springboot.SwiftMxDataFormatConfiguration",
       "defaultValue": false
     }

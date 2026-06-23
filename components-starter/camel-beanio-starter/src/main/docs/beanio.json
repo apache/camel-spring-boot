@@ -16,7 +16,7 @@
     {
       "name": "camel.dataformat.beanio.bean-reader-error-handler-type",
       "type": "java.lang.String",
-      "description": "To use a custom org.apache.camel.dataformat.beanio.BeanIOErrorHandler as error handler while parsing. Configure the fully qualified class name of the error handler. Notice the options ignoreUnidentifiedRecords, ignoreUnexpectedRecords, and ignoreInvalidRecords may not be in use when you use a custom error handler.",
+      "description": "To use a custom org.apache.camel.dataformat.beanio.BeanIOErrorHandler as error handler while parsing. Configure the fully qualified class name of the error handler.",
       "sourceType": "org.apache.camel.dataformat.beanio.springboot.BeanIODataFormatConfiguration"
     },
     {
@@ -72,7 +72,7 @@
     {
       "name": "camel.dataformat.beanio.unmarshal-single-object",
       "type": "java.lang.Boolean",
-      "description": "This options controls whether to unmarshal as a list of objects or as a single object only. The former is the default mode, and the latter is only intended in special use-cases where beanio maps the Camel message to a single POJO bean.",
+      "description": "This option controls whether to unmarshal as a list of objects or as a single object only.",
       "sourceType": "org.apache.camel.dataformat.beanio.springboot.BeanIODataFormatConfiguration",
       "defaultValue": false
     }

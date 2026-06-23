@@ -35,7 +35,7 @@ public class AvroDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * Class name to use for marshal and unmarshalling
+     * Class name to use for marshal and unmarshalling.
      */
     private String instanceClassName;
 

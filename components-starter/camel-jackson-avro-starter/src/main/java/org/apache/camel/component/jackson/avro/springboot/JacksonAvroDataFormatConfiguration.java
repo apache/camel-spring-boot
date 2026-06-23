@@ -44,19 +44,20 @@ public class JacksonAvroDataFormatConfiguration
      */
     private Boolean useDefaultObjectMapper = true;
     /**
-     * Class name of the java type to use when unmarshalling
+     * Class name of the java type to use when unmarshalling.
      */
     private String unmarshalType;
     /**
      * When marshalling a POJO to JSON you might want to exclude certain fields
      * from the JSON output. With Jackson you can use JSON views to accomplish
-     * this. This option is to refer to the class which has JsonView annotations
+     * this. This option is to refer to the class which has JsonView
+     * annotations.
      */
     private String jsonView;
     /**
      * If you want to marshal a pojo to JSON, and the pojo has some fields with
      * null values. And you want to skip these null values, you can set this
-     * option to NON_NULL
+     * option to NON_NULL.
      */
     private String include;
     /**
@@ -65,9 +66,7 @@ public class JacksonAvroDataFormatConfiguration
      */
     private Boolean allowJmsType = false;
     /**
-     * Refers to a custom collection type to lookup in the registry to use. This
-     * option should rarely be used, but allows to use different collection
-     * types than java.util.Collection based as default.
+     * Refers to a custom collection type to lookup in the registry to use.
      */
     private String collectionType;
     /**
@@ -87,28 +86,19 @@ public class JacksonAvroDataFormatConfiguration
     private String moduleRefs;
     /**
      * Set of features to enable on the Jackson
-     * com.fasterxml.jackson.databind.ObjectMapper. The features should be a
-     * name that matches a enum from
-     * com.fasterxml.jackson.databind.SerializationFeature,
-     * com.fasterxml.jackson.databind.DeserializationFeature, or
-     * com.fasterxml.jackson.databind.MapperFeature Multiple features can be
-     * separated by comma
+     * com.fasterxml.jackson.databind.ObjectMapper. Multiple features can be
+     * separated by comma.
      */
     private String enableFeatures;
     /**
      * Set of features to disable on the Jackson
-     * com.fasterxml.jackson.databind.ObjectMapper. The features should be a
-     * name that matches a enum from
-     * com.fasterxml.jackson.databind.SerializationFeature,
-     * com.fasterxml.jackson.databind.DeserializationFeature, or
-     * com.fasterxml.jackson.databind.MapperFeature Multiple features can be
-     * separated by comma
+     * com.fasterxml.jackson.databind.ObjectMapper. Multiple features can be
+     * separated by comma.
      */
     private String disableFeatures;
     /**
      * If enabled then Jackson is allowed to attempt to use the
-     * CamelJacksonUnmarshalType header during the unmarshalling. This should
-     * only be enabled when desired to be used.
+     * CamelJacksonUnmarshalType header during the unmarshalling.
      */
     private Boolean allowUnmarshallType = false;
     /**
@@ -117,7 +107,7 @@ public class JacksonAvroDataFormatConfiguration
     private String timezone;
     /**
      * If set to true then Jackson will lookup for an objectMapper into the
-     * registry
+     * registry.
      */
     private Boolean autoDiscoverObjectMapper = false;
     /**
@@ -132,7 +122,8 @@ public class JacksonAvroDataFormatConfiguration
      */
     private String schemaResolver;
     /**
-     * When not disabled, the SchemaResolver will be looked up into the registry
+     * When not disabled, the SchemaResolver will be looked up into the
+     * registry.
      */
     private Boolean autoDiscoverSchemaResolver = true;
 

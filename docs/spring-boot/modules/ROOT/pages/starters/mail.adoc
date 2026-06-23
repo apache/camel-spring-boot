@@ -88,10 +88,10 @@ The starter supports 60 options, which are listed below.
 | camel.component.mail.use-inline-attachments | Whether to use disposition inline or attachment. | false | Boolean
 | camel.component.mail.use-java-mail-session-properties-from-headers | Whether to allow dynamic JavaMail session properties (message headers whose key starts with mail.smtp. or mail.smtps.) to override the endpoint configuration on a per-message basis. This is disabled by default. Only enable it when these headers originate exclusively from trusted route logic, never from data crossing a trust boundary (for example HTTP query parameters, or JMS/Kafka messages from untrusted producers). When enabled, an attacker able to set these headers could weaken transport security (such as mail.smtp.ssl.trust or mail.smtp.starttls.enable) or redirect the SMTP connection. | false | Boolean
 | camel.component.mail.username | The username for login. See also setAuthenticator(MailAuthenticator). |  | String
-| camel.dataformat.mime-multipart.binary-content | Defines whether the content of binary parts in the MIME multipart is binary (true) or Base-64 encoded (false) Default is false. | false | Boolean
+| camel.dataformat.mime-multipart.binary-content | Whether the content of binary parts in the MIME multipart is binary (true) or Base-64 encoded (false). | false | Boolean
 | camel.dataformat.mime-multipart.enabled | Whether to enable auto configuration of the mimeMultipart data format. This is enabled by default. |  | Boolean
-| camel.dataformat.mime-multipart.headers-inline | Defines whether the MIME-Multipart headers are part of the message body (true) or are set as Camel headers (false). Default is false. | false | Boolean
-| camel.dataformat.mime-multipart.include-headers | A regex that defines which Camel headers are also included as MIME headers into the MIME multipart. This will only work if headersInline is set to true. Default is to include no headers |  | String
-| camel.dataformat.mime-multipart.multipart-sub-type | Specify the subtype of the MIME Multipart. Default is mixed. | mixed | String
-| camel.dataformat.mime-multipart.multipart-without-attachment | Defines whether a message without attachment is also marshaled into a MIME Multipart (with only one body part). Default is false. | false | Boolean
+| camel.dataformat.mime-multipart.headers-inline | Whether the MIME-Multipart headers are part of the message body (true) or are set as Camel headers (false). | false | Boolean
+| camel.dataformat.mime-multipart.include-headers | A regex that defines which Camel headers are also included as MIME headers into the MIME multipart. This only works if headersInline is set to true. |  | String
+| camel.dataformat.mime-multipart.multipart-sub-type | Specify the subtype of the MIME Multipart. | mixed | String
+| camel.dataformat.mime-multipart.multipart-without-attachment | Whether a message without attachment is also marshaled into a MIME Multipart (with only one body part). | false | Boolean
 |===
