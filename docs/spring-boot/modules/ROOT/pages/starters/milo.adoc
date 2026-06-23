@@ -25,7 +25,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 74 options, which are listed below.
+The starter supports 78 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -51,11 +51,13 @@ The starter supports 74 options, which are listed below.
 | camel.component.milo-browse.milo-client-connection-manager | Instance for managing client connections. The option is a org.apache.camel.component.milo.client.MiloClientConnectionManager type. |  | MiloClientConnectionManager
 | camel.component.milo-browse.override-host | Override the server reported endpoint host with the host from the endpoint URI. | false | Boolean
 | camel.component.milo-browse.override-port | Override the server reported endpoint port with the port from the endpoint URI. | false | Boolean
+| camel.component.milo-browse.password | The password for authentication. Use this instead of embedding credentials in the endpoint URI when the password contains special characters (such as \{code }, \{code /}, \{code }, \{code &}). |  | String
 | camel.component.milo-browse.product-uri | The product URI | http://camel.apache.org/EclipseMilo | String
 | camel.component.milo-browse.request-timeout | Request timeout in milliseconds |  | Long
 | camel.component.milo-browse.requested-publishing-interval | The requested publishing interval in milliseconds |  | Double
 | camel.component.milo-browse.session-name | Session name |  | String
 | camel.component.milo-browse.session-timeout | Session timeout in milliseconds |  | Long
+| camel.component.milo-browse.username | The username for authentication. Use this instead of embedding credentials in the endpoint URI when the username contains special characters (such as \{code }, \{code /}, \{code }, \{code &}). |  | String
 | camel.component.milo-client.allowed-security-policies | A set of allowed security policy URIs. Default is to accept all and use the highest. |  | String
 | camel.component.milo-client.application-name | The application name | Apache Camel adapter for Eclipse Milo | String
 | camel.component.milo-client.application-uri | The application URI | http://camel.apache.org/EclipseMilo/Client | String
@@ -78,11 +80,13 @@ The starter supports 74 options, which are listed below.
 | camel.component.milo-client.milo-client-connection-manager | Instance for managing client connections. The option is a org.apache.camel.component.milo.client.MiloClientConnectionManager type. |  | MiloClientConnectionManager
 | camel.component.milo-client.override-host | Override the server reported endpoint host with the host from the endpoint URI. | false | Boolean
 | camel.component.milo-client.override-port | Override the server reported endpoint port with the port from the endpoint URI. | false | Boolean
+| camel.component.milo-client.password | The password for authentication. Use this instead of embedding credentials in the endpoint URI when the password contains special characters (such as \{code }, \{code /}, \{code }, \{code &}). |  | String
 | camel.component.milo-client.product-uri | The product URI | http://camel.apache.org/EclipseMilo | String
 | camel.component.milo-client.request-timeout | Request timeout in milliseconds |  | Long
 | camel.component.milo-client.requested-publishing-interval | The requested publishing interval in milliseconds |  | Double
 | camel.component.milo-client.session-name | Session name |  | String
 | camel.component.milo-client.session-timeout | Session timeout in milliseconds |  | Long
+| camel.component.milo-client.username | The username for authentication. Use this instead of embedding credentials in the endpoint URI when the username contains special characters (such as \{code }, \{code /}, \{code }, \{code &}). |  | String
 | camel.component.milo-server.application-name | The application name |  | String
 | camel.component.milo-server.application-uri | The application URI |  | String
 | camel.component.milo-server.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean

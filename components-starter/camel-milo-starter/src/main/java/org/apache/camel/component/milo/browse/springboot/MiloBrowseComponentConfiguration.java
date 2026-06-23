@@ -154,6 +154,18 @@ public class MiloBrowseComponentConfiguration
      * Session timeout in milliseconds
      */
     private Long sessionTimeout;
+    /**
+     * The password for authentication. Use this instead of embedding
+     * credentials in the endpoint URI when the password contains special
+     * characters (such as {code }, {code /}, {code }, {code &}).
+     */
+    private String password;
+    /**
+     * The username for authentication. Use this instead of embedding
+     * credentials in the endpoint URI when the username contains special
+     * characters (such as {code }, {code /}, {code }, {code &}).
+     */
+    private String username;
 
     public String getClientId() {
         return clientId;
@@ -355,5 +367,21 @@ public class MiloBrowseComponentConfiguration
 
     public void setSessionTimeout(Long sessionTimeout) {
         this.sessionTimeout = sessionTimeout;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

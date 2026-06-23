@@ -217,26 +217,26 @@ public class MailComponentConfiguration
      * always use the endpoint URI sender, ignoring any From or Sender headers
      * from the message.
      */
-    private Boolean useHeaderFrom = true;
+    private Boolean useHeaderFrom = false;
     /**
      * Whether message headers To, CC, and BCC override the recipients
      * pre-configured in the endpoint URI. Defaults to true. Set to false to
      * always use the endpoint URI recipients, ignoring any recipient headers
      * from the message.
      */
-    private Boolean useHeaderRecipients = true;
+    private Boolean useHeaderRecipients = false;
     /**
      * Whether message header Reply-To overrides the replyTo pre-configured in
      * the endpoint URI. Defaults to true. Set to false to always use the
      * endpoint URI replyTo, ignoring any Reply-To header from the message.
      */
-    private Boolean useHeaderReplyTo = true;
+    private Boolean useHeaderReplyTo = false;
     /**
      * Whether message header Subject overrides the subject pre-configured in
      * the endpoint URI. Defaults to true. Set to false to always use the
      * endpoint URI subject, ignoring any Subject header from the message.
      */
-    private Boolean useHeaderSubject = true;
+    private Boolean useHeaderSubject = false;
     /**
      * To use a custom org.apache.camel.component.mail.JavaMailSender for
      * sending emails. The option is a

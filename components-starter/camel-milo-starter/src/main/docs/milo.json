@@ -173,6 +173,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.milo-browse.password",
+      "type": "java.lang.String",
+      "description": "The password for authentication. Use this instead of embedding credentials in the endpoint URI when the password contains special characters (such as {code }, {code \/}, {code }, {code &}).",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
       "name": "camel.component.milo-browse.product-uri",
       "type": "java.lang.String",
       "description": "The product URI",
@@ -201,6 +207,12 @@
       "name": "camel.component.milo-browse.session-timeout",
       "type": "java.lang.Long",
       "description": "Session timeout in milliseconds",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-browse.username",
+      "type": "java.lang.String",
+      "description": "The username for authentication. Use this instead of embedding credentials in the endpoint URI when the username contains special characters (such as {code }, {code \/}, {code }, {code &}).",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
@@ -348,6 +360,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.milo-client.password",
+      "type": "java.lang.String",
+      "description": "The password for authentication. Use this instead of embedding credentials in the endpoint URI when the password contains special characters (such as {code }, {code \/}, {code }, {code &}).",
+      "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
+    },
+    {
       "name": "camel.component.milo-client.product-uri",
       "type": "java.lang.String",
       "description": "The product URI",
@@ -376,6 +394,12 @@
       "name": "camel.component.milo-client.session-timeout",
       "type": "java.lang.Long",
       "description": "Session timeout in milliseconds",
+      "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milo-client.username",
+      "type": "java.lang.String",
+      "description": "The username for authentication. Use this instead of embedding credentials in the endpoint URI when the username contains special characters (such as {code }, {code \/}, {code }, {code &}).",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
