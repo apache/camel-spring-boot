@@ -47,6 +47,12 @@
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
+      "name": "camel.component.atmosphere-websocket.deserialization-filter",
+      "type": "java.lang.String",
+      "description": "Sets an ObjectInputFilter pattern (jdk.serialFilter syntax) applied when deserializing Java objects from requests or responses with Content-Type application\/x-java-serialized-object (only used when allowJavaSerializedObject or transferException is enabled). When not set, the JVM-wide jdk.serialFilter is used if present; otherwise a conservative default filter denying java.net. and otherwise allowing java., javax. and org.apache.camel. packages is applied.",
+      "sourceType": "org.apache.camel.component.atmosphere.websocket.springboot.WebsocketComponentConfiguration"
+    },
+    {
       "name": "camel.component.atmosphere-websocket.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the atmosphere-websocket component. This is enabled by default.",

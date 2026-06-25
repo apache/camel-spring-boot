@@ -114,6 +114,16 @@ public class ServletComponentConfiguration
      * org.apache.camel.spi.HeaderFilterStrategy type.
      */
     private HeaderFilterStrategy headerFilterStrategy;
+    /**
+     * Sets an ObjectInputFilter pattern (jdk.serialFilter syntax) applied when
+     * deserializing Java objects from requests or responses with Content-Type
+     * application/x-java-serialized-object (only used when
+     * allowJavaSerializedObject or transferException is enabled). When not set,
+     * the JVM-wide jdk.serialFilter is used if present; otherwise a
+     * conservative default filter denying java.net. and otherwise allowing
+     * java., javax. and org.apache.camel. packages is applied.
+     */
+    private String deserializationFilter;
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
@@ -202,5 +212,13 @@ public class ServletComponentConfiguration
     public void setHeaderFilterStrategy(
             HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
+    }
+
+    public String getDeserializationFilter() {
+        return deserializationFilter;
+    }
+
+    public void setDeserializationFilter(String deserializationFilter) {
+        this.deserializationFilter = deserializationFilter;
     }
 }

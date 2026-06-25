@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 39 options, which are listed below.
+The starter supports 40 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -32,6 +32,7 @@ The starter supports 39 options, which are listed below.
 | camel.component.jetty.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.jetty.bridge-error-handler | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | camel.component.jetty.continuation-timeout | Allows to set a timeout in millis when using Jetty as consumer (server). By default Jetty uses 30000. You can use a value of = 0 to never expire. If a timeout occurs then the request will be expired and Jetty will return back a http error 503 to the client. This option is only in use when using Jetty with the Asynchronous Routing Engine. | 30000 | Long
+| camel.component.jetty.deserialization-filter | Sets an ObjectInputFilter pattern (jdk.serialFilter syntax) applied when deserializing Java objects from requests or responses with Content-Type application/x-java-serialized-object (only used when allowJavaSerializedObject or transferException is enabled). When not set, the JVM-wide jdk.serialFilter is used if present; otherwise a conservative default filter denying java.net. and otherwise allowing java., javax. and org.apache.camel. packages is applied. |  | String
 | camel.component.jetty.enable-jmx | If this option is true, Jetty JMX support will be enabled for this endpoint. | false | Boolean
 | camel.component.jetty.enabled | Whether to enable auto configuration of the jetty component. This is enabled by default. |  | Boolean
 | camel.component.jetty.error-handler | This option is used to set the ErrorHandler that Jetty server uses. The option is a org.eclipse.jetty.server.handler.ErrorHandler type. |  | ErrorHandler

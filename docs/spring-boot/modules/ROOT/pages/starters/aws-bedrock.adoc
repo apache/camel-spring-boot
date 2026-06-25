@@ -25,7 +25,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 87 options, which are listed below.
+The starter supports 86 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -71,7 +71,6 @@ The starter supports 87 options, which are listed below.
 | camel.component.aws-bedrock-agent.ingestion-job-id | Define the Ingestion Job Id we want to track |  | String
 | camel.component.aws-bedrock-agent.knowledge-base-id | Define the Knowledge Base Id we are going to use |  | String
 | camel.component.aws-bedrock-agent.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.aws-bedrock-agent.model-id | Define the model Id we are going to use |  | String
 | camel.component.aws-bedrock-agent.operation | The operation to perform |  | BedrockAgentOperations
 | camel.component.aws-bedrock-agent.override-endpoint | Set the need for overriding the endpoint. This option needs to be used in combination with the uriEndpointOverride option | false | Boolean
 | camel.component.aws-bedrock-agent.pojo-request | If we want to use a POJO request as body or not | false | Boolean

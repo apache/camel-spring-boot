@@ -310,12 +310,6 @@
       "defaultValue": false
     },
     {
-      "name": "camel.component.aws-bedrock-agent.model-id",
-      "type": "java.lang.String",
-      "description": "Define the model Id we are going to use",
-      "sourceType": "org.apache.camel.component.aws2.bedrock.agent.springboot.BedrockAgentComponentConfiguration"
-    },
-    {
       "name": "camel.component.aws-bedrock-agent.operation",
       "type": "org.apache.camel.component.aws2.bedrock.agent.BedrockAgentOperations",
       "description": "The operation to perform",

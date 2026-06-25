@@ -274,6 +274,16 @@ public class HttpComponentConfiguration
      */
     private Integer proxyPort;
     /**
+     * Sets an ObjectInputFilter pattern (jdk.serialFilter syntax) applied when
+     * deserializing Java objects from requests or responses with Content-Type
+     * application/x-java-serialized-object (only used when
+     * allowJavaSerializedObject or transferException is enabled). When not set,
+     * the JVM-wide jdk.serialFilter is used if present; otherwise a
+     * conservative default filter denying java.net. and otherwise allowing
+     * java., javax. and org.apache.camel. packages is applied.
+     */
+    private String deserializationFilter;
+    /**
      * Controls how hostname verification is performed during the TLS handshake.
      * CLIENT (default) delegates entirely to the configured
      * x509HostnameVerifier, preserving the behaviour of httpclient 5.5 and
@@ -673,6 +683,14 @@ public class HttpComponentConfiguration
 
     public void setProxyPort(Integer proxyPort) {
         this.proxyPort = proxyPort;
+    }
+
+    public String getDeserializationFilter() {
+        return deserializationFilter;
+    }
+
+    public void setDeserializationFilter(String deserializationFilter) {
+        this.deserializationFilter = deserializationFilter;
     }
 
     public HostnameVerificationPolicy getHostnameVerificationPolicy() {

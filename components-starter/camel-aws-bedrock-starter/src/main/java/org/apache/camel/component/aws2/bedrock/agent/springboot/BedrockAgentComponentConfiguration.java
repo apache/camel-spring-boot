@@ -54,10 +54,6 @@ public class BedrockAgentComponentConfiguration
      */
     private String knowledgeBaseId;
     /**
-     * Define the model Id we are going to use
-     */
-    private String modelId;
-    /**
      * The operation to perform
      */
     private BedrockAgentOperations operation;
@@ -210,14 +206,6 @@ public class BedrockAgentComponentConfiguration
 
     public void setKnowledgeBaseId(String knowledgeBaseId) {
         this.knowledgeBaseId = knowledgeBaseId;
-    }
-
-    public String getModelId() {
-        return modelId;
-    }
-
-    public void setModelId(String modelId) {
-        this.modelId = modelId;
     }
 
     public BedrockAgentOperations getOperation() {

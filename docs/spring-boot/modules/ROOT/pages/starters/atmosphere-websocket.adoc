@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 13 options, which are listed below.
+The starter supports 14 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -32,6 +32,7 @@ The starter supports 13 options, which are listed below.
 | camel.component.atmosphere-websocket.attachment-multipart-binding | Whether to automatic bind multipart/form-data as attachments on the Camel Exchange. The options attachmentMultipartBinding=true and disableStreamCache=false cannot work together. Remove disableStreamCache to use AttachmentMultipartBinding. This is turn off by default as this may require servlet specific configuration to enable this when using Servlet's. | false | Boolean
 | camel.component.atmosphere-websocket.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.atmosphere-websocket.bridge-error-handler | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
+| camel.component.atmosphere-websocket.deserialization-filter | Sets an ObjectInputFilter pattern (jdk.serialFilter syntax) applied when deserializing Java objects from requests or responses with Content-Type application/x-java-serialized-object (only used when allowJavaSerializedObject or transferException is enabled). When not set, the JVM-wide jdk.serialFilter is used if present; otherwise a conservative default filter denying java.net. and otherwise allowing java., javax. and org.apache.camel. packages is applied. |  | String
 | camel.component.atmosphere-websocket.enabled | Whether to enable auto configuration of the atmosphere-websocket component. This is enabled by default. |  | Boolean
 | camel.component.atmosphere-websocket.file-name-ext-whitelist | Whitelist of accepted filename extensions for accepting uploaded files. Multiple extensions can be separated by comma, such as txt,xml. |  | String
 | camel.component.atmosphere-websocket.header-filter-strategy | To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type. |  | HeaderFilterStrategy

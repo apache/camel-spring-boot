@@ -24,7 +24,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 53 options, which are listed below.
+The starter supports 54 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -45,6 +45,7 @@ The starter supports 53 options, which are listed below.
 | camel.component.http.cookie-store | To use a custom org.apache.hc.client5.http.cookie.CookieStore. By default the org.apache.hc.client5.http.cookie.BasicCookieStore is used which is an in-memory only cookie store. Notice if bridgeEndpoint=true then the cookie store is forced to be a noop cookie store as cookie shouldn't be stored as we are just bridging (eg acting as a proxy). The option is a org.apache.hc.client5.http.cookie.CookieStore type. |  | CookieStore
 | camel.component.http.copy-headers | If this option is true then IN exchange headers will be copied to OUT exchange headers according to copy strategy. Setting this to false, allows to only include the headers from the HTTP response (not propagating IN headers). | true | Boolean
 | camel.component.http.default-user-agent-disabled | Disables the default user agent set by this builder if none has been provided by the user | false | Boolean
+| camel.component.http.deserialization-filter | Sets an ObjectInputFilter pattern (jdk.serialFilter syntax) applied when deserializing Java objects from requests or responses with Content-Type application/x-java-serialized-object (only used when allowJavaSerializedObject or transferException is enabled). When not set, the JVM-wide jdk.serialFilter is used if present; otherwise a conservative default filter denying java.net. and otherwise allowing java., javax. and org.apache.camel. packages is applied. |  | String
 | camel.component.http.enabled | Whether to enable auto configuration of the http component. This is enabled by default. |  | Boolean
 | camel.component.http.follow-redirects | Whether to the HTTP request should follow redirects. By default the HTTP request does not follow redirects | false | Boolean
 | camel.component.http.header-filter-strategy | To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type. |  | HeaderFilterStrategy
