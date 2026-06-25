@@ -3,7 +3,7 @@
 = Java
 :artifactid: camel-joor-starter
 
-Evaluates a Java (Java compiled once at runtime) expression.
+Evaluates a Java (Java compiled once at runtime) expression
 
 == What's inside
 

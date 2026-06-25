@@ -3,7 +3,7 @@
 = OCSF
 :artifactid: camel-ocsf-starter
 
-Marshal and unmarshal OCSF (Open Cybersecurity Schema Framework) security events to/from JSON.
+Marshal and unmarshal OCSF (Open Cybersecurity Schema Framework) security events to/from JSON
 
 == What's inside
 

@@ -3,7 +3,7 @@
 = GZip Deflater
 :artifactid: camel-zip-deflater-starter
 
-Compress and decompress messages using java.util.zip.GZIPStream.
+Compress and decompress messages using java.util.zip.GZIP*Stream
 
 == What's inside
 

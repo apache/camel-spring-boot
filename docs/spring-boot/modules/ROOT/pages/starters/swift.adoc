@@ -3,7 +3,7 @@
 = SWIFT MT
 :artifactid: camel-swift-starter
 
-Encode and decode SWIFT MT messages.
+Encode and decode SWIFT MT messages
 
 == What's inside
 

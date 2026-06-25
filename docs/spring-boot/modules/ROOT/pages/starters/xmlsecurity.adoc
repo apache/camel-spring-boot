@@ -3,7 +3,7 @@
 = XML Security
 :artifactid: camel-xmlsecurity-starter
 
-Encrypt and decrypt XML payloads using Apache Santuario.
+Encrypt and decrypt XML payloads using Apache Santuario
 
 == What's inside
 

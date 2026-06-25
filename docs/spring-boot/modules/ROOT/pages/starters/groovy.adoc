@@ -3,7 +3,7 @@
 = Groovy
 :artifactid: camel-groovy-starter
 
-Evaluates a Groovy script.
+Evaluates a Groovy script
 
 == What's inside
 

@@ -3,7 +3,7 @@
 = Protobuf
 :artifactid: camel-protobuf-starter
 
-Serialize and deserialize Java objects using Google's Protocol buffers.
+Serialize and deserialize Java objects using Google's Protocol buffers
 
 == What's inside
 

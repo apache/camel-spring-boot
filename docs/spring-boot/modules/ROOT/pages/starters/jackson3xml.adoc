@@ -3,7 +3,7 @@
 = Jackson XML
 :artifactid: camel-jackson3xml-starter
 
-Unmarshal an XML payloads to POJOs and back using XMLMapper extension of Jackson.
+Unmarshal an XML payloads to POJOs and back using XMLMapper extension of Jackson
 
 == What's inside
 

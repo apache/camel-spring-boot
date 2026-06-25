@@ -3,7 +3,7 @@
 = CSV
 :artifactid: camel-csv-starter
 
-Handle CSV (Comma Separated Values) payloads.
+Handle CSV (Comma Separated Values) payloads
 
 == What's inside
 

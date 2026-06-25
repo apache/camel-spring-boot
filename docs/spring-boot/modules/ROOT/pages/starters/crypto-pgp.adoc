@@ -3,7 +3,7 @@
 = PGP (Pretty Good Privacy Cryptographic)
 :artifactid: camel-crypto-pgp-starter
 
-Encrypt and decrypt messages using Java Cryptographic Extension (JCE) and PGP.
+Encrypt and decrypt messages using Java Cryptographic Extension (JCE) and PGP
 
 == What's inside
 

@@ -3,7 +3,7 @@
 = SpEL
 :artifactid: camel-spring-starter
 
-Evaluates a Spring expression (SpEL).
+Evaluates a Spring expression (SpEL)
 
 == What's inside
 

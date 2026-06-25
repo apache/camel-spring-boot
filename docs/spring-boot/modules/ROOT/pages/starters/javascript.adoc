@@ -3,7 +3,7 @@
 = JavaScript
 :artifactid: camel-javascript-starter
 
-Evaluates a JavaScript expression.
+Evaluates a JavaScript expression
 
 == What's inside
 

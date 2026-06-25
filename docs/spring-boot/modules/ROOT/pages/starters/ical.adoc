@@ -3,7 +3,7 @@
 = iCal
 :artifactid: camel-ical-starter
 
-Marshal and unmarshal iCal (.ics) documents to/from model objects.
+Marshal and unmarshal iCal (*.ics) documents to/from model objects
 
 == What's inside
 

@@ -3,7 +3,7 @@
 = JQ
 :artifactid: camel-jq-starter
 
-Evaluates a JQ expression against a JSON message body.
+Evaluates a JQ expression against a JSON message body
 
 == What's inside
 

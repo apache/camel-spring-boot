@@ -3,7 +3,7 @@
 = Grok
 :artifactid: camel-grok-starter
 
-Unmarshal unstructured data to objects using Logstash based Grok patterns.
+Unmarshal unstructured data to objects using Logstash based Grok patterns
 
 == What's inside
 
