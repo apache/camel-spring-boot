@@ -67,12 +67,12 @@ public class SqsProducerAutoCreateQueueTest extends BaseSqs {
 
         template.send("direct:start", ExchangePattern.InOnly, new Processor() {
             public void process(Exchange exchange) {
-                Collection<Integer> c = new ArrayList<Integer>();
-                c.add(1);
-                c.add(2);
-                c.add(3);
-                c.add(4);
-                c.add(5);
+                Collection<String> c = new ArrayList<>();
+                c.add("1");
+                c.add("2");
+                c.add("3");
+                c.add("4");
+                c.add("5");
                 exchange.getIn().setBody(c);
             }
         });
