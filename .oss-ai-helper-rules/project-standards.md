@@ -3,7 +3,7 @@
 This rule file contains build tools, commands, and code style constraints for the project. Commands read this file to determine how to build, test, and format code.
 
 - **Build tool:** Maven
-- **Build command:** `mvn verify`
+- **Build command:** `mvn install -DskipTests`
 - **Test command:** `mvn verify`
 - **Format command:** `cd <module> && mvn -DskipTests install`
 - **Module-specific build:** yes (always run `mvn` in the module directory where changes occurred)
