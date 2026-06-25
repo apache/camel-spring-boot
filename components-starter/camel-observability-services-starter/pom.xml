@@ -53,6 +53,12 @@
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-observability-services</artifactId>
       <version>${camel-version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.camel</groupId>
+          <artifactId>camel-micrometer-prometheus</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <!--START OF GENERATED CODE-->
     <dependency>
