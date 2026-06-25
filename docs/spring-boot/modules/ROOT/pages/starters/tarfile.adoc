@@ -3,7 +3,7 @@
 = Tar File
 :artifactid: camel-tarfile-starter
 
-Archive files into tarballs or extract files from tarballs.
+Archive files into tarballs or extract files from tarballs
 
 == What's inside
 

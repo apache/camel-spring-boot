@@ -3,7 +3,7 @@
 = Parquet File
 :artifactid: camel-parquet-avro-starter
 
-Parquet Avro serialization and de-serialization.
+Parquet Avro serialization and de-serialization
 
 == What's inside
 

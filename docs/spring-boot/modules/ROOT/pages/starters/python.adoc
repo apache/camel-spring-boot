@@ -3,7 +3,7 @@
 = Python
 :artifactid: camel-python-starter
 
-Evaluates a Python expression.
+Evaluates a Python expression
 
 == What's inside
 

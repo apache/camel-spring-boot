@@ -3,7 +3,7 @@
 = SOAP
 :artifactid: camel-soap-starter
 
-Marshal Java objects to SOAP messages and back.
+Marshal Java objects to SOAP messages and back
 
 == What's inside
 

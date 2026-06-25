@@ -3,7 +3,7 @@
 = DataSonnet
 :artifactid: camel-datasonnet-starter
 
-To use DataSonnet scripts for message transformations.
+To use DataSonnet scripts for message transformations
 
 == What's inside
 

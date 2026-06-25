@@ -3,7 +3,7 @@
 = uniVocity CSV
 :artifactid: camel-univocity-parsers-starter
 
-Marshal and unmarshal Java objects from and to CSV (Comma Separated Values) using UniVocity Parsers.
+Marshal and unmarshal Java objects from and to CSV (Comma Separated Values) using UniVocity Parsers
 
 == What's inside
 

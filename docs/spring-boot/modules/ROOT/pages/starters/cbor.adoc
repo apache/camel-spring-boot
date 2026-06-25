@@ -3,7 +3,7 @@
 = CBOR
 :artifactid: camel-cbor-starter
 
-Unmarshal a CBOR payload to POJO and back.
+Unmarshal a CBOR payload to POJO and back
 
 == What's inside
 

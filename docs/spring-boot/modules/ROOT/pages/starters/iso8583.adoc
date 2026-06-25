@@ -3,7 +3,7 @@
 = ISO-8583
 :artifactid: camel-iso8583-starter
 
-Create, edit and read ISO-8583 messages.
+Create, edit and read ISO-8583 messages
 
 == What's inside
 

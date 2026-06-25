@@ -3,7 +3,7 @@
 = Base64
 :artifactid: camel-base64-starter
 
-Encode and decode data using Base64.
+Encode and decode data using Base64
 
 == What's inside
 

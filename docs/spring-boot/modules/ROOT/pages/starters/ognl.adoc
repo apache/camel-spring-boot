@@ -3,7 +3,7 @@
 = OGNL
 :artifactid: camel-ognl-starter
 
-Evaluates an OGNL expression (Apache Commons OGNL).
+Evaluates an OGNL expression (Apache Commons OGNL)
 
 == What's inside
 

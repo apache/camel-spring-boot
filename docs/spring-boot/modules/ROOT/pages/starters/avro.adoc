@@ -3,7 +3,7 @@
 = Avro
 :artifactid: camel-avro-starter
 
-Serialize and deserialize messages using Apache Avro binary data format.
+Serialize and deserialize messages using Apache Avro binary data format
 
 == What's inside
 

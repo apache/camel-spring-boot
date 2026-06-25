@@ -3,7 +3,7 @@
 = Zip File
 :artifactid: camel-zipfile-starter
 
-Compression and decompress streams using java.util.zip.ZipStream.
+Compression and decompress streams using java.util.zip.Zip*Stream
 
 == What's inside
 
