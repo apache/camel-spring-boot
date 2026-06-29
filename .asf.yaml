@@ -46,7 +46,7 @@ github:
         excludes: []
       bypass_teams:
         - root
-      restrict_deletion: false
-      restrict_force_push: false
+      restrict_deletion: true
+      restrict_force_push: true
 notifications:
   pullrequests: commits@camel.apache.org
