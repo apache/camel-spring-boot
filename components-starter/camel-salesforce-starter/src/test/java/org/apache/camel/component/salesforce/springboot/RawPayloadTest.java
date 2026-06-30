@@ -167,8 +167,8 @@ public class RawPayloadTest extends AbstractSalesforceTestBase {
                 requestBody = "{ \"request\" : \"mock\" }";
             }
             headers = new HashMap<>();
-            headers.put("sObjectId", "mockId");
-            headers.put("sObjectIdValue", "mockIdValue");
+            headers.put(SalesforceEndpointConfig.SOBJECT_ID, "mockId");
+            headers.put(SalesforceEndpointConfig.SOBJECT_EXT_ID_VALUE, "mockIdValue");
             headers.put("id", "mockId");
             headers.put(SalesforceEndpointConfig.APEX_QUERY_PARAM_PREFIX + "id", "mockId");
 
