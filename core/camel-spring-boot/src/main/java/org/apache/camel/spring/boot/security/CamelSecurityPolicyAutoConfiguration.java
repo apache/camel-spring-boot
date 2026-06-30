@@ -50,6 +50,14 @@ public class CamelSecurityPolicyAutoConfiguration {
     SecurityPolicyResult camelSecurityPolicyResult(CamelContext camelContext,
             CamelSecurityPolicyConfigurationProperties config, Environment environment) {
 
+        // apply profile-based security defaults
+        String profile = camelContext.getCamelContextExtension().getProfile();
+        if ("dev".equals(profile) && config.getInsecureDevPolicy() == null) {
+            config.setInsecureDevPolicy("allow");
+        } else if ("prod".equals(profile) && "warn".equals(config.getPolicy())) {
+            config.setPolicy("fail");
+        }
+
         SecurityConfigurationProperties securityConfig = applySecurityProperties(camelContext, config);
 
         Map<String, Object> camelProperties = extractCamelProperties(environment);
