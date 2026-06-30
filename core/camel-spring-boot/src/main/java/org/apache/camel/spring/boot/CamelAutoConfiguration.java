@@ -37,6 +37,7 @@ import org.apache.camel.component.properties.PropertiesParser;
 import org.apache.camel.main.DebuggerConfigurationProperties;
 import org.apache.camel.main.DefaultConfigurationConfigurer;
 import org.apache.camel.main.MainListener;
+import org.apache.camel.main.ProfileConfigurer;
 import org.apache.camel.main.RoutesCollector;
 import org.apache.camel.main.fatjar.FatJarPackageScanClassResolver;
 import org.apache.camel.main.fatjar.FatJarPackageScanResourceResolver;
@@ -216,6 +217,11 @@ public class CamelAutoConfiguration {
                     config.getMain().getRouteFilterIncludePattern(), config.getMain().getRouteFilterExcludePattern());
         }
 
+        // configure profile (dev/prod) defaults before applying main configuration,
+        // so that profile defaults are set but user-explicit properties take precedence
+        Properties autoConfigured = doExtractCamelMainProperties(applicationContext);
+        ProfileConfigurer.configureCommon(camelContext, config.getMain().getProfile(), config.getMain(), autoConfigured);
+
         // configure the common/default options
         DefaultConfigurationConfigurer.configure(camelContext, config.getMain());
         // lookup and configure SPI beans
@@ -228,6 +234,27 @@ public class CamelAutoConfiguration {
         }
 
         return camelContext;
+    }
+
+    /**
+     * Collect all camel.main.* property names that the user has explicitly configured
+     * so that ProfileConfigurer does not override them with profile defaults.
+     */
+    protected static Properties doExtractCamelMainProperties(ApplicationContext applicationContext) {
+        Properties answer = new Properties();
+        Environment env = applicationContext.getEnvironment();
+        if (env instanceof ConfigurableEnvironment cev) {
+            cev.getPropertySources().forEach(ps -> {
+                if (ps instanceof EnumerablePropertySource<?> eps) {
+                    for (String n : eps.getPropertyNames()) {
+                        if (n.startsWith("camel.main.")) {
+                            answer.put(n, cev.getProperty(n, ""));
+                        }
+                    }
+                }
+            });
+        }
+        return answer;
     }
 
     protected static Map<String, String> doExtractVariablesFromSpringBoot(ConfigurableEnvironment env) {

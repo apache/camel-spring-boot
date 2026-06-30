@@ -32,6 +32,10 @@ public class CamelTraceAutoConfiguration {
     @Bean
     public BacklogTracer backlogTracer(CamelContext camelContext, CamelTraceConfigurationProperties config)
             throws Exception {
+        // dev profile enables tracer standby so tooling (TUI) can activate tracing on demand
+        if (!config.isStandby() && "dev".equals(camelContext.getCamelContextExtension().getProfile())) {
+            config.setStandby(true);
+        }
         if (!config.isEnabled() && !config.isStandby()) {
             return null;
         }
