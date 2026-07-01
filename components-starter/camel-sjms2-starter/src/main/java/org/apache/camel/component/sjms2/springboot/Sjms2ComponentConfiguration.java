@@ -119,6 +119,16 @@ public class Sjms2ComponentConfiguration
      */
     private MessageCreatedStrategy messageCreatedStrategy;
     /**
+     * Whether to enable sending and receiving JMS ObjectMessage. By default
+     * this is disabled because Java object serialization is a known source of
+     * security vulnerabilities. Enable this option only if you trust the source
+     * of the messages and need to send or receive Java serialized objects via
+     * JMS. When disabled, Camel will refuse to create or read JMS ObjectMessage
+     * instances. Options that rely on ObjectMessage internally (such as
+     * transferException) require this option to be enabled.
+     */
+    private Boolean objectMessageEnabled = false;
+    /**
      * Specifies the interval between recovery attempts, i.e. when a connection
      * is being refreshed, in milliseconds. The default is 5000 ms, that is, 5
      * seconds. The option is a long type.
@@ -230,6 +240,14 @@ public class Sjms2ComponentConfiguration
     public void setMessageCreatedStrategy(
             MessageCreatedStrategy messageCreatedStrategy) {
         this.messageCreatedStrategy = messageCreatedStrategy;
+    }
+
+    public Boolean getObjectMessageEnabled() {
+        return objectMessageEnabled;
+    }
+
+    public void setObjectMessageEnabled(Boolean objectMessageEnabled) {
+        this.objectMessageEnabled = objectMessageEnabled;
     }
 
     public Long getRecoveryInterval() {

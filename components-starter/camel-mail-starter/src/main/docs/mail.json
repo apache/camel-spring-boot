@@ -345,6 +345,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.mail.use-java-mail-session-properties-from-headers",
+      "type": "java.lang.Boolean",
+      "description": "Whether to allow dynamic JavaMail session properties (message headers whose key starts with mail.smtp. or mail.smtps.) to override the endpoint configuration on a per-message basis. This is disabled by default. Only enable it when these headers originate exclusively from trusted route logic, never from data crossing a trust boundary (for example HTTP query parameters, or JMS\/Kafka messages from untrusted producers). When enabled, an attacker able to set these headers could weaken transport security (such as mail.smtp.ssl.trust or mail.smtp.starttls.enable) or redirect the SMTP connection.",
+      "sourceType": "org.apache.camel.component.mail.springboot.MailComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.mail.username",
       "type": "java.lang.String",
       "description": "The username for login. See also setAuthenticator(MailAuthenticator).",

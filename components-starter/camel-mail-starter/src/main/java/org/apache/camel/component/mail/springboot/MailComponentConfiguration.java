@@ -342,6 +342,18 @@ public class MailComponentConfiguration
      */
     private Boolean useGlobalSslContextParameters = false;
     /**
+     * Whether to allow dynamic JavaMail session properties (message headers
+     * whose key starts with mail.smtp. or mail.smtps.) to override the endpoint
+     * configuration on a per-message basis. This is disabled by default. Only
+     * enable it when these headers originate exclusively from trusted route
+     * logic, never from data crossing a trust boundary (for example HTTP query
+     * parameters, or JMS/Kafka messages from untrusted producers). When
+     * enabled, an attacker able to set these headers could weaken transport
+     * security (such as mail.smtp.ssl.trust or mail.smtp.starttls.enable) or
+     * redirect the SMTP connection.
+     */
+    private Boolean useJavaMailSessionPropertiesFromHeaders = false;
+    /**
      * The username for login. See also setAuthenticator(MailAuthenticator).
      */
     private String username;
@@ -728,6 +740,15 @@ public class MailComponentConfiguration
     public void setUseGlobalSslContextParameters(
             Boolean useGlobalSslContextParameters) {
         this.useGlobalSslContextParameters = useGlobalSslContextParameters;
+    }
+
+    public Boolean getUseJavaMailSessionPropertiesFromHeaders() {
+        return useJavaMailSessionPropertiesFromHeaders;
+    }
+
+    public void setUseJavaMailSessionPropertiesFromHeaders(
+            Boolean useJavaMailSessionPropertiesFromHeaders) {
+        this.useJavaMailSessionPropertiesFromHeaders = useJavaMailSessionPropertiesFromHeaders;
     }
 
     public String getUsername() {
