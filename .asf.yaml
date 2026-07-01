@@ -40,8 +40,6 @@ github:
       branches:
         includes:
           - "~DEFAULT_BRANCH"
-          - "release/*"
-          - "rel/*"
           - "camel-spring-boot-*"
         excludes: []
       bypass_teams:
