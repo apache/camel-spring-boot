@@ -784,7 +784,14 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             pattern = pattern.replaceAll("ms", "");
         }
         try {
-            Duration d = Duration.parse("PT" + pattern);
+            // Days are a date component in ISO-8601 and must appear before the T separator (P1D, not PT1D)
+            String iso;
+            if (pattern.endsWith("d")) {
+                iso = "P" + pattern;
+            } else {
+                iso = "PT" + pattern;
+            }
+            Duration d = Duration.parse(iso);
             value = String.valueOf(d.toMillis());
         } catch (java.time.format.DateTimeParseException e) {
             value = pattern;
