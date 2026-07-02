@@ -10,6 +10,6 @@
     "supportLevel": "Preview",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-mdc-starter",
-    "version": "4.21.0-SNAPSHOT"
+    "version": "4.22.0-SNAPSHOT"
   }
 }
