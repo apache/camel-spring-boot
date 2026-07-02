@@ -200,13 +200,6 @@
       "defaultValue": 128
     },
     {
-      "name": "camel.dataformat.pqc.buffer-size",
-      "type": "java.lang.Integer",
-      "description": "The size of the buffer used for streaming encryption\/decryption.",
-      "sourceType": "org.apache.camel.component.pqc.dataformat.springboot.PQCDataFormatConfiguration",
-      "defaultValue": 4096
-    },
-    {
       "name": "camel.dataformat.pqc.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
@@ -245,7 +238,7 @@
     {
       "name": "camel.dataformat.pqc.symmetric-key-algorithm",
       "type": "java.lang.String",
-      "description": "The symmetric encryption algorithm to use with the shared secret.",
+      "description": "The symmetric encryption algorithm to use with the shared secret. Only algorithms that support authenticated encryption (AEAD) are allowed: AES, ARIA, CAMELLIA, CAST6, DSTU7624, GOST3412_2015, SEED and SM4 are encrypted with GCM, and CHACHA7539 with ChaCha20-Poly1305.",
       "sourceType": "org.apache.camel.component.pqc.dataformat.springboot.PQCDataFormatConfiguration",
       "defaultValue": "AES"
     },
