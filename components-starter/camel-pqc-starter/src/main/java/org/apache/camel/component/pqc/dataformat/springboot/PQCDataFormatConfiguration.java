@@ -40,7 +40,10 @@ public class PQCDataFormatConfiguration
      */
     private String keyEncapsulationAlgorithm = "MLKEM";
     /**
-     * The symmetric encryption algorithm to use with the shared secret.
+     * The symmetric encryption algorithm to use with the shared secret. Only
+     * algorithms that support authenticated encryption (AEAD) are allowed: AES,
+     * ARIA, CAMELLIA, CAST6, DSTU7624, GOST3412_2015, SEED and SM4 are
+     * encrypted with GCM, and CHACHA7539 with ChaCha20-Poly1305.
      */
     private String symmetricKeyAlgorithm = "AES";
     /**
@@ -52,10 +55,6 @@ public class PQCDataFormatConfiguration
      * operations. The option is a java.security.KeyPair type.
      */
     private String keyPair;
-    /**
-     * The size of the buffer used for streaming encryption/decryption.
-     */
-    private Integer bufferSize = 4096;
     /**
      * The JCE security provider to use.
      */
@@ -96,14 +95,6 @@ public class PQCDataFormatConfiguration
 
     public void setKeyPair(String keyPair) {
         this.keyPair = keyPair;
-    }
-
-    public Integer getBufferSize() {
-        return bufferSize;
-    }
-
-    public void setBufferSize(Integer bufferSize) {
-        this.bufferSize = bufferSize;
     }
 
     public String getProvider() {

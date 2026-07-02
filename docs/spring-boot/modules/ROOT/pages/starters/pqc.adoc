@@ -24,7 +24,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 35 options, which are listed below.
+The starter supports 34 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -56,12 +56,11 @@ The starter supports 35 options, which are listed below.
 | camel.component.pqc.strict-key-lifecycle | Whether to enforce key status checks before cryptographic operations. When enabled, REVOKED keys are rejected for all operations, EXPIRED keys are rejected for signing/encapsulation but allowed for verification/extraction, and DEPRECATED keys produce a warning but still function. Requires a KeyLifecycleManager and a CamelPQCKeyId header to be set. | true | Boolean
 | camel.component.pqc.symmetric-key-algorithm | In case we are using KEM operations, we need a Symmetric algorithm to be defined for the flow to work. |  | String
 | camel.component.pqc.symmetric-key-length | The required length of the symmetric key used | 128 | Integer
-| camel.dataformat.pqc.buffer-size | The size of the buffer used for streaming encryption/decryption. | 4096 | Integer
 | camel.dataformat.pqc.enabled | Whether to enable auto configuration of the pqc data format. This is enabled by default. |  | Boolean
 | camel.dataformat.pqc.key-encapsulation-algorithm | The Post-Quantum KEM algorithm to use for key encapsulation. | MLKEM | String
 | camel.dataformat.pqc.key-generator | Refers to a custom KeyGenerator to lookup from the registry for KEM operations. The option is a javax.crypto.KeyGenerator type. |  | String
 | camel.dataformat.pqc.key-pair | Refers to the KeyPair to lookup from the registry to use for KEM operations. The option is a java.security.KeyPair type. |  | String
 | camel.dataformat.pqc.provider | The JCE security provider to use. |  | String
-| camel.dataformat.pqc.symmetric-key-algorithm | The symmetric encryption algorithm to use with the shared secret. | AES | String
+| camel.dataformat.pqc.symmetric-key-algorithm | The symmetric encryption algorithm to use with the shared secret. Only algorithms that support authenticated encryption (AEAD) are allowed: AES, ARIA, CAMELLIA, CAST6, DSTU7624, GOST3412_2015, SEED and SM4 are encrypted with GCM, and CHACHA7539 with ChaCha20-Poly1305. | AES | String
 | camel.dataformat.pqc.symmetric-key-length | The length (in bits) of the symmetric key. | 128 | Integer
 |===
