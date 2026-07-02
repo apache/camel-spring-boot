@@ -574,6 +574,13 @@
       "defaultValue": "io.debezium.connector.mongodb.MongoDbSourceInfoStructMaker"
     },
     {
+      "name": "camel.component.debezium-mongodb.statistics-metrics-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable to collect various kind of statistics, like latencies in record processing, and derived data like quantiles. By default collecting statistics is enabled.",
+      "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.debezium-mongodb.streaming-delay-ms",
       "type": "java.lang.Long",
       "description": "A delay period after the snapshot is completed and the streaming begins, given in milliseconds. Defaults to 0 ms. The option is a long type.",

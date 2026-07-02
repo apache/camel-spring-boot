@@ -515,6 +515,12 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String sourceinfoStructMaker = "io.debezium.connector.mongodb.MongoDbSourceInfoStructMaker";
     /**
+     * Enable to collect various kind of statistics, like latencies in record
+     * processing, and derived data like quantiles. By default collecting
+     * statistics is enabled.
+     */
+    private Boolean statisticsMetricsEnabled = true;
+    /**
      * A delay period after the snapshot is completed and the streaming begins,
      * given in milliseconds. Defaults to 0 ms. The option is a long type.
      */
@@ -1235,6 +1241,14 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setSourceinfoStructMaker(String sourceinfoStructMaker) {
         this.sourceinfoStructMaker = sourceinfoStructMaker;
+    }
+
+    public Boolean getStatisticsMetricsEnabled() {
+        return statisticsMetricsEnabled;
+    }
+
+    public void setStatisticsMetricsEnabled(Boolean statisticsMetricsEnabled) {
+        this.statisticsMetricsEnabled = statisticsMetricsEnabled;
     }
 
     public Long getStreamingDelayMs() {

@@ -318,6 +318,13 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String datatypePropagateSourceType;
     /**
+     * Specifies which ANTLR grammar to use for parsing MySQL DDL statements.
+     * 'default' uses the Oracle MySQL grammar, which is actively maintained and
+     * supports MySQL 8.0 features. 'legacy' uses the Positive Technologies
+     * grammar for backward compatibility with existing deployments.
+     */
+    private String ddlParserType = "default";
+    /**
      * Specify how DECIMAL and NUMERIC columns should be represented in change
      * events, including: 'precise' (the default) uses java.math.BigDecimal to
      * represent values, which are encoded in the change events using a binary
@@ -368,6 +375,12 @@ public class DebeziumMySqlComponentConfiguration
      * processing systems.
      */
     private Boolean extendedHeadersEnabled = true;
+    /**
+     * Whether the connector should ignore GTID during recovery and restart from
+     * the binlog file and position instead. GTID mode on the server remains
+     * enabled, and GTID tracking resumes normally after recovery.
+     */
+    private Boolean gtidIgnoreOnRecovery = false;
     /**
      * The source UUIDs used to exclude GTID ranges when determine the starting
      * position in the MySQL server's binlog.
@@ -492,6 +505,22 @@ public class DebeziumMySqlComponentConfiguration
      * feature is not enabled
      */
     private Long maxQueueSizeInBytes = 0L;
+    /**
+     * The fully-qualified class name of the storage implementation for schema
+     * metadata. The class must implement
+     * io.debezium.relational.TableMappingStorage. Defaults to
+     * io.debezium.relational.ConcurrentMapTableMappingStorage for in-memory
+     * storage.
+     */
+    private String memoryManagementSchemasClass = "io.debezium.relational.ConcurrentMapTableMappingStorage";
+    /**
+     * The fully-qualified class name of the storage implementation for table
+     * metadata. The class must implement
+     * io.debezium.relational.TableMappingStorage. Defaults to
+     * io.debezium.relational.ConcurrentMapTableMappingStorage for in-memory
+     * storage.
+     */
+    private String memoryManagementTablesClass = "io.debezium.relational.ConcurrentMapTableMappingStorage";
     /**
      * A semicolon-separated list of expressions that match fully-qualified
      * tables and column(s) to be used as message key. Each expression must
@@ -710,10 +739,7 @@ public class DebeziumMySqlComponentConfiguration
      * to stream changes from the binlog.; 'initial_only': The connector
      * performs a snapshot as it does for the 'initial' option, but after the
      * connector completes the snapshot, it stops, and does not stream changes
-     * from the binlog.; 'never': The connector does not run a snapshot. Upon
-     * first startup, the connector immediately begins reading from the
-     * beginning of the binlog. The 'never' mode should be used with care, and
-     * only when the binlog is known to contain all history.
+     * from the binlog.
      */
     private String snapshotMode = "initial";
     /**
@@ -789,6 +815,12 @@ public class DebeziumMySqlComponentConfiguration
      * schema and struct.
      */
     private String sourceinfoStructMaker = "io.debezium.connector.mysql.MySqlSourceInfoStructMaker";
+    /**
+     * Enable to collect various kind of statistics, like latencies in record
+     * processing, and derived data like quantiles. By default collecting
+     * statistics is enabled.
+     */
+    private Boolean statisticsMetricsEnabled = true;
     /**
      * A delay period after the snapshot is completed and the streaming begins,
      * given in milliseconds. Defaults to 0 ms. The option is a long type.
@@ -1223,6 +1255,14 @@ public class DebeziumMySqlComponentConfiguration
         this.datatypePropagateSourceType = datatypePropagateSourceType;
     }
 
+    public String getDdlParserType() {
+        return ddlParserType;
+    }
+
+    public void setDdlParserType(String ddlParserType) {
+        this.ddlParserType = ddlParserType;
+    }
+
     public String getDecimalHandlingMode() {
         return decimalHandlingMode;
     }
@@ -1279,6 +1319,14 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setExtendedHeadersEnabled(Boolean extendedHeadersEnabled) {
         this.extendedHeadersEnabled = extendedHeadersEnabled;
+    }
+
+    public Boolean getGtidIgnoreOnRecovery() {
+        return gtidIgnoreOnRecovery;
+    }
+
+    public void setGtidIgnoreOnRecovery(Boolean gtidIgnoreOnRecovery) {
+        this.gtidIgnoreOnRecovery = gtidIgnoreOnRecovery;
     }
 
     public String getGtidSourceExcludes() {
@@ -1428,6 +1476,24 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setMaxQueueSizeInBytes(Long maxQueueSizeInBytes) {
         this.maxQueueSizeInBytes = maxQueueSizeInBytes;
+    }
+
+    public String getMemoryManagementSchemasClass() {
+        return memoryManagementSchemasClass;
+    }
+
+    public void setMemoryManagementSchemasClass(
+            String memoryManagementSchemasClass) {
+        this.memoryManagementSchemasClass = memoryManagementSchemasClass;
+    }
+
+    public String getMemoryManagementTablesClass() {
+        return memoryManagementTablesClass;
+    }
+
+    public void setMemoryManagementTablesClass(
+            String memoryManagementTablesClass) {
+        this.memoryManagementTablesClass = memoryManagementTablesClass;
     }
 
     public String getMessageKeyColumns() {
@@ -1811,6 +1877,14 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setSourceinfoStructMaker(String sourceinfoStructMaker) {
         this.sourceinfoStructMaker = sourceinfoStructMaker;
+    }
+
+    public Boolean getStatisticsMetricsEnabled() {
+        return statisticsMetricsEnabled;
+    }
+
+    public void setStatisticsMetricsEnabled(Boolean statisticsMetricsEnabled) {
+        this.statisticsMetricsEnabled = statisticsMetricsEnabled;
     }
 
     public Long getStreamingDelayMs() {

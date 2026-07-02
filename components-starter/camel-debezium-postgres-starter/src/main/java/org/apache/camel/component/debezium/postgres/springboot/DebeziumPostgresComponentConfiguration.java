@@ -407,6 +407,22 @@ public class DebeziumPostgresComponentConfiguration
      */
     private Long maxQueueSizeInBytes = 0L;
     /**
+     * The fully-qualified class name of the storage implementation for schema
+     * metadata. The class must implement
+     * io.debezium.relational.TableMappingStorage. Defaults to
+     * io.debezium.relational.ConcurrentMapTableMappingStorage for in-memory
+     * storage.
+     */
+    private String memoryManagementSchemasClass = "io.debezium.relational.ConcurrentMapTableMappingStorage";
+    /**
+     * The fully-qualified class name of the storage implementation for table
+     * metadata. The class must implement
+     * io.debezium.relational.TableMappingStorage. Defaults to
+     * io.debezium.relational.ConcurrentMapTableMappingStorage for in-memory
+     * storage.
+     */
+    private String memoryManagementTablesClass = "io.debezium.relational.ConcurrentMapTableMappingStorage";
+    /**
      * A semicolon-separated list of expressions that match fully-qualified
      * tables and column(s) to be used as message key. Each expression must
      * match the pattern ':', where the table names could be defined as
@@ -797,6 +813,12 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String sourceinfoStructMaker = "io.debezium.connector.postgresql.PostgresSourceInfoStructMaker";
     /**
+     * Enable to collect various kind of statistics, like latencies in record
+     * processing, and derived data like quantiles. By default collecting
+     * statistics is enabled.
+     */
+    private Boolean statisticsMetricsEnabled = true;
+    /**
      * Frequency for sending replication connection status updates to the
      * server, given in milliseconds. Defaults to 10 seconds (10,000 ms). The
      * option is a int type.
@@ -828,7 +850,11 @@ public class DebeziumPostgresComponentConfiguration
      * use microseconds precision; 'connect' always represents time, date, and
      * timestamp values using Kafka Connect's built-in representations for Time,
      * Date, and Timestamp, which uses millisecond precision regardless of the
-     * database columns' precision.
+     * database columns' precision; 'isostring' represents time, date, and
+     * timestamp values as ISO-8601 formatted strings at the UTC time zone;
+     * 'microseconds' always represents time, date, and timestamp values using
+     * microsecond precision; 'nanoseconds' always represents time, date, and
+     * timestamp values using nanosecond precision.
      */
     private String timePrecisionMode = "adaptive";
     /**
@@ -1356,6 +1382,24 @@ public class DebeziumPostgresComponentConfiguration
         this.maxQueueSizeInBytes = maxQueueSizeInBytes;
     }
 
+    public String getMemoryManagementSchemasClass() {
+        return memoryManagementSchemasClass;
+    }
+
+    public void setMemoryManagementSchemasClass(
+            String memoryManagementSchemasClass) {
+        this.memoryManagementSchemasClass = memoryManagementSchemasClass;
+    }
+
+    public String getMemoryManagementTablesClass() {
+        return memoryManagementTablesClass;
+    }
+
+    public void setMemoryManagementTablesClass(
+            String memoryManagementTablesClass) {
+        this.memoryManagementTablesClass = memoryManagementTablesClass;
+    }
+
     public String getMessageKeyColumns() {
         return messageKeyColumns;
     }
@@ -1840,6 +1884,14 @@ public class DebeziumPostgresComponentConfiguration
 
     public void setSourceinfoStructMaker(String sourceinfoStructMaker) {
         this.sourceinfoStructMaker = sourceinfoStructMaker;
+    }
+
+    public Boolean getStatisticsMetricsEnabled() {
+        return statisticsMetricsEnabled;
+    }
+
+    public void setStatisticsMetricsEnabled(Boolean statisticsMetricsEnabled) {
+        this.statisticsMetricsEnabled = statisticsMetricsEnabled;
     }
 
     public Integer getStatusUpdateIntervalMs() {

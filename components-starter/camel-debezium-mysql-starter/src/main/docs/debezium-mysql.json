@@ -252,6 +252,13 @@
       "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-mysql.ddl-parser-type",
+      "type": "java.lang.String",
+      "description": "Specifies which ANTLR grammar to use for parsing MySQL DDL statements. 'default' uses the Oracle MySQL grammar, which is actively maintained and supports MySQL 8.0 features. 'legacy' uses the Positive Technologies grammar for backward compatibility with existing deployments.",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": "default"
+    },
+    {
       "name": "camel.component.debezium-mysql.decimal-handling-mode",
       "type": "java.lang.String",
       "description": "Specify how DECIMAL and NUMERIC columns should be represented in change events, including: 'precise' (the default) uses java.math.BigDecimal to represent values, which are encoded in the change events using a binary representation and Kafka Connect's 'org.apache.kafka.connect.data.Decimal' type; 'string' uses string to represent values; 'double' represents values using Java's 'double', which may not offer the precision but will be far easier to use in consumers.",
@@ -305,6 +312,13 @@
       "description": "Enable\/Disable Debezium context headers that provides essential metadata for tracking and identifying the source of CDC events in downstream processing systems.",
       "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.component.debezium-mysql.gtid-ignore-on-recovery",
+      "type": "java.lang.Boolean",
+      "description": "Whether the connector should ignore GTID during recovery and restart from the binlog file and position instead. GTID mode on the server remains enabled, and GTID tracking resumes normally after recovery.",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.debezium-mysql.gtid-source-excludes",
@@ -442,6 +456,20 @@
       "description": "Maximum size of the queue in bytes for change events read from the database log but not yet recorded or forwarded. Defaults to 0. Mean the feature is not enabled",
       "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": 0
+    },
+    {
+      "name": "camel.component.debezium-mysql.memory-management-schemas-class",
+      "type": "java.lang.String",
+      "description": "The fully-qualified class name of the storage implementation for schema metadata. The class must implement io.debezium.relational.TableMappingStorage. Defaults to io.debezium.relational.ConcurrentMapTableMappingStorage for in-memory storage.",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": "io.debezium.relational.ConcurrentMapTableMappingStorage"
+    },
+    {
+      "name": "camel.component.debezium-mysql.memory-management-tables-class",
+      "type": "java.lang.String",
+      "description": "The fully-qualified class name of the storage implementation for table metadata. The class must implement io.debezium.relational.TableMappingStorage. Defaults to io.debezium.relational.ConcurrentMapTableMappingStorage for in-memory storage.",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": "io.debezium.relational.ConcurrentMapTableMappingStorage"
     },
     {
       "name": "camel.component.debezium-mysql.message-key-columns",
@@ -716,7 +744,7 @@
     {
       "name": "camel.component.debezium-mysql.snapshot-mode",
       "type": "java.lang.String",
-      "description": "The criteria for running a snapshot upon startup of the connector. Select one of the following snapshot options: 'when_needed': On startup, the connector runs a snapshot if one is needed.; 'schema_only': If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures only the schema (table structures), but not any table data. After the snapshot completes, the connector begins to stream changes from the binlog.; 'schema_only_recovery': The connector performs a snapshot that captures only the database schema history. The connector then transitions back to streaming. Use this setting to restore a corrupted or lost database schema history topic. Do not use if the database schema was modified after the connector stopped.; 'initial' (default): If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures the current full state of the configured tables. After the snapshot completes, the connector begins to stream changes from the binlog.; 'initial_only': The connector performs a snapshot as it does for the 'initial' option, but after the connector completes the snapshot, it stops, and does not stream changes from the binlog.; 'never': The connector does not run a snapshot. Upon first startup, the connector immediately begins reading from the beginning of the binlog. The 'never' mode should be used with care, and only when the binlog is known to contain all history.",
+      "description": "The criteria for running a snapshot upon startup of the connector. Select one of the following snapshot options: 'when_needed': On startup, the connector runs a snapshot if one is needed.; 'schema_only': If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures only the schema (table structures), but not any table data. After the snapshot completes, the connector begins to stream changes from the binlog.; 'schema_only_recovery': The connector performs a snapshot that captures only the database schema history. The connector then transitions back to streaming. Use this setting to restore a corrupted or lost database schema history topic. Do not use if the database schema was modified after the connector stopped.; 'initial' (default): If the connector does not detect any offsets for the logical server name, it runs a snapshot that captures the current full state of the configured tables. After the snapshot completes, the connector begins to stream changes from the binlog.; 'initial_only': The connector performs a snapshot as it does for the 'initial' option, but after the connector completes the snapshot, it stops, and does not stream changes from the binlog.",
       "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": "initial"
     },
@@ -793,6 +821,13 @@
       "description": "The name of the SourceInfoStructMaker class that returns SourceInfo schema and struct.",
       "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": "io.debezium.connector.mysql.MySqlSourceInfoStructMaker"
+    },
+    {
+      "name": "camel.component.debezium-mysql.statistics-metrics-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable to collect various kind of statistics, like latencies in record processing, and derived data like quantiles. By default collecting statistics is enabled.",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": true
     },
     {
       "name": "camel.component.debezium-mysql.streaming-delay-ms",

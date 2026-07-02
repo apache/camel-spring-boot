@@ -148,6 +148,14 @@ public class DebeziumOracleComponentConfiguration
      */
     private String binaryHandlingMode = "bytes";
     /**
+     * Specifies the capture mode used to capture streaming changes from
+     * Oracle'primary' (the default) captures changes from the primary,
+     * specified by database. configurations, 'physical_standby' captures
+     * changes from a read-only physical standby, specified by secondary.
+     * configurations.
+     */
+    private String captureMode = "primary";
+    /**
      * Regular expressions matching columns to exclude from change events
      */
     private String columnExcludeList;
@@ -363,25 +371,21 @@ public class DebeziumOracleComponentConfiguration
      */
     private Long logMiningArchiveLogOnlyScnPollIntervalMs = 10000L;
     /**
-     * The starting SCN interval size that the connector will use for reading
-     * data from redo/archive logs.
+     * Duration in milliseconds to retain deferred transaction metadata for
+     * transactions that never emit a DML event. By default, deferred
+     * transaction metadata is retained for 24 hours. This is independent of
+     * log.mining.transaction.retention.ms which governs cached transactions
+     * with events. The option is a long type.
      */
-    private Long logMiningBatchSizeDefault = 20000L;
+    private Long logMiningBufferDeferredTransactionRetentionMs = 86400000L;
     /**
-     * Active batch size will be also increased/decreased by this amount for
-     * tuning connector throughput when needed.
+     * Controls whether transaction start events are deferred when using
+     * buffered LogMiner. When enabled, transaction start events are stored in a
+     * lightweight metadata map. Transactions are only promoted to the
+     * transaction cache when a DML event is observed. The mining window is not
+     * pinned by transactions, allowing a block-by-block sliding window.
      */
-    private Long logMiningBatchSizeIncrement = 20000L;
-    /**
-     * The maximum SCN interval size that this connector will use when reading
-     * from redo/archive logs.
-     */
-    private Long logMiningBatchSizeMax = 100000L;
-    /**
-     * The minimum SCN interval size that this connector will try to read from
-     * redo/archive logs.
-     */
-    private Long logMiningBatchSizeMin = 1000L;
+    private Boolean logMiningBufferDeferredTransactionStart = false;
     /**
      * When set to true the underlying buffer cache is not retained when the
      * connector is stopped. When set to false (the default), the buffer cache
@@ -449,12 +453,55 @@ public class DebeziumOracleComponentConfiguration
      */
     private String logMiningBufferInfinispanCacheTransactions;
     /**
+     * Controls whether transaction start events are deferred when using
+     * buffered LogMiner. When enabled, transaction start events are stored in a
+     * lightweight metadata map. Transactions are only promoted to the
+     * transaction cache when a DML event is observed. The mining window is not
+     * pinned by transactions, allowing a block-by-block sliding window.
+     */
+    private Boolean logMiningBufferMemoryLegacyTransactionStart = false;
+    /**
+     * This controls whether the 'CLIENT_ID' column values are tracked. When set
+     * to true (the default), the 'CLIENT_ID' values are buffered and provided
+     * in events when available. When set to false, the 'CLIENT_ID' column is
+     * excluded from the LogMiner query and its values are not buffered,
+     * reducing both the memory footprint and query bandwidth.
+     */
+    private Boolean logMiningBufferTrackClientId = true;
+    /**
+     * This controls whether the 'COMMIT_TIMESTAMP' column values are tracked.
+     * When set to true (the default), the 'COMMIT_TIMESTAMP' values are
+     * buffered and provided in events when available. When set to false, the
+     * 'COMMIT_TIMESTAMP' column is excluded from the LogMiner query and its
+     * values are not buffered, reducing both the memory footprint and query
+     * bandwidth.
+     */
+    private Boolean logMiningBufferTrackCommitTimestamp = true;
+    /**
      * This controls whether the 'RS_ID' column values are tracked. When set to
      * true (the default), the 'RS_ID' values are buffered and provided in
-     * events when available. When set to false, the 'RS_ID' values are not
-     * buffered and can reduce the memory footprint.
+     * events when available. When set to false, the 'RS_ID' column is excluded
+     * from the LogMiner query and its values are not buffered, reducing both
+     * the memory footprint and query bandwidth.
      */
     private Boolean logMiningBufferTrackRsId = true;
+    /**
+     * This controls whether the 'START_TIMESTAMP' column values are tracked.
+     * When set to true (the default), the 'START_TIMESTAMP' values are buffered
+     * and provided in events when available. When set to false, the
+     * 'START_TIMESTAMP' column is excluded from the LogMiner query and its
+     * values are not buffered, reducing both the memory footprint and query
+     * bandwidth.
+     */
+    private Boolean logMiningBufferTrackStartTimestamp = true;
+    /**
+     * This controls whether the 'USERNAME' column values are tracked. When set
+     * to true (the default), the 'USERNAME' values are buffered and provided in
+     * events when available. When set to false, the 'USERNAME' column is
+     * excluded from the LogMiner query and its values are not buffered,
+     * reducing both the memory footprint and query bandwidth.
+     */
+    private Boolean logMiningBufferTrackUsername = true;
     /**
      * The number of events a transaction can include before the transaction is
      * discarded. This is useful for managing buffer memory and/or space when
@@ -491,6 +538,12 @@ public class DebeziumOracleComponentConfiguration
      */
     private Boolean logMiningIncludeRedoSql = false;
     /**
+     * Specifies the minimum number of logs to mine per redo thread. Setting
+     * this to 0 disables the cap, and all available logs are mined in a single
+     * pass.
+     */
+    private Integer logMiningLogCountMin = 2;
+    /**
      * This is required when using the connector against a read-only database
      * replica.
      */
@@ -505,8 +558,12 @@ public class DebeziumOracleComponentConfiguration
      */
     private String logMiningQueryFilterMode = "none";
     /**
-     * The hostname the connector will use to connect and perform read-only
-     * operations for the the replica.
+     * When set to 'true', the connector will not attempt to flush the LGWR
+     * buffer to disk, allowing connecting to read-only databases.
+     */
+    private Boolean logMiningReadOnly = false;
+    /**
+     * The secondary Oracle instance where changes will be streamed
      */
     private String logMiningReadonlyHostname;
     /**
@@ -519,53 +576,19 @@ public class DebeziumOracleComponentConfiguration
      */
     private Boolean logMiningRestartConnection = false;
     /**
-     * Used for SCN gap detection, if the difference between current SCN and
-     * previous end SCN is bigger than this value, and the time difference of
-     * current SCN and previous end SCN is smaller than
-     * log.mining.scn.gap.detection.time.interval.max.ms, consider it a SCN gap.
-     */
-    private Long logMiningScnGapDetectionGapSizeMin = 1000000L;
-    /**
-     * Used for SCN gap detection, if the difference between current SCN and
-     * previous end SCN is bigger than
-     * log.mining.scn.gap.detection.gap.size.min, and the time difference of
-     * current SCN and previous end SCN is smaller than this value, consider it
-     * a SCN gap. The option is a long type.
-     */
-    private Long logMiningScnGapDetectionTimeIntervalMaxMs = 20000L;
-    /**
      * The maximum number of milliseconds that a LogMiner session lives for
      * before being restarted. Defaults to 0 (indefinite until a log switch
      * occurs). The option is a long type.
      */
     private Long logMiningSessionMaxMs = 0L;
     /**
-     * The amount of time that the connector will sleep after reading data from
-     * redo/archive logs and before starting reading data again. Value is in
-     * milliseconds. The option is a long type.
-     */
-    private Long logMiningSleepTimeDefaultMs = 1000L;
-    /**
-     * The maximum amount of time that the connector will use to tune the
-     * optimal sleep time when reading data from LogMiner. Value is in
-     * milliseconds. The option is a long type.
-     */
-    private Long logMiningSleepTimeIncrementMs = 200L;
-    /**
-     * The maximum amount of time that the connector will sleep after reading
-     * data from redo/archive logs and before starting reading data again. Value
-     * is in milliseconds. The option is a long type.
-     */
-    private Long logMiningSleepTimeMaxMs = 3000L;
-    /**
-     * The minimum amount of time that the connector will sleep after reading
-     * data from redo/archive logs and before starting reading data again. Value
-     * is in milliseconds. The option is a long type.
-     */
-    private Long logMiningSleepTimeMinMs = 0L;
-    /**
-     * There are strategies: Online catalog with faster mining but no captured
-     * DDL. Another - with data dictionary loaded into REDO LOG files
+     * Defines the mining strategy and LogMiner session characteristics:
+     * 'redo_log_catalog' writes the data dictionary to the redo logs, is
+     * deprecated and will be removed in 3.7, 'online_catalog' uses the existing
+     * data dictionary and operates faster than 'redo_log_catalog' but requires
+     * schema changes in lock-step, 'hybrid' uses the existing data dictionary,
+     * operates faster than 'redo_log_catalog', and supports interleaved schema
+     * changes.
      */
     private String logMiningStrategy = "online_catalog";
     /**
@@ -606,6 +629,22 @@ public class DebeziumOracleComponentConfiguration
      * feature is not enabled
      */
     private Long maxQueueSizeInBytes = 0L;
+    /**
+     * The fully-qualified class name of the storage implementation for schema
+     * metadata. The class must implement
+     * io.debezium.relational.TableMappingStorage. Defaults to
+     * io.debezium.relational.ConcurrentMapTableMappingStorage for in-memory
+     * storage.
+     */
+    private String memoryManagementSchemasClass = "io.debezium.relational.ConcurrentMapTableMappingStorage";
+    /**
+     * The fully-qualified class name of the storage implementation for table
+     * metadata. The class must implement
+     * io.debezium.relational.TableMappingStorage. Defaults to
+     * io.debezium.relational.ConcurrentMapTableMappingStorage for in-memory
+     * storage.
+     */
+    private String memoryManagementTablesClass = "io.debezium.relational.ConcurrentMapTableMappingStorage";
     /**
      * A semicolon-separated list of expressions that match fully-qualified
      * tables and column(s) to be used as message key. Each expression must
@@ -741,6 +780,23 @@ public class DebeziumOracleComponentConfiguration
      * adjustment (default)
      */
     private String schemaNameAdjustmentMode = "none";
+    /**
+     * The secondary Oracle instance database name, if different from primary
+     */
+    private String secondaryDbname;
+    /**
+     * The secondary Oracle instance where changes will be streamed
+     */
+    private String secondaryHostname;
+    /**
+     * The secondary Oracle instance port where changes will be streamed
+     */
+    private Integer secondaryPort = 1528;
+    /**
+     * The secondary Oracle instance connection string URL where changes will be
+     * streamed
+     */
+    private String secondaryUrl;
     /**
      * The name of the data collection that is used to send signals/commands to
      * Debezium. For multi-partition mode connectors, multiple signal data
@@ -902,6 +958,12 @@ public class DebeziumOracleComponentConfiguration
      */
     private String sourceinfoStructMaker = "io.debezium.connector.oracle.OracleSourceInfoStructMaker";
     /**
+     * Enable to collect various kind of statistics, like latencies in record
+     * processing, and derived data like quantiles. By default collecting
+     * statistics is enabled.
+     */
+    private Boolean statisticsMetricsEnabled = true;
+    /**
      * A delay period after the snapshot is completed and the streaming begins,
      * given in milliseconds. Defaults to 0 ms. The option is a long type.
      */
@@ -923,7 +985,11 @@ public class DebeziumOracleComponentConfiguration
      * use microseconds precision; 'connect' always represents time, date, and
      * timestamp values using Kafka Connect's built-in representations for Time,
      * Date, and Timestamp, which uses millisecond precision regardless of the
-     * database columns' precision.
+     * database columns' precision; 'isostring' represents time, date, and
+     * timestamp values as ISO-8601 formatted strings at the UTC time zone;
+     * 'microseconds' always represents time, date, and timestamp values using
+     * microsecond precision; 'nanoseconds' always represents time, date, and
+     * timestamp values using nanosecond precision.
      */
     private String timePrecisionMode = "adaptive";
     /**
@@ -1098,6 +1164,14 @@ public class DebeziumOracleComponentConfiguration
 
     public void setBinaryHandlingMode(String binaryHandlingMode) {
         this.binaryHandlingMode = binaryHandlingMode;
+    }
+
+    public String getCaptureMode() {
+        return captureMode;
+    }
+
+    public void setCaptureMode(String captureMode) {
+        this.captureMode = captureMode;
     }
 
     public String getColumnExcludeList() {
@@ -1396,36 +1470,22 @@ public class DebeziumOracleComponentConfiguration
         this.logMiningArchiveLogOnlyScnPollIntervalMs = logMiningArchiveLogOnlyScnPollIntervalMs;
     }
 
-    public Long getLogMiningBatchSizeDefault() {
-        return logMiningBatchSizeDefault;
+    public Long getLogMiningBufferDeferredTransactionRetentionMs() {
+        return logMiningBufferDeferredTransactionRetentionMs;
     }
 
-    public void setLogMiningBatchSizeDefault(Long logMiningBatchSizeDefault) {
-        this.logMiningBatchSizeDefault = logMiningBatchSizeDefault;
+    public void setLogMiningBufferDeferredTransactionRetentionMs(
+            Long logMiningBufferDeferredTransactionRetentionMs) {
+        this.logMiningBufferDeferredTransactionRetentionMs = logMiningBufferDeferredTransactionRetentionMs;
     }
 
-    public Long getLogMiningBatchSizeIncrement() {
-        return logMiningBatchSizeIncrement;
+    public Boolean getLogMiningBufferDeferredTransactionStart() {
+        return logMiningBufferDeferredTransactionStart;
     }
 
-    public void setLogMiningBatchSizeIncrement(Long logMiningBatchSizeIncrement) {
-        this.logMiningBatchSizeIncrement = logMiningBatchSizeIncrement;
-    }
-
-    public Long getLogMiningBatchSizeMax() {
-        return logMiningBatchSizeMax;
-    }
-
-    public void setLogMiningBatchSizeMax(Long logMiningBatchSizeMax) {
-        this.logMiningBatchSizeMax = logMiningBatchSizeMax;
-    }
-
-    public Long getLogMiningBatchSizeMin() {
-        return logMiningBatchSizeMin;
-    }
-
-    public void setLogMiningBatchSizeMin(Long logMiningBatchSizeMin) {
-        this.logMiningBatchSizeMin = logMiningBatchSizeMin;
+    public void setLogMiningBufferDeferredTransactionStart(
+            Boolean logMiningBufferDeferredTransactionStart) {
+        this.logMiningBufferDeferredTransactionStart = logMiningBufferDeferredTransactionStart;
     }
 
     public Boolean getLogMiningBufferDropOnStop() {
@@ -1544,12 +1604,57 @@ public class DebeziumOracleComponentConfiguration
         this.logMiningBufferInfinispanCacheTransactions = logMiningBufferInfinispanCacheTransactions;
     }
 
+    public Boolean getLogMiningBufferMemoryLegacyTransactionStart() {
+        return logMiningBufferMemoryLegacyTransactionStart;
+    }
+
+    public void setLogMiningBufferMemoryLegacyTransactionStart(
+            Boolean logMiningBufferMemoryLegacyTransactionStart) {
+        this.logMiningBufferMemoryLegacyTransactionStart = logMiningBufferMemoryLegacyTransactionStart;
+    }
+
+    public Boolean getLogMiningBufferTrackClientId() {
+        return logMiningBufferTrackClientId;
+    }
+
+    public void setLogMiningBufferTrackClientId(
+            Boolean logMiningBufferTrackClientId) {
+        this.logMiningBufferTrackClientId = logMiningBufferTrackClientId;
+    }
+
+    public Boolean getLogMiningBufferTrackCommitTimestamp() {
+        return logMiningBufferTrackCommitTimestamp;
+    }
+
+    public void setLogMiningBufferTrackCommitTimestamp(
+            Boolean logMiningBufferTrackCommitTimestamp) {
+        this.logMiningBufferTrackCommitTimestamp = logMiningBufferTrackCommitTimestamp;
+    }
+
     public Boolean getLogMiningBufferTrackRsId() {
         return logMiningBufferTrackRsId;
     }
 
     public void setLogMiningBufferTrackRsId(Boolean logMiningBufferTrackRsId) {
         this.logMiningBufferTrackRsId = logMiningBufferTrackRsId;
+    }
+
+    public Boolean getLogMiningBufferTrackStartTimestamp() {
+        return logMiningBufferTrackStartTimestamp;
+    }
+
+    public void setLogMiningBufferTrackStartTimestamp(
+            Boolean logMiningBufferTrackStartTimestamp) {
+        this.logMiningBufferTrackStartTimestamp = logMiningBufferTrackStartTimestamp;
+    }
+
+    public Boolean getLogMiningBufferTrackUsername() {
+        return logMiningBufferTrackUsername;
+    }
+
+    public void setLogMiningBufferTrackUsername(
+            Boolean logMiningBufferTrackUsername) {
+        this.logMiningBufferTrackUsername = logMiningBufferTrackUsername;
     }
 
     public Long getLogMiningBufferTransactionEventsThreshold() {
@@ -1603,6 +1708,14 @@ public class DebeziumOracleComponentConfiguration
         this.logMiningIncludeRedoSql = logMiningIncludeRedoSql;
     }
 
+    public Integer getLogMiningLogCountMin() {
+        return logMiningLogCountMin;
+    }
+
+    public void setLogMiningLogCountMin(Integer logMiningLogCountMin) {
+        this.logMiningLogCountMin = logMiningLogCountMin;
+    }
+
     public String getLogMiningPathDictionary() {
         return logMiningPathDictionary;
     }
@@ -1617,6 +1730,14 @@ public class DebeziumOracleComponentConfiguration
 
     public void setLogMiningQueryFilterMode(String logMiningQueryFilterMode) {
         this.logMiningQueryFilterMode = logMiningQueryFilterMode;
+    }
+
+    public Boolean getLogMiningReadOnly() {
+        return logMiningReadOnly;
+    }
+
+    public void setLogMiningReadOnly(Boolean logMiningReadOnly) {
+        this.logMiningReadOnly = logMiningReadOnly;
     }
 
     public String getLogMiningReadonlyHostname() {
@@ -1635,63 +1756,12 @@ public class DebeziumOracleComponentConfiguration
         this.logMiningRestartConnection = logMiningRestartConnection;
     }
 
-    public Long getLogMiningScnGapDetectionGapSizeMin() {
-        return logMiningScnGapDetectionGapSizeMin;
-    }
-
-    public void setLogMiningScnGapDetectionGapSizeMin(
-            Long logMiningScnGapDetectionGapSizeMin) {
-        this.logMiningScnGapDetectionGapSizeMin = logMiningScnGapDetectionGapSizeMin;
-    }
-
-    public Long getLogMiningScnGapDetectionTimeIntervalMaxMs() {
-        return logMiningScnGapDetectionTimeIntervalMaxMs;
-    }
-
-    public void setLogMiningScnGapDetectionTimeIntervalMaxMs(
-            Long logMiningScnGapDetectionTimeIntervalMaxMs) {
-        this.logMiningScnGapDetectionTimeIntervalMaxMs = logMiningScnGapDetectionTimeIntervalMaxMs;
-    }
-
     public Long getLogMiningSessionMaxMs() {
         return logMiningSessionMaxMs;
     }
 
     public void setLogMiningSessionMaxMs(Long logMiningSessionMaxMs) {
         this.logMiningSessionMaxMs = logMiningSessionMaxMs;
-    }
-
-    public Long getLogMiningSleepTimeDefaultMs() {
-        return logMiningSleepTimeDefaultMs;
-    }
-
-    public void setLogMiningSleepTimeDefaultMs(Long logMiningSleepTimeDefaultMs) {
-        this.logMiningSleepTimeDefaultMs = logMiningSleepTimeDefaultMs;
-    }
-
-    public Long getLogMiningSleepTimeIncrementMs() {
-        return logMiningSleepTimeIncrementMs;
-    }
-
-    public void setLogMiningSleepTimeIncrementMs(
-            Long logMiningSleepTimeIncrementMs) {
-        this.logMiningSleepTimeIncrementMs = logMiningSleepTimeIncrementMs;
-    }
-
-    public Long getLogMiningSleepTimeMaxMs() {
-        return logMiningSleepTimeMaxMs;
-    }
-
-    public void setLogMiningSleepTimeMaxMs(Long logMiningSleepTimeMaxMs) {
-        this.logMiningSleepTimeMaxMs = logMiningSleepTimeMaxMs;
-    }
-
-    public Long getLogMiningSleepTimeMinMs() {
-        return logMiningSleepTimeMinMs;
-    }
-
-    public void setLogMiningSleepTimeMinMs(Long logMiningSleepTimeMinMs) {
-        this.logMiningSleepTimeMinMs = logMiningSleepTimeMinMs;
     }
 
     public String getLogMiningStrategy() {
@@ -1759,6 +1829,24 @@ public class DebeziumOracleComponentConfiguration
 
     public void setMaxQueueSizeInBytes(Long maxQueueSizeInBytes) {
         this.maxQueueSizeInBytes = maxQueueSizeInBytes;
+    }
+
+    public String getMemoryManagementSchemasClass() {
+        return memoryManagementSchemasClass;
+    }
+
+    public void setMemoryManagementSchemasClass(
+            String memoryManagementSchemasClass) {
+        this.memoryManagementSchemasClass = memoryManagementSchemasClass;
+    }
+
+    public String getMemoryManagementTablesClass() {
+        return memoryManagementTablesClass;
+    }
+
+    public void setMemoryManagementTablesClass(
+            String memoryManagementTablesClass) {
+        this.memoryManagementTablesClass = memoryManagementTablesClass;
     }
 
     public String getMessageKeyColumns() {
@@ -1974,6 +2062,38 @@ public class DebeziumOracleComponentConfiguration
         this.schemaNameAdjustmentMode = schemaNameAdjustmentMode;
     }
 
+    public String getSecondaryDbname() {
+        return secondaryDbname;
+    }
+
+    public void setSecondaryDbname(String secondaryDbname) {
+        this.secondaryDbname = secondaryDbname;
+    }
+
+    public String getSecondaryHostname() {
+        return secondaryHostname;
+    }
+
+    public void setSecondaryHostname(String secondaryHostname) {
+        this.secondaryHostname = secondaryHostname;
+    }
+
+    public Integer getSecondaryPort() {
+        return secondaryPort;
+    }
+
+    public void setSecondaryPort(Integer secondaryPort) {
+        this.secondaryPort = secondaryPort;
+    }
+
+    public String getSecondaryUrl() {
+        return secondaryUrl;
+    }
+
+    public void setSecondaryUrl(String secondaryUrl) {
+        this.secondaryUrl = secondaryUrl;
+    }
+
     public String getSignalDataCollection() {
         return signalDataCollection;
     }
@@ -2158,6 +2278,14 @@ public class DebeziumOracleComponentConfiguration
 
     public void setSourceinfoStructMaker(String sourceinfoStructMaker) {
         this.sourceinfoStructMaker = sourceinfoStructMaker;
+    }
+
+    public Boolean getStatisticsMetricsEnabled() {
+        return statisticsMetricsEnabled;
+    }
+
+    public void setStatisticsMetricsEnabled(Boolean statisticsMetricsEnabled) {
+        this.statisticsMetricsEnabled = statisticsMetricsEnabled;
     }
 
     public Long getStreamingDelayMs() {
