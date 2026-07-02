@@ -54,6 +54,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.debezium-oracle.capture-mode",
+      "type": "java.lang.String",
+      "description": "Specifies the capture mode used to capture streaming changes from Oracle'primary' (the default) captures changes from the primary, specified by database. configurations, 'physical_standby' captures changes from a read-only physical standby, specified by secondary. configurations.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "primary"
+    },
+    {
       "name": "camel.component.debezium-oracle.column-exclude-list",
       "type": "java.lang.String",
       "description": "Regular expressions matching columns to exclude from change events",
@@ -323,32 +330,18 @@
       "defaultValue": 10000
     },
     {
-      "name": "camel.component.debezium-oracle.log-mining-batch-size-default",
+      "name": "camel.component.debezium-oracle.log-mining-buffer-deferred-transaction-retention-ms",
       "type": "java.lang.Long",
-      "description": "The starting SCN interval size that the connector will use for reading data from redo\/archive logs.",
+      "description": "Duration in milliseconds to retain deferred transaction metadata for transactions that never emit a DML event. By default, deferred transaction metadata is retained for 24 hours. This is independent of log.mining.transaction.retention.ms which governs cached transactions with events. The option is a long type.",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
-      "defaultValue": 20000
+      "defaultValue": 86400000
     },
     {
-      "name": "camel.component.debezium-oracle.log-mining-batch-size-increment",
-      "type": "java.lang.Long",
-      "description": "Active batch size will be also increased\/decreased by this amount for tuning connector throughput when needed.",
+      "name": "camel.component.debezium-oracle.log-mining-buffer-deferred-transaction-start",
+      "type": "java.lang.Boolean",
+      "description": "Controls whether transaction start events are deferred when using buffered LogMiner. When enabled, transaction start events are stored in a lightweight metadata map. Transactions are only promoted to the transaction cache when a DML event is observed. The mining window is not pinned by transactions, allowing a block-by-block sliding window.",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
-      "defaultValue": 20000
-    },
-    {
-      "name": "camel.component.debezium-oracle.log-mining-batch-size-max",
-      "type": "java.lang.Long",
-      "description": "The maximum SCN interval size that this connector will use when reading from redo\/archive logs.",
-      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
-      "defaultValue": 100000
-    },
-    {
-      "name": "camel.component.debezium-oracle.log-mining-batch-size-min",
-      "type": "java.lang.Long",
-      "description": "The minimum SCN interval size that this connector will try to read from redo\/archive logs.",
-      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
-      "defaultValue": 1000
+      "defaultValue": false
     },
     {
       "name": "camel.component.debezium-oracle.log-mining-buffer-drop-on-stop",
@@ -430,9 +423,44 @@
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-memory-legacy-transaction-start",
+      "type": "java.lang.Boolean",
+      "description": "Controls whether transaction start events are deferred when using buffered LogMiner. When enabled, transaction start events are stored in a lightweight metadata map. Transactions are only promoted to the transaction cache when a DML event is observed. The mining window is not pinned by transactions, allowing a block-by-block sliding window.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-track-client-id",
+      "type": "java.lang.Boolean",
+      "description": "This controls whether the 'CLIENT_ID' column values are tracked. When set to true (the default), the 'CLIENT_ID' values are buffered and provided in events when available. When set to false, the 'CLIENT_ID' column is excluded from the LogMiner query and its values are not buffered, reducing both the memory footprint and query bandwidth.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-track-commit-timestamp",
+      "type": "java.lang.Boolean",
+      "description": "This controls whether the 'COMMIT_TIMESTAMP' column values are tracked. When set to true (the default), the 'COMMIT_TIMESTAMP' values are buffered and provided in events when available. When set to false, the 'COMMIT_TIMESTAMP' column is excluded from the LogMiner query and its values are not buffered, reducing both the memory footprint and query bandwidth.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.debezium-oracle.log-mining-buffer-track-rs-id",
       "type": "java.lang.Boolean",
-      "description": "This controls whether the 'RS_ID' column values are tracked. When set to true (the default), the 'RS_ID' values are buffered and provided in events when available. When set to false, the 'RS_ID' values are not buffered and can reduce the memory footprint.",
+      "description": "This controls whether the 'RS_ID' column values are tracked. When set to true (the default), the 'RS_ID' values are buffered and provided in events when available. When set to false, the 'RS_ID' column is excluded from the LogMiner query and its values are not buffered, reducing both the memory footprint and query bandwidth.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-track-start-timestamp",
+      "type": "java.lang.Boolean",
+      "description": "This controls whether the 'START_TIMESTAMP' column values are tracked. When set to true (the default), the 'START_TIMESTAMP' values are buffered and provided in events when available. When set to false, the 'START_TIMESTAMP' column is excluded from the LogMiner query and its values are not buffered, reducing both the memory footprint and query bandwidth.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.debezium-oracle.log-mining-buffer-track-username",
+      "type": "java.lang.Boolean",
+      "description": "This controls whether the 'USERNAME' column values are tracked. When set to true (the default), the 'USERNAME' values are buffered and provided in events when available. When set to false, the 'USERNAME' column is excluded from the LogMiner query and its values are not buffered, reducing both the memory footprint and query bandwidth.",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": true
     },
@@ -477,6 +505,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.debezium-oracle.log-mining-log-count-min",
+      "type": "java.lang.Integer",
+      "description": "Specifies the minimum number of logs to mine per redo thread. Setting this to 0 disables the cap, and all available logs are mined in a single pass.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 2
+    },
+    {
       "name": "camel.component.debezium-oracle.log-mining-path-dictionary",
       "type": "java.lang.String",
       "description": "This is required when using the connector against a read-only database replica.",
@@ -490,9 +525,16 @@
       "defaultValue": "none"
     },
     {
+      "name": "camel.component.debezium-oracle.log-mining-read-only",
+      "type": "java.lang.Boolean",
+      "description": "When set to 'true', the connector will not attempt to flush the LGWR buffer to disk, allowing connecting to read-only databases.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.debezium-oracle.log-mining-readonly-hostname",
       "type": "java.lang.String",
-      "description": "The hostname the connector will use to connect and perform read-only operations for the the replica.",
+      "description": "The secondary Oracle instance where changes will be streamed",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
     },
     {
@@ -503,20 +545,6 @@
       "defaultValue": false
     },
     {
-      "name": "camel.component.debezium-oracle.log-mining-scn-gap-detection-gap-size-min",
-      "type": "java.lang.Long",
-      "description": "Used for SCN gap detection, if the difference between current SCN and previous end SCN is bigger than this value, and the time difference of current SCN and previous end SCN is smaller than log.mining.scn.gap.detection.time.interval.max.ms, consider it a SCN gap.",
-      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
-      "defaultValue": 1000000
-    },
-    {
-      "name": "camel.component.debezium-oracle.log-mining-scn-gap-detection-time-interval-max-ms",
-      "type": "java.lang.Long",
-      "description": "Used for SCN gap detection, if the difference between current SCN and previous end SCN is bigger than log.mining.scn.gap.detection.gap.size.min, and the time difference of current SCN and previous end SCN is smaller than this value, consider it a SCN gap. The option is a long type.",
-      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
-      "defaultValue": 20000
-    },
-    {
       "name": "camel.component.debezium-oracle.log-mining-session-max-ms",
       "type": "java.lang.Long",
       "description": "The maximum number of milliseconds that a LogMiner session lives for before being restarted. Defaults to 0 (indefinite until a log switch occurs). The option is a long type.",
@@ -524,37 +552,9 @@
       "defaultValue": 0
     },
     {
-      "name": "camel.component.debezium-oracle.log-mining-sleep-time-default-ms",
-      "type": "java.lang.Long",
-      "description": "The amount of time that the connector will sleep after reading data from redo\/archive logs and before starting reading data again. Value is in milliseconds. The option is a long type.",
-      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
-      "defaultValue": 1000
-    },
-    {
-      "name": "camel.component.debezium-oracle.log-mining-sleep-time-increment-ms",
-      "type": "java.lang.Long",
-      "description": "The maximum amount of time that the connector will use to tune the optimal sleep time when reading data from LogMiner. Value is in milliseconds. The option is a long type.",
-      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
-      "defaultValue": 200
-    },
-    {
-      "name": "camel.component.debezium-oracle.log-mining-sleep-time-max-ms",
-      "type": "java.lang.Long",
-      "description": "The maximum amount of time that the connector will sleep after reading data from redo\/archive logs and before starting reading data again. Value is in milliseconds. The option is a long type.",
-      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
-      "defaultValue": 3000
-    },
-    {
-      "name": "camel.component.debezium-oracle.log-mining-sleep-time-min-ms",
-      "type": "java.lang.Long",
-      "description": "The minimum amount of time that the connector will sleep after reading data from redo\/archive logs and before starting reading data again. Value is in milliseconds. The option is a long type.",
-      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
-      "defaultValue": 0
-    },
-    {
       "name": "camel.component.debezium-oracle.log-mining-strategy",
       "type": "java.lang.String",
-      "description": "There are strategies: Online catalog with faster mining but no captured DDL. Another - with data dictionary loaded into REDO LOG files",
+      "description": "Defines the mining strategy and LogMiner session characteristics: 'redo_log_catalog' writes the data dictionary to the redo logs, is deprecated and will be removed in 3.7, 'online_catalog' uses the existing data dictionary and operates faster than 'redo_log_catalog' but requires schema changes in lock-step, 'hybrid' uses the existing data dictionary, operates faster than 'redo_log_catalog', and supports interleaved schema changes.",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": "online_catalog"
     },
@@ -604,6 +604,20 @@
       "description": "Maximum size of the queue in bytes for change events read from the database log but not yet recorded or forwarded. Defaults to 0. Mean the feature is not enabled",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": 0
+    },
+    {
+      "name": "camel.component.debezium-oracle.memory-management-schemas-class",
+      "type": "java.lang.String",
+      "description": "The fully-qualified class name of the storage implementation for schema metadata. The class must implement io.debezium.relational.TableMappingStorage. Defaults to io.debezium.relational.ConcurrentMapTableMappingStorage for in-memory storage.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "io.debezium.relational.ConcurrentMapTableMappingStorage"
+    },
+    {
+      "name": "camel.component.debezium-oracle.memory-management-tables-class",
+      "type": "java.lang.String",
+      "description": "The fully-qualified class name of the storage implementation for table metadata. The class must implement io.debezium.relational.TableMappingStorage. Defaults to io.debezium.relational.ConcurrentMapTableMappingStorage for in-memory storage.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": "io.debezium.relational.ConcurrentMapTableMappingStorage"
     },
     {
       "name": "camel.component.debezium-oracle.message-key-columns",
@@ -819,6 +833,31 @@
       "defaultValue": "none"
     },
     {
+      "name": "camel.component.debezium-oracle.secondary-dbname",
+      "type": "java.lang.String",
+      "description": "The secondary Oracle instance database name, if different from primary",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.secondary-hostname",
+      "type": "java.lang.String",
+      "description": "The secondary Oracle instance where changes will be streamed",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-oracle.secondary-port",
+      "type": "java.lang.Integer",
+      "description": "The secondary Oracle instance port where changes will be streamed",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 1528
+    },
+    {
+      "name": "camel.component.debezium-oracle.secondary-url",
+      "type": "java.lang.String",
+      "description": "The secondary Oracle instance connection string URL where changes will be streamed",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
+    },
+    {
       "name": "camel.component.debezium-oracle.signal-data-collection",
       "type": "java.lang.String",
       "description": "The name of the data collection that is used to send signals\/commands to Debezium. For multi-partition mode connectors, multiple signal data collections can be specified as a comma-separated list. Signaling is disabled when not set.",
@@ -968,6 +1007,13 @@
       "defaultValue": "io.debezium.connector.oracle.OracleSourceInfoStructMaker"
     },
     {
+      "name": "camel.component.debezium-oracle.statistics-metrics-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable to collect various kind of statistics, like latencies in record processing, and derived data like quantiles. By default collecting statistics is enabled.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.debezium-oracle.streaming-delay-ms",
       "type": "java.lang.Long",
       "description": "A delay period after the snapshot is completed and the streaming begins, given in milliseconds. Defaults to 0 ms. The option is a long type.",
@@ -989,7 +1035,7 @@
     {
       "name": "camel.component.debezium-oracle.time-precision-mode",
       "type": "java.lang.String",
-      "description": "Time, date, and timestamps can be represented with different kinds of precisions, including: 'adaptive' (the default) bases the precision of time, date, and timestamp values on the database column's precision; 'adaptive_time_microseconds' like 'adaptive' mode, but TIME fields always use microseconds precision; 'connect' always represents time, date, and timestamp values using Kafka Connect's built-in representations for Time, Date, and Timestamp, which uses millisecond precision regardless of the database columns' precision.",
+      "description": "Time, date, and timestamps can be represented with different kinds of precisions, including: 'adaptive' (the default) bases the precision of time, date, and timestamp values on the database column's precision; 'adaptive_time_microseconds' like 'adaptive' mode, but TIME fields always use microseconds precision; 'connect' always represents time, date, and timestamp values using Kafka Connect's built-in representations for Time, Date, and Timestamp, which uses millisecond precision regardless of the database columns' precision; 'isostring' represents time, date, and timestamp values as ISO-8601 formatted strings at the UTC time zone; 'microseconds' always represents time, date, and timestamp values using microsecond precision; 'nanoseconds' always represents time, date, and timestamp values using nanosecond precision.",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": "adaptive"
     },
