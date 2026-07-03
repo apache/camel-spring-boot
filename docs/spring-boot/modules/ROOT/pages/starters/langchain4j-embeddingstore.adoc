@@ -3,7 +3,7 @@
 = LangChain4j Embedding Store
 :artifactid: camel-langchain4j-embeddingstore-starter
 
-Perform operations on the Langchain4jEmbeddingStores.
+Perform operations on the LangChain4jEmbeddingStores.
 
 == What's inside
 

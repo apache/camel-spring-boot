@@ -47,7 +47,7 @@
     {
       "name": "camel.component.mapstruct.mapper-package-name",
       "type": "java.lang.String",
-      "description": "Package name(s) where Camel should discover Mapstruct mapping classes. Multiple package names can be separated by comma.",
+      "description": "Package name(s) where Camel should discover MapStruct mapping classes. Multiple package names can be separated by comma.",
       "sourceType": "org.apache.camel.component.mapstruct.springboot.MapstructComponentConfiguration"
     }
   ],
