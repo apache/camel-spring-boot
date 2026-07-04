@@ -47,6 +47,7 @@ import org.apache.camel.spi.CliConnector;
 import org.apache.camel.spi.CliConnectorFactory;
 import org.apache.camel.spi.PackageScanClassResolver;
 import org.apache.camel.spi.PackageScanResourceResolver;
+import org.apache.camel.spi.RuntimePropertiesProvider;
 import org.apache.camel.spi.StartupConditionStrategy;
 import org.apache.camel.spi.StartupStepRecorder;
 import org.apache.camel.spi.VariableRepository;
@@ -404,6 +405,12 @@ public class CamelAutoConfiguration {
     }
 
     // SpringCamelContext integration
+
+    @Bean
+    @ConditionalOnMissingBean(RuntimePropertiesProvider.class)
+    RuntimePropertiesProvider runtimePropertiesProvider(Environment env) {
+        return new SpringBootRuntimePropertiesProvider((ConfigurableEnvironment) env);
+    }
 
     @Bean
     @ConditionalOnMissingBean(PropertiesParser.class)
