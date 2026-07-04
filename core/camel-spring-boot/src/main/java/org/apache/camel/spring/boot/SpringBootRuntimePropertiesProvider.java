@@ -16,8 +16,9 @@
  */
 package org.apache.camel.spring.boot;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.camel.spi.RuntimePropertiesProvider;
@@ -30,7 +31,8 @@ import org.springframework.core.env.EnumerablePropertySource;
  * do not affect Camel's placeholder resolution.
  * <p>
  * Property sources that represent environment variables, JVM system properties, and Spring Boot internals are skipped
- * to avoid noise — only application-level configuration is included.
+ * to avoid noise — only application-level configuration is included. However, camel/spring/server/management keys from
+ * env/sys sources are still included since they represent application configuration.
  */
 public class SpringBootRuntimePropertiesProvider implements RuntimePropertiesProvider {
 
@@ -47,22 +49,22 @@ public class SpringBootRuntimePropertiesProvider implements RuntimePropertiesPro
     }
 
     @Override
-    public String getSource() {
-        return "Spring Boot";
-    }
-
-    @Override
-    public Map<String, Object> getProperties() {
-        Map<String, Object> answer = new LinkedHashMap<>();
+    public Collection<Property> getProperties() {
+        Collection<Property> answer = new ArrayList<>();
+        Set<String> seen = new LinkedHashSet<>();
         environment.getPropertySources().forEach(ps -> {
-            if (SKIP_SOURCES.contains(ps.getName())) {
-                return;
-            }
+            boolean skipped = SKIP_SOURCES.contains(ps.getName());
+            String source = toSourceLabel(ps.getName());
             if (ps instanceof EnumerablePropertySource<?> eps) {
                 for (String name : eps.getPropertyNames()) {
-                    if (!answer.containsKey(name)) {
+                    if (!seen.contains(name)) {
+                        if (skipped && !isApplicationKey(name)) {
+                            continue;
+                        }
+                        seen.add(name);
                         try {
-                            answer.put(name, environment.getProperty(name));
+                            Object value = environment.getProperty(name);
+                            answer.add(new Property(name, value, source));
                         } catch (Exception e) {
                             // ignore properties that cannot be resolved
                         }
@@ -71,5 +73,25 @@ public class SpringBootRuntimePropertiesProvider implements RuntimePropertiesPro
             }
         });
         return answer;
+    }
+
+    private static boolean isApplicationKey(String name) {
+        String lower = name.toLowerCase();
+        return lower.startsWith("camel.") || lower.startsWith("camel_")
+                || lower.startsWith("spring.") || lower.startsWith("spring_")
+                || lower.startsWith("server.") || lower.startsWith("server_")
+                || lower.startsWith("management.") || lower.startsWith("management_");
+    }
+
+    private static String toSourceLabel(String sourceName) {
+        if ("systemProperties".equals(sourceName)) {
+            return "JVM";
+        } else if ("systemEnvironment".equals(sourceName)) {
+            return "ENV";
+        } else if ("server.ports".equals(sourceName)) {
+            return "Spring Boot";
+        } else {
+            return "Spring Boot";
+        }
     }
 }
