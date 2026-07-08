@@ -82,6 +82,12 @@ public class KafkaComponentConfiguration
      */
     private HeaderFilterStrategy headerFilterStrategy;
     /**
+     * The period of time in milliseconds after which we force a refresh of
+     * metadata even if we haven't seen any partition leadership changes to
+     * proactively discover any new brokers or partitions.
+     */
+    private Integer metadataMaxAgeMs = 300000;
+    /**
      * The maximum amount of time in milliseconds to wait when reconnecting to a
      * broker that has repeatedly failed to connect. If provided, the backoff
      * per host will increase exponentially for each consecutive connection
@@ -585,12 +591,6 @@ public class KafkaComponentConfiguration
      */
     private Integer maxRequestSize = 1048576;
     /**
-     * The period of time in milliseconds after which we force a refresh of
-     * metadata even if we haven't seen any partition leadership changes to
-     * proactively discover any new brokers or partitions.
-     */
-    private Integer metadataMaxAgeMs = 300000;
-    /**
      * A list of classes to use as metrics reporters. Implementing the
      * MetricReporter interface allows plugging in classes that will be notified
      * of new metric creation. The JmxReporter is always included to register
@@ -1034,6 +1034,14 @@ public class KafkaComponentConfiguration
     public void setHeaderFilterStrategy(
             HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
+    }
+
+    public Integer getMetadataMaxAgeMs() {
+        return metadataMaxAgeMs;
+    }
+
+    public void setMetadataMaxAgeMs(Integer metadataMaxAgeMs) {
+        this.metadataMaxAgeMs = metadataMaxAgeMs;
     }
 
     public Integer getReconnectBackoffMaxMs() {
@@ -1530,14 +1538,6 @@ public class KafkaComponentConfiguration
 
     public void setMaxRequestSize(Integer maxRequestSize) {
         this.maxRequestSize = maxRequestSize;
-    }
-
-    public Integer getMetadataMaxAgeMs() {
-        return metadataMaxAgeMs;
-    }
-
-    public void setMetadataMaxAgeMs(Integer metadataMaxAgeMs) {
-        this.metadataMaxAgeMs = metadataMaxAgeMs;
     }
 
     public String getMetricReporters() {
