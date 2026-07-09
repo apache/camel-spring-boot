@@ -130,6 +130,33 @@
       "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration"
     },
     {
+      "name": "camel.component.pqc.key-rotation-check-interval",
+      "type": "java.lang.Long",
+      "description": "Interval between key rotation checks when the scheduler is enabled. The option is a long type.",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration",
+      "defaultValue": 3600000
+    },
+    {
+      "name": "camel.component.pqc.key-rotation-max-age",
+      "type": "java.lang.Long",
+      "description": "When the scheduler is enabled, rotate keys older than this age. If not set, age is not used as a rotation signal. The option is a long type.",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration"
+    },
+    {
+      "name": "camel.component.pqc.key-rotation-max-usage",
+      "type": "java.lang.Long",
+      "description": "When the scheduler is enabled, rotate keys whose recorded usage count reaches this value. 0 disables usage-based rotation.",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.pqc.key-rotation-scheduler-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to start an automated background key rotation scheduler for this component. Requires keyLifecycleManager to be set. The scheduler periodically rotates keys that exceed the configured age and\/or usage policy.",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.pqc.key-store",
       "type": "java.security.KeyStore",
       "description": "A KeyStore where we could get Cryptographic material. The option is a java.security.KeyStore type.",

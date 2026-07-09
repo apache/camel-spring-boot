@@ -124,6 +124,28 @@ public class PQCComponentConfiguration
      */
     private String keyPairAlias;
     /**
+     * Interval between key rotation checks when the scheduler is enabled. The
+     * option is a long type.
+     */
+    private Long keyRotationCheckInterval = 3600000L;
+    /**
+     * When the scheduler is enabled, rotate keys older than this age. If not
+     * set, age is not used as a rotation signal. The option is a long type.
+     */
+    private Long keyRotationMaxAge;
+    /**
+     * When the scheduler is enabled, rotate keys whose recorded usage count
+     * reaches this value. 0 disables usage-based rotation.
+     */
+    private Long keyRotationMaxUsage = 0L;
+    /**
+     * Whether to start an automated background key rotation scheduler for this
+     * component. Requires keyLifecycleManager to be set. The scheduler
+     * periodically rotates keys that exceed the configured age and/or usage
+     * policy.
+     */
+    private Boolean keyRotationSchedulerEnabled = false;
+    /**
      * A KeyStore where we could get Cryptographic material. The option is a
      * java.security.KeyStore type.
      */
@@ -304,6 +326,39 @@ public class PQCComponentConfiguration
 
     public void setKeyPairAlias(String keyPairAlias) {
         this.keyPairAlias = keyPairAlias;
+    }
+
+    public Long getKeyRotationCheckInterval() {
+        return keyRotationCheckInterval;
+    }
+
+    public void setKeyRotationCheckInterval(Long keyRotationCheckInterval) {
+        this.keyRotationCheckInterval = keyRotationCheckInterval;
+    }
+
+    public Long getKeyRotationMaxAge() {
+        return keyRotationMaxAge;
+    }
+
+    public void setKeyRotationMaxAge(Long keyRotationMaxAge) {
+        this.keyRotationMaxAge = keyRotationMaxAge;
+    }
+
+    public Long getKeyRotationMaxUsage() {
+        return keyRotationMaxUsage;
+    }
+
+    public void setKeyRotationMaxUsage(Long keyRotationMaxUsage) {
+        this.keyRotationMaxUsage = keyRotationMaxUsage;
+    }
+
+    public Boolean getKeyRotationSchedulerEnabled() {
+        return keyRotationSchedulerEnabled;
+    }
+
+    public void setKeyRotationSchedulerEnabled(
+            Boolean keyRotationSchedulerEnabled) {
+        this.keyRotationSchedulerEnabled = keyRotationSchedulerEnabled;
     }
 
     public KeyStore getKeyStore() {
