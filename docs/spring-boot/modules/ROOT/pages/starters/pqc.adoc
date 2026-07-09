@@ -24,7 +24,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 34 options, which are listed below.
+The starter supports 38 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -45,6 +45,10 @@ The starter supports 34 options, which are listed below.
 | camel.component.pqc.key-lifecycle-manager | The KeyLifecycleManager to use for key lifecycle operations such as generation, rotation, import/export, expiration, and revocation. The option is a org.apache.camel.component.pqc.lifecycle.KeyLifecycleManager type. |  | KeyLifecycleManager
 | camel.component.pqc.key-pair | The KeyPair to be used. The option is a java.security.KeyPair type. |  | KeyPair
 | camel.component.pqc.key-pair-alias | A KeyPair alias to use in combination with KeyStore parameter |  | String
+| camel.component.pqc.key-rotation-check-interval | Interval between key rotation checks when the scheduler is enabled. The option is a long type. | 3600000 | Long
+| camel.component.pqc.key-rotation-max-age | When the scheduler is enabled, rotate keys older than this age. If not set, age is not used as a rotation signal. The option is a long type. |  | Long
+| camel.component.pqc.key-rotation-max-usage | When the scheduler is enabled, rotate keys whose recorded usage count reaches this value. 0 disables usage-based rotation. | 0 | Long
+| camel.component.pqc.key-rotation-scheduler-enabled | Whether to start an automated background key rotation scheduler for this component. Requires keyLifecycleManager to be set. The scheduler periodically rotates keys that exceed the configured age and/or usage policy. | false | Boolean
 | camel.component.pqc.key-store | A KeyStore where we could get Cryptographic material. The option is a java.security.KeyStore type. |  | KeyStore
 | camel.component.pqc.key-store-password | The KeyStore password to use in combination with KeyStore Parameter |  | String
 | camel.component.pqc.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
