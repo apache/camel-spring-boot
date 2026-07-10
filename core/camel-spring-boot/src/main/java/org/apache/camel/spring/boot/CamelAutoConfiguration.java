@@ -482,8 +482,8 @@ public class CamelAutoConfiguration {
     StartupConditionStrategy startupConditionStrategy(CamelStartupConditionConfigurationProperties config) {
         StartupConditionStrategy scs = new DefaultStartupConditionStrategy();
         scs.setEnabled(config.isEnabled());
-        scs.setInterval((int) config.getInterval().toMillis());
-        scs.setTimeout((int) config.getTimeout().toMillis());
+        scs.setInterval(Math.toIntExact(config.getInterval().toMillis()));
+        scs.setTimeout(Math.toIntExact(config.getTimeout().toMillis()));
         scs.setOnTimeout(config.getOnTimeout());
         String envExist = config.getEnvironmentVariableExists();
         if (envExist != null) {
