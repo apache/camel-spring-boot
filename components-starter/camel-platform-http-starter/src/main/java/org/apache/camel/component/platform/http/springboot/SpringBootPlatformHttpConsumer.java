@@ -115,23 +115,25 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
             return;
         }
 
-        Exchange exchange = createExchange(true);
-        exchange.setPattern(ExchangePattern.InOut);
-        HttpHelper.setCharsetFromContentType(request.getContentType(), exchange);
-        boolean streaming = getEndpoint().isUseStreaming();
-        PlatformHttpMessage msg = new PlatformHttpMessage(request, response, exchange, binding, streaming);
-        exchange.setIn(msg);
-        msg.init(exchange, binding, request, response);
-        String contextPath = getEndpoint().getPath();
-        exchange.getIn().setHeader(SpringBootPlatformHttpConstants.CONTEXT_PATH, contextPath);
-        if (getEndpoint().isUseCookieHandler()) {
-            exchange.setProperty(Exchange.COOKIE_HANDLER, new SpringBootCookieHandler(request, response));
-        }
-
-        // we want to handle the UoW
+        Exchange exchange = createExchange(false);
         try {
+            exchange.setPattern(ExchangePattern.InOut);
+            HttpHelper.setCharsetFromContentType(request.getContentType(), exchange);
+            boolean streaming = getEndpoint().isUseStreaming();
+            PlatformHttpMessage msg = new PlatformHttpMessage(request, response, exchange, binding, streaming);
+            exchange.setIn(msg);
+            msg.init(exchange, binding, request, response);
+            String contextPath = getEndpoint().getPath();
+            exchange.getIn().setHeader(SpringBootPlatformHttpConstants.CONTEXT_PATH, contextPath);
+            if (getEndpoint().isUseCookieHandler()) {
+                exchange.setProperty(Exchange.COOKIE_HANDLER, new SpringBootCookieHandler(request, response));
+            }
+
+            // we want to handle the UoW
             createUoW(exchange);
         } catch (Exception e) {
+            // the exchange did not reach afterProcess, so it must be released here
+            releaseExchange(exchange, false);
             throw new ServletException(e);
         }
         if (LOG.isTraceEnabled()) {
