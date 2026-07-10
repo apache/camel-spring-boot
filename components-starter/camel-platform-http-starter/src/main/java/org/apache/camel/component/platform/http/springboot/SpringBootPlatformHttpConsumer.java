@@ -16,8 +16,10 @@
  */
 package org.apache.camel.component.platform.http.springboot;
 
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import jakarta.servlet.ServletException;
@@ -49,9 +51,19 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
     private HttpBinding binding;
     private final boolean handleWriteResponseError;
     private final CookieConfiguration cookieConfiguration;
-    private Executor executor;
+    private final Executor executor;
+    private final boolean shutdownExecutor;
 
     public SpringBootPlatformHttpConsumer(PlatformHttpEndpoint endpoint, Processor processor) {
+        this(endpoint, processor, Executors.newSingleThreadExecutor(), true);
+    }
+
+    public SpringBootPlatformHttpConsumer(PlatformHttpEndpoint endpoint, Processor processor, Executor executor) {
+        this(endpoint, processor, Objects.requireNonNull(executor, "executor"), false);
+    }
+
+    private SpringBootPlatformHttpConsumer(PlatformHttpEndpoint endpoint, Processor processor, Executor executor,
+                                           boolean shutdownExecutor) {
         super(endpoint, processor);
         SpringBootPlatformHttpBinding httpBinding = new SpringBootPlatformHttpBinding();
         httpBinding.setStreaming(endpoint.isUseStreaming());
@@ -61,12 +73,16 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         this.binding.setFileNameExtWhitelist(endpoint.getFileNameExtWhitelist());
         this.handleWriteResponseError = endpoint.isHandleWriteResponseError();
         this.cookieConfiguration = endpoint.getCookieConfiguration();
-        this.executor = Executors.newSingleThreadExecutor();
+        this.executor = executor;
+        this.shutdownExecutor = shutdownExecutor;
     }
 
-    public SpringBootPlatformHttpConsumer(PlatformHttpEndpoint endpoint, Processor processor, Executor executor) {
-        this(endpoint, processor);
-        this.executor = executor;
+    @Override
+    protected void doStop() throws Exception {
+        super.doStop();
+        if (shutdownExecutor && executor instanceof ExecutorService executorService) {
+            executorService.shutdown();
+        }
     }
 
     /**

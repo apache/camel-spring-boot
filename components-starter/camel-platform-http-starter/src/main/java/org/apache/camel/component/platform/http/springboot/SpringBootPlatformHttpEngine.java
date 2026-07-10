@@ -26,19 +26,23 @@ import java.util.concurrent.Executor;
 public class SpringBootPlatformHttpEngine implements PlatformHttpEngine {
 
     private final int port;
-    private Executor executor;
+    private final Executor executor;
 
     public SpringBootPlatformHttpEngine(int port) {
-        this.port = port;
+        this(port, null);
     }
 
     public SpringBootPlatformHttpEngine(int port, Executor executor) {
-        this(port);
+        this.port = port;
         this.executor = executor;
     }
 
     @Override
     public PlatformHttpConsumer createConsumer(PlatformHttpEndpoint endpoint, Processor processor) {
+        if (executor == null) {
+            // engine created without an executor: let the consumer manage its own
+            return new SpringBootPlatformHttpConsumer(endpoint, processor);
+        }
         return new SpringBootPlatformHttpConsumer(endpoint, processor, executor);
     }
 
