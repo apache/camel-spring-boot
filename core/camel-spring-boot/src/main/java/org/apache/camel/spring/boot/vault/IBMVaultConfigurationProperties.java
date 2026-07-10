@@ -63,6 +63,32 @@ public class IBMVaultConfigurationProperties {
      */
     private long eventStreamConsumerPollTimeout = 3000;
 
+    /**
+     * Whether to automatically refresh the secrets on update
+     */
+    private boolean refreshEnabled;
+
+    /**
+     * Define the secrets to look at
+     */
+    private String secrets;
+
+    public boolean isRefreshEnabled() {
+        return refreshEnabled;
+    }
+
+    public void setRefreshEnabled(boolean refreshEnabled) {
+        this.refreshEnabled = refreshEnabled;
+    }
+
+    public String getSecrets() {
+        return secrets;
+    }
+
+    public void setSecrets(String secrets) {
+        this.secrets = secrets;
+    }
+
     public String getToken() {
         return token;
     }

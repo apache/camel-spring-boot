@@ -18,6 +18,7 @@ package org.apache.camel.spring.boot.vault;
 
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.vault.AzureVaultConfiguration;
+import org.springframework.beans.BeanUtils;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -31,18 +32,7 @@ public class AzureVaultAutoConfiguration {
     @Bean
     public AzureVaultConfiguration azureVaultConfiguration(AzureVaultConfigurationProperties config) {
         AzureVaultConfiguration answer = new AzureVaultConfiguration();
-        answer.setClientId(config.getClientId());
-        answer.setClientSecret(config.getClientSecret());
-        answer.setVaultName(config.getVaultName());
-        answer.setTenantId(config.getTenantId());
-        answer.setAzureIdentityEnabled(config.isAzureIdentityEnabled());
-        answer.setRefreshEnabled(config.isRefreshEnabled());
-        answer.setRefreshPeriod(config.getRefreshPeriod());
-        answer.setSecrets(config.getSecrets());
-        answer.setEventhubConnectionString(config.getEventhubConnectionString());
-        answer.setBlobAccessKey(config.getBlobAccessKey());
-        answer.setBlobAccountName(config.getBlobAccountName());
-        answer.setBlobContainerName(config.getBlobContainerName());
+        BeanUtils.copyProperties(config, answer);
         return answer;
     }
 

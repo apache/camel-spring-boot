@@ -18,6 +18,7 @@ package org.apache.camel.spring.boot.vault;
 
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.vault.HashicorpVaultConfiguration;
+import org.springframework.beans.BeanUtils;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -31,15 +32,7 @@ public class HashicorpVaultAutoConfiguration {
     @Bean
     public HashicorpVaultConfiguration hashicorpVaultConfiguration(HashicorpVaultConfigurationProperties config) {
         HashicorpVaultConfiguration answer = new HashicorpVaultConfiguration();
-        answer.setToken(config.getToken());
-        answer.setHost(config.getHost());
-        answer.setPort(config.getPort());
-        answer.setScheme(config.getScheme());
-        answer.setCloud(config.isCloud());
-        answer.setNamespace(config.getNamespace());
-        answer.setRefreshEnabled(config.isRefreshEnabled());
-        answer.setRefreshPeriod(config.getRefreshPeriod());
-        answer.setSecrets(config.getSecrets());
+        BeanUtils.copyProperties(config, answer);
         return answer;
     }
 
