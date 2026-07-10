@@ -45,6 +45,14 @@ public class WeaviateVectorDbComponentConfiguration
      */
     private WeaviateVectorDbConfiguration configuration;
     /**
+     * gRPC host for Weaviate server connection
+     */
+    private String grpcHost;
+    /**
+     * gRPC port for Weaviate server connection
+     */
+    private Integer grpcPort = 50051;
+    /**
      * Weaviate server host to connect to
      */
     private String host;
@@ -60,21 +68,9 @@ public class WeaviateVectorDbComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Proxy host to connect to weaviate through
-     */
-    private String proxyHost;
-    /**
-     * Proxy port to connect to weaviate through
-     */
-    private Integer proxyPort;
-    /**
-     * Proxy scheme to connect to weaviate through
-     */
-    private String proxyScheme;
-    /**
      * Scheme used to connect to weaviate
      */
-    private String scheme;
+    private String scheme = "http";
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -101,6 +97,22 @@ public class WeaviateVectorDbComponentConfiguration
         this.configuration = configuration;
     }
 
+    public String getGrpcHost() {
+        return grpcHost;
+    }
+
+    public void setGrpcHost(String grpcHost) {
+        this.grpcHost = grpcHost;
+    }
+
+    public Integer getGrpcPort() {
+        return grpcPort;
+    }
+
+    public void setGrpcPort(Integer grpcPort) {
+        this.grpcPort = grpcPort;
+    }
+
     public String getHost() {
         return host;
     }
@@ -115,30 +127,6 @@ public class WeaviateVectorDbComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public String getProxyHost() {
-        return proxyHost;
-    }
-
-    public void setProxyHost(String proxyHost) {
-        this.proxyHost = proxyHost;
-    }
-
-    public Integer getProxyPort() {
-        return proxyPort;
-    }
-
-    public void setProxyPort(Integer proxyPort) {
-        this.proxyPort = proxyPort;
-    }
-
-    public String getProxyScheme() {
-        return proxyScheme;
-    }
-
-    public void setProxyScheme(String proxyScheme) {
-        this.proxyScheme = proxyScheme;
     }
 
     public String getScheme() {
