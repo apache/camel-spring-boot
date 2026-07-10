@@ -36,6 +36,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class CamelRequestHandlerMapping extends RequestMappingHandlerMapping implements PlatformHttpListener {
@@ -159,8 +160,13 @@ public class CamelRequestHandlerMapping extends RequestMappingHandlerMapping imp
             }
         }
         if (verbs != null) {
-            for (String v : model.getVerbs().split(",")) {
-                RequestMethod rm = RequestMethod.resolve(v);
+            for (String v : verbs.split(",")) {
+                RequestMethod rm = RequestMethod.resolve(v.trim().toUpperCase(Locale.US));
+                if (rm == null) {
+                    // fail closed: an unknown verb must not widen the mapping to all methods
+                    throw new IllegalArgumentException(
+                            "Unsupported HTTP method '" + v.trim() + "' in verbs '" + verbs + "' for uri: " + model.getUri());
+                }
                 methods.add(rm);
             }
         }
