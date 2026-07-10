@@ -40,11 +40,6 @@ public class ClusteredRouteControllerConfiguration {
     private String namespace;
 
     /**
-     * The reference to a cluster service.
-     */
-    private String clusterServiceRef;
-
-    /**
      * The cluster service.
      */
     private CamelClusterService clusterService;
