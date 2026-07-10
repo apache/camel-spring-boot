@@ -18,6 +18,7 @@ package org.apache.camel.spring.boot.vault;
 
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.vault.AwsVaultConfiguration;
+import org.springframework.beans.BeanUtils;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -31,19 +32,7 @@ public class AwsVaultAutoConfiguration {
     @Bean
     public AwsVaultConfiguration awsVaultConfiguration(AwsVaultConfigurationProperties config) {
         AwsVaultConfiguration answer = new AwsVaultConfiguration();
-        answer.setAccessKey(config.getAccessKey());
-        answer.setSecretKey(config.getSecretKey());
-        answer.setRegion(config.getRegion());
-        answer.setDefaultCredentialsProvider(config.isDefaultCredentialsProvider());
-        answer.setProfileCredentialsProvider(config.isProfileCredentialsProvider());
-        answer.setProfileName(config.getProfileName());
-        answer.setRefreshEnabled(config.isRefreshEnabled());
-        answer.setRefreshPeriod(config.getRefreshPeriod());
-        answer.setSecrets(config.getSecrets());
-        answer.setUseSqsNotification(config.isUseSqsNotification());
-        answer.setSqsQueueUrl(config.getSqsQueueUrl());
-        answer.setUriEndpointOverride(config.getUriEndpointOverride());
-        answer.setOverrideEndpoint(config.isOverrideEndpoint());
+        BeanUtils.copyProperties(config, answer);
         return answer;
     }
 

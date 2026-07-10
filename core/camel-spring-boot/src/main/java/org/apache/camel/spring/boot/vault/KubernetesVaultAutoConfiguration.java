@@ -18,6 +18,7 @@ package org.apache.camel.spring.boot.vault;
 
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.vault.KubernetesVaultConfiguration;
+import org.springframework.beans.BeanUtils;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -31,8 +32,7 @@ public class KubernetesVaultAutoConfiguration {
     @Bean
     public KubernetesVaultConfiguration kubernetesVaultConfiguration(KubernetesVaultConfigurationProperties config) {
         KubernetesVaultConfiguration answer = new KubernetesVaultConfiguration();
-        answer.setRefreshEnabled(config.isRefreshEnabled());
-        answer.setSecrets(config.getSecrets());
+        BeanUtils.copyProperties(config, answer);
         return answer;
     }
 

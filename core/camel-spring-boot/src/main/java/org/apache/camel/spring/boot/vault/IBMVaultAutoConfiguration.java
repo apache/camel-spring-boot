@@ -18,6 +18,7 @@ package org.apache.camel.spring.boot.vault;
 
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.vault.IBMSecretsManagerVaultConfiguration;
+import org.springframework.beans.BeanUtils;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -31,14 +32,7 @@ public class IBMVaultAutoConfiguration {
     @Bean
     public IBMSecretsManagerVaultConfiguration ibmSecretsManagerVaultConfiguration(IBMVaultConfigurationProperties config) {
         IBMSecretsManagerVaultConfiguration answer = new IBMSecretsManagerVaultConfiguration();
-        answer.setToken(config.getToken());
-        answer.setServiceUrl(config.getServiceUrl());
-        answer.setEventStreamTopic(config.getEventStreamTopic());
-        answer.setEventStreamBootstrapServers(config.getEventStreamBootstrapServers());
-        answer.setEventStreamUsername(config.getEventStreamUsername());
-        answer.setEventStreamPassword(config.getEventStreamPassword());
-        answer.setEventStreamGroupId(config.getEventStreamGroupId());
-        answer.setEventStreamConsumerPollTimeout(config.getEventStreamConsumerPollTimeout());
+        BeanUtils.copyProperties(config, answer);
         return answer;
     }
 

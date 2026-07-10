@@ -18,6 +18,7 @@ package org.apache.camel.spring.boot.vault;
 
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.vault.CyberArkVaultConfiguration;
+import org.springframework.beans.BeanUtils;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -31,15 +32,7 @@ public class CyberArkVaultAutoConfiguration {
     @Bean
     public CyberArkVaultConfiguration cyberarkVaultConfiguration(CyberArkVaultConfigurationProperties config) {
         CyberArkVaultConfiguration answer = new CyberArkVaultConfiguration();
-        answer.setUrl(config.getUrl());
-        answer.setAccount(config.getAccount());
-        answer.setUsername(config.getUsername());
-        answer.setPassword(config.getPassword());
-        answer.setApiKey(config.getApiKey());
-        answer.setAuthToken(config.getAuthToken());
-        answer.setVerifySsl(config.isVerifySsl());
-        answer.setCertificatePath(config.getCertificatePath());
-        answer.setSecrets(config.getSecrets());
+        BeanUtils.copyProperties(config, answer);
         return answer;
     }
 

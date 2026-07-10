@@ -18,6 +18,7 @@ package org.apache.camel.spring.boot.vault;
 
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.vault.GcpVaultConfiguration;
+import org.springframework.beans.BeanUtils;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -31,13 +32,7 @@ public class GcpVaultAutoConfiguration {
     @Bean
     public GcpVaultConfiguration gcpVaultConfiguration(GcpVaultConfigurationProperties config) {
         GcpVaultConfiguration answer = new GcpVaultConfiguration();
-        answer.setServiceAccountKey(config.getServiceAccountKey());
-        answer.setProjectId(config.getProjectId());
-        answer.setUseDefaultInstance(config.isUseDefaultInstance());
-        answer.setRefreshEnabled(config.isRefreshEnabled());
-        answer.setRefreshPeriod(config.getRefreshPeriod());
-        answer.setSecrets(config.getSecrets());
-        answer.setSubscriptionName(config.getSubscriptionName());
+        BeanUtils.copyProperties(config, answer);
         return answer;
     }
 
