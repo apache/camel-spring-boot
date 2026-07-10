@@ -103,6 +103,20 @@ public class SpringBootPlatformHttpCookiesTest {
                             })
                             .setBody().constant("get");
 
+                    from("platform-http:/readCookie?useCookieHandler=true")
+                            .process(exchange -> {
+                                String value = exchange.getProperty(Exchange.COOKIE_HANDLER, CookieHandler.class)
+                                        .getCookieValue("foo");
+                                exchange.getMessage().setBody(String.valueOf(value));
+                            });
+
+                    from("platform-http:/removeCookieValue?useCookieHandler=true")
+                            .process(exchange -> {
+                                String value = exchange.getProperty(Exchange.COOKIE_HANDLER, CookieHandler.class)
+                                        .removeCookie("foo");
+                                exchange.getMessage().setBody(String.valueOf(value));
+                            });
+
                     from("platform-http:/replace")
                             .process(exchange -> {
                                 PlatformHttpMessage message = (PlatformHttpMessage) exchange.getMessage();
@@ -161,6 +175,48 @@ public class SpringBootPlatformHttpCookiesTest {
                         detailedCookie()
                                 .value("bar"))
                 .body(equalTo("get"));
+    }
+
+    @Test
+    public void testReadCookieValue() {
+        given()
+                .header("cookie", "foo=sent")
+                .when()
+                .get("/readCookie")
+                .then()
+                .statusCode(200)
+                .body(equalTo("sent"));
+    }
+
+    @Test
+    public void testReadMissingCookieValueReturnsNull() {
+        given()
+                .when()
+                .get("/readCookie")
+                .then()
+                .statusCode(200)
+                .body(equalTo("null"));
+    }
+
+    @Test
+    public void testRemoveCookieReturnsRemovedValue() {
+        given()
+                .header("cookie", "foo=old")
+                .when()
+                .get("/removeCookieValue")
+                .then()
+                .statusCode(200)
+                .body(equalTo("old"));
+    }
+
+    @Test
+    public void testRemoveMissingCookieReturnsNull() {
+        given()
+                .when()
+                .get("/removeCookieValue")
+                .then()
+                .statusCode(200)
+                .body(equalTo("null"));
     }
 
     @Test
