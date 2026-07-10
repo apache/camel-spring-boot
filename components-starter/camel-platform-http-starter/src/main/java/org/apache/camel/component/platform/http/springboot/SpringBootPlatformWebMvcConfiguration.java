@@ -17,18 +17,18 @@
 package org.apache.camel.component.platform.http.springboot;
 
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Configuration
-@EnableConfigurationProperties({ComponentConfigurationProperties.class,PlatformHttpComponentConfiguration.class, WebMvcProperties.class})
+@AutoConfiguration
+@EnableConfigurationProperties({ ComponentConfigurationProperties.class, PlatformHttpComponentConfiguration.class })
 public class SpringBootPlatformWebMvcConfiguration implements WebMvcConfigurer {
 
-    private PlatformHttpComponentConfiguration platformHttpComponentConfiguration;
-    private WebMvcProperties webMvcProperties;
+    private final PlatformHttpComponentConfiguration platformHttpComponentConfiguration;
+    private final WebMvcProperties webMvcProperties;
 
     public SpringBootPlatformWebMvcConfiguration(PlatformHttpComponentConfiguration platformHttpComponentConfiguration,
                                                  WebMvcProperties webMvcProperties) {
