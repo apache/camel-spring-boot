@@ -18,6 +18,7 @@ package org.apache.camel.component.platform.http.springboot;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.camel.Consumer;
 import org.apache.camel.component.platform.http.HttpEndpointModel;
 import org.apache.camel.component.platform.http.PlatformHttpComponent;
 import org.apache.camel.component.platform.http.PlatformHttpEndpoint;
@@ -38,11 +39,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CamelRequestHandlerMapping extends RequestMappingHandlerMapping implements PlatformHttpListener {
 
     private final PlatformHttpComponent component;
     private final PlatformHttpEngine engine;
+    private final Map<Consumer, List<RequestMappingInfo>> registrations = new ConcurrentHashMap<>();
 
     private CorsConfiguration corsConfiguration;
 
@@ -134,16 +138,24 @@ public class CamelRequestHandlerMapping extends RequestMappingHandlerMapping imp
         List<RequestMappingInfo> requestMappingInfos = asRequestMappingInfo(model);
         Method m = ReflectionHelper.findMethod(SpringBootPlatformHttpConsumer.class, "service",
                 HttpServletRequest.class, HttpServletResponse.class);
+        List<RequestMappingInfo> registered
+                = registrations.computeIfAbsent(model.getConsumer(), c -> new CopyOnWriteArrayList<>());
         for (RequestMappingInfo info : requestMappingInfos) {
             // Needed in case of context reload
             unregisterMapping(info);
             registerMapping(info, model.getConsumer(), m);
+            registered.add(info);
         }
     }
 
     @Override
     public void unregisterHttpEndpoint(HttpEndpointModel model) {
-        // noop
+        // mappings are tracked per consumer so unregistering an endpoint does not
+        // affect other consumers serving the same uri with different methods
+        List<RequestMappingInfo> registered = registrations.remove(model.getConsumer());
+        if (registered != null) {
+            registered.forEach(this::unregisterMapping);
+        }
     }
 
     private List<RequestMappingInfo> asRequestMappingInfo(HttpEndpointModel model) {
