@@ -172,6 +172,10 @@
                     <release>${jdk.version}</release>
                     <maxmem>512M</maxmem>
                     <fork>${compiler.fork}</fork>
+                    <!-- maven-compiler-plugin >= 3.13 no longer runs annotation processors discovered on the
+                         classpath by default; spring-boot-configuration-processor must run so the jars contain
+                         META-INF/spring-configuration-metadata.json -->
+                    <proc>full</proc>
                 </configuration>
             </plugin>
             <plugin>
