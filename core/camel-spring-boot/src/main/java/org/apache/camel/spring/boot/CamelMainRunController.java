@@ -17,11 +17,8 @@
 package org.apache.camel.spring.boot;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.main.MainListener;
 import org.apache.camel.main.MainShutdownStrategy;
 import org.springframework.context.ApplicationContext;
-
-import java.util.Map;
 
 /**
  * Controller to keep the main running and perform graceful shutdown when the JVM is stopped.
@@ -32,14 +29,11 @@ public class CamelMainRunController {
     private final Thread daemon;
 
     public CamelMainRunController(ApplicationContext applicationContext, CamelContext camelContext) {
-        controller = new CamelSpringBootApplicationController(applicationContext);
+        // do not register the MainListener beans on this controller: they are already notified
+        // via the controller created by CamelAutoConfiguration, and this Main is only used
+        // to keep the JVM running
+        controller = new CamelSpringBootApplicationController(applicationContext, false);
         controller.setCamelContext(camelContext);
-
-        // setup main listeners eager on controller
-        final Map<String, MainListener> listeners = applicationContext.getBeansOfType(MainListener.class);
-        for (MainListener listener : listeners.values()) {
-            controller.getMain().addMainListener(listener);
-        }
 
         daemon = new Thread(new DaemonTask(), "CamelMainRunController");
     }

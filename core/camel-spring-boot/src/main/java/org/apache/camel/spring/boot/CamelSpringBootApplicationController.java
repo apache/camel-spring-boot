@@ -37,11 +37,24 @@ public class CamelSpringBootApplicationController implements CamelContextAware {
     private CamelContext camelContext;
 
     public CamelSpringBootApplicationController(final ApplicationContext applicationContext) {
+        this(applicationContext, true);
+    }
+
+    /**
+     * @param registerMainListeners whether to register the {@link MainListener} beans from the application context on
+     *                              the internal {@link Main}. The controller used by the main run controller must not
+     *                              register them, as the listeners are already notified via the controller created by
+     *                              {@link CamelAutoConfiguration}, and registering them on both would notify each
+     *                              listener twice.
+     */
+    CamelSpringBootApplicationController(final ApplicationContext applicationContext, boolean registerMainListeners) {
         this.main = new CamelSpringMain(applicationContext, this);
-        // inject main listeners
-        final Map<String, MainListener> listeners = applicationContext.getBeansOfType(MainListener.class);
-        for (MainListener listener : listeners.values()) {
-            this.main.addMainListener(listener);
+        if (registerMainListeners) {
+            // inject main listeners
+            final Map<String, MainListener> listeners = applicationContext.getBeansOfType(MainListener.class);
+            for (MainListener listener : listeners.values()) {
+                this.main.addMainListener(listener);
+            }
         }
     }
 
