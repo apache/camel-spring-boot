@@ -16,8 +16,12 @@
  */
 package org.apache.camel.spring.boot.routecontroller;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+
 import org.apache.camel.spi.Metadata;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.convert.DurationUnit;
 
 @ConfigurationProperties(prefix = "camel.routecontroller")
 public class SupervisingRouteControllerConfiguration {
@@ -42,26 +46,32 @@ public class SupervisingRouteControllerConfiguration {
     int threadPoolSize = 1;
 
     /**
-     * Initial delay in milli seconds before the route controller starts, after CamelContext has been started.
+     * Initial delay before the route controller starts, after CamelContext has been started. Plain numbers are
+     * treated as milliseconds.
      */
-    long initialDelay;
+    @DurationUnit(ChronoUnit.MILLIS)
+    Duration initialDelay;
 
     /**
-     * Backoff delay in millis when restarting a route that failed to startup.
+     * Backoff delay when restarting a route that failed to startup. Plain numbers are treated as milliseconds.
      */
     @Metadata(defaultValue = "2000")
-    long backOffDelay = 2000;
+    @DurationUnit(ChronoUnit.MILLIS)
+    Duration backOffDelay = Duration.ofMillis(2000);
 
     /**
-     * Backoff maximum delay in millis when restarting a route that failed to startup.
+     * Backoff maximum delay when restarting a route that failed to startup. Plain numbers are treated as
+     * milliseconds.
      */
-    long backOffMaxDelay;
+    @DurationUnit(ChronoUnit.MILLIS)
+    Duration backOffMaxDelay;
 
     /**
-     * Backoff maximum elapsed time in millis, after which the backoff should be considered exhausted and no more
-     * attempts should be made.
+     * Backoff maximum elapsed time, after which the backoff should be considered exhausted and no more attempts
+     * should be made. Plain numbers are treated as milliseconds.
      */
-    long backOffMaxElapsedTime;
+    @DurationUnit(ChronoUnit.MILLIS)
+    Duration backOffMaxElapsedTime;
 
     /**
      * Backoff maximum number of attempts to restart a route that failed to startup. When this threshold has been
@@ -133,35 +143,35 @@ public class SupervisingRouteControllerConfiguration {
         this.threadPoolSize = threadPoolSize;
     }
 
-    public long getInitialDelay() {
+    public Duration getInitialDelay() {
         return initialDelay;
     }
 
-    public void setInitialDelay(long initialDelay) {
+    public void setInitialDelay(Duration initialDelay) {
         this.initialDelay = initialDelay;
     }
 
-    public long getBackOffDelay() {
+    public Duration getBackOffDelay() {
         return backOffDelay;
     }
 
-    public void setBackOffDelay(long backOffDelay) {
+    public void setBackOffDelay(Duration backOffDelay) {
         this.backOffDelay = backOffDelay;
     }
 
-    public long getBackOffMaxDelay() {
+    public Duration getBackOffMaxDelay() {
         return backOffMaxDelay;
     }
 
-    public void setBackOffMaxDelay(long backOffMaxDelay) {
+    public void setBackOffMaxDelay(Duration backOffMaxDelay) {
         this.backOffMaxDelay = backOffMaxDelay;
     }
 
-    public long getBackOffMaxElapsedTime() {
+    public Duration getBackOffMaxElapsedTime() {
         return backOffMaxElapsedTime;
     }
 
-    public void setBackOffMaxElapsedTime(long backOffMaxElapsedTime) {
+    public void setBackOffMaxElapsedTime(Duration backOffMaxElapsedTime) {
         this.backOffMaxElapsedTime = backOffMaxElapsedTime;
     }
 

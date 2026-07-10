@@ -1208,10 +1208,10 @@
     },
     {
       "name": "camel.routecontroller.back-off-delay",
-      "type": "java.lang.Long",
-      "description": "Backoff delay in millis when restarting a route that failed to startup.",
+      "type": "java.time.Duration",
+      "description": "Backoff delay when restarting a route that failed to startup. Plain numbers are treated as milliseconds.",
       "sourceType": "org.apache.camel.spring.boot.routecontroller.SupervisingRouteControllerConfiguration",
-      "defaultValue": 2000
+      "defaultValue": "2000ms"
     },
     {
       "name": "camel.routecontroller.back-off-max-attempts",
@@ -1222,17 +1222,15 @@
     },
     {
       "name": "camel.routecontroller.back-off-max-delay",
-      "type": "java.lang.Long",
-      "description": "Backoff maximum delay in millis when restarting a route that failed to startup.",
-      "sourceType": "org.apache.camel.spring.boot.routecontroller.SupervisingRouteControllerConfiguration",
-      "defaultValue": 0
+      "type": "java.time.Duration",
+      "description": "Backoff maximum delay when restarting a route that failed to startup. Plain numbers are treated as milliseconds.",
+      "sourceType": "org.apache.camel.spring.boot.routecontroller.SupervisingRouteControllerConfiguration"
     },
     {
       "name": "camel.routecontroller.back-off-max-elapsed-time",
-      "type": "java.lang.Long",
-      "description": "Backoff maximum elapsed time in millis, after which the backoff should be considered exhausted and no more attempts should be made.",
-      "sourceType": "org.apache.camel.spring.boot.routecontroller.SupervisingRouteControllerConfiguration",
-      "defaultValue": 0
+      "type": "java.time.Duration",
+      "description": "Backoff maximum elapsed time, after which the backoff should be considered exhausted and no more attempts should be made. Plain numbers are treated as milliseconds.",
+      "sourceType": "org.apache.camel.spring.boot.routecontroller.SupervisingRouteControllerConfiguration"
     },
     {
       "name": "camel.routecontroller.back-off-multiplier",
@@ -1262,10 +1260,9 @@
     },
     {
       "name": "camel.routecontroller.initial-delay",
-      "type": "java.lang.Long",
-      "description": "Initial delay in milli seconds before the route controller starts, after CamelContext has been started.",
-      "sourceType": "org.apache.camel.spring.boot.routecontroller.SupervisingRouteControllerConfiguration",
-      "defaultValue": 0
+      "type": "java.time.Duration",
+      "description": "Initial delay before the route controller starts, after CamelContext has been started. Plain numbers are treated as milliseconds.",
+      "sourceType": "org.apache.camel.spring.boot.routecontroller.SupervisingRouteControllerConfiguration"
     },
     {
       "name": "camel.routecontroller.thread-pool-size",
@@ -1473,10 +1470,10 @@
     },
     {
       "name": "camel.startupcondition.interval",
-      "type": "java.lang.Integer",
-      "description": "Interval in millis between checking conditions.",
+      "type": "java.time.Duration",
+      "description": "Interval between checking conditions. Plain numbers are treated as milliseconds.",
       "sourceType": "org.apache.camel.spring.boot.CamelStartupConditionConfigurationProperties",
-      "defaultValue": 500
+      "defaultValue": "500ms"
     },
     {
       "name": "camel.startupcondition.on-timeout",
@@ -1487,10 +1484,10 @@
     },
     {
       "name": "camel.startupcondition.timeout",
-      "type": "java.lang.Integer",
-      "description": "Total timeout (in millis) for all startup conditions.",
+      "type": "java.time.Duration",
+      "description": "Total timeout for all startup conditions. Plain numbers are treated as milliseconds.",
       "sourceType": "org.apache.camel.spring.boot.CamelStartupConditionConfigurationProperties",
-      "defaultValue": 20000
+      "defaultValue": "20000ms"
     },
     {
       "name": "camel.threadpool.allow-core-thread-time-out",

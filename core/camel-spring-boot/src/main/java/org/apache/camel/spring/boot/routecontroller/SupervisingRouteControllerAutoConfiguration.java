@@ -44,20 +44,20 @@ public class SupervisingRouteControllerAutoConfiguration {
         if (config.getThreadPoolSize() > 0) {
             src.setThreadPoolSize(config.getThreadPoolSize());
         }
-        if (config.getBackOffDelay() > 0) {
-            src.setBackOffDelay(config.getBackOffDelay());
+        if (config.getBackOffDelay() != null && config.getBackOffDelay().toMillis() > 0) {
+            src.setBackOffDelay(config.getBackOffDelay().toMillis());
         }
-        if (config.getInitialDelay() > 0) {
-            src.setInitialDelay(config.getInitialDelay());
+        if (config.getInitialDelay() != null && config.getInitialDelay().toMillis() > 0) {
+            src.setInitialDelay(config.getInitialDelay().toMillis());
         }
         if (config.getBackOffMaxAttempts() > 0) {
             src.setBackOffMaxAttempts(config.getBackOffMaxAttempts());
         }
-        if (config.getBackOffMaxDelay() > 0) {
-            src.setBackOffMaxDelay(config.getBackOffMaxDelay());
+        if (config.getBackOffMaxDelay() != null && config.getBackOffMaxDelay().toMillis() > 0) {
+            src.setBackOffMaxDelay(config.getBackOffMaxDelay().toMillis());
         }
-        if (config.getBackOffMaxElapsedTime() > 0) {
-            src.setBackOffMaxElapsedTime(config.getBackOffMaxElapsedTime());
+        if (config.getBackOffMaxElapsedTime() != null && config.getBackOffMaxElapsedTime().toMillis() > 0) {
+            src.setBackOffMaxElapsedTime(config.getBackOffMaxElapsedTime().toMillis());
         }
         if (config.getBackOffMultiplier() > 0) {
             src.setBackOffMultiplier(config.getBackOffMultiplier());
