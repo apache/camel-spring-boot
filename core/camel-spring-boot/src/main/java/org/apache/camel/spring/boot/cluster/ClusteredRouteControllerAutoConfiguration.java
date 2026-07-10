@@ -30,13 +30,13 @@ import org.apache.camel.util.ObjectHelper;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBooleanProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
 @AutoConfiguration(before = CamelAutoConfiguration.class)
-@ConditionalOnProperty(prefix = "camel.clustered.controller", name = "enabled")
+@ConditionalOnBooleanProperty("camel.clustered.controller.enabled")
 @EnableConfigurationProperties(ClusteredRouteControllerConfiguration.class)
 public class ClusteredRouteControllerAutoConfiguration {
 
