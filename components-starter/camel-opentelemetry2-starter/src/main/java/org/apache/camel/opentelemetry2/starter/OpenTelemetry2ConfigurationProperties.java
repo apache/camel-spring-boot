@@ -40,6 +40,14 @@ public class OpenTelemetry2ConfigurationProperties {
      * Disable any inner core processors (any core DSL processor provided in the route, for example `bean`, `log`, ...).
      */
     private boolean disableCoreProcessors;
+    /**
+     * Setting this to true will only create trace spans for routes and nodes that have a custom id assigned.
+     */
+    private boolean traceCustomIdOnly;
+    /**
+     * Setting this to true will include the message headers in the trace spans.
+     */
+    private boolean traceHeadersInclusion;
 
     public Boolean getTraceProcessors() {
         return traceProcessors;
@@ -71,5 +79,21 @@ public class OpenTelemetry2ConfigurationProperties {
 
     public void setIncludePatterns(String includePatterns) {
         this.includePatterns = includePatterns;
+    }
+
+    public boolean isTraceCustomIdOnly() {
+        return traceCustomIdOnly;
+    }
+
+    public void setTraceCustomIdOnly(boolean traceCustomIdOnly) {
+        this.traceCustomIdOnly = traceCustomIdOnly;
+    }
+
+    public boolean isTraceHeadersInclusion() {
+        return traceHeadersInclusion;
+    }
+
+    public void setTraceHeadersInclusion(boolean traceHeadersInclusion) {
+        this.traceHeadersInclusion = traceHeadersInclusion;
     }
 }

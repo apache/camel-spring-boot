@@ -47,6 +47,8 @@ public class OpenTelemetry2AutoConfiguration {
         if (config.getDisableCoreProcessors() != null ) {
             ottracer.setDisableCoreProcessors(config.getDisableCoreProcessors());
         }
+        ottracer.setTraceCustomIdOnly(config.isTraceCustomIdOnly());
+        ottracer.setTraceHeadersInclusion(config.isTraceHeadersInclusion());
         ottracer.init(camelContext);
 
         return ottracer;
