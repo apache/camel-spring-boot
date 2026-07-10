@@ -51,14 +51,17 @@ public class CamelSecurityPolicyAutoConfiguration {
             CamelSecurityPolicyConfigurationProperties config, Environment environment) {
 
         // apply profile-based security defaults
+        // (do not mutate the shared configuration properties bean)
         String profile = camelContext.getCamelContextExtension().getProfile();
-        if ("dev".equals(profile) && config.getInsecureDevPolicy() == null) {
-            config.setInsecureDevPolicy("allow");
-        } else if ("prod".equals(profile) && "warn".equals(config.getPolicy())) {
-            config.setPolicy("fail");
+        String policy = config.getPolicy();
+        String insecureDevPolicy = config.getInsecureDevPolicy();
+        if ("dev".equals(profile) && insecureDevPolicy == null) {
+            insecureDevPolicy = "allow";
+        } else if ("prod".equals(profile) && "warn".equals(policy)) {
+            policy = "fail";
         }
 
-        SecurityConfigurationProperties securityConfig = applySecurityProperties(camelContext, config);
+        SecurityConfigurationProperties securityConfig = applySecurityProperties(config, policy, insecureDevPolicy);
 
         Map<String, Object> camelProperties = extractCamelProperties(environment);
 
@@ -74,14 +77,14 @@ public class CamelSecurityPolicyAutoConfiguration {
         return result;
     }
 
-    private SecurityConfigurationProperties applySecurityProperties(CamelContext camelContext,
-            CamelSecurityPolicyConfigurationProperties config) {
+    private SecurityConfigurationProperties applySecurityProperties(CamelSecurityPolicyConfigurationProperties config,
+            String policy, String insecureDevPolicy) {
 
         // get the security config from camel-main's MainConfigurationProperties
         // which is already bound by CamelAutoConfiguration via CamelConfigurationProperties
         SecurityConfigurationProperties securityConfig = new SecurityConfigurationProperties(null);
 
-        securityConfig.setPolicy(config.getPolicy());
+        securityConfig.setPolicy(policy);
         if (config.getSecretPolicy() != null) {
             securityConfig.setSecretPolicy(config.getSecretPolicy());
         }
@@ -91,8 +94,8 @@ public class CamelSecurityPolicyAutoConfiguration {
         if (config.getInsecureSerializationPolicy() != null) {
             securityConfig.setInsecureSerializationPolicy(config.getInsecureSerializationPolicy());
         }
-        if (config.getInsecureDevPolicy() != null) {
-            securityConfig.setInsecureDevPolicy(config.getInsecureDevPolicy());
+        if (insecureDevPolicy != null) {
+            securityConfig.setInsecureDevPolicy(insecureDevPolicy);
         }
         if (config.getAllowedProperties() != null) {
             securityConfig.setAllowedProperties(config.getAllowedProperties());

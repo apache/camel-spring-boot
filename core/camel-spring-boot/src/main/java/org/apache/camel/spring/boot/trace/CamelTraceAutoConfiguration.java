@@ -33,10 +33,10 @@ public class CamelTraceAutoConfiguration {
     public BacklogTracer backlogTracer(CamelContext camelContext, CamelTraceConfigurationProperties config)
             throws Exception {
         // dev profile enables tracer standby so tooling (TUI) can activate tracing on demand
-        if (!config.isStandby() && "dev".equals(camelContext.getCamelContextExtension().getProfile())) {
-            config.setStandby(true);
-        }
-        if (!config.isEnabled() && !config.isStandby()) {
+        // (do not mutate the shared configuration properties bean)
+        boolean standby = config.isStandby()
+                || "dev".equals(camelContext.getCamelContextExtension().getProfile());
+        if (!config.isEnabled() && !standby) {
             return null;
         }
 
@@ -45,12 +45,12 @@ public class CamelTraceAutoConfiguration {
 
         // enable tracer on camel
         camelContext.setBacklogTracing(config.isEnabled());
-        camelContext.setBacklogTracingStandby(config.isStandby());
+        camelContext.setBacklogTracingStandby(standby);
         camelContext.setBacklogTracingTemplates(config.isTraceTemplates());
 
         BacklogTracer tracer = org.apache.camel.impl.debugger.BacklogTracer.createTracer(camelContext);
         tracer.setEnabled(config.isEnabled());
-        tracer.setStandby(config.isStandby());
+        tracer.setStandby(standby);
         tracer.setBacklogSize(config.getBacklogSize());
         tracer.setRemoveOnDump(config.isRemoveOnDump());
         tracer.setBodyMaxChars(config.getBodyMaxChars());
