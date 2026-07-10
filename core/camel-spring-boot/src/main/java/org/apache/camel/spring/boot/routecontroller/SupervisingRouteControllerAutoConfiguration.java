@@ -17,58 +17,53 @@
 package org.apache.camel.spring.boot.routecontroller;
 
 import org.apache.camel.impl.engine.DefaultSupervisingRouteController;
-import org.apache.camel.spi.RouteController;
 import org.apache.camel.spi.SupervisingRouteController;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBooleanProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
 @AutoConfiguration(before = CamelAutoConfiguration.class)
-@ConditionalOnProperty(prefix = "camel.routecontroller", name = "enabled")
+@ConditionalOnBooleanProperty("camel.routecontroller.enabled")
 @EnableConfigurationProperties(SupervisingRouteControllerConfiguration.class)
 public class SupervisingRouteControllerAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
     public SupervisingRouteController supervisingRouteController(SupervisingRouteControllerConfiguration config) {
-        SupervisingRouteController src = null;
-
-        if (config.isEnabled()) {
-            // switch to supervising route controller
-            src = new DefaultSupervisingRouteController();
-            if (config.getIncludeRoutes() != null) {
-                src.setIncludeRoutes(config.getIncludeRoutes());
-            }
-            if (config.getExcludeRoutes() != null) {
-                src.setExcludeRoutes(config.getExcludeRoutes());
-            }
-            if (config.getThreadPoolSize() > 0) {
-                src.setThreadPoolSize(config.getThreadPoolSize());
-            }
-            if (config.getBackOffDelay() > 0) {
-                src.setBackOffDelay(config.getBackOffDelay());
-            }
-            if (config.getInitialDelay() > 0) {
-                src.setInitialDelay(config.getInitialDelay());
-            }
-            if (config.getBackOffMaxAttempts() > 0) {
-                src.setBackOffMaxAttempts(config.getBackOffMaxAttempts());
-            }
-            if (config.getBackOffMaxDelay() > 0) {
-                src.setBackOffMaxDelay(config.getBackOffMaxDelay());
-            }
-            if (config.getBackOffMaxElapsedTime() > 0) {
-                src.setBackOffMaxElapsedTime(config.getBackOffMaxElapsedTime());
-            }
-            if (config.getBackOffMultiplier() > 0) {
-                src.setBackOffMultiplier(config.getBackOffMultiplier());
-            }
-            src.setUnhealthyOnExhausted(config.isUnhealthyOnExhausted());
-            src.setUnhealthyOnRestarting(config.isUnhealthyOnRestarting());
+        // switch to supervising route controller
+        SupervisingRouteController src = new DefaultSupervisingRouteController();
+        if (config.getIncludeRoutes() != null) {
+            src.setIncludeRoutes(config.getIncludeRoutes());
         }
+        if (config.getExcludeRoutes() != null) {
+            src.setExcludeRoutes(config.getExcludeRoutes());
+        }
+        if (config.getThreadPoolSize() > 0) {
+            src.setThreadPoolSize(config.getThreadPoolSize());
+        }
+        if (config.getBackOffDelay() > 0) {
+            src.setBackOffDelay(config.getBackOffDelay());
+        }
+        if (config.getInitialDelay() > 0) {
+            src.setInitialDelay(config.getInitialDelay());
+        }
+        if (config.getBackOffMaxAttempts() > 0) {
+            src.setBackOffMaxAttempts(config.getBackOffMaxAttempts());
+        }
+        if (config.getBackOffMaxDelay() > 0) {
+            src.setBackOffMaxDelay(config.getBackOffMaxDelay());
+        }
+        if (config.getBackOffMaxElapsedTime() > 0) {
+            src.setBackOffMaxElapsedTime(config.getBackOffMaxElapsedTime());
+        }
+        if (config.getBackOffMultiplier() > 0) {
+            src.setBackOffMultiplier(config.getBackOffMultiplier());
+        }
+        src.setUnhealthyOnExhausted(config.isUnhealthyOnExhausted());
+        src.setUnhealthyOnRestarting(config.isUnhealthyOnRestarting());
 
         return src;
     }
