@@ -40,7 +40,6 @@ import org.apache.camel.http.common.HttpHelper;
 import org.apache.camel.support.DefaultConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements PlatformHttpConsumer, Suspendable, SuspendableService {
@@ -49,7 +48,7 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
 
     private HttpBinding binding;
     private final boolean handleWriteResponseError;
-    private CookieConfiguration cookieConfiguration;
+    private final CookieConfiguration cookieConfiguration;
     private Executor executor;
 
     public SpringBootPlatformHttpConsumer(PlatformHttpEndpoint endpoint, Processor processor) {
@@ -61,6 +60,7 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         this.binding.setMuteException(endpoint.isMuteException());
         this.binding.setFileNameExtWhitelist(endpoint.getFileNameExtWhitelist());
         this.handleWriteResponseError = endpoint.isHandleWriteResponseError();
+        this.cookieConfiguration = endpoint.getCookieConfiguration();
         this.executor = Executors.newSingleThreadExecutor();
     }
 
@@ -125,7 +125,6 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         String contextPath = getEndpoint().getPath();
         exchange.getIn().setHeader(SpringBootPlatformHttpConstants.CONTEXT_PATH, contextPath);
         if (getEndpoint().isUseCookieHandler()) {
-            cookieConfiguration = getEndpoint().getCookieConfiguration();
             exchange.setProperty(Exchange.COOKIE_HANDLER, new SpringBootCookieHandler(request, response));
         }
 
@@ -233,11 +232,11 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
             // set max age to 0 to delete the cookie
             cookieToRemove.setMaxAge(0);
             response.addCookie(cookieToRemove);
-            return cookieName;
+            return getCookieValue(cookieName);
         }
 
         @Override
-        public String getCookieValue(@CookieValue String cookieName) {
+        public String getCookieValue(String cookieName) {
             Cookie[] cookie = request.getCookies();
             // ensure cookies are not null
             if (cookie != null) {
@@ -247,7 +246,7 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
                     }
                 }
             }
-            return "Cookie not found";
+            return null;
         }
     }
 }
