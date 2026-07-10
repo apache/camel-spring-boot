@@ -16,8 +16,12 @@
  */
 package org.apache.camel.spring.boot;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+
 import org.apache.camel.spi.Metadata;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.convert.DurationUnit;
 
 @ConfigurationProperties(prefix = "camel.startupcondition")
 public class CamelStartupConditionConfigurationProperties {
@@ -28,14 +32,16 @@ public class CamelStartupConditionConfigurationProperties {
     private boolean enabled;
 
     /**
-     * Interval in millis between checking conditions.
+     * Interval between checking conditions. Plain numbers are treated as milliseconds.
      */
-    private int interval = 500;
+    @DurationUnit(ChronoUnit.MILLIS)
+    private Duration interval = Duration.ofMillis(500);
 
     /**
-     * Total timeout (in millis) for all startup conditions.
+     * Total timeout for all startup conditions. Plain numbers are treated as milliseconds.
      */
-    private int timeout = 20000;
+    @DurationUnit(ChronoUnit.MILLIS)
+    private Duration timeout = Duration.ofMillis(20000);
 
     /**
      * What action, to do on timeout.
@@ -69,19 +75,19 @@ public class CamelStartupConditionConfigurationProperties {
         this.enabled = enabled;
     }
 
-    public int getInterval() {
+    public Duration getInterval() {
         return interval;
     }
 
-    public void setInterval(int interval) {
+    public void setInterval(Duration interval) {
         this.interval = interval;
     }
 
-    public int getTimeout() {
+    public Duration getTimeout() {
         return timeout;
     }
 
-    public void setTimeout(int timeout) {
+    public void setTimeout(Duration timeout) {
         this.timeout = timeout;
     }
 
