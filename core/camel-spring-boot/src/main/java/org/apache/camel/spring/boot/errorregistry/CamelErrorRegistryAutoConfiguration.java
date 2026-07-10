@@ -34,10 +34,10 @@ public class CamelErrorRegistryAutoConfiguration {
     @Bean
     public ErrorRegistry errorRegistry(CamelContext camelContext, CamelErrorRegistryConfigurationProperties config) {
         // dev profile enables error registry to capture routing errors for tooling (TUI)
-        if (!config.isEnabled() && "dev".equals(camelContext.getCamelContextExtension().getProfile())) {
-            config.setEnabled(true);
-        }
-        if (!config.isEnabled()) {
+        // (do not mutate the shared configuration properties bean)
+        boolean enabled = config.isEnabled()
+                || "dev".equals(camelContext.getCamelContextExtension().getProfile());
+        if (!enabled) {
             return null;
         }
 
