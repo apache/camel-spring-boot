@@ -44,6 +44,19 @@
       "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration"
     },
     {
+      "name": "camel.component.weaviate.grpc-host",
+      "type": "java.lang.String",
+      "description": "gRPC host for Weaviate server connection",
+      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.weaviate.grpc-port",
+      "type": "java.lang.Integer",
+      "description": "gRPC port for Weaviate server connection",
+      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration",
+      "defaultValue": 50051
+    },
+    {
       "name": "camel.component.weaviate.host",
       "type": "java.lang.String",
       "description": "Weaviate server host to connect to",
@@ -57,28 +70,11 @@
       "defaultValue": false
     },
     {
-      "name": "camel.component.weaviate.proxy-host",
-      "type": "java.lang.String",
-      "description": "Proxy host to connect to weaviate through",
-      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration"
-    },
-    {
-      "name": "camel.component.weaviate.proxy-port",
-      "type": "java.lang.Integer",
-      "description": "Proxy port to connect to weaviate through",
-      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration"
-    },
-    {
-      "name": "camel.component.weaviate.proxy-scheme",
-      "type": "java.lang.String",
-      "description": "Proxy scheme to connect to weaviate through",
-      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration"
-    },
-    {
       "name": "camel.component.weaviate.scheme",
       "type": "java.lang.String",
       "description": "Scheme used to connect to weaviate",
-      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration"
+      "sourceType": "org.apache.camel.component.weaviate.springboot.WeaviateVectorDbComponentConfiguration",
+      "defaultValue": "http"
     }
   ],
   "hints": [],
