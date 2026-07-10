@@ -36,6 +36,7 @@ import org.apache.camel.component.platform.http.spi.Method;
 import org.apache.camel.converter.stream.CachedOutputStream;
 import org.apache.camel.http.base.HttpHelper;
 import org.apache.camel.http.common.DefaultHttpBinding;
+import org.apache.camel.http.common.HttpConstants;
 import org.apache.camel.support.ExchangeHelper;
 import org.apache.camel.util.FileUtil;
 import org.apache.camel.util.IOHelper;
@@ -46,7 +47,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
 
 import java.io.ByteArrayOutputStream;
-import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -218,102 +218,114 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
                 METHODS_WITH_REQUEST_ALREADY_READ.contains(Method.valueOf(request.getMethod()));
     }
 
+    @Override
     protected void doWriteDirectResponse(Message message, HttpServletResponse response, Exchange exchange) throws IOException {
-        String contentType = (String)message.getHeader("Content-Type", String.class);
-        if ("application/x-java-serialized-object".equals(contentType)) {
-            if (!isAllowJavaSerializedObject() && !this.isTransferException()) {
-                throw new RuntimeCamelException("Content-type application/x-java-serialized-object is not allowed");
-            } else {
+        // if content type is serialized Java object, then serialize and write it to the response
+        String contentType = message.getHeader(Exchange.CONTENT_TYPE, String.class);
+        if (HttpConstants.CONTENT_TYPE_JAVA_SERIALIZED_OBJECT.equals(contentType)) {
+            if (!isAllowJavaSerializedObject() && !isTransferException()) {
+                throw new RuntimeCamelException(
+                        "Content-type " + HttpConstants.CONTENT_TYPE_JAVA_SERIALIZED_OBJECT + " is not allowed");
+            }
+            try {
+                Object object = message.getMandatoryBody(Serializable.class);
+                org.apache.camel.http.common.HttpHelper.writeObjectToServletResponse(response, object);
+                return;
+            } catch (InvalidPayloadException e) {
+                throw new IOException(e);
+            }
+        }
+
+        // prefer streaming
+        InputStream is = null;
+        if (checkChunked(message, exchange)) {
+            is = message.getBody(InputStream.class);
+        } else if (!isText(contentType)) {
+            // try to use input stream first, so we can copy directly
+            is = exchange.getContext().getTypeConverter().tryConvertTo(InputStream.class, message.getBody());
+        }
+
+        if (is != null) {
+            ServletOutputStream os = response.getOutputStream();
+            if (!checkChunked(message, exchange)) {
+                CachedOutputStream stream = new CachedOutputStream(exchange);
                 try {
-                    Object object = message.getMandatoryBody(Serializable.class);
-                    org.apache.camel.http.common.HttpHelper.writeObjectToServletResponse(response, object);
-                } catch (InvalidPayloadException var19) {
-                    InvalidPayloadException e = var19;
-                    throw new IOException(e);
+                    // copy directly from input stream to the cached output stream to get the content length
+                    int len = copyStream(is, stream, response.getBufferSize());
+                    // we need to setup the length if message is not chunked
+                    response.setContentLength(len);
+                    OutputStream current = stream.getCurrentStream();
+                    if (current instanceof ByteArrayOutputStream bos) {
+                        if (LOG.isDebugEnabled()) {
+                            LOG.debug("Streaming (direct) response in non-chunked mode with content-length {}", len);
+                        }
+                        bos.writeTo(os);
+                    } else {
+                        if (LOG.isDebugEnabled()) {
+                            LOG.debug("Streaming response in non-chunked mode with content-length {} and buffer size: {}",
+                                    len, len);
+                        }
+                        copyStream(stream.getInputStream(), os, len);
+                    }
+                } finally {
+                    IOHelper.close(is, os);
+                    stream.close();
                 }
+            } else {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Streaming response in chunked mode with buffer size {}", response.getBufferSize());
+                }
+                copyStream(is, os, response.getBufferSize());
             }
         } else {
-            InputStream is = null;
-            if (this.checkChunked(message, exchange)) {
-                is = message.getBody(InputStream.class);
-            } else if (!this.isText(contentType)) {
-                is = exchange.getContext().getTypeConverter().tryConvertTo(InputStream.class, message.getBody());
-            }
-
-            int len;
-            if (is != null) {
-                ServletOutputStream os = response.getOutputStream();
-                if (!this.checkChunked(message, exchange)) {
-                    CachedOutputStream stream = new CachedOutputStream(exchange);
-
-                    try {
-                        len = this.copyStream(is, stream, response.getBufferSize());
-                        response.setContentLength(len);
-                        OutputStream current = stream.getCurrentStream();
-                        if (current instanceof ByteArrayOutputStream) {
-                            ByteArrayOutputStream bos = (ByteArrayOutputStream)current;
-                            if (LOG.isDebugEnabled()) {
-                                LOG.debug("Streaming (direct) response in non-chunked mode with content-length {}", len);
-                            }
-
-                            bos.writeTo(os);
-                        } else {
-                            if (LOG.isDebugEnabled()) {
-                                LOG.debug("Streaming response in non-chunked mode with content-length {} and buffer size: {}", len, len);
-                            }
-
-                            this.copyStream(stream.getInputStream(), os, len);
-                        }
-                    } finally {
-                        IOHelper.close(new Closeable[]{is, os});
-                        stream.close();
-                    }
-                } else {
+            Object body = message.getBody();
+            if (body instanceof String) {
+                String data = message.getBody(String.class);
+                if (data != null) {
+                    // set content length and encoding before we write data
+                    String charset = ExchangeHelper.getCharsetName(exchange, true);
+                    int len = data.getBytes(charset).length;
+                    response.setCharacterEncoding(charset);
+                    response.setContentLength(len);
                     if (LOG.isDebugEnabled()) {
-                        LOG.debug("Streaming response in chunked mode with buffer size {}", response.getBufferSize());
+                        LOG.debug("Writing response in non-chunked mode as plain text with content-length {} and buffer size: {}",
+                                len, response.getBufferSize());
                     }
-
-                    this.copyStream(is, os, response.getBufferSize());
+                    try {
+                        response.getWriter().print(data);
+                    } finally {
+                        response.getWriter().flush();
+                    }
                 }
+            } else if (body instanceof InputStream bodyIS) {
+                bodyIS.transferTo(response.getOutputStream());
             } else {
-                Object body = message.getBody();
-                if (body instanceof String) {
-                    String data = message.getBody(String.class);
-
-                    if (data != null) {
-                        String charset = ExchangeHelper.getCharsetName(exchange, true);
-                        len = data.getBytes(charset).length;
-                        response.setCharacterEncoding(charset);
-                        response.setContentLength(len);
-                        if (LOG.isDebugEnabled()) {
-                            LOG.debug("Writing response in non-chunked mode as plain text with content-length {} and buffer size: {}", len, response.getBufferSize());
-                        }
-
-                        try {
-                            response.getWriter().print(data);
-                        } finally {
-                            response.getWriter().flush();
-                        }
-                    }
-                } else if (body instanceof InputStream) {
-                    InputStream bodyIS = message.getBody(InputStream.class);
-                    bodyIS.transferTo(response.getOutputStream());
+                final TypeConverter tc = exchange.getContext().getTypeConverter();
+                // try to convert to ByteBuffer for performance reasons
+                final ByteBuffer bb = tc.tryConvertTo(ByteBuffer.class, exchange, body);
+                if (bb != null) {
+                    writeByteBuffer(response, bb);
                 } else {
-                    final TypeConverter tc = exchange.getContext().getTypeConverter();
-                    // Try to convert to ByteBuffer for performance reason
-                    final ByteBuffer bb = tc.tryConvertTo(ByteBuffer.class, exchange, body);
-                    if (bb != null) {
-                        response.getOutputStream().write(bb.array());
-                    } else {
-                        try {
-                            final InputStream bodyIS = tc.mandatoryConvertTo(InputStream.class, exchange, body);
-                            bodyIS.transferTo(response.getOutputStream());
-                        } catch (NoTypeConversionAvailableException e) {
-                            throw new RuntimeException(e);
-                        }
+                    try {
+                        final InputStream bodyIS = tc.mandatoryConvertTo(InputStream.class, exchange, body);
+                        bodyIS.transferTo(response.getOutputStream());
+                    } catch (NoTypeConversionAvailableException e) {
+                        throw new IOException(e);
                     }
                 }
             }
+        }
+    }
+
+    private static void writeByteBuffer(HttpServletResponse response, ByteBuffer bb) throws IOException {
+        // only write the remaining window of the buffer, the backing array may be
+        // larger (sliced or partially consumed buffer) or absent (direct buffer)
+        if (bb.hasArray()) {
+            response.getOutputStream().write(bb.array(), bb.arrayOffset() + bb.position(), bb.remaining());
+        } else {
+            byte[] bytes = new byte[bb.remaining()];
+            bb.duplicate().get(bytes);
+            response.getOutputStream().write(bytes);
         }
     }
 
