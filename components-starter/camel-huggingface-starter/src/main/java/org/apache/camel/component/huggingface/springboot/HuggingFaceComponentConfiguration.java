@@ -37,10 +37,6 @@ public class HuggingFaceComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * HF API token for private models
-     */
-    private String authToken;
-    /**
      * If true, auto-select the best label (highest score) for zero-shot
      * classification
      */
@@ -148,20 +144,16 @@ public class HuggingFaceComponentConfiguration
      */
     private Boolean healthCheckProducerEnabled = true;
     /**
+     * HF API token for private models
+     */
+    private String authToken;
+    /**
      * OAuth profile name for obtaining an access token via the OAuth 2.0 Client
      * Credentials grant. When set, the token is acquired from the configured
      * identity provider and used as authToken. Requires camel-oauth on the
      * classpath.
      */
     private String oauthProfile;
-
-    public String getAuthToken() {
-        return authToken;
-    }
-
-    public void setAuthToken(String authToken) {
-        this.authToken = authToken;
-    }
 
     public Boolean getAutoSelect() {
         return autoSelect;
@@ -329,6 +321,14 @@ public class HuggingFaceComponentConfiguration
 
     public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
         this.healthCheckProducerEnabled = healthCheckProducerEnabled;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 
     public String getOauthProfile() {
