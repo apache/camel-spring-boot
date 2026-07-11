@@ -181,10 +181,6 @@ public class WatsonxAiComponentConfiguration
      */
     private Long timeout;
     /**
-     * Whether to verify SSL certificates
-     */
-    private Boolean verifySsl = true;
-    /**
      * IBM Cloud API key for authentication
      */
     private String apiKey;
@@ -195,6 +191,10 @@ public class WatsonxAiComponentConfiguration
      * classpath.
      */
     private String oauthProfile;
+    /**
+     * Whether to verify SSL certificates
+     */
+    private Boolean verifySsl = true;
 
     public String getBaseUrl() {
         return baseUrl;
@@ -452,14 +452,6 @@ public class WatsonxAiComponentConfiguration
         this.timeout = timeout;
     }
 
-    public Boolean getVerifySsl() {
-        return verifySsl;
-    }
-
-    public void setVerifySsl(Boolean verifySsl) {
-        this.verifySsl = verifySsl;
-    }
-
     public String getApiKey() {
         return apiKey;
     }
@@ -474,5 +466,13 @@ public class WatsonxAiComponentConfiguration
 
     public void setOauthProfile(String oauthProfile) {
         this.oauthProfile = oauthProfile;
+    }
+
+    public Boolean getVerifySsl() {
+        return verifySsl;
+    }
+
+    public void setVerifySsl(Boolean verifySsl) {
+        this.verifySsl = verifySsl;
     }
 }

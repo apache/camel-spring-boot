@@ -61,10 +61,6 @@ public class WordpressComponentConfiguration
      */
     private Integer id;
     /**
-     * Password from authorized user
-     */
-    private String password;
-    /**
      * Search criteria. The option is a
      * org.apache.camel.component.wordpress.api.model.SearchCriteria type.
      */
@@ -123,6 +119,10 @@ public class WordpressComponentConfiguration
      * camel.health.producersEnabled=true.
      */
     private Boolean healthCheckProducerEnabled = true;
+    /**
+     * Password from authorized user
+     */
+    private String password;
 
     public String getApiVersion() {
         return apiVersion;
@@ -162,14 +162,6 @@ public class WordpressComponentConfiguration
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public SearchCriteria getSearchCriteria() {
@@ -234,5 +226,13 @@ public class WordpressComponentConfiguration
 
     public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
         this.healthCheckProducerEnabled = healthCheckProducerEnabled;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
