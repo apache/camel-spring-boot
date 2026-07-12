@@ -1586,6 +1586,20 @@
       "sourceType": "org.apache.camel.spring.boot.threadpool.CamelThreadPoolConfigurationProperties"
     },
     {
+      "name": "camel.trace.activity-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether activity tracking is enabled.",
+      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.trace.activity-size",
+      "type": "java.lang.Integer",
+      "description": "Number of completed exchange summaries to keep in the activity queue (should be between 1 - 1000). Default is 100.",
+      "sourceType": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties",
+      "defaultValue": 100
+    },
+    {
       "name": "camel.trace.backlog-size",
       "type": "java.lang.Integer",
       "description": "Defines how many of the last messages to keep in the tracer.",

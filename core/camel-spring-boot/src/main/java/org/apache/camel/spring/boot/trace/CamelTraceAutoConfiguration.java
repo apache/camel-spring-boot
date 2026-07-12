@@ -63,6 +63,11 @@ public class CamelTraceAutoConfiguration {
         tracer.setTraceTemplates(config.isTraceTemplates());
         tracer.setTracePattern(config.getTracePattern());
         tracer.setTraceFilter(config.getTraceFilter());
+        tracer.setActivitySize(config.getActivitySize());
+        // dev profile enables activity tracking so tooling (TUI) gets enriched data
+        boolean activityEnabled = config.isActivityEnabled()
+                || "dev".equals(camelContext.getCamelContextExtension().getProfile());
+        tracer.setActivityEnabled(activityEnabled);
 
         camelContext.getCamelContextExtension().addContextPlugin(BacklogTracer.class, tracer);
         camelContext.addService(tracer);
