@@ -94,6 +94,18 @@ public class CamelTraceConfigurationProperties {
     private boolean traceTemplates;
 
     /**
+     * Whether activity tracking is enabled.
+     */
+    private boolean activityEnabled;
+
+    /**
+     * Number of completed exchange summaries to keep in the activity queue (should be between 1 - 1000). Default is
+     * 100.
+     */
+    @Metadata(label = "advanced", defaultValue = "100")
+    private int activitySize = 100;
+
+    /**
      * Filter for tracing by route or node id
      */
     private String tracePattern;
@@ -197,6 +209,22 @@ public class CamelTraceConfigurationProperties {
 
     public void setTraceTemplates(boolean traceTemplates) {
         this.traceTemplates = traceTemplates;
+    }
+
+    public boolean isActivityEnabled() {
+        return activityEnabled;
+    }
+
+    public void setActivityEnabled(boolean activityEnabled) {
+        this.activityEnabled = activityEnabled;
+    }
+
+    public int getActivitySize() {
+        return activitySize;
+    }
+
+    public void setActivitySize(int activitySize) {
+        this.activitySize = activitySize;
     }
 
     public String getTracePattern() {
