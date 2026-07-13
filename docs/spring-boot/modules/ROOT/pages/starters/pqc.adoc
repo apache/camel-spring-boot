@@ -24,7 +24,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 38 options, which are listed below.
+The starter supports 39 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -53,6 +53,7 @@ The starter supports 38 options, which are listed below.
 | camel.component.pqc.key-store-password | The KeyStore password to use in combination with KeyStore Parameter |  | String
 | camel.component.pqc.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.pqc.operation | The operation to perform |  | PQCOperations
+| camel.component.pqc.parameter-spec | The NIST parameter set (security level) to use for the configured signature or key encapsulation algorithm, using the BouncyCastle parameter-set names: for example ML-DSA-44, ML-DSA-65 or ML-DSA-87 for MLDSA, and ML-KEM-512, ML-KEM-768 or ML-KEM-1024 for MLKEM. Names are case-insensitive and the underscore form (ml_dsa_87) is accepted as an alias. When set, the key material is generated with this parameter set instead of the algorithm default. Not supported for the stateful signature algorithms (XMSS, XMSSMT, LMS, HSS), for MAYO and SNOVA, nor for the hybrid operations: for those, register a KeyPair bean in the registry instead. |  | String
 | camel.component.pqc.signature-algorithm | In case there is no signer, we specify an algorithm to build the KeyPair or the Signer |  | String
 | camel.component.pqc.signer | The Signer to be used. The option is a java.security.Signature type. |  | Signature
 | camel.component.pqc.stateful-key-warning-threshold | The warning threshold for stateful key exhaustion as a fraction of total signatures (0.0 to 1.0). When the remaining signatures for a stateful key (XMSS, XMSSMT, LMS/HSS) drop below this fraction of the total capacity, a WARN log is emitted. When remaining signatures reach zero, an exception is thrown to prevent key reuse. Set to 0 to disable warnings. |  | Double
