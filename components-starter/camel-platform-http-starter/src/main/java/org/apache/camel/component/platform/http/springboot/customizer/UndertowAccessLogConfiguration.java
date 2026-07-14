@@ -35,7 +35,11 @@ import org.springframework.core.env.Environment;
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(UndertowAccessLogProperties.class)
-@ConditionalOnClass(name = "io.undertow.Undertow")
+@ConditionalOnClass(name = {
+    "io.undertow.Undertow",
+    "io.undertow.server.handlers.accesslog.AccessLogHandler",
+    "io.undertow.server.handlers.accesslog.JBossLoggingAccessLogReceiver"
+})
 @ConditionalOnProperties( {
     @ConditionalOnProperty(name = "server.undertow.accesslog.enabled", havingValue = "false"),
     @ConditionalOnProperty(name = "camel.component.platform-http.server.undertow.accesslog.use-camel-logging", havingValue = "true"),
