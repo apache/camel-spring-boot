@@ -104,7 +104,7 @@
       "type": "java.lang.Boolean",
       "description": "Whether the client uses Transport Layer Security (TLS) to secure communications",
       "sourceType": "org.apache.camel.component.pinecone.springboot.PineconeVectorDbComponentConfiguration",
-      "defaultValue": true
+      "defaultValue": false
     },
     {
       "name": "camel.component.pinecone.token",
