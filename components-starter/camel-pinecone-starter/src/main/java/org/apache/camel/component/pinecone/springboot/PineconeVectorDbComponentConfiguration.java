@@ -102,7 +102,7 @@ public class PineconeVectorDbComponentConfiguration
      * Whether the client uses Transport Layer Security (TLS) to secure
      * communications
      */
-    private Boolean tls = true;
+    private Boolean tls = false;
     /**
      * Sets the API key to use for authentication
      */
