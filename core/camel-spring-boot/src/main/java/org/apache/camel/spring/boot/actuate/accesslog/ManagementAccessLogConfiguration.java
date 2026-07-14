@@ -48,7 +48,11 @@ public class ManagementAccessLogConfiguration {
      * Undertow-specific configuration.
      */
     @Configuration(proxyBeanMethods = false)
-    @ConditionalOnClass(name = "io.undertow.Undertow")
+    @ConditionalOnClass(name = {
+            "io.undertow.Undertow",
+            "io.undertow.server.handlers.accesslog.AccessLogHandler",
+            "io.undertow.server.handlers.accesslog.JBossLoggingAccessLogReceiver"
+    })
     static class UndertowAccessLogCustomizerConfiguration {
 
         /**
@@ -78,7 +82,10 @@ public class ManagementAccessLogConfiguration {
      * Tomcat-specific configuration to disable access logging in the management context.
      */
     @Configuration(proxyBeanMethods = false)
-    @ConditionalOnClass(name = "org.apache.catalina.startup.Tomcat")
+    @ConditionalOnClass(name = {
+            "org.apache.catalina.startup.Tomcat",
+            "org.apache.catalina.valves.AccessLogValve"
+    })
     @ConditionalOnProperty(name = "management.server.accesslog.enabled", havingValue = "false")
     static class TomcatAccessLogCustomizerConfiguration {
 
