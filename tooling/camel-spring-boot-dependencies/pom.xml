@@ -5223,7 +5223,7 @@
       <dependency>
         <groupId>org.junit</groupId>
         <artifactId>junit-start</artifactId>
-        <version>6.1.1</version>
+        <version>6.1.2</version>
       </dependency>
       <dependency>
         <groupId>org.xmlunit</groupId>
