@@ -23,6 +23,7 @@ public class CamelJmsIT extends AbstractSpringBootBaseTestSupport {
 
     @Test
     void componentTest() {
+    	// dummy change to trigger it test play on GitHub Action
         assertComponent(inferComponentName(getClass()));
     }
 }
