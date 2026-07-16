@@ -535,13 +535,6 @@
       "defaultValue": 16384
     },
     {
-      "name": "camel.component.kafka.queue-buffering-max-messages",
-      "type": "java.lang.Integer",
-      "description": "The maximum number of unsent messages that can be queued up the producer when using async mode before either the producer must be blocked or data must be dropped.",
-      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
-      "defaultValue": 10000
-    },
-    {
       "name": "camel.component.kafka.receive-buffer-bytes",
       "type": "java.lang.Integer",
       "description": "The size of the TCP receive buffer (SO_RCVBUF) to use when reading data.",
@@ -876,6 +869,15 @@
       "description": "Maximum number of threads for the worker pool for continue routing Exchange after kafka server has acknowledged the message that was sent to it from KafkaProducer using asynchronous non-blocking processing.",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
       "defaultValue": 20
+    },
+    {
+      "name": "camel.component.kafka.queue-buffering-max-messages",
+      "type": "java.lang.Integer",
+      "description": "Deprecated: this option has no effect. Use bufferMemorySize or maxBlockMs instead.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
+      "defaultValue": 10000,
+      "deprecated": true,
+      "deprecation": {}
     }
   ],
   "hints": [],

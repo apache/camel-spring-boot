@@ -33,6 +33,7 @@ import org.apache.camel.spi.StateRepository;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Send and receive messages to/from an Apache Kafka broker.
@@ -636,10 +637,10 @@ public class KafkaComponentConfiguration
      */
     private Integer producerBatchSize = 16384;
     /**
-     * The maximum number of unsent messages that can be queued up the producer
-     * when using async mode before either the producer must be blocked or data
-     * must be dropped.
+     * Deprecated: this option has no effect. Use bufferMemorySize or maxBlockMs
+     * instead.
      */
+    @Deprecated
     private Integer queueBufferingMaxMessages = 10000;
     /**
      * The size of the TCP receive buffer (SO_RCVBUF) to use when reading data.
@@ -1596,10 +1597,13 @@ public class KafkaComponentConfiguration
         this.producerBatchSize = producerBatchSize;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Integer getQueueBufferingMaxMessages() {
         return queueBufferingMaxMessages;
     }
 
+    @Deprecated
     public void setQueueBufferingMaxMessages(Integer queueBufferingMaxMessages) {
         this.queueBufferingMaxMessages = queueBufferingMaxMessages;
     }

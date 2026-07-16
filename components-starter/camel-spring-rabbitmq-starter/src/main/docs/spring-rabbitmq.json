@@ -197,9 +197,9 @@
     {
       "name": "camel.component.spring-rabbitmq.reply-timeout",
       "type": "java.lang.Long",
-      "description": "Specify the timeout in milliseconds to be used when waiting for a reply message when doing request\/reply messaging. The default value is 5 seconds. A negative value indicates an indefinite timeout. The option is a long type.",
+      "description": "Specify the timeout in milliseconds to be used when waiting for a reply message when doing request\/reply messaging. The default value is 30 seconds. A negative value indicates an indefinite timeout. The option is a long type.",
       "sourceType": "org.apache.camel.component.springrabbit.springboot.SpringRabbitMQComponentConfiguration",
-      "defaultValue": 5000
+      "defaultValue": 30000
     },
     {
       "name": "camel.component.spring-rabbitmq.retry",

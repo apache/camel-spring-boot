@@ -189,11 +189,11 @@ public class SpringRabbitMQComponentConfiguration
     private Boolean lazyStartProducer = false;
     /**
      * Specify the timeout in milliseconds to be used when waiting for a reply
-     * message when doing request/reply messaging. The default value is 5
+     * message when doing request/reply messaging. The default value is 30
      * seconds. A negative value indicates an indefinite timeout. The option is
      * a long type.
      */
-    private Long replyTimeout = 5000L;
+    private Long replyTimeout = 30000L;
     /**
      * Specify arguments for configuring the different RabbitMQ concepts, a
      * different prefix is required for each element: consumer. exchange. queue.
