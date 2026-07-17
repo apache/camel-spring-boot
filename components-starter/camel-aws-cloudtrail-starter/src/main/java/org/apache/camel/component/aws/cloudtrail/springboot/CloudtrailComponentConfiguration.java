@@ -62,9 +62,11 @@ public class CloudtrailComponentConfiguration
      */
     private String eventSource;
     /**
-     * Maximum number of records that will be fetched in each poll
+     * Maximum number of records that will be fetched in each lookup page. Each
+     * poll drains all pages, so this controls the page size rather than the
+     * total per poll. AWS allows up to 50.
      */
-    private Integer maxResults = 1;
+    private Integer maxResults = 50;
     /**
      * Set the need for overriding the endpoint. This option needs to be used in
      * combination with uriEndpointOverride option

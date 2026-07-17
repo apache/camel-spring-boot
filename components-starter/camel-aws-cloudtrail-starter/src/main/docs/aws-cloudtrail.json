@@ -79,9 +79,9 @@
     {
       "name": "camel.component.aws-cloudtrail.max-results",
       "type": "java.lang.Integer",
-      "description": "Maximum number of records that will be fetched in each poll",
+      "description": "Maximum number of records that will be fetched in each lookup page. Each poll drains all pages, so this controls the page size rather than the total per poll. AWS allows up to 50.",
       "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration",
-      "defaultValue": 1
+      "defaultValue": 50
     },
     {
       "name": "camel.component.aws-cloudtrail.override-endpoint",

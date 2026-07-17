@@ -37,7 +37,7 @@ The starter supports 23 options, which are listed below.
 | camel.component.aws-cloudtrail.event-source | Specify an event source to select events |  | String
 | camel.component.aws-cloudtrail.health-check-consumer-enabled | Used for enabling or disabling all consumer based health checks from this component | true | Boolean
 | camel.component.aws-cloudtrail.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
-| camel.component.aws-cloudtrail.max-results | Maximum number of records that will be fetched in each poll | 1 | Integer
+| camel.component.aws-cloudtrail.max-results | Maximum number of records that will be fetched in each lookup page. Each poll drains all pages, so this controls the page size rather than the total per poll. AWS allows up to 50. | 50 | Integer
 | camel.component.aws-cloudtrail.override-endpoint | Set the need for overriding the endpoint. This option needs to be used in combination with uriEndpointOverride option | false | Boolean
 | camel.component.aws-cloudtrail.profile-credentials-name | If using a profile credentials provider this parameter will set the profile name. |  | String
 | camel.component.aws-cloudtrail.proxy-host | To define a proxy host when instantiating the Cloudtrail client |  | String
