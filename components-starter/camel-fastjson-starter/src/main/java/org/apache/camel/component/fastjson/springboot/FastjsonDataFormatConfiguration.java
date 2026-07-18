@@ -35,6 +35,10 @@ public class FastjsonDataFormatConfiguration
      */
     private Boolean enabled;
     /**
+     * To enable pretty printing output nicely formatted. Is by default false.
+     */
+    private Boolean prettyPrint = false;
+    /**
      * Class name of the java type to use when unmarshalling.
      */
     private String unmarshalType;
@@ -45,6 +49,14 @@ public class FastjsonDataFormatConfiguration
      * JSON
      */
     private Boolean contentTypeHeader = true;
+
+    public Boolean getPrettyPrint() {
+        return prettyPrint;
+    }
+
+    public void setPrettyPrint(Boolean prettyPrint) {
+        this.prettyPrint = prettyPrint;
+    }
 
     public String getUnmarshalType() {
         return unmarshalType;
