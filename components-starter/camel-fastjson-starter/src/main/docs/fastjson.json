@@ -32,6 +32,13 @@
       "sourceType": "org.apache.camel.component.fastjson.springboot.FastjsonDataFormatConfiguration"
     },
     {
+      "name": "camel.dataformat.fastjson.pretty-print",
+      "type": "java.lang.Boolean",
+      "description": "To enable pretty printing output nicely formatted. Is by default false.",
+      "sourceType": "org.apache.camel.component.fastjson.springboot.FastjsonDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.dataformat.fastjson.unmarshal-type",
       "type": "java.lang.String",
       "description": "Class name of the java type to use when unmarshalling.",
