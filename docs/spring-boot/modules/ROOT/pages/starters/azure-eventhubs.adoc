@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 25 options, which are listed below.
+The starter supports 26 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -45,6 +45,7 @@ The starter supports 25 options, which are listed below.
 | camel.component.azure-eventhubs.credential-type | Determines the credential strategy to adopt | connection-string | CredentialType
 | camel.component.azure-eventhubs.enabled | Whether to enable auto configuration of the azure-eventhubs component. This is enabled by default. |  | Boolean
 | camel.component.azure-eventhubs.event-position | Sets the map containing the event position to use for each partition if a checkpoint for the partition does not exist in CheckpointStore. This map is keyed off of the partition id. If there is no checkpoint in CheckpointStore and there is no entry in this map, the processing of the partition will start from EventPosition#latest() position. |  | EventPosition>
+| camel.component.azure-eventhubs.header-filter-strategy | To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter header to and from Camel message. The option is a org.apache.camel.spi.HeaderFilterStrategy type. |  | HeaderFilterStrategy
 | camel.component.azure-eventhubs.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.azure-eventhubs.partition-id | Sets the identifier of the Event Hub partition that the EventData events will be sent to. If the identifier is not specified, the Event Hubs service will be responsible for routing events that are sent to an available partition. |  | String
 | camel.component.azure-eventhubs.partition-key | Sets a hashing key to be provided for the batch of events, which instructs the Event Hubs service to map this key to a specific partition. The selection of a partition is stable for a given partition hashing key. Should any other batches of events be sent using the same exact partition hashing key, the Event Hubs service will route them all to the same partition. This should be specified only when there is a need to group events by partition, but there is flexibility into which partition they are routed. If ensuring that a batch of events is sent only to a specific partition, it is recommended that the identifier of the position be specified directly when sending the batch. |  | String

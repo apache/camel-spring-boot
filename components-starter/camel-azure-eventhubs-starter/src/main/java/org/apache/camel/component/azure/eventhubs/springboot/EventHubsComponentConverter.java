@@ -44,6 +44,7 @@ public class EventHubsComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, com.azure.storage.common.StorageSharedKeyCredential.class));
         answer.add(new ConvertiblePair(String.class, com.azure.messaging.eventhubs.CheckpointStore.class));
         answer.add(new ConvertiblePair(String.class, com.azure.messaging.eventhubs.EventHubProducerAsyncClient.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.HeaderFilterStrategy.class));
         answer.add(new ConvertiblePair(String.class, com.azure.core.credential.TokenCredential.class));
         return answer;
     }
@@ -66,6 +67,7 @@ public class EventHubsComponentConverter implements GenericConverter {
             case "com.azure.storage.common.StorageSharedKeyCredential": return applicationContext.getBean(ref, com.azure.storage.common.StorageSharedKeyCredential.class);
             case "com.azure.messaging.eventhubs.CheckpointStore": return applicationContext.getBean(ref, com.azure.messaging.eventhubs.CheckpointStore.class);
             case "com.azure.messaging.eventhubs.EventHubProducerAsyncClient": return applicationContext.getBean(ref, com.azure.messaging.eventhubs.EventHubProducerAsyncClient.class);
+            case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
             case "com.azure.core.credential.TokenCredential": return applicationContext.getBean(ref, com.azure.core.credential.TokenCredential.class);
         }
         return null;

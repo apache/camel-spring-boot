@@ -27,6 +27,7 @@ import com.azure.storage.common.StorageSharedKeyCredential;
 import org.apache.camel.component.azure.eventhubs.CredentialType;
 import org.apache.camel.component.azure.eventhubs.EventHubsComponent;
 import org.apache.camel.component.azure.eventhubs.EventHubsConfiguration;
+import org.apache.camel.spi.HeaderFilterStrategy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -191,6 +192,12 @@ public class EventHubsComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
+     * header to and from Camel message. The option is a
+     * org.apache.camel.spi.HeaderFilterStrategy type.
+     */
+    private HeaderFilterStrategy headerFilterStrategy;
     /**
      * Instead of supplying namespace, sharedAccessKey, sharedAccessName, etc.
      * you can supply the connection string for your eventHub. The connection
@@ -371,6 +378,15 @@ public class EventHubsComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public HeaderFilterStrategy getHeaderFilterStrategy() {
+        return headerFilterStrategy;
+    }
+
+    public void setHeaderFilterStrategy(
+            HeaderFilterStrategy headerFilterStrategy) {
+        this.headerFilterStrategy = headerFilterStrategy;
     }
 
     public String getConnectionString() {
