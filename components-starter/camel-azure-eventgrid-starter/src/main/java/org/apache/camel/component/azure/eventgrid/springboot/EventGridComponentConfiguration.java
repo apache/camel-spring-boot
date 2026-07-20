@@ -20,7 +20,7 @@ import com.azure.core.credential.AzureKeyCredential;
 import com.azure.core.credential.TokenCredential;
 import com.azure.core.models.CloudEvent;
 import com.azure.messaging.eventgrid.EventGridPublisherClient;
-import org.apache.camel.component.azure.eventgrid.CredentialType;
+import org.apache.camel.component.azure.common.CredentialType;
 import org.apache.camel.component.azure.eventgrid.EventGridComponent;
 import org.apache.camel.component.azure.eventgrid.EventGridConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;

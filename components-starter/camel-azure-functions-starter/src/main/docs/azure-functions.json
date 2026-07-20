@@ -53,7 +53,7 @@
     },
     {
       "name": "camel.component.azure-functions.credential-type",
-      "type": "org.apache.camel.component.azure.functions.CredentialType",
+      "type": "org.apache.camel.component.azure.common.CredentialType",
       "description": "Determines the credential strategy to adopt",
       "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration",
       "defaultValue": "azure-identity"

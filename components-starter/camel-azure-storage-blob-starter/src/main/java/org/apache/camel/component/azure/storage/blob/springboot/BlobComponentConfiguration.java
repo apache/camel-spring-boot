@@ -22,11 +22,11 @@ import com.azure.core.util.Context;
 import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.models.BlockListType;
 import com.azure.storage.common.StorageSharedKeyCredential;
+import org.apache.camel.component.azure.common.CredentialType;
 import org.apache.camel.component.azure.storage.blob.BlobComponent;
 import org.apache.camel.component.azure.storage.blob.BlobConfiguration;
 import org.apache.camel.component.azure.storage.blob.BlobOperationsDefinition;
 import org.apache.camel.component.azure.storage.blob.BlobType;
-import org.apache.camel.component.azure.storage.blob.CredentialType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

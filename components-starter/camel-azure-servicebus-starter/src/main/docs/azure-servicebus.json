@@ -67,7 +67,7 @@
     },
     {
       "name": "camel.component.azure-servicebus.credential-type",
-      "type": "org.apache.camel.component.azure.servicebus.CredentialType",
+      "type": "org.apache.camel.component.azure.common.CredentialType",
       "description": "Determines the credential strategy to adopt",
       "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration",
       "defaultValue": "connection-string"

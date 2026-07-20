@@ -18,7 +18,7 @@ package org.apache.camel.component.azure.functions.springboot;
 
 import com.azure.core.credential.TokenCredential;
 import com.azure.resourcemanager.appservice.AppServiceManager;
-import org.apache.camel.component.azure.functions.CredentialType;
+import org.apache.camel.component.azure.common.CredentialType;
 import org.apache.camel.component.azure.functions.FunctionsComponent;
 import org.apache.camel.component.azure.functions.FunctionsConfiguration;
 import org.apache.camel.component.azure.functions.FunctionsOperations;

@@ -315,7 +315,7 @@
       "type": "java.lang.Boolean",
       "description": "Specifies whether the listener session should be exposed when consuming messages.",
       "sourceType": "org.apache.camel.component.activemq6.springboot.ActiveMQComponentConfiguration",
-      "defaultValue": false
+      "defaultValue": true
     },
     {
       "name": "camel.component.activemq6.force-send-original-message",

@@ -308,7 +308,7 @@
       "type": "java.lang.Boolean",
       "description": "Specifies whether the listener session should be exposed when consuming messages.",
       "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
-      "defaultValue": false
+      "defaultValue": true
     },
     {
       "name": "camel.component.amqp.force-send-original-message",

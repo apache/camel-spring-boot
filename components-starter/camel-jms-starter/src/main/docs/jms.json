@@ -302,7 +302,7 @@
       "type": "java.lang.Boolean",
       "description": "Specifies whether the listener session should be exposed when consuming messages.",
       "sourceType": "org.apache.camel.component.jms.springboot.JmsComponentConfiguration",
-      "defaultValue": false
+      "defaultValue": true
     },
     {
       "name": "camel.component.jms.force-send-original-message",

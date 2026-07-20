@@ -22,10 +22,10 @@ import com.azure.cosmos.models.ChangeFeedProcessorOptions;
 import com.azure.cosmos.models.CosmosQueryRequestOptions;
 import com.azure.cosmos.models.IndexingPolicy;
 import com.azure.cosmos.models.ThroughputProperties;
+import org.apache.camel.component.azure.common.CredentialType;
 import org.apache.camel.component.azure.cosmosdb.CosmosDbComponent;
 import org.apache.camel.component.azure.cosmosdb.CosmosDbConfiguration;
 import org.apache.camel.component.azure.cosmosdb.CosmosDbOperationsDefinition;
-import org.apache.camel.component.azure.cosmosdb.CredentialType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

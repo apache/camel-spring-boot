@@ -266,7 +266,7 @@ public class JmsComponentConfiguration
      * Specifies whether the listener session should be exposed when consuming
      * messages.
      */
-    private Boolean exposeListenerSession = false;
+    private Boolean exposeListenerSession = true;
     /**
      * The consumer type of the reply consumer (when doing request/reply), which
      * can be one of: Simple, Default, or Custom. The consumer type determines

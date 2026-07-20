@@ -27,7 +27,7 @@ import com.azure.messaging.servicebus.ServiceBusSenderClient;
 import com.azure.messaging.servicebus.ServiceBusTransactionContext;
 import com.azure.messaging.servicebus.models.ServiceBusReceiveMode;
 import com.azure.messaging.servicebus.models.SubQueue;
-import org.apache.camel.component.azure.servicebus.CredentialType;
+import org.apache.camel.component.azure.common.CredentialType;
 import org.apache.camel.component.azure.servicebus.ServiceBusComponent;
 import org.apache.camel.component.azure.servicebus.ServiceBusConfiguration;
 import org.apache.camel.component.azure.servicebus.ServiceBusProducerOperationDefinition;

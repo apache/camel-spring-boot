@@ -73,7 +73,7 @@
     },
     {
       "name": "camel.component.azure-storage-datalake.credential-type",
-      "type": "org.apache.camel.component.azure.storage.datalake.CredentialType",
+      "type": "org.apache.camel.component.azure.common.CredentialType",
       "description": "Determines the credential strategy to adopt",
       "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration",
       "defaultValue": "client-secret"

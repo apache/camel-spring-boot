@@ -23,7 +23,7 @@ import com.azure.core.credential.AzureSasCredential;
 import com.azure.identity.ClientSecretCredential;
 import com.azure.storage.common.StorageSharedKeyCredential;
 import com.azure.storage.file.datalake.DataLakeServiceClient;
-import org.apache.camel.component.azure.storage.datalake.CredentialType;
+import org.apache.camel.component.azure.common.CredentialType;
 import org.apache.camel.component.azure.storage.datalake.DataLakeComponent;
 import org.apache.camel.component.azure.storage.datalake.DataLakeConfiguration;
 import org.apache.camel.component.azure.storage.datalake.DataLakeOperationsDefinition;

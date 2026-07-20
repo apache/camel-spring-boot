@@ -24,7 +24,7 @@ import com.azure.messaging.eventhubs.CheckpointStore;
 import com.azure.messaging.eventhubs.EventHubProducerAsyncClient;
 import com.azure.messaging.eventhubs.models.EventPosition;
 import com.azure.storage.common.StorageSharedKeyCredential;
-import org.apache.camel.component.azure.eventhubs.CredentialType;
+import org.apache.camel.component.azure.common.CredentialType;
 import org.apache.camel.component.azure.eventhubs.EventHubsComponent;
 import org.apache.camel.component.azure.eventhubs.EventHubsConfiguration;
 import org.apache.camel.spi.HeaderFilterStrategy;
