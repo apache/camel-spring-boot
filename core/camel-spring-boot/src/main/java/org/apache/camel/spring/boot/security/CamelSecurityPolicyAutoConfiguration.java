@@ -111,7 +111,7 @@ public class CamelSecurityPolicyAutoConfiguration {
             ce.getPropertySources().forEach(ps -> {
                 if (ps instanceof EnumerablePropertySource<?> eps) {
                     for (String name : eps.getPropertyNames()) {
-                        if (name.startsWith("camel.") && !name.startsWith("camel.security.")) {
+                        if (name != null && name.startsWith("camel.") && !name.startsWith("camel.security.")) {
                             Object value = environment.getProperty(name);
                             if (value != null) {
                                 properties.putIfAbsent(name, value);

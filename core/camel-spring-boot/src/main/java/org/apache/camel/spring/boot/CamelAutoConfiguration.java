@@ -248,7 +248,7 @@ public class CamelAutoConfiguration {
             cev.getPropertySources().forEach(ps -> {
                 if (ps instanceof EnumerablePropertySource<?> eps) {
                     for (String n : eps.getPropertyNames()) {
-                        if (n.startsWith("camel.main.")) {
+                        if (n != null && n.startsWith("camel.main.")) {
                             answer.put(n, cev.getProperty(n, ""));
                         }
                     }
@@ -265,7 +265,7 @@ public class CamelAutoConfiguration {
         env.getPropertySources().forEach(ps -> {
             if (ps instanceof EnumerablePropertySource eps) {
                 for (String n : eps.getPropertyNames()) {
-                    if (n.startsWith("camel.variable.")) {
+                    if (n != null && n.startsWith("camel.variable.")) {
                         String v = env.getRequiredProperty(n);
                         n = n.substring(15);
                         answer.put(n, v);
