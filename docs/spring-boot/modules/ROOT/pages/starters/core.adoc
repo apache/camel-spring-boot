@@ -15,7 +15,7 @@
 
 == Spring Boot Auto-Configuration
 
-The starter supports 123 options, which are listed below.
+The starter supports 126 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -89,28 +89,31 @@ The starter supports 123 options, which are listed below.
 | camel.language.variable.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. | true | Boolean
 | camel.resilience4j.automatic-transition-from-open-to-half-open-enabled | Enables automatic transition from OPEN to HALF_OPEN state once the waitDurationInOpenState has passed. | false | Boolean
 | camel.resilience4j.bulkhead-enabled | Whether bulkhead is enabled or not on the circuit breaker. | false | Boolean
+| camel.resilience4j.bulkhead-fair-call-handling-enabled | Configures whether the bulkhead uses a fair calling strategy. When enabled (default), a fair strategy guarantees the order of incoming requests (FIFO). When disabled, no ordering is guaranteed and may improve throughput. | true | Boolean
 | camel.resilience4j.bulkhead-max-concurrent-calls | Configures the max amount of concurrent calls the bulkhead will support. | 25 | Integer
-| camel.resilience4j.bulkhead-max-wait-duration | Configures a maximum amount of time which the calling thread will wait to enter the bulkhead. | 0 | Integer
+| camel.resilience4j.bulkhead-max-wait-duration | Configures a maximum amount of time which the calling thread will wait to enter the bulkhead. The default is 0 (no waiting). | 0 | String
 | camel.resilience4j.circuit-breaker | Refers to an existing io.github.resilience4j.circuitbreaker.CircuitBreaker instance to lookup and use from the registry. When using this, then any other circuit breaker options are not in use. |  | String
 | camel.resilience4j.config | Refers to an existing io.github.resilience4j.circuitbreaker.CircuitBreakerConfig instance to lookup and use from the registry. |  | String
 | camel.resilience4j.configurations | Define additional configuration definitions |  | Resilience4jConfigurationDefinitionCommon>
 | camel.resilience4j.enabled | Enable the component | true | Boolean
 | camel.resilience4j.failure-rate-threshold | Configures the failure rate threshold in percentage. If the failure rate is equal or greater than the threshold the CircuitBreaker transitions to open and starts short-circuiting calls. |  | Float
 | camel.resilience4j.ignore-exception | Configure a list of exceptions that are ignored and neither count as a failure nor success. Any exception matching or inheriting from one of the list will not count as a failure nor success, even if the exception is part of recordExceptions. |  | String>
-| camel.resilience4j.micrometer-enabled | Whether to enable collecting statistics using Micrometer. This requires adding camel-resilience4j-micrometer JAR to the classpath. | false | Boolean
+| camel.resilience4j.max-wait-duration-in-half-open-state | Configures the maximum wait duration which controls how long the CircuitBreaker should stay in Half Open state, before it switches to open. Value 0 means circuit breaker will wait in half open state until all permitted calls have been completed. | 0 | String
+| camel.resilience4j.micrometer-enabled | Whether to enable collecting statistics using Micrometer for all circuit breaker instances. This is a global setting (configure via camel.resilience4j.micrometerEnabled=true) and requires adding camel-resilience4j-micrometer JAR to the classpath. | false | Boolean
 | camel.resilience4j.minimum-number-of-calls | Configures the minimum number of calls which are required (per sliding window period) before the CircuitBreaker can calculate the error rate. | 100 | Integer
 | camel.resilience4j.permitted-number-of-calls-in-half-open-state | Configures the number of permitted calls when the CircuitBreaker is half open. | 10 | Integer
 | camel.resilience4j.record-exception | Configure a list of exceptions that are recorded as a failure and thus increase the failure rate. Any exception matching or inheriting from one of the list counts as a failure, unless explicitly ignored via ignoreExceptions. |  | String>
 | camel.resilience4j.sliding-window-size | Configures the size of the sliding window which is used to record the outcome of calls when the CircuitBreaker is closed. Sliding window can either be count-based or time-based. | 100 | Integer
+| camel.resilience4j.sliding-window-synchronization-strategy | Configures the synchronization strategy for the sliding window. LOCK_FREE uses a CAS-based lock-free algorithm for better performance under high concurrency. SYNCHRONIZED uses blocking locks with lower memory allocation. | SYNCHRONIZED | String
 | camel.resilience4j.sliding-window-type | Configures the type of the sliding window which is used to record the outcome of calls when the CircuitBreaker is closed. Sliding window can either be count-based or time-based. | COUNT_BASED | String
-| camel.resilience4j.slow-call-duration-threshold | Configures the duration threshold (seconds) above which calls are considered as slow and increase the slow calls percentage. | 60 | Integer
+| camel.resilience4j.slow-call-duration-threshold | Configures the duration threshold above which calls are considered as slow and increase the slow calls percentage. The default is 60 seconds. | 60000 | String
 | camel.resilience4j.slow-call-rate-threshold | Configures a threshold in percentage. The CircuitBreaker considers a call as slow when the call duration is greater than slowCallDurationThreshold. When the percentage of slow calls is equal or greater the threshold, the CircuitBreaker transitions to open and starts short-circuiting calls. |  | Float
 | camel.resilience4j.throw-exception-when-half-open-or-open-state | Whether to throw io.github.resilience4j.circuitbreaker.CallNotPermittedException when the call is rejected because the circuit breaker is half open or open. | false | Boolean
 | camel.resilience4j.timeout-cancel-running-future | Configures whether cancel is called on the running future. Defaults to true. | true | Boolean
-| camel.resilience4j.timeout-duration | Configures the thread execution timeout. Default value is 1 second. | 1000 | Integer
+| camel.resilience4j.timeout-duration | Configures the thread execution timeout. Default value is 1 second. | 1000 | String
 | camel.resilience4j.timeout-enabled | Whether timeout is enabled or not on the circuit breaker. | false | Boolean
 | camel.resilience4j.timeout-executor-service | References to a custom thread pool to use when timeout is enabled (uses ForkJoinPool.commonPool() by default). |  | ExecutorService
-| camel.resilience4j.wait-duration-in-open-state | Configures the wait duration (in seconds) which specifies how long the CircuitBreaker should stay open, before it switches to half open. | 60 | Integer
+| camel.resilience4j.wait-duration-in-open-state | Configures the wait duration which specifies how long the CircuitBreaker should stay open, before it switches to half open. The default is 60 seconds. | 60000 | String
 | camel.resilience4j.writable-stack-trace-enabled | Enables writable stack traces. When set to false, Exception.getStackTrace returns a zero length array. This may be used to reduce log spam when the circuit breaker is open. | true | Boolean
 | camel.rest.api-component | The name of the Camel component to use as the REST API (such as OpenApi). |  | String
 | camel.rest.api-context-path | Sets a leading context-path the REST API will be using. |  | String

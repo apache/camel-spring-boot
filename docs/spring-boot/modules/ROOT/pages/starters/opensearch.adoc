@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 16 options, which are listed below.
+The starter supports 17 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -37,6 +37,7 @@ The starter supports 16 options, which are listed below.
 | camel.component.opensearch.host-addresses | Comma separated list with ip:port formatted remote transport addresses to use. The ip and port options must be left blank for hostAddresses to be considered instead. |  | String
 | camel.component.opensearch.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.opensearch.max-retry-timeout | The time in ms before retry | 30000 | Integer
+| camel.component.opensearch.open-search-client | To use a custom configured OpenSearchClient instance. When set, this takes precedence over the RestClient-based client option. The option is a org.opensearch.client.opensearch.OpenSearchClient type. |  | OpenSearchClient
 | camel.component.opensearch.password | Password for authenticating |  | String
 | camel.component.opensearch.sniff-after-failure-delay | The delay of a sniff execution scheduled after a failure (in milliseconds) | 60000 | Integer
 | camel.component.opensearch.sniffer-interval | The interval between consecutive ordinary sniff executions in milliseconds. Will be honoured when sniffOnFailure is disabled or when there are no failures between consecutive sniff executions | 300000 | Integer

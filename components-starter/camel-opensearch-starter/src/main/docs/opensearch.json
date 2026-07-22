@@ -79,6 +79,12 @@
       "defaultValue": 30000
     },
     {
+      "name": "camel.component.opensearch.open-search-client",
+      "type": "org.opensearch.client.opensearch.OpenSearchClient",
+      "description": "To use a custom configured OpenSearchClient instance. When set, this takes precedence over the RestClient-based client option. The option is a org.opensearch.client.opensearch.OpenSearchClient type.",
+      "sourceType": "org.apache.camel.component.opensearch.springboot.OpensearchComponentConfiguration"
+    },
+    {
       "name": "camel.component.opensearch.password",
       "type": "java.lang.String",
       "description": "Password for authenticating",
