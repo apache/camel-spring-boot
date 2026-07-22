@@ -19,6 +19,7 @@ package org.apache.camel.component.opensearch.springboot;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.opensearch.client.RestClient;
+import org.opensearch.client.opensearch.OpenSearchClient;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -86,6 +87,12 @@ public class OpensearchComponentConfiguration
      * the Spring Boot configuration (see: Disable Sniffer in Spring Boot).
      */
     private Boolean enableSniffer = false;
+    /**
+     * To use a custom configured OpenSearchClient instance. When set, this
+     * takes precedence over the RestClient-based client option. The option is a
+     * org.opensearch.client.opensearch.OpenSearchClient type.
+     */
+    private OpenSearchClient openSearchClient;
     /**
      * The delay of a sniff execution scheduled after a failure (in
      * milliseconds)
@@ -182,6 +189,14 @@ public class OpensearchComponentConfiguration
 
     public void setEnableSniffer(Boolean enableSniffer) {
         this.enableSniffer = enableSniffer;
+    }
+
+    public OpenSearchClient getOpenSearchClient() {
+        return openSearchClient;
+    }
+
+    public void setOpenSearchClient(OpenSearchClient openSearchClient) {
+        this.openSearchClient = openSearchClient;
     }
 
     public Integer getSniffAfterFailureDelay() {

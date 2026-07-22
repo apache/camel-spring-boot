@@ -612,6 +612,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.resilience4j.bulkhead-fair-call-handling-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Configures whether the bulkhead uses a fair calling strategy. When enabled (default), a fair strategy guarantees the order of incoming requests (FIFO). When disabled, no ordering is guaranteed and may improve throughput.",
+      "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
+      "defaultValue": true
+    },
+    {
       "name": "camel.resilience4j.bulkhead-max-concurrent-calls",
       "type": "java.lang.Integer",
       "description": "Configures the max amount of concurrent calls the bulkhead will support.",
@@ -620,10 +627,10 @@
     },
     {
       "name": "camel.resilience4j.bulkhead-max-wait-duration",
-      "type": "java.lang.Integer",
-      "description": "Configures a maximum amount of time which the calling thread will wait to enter the bulkhead.",
+      "type": "java.lang.String",
+      "description": "Configures a maximum amount of time which the calling thread will wait to enter the bulkhead. The default is 0 (no waiting).",
       "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
-      "defaultValue": 0
+      "defaultValue": "0"
     },
     {
       "name": "camel.resilience4j.circuit-breaker",
@@ -663,9 +670,16 @@
       "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties"
     },
     {
+      "name": "camel.resilience4j.max-wait-duration-in-half-open-state",
+      "type": "java.lang.String",
+      "description": "Configures the maximum wait duration which controls how long the CircuitBreaker should stay in Half Open state, before it switches to open. Value 0 means circuit breaker will wait in half open state until all permitted calls have been completed.",
+      "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
+      "defaultValue": "0"
+    },
+    {
       "name": "camel.resilience4j.micrometer-enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable collecting statistics using Micrometer. This requires adding camel-resilience4j-micrometer JAR to the classpath.",
+      "description": "Whether to enable collecting statistics using Micrometer for all circuit breaker instances. This is a global setting (configure via camel.resilience4j.micrometerEnabled=true) and requires adding camel-resilience4j-micrometer JAR to the classpath.",
       "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
       "defaultValue": false
     },
@@ -697,6 +711,13 @@
       "defaultValue": 100
     },
     {
+      "name": "camel.resilience4j.sliding-window-synchronization-strategy",
+      "type": "java.lang.String",
+      "description": "Configures the synchronization strategy for the sliding window. LOCK_FREE uses a CAS-based lock-free algorithm for better performance under high concurrency. SYNCHRONIZED uses blocking locks with lower memory allocation.",
+      "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
+      "defaultValue": "SYNCHRONIZED"
+    },
+    {
       "name": "camel.resilience4j.sliding-window-type",
       "type": "java.lang.String",
       "description": "Configures the type of the sliding window which is used to record the outcome of calls when the CircuitBreaker is closed. Sliding window can either be count-based or time-based.",
@@ -705,10 +726,10 @@
     },
     {
       "name": "camel.resilience4j.slow-call-duration-threshold",
-      "type": "java.lang.Integer",
-      "description": "Configures the duration threshold (seconds) above which calls are considered as slow and increase the slow calls percentage.",
+      "type": "java.lang.String",
+      "description": "Configures the duration threshold above which calls are considered as slow and increase the slow calls percentage. The default is 60 seconds.",
       "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
-      "defaultValue": 60
+      "defaultValue": "60000"
     },
     {
       "name": "camel.resilience4j.slow-call-rate-threshold",
@@ -732,10 +753,10 @@
     },
     {
       "name": "camel.resilience4j.timeout-duration",
-      "type": "java.lang.Integer",
+      "type": "java.lang.String",
       "description": "Configures the thread execution timeout. Default value is 1 second.",
       "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
-      "defaultValue": 1000
+      "defaultValue": "1000"
     },
     {
       "name": "camel.resilience4j.timeout-enabled",
@@ -752,10 +773,10 @@
     },
     {
       "name": "camel.resilience4j.wait-duration-in-open-state",
-      "type": "java.lang.Integer",
-      "description": "Configures the wait duration (in seconds) which specifies how long the CircuitBreaker should stay open, before it switches to half open.",
+      "type": "java.lang.String",
+      "description": "Configures the wait duration which specifies how long the CircuitBreaker should stay open, before it switches to half open. The default is 60 seconds.",
       "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
-      "defaultValue": 60
+      "defaultValue": "60000"
     },
     {
       "name": "camel.resilience4j.writable-stack-trace-enabled",

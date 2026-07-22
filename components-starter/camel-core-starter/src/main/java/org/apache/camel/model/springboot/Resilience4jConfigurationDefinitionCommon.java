@@ -70,6 +70,13 @@ public class Resilience4jConfigurationDefinitionCommon {
      */
     private String slidingWindowType = "COUNT_BASED";
     /**
+     * Configures the synchronization strategy for the sliding window. LOCK_FREE
+     * uses a CAS-based lock-free algorithm for better performance under high
+     * concurrency. SYNCHRONIZED uses blocking locks with lower memory
+     * allocation.
+     */
+    private String slidingWindowSynchronizationStrategy = "SYNCHRONIZED";
+    /**
      * Configures the minimum number of calls which are required (per sliding
      * window period) before the CircuitBreaker can calculate the error rate.
      */
@@ -81,15 +88,23 @@ public class Resilience4jConfigurationDefinitionCommon {
      */
     private Boolean writableStackTraceEnabled = true;
     /**
-     * Configures the wait duration (in seconds) which specifies how long the
-     * CircuitBreaker should stay open, before it switches to half open.
+     * Configures the wait duration which specifies how long the CircuitBreaker
+     * should stay open, before it switches to half open. The default is 60
+     * seconds.
      */
-    private Integer waitDurationInOpenState = 60;
+    private String waitDurationInOpenState = "60000";
     /**
      * Enables automatic transition from OPEN to HALF_OPEN state once the
      * waitDurationInOpenState has passed.
      */
     private Boolean automaticTransitionFromOpenToHalfOpenEnabled = false;
+    /**
+     * Configures the maximum wait duration which controls how long the
+     * CircuitBreaker should stay in Half Open state, before it switches to
+     * open. Value 0 means circuit breaker will wait in half open state until
+     * all permitted calls have been completed.
+     */
+    private String maxWaitDurationInHalfOpenState = "0";
     /**
      * Configures a threshold in percentage. The CircuitBreaker considers a call
      * as slow when the call duration is greater than slowCallDurationThreshold.
@@ -98,10 +113,10 @@ public class Resilience4jConfigurationDefinitionCommon {
      */
     private Float slowCallRateThreshold;
     /**
-     * Configures the duration threshold (seconds) above which calls are
-     * considered as slow and increase the slow calls percentage.
+     * Configures the duration threshold above which calls are considered as
+     * slow and increase the slow calls percentage. The default is 60 seconds.
      */
-    private Integer slowCallDurationThreshold = 60;
+    private String slowCallDurationThreshold = "60000";
     /**
      * Whether bulkhead is enabled or not on the circuit breaker.
      */
@@ -112,9 +127,16 @@ public class Resilience4jConfigurationDefinitionCommon {
     private Integer bulkheadMaxConcurrentCalls = 25;
     /**
      * Configures a maximum amount of time which the calling thread will wait to
-     * enter the bulkhead.
+     * enter the bulkhead. The default is 0 (no waiting).
      */
-    private Integer bulkheadMaxWaitDuration = 0;
+    private String bulkheadMaxWaitDuration = "0";
+    /**
+     * Configures whether the bulkhead uses a fair calling strategy. When
+     * enabled (default), a fair strategy guarantees the order of incoming
+     * requests (FIFO). When disabled, no ordering is guaranteed and may improve
+     * throughput.
+     */
+    private Boolean bulkheadFairCallHandlingEnabled = true;
     /**
      * Whether timeout is enabled or not on the circuit breaker.
      */
@@ -127,15 +149,17 @@ public class Resilience4jConfigurationDefinitionCommon {
     /**
      * Configures the thread execution timeout. Default value is 1 second.
      */
-    private Integer timeoutDuration = 1000;
+    private String timeoutDuration = "1000";
     /**
      * Configures whether cancel is called on the running future. Defaults to
      * true.
      */
     private Boolean timeoutCancelRunningFuture = true;
     /**
-     * Whether to enable collecting statistics using Micrometer. This requires
-     * adding camel-resilience4j-micrometer JAR to the classpath.
+     * Whether to enable collecting statistics using Micrometer for all circuit
+     * breaker instances. This is a global setting (configure via
+     * camel.resilience4j.micrometerEnabled=true) and requires adding
+     * camel-resilience4j-micrometer JAR to the classpath.
      */
     private Boolean micrometerEnabled = false;
     /**
@@ -211,6 +235,15 @@ public class Resilience4jConfigurationDefinitionCommon {
         this.slidingWindowType = slidingWindowType;
     }
 
+    public String getSlidingWindowSynchronizationStrategy() {
+        return slidingWindowSynchronizationStrategy;
+    }
+
+    public void setSlidingWindowSynchronizationStrategy(
+            String slidingWindowSynchronizationStrategy) {
+        this.slidingWindowSynchronizationStrategy = slidingWindowSynchronizationStrategy;
+    }
+
     public Integer getMinimumNumberOfCalls() {
         return minimumNumberOfCalls;
     }
@@ -227,11 +260,11 @@ public class Resilience4jConfigurationDefinitionCommon {
         this.writableStackTraceEnabled = writableStackTraceEnabled;
     }
 
-    public Integer getWaitDurationInOpenState() {
+    public String getWaitDurationInOpenState() {
         return waitDurationInOpenState;
     }
 
-    public void setWaitDurationInOpenState(Integer waitDurationInOpenState) {
+    public void setWaitDurationInOpenState(String waitDurationInOpenState) {
         this.waitDurationInOpenState = waitDurationInOpenState;
     }
 
@@ -244,6 +277,15 @@ public class Resilience4jConfigurationDefinitionCommon {
         this.automaticTransitionFromOpenToHalfOpenEnabled = automaticTransitionFromOpenToHalfOpenEnabled;
     }
 
+    public String getMaxWaitDurationInHalfOpenState() {
+        return maxWaitDurationInHalfOpenState;
+    }
+
+    public void setMaxWaitDurationInHalfOpenState(
+            String maxWaitDurationInHalfOpenState) {
+        this.maxWaitDurationInHalfOpenState = maxWaitDurationInHalfOpenState;
+    }
+
     public Float getSlowCallRateThreshold() {
         return slowCallRateThreshold;
     }
@@ -252,11 +294,11 @@ public class Resilience4jConfigurationDefinitionCommon {
         this.slowCallRateThreshold = slowCallRateThreshold;
     }
 
-    public Integer getSlowCallDurationThreshold() {
+    public String getSlowCallDurationThreshold() {
         return slowCallDurationThreshold;
     }
 
-    public void setSlowCallDurationThreshold(Integer slowCallDurationThreshold) {
+    public void setSlowCallDurationThreshold(String slowCallDurationThreshold) {
         this.slowCallDurationThreshold = slowCallDurationThreshold;
     }
 
@@ -276,12 +318,21 @@ public class Resilience4jConfigurationDefinitionCommon {
         this.bulkheadMaxConcurrentCalls = bulkheadMaxConcurrentCalls;
     }
 
-    public Integer getBulkheadMaxWaitDuration() {
+    public String getBulkheadMaxWaitDuration() {
         return bulkheadMaxWaitDuration;
     }
 
-    public void setBulkheadMaxWaitDuration(Integer bulkheadMaxWaitDuration) {
+    public void setBulkheadMaxWaitDuration(String bulkheadMaxWaitDuration) {
         this.bulkheadMaxWaitDuration = bulkheadMaxWaitDuration;
+    }
+
+    public Boolean getBulkheadFairCallHandlingEnabled() {
+        return bulkheadFairCallHandlingEnabled;
+    }
+
+    public void setBulkheadFairCallHandlingEnabled(
+            Boolean bulkheadFairCallHandlingEnabled) {
+        this.bulkheadFairCallHandlingEnabled = bulkheadFairCallHandlingEnabled;
     }
 
     public Boolean getTimeoutEnabled() {
@@ -300,11 +351,11 @@ public class Resilience4jConfigurationDefinitionCommon {
         this.timeoutExecutorService = timeoutExecutorService;
     }
 
-    public Integer getTimeoutDuration() {
+    public String getTimeoutDuration() {
         return timeoutDuration;
     }
 
-    public void setTimeoutDuration(Integer timeoutDuration) {
+    public void setTimeoutDuration(String timeoutDuration) {
         this.timeoutDuration = timeoutDuration;
     }
 
