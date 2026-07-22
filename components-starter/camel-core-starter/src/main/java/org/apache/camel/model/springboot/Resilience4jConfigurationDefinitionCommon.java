@@ -138,6 +138,16 @@ public class Resilience4jConfigurationDefinitionCommon {
      */
     private Boolean bulkheadFairCallHandlingEnabled = true;
     /**
+     * Whether to use asynchronous (non-blocking) processing with
+     * CompletionStage-based circuit breaker decorators. When enabled, the
+     * circuit breaker releases the caller thread immediately and completes
+     * processing asynchronously. This is most valuable when the downstream
+     * processor supports asynchronous processing (e.g. Netty HTTP, Kafka). When
+     * used with timeout, the timeoutExecutorService must be a
+     * ScheduledExecutorService.
+     */
+    private Boolean asynchronous = false;
+    /**
      * Whether timeout is enabled or not on the circuit breaker.
      */
     private Boolean timeoutEnabled = false;
@@ -333,6 +343,14 @@ public class Resilience4jConfigurationDefinitionCommon {
     public void setBulkheadFairCallHandlingEnabled(
             Boolean bulkheadFairCallHandlingEnabled) {
         this.bulkheadFairCallHandlingEnabled = bulkheadFairCallHandlingEnabled;
+    }
+
+    public Boolean getAsynchronous() {
+        return asynchronous;
+    }
+
+    public void setAsynchronous(Boolean asynchronous) {
+        this.asynchronous = asynchronous;
     }
 
     public Boolean getTimeoutEnabled() {

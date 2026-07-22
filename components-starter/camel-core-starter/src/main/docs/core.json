@@ -598,6 +598,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.resilience4j.asynchronous",
+      "type": "java.lang.Boolean",
+      "description": "Whether to use asynchronous (non-blocking) processing with CompletionStage-based circuit breaker decorators. When enabled, the circuit breaker releases the caller thread immediately and completes processing asynchronously. This is most valuable when the downstream processor supports asynchronous processing (e.g. Netty HTTP, Kafka). When used with timeout, the timeoutExecutorService must be a ScheduledExecutorService.",
+      "sourceType": "org.apache.camel.model.springboot.Resilience4jConfigurationDefinitionProperties",
+      "defaultValue": false
+    },
+    {
       "name": "camel.resilience4j.automatic-transition-from-open-to-half-open-enabled",
       "type": "java.lang.Boolean",
       "description": "Enables automatic transition from OPEN to HALF_OPEN state once the waitDurationInOpenState has passed.",

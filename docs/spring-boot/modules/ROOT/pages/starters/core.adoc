@@ -15,7 +15,7 @@
 
 == Spring Boot Auto-Configuration
 
-The starter supports 126 options, which are listed below.
+The starter supports 127 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -87,6 +87,7 @@ The starter supports 126 options, which are listed below.
 | camel.language.tokenize.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. | true | Boolean
 | camel.language.variable.enabled | Whether to enable auto configuration of the variable language. This is enabled by default. |  | Boolean
 | camel.language.variable.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. | true | Boolean
+| camel.resilience4j.asynchronous | Whether to use asynchronous (non-blocking) processing with CompletionStage-based circuit breaker decorators. When enabled, the circuit breaker releases the caller thread immediately and completes processing asynchronously. This is most valuable when the downstream processor supports asynchronous processing (e.g. Netty HTTP, Kafka). When used with timeout, the timeoutExecutorService must be a ScheduledExecutorService. | false | Boolean
 | camel.resilience4j.automatic-transition-from-open-to-half-open-enabled | Enables automatic transition from OPEN to HALF_OPEN state once the waitDurationInOpenState has passed. | false | Boolean
 | camel.resilience4j.bulkhead-enabled | Whether bulkhead is enabled or not on the circuit breaker. | false | Boolean
 | camel.resilience4j.bulkhead-fair-call-handling-enabled | Configures whether the bulkhead uses a fair calling strategy. When enabled (default), a fair strategy guarantees the order of incoming requests (FIFO). When disabled, no ordering is guaranteed and may improve throughput. | true | Boolean
