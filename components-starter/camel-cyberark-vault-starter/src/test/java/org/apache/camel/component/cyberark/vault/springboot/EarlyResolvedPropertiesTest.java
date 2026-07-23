@@ -26,6 +26,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIfSystemProperties;
 import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,19 +35,30 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
+
 @CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
 @SpringBootTest(
-        classes = { EarlyResolvedPropertiesTest.TestConfiguration.class },
+        classes = {EarlyResolvedPropertiesTest.TestConfiguration.class},
         properties = {
                 "camel.component.cyberark-vault.early-resolve-properties=true",
                 "early.resolved.property.simple={{cyberark:test/secret}}"
         })
 
-// Must be manually tested. Provide your own credentials using system properties:
-// -Dcamel.vault.test.cyberark.url, -Dcamel.vault.test.cyberark.account,
-// -Dcamel.vault.test.cyberark.username, -Dcamel.vault.test.cyberark.apiKey
+/*
+Must be manually tested. Provide your own credentials using system properties:
+
+    -Dcamel.vault.test.cyberark.url=http://localhost:8080
+    -Dcamel.vault.test.cyberark.account=myConjurAccount
+    -Dcamel.vault.test.cyberark.username=admin
+    -Dcamel.vault.test.cyberark.apiKey=your-api-key
+*/
 @EnabledIfSystemProperties({
         @EnabledIfSystemProperty(named = "camel.vault.test.cyberark.url", matches = ".*",
                 disabledReason = "CyberArk Conjur URL not provided"),
@@ -58,34 +71,41 @@ import org.springframework.test.annotation.DirtiesContext;
 })
 public class EarlyResolvedPropertiesTest {
 
-    @BeforeAll
-    public static void setup() {
-        String url = System.getProperty("camel.vault.test.cyberark.url");
-        String account = System.getProperty("camel.vault.test.cyberark.account");
-        String username = System.getProperty("camel.vault.test.cyberark.username");
-        String apiKey = System.getProperty("camel.vault.test.cyberark.apiKey");
+    static final Logger LOG = LoggerFactory.getLogger(EarlyResolvedPropertiesTest.class);
 
-        System.setProperty("camel.vault.cyberark.url", url);
-        System.setProperty("camel.vault.cyberark.account", account);
-        System.setProperty("camel.vault.cyberark.username", username);
-        System.setProperty("camel.vault.cyberark.apiKey", apiKey);
+    record CyberarkClientConfig(
+            String url, String account, String username, String apiKey) {
+    }
+
+    static HttpClient httpClient;
+
+    @BeforeAll
+    public static void setup() throws Exception {
+
+        httpClient = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(10))
+                .build();
+
+        var cfg = new CyberarkClientConfig(
+                System.getProperty("camel.vault.test.cyberark.url"),
+                System.getProperty("camel.vault.test.cyberark.account"),
+                System.getProperty("camel.vault.test.cyberark.username"),
+                System.getProperty("camel.vault.test.cyberark.apiKey")
+        );
+
+        System.setProperty("camel.vault.cyberark.url", cfg.url);
+        System.setProperty("camel.vault.cyberark.account", cfg.account);
+        System.setProperty("camel.vault.cyberark.username", cfg.username);
+        System.setProperty("camel.vault.cyberark.apiKey", cfg.apiKey);
 
         // Create a test secret in CyberArk Conjur
-        ConjurClient client = ConjurClientFactory.createWithApiKey(url, account, username, apiKey);
-        try {
-            // Note: Creating secrets in Conjur requires proper permissions and policy setup
-            // This is a placeholder - actual secret creation depends on Conjur policy configuration
-            // In a real test, you would need to create the secret "test/secret" with value "testValue"
-            // through Conjur CLI or API with appropriate permissions
-        } catch (Exception e) {
-            // Log or handle exception
-            System.err.println("Warning: Could not create test secret. Ensure 'test/secret' exists in Conjur: " + e.getMessage());
-        } finally {
-            try {
-                client.close();
-            } catch (Exception e) {
-                // Ignore
-            }
+        try (ConjurClient client = ConjurClientFactory.createWithApiKey(cfg.url, cfg.account, cfg.username, cfg.apiKey)) {
+
+            loadPolicy(cfg, """
+                    - !variable test/secret
+                    """);
+
+            client.createSecret("test/secret", "mySecretValue");
         }
     }
 
@@ -107,13 +127,55 @@ public class EarlyResolvedPropertiesTest {
     @Test
     public void testEarlyResolvedProperties() {
         // Verify that the property was resolved from CyberArk Conjur vault
-        // The actual value depends on what's stored in the 'test/secret' in your Conjur instance
-        Assertions.assertThat(earlyResolvedPropertySimple).isNotNull();
-        Assertions.assertThat(earlyResolvedPropertySimple).isNotEmpty();
+        Assertions.assertThat(earlyResolvedPropertySimple).isEqualTo("mySecretValue");
     }
 
     @Configuration
     @AutoConfigureBefore(CamelAutoConfiguration.class)
     public static class TestConfiguration {
+    }
+
+    static String authenticate(CyberarkClientConfig cfg) throws Exception {
+
+        String url = String.format("%s/authn/%s/%s/authenticate",
+                cfg.url, cfg.account, cfg.username);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Content-Type", "text/plain")
+                .header("Accept-Encoding", "base64")
+                .POST(HttpRequest.BodyPublishers.ofString(cfg.apiKey))
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        requireSuccess("Authenticate", response);
+
+        return response.body();
+    }
+
+    static void loadPolicy(CyberarkClientConfig cfg, String policy) throws Exception {
+
+        String authToken = authenticate(cfg);
+
+        String policyUrl = String.format("%s/policies/%s/policy/%s",
+                cfg.url, cfg.account, "root");
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(policyUrl))
+                .header("Authorization", "Token token=\"" + authToken + "\"")
+                .header("Content-Type", "text/plain")
+                .method("PATCH", HttpRequest.BodyPublishers.ofString(policy))
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        requireSuccess("Load policy", response);
+    }
+
+    static void requireSuccess(String op, HttpResponse<String> response) {
+        if (response.statusCode() < 200 || response.statusCode() >= 300) {
+            throw new IllegalStateException(
+                    String.format("%s failed: HTTP %d: %s", op, response.statusCode(), response.body()));
+        }
+        LOG.info("{} ok - HTTP {}", op, response.statusCode());
     }
 }
