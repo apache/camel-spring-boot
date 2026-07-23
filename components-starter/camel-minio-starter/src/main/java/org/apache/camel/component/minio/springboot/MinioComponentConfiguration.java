@@ -19,7 +19,7 @@ package org.apache.camel.component.minio.springboot;
 import java.time.ZonedDateTime;
 import io.minio.MinioClient;
 import io.minio.ServerSideEncryption;
-import io.minio.ServerSideEncryptionCustomerKey;
+import io.minio.ServerSideEncryption.CustomerKey;
 import okhttp3.OkHttpClient;
 import org.apache.camel.component.minio.MinioConfiguration;
 import org.apache.camel.component.minio.MinioOperations;
@@ -299,9 +299,9 @@ public class MinioComponentConfiguration
     private ServerSideEncryption serverSideEncryption;
     /**
      * Server-side encryption for source object while copy/move objects. The
-     * option is a io.minio.ServerSideEncryptionCustomerKey type.
+     * option is a io.minio.ServerSideEncryption.CustomerKey type.
      */
-    private ServerSideEncryptionCustomerKey serverSideEncryptionCustomerKey;
+    private CustomerKey serverSideEncryptionCustomerKey;
 
     public Boolean getAutoCreateBucket() {
         return autoCreateBucket;
@@ -688,12 +688,12 @@ public class MinioComponentConfiguration
         this.serverSideEncryption = serverSideEncryption;
     }
 
-    public ServerSideEncryptionCustomerKey getServerSideEncryptionCustomerKey() {
+    public CustomerKey getServerSideEncryptionCustomerKey() {
         return serverSideEncryptionCustomerKey;
     }
 
     public void setServerSideEncryptionCustomerKey(
-            ServerSideEncryptionCustomerKey serverSideEncryptionCustomerKey) {
+            CustomerKey serverSideEncryptionCustomerKey) {
         this.serverSideEncryptionCustomerKey = serverSideEncryptionCustomerKey;
     }
 }

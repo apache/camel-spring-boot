@@ -43,7 +43,7 @@ public class MinioComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, io.minio.MinioClient.class));
         answer.add(new ConvertiblePair(String.class, okhttp3.OkHttpClient.class));
         answer.add(new ConvertiblePair(String.class, io.minio.ServerSideEncryption.class));
-        answer.add(new ConvertiblePair(String.class, io.minio.ServerSideEncryptionCustomerKey.class));
+        answer.add(new ConvertiblePair(String.class, io.minio.ServerSideEncryption.CustomerKey.class));
         return answer;
     }
 
@@ -64,7 +64,7 @@ public class MinioComponentConverter implements GenericConverter {
             case "io.minio.MinioClient": return applicationContext.getBean(ref, io.minio.MinioClient.class);
             case "okhttp3.OkHttpClient": return applicationContext.getBean(ref, okhttp3.OkHttpClient.class);
             case "io.minio.ServerSideEncryption": return applicationContext.getBean(ref, io.minio.ServerSideEncryption.class);
-            case "io.minio.ServerSideEncryptionCustomerKey": return applicationContext.getBean(ref, io.minio.ServerSideEncryptionCustomerKey.class);
+            case "io.minio.ServerSideEncryption.CustomerKey": return applicationContext.getBean(ref, io.minio.ServerSideEncryption.CustomerKey.class);
         }
         return null;
     }

@@ -72,7 +72,7 @@ The starter supports 50 options, which are listed below.
 | camel.component.minio.secret-key | Amazon AWS Access Key Id or Minio Secret Key. If not set camel will connect to service for anonymous access. |  | String
 | camel.component.minio.secure | Flag to indicate to use secure connection to minio service or not. | false | Boolean
 | camel.component.minio.server-side-encryption | Server-side encryption. The option is a io.minio.ServerSideEncryption type. |  | ServerSideEncryption
-| camel.component.minio.server-side-encryption-customer-key | Server-side encryption for source object while copy/move objects. The option is a io.minio.ServerSideEncryptionCustomerKey type. |  | ServerSideEncryptionCustomerKey
+| camel.component.minio.server-side-encryption-customer-key | Server-side encryption for source object while copy/move objects. The option is a io.minio.ServerSideEncryption.CustomerKey type. |  | ServerSideEncryption$CustomerKey
 | camel.component.minio.start-after | list objects in bucket after this object name. |  | String
 | camel.component.minio.storage-class | The storage class to set in the request. |  | String
 | camel.component.minio.un-modified-since | Set un modified since parameter for get object(s). |  | ZonedDateTime
