@@ -26,7 +26,7 @@
   </parent>
   <artifactId>camel-cyberark-vault-starter</artifactId>
   <packaging>jar</packaging>
-  <name>Camel SB Starters :: cyberark-vault</name>
+  <name>Camel SB Starters :: CyberArk Vault</name>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -45,4 +45,21 @@
     </dependency>
     <!--END OF GENERATED CODE-->
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <systemPropertyVariables>
+            <!-- Use defaults like this for a local CyberArk Conjur Server
+            <camel.vault.test.cyberark.url>http://localhost:8080</camel.vault.test.cyberark.url>
+            <camel.vault.test.cyberark.account>myConjurAccount</camel.vault.test.cyberark.account>
+            <camel.vault.test.cyberark.username>admin</camel.vault.test.cyberark.username>
+            <camel.vault.test.cyberark.apiKey>your-api-key</camel.vault.test.cyberark.apiKey>
+            -->
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
