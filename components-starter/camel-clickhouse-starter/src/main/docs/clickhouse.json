@@ -1,0 +1,85 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.clickhouse",
+      "type": "org.apache.camel.component.clickhouse.springboot.ClickHouseComponentConfiguration",
+      "sourceType": "org.apache.camel.component.clickhouse.springboot.ClickHouseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.clickhouse.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.clickhouse.springboot.ClickHouseComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.clickhouse.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.clickhouse.springboot.ClickHouseComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.clickhouse.client",
+      "type": "com.clickhouse.client.api.Client",
+      "description": "The shared ClickHouse client to use for all endpoints, of type com.clickhouse.client.api.Client. When set, the endpoint-level connection options (serverUrl, username, password, ssl) are ignored. The option is a com.clickhouse.client.api.Client type.",
+      "sourceType": "org.apache.camel.component.clickhouse.springboot.ClickHouseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.clickhouse.compression",
+      "type": "java.lang.Boolean",
+      "description": "Whether to compress the insert request payload sent to the server (LZ4).",
+      "sourceType": "org.apache.camel.component.clickhouse.springboot.ClickHouseComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.clickhouse.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.clickhouse.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the clickhouse component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.clickhouse.springboot.ClickHouseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.clickhouse.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.clickhouse.springboot.ClickHouseComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.clickhouse.password",
+      "type": "java.lang.String",
+      "description": "The password used to authenticate to ClickHouse.",
+      "sourceType": "org.apache.camel.component.clickhouse.springboot.ClickHouseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.clickhouse.server-url",
+      "type": "java.lang.String",
+      "description": "The ClickHouse HTTP endpoint URL, e.g. http:\/\/localhost:8123. Can be overridden per endpoint. Required unless a shared Client bean is autowired or configured on the component.",
+      "sourceType": "org.apache.camel.component.clickhouse.springboot.ClickHouseComponentConfiguration"
+    },
+    {
+      "name": "camel.component.clickhouse.ssl",
+      "type": "java.lang.Boolean",
+      "description": "Whether to connect to ClickHouse over a secure (HTTPS) connection.",
+      "sourceType": "org.apache.camel.component.clickhouse.springboot.ClickHouseComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.clickhouse.username",
+      "type": "java.lang.String",
+      "description": "The username used to authenticate to ClickHouse.",
+      "sourceType": "org.apache.camel.component.clickhouse.springboot.ClickHouseComponentConfiguration",
+      "defaultValue": "default"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

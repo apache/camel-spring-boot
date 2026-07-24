@@ -74,6 +74,7 @@
 ** xref:starters/cbor.adoc[CBOR]
 ** xref:starters/chatscript.adoc[ChatScript]
 ** xref:starters/chunk.adoc[Chunk]
+** xref:starters/clickhouse.adoc[ClickHouse]
 ** xref:starters/clickup.adoc[ClickUp]
 ** xref:starters/cloudevents.adoc[Cloudevents]
 ** xref:starters/cm-sms.adoc[CM SMS Gateway]
