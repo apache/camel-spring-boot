@@ -119,6 +119,7 @@
 ** xref:starters/docling.adoc[Docling]
 ** xref:starters/drill.adoc[Drill]
 ** xref:starters/dropbox.adoc[Dropbox]
+** xref:starters/duckdb.adoc[DuckDB]
 ** xref:starters/dynamic-router.adoc[Dynamic Router]
 ** xref:starters/ehcache.adoc[Ehcache]
 ** xref:starters/elasticsearch-rest-client.adoc[Elasticsearch Low level Rest Client]
