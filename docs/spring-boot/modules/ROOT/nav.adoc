@@ -197,6 +197,7 @@
 ** xref:starters/jackson3.adoc[JSON Jackson]
 ** xref:starters/jackson3xml.adoc[Jackson XML]
 ** xref:starters/jacksonxml.adoc[Jackson XML]
+** xref:starters/jactl.adoc[Jactl]
 ** xref:starters/jandex.adoc[Jandex]
 ** xref:starters/jasypt.adoc[Jasypt]
 ** xref:starters/javascript.adoc[JavaScript]

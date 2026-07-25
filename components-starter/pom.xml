@@ -298,6 +298,7 @@
     <module>camel-jackson3-starter</module>
     <module>camel-jackson3xml-starter</module>
     <module>camel-jacksonxml-starter</module>
+    <module>camel-jactl-starter</module>
     <module>camel-jandex-starter</module>
     <module>camel-jasypt-starter</module>
     <module>camel-javascript-starter</module>

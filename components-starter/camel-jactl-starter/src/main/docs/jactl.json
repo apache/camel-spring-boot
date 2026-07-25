@@ -1,0 +1,39 @@
+{
+  "groups": [
+    {
+      "name": "camel.language.jactl",
+      "type": "org.apache.camel.language.jactl.springboot.JactlLanguageConfiguration",
+      "sourceType": "org.apache.camel.language.jactl.springboot.JactlLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.jactl.customizer",
+      "type": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.language.jactl.springboot.JactlLanguageConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.language.jactl.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.language.jactl.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the jactl language. This is enabled by default.",
+      "sourceType": "org.apache.camel.language.jactl.springboot.JactlLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.jactl.trim",
+      "type": "java.lang.Boolean",
+      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks.",
+      "sourceType": "org.apache.camel.language.jactl.springboot.JactlLanguageConfiguration",
+      "defaultValue": true
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
