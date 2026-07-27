@@ -127,11 +127,43 @@ public class BedrockAgentRuntimeComponentConfiguration
      */
     private BedrockAgentRuntimeClient bedrockAgentRuntimeClient;
     /**
-     * Enables tracing for the invokeFlow operation. When enabled, the producer
-     * collects FlowTraceEvent entries and publishes them in the
-     * CamelAwsBedrockAgentRuntimeFlowTraces header.
+     * The unique identifier of the agent alias to invoke, used by the
+     * invokeAgent operation.
+     */
+    private String agentAliasId;
+    /**
+     * The unique identifier of the agent to invoke, used by the invokeAgent
+     * operation.
+     */
+    private String agentId;
+    /**
+     * Enables tracing for the invokeFlow and agent operations. When enabled,
+     * the producer collects the trace events and publishes them in the
+     * CamelAwsBedrockAgentRuntimeFlowTraces or
+     * CamelAwsBedrockAgentRuntimeAgentTraces header.
      */
     private Boolean enableTrace = false;
+    /**
+     * The foundation model used by the invokeInlineAgent operation.
+     */
+    private String foundationModel;
+    /**
+     * The instruction given to the agent defined by the invokeInlineAgent
+     * operation.
+     */
+    private String instruction;
+    /**
+     * The unique identifier of the agent session. Reuse the same value across
+     * invocations to continue the same conversation. When not set, a random
+     * session id is generated for each invocation.
+     */
+    private String sessionId;
+    /**
+     * The streaming output mode (complete or chunks) used by the agent
+     * operations. In complete mode the response chunks are accumulated and the
+     * body is the full text. In chunks mode the body is the list of chunks.
+     */
+    private String streamOutputMode = "complete";
     /**
      * The unique identifier of the Bedrock flow alias to invoke (used by the
      * invokeFlow operation). Can be overridden per exchange via the
@@ -318,12 +350,60 @@ public class BedrockAgentRuntimeComponentConfiguration
         this.bedrockAgentRuntimeClient = bedrockAgentRuntimeClient;
     }
 
+    public String getAgentAliasId() {
+        return agentAliasId;
+    }
+
+    public void setAgentAliasId(String agentAliasId) {
+        this.agentAliasId = agentAliasId;
+    }
+
+    public String getAgentId() {
+        return agentId;
+    }
+
+    public void setAgentId(String agentId) {
+        this.agentId = agentId;
+    }
+
     public Boolean getEnableTrace() {
         return enableTrace;
     }
 
     public void setEnableTrace(Boolean enableTrace) {
         this.enableTrace = enableTrace;
+    }
+
+    public String getFoundationModel() {
+        return foundationModel;
+    }
+
+    public void setFoundationModel(String foundationModel) {
+        this.foundationModel = foundationModel;
+    }
+
+    public String getInstruction() {
+        return instruction;
+    }
+
+    public void setInstruction(String instruction) {
+        this.instruction = instruction;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public String getStreamOutputMode() {
+        return streamOutputMode;
+    }
+
+    public void setStreamOutputMode(String streamOutputMode) {
+        this.streamOutputMode = streamOutputMode;
     }
 
     public String getFlowAliasIdentifier() {

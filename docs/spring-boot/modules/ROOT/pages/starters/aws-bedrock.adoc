@@ -25,22 +25,26 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 86 options, which are listed below.
+The starter supports 92 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
 | camel.component.aws-bedrock-agent-runtime.access-key | Amazon AWS Access Key |  | String
+| camel.component.aws-bedrock-agent-runtime.agent-alias-id | The unique identifier of the agent alias to invoke, used by the invokeAgent operation. |  | String
+| camel.component.aws-bedrock-agent-runtime.agent-id | The unique identifier of the agent to invoke, used by the invokeAgent operation. |  | String
 | camel.component.aws-bedrock-agent-runtime.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.aws-bedrock-agent-runtime.bedrock-agent-runtime-async-client | To use an existing configured AWS Bedrock Agent Runtime async client (required for invokeFlow which streams events back). The option is a software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeAsyncClient type. |  | BedrockAgentRuntimeAsyncClient
 | camel.component.aws-bedrock-agent-runtime.bedrock-agent-runtime-client | To use an existing configured AWS Bedrock Agent Runtime client. The option is a software.amazon.awssdk.services.bedrockagentruntime.BedrockAgentRuntimeClient type. |  | BedrockAgentRuntimeClient
 | camel.component.aws-bedrock-agent-runtime.configuration | Component configuration. The option is a org.apache.camel.component.aws2.bedrock.agentruntime.BedrockAgentRuntimeConfiguration type. |  | BedrockAgentRuntimeConfiguration
-| camel.component.aws-bedrock-agent-runtime.enable-trace | Enables tracing for the invokeFlow operation. When enabled, the producer collects FlowTraceEvent entries and publishes them in the CamelAwsBedrockAgentRuntimeFlowTraces header. | false | Boolean
+| camel.component.aws-bedrock-agent-runtime.enable-trace | Enables tracing for the invokeFlow and agent operations. When enabled, the producer collects the trace events and publishes them in the CamelAwsBedrockAgentRuntimeFlowTraces or CamelAwsBedrockAgentRuntimeAgentTraces header. | false | Boolean
 | camel.component.aws-bedrock-agent-runtime.enabled | Whether to enable auto configuration of the aws-bedrock-agent-runtime component. This is enabled by default. |  | Boolean
 | camel.component.aws-bedrock-agent-runtime.flow-alias-identifier | The unique identifier of the Bedrock flow alias to invoke (used by the invokeFlow operation). Can be overridden per exchange via the CamelAwsBedrockAgentRuntimeFlowAliasIdentifier header. |  | String
 | camel.component.aws-bedrock-agent-runtime.flow-identifier | The unique identifier of the Bedrock flow to invoke (used by the invokeFlow operation). Can be overridden per exchange via the CamelAwsBedrockAgentRuntimeFlowIdentifier header. |  | String
+| camel.component.aws-bedrock-agent-runtime.foundation-model | The foundation model used by the invokeInlineAgent operation. |  | String
 | camel.component.aws-bedrock-agent-runtime.health-check-consumer-enabled | Used for enabling or disabling all consumer based health checks from this component | true | Boolean
 | camel.component.aws-bedrock-agent-runtime.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
+| camel.component.aws-bedrock-agent-runtime.instruction | The instruction given to the agent defined by the invokeInlineAgent operation. |  | String
 | camel.component.aws-bedrock-agent-runtime.knowledge-base-id | Define the Knowledge Base Id we are going to use |  | String
 | camel.component.aws-bedrock-agent-runtime.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.aws-bedrock-agent-runtime.model-id | Define the model Id we are going to use |  | String
@@ -53,7 +57,9 @@ The starter supports 86 options, which are listed below.
 | camel.component.aws-bedrock-agent-runtime.proxy-protocol | To define a proxy protocol when instantiating the Bedrock Agent Runtime client | https | Protocol
 | camel.component.aws-bedrock-agent-runtime.region | The region in which Bedrock Agent Runtime client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example, ap-east-1) You'll need to use the name Region.EU_WEST_1.id() |  | String
 | camel.component.aws-bedrock-agent-runtime.secret-key | Amazon AWS Secret Key |  | String
+| camel.component.aws-bedrock-agent-runtime.session-id | The unique identifier of the agent session. Reuse the same value across invocations to continue the same conversation. When not set, a random session id is generated for each invocation. |  | String
 | camel.component.aws-bedrock-agent-runtime.session-token | Amazon AWS Session Token used when the user needs to assume an IAM role |  | String
+| camel.component.aws-bedrock-agent-runtime.stream-output-mode | The streaming output mode (complete or chunks) used by the agent operations. In complete mode the response chunks are accumulated and the body is the full text. In chunks mode the body is the list of chunks. | complete | String
 | camel.component.aws-bedrock-agent-runtime.trust-all-certificates | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
 | camel.component.aws-bedrock-agent-runtime.uri-endpoint-override | Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option |  | String
 | camel.component.aws-bedrock-agent-runtime.use-default-credentials-provider | Set whether the Bedrock Agent Runtime client should expect to load credentials through a default credentials provider or to expect static credentials to be passed in. | false | Boolean

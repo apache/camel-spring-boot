@@ -42,6 +42,18 @@
       "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
     },
     {
+      "name": "camel.component.aws-bedrock-agent-runtime.agent-alias-id",
+      "type": "java.lang.String",
+      "description": "The unique identifier of the agent alias to invoke, used by the invokeAgent operation.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.agent-id",
+      "type": "java.lang.String",
+      "description": "The unique identifier of the agent to invoke, used by the invokeAgent operation.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
       "name": "camel.component.aws-bedrock-agent-runtime.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
@@ -74,7 +86,7 @@
     {
       "name": "camel.component.aws-bedrock-agent-runtime.enable-trace",
       "type": "java.lang.Boolean",
-      "description": "Enables tracing for the invokeFlow operation. When enabled, the producer collects FlowTraceEvent entries and publishes them in the CamelAwsBedrockAgentRuntimeFlowTraces header.",
+      "description": "Enables tracing for the invokeFlow and agent operations. When enabled, the producer collects the trace events and publishes them in the CamelAwsBedrockAgentRuntimeFlowTraces or CamelAwsBedrockAgentRuntimeAgentTraces header.",
       "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration",
       "defaultValue": false
     },
@@ -97,6 +109,12 @@
       "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
     },
     {
+      "name": "camel.component.aws-bedrock-agent-runtime.foundation-model",
+      "type": "java.lang.String",
+      "description": "The foundation model used by the invokeInlineAgent operation.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
       "name": "camel.component.aws-bedrock-agent-runtime.health-check-consumer-enabled",
       "type": "java.lang.Boolean",
       "description": "Used for enabling or disabling all consumer based health checks from this component",
@@ -109,6 +127,12 @@
       "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
       "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.instruction",
+      "type": "java.lang.String",
+      "description": "The instruction given to the agent defined by the invokeInlineAgent operation.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
     },
     {
       "name": "camel.component.aws-bedrock-agent-runtime.knowledge-base-id",
@@ -188,10 +212,23 @@
       "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
     },
     {
+      "name": "camel.component.aws-bedrock-agent-runtime.session-id",
+      "type": "java.lang.String",
+      "description": "The unique identifier of the agent session. Reuse the same value across invocations to continue the same conversation. When not set, a random session id is generated for each invocation.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
       "name": "camel.component.aws-bedrock-agent-runtime.session-token",
       "type": "java.lang.String",
       "description": "Amazon AWS Session Token used when the user needs to assume an IAM role",
       "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws-bedrock-agent-runtime.stream-output-mode",
+      "type": "java.lang.String",
+      "description": "The streaming output mode (complete or chunks) used by the agent operations. In complete mode the response chunks are accumulated and the body is the full text. In chunks mode the body is the list of chunks.",
+      "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration",
+      "defaultValue": "complete"
     },
     {
       "name": "camel.component.aws-bedrock-agent-runtime.trust-all-certificates",

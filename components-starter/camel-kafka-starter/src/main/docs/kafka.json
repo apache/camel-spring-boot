@@ -776,22 +776,9 @@
       "defaultValue": "JKS"
     },
     {
-      "name": "camel.component.kafka.subscribe-consumer-backoff-interval",
-      "type": "java.lang.Long",
-      "description": "The delay in millis seconds to wait before trying again to subscribe to the kafka broker.",
-      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
-      "defaultValue": 5000
-    },
-    {
-      "name": "camel.component.kafka.subscribe-consumer-backoff-max-attempts",
-      "type": "java.lang.Integer",
-      "description": "Maximum number the kafka consumer will attempt to subscribe to the kafka broker, before eventually giving up and failing. Error during subscribing the consumer to the kafka topic could be temporary errors due to network issues, and could potentially be recoverable. Camel will by default retry forever, and therefore never give up. If you want to give up after many attempts, then set this option and Camel will then when giving up terminate the consumer. You can manually restart the consumer by stopping and starting the route, to try again.",
-      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
-    },
-    {
       "name": "camel.component.kafka.subscribe-consumer-topic-must-exists",
       "type": "java.lang.Boolean",
-      "description": "Whether when a Camel Kafka consumer is subscribing to a Kafka broker then check whether a topic already exist on the broker, and fail if it does not. Otherwise, the Camel Kafka consumer will keep attempt to consume from the topic, until it's created on the Kafka broker; and until then the Camel Kafka consumer will fail and log a WARN about UNKNOWN_TOPIC_OR_PARTITION. The option subscribeConsumerBackoffMaxAttempts can be configured to give up trying to subscribe after a given number of attempts.",
+      "description": "Whether when a Camel Kafka consumer is subscribing to a Kafka broker then check whether a topic already exist on the broker, and fail if it does not. Otherwise, the Camel Kafka consumer will keep attempt to consume from the topic, until it's created on the Kafka broker; and until then the Camel Kafka consumer will fail and log a WARN about UNKNOWN_TOPIC_OR_PARTITION. The option createConsumerBackoffMaxAttempts can be configured to give up trying to subscribe after a given number of attempts.",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
       "defaultValue": false
     },
@@ -876,6 +863,23 @@
       "description": "Deprecated: this option has no effect. Use bufferMemorySize or maxBlockMs instead.",
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
       "defaultValue": 10000,
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "camel.component.kafka.subscribe-consumer-backoff-interval",
+      "type": "java.lang.Long",
+      "description": "The delay in millis seconds to wait before trying again to subscribe to the kafka broker.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
+      "defaultValue": 5000,
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "camel.component.kafka.subscribe-consumer-backoff-max-attempts",
+      "type": "java.lang.Integer",
+      "description": "Maximum number the kafka consumer will attempt to subscribe to the kafka broker, before eventually giving up and failing. Error during subscribing the consumer to the kafka topic could be temporary errors due to network issues, and could potentially be recoverable. Camel will by default retry forever, and therefore never give up. If you want to give up after many attempts, then set this option and Camel will then when giving up terminate the consumer. You can manually restart the consumer by stopping and starting the route, to try again.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
       "deprecated": true,
       "deprecation": {}
     }

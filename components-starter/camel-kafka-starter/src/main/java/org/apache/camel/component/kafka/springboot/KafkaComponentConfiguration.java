@@ -441,6 +441,7 @@ public class KafkaComponentConfiguration
      * The delay in millis seconds to wait before trying again to subscribe to
      * the kafka broker.
      */
+    @Deprecated
     private Long subscribeConsumerBackoffInterval = 5000L;
     /**
      * Maximum number the kafka consumer will attempt to subscribe to the kafka
@@ -452,6 +453,7 @@ public class KafkaComponentConfiguration
      * terminate the consumer. You can manually restart the consumer by stopping
      * and starting the route, to try again.
      */
+    @Deprecated
     private Integer subscribeConsumerBackoffMaxAttempts;
     /**
      * Whether when a Camel Kafka consumer is subscribing to a Kafka broker then
@@ -459,9 +461,9 @@ public class KafkaComponentConfiguration
      * not. Otherwise, the Camel Kafka consumer will keep attempt to consume
      * from the topic, until it's created on the Kafka broker; and until then
      * the Camel Kafka consumer will fail and log a WARN about
-     * UNKNOWN_TOPIC_OR_PARTITION. The option
-     * subscribeConsumerBackoffMaxAttempts can be configured to give up trying
-     * to subscribe after a given number of attempts.
+     * UNKNOWN_TOPIC_OR_PARTITION. The option createConsumerBackoffMaxAttempts
+     * can be configured to give up trying to subscribe after a given number of
+     * attempts.
      */
     private Boolean subscribeConsumerTopicMustExists = false;
     /**
@@ -1402,19 +1404,25 @@ public class KafkaComponentConfiguration
         this.pollExceptionStrategy = pollExceptionStrategy;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Long getSubscribeConsumerBackoffInterval() {
         return subscribeConsumerBackoffInterval;
     }
 
+    @Deprecated
     public void setSubscribeConsumerBackoffInterval(
             Long subscribeConsumerBackoffInterval) {
         this.subscribeConsumerBackoffInterval = subscribeConsumerBackoffInterval;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Integer getSubscribeConsumerBackoffMaxAttempts() {
         return subscribeConsumerBackoffMaxAttempts;
     }
 
+    @Deprecated
     public void setSubscribeConsumerBackoffMaxAttempts(
             Integer subscribeConsumerBackoffMaxAttempts) {
         this.subscribeConsumerBackoffMaxAttempts = subscribeConsumerBackoffMaxAttempts;
