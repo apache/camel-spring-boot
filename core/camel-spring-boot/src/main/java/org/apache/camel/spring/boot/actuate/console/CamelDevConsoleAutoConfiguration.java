@@ -40,4 +40,10 @@ public class CamelDevConsoleAutoConfiguration {
         return new CamelDevConsoleEndpoint(camelContext);
     }
 
+    @Bean
+    @ConditionalOnMissingBean(SpringBootConfigurationMetadataDevConsole.class)
+    public SpringBootConfigurationMetadataDevConsole springBootConfigurationMetadataDevConsole() {
+        return new SpringBootConfigurationMetadataDevConsole();
+    }
+
 }
