@@ -102,7 +102,7 @@
     {
       "name": "camel.component.ssh.fail-on-unknown-host",
       "type": "java.lang.Boolean",
-      "description": "Specifies whether a connection to an unknown host should fail or not. This value is only checked when the property knownHosts is set.",
+      "description": "Specifies whether a connection to an unknown SSH server host key should fail. When false, host keys that are not present in the known_hosts resource are accepted.",
       "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration",
       "defaultValue": false
     },
@@ -159,7 +159,7 @@
     {
       "name": "camel.component.ssh.known-hosts-resource",
       "type": "java.lang.String",
-      "description": "Sets the resource path for a known_hosts file",
+      "description": "Sets the resource path for a known_hosts file used to verify the SSH server host key. When not set, the client does not verify the server host key against a known_hosts file.",
       "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
     },
     {

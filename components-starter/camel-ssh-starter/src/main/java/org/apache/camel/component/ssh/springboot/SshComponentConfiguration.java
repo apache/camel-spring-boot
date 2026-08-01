@@ -38,15 +38,6 @@ public class SshComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Specifies whether a connection to an unknown host should fail or not.
-     * This value is only checked when the property knownHosts is set.
-     */
-    private Boolean failOnUnknownHost = false;
-    /**
-     * Sets the resource path for a known_hosts file
-     */
-    private String knownHostsResource;
-    /**
      * Sets the timeout in milliseconds to wait in establishing the remote SSH
      * server connection. Defaults to 30000 milliseconds.
      */
@@ -178,6 +169,12 @@ public class SshComponentConfiguration
      */
     private String ciphers;
     /**
+     * Specifies whether a connection to an unknown SSH server host key should
+     * fail. When false, host keys that are not present in the known_hosts
+     * resource are accepted.
+     */
+    private Boolean failOnUnknownHost = false;
+    /**
      * Comma-separated list of allowed/supported key exchange algorithms in
      * their order of preference.
      */
@@ -196,6 +193,12 @@ public class SshComponentConfiguration
      * was enforced by default.
      */
     private String keyType;
+    /**
+     * Sets the resource path for a known_hosts file used to verify the SSH
+     * server host key. When not set, the client does not verify the server host
+     * key against a known_hosts file.
+     */
+    private String knownHostsResource;
     /**
      * Comma-separated list of allowed/supported message authentication code
      * algorithms in their order of preference. The MAC algorithm is used for
@@ -216,22 +219,6 @@ public class SshComponentConfiguration
      * Sets the username to use in logging into the remote SSH server.
      */
     private String username;
-
-    public Boolean getFailOnUnknownHost() {
-        return failOnUnknownHost;
-    }
-
-    public void setFailOnUnknownHost(Boolean failOnUnknownHost) {
-        this.failOnUnknownHost = failOnUnknownHost;
-    }
-
-    public String getKnownHostsResource() {
-        return knownHostsResource;
-    }
-
-    public void setKnownHostsResource(String knownHostsResource) {
-        this.knownHostsResource = knownHostsResource;
-    }
 
     public Long getTimeout() {
         return timeout;
@@ -409,6 +396,14 @@ public class SshComponentConfiguration
         this.ciphers = ciphers;
     }
 
+    public Boolean getFailOnUnknownHost() {
+        return failOnUnknownHost;
+    }
+
+    public void setFailOnUnknownHost(Boolean failOnUnknownHost) {
+        this.failOnUnknownHost = failOnUnknownHost;
+    }
+
     public String getKex() {
         return kex;
     }
@@ -431,6 +426,14 @@ public class SshComponentConfiguration
 
     public void setKeyType(String keyType) {
         this.keyType = keyType;
+    }
+
+    public String getKnownHostsResource() {
+        return knownHostsResource;
+    }
+
+    public void setKnownHostsResource(String knownHostsResource) {
+        this.knownHostsResource = knownHostsResource;
     }
 
     public String getMacs() {
