@@ -1,0 +1,25 @@
+Define tools as regular `ai-tool` routes and give them tags:
+
+[source,java]
+----
+from("ai-tool:query_db?tags=crm&description=Query customer database"
+     + "&parameter.customerId=string&parameter.customerId.required=true")
+    .to("jdbc:dataSource");
+----
+
+Select the tags to expose and the MCP transport in
+`application.properties`:
+
+[source,properties]
+----
+spring.ai.mcp.server.protocol = STREAMABLE
+camel.mcp-server.tags = crm,notify
+----
+
+The MCP endpoint is served by the Spring AI MCP server (default path
+`/mcp`). Tools appearing or disappearing (routes starting and stopping) emit
+`notifications/tools/list_changed` to connected clients.
+
+On Camel Main and Camel JBang the equivalent setup is the `camel-mcp-server`
+module with the `camel.server.mcp-*` options; on Quarkus it is the
+`camel-quarkus-mcp-server` extension.
