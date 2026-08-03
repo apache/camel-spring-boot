@@ -29,6 +29,8 @@ import io.modelcontextprotocol.spec.McpSchema;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
+import org.springframework.ai.mcp.annotation.McpTool;
+import org.springframework.ai.mcp.annotation.McpToolParam;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,8 +71,26 @@ public class SpringBootMcpServerTest {
 
     private McpSyncClient client;
 
+    /**
+     * A plain Spring-defined MCP tool ({@code @McpTool} annotation, registered by the Spring AI annotation scanner)
+     * living on the same MCP server as the Camel ai-tool routes.
+     */
+    public static class SpringDefinedTools {
+        @McpTool(name = "add_numbers", description = "Add two numbers")
+        public String add(
+                @McpToolParam(description = "First addend", required = true) int a,
+                @McpToolParam(description = "Second addend", required = true) int b) {
+            return String.valueOf(a + b);
+        }
+    }
+
     @Configuration
     public static class TestConfiguration {
+        @Bean
+        public SpringDefinedTools springDefinedTools() {
+            return new SpringDefinedTools();
+        }
+
         @Bean
         public RouteBuilder routes() {
             return new RouteBuilder() {
@@ -127,6 +147,18 @@ public class SpringBootMcpServerTest {
         assertThat(tools).extracting(McpSchema.Tool::name)
                 .contains("say_hello", "fail_tool", "slow_tool")
                 .doesNotContain("hidden_tool", "other_tool");
+    }
+
+    @Test
+    void testSpringAnnotatedToolsCoexistWithCamelTools() {
+        // both tool sources are served by the same MCP server
+        assertThat(client().listTools().tools()).extracting(McpSchema.Tool::name)
+                .contains("add_numbers", "say_hello");
+
+        McpSchema.CallToolResult result
+                = client().callTool(new McpSchema.CallToolRequest("add_numbers", Map.of("a", 17, "b", 25)));
+        assertThat(result.isError()).as(textOf(result)).isNotEqualTo(Boolean.TRUE);
+        assertThat(textOf(result)).isEqualTo("42");
     }
 
     @Test

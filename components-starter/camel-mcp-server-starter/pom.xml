@@ -76,4 +76,17 @@
     </dependency>
     <!--END OF GENERATED CODE-->
   </dependencies>
+  <build>
+    <plugins>
+      <!-- parameter names are needed by the Spring AI annotation scanner to derive @McpTool
+           input schemas in the tests (Spring Boot applications get this from the boot parent) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <parameters>true</parameters>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
