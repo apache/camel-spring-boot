@@ -1028,6 +1028,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.main.startup-recorder-runtime-enabled",
+      "type": "java.lang.Boolean",
+      "description": "To also instrument the running Camel application, and not only its startup, by emitting Java Flight Recorder events for every exchange, route and processor. This requires that camel-jfr is on the classpath, and to enable this option. The runtime events are only captured while a recording is active. As they are emitted per message they add overhead, so this is turned off by default.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": false
+    },
+    {
       "name": "camel.main.startup-summary-level",
       "type": "org.apache.camel.StartupSummaryLevel",
       "description": "Controls the level of information logged during startup (and shutdown) of CamelContext.",
