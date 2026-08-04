@@ -43,8 +43,10 @@ camel.mcp-server.tags = crm,notify
 camel.mcp-server.tool-timeout = 10000
 ----
 
-The streamable HTTP transport (`spring.ai.mcp.server.protocol=STREAMABLE`)
-is the Spring AI default.
+The streamable HTTP transport has to be selected explicitly with
+`spring.ai.mcp.server.protocol=STREAMABLE`; when the property is not set,
+Spring AI serves the deprecated SSE transport instead and there is no
+endpoint at `/mcp`.
 
 Serving concerns are configured on the Spring AI MCP server — see the
 https://docs.spring.io/spring-ai/reference/api/mcp/mcp-streamable-http-server-boot-starter-docs.html[Spring AI MCP server documentation]
@@ -52,6 +54,7 @@ for the full list of `spring.ai.mcp.server.*` options. For example:
 
 [source,properties]
 ----
+spring.ai.mcp.server.protocol = STREAMABLE
 spring.ai.mcp.server.name = my-integration-app
 spring.ai.mcp.server.version = 1.0.0
 spring.ai.mcp.server.streamable-http.mcp-endpoint = /mcp
@@ -87,6 +90,72 @@ A coding agent or IDE is configured with the same URL, e.g. in an
   }
 }
 ----
+
+=== Serving over stdio
+
+Out of the box the tools are served over streamable HTTP: the starter brings
+in `spring-ai-starter-mcp-server-webmvc`. MCP clients that launch the server
+as a subprocess speak over stdin/stdout instead, which Spring AI serves with
+the plain `spring-ai-starter-mcp-server`. Swap the transport starter:
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.apache.camel.springboot</groupId>
+    <artifactId>camel-mcp-server-starter</artifactId>
+    <exclusions>
+        <exclusion>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+<dependency>
+    <groupId>org.springframework.ai</groupId>
+    <artifactId>spring-ai-starter-mcp-server</artifactId>
+    <version>2.0.0</version>
+</dependency>
+----
+
+and enable the stdio transport:
+
+[source,properties]
+----
+spring.ai.mcp.server.stdio = true
+spring.main.web-application-type = none
+spring.main.banner-mode = off
+
+# stdout carries the MCP protocol, so nothing else may be written to it
+logging.threshold.console = OFF
+logging.file.name = my-integration-app.log
+----
+
+Because stdout carries the MCP protocol, the application must not run as a
+web application, the banner has to be switched off and console logging has
+to be turned off — writing the log to a file instead. Leaving console
+logging on corrupts the protocol stream, as the Spring Boot startup log is
+then interleaved with the JSON-RPC messages.
+
+A stdio server is launched by the client instead of being connected to over
+a URL:
+
+[source,json]
+----
+{
+  "mcpServers": {
+    "my-integration-app": {
+      "command": "java",
+      "args": ["-jar", "/path/to/my-integration-app-1.0.0.jar"]
+    }
+  }
+}
+----
+
+See the
+https://docs.spring.io/spring-ai/reference/api/mcp/mcp-server-boot-starter-docs.html[Spring AI MCP Server Boot Starter documentation]
+for the transport options and the full list of `spring.ai.mcp.server.*`
+properties. On Quarkus the equivalent setup is described in the
+https://docs.quarkiverse.io/quarkus-mcp-server/dev/getting-started-stdio.html[quarkus-mcp-server stdio guide].
 
 === Mixing with Spring-defined tools
 
