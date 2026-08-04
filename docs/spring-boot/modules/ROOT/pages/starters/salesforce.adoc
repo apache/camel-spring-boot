@@ -29,14 +29,14 @@ The starter supports 109 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | camel.component.salesforce.all-or-none | Composite API option to indicate to rollback all records if any are not successful. | false | Boolean
-| camel.component.salesforce.apex-method | APEX method name |  | String
+| camel.component.salesforce.apex-method | HTTP verb used for the Apex REST invocation, such as GET, POST, PUT, PATCH or DELETE. Applies to the apexCall operation and defaults to GET. Can be overridden per message with the CamelSalesforceApexMethod header. | GET | String
 | camel.component.salesforce.apex-query-params | Query params for APEX method |  | Object>
-| camel.component.salesforce.apex-url | APEX method URL |  | String
+| camel.component.salesforce.apex-url | Path of the Apex REST resource to invoke, appended to /services/apexrest/ on the instance URL, for example MyApexClass/. The apexCall operation needs this value, which can be given as this option, in the endpoint path as apexCall/MyApexClass/, or in the CamelSalesforceApexUrl header. Placeholders written in curly braces are resolved from message headers of the same name. |  | String
 | camel.component.salesforce.api-version | Salesforce API version. | 56.0 | String
 | camel.component.salesforce.authentication-type | Explicit authentication method to be used, one of USERNAME_PASSWORD, REFRESH_TOKEN, CLIENT_CREDENTIALS, or JWT. Salesforce component can auto-determine the authentication method to use from the properties set, set this property to eliminate any ambiguity. |  | AuthenticationType
 | camel.component.salesforce.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.salesforce.backoff-increment | Backoff interval increment for Streaming connection restart attempts for failures beyond CometD auto-reconnect. The option is a long type. | 1000 | Long
-| camel.component.salesforce.batch-id | Bulk API Batch ID |  | String
+| camel.component.salesforce.batch-id | Identifies a batch within a Bulk API v1 job. Required by getBatch, getRequest, getResults, getQueryResultIds and getQueryResult unless a BatchInfo message body supplies it. Not used by Bulk API 2.0. |  | String
 | camel.component.salesforce.bridge-error-handler | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | camel.component.salesforce.client-id | OAuth Consumer Key of the connected app configured in the Salesforce instance setup. Typically a connected app needs to be configured but one can be provided by installing a package. |  | String
 | camel.component.salesforce.client-secret | OAuth Consumer Secret of the connected app configured in the Salesforce instance setup. |  | String
@@ -78,7 +78,7 @@ The starter supports 109 options, which are listed below.
 | camel.component.salesforce.initial-reply-id-timeout | Timeout in seconds to validate when a custom pubSubReplayId has been configured, when starting the Camel Salesforce consumer. | 30 | Integer
 | camel.component.salesforce.instance-id | Salesforce1 Analytics report execution instance ID |  | String
 | camel.component.salesforce.instance-url | URL of the Salesforce instance used after authentication, by default received from Salesforce on successful authentication |  | String
-| camel.component.salesforce.job-id | Bulk API Job ID |  | String
+| camel.component.salesforce.job-id | Identifies the Bulk API job to act on, for Bulk API v1 operations such as getJob, closeJob, abortJob, createBatch and getResults, and for the bulk2 operations that target an existing job. Operations that accept a JobInfo or BatchInfo message body can take the id from there instead. |  | String
 | camel.component.salesforce.jwt-audience | Value to use for the Audience claim (aud) when using OAuth JWT flow. If not set, the login URL will be used, which is appropriate in most cases. |  | String
 | camel.component.salesforce.keystore | KeyStore parameters to use in OAuth JWT flow. The KeyStore should contain only one entry with private key and certificate. Salesforce does not verify the certificate chain, so this can easily be a selfsigned certificate. Make sure that you upload the certificate to the corresponding connected app. The option is a org.apache.camel.support.jsse.KeyStoreParameters type. |  | KeyStoreParameters
 | camel.component.salesforce.lazy-login | If set to true prevents the component from authenticating to Salesforce with the start of the component. You would generally set this to the (default) false and authenticate early and be immediately aware of any authentication issues. Lazy login is not supported by salesforce consumers. | false | Boolean
@@ -106,9 +106,9 @@ The starter supports 109 options, which are listed below.
 | camel.component.salesforce.pk-chunking-start-row | Specifies the 15-character or 18-character record ID to be used as the lower boundary for the first chunk. Use this parameter to specify a starting ID when restarting a job that failed between batches. |  | String
 | camel.component.salesforce.pub-sub-batch-size | Max number of events to receive in a batch from the Pub/Sub API. | 100 | Integer
 | camel.component.salesforce.pub-sub-deserialize-type | How to deserialize events consume from the Pub/Sub API. AVRO will try a SpecificRecord subclass if found, otherwise GenericRecord. | avro | PubSubDeserializeType
-| camel.component.salesforce.pub-sub-host | Pub/Sub host | api.pubsub.salesforce.com | String
+| camel.component.salesforce.pub-sub-host | Host name of the Salesforce Pub/Sub API gRPC service used by the pubSubSubscribe and pubSubPublish operations. Give a bare host name, without scheme or port. | api.pubsub.salesforce.com | String
 | camel.component.salesforce.pub-sub-pojo-class | Fully qualified class name to deserialize Pub/Sub API event to. |  | String
-| camel.component.salesforce.pub-sub-port | Pub/Sub port | 7443 | Integer
+| camel.component.salesforce.pub-sub-port | TCP port of the Salesforce Pub/Sub API gRPC service used by the pubSubSubscribe and pubSubPublish operations. | 7443 | Integer
 | camel.component.salesforce.pubsub-allow-use-system-proxy | Allow the Pub/Sub API client to use the proxy detected by java.net.ProxySelector. If false then no proxy server will be used. | true | Boolean
 | camel.component.salesforce.query-locator | Query Locator provided by salesforce for use when a query results in more records than can be retrieved in a single call. Use this value in a subsequent call to retrieve additional records. |  | String
 | camel.component.salesforce.raw-http-headers | Comma separated list of message headers to include as HTTP parameters for Raw operation. |  | String
@@ -120,7 +120,7 @@ The starter supports 109 options, which are listed below.
 | camel.component.salesforce.replay-preset | Replay preset for Pub/Sub API. | latest | ReplayPreset
 | camel.component.salesforce.report-id | Salesforce1 Analytics report Id |  | String
 | camel.component.salesforce.report-metadata | Salesforce1 Analytics report metadata for filtering. The option is a org.apache.camel.component.salesforce.api.dto.analytics.reports.ReportMetadata type. |  | ReportMetadata
-| camel.component.salesforce.result-id | Bulk API Result ID |  | String
+| camel.component.salesforce.result-id | Identifies one result set of a completed Bulk API v1 query batch, as returned by the getQueryResultIds operation. Used only by getQueryResult, together with jobId and batchId. |  | String
 | camel.component.salesforce.s-object-blob-field-name | SObject blob field name |  | String
 | camel.component.salesforce.s-object-class | Fully qualified SObject class name, usually generated using camel-salesforce-maven-plugin |  | String
 | camel.component.salesforce.s-object-fields | SObject fields to retrieve |  | String

@@ -23,8 +23,9 @@
     {
       "name": "camel.component.salesforce.apex-method",
       "type": "java.lang.String",
-      "description": "APEX method name",
-      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+      "description": "HTTP verb used for the Apex REST invocation, such as GET, POST, PUT, PATCH or DELETE. Applies to the apexCall operation and defaults to GET. Can be overridden per message with the CamelSalesforceApexMethod header.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
+      "defaultValue": "GET"
     },
     {
       "name": "camel.component.salesforce.apex-query-params",
@@ -35,7 +36,7 @@
     {
       "name": "camel.component.salesforce.apex-url",
       "type": "java.lang.String",
-      "description": "APEX method URL",
+      "description": "Path of the Apex REST resource to invoke, appended to \/services\/apexrest\/ on the instance URL, for example MyApexClass\/. The apexCall operation needs this value, which can be given as this option, in the endpoint path as apexCall\/MyApexClass\/, or in the CamelSalesforceApexUrl header. Placeholders written in curly braces are resolved from message headers of the same name.",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {
@@ -68,7 +69,7 @@
     {
       "name": "camel.component.salesforce.batch-id",
       "type": "java.lang.String",
-      "description": "Bulk API Batch ID",
+      "description": "Identifies a batch within a Bulk API v1 job. Required by getBatch, getRequest, getResults, getQueryResultIds and getQueryResult unless a BatchInfo message body supplies it. Not used by Bulk API 2.0.",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {
@@ -341,7 +342,7 @@
     {
       "name": "camel.component.salesforce.job-id",
       "type": "java.lang.String",
-      "description": "Bulk API Job ID",
+      "description": "Identifies the Bulk API job to act on, for Bulk API v1 operations such as getJob, closeJob, abortJob, createBatch and getResults, and for the bulk2 operations that target an existing job. Operations that accept a JobInfo or BatchInfo message body can take the id from there instead.",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {
@@ -521,7 +522,7 @@
     {
       "name": "camel.component.salesforce.pub-sub-host",
       "type": "java.lang.String",
-      "description": "Pub\/Sub host",
+      "description": "Host name of the Salesforce Pub\/Sub API gRPC service used by the pubSubSubscribe and pubSubPublish operations. Give a bare host name, without scheme or port.",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
       "defaultValue": "api.pubsub.salesforce.com"
     },
@@ -534,7 +535,7 @@
     {
       "name": "camel.component.salesforce.pub-sub-port",
       "type": "java.lang.Integer",
-      "description": "Pub\/Sub port",
+      "description": "TCP port of the Salesforce Pub\/Sub API gRPC service used by the pubSubSubscribe and pubSubPublish operations.",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
       "defaultValue": 7443
     },
@@ -610,7 +611,7 @@
     {
       "name": "camel.component.salesforce.result-id",
       "type": "java.lang.String",
-      "description": "Bulk API Result ID",
+      "description": "Identifies one result set of a completed Bulk API v1 query batch, as returned by the getQueryResultIds operation. Used only by getQueryResult, together with jobId and batchId.",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {

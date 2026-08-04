@@ -55,9 +55,11 @@ public class SalesforceComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * APEX method name
+     * HTTP verb used for the Apex REST invocation, such as GET, POST, PUT,
+     * PATCH or DELETE. Applies to the apexCall operation and defaults to GET.
+     * Can be overridden per message with the CamelSalesforceApexMethod header.
      */
-    private String apexMethod;
+    private String apexMethod = "GET";
     /**
      * Query params for APEX method
      */
@@ -72,7 +74,9 @@ public class SalesforceComponentConfiguration
      */
     private Long backoffIncrement = 1000L;
     /**
-     * Bulk API Batch ID
+     * Identifies a batch within a Bulk API v1 job. Required by getBatch,
+     * getRequest, getResults, getQueryResultIds and getQueryResult unless a
+     * BatchInfo message body supplies it. Not used by Bulk API 2.0.
      */
     private String batchId;
     /**
@@ -134,7 +138,10 @@ public class SalesforceComponentConfiguration
      */
     private String instanceId;
     /**
-     * Bulk API Job ID
+     * Identifies the Bulk API job to act on, for Bulk API v1 operations such as
+     * getJob, closeJob, abortJob, createBatch and getResults, and for the bulk2
+     * operations that target an existing job. Operations that accept a JobInfo
+     * or BatchInfo message body can take the id from there instead.
      */
     private String jobId;
     /**
@@ -253,7 +260,9 @@ public class SalesforceComponentConfiguration
      */
     private ReportMetadata reportMetadata;
     /**
-     * Bulk API Result ID
+     * Identifies one result set of a completed Bulk API v1 query batch, as
+     * returned by the getQueryResultIds operation. Used only by getQueryResult,
+     * together with jobId and batchId.
      */
     private String resultId;
     /**
@@ -399,7 +408,12 @@ public class SalesforceComponentConfiguration
      */
     private Boolean allOrNone = false;
     /**
-     * APEX method URL
+     * Path of the Apex REST resource to invoke, appended to /services/apexrest/
+     * on the instance URL, for example MyApexClass/. The apexCall operation
+     * needs this value, which can be given as this option, in the endpoint path
+     * as apexCall/MyApexClass/, or in the CamelSalesforceApexUrl header.
+     * Placeholders written in curly braces are resolved from message headers of
+     * the same name.
      */
     private String apexUrl;
     /**
@@ -578,11 +592,14 @@ public class SalesforceComponentConfiguration
      */
     private String password;
     /**
-     * Pub/Sub host
+     * Host name of the Salesforce Pub/Sub API gRPC service used by the
+     * pubSubSubscribe and pubSubPublish operations. Give a bare host name,
+     * without scheme or port.
      */
     private String pubSubHost = "api.pubsub.salesforce.com";
     /**
-     * Pub/Sub port
+     * TCP port of the Salesforce Pub/Sub API gRPC service used by the
+     * pubSubSubscribe and pubSubPublish operations.
      */
     private Integer pubSubPort = 7443;
     /**
