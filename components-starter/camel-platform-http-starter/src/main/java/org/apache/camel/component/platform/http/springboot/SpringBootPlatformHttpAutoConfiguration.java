@@ -22,13 +22,13 @@ import org.apache.camel.component.platform.http.spi.PlatformHttpEngine;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.thread.Threading;
 import org.springframework.boot.web.server.autoconfigure.ServerProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.core.env.Environment;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -90,9 +90,18 @@ public class SpringBootPlatformHttpAutoConfiguration {
         return new SpringBootPlatformHttpEngine(port, executor);
     }
 
+    /**
+     * The mapping registers itself as a {@link org.apache.camel.component.platform.http.PlatformHttpListener} and is
+     * only notified of endpoints created after it exists, so it must be eager. A lazy mapping is created on first
+     * demand, which is unordered with respect to CamelContext startup: if Camel starts first, every platform-http
+     * endpoint is already registered and the mapping never learns about any of them, leaving all of them unreachable
+     * with a 404 while the routes report themselves as started. CamelContext is taken as an ObjectProvider and
+     * resolved inside the method to avoid the circular dependency that injecting it directly would create.
+     */
     @Bean
-    @Lazy
-    public CamelRequestHandlerMapping platformHttpEngineRequestMapping(PlatformHttpEngine engine, CamelContext camelContext) {
+    public CamelRequestHandlerMapping platformHttpEngineRequestMapping(
+            PlatformHttpEngine engine, ObjectProvider<CamelContext> camelContextProvider) {
+        CamelContext camelContext = camelContextProvider.getObject();
         PlatformHttpComponent component = camelContext.getComponent("platform-http", PlatformHttpComponent.class);
         return new CamelRequestHandlerMapping(component, engine);
     }
