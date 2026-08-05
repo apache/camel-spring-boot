@@ -1,0 +1,70 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.ai-tool",
+      "type": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ai-tool.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.ai-tool.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ai-tool.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ai-tool.configuration",
+      "type": "org.apache.camel.component.ai.tool.AiToolConfiguration",
+      "description": "The component configuration. The option is a org.apache.camel.component.ai.tool.AiToolConfiguration type.",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ai-tool.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.ai-tool.description",
+      "type": "java.lang.String",
+      "description": "Human-readable description of what this tool does. Passed verbatim to the LLM; be precise and action-oriented. When omitted, defaults to the tool name.",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ai-tool.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the ai-tool component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ai-tool.parameters",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "description": "Tool input parameters. Format: parameter.NAME=TYPE, parameter.NAME.description=TEXT, parameter.NAME.required=true or false, parameter.NAME.enum=val1,val2. Supported types: string, integer, number, boolean. This is a multi-value option with prefix: parameter.",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ai-tool.tags",
+      "type": "java.lang.String",
+      "description": "Comma-separated list of tags used to group tools. Producers filter the registry by these tags to select which tools to expose to the LLM. When omitted, the tool goes into a default pool available to all producers.",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
