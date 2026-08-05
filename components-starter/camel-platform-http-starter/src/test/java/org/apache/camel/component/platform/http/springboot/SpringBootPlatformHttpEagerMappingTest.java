@@ -32,12 +32,9 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * {@link CamelRequestHandlerMapping} registers itself as a platform-http listener and is only notified of endpoints
- * created after it exists. It must therefore be instantiated eagerly: creating it on first demand is unordered with
- * respect to CamelContext startup, and when Camel starts first the mapping never learns about the endpoints that
- * already exist, so every platform-http route is answered with 404 while reporting itself as started.
- * <p>
- * That the context starts at all also covers the circular dependency the ObjectProvider avoids.
+ * Regression test for <a href="https://issues.apache.org/jira/browse/CAMEL-24351">CAMEL-24351</a>: the mapping only
+ * learns about endpoints created after it exists, so a lazily created one can miss every platform-http endpoint and
+ * answer 404. Asserts the bean definition rather than behaviour, because the runtime failure depends on startup timing.
  */
 @EnableAutoConfiguration
 @CamelSpringBootTest

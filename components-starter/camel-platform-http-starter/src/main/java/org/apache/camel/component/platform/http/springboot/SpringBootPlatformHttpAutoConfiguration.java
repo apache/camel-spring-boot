@@ -90,14 +90,11 @@ public class SpringBootPlatformHttpAutoConfiguration {
         return new SpringBootPlatformHttpEngine(port, executor);
     }
 
-    /**
-     * The mapping registers itself as a {@link org.apache.camel.component.platform.http.PlatformHttpListener} and is
-     * only notified of endpoints created after it exists, so it must be eager. A lazy mapping is created on first
-     * demand, which is unordered with respect to CamelContext startup: if Camel starts first, every platform-http
-     * endpoint is already registered and the mapping never learns about any of them, leaving all of them unreachable
-     * with a 404 while the routes report themselves as started. CamelContext is taken as an ObjectProvider and
-     * resolved inside the method to avoid the circular dependency that injecting it directly would create.
-     */
+    // Must not be @Lazy: eager beans are created before Camel starts, so the mapping is listening before the first
+    // endpoint exists. Lazily it is created at DispatcherServlet init, which Boot defers to the first request, too late
+    // to hear about any endpoint. See CAMEL-24351.
+    // The ObjectProvider avoids an initialization cycle by keeping CamelContext out of this method's dependency set,
+    // not by deferring the lookup.
     @Bean
     public CamelRequestHandlerMapping platformHttpEngineRequestMapping(
             PlatformHttpEngine engine, ObjectProvider<CamelContext> camelContextProvider) {
