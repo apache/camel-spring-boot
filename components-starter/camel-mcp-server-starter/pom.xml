@@ -28,11 +28,6 @@
   <packaging>jar</packaging>
   <name>Camel SB Starters :: MCP Server</name>
   <description>Spring Boot Starter to expose ai-tool routes as MCP tools through the Spring AI MCP server</description>
-  <properties>
-    <!-- the Spring AI MCP server support requires Spring AI 2.x (Spring Boot 4.1 baseline);
-             it pins the same MCP Java SDK version (2.0.0) that Apache Camel manages -->
-    <spring-ai-mcp-version>2.0.0</spring-ai-mcp-version>
-  </properties>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -46,10 +41,12 @@
       <artifactId>camel-mcp-server-api</artifactId>
       <version>${camel-version}</version>
     </dependency>
+    <!-- the MCP serving engine; spring-ai-version comes from the Camel parent and is on the 2.x line,
+             which is the one that supports the Spring Boot 4.1 baseline -->
     <dependency>
       <groupId>org.springframework.ai</groupId>
       <artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
-      <version>${spring-ai-mcp-version}</version>
+      <version>${spring-ai-version}</version>
     </dependency>
     <!-- test dependencies -->
     <dependency>
