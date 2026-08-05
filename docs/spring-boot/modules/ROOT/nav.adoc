@@ -351,7 +351,6 @@
 ** xref:starters/spring-ai-chat.adoc[Spring AI Chat]
 ** xref:starters/spring-ai-embeddings.adoc[Spring AI Embeddings]
 ** xref:starters/spring-ai-image.adoc[Spring AI Image]
-** xref:starters/spring-ai-tools.adoc[Spring AI Tools]
 ** xref:starters/spring-ai-vector-store.adoc[Spring AI Vector Store]
 ** xref:starters/spring-batch.adoc[Spring Batch]
 ** xref:starters/spring-cloud-config.adoc[Spring Cloud Config]

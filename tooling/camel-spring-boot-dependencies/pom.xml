@@ -2074,11 +2074,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-spring-ai-tools-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-spring-ai-vector-store-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
