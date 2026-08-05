@@ -6,6 +6,7 @@
 // starters: START
 ** xref:starters/activemq.adoc[ActiveMQ 5.x]
 ** xref:starters/activemq6.adoc[ActiveMQ 6.x]
+** xref:starters/ai-tool.adoc[AI Tool]
 ** xref:starters/amqp.adoc[AMQP]
 ** xref:starters/arangodb.adoc[ArangoDb]
 ** xref:starters/as2.adoc[AS2]
