@@ -261,6 +261,7 @@
 ** xref:starters/management.adoc[Management]
 ** xref:starters/mapstruct.adoc[MapStruct]
 ** xref:starters/master.adoc[Master]
+** xref:starters/mcp-server.adoc[Mcp Server]
 ** xref:starters/mdc.adoc[Mdc]
 ** xref:starters/metrics.adoc[Metrics]
 ** xref:starters/micrometer-observability.adoc[Micrometer Observability]
