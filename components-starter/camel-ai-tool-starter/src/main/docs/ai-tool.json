@@ -14,6 +14,12 @@
   ],
   "properties": [
     {
+      "name": "camel.component.ai-tool.arg-schema",
+      "type": "java.lang.String",
+      "description": "Raw JSON Schema for tool input parameters. Supports inline JSON and resource references (classpath:, file:, resource:). Mutually exclusive with the parameter multi-value options. Use for nested objects, arrays, oneOf, and other complex schemas.",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration"
+    },
+    {
       "name": "camel.component.ai-tool.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
@@ -53,7 +59,7 @@
     {
       "name": "camel.component.ai-tool.parameters",
       "type": "java.util.Map<java.lang.String,java.lang.String>",
-      "description": "Tool input parameters. Format: parameter.NAME=TYPE, parameter.NAME.description=TEXT, parameter.NAME.required=true or false, parameter.NAME.enum=val1,val2. Supported types: string, integer, number, boolean. This is a multi-value option with prefix: parameter.",
+      "description": "Tool input parameters. Format: parameter.NAME=TYPE, parameter.NAME.description=TEXT, parameter.NAME.required=true or false, parameter.NAME.enum=val1,val2. Supported types: string, integer, number, boolean. Mutually exclusive with argSchema. This is a multi-value option with prefix: parameter.",
       "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration"
     },
     {

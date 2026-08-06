@@ -38,6 +38,13 @@ public class AiToolComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * Raw JSON Schema for tool input parameters. Supports inline JSON and
+     * resource references (classpath:, file:, resource:). Mutually exclusive
+     * with the parameter multi-value options. Use for nested objects, arrays,
+     * oneOf, and other complex schemas.
+     */
+    private String argSchema;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions (if possible) occurred while the Camel consumer
      * is trying to pickup incoming messages, or the likes, will now be
@@ -66,7 +73,8 @@ public class AiToolComponentConfiguration
      * Tool input parameters. Format: parameter.NAME=TYPE,
      * parameter.NAME.description=TEXT, parameter.NAME.required=true or false,
      * parameter.NAME.enum=val1,val2. Supported types: string, integer, number,
-     * boolean. This is a multi-value option with prefix: parameter.
+     * boolean. Mutually exclusive with argSchema. This is a multi-value option
+     * with prefix: parameter.
      */
     private Map<String, String> parameters;
     /**
@@ -84,6 +92,14 @@ public class AiToolComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+
+    public String getArgSchema() {
+        return argSchema;
+    }
+
+    public void setArgSchema(String argSchema) {
+        this.argSchema = argSchema;
+    }
 
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;

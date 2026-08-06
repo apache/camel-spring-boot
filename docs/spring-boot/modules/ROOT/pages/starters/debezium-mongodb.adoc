@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 90 options, which are listed below.
+The starter supports 91 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -39,7 +39,7 @@ The starter supports 90 options, which are listed below.
 | camel.component.debezium-mongodb.converters | Optional list of custom converters that would be used instead of default ones. The converters are defined using '.type' config option and configured using options '.' |  | String
 | camel.component.debezium-mongodb.cursor-max-await-time-ms | The maximum processing time in milliseconds to wait for the oplog cursor to process a single poll request. The option is a int type. |  | Integer
 | camel.component.debezium-mongodb.custom-metric-tags | The custom metric tags will accept key-value pairs to customize the MBean object name which should be appended the end of regular name, each key would represent a tag for the MBean object name, and the corresponding value would be the value of that tag the key is. For example: k1=v1,k2=v2 |  | String
-| camel.component.debezium-mongodb.custom-sanitize-pattern | Regular expression identifying configuration keys whose values should be masked. When set, this custom pattern replaces Debeziums default password masking pattern. | \.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$ | String
+| camel.component.debezium-mongodb.custom-sanitize-pattern | Regular expression identifying configuration keys whose values should be masked. When set, this custom pattern replaces Debeziums default password masking pattern. | \.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$|.*connectionstring$|.*connection.string$ | String
 | camel.component.debezium-mongodb.database-exclude-list | A comma-separated list of regular expressions or literals that match the database names for which changes are to be excluded |  | String
 | camel.component.debezium-mongodb.database-include-list | A comma-separated list of regular expressions or literals that match the database names for which changes are to be captured |  | String
 | camel.component.debezium-mongodb.enabled | Whether to enable auto configuration of the debezium-mongodb component. This is enabled by default. |  | Boolean
@@ -56,6 +56,7 @@ The starter supports 90 options, which are listed below.
 | camel.component.debezium-mongodb.incremental-snapshot-watermarking-strategy | Specify the strategy used for watermarking during an incremental snapshot: 'insert_insert' both open and close signal is written into signal data collection (default); 'insert_delete' only open signal is written on signal data collection, the close will delete the relative open signal; | INSERT_INSERT | String
 | camel.component.debezium-mongodb.internal-key-converter | The Converter class that should be used to serialize and deserialize key data for offsets. The default is JSON converter. | org.apache.kafka.connect.json.JsonConverter | String
 | camel.component.debezium-mongodb.internal-value-converter | The Converter class that should be used to serialize and deserialize value data for offsets. The default is JSON converter. | org.apache.kafka.connect.json.JsonConverter | String
+| camel.component.debezium-mongodb.legacy-snapshot-max-threads | When enabled, uses the legacy table-per-thread parallel snapshot algorithm. When set to false (the default), tables are split into chunks and processed across all snapshot threads, allowing for higher concurrency for snapshots. | false | Boolean
 | camel.component.debezium-mongodb.max-batch-size | Maximum size of each batch of source records. Defaults to 2048. | 2048 | Integer
 | camel.component.debezium-mongodb.max-queue-size | Maximum size of the queue for change events read from the database log but not yet recorded or forwarded. Defaults to 8192, and should always be larger than the maximum batch size. | 8192 | Integer
 | camel.component.debezium-mongodb.max-queue-size-in-bytes | Maximum size of the queue in bytes for change events read from the database log but not yet recorded or forwarded. Defaults to 0. Mean the feature is not enabled | 0 | Long

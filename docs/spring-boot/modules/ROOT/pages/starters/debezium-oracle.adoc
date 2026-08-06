@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 161 options, which are listed below.
+The starter supports 162 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -42,7 +42,7 @@ The starter supports 161 options, which are listed below.
 | camel.component.debezium-oracle.connection-validation-timeout-ms | The maximum time in milliseconds to wait for connection validation to complete. Defaults to 60 seconds. The option is a long type. | 60000 | Long
 | camel.component.debezium-oracle.converters | Optional list of custom converters that would be used instead of default ones. The converters are defined using '.type' config option and configured using options '.' |  | String
 | camel.component.debezium-oracle.custom-metric-tags | The custom metric tags will accept key-value pairs to customize the MBean object name which should be appended the end of regular name, each key would represent a tag for the MBean object name, and the corresponding value would be the value of that tag the key is. For example: k1=v1,k2=v2 |  | String
-| camel.component.debezium-oracle.custom-sanitize-pattern | Regular expression identifying configuration keys whose values should be masked. When set, this custom pattern replaces Debeziums default password masking pattern. | \.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$ | String
+| camel.component.debezium-oracle.custom-sanitize-pattern | Regular expression identifying configuration keys whose values should be masked. When set, this custom pattern replaces Debeziums default password masking pattern. | \.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$|.*connectionstring$|.*connection.string$ | String
 | camel.component.debezium-oracle.database-connection-adapter | The adapter to use when capturing changes from the database. Options include: 'LogMiner': (the default) to capture changes using native Oracle LogMiner with buffered transactions; 'LogMiner_Unbuffered': to capture changes using native Oracle LogMiner without buffering; 'XStream': to capture changes using Oracle XStreams; 'OLR': to capture changes using OpenLogReplicator | LogMiner | String
 | camel.component.debezium-oracle.database-dbname | The name of the database from which the connector should capture changes |  | String
 | camel.component.debezium-oracle.database-hostname | Resolvable hostname or IP address of the database server. |  | String
@@ -72,6 +72,7 @@ The starter supports 161 options, which are listed below.
 | camel.component.debezium-oracle.internal-value-converter | The Converter class that should be used to serialize and deserialize value data for offsets. The default is JSON converter. | org.apache.kafka.connect.json.JsonConverter | String
 | camel.component.debezium-oracle.interval-handling-mode | Specify how INTERVAL columns should be represented in change events, including: 'string' represents values as an exact ISO formatted string; 'numeric' (default) represents values using the inexact conversion into microseconds | numeric | String
 | camel.component.debezium-oracle.legacy-decimal-handling-strategy | Uses the legacy decimal handling behavior before DBZ-7882 | false | Boolean
+| camel.component.debezium-oracle.legacy-snapshot-max-threads | When enabled, uses the legacy table-per-thread parallel snapshot algorithm. When set to false (the default), tables are split into chunks and processed across all snapshot threads, allowing for higher concurrency for snapshots. | false | Boolean
 | camel.component.debezium-oracle.lob-enabled | When set to 'false', the default, LOB fields will not be captured nor emitted. When set to 'true', the connector will capture LOB fields and emit changes for those fields like any other column type. | false | Boolean
 | camel.component.debezium-oracle.log-mining-archive-log-only-mode | When set to 'false', the default, the connector will mine both archive log and redo logs to emit change events. When set to 'true', the connector will only mine archive logs. There are circumstances where its advantageous to only mine archive logs and accept latency in event emission due to frequent revolving redo logs. | false | Boolean
 | camel.component.debezium-oracle.log-mining-archive-log-only-scn-poll-interval-ms | The interval in milliseconds to wait between polls checking to see if the SCN is in the archive logs. The option is a long type. | 10000 | Long

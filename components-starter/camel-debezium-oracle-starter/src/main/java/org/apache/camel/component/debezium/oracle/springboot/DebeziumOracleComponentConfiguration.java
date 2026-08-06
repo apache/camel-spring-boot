@@ -193,7 +193,7 @@ public class DebeziumOracleComponentConfiguration
      * masked. When set, this custom pattern replaces Debeziums default password
      * masking pattern.
      */
-    private String customSanitizePattern = "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$";
+    private String customSanitizePattern = "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$|.*connectionstring$|.*connection.string$";
     /**
      * The adapter to use when capturing changes from the database. Options
      * include: 'LogMiner': (the default) to capture changes using native Oracle
@@ -351,6 +351,13 @@ public class DebeziumOracleComponentConfiguration
      * Uses the legacy decimal handling behavior before DBZ-7882
      */
     private Boolean legacyDecimalHandlingStrategy = false;
+    /**
+     * When enabled, uses the legacy table-per-thread parallel snapshot
+     * algorithm. When set to false (the default), tables are split into chunks
+     * and processed across all snapshot threads, allowing for higher
+     * concurrency for snapshots.
+     */
+    private Boolean legacySnapshotMaxThreads = false;
     /**
      * When set to 'false', the default, LOB fields will not be captured nor
      * emitted. When set to 'true', the connector will capture LOB fields and
@@ -1442,6 +1449,14 @@ public class DebeziumOracleComponentConfiguration
     public void setLegacyDecimalHandlingStrategy(
             Boolean legacyDecimalHandlingStrategy) {
         this.legacyDecimalHandlingStrategy = legacyDecimalHandlingStrategy;
+    }
+
+    public Boolean getLegacySnapshotMaxThreads() {
+        return legacySnapshotMaxThreads;
+    }
+
+    public void setLegacySnapshotMaxThreads(Boolean legacySnapshotMaxThreads) {
+        this.legacySnapshotMaxThreads = legacySnapshotMaxThreads;
     }
 
     public Boolean getLobEnabled() {

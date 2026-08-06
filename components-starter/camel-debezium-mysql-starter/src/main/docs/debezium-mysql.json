@@ -130,7 +130,7 @@
       "type": "java.lang.String",
       "description": "Regular expression identifying configuration keys whose values should be masked. When set, this custom pattern replaces Debeziums default password masking pattern.",
       "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
-      "defaultValue": "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$"
+      "defaultValue": "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$|.*connectionstring$|.*connection.string$"
     },
     {
       "name": "camel.component.debezium-mysql.customizer.enabled",
@@ -435,6 +435,13 @@
       "description": "The Converter class that should be used to serialize and deserialize value data for offsets. The default is JSON converter.",
       "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": "org.apache.kafka.connect.json.JsonConverter"
+    },
+    {
+      "name": "camel.component.debezium-mysql.legacy-snapshot-max-threads",
+      "type": "java.lang.Boolean",
+      "description": "When enabled, uses the legacy table-per-thread parallel snapshot algorithm. When set to false (the default), tables are split into chunks and processed across all snapshot threads, allowing for higher concurrency for snapshots.",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.debezium-mysql.max-batch-size",

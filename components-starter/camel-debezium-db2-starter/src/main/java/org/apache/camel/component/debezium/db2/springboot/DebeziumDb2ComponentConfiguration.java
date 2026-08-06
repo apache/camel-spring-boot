@@ -176,7 +176,7 @@ public class DebeziumDb2ComponentConfiguration
      * masked. When set, this custom pattern replaces Debeziums default password
      * masking pattern.
      */
-    private String customSanitizePattern = "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$";
+    private String customSanitizePattern = "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$|.*connectionstring$|.*connection.string$";
     /**
      * The name of the database from which the connector should capture changes
      */
@@ -292,6 +292,13 @@ public class DebeziumDb2ComponentConfiguration
      * open signal;
      */
     private String incrementalSnapshotWatermarkingStrategy = "INSERT_INSERT";
+    /**
+     * When enabled, uses the legacy table-per-thread parallel snapshot
+     * algorithm. When set to false (the default), tables are split into chunks
+     * and processed across all snapshot threads, allowing for higher
+     * concurrency for snapshots.
+     */
+    private Boolean legacySnapshotMaxThreads = false;
     /**
      * Maximum size of each batch of source records. Defaults to 2048.
      */
@@ -973,6 +980,14 @@ public class DebeziumDb2ComponentConfiguration
     public void setIncrementalSnapshotWatermarkingStrategy(
             String incrementalSnapshotWatermarkingStrategy) {
         this.incrementalSnapshotWatermarkingStrategy = incrementalSnapshotWatermarkingStrategy;
+    }
+
+    public Boolean getLegacySnapshotMaxThreads() {
+        return legacySnapshotMaxThreads;
+    }
+
+    public void setLegacySnapshotMaxThreads(Boolean legacySnapshotMaxThreads) {
+        this.legacySnapshotMaxThreads = legacySnapshotMaxThreads;
     }
 
     public Integer getMaxBatchSize() {

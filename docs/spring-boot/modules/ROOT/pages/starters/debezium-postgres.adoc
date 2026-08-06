@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 133 options, which are listed below.
+The starter supports 134 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -39,7 +39,7 @@ The starter supports 133 options, which are listed below.
 | camel.component.debezium-postgres.connection-validation-timeout-ms | The maximum time in milliseconds to wait for connection validation to complete. Defaults to 60 seconds. The option is a long type. | 60000 | Long
 | camel.component.debezium-postgres.converters | Optional list of custom converters that would be used instead of default ones. The converters are defined using '.type' config option and configured using options '.' |  | String
 | camel.component.debezium-postgres.custom-metric-tags | The custom metric tags will accept key-value pairs to customize the MBean object name which should be appended the end of regular name, each key would represent a tag for the MBean object name, and the corresponding value would be the value of that tag the key is. For example: k1=v1,k2=v2 |  | String
-| camel.component.debezium-postgres.custom-sanitize-pattern | Regular expression identifying configuration keys whose values should be masked. When set, this custom pattern replaces Debeziums default password masking pattern. | \.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$ | String
+| camel.component.debezium-postgres.custom-sanitize-pattern | Regular expression identifying configuration keys whose values should be masked. When set, this custom pattern replaces Debeziums default password masking pattern. | \.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$|.*connectionstring$|.*connection.string$ | String
 | camel.component.debezium-postgres.database-dbname | The name of the database from which the connector should capture changes |  | String
 | camel.component.debezium-postgres.database-hostname | Resolvable hostname or IP address of the database server. |  | String
 | camel.component.debezium-postgres.database-initial-statements | A semicolon separated list of SQL statements to be executed when a JDBC connection to the database is established. Note that the connector may establish JDBC connections at its own discretion, so this should typically be used for configuration of session parameters only, but not for executing DML statements. Use doubled semicolon (';;') to use a semicolon as a character and not as a delimiter. |  | String
@@ -74,6 +74,7 @@ The starter supports 133 options, which are listed below.
 | camel.component.debezium-postgres.internal-key-converter | The Converter class that should be used to serialize and deserialize key data for offsets. The default is JSON converter. | org.apache.kafka.connect.json.JsonConverter | String
 | camel.component.debezium-postgres.internal-value-converter | The Converter class that should be used to serialize and deserialize value data for offsets. The default is JSON converter. | org.apache.kafka.connect.json.JsonConverter | String
 | camel.component.debezium-postgres.interval-handling-mode | Specify how INTERVAL columns should be represented in change events, including: 'string' represents values as an exact ISO formatted string; 'numeric' (default) represents values using the inexact conversion into microseconds | numeric | String
+| camel.component.debezium-postgres.legacy-snapshot-max-threads | When enabled, uses the legacy table-per-thread parallel snapshot algorithm. When set to false (the default), tables are split into chunks and processed across all snapshot threads, allowing for higher concurrency for snapshots. | false | Boolean
 | camel.component.debezium-postgres.lsn-flush-mode | Determines the LSN flushing strategy. Options include: 'connector' (default) for Debezium managed LSN flushing (replaces deprecated flush.lsn.source=true); 'manual' for externally managed LSN flushing (replaces deprecated flush.lsn.source=false); 'connector_and_driver' for Debezium managed LSN flushing with the pgjdbc driver flushing unmonitored LSNsusing server keepalive LSN, which prevents WAL growth on low-activity databases. |  | String
 | camel.component.debezium-postgres.lsn-flush-timeout-action | Action to take when an LSN flush timeout occurs. Options include: 'fail' (default) to fail the connector; 'warn' to log a warning and continue processing; 'ignore' to continue processing and ignore the timeout. | fail | String
 | camel.component.debezium-postgres.lsn-flush-timeout-ms | Maximum time in milliseconds to wait for LSN flush operation to complete. If the flush operation does not complete within this timeout, the action specified by lsn.flush.timeout.action will be taken. Defaults to 30 seconds. The option is a long type. | 30000 | Long

@@ -108,7 +108,7 @@
       "type": "java.lang.String",
       "description": "Regular expression identifying configuration keys whose values should be masked. When set, this custom pattern replaces Debeziums default password masking pattern.",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
-      "defaultValue": "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$"
+      "defaultValue": "\\.jaas.config$|.*basic.auth.user.info|.*registry.auth.client-secret|.*credentials.json$|.*connectionstring$|.*connection.string$"
     },
     {
       "name": "camel.component.debezium-oracle.customizer.enabled",
@@ -305,6 +305,13 @@
       "name": "camel.component.debezium-oracle.legacy-decimal-handling-strategy",
       "type": "java.lang.Boolean",
       "description": "Uses the legacy decimal handling behavior before DBZ-7882",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-oracle.legacy-snapshot-max-threads",
+      "type": "java.lang.Boolean",
+      "description": "When enabled, uses the legacy table-per-thread parallel snapshot algorithm. When set to false (the default), tables are split into chunks and processed across all snapshot threads, allowing for higher concurrency for snapshots.",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": false
     },
