@@ -17,6 +17,7 @@
 package org.apache.camel.component.langchain4j.embeddingstore.springboot;
 
 import dev.langchain4j.data.segment.TextSegment;
+import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.store.embedding.EmbeddingStore;
 import org.apache.camel.component.langchain4j.embeddingstore.EmbeddingStoreFactory;
 import org.apache.camel.component.langchain4j.embeddingstore.LangChain4jEmbeddingStoreAction;
@@ -48,6 +49,15 @@ public class LangChain4jEmbeddingStoreComponentConfiguration
      * org.apache.camel.component.langchain4j.embeddingstore.LangChain4jEmbeddingStoreConfiguration type.
      */
     private LangChain4jEmbeddingStoreConfiguration configuration;
+    /**
+     * Embedding model for auto-computing embeddings from message body text.
+     * When set, ADD and SEARCH operations can accept plain text body instead of
+     * requiring a pre-computed embedding in the
+     * CamelLangChain4jEmbeddingsEmbedding header. The header always takes
+     * precedence when present. The option is a
+     * dev.langchain4j.model.embedding.EmbeddingModel type.
+     */
+    private EmbeddingModel embeddingModel;
     /**
      * Direct embedding store instance for vector operations. The option is a
      * dev.langchain4j.store.embedding.EmbeddingStore<dev.langchain4j.data.segment.TextSegment> type.
@@ -107,6 +117,14 @@ public class LangChain4jEmbeddingStoreComponentConfiguration
     public void setConfiguration(
             LangChain4jEmbeddingStoreConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public EmbeddingModel getEmbeddingModel() {
+        return embeddingModel;
+    }
+
+    public void setEmbeddingModel(EmbeddingModel embeddingModel) {
+        this.embeddingModel = embeddingModel;
     }
 
     public EmbeddingStore<TextSegment> getEmbeddingStore() {

@@ -69,11 +69,6 @@ public class EKS2ComponentConfiguration
      */
     private Boolean pojoRequest = false;
     /**
-     * If using a profile credentials provider, this parameter will set the
-     * profile name
-     */
-    private String profileCredentialsName = "false";
-    /**
      * The region in which EKS client needs to work. When using this parameter,
      * the configuration will expect the lowercase name of the region (for
      * example, ap-east-1) You'll need to use the name Region.EU_WEST_1.id()
@@ -138,6 +133,11 @@ public class EKS2ComponentConfiguration
      */
     private String accessKey;
     /**
+     * If using a profile credentials provider, this parameter will set the
+     * profile name
+     */
+    private String profileCredentialsName;
+    /**
      * Amazon AWS Secret Key
      */
     private String secretKey;
@@ -194,14 +194,6 @@ public class EKS2ComponentConfiguration
 
     public void setPojoRequest(Boolean pojoRequest) {
         this.pojoRequest = pojoRequest;
-    }
-
-    public String getProfileCredentialsName() {
-        return profileCredentialsName;
-    }
-
-    public void setProfileCredentialsName(String profileCredentialsName) {
-        this.profileCredentialsName = profileCredentialsName;
     }
 
     public String getRegion() {
@@ -300,6 +292,14 @@ public class EKS2ComponentConfiguration
 
     public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
+    }
+
+    public String getProfileCredentialsName() {
+        return profileCredentialsName;
+    }
+
+    public void setProfileCredentialsName(String profileCredentialsName) {
+        this.profileCredentialsName = profileCredentialsName;
     }
 
     public String getSecretKey() {

@@ -51,10 +51,31 @@
       "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration"
     },
     {
+      "name": "camel.component.ai-tool.destructive-hint",
+      "type": "java.lang.Boolean",
+      "description": "MCP hint that the tool may perform destructive or irreversible updates. Advisory for MCP clients; not enforced by Camel.",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.ai-tool.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the ai-tool component. This is enabled by default.",
       "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ai-tool.idempotent-hint",
+      "type": "java.lang.Boolean",
+      "description": "MCP hint that repeating the tool call with the same arguments has no additional effect. Advisory for MCP clients; not enforced by Camel.",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ai-tool.open-world-hint",
+      "type": "java.lang.Boolean",
+      "description": "MCP hint that the tool interacts with external systems outside the application's control. Advisory for MCP clients; not enforced by Camel.",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.ai-tool.parameters",
@@ -63,9 +84,22 @@
       "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration"
     },
     {
+      "name": "camel.component.ai-tool.read-only-hint",
+      "type": "java.lang.Boolean",
+      "description": "MCP hint that the tool only reads data and does not modify state. Advisory for MCP clients; not enforced by Camel.",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.ai-tool.tags",
       "type": "java.lang.String",
       "description": "Comma-separated list of tags used to group tools. Producers filter the registry by these tags to select which tools to expose to the LLM. When omitted, the tool goes into a default pool available to all producers.",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ai-tool.title",
+      "type": "java.lang.String",
+      "description": "Optional display title for MCP tool listings. Advisory hint for MCP clients only.",
       "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration"
     }
   ],

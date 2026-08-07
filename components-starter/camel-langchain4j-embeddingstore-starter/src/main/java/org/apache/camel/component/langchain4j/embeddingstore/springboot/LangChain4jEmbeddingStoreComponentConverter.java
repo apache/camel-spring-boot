@@ -42,6 +42,7 @@ public class LangChain4jEmbeddingStoreComponentConverter
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.langchain4j.embeddingstore.LangChain4jEmbeddingStoreConfiguration.class));
+        answer.add(new ConvertiblePair(String.class, dev.langchain4j.model.embedding.EmbeddingModel.class));
         answer.add(new ConvertiblePair(String.class, dev.langchain4j.store.embedding.EmbeddingStore.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.langchain4j.embeddingstore.EmbeddingStoreFactory.class));
         return answer;
@@ -61,6 +62,7 @@ public class LangChain4jEmbeddingStoreComponentConverter
         ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
         switch (targetType.getName()) {
             case "org.apache.camel.component.langchain4j.embeddingstore.LangChain4jEmbeddingStoreConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.langchain4j.embeddingstore.LangChain4jEmbeddingStoreConfiguration.class);
+            case "dev.langchain4j.model.embedding.EmbeddingModel": return applicationContext.getBean(ref, dev.langchain4j.model.embedding.EmbeddingModel.class);
             case "dev.langchain4j.store.embedding.EmbeddingStore": return applicationContext.getBean(ref, dev.langchain4j.store.embedding.EmbeddingStore.class);
             case "org.apache.camel.component.langchain4j.embeddingstore.EmbeddingStoreFactory": return applicationContext.getBean(ref, org.apache.camel.component.langchain4j.embeddingstore.EmbeddingStoreFactory.class);
         }
