@@ -115,6 +115,12 @@ public class SpringBootMcpServerTest {
 
                     from("ai-tool:other_tool?tags=untrusted&description=Not a selected tag, must not be exposed")
                             .setBody(constant("other"));
+
+                    from("ai-tool:annotated_tool?tags=conformance&description=Tool with annotation hints"
+                         + "&title=Annotated tool"
+                         + "&readOnlyHint=true"
+                         + "&idempotentHint=true")
+                            .setBody(constant("annotated"));
                 }
             };
         }
@@ -147,6 +153,29 @@ public class SpringBootMcpServerTest {
         assertThat(tools).extracting(McpSchema.Tool::name)
                 .contains("say_hello", "fail_tool", "slow_tool")
                 .doesNotContain("hidden_tool", "other_tool");
+    }
+
+    @Test
+    void testToolAnnotationHintsArePublished() {
+        McpSchema.Tool tool = client().listTools().tools().stream()
+                .filter(t -> "annotated_tool".equals(t.name()))
+                .findFirst()
+                .orElseThrow();
+
+        assertThat(tool.title()).isEqualTo("Annotated tool");
+        assertThat(tool.annotations()).isNotNull();
+        assertThat(tool.annotations().readOnlyHint()).isTrue();
+        assertThat(tool.annotations().idempotentHint()).isTrue();
+    }
+
+    @Test
+    void testToolWithoutHintsHasNoAnnotations() {
+        McpSchema.Tool tool = client().listTools().tools().stream()
+                .filter(t -> "say_hello".equals(t.name()))
+                .findFirst()
+                .orElseThrow();
+
+        assertThat(tool.annotations()).isNull();
     }
 
     @Test

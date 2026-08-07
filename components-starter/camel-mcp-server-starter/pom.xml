@@ -48,6 +48,16 @@
       <artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
       <version>${spring-ai-version}</version>
     </dependency>
+    <!-- direct dependency so applications resolve the Jackson3-based json-schema-validator
+             required by the MCP SDK's mcp-json-jackson3 tool-argument validation: without it,
+             nearest-wins can pick the Jackson2-based 2.0.x line (Camel manages 2.0.1 for other
+             components) and the application fails at startup with
+             NoSuchMethodError: Schema.validate(tools.jackson.databind.JsonNode) -->
+    <dependency>
+      <groupId>com.networknt</groupId>
+      <artifactId>json-schema-validator</artifactId>
+      <version>3.0.0</version>
+    </dependency>
     <!-- test dependencies -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -59,7 +69,6 @@
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-ai-tool</artifactId>
       <version>${camel-version}</version>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.awaitility</groupId>
