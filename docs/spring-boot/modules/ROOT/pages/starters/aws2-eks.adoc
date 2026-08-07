@@ -39,7 +39,7 @@ The starter supports 23 options, which are listed below.
 | camel.component.aws2-eks.operation | The operation to perform |  | EKS2Operations
 | camel.component.aws2-eks.override-endpoint | Set the need for overriding the endpoint. This option needs to be used in combination with the uriEndpointOverride option | false | Boolean
 | camel.component.aws2-eks.pojo-request | If we want to use a POJO request as body or not | false | Boolean
-| camel.component.aws2-eks.profile-credentials-name | If using a profile credentials provider, this parameter will set the profile name | false | String
+| camel.component.aws2-eks.profile-credentials-name | If using a profile credentials provider, this parameter will set the profile name |  | String
 | camel.component.aws2-eks.proxy-host | To define a proxy host when instantiating the EKS client |  | String
 | camel.component.aws2-eks.proxy-port | To define a proxy port when instantiating the EKS client |  | Integer
 | camel.component.aws2-eks.proxy-protocol | To define a proxy protocol when instantiating the EKS client | https | Protocol

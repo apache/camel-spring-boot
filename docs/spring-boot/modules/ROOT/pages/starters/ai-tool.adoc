@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 8 options, which are listed below.
+The starter supports 13 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -33,7 +33,12 @@ The starter supports 8 options, which are listed below.
 | camel.component.ai-tool.bridge-error-handler | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | camel.component.ai-tool.configuration | The component configuration. The option is a org.apache.camel.component.ai.tool.AiToolConfiguration type. |  | AiToolConfiguration
 | camel.component.ai-tool.description | Human-readable description of what this tool does. Passed verbatim to the LLM; be precise and action-oriented. When omitted, defaults to the tool name. |  | String
+| camel.component.ai-tool.destructive-hint | MCP hint that the tool may perform destructive or irreversible updates. Advisory for MCP clients; not enforced by Camel. | false | Boolean
 | camel.component.ai-tool.enabled | Whether to enable auto configuration of the ai-tool component. This is enabled by default. |  | Boolean
+| camel.component.ai-tool.idempotent-hint | MCP hint that repeating the tool call with the same arguments has no additional effect. Advisory for MCP clients; not enforced by Camel. | false | Boolean
+| camel.component.ai-tool.open-world-hint | MCP hint that the tool interacts with external systems outside the application's control. Advisory for MCP clients; not enforced by Camel. | false | Boolean
 | camel.component.ai-tool.parameters | Tool input parameters. Format: parameter.NAME=TYPE, parameter.NAME.description=TEXT, parameter.NAME.required=true or false, parameter.NAME.enum=val1,val2. Supported types: string, integer, number, boolean. Mutually exclusive with argSchema. This is a multi-value option with prefix: parameter. |  | String>
+| camel.component.ai-tool.read-only-hint | MCP hint that the tool only reads data and does not modify state. Advisory for MCP clients; not enforced by Camel. | false | Boolean
 | camel.component.ai-tool.tags | Comma-separated list of tags used to group tools. Producers filter the registry by these tags to select which tools to expose to the LLM. When omitted, the tool goes into a default pool available to all producers. |  | String
+| camel.component.ai-tool.title | Optional display title for MCP tool listings. Advisory hint for MCP clients only. |  | String
 |===

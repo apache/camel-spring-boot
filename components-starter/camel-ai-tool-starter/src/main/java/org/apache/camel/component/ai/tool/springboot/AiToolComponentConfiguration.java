@@ -70,6 +70,21 @@ public class AiToolComponentConfiguration
      */
     private String description;
     /**
+     * MCP hint that the tool may perform destructive or irreversible updates.
+     * Advisory for MCP clients; not enforced by Camel.
+     */
+    private Boolean destructiveHint = false;
+    /**
+     * MCP hint that repeating the tool call with the same arguments has no
+     * additional effect. Advisory for MCP clients; not enforced by Camel.
+     */
+    private Boolean idempotentHint = false;
+    /**
+     * MCP hint that the tool interacts with external systems outside the
+     * application's control. Advisory for MCP clients; not enforced by Camel.
+     */
+    private Boolean openWorldHint = false;
+    /**
      * Tool input parameters. Format: parameter.NAME=TYPE,
      * parameter.NAME.description=TEXT, parameter.NAME.required=true or false,
      * parameter.NAME.enum=val1,val2. Supported types: string, integer, number,
@@ -78,11 +93,21 @@ public class AiToolComponentConfiguration
      */
     private Map<String, String> parameters;
     /**
+     * MCP hint that the tool only reads data and does not modify state.
+     * Advisory for MCP clients; not enforced by Camel.
+     */
+    private Boolean readOnlyHint = false;
+    /**
      * Comma-separated list of tags used to group tools. Producers filter the
      * registry by these tags to select which tools to expose to the LLM. When
      * omitted, the tool goes into a default pool available to all producers.
      */
     private String tags;
+    /**
+     * Optional display title for MCP tool listings. Advisory hint for MCP
+     * clients only.
+     */
+    private String title;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -125,6 +150,30 @@ public class AiToolComponentConfiguration
         this.description = description;
     }
 
+    public Boolean getDestructiveHint() {
+        return destructiveHint;
+    }
+
+    public void setDestructiveHint(Boolean destructiveHint) {
+        this.destructiveHint = destructiveHint;
+    }
+
+    public Boolean getIdempotentHint() {
+        return idempotentHint;
+    }
+
+    public void setIdempotentHint(Boolean idempotentHint) {
+        this.idempotentHint = idempotentHint;
+    }
+
+    public Boolean getOpenWorldHint() {
+        return openWorldHint;
+    }
+
+    public void setOpenWorldHint(Boolean openWorldHint) {
+        this.openWorldHint = openWorldHint;
+    }
+
     public Map<String, String> getParameters() {
         return parameters;
     }
@@ -133,12 +182,28 @@ public class AiToolComponentConfiguration
         this.parameters = parameters;
     }
 
+    public Boolean getReadOnlyHint() {
+        return readOnlyHint;
+    }
+
+    public void setReadOnlyHint(Boolean readOnlyHint) {
+        this.readOnlyHint = readOnlyHint;
+    }
+
     public String getTags() {
         return tags;
     }
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Boolean getAutowiredEnabled() {
