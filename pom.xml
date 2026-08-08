@@ -716,6 +716,10 @@
                     <name>release</name>
                 </property>
             </activation>
+            <properties>
+                <archetype.test.skip>true</archetype.test.skip>
+                <skipTests>true</skipTests>
+            </properties>
             <build>
                 <plugins>
                     <!-- We want to deploy the artifact to a staging location for perusal -->
@@ -769,6 +773,13 @@
                                 </goals>
                             </execution>
                         </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <skipITs>true</skipITs>
+                        </configuration>
                     </plugin>
                    <plugin>
                    <groupId>org.cyclonedx</groupId>
