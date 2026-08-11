@@ -110,12 +110,6 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
             }
             return null;
         });
-        task.onTimeout(() -> {
-            if (!response.isCommitted()) {
-                response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
-            }
-            return null;
-        });
         return task;
     }
 
