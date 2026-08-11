@@ -43,7 +43,8 @@ public class ObservabilityServicesEnvironmentPostProcessor implements Environmen
         defaults.put("management.endpoints.web.path-mapping.prometheus", "metrics");
         // Metrics
         defaults.put("camel.metrics.log-metrics-on-shutdown", "true");
-        defaults.put("camel.metrics.log-metrics-on-shutdown-filters", "app.info,camel.exchanges.*");
+        defaults.put("camel.metrics.log-metrics-on-shutdown-filters", "app.info,camel.exchanges.*,process.cpu.usage,jvm.memory.max,jvm.memory.used");
+        defaults.put("camel.metrics.log-metrics-on-shutdown-format", "prometheus");
         // Opentelemetry
         defaults.put("camel.opentelemetry2.enabled", "true");
         // Health

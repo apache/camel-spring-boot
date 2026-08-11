@@ -80,6 +80,9 @@ public class CamelMetricsAutoConfiguration {
                 String[] shutdownFilters = configuration.getLogMetricsOnShutdownFilters().split(",");
                 notifier.setLogMetricsOnShutdownFilters(shutdownFilters);
             }
+            if (configuration.getLogMetricsOnShutdownFormat() != null){
+                notifier.setLogMetricsOnShutdownFormat(configuration.getLogMetricsOnShutdownFormat());
+            }
             if ("legacy".equalsIgnoreCase(configuration.getNamingStrategy())) {
                 notifier.setNamingStrategy(new MicrometerExchangeEventNotifierNamingStrategyLegacy(
                     configuration.isBaseEndpointUriExchangeEventNotifier()

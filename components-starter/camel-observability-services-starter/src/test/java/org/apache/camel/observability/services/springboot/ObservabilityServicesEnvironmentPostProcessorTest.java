@@ -38,8 +38,10 @@ public class ObservabilityServicesEnvironmentPostProcessorTest {
         assertEquals("health,prometheus", environment.getProperty("management.endpoints.web.exposure.include"));
         assertEquals("metrics", environment.getProperty("management.endpoints.web.path-mapping.prometheus"));
         assertEquals("true", environment.getProperty("camel.metrics.log-metrics-on-shutdown"));
-        assertEquals("app.info,camel.exchanges.*",
+        assertEquals("app.info,camel.exchanges.*,process.cpu.usage,jvm.memory.max,jvm.memory.used",
                 environment.getProperty("camel.metrics.log-metrics-on-shutdown-filters"));
+        assertEquals("prometheus",
+                environment.getProperty("camel.metrics.log-metrics-on-shutdown-format"));
         assertEquals("full", environment.getProperty("camel.health.exposure-level"));
         assertEquals("true", environment.getProperty("management.endpoint.health.probes.enabled"));
         assertEquals("true", environment.getProperty("management.health.readinessState.enabled"));
