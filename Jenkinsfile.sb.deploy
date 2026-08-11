@@ -55,7 +55,7 @@ pipeline {
         stage('Build & Deploy') {
             when {
                 anyOf {
-                    branch 'main'
+                    branch 'camel-spring-boot-4.22.x'
                 }
             }
             steps {
