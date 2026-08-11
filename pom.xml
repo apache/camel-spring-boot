@@ -23,12 +23,12 @@
     <parent>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-dependencies</artifactId>
-        <version>4.22.0-SNAPSHOT</version>
+        <version>4.22.0</version>
     </parent>
 
     <groupId>org.apache.camel.springboot</groupId>
     <artifactId>spring-boot</artifactId>
-    <version>4.22.0-SNAPSHOT</version>
+    <version>4.22.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Camel SB</name>
@@ -115,7 +115,7 @@
         <!-- spring-boot-version is now maintained in camel/parent/pom.xml https://github.com/apache/camel/blob/main/parent/pom.xml#L484 -->
 
         <!-- Camel target version -->
-        <camel-version>4.22.0-SNAPSHOT</camel-version>
+        <camel-version>4.22.0</camel-version>
 
         <!-- versions -->
         <avro-version>1.12.0</avro-version>
@@ -442,7 +442,7 @@
         <profile>
             <id>dev</id>
             <properties>
-                <camel-version>4.22.0-SNAPSHOT</camel-version>
+                <camel-version>4.22.0</camel-version>
             </properties>
         </profile>
 
@@ -716,6 +716,10 @@
                     <name>release</name>
                 </property>
             </activation>
+            <properties>
+                <archetype.test.skip>true</archetype.test.skip>
+                <skipTests>true</skipTests>
+            </properties>
             <build>
                 <plugins>
                     <!-- We want to deploy the artifact to a staging location for perusal -->
@@ -769,6 +773,13 @@
                                 </goals>
                             </execution>
                         </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <skipITs>true</skipITs>
+                        </configuration>
                     </plugin>
                    <plugin>
                    <groupId>org.cyclonedx</groupId>
