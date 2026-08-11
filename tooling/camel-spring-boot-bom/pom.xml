@@ -2181,7 +2181,7 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-test-spring-junit6</artifactId>
-        <version>4.22.0</version>
+        <version>4.22.1-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
