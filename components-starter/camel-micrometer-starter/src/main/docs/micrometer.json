@@ -105,6 +105,12 @@
       "sourceType": "org.apache.camel.component.micrometer.springboot.metrics.CamelMetricsConfiguration"
     },
     {
+      "name": "camel.metrics.log-metrics-on-shutdown-format",
+      "type": "java.lang.String",
+      "description": "Format used to log metrics when application is shutting down. Either json (default) or prometheus format.",
+      "sourceType": "org.apache.camel.component.micrometer.springboot.metrics.CamelMetricsConfiguration"
+    },
+    {
       "name": "camel.metrics.naming-strategy",
       "type": "java.lang.String",
       "description": "Controls the name style to use for metrics. Default = uses micrometer naming convention. Legacy = uses the classic naming style (camelCase)",

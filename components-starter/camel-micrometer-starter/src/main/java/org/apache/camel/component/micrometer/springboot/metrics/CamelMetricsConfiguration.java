@@ -106,6 +106,11 @@ public class CamelMetricsConfiguration {
     */
     private String logMetricsOnShutdownFilters;
 
+    /**
+     * Format used to log metrics when application is shutting down. Either json (default) or prometheus format.
+    */
+    private String logMetricsOnShutdownFormat;
+
     public boolean isUriTagEnabled() {
         return uriTagEnabled;
     }
@@ -208,5 +213,13 @@ public class CamelMetricsConfiguration {
 
     public void setLogMetricsOnShutdownFilters(String logMetricsOnShutdownFilters) {
         this.logMetricsOnShutdownFilters = logMetricsOnShutdownFilters;
+    }
+
+    public String getLogMetricsOnShutdownFormat() {
+        return logMetricsOnShutdownFormat;
+    }
+
+    public void setLogMetricsOnShutdownFormat(String logMetricsOnShutdownFormat) {
+        this.logMetricsOnShutdownFormat = logMetricsOnShutdownFormat;
     }
 }
