@@ -17,9 +17,8 @@
 
 name: camel-spring-boot
 title: Camel Spring Boot
-version: next
-prerelease: true
-display-version: Next (Pre-release)
+version: 4.22.x
+display-version: 4.22.x (LTS)
 nav:
 - modules/ROOT/nav.adoc
 
@@ -27,4 +26,4 @@ asciidoc:
   attributes:
     index-table-format: width="100%",cols="4,3,3,3,6",options="header"
     # Attributes used in xrefs to other Antora components
-    csb-camel-components: next@components
+    csb-camel-components: 4.22.x@components
