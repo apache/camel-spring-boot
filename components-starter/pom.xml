@@ -424,6 +424,7 @@
     <module>camel-resilience4j-micrometer-starter</module>
     <module>camel-resilience4j-starter</module>
     <module>camel-rest-openapi-starter</module>
+    <module>camel-rest-postman-starter</module>
     <module>camel-rest-starter</module>
     <module>camel-robotframework-starter</module>
     <module>camel-rocketmq-starter</module>

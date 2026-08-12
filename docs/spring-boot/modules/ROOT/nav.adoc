@@ -323,6 +323,7 @@
 ** xref:starters/resilience4j-micrometer.adoc[Resilience4j Micrometer]
 ** xref:starters/resilience4j.adoc[Resilience4j]
 ** xref:starters/rest-openapi.adoc[REST OpenApi]
+** xref:starters/rest-postman.adoc[REST Postman]
 ** xref:starters/rest.adoc[REST]
 ** xref:starters/robotframework.adoc[Robot Framework]
 ** xref:starters/rocketmq.adoc[RocketMQ]
