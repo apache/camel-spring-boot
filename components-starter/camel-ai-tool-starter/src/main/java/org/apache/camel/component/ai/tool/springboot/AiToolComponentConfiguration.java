@@ -85,6 +85,21 @@ public class AiToolComponentConfiguration
      */
     private Boolean openWorldHint = false;
     /**
+     * Tool output schema fields. Format: outputParameter.NAME=TYPE,
+     * outputParameter.NAME.description=TEXT. Supported types: string, integer,
+     * number, boolean. Mutually exclusive with outputSchema. This is a
+     * multi-value option with prefix: outputParameter.
+     */
+    private Map<String, String> outputParameters;
+    /**
+     * Raw JSON Schema describing the tool's structured output. Supports inline
+     * JSON and resource references (classpath:, file:, resource:). Mutually
+     * exclusive with the outputParameter multi-value options. When declared,
+     * the route body is parsed as JSON and exposed as structured content to MCP
+     * clients.
+     */
+    private String outputSchema;
+    /**
      * Tool input parameters. Format: parameter.NAME=TYPE,
      * parameter.NAME.description=TEXT, parameter.NAME.required=true or false,
      * parameter.NAME.enum=val1,val2. Supported types: string, integer, number,
@@ -172,6 +187,22 @@ public class AiToolComponentConfiguration
 
     public void setOpenWorldHint(Boolean openWorldHint) {
         this.openWorldHint = openWorldHint;
+    }
+
+    public Map<String, String> getOutputParameters() {
+        return outputParameters;
+    }
+
+    public void setOutputParameters(Map<String, String> outputParameters) {
+        this.outputParameters = outputParameters;
+    }
+
+    public String getOutputSchema() {
+        return outputSchema;
+    }
+
+    public void setOutputSchema(String outputSchema) {
+        this.outputSchema = outputSchema;
     }
 
     public Map<String, String> getParameters() {
