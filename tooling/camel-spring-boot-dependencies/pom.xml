@@ -53,7 +53,7 @@
       <dependency>
         <groupId>com.aliyun</groupId>
         <artifactId>kms20160120</artifactId>
-        <version>1.2.3</version>
+        <version>2.2.0</version>
       </dependency>
       <dependency>
         <groupId>com.aliyun</groupId>
