@@ -589,6 +589,11 @@
                     <artifactId>build-helper-maven-plugin</artifactId>
                     <version>${build-helper-maven-plugin-version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.eclipse.jkube</groupId>
+                    <artifactId>openshift-maven-plugin</artifactId>
+                    <version>${openshift-maven-plugin-version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>

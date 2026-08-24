@@ -43,13 +43,13 @@
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-test-infra-mongodb</artifactId>
-      <version>${camel-version}</version>
+      <version>${camel-community-version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-test-infra-common</artifactId>
-      <version>${camel-version}</version>
+      <version>${camel-community-version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
