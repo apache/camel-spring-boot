@@ -413,7 +413,6 @@
 ** xref:starters/xpath.adoc[XPath]
 ** xref:starters/xslt-saxon.adoc[XSLT Saxon]
 ** xref:starters/xslt.adoc[XSLT]
-** xref:starters/zeebe.adoc[Zeebe]
 ** xref:starters/zendesk.adoc[Zendesk]
 ** xref:starters/zip-deflater.adoc[GZip Deflater]
 ** xref:starters/zipfile.adoc[Zip File]
