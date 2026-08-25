@@ -23,12 +23,14 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 54 options, which are listed below.
+The starter supports 57 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
 | camel.component.docling.abort-on-error | Abort processing on error | false | Boolean
+| camel.component.docling.allow-file-path-source | Whether a String message body that starts with / or contains \ is interpreted as a local filesystem path to read. When disabled, such a body is rejected instead of being read. This does not affect the CamelDoclingInputFilePath header, nor File, byte or explicit path collection bodies used by the batch operations. | false | Boolean
+| camel.component.docling.allow-url-source | Whether a String message body that starts with http:// or https:// is interpreted as a remote URL for Docling to fetch. When disabled, such a body is rejected instead of being fetched. This does not affect the CamelDoclingInputFilePath header, nor bodies of any other type. | false | Boolean
 | camel.component.docling.api-key-header | Header name for API key authentication | X-API-Key | String
 | camel.component.docling.async-poll-interval | Polling interval for async conversion status in milliseconds | 2000 | Long
 | camel.component.docling.async-task-ttl | Time-to-live for pending async conversion tasks in milliseconds. Tasks older than this will be evicted from memory to prevent leaks. | 86400000 | Long
@@ -65,6 +67,7 @@ The starter supports 54 options, which are listed below.
 | camel.component.docling.include-layout-info | Show layout information with bounding boxes | false | Boolean
 | camel.component.docling.include-metadata-in-headers | Include metadata in message headers when extracting metadata | true | Boolean
 | camel.component.docling.include-raw-metadata | Include raw metadata as returned by the parser | false | Boolean
+| camel.component.docling.input-base-directory | When set, every local input file path must resolve inside this directory once normalized. Applies to the CamelDoclingInputFilePath header, to file path message bodies, and to the paths used by the batch operations. When empty, no directory restriction is applied. |  | String
 | camel.component.docling.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.docling.max-file-size | Maximum file size in bytes for processing | 52428800 | Long
 | camel.component.docling.md-page-break-placeholder | Placeholder string for page breaks in markdown output |  | String
