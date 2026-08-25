@@ -112,6 +112,7 @@
     <kryo-version>2.24.0</kryo-version>
     <narayana-spring-boot.version>4.1.1-SNAPSHOT</narayana-spring-boot.version>
     <openshift-maven-plugin-version>1.19.1.redhat-00001</openshift-maven-plugin-version>
+    <spring-boot-undertow-version>1.0.0.Alpha1-SNAPSHOT</spring-boot-undertow-version>
     <org-json-json-version>20250517</org-json-json-version>
     <parsson-version>1.1.7</parsson-version>
     <perfmark-version>0.27.0</perfmark-version>
@@ -168,6 +169,11 @@
         <groupId>com.google.j2objc</groupId>
         <artifactId>j2objc-annotations</artifactId>
         <version>${jobjc-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.undertow</groupId>
+        <artifactId>undertow-spring-boot-starter</artifactId>
+        <version>${spring-boot-undertow-version}</version>
       </dependency>
       <dependency>
         <groupId>dev.snowdrop</groupId>
