@@ -314,6 +314,7 @@
 ** xref:starters/pubnub.adoc[PubNub]
 ** xref:starters/pulsar.adoc[Pulsar]
 ** xref:starters/python.adoc[Python]
+** xref:starters/python3.adoc[Python 3]
 ** xref:starters/qdrant.adoc[Qdrant]
 ** xref:starters/quartz.adoc[Quartz]
 ** xref:starters/quickfix.adoc[QuickFix]

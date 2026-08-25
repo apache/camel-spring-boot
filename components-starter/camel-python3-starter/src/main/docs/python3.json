@@ -1,0 +1,39 @@
+{
+  "groups": [
+    {
+      "name": "camel.language.python3",
+      "type": "org.apache.camel.language.python3.springboot.Python3LanguageConfiguration",
+      "sourceType": "org.apache.camel.language.python3.springboot.Python3LanguageConfiguration"
+    },
+    {
+      "name": "camel.language.python3.customizer",
+      "type": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.language.python3.springboot.Python3LanguageConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.language.python3.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.language.python3.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the python3 language. This is enabled by default.",
+      "sourceType": "org.apache.camel.language.python3.springboot.Python3LanguageConfiguration"
+    },
+    {
+      "name": "camel.language.python3.trim",
+      "type": "java.lang.Boolean",
+      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks.",
+      "sourceType": "org.apache.camel.language.python3.springboot.Python3LanguageConfiguration",
+      "defaultValue": true
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
