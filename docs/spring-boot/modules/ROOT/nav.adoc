@@ -180,7 +180,6 @@
 ** xref:starters/ibm-watson-text-to-speech.adoc[IBM Watson Text to Speech]
 ** xref:starters/ibm-watsonx-ai.adoc[IBM watsonx.ai]
 ** xref:starters/ical.adoc[iCal]
-** xref:starters/iec60870.adoc[IEC 60870 Client]
 ** xref:starters/iggy.adoc[Iggy]
 ** xref:starters/ignite.adoc[Ignite Cache]
 ** xref:starters/infinispan-cluster-service.adoc[Infinispan Cluster Service]
