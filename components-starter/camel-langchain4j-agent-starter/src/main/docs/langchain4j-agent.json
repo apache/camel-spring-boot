@@ -39,6 +39,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.langchain4j-agent.compensate-on-tool-errors",
+      "type": "java.lang.Boolean",
+      "description": "Whether LangChain4j should compensate when a tool execution fails. Only supported in inline agent creation mode (agentConfiguration without agent or agentFactory). URI value overrides the same option on the agentConfiguration bean.",
+      "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.langchain4j-agent.configuration",
       "type": "org.apache.camel.component.langchain4j.agent.LangChain4jAgentConfiguration",
       "description": "The configuration. The option is a org.apache.camel.component.langchain4j.agent.LangChain4jAgentConfiguration type.",
@@ -56,6 +63,13 @@
       "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration"
     },
     {
+      "name": "camel.component.langchain4j-agent.execute-tools-concurrently",
+      "type": "java.lang.Boolean",
+      "description": "Whether multiple tools requested in a single LLM turn are executed concurrently. Camel route tools run on isolated exchange copies. Only supported in inline agent creation mode (agentConfiguration without agent or agentFactory). URI value overrides the same option on the agentConfiguration bean.",
+      "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.langchain4j-agent.json-schema",
       "type": "java.lang.String",
       "description": "JSON schema for structured output validation. Only supported in inline agent creation mode: agentConfiguration must be set and neither agent nor agentFactory may be configured. Mutually exclusive with outputClass.",
@@ -67,6 +81,13 @@
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
       "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.langchain4j-agent.max-tool-calling-round-trips",
+      "type": "java.lang.Integer",
+      "description": "Maximum number of tool-calling round trips allowed per request. Each round trip is one LLM call plus execution of the tools requested in that call. Set to 0 to leave unset and use the LangChain4j default. Only supported in inline agent creation mode (agentConfiguration without agent or agentFactory). URI value overrides the same option on the agentConfiguration bean.",
+      "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration",
+      "defaultValue": 0
     },
     {
       "name": "camel.component.langchain4j-agent.mcp-clients",
