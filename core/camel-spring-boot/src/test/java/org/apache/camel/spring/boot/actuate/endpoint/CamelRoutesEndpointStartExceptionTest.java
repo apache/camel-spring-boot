@@ -18,12 +18,21 @@ package org.apache.camel.spring.boot.actuate.endpoint;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.camel.CamelContext;
+import org.apache.camel.Route;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.concurrent.TimeUnit;
+
+import static org.awaitility.Awaitility.await;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The {@code route.start.exception} route property is filtered out of the actuator route views. The base
@@ -43,6 +52,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class CamelRoutesEndpointStartExceptionTest {
 
     private static final String FAILING_ROUTE_ID = "controlled-bar";
+    private static final String START_EXCEPTION = "route.start.exception";
 
     @Autowired
     CamelRoutesEndpoint endpoint;
@@ -52,21 +62,49 @@ public class CamelRoutesEndpointStartExceptionTest {
 
     private final ObjectMapper mapper = new ObjectMapper();
 
+    private Route failingRoute() {
+        return camelContext.getRouteController().getControlledRoutes().stream()
+                .filter(route -> FAILING_ROUTE_ID.equals(route.getId()))
+                .findAny()
+                .orElse(null);
+    }
+
+    /**
+     * The supervising route controller starts routes asynchronously, so the start failure is not recorded when the
+     * context finishes refreshing. Without waiting for it the assertions below would pass vacuously - there would be
+     * no property to leak in the first place.
+     */
+    @BeforeEach
+    public void waitUntilTheStartFailureIsRecorded() {
+        await().atMost(30, TimeUnit.SECONDS).untilAsserted(() -> {
+            Route route = failingRoute();
+            assertNotNull(route, "the supervised route should be known to the route controller");
+            assertInstanceOf(Throwable.class, route.getProperties().get(START_EXCEPTION),
+                    "the route start failure should be recorded before the endpoint views are checked");
+        });
+    }
+
     @Test
     public void infoViewDoesNotExposeStartException() throws Exception {
         Object info = endpoint.doReadAction(FAILING_ROUTE_ID, CamelRoutesEndpoint.ReadAction.INFO);
-        Assertions.assertNotNull(info);
+        assertNotNull(info);
+
         String json = mapper.writeValueAsString(info);
-        Assertions.assertFalse(json.contains("route.start.exception"),
-                "route.start.exception must not be serialized in the info view, but was: " + json);
+        assertFalse(json.contains(START_EXCEPTION),
+                START_EXCEPTION + " must not be serialized in the info view, but was: " + json);
+        assertTrue(json.contains("customId"),
+                "the remaining route properties should still be serialized, but were not: " + json);
     }
 
     @Test
     public void detailViewDoesNotExposeStartException() throws Exception {
         Object details = endpoint.doReadAction(FAILING_ROUTE_ID, CamelRoutesEndpoint.ReadAction.DETAIL);
-        Assertions.assertNotNull(details);
+        assertNotNull(details);
+
         String json = mapper.writeValueAsString(details);
-        Assertions.assertFalse(json.contains("route.start.exception"),
-                "route.start.exception must not be serialized in the detail view, but was: " + json);
+        assertFalse(json.contains(START_EXCEPTION),
+                START_EXCEPTION + " must not be serialized in the detail view, but was: " + json);
+        assertTrue(json.contains("customId"),
+                "the remaining route properties should still be serialized, but were not: " + json);
     }
 }
