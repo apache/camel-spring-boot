@@ -2294,6 +2294,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-toon-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-twilio-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -4957,6 +4962,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-tooling-util</artifactId>
+        <version>4.23.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-toon</artifactId>
         <version>4.23.0-SNAPSHOT</version>
       </dependency>
       <dependency>

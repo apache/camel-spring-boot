@@ -1,0 +1,67 @@
+{
+  "groups": [
+    {
+      "name": "camel.dataformat.toon",
+      "type": "org.apache.camel.dataformat.toon.springboot.ToonDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.toon.springboot.ToonDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.toon.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.toon.springboot.ToonDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.dataformat.toon.content-type-header",
+      "type": "java.lang.Boolean",
+      "description": "Whether the data format should set the Content-Type header to text\/toon when marshalling.",
+      "sourceType": "org.apache.camel.dataformat.toon.springboot.ToonDataFormatConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.dataformat.toon.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.toon.delimiter",
+      "type": "java.lang.String",
+      "description": "Delimiter used for tabular array rows and inline primitive arrays.",
+      "sourceType": "org.apache.camel.dataformat.toon.springboot.ToonDataFormatConfiguration",
+      "defaultValue": "COMMA"
+    },
+    {
+      "name": "camel.dataformat.toon.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the toon data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.toon.springboot.ToonDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.toon.indent",
+      "type": "java.lang.Integer",
+      "description": "Number of spaces per indentation level.",
+      "sourceType": "org.apache.camel.dataformat.toon.springboot.ToonDataFormatConfiguration",
+      "defaultValue": 2
+    },
+    {
+      "name": "camel.dataformat.toon.length-marker",
+      "type": "java.lang.Boolean",
+      "description": "Whether to prefix array lengths with a hash marker so arrays render as hash-prefixed lengths instead of plain lengths.",
+      "sourceType": "org.apache.camel.dataformat.toon.springboot.ToonDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.toon.strict",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable strict validation when unmarshalling TOON. When false, JToon uses best-effort parsing.",
+      "sourceType": "org.apache.camel.dataformat.toon.springboot.ToonDataFormatConfiguration",
+      "defaultValue": true
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

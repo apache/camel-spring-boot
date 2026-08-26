@@ -385,6 +385,7 @@
 ** xref:starters/thymeleaf.adoc[Thymeleaf]
 ** xref:starters/tika.adoc[Tika]
 ** xref:starters/timer.adoc[Timer]
+** xref:starters/toon.adoc[TOON]
 ** xref:starters/twilio.adoc[Twilio]
 ** xref:starters/twitter.adoc[Twitter Direct Message]
 ** xref:starters/ubl.adoc[UBL]
