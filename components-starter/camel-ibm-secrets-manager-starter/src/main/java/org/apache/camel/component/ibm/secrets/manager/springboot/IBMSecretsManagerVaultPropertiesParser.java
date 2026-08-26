@@ -40,6 +40,10 @@ public class IBMSecretsManagerVaultPropertiesParser implements ApplicationListen
     public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
         SecretsManager client;
         ConfigurableEnvironment environment = event.getEnvironment();
+        // an unresolved placeholder would otherwise stay in the property value and become the effective
+        // secret, so resolution failures abort startup unless the operator opts back into the old behaviour
+        final boolean ignoreResolutionFailures
+                = Boolean.parseBoolean(environment.getProperty("camel.vault.ignore-resolution-failures"));
         String token;
         String serviceUrl;
         if (Boolean.parseBoolean(environment.getProperty("camel.component.ibm-secrets-manager.early-resolve-properties"))) {
@@ -77,8 +81,17 @@ public class IBMSecretsManagerVaultPropertiesParser implements ApplicationListen
                                         .replace("}}", ""));
                                 props.put(key, element);
                             } catch (Exception e) {
-                                // Log and do nothing
-                                LOG.debug("failed to parse property {}. This exception is ignored.", key, e);
+                                if (ignoreResolutionFailures) {
+                                    LOG.warn("Failed to resolve property {} from the vault; the placeholder is left "
+                                             + "unresolved because camel.vault.ignore-resolution-failures is enabled", key, e);
+                                } else {
+                                    throw new RuntimeCamelException(
+                                            "Failed to resolve property " + key + " from the vault. Startup is aborted so "
+                                                            + "that the unresolved placeholder cannot become the effective "
+                                                            + "value; set camel.vault.ignore-resolution-failures=true to "
+                                                            + "continue anyway.",
+                                            e);
+                                }
                             }
                         }
                     });
