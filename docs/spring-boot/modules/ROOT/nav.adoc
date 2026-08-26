@@ -250,7 +250,6 @@
 ** xref:starters/language.adoc[Language]
 ** xref:starters/ldap.adoc[LDAP]
 ** xref:starters/ldif.adoc[LDIF]
-** xref:starters/leveldb.adoc[Leveldb]
 ** xref:starters/log.adoc[Log Data]
 ** xref:starters/lra.adoc[Lra]
 ** xref:starters/lucene.adoc[Lucene]

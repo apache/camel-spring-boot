@@ -351,7 +351,6 @@
     <module>camel-language-starter</module>
     <module>camel-ldap-starter</module>
     <module>camel-ldif-starter</module>
-    <module>camel-leveldb-starter</module>
     <module>camel-log-starter</module>
     <module>camel-lra-starter</module>
     <module>camel-lucene-starter</module>
