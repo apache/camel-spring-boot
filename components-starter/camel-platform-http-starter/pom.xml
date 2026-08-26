@@ -60,8 +60,8 @@
     <!-- https://github.com/apache/camel-spring-boot/commit/1bb2b737a4cc1301945a1084e5a5cbb2e4744690 -->
     <!-- https://github.com/apache/camel-spring-boot/commit/16e8983051d473638701edcbb8b333022ac2eb90 -->
     <!--dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-undertow</artifactId>
+      <groupId>io.undertow</groupId>
+      <artifactId>undertow-spring-boot-starter</artifactId>
       <version>${spring-boot-version}</version>
       <optional>true</optional>
     </dependency-->

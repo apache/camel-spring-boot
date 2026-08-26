@@ -635,8 +635,8 @@ When using the Platform HTTP component with Undertow as the underlying web serve
 [source,xml]
 ----
 <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-undertow</artifactId>
+    <groupId>io.undertow</groupId>
+    <artifactId>undertow-spring-boot-starter</artifactId>
 </dependency>
 ----
 
