@@ -1244,11 +1244,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-iec60870-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-iggy-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -3662,11 +3657,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-ical</artifactId>
-        <version>4.23.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-iec60870</artifactId>
         <version>4.23.0-SNAPSHOT</version>
       </dependency>
       <dependency>
