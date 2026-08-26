@@ -63,10 +63,17 @@ final class CamelHealthHelper {
                 if (error.getMessage() != null) {
                     builder.withDetail("error.message", error.getMessage());
                 }
-                final StringWriter stackTraceWriter = new StringWriter();
-                try (final PrintWriter pw = new PrintWriter(stackTraceWriter, true)) {
-                    error.printStackTrace(pw);
-                    data.put("error.stacktrace", stackTraceWriter.toString());
+                // the stack trace is only surfaced at the 'full' exposure level; at the default level the
+                // exception type and message are enough to identify the failure, and the full trace stays
+                // in the server log
+                if (exposureLevel.equals("full")) {
+                    final StringWriter stackTraceWriter = new StringWriter();
+                    try (final PrintWriter pw = new PrintWriter(stackTraceWriter, true)) {
+                        error.printStackTrace(pw);
+                        data.put("error.stacktrace", stackTraceWriter.toString());
+                    }
+                } else {
+                    data.put("error.type", error.getClass().getName());
                 }
             });
 
