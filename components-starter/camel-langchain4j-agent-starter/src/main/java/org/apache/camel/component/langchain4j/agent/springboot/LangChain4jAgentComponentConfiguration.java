@@ -61,10 +61,25 @@ public class LangChain4jAgentComponentConfiguration
      */
     private AgentFactory agentFactory;
     /**
+     * Whether LangChain4j should compensate when a tool execution fails. Only
+     * supported in inline agent creation mode (agentConfiguration without agent
+     * or agentFactory). URI value overrides the same option on the
+     * agentConfiguration bean.
+     */
+    private Boolean compensateOnToolErrors = false;
+    /**
      * The configuration. The option is a
      * org.apache.camel.component.langchain4j.agent.LangChain4jAgentConfiguration type.
      */
     private LangChain4jAgentConfiguration configuration;
+    /**
+     * Whether multiple tools requested in a single LLM turn are executed
+     * concurrently. Camel route tools run on isolated exchange copies. Only
+     * supported in inline agent creation mode (agentConfiguration without agent
+     * or agentFactory). URI value overrides the same option on the
+     * agentConfiguration bean.
+     */
+    private Boolean executeToolsConcurrently = false;
     /**
      * JSON schema for structured output validation. Only supported in inline
      * agent creation mode: agentConfiguration must be set and neither agent nor
@@ -82,6 +97,15 @@ public class LangChain4jAgentComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Maximum number of tool-calling round trips allowed per request. Each
+     * round trip is one LLM call plus execution of the tools requested in that
+     * call. Set to 0 to leave unset and use the LangChain4j default. Only
+     * supported in inline agent creation mode (agentConfiguration without agent
+     * or agentFactory). URI value overrides the same option on the
+     * agentConfiguration bean.
+     */
+    private Integer maxToolCallingRoundTrips = 0;
     /**
      * Java class to use for structured output. Camel derives the JSON schema
      * from the class and instructs the model to produce matching JSON; the
@@ -146,12 +170,28 @@ public class LangChain4jAgentComponentConfiguration
         this.agentFactory = agentFactory;
     }
 
+    public Boolean getCompensateOnToolErrors() {
+        return compensateOnToolErrors;
+    }
+
+    public void setCompensateOnToolErrors(Boolean compensateOnToolErrors) {
+        this.compensateOnToolErrors = compensateOnToolErrors;
+    }
+
     public LangChain4jAgentConfiguration getConfiguration() {
         return configuration;
     }
 
     public void setConfiguration(LangChain4jAgentConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public Boolean getExecuteToolsConcurrently() {
+        return executeToolsConcurrently;
+    }
+
+    public void setExecuteToolsConcurrently(Boolean executeToolsConcurrently) {
+        this.executeToolsConcurrently = executeToolsConcurrently;
     }
 
     public String getJsonSchema() {
@@ -168,6 +208,14 @@ public class LangChain4jAgentComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Integer getMaxToolCallingRoundTrips() {
+        return maxToolCallingRoundTrips;
+    }
+
+    public void setMaxToolCallingRoundTrips(Integer maxToolCallingRoundTrips) {
+        this.maxToolCallingRoundTrips = maxToolCallingRoundTrips;
     }
 
     public Class<Object> getOutputClass() {

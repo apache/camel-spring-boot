@@ -113,6 +113,13 @@ public class AiToolComponentConfiguration
      */
     private Boolean readOnlyHint = false;
     /**
+     * When true, AI producers that support agentic tool loops (such as
+     * camel-openai) return this tool's result directly to the caller without
+     * sending it back to the model. Also published as an MCP tool annotation
+     * when the tool is exposed via camel-mcp-server.
+     */
+    private Boolean returnDirect = false;
+    /**
      * Comma-separated list of tags used to group tools. Producers filter the
      * registry by these tags to select which tools to expose to the LLM. When
      * omitted, the tool goes into a default pool available to all producers.
@@ -219,6 +226,14 @@ public class AiToolComponentConfiguration
 
     public void setReadOnlyHint(Boolean readOnlyHint) {
         this.readOnlyHint = readOnlyHint;
+    }
+
+    public Boolean getReturnDirect() {
+        return returnDirect;
+    }
+
+    public void setReturnDirect(Boolean returnDirect) {
+        this.returnDirect = returnDirect;
     }
 
     public String getTags() {
