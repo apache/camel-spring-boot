@@ -188,7 +188,6 @@
 ** xref:starters/influxdb.adoc[InfluxDB]
 ** xref:starters/influxdb2.adoc[InfluxDB2]
 ** xref:starters/irc.adoc[IRC]
-** xref:starters/ironmq.adoc[IronMQ]
 ** xref:starters/iso8583.adoc[ISO-8583]
 ** xref:starters/jackson-avro.adoc[Avro Jackson]
 ** xref:starters/jackson-protobuf.adoc[Protobuf Jackson]

@@ -289,7 +289,6 @@
     <module>camel-influxdb-starter</module>
     <module>camel-influxdb2-starter</module>
     <module>camel-irc-starter</module>
-    <module>camel-ironmq-starter</module>
     <module>camel-iso8583-starter</module>
     <module>camel-jackson-avro-starter</module>
     <module>camel-jackson-protobuf-starter</module>
