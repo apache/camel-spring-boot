@@ -31,11 +31,6 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>com.aliyun.openservices</groupId>
-        <artifactId>tablestore</artifactId>
-        <version>5.17.11</version>
-      </dependency>
-      <dependency>
         <groupId>com.aliyun</groupId>
         <artifactId>dysmsapi20170525</artifactId>
         <version>4.6.0</version>
@@ -59,11 +54,6 @@
         <groupId>com.aliyun</groupId>
         <artifactId>kms20160120</artifactId>
         <version>2.2.0</version>
-      </dependency>
-      <dependency>
-        <groupId>com.aliyun</groupId>
-        <artifactId>sls20201230</artifactId>
-        <version>5.9.0</version>
       </dependency>
       <dependency>
         <groupId>com.aliyun</groupId>
@@ -895,11 +885,6 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-diagram-starter</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel.springboot</groupId>
-        <artifactId>camel-digitalocean-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -2544,16 +2529,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-alibaba-ots</artifactId>
-        <version>4.23.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-alibaba-sls</artifactId>
-        <version>4.23.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-alibaba-sms</artifactId>
         <version>4.23.0-SNAPSHOT</version>
       </dependency>
@@ -3117,16 +3092,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-crypto-pgp</artifactId>
-        <version>4.23.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-csimple-joor</artifactId>
-        <version>4.23.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-csimple-maven-plugin</artifactId>
         <version>4.23.0-SNAPSHOT</version>
       </dependency>
       <dependency>

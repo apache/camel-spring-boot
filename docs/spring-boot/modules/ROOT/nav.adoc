@@ -111,7 +111,6 @@
 ** xref:starters/dfdl.adoc[DFDL]
 ** xref:starters/dhis2.adoc[DHIS2]
 ** xref:starters/diagram.adoc[Diagram]
-** xref:starters/digitalocean.adoc[DigitalOcean]
 ** xref:starters/direct.adoc[Direct]
 ** xref:starters/disruptor.adoc[Disruptor]
 ** xref:starters/djl.adoc[Deep Java Library]
