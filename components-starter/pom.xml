@@ -341,7 +341,6 @@
     <module>camel-langchain4j-embeddings-starter</module>
     <module>camel-langchain4j-embeddingstore-starter</module>
     <module>camel-langchain4j-tokenizer-starter</module>
-    <module>camel-langchain4j-tools-starter</module>
     <module>camel-langchain4j-web-search-starter</module>
     <module>camel-language-starter</module>
     <module>camel-ldap-starter</module>

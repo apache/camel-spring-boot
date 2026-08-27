@@ -240,7 +240,6 @@
 ** xref:starters/langchain4j-embeddings.adoc[LangChain4j Embeddings]
 ** xref:starters/langchain4j-embeddingstore.adoc[LangChain4j Embedding Store]
 ** xref:starters/langchain4j-tokenizer.adoc[Langchain4j Tokenizer]
-** xref:starters/langchain4j-tools.adoc[LangChain4j Tools]
 ** xref:starters/langchain4j-web-search.adoc[LangChain4j Web Search]
 ** xref:starters/language.adoc[Language]
 ** xref:starters/ldap.adoc[LDAP]
