@@ -31,6 +31,11 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
+        <groupId>com.aliyun.openservices</groupId>
+        <artifactId>tablestore</artifactId>
+        <version>5.17.11</version>
+      </dependency>
+      <dependency>
         <groupId>com.aliyun</groupId>
         <artifactId>dysmsapi20170525</artifactId>
         <version>4.6.0</version>
@@ -54,6 +59,11 @@
         <groupId>com.aliyun</groupId>
         <artifactId>kms20160120</artifactId>
         <version>2.2.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.aliyun</groupId>
+        <artifactId>sls20201230</artifactId>
+        <version>5.9.0</version>
       </dependency>
       <dependency>
         <groupId>com.aliyun</groupId>
@@ -2534,6 +2544,16 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-alibaba-ots</artifactId>
+        <version>4.23.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-alibaba-sls</artifactId>
+        <version>4.23.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-alibaba-sms</artifactId>
         <version>4.23.0-SNAPSHOT</version>
       </dependency>
@@ -2940,11 +2960,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-catalog-lucene</artifactId>
-        <version>4.23.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-catalog-maven</artifactId>
         <version>4.23.0-SNAPSHOT</version>
       </dependency>
@@ -3247,11 +3262,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-diagram</artifactId>
-        <version>4.23.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-digitalocean</artifactId>
         <version>4.23.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -3691,11 +3701,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-irc</artifactId>
-        <version>4.23.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-iso8583</artifactId>
         <version>4.23.0-SNAPSHOT</version>
       </dependency>
@@ -3901,11 +3906,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-json-patch</artifactId>
-        <version>4.23.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-json-validator</artifactId>
         <version>4.23.0-SNAPSHOT</version>
       </dependency>
@@ -4042,11 +4042,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-langchain4j-tokenizer</artifactId>
-        <version>4.23.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-langchain4j-tools</artifactId>
         <version>4.23.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -4672,11 +4667,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-solr</artifactId>
-        <version>4.23.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-splunk</artifactId>
         <version>4.23.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -5323,7 +5313,7 @@
       <dependency>
         <groupId>org.codehaus.plexus</groupId>
         <artifactId>plexus-archiver</artifactId>
-        <version>4.13.0</version>
+        <version>4.14.0</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.plexus</groupId>

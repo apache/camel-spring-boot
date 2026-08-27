@@ -47,7 +47,7 @@ The starter supports 29 options, which are listed below.
 | camel.component.mina.maximum-pool-size | Number of worker threads in the worker pool for TCP and UDP | 16 | Integer
 | camel.component.mina.mina-logger | You can enable the Apache MINA logging filter. Apache MINA uses slf4j logging at INFO level to log all input and output. | false | Boolean
 | camel.component.mina.no-reply-log-level | If sync is enabled this option dictates MinaConsumer which logging level to use when logging a there is no reply to send back. | warn | LoggingLevel
-| camel.component.mina.object-codec-pattern | Accept the wildcard specified classes for Object deserialization, unless they are otherwise rejected. Multiple patterns can be separated by comma. |  | String
+| camel.component.mina.object-codec-pattern | Accept the wildcard specified classes for Object deserialization, unless they are otherwise rejected. Multiple patterns can be separated by comma. This widens the codec's deserialization allow-list, so keep it as narrow as the route actually needs. Avoid : it accepts every class the classpath can load from an untrusted peer, including Camel's own org.apache.camel types. Leaving the option unset is the safest choice - the codec then accepts only the small built-in set and refuses anything else. |  | String
 | camel.component.mina.ordered-thread-pool-executor | Whether to use ordered thread pool, to ensure events are processed orderly on the same channel. | true | Boolean
 | camel.component.mina.ssl-context-parameters | To configure SSL security. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
 | camel.component.mina.sync | Setting to set endpoint as one-way or request-response. | true | Boolean
