@@ -78,6 +78,8 @@
         <!-- <module>tests</module> disabled by camel-spring-boot-prod-maven-plugin:camel-prod-excludes -->
         <!-- <module>docs</module> disabled by camel-spring-boot-prod-maven-plugin:camel-prod-excludes -->
         <module>archetypes</module>
+        <module>sap</module>
+        <module>cics</module>
     </modules>
 
     <scm>
@@ -302,6 +304,7 @@
           <additionalProductizedArtifactIds>
             <additionalProductizedArtifactId>com.redhat.camel.springboot.platform:camel-spring-boot-bom</additionalProductizedArtifactId>
             <additionalProductizedArtifactId>org.fusesource:camel-sap-starter</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>org.fusesource:camel-cics-starter</additionalProductizedArtifactId>
             <additionalProductizedArtifactId>com.sap.conn.idoc:com.sap.conn.idoc</additionalProductizedArtifactId>
             <additionalProductizedArtifactId>com.sap.conn.jco:com.sap.conn.jco</additionalProductizedArtifactId>
             <additionalProductizedArtifactId>bom-generator</additionalProductizedArtifactId>
