@@ -316,6 +316,7 @@
 ** xref:starters/qdrant.adoc[Qdrant]
 ** xref:starters/quartz.adoc[Quartz]
 ** xref:starters/quickfix.adoc[QuickFix]
+** xref:starters/quickjs.adoc[QuickJS]
 ** xref:starters/reactive-streams.adoc[Reactive Streams]
 ** xref:starters/reactor.adoc[Reactor]
 ** xref:starters/ref.adoc[Ref]
