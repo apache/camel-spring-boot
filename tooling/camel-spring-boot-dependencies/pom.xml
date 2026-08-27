@@ -3541,11 +3541,6 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
-        <artifactId>camel-headersmap</artifactId>
-        <version>4.23.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
         <artifactId>camel-health</artifactId>
         <version>4.23.0-SNAPSHOT</version>
       </dependency>
@@ -3697,11 +3692,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-irc</artifactId>
-        <version>4.23.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-ironmq</artifactId>
         <version>4.23.0-SNAPSHOT</version>
       </dependency>
       <dependency>
@@ -4902,11 +4892,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-test-spring-junit6</artifactId>
-        <version>4.23.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-threadpoolfactory-vertx</artifactId>
         <version>4.23.0-SNAPSHOT</version>
       </dependency>
       <dependency>
