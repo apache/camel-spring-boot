@@ -1,6 +1,12 @@
 {
   "properties": [
     {
+      "name": "camel.vault.ignore-resolution-failures",
+      "type": "java.lang.Boolean",
+      "description": "Whether a vault or secrets placeholder that cannot be resolved during early property resolution should be tolerated. When false (the default) an unresolvable placeholder aborts startup, so the literal placeholder text can never become the effective value. When true the failure is logged at WARN and the placeholder is left in place.",
+      "defaultValue": false
+    },
+    {
       "name": "management.info.camel.enabled",
       "type": "java.lang.Boolean",
       "description": "Whether to enable Camel info.",

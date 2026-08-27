@@ -38,7 +38,7 @@ public class SpringBootCloudConfigPropertiesParser implements ApplicationListene
         Properties properties = new Properties();
         ConfigurableEnvironment environment = event.getEnvironment();
         // an unresolved placeholder would otherwise stay in the property value and become the effective
-        // secret, so resolution failures abort startup unless the operator opts back into the old behaviour
+        // configuration value, so resolution failures abort startup unless the operator opts back in
         final boolean ignoreResolutionFailures
                 = Boolean.parseBoolean(environment.getProperty("camel.vault.ignore-resolution-failures"));
 
@@ -65,12 +65,12 @@ public class SpringBootCloudConfigPropertiesParser implements ApplicationListene
                                 properties.put(key, element);
                             } catch (Exception e) {
                                 if (ignoreResolutionFailures) {
-                                    LOG.warn("Failed to resolve property {} from the vault; the placeholder is left "
+                                    LOG.warn("Failed to resolve property {} from Spring Cloud Config; the placeholder is left "
                                              + "unresolved because camel.vault.ignore-resolution-failures is enabled", key, e);
                                 } else {
                                     throw new RuntimeCamelException(
-                                            "Failed to resolve property " + key + " from the vault. Startup is aborted so "
-                                                            + "that the unresolved placeholder cannot become the effective "
+                                            "Failed to resolve property " + key + " from Spring Cloud Config. Startup is aborted "
+                                                            + "so that the unresolved placeholder cannot become the effective "
                                                             + "value; set camel.vault.ignore-resolution-failures=true to "
                                                             + "continue anyway.",
                                             e);
