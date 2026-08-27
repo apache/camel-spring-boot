@@ -212,7 +212,6 @@
     <module>camel-dfdl-starter</module>
     <module>camel-dhis2-starter</module>
     <module>camel-diagram-starter</module>
-    <module>camel-digitalocean-starter</module>
     <module>camel-direct-starter</module>
     <module>camel-disruptor-starter</module>
     <module>camel-djl-starter</module>
@@ -288,7 +287,6 @@
     <module>camel-infinispan-starter</module>
     <module>camel-influxdb-starter</module>
     <module>camel-influxdb2-starter</module>
-    <module>camel-irc-starter</module>
     <module>camel-iso8583-starter</module>
     <module>camel-jackson-avro-starter</module>
     <module>camel-jackson-protobuf-starter</module>
@@ -322,7 +320,6 @@
     <module>camel-jq-starter</module>
     <module>camel-jsch-starter</module>
     <module>camel-jslt-starter</module>
-    <module>camel-json-patch-starter</module>
     <module>camel-json-validator-starter</module>
     <module>camel-jsonapi-starter</module>
     <module>camel-jsonata-starter</module>
@@ -449,7 +446,6 @@
     <module>camel-soap-starter</module>
     <module>camel-solr-starter</module>
     <module>camel-splunk-hec-starter</module>
-    <module>camel-splunk-starter</module>
     <module>camel-spring-ai-chat-starter</module>
     <module>camel-spring-ai-embeddings-starter</module>
     <module>camel-spring-ai-image-starter</module>
