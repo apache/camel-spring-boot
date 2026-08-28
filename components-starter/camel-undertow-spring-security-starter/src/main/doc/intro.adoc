@@ -1,3 +1,21 @@
 Spring Boot auto-configuration for Camel Undertow with Spring Security.
 
 This starter secures Camel HTTP endpoints served by the Undertow component using Spring Security. It supports OAuth2/OpenID Connect providers (such as Keycloak) for authentication and authorization of incoming HTTP requests to Camel routes.
+
+== Token validation
+
+Incoming JWTs are validated against the configured provider on three points: the standard timestamp checks,
+the `iss` claim (which must match the configured realm), and the audience — the token must carry the
+configured `clientId` in either its `aud` claim or, for providers such as Keycloak that record the requesting
+client separately, its `azp` claim.
+
+The audience check matters because every client of a realm is served by the same signing key. Without it, a
+token minted for any other client in the realm — including a low-trust public one — satisfies the signature
+check and is accepted here.
+
+It can be turned off if an existing deployment relies on tokens minted for a different client:
+
+[source,properties]
+----
+camel.security.undertow.keycloak.validate-audience = false
+----

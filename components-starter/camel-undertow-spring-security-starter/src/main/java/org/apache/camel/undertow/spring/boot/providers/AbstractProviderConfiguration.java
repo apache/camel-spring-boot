@@ -32,11 +32,30 @@ public abstract class AbstractProviderConfiguration {
         keycloak
     }
 
+    /**
+     * Whether an incoming token must carry the configured client id in its aud or azp claim. Every client of a realm
+     * shares the signing key, so with this disabled a token minted for any other client of the same realm is accepted.
+     */
+    private boolean validateAudience = true;
+
     abstract TYPE getType();
 
     public abstract ClientRegistration getClientRegistration() throws URISyntaxException;
 
     public abstract String getUserNameAttribute();
+
+    /**
+     * The issuer the provider stamps into the {@code iss} claim of the tokens it mints.
+     */
+    public abstract String getIssuerUri() throws URISyntaxException;
+
+    public boolean isValidateAudience() {
+        return validateAudience;
+    }
+
+    public void setValidateAudience(boolean validateAudience) {
+        this.validateAudience = validateAudience;
+    }
 
     public Converter<Jwt, ? extends AbstractAuthenticationToken> getJwtAuthenticationConverter() {
         throw new IllegalArgumentException("Not implemented");
