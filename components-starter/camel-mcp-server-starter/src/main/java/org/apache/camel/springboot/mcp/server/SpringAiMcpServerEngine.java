@@ -37,7 +37,8 @@ import org.slf4j.LoggerFactory;
  * {@link McpServerEngine} publishing tools into the Spring AI MCP server: {@code toolAdded}/{@code toolRemoved} map to
  * the auto-configured {@link McpSyncServer}'s {@code addTool}/{@code removeTool}, which emit
  * {@code notifications/tools/list_changed} to connected clients. Serving concerns (endpoint path, protocol, server
- * identity, authentication) are owned by the Spring AI MCP server configuration ({@code spring.ai.mcp.server.*}).
+ * identity) are owned by the Spring AI MCP server configuration ({@code spring.ai.mcp.server.*}), which provides
+ * no authentication - the endpoint must be protected by the application.
  */
 public class SpringAiMcpServerEngine extends ServiceSupport implements McpServerEngine {
 
