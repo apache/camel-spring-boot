@@ -24,106 +24,63 @@ import com.azure.security.keyvault.secrets.SecretClient;
 import com.azure.security.keyvault.secrets.SecretClientBuilder;
 import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.component.azure.key.vault.KeyVaultPropertiesFunction;
+import org.apache.camel.spi.PropertiesFunction;
+import org.apache.camel.spring.boot.AbstractEarlyResolutionPropertiesParser;
 import org.apache.camel.util.ObjectHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
-import org.springframework.boot.origin.OriginTrackedValue;
-import org.springframework.context.ApplicationListener;
 import org.springframework.core.env.ConfigurableEnvironment;
-import org.springframework.core.env.MapPropertySource;
-import org.springframework.core.env.PropertiesPropertySource;
-import org.springframework.core.env.PropertySource;
 
-import java.util.Properties;
-
-public class SpringBootAzureKeyVaultPropertiesParser implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
-    private static final Logger LOG = LoggerFactory.getLogger(SpringBootAzureKeyVaultPropertiesParser.class);
+public class SpringBootAzureKeyVaultPropertiesParser extends AbstractEarlyResolutionPropertiesParser {
 
     @Override
-    public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
+    protected String getEarlyResolutionProperty() {
+        return "camel.component.azure-key-vault.early-resolve-properties";
+    }
+
+    @Override
+    protected String getOverridePropertySourceName() {
+        return "overridden-camel-azure-key-vault-properties";
+    }
+
+    @Override
+    protected PropertiesFunction createPropertiesFunction(ConfigurableEnvironment environment) {
         SecretClient client;
-        ConfigurableEnvironment environment = event.getEnvironment();
-        // an unresolved placeholder would otherwise stay in the property value and become the effective
-        // secret, so resolution failures abort startup unless the operator opts back into the old behaviour
-        final boolean ignoreResolutionFailures
-                = Boolean.parseBoolean(environment.getProperty("camel.vault.ignore-resolution-failures"));
-        if (Boolean.parseBoolean(environment.getProperty("camel.component.azure-key-vault.early-resolve-properties"))) {
-            String vaultName = environment.getProperty("camel.vault.azure.vaultName");
-            String clientId = environment.getProperty("camel.vault.azure.clientId");
-            String clientSecret = environment.getProperty("camel.vault.azure.clientSecret");
-            String tenantId = environment.getProperty("camel.vault.azure.tenantId");
-            boolean azureIdentityEnabled = Boolean.parseBoolean(System.getenv("CAMEL_VAULT_AZURE_IDENTITY_ENABLED"));
-            if (ObjectHelper.isNotEmpty(vaultName) && ObjectHelper.isNotEmpty(clientId) && ObjectHelper.isNotEmpty(clientSecret)
-                    && ObjectHelper.isNotEmpty(tenantId) && !azureIdentityEnabled) {
-                String keyVaultUri = "https://" + vaultName + ".vault.azure.net";
+        String vaultName = environment.getProperty("camel.vault.azure.vaultName");
+        String clientId = environment.getProperty("camel.vault.azure.clientId");
+        String clientSecret = environment.getProperty("camel.vault.azure.clientSecret");
+        String tenantId = environment.getProperty("camel.vault.azure.tenantId");
+        boolean azureIdentityEnabled = Boolean.parseBoolean(System.getenv("CAMEL_VAULT_AZURE_IDENTITY_ENABLED"));
+        if (ObjectHelper.isNotEmpty(vaultName) && ObjectHelper.isNotEmpty(clientId)
+                && ObjectHelper.isNotEmpty(clientSecret)
+                && ObjectHelper.isNotEmpty(tenantId) && !azureIdentityEnabled) {
+            String keyVaultUri = "https://" + vaultName + ".vault.azure.net";
 
-                // Credential
-                ClientSecretCredential credential = new ClientSecretCredentialBuilder()
-                        .tenantId(tenantId)
-                        .clientId(clientId)
-                        .clientSecret(clientSecret)
-                        .build();
+            // Credential
+            ClientSecretCredential credential = new ClientSecretCredentialBuilder()
+                    .tenantId(tenantId)
+                    .clientId(clientId)
+                    .clientSecret(clientSecret)
+                    .build();
 
-                // Build Client
-                client = new SecretClientBuilder()
-                        .vaultUrl(keyVaultUri)
-                        .credential(credential)
-                        .buildClient();
-            } else if (ObjectHelper.isNotEmpty(vaultName) && azureIdentityEnabled) {
-                String keyVaultUri = "https://" + vaultName + ".vault.azure.net";
+            // Build Client
+            client = new SecretClientBuilder()
+                    .vaultUrl(keyVaultUri)
+                    .credential(credential)
+                    .buildClient();
+        } else if (ObjectHelper.isNotEmpty(vaultName) && azureIdentityEnabled) {
+            String keyVaultUri = "https://" + vaultName + ".vault.azure.net";
 
-                // Credential
-                TokenCredential credential = new DefaultAzureCredentialBuilder().build();
+            // Credential
+            TokenCredential credential = new DefaultAzureCredentialBuilder().build();
 
-                // Build Client
-                client = new SecretClientBuilder()
-                        .vaultUrl(keyVaultUri)
-                        .credential(credential)
-                        .buildClient();
-            } else {
-                throw new RuntimeCamelException(
-                        "Using the Azure Key Vault Properties Function requires setting Azure credentials as application properties or environment variables or enable the Azure Identity Authentication mechanism");
-            }
-            KeyVaultPropertiesFunction keyVaultPropertiesFunction = new KeyVaultPropertiesFunction(client);
-            final Properties props = new Properties();
-            for (PropertySource mutablePropertySources : event.getEnvironment().getPropertySources()) {
-                if (mutablePropertySources instanceof MapPropertySource mapPropertySource) {
-                    mapPropertySource.getSource().forEach((key, value) -> {
-                        String stringValue = null;
-                        if ((value instanceof OriginTrackedValue originTrackedValue &&
-                                originTrackedValue.getValue() instanceof String v)) {
-                            stringValue = v;
-                        } else if (value instanceof String v) {
-                            stringValue = v;
-                        }
-                        if (stringValue != null &&
-                                stringValue.startsWith("{{azure:") &&
-                                stringValue.endsWith("}}")) {
-                            LOG.debug("decrypting and overriding property {}", key);
-                            try {
-                                String element = keyVaultPropertiesFunction.apply(stringValue
-                                        .replace("{{azure:", "")
-                                        .replace("}}", ""));
-                                props.put(key, element);
-                            } catch (Exception e) {
-                                if (ignoreResolutionFailures) {
-                                    LOG.warn("Failed to resolve property {} from the vault; the placeholder is left "
-                                             + "unresolved because camel.vault.ignore-resolution-failures is enabled", key, e);
-                                } else {
-                                    throw new RuntimeCamelException(
-                                            "Failed to resolve property " + key + " from the vault. Startup is aborted so "
-                                                            + "that the unresolved placeholder cannot become the effective "
-                                                            + "value; set camel.vault.ignore-resolution-failures=true to "
-                                                            + "continue anyway.",
-                                            e);
-                                }
-                            }
-                        }
-                    });
-                }
-            }
-            environment.getPropertySources().addFirst(new PropertiesPropertySource("overridden-camel-azure-key-vault-properties", props));
+            // Build Client
+            client = new SecretClientBuilder()
+                    .vaultUrl(keyVaultUri)
+                    .credential(credential)
+                    .buildClient();
+        } else {
+            throw new RuntimeCamelException(
+                    "Using the Azure Key Vault Properties Function requires setting Azure credentials as application properties or environment variables or enable the Azure Identity Authentication mechanism");
         }
+        return new KeyVaultPropertiesFunction(client);
     }
 }
