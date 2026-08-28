@@ -16,14 +16,16 @@
  */
 package org.apache.camel.component.hashicorp.vault.springboot;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
 import org.apache.camel.RuntimeCamelException;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.StandardEnvironment;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -71,6 +73,36 @@ public class SpringBootHashicorpVaultPropertiesParserTest {
     }
 
     @Test
+    public void missingHostFailsAsACamelExceptionNamingTheProperty() {
+        RuntimeCamelException thrown = assertThrows(RuntimeCamelException.class,
+                () -> parser.createPropertiesFunction(environmentWith(Map.of(
+                        "camel.vault.hashicorp.token", "a-token"))),
+                "a missing setting is an operator error, not a programming defect, so it must not surface "
+                        + "as NullPointerException");
+
+        assertTrue(thrown.getMessage().contains("host"),
+                "the failure must name the missing setting, was: " + thrown.getMessage());
+        assertTrue(thrown.getMessage().contains("camel.vault.hashicorp.host"),
+                "the failure must name the missing property, was: " + thrown.getMessage());
+    }
+
+    @Test
+    public void missingSchemeFailsAsACamelExceptionNamingTheProperty() {
+        RuntimeCamelException thrown = assertThrows(RuntimeCamelException.class,
+                () -> parser.createPropertiesFunction(environmentWith(Map.of(
+                        "camel.vault.hashicorp.token", "a-token",
+                        "camel.vault.hashicorp.host", "127.0.0.1",
+                        "camel.vault.hashicorp.port", "8200"))),
+                "a missing setting is an operator error, not a programming defect, so it must not surface "
+                        + "as NullPointerException");
+
+        assertTrue(thrown.getMessage().contains("scheme"),
+                "the failure must name the missing setting, was: " + thrown.getMessage());
+        assertTrue(thrown.getMessage().contains("camel.vault.hashicorp.scheme"),
+                "the failure must name the missing property, was: " + thrown.getMessage());
+    }
+
+    @Test
     public void nonNumericPortFailsAsACamelExceptionNamingTheProperty() {
         RuntimeCamelException thrown = assertThrows(RuntimeCamelException.class,
                 () -> parser.createPropertiesFunction(environmentWith(Map.of(
@@ -82,5 +114,7 @@ public class SpringBootHashicorpVaultPropertiesParserTest {
 
         assertTrue(thrown.getMessage().contains("camel.vault.hashicorp.port"),
                 "the failure must name the malformed property, was: " + thrown.getMessage());
+        assertInstanceOf(NumberFormatException.class, thrown.getCause(),
+                "the cause must be preserved so the original NumberFormatException is not lost");
     }
 }
