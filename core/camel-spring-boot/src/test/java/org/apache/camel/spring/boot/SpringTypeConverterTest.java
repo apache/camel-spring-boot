@@ -16,7 +16,14 @@
  */
 package org.apache.camel.spring.boot;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.zip.ZipFile;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
@@ -83,6 +90,38 @@ public class SpringTypeConverterTest {
     @Test
     public void testStringToInputStreamConversionIsBlocked() {
         Assertions.assertNull(converter.convertTo(InputStream.class, null, "some file content"));
+    }
+
+    @Test
+    public void testStringToFileReaderConversionIsBlocked() {
+        // FileReader(String) would open the content as a path, exactly as FileInputStream(String) did
+        Assertions.assertNull(converter.convertTo(FileReader.class, null, "some file content"));
+    }
+
+    @Test
+    public void testStringToReaderConversionIsBlocked() {
+        Assertions.assertNull(converter.convertTo(Reader.class, null, "some file content"));
+    }
+
+    @Test
+    public void testStringToFileWriterConversionIsBlocked() throws Exception {
+        // FileWriter(String) would go further and create the named file
+        Path target = Files.createTempDirectory("spring-type-converter").resolve("must-not-be-created.txt");
+        Assertions.assertNull(converter.convertTo(FileWriter.class, null, target.toString()));
+        Assertions.assertFalse(Files.exists(target), "converting a String must not create a file on disk");
+    }
+
+    @Test
+    public void testStringToZipFileConversionIsBlocked() {
+        Assertions.assertNull(converter.convertTo(ZipFile.class, null, "some file content"));
+    }
+
+    @Test
+    public void testStringToFileConversionIsStillAllowed() {
+        // String -> File is a documented Spring conversion where the String really is a path, so the guard
+        // must not swallow it
+        Assertions.assertEquals(new File("/tmp/example.txt"),
+                converter.convertTo(File.class, null, "/tmp/example.txt"));
     }
 
     public static class Person {

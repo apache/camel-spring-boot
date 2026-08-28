@@ -17,10 +17,13 @@
 package org.apache.camel.spring.boot;
 
 import java.io.InputStream;
+import java.io.Reader;
+import java.io.Writer;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.zip.ZipFile;
 import org.apache.camel.Exchange;
 import org.apache.camel.TypeConversionException;
 import org.apache.camel.support.TypeConverterSupport;
@@ -53,10 +56,13 @@ public class SpringTypeConverter extends TypeConverterSupport {
             return null;
         }
 
-        // do not attempt to convert String -> InputStream (or subclasses like FileInputStream).
-        // Spring's ObjectToObjectConverter finds FileInputStream(String) constructor and treats
-        // the String value as a file path instead of data content.
-        if (value instanceof String && InputStream.class.isAssignableFrom(type)) {
+        // do not attempt to convert a String into a type whose single-String constructor interprets it as a
+        // file path rather than as data content - Spring's ObjectToObjectConverter would find
+        // FileInputStream(String), FileReader(String), FileWriter(String) or ZipFile(String) and open, or in
+        // the Writer case create, the named file. Camel's own converters handle these from a String body.
+        // java.io.File is deliberately not listed: String -> File is a documented Spring conversion where the
+        // String genuinely is a path (CAMEL-23378).
+        if (value instanceof String && isFileBackedTarget(type)) {
             return null;
         }
 
@@ -84,6 +90,13 @@ public class SpringTypeConverter extends TypeConverterSupport {
         }
 
         return null;
+    }
+
+    private boolean isFileBackedTarget(Class<?> type) {
+        return InputStream.class.isAssignableFrom(type)
+                || Reader.class.isAssignableFrom(type)
+                || Writer.class.isAssignableFrom(type)
+                || ZipFile.class.isAssignableFrom(type);
     }
 
     private boolean isArrayOrCollection(Object value) {
