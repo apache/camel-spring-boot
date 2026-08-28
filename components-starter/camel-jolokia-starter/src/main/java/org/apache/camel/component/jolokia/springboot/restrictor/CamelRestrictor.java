@@ -51,6 +51,23 @@ public class CamelRestrictor extends AllowAllRestrictor {
 	}
 
 	/**
+	 * Rejects cross-origin browser requests.
+	 * <p/>
+	 * {@link AllowAllRestrictor} permits every origin, which leaves the agent open to being driven by a page the
+	 * user happens to visit - the port being on loopback is no protection against that. A request that carries no
+	 * Origin or Referer header is not a cross-origin browser request and is still allowed, so ordinary clients such
+	 * as curl, Hawtio or the Jolokia CLI are unaffected.
+	 *
+	 * @param  pOrigin         the Origin or Referer header of the request, or <tt>null</tt> when absent
+	 * @param  pOnlyWhenStrictCheckingIsEnabled whether Jolokia asks to apply the check only in strict mode
+	 * @return                 <tt>true</tt> if the request may proceed
+	 */
+	@Override
+	public boolean isOriginAllowed(String pOrigin, boolean pOnlyWhenStrictCheckingIsEnabled) {
+		return pOrigin == null;
+	}
+
+	/**
 	 * Provides the list of allowed domains from JMX.
 	 * @return List of String, the list of the allowed domains.
 	 */
