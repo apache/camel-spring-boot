@@ -16,7 +16,10 @@
  */
 package org.apache.camel.spring.boot;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.spi.PropertiesFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -86,11 +89,18 @@ public abstract class AbstractEarlyResolutionPropertiesParser
             return;
         }
 
+        // an unresolved placeholder would otherwise stay in the property value and become the effective
+        // secret, so resolution failures abort startup unless the operator opts back into the old behaviour
+        final boolean ignoreResolutionFailures
+                = Boolean.parseBoolean(environment.getProperty(IGNORE_RESOLUTION_FAILURES));
+
         PropertiesFunction propertiesFunction = createPropertiesFunction(environment);
         LOG.debug("Early resolving properties using the {} function", propertiesFunction.getName());
 
         final String prefix = "{{" + propertiesFunction.getName() + ":";
         final Properties props = new Properties();
+        final List<String> failedKeys = new ArrayList<>();
+        final List<RuntimeCamelException> failures = new ArrayList<>();
 
         for (PropertySource<?> propertySource : environment.getPropertySources()) {
             if (propertySource instanceof MapPropertySource mapPropertySource) {
@@ -100,10 +110,35 @@ public abstract class AbstractEarlyResolutionPropertiesParser
                         String remainder = stringValue.substring(prefix.length(),
                                 stringValue.length() - SUFFIX.length());
                         LOG.debug("decrypting and overriding property {}", key);
-                        props.put(key, propertiesFunction.apply(remainder));
+                        try {
+                            props.put(key, propertiesFunction.apply(remainder));
+                        } catch (Exception e) {
+                            if (ignoreResolutionFailures) {
+                                LOG.warn("Failed to resolve property {} from {}; the placeholder is left "
+                                         + "unresolved because {} is enabled",
+                                        key, getSourceDescription(), IGNORE_RESOLUTION_FAILURES, e);
+                            } else {
+                                failedKeys.add(key);
+                                failures.add(new RuntimeCamelException(
+                                        "Failed to resolve property " + key + " from " + getSourceDescription()
+                                                              + ".",
+                                        e));
+                            }
+                        }
                     }
                 });
             }
+        }
+
+        if (!failures.isEmpty()) {
+            RuntimeCamelException aggregated = new RuntimeCamelException(
+                    "Failed to resolve " + failures.size() + " property placeholder(s) from "
+                                          + getSourceDescription() + ": " + String.join(", ", failedKeys)
+                                          + ". Startup is aborted so that the unresolved placeholders cannot "
+                                          + "become the effective values; set " + IGNORE_RESOLUTION_FAILURES
+                                          + "=true to continue anyway.");
+            failures.forEach(aggregated::addSuppressed);
+            throw aggregated;
         }
 
         environment.getPropertySources()

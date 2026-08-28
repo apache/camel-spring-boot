@@ -21,6 +21,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.spi.PropertiesFunction;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.SpringApplication;
@@ -31,9 +32,13 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.StandardEnvironment;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AbstractEarlyResolutionPropertiesParserTest {
 
@@ -213,5 +218,76 @@ public class AbstractEarlyResolutionPropertiesParserTest {
 
         assertEquals("pazzword", environment.getProperty("my.secret"),
                 "values loaded from application.properties arrive wrapped in OriginTrackedValue");
+    }
+
+    @Test
+    public void guardDisabledDoesNotReadTheIgnoreFlag() {
+        RecordingEnvironment environment = environmentWith(Map.of(
+                "my.secret", "{{test:some/secret}}"));
+        TestParser parser = new TestParser(new StubPropertiesFunction(Map.of(), Set.of()));
+
+        parser.onApplicationEvent(eventFor(environment));
+
+        assertFalse(environment.queried.contains(
+                AbstractEarlyResolutionPropertiesParser.IGNORE_RESOLUTION_FAILURES),
+                "the opt-out flag is only meaningful once early resolution is enabled, so it must not be "
+                        + "evaluated before the guard");
+    }
+
+    @Test
+    public void failClosedReportsEveryFailingPropertyTogether() {
+        RecordingEnvironment environment = environmentWith(Map.of(
+                GUARD, "true",
+                "first.secret", "{{test:missing/one}}",
+                "second.secret", "{{test:missing/two}}"));
+        StubPropertiesFunction function = new StubPropertiesFunction(
+                Map.of(), Set.of("missing/one", "missing/two"));
+        TestParser parser = new TestParser(function);
+
+        RuntimeCamelException thrown = assertThrows(RuntimeCamelException.class,
+                () -> parser.onApplicationEvent(eventFor(environment)));
+
+        assertTrue(thrown.getMessage().contains("first.secret"),
+                "the failure must name every property that could not be resolved, was: " + thrown.getMessage());
+        assertTrue(thrown.getMessage().contains("second.secret"),
+                "the failure must name every property that could not be resolved, was: " + thrown.getMessage());
+        assertTrue(thrown.getMessage().contains(
+                AbstractEarlyResolutionPropertiesParser.IGNORE_RESOLUTION_FAILURES),
+                "the failure must point at the opt-out property, was: " + thrown.getMessage());
+        assertEquals(2, thrown.getSuppressed().length,
+                "each individual failure is attached so its cause survives");
+        assertEquals(2, function.applied.size(),
+                "aborting on the first failure would hide the remaining broken placeholders from the operator");
+    }
+
+    @Test
+    public void failClosedDoesNotRegisterAnOverrideSource() {
+        RecordingEnvironment environment = environmentWith(Map.of(
+                GUARD, "true",
+                "my.secret", "{{test:missing}}"));
+        TestParser parser = new TestParser(new StubPropertiesFunction(Map.of(), Set.of("missing")));
+
+        assertThrows(RuntimeCamelException.class, () -> parser.onApplicationEvent(eventFor(environment)));
+
+        assertNull(environment.getPropertySources().get(OVERRIDE_SOURCE),
+                "a partially populated override source must not be left behind after an aborted startup");
+    }
+
+    @Test
+    public void ignoreResolutionFailuresKeepsStartupGoing() {
+        RecordingEnvironment environment = environmentWith(Map.of(
+                GUARD, "true",
+                AbstractEarlyResolutionPropertiesParser.IGNORE_RESOLUTION_FAILURES, "true",
+                "good.secret", "{{test:present}}",
+                "bad.secret", "{{test:missing}}"));
+        TestParser parser = new TestParser(
+                new StubPropertiesFunction(Map.of("present", "resolved"), Set.of("missing")));
+
+        assertDoesNotThrow(() -> parser.onApplicationEvent(eventFor(environment)));
+
+        assertEquals("resolved", environment.getProperty("good.secret"),
+                "a failure elsewhere must not discard the values that did resolve");
+        assertEquals("{{test:missing}}", environment.getProperty("bad.secret"),
+                "in tolerant mode the unresolved placeholder is deliberately left in place");
     }
 }
