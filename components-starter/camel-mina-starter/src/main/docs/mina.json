@@ -140,6 +140,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.mina.mute-exception",
+      "type": "java.lang.Boolean",
+      "description": "If enabled and an Exchange failed processing on the consumer side the response written back to the remote peer won't contain the exception's class, message or stack trace.",
+      "sourceType": "org.apache.camel.component.mina.springboot.MinaComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.mina.no-reply-log-level",
       "type": "org.apache.camel.LoggingLevel",
       "description": "If sync is enabled this option dictates MinaConsumer which logging level to use when logging a there is no reply to send back.",

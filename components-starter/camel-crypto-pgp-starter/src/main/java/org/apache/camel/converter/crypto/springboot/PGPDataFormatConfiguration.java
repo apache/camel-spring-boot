@@ -106,6 +106,15 @@ public class PGPDataFormatConfiguration
      * Possible values: optional, required, ignore, no_signature_allowed.
      */
     private String signatureVerificationOption;
+    /**
+     * Whether a message must be integrity protected in order to be decrypted.
+     * The legacy symmetrically encrypted data packet carries no modification
+     * detection code, and the packet type is chosen by whoever produced the
+     * message, so accepting it lets the sender decide whether the integrity
+     * check applies. Set to false only to interoperate with a sender that still
+     * emits the legacy packet.
+     */
+    private Boolean requireIntegrityProtection = true;
 
     public String getKeyUserid() {
         return keyUserid;
@@ -218,5 +227,13 @@ public class PGPDataFormatConfiguration
     public void setSignatureVerificationOption(
             String signatureVerificationOption) {
         this.signatureVerificationOption = signatureVerificationOption;
+    }
+
+    public Boolean getRequireIntegrityProtection() {
+        return requireIntegrityProtection;
+    }
+
+    public void setRequireIntegrityProtection(Boolean requireIntegrityProtection) {
+        this.requireIntegrityProtection = requireIntegrityProtection;
     }
 }

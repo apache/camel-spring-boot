@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 15 options, which are listed below.
+The starter supports 16 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -38,6 +38,7 @@ The starter supports 15 options, which are listed below.
 | camel.dataformat.pgp.key-userid | The user ID of the key in the PGP keyring used during encryption. Can also be only a part of a user ID. |  | String
 | camel.dataformat.pgp.password | Password used when opening the private key (not used for encryption). |  | String
 | camel.dataformat.pgp.provider | Java Cryptography Extension (JCE) provider, default is Bouncy Castle (BC). Alternatively you can use, for example, the IAIK JCE provider. |  | String
+| camel.dataformat.pgp.require-integrity-protection | Whether a message must be integrity protected in order to be decrypted. The legacy symmetrically encrypted data packet carries no modification detection code, and the packet type is chosen by whoever produced the message, so accepting it lets the sender decide whether the integrity check applies. Set to false only to interoperate with a sender that still emits the legacy packet. | true | Boolean
 | camel.dataformat.pgp.signature-key-file-name | Filename of the keyring to use for signing (during encryption) or for signature verification (during decryption); must be accessible as a classpath resource (but you can specify a location in the file system by using the file: prefix). |  | String
 | camel.dataformat.pgp.signature-key-ring | Keyring used for signing/verifying as byte array. You cannot set the signatureKeyFileName and signatureKeyRing at the same time. |  | String
 | camel.dataformat.pgp.signature-key-userid | User ID of the key in the PGP keyring used for signing (during encryption) or signature verification (during decryption). |  | String

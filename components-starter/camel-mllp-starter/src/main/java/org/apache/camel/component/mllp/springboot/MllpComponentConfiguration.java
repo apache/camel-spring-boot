@@ -180,7 +180,7 @@ public class MllpComponentConfiguration
     /**
      * Whether to log PHI
      */
-    private Boolean logPhi = true;
+    private Boolean logPhi = false;
     /**
      * Set the maximum number of bytes of PHI that will be logged in a log
      * entry.

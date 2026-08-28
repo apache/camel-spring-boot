@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 29 options, which are listed below.
+The starter supports 30 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -46,6 +46,7 @@ The starter supports 29 options, which are listed below.
 | camel.component.mina.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.mina.maximum-pool-size | Number of worker threads in the worker pool for TCP and UDP | 16 | Integer
 | camel.component.mina.mina-logger | You can enable the Apache MINA logging filter. Apache MINA uses slf4j logging at INFO level to log all input and output. | false | Boolean
+| camel.component.mina.mute-exception | If enabled and an Exchange failed processing on the consumer side the response written back to the remote peer won't contain the exception's class, message or stack trace. | true | Boolean
 | camel.component.mina.no-reply-log-level | If sync is enabled this option dictates MinaConsumer which logging level to use when logging a there is no reply to send back. | warn | LoggingLevel
 | camel.component.mina.object-codec-pattern | Accept the wildcard specified classes for Object deserialization, unless they are otherwise rejected. Multiple patterns can be separated by comma. This widens the codec's deserialization allow-list, so keep it as narrow as the route actually needs. Avoid : it accepts every class the classpath can load from an untrusted peer, including Camel's own org.apache.camel types. Leaving the option unset is the safest choice - the codec then accepts only the small built-in set and refuses anything else. |  | String
 | camel.component.mina.ordered-thread-pool-executor | Whether to use ordered thread pool, to ensure events are processed orderly on the same channel. | true | Boolean
