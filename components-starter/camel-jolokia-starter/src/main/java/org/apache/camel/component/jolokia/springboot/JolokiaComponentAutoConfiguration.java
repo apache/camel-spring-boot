@@ -84,7 +84,9 @@ public class JolokiaComponentAutoConfiguration {
 	public SpringJolokiaConfigHolder camelConfigHolder() {
 		LOG.debug("jolokia configuration from properties");
 		final SpringJolokiaConfigHolder springJolokiaConfigHolder = new SpringJolokiaConfigHolder();
-		setDefaultConfigValue("host", "0.0.0.0");
+		// bind to loopback like the Jolokia JVM agent does; the agent ships no authenticator, so exposing it
+		// beyond the host has to be a conscious step via camel.component.jolokia.server-config.host
+		setDefaultConfigValue("host", "127.0.0.1");
 		setDefaultConfigValue("autoStart", "true");
 		if (configuration.isUseCamelRestrictor()
 				&& !configuration.getServerConfig().containsKey(ConfigKey.RESTRICTOR_CLASS.getKeyValue())) {

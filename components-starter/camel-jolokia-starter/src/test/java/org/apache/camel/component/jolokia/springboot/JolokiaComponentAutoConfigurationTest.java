@@ -76,7 +76,7 @@ public class JolokiaComponentAutoConfigurationTest extends JolokiaComponentTestB
 				.extracting("configHolder").isNotNull()
 				.extracting("config")
 				.asInstanceOf(InstanceOfAssertFactories.map(String.class, String.class))
-				.containsEntry("host", "0.0.0.0")
+				.containsEntry("host", "127.0.0.1")
 				.containsEntry("autoStart", "true")
 				.containsEntry("restrictorClass", CamelRestrictor.class.getCanonicalName())
 				.containsEntry("discoveryEnabled", "true");
