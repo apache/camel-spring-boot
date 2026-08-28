@@ -42,7 +42,11 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
+import org.springframework.security.oauth2.core.OAuth2TokenValidator;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtValidators;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -106,7 +110,25 @@ public class UndertowSpringSecurityCustomizer implements ComponentCustomizer {
         final String jwkSetUri = getClientRegistration().getProviderDetails().getJwkSetUri();
         final NimbusJwtDecoder jwtDecoder = NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
         jwtDecoder.setClaimSetConverter(new KeycloakUsernameSubClaimAdapter(getProvider().getUserNameAttribute()));
+        // building the decoder from the JWK set URI pins the signing keys but installs no claim validation beyond
+        // timestamps, so bind the token to the configured issuer and client explicitly
+        jwtDecoder.setJwtValidator(jwtValidator());
         return jwtDecoder;
+    }
+
+    private OAuth2TokenValidator<Jwt> jwtValidator() {
+        final String issuerUri;
+        try {
+            issuerUri = getProvider().getIssuerUri();
+        } catch (URISyntaxException e) {
+            throw new IllegalArgumentException("Provider url is not correct.", e);
+        }
+        final OAuth2TokenValidator<Jwt> withIssuer = JwtValidators.createDefaultWithIssuer(issuerUri);
+        if (!getProvider().isValidateAudience()) {
+            return withIssuer;
+        }
+        return new DelegatingOAuth2TokenValidator<>(withIssuer,
+                new JwtAudienceValidator(getClientRegistration().getClientId()));
     }
 
     @Bean
