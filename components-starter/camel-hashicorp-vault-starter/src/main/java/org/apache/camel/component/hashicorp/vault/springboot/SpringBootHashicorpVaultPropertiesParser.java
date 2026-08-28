@@ -18,93 +18,57 @@ package org.apache.camel.component.hashicorp.vault.springboot;
 
 import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.component.hashicorp.vault.HashicorpVaultPropertiesFunction;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
-import org.springframework.boot.origin.OriginTrackedValue;
-import org.springframework.context.ApplicationListener;
+import org.apache.camel.spi.PropertiesFunction;
+import org.apache.camel.spring.boot.AbstractEarlyResolutionPropertiesParser;
+import org.apache.camel.util.ObjectHelper;
 import org.springframework.core.env.ConfigurableEnvironment;
-import org.springframework.core.env.MapPropertySource;
-import org.springframework.core.env.PropertiesPropertySource;
-import org.springframework.core.env.PropertySource;
 import org.springframework.vault.authentication.TokenAuthentication;
 import org.springframework.vault.client.VaultEndpoint;
 import org.springframework.vault.core.VaultTemplate;
 
-import java.util.Objects;
-import java.util.Properties;
-
-public class SpringBootHashicorpVaultPropertiesParser implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
-    private static final Logger LOG = LoggerFactory.getLogger(SpringBootHashicorpVaultPropertiesParser.class);
+public class SpringBootHashicorpVaultPropertiesParser extends AbstractEarlyResolutionPropertiesParser {
 
     @Override
-    public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
-        ConfigurableEnvironment environment = event.getEnvironment();
-        // an unresolved placeholder would otherwise stay in the property value and become the effective
-        // secret, so resolution failures abort startup unless the operator opts back into the old behaviour
-        final boolean ignoreResolutionFailures
-                = Boolean.parseBoolean(environment.getProperty("camel.vault.ignore-resolution-failures"));
-        if (Boolean.parseBoolean(environment.getProperty("camel.component.hashicorp-vault.early-resolve-properties"))) {
-            Objects.requireNonNull(environment.getProperty("camel.vault.hashicorp.token"), "Hashicorp Vault token is required");
-            Objects.requireNonNull(environment.getProperty("camel.vault.hashicorp.host"), "Hashicorp Vault host is required");
-            Objects.requireNonNull(environment.getProperty("camel.vault.hashicorp.port"), "Hashicorp Vault port is required");
-            Objects.requireNonNull(environment.getProperty("camel.vault.hashicorp.scheme"), "Hashicorp Vault scheme is required");
+    protected String getEarlyResolutionProperty() {
+        return "camel.component.hashicorp-vault.early-resolve-properties";
+    }
 
-            String token = environment.getProperty("camel.vault.hashicorp.token");
-            String host = environment.getProperty("camel.vault.hashicorp.host");
+    @Override
+    protected String getOverridePropertySourceName() {
+        return "overridden-camel-hashicorp-vault-properties";
+    }
 
-            int port = Integer.parseInt(environment.getProperty("camel.vault.hashicorp.port"));
-            String scheme = environment.getProperty("camel.vault.hashicorp.scheme");
+    @Override
+    protected PropertiesFunction createPropertiesFunction(ConfigurableEnvironment environment) {
+        String token = required(environment, "camel.vault.hashicorp.token", "Hashicorp Vault token is required");
+        String host = required(environment, "camel.vault.hashicorp.host", "Hashicorp Vault host is required");
+        String portValue = required(environment, "camel.vault.hashicorp.port", "Hashicorp Vault port is required");
+        String scheme = required(environment, "camel.vault.hashicorp.scheme", "Hashicorp Vault scheme is required");
 
-            VaultEndpoint vaultEndpoint = new VaultEndpoint();
-            vaultEndpoint.setHost(host);
-            vaultEndpoint.setPort(port);
-            vaultEndpoint.setScheme(scheme);
-
-            VaultTemplate client = new VaultTemplate(
-                    vaultEndpoint,
-                    new TokenAuthentication(token));
-            HashicorpVaultPropertiesFunction hashicorpVaultPropertiesFunction = new HashicorpVaultPropertiesFunction(client);
-
-            final Properties props = new Properties();
-            for (PropertySource mutablePropertySources : event.getEnvironment().getPropertySources()) {
-                if (mutablePropertySources instanceof MapPropertySource mapPropertySource) {
-                    mapPropertySource.getSource().forEach((key, value) -> {
-                        String stringValue = null;
-                        if ((value instanceof OriginTrackedValue originTrackedValue &&
-                                originTrackedValue.getValue() instanceof String v)) {
-                            stringValue = v;
-                        } else if (value instanceof String v) {
-                            stringValue = v;
-                        }
-
-                        if (stringValue != null &&
-                                stringValue.startsWith("{{hashicorp:") &&
-                                stringValue.endsWith("}}")) {
-                            LOG.debug("decrypting and overriding property {}", key);
-                            try {
-                                props.put(key, hashicorpVaultPropertiesFunction.apply(stringValue
-                                        .replace("{{hashicorp:", "")
-                                        .replace("}}", "")));
-                            } catch (Exception e) {
-                                if (ignoreResolutionFailures) {
-                                    LOG.warn("Failed to resolve property {} from the vault; the placeholder is left "
-                                             + "unresolved because camel.vault.ignore-resolution-failures is enabled", key, e);
-                                } else {
-                                    throw new RuntimeCamelException(
-                                            "Failed to resolve property " + key + " from the vault. Startup is aborted so "
-                                                            + "that the unresolved placeholder cannot become the effective "
-                                                            + "value; set camel.vault.ignore-resolution-failures=true to "
-                                                            + "continue anyway.",
-                                            e);
-                                }
-                            }
-                        }
-                    });
-                }
-            }
-
-            environment.getPropertySources().addFirst(new PropertiesPropertySource("overridden-camel-hashicorp-vault-properties", props));
+        int port;
+        try {
+            port = Integer.parseInt(portValue);
+        } catch (NumberFormatException e) {
+            throw new RuntimeCamelException(
+                    "camel.vault.hashicorp.port must be a number but was: " + portValue, e);
         }
+
+        VaultEndpoint vaultEndpoint = new VaultEndpoint();
+        vaultEndpoint.setHost(host);
+        vaultEndpoint.setPort(port);
+        vaultEndpoint.setScheme(scheme);
+
+        VaultTemplate client = new VaultTemplate(
+                vaultEndpoint,
+                new TokenAuthentication(token));
+        return new HashicorpVaultPropertiesFunction(client);
+    }
+
+    private static String required(ConfigurableEnvironment environment, String key, String message) {
+        String value = environment.getProperty(key);
+        if (ObjectHelper.isEmpty(value)) {
+            throw new RuntimeCamelException(message + " (set " + key + ")");
+        }
+        return value;
     }
 }
