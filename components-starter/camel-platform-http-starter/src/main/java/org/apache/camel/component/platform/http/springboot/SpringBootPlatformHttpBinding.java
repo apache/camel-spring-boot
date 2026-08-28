@@ -104,50 +104,77 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
             message.setHeader(Exchange.ATTACHMENTS_SIZE, multipartHttpServletRequest.getFileMap().keySet().size());
             multipartHttpServletRequest.getFileMap().forEach((name, multipartFile) -> {
                 try {
-                    Path uploadedTmpFile = Paths.get(tmpFolder.getPath(), UUID.randomUUID().toString());
-                    multipartFile.transferTo(uploadedTmpFile);
-
                     if (name != null) {
                         name = name.replaceAll("[\n\r\t]", "_");
                     }
 
-                    boolean accepted = true;
-
-                    if (getFileNameExtWhitelist() != null) {
-                        String ext = FileUtil.onlyExt(name);
-                        if (ext != null) {
-                            ext = ext.toLowerCase(Locale.US);
-                            if (!getFileNameExtWhitelist().equals("*") && !getFileNameExtWhitelist().contains(ext)) {
-                                accepted = false;
-                            }
-                        }
-                    }
-
-                    if (accepted) {
-                        AttachmentMessage am = new DefaultAttachmentMessage(message);
-                        File uploadedFile = uploadedTmpFile.toFile();
-                        am.addAttachment(name, new DataHandler(new CamelFileDataSource(uploadedFile, name)));
-
-                        // populate body in case there is only one attachment
-                        if (isSingleAttachment) {
-                            message.setHeader(Exchange.FILE_PATH, uploadedFile.getAbsolutePath());
-                            message.setHeader(Exchange.FILE_LENGTH, multipartFile.getSize());
-                            message.setHeader(Exchange.FILE_NAME, multipartFile.getOriginalFilename());
-                            if (multipartFile.getContentType() != null) {
-                                message.setHeader(Exchange.FILE_CONTENT_TYPE, multipartFile.getContentType());
-                            }
-                            message.setBody(uploadedTmpFile);
-                        }
-                    } else {
+                    // the whitelist is evaluated against the submitted file name - the value that is
+                    // propagated downstream - and before the upload is written to the servlet temp
+                    // directory, so a rejected file never reaches disk
+                    if (!isFileNameExtAccepted(multipartFile.getOriginalFilename())) {
                         LOG.debug(
                                 "Cannot add file as attachment: {} because the file is not accepted according to fileNameExtWhitelist: {}",
                                 name, getFileNameExtWhitelist());
+                        return;
+                    }
+
+                    Path uploadedTmpFile = Paths.get(tmpFolder.getPath(), UUID.randomUUID().toString());
+                    multipartFile.transferTo(uploadedTmpFile);
+
+                    AttachmentMessage am = new DefaultAttachmentMessage(message);
+                    File uploadedFile = uploadedTmpFile.toFile();
+                    am.addAttachment(name, new DataHandler(new CamelFileDataSource(uploadedFile, name)));
+
+                    // populate body in case there is only one attachment
+                    if (isSingleAttachment) {
+                        message.setHeader(Exchange.FILE_PATH, uploadedFile.getAbsolutePath());
+                        message.setHeader(Exchange.FILE_LENGTH, multipartFile.getSize());
+                        // FILE_NAME is a Camel control header consumed by file/ftp producers; the raw
+                        // client-supplied multipart filename may contain path segments, so reduce it to a
+                        // leaf name (CAMEL-24293)
+                        message.setHeader(Exchange.FILE_NAME, FileUtil.stripPath(multipartFile.getOriginalFilename()));
+                        if (multipartFile.getContentType() != null) {
+                            message.setHeader(Exchange.FILE_CONTENT_TYPE, multipartFile.getContentType());
+                        }
+                        message.setBody(uploadedTmpFile);
                     }
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             });
         }
+    }
+
+    /**
+     * Whether the submitted file name is accepted according to the configured {@code fileNameExtWhitelist}.
+     * <p/>
+     * The whitelist is a comma separated list of extensions, or {@code *} to accept every file. When a whitelist is
+     * configured, a file name that carries no extension is not accepted.
+     *
+     * @param  fileName the submitted file name, as sent by the client
+     * @return          <tt>true</tt> if the file may be added as an attachment
+     */
+    private boolean isFileNameExtAccepted(String fileName) {
+        final String whitelist = getFileNameExtWhitelist();
+        if (whitelist == null) {
+            return true;
+        }
+        final String trimmedWhitelist = whitelist.trim();
+        if ("*".equals(trimmedWhitelist)) {
+            return true;
+        }
+        // keep the multi-extension semantics of FileUtil.onlyExt so a whitelist such as "tar.gz" works
+        final String ext = FileUtil.onlyExt(fileName);
+        if (ext == null) {
+            return false;
+        }
+        final String candidate = ext.toLowerCase(Locale.US);
+        for (String allowed : trimmedWhitelist.split(",")) {
+            if (candidate.equals(allowed.trim().toLowerCase(Locale.US))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setStreaming(boolean streaming) {
