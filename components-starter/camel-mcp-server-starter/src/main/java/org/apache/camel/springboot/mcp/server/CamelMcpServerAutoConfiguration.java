@@ -22,6 +22,8 @@ import org.apache.camel.component.mcp.server.McpServerBridge;
 import org.apache.camel.component.mcp.server.McpServerConfiguration;
 import org.apache.camel.component.mcp.server.McpServerEngine;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -39,6 +41,8 @@ import org.springframework.context.annotation.Bean;
 @ConditionalOnProperty(value = "camel.mcp-server.enabled", matchIfMissing = true)
 @EnableConfigurationProperties(McpServerConfigurationProperties.class)
 public class CamelMcpServerAutoConfiguration {
+
+    private static final Logger LOG = LoggerFactory.getLogger(CamelMcpServerAutoConfiguration.class);
 
     @Bean(initMethod = "", destroyMethod = "")
     // Camel handles the lifecycle of this bean
@@ -58,6 +62,14 @@ public class CamelMcpServerAutoConfiguration {
         configuration.setToolTimeout(properties.getToolTimeout());
         McpServerBridge bridge = new McpServerBridge(configuration);
         camelContext.addService(bridge);
+        if (properties.getTags() != null && !properties.getTags().isBlank()) {
+            // exposing tools is opt-in, but once opted in the endpoint is reachable by anything that can reach
+            // the application HTTP port - spring.ai.mcp.server.* has no authentication of its own
+            LOG.info("Exposing ai-tool routes tagged [{}] as MCP tools. The MCP endpoint is served on the"
+                     + " application HTTP port and is not authenticated by the Spring AI MCP server; secure it in"
+                     + " the application, for example with a Spring Security filter chain on its path.",
+                    properties.getTags());
+        }
         return bridge;
     }
 }

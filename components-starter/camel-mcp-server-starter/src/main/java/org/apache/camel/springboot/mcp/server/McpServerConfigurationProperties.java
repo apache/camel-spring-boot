@@ -19,8 +19,12 @@ package org.apache.camel.springboot.mcp.server;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * Bridge-owned configuration of the Camel MCP server. Serving concerns (endpoint path, protocol, server identity,
- * authentication) are owned by the Spring AI MCP server and configured via {@code spring.ai.mcp.server.*}.
+ * Bridge-owned configuration of the Camel MCP server. Serving concerns (endpoint path, protocol, server identity)
+ * are owned by the Spring AI MCP server and configured via {@code spring.ai.mcp.server.*}.
+ * <p/>
+ * Note that {@code spring.ai.mcp.server.*} provides no authentication: the MCP endpoint is served on the
+ * application's own HTTP port and must be protected by the application, for example with a Spring Security filter
+ * chain matching the endpoint path.
  */
 @ConfigurationProperties(prefix = "camel.mcp-server")
 public class McpServerConfigurationProperties {
