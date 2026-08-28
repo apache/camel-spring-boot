@@ -22,6 +22,9 @@ import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.main.SecurityPolicyResult;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
+
+import java.util.Map;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 
@@ -129,6 +132,40 @@ public class CamelSecurityPolicyAutoConfigurationTest {
                     assertThat(context).hasNotFailed();
                     SecurityPolicyResult result = context.getBean(SecurityPolicyResult.class);
                     assertThat(result.hasViolations()).isTrue();
+                });
+    }
+
+
+    /**
+     * The same option configured as an environment variable arrives as CAMEL_COMPONENT_HTTP_TRUSTALLCERTIFICATES,
+     * which never matched the "camel." prefix - so every option set through the environment, the usual way to
+     * configure a containerised application, escaped the policy check entirely.
+     */
+    @Test
+    public void policyShouldSeeInsecureOptionsSetThroughTheEnvironment() {
+        runner.withPropertyValues("camel.security.policy=warn")
+                .withInitializer(ctx -> ctx.getEnvironment().getPropertySources()
+                        .addFirst(new SystemEnvironmentPropertySource("testSystemEnvironment",
+                                Map.of("CAMEL_COMPONENT_HTTP_TRUSTALLCERTIFICATES", "true"))))
+                .run(context -> {
+                    assertThat(context).hasNotFailed();
+                    SecurityPolicyResult result = context.getBean(SecurityPolicyResult.class);
+                    assertThat(result.hasViolations()).isTrue();
+                    assertThat(result.getViolations())
+                            .anySatisfy(v -> assertThat(v.propertyKey()).endsWith("trustallcertificates"));
+                });
+    }
+
+    @Test
+    public void environmentVariablesUnrelatedToCamelAreIgnored() {
+        runner.withPropertyValues("camel.security.policy=warn")
+                .withInitializer(ctx -> ctx.getEnvironment().getPropertySources()
+                        .addFirst(new SystemEnvironmentPropertySource("testSystemEnvironment",
+                                Map.of("SOME_OTHER_TRUSTALLCERTIFICATES", "true"))))
+                .run(context -> {
+                    assertThat(context).hasNotFailed();
+                    SecurityPolicyResult result = context.getBean(SecurityPolicyResult.class);
+                    assertThat(result.hasViolations()).isFalse();
                 });
     }
 
