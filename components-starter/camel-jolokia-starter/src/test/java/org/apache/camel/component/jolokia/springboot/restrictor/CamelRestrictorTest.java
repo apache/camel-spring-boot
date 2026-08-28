@@ -21,8 +21,7 @@ import org.junit.jupiter.api.Test;
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CamelRestrictorTest {
 
@@ -36,29 +35,45 @@ class CamelRestrictorTest {
 	void rejectsCrossOriginBrowserRequests() {
 		// AllowAllRestrictor permits every origin, which lets a page the user visits drive the agent -
 		// binding to loopback is no protection against that
-		assertFalse(restrictor.isOriginAllowed("http://evil.example.com", false));
-		assertFalse(restrictor.isOriginAllowed("http://evil.example.com", true));
+		assertThat(restrictor.isOriginAllowed("http://evil.example.com", false)).isFalse();
+		assertThat(restrictor.isOriginAllowed("http://evil.example.com", true)).isFalse();
+	}
+
+	@Test
+	void allowsLoopbackBrowserOrigins() {
+		assertThat(restrictor.isOriginAllowed("http://localhost:8080", false)).isTrue();
+		assertThat(restrictor.isOriginAllowed("http://127.0.0.1:8778", false)).isTrue();
+		assertThat(restrictor.isOriginAllowed("http://127.255.255.255:8778", false)).isTrue();
+		assertThat(restrictor.isOriginAllowed("http://[::1]:8778", false)).isTrue();
+		assertThat(restrictor.isOriginAllowed("http://[0:0:0:0:0:0:0:1]:8778", true)).isTrue();
+	}
+
+	@Test
+	void rejectsMalformedAndNonLoopbackOrigins() {
+		assertThat(restrictor.isOriginAllowed("not a URI", false)).isFalse();
+		assertThat(restrictor.isOriginAllowed("http://localhost.example.com", false)).isFalse();
+		assertThat(restrictor.isOriginAllowed("http://128.0.0.1:8778", false)).isFalse();
 	}
 
 	@Test
 	void allowsRequestsCarryingNoOrigin() {
-		// curl, Hawtio and the Jolokia CLI send no Origin or Referer header
-		assertTrue(restrictor.isOriginAllowed(null, false));
-		assertTrue(restrictor.isOriginAllowed(null, true));
+		// curl and the Jolokia CLI send no Origin or Referer header
+		assertThat(restrictor.isOriginAllowed(null, false)).isTrue();
+		assertThat(restrictor.isOriginAllowed(null, true)).isTrue();
 	}
 
 	@Test
 	void stillLimitsMBeansToTheAllowedDomains() throws Exception {
-		assertTrue(restrictor.isAttributeReadAllowed(name("org.apache.camel:type=context"), "CamelId"));
-		assertFalse(restrictor.isAttributeReadAllowed(name("com.example:type=Secret"), "value"));
-		assertTrue(restrictor.isObjectNameHidden(name("com.example:type=Secret")));
+		assertThat(restrictor.isAttributeReadAllowed(name("org.apache.camel:type=context"), "CamelId")).isTrue();
+		assertThat(restrictor.isAttributeReadAllowed(name("com.example:type=Secret"), "value")).isFalse();
+		assertThat(restrictor.isObjectNameHidden(name("com.example:type=Secret"))).isTrue();
 	}
 
 	@Test
 	void managementOfCamelMBeansRemainsPossible() throws Exception {
 		// the starter exists to manage Camel through Jolokia, so operations on the Camel domain stay allowed;
 		// that capability is why the agent binds to loopback by default
-		assertTrue(restrictor.isOperationAllowed(name("org.apache.camel:type=context"), "stop"));
-		assertFalse(restrictor.isOperationAllowed(name("com.example:type=Secret"), "reveal"));
+		assertThat(restrictor.isOperationAllowed(name("org.apache.camel:type=context"), "stop")).isTrue();
+		assertThat(restrictor.isOperationAllowed(name("com.example:type=Secret"), "reveal")).isFalse();
 	}
 }

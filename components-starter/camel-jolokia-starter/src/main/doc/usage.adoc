@@ -13,7 +13,7 @@ camel.component.jolokia.server-config.discoveryEnabled=true
 
 To avoid exposing all JMX MBeans (see https://jolokia.org/reference/html/manual/security.html[Security] considerations), a default Jolokia https://jolokia.org/reference/html/manual/security.html#security-restrictor[Restrictor] is provided that allows only Camel related data and some basic information from Java.
 
-The restrictor limits which MBeans are reachable, not what may be done to them: within the allowed domains, reading and writing attributes and invoking operations are all permitted, since managing Camel through Jolokia (starting and stopping routes from Hawtio, for example) is what the starter is for. That capability is why the agent binds to loopback by default. Cross-origin browser requests are rejected, so a page the user visits cannot drive the agent.
+The restrictor limits which MBeans are reachable, not what may be done to them: within the allowed domains, reading and writing attributes and invoking operations are all permitted, since managing Camel through Jolokia (starting and stopping routes from Hawtio, for example) is what the starter is for. That capability is why the agent binds to loopback by default. Browser requests from origins outside loopback are rejected, so a remote page the user visits cannot drive the agent.
 
 If the endpoint is exposed beyond the host, put authentication or a network policy in front of it, or supply a stricter restrictor.
 
