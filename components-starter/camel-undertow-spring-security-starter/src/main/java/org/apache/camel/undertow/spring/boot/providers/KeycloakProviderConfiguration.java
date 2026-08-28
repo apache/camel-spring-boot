@@ -61,8 +61,17 @@ public class KeycloakProviderConfiguration extends AbstractProviderConfiguration
     }
 
     @Override
+    public String getIssuerUri() throws URISyntaxException {
+        return realmUri().toString();
+    }
+
+    private URI realmUri() throws URISyntaxException {
+        return new URI(getUrl()).resolve("/auth/realms/" + getRealmId());
+    }
+
+    @Override
     public ClientRegistration getClientRegistration() throws URISyntaxException {
-        URI keycloakUri = new URI(getUrl()).resolve("/auth/realms/" + getRealmId() + "/protocol/openid-connect");
+        URI keycloakUri = URI.create(realmUri() + "/protocol/openid-connect");
         return ClientRegistration.withRegistrationId(getType().name()).clientId(getClientId())
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .redirectUri("{baseUrl}/login/oauth2/code/{registrationId}").scope("openid", "profile", "email")
