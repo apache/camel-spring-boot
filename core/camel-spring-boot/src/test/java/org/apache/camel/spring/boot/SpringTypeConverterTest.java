@@ -21,7 +21,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStream;
-import java.io.Reader;
+import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -99,8 +99,8 @@ public class SpringTypeConverterTest {
     }
 
     @Test
-    public void testStringToReaderConversionIsBlocked() {
-        Assertions.assertNull(converter.convertTo(Reader.class, null, "some file content"));
+    public void testStringToStringReaderConversionIsStillAllowed() {
+        Assertions.assertNotNull(converter.convertTo(StringReader.class, null, "some file content"));
     }
 
     @Test

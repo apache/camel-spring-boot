@@ -16,8 +16,8 @@
  */
 package org.apache.camel.spring.boot;
 
+import java.io.FileReader;
 import java.io.InputStream;
-import java.io.Reader;
 import java.io.Writer;
 import java.util.Collection;
 import java.util.List;
@@ -94,7 +94,7 @@ public class SpringTypeConverter extends TypeConverterSupport {
 
     private boolean isFileBackedTarget(Class<?> type) {
         return InputStream.class.isAssignableFrom(type)
-                || Reader.class.isAssignableFrom(type)
+                || FileReader.class.isAssignableFrom(type)
                 || Writer.class.isAssignableFrom(type)
                 || ZipFile.class.isAssignableFrom(type);
     }
