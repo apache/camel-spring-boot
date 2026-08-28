@@ -20,86 +20,42 @@ import com.google.cloud.secretmanager.v1.SecretManagerServiceClient;
 import com.google.cloud.secretmanager.v1.SecretManagerServiceSettings;
 import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.component.google.secret.manager.GoogleSecretManagerPropertiesFunction;
+import org.apache.camel.spi.PropertiesFunction;
+import org.apache.camel.spring.boot.AbstractEarlyResolutionPropertiesParser;
 import org.apache.camel.util.ObjectHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
-import org.springframework.boot.origin.OriginTrackedValue;
-import org.springframework.context.ApplicationListener;
 import org.springframework.core.env.ConfigurableEnvironment;
-import org.springframework.core.env.MapPropertySource;
-import org.springframework.core.env.PropertiesPropertySource;
-import org.springframework.core.env.PropertySource;
 
 import java.io.IOException;
-import java.util.Properties;
 
-public class SpringBootGoogleSecretManagerPropertiesParser implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
-    private static final Logger LOG = LoggerFactory.getLogger(SpringBootGoogleSecretManagerPropertiesParser.class);
+public class SpringBootGoogleSecretManagerPropertiesParser extends AbstractEarlyResolutionPropertiesParser {
 
     @Override
-    public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
+    protected String getEarlyResolutionProperty() {
+        return "camel.component.google-secret-manager.early-resolve-properties";
+    }
+
+    @Override
+    protected String getOverridePropertySourceName() {
+        return "overridden-camel-google-secret-manager-properties";
+    }
+
+    @Override
+    protected PropertiesFunction createPropertiesFunction(ConfigurableEnvironment environment) {
         SecretManagerServiceClient client;
-        ConfigurableEnvironment environment = event.getEnvironment();
-        // an unresolved placeholder would otherwise stay in the property value and become the effective
-        // secret, so resolution failures abort startup unless the operator opts back into the old behaviour
-        final boolean ignoreResolutionFailures
-                = Boolean.parseBoolean(environment.getProperty("camel.vault.ignore-resolution-failures"));
-        String projectId;
-        if (Boolean.parseBoolean(environment.getProperty("camel.component.google-secret-manager.early-resolve-properties"))) {
-            projectId = environment.getProperty("camel.vault.gcp.projectId");
-            boolean useDefaultInstance = Boolean.parseBoolean(environment.getProperty("camel.vault.gcp.useDefaultInstance"));
-            if (useDefaultInstance && ObjectHelper.isNotEmpty(projectId)) {
-                SecretManagerServiceSettings settings = null;
-                try {
-                    settings = SecretManagerServiceSettings.newBuilder().build();
-                    client = SecretManagerServiceClient.create(settings);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else {
-                throw new RuntimeCamelException(
-                        "Using the GCP Secret Manager Properties Function in Spring Boot early resolver mode requires setting GCP project Id as application properties and use default instance option to true");
+        String projectId = environment.getProperty("camel.vault.gcp.projectId");
+        boolean useDefaultInstance
+                = Boolean.parseBoolean(environment.getProperty("camel.vault.gcp.useDefaultInstance"));
+        if (useDefaultInstance && ObjectHelper.isNotEmpty(projectId)) {
+            try {
+                SecretManagerServiceSettings settings = SecretManagerServiceSettings.newBuilder().build();
+                client = SecretManagerServiceClient.create(settings);
+            } catch (IOException e) {
+                throw new RuntimeCamelException(e);
             }
-            GoogleSecretManagerPropertiesFunction secretsManagerPropertiesFunction = new GoogleSecretManagerPropertiesFunction(client, projectId);
-            final Properties props = new Properties();
-            for (PropertySource mutablePropertySources : event.getEnvironment().getPropertySources()) {
-                if (mutablePropertySources instanceof MapPropertySource mapPropertySource) {
-                    mapPropertySource.getSource().forEach((key, value) -> {
-                        String stringValue = null;
-                        if ((value instanceof OriginTrackedValue originTrackedValue &&
-                                originTrackedValue.getValue() instanceof String v)) {
-                            stringValue = v;
-                        } else if (value instanceof String v) {
-                            stringValue = v;
-                        }
-                        if (stringValue != null &&
-                                stringValue.startsWith("{{gcp:") &&
-                                stringValue.endsWith("}}")) {
-                            LOG.debug("decrypting and overriding property {}", key);
-                            try {
-                                String element = secretsManagerPropertiesFunction.apply(stringValue
-                                        .replace("{{gcp:", "")
-                                        .replace("}}", ""));
-                                props.put(key, element);
-                            } catch (Exception e) {
-                                if (ignoreResolutionFailures) {
-                                    LOG.warn("Failed to resolve property {} from the vault; the placeholder is left "
-                                             + "unresolved because camel.vault.ignore-resolution-failures is enabled", key, e);
-                                } else {
-                                    throw new RuntimeCamelException(
-                                            "Failed to resolve property " + key + " from the vault. Startup is aborted so "
-                                                            + "that the unresolved placeholder cannot become the effective "
-                                                            + "value; set camel.vault.ignore-resolution-failures=true to "
-                                                            + "continue anyway.",
-                                            e);
-                                }
-                            }
-                        }
-                    });
-                }
-            }
-            environment.getPropertySources().addFirst(new PropertiesPropertySource("overridden-camel-google-secret-manager-properties", props));
+        } else {
+            throw new RuntimeCamelException(
+                    "Using the GCP Secret Manager Properties Function in Spring Boot early resolver mode requires setting GCP project Id as application properties and use default instance option to true");
         }
+        return new GoogleSecretManagerPropertiesFunction(client, projectId);
     }
 }
