@@ -34,6 +34,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.context.properties.source.ConfigurationPropertyName;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.EnumerablePropertySource;
@@ -45,6 +46,7 @@ import org.springframework.core.env.Environment;
 public class CamelSecurityPolicyAutoConfiguration {
 
     private static final Logger LOG = LoggerFactory.getLogger(CamelSecurityPolicyAutoConfiguration.class);
+    private static final String CAMEL_PREFIX = "camel.";
 
     @Bean
     SecurityPolicyResult camelSecurityPolicyResult(CamelContext camelContext,
@@ -111,10 +113,11 @@ public class CamelSecurityPolicyAutoConfiguration {
             ce.getPropertySources().forEach(ps -> {
                 if (ps instanceof EnumerablePropertySource<?> eps) {
                     for (String name : eps.getPropertyNames()) {
-                        if (name != null && name.startsWith("camel.") && !name.startsWith("camel.security.")) {
-                            Object value = environment.getProperty(name);
+                        String canonical = canonicalCamelName(name);
+                        if (canonical != null && !canonical.startsWith("camel.security.")) {
+                            Object value = environment.getProperty(canonical);
                             if (value != null) {
-                                properties.putIfAbsent(name, value);
+                                properties.putIfAbsent(canonical, value);
                             }
                         }
                     }
@@ -123,6 +126,28 @@ public class CamelSecurityPolicyAutoConfiguration {
         }
 
         return properties;
+    }
+
+    /**
+     * Canonicalizes a property name as its source reports it, returning <tt>null</tt> when it is not a Camel
+     * property.
+     * <p/>
+     * Property sources report names in their own form: an option set in application.properties arrives as
+     * <tt>camel.component.foo.bar</tt>, while the same option set as an environment variable arrives as
+     * <tt>CAMEL_COMPONENT_FOO_BAR</tt>. Spring's relaxed binding applies both to the same option, so both have to
+     * be recognised here - otherwise every option configured through the environment, which is the usual way to
+     * configure a containerised application, is invisible to the policy check.
+     */
+    private static String canonicalCamelName(String name) {
+        if (name == null) {
+            return null;
+        }
+        if (name.startsWith(CAMEL_PREFIX)) {
+            return name;
+        }
+        ConfigurationPropertyName adapted = ConfigurationPropertyName.adapt(name, '_');
+        String canonical = adapted.toString();
+        return canonical.startsWith(CAMEL_PREFIX) ? canonical : null;
     }
 
     private static boolean containsSensitive(CamelContext camelContext, String key, Object value) {
