@@ -276,25 +276,17 @@ public class CamelRoutesEndpoint {
 
         @JsonProperty("details")
         private RouteDetails routeDetails;
-        private final Map<String, Object> properties;
 
         public RouteDetailsEndpointInfo(final CamelContext camelContext, final Route route) {
             super(route);
 
-            if (route.getProperties() != null) {
-                this.properties = new HashMap<>(route.getProperties());
-            } else {
-                this.properties = Collections.emptyMap();
-            }
+            // route properties are carried by the base class, whose field holds the
+            // @JsonIgnoreProperties filter - do not shadow it here, or the filter is bypassed
             if (camelContext.getManagementStrategy().getManagementAgent() != null) {
                 ManagedCamelContext mcc = camelContext.getCamelContextExtension()
                         .getContextPlugin(ManagedCamelContext.class);
                 this.routeDetails = new RouteDetails(mcc.getManagedRoute(route.getId(), ManagedRouteMBean.class));
             }
-        }
-
-        public Map<String, Object> getProperties() {
-            return properties;
         }
 
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
