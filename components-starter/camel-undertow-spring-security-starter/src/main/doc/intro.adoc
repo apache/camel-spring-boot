@@ -6,8 +6,8 @@ This starter secures Camel HTTP endpoints served by the Undertow component using
 
 Incoming JWTs are validated against the configured provider on three points: the standard timestamp checks,
 the `iss` claim (which must match the configured realm), and the audience — the token must carry the
-configured `clientId` in either its `aud` claim or, for providers such as Keycloak that record the requesting
-client separately, its `azp` claim.
+configured `clientId` in its `aud` claim. Keycloak may require an Audience protocol mapper to add the service
+client to access tokens.
 
 The audience check matters because every client of a realm is served by the same signing key. Without it, a
 token minted for any other client in the realm — including a low-trust public one — satisfies the signature

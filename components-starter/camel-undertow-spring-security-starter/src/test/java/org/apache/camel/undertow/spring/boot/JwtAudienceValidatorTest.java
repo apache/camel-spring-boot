@@ -58,10 +58,9 @@ public class JwtAudienceValidatorTest {
     }
 
     @Test
-    public void acceptsTokenWithThisClientAsAuthorizedParty() {
-        // Keycloak records the requesting client in azp and commonly leaves aud as "account"
+    public void rejectsMatchingAuthorizedPartyWhenAudienceTargetsAnotherService() {
         OAuth2TokenValidatorResult result = validator.validate(token(List.of("account"), CLIENT_ID));
-        assertFalse(result.hasErrors(), "a token minted for this client should be accepted via azp");
+        assertTrue(result.hasErrors(), "the authorized party must not override a mismatching audience");
     }
 
     @Test
@@ -73,9 +72,9 @@ public class JwtAudienceValidatorTest {
     }
 
     @Test
-    public void rejectsTokenCarryingNoAudienceOrAuthorizedParty() {
+    public void rejectsTokenCarryingNoAudience() {
         OAuth2TokenValidatorResult result = validator.validate(token(null, null));
-        assertTrue(result.hasErrors(), "a token with neither aud nor azp must be rejected");
+        assertTrue(result.hasErrors(), "a token without an audience must be rejected");
     }
 
     @Test

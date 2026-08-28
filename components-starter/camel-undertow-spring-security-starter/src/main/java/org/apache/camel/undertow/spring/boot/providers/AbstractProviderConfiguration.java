@@ -33,8 +33,8 @@ public abstract class AbstractProviderConfiguration {
     }
 
     /**
-     * Whether an incoming token must carry the configured client id in its aud or azp claim. Every client of a realm
-     * shares the signing key, so with this disabled a token minted for any other client of the same realm is accepted.
+     * Whether an incoming token must carry the configured client id in its aud claim. Every client of a realm shares
+     * the signing key, so with this disabled a token minted for any other client of the same realm is accepted.
      */
     private boolean validateAudience = true;
 
