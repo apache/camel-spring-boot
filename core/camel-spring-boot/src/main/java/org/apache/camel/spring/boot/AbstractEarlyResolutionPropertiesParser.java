@@ -21,9 +21,12 @@ import org.apache.camel.spi.PropertiesFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
+import org.springframework.boot.origin.OriginTrackedValue;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.PropertiesPropertySource;
+import org.springframework.core.env.PropertySource;
 
 /**
  * Base class for the early-resolution listeners used by the Camel vault and secrets starters.
@@ -45,6 +48,8 @@ public abstract class AbstractEarlyResolutionPropertiesParser
      * Lets an operator tolerate resolution failures instead of aborting startup.
      */
     public static final String IGNORE_RESOLUTION_FAILURES = "camel.vault.ignore-resolution-failures";
+
+    private static final String SUFFIX = "}}";
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractEarlyResolutionPropertiesParser.class);
 
@@ -84,9 +89,35 @@ public abstract class AbstractEarlyResolutionPropertiesParser
         PropertiesFunction propertiesFunction = createPropertiesFunction(environment);
         LOG.debug("Early resolving properties using the {} function", propertiesFunction.getName());
 
+        final String prefix = "{{" + propertiesFunction.getName() + ":";
         final Properties props = new Properties();
+
+        for (PropertySource<?> propertySource : environment.getPropertySources()) {
+            if (propertySource instanceof MapPropertySource mapPropertySource) {
+                mapPropertySource.getSource().forEach((key, value) -> {
+                    String stringValue = asString(value);
+                    if (stringValue != null && stringValue.startsWith(prefix) && stringValue.endsWith(SUFFIX)) {
+                        String remainder = stringValue.substring(prefix.length(),
+                                stringValue.length() - SUFFIX.length());
+                        LOG.debug("decrypting and overriding property {}", key);
+                        props.put(key, propertiesFunction.apply(remainder));
+                    }
+                });
+            }
+        }
 
         environment.getPropertySources()
                 .addFirst(new PropertiesPropertySource(getOverridePropertySourceName(), props));
+    }
+
+    private static String asString(Object value) {
+        if (value instanceof OriginTrackedValue originTrackedValue
+                && originTrackedValue.getValue() instanceof String v) {
+            return v;
+        }
+        if (value instanceof String v) {
+            return v;
+        }
+        return null;
     }
 }

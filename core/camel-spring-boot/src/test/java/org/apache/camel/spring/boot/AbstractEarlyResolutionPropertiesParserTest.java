@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.bootstrap.DefaultBootstrapContext;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
+import org.springframework.boot.origin.OriginTrackedValue;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.StandardEnvironment;
@@ -148,5 +149,69 @@ public class AbstractEarlyResolutionPropertiesParserTest {
         assertEquals(1, parser.factoryCalls, "the client is built exactly once per event");
         assertNotNull(environment.getPropertySources().get(OVERRIDE_SOURCE),
                 "the override source must be registered so later property resolution sees it");
+    }
+
+    @Test
+    public void resolvesWholeValuePlaceholders() {
+        RecordingEnvironment environment = environmentWith(Map.of(
+                GUARD, "true",
+                "my.secret", "{{test:database/password}}"));
+        TestParser parser = new TestParser(
+                new StubPropertiesFunction(Map.of("database/password", "pazzword"), Set.of()));
+
+        parser.onApplicationEvent(eventFor(environment));
+
+        assertEquals("pazzword", environment.getProperty("my.secret"),
+                "the resolved value must take effect, because the placeholder text is not a usable secret");
+    }
+
+    @Test
+    public void leavesNonMatchingValuesAlone() {
+        RecordingEnvironment environment = environmentWith(Map.of(
+                GUARD, "true",
+                "embedded.placeholder", "jdbc://{{test:host}}/db",
+                "foreign.prefix", "{{other:host}}",
+                "plain.value", "just-a-string"));
+        StubPropertiesFunction function = new StubPropertiesFunction(Map.of("host", "resolved-host"), Set.of());
+        TestParser parser = new TestParser(function);
+
+        parser.onApplicationEvent(eventFor(environment));
+
+        assertEquals(List.of(), function.applied,
+                "early resolution deliberately handles only values that are entirely one placeholder; "
+                        + "embedded placeholders belong to Camel's normal property parser");
+        assertEquals("jdbc://{{test:host}}/db", environment.getProperty("embedded.placeholder"));
+        assertEquals("{{other:host}}", environment.getProperty("foreign.prefix"));
+        assertEquals("just-a-string", environment.getProperty("plain.value"));
+    }
+
+    @Test
+    public void stripsOnlyTheLeadingPrefixAndTrailingDelimiters() {
+        RecordingEnvironment environment = environmentWith(Map.of(
+                GUARD, "true",
+                "my.secret", "{{test:a}}b}}"));
+        StubPropertiesFunction function = new StubPropertiesFunction(Map.of("a}}b", "resolved"), Set.of());
+        TestParser parser = new TestParser(function);
+
+        parser.onApplicationEvent(eventFor(environment));
+
+        assertEquals(List.of("a}}b"), function.applied,
+                "a global replace of the delimiters would corrupt a remainder that itself contains them");
+        assertEquals("resolved", environment.getProperty("my.secret"));
+    }
+
+    @Test
+    public void resolvesOriginTrackedValues() {
+        Map<String, Object> properties = new LinkedHashMap<>();
+        properties.put(GUARD, "true");
+        properties.put("my.secret", OriginTrackedValue.of("{{test:database/password}}"));
+        RecordingEnvironment environment = environmentWith(properties);
+        TestParser parser = new TestParser(
+                new StubPropertiesFunction(Map.of("database/password", "pazzword"), Set.of()));
+
+        parser.onApplicationEvent(eventFor(environment));
+
+        assertEquals("pazzword", environment.getProperty("my.secret"),
+                "values loaded from application.properties arrive wrapped in OriginTrackedValue");
     }
 }
