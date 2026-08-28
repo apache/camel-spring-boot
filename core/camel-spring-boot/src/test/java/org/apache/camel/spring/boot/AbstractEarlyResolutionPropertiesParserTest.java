@@ -228,6 +228,8 @@ public class AbstractEarlyResolutionPropertiesParserTest {
 
         parser.onApplicationEvent(eventFor(environment));
 
+        assertTrue(environment.queried.contains(GUARD),
+                "the guard property must be queried so that the ordering below is actually exercised");
         assertFalse(environment.queried.contains(
                 AbstractEarlyResolutionPropertiesParser.IGNORE_RESOLUTION_FAILURES),
                 "the opt-out flag is only meaningful once early resolution is enabled, so it must not be "
@@ -258,6 +260,23 @@ public class AbstractEarlyResolutionPropertiesParserTest {
                 "each individual failure is attached so its cause survives");
         assertEquals(2, function.applied.size(),
                 "aborting on the first failure would hide the remaining broken placeholders from the operator");
+    }
+
+    @Test
+    public void nullResolutionResultIsTreatedAsAFailure() {
+        RecordingEnvironment environment = environmentWith(Map.of(
+                GUARD, "true",
+                "my.secret", "{{test:missing/subkey}}"));
+        TestParser parser = new TestParser(new StubPropertiesFunction(Map.of(), Set.of()));
+
+        RuntimeCamelException thrown = assertThrows(RuntimeCamelException.class,
+                () -> parser.onApplicationEvent(eventFor(environment)));
+
+        assertTrue(thrown.getMessage().contains("my.secret"),
+                "a null result is a resolution failure like any other, so it must name the property, was: "
+                        + thrown.getMessage());
+        assertNull(environment.getPropertySources().get(OVERRIDE_SOURCE),
+                "a null resolution result must abort startup rather than silently storing no value");
     }
 
     @Test

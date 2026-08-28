@@ -16,8 +16,8 @@
  */
 package org.apache.camel.spring.boot;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Properties;
 import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.spi.PropertiesFunction;
@@ -40,9 +40,10 @@ import org.springframework.core.env.PropertySource;
  * resolving them and registering the resolved values. Subclasses contribute only the component-specific client
  * construction and naming.
  * <p/>
- * Early resolution deliberately handles only property values that consist entirely of a single placeholder.
- * Values with an embedded placeholder, such as {@code jdbc://{{aws:host}}/db}, are left for Camel's normal
- * property parser.
+ * A property value is an early-resolution candidate only when it starts with <code>{{&lt;functionName&gt;:</code>
+ * and ends with <code>}}</code>; everything in between is passed to the properties function verbatim. A value
+ * that concatenates two placeholders, such as {@code {{aws:user}}:{{aws:pass}}}, satisfies both conditions and
+ * is therefore not handled correctly; this is a known limitation, not a supported use case.
  */
 public abstract class AbstractEarlyResolutionPropertiesParser
         implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
@@ -99,8 +100,7 @@ public abstract class AbstractEarlyResolutionPropertiesParser
 
         final String prefix = "{{" + propertiesFunction.getName() + ":";
         final Properties props = new Properties();
-        final List<String> failedKeys = new ArrayList<>();
-        final List<RuntimeCamelException> failures = new ArrayList<>();
+        final Map<String, RuntimeCamelException> failures = new LinkedHashMap<>();
 
         for (PropertySource<?> propertySource : environment.getPropertySources()) {
             if (propertySource instanceof MapPropertySource mapPropertySource) {
@@ -109,19 +109,24 @@ public abstract class AbstractEarlyResolutionPropertiesParser
                     if (stringValue != null && stringValue.startsWith(prefix) && stringValue.endsWith(SUFFIX)) {
                         String remainder = stringValue.substring(prefix.length(),
                                 stringValue.length() - SUFFIX.length());
-                        LOG.debug("decrypting and overriding property {}", key);
+                        LOG.debug("Resolving and overriding property {}", key);
                         try {
-                            props.put(key, propertiesFunction.apply(remainder));
+                            String resolved = propertiesFunction.apply(remainder);
+                            if (resolved == null) {
+                                throw new RuntimeCamelException(
+                                        "The " + propertiesFunction.getName()
+                                                + " properties function returned no value for " + remainder);
+                            }
+                            props.put(key, resolved);
                         } catch (Exception e) {
                             if (ignoreResolutionFailures) {
                                 LOG.warn("Failed to resolve property {} from {}; the placeholder is left "
                                          + "unresolved because {} is enabled",
                                         key, getSourceDescription(), IGNORE_RESOLUTION_FAILURES, e);
                             } else {
-                                failedKeys.add(key);
-                                failures.add(new RuntimeCamelException(
+                                failures.put(key, new RuntimeCamelException(
                                         "Failed to resolve property " + key + " from " + getSourceDescription()
-                                                              + ".",
+                                                + ".",
                                         e));
                             }
                         }
@@ -133,11 +138,11 @@ public abstract class AbstractEarlyResolutionPropertiesParser
         if (!failures.isEmpty()) {
             RuntimeCamelException aggregated = new RuntimeCamelException(
                     "Failed to resolve " + failures.size() + " property placeholder(s) from "
-                                          + getSourceDescription() + ": " + String.join(", ", failedKeys)
-                                          + ". Startup is aborted so that the unresolved placeholders cannot "
-                                          + "become the effective values; set " + IGNORE_RESOLUTION_FAILURES
-                                          + "=true to continue anyway.");
-            failures.forEach(aggregated::addSuppressed);
+                            + getSourceDescription() + ": " + String.join(", ", failures.keySet())
+                            + ". Startup is aborted so that the unresolved placeholders cannot "
+                            + "become the effective values; set " + IGNORE_RESOLUTION_FAILURES
+                            + "=true to continue anyway.");
+            failures.values().forEach(aggregated::addSuppressed);
             throw aggregated;
         }
 
