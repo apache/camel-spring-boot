@@ -91,7 +91,6 @@
 ** xref:starters/cron.adoc[Cron]
 ** xref:starters/crypto-pgp.adoc[PGP (Pretty Good Privacy Cryptographic)]
 ** xref:starters/crypto.adoc[Crypto (JCE)]
-** xref:starters/csimple-joor.adoc[Csimple Joor]
 ** xref:starters/csv.adoc[CSV]
 ** xref:starters/cxf-rest.adoc[CXF-RS]
 ** xref:starters/cxf-soap.adoc[CXF]

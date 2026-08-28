@@ -15,7 +15,7 @@
 
 == Spring Boot Auto-Configuration
 
-The starter supports 127 options, which are listed below.
+The starter supports 123 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -61,10 +61,6 @@ The starter supports 127 options, which are listed below.
 | camel.cloud.kubernetes.service-discovery.username | Sets the username for authentication when using client lookup |  | String
 | camel.language.constant.enabled | Whether to enable auto configuration of the constant language. This is enabled by default. |  | Boolean
 | camel.language.constant.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. | true | Boolean
-| camel.language.csimple.enabled | Whether to enable auto configuration of the csimple language. This is enabled by default. |  | Boolean
-| camel.language.csimple.pretty | To pretty format the output (only JSon or XML supported). | false | Boolean
-| camel.language.csimple.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. | true | Boolean
-| camel.language.csimple.trim-result | Whether to trim the returned values when this language is in use. | false | Boolean
 | camel.language.exchange-property.enabled | Whether to enable auto configuration of the exchangeProperty language. This is enabled by default. |  | Boolean
 | camel.language.exchange-property.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. | true | Boolean
 | camel.language.file.enabled | Whether to enable auto configuration of the file language. This is enabled by default. |  | Boolean

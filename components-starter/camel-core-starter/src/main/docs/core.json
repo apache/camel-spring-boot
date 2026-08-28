@@ -27,17 +27,6 @@
       "sourceMethod": "getCustomizer()"
     },
     {
-      "name": "camel.language.csimple",
-      "type": "org.apache.camel.language.csimple.springboot.CSimpleLanguageConfiguration",
-      "sourceType": "org.apache.camel.language.csimple.springboot.CSimpleLanguageConfiguration"
-    },
-    {
-      "name": "camel.language.csimple.customizer",
-      "type": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties",
-      "sourceType": "org.apache.camel.language.csimple.springboot.CSimpleLanguageConfiguration",
-      "sourceMethod": "getCustomizer()"
-    },
-    {
       "name": "camel.language.exchange-property",
       "type": "org.apache.camel.language.property.springboot.ExchangePropertyLanguageConfiguration",
       "sourceType": "org.apache.camel.language.property.springboot.ExchangePropertyLanguageConfiguration"
@@ -384,38 +373,6 @@
       "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks.",
       "sourceType": "org.apache.camel.language.constant.springboot.ConstantLanguageConfiguration",
       "defaultValue": true
-    },
-    {
-      "name": "camel.language.csimple.customizer.enabled",
-      "type": "java.lang.Boolean",
-      "sourceType": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties"
-    },
-    {
-      "name": "camel.language.csimple.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Whether to enable auto configuration of the csimple language. This is enabled by default.",
-      "sourceType": "org.apache.camel.language.csimple.springboot.CSimpleLanguageConfiguration"
-    },
-    {
-      "name": "camel.language.csimple.pretty",
-      "type": "java.lang.Boolean",
-      "description": "To pretty format the output (only JSon or XML supported).",
-      "sourceType": "org.apache.camel.language.csimple.springboot.CSimpleLanguageConfiguration",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.language.csimple.trim",
-      "type": "java.lang.Boolean",
-      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks.",
-      "sourceType": "org.apache.camel.language.csimple.springboot.CSimpleLanguageConfiguration",
-      "defaultValue": true
-    },
-    {
-      "name": "camel.language.csimple.trim-result",
-      "type": "java.lang.Boolean",
-      "description": "Whether to trim the returned values when this language is in use.",
-      "sourceType": "org.apache.camel.language.csimple.springboot.CSimpleLanguageConfiguration",
-      "defaultValue": false
     },
     {
       "name": "camel.language.exchange-property.customizer.enabled",
