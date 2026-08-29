@@ -15,6 +15,7 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
+org.apache.camel.spring.boot.aiobservability.CamelAiObservabilityAutoConfiguration
 org.apache.camel.spring.boot.CamelAutoConfiguration
 org.apache.camel.spring.boot.actuate.console.CamelDevConsoleAutoConfiguration
 org.apache.camel.spring.boot.actuate.endpoint.CamelRouteControllerEndpointAutoConfiguration
