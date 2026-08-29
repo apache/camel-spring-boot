@@ -46,6 +46,11 @@ public class XQueryLanguageConfiguration
      */
     private List<PropertyDefinition> namespace;
     /**
+     * Reference to a org.apache.camel.support.builder.Namespaces bean in the
+     * registry to use for the XML Namespaces of prefix to uri mappings.
+     */
+    private String namespacesRef;
+    /**
      * Source to use, instead of message body. You can prefix with variable:,
      * header:, or property: to specify kind of source. Otherwise, the source is
      * assumed to be a variable. Use empty or null to use default source, which
@@ -72,6 +77,14 @@ public class XQueryLanguageConfiguration
 
     public void setNamespace(List<PropertyDefinition> namespace) {
         this.namespace = namespace;
+    }
+
+    public String getNamespacesRef() {
+        return namespacesRef;
+    }
+
+    public void setNamespacesRef(String namespacesRef) {
+        this.namespacesRef = namespacesRef;
     }
 
     public String getSource() {

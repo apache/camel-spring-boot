@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 12 options, which are listed below.
+The starter supports 13 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -33,6 +33,7 @@ The starter supports 12 options, which are listed below.
 | camel.language.xpath.factory-ref | References to a custom XPathFactory to lookup in the registry. |  | String
 | camel.language.xpath.log-namespaces | Whether to log namespaces which can assist during troubleshooting. | false | Boolean
 | camel.language.xpath.namespace | Injects the XML Namespaces of prefix to uri mappings. |  | PropertyDefinition>
+| camel.language.xpath.namespaces-ref | Reference to a org.apache.camel.support.builder.Namespaces bean in the registry to use for the XML Namespaces of prefix to uri mappings. |  | String
 | camel.language.xpath.object-model | The XPath object model to use. |  | String
 | camel.language.xpath.pre-compile | Whether to enable pre-compiling the xpath expression during initialization phase. pre-compile is enabled by default. | true | Boolean
 | camel.language.xpath.result-q-name | Sets the output type supported by XPath. | NODESET | String
