@@ -6,6 +6,7 @@
     "title": "Quartz",
     "description": "Quartz Scheduler",
     "deprecated": false,
+    "readOnly": true,
     "javaType": "org.apache.camel.component.quartz.QuartzConsole",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-quartz-starter",
