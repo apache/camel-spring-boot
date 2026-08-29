@@ -50,6 +50,12 @@
       "sourceType": "org.apache.camel.language.xpath.springboot.XPathLanguageConfiguration"
     },
     {
+      "name": "camel.language.xpath.namespaces-ref",
+      "type": "java.lang.String",
+      "description": "Reference to a org.apache.camel.support.builder.Namespaces bean in the registry to use for the XML Namespaces of prefix to uri mappings.",
+      "sourceType": "org.apache.camel.language.xpath.springboot.XPathLanguageConfiguration"
+    },
+    {
       "name": "camel.language.xpath.object-model",
       "type": "java.lang.String",
       "description": "The XPath object model to use.",
