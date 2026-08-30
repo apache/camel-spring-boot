@@ -14,26 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.spring.boot.aiobservability;
+package org.apache.camel.ai.observability.starter;
 
 import org.apache.camel.component.ai.observability.GenAiObservability;
 import org.apache.camel.component.ai.observability.GenAiObservabilityProperties;
 import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.junit.jupiter.api.Test;
+import org.springframework.mock.env.MockEnvironment;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.springframework.mock.env.MockEnvironment;
-
-class CamelAiObservabilityAutoConfigurationUnitTest {
+class AiObservabilityAutoConfigurationUnitTest {
 
     @Test
     void shouldPreferCanonicalPropertyFromEnvironment() {
         MockEnvironment environment = new MockEnvironment();
         environment.setProperty(GenAiObservabilityProperties.ENABLED, "false");
 
-        assertThat(CamelAiObservabilityAutoConfiguration.resolveEnabled(environment)).isFalse();
+        assertThat(AiObservabilityAutoConfiguration.resolveEnabled(environment)).isFalse();
     }
 
     @Test
@@ -41,14 +40,14 @@ class CamelAiObservabilityAutoConfigurationUnitTest {
         MockEnvironment environment = new MockEnvironment();
         environment.setProperty("camel.ai-observability.enabled", "false");
 
-        assertThat(CamelAiObservabilityAutoConfiguration.resolveEnabled(environment)).isFalse();
+        assertThat(AiObservabilityAutoConfiguration.resolveEnabled(environment)).isFalse();
     }
 
     @Test
     void shouldDefaultToEnabledWhenPropertyIsAbsent() {
         MockEnvironment environment = new MockEnvironment();
 
-        assertThat(CamelAiObservabilityAutoConfiguration.resolveEnabled(environment)).isTrue();
+        assertThat(AiObservabilityAutoConfiguration.resolveEnabled(environment)).isTrue();
     }
 
     @Test
@@ -56,10 +55,10 @@ class CamelAiObservabilityAutoConfigurationUnitTest {
         try (DefaultCamelContext camelContext = new DefaultCamelContext()) {
             camelContext.getPropertiesComponent().setLocalProperties(null);
 
-            CamelAiObservabilityAutoConfiguration.applyEnabledProperty(camelContext, false);
+            AiObservabilityAutoConfiguration.applyEnabledProperty(camelContext, false);
 
             PropertiesComponent pc = (PropertiesComponent) camelContext.getPropertiesComponent();
-            assertThat(pc.getOverrideProperties())
+            assertThat(pc.getLocalProperties())
                     .containsEntry(GenAiObservabilityProperties.ENABLED, "false");
             assertThat(GenAiObservability.isEnabled(camelContext)).isFalse();
         }
@@ -68,10 +67,10 @@ class CamelAiObservabilityAutoConfigurationUnitTest {
     @Test
     void shouldApplyEnabledPropertyToExistingLocalProperties() throws Exception {
         try (DefaultCamelContext camelContext = new DefaultCamelContext()) {
-            CamelAiObservabilityAutoConfiguration.applyEnabledProperty(camelContext, true);
+            AiObservabilityAutoConfiguration.applyEnabledProperty(camelContext, true);
 
             PropertiesComponent pc = (PropertiesComponent) camelContext.getPropertiesComponent();
-            assertThat(pc.getOverrideProperties())
+            assertThat(pc.getLocalProperties())
                     .containsEntry(GenAiObservabilityProperties.ENABLED, "true");
             assertThat(GenAiObservability.isEnabled(camelContext)).isTrue();
         }

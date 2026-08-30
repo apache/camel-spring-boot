@@ -14,26 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.spring.boot.aiobservability;
+package org.apache.camel.ai.observability.starter;
 
-import org.apache.camel.spi.Metadata;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-@ConfigurationProperties(prefix = "camel.aiobservability")
-public class CamelAiObservabilityConfigurationProperties {
+import org.springframework.context.annotation.Import;
 
-    /**
-     * Enables GenAI observability for Camel AI producers (OpenTelemetry spans and Micrometer metrics when backends are
-     * present).
-     */
-    @Metadata(defaultValue = "true")
-    private boolean enabled = true;
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+@Import(AiObservabilityAutoConfiguration.class)
+public @interface CamelAiObservability {
 }

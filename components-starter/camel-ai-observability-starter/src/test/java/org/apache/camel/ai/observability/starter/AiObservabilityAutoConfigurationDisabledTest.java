@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.spring.boot.aiobservability;
+package org.apache.camel.ai.observability.starter;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.ai.observability.GenAiObservability;
@@ -34,27 +34,29 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(classes = {
-        CamelAiObservabilityAutoConfigurationDefaultTest.TestConfiguration.class,
-        CamelAiObservabilityAutoConfiguration.class,
-        CamelAutoConfiguration.class
-})
-class CamelAiObservabilityAutoConfigurationDefaultTest {
+@SpringBootTest(
+        classes = {
+                AiObservabilityAutoConfigurationDisabledTest.TestConfiguration.class,
+                AiObservabilityAutoConfiguration.class,
+                CamelAutoConfiguration.class
+        },
+        properties = "camel.aiobservability.enabled=false")
+class AiObservabilityAutoConfigurationDisabledTest {
 
     @Autowired
     CamelContext camelContext;
 
     @Autowired
-    CamelAiObservabilityConfigurationProperties configurationProperties;
+    AiObservabilityConfigurationProperties configurationProperties;
 
     @Test
-    void shouldEnableGenAiObservabilityByDefault() {
-        assertThat(configurationProperties.isEnabled()).isTrue();
-        assertThat(GenAiObservability.isEnabled(camelContext)).isTrue();
+    void shouldDisableGenAiObservability() {
+        assertThat(configurationProperties.isEnabled()).isFalse();
+        assertThat(GenAiObservability.isEnabled(camelContext)).isFalse();
 
         PropertiesComponent pc = (PropertiesComponent) camelContext.getPropertiesComponent();
-        assertThat(pc.getOverrideProperties())
-                .containsEntry(GenAiObservabilityProperties.ENABLED, "true");
+        assertThat(pc.getLocalProperties())
+                .containsEntry(GenAiObservabilityProperties.ENABLED, "false");
     }
 
     @Configuration

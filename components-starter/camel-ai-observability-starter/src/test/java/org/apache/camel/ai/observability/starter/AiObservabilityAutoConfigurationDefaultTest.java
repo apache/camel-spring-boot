@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.spring.boot.aiobservability;
+package org.apache.camel.ai.observability.starter;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.ai.observability.GenAiObservability;
@@ -34,29 +34,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DirtiesContext
 @CamelSpringBootTest
 @EnableAutoConfiguration
-@SpringBootTest(
-        classes = {
-                CamelAiObservabilityAutoConfigurationDisabledTest.TestConfiguration.class,
-                CamelAiObservabilityAutoConfiguration.class,
-                CamelAutoConfiguration.class
-        },
-        properties = "camel.aiobservability.enabled=false")
-class CamelAiObservabilityAutoConfigurationDisabledTest {
+@SpringBootTest(classes = {
+        AiObservabilityAutoConfigurationDefaultTest.TestConfiguration.class,
+        AiObservabilityAutoConfiguration.class,
+        CamelAutoConfiguration.class
+})
+class AiObservabilityAutoConfigurationDefaultTest {
 
     @Autowired
     CamelContext camelContext;
 
     @Autowired
-    CamelAiObservabilityConfigurationProperties configurationProperties;
+    AiObservabilityConfigurationProperties configurationProperties;
 
     @Test
-    void shouldDisableGenAiObservability() {
-        assertThat(configurationProperties.isEnabled()).isFalse();
-        assertThat(GenAiObservability.isEnabled(camelContext)).isFalse();
+    void shouldEnableGenAiObservabilityByDefault() {
+        assertThat(configurationProperties.isEnabled()).isTrue();
+        assertThat(GenAiObservability.isEnabled(camelContext)).isTrue();
 
         PropertiesComponent pc = (PropertiesComponent) camelContext.getPropertiesComponent();
-        assertThat(pc.getOverrideProperties())
-                .containsEntry(GenAiObservabilityProperties.ENABLED, "false");
+        assertThat(pc.getLocalProperties())
+                .containsEntry(GenAiObservabilityProperties.ENABLED, "true");
     }
 
     @Configuration

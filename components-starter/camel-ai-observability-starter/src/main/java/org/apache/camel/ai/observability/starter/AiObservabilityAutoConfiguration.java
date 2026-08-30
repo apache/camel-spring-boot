@@ -14,12 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.spring.boot.aiobservability;
+package org.apache.camel.ai.observability.starter;
+
+import java.util.Properties;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.ai.observability.GenAiObservabilityProperties;
 import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
+import org.apache.camel.spring.boot.CamelContextConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -30,20 +33,22 @@ import org.springframework.core.env.Environment;
 
 @AutoConfiguration(after = CamelAutoConfiguration.class)
 @ConditionalOnBean(CamelAutoConfiguration.class)
-@EnableConfigurationProperties(CamelAiObservabilityConfigurationProperties.class)
-public class CamelAiObservabilityAutoConfiguration {
+@EnableConfigurationProperties(AiObservabilityConfigurationProperties.class)
+public class AiObservabilityAutoConfiguration {
 
     @Bean
-    GenAiObservabilityConfigurer genAiObservabilityConfigurer(
-            CamelContext camelContext, Environment environment, PropertiesComponent propertiesComponent) {
-        propertiesComponent.setCamelContext(camelContext);
-        camelContext.setPropertiesComponent(propertiesComponent);
-        applyEnabledProperty(camelContext, resolveEnabled(environment));
-        return new GenAiObservabilityConfigurer();
-    }
+    CamelContextConfiguration aiObservabilityCamelContextConfiguration(Environment environment) {
+        boolean enabled = resolveEnabled(environment);
+        return new CamelContextConfiguration() {
+            @Override
+            public void beforeApplicationStart(CamelContext camelContext) {
+                applyEnabledProperty(camelContext, enabled);
+            }
 
-    static final class GenAiObservabilityConfigurer {
-        // marker bean
+            @Override
+            public void afterApplicationStart(CamelContext camelContext) {
+            }
+        };
     }
 
     static boolean resolveEnabled(Environment environment) {
@@ -52,13 +57,18 @@ public class CamelAiObservabilityAutoConfiguration {
             return canonical;
         }
         return Binder.get(environment)
-                .bind("camel.aiobservability", Bindable.of(CamelAiObservabilityConfigurationProperties.class))
-                .map(CamelAiObservabilityConfigurationProperties::isEnabled)
+                .bind("camel.aiobservability", Bindable.of(AiObservabilityConfigurationProperties.class))
+                .map(AiObservabilityConfigurationProperties::isEnabled)
                 .orElse(true);
     }
 
     static void applyEnabledProperty(CamelContext camelContext, boolean enabled) {
         PropertiesComponent pc = (PropertiesComponent) camelContext.getPropertiesComponent();
-        pc.addOverrideProperty(GenAiObservabilityProperties.ENABLED, Boolean.toString(enabled));
+        Properties local = pc.getLocalProperties();
+        if (local == null) {
+            local = new Properties();
+            pc.setLocalProperties(local);
+        }
+        local.setProperty(GenAiObservabilityProperties.ENABLED, Boolean.toString(enabled));
     }
 }

@@ -38,11 +38,6 @@
       "sourceMethod": "getCustomizer()"
     },
     {
-      "name": "camel.aiobservability",
-      "type": "org.apache.camel.spring.boot.aiobservability.CamelAiObservabilityConfigurationProperties",
-      "sourceType": "org.apache.camel.spring.boot.aiobservability.CamelAiObservabilityConfigurationProperties"
-    },
-    {
       "name": "camel.errorregistry",
       "type": "org.apache.camel.spring.boot.errorregistry.CamelErrorRegistryConfigurationProperties",
       "sourceType": "org.apache.camel.spring.boot.errorregistry.CamelErrorRegistryConfigurationProperties"
@@ -298,13 +293,6 @@
       "type": "java.lang.Boolean",
       "description": "Global option to enable\/disable dataformat auto-configuration, default is true.",
       "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationProperties",
-      "defaultValue": true
-    },
-    {
-      "name": "camel.aiobservability.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Enables GenAI observability for Camel AI producers (OpenTelemetry spans and Micrometer metrics when backends are present).",
-      "sourceType": "org.apache.camel.spring.boot.aiobservability.CamelAiObservabilityConfigurationProperties",
       "defaultValue": true
     },
     {

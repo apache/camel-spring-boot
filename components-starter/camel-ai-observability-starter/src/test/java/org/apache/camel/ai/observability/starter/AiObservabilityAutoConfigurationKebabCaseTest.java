@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.spring.boot.aiobservability;
+package org.apache.camel.ai.observability.starter;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.ai.observability.GenAiObservability;
@@ -36,22 +36,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 @EnableAutoConfiguration
 @SpringBootTest(
         classes = {
-                CamelAiObservabilityAutoConfigurationRelaxedBindingTest.TestConfiguration.class,
-                CamelAiObservabilityAutoConfiguration.class,
+                AiObservabilityAutoConfigurationKebabCaseTest.TestConfiguration.class,
+                AiObservabilityAutoConfiguration.class,
                 CamelAutoConfiguration.class
         },
-        properties = "camel.aiObservability.enabled=false")
-class CamelAiObservabilityAutoConfigurationRelaxedBindingTest {
+        properties = "camel.ai-observability.enabled=false")
+class AiObservabilityAutoConfigurationKebabCaseTest {
 
     @Autowired
     CamelContext camelContext;
 
     @Test
-    void shouldDisableGenAiObservabilityWithCamelCaseProperty() {
+    void shouldDisableGenAiObservabilityWithKebabCaseProperty() {
         assertThat(GenAiObservability.isEnabled(camelContext)).isFalse();
 
         PropertiesComponent pc = (PropertiesComponent) camelContext.getPropertiesComponent();
-        assertThat(pc.getOverrideProperties())
+        assertThat(pc.getLocalProperties())
                 .containsEntry(GenAiObservabilityProperties.ENABLED, "false");
     }
 
