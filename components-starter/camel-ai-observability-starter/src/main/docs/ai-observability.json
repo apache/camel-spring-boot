@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "camel.aiobservability",
+      "type": "org.apache.camel.ai.observability.starter.AiObservabilityConfigurationProperties",
+      "sourceType": "org.apache.camel.ai.observability.starter.AiObservabilityConfigurationProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.aiobservability.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enables GenAI observability for Camel AI producers (OpenTelemetry spans and Micrometer metrics when backends are present).",
+      "sourceType": "org.apache.camel.ai.observability.starter.AiObservabilityConfigurationProperties",
+      "defaultValue": true
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

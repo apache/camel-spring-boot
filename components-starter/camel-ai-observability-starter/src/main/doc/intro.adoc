@@ -1,0 +1,13 @@
+Spring Boot auto-configuration for Camel GenAI observability.
+
+Add this starter to opt in to GenAI observability configuration for Camel AI producers. Camel 4.23+ AI producers emit OpenTelemetry spans and Micrometer metrics when `camel-ai-observability` and a tracing or metrics backend are on the classpath.
+
+Configure the global toggle in `application.properties`:
+
+[source,properties]
+----
+# Disable GenAI observability for all AI producers (default is true)
+camel.aiobservability.enabled=false
+----
+
+Relaxed binding also accepts `camel.aiObservability.enabled` and `camel.ai-observability.enabled`. The property is written to the Camel `PropertiesComponent` local properties as `camel.aiObservability.enabled`, matching Camel Main and JBang.
