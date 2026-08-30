@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 14 options, which are listed below.
+The starter supports 15 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -38,6 +38,7 @@ The starter supports 14 options, which are listed below.
 | camel.component.google-firestore.health-check-consumer-enabled | Used for enabling or disabling all consumer based health checks from this component | true | Boolean
 | camel.component.google-firestore.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
 | camel.component.google-firestore.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| camel.component.google-firestore.max-pending-changes | Maximum number of realtime document changes buffered between two polls. The changes reported by the snapshot listener are buffered until the next poll picks them up, so a collection changing faster than the route consumes it makes that buffer grow. When the buffer is full the oldest buffered change is discarded and a warning is logged. Use 0 for an unbounded buffer. Only used when realtimeUpdates is enabled. | 0 | Integer
 | camel.component.google-firestore.operation | Set the operation for the producer. |  | GoogleFirestoreOperations
 | camel.component.google-firestore.project-id | The Google Cloud project ID. If not specified, it will be determined from the service account key or environment. |  | String
 | camel.component.google-firestore.realtime-updates | When true, the consumer will listen for real-time updates on the collection | false | Boolean

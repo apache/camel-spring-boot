@@ -85,6 +85,15 @@ public class GoogleFirestoreComponentConfiguration
      */
     private Boolean realtimeUpdates = false;
     /**
+     * Maximum number of realtime document changes buffered between two polls.
+     * The changes reported by the snapshot listener are buffered until the next
+     * poll picks them up, so a collection changing faster than the route
+     * consumes it makes that buffer grow. When the buffer is full the oldest
+     * buffered change is discarded and a warning is logged. Use 0 for an
+     * unbounded buffer. Only used when realtimeUpdates is enabled.
+     */
+    private Integer maxPendingChanges = 0;
+    /**
      * The document ID to use for document-specific operations
      */
     private String documentId;
@@ -179,6 +188,14 @@ public class GoogleFirestoreComponentConfiguration
 
     public void setRealtimeUpdates(Boolean realtimeUpdates) {
         this.realtimeUpdates = realtimeUpdates;
+    }
+
+    public Integer getMaxPendingChanges() {
+        return maxPendingChanges;
+    }
+
+    public void setMaxPendingChanges(Integer maxPendingChanges) {
+        this.maxPendingChanges = maxPendingChanges;
     }
 
     public String getDocumentId() {
