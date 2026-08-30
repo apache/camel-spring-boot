@@ -1,0 +1,15 @@
+{
+  "other": {
+    "kind": "other",
+    "name": "ai-observability",
+    "title": "AI Observability",
+    "description": "Spring Boot auto-configuration for Camel GenAI observability",
+    "deprecated": false,
+    "firstVersion": "4.23.0",
+    "label": "monitoring,ai",
+    "supportLevel": "Preview",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-ai-observability-starter",
+    "version": "4.23.0-SNAPSHOT"
+  }
+}

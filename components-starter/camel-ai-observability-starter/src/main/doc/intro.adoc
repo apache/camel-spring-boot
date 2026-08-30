@@ -11,5 +11,3 @@ camel.aiobservability.enabled=false
 ----
 
 Relaxed binding also accepts `camel.aiObservability.enabled` and `camel.ai-observability.enabled`. The property is written to the Camel `PropertiesComponent` local properties as `camel.aiObservability.enabled`, matching Camel Main and JBang.
-
-Use the `@CamelAiObservability` annotation on your Spring Boot main class or configuration to enable explicitly.

@@ -202,7 +202,7 @@ camel.aiobservability.enabled=false
 
 Relaxed binding also accepts `camel.aiObservability.enabled` and `camel.ai-observability.enabled`. The property is
 written to the Camel `PropertiesComponent` local properties as `camel.aiObservability.enabled`, matching Camel Main and
-JBang. See the Camel xref:next@components:others:ai-observability.adoc[AI Observability] documentation for span
+JBang. See the Camel xref:components:others:ai-observability.adoc[AI Observability] documentation for span
 attributes and metrics.
 
 == Custom Camel context configuration
