@@ -180,31 +180,6 @@ public class MyRouter extends RouteBuilder {
 }
 ----
 
-=== GenAI observability
-
-Camel 4.23+ AI producers emit OpenTelemetry spans and Micrometer metrics when `camel-ai-observability` and a tracing or
-metrics backend are on the classpath. Add the `camel-ai-observability-starter` dependency to opt in to first-class
-Spring Boot configuration for the global toggle:
-
-[source,xml]
-----
-<dependency>
-  <groupId>org.apache.camel.springboot</groupId>
-  <artifactId>camel-ai-observability-starter</artifactId>
-</dependency>
-----
-
-[source,properties]
-----
-# Disable GenAI observability for all AI producers (default is true)
-camel.aiobservability.enabled=false
-----
-
-Relaxed binding also accepts `camel.aiObservability.enabled` and `camel.ai-observability.enabled`. The property is
-written to the Camel `PropertiesComponent` local properties as `camel.aiObservability.enabled`, matching Camel Main and
-JBang. See the Camel xref:components:others:ai-observability.adoc[AI Observability] documentation for span
-attributes and metrics.
-
 == Custom Camel context configuration
 
 If you would like to perform some operations on `CamelContext` bean
