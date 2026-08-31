@@ -20,6 +20,7 @@ import static org.awaitility.Awaitility.await;
 
 import java.util.concurrent.TimeUnit;
 import org.apache.camel.CamelContext;
+import org.apache.camel.FailedToStartRouteException;
 import org.apache.camel.ServiceStatus;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spi.SupervisingRouteController;
@@ -69,7 +70,11 @@ public class SupervisingRouteControllerRestartTest {
         try {
             controller.startRoute("dummy");
         } catch (Exception e) {
-            Assertions.assertEquals("Forced error on restart", e.getCause().getMessage());
+            // consumer startup failures are wrapped in FailedToStartRouteException (CAMEL-24404); the
+            // checked IOException thrown by DummyConsumer is itself wrapped in a RuntimeCamelException
+            // before that, so the original message is two levels down the cause chain
+            Assertions.assertInstanceOf(FailedToStartRouteException.class, e);
+            Assertions.assertEquals("Forced error on restart", e.getCause().getCause().getMessage());
         }
 
         // Wait for wile to give time to the controller to start the route
