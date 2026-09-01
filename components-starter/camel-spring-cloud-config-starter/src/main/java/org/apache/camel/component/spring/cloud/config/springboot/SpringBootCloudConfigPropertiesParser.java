@@ -16,72 +16,33 @@
  */
 package org.apache.camel.component.spring.cloud.config.springboot;
 
-import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.component.spring.cloud.config.SpringCloudConfigPropertiesFunction;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
-import org.springframework.boot.origin.OriginTrackedValue;
-import org.springframework.context.ApplicationListener;
+import org.apache.camel.spi.PropertiesFunction;
+import org.apache.camel.spring.boot.AbstractEarlyResolutionPropertiesParser;
 import org.springframework.core.env.ConfigurableEnvironment;
-import org.springframework.core.env.MapPropertySource;
-import org.springframework.core.env.PropertiesPropertySource;
-import org.springframework.core.env.PropertySource;
 
-import java.util.Properties;
-
-public class SpringBootCloudConfigPropertiesParser implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
-    private static final Logger LOG = LoggerFactory.getLogger(SpringBootCloudConfigPropertiesParser.class);
+public class SpringBootCloudConfigPropertiesParser extends AbstractEarlyResolutionPropertiesParser {
 
     @Override
-    public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
-        Properties properties = new Properties();
-        ConfigurableEnvironment environment = event.getEnvironment();
-        // an unresolved placeholder would otherwise stay in the property value and become the effective
-        // configuration value, so resolution failures abort startup unless the operator opts back in
-        final boolean ignoreResolutionFailures
-                = Boolean.parseBoolean(environment.getProperty("camel.vault.ignore-resolution-failures"));
+    protected String getEarlyResolutionProperty() {
+        return "camel.component.spring-cloud-config.early-resolve-properties";
+    }
 
-        if (Boolean.parseBoolean(
-                environment.getProperty("camel.component.spring-cloud-config.early-resolve-properties"))) {
-            SpringCloudConfigPropertiesFunction springCloudConfigPropertiesFunction = new SpringCloudConfigPropertiesFunction();
-            springCloudConfigPropertiesFunction.setEnvironment(environment);
-            for (PropertySource mutablePropertySources : event.getEnvironment().getPropertySources()) {
-                if (mutablePropertySources instanceof MapPropertySource mapPropertySource) {
-                    mapPropertySource.getSource().forEach((key, value) -> {
-                        String stringValue = null;
-                        if ((value instanceof OriginTrackedValue originTrackedValue
-                                && originTrackedValue.getValue() instanceof String v)) {
-                            stringValue = v;
-                        } else if (value instanceof String v) {
-                            stringValue = v;
-                        }
-                        if (stringValue != null && stringValue.startsWith("{{spring-config:")
-                                && stringValue.endsWith("}}")) {
-                            LOG.debug("decrypting and overriding property {}", key);
-                            try {
-                                String element = springCloudConfigPropertiesFunction
-                                        .apply(stringValue.replace("{{spring-config:", "").replace("}}", ""));
-                                properties.put(key, element);
-                            } catch (Exception e) {
-                                if (ignoreResolutionFailures) {
-                                    LOG.warn("Failed to resolve property {} from Spring Cloud Config; the placeholder is left "
-                                             + "unresolved because camel.vault.ignore-resolution-failures is enabled", key, e);
-                                } else {
-                                    throw new RuntimeCamelException(
-                                            "Failed to resolve property " + key + " from Spring Cloud Config. Startup is aborted "
-                                                            + "so that the unresolved placeholder cannot become the effective "
-                                                            + "value; set camel.vault.ignore-resolution-failures=true to "
-                                                            + "continue anyway.",
-                                            e);
-                                }
-                            }
-                        }
-                    });
-                }
-            }
-            environment.getPropertySources()
-                    .addFirst(new PropertiesPropertySource("overridden-camel-spring-config-properties", properties));
-        }
+    @Override
+    protected String getOverridePropertySourceName() {
+        return "overridden-camel-spring-config-properties";
+    }
+
+    @Override
+    protected String getSourceDescription() {
+        return "Spring Cloud Config";
+    }
+
+    @Override
+    protected PropertiesFunction createPropertiesFunction(ConfigurableEnvironment environment) {
+        SpringCloudConfigPropertiesFunction springCloudConfigPropertiesFunction
+                = new SpringCloudConfigPropertiesFunction();
+        springCloudConfigPropertiesFunction.setEnvironment(environment);
+        return springCloudConfigPropertiesFunction;
     }
 }

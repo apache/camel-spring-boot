@@ -20,100 +20,53 @@ import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.component.cyberark.vault.CyberArkVaultPropertiesFunction;
 import org.apache.camel.component.cyberark.vault.client.ConjurClient;
 import org.apache.camel.component.cyberark.vault.client.ConjurClientFactory;
+import org.apache.camel.spi.PropertiesFunction;
+import org.apache.camel.spring.boot.AbstractEarlyResolutionPropertiesParser;
 import org.apache.camel.util.ObjectHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
-import org.springframework.boot.origin.OriginTrackedValue;
-import org.springframework.context.ApplicationListener;
 import org.springframework.core.env.ConfigurableEnvironment;
-import org.springframework.core.env.MapPropertySource;
-import org.springframework.core.env.PropertiesPropertySource;
-import org.springframework.core.env.PropertySource;
 
-import java.util.Properties;
-
-public class SpringBootCyberArkVaultPropertiesParser implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
-    private static final Logger LOG = LoggerFactory.getLogger(SpringBootCyberArkVaultPropertiesParser.class);
+public class SpringBootCyberArkVaultPropertiesParser extends AbstractEarlyResolutionPropertiesParser {
 
     @Override
-    public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
-        ConjurClient client;
-        ConfigurableEnvironment environment = event.getEnvironment();
-        // an unresolved placeholder would otherwise stay in the property value and become the effective
-        // secret, so resolution failures abort startup unless the operator opts back into the old behaviour
-        final boolean ignoreResolutionFailures
-                = Boolean.parseBoolean(environment.getProperty("camel.vault.ignore-resolution-failures"));
-        if (Boolean.parseBoolean(environment.getProperty("camel.component.cyberark-vault.early-resolve-properties"))) {
-            String url = environment.getProperty("camel.vault.cyberark.url");
-            String account = environment.getProperty("camel.vault.cyberark.account");
-            String username = environment.getProperty("camel.vault.cyberark.username");
-            String password = environment.getProperty("camel.vault.cyberark.password");
-            String apiKey = environment.getProperty("camel.vault.cyberark.apiKey");
-            String authToken = environment.getProperty("camel.vault.cyberark.authToken");
+    protected String getEarlyResolutionProperty() {
+        return "camel.component.cyberark-vault.early-resolve-properties";
+    }
 
-            if (ObjectHelper.isNotEmpty(url) && ObjectHelper.isNotEmpty(account)) {
-                // Create Conjur client based on authentication method
-                if (ObjectHelper.isNotEmpty(authToken)) {
-                    // Use pre-authenticated token
-                    client = ConjurClientFactory.createWithToken(url, account, authToken);
-                } else if (ObjectHelper.isNotEmpty(apiKey) && ObjectHelper.isNotEmpty(username)) {
-                    // Use API key authentication
-                    client = ConjurClientFactory.createWithApiKey(url, account, username, apiKey);
-                } else if (ObjectHelper.isNotEmpty(username) && ObjectHelper.isNotEmpty(password)) {
-                    // Use username/password authentication
-                    client = ConjurClientFactory.createWithCredentials(url, account, username, password);
-                } else {
-                    throw new RuntimeCamelException(
-                            "Using the CyberArk Conjur Vault Properties Function requires authentication credentials (authToken, apiKey, or username/password)");
-                }
+    @Override
+    protected String getOverridePropertySourceName() {
+        return "overridden-camel-cyberark-vault-properties";
+    }
+
+    @Override
+    protected PropertiesFunction createPropertiesFunction(ConfigurableEnvironment environment) {
+        ConjurClient client;
+        String url = environment.getProperty("camel.vault.cyberark.url");
+        String account = environment.getProperty("camel.vault.cyberark.account");
+        String username = environment.getProperty("camel.vault.cyberark.username");
+        String password = environment.getProperty("camel.vault.cyberark.password");
+        String apiKey = environment.getProperty("camel.vault.cyberark.apiKey");
+        String authToken = environment.getProperty("camel.vault.cyberark.authToken");
+
+        if (ObjectHelper.isNotEmpty(url) && ObjectHelper.isNotEmpty(account)) {
+            // Create Conjur client based on authentication method
+            if (ObjectHelper.isNotEmpty(authToken)) {
+                // Use pre-authenticated token
+                client = ConjurClientFactory.createWithToken(url, account, authToken);
+            } else if (ObjectHelper.isNotEmpty(apiKey) && ObjectHelper.isNotEmpty(username)) {
+                // Use API key authentication
+                client = ConjurClientFactory.createWithApiKey(url, account, username, apiKey);
+            } else if (ObjectHelper.isNotEmpty(username) && ObjectHelper.isNotEmpty(password)) {
+                // Use username/password authentication
+                client = ConjurClientFactory.createWithCredentials(url, account, username, password);
             } else {
                 throw new RuntimeCamelException(
-                        "Using the CyberArk Conjur Vault Properties Function requires setting URL and account as application properties or environment variables");
+                        "Using the CyberArk Conjur Vault Properties Function requires authentication credentials (authToken, apiKey, or username/password)");
             }
-
-            CyberArkVaultPropertiesFunction cyberArkVaultPropertiesFunction = new CyberArkVaultPropertiesFunction(client);
-
-            final Properties props = new Properties();
-            for (PropertySource mutablePropertySources : event.getEnvironment().getPropertySources()) {
-                if (mutablePropertySources instanceof MapPropertySource mapPropertySource) {
-                    mapPropertySource.getSource().forEach((key, value) -> {
-                        String stringValue = null;
-                        if ((value instanceof OriginTrackedValue originTrackedValue &&
-                                originTrackedValue.getValue() instanceof String v)) {
-                            stringValue = v;
-                        } else if (value instanceof String v) {
-                            stringValue = v;
-                        }
-
-                        if (stringValue != null &&
-                                stringValue.startsWith("{{cyberark:") &&
-                                stringValue.endsWith("}}")) {
-                            LOG.debug("decrypting and overriding property {}", key);
-                            try {
-                                String element = cyberArkVaultPropertiesFunction.apply(stringValue
-                                        .replace("{{cyberark:", "")
-                                        .replace("}}", ""));
-                                props.put(key, element);
-                            } catch (Exception e) {
-                                if (ignoreResolutionFailures) {
-                                    LOG.warn("Failed to resolve property {} from the vault; the placeholder is left "
-                                             + "unresolved because camel.vault.ignore-resolution-failures is enabled", key, e);
-                                } else {
-                                    throw new RuntimeCamelException(
-                                            "Failed to resolve property " + key + " from the vault. Startup is aborted so "
-                                                            + "that the unresolved placeholder cannot become the effective "
-                                                            + "value; set camel.vault.ignore-resolution-failures=true to "
-                                                            + "continue anyway.",
-                                            e);
-                                }
-                            }
-                        }
-                    });
-                }
-            }
-
-            environment.getPropertySources().addFirst(new PropertiesPropertySource("overridden-camel-cyberark-vault-properties", props));
+        } else {
+            throw new RuntimeCamelException(
+                    "Using the CyberArk Conjur Vault Properties Function requires setting URL and account as application properties or environment variables");
         }
+
+        return new CyberArkVaultPropertiesFunction(client);
     }
 }
