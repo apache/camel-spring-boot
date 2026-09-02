@@ -554,7 +554,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 createComponentConfigurationSource(pkg, model, overrideComponentName);
                 createComponentAutoConfigurationSource(pkg, model, overrideComponentName, complexOptions);
                 if (complexOptions) {
-                    createComponentConverterSource(pkg, model);
+                    createComponentConverterSource(pkg, model, overrideComponentName);
                 }
                 createComponentSpringFactorySource(pkg, model);
             }
@@ -621,7 +621,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 createDataFormatConfigurationSource(pkg, model, overrideDataFormatName);
                 createDataFormatAutoConfigurationSource(pkg, model, overrideDataFormatName, complexOptions);
                 if (complexOptions) {
-                    createDataFormatConverterSource(pkg, model);
+                    createDataFormatConverterSource(pkg, model, overrideDataFormatName);
                 }
                 createDataFormatSpringFactorySource(pkg, model);
             }
@@ -672,7 +672,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 createLanguageConfigurationSource(pkg, model, overrideLanguageName);
                 createLanguageAutoConfigurationSource(pkg, model, overrideLanguageName, complexOptions);
                 if (complexOptions) {
-                    createLanguageConverterSource(pkg, model);
+                    createLanguageConverterSource(pkg, model, overrideLanguageName);
                 }
                 createLanguageSpringFactorySource(pkg, model);
             }
@@ -706,10 +706,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         }
         javaClass.getJavaDoc().setText(doc);
 
-        String prefix = "camel.component."
-                + camelCaseToDash(overrideComponentName != null ? overrideComponentName : model.getScheme());
-        // make sure prefix is in lower case
-        prefix = prefix.toLowerCase(Locale.US);
+        String prefix = componentPropertyPrefix(model, overrideComponentName);
         javaClass.addAnnotation("org.springframework.boot.context.properties.ConfigurationProperties")
                 .setStringValue("prefix", prefix);
 
@@ -1162,10 +1159,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         }
         javaClass.getJavaDoc().setFullText(doc);
 
-        String prefix = "camel.dataformat."
-                + camelCaseToDash(overrideDataFormatName != null ? overrideDataFormatName : model.getName());
-        // make sure prefix is in lower case
-        prefix = prefix.toLowerCase(Locale.US);
+        String prefix = dataFormatPropertyPrefix(model, overrideDataFormatName);
         javaClass.addAnnotation("org.springframework.boot.context.properties.ConfigurationProperties")
                 .setStringValue("prefix", prefix);
 
@@ -1269,10 +1263,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         }
         javaClass.getJavaDoc().setFullText(doc);
 
-        String prefix = "camel.language."
-                + (camelCaseToDash(overrideLanguageName != null ? overrideLanguageName : model.getName()));
-        // make sure prefix is in lower case
-        prefix = prefix.toLowerCase(Locale.US);
+        String prefix = languagePropertyPrefix(model, overrideLanguageName);
         javaClass.addAnnotation("org.springframework.boot.context.properties.ConfigurationProperties")
                 .setStringValue("prefix", prefix);
 
@@ -1442,10 +1433,12 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         writeSourceIfChanged(javaClass, fileName, false);
     }
 
-    private void createComponentConverterSource(String packageName, ComponentModel model) throws MojoFailureException {
+    private void createComponentConverterSource(String packageName, ComponentModel model, String overrideComponentName)
+            throws MojoFailureException {
 
         final String name = model.getJavaType().substring(model.getJavaType().lastIndexOf(".") + 1).replace("Component",
                 "ComponentConverter");
+        final String prefix = componentPropertyPrefix(model, overrideComponentName);
 
         // create converter class and write source
         JavaClass javaClass = new JavaClass(getProjectClassLoader());
@@ -1457,6 +1450,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         javaClass.addAnnotation("org.springframework.stereotype.Component");
         javaClass.addImport("java.util.LinkedHashSet");
         javaClass.addImport("java.util.Set");
+        javaClass.addImport("org.apache.camel.spring.boot.util.BeanReferenceHelper");
         javaClass.addImport("org.springframework.core.convert.TypeDescriptor");
         javaClass.addImport("org.springframework.core.convert.converter.GenericConverter");
 
@@ -1467,7 +1461,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         String body = createConverterPairBody(model);
         javaClass.addMethod().setName("getConvertibleTypes").setPublic().setReturnType("Set<ConvertiblePair>")
                 .setBody(body);
-        body = createConvertBody(model);
+        body = createConvertBody(prefix);
         javaClass.addMethod().setName("convert").setPublic().setReturnType("Object").addParameter("Object", "source")
                 .addParameter("TypeDescriptor", "sourceType").addParameter("TypeDescriptor", "targetType")
                 .setBody(body);
@@ -1479,76 +1473,32 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         writeComponentSpringFactorySource(packageName, name);
     }
 
-    private String createConvertBody(ComponentModel model) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("if (source == null) {\n");
-        sb.append("    return null;\n");
-        sb.append("}\n");
-        sb.append("String ref = source.toString();\n");
-        sb.append("if (!ref.startsWith(\"#\")) {\n");
-        sb.append("    return null;\n");
-        sb.append("}\n");
-        sb.append("ref = ref.startsWith(\"#bean:\") ? ref.substring(6) : ref.substring(1);\n");
-        sb.append("switch (targetType.getName()) {\n");
-        // we need complex types only which unique types only
-        Stream<String> s = model.getComponentOptions().stream().filter(this::isComplexType)
-                .map(SpringBootAutoConfigurationMojo::getJavaType).distinct();
-        s.forEach(type -> {
-            String replacedType = applyTypeReplacement(type);
-            sb.append("    case \"").append(replacedType).append("\": return applicationContext.getBean(ref, ").append(replacedType)
-                    .append(".class);\n");
-        });
-        sb.append("}\n");
-        sb.append("return null;\n");
-        return sb.toString();
+    private static String componentPropertyPrefix(ComponentModel model, String overrideComponentName) {
+        return ("camel.component."
+                + camelCaseToDash(overrideComponentName != null ? overrideComponentName : model.getScheme()))
+                        .toLowerCase(Locale.US);
     }
 
-    private String createConvertBody(DataFormatModel model) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("if (source == null) {\n");
-        sb.append("    return null;\n");
-        sb.append("}\n");
-        sb.append("String ref = source.toString();\n");
-        sb.append("if (!ref.startsWith(\"#\")) {\n");
-        sb.append("    return null;\n");
-        sb.append("}\n");
-        sb.append("ref = ref.startsWith(\"#bean:\") ? ref.substring(6) : ref.substring(1);\n");
-        sb.append("switch (targetType.getName()) {\n");
-        // we need complex types only which unique types only
-        Stream<String> s = model.getOptions().stream().filter(this::isComplexType)
-                .map(SpringBootAutoConfigurationMojo::getJavaType).distinct();
-        s.forEach(type -> {
-            String replacedType = applyTypeReplacement(type);
-            sb.append("    case \"").append(replacedType).append("\": return applicationContext.getBean(ref, ").append(replacedType)
-                    .append(".class);\n");
-        });
-        sb.append("}\n");
-        sb.append("return null;\n");
-        return sb.toString();
+    private static String dataFormatPropertyPrefix(DataFormatModel model, String overrideDataFormatName) {
+        return ("camel.dataformat."
+                + camelCaseToDash(overrideDataFormatName != null ? overrideDataFormatName : model.getName()))
+                        .toLowerCase(Locale.US);
     }
 
-    private String createConvertBody(LanguageModel model) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("if (source == null) {\n");
-        sb.append("    return null;\n");
-        sb.append("}\n");
-        sb.append("String ref = source.toString();\n");
-        sb.append("if (!ref.startsWith(\"#\")) {\n");
-        sb.append("    return null;\n");
-        sb.append("}\n");
-        sb.append("ref = ref.startsWith(\"#bean:\") ? ref.substring(6) : ref.substring(1);\n");
-        sb.append("switch (targetType.getName()) {\n");
-        // we need complex types only which unique types only
-        Stream<String> s = model.getOptions().stream().filter(this::isComplexType)
-                .map(SpringBootAutoConfigurationMojo::getJavaType).distinct();
-        s.forEach(type -> {
-            String replacedType = applyTypeReplacement(type);
-            sb.append("    case \"").append(replacedType).append("\": return applicationContext.getBean(ref, ").append(replacedType)
-                    .append(".class);\n");
-        });
-        sb.append("}\n");
-        sb.append("return null;\n");
-        return sb.toString();
+    private static String languagePropertyPrefix(LanguageModel model, String overrideLanguageName) {
+        return ("camel.language."
+                + camelCaseToDash(overrideLanguageName != null ? overrideLanguageName : model.getName()))
+                        .toLowerCase(Locale.US);
+    }
+
+    /**
+     * The body of the generated converters. The value is resolved by
+     * {@code org.apache.camel.spring.boot.util.BeanReferenceHelper} which fails with a meaningful error when a
+     * configured value cannot be resolved, instead of silently converting it to null.
+     */
+    static String createConvertBody(String propertyPrefix) {
+        return "return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, \""
+               + propertyPrefix + "\");\n";
     }
 
     private String createConverterPairBody(ComponentModel model) {
@@ -1662,11 +1612,12 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         writeSourceIfChanged(javaClass, fileName, false);
     }
 
-    private void createDataFormatConverterSource(String packageName, DataFormatModel model)
-            throws MojoFailureException {
+    private void createDataFormatConverterSource(String packageName, DataFormatModel model,
+            String overrideDataFormatName) throws MojoFailureException {
 
         final String name = model.getJavaType().substring(model.getJavaType().lastIndexOf(".") + 1)
                 .replace("DataFormat", "DataFormatConverter");
+        final String prefix = dataFormatPropertyPrefix(model, overrideDataFormatName);
 
         // create converter class and write source
         JavaClass javaClass = new JavaClass(getProjectClassLoader());
@@ -1678,7 +1629,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         javaClass.addAnnotation("org.springframework.stereotype.Component");
         javaClass.addImport("java.util.LinkedHashSet");
         javaClass.addImport("java.util.Set");
-        javaClass.addImport("org.apache.camel.CamelContext");
+        javaClass.addImport("org.apache.camel.spring.boot.util.BeanReferenceHelper");
         javaClass.addImport("org.springframework.core.convert.TypeDescriptor");
         javaClass.addImport("org.springframework.core.convert.converter.GenericConverter");
 
@@ -1689,7 +1640,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         String body = createConverterPairBody(model);
         javaClass.addMethod().setName("getConvertibleTypes").setPublic().setReturnType("Set<ConvertiblePair>")
                 .setBody(body);
-        body = createConvertBody(model);
+        body = createConvertBody(prefix);
         javaClass.addMethod().setName("convert").setPublic().setReturnType("Object").addParameter("Object", "source")
                 .addParameter("TypeDescriptor", "sourceType").addParameter("TypeDescriptor", "targetType")
                 .setBody(body);
@@ -1765,33 +1716,35 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         writeComponentSpringFactorySource(packageName, name);
     }
 
-    private void createLanguageConverterSource(String packageName, LanguageModel model) throws MojoFailureException {
+    private void createLanguageConverterSource(String packageName, LanguageModel model, String overrideLanguageName)
+            throws MojoFailureException {
 
         final String name = model.getJavaType().substring(model.getJavaType().lastIndexOf(".") + 1).replace("Language",
                 "LanguageConverter");
+        final String prefix = languagePropertyPrefix(model, overrideLanguageName);
 
         // create converter class and write source
         JavaClass javaClass = new JavaClass(getProjectClassLoader());
         javaClass.setPackage(packageName);
         javaClass.setName(name);
         javaClass.getJavaDoc().setFullText("Generated by camel-package-maven-plugin - do not edit this file!");
+        javaClass.addAnnotation(Configuration.class).setLiteralValue("proxyBeanMethods", "false");
+        javaClass.addAnnotation("org.springframework.boot.context.properties.ConfigurationPropertiesBinding");
+        javaClass.addAnnotation("org.springframework.stereotype.Component");
         javaClass.addImport("java.util.LinkedHashSet");
         javaClass.addImport("java.util.Set");
-        javaClass.addImport("org.apache.camel.CamelContext");
+        javaClass.addImport("org.apache.camel.spring.boot.util.BeanReferenceHelper");
         javaClass.addImport("org.springframework.core.convert.TypeDescriptor");
         javaClass.addImport("org.springframework.core.convert.converter.GenericConverter");
 
-        javaClass.implementInterface("org.springframework.core.convert.converter.GenericConverter");
-        javaClass.addField().setPrivate().setFinal(true).setName("camelContext")
-                .setType(loadClass("org.apache.camel.CamelContext"));
-        javaClass.addMethod().setConstructor(true).setPublic().setName(name)
-                .addParameter("org.apache.camel.CamelContext", "camelContext")
-                .setBody("this.camelContext = camelContext;\n");
+        javaClass.implementInterface("GenericConverter");
+        javaClass.addField().setPrivate().setName("applicationContext")
+                .setType(loadClass("org.springframework.context.ApplicationContext")).addAnnotation(Autowired.class);
 
         String body = createConverterPairBody(model);
         javaClass.addMethod().setName("getConvertibleTypes").setPublic().setReturnType("Set<ConvertiblePair>")
                 .setBody(body);
-        body = createConvertBody(model);
+        body = createConvertBody(prefix);
         javaClass.addMethod().setName("convert").setPublic().setReturnType("Object").addParameter("Object", "source")
                 .addParameter("TypeDescriptor", "sourceType").addParameter("TypeDescriptor", "targetType")
                 .setBody(body);
@@ -1819,10 +1772,11 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         writeComponentSpringFactorySource(packageName, name);
     }
 
-    private static String createComponentBody(String shortJavaType, String name) {
+    static String createComponentBody(String shortJavaType, String name) {
         return new StringBuilder().append("return new ComponentCustomizer() {\n").append("    @Override\n")
                 .append("    public void configure(String name, Component target) {\n")
-                .append("        CamelPropertiesHelper.copyProperties(target.getCamelContext(), configuration, target);\n")
+                .append("        CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,\n")
+                .append("                \"camel.component.").append(name).append("\", configuration, target);\n")
                 .append("    }\n").append("    @Override\n")
                 .append("    public boolean isEnabled(String name, Component target) {\n")
                 .append("        return HierarchicalPropertiesEvaluator.evaluate(\n")
@@ -1833,10 +1787,11 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 .append("};\n").toString();
     }
 
-    private static String createDataFormatBody(String shortJavaType, String name) {
+    static String createDataFormatBody(String shortJavaType, String name) {
         return new StringBuilder().append("return new DataFormatCustomizer() {\n").append("    @Override\n")
                 .append("    public void configure(String name, DataFormat target) {\n")
-                .append("        CamelPropertiesHelper.copyProperties(camelContextProvider.getObject(), configuration, target);\n")
+                .append("        CamelPropertiesHelper.copyConfigurationProperties(camelContextProvider.getObject(), applicationContext,\n")
+                .append("                \"camel.dataformat.").append(name).append("\", configuration, target);\n")
                 .append("    }\n").append("    @Override\n")
                 .append("    public boolean isEnabled(String name, DataFormat target) {\n")
                 .append("        return HierarchicalPropertiesEvaluator.evaluate(\n")
@@ -1847,11 +1802,12 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 .append("};\n").toString();
     }
 
-    private static String createLanguageBody(String shortJavaType, String name) {
+    static String createLanguageBody(String shortJavaType, String name) {
         return new StringBuilder().append("return new LanguageCustomizer() {\n").append("    @Override\n")
                 .append("    public void configure(String name, Language target) {\n")
                 .append("        if (target instanceof CamelContextAware cca && cca.getCamelContext() != null) {\n")
-                .append("            CamelPropertiesHelper.copyProperties(cca.getCamelContext(), configuration, target);\n")
+                .append("            CamelPropertiesHelper.copyConfigurationProperties(cca.getCamelContext(), applicationContext,\n")
+                .append("                    \"camel.language.").append(name).append("\", configuration, target);\n")
                 .append("        } else {\n")
                 .append("            org.slf4j.LoggerFactory.getLogger(getClass()).debug(\"Language {} does not implement CamelContextAware, skipping auto-configuration properties\", name);\n")
                 .append("        }\n")
