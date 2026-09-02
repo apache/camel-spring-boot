@@ -101,14 +101,17 @@ public class CamelDebugConfigurationProperties {
     private long fallbackTimeout = 300;
 
     /**
-     * Whether to create JMX connector that allows tooling to control the Camel debugger.
-     * This is what the IDEA and VSCode tooling is using.
+     * Whether to create JMX connector that allows tooling to control the Camel debugger. This is what the IDEA and
+     * VSCode tooling is using. The connector opens an RMI registry and a JMX RMI server on the configured port, without
+     * authentication or transport security, so it is disabled by default and must be turned on explicitly. Only enable
+     * it on a trusted network, and bind or firewall the port accordingly.
      */
-    @Metadata(label = "advanced", defaultValue = "true")
-    private boolean jmxConnectorEnabled = true;
+    @Metadata(label = "advanced", defaultValue = "false")
+    private boolean jmxConnectorEnabled;
 
     /**
-     * Port number to expose a JMX RMI connector for tooling that needs to control the debugger.
+     * Port number to expose a JMX RMI connector for tooling that needs to control the debugger. Only in use when the
+     * JMX connector is enabled.
      */
     @Metadata(label = "advanced", defaultValue = "1099")
     private int jmxConnectorPort = 1099;

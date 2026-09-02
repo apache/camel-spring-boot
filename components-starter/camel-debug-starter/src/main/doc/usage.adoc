@@ -1,0 +1,20 @@
+Adding this starter to the classpath installs and enables the Camel Debugger. The debugger can be turned off with:
+
+[source,properties]
+----
+camel.debug.enabled = false
+----
+
+=== JMX connector
+
+Tooling that attaches to the debugger from another process, such as the IntelliJ IDEA and VS Code Camel plugins, uses a JMX RMI connector. The connector is *disabled by default*, so having this starter on the classpath never opens a listening socket on its own. Enable it explicitly when remote tooling needs to attach:
+
+[source,properties]
+----
+camel.debug.jmx-connector-enabled = true
+camel.debug.jmx-connector-port = 1099
+----
+
+WARNING: The JMX RMI connector is created without authentication or transport security. Anyone able to reach the port can control the debugger, suspend routes and read message payloads. Only enable it on a trusted network, and make sure the port is bound to a loopback interface or protected by a firewall.
+
+The `camel debug` command of Camel JBang does not need this connector: it drives a Spring Boot application through the local CLI connector provided by `camel-cli-connector-starter`.
