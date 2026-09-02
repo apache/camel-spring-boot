@@ -16,27 +16,174 @@
  */
 package org.apache.camel.spring.boot.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
 import org.apache.camel.PropertyBindingException;
 import org.apache.camel.spi.BeanIntrospection;
+import org.apache.camel.spi.PropertiesComponent;
 import org.apache.camel.spi.PropertyConfigurer;
 import org.apache.camel.support.PluginHelper;
 import org.apache.camel.support.PropertyBindingSupport;
 import org.apache.camel.support.service.ServiceHelper;
 import org.apache.camel.util.ObjectHelper;
+import org.apache.camel.util.StringHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.properties.source.ConfigurationPropertyName;
+import org.springframework.boot.context.properties.source.ConfigurationPropertySource;
+import org.springframework.boot.context.properties.source.ConfigurationPropertySources;
+import org.springframework.context.ApplicationContext;
 
 /**
  * To help configuring Camel properties that have been defined in Spring Boot configuration files.
  */
 public final class CamelPropertiesHelper {
 
+    /**
+     * Property to turn off failing fast when an explicitly configured Spring Boot option cannot be set on the Camel
+     * component, data format or language it belongs to. When lenient, such an option is logged at WARN level and
+     * ignored, which is close to the behaviour before Camel 4.23, where it was dropped without any log line.
+     */
+    public static final String LENIENT_CONFIGURATION_BINDING = "camel.springboot.lenient-configuration-binding";
+
+    private static final Logger LOG = LoggerFactory.getLogger(CamelPropertiesHelper.class);
+
+    /**
+     * Options that belong to the Spring Boot auto configuration layer itself, and therefore are not options on the
+     * Camel component, data format or language being configured.
+     */
+    private static final Set<String> AUTO_CONFIGURATION_OPTIONS = Set.of("enabled", "customizer");
+
     private CamelPropertiesHelper() {
     }
 
+    /**
+     * Copies the options from a generated Spring Boot configuration class onto the Camel component, data format or
+     * language it configures.
+     * <p/>
+     * The options that belong to the auto configuration layer itself (<tt>enabled</tt> and <tt>customizer</tt>) are
+     * removed first, as they are not options on the target bean.
+     * <p/>
+     * An option that cannot be set on the target and that the application configured explicitly fails fast with an
+     * {@link IllegalArgumentException}, instead of being dropped without a trace. An option that cannot be set and
+     * that only carries its catalog default is logged at DEBUG, as there is nothing the application can do about it
+     * and the target keeps its own default. Set {@link #LENIENT_CONFIGURATION_BINDING} to <tt>true</tt> to log an
+     * explicitly configured option at WARN and continue, instead of failing.
+     *
+     * @param camelContext
+     *                           the CamelContext
+     * @param applicationContext
+     *                           the Spring application context, used to tell an explicitly configured option from a
+     *                           catalog default
+     * @param propertyPrefix
+     *                           the configuration prefix of the source, such as <tt>camel.component.http</tt>
+     * @param source
+     *                           the Spring Boot configuration class
+     * @param target
+     *                           the Camel component, data format or language to configure
+     */
+    public static void copyConfigurationProperties(CamelContext camelContext, ApplicationContext applicationContext,
+            String propertyPrefix, Object source, Object target) {
+        ObjectHelper.notNull(camelContext, "camel context");
+        ObjectHelper.notNull(source, "source");
+        ObjectHelper.notNull(target, "target");
+
+        Map<String, Object> properties = getNonNullProperties(camelContext, source);
+        properties.keySet().removeIf(key -> AUTO_CONFIGURATION_OPTIONS.contains(key.toLowerCase(Locale.US)));
+
+        // the options that could be set are removed from the map, so what is left could not be set
+        doSetCamelProperties(camelContext, target, properties, false, false);
+        if (properties.isEmpty()) {
+            return;
+        }
+
+        boolean lenient = isLenientBinding(camelContext);
+        List<String> failed = new ArrayList<>();
+        for (Map.Entry<String, Object> entry : properties.entrySet()) {
+            String name = entry.getKey();
+            Object value = entry.getValue();
+            if (isExplicitlyConfigured(applicationContext, propertyPrefix, name)) {
+                if (lenient) {
+                    LOG.warn("Cannot configure option [{}] with value [{}] on [{}]. This option is ignored.",
+                            optionKey(propertyPrefix, name), value, ObjectHelper.classCanonicalName(target));
+                } else {
+                    failed.add(optionKey(propertyPrefix, name) + " = " + value);
+                }
+            } else {
+                // only the catalog default was carried, so the target keeps its own default
+                LOG.debug("Cannot configure option [{}] with default value [{}] on [{}]. This option is ignored.",
+                        optionKey(propertyPrefix, name), value, ObjectHelper.classCanonicalName(target));
+            }
+        }
+        if (!failed.isEmpty()) {
+            throw new IllegalArgumentException(
+                    "Cannot configure " + failed + " as the bean class [" + ObjectHelper.classCanonicalName(target)
+                                               + "] has no suitable setter method, or it is not possible to lookup a bean with that id in the"
+                                               + " Spring Boot registry. Remove or correct the option, or set "
+                                               + LENIENT_CONFIGURATION_BINDING + "=true to ignore it.");
+        }
+    }
+
+    private static String optionKey(String propertyPrefix, String name) {
+        String dashed = StringHelper.camelCaseToDash(name);
+        return propertyPrefix != null && !propertyPrefix.isEmpty() ? propertyPrefix + "." + dashed : dashed;
+    }
+
+    /**
+     * Whether the application configured the given option itself, as opposed to the option only carrying the default
+     * value the generator took from the Camel catalog.
+     */
+    private static boolean isExplicitlyConfigured(ApplicationContext applicationContext, String propertyPrefix,
+            String name) {
+        if (applicationContext == null || propertyPrefix == null || propertyPrefix.isEmpty()) {
+            return false;
+        }
+        try {
+            ConfigurationPropertyName key
+                    = ConfigurationPropertyName.of(optionKey(propertyPrefix, name).toLowerCase(Locale.US));
+            for (ConfigurationPropertySource source : ConfigurationPropertySources
+                    .get(applicationContext.getEnvironment())) {
+                if (source.getConfigurationProperty(key) != null) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            LOG.debug("Cannot determine whether {}.{} was configured due to: {}", propertyPrefix, name,
+                    e.getMessage());
+        }
+        return false;
+    }
+
+    private static boolean isLenientBinding(CamelContext camelContext) {
+        try {
+            PropertiesComponent pc = camelContext.getPropertiesComponent();
+            if (pc != null) {
+                Optional<String> value = pc.resolveProperty(LENIENT_CONFIGURATION_BINDING);
+                if (value.isPresent()) {
+                    return "true".equalsIgnoreCase(value.get().trim());
+                }
+            }
+        } catch (Exception e) {
+            LOG.debug("Cannot resolve {} due to: {}. Using strict configuration binding.",
+                    LENIENT_CONFIGURATION_BINDING, e.getMessage());
+        }
+        return false;
+    }
+
+    /**
+     * Copies all non-null options from the source onto the target, ignoring any option that cannot be set.
+     *
+     * @see #copyConfigurationProperties(CamelContext, ApplicationContext, String, Object, Object) for copying a
+     *      generated Spring Boot configuration class onto the Camel bean it configures
+     */
     @SuppressWarnings({ "unchecked" })
     public static void copyProperties(CamelContext camelContext, Object source, Object target) {
         ObjectHelper.notNull(camelContext, "camel context");
@@ -94,6 +241,11 @@ public final class CamelPropertiesHelper {
      */
     public static boolean setCamelProperties(CamelContext context, Object target, Map<String, Object> properties,
             boolean failIfNotSet) {
+        return doSetCamelProperties(context, target, properties, failIfNotSet, true);
+    }
+
+    private static boolean doSetCamelProperties(CamelContext context, Object target, Map<String, Object> properties,
+            boolean failIfNotSet, boolean warnIfNotSet) {
         ObjectHelper.notNull(context, "context");
         ObjectHelper.notNull(target, "target");
         ObjectHelper.notNull(properties, "properties");
@@ -139,6 +291,12 @@ public final class CamelPropertiesHelper {
                         + "] as the bean class [" + ObjectHelper.classCanonicalName(target)
                         + "] has no suitable setter method, or not possible to lookup a bean with the id ["
                         + stringValue + "] in Spring Boot registry");
+            } else if (warnIfNotSet) {
+                LOG.warn(
+                        "Cannot configure option [{}] with value [{}] as the bean class [{}] has no suitable setter method,"
+                        + " or not possible to lookup a bean with the id [{}] in Spring Boot registry."
+                        + " This option is ignored.",
+                        name, stringValue, ObjectHelper.classCanonicalName(target), stringValue);
             }
         }
 
