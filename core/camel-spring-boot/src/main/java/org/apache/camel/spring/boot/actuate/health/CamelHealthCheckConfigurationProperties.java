@@ -89,10 +89,11 @@ public class CamelHealthCheckConfigurationProperties {
      * Sets the level of details to exposure as result of invoking health checks. There are the following levels: full,
      * default, oneline
      *
-     * The full level will include all details and status from all the invoked health checks.
+     * The full level will include all details and status from all the invoked health checks, including the stack trace
+     * of any error carried by a health check result.
      *
      * The default level will report UP if everything is okay, and only include detailed information for health checks
-     * that was DOWN.
+     * that was DOWN, such as the error message, but not the stack trace.
      *
      * The oneline level will only report either UP or DOWN.
      */

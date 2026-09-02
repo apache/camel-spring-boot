@@ -63,10 +63,13 @@ final class CamelHealthHelper {
                 if (error.getMessage() != null) {
                     builder.withDetail("error.message", error.getMessage());
                 }
-                final StringWriter stackTraceWriter = new StringWriter();
-                try (final PrintWriter pw = new PrintWriter(stackTraceWriter, true)) {
-                    error.printStackTrace(pw);
-                    data.put("error.stacktrace", stackTraceWriter.toString());
+                // the stack trace is the most verbose detail there is, so only include it in full exposure level
+                if (exposureLevel.equals("full")) {
+                    final StringWriter stackTraceWriter = new StringWriter();
+                    try (final PrintWriter pw = new PrintWriter(stackTraceWriter, true)) {
+                        error.printStackTrace(pw);
+                        data.put("error.stacktrace", stackTraceWriter.toString());
+                    }
                 }
             });
 
