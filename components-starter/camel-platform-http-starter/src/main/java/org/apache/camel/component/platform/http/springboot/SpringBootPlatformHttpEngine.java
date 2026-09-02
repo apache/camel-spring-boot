@@ -27,6 +27,7 @@ public class SpringBootPlatformHttpEngine implements PlatformHttpEngine {
 
     private final int port;
     private Executor executor;
+    private boolean deleteUploadedFilesOnEnd = true;
 
     public SpringBootPlatformHttpEngine(int port) {
         this.port = port;
@@ -37,9 +38,16 @@ public class SpringBootPlatformHttpEngine implements PlatformHttpEngine {
         this.executor = executor;
     }
 
+    public SpringBootPlatformHttpEngine(int port, Executor executor, boolean deleteUploadedFilesOnEnd) {
+        this(port, executor);
+        this.deleteUploadedFilesOnEnd = deleteUploadedFilesOnEnd;
+    }
+
     @Override
     public PlatformHttpConsumer createConsumer(PlatformHttpEndpoint endpoint, Processor processor) {
-        return new SpringBootPlatformHttpConsumer(endpoint, processor, executor);
+        SpringBootPlatformHttpConsumer consumer = new SpringBootPlatformHttpConsumer(endpoint, processor, executor);
+        consumer.setDeleteUploadedFilesOnEnd(deleteUploadedFilesOnEnd);
+        return consumer;
     }
 
     @Override

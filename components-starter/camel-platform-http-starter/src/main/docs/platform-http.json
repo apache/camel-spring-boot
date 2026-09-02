@@ -12,6 +12,11 @@
       "sourceMethod": "getCustomizer()"
     },
     {
+      "name": "camel.component.platform-http.server",
+      "type": "org.apache.camel.component.platform.http.springboot.SpringBootPlatformHttpServerProperties",
+      "sourceType": "org.apache.camel.component.platform.http.springboot.SpringBootPlatformHttpServerProperties"
+    },
+    {
       "name": "camel.component.platform-http.server.undertow.accesslog",
       "type": "org.apache.camel.component.platform.http.springboot.customizer.UndertowAccessLogProperties",
       "sourceType": "org.apache.camel.component.platform.http.springboot.customizer.UndertowAccessLogProperties"
@@ -73,6 +78,13 @@
       "type": "java.lang.Boolean",
       "description": "Whether HTTP server should do preliminary validation of incoming requests, validating if Content-Type\/Accept header, matches what is allowed according to consumes\/produces configuration (if set). If validation fails HTTP Status 415\/406 is returned. The HTTP server performs this validation before Camel is involved, and as such if validation fails then Camel is never activated. Setting this option to false, allows Camel to process any incoming requests such as to do custom validation or all requests must be handled by Camel.",
       "sourceType": "org.apache.camel.component.platform.http.springboot.PlatformHttpComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.platform-http.server.delete-uploaded-files-on-end",
+      "type": "java.lang.Boolean",
+      "description": "Whether the temporary files, that multipart file uploads are written to, are deleted when the exchange is done being routed. The uploaded file is copied out of the servlet container into the servlet temp directory so that it stays readable after the HTTP request has completed, which makes Camel the owner of that copy. Turn this off only if the route hands the file over to something that reads it after the exchange has completed - the route is then responsible for deleting the file.",
+      "sourceType": "org.apache.camel.component.platform.http.springboot.SpringBootPlatformHttpServerProperties",
       "defaultValue": true
     },
     {
