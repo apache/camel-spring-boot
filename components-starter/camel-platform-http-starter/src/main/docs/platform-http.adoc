@@ -6,6 +6,17 @@
 
 The Platform HTTP starter provides Spring Boot auto-configuration for the Camel Platform HTTP component.
 
+== Path variables
+
+A consumer path may declare placeholders, such as `platform-http:/greeting/{name}`, and the matched value is
+set as a message header named after the placeholder.
+
+The values are taken from the path Spring Boot matched the request against, so they are percent-decoded and
+carry no matrix parameters. A request to `/greeting/John%20Doe;v=1` sets the `name` header to `John Doe`.
+
+The `CamelHttpPath` header is not affected: it reports the raw request path, with the servlet context-path
+removed.
+
 == Undertow Access Log
 
 You can enable Undertow access log to be managed by whatever logging library you have in your camel application, you have to set the following parameters:
