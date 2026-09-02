@@ -61,7 +61,11 @@ final class CamelHealthHelper {
 
             result.getError().ifPresent(error -> {
                 if (error.getMessage() != null) {
+                    // the top-level key is kept for compatibility, but it is a single slot on a builder shared
+                    // by every check, so with more than one DOWN check the last one wins; the check-scoped copy
+                    // is the one that stays addressable per check
                     builder.withDetail("error.message", error.getMessage());
+                    data.put("error.message", error.getMessage());
                 }
                 final StringWriter stackTraceWriter = new StringWriter();
                 try (final PrintWriter pw = new PrintWriter(stackTraceWriter, true)) {
