@@ -42,7 +42,7 @@ import org.springframework.context.annotation.Configuration;
 import static io.restassured.RestAssured.given;
 import static io.restassured.matcher.RestAssuredMatchers.detailedCookie;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.startsWith;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @EnableAutoConfiguration
@@ -231,15 +231,19 @@ public class SpringBootPlatformHttpCookiesTest {
                 .body(equalTo("replace"));
     }
 
+    /**
+     * The Cookie request header must not be echoed back on the response, whatever its casing: platform-http suppresses
+     * the common request headers case-insensitively since CAMEL-24453.
+     */
     @Test
-    public void echoCookie() {
+    public void cookieRequestHeaderIsNotEchoed() {
         given()
                 .header("cookie", "echo=cookie")
                 .when()
                 .get("/echo")
                 .then()
                 .statusCode(200)
-                .header("cookie", startsWith("echo=cookie"))
+                .header("cookie", nullValue())
                 .body(equalTo("echo"));
     }
 
