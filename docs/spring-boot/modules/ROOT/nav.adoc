@@ -161,6 +161,7 @@
 ** xref:starters/gson.adoc[JSON Gson]
 ** xref:starters/hashicorp-vault.adoc[HashiCorp Vault]
 ** xref:starters/hazelcast.adoc[Hazelcast Atomic Number]
+** xref:starters/hivemq.adoc[HiveMQ]
 ** xref:starters/hl7.adoc[HL7]
 ** xref:starters/http.adoc[HTTP]
 ** xref:starters/huaweicloud-dms.adoc[Huawei Distributed Message Service (DMS)]

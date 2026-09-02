@@ -262,6 +262,7 @@
     <module>camel-gson-starter</module>
     <module>camel-hashicorp-vault-starter</module>
     <module>camel-hazelcast-starter</module>
+    <module>camel-hivemq-starter</module>
     <module>camel-hl7-starter</module>
     <module>camel-http-starter</module>
     <module>camel-huaweicloud-dms-starter</module>
