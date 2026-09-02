@@ -1,14 +1,47 @@
-Add encrypted values to your `application.properties` using the `ENC(...)` syntax:
+Add encrypted values to your `application.properties` using the `ENC(...)` syntax, and point the starter at the master
+password:
 
 [source,properties]
 ----
 my.secret = ENC(encrypted-value-here)
-camel.component.jasypt.password = the-master-password
+camel.component.jasypt.password = sysenv:JASYPT_PASSWORD
 ----
 
-Use Camel's Jasypt tooling to encrypt values:
+WARNING: The master password must never be stored in the same file, or the same repository, as the encrypted values it
+protects. A file that carries both the ciphertext and the key that unlocks it is no better than a plaintext file. Supply
+the master password from the environment or from an external secret store at deployment time.
+
+`camel.component.jasypt.password` understands two prefixes that keep the password out of the configuration file:
+
+* `sysenv:<name>` looks the password up in the OS environment variable `<name>`.
+* `sys:<name>` looks the password up in the JVM system property `<name>`.
+
+Any other value is used as the password verbatim, which is only appropriate when the property itself is injected by an
+external secret store (for example a mounted secret or a config server) rather than checked in.
+
+=== Encryption algorithm
+
+The default algorithm is `PBEWITHHMACSHA256ANDAES_256`. It requires an initialization vector, which the starter
+generates automatically (`org.jasypt.iv.RandomIvGenerator`) unless `camel.component.jasypt.iv-generator-class-name` is
+set explicitly.
+
+Use Jasypt tooling to encrypt values, passing the *same* algorithm and a random IV generator; a value encrypted under a
+different algorithm, or without an IV generator, cannot be decrypted at runtime:
 
 [source,bash]
 ----
-camel jasypt encrypt --password=the-master-password --input=my-secret-value
+jbang org.apache.camel:camel-jasypt:<camel-version> \
+  -c encrypt -p "$JASYPT_PASSWORD" -i my-secret-value \
+  -a PBEWITHHMACSHA256ANDAES_256 -riga SHA1PRNG
+----
+
+NOTE: The `camel-jasypt` CLI entrypoint is deprecated. The `encrypt.sh` script shipped in the
+https://github.com/jasypt/jasypt/releases/tag/jasypt-1.9.3[Jasypt distribution] provides the same workflow, and takes
+the algorithm and IV generator through its own `algorithm` and `ivGeneratorClassName` arguments.
+
+To keep reading values that were encrypted with the previous default algorithm, pin it explicitly:
+
+[source,properties]
+----
+camel.component.jasypt.algorithm = PBEWithMD5AndDES
 ----
