@@ -18,6 +18,7 @@ package org.apache.camel.component.jasypt.springboot;
 
 import org.apache.camel.component.jasypt.JasyptPropertiesParser;
 import org.apache.camel.component.properties.PropertiesParser;
+import org.apache.camel.spring.boot.EarlyResolutionPropertySources;
 import org.apache.camel.util.ObjectHelper;
 import org.apache.camel.util.StringHelper;
 import org.jasypt.encryption.StringEncryptor;
@@ -74,10 +75,15 @@ public class SpringBootJasyptPropertiesParser implements ApplicationListener<App
                                 originTrackedValue.getValue() instanceof String stringValue &&
                                 stringValue.startsWith(JasyptPropertiesParser.JASYPT_PREFIX_TOKEN) &&
                                 stringValue.endsWith(JasyptPropertiesParser.JASYPT_SUFFIX_TOKEN)) {
+                            if (EarlyResolutionPropertySources.shouldSkipBecauseHigherPrecedenceDefines(
+                                    event.getEnvironment().getPropertySources(), mutablePropertySources, key, LOG)) {
+                                return;
+                            }
 
                             LOG.debug("decrypting and overriding property {}", key);
                             try {
-                                props.put(key, propertiesParser.parseProperty(key.toString(), stringValue, null));
+                                EarlyResolutionPropertySources.putIfAbsent(props, key,
+                                        propertiesParser.parseProperty(key.toString(), stringValue, null));
                             } catch (Exception e) {
                                 // Log and do nothing
                                 LOG.debug("failed to parse property {}", key, e);

@@ -24,7 +24,6 @@ import org.apache.camel.spi.PropertiesFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
-import org.springframework.boot.origin.OriginTrackedValue;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
@@ -105,8 +104,12 @@ public abstract class AbstractEarlyResolutionPropertiesParser
         for (PropertySource<?> propertySource : environment.getPropertySources()) {
             if (propertySource instanceof MapPropertySource mapPropertySource) {
                 mapPropertySource.getSource().forEach((key, value) -> {
-                    String stringValue = asString(value);
+                    String stringValue = EarlyResolutionPropertySources.asString(value);
                     if (stringValue != null && stringValue.startsWith(prefix) && stringValue.endsWith(SUFFIX)) {
+                        if (EarlyResolutionPropertySources.shouldSkipBecauseHigherPrecedenceDefines(
+                                environment.getPropertySources(), propertySource, key, LOG)) {
+                            return;
+                        }
                         String remainder = stringValue.substring(prefix.length(),
                                 stringValue.length() - SUFFIX.length());
                         LOG.debug("Resolving and overriding property {}", key);
@@ -117,7 +120,7 @@ public abstract class AbstractEarlyResolutionPropertiesParser
                                         "The " + propertiesFunction.getName()
                                                 + " properties function returned no value for " + remainder);
                             }
-                            props.put(key, resolved);
+                            EarlyResolutionPropertySources.putIfAbsent(props, key, resolved);
                         } catch (Exception e) {
                             if (ignoreResolutionFailures) {
                                 LOG.warn("Failed to resolve property {} from {}; the placeholder is left "
@@ -148,16 +151,5 @@ public abstract class AbstractEarlyResolutionPropertiesParser
 
         environment.getPropertySources()
                 .addFirst(new PropertiesPropertySource(getOverridePropertySourceName(), props));
-    }
-
-    private static String asString(Object value) {
-        if (value instanceof OriginTrackedValue originTrackedValue
-                && originTrackedValue.getValue() instanceof String v) {
-            return v;
-        }
-        if (value instanceof String v) {
-            return v;
-        }
-        return null;
     }
 }

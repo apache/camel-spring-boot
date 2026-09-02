@@ -309,4 +309,42 @@ public class AbstractEarlyResolutionPropertiesParserTest {
         assertEquals("{{test:missing}}", environment.getProperty("bad.secret"),
                 "in tolerant mode the unresolved placeholder is deliberately left in place");
     }
+
+    @Test
+    public void preservesHighestPrecedencePlaceholderForDuplicateKeys() {
+        RecordingEnvironment environment = new RecordingEnvironment();
+        environment.getPropertySources().addLast(new MapPropertySource("application.properties", Map.of(
+                "my.secret", "{{test:default-secret}}")));
+        environment.getPropertySources().addFirst(new MapPropertySource("application-prod.properties", Map.of(
+                "my.secret", "{{test:prod-secret}}")));
+        environment.getPropertySources().addFirst(new MapPropertySource("guard", Map.of(GUARD, "true")));
+        StubPropertiesFunction function = new StubPropertiesFunction(
+                Map.of("prod-secret", "from-prod", "default-secret", "from-default"), Set.of());
+        TestParser parser = new TestParser(function);
+
+        parser.onApplicationEvent(eventFor(environment));
+
+        assertEquals("from-prod", environment.getProperty("my.secret"),
+                "the highest-precedence placeholder must win when the same key appears in multiple sources");
+        assertEquals(List.of("prod-secret"), function.applied,
+                "the lower-precedence duplicate must not contact the vault backend");
+    }
+
+    @Test
+    public void skipsLowerPrecedencePlaceholderWhenHigherPrecedenceDefinesKey() {
+        RecordingEnvironment environment = new RecordingEnvironment();
+        environment.getPropertySources().addLast(new MapPropertySource("application.properties", Map.of(
+                "my.secret", "{{test:missing}}")));
+        environment.getPropertySources().addFirst(new MapPropertySource("application-prod.properties", Map.of(
+                "my.secret", "plain-value")));
+        environment.getPropertySources().addFirst(new MapPropertySource("guard", Map.of(GUARD, "true")));
+        StubPropertiesFunction function = new StubPropertiesFunction(Map.of(), Set.of("missing"));
+        TestParser parser = new TestParser(function);
+
+        assertDoesNotThrow(() -> parser.onApplicationEvent(eventFor(environment)));
+
+        assertEquals(List.of(), function.applied,
+                "a shadowed lower-precedence placeholder must not be resolved");
+        assertEquals("plain-value", environment.getProperty("my.secret"));
+    }
 }
