@@ -16,8 +16,12 @@
  */
 package org.apache.camel.spring.boot.util;
 
+import java.lang.reflect.Field;
 import org.springframework.beans.BeansException;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.MethodParameter;
+import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.util.ClassUtils;
 
@@ -37,6 +41,12 @@ import org.springframework.util.ClassUtils;
  * </ul>
  * A configured value that cannot be resolved is reported by throwing an {@link IllegalArgumentException}, so a typo in
  * a configuration file is not silently turned into a <tt>null</tt> value.
+ * <p/>
+ * The generated converters are registered with {@code @ConfigurationPropertiesBinding} and therefore take part in
+ * every {@code @ConfigurationProperties} binding in the application, not only in Camel's own. A binding whose target
+ * is not a Camel configuration class keeps the behaviour it had before Camel 4.23 - a value that is not a bean
+ * reference converts to <tt>null</tt> - so that adding a starter to the classpath cannot make an unrelated
+ * application property fail to bind. See {@link #isCamelConfigurationTarget(TypeDescriptor)}.
  */
 public final class BeanReferenceHelper {
 
@@ -44,6 +54,9 @@ public final class BeanReferenceHelper {
     private static final String TYPE_PREFIX = "#type:";
     private static final String CLASS_PREFIX = "#class:";
     private static final String AUTOWIRED = "#autowired";
+
+    private static final String CAMEL_PACKAGE = "org.apache.camel";
+    private static final String CAMEL_PROPERTY_PREFIX = "camel.";
 
     private BeanReferenceHelper() {
     }
@@ -64,7 +77,8 @@ public final class BeanReferenceHelper {
      * @return                          the resolved bean, or <tt>null</tt> if no value was configured
      *
      * @throws IllegalArgumentException
-     *                                  if a value was configured but cannot be resolved to a bean of the target type
+     *                                  if a Camel option was configured with a value that cannot be resolved to a bean
+     *                                  of the target type
      */
     public static Object resolveBeanReference(ApplicationContext applicationContext, Object source,
             TypeDescriptor targetType, String propertyPrefix) {
@@ -76,6 +90,13 @@ public final class BeanReferenceHelper {
             return null;
         }
         Class<?> type = targetType != null ? targetType.getObjectType() : Object.class;
+        if (!isCamelConfigurationTarget(targetType)) {
+            // this binding belongs to somebody else, so only resolve what has always been resolved here and
+            // leave the rest alone rather than imposing Camel's bean reference syntax on it
+            if (!value.startsWith("#")) {
+                return null;
+            }
+        }
         if (applicationContext == null) {
             throw new IllegalArgumentException(
                     message(value, type, propertyPrefix, "there is no Spring application context available"));
@@ -90,7 +111,13 @@ public final class BeanReferenceHelper {
             }
             if (value.startsWith(TYPE_PREFIX)) {
                 String fqn = value.substring(TYPE_PREFIX.length()).trim();
-                return applicationContext.getBean(ClassUtils.forName(fqn, applicationContext.getClassLoader()));
+                Object bean = applicationContext.getBean(ClassUtils.forName(fqn, applicationContext.getClassLoader()));
+                if (!type.isInstance(bean)) {
+                    throw new IllegalArgumentException(message(value, type, propertyPrefix,
+                            "the bean found by type is a [" + bean.getClass().getName()
+                                                                     + "] which is not assignable to the option type"));
+                }
+                return bean;
             }
             String id = value;
             if (id.startsWith(BEAN_PREFIX)) {
@@ -105,6 +132,52 @@ public final class BeanReferenceHelper {
         } catch (BeansException | ClassNotFoundException | LinkageError e) {
             throw new IllegalArgumentException(message(value, type, propertyPrefix, e.getMessage()), e);
         }
+    }
+
+    /**
+     * Whether the binding this conversion takes part in targets a Camel configuration class.
+     * <p/>
+     * Spring Boot's binder builds the target {@link TypeDescriptor} from the setter's {@link MethodParameter} (or from
+     * the {@link Field} for field access), so the class being bound is reachable through
+     * {@link TypeDescriptor#getSource()}. A class counts as Camel's own when it lives under
+     * <tt>org.apache.camel</tt>, or when it is annotated with {@link ConfigurationProperties} for a prefix starting
+     * with <tt>camel.</tt>.
+     * <p/>
+     * When the source does not identify a class this returns <tt>true</tt>, so that Camel's own binding is never
+     * weakened by a shape of the binder this does not recognise.
+     * <p/>
+     * Note that this cannot be done in {@code ConditionalGenericConverter.matches}: Spring's
+     * {@code GenericConversionService} caches the converter it picked per source/target {@code TypeDescriptor} pair,
+     * and {@code TypeDescriptor.equals} ignores the source, so {@code matches} is consulted once for the first class
+     * bound and the answer is then reused for every other class with a field of the same type.
+     */
+    static boolean isCamelConfigurationTarget(TypeDescriptor targetType) {
+        Class<?> owner = boundClass(targetType);
+        if (owner == null) {
+            return true;
+        }
+        if (owner.getName().startsWith(CAMEL_PACKAGE)) {
+            return true;
+        }
+        ConfigurationProperties annotation
+                = AnnotatedElementUtils.findMergedAnnotation(owner, ConfigurationProperties.class);
+        if (annotation != null) {
+            String prefix = !annotation.prefix().isEmpty() ? annotation.prefix() : annotation.value();
+            return prefix.startsWith(CAMEL_PROPERTY_PREFIX);
+        }
+        return false;
+    }
+
+    private static Class<?> boundClass(TypeDescriptor targetType) {
+        Object source = targetType != null ? targetType.getSource() : null;
+        if (source instanceof MethodParameter methodParameter) {
+            Class<?> containing = methodParameter.getContainingClass();
+            return containing != null ? containing : methodParameter.getDeclaringClass();
+        }
+        if (source instanceof Field field) {
+            return field.getDeclaringClass();
+        }
+        return null;
     }
 
     private static String message(String value, Class<?> type, String propertyPrefix, String reason) {

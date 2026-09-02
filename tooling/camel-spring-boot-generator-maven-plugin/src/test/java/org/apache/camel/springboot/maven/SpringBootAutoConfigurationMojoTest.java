@@ -16,10 +16,13 @@
  */
 package org.apache.camel.springboot.maven;
 
+import org.apache.maven.plugin.MojoFailureException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * Tests for the code that {@link SpringBootAutoConfigurationMojo} generates into the starters.
@@ -71,6 +74,20 @@ class SpringBootAutoConfigurationMojoTest {
                                   + " applicationContext,\n                    \"camel.language.xpath\","
                                   + " configuration, target);");
         assertThat(body).doesNotContain("CamelPropertiesHelper.copyProperties(");
+    }
+
+    @Test
+    @DisplayName("A catalog option named enabled or customizer fails the build")
+    void testReservedOptionNamesAreRejected() {
+        assertThatThrownBy(() -> SpringBootAutoConfigurationMojo.checkReservedOptionName("component", "foo", "enabled"))
+                .isInstanceOf(MojoFailureException.class)
+                .hasMessageContaining("enabled")
+                .hasMessageContaining("would never take effect");
+        assertThatThrownBy(
+                () -> SpringBootAutoConfigurationMojo.checkReservedOptionName("data format", "foo", "Customizer"))
+                        .isInstanceOf(MojoFailureException.class);
+        assertThatCode(() -> SpringBootAutoConfigurationMojo.checkReservedOptionName("language", "foo", "trim"))
+                .doesNotThrowAnyException();
     }
 
 }

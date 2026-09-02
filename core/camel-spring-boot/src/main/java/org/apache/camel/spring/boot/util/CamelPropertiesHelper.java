@@ -22,13 +22,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
 import org.apache.camel.PropertyBindingException;
 import org.apache.camel.spi.BeanIntrospection;
-import org.apache.camel.spi.PropertiesComponent;
 import org.apache.camel.spi.PropertyConfigurer;
 import org.apache.camel.support.PluginHelper;
 import org.apache.camel.support.PropertyBindingSupport;
@@ -105,7 +103,7 @@ public final class CamelPropertiesHelper {
             return;
         }
 
-        boolean lenient = isLenientBinding(camelContext);
+        boolean lenient = isLenientBinding(applicationContext);
         List<String> failed = new ArrayList<>();
         for (Map.Entry<String, Object> entry : properties.entrySet()) {
             String name = entry.getKey();
@@ -125,10 +123,12 @@ public final class CamelPropertiesHelper {
         }
         if (!failed.isEmpty()) {
             throw new IllegalArgumentException(
-                    "Cannot configure " + failed + " as the bean class [" + ObjectHelper.classCanonicalName(target)
-                                               + "] has no suitable setter method, or it is not possible to lookup a bean with that id in the"
-                                               + " Spring Boot registry. Remove or correct the option, or set "
-                                               + LENIENT_CONFIGURATION_BINDING + "=true to ignore it.");
+                    "Cannot configure " + failed + " on [" + ObjectHelper.classCanonicalName(target)
+                                               + "], which has no suitable setter method for it, and no bean with that id exists in the Spring"
+                                               + " Boot registry. The option may be listed in the documentation of the starter, as that is"
+                                               + " generated from the Camel catalog rather than from this class, in which case it has never"
+                                               + " taken effect. Correct or remove the option, or set "
+                                               + LENIENT_CONFIGURATION_BINDING + "=true to keep ignoring it.");
         }
     }
 
@@ -156,26 +156,25 @@ public final class CamelPropertiesHelper {
                 }
             }
         } catch (Exception e) {
-            LOG.debug("Cannot determine whether {}.{} was configured due to: {}", propertyPrefix, name,
-                    e.getMessage());
+            // returning false downgrades a hard error to an ignored option, so this must not stay quiet
+            LOG.warn("Cannot determine whether {} was configured due to: {}. Treating it as not configured.",
+                    optionKey(propertyPrefix, name), e.getMessage(), e);
         }
         return false;
     }
 
-    private static boolean isLenientBinding(CamelContext camelContext) {
-        try {
-            PropertiesComponent pc = camelContext.getPropertiesComponent();
-            if (pc != null) {
-                Optional<String> value = pc.resolveProperty(LENIENT_CONFIGURATION_BINDING);
-                if (value.isPresent()) {
-                    return "true".equalsIgnoreCase(value.get().trim());
-                }
-            }
-        } catch (Exception e) {
-            LOG.debug("Cannot resolve {} due to: {}. Using strict configuration binding.",
-                    LENIENT_CONFIGURATION_BINDING, e.getMessage());
+    private static boolean isLenientBinding(ApplicationContext applicationContext) {
+        if (applicationContext == null) {
+            return false;
         }
-        return false;
+        try {
+            return applicationContext.getEnvironment().getProperty(LENIENT_CONFIGURATION_BINDING, Boolean.class,
+                    Boolean.FALSE);
+        } catch (Exception e) {
+            LOG.warn("Cannot resolve {} due to: {}. Using strict configuration binding.",
+                    LENIENT_CONFIGURATION_BINDING, e.getMessage(), e);
+            return false;
+        }
     }
 
     /**
