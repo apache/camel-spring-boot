@@ -17,6 +17,27 @@ carry no matrix parameters. A request to `/greeting/John%20Doe;v=1` sets the `na
 The `CamelHttpPath` header is not affected: it reports the raw request path, with the servlet context-path
 removed.
 
+== File uploads
+
+Every accepted multipart file upload is copied out of the servlet container into the servlet temporary directory
+(`jakarta.servlet.ServletContext#TEMPDIR`), so that it can still be read after the HTTP request has completed. The
+copy is what the route sees: it is the `jakarta.activation.DataSource` of the attachment and, when the request carries
+a single file, also the `java.nio.file.Path` message body and the value of the `CamelFilePath` header.
+
+Because Camel owns that copy, it is deleted again once the exchange is done being routed, that is after the response
+has been written. A route that consumes the upload during routing - saving it with the file producer, streaming it to
+a remote system, unmarshalling it - is unaffected, since the content has already been read or copied by then.
+
+Set the following property if the application hands the temporary file over to something that reads it *after* the
+exchange has completed, in which case the application becomes responsible for deleting the file:
+
+[source,properties]
+----
+camel.component.platform-http.server.delete-uploaded-files-on-end=false
+----
+
+This mirrors the `deleteUploadedFilesOnEnd` option of the Vert.x platform-http implementation and defaults to `true`.
+
 == Undertow Access Log
 
 You can enable Undertow access log to be managed by whatever logging library you have in your camel application, you have to set the following parameters:

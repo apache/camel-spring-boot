@@ -39,13 +39,15 @@ import java.util.concurrent.Executor;
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(name = { "org.apache.camel.component.servlet.springboot.PlatformHttpComponentAutoConfiguration",
         "org.apache.camel.component.servlet.springboot.PlatformHttpComponentConverter" })
-@EnableConfigurationProperties({ComponentConfigurationProperties.class,PlatformHttpComponentConfiguration.class, WebMvcProperties.class})
+@EnableConfigurationProperties({ComponentConfigurationProperties.class,PlatformHttpComponentConfiguration.class, WebMvcProperties.class,
+        SpringBootPlatformHttpServerProperties.class})
 public class SpringBootPlatformHttpAutoConfiguration {
     private static final Logger LOG = LoggerFactory.getLogger(SpringBootPlatformHttpAutoConfiguration.class);
 
     @Bean(name = "platform-http-engine")
     @ConditionalOnMissingBean(PlatformHttpEngine.class)
-    public PlatformHttpEngine springBootPlatformHttpEngine(Environment env, List<Executor> executors) {
+    public PlatformHttpEngine springBootPlatformHttpEngine(Environment env, List<Executor> executors,
+                                                           SpringBootPlatformHttpServerProperties serverHttpProperties) {
         Executor executor;
 
         if (executors != null && !executors.isEmpty()) {
@@ -92,7 +94,7 @@ public class SpringBootPlatformHttpAutoConfiguration {
             LOG.debug("Using executor: {}", executor.getClass().getName());
         }
         int port = Integer.parseInt(env.getProperty("server.port", "8080"));
-        return new SpringBootPlatformHttpEngine(port, executor);
+        return new SpringBootPlatformHttpEngine(port, executor, serverHttpProperties.isDeleteUploadedFilesOnEnd());
     }
 
     @Bean
