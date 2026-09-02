@@ -102,6 +102,14 @@ public class AvroComponentConfiguration
      * is a org.apache.camel.component.avro.AvroConfiguration type.
      */
     private AvroConfiguration configuration;
+    /**
+     * Comma-separated list of additional packages that contain trusted Avro
+     * model classes. Avro 1.12 validates classes resolved from schemas; Camel
+     * automatically trusts org.apache.avro for IPC and packages derived from
+     * the configured protocol. Use this option for any additional model
+     * packages not inferred from the protocol.
+     */
+    private String serializablePackages;
 
     public Protocol getProtocol() {
         return protocol;
@@ -181,5 +189,13 @@ public class AvroComponentConfiguration
 
     public void setConfiguration(AvroConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getSerializablePackages() {
+        return serializablePackages;
+    }
+
+    public void setSerializablePackages(String serializablePackages) {
+        this.serializablePackages = serializablePackages;
     }
 }

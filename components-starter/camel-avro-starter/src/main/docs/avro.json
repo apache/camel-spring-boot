@@ -29,6 +29,12 @@
       "type": "java.lang.String",
       "description": "Class name to use for marshal and unmarshalling.",
       "sourceType": "org.apache.camel.dataformat.avro.springboot.AvroDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.avro.serializable-packages",
+      "type": "java.lang.String",
+      "description": "Comma-separated list of additional packages that contain trusted Avro model classes. Avro 1.12 validates classes resolved from schemas; Camel automatically trusts packages derived from the configured schema or instance class.",
+      "sourceType": "org.apache.camel.dataformat.avro.springboot.AvroDataFormatConfiguration"
     }
   ],
   "hints": [],

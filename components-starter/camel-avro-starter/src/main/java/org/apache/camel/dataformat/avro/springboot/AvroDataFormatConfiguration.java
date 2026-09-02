@@ -38,6 +38,13 @@ public class AvroDataFormatConfiguration
      * Class name to use for marshal and unmarshalling.
      */
     private String instanceClassName;
+    /**
+     * Comma-separated list of additional packages that contain trusted Avro
+     * model classes. Avro 1.12 validates classes resolved from schemas; Camel
+     * automatically trusts packages derived from the configured schema or
+     * instance class.
+     */
+    private String serializablePackages;
 
     public String getInstanceClassName() {
         return instanceClassName;
@@ -45,5 +52,13 @@ public class AvroDataFormatConfiguration
 
     public void setInstanceClassName(String instanceClassName) {
         this.instanceClassName = instanceClassName;
+    }
+
+    public String getSerializablePackages() {
+        return serializablePackages;
+    }
+
+    public void setSerializablePackages(String serializablePackages) {
+        this.serializablePackages = serializablePackages;
     }
 }

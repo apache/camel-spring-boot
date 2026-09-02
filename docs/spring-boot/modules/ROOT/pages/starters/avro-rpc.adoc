@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 11 options, which are listed below.
+The starter supports 12 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -37,6 +37,7 @@ The starter supports 11 options, which are listed below.
 | camel.component.avro.protocol-class-name | Avro protocol to use defined by the FQN class name |  | String
 | camel.component.avro.protocol-location | Avro protocol location |  | String
 | camel.component.avro.reflection-protocol | If the protocol object provided is reflection protocol. Should be used only with protocol parameter because for protocolClassName protocol type will be auto-detected | false | Boolean
+| camel.component.avro.serializable-packages | Comma-separated list of additional packages that contain trusted Avro model classes. Avro 1.12 validates classes resolved from schemas; Camel automatically trusts org.apache.avro for IPC and packages derived from the configured protocol. Use this option for any additional model packages not inferred from the protocol. |  | String
 | camel.component.avro.single-parameter | If true, consumer parameter won't be wrapped into an array. Will fail if protocol specifies more than one parameter for the message | false | Boolean
 | camel.component.avro.uri-authority | Authority to use (username and password) |  | String
 |===

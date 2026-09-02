@@ -23,11 +23,12 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 2 options, which are listed below.
+The starter supports 3 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
 | camel.dataformat.avro.enabled | Whether to enable auto configuration of the avro data format. This is enabled by default. |  | Boolean
 | camel.dataformat.avro.instance-class-name | Class name to use for marshal and unmarshalling. |  | String
+| camel.dataformat.avro.serializable-packages | Comma-separated list of additional packages that contain trusted Avro model classes. Avro 1.12 validates classes resolved from schemas; Camel automatically trusts packages derived from the configured schema or instance class. |  | String
 |===
