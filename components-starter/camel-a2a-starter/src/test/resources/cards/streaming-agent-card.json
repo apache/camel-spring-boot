@@ -1,0 +1,31 @@
+{
+  "protocolVersion": "1.0",
+  "name": "SpringBootAgent",
+  "description": "Streaming agent used by the Spring Boot starter smoke test",
+  "url": "http://localhost:8080",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": true,
+    "pushNotifications": false,
+    "extendedAgentCard": false
+  },
+  "defaultInputModes": ["text/plain"],
+  "defaultOutputModes": ["text/plain"],
+  "skills": [
+    {
+      "id": "echo",
+      "name": "Echo",
+      "description": "Echoes a fixed response",
+      "tags": ["test"],
+      "inputModes": ["text/plain"],
+      "outputModes": ["text/plain"]
+    }
+  ],
+  "supportedInterfaces": [
+    {
+      "url": "http://localhost:8080",
+      "protocolBinding": "HTTP+JSON",
+      "protocolVersion": "1.0"
+    }
+  ]
+}
