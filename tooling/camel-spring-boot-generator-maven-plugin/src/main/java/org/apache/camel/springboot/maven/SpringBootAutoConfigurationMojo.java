@@ -89,6 +89,12 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
      */
     private static final boolean DELETE_FILES_ON_MAIN_ARTIFACTS = false;
 
+    /**
+     * Option names owned by the Spring Boot auto configuration layer, see
+     * {@code CamelPropertiesHelper.copyConfigurationProperties}.
+     */
+    private static final Set<String> RESERVED_OPTION_NAMES = Set.of("enabled", "customizer");
+
     private static final Map<String, String> PRIMITIVEMAP;
     private static final Map<Type, Type> PRIMITIVE_CLASSES;
 
@@ -712,6 +718,8 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
 
         for (ComponentOptionModel option : model.getComponentOptions()) {
 
+            checkReservedOptionName("component", model.getScheme(), option.getName());
+
             if (skipComponentOption(model, option)) {
                 // some component options should be skipped
                 continue;
@@ -1164,6 +1172,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 .setStringValue("prefix", prefix);
 
         for (DataFormatOptionModel option : model.getOptions()) {
+            checkReservedOptionName("data format", model.getName(), option.getName());
             // skip option with name id in data format as we do not need that
             if ("id".equals(option.getName())) {
                 continue;
@@ -1268,6 +1277,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 .setStringValue("prefix", prefix);
 
         for (LanguageOptionModel option : model.getOptions()) {
+            checkReservedOptionName("language", model.getName(), option.getName());
             // skip option with name id, or expression in language as we do not
             // need that and skip resultType as they are not global options
             if ("id".equals(option.getName()) || "expression".equals(option.getName())
@@ -1471,6 +1481,23 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         writeSourceIfChanged(javaClass, fileName, false);
 
         writeComponentSpringFactorySource(packageName, name);
+    }
+
+    /**
+     * The generated customizers strip the options owned by the Spring Boot auto configuration layer itself before
+     * binding the configuration onto the Camel target, because they are not options on that target. No Camel
+     * component, data format or language declares an option with one of these names today, and this check makes sure
+     * that a catalog option carrying one of them can never be dropped silently by that stripping.
+     */
+    static void checkReservedOptionName(String kind, String name, String optionName)
+            throws MojoFailureException {
+        if (RESERVED_OPTION_NAMES.contains(optionName.toLowerCase(Locale.US))) {
+            throw new MojoFailureException(
+                    "The " + kind + " " + name + " declares an option named " + optionName
+                                            + ", which collides with the Spring Boot auto configuration layer. Such an option is removed"
+                                            + " before the configuration is copied onto the Camel target, so it would never take effect."
+                                            + " Rename the option, or teach CamelPropertiesHelper to tell the two apart.");
+        }
     }
 
     private static String componentPropertyPrefix(ComponentModel model, String overrideComponentName) {
