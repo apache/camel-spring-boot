@@ -43,8 +43,11 @@ import org.apache.camel.util.IOHelper;
 import org.apache.camel.util.URISupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.server.PathContainer;
+import org.springframework.http.server.RequestPath;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
+import org.springframework.web.util.ServletRequestPathUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -73,25 +76,65 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
 
     protected void populateRequestParameters(HttpServletRequest request, Message message) {
         super.populateRequestParameters(request, message);
-        String path = getRawPath(request);
+        PlatformHttpEndpoint endpoint = (PlatformHttpEndpoint) message.getExchange().getFromEndpoint();
+        String consumerPath = endpoint.getPath();
+        if (consumerPath != null && consumerPath.startsWith("/")) {
+            consumerPath = consumerPath.substring(1);
+        }
+        if (consumerPath == null || !useRestMatching(consumerPath)) {
+            return;
+        }
+        String path = getMatchedPath(request);
         // skip leading slash
         if (path != null && path.startsWith("/")) {
             path = path.substring(1);
         }
         if (path != null) {
-            PlatformHttpEndpoint endpoint = (PlatformHttpEndpoint) message.getExchange().getFromEndpoint();
-            String consumerPath = endpoint.getPath();
-            if (consumerPath != null && consumerPath.startsWith("/")) {
-                consumerPath = consumerPath.substring(1);
-            }
-            if (useRestMatching(consumerPath)) {
-                HttpHelper.evalPlaceholders(message.getHeaders(), path, consumerPath);
-            }
+            HttpHelper.evalPlaceholders(message.getHeaders(), path, consumerPath);
         }
     }
 
     private boolean useRestMatching(String path) {
         return path.indexOf('{') > -1;
+    }
+
+    /**
+     * The request path to evaluate the rest placeholders of the consumer path against.
+     * <p/>
+     * Spring matches the request against the {@link RequestPath} it parses from the request, whose segments are
+     * percent-decoded and stripped of matrix parameters. Evaluating the placeholders against that same path makes the
+     * headers agree with the path the request was actually matched on, and matches the decoded values the vertx engine
+     * provides.
+     * <p/>
+     * The path is parsed again instead of reading the one Spring cached in the request, because the request is serviced
+     * on another thread and the dispatch that cached it may already have removed it by then.
+     *
+     * @param  request the current request
+     * @return         the path the placeholders are evaluated against
+     */
+    private String getMatchedPath(HttpServletRequest request) {
+        try {
+            // pathWithinApplication has the context-path (and any servlet path prefix) removed, which is the
+            // same part getRawPath skips
+            return toMatchedValue(ServletRequestPathUtils.parse(request).pathWithinApplication());
+        } catch (Exception e) {
+            LOG.debug("Cannot parse request path of {}, using the raw path instead", request.getRequestURI(), e);
+            return getRawPath(request);
+        }
+    }
+
+    private static String toMatchedValue(PathContainer path) {
+        StringBuilder sb = new StringBuilder(path.value().length());
+        for (PathContainer.Element element : path.elements()) {
+            if (element instanceof PathContainer.PathSegment segment) {
+                // the decoded segment, without its matrix parameters
+                sb.append(segment.valueToMatch());
+            } else {
+                // separator
+                sb.append(element.value());
+            }
+        }
+        return sb.toString();
     }
 
     @Override
