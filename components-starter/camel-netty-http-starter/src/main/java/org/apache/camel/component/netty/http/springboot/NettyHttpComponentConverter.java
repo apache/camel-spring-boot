@@ -18,6 +18,7 @@ package org.apache.camel.component.netty.http.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.camel.spring.boot.util.BeanReferenceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -59,29 +60,6 @@ public class NettyHttpComponentConverter implements GenericConverter {
             Object source,
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
-        if (source == null) {
-            return null;
-        }
-        String ref = source.toString();
-        if (!ref.startsWith("#")) {
-            return null;
-        }
-        ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
-        switch (targetType.getName()) {
-            case "org.apache.camel.component.netty.NettyConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.netty.NettyConfiguration.class);
-            case "io.netty.channel.EventLoopGroup": return applicationContext.getBean(ref, io.netty.channel.EventLoopGroup.class);
-            case "io.netty.util.concurrent.EventExecutorGroup": return applicationContext.getBean(ref, io.netty.util.concurrent.EventExecutorGroup.class);
-            case "org.apache.camel.component.netty.NettyServerBootstrapFactory": return applicationContext.getBean(ref, org.apache.camel.component.netty.NettyServerBootstrapFactory.class);
-            case "org.apache.camel.component.netty.ServerInitializerFactory": return applicationContext.getBean(ref, org.apache.camel.component.netty.ServerInitializerFactory.class);
-            case "org.apache.camel.component.netty.ClientInitializerFactory": return applicationContext.getBean(ref, org.apache.camel.component.netty.ClientInitializerFactory.class);
-            case "org.apache.camel.component.netty.NettyCamelStateCorrelationManager": return applicationContext.getBean(ref, org.apache.camel.component.netty.NettyCamelStateCorrelationManager.class);
-            case "io.netty.channel.group.ChannelGroup": return applicationContext.getBean(ref, io.netty.channel.group.ChannelGroup.class);
-            case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
-            case "org.apache.camel.component.netty.http.NettyHttpBinding": return applicationContext.getBean(ref, org.apache.camel.component.netty.http.NettyHttpBinding.class);
-            case "org.apache.camel.component.netty.http.NettyHttpSecurityConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.netty.http.NettyHttpSecurityConfiguration.class);
-            case "org.apache.camel.support.jsse.SSLContextParameters": return applicationContext.getBean(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
-            case "io.netty.handler.ssl.SslHandler": return applicationContext.getBean(ref, io.netty.handler.ssl.SslHandler.class);
-        }
-        return null;
+        return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.netty-http");
     }
 }

@@ -18,6 +18,7 @@ package org.apache.camel.component.aws2.s3vectors.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.camel.spring.boot.util.BeanReferenceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -48,18 +49,6 @@ public class AWS2S3VectorsComponentConverter implements GenericConverter {
             Object source,
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
-        if (source == null) {
-            return null;
-        }
-        String ref = source.toString();
-        if (!ref.startsWith("#")) {
-            return null;
-        }
-        ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
-        switch (targetType.getName()) {
-            case "org.apache.camel.component.aws2.s3vectors.AWS2S3VectorsConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.aws2.s3vectors.AWS2S3VectorsConfiguration.class);
-            case "software.amazon.awssdk.services.s3vectors.S3VectorsClient": return applicationContext.getBean(ref, software.amazon.awssdk.services.s3vectors.S3VectorsClient.class);
-        }
-        return null;
+        return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.aws2-s3-vectors");
     }
 }

@@ -18,6 +18,7 @@ package org.apache.camel.component.activemq.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.camel.spring.boot.util.BeanReferenceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -59,29 +60,6 @@ public class ActiveMQComponentConverter implements GenericConverter {
             Object source,
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
-        if (source == null) {
-            return null;
-        }
-        String ref = source.toString();
-        if (!ref.startsWith("#")) {
-            return null;
-        }
-        ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
-        switch (targetType.getName()) {
-            case "jakarta.jms.ConnectionFactory": return applicationContext.getBean(ref, jakarta.jms.ConnectionFactory.class);
-            case "org.springframework.core.task.TaskExecutor": return applicationContext.getBean(ref, org.springframework.core.task.TaskExecutor.class);
-            case "org.apache.camel.component.jms.JmsConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.jms.JmsConfiguration.class);
-            case "org.springframework.jms.support.destination.DestinationResolver": return applicationContext.getBean(ref, org.springframework.jms.support.destination.DestinationResolver.class);
-            case "org.springframework.util.ErrorHandler": return applicationContext.getBean(ref, org.springframework.util.ErrorHandler.class);
-            case "jakarta.jms.ExceptionListener": return applicationContext.getBean(ref, jakarta.jms.ExceptionListener.class);
-            case "org.springframework.jms.support.converter.MessageConverter": return applicationContext.getBean(ref, org.springframework.jms.support.converter.MessageConverter.class);
-            case "org.apache.camel.component.jms.MessageCreatedStrategy": return applicationContext.getBean(ref, org.apache.camel.component.jms.MessageCreatedStrategy.class);
-            case "org.apache.camel.component.jms.MessageListenerContainerFactory": return applicationContext.getBean(ref, org.apache.camel.component.jms.MessageListenerContainerFactory.class);
-            case "org.apache.camel.component.jms.QueueBrowseStrategy": return applicationContext.getBean(ref, org.apache.camel.component.jms.QueueBrowseStrategy.class);
-            case "org.apache.camel.component.jms.TemporaryQueueResolver": return applicationContext.getBean(ref, org.apache.camel.component.jms.TemporaryQueueResolver.class);
-            case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
-            case "org.springframework.transaction.PlatformTransactionManager": return applicationContext.getBean(ref, org.springframework.transaction.PlatformTransactionManager.class);
-        }
-        return null;
+        return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.activemq");
     }
 }

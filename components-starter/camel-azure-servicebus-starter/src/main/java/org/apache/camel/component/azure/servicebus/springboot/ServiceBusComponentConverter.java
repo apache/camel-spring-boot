@@ -18,6 +18,7 @@ package org.apache.camel.component.azure.servicebus.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.camel.spring.boot.util.BeanReferenceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -55,25 +56,6 @@ public class ServiceBusComponentConverter implements GenericConverter {
             Object source,
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
-        if (source == null) {
-            return null;
-        }
-        String ref = source.toString();
-        if (!ref.startsWith("#")) {
-            return null;
-        }
-        ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
-        switch (targetType.getName()) {
-            case "com.azure.core.amqp.AmqpRetryOptions": return applicationContext.getBean(ref, com.azure.core.amqp.AmqpRetryOptions.class);
-            case "com.azure.core.util.ClientOptions": return applicationContext.getBean(ref, com.azure.core.util.ClientOptions.class);
-            case "org.apache.camel.component.azure.servicebus.ServiceBusConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.azure.servicebus.ServiceBusConfiguration.class);
-            case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
-            case "com.azure.core.amqp.ProxyOptions": return applicationContext.getBean(ref, com.azure.core.amqp.ProxyOptions.class);
-            case "com.azure.messaging.servicebus.ServiceBusProcessorClient": return applicationContext.getBean(ref, com.azure.messaging.servicebus.ServiceBusProcessorClient.class);
-            case "com.azure.messaging.servicebus.ServiceBusSenderClient": return applicationContext.getBean(ref, com.azure.messaging.servicebus.ServiceBusSenderClient.class);
-            case "com.azure.messaging.servicebus.ServiceBusTransactionContext": return applicationContext.getBean(ref, com.azure.messaging.servicebus.ServiceBusTransactionContext.class);
-            case "com.azure.core.credential.TokenCredential": return applicationContext.getBean(ref, com.azure.core.credential.TokenCredential.class);
-        }
-        return null;
+        return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.azure-servicebus");
     }
 }

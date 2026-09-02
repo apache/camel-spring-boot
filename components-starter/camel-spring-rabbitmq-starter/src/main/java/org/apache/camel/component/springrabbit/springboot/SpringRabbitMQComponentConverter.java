@@ -18,6 +18,7 @@ package org.apache.camel.component.springrabbit.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.camel.spring.boot.util.BeanReferenceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -54,24 +55,6 @@ public class SpringRabbitMQComponentConverter implements GenericConverter {
             Object source,
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
-        if (source == null) {
-            return null;
-        }
-        String ref = source.toString();
-        if (!ref.startsWith("#")) {
-            return null;
-        }
-        ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
-        switch (targetType.getName()) {
-            case "org.springframework.amqp.core.AmqpAdmin": return applicationContext.getBean(ref, org.springframework.amqp.core.AmqpAdmin.class);
-            case "org.springframework.amqp.rabbit.connection.ConnectionFactory": return applicationContext.getBean(ref, org.springframework.amqp.rabbit.connection.ConnectionFactory.class);
-            case "org.springframework.util.ErrorHandler": return applicationContext.getBean(ref, org.springframework.util.ErrorHandler.class);
-            case "org.apache.camel.component.springrabbit.ListenerContainerFactory": return applicationContext.getBean(ref, org.apache.camel.component.springrabbit.ListenerContainerFactory.class);
-            case "org.springframework.amqp.rabbit.config.StatelessRetryOperationsInterceptor": return applicationContext.getBean(ref, org.springframework.amqp.rabbit.config.StatelessRetryOperationsInterceptor.class);
-            case "org.springframework.amqp.support.converter.MessageConverter": return applicationContext.getBean(ref, org.springframework.amqp.support.converter.MessageConverter.class);
-            case "org.apache.camel.component.springrabbit.MessagePropertiesConverter": return applicationContext.getBean(ref, org.apache.camel.component.springrabbit.MessagePropertiesConverter.class);
-            case "org.apache.camel.spi.HeaderFilterStrategy": return applicationContext.getBean(ref, org.apache.camel.spi.HeaderFilterStrategy.class);
-        }
-        return null;
+        return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.spring-rabbitmq");
     }
 }
