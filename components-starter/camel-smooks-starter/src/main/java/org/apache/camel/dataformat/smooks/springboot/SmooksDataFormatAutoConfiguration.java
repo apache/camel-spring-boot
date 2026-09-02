@@ -63,16 +63,6 @@ public class SmooksDataFormatAutoConfiguration {
         return new DataFormatCustomizer() {
             @Override
             public void configure(String name, DataFormat target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
-            }
-            @Override
-            public boolean isEnabled(String name, DataFormat target) {
-                return HierarchicalPropertiesEvaluator.evaluate(
-                        applicationContext,
-                        "camel.dataformat.customizer",
-                        "camel.dataformat.smooks.customizer")
-                    && target instanceof SmooksDataFormat;
-            }
-        };
-    }
+                CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
+                        "camel.dataformat.smooks", configuration, target);
 }

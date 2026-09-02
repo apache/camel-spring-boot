@@ -62,16 +62,6 @@ public class StitchComponentAutoConfiguration {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
-            }
-            @Override
-            public boolean isEnabled(String name, Component target) {
-                return HierarchicalPropertiesEvaluator.evaluate(
-                        applicationContext,
-                        "camel.component.customizer",
-                        "camel.component.stitch.customizer")
-                    && target instanceof StitchComponent;
-            }
-        };
-    }
+                CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
+                        "camel.component.stitch", configuration, target);
 }

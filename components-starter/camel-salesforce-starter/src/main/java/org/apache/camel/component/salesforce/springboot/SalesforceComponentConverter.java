@@ -18,6 +18,7 @@ package org.apache.camel.component.salesforce.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.camel.spring.boot.util.BeanReferenceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -54,24 +55,6 @@ public class SalesforceComponentConverter implements GenericConverter {
             Object source,
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
-        if (source == null) {
-            return null;
-        }
-        String ref = source.toString();
-        if (!ref.startsWith("#")) {
-            return null;
-        }
-        ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
-        switch (targetType.getName()) {
-            case "org.apache.camel.component.salesforce.SalesforceHttpClient": return applicationContext.getBean(ref, org.apache.camel.component.salesforce.SalesforceHttpClient.class);
-            case "com.fasterxml.jackson.databind.ObjectMapper": return applicationContext.getBean(ref, com.fasterxml.jackson.databind.ObjectMapper.class);
-            case "org.apache.camel.component.salesforce.api.dto.analytics.reports.ReportMetadata": return applicationContext.getBean(ref, org.apache.camel.component.salesforce.api.dto.analytics.reports.ReportMetadata.class);
-            case "org.apache.camel.component.salesforce.SalesforceEndpointConfig": return applicationContext.getBean(ref, org.apache.camel.component.salesforce.SalesforceEndpointConfig.class);
-            case "java.util.concurrent.ExecutorService": return applicationContext.getBean(ref, java.util.concurrent.ExecutorService.class);
-            case "org.apache.camel.support.jsse.KeyStoreParameters": return applicationContext.getBean(ref, org.apache.camel.support.jsse.KeyStoreParameters.class);
-            case "org.apache.camel.component.salesforce.SalesforceLoginConfig": return applicationContext.getBean(ref, org.apache.camel.component.salesforce.SalesforceLoginConfig.class);
-            case "org.apache.camel.support.jsse.SSLContextParameters": return applicationContext.getBean(ref, org.apache.camel.support.jsse.SSLContextParameters.class);
-        }
-        return null;
+        return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.salesforce");
     }
 }

@@ -62,16 +62,6 @@ public class VertxWebsocketComponentAutoConfiguration {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
-            }
-            @Override
-            public boolean isEnabled(String name, Component target) {
-                return HierarchicalPropertiesEvaluator.evaluate(
-                        applicationContext,
-                        "camel.component.customizer",
-                        "camel.component.vertx-websocket.customizer")
-                    && target instanceof VertxWebsocketComponent;
-            }
-        };
-    }
+                CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
+                        "camel.component.vertx-websocket", configuration, target);
 }

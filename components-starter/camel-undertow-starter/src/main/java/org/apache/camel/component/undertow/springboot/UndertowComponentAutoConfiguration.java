@@ -62,16 +62,6 @@ public class UndertowComponentAutoConfiguration {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
-            }
-            @Override
-            public boolean isEnabled(String name, Component target) {
-                return HierarchicalPropertiesEvaluator.evaluate(
-                        applicationContext,
-                        "camel.component.customizer",
-                        "camel.component.undertow.customizer")
-                    && target instanceof UndertowComponent;
-            }
-        };
-    }
+                CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
+                        "camel.component.undertow", configuration, target);
 }

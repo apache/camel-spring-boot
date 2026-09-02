@@ -62,16 +62,6 @@ public class LangChain4jEmbeddingsComponentAutoConfiguration {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
-            }
-            @Override
-            public boolean isEnabled(String name, Component target) {
-                return HierarchicalPropertiesEvaluator.evaluate(
-                        applicationContext,
-                        "camel.component.customizer",
-                        "camel.component.langchain4j-embeddings.customizer")
-                    && target instanceof LangChain4jEmbeddingsComponent;
-            }
-        };
-    }
+                CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
+                        "camel.component.langchain4j-embeddings", configuration, target);
 }

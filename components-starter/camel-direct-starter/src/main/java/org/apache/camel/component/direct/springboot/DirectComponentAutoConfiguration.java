@@ -62,16 +62,6 @@ public class DirectComponentAutoConfiguration {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
-            }
-            @Override
-            public boolean isEnabled(String name, Component target) {
-                return HierarchicalPropertiesEvaluator.evaluate(
-                        applicationContext,
-                        "camel.component.customizer",
-                        "camel.component.direct.customizer")
-                    && target instanceof DirectComponent;
-            }
-        };
-    }
+                CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
+                        "camel.component.direct", configuration, target);
 }

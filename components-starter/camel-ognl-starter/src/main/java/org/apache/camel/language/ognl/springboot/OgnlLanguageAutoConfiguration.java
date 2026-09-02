@@ -63,16 +63,6 @@ public class OgnlLanguageAutoConfiguration {
         return new LanguageCustomizer() {
             @Override
             public void configure(String name, Language target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
-            }
-            @Override
-            public boolean isEnabled(String name, Language target) {
-                return HierarchicalPropertiesEvaluator.evaluate(
-                        applicationContext,
-                        "camel.language.customizer",
-                        "camel.language.ognl.customizer")
-                    && target instanceof OgnlLanguage;
-            }
-        };
-    }
+                CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
+                        "camel.language.ognl", configuration, target);
 }

@@ -63,16 +63,6 @@ public class JavaScriptLanguageAutoConfiguration {
         return new LanguageCustomizer() {
             @Override
             public void configure(String name, Language target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
-            }
-            @Override
-            public boolean isEnabled(String name, Language target) {
-                return HierarchicalPropertiesEvaluator.evaluate(
-                        applicationContext,
-                        "camel.language.customizer",
-                        "camel.language.js.customizer")
-                    && target instanceof JavaScriptLanguage;
-            }
-        };
-    }
+                CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
+                        "camel.language.js", configuration, target);
 }

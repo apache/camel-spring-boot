@@ -63,16 +63,6 @@ public class VariableLanguageAutoConfiguration {
         return new LanguageCustomizer() {
             @Override
             public void configure(String name, Language target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
-            }
-            @Override
-            public boolean isEnabled(String name, Language target) {
-                return HierarchicalPropertiesEvaluator.evaluate(
-                        applicationContext,
-                        "camel.language.customizer",
-                        "camel.language.variable.customizer")
-                    && target instanceof VariableLanguage;
-            }
-        };
-    }
+                CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
+                        "camel.language.variable", configuration, target);
 }

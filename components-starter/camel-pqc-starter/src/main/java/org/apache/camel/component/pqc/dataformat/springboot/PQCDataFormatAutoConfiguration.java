@@ -63,16 +63,6 @@ public class PQCDataFormatAutoConfiguration {
         return new DataFormatCustomizer() {
             @Override
             public void configure(String name, DataFormat target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
-            }
-            @Override
-            public boolean isEnabled(String name, DataFormat target) {
-                return HierarchicalPropertiesEvaluator.evaluate(
-                        applicationContext,
-                        "camel.dataformat.customizer",
-                        "camel.dataformat.pqc.customizer")
-                    && target instanceof PQCDataFormat;
-            }
-        };
-    }
+                CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
+                        "camel.dataformat.pqc", configuration, target);
 }
