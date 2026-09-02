@@ -37,14 +37,16 @@ import java.util.List;
 import java.util.concurrent.Executor;
 
 @AutoConfiguration(after = { PlatformHttpComponentAutoConfiguration.class, PlatformHttpComponentConverter.class })
-@EnableConfigurationProperties({ ComponentConfigurationProperties.class, PlatformHttpComponentConfiguration.class })
+@EnableConfigurationProperties({ ComponentConfigurationProperties.class, PlatformHttpComponentConfiguration.class,
+        SpringBootPlatformHttpServerProperties.class })
 public class SpringBootPlatformHttpAutoConfiguration {
     private static final Logger LOG = LoggerFactory.getLogger(SpringBootPlatformHttpAutoConfiguration.class);
 
     @Bean(name = "platform-http-engine")
     @ConditionalOnMissingBean(PlatformHttpEngine.class)
     public PlatformHttpEngine springBootPlatformHttpEngine(Environment env, ServerProperties serverProperties,
-                                                           List<Executor> executors) {
+                                                           List<Executor> executors,
+                                                           SpringBootPlatformHttpServerProperties serverHttpProperties) {
         if (executors == null || executors.isEmpty()) {
             throw new IllegalStateException("No Executor configured");
         }
@@ -87,7 +89,7 @@ public class SpringBootPlatformHttpAutoConfiguration {
             LOG.debug("Using executor: {}", executor.getClass().getName());
         }
         int port = serverProperties.getPort() != null ? serverProperties.getPort() : 8080;
-        return new SpringBootPlatformHttpEngine(port, executor);
+        return new SpringBootPlatformHttpEngine(port, executor, serverHttpProperties.isDeleteUploadedFilesOnEnd());
     }
 
     // Must not be @Lazy: eager beans are created before Camel starts, so the mapping is listening before the first
