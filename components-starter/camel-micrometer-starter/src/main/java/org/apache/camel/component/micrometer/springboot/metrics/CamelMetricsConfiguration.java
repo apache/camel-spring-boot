@@ -32,7 +32,8 @@ public class CamelMetricsConfiguration {
      *
      * When using dynamic tags, then a REST service with base URL: /users/{id} will capture metrics with uri tag with
      * the actual dynamic value such as: /users/123. However, this can lead to many tags as the URI is dynamic, so use
-     * this with care.
+     * this with care. The dynamic value is only used for requests that are resolved to a Camel HTTP consumer, any
+     * other request is tagged by the default Spring convention.
      */
     private boolean uriTagDynamic;
 
