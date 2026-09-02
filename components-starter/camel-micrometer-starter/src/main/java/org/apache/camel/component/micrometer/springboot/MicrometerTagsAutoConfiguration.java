@@ -36,8 +36,18 @@ import java.util.Optional;
 
 @AutoConfiguration(after = CamelAutoConfiguration.class)
 @Conditional({ ConditionalOnCamelContextAndAutoConfigurationBeans.class })
-@ConditionalOnProperty(prefix = "camel.metrics", name = "uriTagEnabled", havingValue = "true")
+@ConditionalOnProperty(prefix = "camel.metrics", name = "uri-tag-enabled", havingValue = "true")
 public class MicrometerTagsAutoConfiguration {
+
+    /**
+     * Name of the low cardinality key holding the http uri.
+     */
+    private static final String URI = "uri";
+
+    /**
+     * Maximum length of the uri tag value when using dynamic uri tags, to keep the tag value bounded.
+     */
+    private static final int MAX_URI_LENGTH = 200;
 
     /**
      * To integrate with micrometer to include expanded uri in tags when for example using camel rest-dsl with servlet.
@@ -50,39 +60,71 @@ public class MicrometerTagsAutoConfiguration {
             @Override
             public KeyValues getLowCardinalityKeyValues(ServerRequestObservationContext context) {
                 // here, we just want to have an additional KeyValue to the observation, keeping the default values
-                return super.getLowCardinalityKeyValues(context).and(custom(context));
+                KeyValue uri = custom(context);
+                KeyValues answer = super.getLowCardinalityKeyValues(context);
+                // when the request is not for a camel consumer, then we keep the uri computed by the default
+                // spring convention (the mapped pattern, or a constant such as UNKNOWN or NOT_FOUND), instead of
+                // the requested path, which would add a new meter for every distinct path being requested
+                return uri != null ? answer.and(uri) : answer;
             }
 
             protected KeyValue custom(ServerRequestObservationContext context) {
                 HttpServletRequest request = context.getCarrier();
-                String uri = null;
-                if (servlet.isPresent() && !configuration.isUriTagDynamic()) {
-                    HttpConsumer consumer = servlet.get().getServletResolveConsumerStrategy().resolve(request,
-                            servlet.get().getConsumers());
-                    if (consumer != null) {
-                        uri = consumer.getPath();
-                    }
+                if (request == null || servlet.isEmpty()) {
+                    return null;
+                }
+                HttpConsumer consumer = servlet.get().getServletResolveConsumerStrategy().resolve(request,
+                        servlet.get().getConsumers());
+                if (consumer == null) {
+                    // the request is not for a camel consumer, so let the default spring convention resolve the uri
+                    return null;
                 }
 
-                // the request may not be for camel servlet, so we need to capture uri from request
+                String uri;
+                if (configuration.isUriTagDynamic()) {
+                    // dynamic uri with the actual value from the http request, this is opt-in as the uri is dynamic
+                    // and therefore leads to a tag value per distinct request path
+                    uri = dynamicUri(request);
+                } else {
+                    // the static path of the camel consumer, such as /users/{id}
+                    uri = consumer.getPath();
+                }
                 if (uri == null || uri.isEmpty()) {
-                    // dynamic uri with the actual value from the http request
-                    uri = request.getServletPath();
-                    if (uri == null || uri.isEmpty()) {
-                        uri = request.getPathInfo();
-                    } else {
-                        String p = request.getPathInfo();
-                        if (p != null) {
-                            uri = uri + p;
-                        }
-                    }
-                }
-                if (uri == null) {
-                    uri = "";
+                    return null;
                 }
 
-                return KeyValue.of("uri", uri);
+                return KeyValue.of(URI, uri);
             }
         };
+    }
+
+    /**
+     * The uri from the http request, as requested by the client.
+     */
+    private static String dynamicUri(HttpServletRequest request) {
+        StringBuilder sb = new StringBuilder();
+        String path = request.getServletPath();
+        if (path != null) {
+            sb.append(path);
+        }
+        String info = request.getPathInfo();
+        if (info != null) {
+            sb.append(info);
+        }
+        return sanitize(sb.toString());
+    }
+
+    /**
+     * The dynamic uri is client provided, so keep the tag value bounded in length and free of control characters that
+     * the monitoring system may not be able to render.
+     */
+    private static String sanitize(String uri) {
+        String answer = uri.length() > MAX_URI_LENGTH ? uri.substring(0, MAX_URI_LENGTH) : uri;
+        StringBuilder sb = new StringBuilder(answer.length());
+        for (int i = 0; i < answer.length(); i++) {
+            char ch = answer.charAt(i);
+            sb.append(Character.isISOControl(ch) ? '_' : ch);
+        }
+        return sb.toString();
     }
 }
