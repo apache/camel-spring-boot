@@ -38,6 +38,7 @@ import org.apache.camel.http.base.HttpHelper;
 import org.apache.camel.http.common.DefaultHttpBinding;
 import org.apache.camel.http.common.HttpConstants;
 import org.apache.camel.support.ExchangeHelper;
+import org.apache.camel.support.SynchronizationAdapter;
 import org.apache.camel.util.FileUtil;
 import org.apache.camel.util.IOHelper;
 import org.apache.camel.util.URISupport;
@@ -57,8 +58,10 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -68,6 +71,7 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
     private static final Logger LOG = LoggerFactory.getLogger(SpringBootPlatformHttpBinding.class);
 
     private boolean streaming;
+    private boolean deleteUploadedFilesOnEnd = true;
     private static final String CONTENT_TYPE_FORM_URLENCODED = "application/x-www-form-urlencoded";
     private static final List<Method> METHODS_WITH_BODY_ALLOWED = List.of(Method.POST,
             Method.PUT, Method.PATCH, Method.DELETE);
@@ -145,6 +149,9 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
             boolean isSingleAttachment = multipartHttpServletRequest.getFileMap() != null &&
                     multipartHttpServletRequest.getFileMap().keySet().size() == 1;
             message.setHeader(Exchange.ATTACHMENTS_SIZE, multipartHttpServletRequest.getFileMap().keySet().size());
+            // the uploads are copied out of the servlet container and are therefore owned by Camel, they are
+            // deleted again when the exchange is done being routed (unless deleteUploadedFilesOnEnd is turned off)
+            final List<Path> uploadedTmpFiles = new ArrayList<>();
             multipartHttpServletRequest.getFileMap().forEach((name, multipartFile) -> {
                 try {
                     if (name != null) {
@@ -163,6 +170,7 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
 
                     Path uploadedTmpFile = Paths.get(tmpFolder.getPath(), UUID.randomUUID().toString());
                     multipartFile.transferTo(uploadedTmpFile);
+                    uploadedTmpFiles.add(uploadedTmpFile);
 
                     AttachmentMessage am = new DefaultAttachmentMessage(message);
                     File uploadedFile = uploadedTmpFile.toFile();
@@ -185,7 +193,40 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
                     throw new RuntimeException(e);
                 }
             });
+
+            if (deleteUploadedFilesOnEnd && !uploadedTmpFiles.isEmpty()) {
+                registerUploadedFilesCleanup(message, uploadedTmpFiles);
+            }
         }
+    }
+
+    /**
+     * Deletes the temporary copies of the uploaded files when the exchange is done being routed.
+     * <p/>
+     * The attachment {@code DataSource} and, for a single upload, the message body point at those
+     * files for as long as the exchange is being routed, so the files can only be deleted on completion.
+     */
+    private void registerUploadedFilesCleanup(Message message, List<Path> uploadedTmpFiles) {
+        Exchange exchange = message.getExchange();
+        if (exchange == null) {
+            LOG.debug("Cannot delete uploaded temporary files as the message is not associated with an exchange");
+            return;
+        }
+        exchange.getExchangeExtension().addOnCompletion(new SynchronizationAdapter() {
+            @Override
+            public void onDone(Exchange doneExchange) {
+                for (Path uploadedTmpFile : uploadedTmpFiles) {
+                    try {
+                        if (Files.deleteIfExists(uploadedTmpFile)) {
+                            LOG.trace("Deleted uploaded temporary file: {}", uploadedTmpFile);
+                        }
+                    } catch (IOException e) {
+                        LOG.debug("Cannot delete uploaded temporary file: {} due to: {}. This exception is ignored.",
+                                uploadedTmpFile, e.getMessage(), e);
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -222,6 +263,17 @@ public class SpringBootPlatformHttpBinding extends DefaultHttpBinding {
 
     public void setStreaming(boolean streaming) {
         this.streaming = streaming;
+    }
+
+    public boolean isDeleteUploadedFilesOnEnd() {
+        return deleteUploadedFilesOnEnd;
+    }
+
+    /**
+     * Whether the temporary copies of multipart file uploads are deleted when the exchange is done being routed.
+     */
+    public void setDeleteUploadedFilesOnEnd(boolean deleteUploadedFilesOnEnd) {
+        this.deleteUploadedFilesOnEnd = deleteUploadedFilesOnEnd;
     }
 
     public Object parseBody(HttpServletRequest request, Message message) throws IOException {
