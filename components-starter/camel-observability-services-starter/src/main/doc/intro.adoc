@@ -1,0 +1,8 @@
+Spring Boot auto-configuration bundling the Camel observability services: metrics, tracing and health.
+
+The starter pulls in `camel-micrometer`, `micrometer-registry-prometheus`, `camel-opentelemetry2` and
+`camel-management`, and contributes a set of defaults so that a Camel application exposes a Prometheus
+scrape endpoint and Kubernetes-shaped liveness and readiness probes without any configuration.
+
+The defaults are registered as the lowest precedence property source, so anything you set in
+`application.properties`, in an environment variable or on the command line overrides them.

@@ -29,6 +29,11 @@ import org.springframework.core.env.MapPropertySource;
  * Contributes the opinionated observability defaults as the lowest precedence property source so that any
  * user-provided configuration (application.properties, environment variables, system properties, ...) overrides them
  * following the standard Spring Boot precedence rules.
+ * <p>
+ * The defaults stay within the Spring Boot baseline: the management listener binds to loopback, and the aggregate
+ * health endpoint only shows its details to an authorized caller. The {@code live} and {@code ready} probe groups
+ * keep {@code show-details=always} because they are consumed unauthenticated by the kubelet, and the indicators
+ * they contain report an availability state and nothing else.
  */
 public class ObservabilityServicesEnvironmentPostProcessor implements EnvironmentPostProcessor, Ordered {
 
@@ -38,6 +43,8 @@ public class ObservabilityServicesEnvironmentPostProcessor implements Environmen
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
         Map<String, Object> defaults = new LinkedHashMap<>();
         defaults.put("management.server.port", "9876");
+        // bind the management listener to loopback; exposing it beyond the host is a conscious step
+        defaults.put("management.server.address", "127.0.0.1");
         defaults.put("management.endpoints.web.exposure.include", "health,prometheus");
         defaults.put("management.endpoints.web.base-path", "/observe");
         defaults.put("management.endpoints.web.path-mapping.prometheus", "metrics");
@@ -48,15 +55,15 @@ public class ObservabilityServicesEnvironmentPostProcessor implements Environmen
         // Opentelemetry
         defaults.put("camel.opentelemetry2.enabled", "true");
         // Health
-        defaults.put("camel.health.exposure-level", "full");
         defaults.put("management.endpoint.health.probes.enabled", "true");
         defaults.put("management.health.readinessState.enabled", "true");
         defaults.put("management.health.livenessState.enabled", "true");
-        defaults.put("management.endpoint.health.show-details", "always");
-        // /observe/health/live remap
+        defaults.put("management.endpoint.health.show-details", "when-authorized");
+        // /observe/health/live remap; the group carries availability states only, and the kubelet reads it
+        // unauthenticated, so its details stay visible
         defaults.put("management.endpoint.health.group.live.include", "livenessState,camelLivenessState");
         defaults.put("management.endpoint.health.group.live.show-details", "always");
-        // /observe/health/ready remap
+        // /observe/health/ready remap; see the note on the live group above
         defaults.put("management.endpoint.health.group.ready.include", "readinessState,camelReadinessState");
         defaults.put("management.endpoint.health.group.ready.show-details", "always");
 
