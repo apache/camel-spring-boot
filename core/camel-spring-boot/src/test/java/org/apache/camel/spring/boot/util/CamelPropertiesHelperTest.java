@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.apache.camel.CamelContext;
+import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -34,8 +35,12 @@ import org.springframework.test.annotation.DirtiesContext;
 @CamelSpringBootTest
 @DirtiesContext
 @SpringBootApplication
-@SpringBootTest(classes = { CamelPropertiesHelperTest.TestConfiguration.class })
+@SpringBootTest(
+                classes = { CamelPropertiesHelperTest.TestConfiguration.class },
+                properties = { "camel.test.my-config.no-such-option-on-the-target = bar" })
 public class CamelPropertiesHelperTest {
+
+    static final String PREFIX = "camel.test.my-config";
 
     @Autowired
     ApplicationContext context;
@@ -52,6 +57,58 @@ public class CamelPropertiesHelperTest {
     }
 
     public static class MyOption {
+    }
+
+    /**
+     * Mimics a generated {@code *ComponentConfiguration} class: the auto configuration layer options
+     * (enabled/customizer) are inherited and are not options on the Camel target bean.
+     */
+    public static class MyConfiguration extends ComponentConfigurationPropertiesCommon {
+
+        private String name;
+        private MyOption option;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public MyOption getOption() {
+            return option;
+        }
+
+        public void setOption(MyOption option) {
+            this.option = option;
+        }
+    }
+
+    /**
+     * A configuration class holding an option that does not exist on the target bean, which is what generator or
+     * catalog drift looks like at runtime.
+     */
+    public static class MyDriftedConfiguration extends MyConfiguration {
+
+        private String noSuchOptionOnTheTarget;
+        private String anotherOptionOnlyCarryingItsDefault;
+
+        public String getNoSuchOptionOnTheTarget() {
+            return noSuchOptionOnTheTarget;
+        }
+
+        public void setNoSuchOptionOnTheTarget(String noSuchOptionOnTheTarget) {
+            this.noSuchOptionOnTheTarget = noSuchOptionOnTheTarget;
+        }
+
+        public String getAnotherOptionOnlyCarryingItsDefault() {
+            return anotherOptionOnlyCarryingItsDefault;
+        }
+
+        public void setAnotherOptionOnlyCarryingItsDefault(String anotherOptionOnlyCarryingItsDefault) {
+            this.anotherOptionOnlyCarryingItsDefault = anotherOptionOnlyCarryingItsDefault;
+        }
     }
 
     public static class MyClass {
@@ -224,6 +281,57 @@ public class CamelPropertiesHelperTest {
         Assertions.assertEquals(123, target.getId());
         Assertions.assertEquals("Donald Duck", target.getName());
         Assertions.assertSame(context.getBean("myCoolOption"), target.getOption());
+    }
+
+    @Test
+    public void testCopyConfigurationPropertiesIgnoresAutoConfigurationOptions() {
+        MyClass target = new MyClass();
+
+        MyConfiguration config = new MyConfiguration();
+        config.setName("Donald Duck");
+        config.setOption(context.getBean("myCoolOption", MyOption.class));
+
+        // enabled and customizer are always set on a generated configuration class, and must not be
+        // attempted on the target bean
+        Assertions.assertTrue(config.isEnabled());
+        Assertions.assertNotNull(config.getCustomizer());
+
+        CamelPropertiesHelper.copyConfigurationProperties(camelContext, context, PREFIX, config, target);
+
+        Assertions.assertEquals("Donald Duck", target.getName());
+        Assertions.assertSame(context.getBean("myCoolOption"), target.getOption());
+    }
+
+    @Test
+    public void testCopyConfigurationPropertiesFailsOnConfiguredOptionThatCannotBeSet() {
+        MyClass target = new MyClass();
+
+        MyDriftedConfiguration config = new MyDriftedConfiguration();
+        config.setName("Donald Duck");
+        // camel.test.my-config.no-such-option-on-the-target is set on the test application
+        config.setNoSuchOptionOnTheTarget("bar");
+
+        IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class,
+                () -> CamelPropertiesHelper.copyConfigurationProperties(camelContext, context, PREFIX, config,
+                        target));
+        Assertions.assertTrue(e.getMessage().contains("camel.test.my-config.no-such-option-on-the-target"),
+                e.getMessage());
+        Assertions.assertTrue(e.getMessage().contains(CamelPropertiesHelper.LENIENT_CONFIGURATION_BINDING),
+                e.getMessage());
+    }
+
+    @Test
+    public void testCopyConfigurationPropertiesIgnoresDefaultThatCannotBeSet() {
+        MyClass target = new MyClass();
+
+        MyDriftedConfiguration config = new MyDriftedConfiguration();
+        config.setName("Donald Duck");
+        // nothing configured this one, so it only carries a catalog default and must not break startup
+        config.setAnotherOptionOnlyCarryingItsDefault("false");
+
+        CamelPropertiesHelper.copyConfigurationProperties(camelContext, context, PREFIX, config, target);
+
+        Assertions.assertEquals("Donald Duck", target.getName());
     }
 
     @Test
