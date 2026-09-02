@@ -37,14 +37,18 @@ public class JasyptEncryptedPropertiesConfiguration {
     private boolean earlyDecryptionEnabled;
 
     /**
-     * The algorithm to be used for decryption. Default: PBEWithMD5AndDES
+     * The algorithm to be used for decryption. Default: PBEWITHHMACSHA256ANDAES_256. This algorithm requires an
+     * initialization vector, which is generated automatically unless ivGeneratorClassName is set explicitly. Values
+     * encrypted with a different algorithm can only be decrypted by setting this option to that algorithm, for example
+     * PBEWithMD5AndDES.
      */
-    private String algorithm = "PBEWithMD5AndDES";
+    private String algorithm = "PBEWITHHMACSHA256ANDAES_256";
 
     /**
      * The master password used by Jasypt for decrypting the values. This option supports prefixes which influence the
      * master password lookup behaviour: sysenv: means to lookup the OS system environment with the given key. sys:
-     * means to lookup a JVM system property.
+     * means to lookup a JVM system property. The master password should be supplied through one of those prefixes, or
+     * from an external secret store, and should not be stored alongside the encrypted values it protects.
      */
     private String password;
 

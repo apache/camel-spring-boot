@@ -30,8 +30,17 @@ public class EncryptedPropertiesUtilsTest {
 
     @Test
     public void noIvGeneratorPropertyTest() {
-        // IVGenerator is null
+        // IVGenerator is not configured, the default algorithm requires one so it is auto detected
         JasyptEncryptedPropertiesConfiguration configuration = new JasyptEncryptedPropertiesConfiguration();
+        IvGenerator ivGenerator = getIVGenerator(configuration);
+        assertThat(ivGenerator).isInstanceOf(RandomIvGenerator.class);
+    }
+
+    @Test
+    public void noIvGeneratorPropertyWithAlgorithmThatDoesNotNeedIvTest() {
+        // IVGenerator is not configured and the algorithm does not require one
+        JasyptEncryptedPropertiesConfiguration configuration = new JasyptEncryptedPropertiesConfiguration();
+        configuration.setAlgorithm("PBEWithMD5AndDES");
         IvGenerator ivGenerator = getIVGenerator(configuration);
         assertThat(ivGenerator).isInstanceOf(NoIvGenerator.class);
     }
