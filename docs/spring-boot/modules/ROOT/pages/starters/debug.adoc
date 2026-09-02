@@ -5,7 +5,7 @@
 
 Spring Boot auto-configuration for the Camel Debugger.
 
-This starter enables the Camel Debugger in your Spring Boot application, allowing you to set breakpoints and step through Camel routes during development. The debugger integrates with IDEs and tooling through JMX.
+This starter enables the Camel Debugger in your Spring Boot application, allowing you to set breakpoints and step through Camel routes during development. The debugger is controlled from Java, JMX or tooling, and can additionally expose a JMX RMI connector for remote tooling, which is disabled by default.
 
 == Maven coordinates
 
@@ -16,6 +16,29 @@ This starter enables the Camel Debugger in your Spring Boot application, allowin
     <artifactId>camel-debug-starter</artifactId>
 </dependency>
 ----
+
+== Usage
+
+Adding this starter to the classpath installs and enables the Camel Debugger. The debugger can be turned off with:
+
+[source,properties]
+----
+camel.debug.enabled = false
+----
+
+=== JMX connector
+
+Tooling that attaches to the debugger from another process, such as the IntelliJ IDEA and VS Code Camel plugins, uses a JMX RMI connector. The connector is *disabled by default*, so having this starter on the classpath never opens a listening socket on its own. Enable it explicitly when remote tooling needs to attach:
+
+[source,properties]
+----
+camel.debug.jmx-connector-enabled = true
+camel.debug.jmx-connector-port = 1099
+----
+
+WARNING: The JMX RMI connector is created without authentication or transport security. Anyone able to reach the port can control the debugger, suspend routes and read message payloads. Only enable it on a trusted network, and make sure the port is bound to a loopback interface or protected by a firewall.
+
+The `camel debug` command of Camel JBang does not need this connector: it drives a Spring Boot application through the local CLI connector provided by `camel-cli-connector-starter`.
 
 == Spring Boot Auto-Configuration
 
@@ -33,8 +56,8 @@ The starter supports 15 options, which are listed below.
 | camel.debug.include-exception | Trace messages to include exception if the message failed | true | Boolean
 | camel.debug.include-exchange-properties | Whether to include the exchange properties in the traced message | true | Boolean
 | camel.debug.include-exchange-variables | Whether to include the exchange variables in the traced message | true | Boolean
-| camel.debug.jmx-connector-enabled | Whether to create JMX connector that allows tooling to control the Camel debugger. This is what the IDEA and VSCode tooling is using. | true | Boolean
-| camel.debug.jmx-connector-port | Port number to expose a JMX RMI connector for tooling that needs to control the debugger. | 1099 | Integer
+| camel.debug.jmx-connector-enabled | Whether to create JMX connector that allows tooling to control the Camel debugger. This is what the IDEA and VSCode tooling is using. The connector opens an RMI registry and a JMX RMI server on the configured port, without authentication or transport security, so it is disabled by default and must be turned on explicitly. Only enable it on a trusted network, and bind or firewall the port accordingly. | false | Boolean
+| camel.debug.jmx-connector-port | Port number to expose a JMX RMI connector for tooling that needs to control the debugger. Only in use when the JMX connector is enabled. | 1099 | Integer
 | camel.debug.logging-level | The debugger logging level to use when logging activity. | info | LoggingLevel
 | camel.debug.single-step-include-start-end | In single step mode, then when the exchange is created and completed, then simulate a breakpoint at start and end, that allows to suspend and watch the incoming/complete exchange at the route (you can see message body as response, failed exception etc). | false | Boolean
 | camel.debug.standby | To set the debugger in standby mode, where the debugger will be installed by not automatic enabled. The debugger can then later be enabled explicit from Java, JMX or tooling. | false | Boolean

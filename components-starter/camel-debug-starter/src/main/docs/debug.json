@@ -71,14 +71,14 @@
     {
       "name": "camel.debug.jmx-connector-enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether to create JMX connector that allows tooling to control the Camel debugger. This is what the IDEA and VSCode tooling is using.",
+      "description": "Whether to create JMX connector that allows tooling to control the Camel debugger. This is what the IDEA and VSCode tooling is using. The connector opens an RMI registry and a JMX RMI server on the configured port, without authentication or transport security, so it is disabled by default and must be turned on explicitly. Only enable it on a trusted network, and bind or firewall the port accordingly.",
       "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
-      "defaultValue": true
+      "defaultValue": false
     },
     {
       "name": "camel.debug.jmx-connector-port",
       "type": "java.lang.Integer",
-      "description": "Port number to expose a JMX RMI connector for tooling that needs to control the debugger.",
+      "description": "Port number to expose a JMX RMI connector for tooling that needs to control the debugger. Only in use when the JMX connector is enabled.",
       "sourceType": "org.apache.camel.spring.boot.debug.CamelDebugConfigurationProperties",
       "defaultValue": 1099
     },

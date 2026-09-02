@@ -1,3 +1,3 @@
 Spring Boot auto-configuration for the Camel Debugger.
 
-This starter enables the Camel Debugger in your Spring Boot application, allowing you to set breakpoints and step through Camel routes during development. The debugger integrates with IDEs and tooling through JMX.
+This starter enables the Camel Debugger in your Spring Boot application, allowing you to set breakpoints and step through Camel routes during development. The debugger is controlled from Java, JMX or tooling, and can additionally expose a JMX RMI connector for remote tooling, which is disabled by default.
