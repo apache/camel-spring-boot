@@ -4,6 +4,7 @@
 * xref:starter-configuration.adoc[Starter Configuration]
 * Starters
 // starters: START
+** xref:starters/a2a.adoc[A2A]
 ** xref:starters/activemq.adoc[ActiveMQ 5.x]
 ** xref:starters/activemq6.adoc[ActiveMQ 6.x]
 ** xref:starters/ai-tool.adoc[AI Tool]

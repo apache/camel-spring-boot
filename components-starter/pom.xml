@@ -105,6 +105,7 @@
   </build>
   <modules>
 
+    <module>camel-a2a-starter</module>
     <module>camel-activemq-starter</module>
     <module>camel-activemq6-starter</module>
     <module>camel-ai-tool-starter</module>
