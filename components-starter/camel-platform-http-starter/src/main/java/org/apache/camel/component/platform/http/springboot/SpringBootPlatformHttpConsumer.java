@@ -92,6 +92,15 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         this.binding = binding;
     }
 
+    /**
+     * Whether the temporary copies of multipart file uploads are deleted when the exchange is done being routed.
+     */
+    public void setDeleteUploadedFilesOnEnd(boolean deleteUploadedFilesOnEnd) {
+        if (binding instanceof SpringBootPlatformHttpBinding springBootBinding) {
+            springBootBinding.setDeleteUploadedFilesOnEnd(deleteUploadedFilesOnEnd);
+        }
+    }
+
     @Override
     public PlatformHttpEndpoint getEndpoint() {
         return (PlatformHttpEndpoint) super.getEndpoint();
