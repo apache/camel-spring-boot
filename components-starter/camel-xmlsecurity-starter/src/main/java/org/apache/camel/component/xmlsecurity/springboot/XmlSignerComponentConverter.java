@@ -18,6 +18,7 @@ package org.apache.camel.component.xmlsecurity.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.camel.spring.boot.util.BeanReferenceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -52,22 +53,6 @@ public class XmlSignerComponentConverter implements GenericConverter {
             Object source,
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
-        if (source == null) {
-            return null;
-        }
-        String ref = source.toString();
-        if (!ref.startsWith("#")) {
-            return null;
-        }
-        ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
-        switch (targetType.getName()) {
-            case "javax.xml.crypto.AlgorithmMethod": return applicationContext.getBean(ref, javax.xml.crypto.AlgorithmMethod.class);
-            case "org.apache.camel.component.xmlsecurity.api.KeyAccessor": return applicationContext.getBean(ref, org.apache.camel.component.xmlsecurity.api.KeyAccessor.class);
-            case "javax.xml.crypto.dsig.spec.XPathFilterParameterSpec": return applicationContext.getBean(ref, javax.xml.crypto.dsig.spec.XPathFilterParameterSpec.class);
-            case "org.apache.camel.component.xmlsecurity.api.XmlSignatureProperties": return applicationContext.getBean(ref, org.apache.camel.component.xmlsecurity.api.XmlSignatureProperties.class);
-            case "org.apache.camel.component.xmlsecurity.processor.XmlSignerConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.xmlsecurity.processor.XmlSignerConfiguration.class);
-            case "javax.xml.crypto.URIDereferencer": return applicationContext.getBean(ref, javax.xml.crypto.URIDereferencer.class);
-        }
-        return null;
+        return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.xmlsecurity-sign");
     }
 }

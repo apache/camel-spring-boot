@@ -18,6 +18,7 @@ package org.apache.camel.component.xj.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.camel.spring.boot.util.BeanReferenceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -50,20 +51,6 @@ public class XJComponentConverter implements GenericConverter {
             Object source,
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
-        if (source == null) {
-            return null;
-        }
-        String ref = source.toString();
-        if (!ref.startsWith("#")) {
-            return null;
-        }
-        ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
-        switch (targetType.getName()) {
-            case "net.sf.saxon.Configuration": return applicationContext.getBean(ref, net.sf.saxon.Configuration.class);
-            case "org.apache.camel.component.xslt.TransformerFactoryConfigurationStrategy": return applicationContext.getBean(ref, org.apache.camel.component.xslt.TransformerFactoryConfigurationStrategy.class);
-            case "javax.xml.transform.URIResolver": return applicationContext.getBean(ref, javax.xml.transform.URIResolver.class);
-            case "org.apache.camel.component.xslt.XsltUriResolverFactory": return applicationContext.getBean(ref, org.apache.camel.component.xslt.XsltUriResolverFactory.class);
-        }
-        return null;
+        return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.xj");
     }
 }

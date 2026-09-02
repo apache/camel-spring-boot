@@ -18,6 +18,7 @@ package org.apache.camel.component.azure.storage.blob.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.camel.spring.boot.util.BeanReferenceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -50,20 +51,6 @@ public class BlobComponentConverter implements GenericConverter {
             Object source,
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
-        if (source == null) {
-            return null;
-        }
-        String ref = source.toString();
-        if (!ref.startsWith("#")) {
-            return null;
-        }
-        ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
-        switch (targetType.getName()) {
-            case "org.apache.camel.component.azure.storage.blob.BlobConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.azure.storage.blob.BlobConfiguration.class);
-            case "com.azure.storage.common.StorageSharedKeyCredential": return applicationContext.getBean(ref, com.azure.storage.common.StorageSharedKeyCredential.class);
-            case "com.azure.storage.blob.BlobServiceClient": return applicationContext.getBean(ref, com.azure.storage.blob.BlobServiceClient.class);
-            case "com.azure.core.util.Context": return applicationContext.getBean(ref, com.azure.core.util.Context.class);
-        }
-        return null;
+        return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.azure-storage-blob");
     }
 }

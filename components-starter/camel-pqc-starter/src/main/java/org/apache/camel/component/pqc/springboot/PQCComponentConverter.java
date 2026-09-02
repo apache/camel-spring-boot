@@ -18,6 +18,7 @@ package org.apache.camel.component.pqc.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.camel.spring.boot.util.BeanReferenceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -53,23 +54,6 @@ public class PQCComponentConverter implements GenericConverter {
             Object source,
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
-        if (source == null) {
-            return null;
-        }
-        String ref = source.toString();
-        if (!ref.startsWith("#")) {
-            return null;
-        }
-        ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
-        switch (targetType.getName()) {
-            case "org.apache.camel.component.pqc.PQCConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.pqc.PQCConfiguration.class);
-            case "javax.crypto.KeyAgreement": return applicationContext.getBean(ref, javax.crypto.KeyAgreement.class);
-            case "java.security.KeyPair": return applicationContext.getBean(ref, java.security.KeyPair.class);
-            case "java.security.Signature": return applicationContext.getBean(ref, java.security.Signature.class);
-            case "javax.crypto.KeyGenerator": return applicationContext.getBean(ref, javax.crypto.KeyGenerator.class);
-            case "org.apache.camel.component.pqc.lifecycle.KeyLifecycleManager": return applicationContext.getBean(ref, org.apache.camel.component.pqc.lifecycle.KeyLifecycleManager.class);
-            case "java.security.KeyStore": return applicationContext.getBean(ref, java.security.KeyStore.class);
-        }
-        return null;
+        return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.pqc");
     }
 }

@@ -58,7 +58,8 @@ public class LangChain4jEmbeddingStoreComponentAutoConfiguration {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
-                CamelPropertiesHelper.copyProperties(target.getCamelContext(), configuration, target);
+                CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
+                        "camel.component.langchain4j-embeddingstore", configuration, target);
             }
             @Override
             public boolean isEnabled(String name, Component target) {

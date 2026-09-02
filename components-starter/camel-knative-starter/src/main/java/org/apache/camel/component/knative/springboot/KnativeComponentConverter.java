@@ -18,6 +18,7 @@ package org.apache.camel.component.knative.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.camel.spring.boot.util.BeanReferenceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -51,21 +52,6 @@ public class KnativeComponentConverter implements GenericConverter {
             Object source,
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
-        if (source == null) {
-            return null;
-        }
-        String ref = source.toString();
-        if (!ref.startsWith("#")) {
-            return null;
-        }
-        ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
-        switch (targetType.getName()) {
-            case "org.apache.camel.component.knative.KnativeConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.knative.KnativeConfiguration.class);
-            case "org.apache.camel.component.knative.spi.KnativeConsumerFactory": return applicationContext.getBean(ref, org.apache.camel.component.knative.spi.KnativeConsumerFactory.class);
-            case "org.apache.camel.component.knative.spi.KnativeEnvironment": return applicationContext.getBean(ref, org.apache.camel.component.knative.spi.KnativeEnvironment.class);
-            case "org.apache.camel.component.knative.spi.KnativeProducerFactory": return applicationContext.getBean(ref, org.apache.camel.component.knative.spi.KnativeProducerFactory.class);
-            case "org.apache.camel.component.knative.spi.KnativeSinkBinding": return applicationContext.getBean(ref, org.apache.camel.component.knative.spi.KnativeSinkBinding.class);
-        }
-        return null;
+        return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.knative");
     }
 }
