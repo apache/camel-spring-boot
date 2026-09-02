@@ -18,6 +18,7 @@ package org.apache.camel.component.dhis2.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.camel.spring.boot.util.BeanReferenceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -48,18 +49,6 @@ public class Dhis2ComponentConverter implements GenericConverter {
             Object source,
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
-        if (source == null) {
-            return null;
-        }
-        String ref = source.toString();
-        if (!ref.startsWith("#")) {
-            return null;
-        }
-        ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
-        switch (targetType.getName()) {
-            case "org.hisp.dhis.integration.sdk.api.Dhis2Client": return applicationContext.getBean(ref, org.hisp.dhis.integration.sdk.api.Dhis2Client.class);
-            case "org.apache.camel.component.dhis2.Dhis2Configuration": return applicationContext.getBean(ref, org.apache.camel.component.dhis2.Dhis2Configuration.class);
-        }
-        return null;
+        return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.dhis2");
     }
 }

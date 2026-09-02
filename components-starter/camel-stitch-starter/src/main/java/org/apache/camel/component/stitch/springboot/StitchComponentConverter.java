@@ -18,6 +18,7 @@ package org.apache.camel.component.stitch.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.camel.spring.boot.util.BeanReferenceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -51,21 +52,6 @@ public class StitchComponentConverter implements GenericConverter {
             Object source,
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
-        if (source == null) {
-            return null;
-        }
-        String ref = source.toString();
-        if (!ref.startsWith("#")) {
-            return null;
-        }
-        ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
-        switch (targetType.getName()) {
-            case "org.apache.camel.component.stitch.StitchConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.stitch.StitchConfiguration.class);
-            case "org.apache.camel.component.stitch.client.models.StitchSchema": return applicationContext.getBean(ref, org.apache.camel.component.stitch.client.models.StitchSchema.class);
-            case "reactor.netty.resources.ConnectionProvider": return applicationContext.getBean(ref, reactor.netty.resources.ConnectionProvider.class);
-            case "reactor.netty.http.client.HttpClient": return applicationContext.getBean(ref, reactor.netty.http.client.HttpClient.class);
-            case "org.apache.camel.component.stitch.client.StitchClient": return applicationContext.getBean(ref, org.apache.camel.component.stitch.client.StitchClient.class);
-        }
-        return null;
+        return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.stitch");
     }
 }
