@@ -21,21 +21,28 @@ on:
   schedule:
     # Run at midnight every day
     - cron:  '0 0 * * *'
+
+# No grants by default, every job opts in to exactly what it needs.
+permissions: {}
+
 jobs:
   build:
     name: Sync Camel Spring Boot Main Branch
     if: github.repository == 'apache/camel-spring-boot'
     runs-on: ubuntu-latest
+    # Builds apache/camel and camel-spring-boot, so it must not hold any write grant.
+    permissions:
+      contents: read
     steps:
       - name: Checkout Camel project
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           repository: apache/camel
           persist-credentials: false
           ref: main
           path: camel
       - name: Set up JDK
-        uses: actions/setup-java@v6
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6
         with:
           distribution: 'temurin'
           java-version: 17
@@ -44,15 +51,60 @@ jobs:
         run: ./mvnw -V --no-transfer-progress -Dquickly clean install
         working-directory: ${{ github.workspace }}/camel
       - name: Checkout Camel-spring-boot project
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: main
           persist-credentials: false
           fetch-depth: 0
       - name: Build Camel-spring-boot Project
         run: ./mvnw -V --no-transfer-progress clean install -DskipTests
+      - name: Collect regenerated sources
+        # Capture the regenerated tree as a patch: it carries additions, modifications
+        # and deletions, ignores build output via .gitignore, and excludes the nested
+        # apache/camel checkout.
+        run: |
+          git add --all -- ':!camel'
+          git diff --cached --binary > "${RUNNER_TEMP}/sync.patch"
+          git reset --quiet
+          echo "Patch size: $(wc -c < "${RUNNER_TEMP}/sync.patch") bytes"
+      - name: Upload regenerated sources
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: regenerated-sources
+          path: ${{ runner.temp }}/sync.patch
+          if-no-files-found: error
+          retention-days: 1
+
+  create-pull-request:
+    name: Create Sync Pull Request
+    needs: build
+    if: github.repository == 'apache/camel-spring-boot'
+    runs-on: ubuntu-latest
+    # Only this job, which runs no third party build, holds the write grants.
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout Camel-spring-boot project
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: main
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Download regenerated sources
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: regenerated-sources
+          path: ${{ runner.temp }}/sync
+      - name: Apply regenerated sources
+        run: |
+          if [ -s "${RUNNER_TEMP}/sync/sync.patch" ]; then
+            git apply --3way --whitespace=nowarn "${RUNNER_TEMP}/sync/sync.patch"
+          else
+            echo "Nothing was regenerated, no changes to apply"
+          fi
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v8.1.1
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           base: main
           token: ${{ secrets.GITHUB_TOKEN }}
