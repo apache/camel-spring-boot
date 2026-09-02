@@ -110,6 +110,14 @@
     <module>camel-activemq6-starter</module>
     <module>camel-ai-observability-starter</module>
     <module>camel-ai-tool-starter</module>
+    <module>camel-alibaba-eventbridge-starter</module>
+    <module>camel-alibaba-fc-starter</module>
+    <module>camel-alibaba-kms-starter</module>
+    <module>camel-alibaba-mns-starter</module>
+    <module>camel-alibaba-oss-starter</module>
+    <module>camel-alibaba-ots-starter</module>
+    <module>camel-alibaba-sls-starter</module>
+    <module>camel-alibaba-sms-starter</module>
     <module>camel-amqp-starter</module>
     <module>camel-arangodb-starter</module>
     <module>camel-as2-starter</module>
