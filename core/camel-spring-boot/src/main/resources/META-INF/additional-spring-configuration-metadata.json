@@ -1,6 +1,12 @@
 {
   "properties": [
     {
+      "name": "camel.springboot.lenient-configuration-binding",
+      "type": "java.lang.Boolean",
+      "description": "Whether a camel.component, camel.dataformat or camel.language option that cannot be set on the Camel component, data format or language it configures should be tolerated. When false (the default) an option the application configured explicitly and that cannot be set aborts startup, so a configured option can never be silently dropped. When true the option is logged at WARN and ignored.",
+      "defaultValue": false
+    },
+    {
       "name": "camel.vault.ignore-resolution-failures",
       "type": "java.lang.Boolean",
       "description": "Whether a vault or secrets placeholder that cannot be resolved during early property resolution should be tolerated. When false (the default) an unresolvable placeholder aborts startup, so the literal placeholder text can never become the effective value. When true the failure is logged at WARN and the placeholder is left in place.",

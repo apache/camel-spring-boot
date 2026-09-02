@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.http.springboot;
 
+import com.example.httpstarter.ThirdPartyHttpProperties;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
@@ -25,6 +26,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * A complex (object) typed option such as {@code sslContextParameters} is configured with a reference to a bean in the
@@ -77,6 +79,38 @@ class HttpComponentBeanReferenceBindingTest {
                             .hasStackTraceContaining("mySslContextParametrs")
                             .hasStackTraceContaining("camel.component.http");
                 });
+    }
+
+    @Test
+    void testThirdPartyPropertiesAreNotIntercepted() {
+        // HttpComponentConverter is registered with @ConfigurationPropertiesBinding and so takes part in every
+        // @ConfigurationProperties binding, not only in Camel's own. Adding the starter to the classpath must not
+        // make an unrelated property of the same type fail to bind.
+        new ApplicationContextRunner()
+                .withConfiguration(AutoConfigurations.of(ThirdPartyConfiguration.class))
+                .withUserConfiguration(HttpComponentConverter.class)
+                .withPropertyValues("thirdparty.http.verifier=someValue")
+                .run(context -> {
+                    assertThat(context).hasNotFailed();
+                    assertNull(context.getBean(ThirdPartyHttpProperties.class).getVerifier());
+                });
+    }
+
+    @Test
+    void testThirdPartyPropertiesStillResolveHashReferences() {
+        new ApplicationContextRunner()
+                .withConfiguration(AutoConfigurations.of(ThirdPartyConfiguration.class))
+                .withUserConfiguration(HttpComponentConverter.class)
+                .withPropertyValues("thirdparty.http.verifier=#bean:noSuchVerifier")
+                .run(context -> {
+                    assertThat(context).hasFailed();
+                    assertThat(context.getStartupFailure()).hasStackTraceContaining("noSuchVerifier");
+                });
+    }
+
+    @Configuration(proxyBeanMethods = false)
+    @EnableConfigurationProperties(ThirdPartyHttpProperties.class)
+    static class ThirdPartyConfiguration {
     }
 
     @Configuration(proxyBeanMethods = false)
