@@ -512,6 +512,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.debezium-oracle.log-mining-log-count-growth-max",
+      "type": "java.lang.Integer",
+      "description": "Specifies the maximum number of logs per redo thread the mining window grows to automatically when a long-running transaction holds the window start in place. Defaults to 4. A 'log.mining.log.count.min' above this value takes precedence. The mining window may exceed this count when re-covering previously mined logs; the value bounds automatic growth, not the window itself.",
+      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
+      "defaultValue": 4
+    },
+    {
       "name": "camel.component.debezium-oracle.log-mining-log-count-min",
       "type": "java.lang.Integer",
       "description": "Specifies the minimum number of logs to mine per redo thread. Setting this to 0 disables the cap, and all available logs are mined in a single pass.",

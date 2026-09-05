@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 162 options, which are listed below.
+The starter supports 163 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -103,6 +103,7 @@ The starter supports 162 options, which are listed below.
 | camel.component.debezium-oracle.log-mining-clientid-include-list | Comma separated list of client ids to include from LogMiner query. |  | String
 | camel.component.debezium-oracle.log-mining-flush-table-name | The name of the flush table used by the connector, defaults to LOG_MINING_FLUSH. | LOG_MINING_FLUSH | String
 | camel.component.debezium-oracle.log-mining-include-redo-sql | When enabled, the transaction log REDO SQL will be included in the source information block. | false | Boolean
+| camel.component.debezium-oracle.log-mining-log-count-growth-max | Specifies the maximum number of logs per redo thread the mining window grows to automatically when a long-running transaction holds the window start in place. Defaults to 4. A 'log.mining.log.count.min' above this value takes precedence. The mining window may exceed this count when re-covering previously mined logs; the value bounds automatic growth, not the window itself. | 4 | Integer
 | camel.component.debezium-oracle.log-mining-log-count-min | Specifies the minimum number of logs to mine per redo thread. Setting this to 0 disables the cap, and all available logs are mined in a single pass. | 2 | Integer
 | camel.component.debezium-oracle.log-mining-path-dictionary | This is required when using the connector against a read-only database replica. |  | String
 | camel.component.debezium-oracle.log-mining-query-filter-mode | Specifies how the filter configuration is applied to the LogMiner database query. none - The query does not apply any schema or table filters, all filtering is at runtime by the connector. in - The query uses SQL in-clause expressions to specify the schema or table filters. regex - The query uses Oracle REGEXP_LIKE expressions to specify the schema or table filters. | none | String
