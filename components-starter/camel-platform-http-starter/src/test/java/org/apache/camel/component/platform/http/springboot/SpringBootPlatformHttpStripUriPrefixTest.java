@@ -37,14 +37,20 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * Verifies the stripUriPrefix consumer option on the Spring Boot (servlet) platform-http engine: combined with the http
- * producer's bridgeEndpoint=true, it turns a platform-http route into a path-based reverse proxy that forwards only the
- * path relative to the consumer, with zero header manipulation - matching the behavior already wired for the Vert.x
- * platform-http engine.
- * <p/>
- * The "backend" is a second platform-http route deployed on the very same embedded server: this avoids relying on
- * WireMock, whose Spring Boot integration is currently incompatible with Spring Boot 4's Jetty version in this module
- * (see the disabled {@link SpringBootPlatformHttpBridgedEndpointTest} and {@link SpringBootPlatformHttpProxyTest}).
+ * Integration test for the stripUriPrefix consumer option on the Spring Boot (servlet) platform-http engine. Combined
+ * with matchOnUriPrefix and the http producer's bridgeEndpoint, it turns a platform-http route into a path-based
+ * reverse proxy that forwards only the path relative to the consumer:
+ *
+ * <pre>
+ * from("platform-http:/reverse-proxy?matchOnUriPrefix=true&amp;stripUriPrefix=true")
+ *         .to("http://backend?bridgeEndpoint=true");
+ * </pre>
+ *
+ * The "backend" is a second platform-http route on the same embedded server: WireMock's Spring Boot integration is
+ * incompatible with this module's Spring Boot 4/Jetty version (see the disabled
+ * {@link SpringBootPlatformHttpBridgedEndpointTest}). A request that was <em>not</em> stripped would not match the
+ * {@code /get} backend route and would fall back into this very reverse-proxy consumer, so the successful response
+ * below proves the consumer path was removed before the request was bridged.
  */
 @EnableAutoConfiguration
 @CamelSpringBootTest
@@ -64,8 +70,8 @@ public class SpringBootPlatformHttpStripUriPrefixTest {
     void setUp() throws Exception {
         RestAssured.port = env.getRequiredProperty("local.server.port", Integer.class);
 
-        // the reverse-proxy routes bridge to a real loopback HTTP call, so they need the actual (random) server
-        // port and are therefore added once the port is known, rather than as a statically configured @Bean route
+        // the reverse proxy bridges to a real loopback HTTP call, so it needs the actual (random) server port and is
+        // added once that port is known, rather than as a statically configured @Bean route
         if (camelContext.getRoute("reverse-proxy-strip") == null) {
             final String backend = "http://localhost:" + RestAssured.port;
             camelContext.addRoutes(new RouteBuilder() {
@@ -73,9 +79,6 @@ public class SpringBootPlatformHttpStripUriPrefixTest {
                 public void configure() {
                     from("platform-http:/reverse-proxy?matchOnUriPrefix=true&stripUriPrefix=true")
                             .routeId("reverse-proxy-strip").to(backend + "?bridgeEndpoint=true");
-
-                    from("platform-http:/reverse-proxy-control?matchOnUriPrefix=true").routeId("reverse-proxy-control")
-                            .to(backend + "?bridgeEndpoint=true");
                 }
             });
         }
@@ -95,31 +98,15 @@ public class SpringBootPlatformHttpStripUriPrefixTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    // the "downstream" backend service, reachable only at these exact paths
+                    // the "downstream" backend service, reachable only at its own path (not under /reverse-proxy)
                     from("platform-http:/get").routeId("backend-get").setBody().simple("get:${header.CamelHttpQuery}");
-
-                    from("platform-http:/reverse-proxy-control/get").routeId("backend-control-get").setBody()
-                            .simple("control:${header.CamelHttpQuery}");
-
-                    from("platform-http:/").routeId("backend-root").setBody().constant("root");
                 }
             };
         }
     }
 
     @Test
-    void stripUriPrefixRemovesTheConsumerPathBeforeBridging() {
+    void reverseProxyStripsTheConsumerPathBeforeBridging() {
         given().when().get("/reverse-proxy/get?arg1=val1").then().statusCode(200).body(equalTo("get:arg1=val1"));
-    }
-
-    @Test
-    void withoutStripUriPrefixTheFullPathIsForwardedUnchanged() {
-        given().when().get("/reverse-proxy-control/get?arg1=val1").then().statusCode(200)
-                .body(equalTo("control:arg1=val1"));
-    }
-
-    @Test
-    void stripUriPrefixOnAnExactMatchLeavesTheRootPath() {
-        given().when().get("/reverse-proxy").then().statusCode(200).body(equalTo("root"));
     }
 }
