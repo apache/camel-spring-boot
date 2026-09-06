@@ -150,6 +150,11 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
             msg.init(exchange, binding, request, response);
             String contextPath = getEndpoint().getPath();
             exchange.getIn().setHeader(SpringBootPlatformHttpConstants.CONTEXT_PATH, contextPath);
+            if (getEndpoint().isStripUriPrefix()) {
+                String httpPath = (String) exchange.getIn().getHeader(Exchange.HTTP_PATH);
+                exchange.getIn().setHeader(Exchange.HTTP_PATH,
+                        org.apache.camel.http.base.HttpHelper.stripUriPrefix(httpPath, contextPath));
+            }
             if (getEndpoint().isUseCookieHandler()) {
                 exchange.setProperty(Exchange.COOKIE_HANDLER, new SpringBootCookieHandler(request, response));
             }
