@@ -17,16 +17,12 @@
 package org.apache.camel.component.jsonpath.springboot.test;
 
 import java.io.File;
-import java.util.Map;
-
 import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -51,20 +47,15 @@ public class JsonPathSplitWriteAsStringMapTest {
     public void testSplitToJSon() throws Exception {
 
         mock.expectedMessageCount(2);
+        mock.allMessages().body().isInstanceOf(String.class);
+        mock.message(0).body()
+                .isEqualTo("{\"action\":\"CU\",\"id\":123,\"modifiedTime\":\"2015-07-28T11:40:09.520+02:00\"}");
+        mock.message(1).body()
+                .isEqualTo("{\"action\":\"CU\",\"id\":456,\"modifiedTime\":\"2015-07-28T11:42:29.510+02:00\"}");
 
         template.sendBody("direct:start", new File("src/test/resources/content-map.json"));
 
         mock.assertIsSatisfied();
-
-        Map.Entry<?, ?> row = mock.getReceivedExchanges().get(0).getIn().getBody(Map.Entry.class);
-        assertEquals("foo", row.getKey());
-        assertEquals("{\"action\":\"CU\",\"id\":123,\"modifiedTime\":\"2015-07-28T11:40:09.520+02:00\"}",
-                row.getValue());
-
-        row = mock.getReceivedExchanges().get(1).getIn().getBody(Map.Entry.class);
-        assertEquals("bar", row.getKey());
-        assertEquals("{\"action\":\"CU\",\"id\":456,\"modifiedTime\":\"2015-07-28T11:42:29.510+02:00\"}",
-                row.getValue());
     }
 
     // *************************************
@@ -79,7 +70,7 @@ public class JsonPathSplitWriteAsStringMapTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() throws Exception {
-                    from("direct:start").split().jsonpathWriteAsString("$.content").to("mock:line").to("log:line")
+                    from("direct:start").split().jsonpathWriteAsString("$.content.*").to("mock:line").to("log:line")
                             .end();
                 }
             };
