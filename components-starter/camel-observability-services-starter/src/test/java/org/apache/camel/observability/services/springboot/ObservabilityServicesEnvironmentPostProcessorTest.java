@@ -58,9 +58,8 @@ public class ObservabilityServicesEnvironmentPostProcessorTest {
     }
 
     @Test
-    public void managementListenerBindsToLoopback() {
-        // the port alone would put a second listener on every interface
-        assertEquals("127.0.0.1", environment.getProperty("management.server.address"));
+    public void managementListenerUsesSpringBootDefaultBindAddress() {
+        assertNull(environment.getProperty("management.server.address"));
     }
 
     @Test
@@ -89,7 +88,6 @@ public class ObservabilityServicesEnvironmentPostProcessorTest {
 
         Set<String> expected = new LinkedHashSet<>(Arrays.asList(
                 "management.server.port",
-                "management.server.address",
                 "management.endpoints.web.exposure.include",
                 "management.endpoints.web.base-path",
                 "management.endpoints.web.path-mapping.prometheus",

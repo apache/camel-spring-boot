@@ -30,10 +30,9 @@ import org.springframework.core.env.MapPropertySource;
  * user-provided configuration (application.properties, environment variables, system properties, ...) overrides them
  * following the standard Spring Boot precedence rules.
  * <p>
- * The defaults stay within the Spring Boot baseline: the management listener binds to loopback, and the aggregate
- * health endpoint only shows its details to an authorized caller. The {@code live} and {@code ready} probe groups
- * keep {@code show-details=always} because they are consumed unauthenticated by the kubelet, and the indicators
- * they contain report an availability state and nothing else.
+ * The aggregate health endpoint only shows its details to an authorized caller. The {@code live} and {@code ready}
+ * probe groups keep {@code show-details=always} because they are consumed unauthenticated by the kubelet, and the
+ * indicators they contain report an availability state and nothing else.
  */
 public class ObservabilityServicesEnvironmentPostProcessor implements EnvironmentPostProcessor, Ordered {
 
@@ -43,8 +42,6 @@ public class ObservabilityServicesEnvironmentPostProcessor implements Environmen
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
         Map<String, Object> defaults = new LinkedHashMap<>();
         defaults.put("management.server.port", "9876");
-        // bind the management listener to loopback; exposing it beyond the host is a conscious step
-        defaults.put("management.server.address", "127.0.0.1");
         defaults.put("management.endpoints.web.exposure.include", "health,prometheus");
         defaults.put("management.endpoints.web.base-path", "/observe");
         defaults.put("management.endpoints.web.path-mapping.prometheus", "metrics");
