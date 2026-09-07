@@ -24,16 +24,15 @@ The defaults are registered as the lowest precedence property source, so anythin
 
 == Usage
 
-Add the starter to the classpath and the endpoints below are available on a separate management listener,
-bound to loopback on port `9876`:
+Add the starter to the classpath and the endpoints below are available on a separate management listener on port `9876`:
 
 [width="100%",cols="3,5",options="header"]
 |===
 | Endpoint | Purpose
-| `http://127.0.0.1:9876/observe/health` | Aggregate health
-| `http://127.0.0.1:9876/observe/health/live` | Kubernetes liveness probe
-| `http://127.0.0.1:9876/observe/health/ready` | Kubernetes readiness probe
-| `http://127.0.0.1:9876/observe/metrics` | Prometheus scrape endpoint
+| `/observe/health` | Aggregate health
+| `/observe/health/live` | Kubernetes liveness probe
+| `/observe/health/ready` | Kubernetes readiness probe
+| `/observe/metrics` | Prometheus scrape endpoint
 |===
 
 === Injected defaults
@@ -45,7 +44,6 @@ configuration:
 |===
 | Property | Value | Notes
 | `management.server.port` | `9876` | Management endpoints run on their own listener, separate from the application port.
-| `management.server.address` | `127.0.0.1` | The listener binds to loopback. See <<Exposing the management listener>>.
 | `management.endpoints.web.exposure.include` | `health,prometheus` | Only these two endpoints are exposed.
 | `management.endpoints.web.base-path` | `/observe` | Replaces the `/actuator` base path.
 | `management.endpoints.web.path-mapping.prometheus` | `metrics` | Serves the Prometheus endpoint at `/observe/metrics`.
@@ -62,23 +60,6 @@ configuration:
 | `management.endpoint.health.group.ready.include` | `readinessState,camelReadinessState` | Contents of `/observe/health/ready`.
 | `management.endpoint.health.group.ready.show-details` | `always` | See <<Health detail exposure>>.
 |===
-
-=== Exposing the management listener
-
-The management listener binds to `127.0.0.1`, so out of the box the health and metrics endpoints are reachable
-from the same host only. This matches the Spring Boot baseline, which ships no separate management listener at
-all: opening one on every interface should be a decision you make, not one the starter makes for you.
-
-A Kubernetes deployment whose kubelet probes or Prometheus scrapers reach the pod over the network has to widen
-the bind address:
-
-[source,properties]
-----
-management.server.address = 0.0.0.0
-----
-
-Pair that with a `NetworkPolicy`, or with authentication in front of the management port, so the endpoints are
-only reachable from your probes and your scrapers.
 
 === Health detail exposure
 
