@@ -48,7 +48,7 @@
       <dependency>
         <groupId>com.aliyun</groupId>
         <artifactId>eventbridge20200401</artifactId>
-        <version>7.3.0</version>
+        <version>7.4.0</version>
       </dependency>
       <dependency>
         <groupId>com.aliyun</groupId>
@@ -63,7 +63,7 @@
       <dependency>
         <groupId>com.aliyun</groupId>
         <artifactId>sls20201230</artifactId>
-        <version>5.17.0</version>
+        <version>5.18.0</version>
       </dependency>
       <dependency>
         <groupId>com.aliyun</groupId>
@@ -4332,6 +4332,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-once</artifactId>
+        <version>4.23.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-opa</artifactId>
         <version>4.23.0-SNAPSHOT</version>
       </dependency>
       <dependency>
