@@ -25,6 +25,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.component.quartz.QuartzComponent;
 import org.apache.camel.component.quartz.QuartzConstants;
+import org.apache.camel.component.quartz.QuartzEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 
 import org.junit.jupiter.api.Test;
@@ -64,7 +65,10 @@ public class QuartzCustomCalendarNoFireTest extends BaseQuartzTest {
         QuartzComponent component = context.getComponent("quartz", QuartzComponent.class);
         Scheduler scheduler = component.getScheduler();
 
-        Calendar c = scheduler.getCalendar(QuartzConstants.QUARTZ_CAMEL_CUSTOM_CALENDAR);
+        QuartzEndpoint endpoint = (QuartzEndpoint) context.getRoutes().get(0).getConsumer().getEndpoint();
+        String calendarName = QuartzConstants.QUARTZ_CAMEL_CUSTOM_CALENDAR + "_" + endpoint.getGroupName() + "_"
+                              + endpoint.getTriggerName();
+        Calendar c = scheduler.getCalendar(calendarName);
         Date now = new Date();
         java.util.Calendar tomorrow = java.util.Calendar.getInstance();
         tomorrow.setTime(now);
