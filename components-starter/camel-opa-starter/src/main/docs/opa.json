@@ -1,0 +1,99 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.opa",
+      "type": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.opa.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.opa.allow-key",
+      "type": "java.lang.String",
+      "description": "The key to read the allow\/deny verdict from when the policy returns an object rather than a plain boolean. For a policy returning {allow: true, reasons: } the default value of allow is what you want.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "defaultValue": "allow"
+    },
+    {
+      "name": "camel.component.opa.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.opa.bearer-token",
+      "type": "java.lang.String",
+      "description": "Bearer token sent to the OPA server in the Authorization header, for an OPA instance that has its API authentication enabled.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.opa.configuration",
+      "type": "org.apache.camel.component.opa.OpaConfiguration",
+      "description": "The component configuration. The option is a org.apache.camel.component.opa.OpaConfiguration type.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.opa.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.opa.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the opa component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.opa.fail-open",
+      "type": "java.lang.Boolean",
+      "description": "Whether to allow the exchange to proceed when the policy cannot be evaluated at all, for example because the OPA server is unreachable. Disabled by default so that an unreachable policy decision point denies rather than grants access. Do not enable this in production.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.opa.include-body",
+      "type": "java.lang.Boolean",
+      "description": "Whether to send the message body to OPA as part of the input document. Disabled by default: bodies can be large or streaming, and most authorization decisions only need headers. When enabled on a streaming body, enable stream caching so that the body is still readable by the rest of the route.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.opa.include-headers",
+      "type": "java.lang.String",
+      "description": "Comma-separated list of message header names to send to OPA in the input document. The default of {code } sends every header. Narrow it when the policy only needs a few headers, or when the message carries headers that should not leave the JVM.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "defaultValue": "*"
+    },
+    {
+      "name": "camel.component.opa.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.opa.opa-client",
+      "type": "com.styra.opa.OPAClient",
+      "description": "An existing OPAClient to use. When set, serverUrl and bearerToken are ignored. The option is a com.styra.opa.OPAClient type.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.opa.server-url",
+      "type": "java.lang.String",
+      "description": "The base URL of the OPA server, without the {code \/v1\/data} suffix. The default assumes OPA running as a sidecar on the standard port.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "defaultValue": "http:\/\/localhost:8181"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
