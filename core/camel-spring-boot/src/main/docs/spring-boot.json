@@ -1336,6 +1336,12 @@
       "sourceType": "org.apache.camel.spring.boot.security.CamelSecurityPolicyConfigurationProperties"
     },
     {
+      "name": "camel.springboot.lenient-configuration-binding",
+      "type": "java.lang.Boolean",
+      "description": "Whether a camel.component, camel.dataformat or camel.language option that cannot be set on the Camel component, data format or language it configures should be tolerated. When false (the default) an option the application configured explicitly and that cannot be set aborts startup, so a configured option can never be silently dropped. When true the option is logged at WARN and ignored.",
+      "defaultValue": false
+    },
+    {
       "name": "camel.ssl.cert-alias",
       "type": "java.lang.String",
       "description": "An optional certificate alias to use. This is useful when the keystore has multiple certificates.",

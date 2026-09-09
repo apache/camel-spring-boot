@@ -63,7 +63,8 @@ public class GrokDataFormatAutoConfiguration {
         return new DataFormatCustomizer() {
             @Override
             public void configure(String name, DataFormat target) {
-                CamelPropertiesHelper.copyProperties(camelContextProvider.getObject(), configuration, target);
+                CamelPropertiesHelper.copyConfigurationProperties(camelContextProvider.getObject(), applicationContext,
+                        "camel.dataformat.grok", configuration, target);
             }
             @Override
             public boolean isEnabled(String name, DataFormat target) {

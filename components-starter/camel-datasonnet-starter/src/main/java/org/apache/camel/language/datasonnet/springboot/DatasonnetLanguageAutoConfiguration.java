@@ -61,7 +61,8 @@ public class DatasonnetLanguageAutoConfiguration {
             @Override
             public void configure(String name, Language target) {
                 if (target instanceof CamelContextAware cca && cca.getCamelContext() != null) {
-                    CamelPropertiesHelper.copyProperties(cca.getCamelContext(), configuration, target);
+                    CamelPropertiesHelper.copyConfigurationProperties(cca.getCamelContext(), applicationContext,
+                            "camel.language.datasonnet", configuration, target);
                 } else {
                     org.slf4j.LoggerFactory.getLogger(getClass()).debug("Language {} does not implement CamelContextAware, skipping auto-configuration properties", name);
                 }
