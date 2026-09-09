@@ -18,6 +18,7 @@ package org.apache.camel.component.crypto.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.camel.spring.boot.util.BeanReferenceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -53,23 +54,6 @@ public class DigitalSignatureComponentConverter implements GenericConverter {
             Object source,
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
-        if (source == null) {
-            return null;
-        }
-        String ref = source.toString();
-        if (!ref.startsWith("#")) {
-            return null;
-        }
-        ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
-        switch (targetType.getName()) {
-            case "java.security.KeyStore": return applicationContext.getBean(ref, java.security.KeyStore.class);
-            case "java.security.PrivateKey": return applicationContext.getBean(ref, java.security.PrivateKey.class);
-            case "java.security.cert.Certificate": return applicationContext.getBean(ref, java.security.cert.Certificate.class);
-            case "org.apache.camel.component.crypto.DigitalSignatureConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.crypto.DigitalSignatureConfiguration.class);
-            case "org.apache.camel.support.jsse.KeyStoreParameters": return applicationContext.getBean(ref, org.apache.camel.support.jsse.KeyStoreParameters.class);
-            case "java.security.PublicKey": return applicationContext.getBean(ref, java.security.PublicKey.class);
-            case "java.security.SecureRandom": return applicationContext.getBean(ref, java.security.SecureRandom.class);
-        }
-        return null;
+        return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.crypto");
     }
 }

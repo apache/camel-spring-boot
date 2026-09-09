@@ -63,16 +63,6 @@ public class ASN1DataFormatAutoConfiguration {
         return new DataFormatCustomizer() {
             @Override
             public void configure(String name, DataFormat target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
-            }
-            @Override
-            public boolean isEnabled(String name, DataFormat target) {
-                return HierarchicalPropertiesEvaluator.evaluate(
-                        applicationContext,
-                        "camel.dataformat.customizer",
-                        "camel.dataformat.asn1.customizer")
-                    && target instanceof ASN1DataFormat;
-            }
-        };
-    }
+                CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
+                        "camel.dataformat.asn1", configuration, target);
 }

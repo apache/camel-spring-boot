@@ -18,6 +18,7 @@ package org.apache.camel.component.azure.storage.datalake.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.camel.spring.boot.util.BeanReferenceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -51,21 +52,6 @@ public class DataLakeComponentConverter implements GenericConverter {
             Object source,
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
-        if (source == null) {
-            return null;
-        }
-        String ref = source.toString();
-        if (!ref.startsWith("#")) {
-            return null;
-        }
-        ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
-        switch (targetType.getName()) {
-            case "org.apache.camel.component.azure.storage.datalake.DataLakeConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.azure.storage.datalake.DataLakeConfiguration.class);
-            case "com.azure.storage.file.datalake.DataLakeServiceClient": return applicationContext.getBean(ref, com.azure.storage.file.datalake.DataLakeServiceClient.class);
-            case "com.azure.storage.common.StorageSharedKeyCredential": return applicationContext.getBean(ref, com.azure.storage.common.StorageSharedKeyCredential.class);
-            case "com.azure.identity.ClientSecretCredential": return applicationContext.getBean(ref, com.azure.identity.ClientSecretCredential.class);
-            case "com.azure.core.credential.AzureSasCredential": return applicationContext.getBean(ref, com.azure.core.credential.AzureSasCredential.class);
-        }
-        return null;
+        return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.azure-storage-datalake");
     }
 }

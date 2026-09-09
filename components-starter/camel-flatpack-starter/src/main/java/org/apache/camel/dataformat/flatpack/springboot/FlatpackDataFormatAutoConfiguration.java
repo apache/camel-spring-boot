@@ -63,16 +63,6 @@ public class FlatpackDataFormatAutoConfiguration {
         return new DataFormatCustomizer() {
             @Override
             public void configure(String name, DataFormat target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
-            }
-            @Override
-            public boolean isEnabled(String name, DataFormat target) {
-                return HierarchicalPropertiesEvaluator.evaluate(
-                        applicationContext,
-                        "camel.dataformat.customizer",
-                        "camel.dataformat.flatpack.customizer")
-                    && target instanceof FlatpackDataFormat;
-            }
-        };
-    }
+                CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
+                        "camel.dataformat.flatpack", configuration, target);
 }

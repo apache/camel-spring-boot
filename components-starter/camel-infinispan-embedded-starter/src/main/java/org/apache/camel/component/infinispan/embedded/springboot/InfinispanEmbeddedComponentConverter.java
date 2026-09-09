@@ -18,6 +18,7 @@ package org.apache.camel.component.infinispan.embedded.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.camel.spring.boot.util.BeanReferenceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -52,22 +53,6 @@ public class InfinispanEmbeddedComponentConverter implements GenericConverter {
             Object source,
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
-        if (source == null) {
-            return null;
-        }
-        String ref = source.toString();
-        if (!ref.startsWith("#")) {
-            return null;
-        }
-        ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
-        switch (targetType.getName()) {
-            case "org.apache.camel.component.infinispan.embedded.InfinispanEmbeddedConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.infinispan.embedded.InfinispanEmbeddedConfiguration.class);
-            case "org.apache.camel.component.infinispan.InfinispanQueryBuilder": return applicationContext.getBean(ref, org.apache.camel.component.infinispan.InfinispanQueryBuilder.class);
-            case "org.apache.camel.component.infinispan.embedded.InfinispanEmbeddedCustomListener": return applicationContext.getBean(ref, org.apache.camel.component.infinispan.embedded.InfinispanEmbeddedCustomListener.class);
-            case "org.infinispan.manager.EmbeddedCacheManager": return applicationContext.getBean(ref, org.infinispan.manager.EmbeddedCacheManager.class);
-            case "org.infinispan.configuration.cache.Configuration": return applicationContext.getBean(ref, org.infinispan.configuration.cache.Configuration.class);
-            case "java.util.function.BiFunction": return applicationContext.getBean(ref, java.util.function.BiFunction.class);
-        }
-        return null;
+        return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.infinispan-embedded");
     }
 }

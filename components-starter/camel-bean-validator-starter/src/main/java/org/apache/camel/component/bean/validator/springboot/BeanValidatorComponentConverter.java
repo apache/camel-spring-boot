@@ -18,6 +18,7 @@ package org.apache.camel.component.bean.validator.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.camel.spring.boot.util.BeanReferenceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -51,21 +52,6 @@ public class BeanValidatorComponentConverter implements GenericConverter {
             Object source,
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
-        if (source == null) {
-            return null;
-        }
-        String ref = source.toString();
-        if (!ref.startsWith("#")) {
-            return null;
-        }
-        ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
-        switch (targetType.getName()) {
-            case "jakarta.validation.ConstraintValidatorFactory": return applicationContext.getBean(ref, jakarta.validation.ConstraintValidatorFactory.class);
-            case "jakarta.validation.MessageInterpolator": return applicationContext.getBean(ref, jakarta.validation.MessageInterpolator.class);
-            case "jakarta.validation.TraversableResolver": return applicationContext.getBean(ref, jakarta.validation.TraversableResolver.class);
-            case "jakarta.validation.ValidationProviderResolver": return applicationContext.getBean(ref, jakarta.validation.ValidationProviderResolver.class);
-            case "jakarta.validation.ValidatorFactory": return applicationContext.getBean(ref, jakarta.validation.ValidatorFactory.class);
-        }
-        return null;
+        return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.bean-validator");
     }
 }

@@ -18,6 +18,7 @@ package org.apache.camel.component.pulsar.springboot;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.apache.camel.spring.boot.util.BeanReferenceHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.context.ApplicationContext;
@@ -52,22 +53,6 @@ public class PulsarComponentConverter implements GenericConverter {
             Object source,
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
-        if (source == null) {
-            return null;
-        }
-        String ref = source.toString();
-        if (!ref.startsWith("#")) {
-            return null;
-        }
-        ref = ref.startsWith("#bean:") ? ref.substring(6) : ref.substring(1);
-        switch (targetType.getName()) {
-            case "org.apache.camel.component.pulsar.PulsarConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.pulsar.PulsarConfiguration.class);
-            case "org.apache.pulsar.client.api.RedeliveryBackoff": return applicationContext.getBean(ref, org.apache.pulsar.client.api.RedeliveryBackoff.class);
-            case "org.apache.camel.component.pulsar.PulsarMessageReceiptFactory": return applicationContext.getBean(ref, org.apache.camel.component.pulsar.PulsarMessageReceiptFactory.class);
-            case "org.apache.pulsar.client.api.MessageRouter": return applicationContext.getBean(ref, org.apache.pulsar.client.api.MessageRouter.class);
-            case "org.apache.camel.component.pulsar.utils.AutoConfiguration": return applicationContext.getBean(ref, org.apache.camel.component.pulsar.utils.AutoConfiguration.class);
-            case "org.apache.pulsar.client.api.PulsarClient": return applicationContext.getBean(ref, org.apache.pulsar.client.api.PulsarClient.class);
-        }
-        return null;
+        return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.pulsar");
     }
 }
