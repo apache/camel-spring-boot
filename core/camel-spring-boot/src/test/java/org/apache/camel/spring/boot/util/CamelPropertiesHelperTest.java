@@ -26,6 +26,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -37,7 +39,9 @@ import org.springframework.test.annotation.DirtiesContext;
 @SpringBootApplication
 @SpringBootTest(
                 classes = { CamelPropertiesHelperTest.TestConfiguration.class },
-                properties = { "camel.test.my-config.no-such-option-on-the-target = bar" })
+                properties = { "camel.test.my-config.name = Donald Duck",
+                        "camel.test.my-config.verify-hostname = true",
+                        "camel.test.my-config.no-such-option-on-the-target = bar" })
 public class CamelPropertiesHelperTest {
 
     static final String PREFIX = "camel.test.my-config";
@@ -48,7 +52,14 @@ public class CamelPropertiesHelperTest {
     @Autowired
     CamelContext camelContext;
 
+    /**
+     * Bound by Spring Boot from the test properties, like a generated configuration class is.
+     */
+    @Autowired
+    MyDriftedConfiguration config;
+
     @Configuration
+    @EnableConfigurationProperties(MyDriftedConfiguration.class)
     static class TestConfiguration {
         @Bean(name = "myCoolOption")
         MyOption myCoolBean() {
@@ -61,12 +72,15 @@ public class CamelPropertiesHelperTest {
 
     /**
      * Mimics a generated {@code *ComponentConfiguration} class: the auto configuration layer options
-     * (enabled/customizer) are inherited and are not options on the Camel target bean.
+     * (enabled/customizer) are inherited and are not options on the Camel target bean, and the catalog defaults are
+     * field initializers.
      */
     public static class MyConfiguration extends ComponentConfigurationPropertiesCommon {
 
         private String name;
         private MyOption option;
+        private Boolean secure = false;
+        private Boolean verifyHostname = true;
 
         public String getName() {
             return name;
@@ -83,16 +97,33 @@ public class CamelPropertiesHelperTest {
         public void setOption(MyOption option) {
             this.option = option;
         }
+
+        public Boolean getSecure() {
+            return secure;
+        }
+
+        public void setSecure(Boolean secure) {
+            this.secure = secure;
+        }
+
+        public Boolean getVerifyHostname() {
+            return verifyHostname;
+        }
+
+        public void setVerifyHostname(Boolean verifyHostname) {
+            this.verifyHostname = verifyHostname;
+        }
     }
 
     /**
      * A configuration class holding an option that does not exist on the target bean, which is what generator or
      * catalog drift looks like at runtime.
      */
+    @ConfigurationProperties(prefix = PREFIX)
     public static class MyDriftedConfiguration extends MyConfiguration {
 
         private String noSuchOptionOnTheTarget;
-        private String anotherOptionOnlyCarryingItsDefault;
+        private String anotherOptionOnlyCarryingItsDefault = "false";
 
         public String getNoSuchOptionOnTheTarget() {
             return noSuchOptionOnTheTarget;
@@ -118,9 +149,27 @@ public class CamelPropertiesHelperTest {
         private MyOption option;
         private CamelContext camelContext;
         private MyFooClass myFooClass;
+        private boolean secure;
+        private boolean verifyHostname;
 
         public int getId() {
             return id;
+        }
+
+        public boolean isSecure() {
+            return secure;
+        }
+
+        public void setSecure(boolean secure) {
+            this.secure = secure;
+        }
+
+        public boolean isVerifyHostname() {
+            return verifyHostname;
+        }
+
+        public void setVerifyHostname(boolean verifyHostname) {
+            this.verifyHostname = verifyHostname;
         }
 
         public void setId(int id) {
@@ -287,30 +336,22 @@ public class CamelPropertiesHelperTest {
     public void testCopyConfigurationPropertiesIgnoresAutoConfigurationOptions() {
         MyClass target = new MyClass();
 
-        MyConfiguration config = new MyConfiguration();
-        config.setName("Donald Duck");
-        config.setOption(context.getBean("myCoolOption", MyOption.class));
-
         // enabled and customizer are always set on a generated configuration class, and must not be
         // attempted on the target bean
         Assertions.assertTrue(config.isEnabled());
         Assertions.assertNotNull(config.getCustomizer());
 
-        CamelPropertiesHelper.copyConfigurationProperties(camelContext, context, PREFIX, config, target);
+        CamelPropertiesHelper.copyConfigurationProperties(camelContext, context, PREFIX, configWithoutDrift(),
+                target);
 
         Assertions.assertEquals("Donald Duck", target.getName());
-        Assertions.assertSame(context.getBean("myCoolOption"), target.getOption());
     }
 
     @Test
     public void testCopyConfigurationPropertiesFailsOnConfiguredOptionThatCannotBeSet() {
         MyClass target = new MyClass();
 
-        MyDriftedConfiguration config = new MyDriftedConfiguration();
-        config.setName("Donald Duck");
         // camel.test.my-config.no-such-option-on-the-target is set on the test application
-        config.setNoSuchOptionOnTheTarget("bar");
-
         IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class,
                 () -> CamelPropertiesHelper.copyConfigurationProperties(camelContext, context, PREFIX, config,
                         target));
@@ -324,14 +365,49 @@ public class CamelPropertiesHelperTest {
     public void testCopyConfigurationPropertiesIgnoresDefaultThatCannotBeSet() {
         MyClass target = new MyClass();
 
-        MyDriftedConfiguration config = new MyDriftedConfiguration();
-        config.setName("Donald Duck");
-        // nothing configured this one, so it only carries a catalog default and must not break startup
-        config.setAnotherOptionOnlyCarryingItsDefault("false");
-
-        CamelPropertiesHelper.copyConfigurationProperties(camelContext, context, PREFIX, config, target);
+        // nothing configured anotherOptionOnlyCarryingItsDefault, so it only carries a catalog default and must
+        // not break startup
+        Assertions.assertEquals("false", config.getAnotherOptionOnlyCarryingItsDefault());
+        CamelPropertiesHelper.copyConfigurationProperties(camelContext, context, PREFIX, configWithoutDrift(),
+                target);
 
         Assertions.assertEquals("Donald Duck", target.getName());
+    }
+
+    @Test
+    public void testCopyConfigurationPropertiesDoesNotOverwriteWithCatalogDefault() {
+        MyClass target = new MyClass();
+        target.setSecure(true);
+
+        // secure is not set on the test application, so it only carries the catalog default false
+        Assertions.assertEquals(false, config.getSecure());
+        CamelPropertiesHelper.copyConfigurationProperties(camelContext, context, PREFIX, configWithoutDrift(),
+                target);
+
+        Assertions.assertTrue(target.isSecure(), "The catalog default must not overwrite the value set on the target");
+    }
+
+    @Test
+    public void testCopyConfigurationPropertiesAppliesOptionConfiguredToItsDefault() {
+        MyClass target = new MyClass();
+        target.setVerifyHostname(false);
+
+        // verify-hostname is set on the test application to the same value as its catalog default
+        CamelPropertiesHelper.copyConfigurationProperties(camelContext, context, PREFIX, configWithoutDrift(),
+                target);
+
+        Assertions.assertTrue(target.isVerifyHostname(), "A configured option must be applied whatever its value");
+    }
+
+    /**
+     * The bound configuration without the option that cannot be set, for the tests that are not about that failure.
+     */
+    private MyConfiguration configWithoutDrift() {
+        MyConfiguration answer = new MyConfiguration();
+        answer.setName(config.getName());
+        answer.setSecure(config.getSecure());
+        answer.setVerifyHostname(config.getVerifyHostname());
+        return answer;
     }
 
     @Test

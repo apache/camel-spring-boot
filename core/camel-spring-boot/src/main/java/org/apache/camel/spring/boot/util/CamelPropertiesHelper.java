@@ -35,9 +35,8 @@ import org.apache.camel.util.ObjectHelper;
 import org.apache.camel.util.StringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.properties.BoundConfigurationProperties;
 import org.springframework.boot.context.properties.source.ConfigurationPropertyName;
-import org.springframework.boot.context.properties.source.ConfigurationPropertySource;
-import org.springframework.boot.context.properties.source.ConfigurationPropertySources;
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -67,20 +66,22 @@ public final class CamelPropertiesHelper {
      * Copies the options from a generated Spring Boot configuration class onto the Camel component, data format or
      * language it configures.
      * <p/>
-     * The options that belong to the auto configuration layer itself (<tt>enabled</tt> and <tt>customizer</tt>) are
-     * removed first, as they are not options on the target bean.
+     * Only the options the application configured are copied, as recorded by Spring Boot in
+     * {@link BoundConfigurationProperties} when it bound the configuration class. The other options merely carry the
+     * default value the generator took from the Camel catalog as field initializer, and must not overwrite the value
+     * the target already holds, such as one set programmatically on a user supplied bean. The options that belong to
+     * the auto configuration layer itself (<tt>enabled</tt> and <tt>customizer</tt>) are never copied, as they are not
+     * options on the target bean.
      * <p/>
-     * An option that cannot be set on the target and that the application configured explicitly fails fast with an
-     * {@link IllegalArgumentException}, instead of being dropped without a trace. An option that cannot be set and
-     * that only carries its catalog default is logged at DEBUG, as there is nothing the application can do about it
-     * and the target keeps its own default. Set {@link #LENIENT_CONFIGURATION_BINDING} to <tt>true</tt> to log an
-     * explicitly configured option at WARN and continue, instead of failing.
+     * A configured option that cannot be set on the target fails fast with an {@link IllegalArgumentException},
+     * instead of being dropped without a trace. Set {@link #LENIENT_CONFIGURATION_BINDING} to <tt>true</tt> to log it
+     * at WARN and continue, instead of failing.
      *
      * @param camelContext
      *                           the CamelContext
      * @param applicationContext
-     *                           the Spring application context, used to tell an explicitly configured option from a
-     *                           catalog default
+     *                           the Spring application context, used to tell a configured option from a catalog
+     *                           default
      * @param propertyPrefix
      *                           the configuration prefix of the source, such as <tt>camel.component.http</tt>
      * @param source
@@ -96,6 +97,11 @@ public final class CamelPropertiesHelper {
 
         Map<String, Object> properties = getNonNullProperties(camelContext, source);
         properties.keySet().removeIf(key -> AUTO_CONFIGURATION_OPTIONS.contains(key.toLowerCase(Locale.US)));
+        // only the options the application configured are copied, the others merely carry their catalog default
+        Set<ConfigurationPropertyName> bound = boundProperties(applicationContext);
+        if (bound != null && propertyPrefix != null && !propertyPrefix.isEmpty()) {
+            properties.keySet().removeIf(key -> !isConfigured(bound, optionKey(propertyPrefix, key)));
+        }
 
         // the options that could be set are removed from the map, so what is left could not be set
         doSetCamelProperties(camelContext, target, properties, false, false);
@@ -106,19 +112,12 @@ public final class CamelPropertiesHelper {
         boolean lenient = isLenientBinding(applicationContext);
         List<String> failed = new ArrayList<>();
         for (Map.Entry<String, Object> entry : properties.entrySet()) {
-            String name = entry.getKey();
-            Object value = entry.getValue();
-            if (isExplicitlyConfigured(applicationContext, propertyPrefix, name)) {
-                if (lenient) {
-                    LOG.warn("Cannot configure option [{}] with value [{}] on [{}]. This option is ignored.",
-                            optionKey(propertyPrefix, name), value, ObjectHelper.classCanonicalName(target));
-                } else {
-                    failed.add(optionKey(propertyPrefix, name) + " = " + value);
-                }
+            String option = optionKey(propertyPrefix, entry.getKey());
+            if (lenient) {
+                LOG.warn("Cannot configure option [{}] with value [{}] on [{}]. This option is ignored.", option,
+                        entry.getValue(), ObjectHelper.classCanonicalName(target));
             } else {
-                // only the catalog default was carried, so the target keeps its own default
-                LOG.debug("Cannot configure option [{}] with default value [{}] on [{}]. This option is ignored.",
-                        optionKey(propertyPrefix, name), value, ObjectHelper.classCanonicalName(target));
+                failed.add(option + " = " + entry.getValue());
             }
         }
         if (!failed.isEmpty()) {
@@ -133,32 +132,42 @@ public final class CamelPropertiesHelper {
     }
 
     private static String optionKey(String propertyPrefix, String name) {
-        String dashed = StringHelper.camelCaseToDash(name);
+        String dashed = StringHelper.camelCaseToDash(name).toLowerCase(Locale.US);
         return propertyPrefix != null && !propertyPrefix.isEmpty() ? propertyPrefix + "." + dashed : dashed;
     }
 
     /**
-     * Whether the application configured the given option itself, as opposed to the option only carrying the default
-     * value the generator took from the Camel catalog.
+     * The properties Spring Boot bound onto the configuration classes of the application, or <tt>null</tt> when that
+     * cannot be determined, in which case every option is copied as before Camel 4.23.
      */
-    private static boolean isExplicitlyConfigured(ApplicationContext applicationContext, String propertyPrefix,
-            String name) {
-        if (applicationContext == null || propertyPrefix == null || propertyPrefix.isEmpty()) {
-            return false;
+    private static Set<ConfigurationPropertyName> boundProperties(ApplicationContext applicationContext) {
+        if (applicationContext == null) {
+            return null;
         }
         try {
-            ConfigurationPropertyName key
-                    = ConfigurationPropertyName.of(optionKey(propertyPrefix, name).toLowerCase(Locale.US));
-            for (ConfigurationPropertySource source : ConfigurationPropertySources
-                    .get(applicationContext.getEnvironment())) {
-                if (source.getConfigurationProperty(key) != null) {
-                    return true;
-                }
-            }
+            return BoundConfigurationProperties.get(applicationContext).getAll().keySet();
         } catch (Exception e) {
-            // returning false downgrades a hard error to an ignored option, so this must not stay quiet
-            LOG.warn("Cannot determine whether {} was configured due to: {}. Treating it as not configured.",
-                    optionKey(propertyPrefix, name), e.getMessage(), e);
+            LOG.warn("Cannot determine which options were configured due to: {}. Copying all options.",
+                    e.getMessage(), e);
+            return null;
+        }
+    }
+
+    /**
+     * Whether the application configured the given option, as opposed to the option only carrying the default value
+     * the generator took from the Camel catalog. Spring Boot records every property it bound, including the entries
+     * of a map or list option, so the option is configured when that property or any property below it was bound.
+     */
+    private static boolean isConfigured(Set<ConfigurationPropertyName> bound, String optionKey) {
+        ConfigurationPropertyName option = ConfigurationPropertyName.ofIfValid(optionKey);
+        if (option == null) {
+            // not a name Spring Boot could have bound, so it cannot be told apart from a default
+            return true;
+        }
+        for (ConfigurationPropertyName name : bound) {
+            if (option.equals(name) || option.isAncestorOf(name)) {
+                return true;
+            }
         }
         return false;
     }

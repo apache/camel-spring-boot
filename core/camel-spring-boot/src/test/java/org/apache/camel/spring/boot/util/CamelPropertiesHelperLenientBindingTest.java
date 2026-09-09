@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.annotation.DirtiesContext;
@@ -37,7 +38,9 @@ import org.springframework.test.annotation.DirtiesContext;
                 classes = { CamelPropertiesHelperLenientBindingTest.class },
                 properties = {
                         "camel.springboot.lenient-configuration-binding = true",
+                        "camel.test.my-config.name = Donald Duck",
                         "camel.test.my-config.no-such-option-on-the-target = bar" })
+@EnableConfigurationProperties(CamelPropertiesHelperTest.MyDriftedConfiguration.class)
 public class CamelPropertiesHelperLenientBindingTest {
 
     @Autowired
@@ -46,13 +49,12 @@ public class CamelPropertiesHelperLenientBindingTest {
     @Autowired
     CamelContext camelContext;
 
+    @Autowired
+    CamelPropertiesHelperTest.MyDriftedConfiguration config;
+
     @Test
     public void testConfiguredOptionThatCannotBeSetIsIgnoredWhenLenient() {
         CamelPropertiesHelperTest.MyClass target = new CamelPropertiesHelperTest.MyClass();
-
-        CamelPropertiesHelperTest.MyDriftedConfiguration config = new CamelPropertiesHelperTest.MyDriftedConfiguration();
-        config.setName("Donald Duck");
-        config.setNoSuchOptionOnTheTarget("bar");
 
         CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
                 CamelPropertiesHelperTest.PREFIX, config, target);

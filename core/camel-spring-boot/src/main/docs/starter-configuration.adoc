@@ -60,6 +60,8 @@ public KafkaComponent kafka(KafkaConfiguration kafkaconfiguration){
 
 The `Bean` name has to be equal to that of the Component, Dataformat or Language your are configuring. If the `Bean` name isn't specified in the annotation it will be set to the method name.
 
+External configuration is still applied on top of such a `Bean`: every `camel.[component|language|dataformat].[name].[parameter]` that is set in the external configuration is copied onto it. A parameter that is not set in the external configuration is left alone, so a value set on the `Bean` in Java is kept, even when it differs from the documented default of that parameter.
+
 Typical Camel Spring Boot projects will use a combination of external configuration and Beans to configure their application. For more complete examples on how to configure your Camel Spring Boot project, you can refer to our example https://github.com/apache/camel-spring-boot-examples[repository].
 
 All contributions are welcome!
