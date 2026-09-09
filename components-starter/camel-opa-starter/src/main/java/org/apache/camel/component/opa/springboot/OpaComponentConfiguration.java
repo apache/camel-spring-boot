@@ -64,6 +64,19 @@ public class OpaComponentConfiguration
      */
     private String includeHeaders = "*";
     /**
+     * Comma-separated list of exchange property names to send to OPA in the
+     * input document, or {code } for all of them. Empty by default, so no
+     * properties are sent unless asked for. This is where the authentication
+     * components put the identity they verified: {code camel-keycloak} stores
+     * the access token and its subject as exchange properties and prefers them
+     * over the equivalent headers, precisely because headers can be set by the
+     * caller. List those property names here to let a policy authorize the
+     * identity an earlier step established, instead of copying it into a header
+     * first. Only custom properties are sent; Camel's own internal exchange
+     * properties are never included.
+     */
+    private String includeProperties;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -136,6 +149,14 @@ public class OpaComponentConfiguration
 
     public void setIncludeHeaders(String includeHeaders) {
         this.includeHeaders = includeHeaders;
+    }
+
+    public String getIncludeProperties() {
+        return includeProperties;
+    }
+
+    public void setIncludeProperties(String includeProperties) {
+        this.includeProperties = includeProperties;
     }
 
     public Boolean getLazyStartProducer() {

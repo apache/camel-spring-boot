@@ -122,10 +122,6 @@ public class BlobComponentConfiguration
      */
     private String regex;
     /**
-     * In case of usage of Shared Access Signature we'll need to set a SAS Token
-     */
-    private String sasToken;
-    /**
      * Client to a storage account. This client does not hold any state about a
      * particular storage account but is instead a convenient way of sending off
      * appropriate requests to the resource on the service. It may also be used
@@ -344,6 +340,10 @@ public class BlobComponentConfiguration
      */
     private String azureTenantId;
     /**
+     * In case of usage of Shared Access Signature we'll need to set a SAS Token
+     */
+    private String sasToken;
+    /**
      * Source Blob Access Key: for copyblob operation, sadly, we need to have an
      * accessKey for the source blob we want to copy Passing an accessKey as
      * header, it's unsafe so we could set as key.
@@ -468,14 +468,6 @@ public class BlobComponentConfiguration
 
     public void setRegex(String regex) {
         this.regex = regex;
-    }
-
-    public String getSasToken() {
-        return sasToken;
-    }
-
-    public void setSasToken(String sasToken) {
-        this.sasToken = sasToken;
     }
 
     public BlobServiceClient getServiceClient() {
@@ -748,6 +740,14 @@ public class BlobComponentConfiguration
 
     public void setAzureTenantId(String azureTenantId) {
         this.azureTenantId = azureTenantId;
+    }
+
+    public String getSasToken() {
+        return sasToken;
+    }
+
+    public void setSasToken(String sasToken) {
+        this.sasToken = sasToken;
     }
 
     public String getSourceBlobAccessKey() {
