@@ -58,6 +58,20 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.opa.health-check-consumer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all consumer based health checks from this component",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.opa.health-check-producer-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.opa.include-body",
       "type": "java.lang.Boolean",
       "description": "Whether to send the message body to OPA as part of the input document. Disabled by default: bodies can be large or streaming, and most authorization decisions only need headers. When enabled on a streaming body, enable stream caching so that the body is still readable by the rest of the route.",
