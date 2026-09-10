@@ -254,6 +254,21 @@ public class DoclingComponentConfiguration
      */
     private Boolean includeRawMetadata = false;
     /**
+     * Whether a String message body that starts with / or contains \ is
+     * interpreted as a local filesystem path to read. When disabled, such a
+     * body is rejected instead of being read. This does not affect the
+     * CamelDoclingInputFilePath header, nor File, byte or explicit path
+     * collection bodies used by the batch operations.
+     */
+    private Boolean allowFilePathSource = false;
+    /**
+     * Whether a String message body that starts with http:// or https:// is
+     * interpreted as a remote URL for Docling to fetch. When disabled, such a
+     * body is rejected instead of being fetched. This does not affect the
+     * CamelDoclingInputFilePath header, nor bodies of any other type.
+     */
+    private Boolean allowUrlSource = false;
+    /**
      * Header name for API key authentication
      */
     private String apiKeyHeader = "X-API-Key";
@@ -265,6 +280,13 @@ public class DoclingComponentConfiguration
      * Authentication token for docling-serve API (Bearer token or API key)
      */
     private String authenticationToken;
+    /**
+     * When set, every local input file path must resolve inside this directory
+     * once normalized. Applies to the CamelDoclingInputFilePath header, to file
+     * path message bodies, and to the paths used by the batch operations. When
+     * empty, no directory restriction is applied.
+     */
+    private String inputBaseDirectory;
     /**
      * Maximum file size in bytes for processing
      */
@@ -661,6 +683,22 @@ public class DoclingComponentConfiguration
         this.includeRawMetadata = includeRawMetadata;
     }
 
+    public Boolean getAllowFilePathSource() {
+        return allowFilePathSource;
+    }
+
+    public void setAllowFilePathSource(Boolean allowFilePathSource) {
+        this.allowFilePathSource = allowFilePathSource;
+    }
+
+    public Boolean getAllowUrlSource() {
+        return allowUrlSource;
+    }
+
+    public void setAllowUrlSource(Boolean allowUrlSource) {
+        this.allowUrlSource = allowUrlSource;
+    }
+
     public String getApiKeyHeader() {
         return apiKeyHeader;
     }
@@ -684,6 +722,14 @@ public class DoclingComponentConfiguration
 
     public void setAuthenticationToken(String authenticationToken) {
         this.authenticationToken = authenticationToken;
+    }
+
+    public String getInputBaseDirectory() {
+        return inputBaseDirectory;
+    }
+
+    public void setInputBaseDirectory(String inputBaseDirectory) {
+        this.inputBaseDirectory = inputBaseDirectory;
     }
 
     public Long getMaxFileSize() {

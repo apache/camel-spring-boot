@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 23 options, which are listed below.
+The starter supports 24 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -44,6 +44,7 @@ The starter supports 23 options, which are listed below.
 | camel.component.knative.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
 | camel.component.knative.kind | The type of the k8s resource referenced by the endpoint. |  | String
 | camel.component.knative.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| camel.component.knative.mute-exception | If enabled and an Exchange failed processing on the consumer side the response's body won't contain the exception's stack trace. | true | Boolean
 | camel.component.knative.name | The name of the k8s resource referenced by the endpoint. |  | String
 | camel.component.knative.producer-factory | The protocol producer factory. The option is a org.apache.camel.component.knative.spi.KnativeProducerFactory type. |  | KnativeProducerFactory
 | camel.component.knative.reply | If the consumer should construct a full reply to knative request. | true | Boolean

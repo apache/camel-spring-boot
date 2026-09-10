@@ -249,8 +249,9 @@
     {
       "name": "camel.component.http.proxy-auth-scheme",
       "type": "java.lang.String",
-      "description": "Proxy server authentication protocol scheme to use",
-      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
+      "description": "Proxy server connection protocol scheme. Defaults to http regardless of the target endpoint scheme, because most corporate HTTP proxies expect a plain HTTP connection on their listener port.",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration",
+      "defaultValue": "http"
     },
     {
       "name": "camel.component.http.proxy-auth-username",

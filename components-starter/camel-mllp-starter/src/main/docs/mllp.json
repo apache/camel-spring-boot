@@ -152,7 +152,7 @@
       "type": "java.lang.Boolean",
       "description": "Whether to log PHI",
       "sourceType": "org.apache.camel.component.mllp.springboot.MllpComponentConfiguration",
-      "defaultValue": true
+      "defaultValue": false
     },
     {
       "name": "camel.component.mllp.log-phi-max-bytes",

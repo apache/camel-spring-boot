@@ -63,7 +63,7 @@ The starter supports 54 options, which are listed below.
 | camel.component.http.proxy-auth-method | Proxy authentication method to use (NTLM is deprecated) |  | String
 | camel.component.http.proxy-auth-nt-host | Proxy authentication domain (workstation name) to use with NTLM (NTLM is deprecated) |  | String
 | camel.component.http.proxy-auth-password | Proxy server password |  | String
-| camel.component.http.proxy-auth-scheme | Proxy server authentication protocol scheme to use |  | String
+| camel.component.http.proxy-auth-scheme | Proxy server connection protocol scheme. Defaults to http regardless of the target endpoint scheme, because most corporate HTTP proxies expect a plain HTTP connection on their listener port. | http | String
 | camel.component.http.proxy-auth-username | Proxy server username |  | String
 | camel.component.http.proxy-host | Proxy server host |  | String
 | camel.component.http.proxy-port | Proxy server port |  | Integer

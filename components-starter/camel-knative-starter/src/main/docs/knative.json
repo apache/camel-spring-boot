@@ -122,6 +122,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.knative.mute-exception",
+      "type": "java.lang.Boolean",
+      "description": "If enabled and an Exchange failed processing on the consumer side the response's body won't contain the exception's stack trace.",
+      "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.knative.name",
       "type": "java.lang.String",
       "description": "The name of the k8s resource referenced by the endpoint.",
