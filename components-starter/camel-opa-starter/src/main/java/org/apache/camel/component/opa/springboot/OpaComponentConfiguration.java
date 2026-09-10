@@ -107,6 +107,18 @@ public class OpaComponentConfiguration
      */
     private OPAClient opaClient;
     /**
+     * Used for enabling or disabling all consumer based health checks from this
+     * component
+     */
+    private Boolean healthCheckConsumerEnabled = true;
+    /**
+     * Used for enabling or disabling all producer based health checks from this
+     * component. Notice: Camel has by default disabled all producer based
+     * health-checks. You can turn on producer checks globally by setting
+     * camel.health.producersEnabled=true.
+     */
+    private Boolean healthCheckProducerEnabled = true;
+    /**
      * Bearer token sent to the OPA server in the Authorization header, for an
      * OPA instance that has its API authentication enabled.
      */
@@ -189,6 +201,22 @@ public class OpaComponentConfiguration
 
     public void setOpaClient(OPAClient opaClient) {
         this.opaClient = opaClient;
+    }
+
+    public Boolean getHealthCheckConsumerEnabled() {
+        return healthCheckConsumerEnabled;
+    }
+
+    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
+        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
+    }
+
+    public Boolean getHealthCheckProducerEnabled() {
+        return healthCheckProducerEnabled;
+    }
+
+    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
+        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
     }
 
     public String getBearerToken() {
