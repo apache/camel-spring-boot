@@ -122,6 +122,11 @@ public class ServiceBusComponentConfiguration
      */
     private Integer maxConcurrentCalls = 1;
     /**
+     * Sets the maximum number of concurrent sessions to process at any given
+     * time. Only applies when sessionEnabled is true.
+     */
+    private Integer maxConcurrentSessions = 1;
+    /**
      * Sets the prefetch count of the receiver. For both PEEK_LOCK PEEK_LOCK and
      * RECEIVE_AND_DELETE RECEIVE_AND_DELETE receive modes the default value is
      * 1. Prefetch speeds up the message flow by aiming to have a message
@@ -314,6 +319,14 @@ public class ServiceBusComponentConfiguration
 
     public void setMaxConcurrentCalls(Integer maxConcurrentCalls) {
         this.maxConcurrentCalls = maxConcurrentCalls;
+    }
+
+    public Integer getMaxConcurrentSessions() {
+        return maxConcurrentSessions;
+    }
+
+    public void setMaxConcurrentSessions(Integer maxConcurrentSessions) {
+        this.maxConcurrentSessions = maxConcurrentSessions;
     }
 
     public Integer getPrefetchCount() {
