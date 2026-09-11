@@ -488,7 +488,7 @@ Result: Main app logs to `logs/access_log.log`, actuator has no access logs.
 
 ==== Camel Logging to Control Management Access Log
 
-This is valid only when using `spring-boot-starter-undertow`.
+This is valid only when using `undertow-spring-boot-starter`.
 
 If you want to defer the http access log control to whatever camel logging mechanism, you have to set `management.server.undertow.accesslog.use-camel-logging=true`.
 Optionally you can set a message pattern with `management.server.accesslog.pattern=combined`.
@@ -636,7 +636,7 @@ When using the Platform HTTP component with Undertow as the underlying web serve
 ----
 <dependency>
     <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-undertow</artifactId>
+    <artifactId>undertow-spring-boot-starter</artifactId>
 </dependency>
 ----
 
