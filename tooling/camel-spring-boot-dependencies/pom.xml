@@ -48,7 +48,7 @@
       <dependency>
         <groupId>com.aliyun</groupId>
         <artifactId>eventbridge20200401</artifactId>
-        <version>7.4.0</version>
+        <version>7.5.0</version>
       </dependency>
       <dependency>
         <groupId>com.aliyun</groupId>
@@ -305,12 +305,12 @@
       <dependency>
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy</artifactId>
-        <version>1.18.12</version>
+        <version>1.18.13</version>
       </dependency>
       <dependency>
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy-agent</artifactId>
-        <version>1.18.12</version>
+        <version>1.18.13</version>
       </dependency>
       <dependency>
         <groupId>org.apache.avro</groupId>
