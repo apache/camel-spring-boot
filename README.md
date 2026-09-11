@@ -1,7 +1,7 @@
 # Apache Camel Spring Boot Support
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.apache.camel/apache-camel.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/org.apache.camel/apache-camel)
-[![Javadocs](http://www.javadoc.io/badge/org.apache.camel/apache-camel.svg?color=brightgreen)](https://www.javadoc.io/doc/org.apache.camel/camel-core)
+[![Javadocs](https://www.javadoc.io/badge/org.apache.camel/camel-api.svg?color=brightgreen)](https://www.javadoc.io/doc/org.apache.camel/camel-api)
 [![Stack Overflow](https://img.shields.io/:stack%20overflow-apache--camel-brightgreen.svg)](https://stackoverflow.com/questions/tagged/apache-camel)
 [![Chat](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://camel.zulipchat.com/)
 [![Twitter](https://img.shields.io/twitter/follow/ApacheCamel.svg?label=Follow&style=social)](https://twitter.com/ApacheCamel)
