@@ -56,6 +56,13 @@
       "sourceType": "org.apache.camel.component.smooks.springboot.SmooksComponentConfiguration"
     },
     {
+      "name": "camel.dataformat.smooks.allow-external-entities",
+      "type": "java.lang.Boolean",
+      "description": "Whether to allow the XML reader used by Smooks to resolve external XML entities (external general and parameter entities) when parsing XML input. This is disabled by default so that external entities in the message body are not resolved; enable it only for trusted legacy configurations that rely on external entity resolution.",
+      "sourceType": "org.apache.camel.dataformat.smooks.springboot.SmooksDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.dataformat.smooks.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"

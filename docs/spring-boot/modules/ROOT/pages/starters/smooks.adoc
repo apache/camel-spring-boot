@@ -24,7 +24,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 6 options, which are listed below.
+The starter supports 7 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -33,6 +33,7 @@ The starter supports 6 options, which are listed below.
 | camel.component.smooks.enabled | Whether to enable auto configuration of the smooks component. This is enabled by default. |  | Boolean
 | camel.component.smooks.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.smooks.smooks-factory | To use a custom factory for creating Smooks. The option is a org.smooks.SmooksFactory type. |  | SmooksFactory
+| camel.dataformat.smooks.allow-external-entities | Whether to allow the XML reader used by Smooks to resolve external XML entities (external general and parameter entities) when parsing XML input. This is disabled by default so that external entities in the message body are not resolved; enable it only for trusted legacy configurations that rely on external entity resolution. | false | Boolean
 | camel.dataformat.smooks.enabled | Whether to enable auto configuration of the smooks data format. This is enabled by default. |  | Boolean
 | camel.dataformat.smooks.smooks-config | Path to the Smooks configuration file. |  | String
 |===
