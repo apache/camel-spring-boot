@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 7 options, which are listed below.
+The starter supports 8 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -32,6 +32,7 @@ The starter supports 7 options, which are listed below.
 | camel.component.jgroups.bridge-error-handler | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | camel.component.jgroups.channel | Channel to use. The option is a org.jgroups.JChannel type. |  | JChannel
 | camel.component.jgroups.channel-properties | Specifies configuration properties of the JChannel used by the endpoint. |  | String
+| camel.component.jgroups.deserialization-filter | Sets an ObjectInputFilter pattern (jdk.serialFilter syntax) applied as a defense-in-depth check on the class of the message body deserialized by org.jgroups.Message.getObject(). The pattern is evaluated after JGroups has deserialized the payload, so this option alone does not prevent gadget-chain execution that happens inside the JGroups receive path; to block such attacks, also configure the JVM-wide -Djdk.serialFilter and secure the channel with AUTH and encryption. When this option is not set and no JVM-wide filter is configured, a conservative default filter denying java.net. and otherwise allowing java., javax. and org.apache.camel. is applied. Use to accept any type. |  | String
 | camel.component.jgroups.enable-view-messages | If set to true, the consumer endpoint will receive org.jgroups.View messages as well (not only org.jgroups.Message instances). By default only regular messages are consumed by the endpoint. | false | Boolean
 | camel.component.jgroups.enabled | Whether to enable auto configuration of the jgroups component. This is enabled by default. |  | Boolean
 | camel.component.jgroups.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
