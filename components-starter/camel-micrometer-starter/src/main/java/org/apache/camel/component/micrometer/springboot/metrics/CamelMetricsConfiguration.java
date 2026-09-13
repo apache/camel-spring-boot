@@ -101,8 +101,8 @@ public class CamelMetricsConfiguration {
     private boolean logMetricsOnShutdown = false;
 
     /**
-     * List of metrics (comma separated) to log when application is shutting down. You can use `*` character to log any
-     * metrics containing the wildcard, for example `camel.exchanges.*` (default to all metrics available).
+     * List of metrics (comma separated) to log when application is shutting down. You can use a wildcard to log any
+     * metrics matching a pattern, for example `camel.exchanges.*` (default to all metrics available).
     */
     private String logMetricsOnShutdownFilters;
 
