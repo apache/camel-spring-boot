@@ -596,6 +596,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.main.duration",
+      "type": "java.lang.String",
+      "description": "To specify for how long time in seconds to keep running the JVM before automatic terminating the JVM. You can use this to run Camel for a short while.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main"
+    },
+    {
       "name": "camel.main.duration-max-action",
       "type": "java.lang.String",
       "description": "Controls whether the Camel application should shutdown the JVM, or stop all routes, when duration max is triggered.",
