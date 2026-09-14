@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.aws2.sqs;
 
+import java.util.UUID;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.ProducerTemplate;
@@ -31,8 +32,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import software.amazon.awssdk.services.sqs.SqsClient;
-
-import java.util.UUID;
 
 public class BaseSqs {
 
@@ -66,10 +65,13 @@ public class BaseSqs {
     }
 
     String receiveMessageFromQueue(String queueName, boolean deleteMessage) {
-        return consumerTemplate.receiveBody(
-                String.format("aws2-sqs://%s?deleteAfterRead=%s&deleteIfFiltered=%s&defaultVisibilityTimeout=0",
-                        queueName, deleteMessage, deleteMessage),
-                10000, String.class);
+        // Use visibilityTimeout (per-request ReceiveMessage timeout) rather than
+        // defaultVisibilityTimeout (queue-level SetQueueAttributes). The latter calls
+        // SetQueueAttributes({VISIBILITY_TIMEOUT:0}) which on LocalStack inadvertently
+        // resets DELAY_SECONDS to 0, breaking delayed-queue tests.
+        return consumerTemplate
+                .receiveBody(String.format("aws2-sqs://%s?deleteAfterRead=%s&deleteIfFiltered=%s&visibilityTimeout=0",
+                        queueName, deleteMessage, deleteMessage), 10000, String.class);
     }
 
     // *************************************
