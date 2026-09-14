@@ -75,6 +75,12 @@
             <optional>true</optional>
         </dependency>
         <dependency>
+            <groupId>io.undertow</groupId>
+            <artifactId>undertow-spring-boot-starter</artifactId>
+            <version>${undertow-spring-boot-version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-spring</artifactId>
         </dependency>
