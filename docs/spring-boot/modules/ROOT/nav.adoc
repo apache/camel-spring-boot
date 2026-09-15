@@ -134,6 +134,7 @@
 ** xref:starters/ehcache.adoc[Ehcache]
 ** xref:starters/elasticsearch-rest-client.adoc[Elasticsearch Low level Rest Client]
 ** xref:starters/elasticsearch.adoc[Elasticsearch]
+** xref:starters/event.adoc[Event]
 ** xref:starters/exec.adoc[Exec]
 ** xref:starters/fastjson.adoc[JSON Fastjson]
 ** xref:starters/fhir.adoc[FHIR]
