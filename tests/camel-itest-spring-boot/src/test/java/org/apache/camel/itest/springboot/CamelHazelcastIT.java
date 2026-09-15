@@ -23,7 +23,6 @@ public class CamelHazelcastIT extends AbstractSpringBootBaseTestSupport {
 
     @Test
     void componentTest() {
-        assertComponent("hazelcast-atomicvalue");
         assertComponent("hazelcast-instance");
         assertComponent("hazelcast-list");
         assertComponent("hazelcast-map");

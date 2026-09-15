@@ -33,8 +33,6 @@ org.apache.camel.component.hazelcast.multimap.springboot.HazelcastMultimapCompon
 org.apache.camel.component.hazelcast.multimap.springboot.HazelcastMultimapComponentAutoConfiguration
 org.apache.camel.component.hazelcast.ringbuffer.springboot.HazelcastRingbufferComponentConverter
 org.apache.camel.component.hazelcast.ringbuffer.springboot.HazelcastRingbufferComponentAutoConfiguration
-org.apache.camel.component.hazelcast.atomicnumber.springboot.HazelcastAtomicnumberComponentConverter
-org.apache.camel.component.hazelcast.atomicnumber.springboot.HazelcastAtomicnumberComponentAutoConfiguration
 org.apache.camel.component.hazelcast.instance.springboot.HazelcastInstanceComponentConverter
 org.apache.camel.component.hazelcast.instance.springboot.HazelcastInstanceComponentAutoConfiguration
 org.apache.camel.component.hazelcast.pncounter.springboot.HazelcastPNCounterComponentConverter
