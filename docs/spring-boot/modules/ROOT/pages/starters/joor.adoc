@@ -8,7 +8,6 @@ Evaluates a Java (Java compiled once at runtime) expression
 == What's inside
 
 * xref:{csb-camel-components}:languages:java-language.adoc[Java language]
-* xref:{csb-camel-components}:languages:joor-language.adoc[jOOR language]
 
 Please refer to the above links for usage and configuration details.
 
@@ -24,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 8 options, which are listed below.
+The starter supports 4 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -33,8 +32,4 @@ The starter supports 8 options, which are listed below.
 | camel.language.java.pre-compile | Whether the expression should be pre compiled once during initialization phase. If this is turned off, then the expression is reloaded and compiled on each evaluation. | true | Boolean
 | camel.language.java.single-quotes | Whether single quotes can be used as replacement for double quotes. This is convenient when you need to work with strings inside strings. | true | Boolean
 | camel.language.java.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. | true | Boolean
-| camel.language.joor.enabled | Whether to enable auto configuration of the joor language. This is enabled by default. |  | Boolean
-| camel.language.joor.pre-compile | Whether the expression should be pre compiled once during initialization phase. If this is turned off, then the expression is reloaded and compiled on each evaluation. | true | Boolean
-| camel.language.joor.single-quotes | Whether single quotes can be used as replacement for double quotes. This is convenient when you need to work with strings inside strings. | true | Boolean
-| camel.language.joor.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. | true | Boolean
 |===
