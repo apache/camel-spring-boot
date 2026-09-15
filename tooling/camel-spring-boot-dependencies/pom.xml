@@ -1314,6 +1314,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-ibm-watsonx-data-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ical-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
