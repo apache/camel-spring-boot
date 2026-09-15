@@ -109,6 +109,7 @@
     <module>camel-activemq-starter</module>
     <module>camel-activemq6-starter</module>
     <module>camel-ai-observability-starter</module>
+    <module>camel-ai-resource-starter</module>
     <module>camel-ai-tool-starter</module>
     <module>camel-alibaba-eventbridge-starter</module>
     <module>camel-alibaba-fc-starter</module>

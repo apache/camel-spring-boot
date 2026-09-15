@@ -8,6 +8,7 @@
 ** xref:starters/activemq.adoc[ActiveMQ 5.x]
 ** xref:starters/activemq6.adoc[ActiveMQ 6.x]
 ** xref:starters/ai-observability.adoc[Ai Observability]
+** xref:starters/ai-resource.adoc[AI Resource]
 ** xref:starters/ai-tool.adoc[AI Tool]
 ** xref:starters/alibaba-eventbridge.adoc[Alibaba EventBridge]
 ** xref:starters/alibaba-fc.adoc[Alibaba Function Compute (FC)]
