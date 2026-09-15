@@ -169,7 +169,7 @@
 ** xref:starters/grpc.adoc[gRPC]
 ** xref:starters/gson.adoc[JSON Gson]
 ** xref:starters/hashicorp-vault.adoc[HashiCorp Vault]
-** xref:starters/hazelcast.adoc[Hazelcast Atomic Number]
+** xref:starters/hazelcast.adoc[Hazelcast Instance]
 ** xref:starters/hivemq.adoc[HiveMQ]
 ** xref:starters/hl7.adoc[HL7]
 ** xref:starters/http.adoc[HTTP]
