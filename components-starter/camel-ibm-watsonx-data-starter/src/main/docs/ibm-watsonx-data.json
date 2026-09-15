@@ -1,0 +1,100 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.ibm-watsonx-data",
+      "type": "org.apache.camel.component.ibm.watsonx.data.springboot.WatsonxDataComponentConfiguration",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.data.springboot.WatsonxDataComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-data.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.data.springboot.WatsonxDataComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.ibm-watsonx-data.api-key",
+      "type": "java.lang.String",
+      "description": "IBM Cloud API key for authentication",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.data.springboot.WatsonxDataComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-data.auth-instance-id",
+      "type": "java.lang.String",
+      "description": "The watsonx.data instance CRN for API authorization",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.data.springboot.WatsonxDataComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-data.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.data.springboot.WatsonxDataComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.ibm-watsonx-data.catalog-name",
+      "type": "java.lang.String",
+      "description": "The catalog name for catalog, schema, and table operations",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.data.springboot.WatsonxDataComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-data.configuration",
+      "type": "org.apache.camel.component.ibm.watsonx.data.WatsonxDataConfiguration",
+      "description": "The component configuration. The option is a org.apache.camel.component.ibm.watsonx.data.WatsonxDataConfiguration type.",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.data.springboot.WatsonxDataComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-data.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-data.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the ibm-watsonx-data component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.data.springboot.WatsonxDataComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-data.engine-id",
+      "type": "java.lang.String",
+      "description": "The engine ID for engine operations and schema\/table queries",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.data.springboot.WatsonxDataComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-data.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.data.springboot.WatsonxDataComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ibm-watsonx-data.oauth-profile",
+      "type": "java.lang.String",
+      "description": "OAuth profile name for obtaining an access token via the OAuth 2.0 Client Credentials grant. When set, the token is acquired from the configured identity provider and used as apiKey. Requires camel-oauth on the classpath.",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.data.springboot.WatsonxDataComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-data.operation",
+      "type": "org.apache.camel.component.ibm.watsonx.data.WatsonxDataOperations",
+      "description": "The operation to perform",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.data.springboot.WatsonxDataComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-data.schema-name",
+      "type": "java.lang.String",
+      "description": "The schema name for schema and table operations",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.data.springboot.WatsonxDataComponentConfiguration"
+    },
+    {
+      "name": "camel.component.ibm-watsonx-data.service-url",
+      "type": "java.lang.String",
+      "description": "The watsonx.data service URL (e.g., https:\/\/region.lakehouse.cloud.ibm.com\/lakehouse\/api\/v2)",
+      "sourceType": "org.apache.camel.component.ibm.watsonx.data.springboot.WatsonxDataComponentConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
