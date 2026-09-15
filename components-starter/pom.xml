@@ -447,6 +447,7 @@
     <module>camel-seda-starter</module>
     <module>camel-servicenow-starter</module>
     <module>camel-servlet-starter</module>
+    <module>camel-shell-starter</module>
     <module>camel-shiro-starter</module>
     <module>camel-sjms-starter</module>
     <module>camel-sjms2-starter</module>

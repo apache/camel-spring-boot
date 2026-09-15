@@ -346,6 +346,7 @@
 ** xref:starters/seda.adoc[SEDA]
 ** xref:starters/servicenow.adoc[ServiceNow]
 ** xref:starters/servlet.adoc[Servlet]
+** xref:starters/shell.adoc[Shell]
 ** xref:starters/shiro.adoc[Shiro]
 ** xref:starters/sjms.adoc[Simple JMS]
 ** xref:starters/sjms2.adoc[Simple JMS2]
