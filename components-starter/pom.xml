@@ -413,6 +413,7 @@
     <module>camel-pdf-starter</module>
     <module>camel-pg-replication-slot-starter</module>
     <module>camel-pgevent-starter</module>
+    <module>camel-pgvector-starter</module>
     <module>camel-pinecone-starter</module>
     <module>camel-platform-http-starter</module>
     <module>camel-plc4x-starter</module>

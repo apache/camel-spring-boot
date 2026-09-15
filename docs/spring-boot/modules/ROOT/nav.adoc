@@ -312,6 +312,7 @@
 ** xref:starters/pdf.adoc[PDF]
 ** xref:starters/pg-replication-slot.adoc[PostgreSQL Replication Slot]
 ** xref:starters/pgevent.adoc[PostgreSQL Event]
+** xref:starters/pgvector.adoc[PGVector]
 ** xref:starters/pinecone.adoc[Pinecone]
 ** xref:starters/platform-http.adoc[Platform HTTP]
 ** xref:starters/plc4x.adoc[PLC4X]

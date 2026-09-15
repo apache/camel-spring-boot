@@ -1924,6 +1924,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-pgvector-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-pinecone-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
