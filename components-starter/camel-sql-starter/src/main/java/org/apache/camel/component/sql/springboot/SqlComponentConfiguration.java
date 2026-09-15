@@ -120,6 +120,13 @@ public class SqlComponentConfiguration
      * camel.health.producersEnabled=true.
      */
     private Boolean healthCheckProducerEnabled = true;
+    /**
+     * Whether to allow overriding the endpoint-configured SQL query with the
+     * CamelSqlQuery header. Disabled by default; enable it only when the header
+     * source is trusted, since it lets a message choose the executed SQL. This
+     * is the default for all sql endpoints and can be overridden per endpoint.
+     */
+    private Boolean allowQueryFromHeader = false;
 
     public DataSource getDataSource() {
         return dataSource;
@@ -207,5 +214,13 @@ public class SqlComponentConfiguration
 
     public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
         this.healthCheckProducerEnabled = healthCheckProducerEnabled;
+    }
+
+    public Boolean getAllowQueryFromHeader() {
+        return allowQueryFromHeader;
+    }
+
+    public void setAllowQueryFromHeader(Boolean allowQueryFromHeader) {
+        this.allowQueryFromHeader = allowQueryFromHeader;
     }
 }
