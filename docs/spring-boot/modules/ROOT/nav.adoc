@@ -376,6 +376,7 @@
 ** xref:starters/springdoc.adoc[Springdoc]
 ** xref:starters/sql.adoc[SQL]
 ** xref:starters/ssh.adoc[SSH]
+** xref:starters/state-store.adoc[State Store]
 ** xref:starters/stax.adoc[StAX]
 ** xref:starters/stitch.adoc[Stitch]
 ** xref:starters/stream.adoc[Stream]

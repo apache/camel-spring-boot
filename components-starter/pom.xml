@@ -477,6 +477,7 @@
     <module>camel-springdoc-starter</module>
     <module>camel-sql-starter</module>
     <module>camel-ssh-starter</module>
+    <module>camel-state-store-starter</module>
     <module>camel-stax-starter</module>
     <module>camel-stitch-starter</module>
     <module>camel-stream-starter</module>
