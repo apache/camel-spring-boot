@@ -81,6 +81,7 @@
 ** xref:starters/braintree.adoc[Braintree]
 ** xref:starters/browse.adoc[Browse]
 ** xref:starters/caffeine.adoc[Caffeine Cache]
+** xref:starters/camunda.adoc[Camunda]
 ** xref:starters/cassandraql.adoc[Cassandra CQL]
 ** xref:starters/cbor.adoc[CBOR]
 ** xref:starters/chatscript.adoc[ChatScript]

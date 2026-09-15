@@ -1,0 +1,98 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.camunda",
+      "type": "org.apache.camel.component.camunda.springboot.CamundaComponentConfiguration",
+      "sourceType": "org.apache.camel.component.camunda.springboot.CamundaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.camunda.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.camunda.springboot.CamundaComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.camunda.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.camunda.springboot.CamundaComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.camunda.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.camunda.springboot.CamundaComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.camunda.client-id",
+      "type": "java.lang.String",
+      "description": "Client ID for OAuth \/ SaaS authentication.",
+      "sourceType": "org.apache.camel.component.camunda.springboot.CamundaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.camunda.client-secret",
+      "type": "java.lang.String",
+      "description": "Client secret for OAuth \/ SaaS authentication.",
+      "sourceType": "org.apache.camel.component.camunda.springboot.CamundaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.camunda.cluster-id",
+      "type": "java.lang.String",
+      "description": "Camunda SaaS cluster ID. When set, the client connects via the cloud builder.",
+      "sourceType": "org.apache.camel.component.camunda.springboot.CamundaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.camunda.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.camunda.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the camunda component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.camunda.springboot.CamundaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.camunda.grpc-address",
+      "type": "java.lang.String",
+      "description": "gRPC address of the Camunda cluster (e.g. http:\/\/localhost:26500). Used for self-managed connections when clusterId is not set.",
+      "sourceType": "org.apache.camel.component.camunda.springboot.CamundaComponentConfiguration",
+      "defaultValue": "http:\/\/localhost:26500"
+    },
+    {
+      "name": "camel.component.camunda.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.camunda.springboot.CamundaComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.camunda.o-auth-a-p-i",
+      "type": "java.lang.String",
+      "description": "OAuth authorization server URL for self-managed authentication.",
+      "sourceType": "org.apache.camel.component.camunda.springboot.CamundaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.camunda.region",
+      "type": "java.lang.String",
+      "description": "Camunda SaaS region (default: bru-2).",
+      "sourceType": "org.apache.camel.component.camunda.springboot.CamundaComponentConfiguration",
+      "defaultValue": "bru-2"
+    },
+    {
+      "name": "camel.component.camunda.rest-address",
+      "type": "java.lang.String",
+      "description": "REST address of the Camunda cluster (e.g. http:\/\/localhost:8080). Used for self-managed connections when clusterId is not set.",
+      "sourceType": "org.apache.camel.component.camunda.springboot.CamundaComponentConfiguration",
+      "defaultValue": "http:\/\/localhost:8080"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
