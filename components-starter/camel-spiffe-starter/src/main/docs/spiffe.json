@@ -1,0 +1,84 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.spiffe",
+      "type": "org.apache.camel.component.spiffe.springboot.SpiffeComponentConfiguration",
+      "sourceType": "org.apache.camel.component.spiffe.springboot.SpiffeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spiffe.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.spiffe.springboot.SpiffeComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.spiffe.allow-operation-header",
+      "type": "java.lang.Boolean",
+      "description": "Whether the CamelSpiffeOperation header may override the configured operation. Disabled by default: the operation decides whether this endpoint validates a token or mints one, so a message that can set it can turn a validator into an endpoint that hands out this workload's own JWT-SVID. Enable it only on routes whose input is trusted.",
+      "sourceType": "org.apache.camel.component.spiffe.springboot.SpiffeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.spiffe.audience",
+      "type": "java.lang.String",
+      "description": "The comma-separated audience(s) to request for a JWT-SVID (fetchJwtSvid) or to validate against (validateJwtSvid). Can be overridden per-message with the CamelSpiffeAudience header. Note that validateJwtSvid validates against a single audience, so when several comma-separated audiences are given only the first one is used for validation; fetchJwtSvid requests all of them.",
+      "sourceType": "org.apache.camel.component.spiffe.springboot.SpiffeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spiffe.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.spiffe.springboot.SpiffeComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.spiffe.configuration",
+      "type": "org.apache.camel.component.spiffe.SpiffeConfiguration",
+      "description": "The component configuration. The option is a org.apache.camel.component.spiffe.SpiffeConfiguration type.",
+      "sourceType": "org.apache.camel.component.spiffe.springboot.SpiffeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spiffe.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.spiffe.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the spiffe component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.spiffe.springboot.SpiffeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spiffe.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.spiffe.springboot.SpiffeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.spiffe.operation",
+      "type": "org.apache.camel.component.spiffe.SpiffeOperation",
+      "description": "The operation to perform on the SPIFFE Workload API.",
+      "sourceType": "org.apache.camel.component.spiffe.springboot.SpiffeComponentConfiguration",
+      "defaultValue": "fetchx509svid"
+    },
+    {
+      "name": "camel.component.spiffe.spiffe-socket-path",
+      "type": "java.lang.String",
+      "description": "The address of the SPIFFE Workload API endpoint (for example {code unix:\/\/\/tmp\/agent.sock} or {code tcp:\/\/127.0.0.1:8082}). When not set, the SPIFFE_ENDPOINT_SOCKET environment variable is used.",
+      "sourceType": "org.apache.camel.component.spiffe.springboot.SpiffeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spiffe.workload-api-client",
+      "type": "io.spiffe.workloadapi.WorkloadApiClient",
+      "description": "An existing WorkloadApiClient to use. When set, the component does not create or close its own client and spiffeSocketPath is ignored. The option is a io.spiffe.workloadapi.WorkloadApiClient type.",
+      "sourceType": "org.apache.camel.component.spiffe.springboot.SpiffeComponentConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

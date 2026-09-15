@@ -358,6 +358,7 @@
 ** xref:starters/snmp.adoc[SNMP]
 ** xref:starters/soap.adoc[SOAP]
 ** xref:starters/solr.adoc[Solr]
+** xref:starters/spiffe.adoc[SPIFFE]
 ** xref:starters/splunk-hec.adoc[Splunk HEC]
 ** xref:starters/spring-ai-chat.adoc[Spring AI Chat]
 ** xref:starters/spring-ai-embeddings.adoc[Spring AI Embeddings]
