@@ -32,9 +32,9 @@ import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletEipAggregateJoorTest.class, })
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletEipAggregateJavaTest.class, })
 
-public class KameletEipAggregateJoorTest {
+public class KameletEipAggregateJavaTest {
 
     @Autowired
     ProducerTemplate template;
@@ -66,10 +66,10 @@ public class KameletEipAggregateJoorTest {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                routeTemplate("my-aggregate").templateBean("myAgg", "joor",
+                routeTemplate("my-aggregate").templateBean("myAgg", "java",
                         // for aggregation we can use a BiFunction that takes Exchange as input and return the
                         // aggregated response
-                        // camel-joor has special support for this if we use (e1, e2) -> { ... } as a lambda expression
+                        // camel-joor (java language) has special support for this if we use (e1, e2) -> { ... } as a lambda expression
                         "(e1, e2) -> {" + " String b1 = e1.getMessage().getBody(String.class);"
                                 + " String b2 = e2.getMessage().getBody(String.class);" + " return b1 + ',' + b2; }")
                         .templateParameter("count").from("kamelet:source").aggregate(constant(true))

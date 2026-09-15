@@ -34,10 +34,10 @@ import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 
 @DirtiesContext
 @CamelSpringBootTest
-@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletLocalBeanJoorExternalTest.class, })
+@SpringBootTest(classes = { CamelAutoConfiguration.class, KameletLocalBeanJavaExternalTest.class, })
 
 @EnabledForJreRange(min = JRE.JAVA_11)
-public class KameletLocalBeanJoorExternalTest {
+public class KameletLocalBeanJavaExternalTest {
 
     @Autowired
     ProducerTemplate template;
@@ -77,7 +77,7 @@ public class KameletLocalBeanJoorExternalTest {
             @Override
             public void configure() {
                 routeTemplate("whereTo").templateParameter("bar") // name of bar
-                        .templateBean("myBar", "joor", "resource:classpath:mybar.joor").from("kamelet:source")
+                        .templateBean("myBar", "java", "resource:classpath:mybar.java").from("kamelet:source")
                         // must use {{myBar}} to refer to the local bean
                         .to("bean:{{myBar}}");
 
