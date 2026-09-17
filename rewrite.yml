@@ -1,0 +1,192 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.redhat.camel-spring-boot.AddProductBranchProperties
+displayName: Add Product Branch Properties
+recipeList:
+  - org.openrewrite.maven.AddProperty:
+      key: cq-plugin.version
+      value: 4.16.2
+  - org.openrewrite.maven.AddProperty:
+      key: camel-community-version
+      value: 4.22.1
+  - org.openrewrite.maven.AddProperty:
+      key: camel-spring-boot-community.version
+      value: 4.22.1
+  - org.openrewrite.maven.AddProperty:
+      key: camel-sap.version
+      value: 4.22.1-SNAPSHOT
+  - org.openrewrite.maven.AddProperty:
+      key: camel-cics.version
+      value: 4.22.1-SNAPSHOT
+  - org.openrewrite.maven.AddProperty:
+      key: narayana-spring-boot.version
+      value: 4.1.1-SNAPSHOT
+  - org.openrewrite.maven.AddProperty:
+      key: camel-kamelets-version
+      value: 4.22.1
+  - org.openrewrite.maven.AddProperty:
+      key: cyclonedx-maven-plugin-version
+      value: 2.9.1
+  - org.openrewrite.maven.AddProperty:
+      key: aalto-xml-version
+      value: 1.3.3
+  - org.openrewrite.maven.AddProperty:
+      key: jakarta-el-version
+      value: 6.0.1
+  - org.openrewrite.maven.AddProperty:
+      key: jakarta-resource-version
+      value: 2.0.0
+  - org.openrewrite.maven.AddProperty:
+      key: jna-version
+      value: 5.17.0
+  - org.openrewrite.maven.AddProperty:
+      key: jobjc-version
+      value: 3.0.0
+  - org.openrewrite.maven.AddProperty:
+      key: kryo-version
+      value: 2.24.0
+  - org.openrewrite.maven.AddProperty:
+      key: org-json-json-version
+      value: 20250517
+  - org.openrewrite.maven.AddProperty:
+      key: parsson-version
+      value: 1.1.7
+  - org.openrewrite.maven.AddProperty:
+      key: perfmark-version
+      value: 0.27.0
+  - org.openrewrite.maven.AddProperty:
+      key: plexus-component-metadata-plugin-version
+      value: 2.1.1
+  - org.openrewrite.maven.AddProperty:
+      key: tomcat-version
+      value: 10.1.43
+  - org.openrewrite.maven.AddProperty:
+      key: snappy-java-version
+      value: 1.1.10.8
+  - org.openrewrite.maven.AddProperty:
+      key: woodstox-stax2-api-version
+      value: 4.2.1
+  - org.openrewrite.maven.AddProperty:
+      key: openshift-maven-plugin-version
+      value: 1.19.1.redhat-00001
+  - org.openrewrite.maven.AddProperty:
+      key: wiremock-spring-boot-version
+      value: 3.10.6
+  - org.openrewrite.maven.AddProperty:
+      key: spring-session-hazelcast-version
+      value: 3.5.1
+  - org.openrewrite.maven.AddManagedDependency:
+      groupId: org.apache.camel.kamelets
+      artifactId: camel-kamelets-bom
+      version: ${camel-kamelets-version}
+  - org.openrewrite.maven.AddManagedDependency:
+      groupId: dev.snowdrop
+      artifactId: narayana-spring-boot-core
+      version: ${narayana-spring-boot.version}
+  - org.openrewrite.maven.AddManagedDependency:
+      groupId: org.fusesource
+      artifactId: camel-sap
+      version: ${camel-sap.version}
+  - org.openrewrite.maven.AddManagedDependency:
+      groupId: org.fusesource
+      artifactId: camel-cics
+      version: ${camel-cics.version}
+  - org.openrewrite.maven.AddManagedDependency:
+      groupId: org.eclipse.jkube
+      artifactId: openshift-maven-plugin
+      version: ${openshift-maven-plugin-version}
+  - org.openrewrite.maven.AddManagedDependency:
+      groupId: org.apache.tomcat
+      artifactId: tomcat-catalina
+      version: ${tomcat-version}
+  - org.openrewrite.maven.AddManagedDependency:
+      groupId: io.projectreactor.netty
+      artifactId: reactor-netty-http
+      version: ${reactor-netty-version}
+  - org.openrewrite.maven.AddManagedDependency:
+      groupId: org.eclipse.parsson
+      artifactId: parsson
+      version: ${parsson-version}
+  - org.openrewrite.maven.AddManagedDependency:
+      groupId: org.json
+      artifactId: json
+      version: ${org-json-json-version}
+  - org.openrewrite.maven.AddManagedDependency:
+      groupId: com.google.j2objc
+      artifactId: j2objc-annotations
+      version: ${jobjc-version}
+  - org.openrewrite.maven.AddManagedDependency:
+      groupId: net.java.dev.jna
+      artifactId: jna-platform
+      version: ${jna-version}
+  - org.openrewrite.maven.AddManagedDependency:
+      groupId: io.perfmark
+      artifactId: perfmark-api
+      version: ${perfmark-version}
+  - org.openrewrite.maven.AddManagedDependency:
+      groupId: com.fasterxml
+      artifactId: aalto-xml
+      version: ${aalto-xml-version}
+  - org.openrewrite.maven.AddManagedDependency:
+      groupId: com.esotericsoftware.kryo
+      artifactId: kryo
+      version: ${kryo-version}
+  - org.openrewrite.maven.AddManagedDependency:
+      groupId: jakarta.el
+      artifactId: jakarta.el-api
+      version: ${jakarta-el-version}
+  - org.openrewrite.maven.AddManagedDependency:
+      groupId: jakarta.resource
+      artifactId: jakarta.resource-api
+      version: ${jakarta-resource-version} 
+  - org.openrewrite.maven.AddPlugin:
+      groupId: org.l2x6.cq
+      artifactId: cq-camel-spring-boot-prod-maven-plugin
+      version: ${cq-plugin.version}
+      configuration: >
+                  <configuration>
+                      <requiredProductizedCamelArtifacts>${maven.multiModuleProjectDirectory}/product/src/main/resources/required-productized-camel-artifacts.txt</requiredProductizedCamelArtifacts>
+                      <simpleElementWhitespace>SPACE</simpleElementWhitespace>
+                      <additionalProductizedArtifactIds>
+                          <additionalProductizedArtifactId>com.redhat.camel.springboot.platform:camel-spring-boot-bom</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>org.fusesource:camel-sap-starter</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>com.sap.conn.idoc:com.sap.conn.idoc</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>com.sap.conn.jco:com.sap.conn.jco</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>bom-generator</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>catalog</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>archetypes</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>org.apache.camel.archetypes:camel-archetype-spring-boot</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>spring-boot-parent</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>tooling</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>camel-spring-boot-bom</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>camel-spring-boot-dependencies-generator</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>camel-spring-boot-dependencies</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>camel-spring-boot-bom-generator</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>camel-spring-boot-bom</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>camel-spring-boot-starter-generator</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>core-modules</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>camel-spring-boot</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>camel-spring-boot-engine-starter</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>camel-spring-boot-starter</additionalProductizedArtifactId>
+                          <additionalProductizedArtifactId>camel-spring-boot-xml</additionalProductizedArtifactId>
+                      </additionalProductizedArtifactIds>
+                  </configuration>
+      dependencies: >
+                  <dependencies>
+                      <dependency>
+                          <groupId>org.apache.camel</groupId>
+                          <artifactId>camel-package-maven-plugin</artifactId>
+                          <version>${camel-version}</version>
+                      </dependency>
+                      <dependency>
+                          <groupId>com.google.guava</groupId>
+                          <artifactId>guava</artifactId>
+                          <version>32.1.1-jre</version>
+                          <exclusions>
+                              <exclusion>
+                                  <groupId>com.google.code.findbugs</groupId>
+                                  <artifactId>jsr305</artifactId>
+                              </exclusion>
+                          </exclusions>
+                      </dependency>
+                  </dependencies>
