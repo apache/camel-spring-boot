@@ -84,8 +84,8 @@
 
             <!-- spring-boot undertow version -->
             <dependency>
-                <groupId>com.redhat.integration</groupId>
-                <artifactId>spring-boot-starter-undertow</artifactId>
+                <groupId>io.undertow</groupId>
+                <artifactId>undertow-spring-boot-starter</artifactId>
                 <version>${spring-boot-undertow-version}</version>
             </dependency>
 
