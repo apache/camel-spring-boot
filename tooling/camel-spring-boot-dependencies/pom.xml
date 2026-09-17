@@ -99,7 +99,7 @@
       <dependency>
         <groupId>com.openai</groupId>
         <artifactId>openai-java</artifactId>
-        <version>4.55.0</version>
+        <version>4.63.1</version>
       </dependency>
       <dependency>
         <groupId>eu.maveniverse.maven.mima.runtime</groupId>

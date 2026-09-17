@@ -47,6 +47,12 @@
       "defaultValue": "56.0"
     },
     {
+      "name": "camel.component.salesforce.approval",
+      "type": "org.apache.camel.component.salesforce.api.dto.approval.ApprovalRequest",
+      "description": "The approval request for the Salesforce Approval API. Options approval.actionType, approval.comments, approval.contextActorId, approval.contextId, approval.nextApproverIds, approval.processDefinitionNameOrId, approval.skipEntryCriteria are bound as nested properties. The option is a org.apache.camel.component.salesforce.api.dto.approval.ApprovalRequest type.",
+      "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
+    },
+    {
       "name": "camel.component.salesforce.authentication-type",
       "type": "org.apache.camel.component.salesforce.AuthenticationType",
       "description": "Explicit authentication method to be used, one of USERNAME_PASSWORD, REFRESH_TOKEN, CLIENT_CREDENTIALS, or JWT. Salesforce component can auto-determine the authentication method to use from the properties set, set this property to eliminate any ambiguity.",

@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 109 options, which are listed below.
+The starter supports 110 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -33,6 +33,7 @@ The starter supports 109 options, which are listed below.
 | camel.component.salesforce.apex-query-params | Query params for APEX method |  | Object>
 | camel.component.salesforce.apex-url | Path of the Apex REST resource to invoke, appended to /services/apexrest/ on the instance URL, for example MyApexClass/. The apexCall operation needs this value, which can be given as this option, in the endpoint path as apexCall/MyApexClass/, or in the CamelSalesforceApexUrl header. Placeholders written in curly braces are resolved from message headers of the same name. |  | String
 | camel.component.salesforce.api-version | Salesforce API version. | 56.0 | String
+| camel.component.salesforce.approval | The approval request for the Salesforce Approval API. Options approval.actionType, approval.comments, approval.contextActorId, approval.contextId, approval.nextApproverIds, approval.processDefinitionNameOrId, approval.skipEntryCriteria are bound as nested properties. The option is a org.apache.camel.component.salesforce.api.dto.approval.ApprovalRequest type. |  | ApprovalRequest
 | camel.component.salesforce.authentication-type | Explicit authentication method to be used, one of USERNAME_PASSWORD, REFRESH_TOKEN, CLIENT_CREDENTIALS, or JWT. Salesforce component can auto-determine the authentication method to use from the properties set, set this property to eliminate any ambiguity. |  | AuthenticationType
 | camel.component.salesforce.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.salesforce.backoff-increment | Backoff interval increment for Streaming connection restart attempts for failures beyond CometD auto-reconnect. The option is a long type. | 1000 | Long
