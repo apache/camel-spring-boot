@@ -100,6 +100,7 @@
     </distributionManagement>
 
     <properties>
+    <threetenbp-version>1.7.2</threetenbp-version>
     <aalto-xml-version>1.3.3</aalto-xml-version>
     <camel-cics.version>4.22.1-SNAPSHOT</camel-cics.version>
     <camel-community-version>4.22.1</camel-community-version>
