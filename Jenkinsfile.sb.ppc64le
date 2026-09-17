@@ -48,6 +48,12 @@ pipeline {
             logRotator(artifactNumToKeepStr: '5', numToKeepStr: '10')
         )
         disableConcurrentBuilds()
+        throttleJobProperty(
+          categories: ['camel'],
+          throttleEnabled: true,
+          throttleOption: 'category',
+          maxConcurrentPerNode: 1
+        )
     }
 
     parameters {
@@ -66,6 +72,9 @@ pipeline {
         }
 
         stage('Build') {
+			options {
+                throttle(['camel'])
+            }
             steps {
                 script {
                     spring_boot_itests_result = sh script: "./mvnw $MAVEN_PARAMS -Dci.env.name=apache.org -Dmaven.test.failure.ignore=true clean install", returnStatus: true
