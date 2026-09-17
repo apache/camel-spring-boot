@@ -32,6 +32,12 @@
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
     },
     {
+      "name": "camel.component.langchain4j-ingest.document-filter",
+      "type": "org.apache.camel.Predicate",
+      "description": "A Predicate deciding whether a delivery is ingested, referenced as #bean:name and evaluated with the message body available. A rejected delivery is answered with a filtered result and releases its dedup claim. Runs after the id patterns and after the dedup claim, so a duplicate is answered skipped without the filter being evaluated. Not looked up by type on purpose - an application may hold unrelated predicates. The option is a org.apache.camel.Predicate type.",
+      "sourceType": "org.apache.camel.component.langchain4j.ingest.springboot.LangChain4jIngestComponentConfiguration"
+    },
+    {
       "name": "camel.component.langchain4j-ingest.document-id-header",
       "type": "java.lang.String",
       "description": "Name of the header carrying the document id, such as CamelAwsS3Key for an S3 consumer or CamelKafkaKey for a Kafka one. The CamelLangChain4jIngestDocumentId exchange property, when set, takes precedence - a route that parses documents captures the id into that property before the parse, so a document cannot forge its own identity. An exchange without an id fails.",
@@ -70,9 +76,21 @@
       "sourceType": "org.apache.camel.component.langchain4j.ingest.springboot.LangChain4jIngestComponentConfiguration"
     },
     {
+      "name": "camel.component.langchain4j-ingest.exclude-id",
+      "type": "java.lang.String",
+      "description": "Comma-separated list of Ant-style patterns for document ids to skip. Exclusion wins over includeId. A matching delivery is answered with a filtered result, before the dedup claim and without reading the body. Matching is case-sensitive, and a pattern only matches an id that agrees with it on a leading path separator. See the component documentation for pattern examples.",
+      "sourceType": "org.apache.camel.component.langchain4j.ingest.springboot.LangChain4jIngestComponentConfiguration"
+    },
+    {
       "name": "camel.component.langchain4j-ingest.idempotent-repository",
       "type": "org.apache.camel.spi.IdempotentRepository",
       "description": "The IdempotentRepository remembering already ingested document ids, referenced as #bean:name. When set, a delivery whose id was already written is answered with a skipped result instead of being re-ingested: first write wins per id. A blank document releases its claim, so a later, populated delivery under the same id still ingests. The claim is eager: a duplicate racing an in-flight first delivery is answered skipped even if that delivery then fails - with an at-least-once source the skipped duplicate is acknowledged and the failed original may be the only other copy, so pair eager deduplication with a source that redelivers on failure. Not looked up by type on purpose - an application may hold unrelated idempotent repositories. The repository is started but never stopped by the endpoint (it may be shared); a persistent repository's lifecycle belongs to whoever created it. The option is a org.apache.camel.spi.IdempotentRepository type.",
+      "sourceType": "org.apache.camel.component.langchain4j.ingest.springboot.LangChain4jIngestComponentConfiguration"
+    },
+    {
+      "name": "camel.component.langchain4j-ingest.include-id",
+      "type": "java.lang.String",
+      "description": "Comma-separated list of Ant-style patterns the document id must match to be ingested. A non-matching delivery is answered with a filtered result, before the dedup claim and without reading the body. When not set, every id is accepted. Matching is case-sensitive, and a pattern only matches an id that agrees with it on a leading path separator - an id derived from an absolute path needs a pattern starting with one. See the component documentation for pattern examples.",
       "sourceType": "org.apache.camel.component.langchain4j.ingest.springboot.LangChain4jIngestComponentConfiguration"
     },
     {
@@ -102,6 +120,13 @@
       "description": "Maximum size of one segment, in characters.",
       "sourceType": "org.apache.camel.component.langchain4j.ingest.springboot.LangChain4jIngestComponentConfiguration",
       "defaultValue": 500
+    },
+    {
+      "name": "camel.component.langchain4j-ingest.min-document-size",
+      "type": "java.lang.Integer",
+      "description": "Minimum size of one document in characters; 0, the default, means no minimum. A shorter document - boilerplate too small to carry retrievable content - is answered with a filtered result instead of being written, and releases its dedup claim like a blank one.",
+      "sourceType": "org.apache.camel.component.langchain4j.ingest.springboot.LangChain4jIngestComponentConfiguration",
+      "defaultValue": 0
     }
   ],
   "hints": [],

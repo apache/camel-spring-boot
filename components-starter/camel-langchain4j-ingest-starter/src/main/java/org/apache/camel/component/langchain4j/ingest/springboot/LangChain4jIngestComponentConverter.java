@@ -45,6 +45,7 @@ public class LangChain4jIngestComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, dev.langchain4j.store.embedding.EmbeddingStore.class));
         answer.add(new ConvertiblePair(String.class, dev.langchain4j.data.document.DocumentSplitter.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.IdempotentRepository.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.Predicate.class));
         return answer;
     }
 

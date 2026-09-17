@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 19 options, which are listed below.
+The starter supports 23 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -33,6 +33,7 @@ The starter supports 19 options, which are listed below.
 | camel.component.opa.bearer-token | Bearer token sent to the OPA server in the Authorization header, for an OPA instance that has its API authentication enabled. |  | String
 | camel.component.opa.borrow-timeout | How long an exchange waits for a free WebAssembly policy instance in wasm mode before the evaluation fails. An exchange that cannot get an instance is not denied by a policy, so it is reported as an evaluation failure and handled like any other: failing closed, or proceeding if failOpen is set. Raise it, or poolSize, for a route whose concurrency exceeds the pool. The option is a long type. | 30000 | Long
 | camel.component.opa.configuration | The component configuration. The option is a org.apache.camel.component.opa.OpaConfiguration type. |  | OpaConfiguration
+| camel.component.opa.connection-timeout | How long to wait for the connection to the OPA server to be established, in rest mode. The SDK's own transport applies no timeout at all, so a server that never answers would otherwise park the calling thread indefinitely rather than letting the component fail closed. The option is a long type. | 10000 | Long
 | camel.component.opa.enabled | Whether to enable auto configuration of the opa component. This is enabled by default. |  | Boolean
 | camel.component.opa.entrypoint | The compiled entrypoint to evaluate in wasm mode. This is not the same thing as the policy path: an entrypoint is fixed when the bundle is built, with \{code opa build -e}. Defaults to the endpoint's policy path, which is the name \{code opa build} gives it. |  | String
 | camel.component.opa.evaluation-mode | How the policy is evaluated. rest (the default) calls a running OPA server over its Data API. wasm evaluates a WebAssembly bundle in-process, with no server involved - so there is no network hop and no unreachable decision point, at the cost of the policy being a build-time artefact rather than something a server distributes and updates. serverUrl, bearerToken and failOpen do not apply in wasm mode. | rest | String
@@ -46,5 +47,8 @@ The starter supports 19 options, which are listed below.
 | camel.component.opa.opa-client | An existing OPAClient to use. When set, serverUrl and bearerToken are ignored. The option is a com.styra.opa.OPAClient type. |  | OPAClient
 | camel.component.opa.policy-bundle | The WebAssembly policy to evaluate in wasm mode, as produced by \{code opa build -t wasm}. Accepts a \{code file:}, \{code classpath:} or \{code http:} location holding either the bundle.tar.gz that \{code opa build} emits or a bare .wasm module. Required when \{code evaluationMode=wasm}. Prefer the bundle: it also carries the data document the policy reads as \{code data.}, which a bare module does not. |  | String
 | camel.component.opa.pool-size | How many WebAssembly policy instances to pool in wasm mode. An instance carries mutable state and is not thread-safe, so each exchange borrows one; this bounds how many exchanges evaluate at once. | 8 | Integer
+| camel.component.opa.request-timeout | How long to wait for the decision once connected, in rest mode. A request that times out is an evaluation failure rather than a deny, so it fails closed - or proceeds when failOpen is set - like any other failure to reach a verdict. The option is a long type. | 30000 | Long
 | camel.component.opa.server-url | The base URL of the OPA server, without the \{code /v1/data} suffix. The default assumes OPA running as a sidecar on the standard port. | http://localhost:8181 | String
+| camel.component.opa.ssl-context-parameters | TLS configuration for the connection to the OPA server in rest mode. Needed to trust a server whose certificate comes from a private CA, and to present a client certificate to a server that requires mutual TLS - a SPIFFE X.509-SVID, for instance, so the workload authenticates to the policy decision point as itself. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
+| camel.component.opa.use-global-ssl-context-parameters | Enable usage of global SSL context parameters. | false | Boolean
 |===

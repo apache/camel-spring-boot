@@ -19,6 +19,7 @@ package org.apache.camel.component.opa.springboot;
 import com.styra.opa.OPAClient;
 import org.apache.camel.component.opa.OpaConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -143,6 +144,14 @@ public class OpaComponentConfiguration
      */
     private Long borrowTimeout = 30000L;
     /**
+     * How long to wait for the connection to the OPA server to be established,
+     * in rest mode. The SDK's own transport applies no timeout at all, so a
+     * server that never answers would otherwise park the calling thread
+     * indefinitely rather than letting the component fail closed. The option is
+     * a long type.
+     */
+    private Long connectionTimeout = 10000L;
+    /**
      * An existing OPAClient to use. When set, serverUrl and bearerToken are
      * ignored. The option is a com.styra.opa.OPAClient type.
      */
@@ -153,6 +162,13 @@ public class OpaComponentConfiguration
      * one; this bounds how many exchanges evaluate at once.
      */
     private Integer poolSize = 8;
+    /**
+     * How long to wait for the decision once connected, in rest mode. A request
+     * that times out is an evaluation failure rather than a deny, so it fails
+     * closed - or proceeds when failOpen is set - like any other failure to
+     * reach a verdict. The option is a long type.
+     */
+    private Long requestTimeout = 30000L;
     /**
      * Used for enabling or disabling all consumer based health checks from this
      * component
@@ -177,6 +193,19 @@ public class OpaComponentConfiguration
      * rather than grants access. Do not enable this in production.
      */
     private Boolean failOpen = false;
+    /**
+     * TLS configuration for the connection to the OPA server in rest mode.
+     * Needed to trust a server whose certificate comes from a private CA, and
+     * to present a client certificate to a server that requires mutual TLS - a
+     * SPIFFE X.509-SVID, for instance, so the workload authenticates to the
+     * policy decision point as itself. The option is a
+     * org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private SSLContextParameters sslContextParameters;
+    /**
+     * Enable usage of global SSL context parameters.
+     */
+    private Boolean useGlobalSslContextParameters = false;
 
     public String getAllowKey() {
         return allowKey;
@@ -274,6 +303,14 @@ public class OpaComponentConfiguration
         this.borrowTimeout = borrowTimeout;
     }
 
+    public Long getConnectionTimeout() {
+        return connectionTimeout;
+    }
+
+    public void setConnectionTimeout(Long connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
+    }
+
     public OPAClient getOpaClient() {
         return opaClient;
     }
@@ -288,6 +325,14 @@ public class OpaComponentConfiguration
 
     public void setPoolSize(Integer poolSize) {
         this.poolSize = poolSize;
+    }
+
+    public Long getRequestTimeout() {
+        return requestTimeout;
+    }
+
+    public void setRequestTimeout(Long requestTimeout) {
+        this.requestTimeout = requestTimeout;
     }
 
     public Boolean getHealthCheckConsumerEnabled() {
@@ -320,5 +365,23 @@ public class OpaComponentConfiguration
 
     public void setFailOpen(Boolean failOpen) {
         this.failOpen = failOpen;
+    }
+
+    public SSLContextParameters getSslContextParameters() {
+        return sslContextParameters;
+    }
+
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
+        this.sslContextParameters = sslContextParameters;
+    }
+
+    public Boolean getUseGlobalSslContextParameters() {
+        return useGlobalSslContextParameters;
+    }
+
+    public void setUseGlobalSslContextParameters(
+            Boolean useGlobalSslContextParameters) {
+        this.useGlobalSslContextParameters = useGlobalSslContextParameters;
     }
 }
