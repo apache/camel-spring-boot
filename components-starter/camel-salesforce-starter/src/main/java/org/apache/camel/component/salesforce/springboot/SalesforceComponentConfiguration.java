@@ -29,6 +29,7 @@ import org.apache.camel.component.salesforce.SalesforceEndpointConfig;
 import org.apache.camel.component.salesforce.SalesforceHttpClient;
 import org.apache.camel.component.salesforce.SalesforceLoginConfig;
 import org.apache.camel.component.salesforce.api.dto.analytics.reports.ReportMetadata;
+import org.apache.camel.component.salesforce.api.dto.approval.ApprovalRequest;
 import org.apache.camel.component.salesforce.api.dto.bulk.ContentType;
 import org.apache.camel.component.salesforce.internal.PayloadFormat;
 import org.apache.camel.component.salesforce.internal.dto.EventSchemaFormatEnum;
@@ -416,6 +417,16 @@ public class SalesforceComponentConfiguration
      * the same name.
      */
     private String apexUrl;
+    /**
+     * The approval request for the Salesforce Approval API. Options
+     * approval.actionType, approval.comments, approval.contextActorId,
+     * approval.contextId, approval.nextApproverIds,
+     * approval.processDefinitionNameOrId, approval.skipEntryCriteria are bound
+     * as nested properties. The option is a
+     * org.apache.camel.component.salesforce.api.dto.approval.ApprovalRequest
+     * type.
+     */
+    private ApprovalRequest approval;
     /**
      * Composite (raw) method.
      */
@@ -1192,6 +1203,14 @@ public class SalesforceComponentConfiguration
 
     public void setApexUrl(String apexUrl) {
         this.apexUrl = apexUrl;
+    }
+
+    public ApprovalRequest getApproval() {
+        return approval;
+    }
+
+    public void setApproval(ApprovalRequest approval) {
+        this.approval = approval;
     }
 
     public String getCompositeMethod() {

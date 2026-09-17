@@ -66,6 +66,10 @@ public class Web3jComponentConfiguration
      */
     private BigInteger gasLimit;
     /**
+     * Operation to use.
+     */
+    private String operation = "transaction";
+    /**
      * A comma separated transaction privateFor nodes with public keys in a
      * Quorum network
      */
@@ -180,10 +184,6 @@ public class Web3jComponentConfiguration
      */
     private String nonce;
     /**
-     * Operation to use.
-     */
-    private String operation = "transaction";
-    /**
      * The transaction index position withing a block. The option is a
      * java.math.BigInteger type.
      */
@@ -276,6 +276,14 @@ public class Web3jComponentConfiguration
 
     public void setGasLimit(BigInteger gasLimit) {
         this.gasLimit = gasLimit;
+    }
+
+    public String getOperation() {
+        return operation;
+    }
+
+    public void setOperation(String operation) {
+        this.operation = operation;
     }
 
     public String getPrivateFor() {
@@ -452,14 +460,6 @@ public class Web3jComponentConfiguration
 
     public void setNonce(String nonce) {
         this.nonce = nonce;
-    }
-
-    public String getOperation() {
-        return operation;
-    }
-
-    public void setOperation(String operation) {
-        this.operation = operation;
     }
 
     public BigInteger getPosition() {

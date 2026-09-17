@@ -45,6 +45,7 @@ public class SalesforceComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.api.dto.analytics.reports.ReportMetadata.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.SalesforceEndpointConfig.class));
         answer.add(new ConvertiblePair(String.class, java.util.concurrent.ExecutorService.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.api.dto.approval.ApprovalRequest.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.KeyStoreParameters.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.SalesforceLoginConfig.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));

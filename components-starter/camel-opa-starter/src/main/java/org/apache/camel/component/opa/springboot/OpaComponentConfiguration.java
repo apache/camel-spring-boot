@@ -40,7 +40,10 @@ public class OpaComponentConfiguration
     /**
      * The key to read the allow/deny verdict from when the policy returns an
      * object rather than a plain boolean. For a policy returning {allow: true,
-     * reasons: } the default value of allow is what you want.
+     * reasons: } the default value of allow is what you want. A dotted path
+     * reaches a verdict nested inside the document: {code
+     * allowKey=result.allow} reads {result: {allow: true}}. A key with no dot
+     * is looked up directly at the top level.
      */
     private String allowKey = "allow";
     /**
@@ -48,6 +51,22 @@ public class OpaComponentConfiguration
      * org.apache.camel.component.opa.OpaConfiguration type.
      */
     private OpaConfiguration configuration;
+    /**
+     * The compiled entrypoint to evaluate in wasm mode. This is not the same
+     * thing as the policy path: an entrypoint is fixed when the bundle is
+     * built, with {code opa build -e}. Defaults to the endpoint's policy path,
+     * which is the name {code opa build} gives it.
+     */
+    private String entrypoint;
+    /**
+     * How the policy is evaluated. rest (the default) calls a running OPA
+     * server over its Data API. wasm evaluates a WebAssembly bundle in-process,
+     * with no server involved - so there is no network hop and no unreachable
+     * decision point, at the cost of the policy being a build-time artefact
+     * rather than something a server distributes and updates. serverUrl,
+     * bearerToken and failOpen do not apply in wasm mode.
+     */
+    private String evaluationMode = "rest";
     /**
      * Whether to send the message body to OPA as part of the input document.
      * Disabled by default: bodies can be large or streaming, and most
@@ -92,6 +111,15 @@ public class OpaComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * The WebAssembly policy to evaluate in wasm mode, as produced by {code opa
+     * build -t wasm}. Accepts a {code file:}, {code classpath:} or {code http:}
+     * location holding either the bundle.tar.gz that {code opa build} emits or
+     * a bare .wasm module. Required when {code evaluationMode=wasm}. Prefer the
+     * bundle: it also carries the data document the policy reads as {code
+     * data.}, which a bare module does not.
+     */
+    private String policyBundle;
+    /**
      * The base URL of the OPA server, without the {code /v1/data} suffix. The
      * default assumes OPA running as a sidecar on the standard port.
      */
@@ -106,10 +134,25 @@ public class OpaComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * How long an exchange waits for a free WebAssembly policy instance in wasm
+     * mode before the evaluation fails. An exchange that cannot get an instance
+     * is not denied by a policy, so it is reported as an evaluation failure and
+     * handled like any other: failing closed, or proceeding if failOpen is set.
+     * Raise it, or poolSize, for a route whose concurrency exceeds the pool.
+     * The option is a long type.
+     */
+    private Long borrowTimeout = 30000L;
+    /**
      * An existing OPAClient to use. When set, serverUrl and bearerToken are
      * ignored. The option is a com.styra.opa.OPAClient type.
      */
     private OPAClient opaClient;
+    /**
+     * How many WebAssembly policy instances to pool in wasm mode. An instance
+     * carries mutable state and is not thread-safe, so each exchange borrows
+     * one; this bounds how many exchanges evaluate at once.
+     */
+    private Integer poolSize = 8;
     /**
      * Used for enabling or disabling all consumer based health checks from this
      * component
@@ -151,6 +194,22 @@ public class OpaComponentConfiguration
         this.configuration = configuration;
     }
 
+    public String getEntrypoint() {
+        return entrypoint;
+    }
+
+    public void setEntrypoint(String entrypoint) {
+        this.entrypoint = entrypoint;
+    }
+
+    public String getEvaluationMode() {
+        return evaluationMode;
+    }
+
+    public void setEvaluationMode(String evaluationMode) {
+        this.evaluationMode = evaluationMode;
+    }
+
     public Boolean getIncludeBody() {
         return includeBody;
     }
@@ -183,6 +242,14 @@ public class OpaComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public String getPolicyBundle() {
+        return policyBundle;
+    }
+
+    public void setPolicyBundle(String policyBundle) {
+        this.policyBundle = policyBundle;
+    }
+
     public String getServerUrl() {
         return serverUrl;
     }
@@ -199,12 +266,28 @@ public class OpaComponentConfiguration
         this.autowiredEnabled = autowiredEnabled;
     }
 
+    public Long getBorrowTimeout() {
+        return borrowTimeout;
+    }
+
+    public void setBorrowTimeout(Long borrowTimeout) {
+        this.borrowTimeout = borrowTimeout;
+    }
+
     public OPAClient getOpaClient() {
         return opaClient;
     }
 
     public void setOpaClient(OPAClient opaClient) {
         this.opaClient = opaClient;
+    }
+
+    public Integer getPoolSize() {
+        return poolSize;
+    }
+
+    public void setPoolSize(Integer poolSize) {
+        this.poolSize = poolSize;
     }
 
     public Boolean getHealthCheckConsumerEnabled() {
