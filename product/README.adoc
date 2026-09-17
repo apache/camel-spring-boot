@@ -1,0 +1,31 @@
+= Camel Spring Boot product build
+
+* This Maven Module should never leak to the ASF repo
+
+== `product/src/main/resources/required-productized-camel-artifacts.txt`
+
+* A file defining which Camel artifacts are required by Camel Quarkus product branch
+* Used by `org.l2x6.cq:cq-camel-spring-boot-prod-maven-plugin:camel-spring-boot-prod-excludes` and `org.l2x6.cq:cq-camel-spring-boot-prod-maven-plugin:camel-spring-boot-prod-excludes-check` mojos
+* `required-productized-camel-artifacts.txt` should be copied verbatim from the corresponding Camel Spring Boot prod branch, such as
+  https://github.com/jboss-fuse/camel-spring-boot/blob/camel-spring-boot-3.14.5-branch/product/src/main/generated/required-productized-camel-artifacts.txt
+
+== Changes in `required-productized-camel-artifacts.txt`
+
+The following mojo should be run after every change in `required-productized-camel-artifacts.txt` and the generated changes should be committed:
+
+[source,shell]
+----
+$ mvn org.l2x6.cq:cq-camel-spring-boot-prod-maven-plugin:camel-spring-boot-prod-excludes -N
+$ mvn clean install
+$ git add -A 
+$ git commit -m ...
+----
+
+== `camel-prod-excludes-check`
+
+This mojo is enabled by default and not only checks whether the source tree is in sync with `required-productized-camel-artifacts.txt`
+but also performs some tasks in the excluded modules so that the build is correct.
+
+To skip the whole mojo (not recommended - see above), pass `-Dcsb.camel-prod-excludes.skip`.
+
+To avoid a check failure, but still perform the tasks in the excluded modules, pass `-Dcsb.onCheckFailure=WARN` or `-Dcsb.onCheckFailure=IGNORE`.

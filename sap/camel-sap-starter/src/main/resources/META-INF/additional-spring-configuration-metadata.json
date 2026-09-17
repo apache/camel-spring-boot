@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "defaultValue": true,
+      "name": "camel.component.sap.enabled",
+      "description": "Enable SAP component",
+      "type": "java.lang.Boolean"
+    }
+  ]
+}

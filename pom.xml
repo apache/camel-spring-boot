@@ -75,8 +75,8 @@
         <module>core-starter</module>
         <module>dsl-starter</module>
         <module>catalog</module>
-        <module>tests</module>
-        <module>docs</module>
+        <!-- <module>tests</module> disabled by camel-spring-boot-prod-maven-plugin:camel-prod-excludes -->
+        <!-- <module>docs</module> disabled by camel-spring-boot-prod-maven-plugin:camel-prod-excludes -->
         <module>archetypes</module>
     </modules>
 
@@ -98,6 +98,27 @@
     </distributionManagement>
 
     <properties>
+    <aalto-xml-version>1.3.3</aalto-xml-version>
+    <camel-cics.version>4.22.1-SNAPSHOT</camel-cics.version>
+    <camel-community-version>4.22.1</camel-community-version>
+    <camel-kamelets-version>4.22.1</camel-kamelets-version>
+    <camel-sap.version>4.22.1-SNAPSHOT</camel-sap.version>
+    <camel-spring-boot-community.version>4.22.1</camel-spring-boot-community.version>
+    <cq-plugin.version>4.16.2</cq-plugin.version>
+    <jakarta-el-version>6.0.1</jakarta-el-version>
+    <jakarta-resource-version>2.0.0</jakarta-resource-version>
+    <jna-version>5.17.0</jna-version>
+    <jobjc-version>3.0.0</jobjc-version>
+    <kryo-version>2.24.0</kryo-version>
+    <narayana-spring-boot.version>4.1.1-SNAPSHOT</narayana-spring-boot.version>
+    <openshift-maven-plugin-version>1.19.1.redhat-00001</openshift-maven-plugin-version>
+    <org-json-json-version>20250517</org-json-json-version>
+    <parsson-version>1.1.7</parsson-version>
+    <perfmark-version>0.27.0</perfmark-version>
+    <plexus-component-metadata-plugin-version>2.1.1</plexus-component-metadata-plugin-version>
+    <snappy-java-version>1.1.10.8</snappy-java-version>
+    <tomcat-version>10.1.43</tomcat-version>
+    <woodstox-stax2-api-version>4.2.1</woodstox-stax2-api-version>
 
         <!-- unify the encoding for all the modules -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -127,10 +148,74 @@
         <maven-surefire-plugin-version>3.5.6</maven-surefire-plugin-version>
         <springdoc-version>3.0.2</springdoc-version>
         <surefire.version>${maven-surefire-plugin-version}</surefire.version>
-        <cyclonedx-maven-plugin-version>2.9.3</cyclonedx-maven-plugin-version>
-        <wiremock-spring-boot-version>4.2.0</wiremock-spring-boot-version>
-        <spring-session-hazelcast-version>4.0.0-M2</spring-session-hazelcast-version>
+        <cyclonedx-maven-plugin-version>2.9.1</cyclonedx-maven-plugin-version>
+        <wiremock-spring-boot-version>3.10.6</wiremock-spring-boot-version>
+        <spring-session-hazelcast-version>3.5.1</spring-session-hazelcast-version>
     </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.esotericsoftware.kryo</groupId>
+        <artifactId>kryo</artifactId>
+        <version>${kryo-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml</groupId>
+        <artifactId>aalto-xml</artifactId>
+        <version>${aalto-xml-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.j2objc</groupId>
+        <artifactId>j2objc-annotations</artifactId>
+        <version>${jobjc-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>dev.snowdrop</groupId>
+        <artifactId>narayana-spring-boot-core</artifactId>
+        <version>${narayana-spring-boot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.perfmark</groupId>
+        <artifactId>perfmark-api</artifactId>
+        <version>${perfmark-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.projectreactor.netty</groupId>
+        <artifactId>reactor-netty-http</artifactId>
+        <version>1.3.6</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.el</groupId>
+        <artifactId>jakarta.el-api</artifactId>
+        <version>${jakarta-el-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>jakarta.resource</groupId>
+        <artifactId>jakarta.resource-api</artifactId>
+        <version>${jakarta-resource-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.java.dev.jna</groupId>
+        <artifactId>jna-platform</artifactId>
+        <version>${jna-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.tomcat</groupId>
+        <artifactId>tomcat-catalina</artifactId>
+        <version>${tomcat-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.parsson</groupId>
+        <artifactId>parsson</artifactId>
+        <version>${parsson-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+        <version>${org-json-json-version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
 
     <!-- Comment out the snapshot repositories as we don't need them now -->
@@ -201,6 +286,56 @@
                 <version>1.8.0</version>
             </plugin>
             -->
+      <plugin>
+        <groupId>org.l2x6.cq</groupId>
+        <artifactId>cq-camel-spring-boot-prod-maven-plugin</artifactId>
+        <version>${cq-plugin.version}</version>
+        <configuration>
+          <requiredProductizedCamelArtifacts>${maven.multiModuleProjectDirectory}/product/src/main/resources/required-productized-camel-artifacts.txt</requiredProductizedCamelArtifacts>
+          <simpleElementWhitespace>SPACE</simpleElementWhitespace>
+          <additionalProductizedArtifactIds>
+            <additionalProductizedArtifactId>com.redhat.camel.springboot.platform:camel-spring-boot-bom</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>org.fusesource:camel-sap-starter</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>com.sap.conn.idoc:com.sap.conn.idoc</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>com.sap.conn.jco:com.sap.conn.jco</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>bom-generator</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>catalog</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>archetypes</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>org.apache.camel.archetypes:camel-archetype-spring-boot</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>spring-boot-parent</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>tooling</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>camel-spring-boot-bom</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>camel-spring-boot-dependencies-generator</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>camel-spring-boot-dependencies</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>camel-spring-boot-bom-generator</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>camel-spring-boot-bom</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>camel-spring-boot-starter-generator</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>core-modules</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>camel-spring-boot</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>camel-spring-boot-engine-starter</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>camel-spring-boot-starter</additionalProductizedArtifactId>
+            <additionalProductizedArtifactId>camel-spring-boot-xml</additionalProductizedArtifactId>
+          </additionalProductizedArtifactIds>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-package-maven-plugin</artifactId>
+            <version>4.22.1</version>
+          </dependency>
+          <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>32.1.1-jre</version>
+            <exclusions>
+              <exclusion>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>jsr305</artifactId>
+              </exclusion>
+            </exclusions>
+          </dependency>
+        </dependencies>
+      </plugin>
         </plugins>
 
         <pluginManagement>
@@ -516,67 +651,67 @@
                                 <phase>validate</phase>
                                 <configuration>
                                     <target>
-                                        <path id="ecp.ws.path" location="${eclipse.workspace.dir}" />
-                                        <property name="full.eclipse.workspace" refid="ecp.ws.path" />
-                                        <path path="${basedir}/etc" id="etc.path" />
+                                        <path id="ecp.ws.path" location="${eclipse.workspace.dir}"/>
+                                        <property name="full.eclipse.workspace" refid="ecp.ws.path"/>
+                                        <path id="etc.path" path="${basedir}/etc"/>
 
                                         <path id="buildtools.classpath">
-                                            <fileset dir="${basedir}/buildingtools/target" includes="*.jar" />
-                                            <pathelement location="${basedir}/buildingtools/target/classes" />
-                                            <pathelement location="${basedir}/buildingtools/src/main/resources" />
+                                            <fileset dir="${basedir}/buildingtools/target" includes="*.jar"/>
+                                            <pathelement location="${basedir}/buildingtools/target/classes"/>
+                                            <pathelement location="${basedir}/buildingtools/src/main/resources"/>
                                         </path>
 
-                                        <whichresource resource="/camel-eclipse-pmd" property="pmd.url" classpathref="buildtools.classpath" />
-                                        <whichresource resource="/camel-pmd-ruleset.xml" property="pmdruleset.url" classpathref="buildtools.classpath" />
-                                        <whichresource resource="/camel-eclipse-checkstyle" property="eclipse.checkstyle.url" classpathref="buildtools.classpath" />
-                                        <whichresource resource="/camel-checkstyle.xml" property="checkstyle.url" classpathref="buildtools.classpath" />
+                                        <whichresource classpathref="buildtools.classpath" property="pmd.url" resource="/camel-eclipse-pmd"/>
+                                        <whichresource classpathref="buildtools.classpath" property="pmdruleset.url" resource="/camel-pmd-ruleset.xml"/>
+                                        <whichresource classpathref="buildtools.classpath" property="eclipse.checkstyle.url" resource="/camel-eclipse-checkstyle"/>
+                                        <whichresource classpathref="buildtools.classpath" property="checkstyle.url" resource="/camel-checkstyle.xml"/>
 
-                                        <mkdir dir="${full.eclipse.workspace}/.metadata/.plugins/org.eclipse.core.runtime/.settings" />
-                                        <mkdir dir="${full.eclipse.workspace}/.metadata/.plugins/net.sf.eclipsecs.core" />
-                                        <mkdir dir="${full.eclipse.workspace}/.metadata/.plugins/net.sourceforge.pmd.eclipse" />
+                                        <mkdir dir="${full.eclipse.workspace}/.metadata/.plugins/org.eclipse.core.runtime/.settings"/>
+                                        <mkdir dir="${full.eclipse.workspace}/.metadata/.plugins/net.sf.eclipsecs.core"/>
+                                        <mkdir dir="${full.eclipse.workspace}/.metadata/.plugins/net.sourceforge.pmd.eclipse"/>
 
-                                        <get src="${checkstyle.url}" dest="${full.eclipse.workspace}/camel-checkstyle.xml" />
+                                        <get dest="${full.eclipse.workspace}/camel-checkstyle.xml" src="${checkstyle.url}"/>
 
                                         <!-- Add checkstyle config -->
-                                        <copy file="${basedir}/etc/eclipse/template.checkstyle-config.xml" tofile="${full.eclipse.workspace}/.metadata/.plugins/net.sf.eclipsecs.core/checkstyle-config.xml" overwrite="no">
+                                        <copy file="${basedir}/etc/eclipse/template.checkstyle-config.xml" overwrite="no" tofile="${full.eclipse.workspace}/.metadata/.plugins/net.sf.eclipsecs.core/checkstyle-config.xml">
                                             <filterset>
-                                                <filter token="CHECKSTYLE_CONFIG_FILE" value="${full.eclipse.workspace}/camel-checkstyle.xml" />
-                                                <filter token="APACHE_HEADER_FILE" value="${full.eclipse.workspace}/apache-header.txt" />
+                                                <filter token="CHECKSTYLE_CONFIG_FILE" value="${full.eclipse.workspace}/camel-checkstyle.xml"/>
+                                                <filter token="APACHE_HEADER_FILE" value="${full.eclipse.workspace}/apache-header.txt"/>
                                             </filterset>
                                         </copy>
 
-                                        <xslt style="${basedir}/etc/eclipse/addcheckstyle.xsl" in="${full.eclipse.workspace}/.metadata/.plugins/net.sf.eclipsecs.core/checkstyle-config.xml" out="${full.eclipse.workspace}/.metadata/.plugins/net.sf.eclipsecs.core/checkstyle-config.xml.new">
-                                            <param name="checkstyleconfig" expression="${full.eclipse.workspace}/camel-checkstyle.xml" />
+                                        <xslt in="${full.eclipse.workspace}/.metadata/.plugins/net.sf.eclipsecs.core/checkstyle-config.xml" out="${full.eclipse.workspace}/.metadata/.plugins/net.sf.eclipsecs.core/checkstyle-config.xml.new" style="${basedir}/etc/eclipse/addcheckstyle.xsl">
+                                            <param expression="${full.eclipse.workspace}/camel-checkstyle.xml" name="checkstyleconfig"/>
                                         </xslt>
-                                        <copy file="${full.eclipse.workspace}/.metadata/.plugins/net.sf.eclipsecs.core/checkstyle-config.xml.new" tofile="${full.eclipse.workspace}/.metadata/.plugins/net.sf.eclipsecs.core/checkstyle-config.xml" overwrite="yes" />
+                                        <copy file="${full.eclipse.workspace}/.metadata/.plugins/net.sf.eclipsecs.core/checkstyle-config.xml.new" overwrite="yes" tofile="${full.eclipse.workspace}/.metadata/.plugins/net.sf.eclipsecs.core/checkstyle-config.xml"/>
 
                                         <!-- Add code format rules -->
-                                        <concat destfile="${full.eclipse.workspace}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.core.prefs" append="true" fixlastline="true">
-                                            <filelist dir="${basedir}/etc/eclipse" files="org.eclipse.jdt.core.prefs" />
+                                        <concat append="true" destfile="${full.eclipse.workspace}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.core.prefs" fixlastline="true">
+                                            <filelist dir="${basedir}/etc/eclipse" files="org.eclipse.jdt.core.prefs"/>
                                         </concat>
-                                        <loadfile property="eclipse.code.format" srcFile="${basedir}/etc/eclipse/CamelCodeFormatter.xml" />
-                                        <loadfile property="eclipse.code.templates" srcFile="${basedir}/etc/eclipse/codetemplates.xml" />
-                                        <loadfile property="eclipse.camel.java.code.templates" srcFile="${basedir}/etc/eclipse/camel_java_templates.xml" />
-                                        <loadfile property="eclipse.camel.xml.code.templates" srcFile="${basedir}/etc/eclipse/camel_xml_templates.xml" />
+                                        <loadfile property="eclipse.code.format" srcFile="${basedir}/etc/eclipse/CamelCodeFormatter.xml"/>
+                                        <loadfile property="eclipse.code.templates" srcFile="${basedir}/etc/eclipse/codetemplates.xml"/>
+                                        <loadfile property="eclipse.camel.java.code.templates" srcFile="${basedir}/etc/eclipse/camel_java_templates.xml"/>
+                                        <loadfile property="eclipse.camel.xml.code.templates" srcFile="${basedir}/etc/eclipse/camel_xml_templates.xml"/>
                                         <propertyfile file="${full.eclipse.workspace}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.ui.prefs">
-                                            <entry key="formatter_profile" value="Camel Java Conventions" />
-                                            <entry key="org.eclipse.jdt.ui.formatterprofiles" value="${eclipse.code.format}" />
-                                            <entry key="org.eclipse.jdt.ui.text.custom_code_templates" value="${eclipse.code.templates}" />
+                                            <entry key="formatter_profile" value="Camel Java Conventions"/>
+                                            <entry key="org.eclipse.jdt.ui.formatterprofiles" value="${eclipse.code.format}"/>
+                                            <entry key="org.eclipse.jdt.ui.text.custom_code_templates" value="${eclipse.code.templates}"/>
 
                                             <!-- Add Camel templates for Java DSL -->
-                                            <entry key="org.eclipse.jdt.ui.text.custom_templates" value="${eclipse.camel.java.code.templates}" />
+                                            <entry key="org.eclipse.jdt.ui.text.custom_templates" value="${eclipse.camel.java.code.templates}"/>
 
                                             <!-- Add import order -->
-                                            <entry key="org.eclipse.jdt.ui.importorder" value="java;javax;org.w3c;org.xml;w3c;" />
+                                            <entry key="org.eclipse.jdt.ui.importorder" value="java;javax;org.w3c;org.xml;w3c;"/>
                                             <!-- Sort order -->
-                                            <entry key="org.eclipse.jdt.ui.visibility.order" value="B,R,D,V," />
-                                            <entry key="outlinesortoption" value="T,SF,F,SI,I,C,SM,M," />
-                                            <entry key="org.eclipse.jdt.ui.enable.visibility.order" value="true" />
+                                            <entry key="org.eclipse.jdt.ui.visibility.order" value="B,R,D,V,"/>
+                                            <entry key="outlinesortoption" value="T,SF,F,SI,I,C,SM,M,"/>
+                                            <entry key="org.eclipse.jdt.ui.enable.visibility.order" value="true"/>
                                         </propertyfile>
                                         <propertyfile file="${full.eclipse.workspace}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.wst.xml.ui.prefs">
-                                            <entry key="eclipse.preferences.version" value="1" />
+                                            <entry key="eclipse.preferences.version" value="1"/>
                                             <!-- Add Camel templates for Spring DSL -->
-                                            <entry key="org.eclipse.wst.sse.ui.custom_templates" value="${eclipse.camel.xml.code.templates}" />
+                                            <entry key="org.eclipse.wst.sse.ui.custom_templates" value="${eclipse.camel.xml.code.templates}"/>
                                         </propertyfile>
                                     </target>
                                 </configuration>

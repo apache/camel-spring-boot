@@ -1,0 +1,139 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.cics",
+      "type": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.cics.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.cics.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.cics.binding",
+      "type": "com.redhat.camel.component.cics.CICSEciBinding",
+      "description": "The Binding instance to transform a Camel Exchange to EciRequest and vice versa. The option is a com.redhat.camel.component.cics.CICSEciBinding type.",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.cics.configuration",
+      "type": "com.redhat.camel.component.cics.CICSConfiguration",
+      "description": "Configuration. The option is a com.redhat.camel.component.cics.CICSConfiguration type.",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.cics.ctg-debug",
+      "type": "java.lang.Boolean",
+      "description": "Enable debug mode on the underlying IBM CGT client.",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.cics.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.cics.eci-timeout",
+      "type": "java.lang.Short",
+      "description": "The ECI timeout value associated with this ECIRequest object. An ECI timeout value of zero indicates that this ECIRequest will not be timed out by CICS Transaction Gateway. An ECI timeout value greater than zero indicates that the ECIRequest may be timed out by CICS Transaction Gateway. ECI timeout can expire before a response is received from CICS. This means that the client does not receive the confirmation from CICS that a unit of work has been backed out or committed.",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.cics.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the cics component. This is enabled by default.",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.cics.encoding",
+      "type": "java.lang.String",
+      "description": "The transfer encoding of the message.",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration",
+      "defaultValue": "Cp1145"
+    },
+    {
+      "name": "camel.component.cics.gateway-factory",
+      "type": "com.redhat.camel.component.cics.pool.CICSGatewayFactory",
+      "description": "The connection factory to be use. The option is a com.redhat.camel.component.cics.pool.CICSGatewayFactory type.",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.cics.host",
+      "type": "java.lang.String",
+      "description": "The address of the CICS Transaction Gateway that this instance connects to",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.cics.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.cics.password",
+      "type": "java.lang.String",
+      "description": "Password to use for authentication",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.cics.port",
+      "type": "java.lang.Integer",
+      "description": "The port of the CICS Transaction Gateway that this instance connects to.",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration",
+      "defaultValue": 2006
+    },
+    {
+      "name": "camel.component.cics.protocol",
+      "type": "java.lang.String",
+      "description": "the protocol that this component will use to connect to the CICS Transaction Gateway.",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration",
+      "defaultValue": "tcp"
+    },
+    {
+      "name": "camel.component.cics.server",
+      "type": "java.lang.String",
+      "description": "The address of the CICS server that this instance connects to",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.cics.socket-connection-timeout",
+      "type": "java.lang.Integer",
+      "description": "The socket connection timeout",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.cics.ssl-keyring",
+      "type": "java.lang.String",
+      "description": "The full classname of the SSL key ring class or keystore file to be used for the client encrypted connection",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.cics.ssl-password",
+      "type": "java.lang.String",
+      "description": "The password for the encrypted key ring class or keystore",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration"
+    },
+    {
+      "name": "camel.component.cics.user-id",
+      "type": "java.lang.String",
+      "description": "User ID to use for authentication",
+      "sourceType": "com.redhat.camel.component.cics.springboot.CICSComponentConfiguration"
+    }
+  ],
+  "hints": []
+}

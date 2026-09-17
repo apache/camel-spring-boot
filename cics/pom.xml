@@ -21,35 +21,20 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.apache.camel.springboot</groupId>
-    <artifactId>components-starter</artifactId>
-    <version>4.22.1-SNAPSHOT</version>
+    <artifactId>camel-starter-parent</artifactId>
+    <version>4.22.0-SNAPSHOT</version>
+    <relativePath>../tooling/camel-starter-parent</relativePath>
   </parent>
-  <artifactId>camel-slack-starter</artifactId>
-  <packaging>jar</packaging>
-  <name>Camel SB Starters :: Slack</name>
-  <description>Spring-Boot Starter for Camel Slack Support</description>
-  <dependencies>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-      <version>${spring-boot-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-slack</artifactId>
-      <version>${camel-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel.springboot</groupId>
-      <artifactId>camel-undertow-starter</artifactId>
-      <version>${camel-spring-boot-community.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <!--START OF GENERATED CODE-->
-    <dependency>
-      <groupId>org.apache.camel.springboot</groupId>
-      <artifactId>camel-core-starter</artifactId>
-    </dependency>
-    <!--END OF GENERATED CODE-->
+  <artifactId>camel-cics-starter-parent</artifactId>
+  <packaging>pom</packaging>
+  <name>Camel SB CICS Starters</name>
+  <description>Camel CICS Components Starter</description>
+  <dependencies> 
   </dependencies>
+  <build>
+  </build>
+
+  <modules>
+    <module>camel-cics-starter</module>
+  </modules>
 </project>

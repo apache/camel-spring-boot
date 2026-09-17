@@ -1,0 +1,79 @@
+= Camel Spring Boot branch creation
+
+* How to create the Camel Spring Boot product branch from a community tag
+
+== Create the branch itself (example from 4.0.0-M3)
+
+[source,shell]
+----
+$ cd /tmp
+$ git clone git@github.com:jboss-fuse/camel-spring-boot.git
+$ cd camel-spring-boot
+$ git remote add upstream https://github.com/apache/camel-spring-boot.git
+$ git fetch upstream
+$ git fetch upstream --tags
+$ git checkout -b camel-spring-boot-4.0.0-M3-branch camel-spring-boot-4.0.0-M3
+$ git push origin camel-spring-boot-4.0.0-M3-branch
+----
+
+In the second to last line, we create a camel-spring-boot-<version>-branch from the community tag.    Please follow the camel-spring-boot-<version>-branch format standard when creating your branch for consistency.
+
+== Change the versions to <version>-SNAPSHOT
+
+[source,shell]
+----
+$ mvn -DnewVersion=4.0.0-M3-SNAPSHOT versions:set
+$ mvn -DskipTests clean install
+----
+
+Use maven to change the versions to a SNAPSHOT version, and rebuild to regenerate generated files.
+
+== Copy the redhat-camel-spring-boot-bom and bom-generator from last release
+
+[source,shell]
+----
+$ mkdir /tmp/product
+$ cd /tmp/product
+$ git clone git@github.com:jboss-fuse/camel-spring-boot.git
+$ cd camel-spring-boot
+$ git checkout camel-spring-boot-3.20.1-branch
+$ cd tooling
+$ cp -r redhat-camel-spring-boot-bom /tmp/camel-spring-boot/tooling
+$ cp -r redhat-camel-spring-boot-bom-generator /tmp/camel-spring-boot/tooling
+$ cd /tmp/camel-spring-boot/tooling
+$ git add redhat-camel-spring-boot-bom redhat-camel-spring-boot-bom-generator
+$ git commit -m ...
+----
+
+After copying the bom and bom-generator, please change the versions in them to match the new version of camel-spring-boot.
+
+== Copy the product directory from the last release
+
+First, add properties to the camel-spring-boot root pom.   You need to add :
+
+`<cq-plugin.version/>`
+`<camel-community.version/>`
+`<camel-spring-boot-community.version/>`
+`<narayana-spring-boot.version/>`
+`<camel-sap.version/>`
+`<openshift-maven-plugin-version/>`
+`<plexus-utils-version/>`
+`<plexus-component-metadata-plugin-version/>`
+`<undertow-version/>`
+
+Then add a <plugin/> definition for org.l2x6.cq:cq-camel-spring-boot-prod-maven-plugin like the one seen in https://github.com/jboss-fuse/camel-spring-boot/commit/64a7c39de34ca7503a7b3be187e79a4fe44cec2b#diff-9c5fb3d1b7e3b0f54bc5c4182965c4fe1f9023d449017cece3005d3f90e8e4d8.
+
+The following mojo should be run after every change in `required-productized-camel-artifacts.txt` and the generated changes should be committed:
+
+[source,shell]
+----
+$ cd /tmp/camel-spring-boot
+$ cp -r /tmp/product/camel-spring-boot/product .
+$ mvn org.l2x6.cq:cq-camel-spring-boot-prod-maven-plugin:camel-spring-boot-prod-excludes -N
+$ mvn clean install
+$ git add -A 
+$ git commit -m ...
+----
+
+== Important cherry-picks 
+
