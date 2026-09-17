@@ -31,6 +31,26 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
+        <groupId>io.undertow</groupId>
+        <artifactId>undertow-spring-boot-starter</artifactId>
+        <version>1.0.0.Alpha1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.kamelets</groupId>
+        <artifactId>camel-kamelets-bom</artifactId>
+        <version>4.22.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.fusesource</groupId>
+        <artifactId>camel-cics</artifactId>
+        <version>4.22.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.fusesource</groupId>
+        <artifactId>camel-sap</artifactId>
+        <version>4.22.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
         <groupId>com.esotericsoftware.kryo</groupId>
         <artifactId>kryo</artifactId>
         <version>2.24.0</version>

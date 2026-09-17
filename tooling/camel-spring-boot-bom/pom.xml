@@ -34,6 +34,41 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
+        <groupId>dev.snowdrop</groupId>
+        <artifactId>narayana-spring-boot-core</artifactId>
+        <version>${narayana-spring-boot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>dev.snowdrop</groupId>
+        <artifactId>narayana-spring-boot-recovery-controller</artifactId>
+        <version>${narayana-spring-boot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>dev.snowdrop</groupId>
+        <artifactId>narayana-spring-boot-starter</artifactId>
+        <version>${narayana-spring-boot.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.agroal</groupId>
+        <artifactId>agroal-api</artifactId>
+        <version>${agroal-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.agroal</groupId>
+        <artifactId>agroal-pool</artifactId>
+        <version>${agroal-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.agroal</groupId>
+        <artifactId>agroal-spring-boot-starter</artifactId>
+        <version>${agroal-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-management</artifactId>
+        <version>${camel-version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-a2a-starter</artifactId>
         <version>4.22.1-SNAPSHOT</version>
