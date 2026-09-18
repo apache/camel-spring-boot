@@ -50,7 +50,20 @@ pipeline {
         disableConcurrentBuilds()
     }
 
+    parameters {
+        booleanParam(name: 'CLEAN', defaultValue: true, description: 'Perform the build in clean workspace')
+    }
+
     stages {
+
+        stage('Clean workspace') {
+            when {
+                expression { params.CLEAN }
+            }
+            steps {
+                sh 'git clean -fdx'
+            }
+        }
 
         stage('Build & Deploy') {
             when {
@@ -72,6 +85,15 @@ pipeline {
                 body: '${DEFAULT_CONTENT}',
                 recipientProviders: [[$class: 'DevelopersRecipientProvider']]
             )
+            cleanWs(
+                cleanWhenNotBuilt: false,
+                cleanWhenUnstable: false,
+                cleanWhenFailure: false,
+                cleanWhenAborted: false,
+                cleanWhenSuccess: true,
+                deleteDirs: true,
+                disableDeferredWipeout: true,
+                notFailBuild: true)
         }
     }
 }
