@@ -50,7 +50,26 @@ pipeline {
         disableConcurrentBuilds()
     }
 
+    parameters {
+        booleanParam(name: 'CLEAN', defaultValue: true, description: 'Perform the build in a clean workspace')
+    }
+
     stages {
+
+        stage('Clean workspace') {
+            when {
+                expression { params.CLEAN }
+            }
+            steps {
+                script {
+                    try {
+                        cleanWs()
+                    } catch (err) {
+                        echo "Workspace cleanup failed, continuing anyway: ${err}"
+                    }
+                }
+            }
+        }
 
         stage('Build & Deploy') {
             when {
