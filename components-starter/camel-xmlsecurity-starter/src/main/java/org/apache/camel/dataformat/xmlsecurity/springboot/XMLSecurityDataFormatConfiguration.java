@@ -39,7 +39,7 @@ public class XMLSecurityDataFormatConfiguration
      * The cipher algorithm to be used for encryption/decryption of the XML
      * message content.
      */
-    private String xmlCipherAlgorithm = "AES-256-GCM";
+    private String xmlCipherAlgorithm = "AES_256_GCM";
     /**
      * A String used as passPhrase to encrypt/decrypt content.
      */

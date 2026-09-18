@@ -19,6 +19,7 @@ package org.apache.camel.component.opa.springboot;
 import com.styra.opa.OPAClient;
 import org.apache.camel.component.opa.OpaConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
+import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -40,7 +41,10 @@ public class OpaComponentConfiguration
     /**
      * The key to read the allow/deny verdict from when the policy returns an
      * object rather than a plain boolean. For a policy returning {allow: true,
-     * reasons: } the default value of allow is what you want.
+     * reasons: } the default value of allow is what you want. A dotted path
+     * reaches a verdict nested inside the document: {code
+     * allowKey=result.allow} reads {result: {allow: true}}. A key with no dot
+     * is looked up directly at the top level.
      */
     private String allowKey = "allow";
     /**
@@ -48,6 +52,22 @@ public class OpaComponentConfiguration
      * org.apache.camel.component.opa.OpaConfiguration type.
      */
     private OpaConfiguration configuration;
+    /**
+     * The compiled entrypoint to evaluate in wasm mode. This is not the same
+     * thing as the policy path: an entrypoint is fixed when the bundle is
+     * built, with {code opa build -e}. Defaults to the endpoint's policy path,
+     * which is the name {code opa build} gives it.
+     */
+    private String entrypoint;
+    /**
+     * How the policy is evaluated. rest (the default) calls a running OPA
+     * server over its Data API. wasm evaluates a WebAssembly bundle in-process,
+     * with no server involved - so there is no network hop and no unreachable
+     * decision point, at the cost of the policy being a build-time artefact
+     * rather than something a server distributes and updates. serverUrl,
+     * bearerToken and failOpen do not apply in wasm mode.
+     */
+    private String evaluationMode = "rest";
     /**
      * Whether to send the message body to OPA as part of the input document.
      * Disabled by default: bodies can be large or streaming, and most
@@ -58,9 +78,13 @@ public class OpaComponentConfiguration
     private Boolean includeBody = false;
     /**
      * Comma-separated list of message header names to send to OPA in the input
-     * document. The default of {code } sends every header. Narrow it when the
-     * policy only needs a few headers, or when the message carries headers that
-     * should not leave the JVM.
+     * document. The default of {code } sends every header except those that
+     * carry a caller credential verbatim - Authorization, {code
+     * Proxy-Authorization}, Cookie and {code Set-Cookie} - which are withheld
+     * because OPA's decision logging ships the whole input document, often off
+     * the box. A policy that genuinely needs one can still have it by naming
+     * the header here. Narrow the list when the policy only needs a few
+     * headers.
      */
     private String includeHeaders = "*";
     /**
@@ -88,6 +112,15 @@ public class OpaComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * The WebAssembly policy to evaluate in wasm mode, as produced by {code opa
+     * build -t wasm}. Accepts a {code file:}, {code classpath:} or {code http:}
+     * location holding either the bundle.tar.gz that {code opa build} emits or
+     * a bare .wasm module. Required when {code evaluationMode=wasm}. Prefer the
+     * bundle: it also carries the data document the policy reads as {code
+     * data.}, which a bare module does not.
+     */
+    private String policyBundle;
+    /**
      * The base URL of the OPA server, without the {code /v1/data} suffix. The
      * default assumes OPA running as a sidecar on the standard port.
      */
@@ -102,10 +135,40 @@ public class OpaComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * How long an exchange waits for a free WebAssembly policy instance in wasm
+     * mode before the evaluation fails. An exchange that cannot get an instance
+     * is not denied by a policy, so it is reported as an evaluation failure and
+     * handled like any other: failing closed, or proceeding if failOpen is set.
+     * Raise it, or poolSize, for a route whose concurrency exceeds the pool.
+     * The option is a long type.
+     */
+    private Long borrowTimeout = 30000L;
+    /**
+     * How long to wait for the connection to the OPA server to be established,
+     * in rest mode. The SDK's own transport applies no timeout at all, so a
+     * server that never answers would otherwise park the calling thread
+     * indefinitely rather than letting the component fail closed. The option is
+     * a long type.
+     */
+    private Long connectionTimeout = 10000L;
+    /**
      * An existing OPAClient to use. When set, serverUrl and bearerToken are
      * ignored. The option is a com.styra.opa.OPAClient type.
      */
     private OPAClient opaClient;
+    /**
+     * How many WebAssembly policy instances to pool in wasm mode. An instance
+     * carries mutable state and is not thread-safe, so each exchange borrows
+     * one; this bounds how many exchanges evaluate at once.
+     */
+    private Integer poolSize = 8;
+    /**
+     * How long to wait for the decision once connected, in rest mode. A request
+     * that times out is an evaluation failure rather than a deny, so it fails
+     * closed - or proceeds when failOpen is set - like any other failure to
+     * reach a verdict. The option is a long type.
+     */
+    private Long requestTimeout = 30000L;
     /**
      * Used for enabling or disabling all consumer based health checks from this
      * component
@@ -130,6 +193,19 @@ public class OpaComponentConfiguration
      * rather than grants access. Do not enable this in production.
      */
     private Boolean failOpen = false;
+    /**
+     * TLS configuration for the connection to the OPA server in rest mode.
+     * Needed to trust a server whose certificate comes from a private CA, and
+     * to present a client certificate to a server that requires mutual TLS - a
+     * SPIFFE X.509-SVID, for instance, so the workload authenticates to the
+     * policy decision point as itself. The option is a
+     * org.apache.camel.support.jsse.SSLContextParameters type.
+     */
+    private SSLContextParameters sslContextParameters;
+    /**
+     * Enable usage of global SSL context parameters.
+     */
+    private Boolean useGlobalSslContextParameters = false;
 
     public String getAllowKey() {
         return allowKey;
@@ -145,6 +221,22 @@ public class OpaComponentConfiguration
 
     public void setConfiguration(OpaConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getEntrypoint() {
+        return entrypoint;
+    }
+
+    public void setEntrypoint(String entrypoint) {
+        this.entrypoint = entrypoint;
+    }
+
+    public String getEvaluationMode() {
+        return evaluationMode;
+    }
+
+    public void setEvaluationMode(String evaluationMode) {
+        this.evaluationMode = evaluationMode;
     }
 
     public Boolean getIncludeBody() {
@@ -179,6 +271,14 @@ public class OpaComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public String getPolicyBundle() {
+        return policyBundle;
+    }
+
+    public void setPolicyBundle(String policyBundle) {
+        this.policyBundle = policyBundle;
+    }
+
     public String getServerUrl() {
         return serverUrl;
     }
@@ -195,12 +295,44 @@ public class OpaComponentConfiguration
         this.autowiredEnabled = autowiredEnabled;
     }
 
+    public Long getBorrowTimeout() {
+        return borrowTimeout;
+    }
+
+    public void setBorrowTimeout(Long borrowTimeout) {
+        this.borrowTimeout = borrowTimeout;
+    }
+
+    public Long getConnectionTimeout() {
+        return connectionTimeout;
+    }
+
+    public void setConnectionTimeout(Long connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
+    }
+
     public OPAClient getOpaClient() {
         return opaClient;
     }
 
     public void setOpaClient(OPAClient opaClient) {
         this.opaClient = opaClient;
+    }
+
+    public Integer getPoolSize() {
+        return poolSize;
+    }
+
+    public void setPoolSize(Integer poolSize) {
+        this.poolSize = poolSize;
+    }
+
+    public Long getRequestTimeout() {
+        return requestTimeout;
+    }
+
+    public void setRequestTimeout(Long requestTimeout) {
+        this.requestTimeout = requestTimeout;
     }
 
     public Boolean getHealthCheckConsumerEnabled() {
@@ -233,5 +365,23 @@ public class OpaComponentConfiguration
 
     public void setFailOpen(Boolean failOpen) {
         this.failOpen = failOpen;
+    }
+
+    public SSLContextParameters getSslContextParameters() {
+        return sslContextParameters;
+    }
+
+    public void setSslContextParameters(
+            SSLContextParameters sslContextParameters) {
+        this.sslContextParameters = sslContextParameters;
+    }
+
+    public Boolean getUseGlobalSslContextParameters() {
+        return useGlobalSslContextParameters;
+    }
+
+    public void setUseGlobalSslContextParameters(
+            Boolean useGlobalSslContextParameters) {
+        this.useGlobalSslContextParameters = useGlobalSslContextParameters;
     }
 }

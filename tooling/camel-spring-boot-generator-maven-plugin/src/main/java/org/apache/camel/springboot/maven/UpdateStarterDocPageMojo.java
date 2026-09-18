@@ -284,7 +284,7 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
         return "";
     }
 
-    private String generatePage(
+    String generatePage(
             String starterArtifactId, String baseName, String title,
             String description, List<CatalogEntry> entries, List<SBProperty> properties,
             String intro, String usage, String configuration, String limitations) {
@@ -369,7 +369,7 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
             for (SBProperty prop : properties) {
                 sb.append("| ").append(prop.name);
                 sb.append(" | ").append(escapeCell(prop.description));
-                sb.append(" | ").append(prop.defaultValue != null ? prop.defaultValue : "");
+                sb.append(" | ").append(escapeCell(prop.defaultValue != null ? prop.defaultValue.toString() : null));
                 sb.append(" | ").append(javaSimpleName(prop.type));
                 sb.append("\n");
             }
@@ -443,6 +443,6 @@ public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
                                 String docPage) {
     }
 
-    private record SBProperty(String name, String description, String type, Object defaultValue) {
+    record SBProperty(String name, String description, String type, Object defaultValue) {
     }
 }

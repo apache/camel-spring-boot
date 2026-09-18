@@ -25,6 +25,13 @@
   ],
   "properties": [
     {
+      "name": "camel.component.sql-stored.allow-template-from-header",
+      "type": "java.lang.Boolean",
+      "description": "Whether to allow overriding the endpoint-configured stored-procedure template with the CamelSqlStoredTemplate header. Disabled by default; a header-supplied template is resolved with placeholders only, never as a file:\/http: resource. This is the default for all sql-stored endpoints and can be overridden per endpoint.",
+      "sourceType": "org.apache.camel.component.sql.stored.springboot.SqlStoredComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.sql-stored.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
@@ -55,6 +62,13 @@
       "description": "Whether to detect the network address location of the database on startup. This information is gathered via reflection on the DataSource, and is vendor specific. This option can be used to turn this off.",
       "sourceType": "org.apache.camel.component.sql.stored.springboot.SqlStoredComponentConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.component.sql.allow-query-from-header",
+      "type": "java.lang.Boolean",
+      "description": "Whether to allow overriding the endpoint-configured SQL query with the CamelSqlQuery header. Disabled by default; enable it only when the header source is trusted, since it lets a message choose the executed SQL. This is the default for all sql endpoints and can be overridden per endpoint.",
+      "sourceType": "org.apache.camel.component.sql.springboot.SqlComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.sql.autowired-enabled",

@@ -50,6 +50,10 @@ public class GoogleCloudStorageComponentConfiguration
      */
     private GoogleCloudStorageConfiguration configuration;
     /**
+     * The Object name inside the bucket
+     */
+    private String objectName;
+    /**
      * The Service account key that can be used as credentials for the Storage
      * client. It can be loaded by default from classpath, but you can prefix
      * with classpath:, file:, or http: to load the resource from different
@@ -145,10 +149,6 @@ public class GoogleCloudStorageComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * The Object name inside the bucket
-     */
-    private String objectName;
-    /**
      * Set the operation for the producer
      */
     private GoogleCloudStorageOperations operation;
@@ -188,6 +188,14 @@ public class GoogleCloudStorageComponentConfiguration
 
     public void setConfiguration(GoogleCloudStorageConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getObjectName() {
+        return objectName;
+    }
+
+    public void setObjectName(String objectName) {
+        this.objectName = objectName;
     }
 
     public String getServiceAccountKey() {
@@ -300,14 +308,6 @@ public class GoogleCloudStorageComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
-    }
-
-    public String getObjectName() {
-        return objectName;
-    }
-
-    public void setObjectName(String objectName) {
-        this.objectName = objectName;
     }
 
     public GoogleCloudStorageOperations getOperation() {

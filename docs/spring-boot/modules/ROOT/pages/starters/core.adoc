@@ -122,7 +122,7 @@ The starter supports 123 options, which are listed below.
 | camel.rest.binding-package-scan | Package name to use as base (offset) for classpath scanning of POJO classes are located when using binding mode is enabled for JSon or XML. Multiple package names can be separated by comma. |  | String
 | camel.rest.client-request-validation | Whether to enable validation of the client request to check whether Content-Type/Accept headers, required parameters, and message body are valid. | false | Boolean
 | camel.rest.client-response-validation | Whether to validate what Camel is returning as response to the client, such as checking status-code, Content-Type, and headers match the Rest DSL response definition. | false | Boolean
-| camel.rest.component | The Camel Rest component to use for the REST transport (consumer), such as netty-http, jetty, servlet, undertow. |  | String
+| camel.rest.component | The Camel Rest component to use for the REST transport (consumer), such as platform-http, netty-http, jetty, servlet, undertow. |  | String
 | camel.rest.component-property | Allows to configure as many additional properties for the rest component in use. |  | Object>
 | camel.rest.consumer-property | Allows to configure as many additional properties for the rest consumer in use. |  | Object>
 | camel.rest.context-path | Sets a leading context-path the REST services will be using. This can be used when using components such as camel-servlet where the deployed web application is deployed using a context-path. |  | String

@@ -816,7 +816,7 @@
     {
       "name": "camel.rest.component",
       "type": "java.lang.String",
-      "description": "The Camel Rest component to use for the REST transport (consumer), such as netty-http, jetty, servlet, undertow.",
+      "description": "The Camel Rest component to use for the REST transport (consumer), such as platform-http, netty-http, jetty, servlet, undertow.",
       "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
     },
     {

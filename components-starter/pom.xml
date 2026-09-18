@@ -109,6 +109,7 @@
     <module>camel-activemq-starter</module>
     <module>camel-activemq6-starter</module>
     <module>camel-ai-observability-starter</module>
+    <module>camel-ai-resource-starter</module>
     <module>camel-ai-tool-starter</module>
     <module>camel-alibaba-eventbridge-starter</module>
     <module>camel-alibaba-fc-starter</module>
@@ -182,6 +183,7 @@
     <module>camel-braintree-starter</module>
     <module>camel-browse-starter</module>
     <module>camel-caffeine-starter</module>
+    <module>camel-camunda-starter</module>
     <module>camel-cassandraql-starter</module>
     <module>camel-cbor-starter</module>
     <module>camel-chatscript-starter</module>
@@ -234,6 +236,7 @@
     <module>camel-ehcache-starter</module>
     <module>camel-elasticsearch-rest-client-starter</module>
     <module>camel-elasticsearch-starter</module>
+    <module>camel-event-starter</module>
     <module>camel-exec-starter</module>
     <module>camel-fastjson-starter</module>
     <module>camel-fhir-starter</module>
@@ -289,6 +292,7 @@
     <module>camel-ibm-watson-speech-to-text-starter</module>
     <module>camel-ibm-watson-text-to-speech-starter</module>
     <module>camel-ibm-watsonx-ai-starter</module>
+    <module>camel-ibm-watsonx-data-starter</module>
     <module>camel-ical-starter</module>
     <module>camel-iggy-starter</module>
     <module>camel-ignite-starter</module>
@@ -350,6 +354,7 @@
     <module>camel-langchain4j-chat-starter</module>
     <module>camel-langchain4j-embeddings-starter</module>
     <module>camel-langchain4j-embeddingstore-starter</module>
+    <module>camel-langchain4j-ingest-starter</module>
     <module>camel-langchain4j-tokenizer-starter</module>
     <module>camel-langchain4j-web-search-starter</module>
     <module>camel-language-starter</module>
@@ -410,6 +415,7 @@
     <module>camel-pdf-starter</module>
     <module>camel-pg-replication-slot-starter</module>
     <module>camel-pgevent-starter</module>
+    <module>camel-pgvector-starter</module>
     <module>camel-pinecone-starter</module>
     <module>camel-platform-http-starter</module>
     <module>camel-plc4x-starter</module>
@@ -445,6 +451,7 @@
     <module>camel-seda-starter</module>
     <module>camel-servicenow-starter</module>
     <module>camel-servlet-starter</module>
+    <module>camel-shell-starter</module>
     <module>camel-shiro-starter</module>
     <module>camel-sjms-starter</module>
     <module>camel-sjms2-starter</module>
@@ -456,6 +463,7 @@
     <module>camel-snmp-starter</module>
     <module>camel-soap-starter</module>
     <module>camel-solr-starter</module>
+    <module>camel-spiffe-starter</module>
     <module>camel-splunk-hec-starter</module>
     <module>camel-spring-ai-chat-starter</module>
     <module>camel-spring-ai-embeddings-starter</module>
@@ -473,6 +481,7 @@
     <module>camel-springdoc-starter</module>
     <module>camel-sql-starter</module>
     <module>camel-ssh-starter</module>
+    <module>camel-state-store-starter</module>
     <module>camel-stax-starter</module>
     <module>camel-stitch-starter</module>
     <module>camel-stream-starter</module>

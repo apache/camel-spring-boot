@@ -1,0 +1,14 @@
+{
+  "transformer": {
+    "kind": "transformer",
+    "name": "pgvector:embeddings",
+    "title": "Pgvector (Embeddings)",
+    "description": "Prepares the message to become an object writable by PgVector component",
+    "deprecated": false,
+    "javaType": "org.apache.camel.component.pgvector.transform.PgVectorEmbeddingsDataTypeTransformer",
+    "groupId": "org.apache.camel.springboot",
+    "artifactId": "camel-pgvector-starter",
+    "version": "4.23.0-SNAPSHOT"
+  }
+}
+

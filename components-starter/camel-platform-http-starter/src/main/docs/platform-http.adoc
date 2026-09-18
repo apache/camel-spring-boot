@@ -17,6 +17,39 @@ carry no matrix parameters. A request to `/greeting/John%20Doe;v=1` sets the `na
 The `CamelHttpPath` header is not affected: it reports the raw request path, with the servlet context-path
 removed.
 
+== Context path
+
+Two independent properties can prefix the path a request is matched against, and they stack rather than
+being alternatives:
+
+* `server.servlet.context-path` - the standard Spring Boot property. It applies to every request handled by
+  the embedded servlet container, so it prefixes both `rest()` DSL routes and plain `platform-http:` consumer
+  routes.
+* `camel.rest.context-path` - a Camel `RestConfiguration` property. It only prefixes routes defined with the
+  `rest()` DSL; it has no effect on a route consuming directly from a `platform-http:` endpoint.
+
+When both are set, the effective path is `{server.servlet.context-path}{camel.rest.context-path}{route path}`.
+For example, with:
+
+[source,properties]
+----
+server.servlet.context-path=/test
+camel.rest.context-path=/api
+----
+
+and the routes:
+
+[source,java]
+----
+rest("/message").get("/{param}").to("direct:messageByParam");
+
+from("platform-http:/greeting/{name}")
+        .transform().simple("Hello ${header.name}");
+----
+
+the REST DSL route is served at `/test/api/message/{param}`, while the plain `platform-http:` route is served
+at `/test/greeting/{name}` - `camel.rest.context-path` is not applied to it.
+
 == File uploads
 
 Every accepted multipart file upload is copied out of the servlet container into the servlet temporary directory

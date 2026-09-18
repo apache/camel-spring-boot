@@ -63,7 +63,12 @@
       <dependency>
         <groupId>com.aliyun</groupId>
         <artifactId>sls20201230</artifactId>
-        <version>5.18.0</version>
+        <version>5.18.1</version>
+      </dependency>
+      <dependency>
+        <groupId>com.aliyun</groupId>
+        <artifactId>tea</artifactId>
+        <version>1.4.2</version>
       </dependency>
       <dependency>
         <groupId>com.aliyun</groupId>
@@ -94,7 +99,7 @@
       <dependency>
         <groupId>com.openai</groupId>
         <artifactId>openai-java</artifactId>
-        <version>4.55.0</version>
+        <version>4.63.1</version>
       </dependency>
       <dependency>
         <groupId>eu.maveniverse.maven.mima.runtime</groupId>
@@ -365,6 +370,11 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ai-observability-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-ai-resource-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -734,6 +744,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-camunda-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-cassandraql-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -1019,6 +1034,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-event-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-exec-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -1290,6 +1310,11 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ibm-watsonx-ai-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-ibm-watsonx-data-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -1604,6 +1629,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-langchain4j-ingest-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-langchain4j-tokenizer-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -1904,6 +1934,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-pgvector-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-pinecone-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2079,6 +2114,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-shell-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-shiro-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -2130,6 +2170,11 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-solr-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-spiffe-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -2235,6 +2280,11 @@
       <dependency>
         <groupId>org.apache.camel.springboot</groupId>
         <artifactId>camel-ssh-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-state-store-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

@@ -66,6 +66,14 @@ public class SqlStoredComponentConfiguration
      * and is vendor specific. This option can be used to turn this off.
      */
     private Boolean serviceLocationEnabled = true;
+    /**
+     * Whether to allow overriding the endpoint-configured stored-procedure
+     * template with the CamelSqlStoredTemplate header. Disabled by default; a
+     * header-supplied template is resolved with placeholders only, never as a
+     * file:/http: resource. This is the default for all sql-stored endpoints
+     * and can be overridden per endpoint.
+     */
+    private Boolean allowTemplateFromHeader = false;
 
     public DataSource getDataSource() {
         return dataSource;
@@ -97,5 +105,13 @@ public class SqlStoredComponentConfiguration
 
     public void setServiceLocationEnabled(Boolean serviceLocationEnabled) {
         this.serviceLocationEnabled = serviceLocationEnabled;
+    }
+
+    public Boolean getAllowTemplateFromHeader() {
+        return allowTemplateFromHeader;
+    }
+
+    public void setAllowTemplateFromHeader(Boolean allowTemplateFromHeader) {
+        this.allowTemplateFromHeader = allowTemplateFromHeader;
     }
 }

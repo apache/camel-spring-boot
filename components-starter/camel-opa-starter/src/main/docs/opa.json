@@ -16,7 +16,7 @@
     {
       "name": "camel.component.opa.allow-key",
       "type": "java.lang.String",
-      "description": "The key to read the allow\/deny verdict from when the policy returns an object rather than a plain boolean. For a policy returning {allow: true, reasons: } the default value of allow is what you want.",
+      "description": "The key to read the allow\/deny verdict from when the policy returns an object rather than a plain boolean. For a policy returning {allow: true, reasons: } the default value of allow is what you want. A dotted path reaches a verdict nested inside the document: {code allowKey=result.allow} reads {result: {allow: true}}. A key with no dot is looked up directly at the top level.",
       "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
       "defaultValue": "allow"
     },
@@ -34,10 +34,24 @@
       "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration"
     },
     {
+      "name": "camel.component.opa.borrow-timeout",
+      "type": "java.lang.Long",
+      "description": "How long an exchange waits for a free WebAssembly policy instance in wasm mode before the evaluation fails. An exchange that cannot get an instance is not denied by a policy, so it is reported as an evaluation failure and handled like any other: failing closed, or proceeding if failOpen is set. Raise it, or poolSize, for a route whose concurrency exceeds the pool. The option is a long type.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "defaultValue": 30000
+    },
+    {
       "name": "camel.component.opa.configuration",
       "type": "org.apache.camel.component.opa.OpaConfiguration",
       "description": "The component configuration. The option is a org.apache.camel.component.opa.OpaConfiguration type.",
       "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.opa.connection-timeout",
+      "type": "java.lang.Long",
+      "description": "How long to wait for the connection to the OPA server to be established, in rest mode. The SDK's own transport applies no timeout at all, so a server that never answers would otherwise park the calling thread indefinitely rather than letting the component fail closed. The option is a long type.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "defaultValue": 10000
     },
     {
       "name": "camel.component.opa.customizer.enabled",
@@ -49,6 +63,19 @@
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the opa component. This is enabled by default.",
       "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.opa.entrypoint",
+      "type": "java.lang.String",
+      "description": "The compiled entrypoint to evaluate in wasm mode. This is not the same thing as the policy path: an entrypoint is fixed when the bundle is built, with {code opa build -e}. Defaults to the endpoint's policy path, which is the name {code opa build} gives it.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.opa.evaluation-mode",
+      "type": "java.lang.String",
+      "description": "How the policy is evaluated. rest (the default) calls a running OPA server over its Data API. wasm evaluates a WebAssembly bundle in-process, with no server involved - so there is no network hop and no unreachable decision point, at the cost of the policy being a build-time artefact rather than something a server distributes and updates. serverUrl, bearerToken and failOpen do not apply in wasm mode.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "defaultValue": "rest"
     },
     {
       "name": "camel.component.opa.fail-open",
@@ -81,7 +108,7 @@
     {
       "name": "camel.component.opa.include-headers",
       "type": "java.lang.String",
-      "description": "Comma-separated list of message header names to send to OPA in the input document. The default of {code } sends every header. Narrow it when the policy only needs a few headers, or when the message carries headers that should not leave the JVM.",
+      "description": "Comma-separated list of message header names to send to OPA in the input document. The default of {code } sends every header except those that carry a caller credential verbatim - Authorization, {code Proxy-Authorization}, Cookie and {code Set-Cookie} - which are withheld because OPA's decision logging ships the whole input document, often off the box. A policy that genuinely needs one can still have it by naming the header here. Narrow the list when the policy only needs a few headers.",
       "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
       "defaultValue": "*"
     },
@@ -105,11 +132,44 @@
       "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration"
     },
     {
+      "name": "camel.component.opa.policy-bundle",
+      "type": "java.lang.String",
+      "description": "The WebAssembly policy to evaluate in wasm mode, as produced by {code opa build -t wasm}. Accepts a {code file:}, {code classpath:} or {code http:} location holding either the bundle.tar.gz that {code opa build} emits or a bare .wasm module. Required when {code evaluationMode=wasm}. Prefer the bundle: it also carries the data document the policy reads as {code data.}, which a bare module does not.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.opa.pool-size",
+      "type": "java.lang.Integer",
+      "description": "How many WebAssembly policy instances to pool in wasm mode. An instance carries mutable state and is not thread-safe, so each exchange borrows one; this bounds how many exchanges evaluate at once.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "defaultValue": 8
+    },
+    {
+      "name": "camel.component.opa.request-timeout",
+      "type": "java.lang.Long",
+      "description": "How long to wait for the decision once connected, in rest mode. A request that times out is an evaluation failure rather than a deny, so it fails closed - or proceeds when failOpen is set - like any other failure to reach a verdict. The option is a long type.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "defaultValue": 30000
+    },
+    {
       "name": "camel.component.opa.server-url",
       "type": "java.lang.String",
       "description": "The base URL of the OPA server, without the {code \/v1\/data} suffix. The default assumes OPA running as a sidecar on the standard port.",
       "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
       "defaultValue": "http:\/\/localhost:8181"
+    },
+    {
+      "name": "camel.component.opa.ssl-context-parameters",
+      "type": "org.apache.camel.support.jsse.SSLContextParameters",
+      "description": "TLS configuration for the connection to the OPA server in rest mode. Needed to trust a server whose certificate comes from a private CA, and to present a client certificate to a server that requires mutual TLS - a SPIFFE X.509-SVID, for instance, so the workload authenticates to the policy decision point as itself. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.opa.use-global-ssl-context-parameters",
+      "type": "java.lang.Boolean",
+      "description": "Enable usage of global SSL context parameters.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "defaultValue": false
     }
   ],
   "hints": [],
