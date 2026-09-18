@@ -51,7 +51,7 @@ pipeline {
     }
 
     parameters {
-        booleanParam(name: 'CLEAN', defaultValue: true, description: 'Perform the build in a clean workspace')
+        booleanParam(name: 'CLEAN', defaultValue: true, description: 'Perform the build in clean workspace')
     }
 
     stages {
@@ -61,13 +61,7 @@ pipeline {
                 expression { params.CLEAN }
             }
             steps {
-                script {
-                    try {
-                        cleanWs()
-                    } catch (err) {
-                        echo "Workspace cleanup failed, continuing anyway: ${err}"
-                    }
-                }
+                sh 'git clean -fdx'
             }
         }
 
@@ -91,6 +85,15 @@ pipeline {
                 body: '${DEFAULT_CONTENT}',
                 recipientProviders: [[$class: 'DevelopersRecipientProvider']]
             )
+            cleanWs(
+                cleanWhenNotBuilt: false,
+                cleanWhenUnstable: false,
+                cleanWhenFailure: false,
+                cleanWhenAborted: false,
+                cleanWhenSuccess: true,
+                deleteDirs: true,
+                disableDeferredWipeout: true,
+                notFailBuild: true)
         }
     }
 }
