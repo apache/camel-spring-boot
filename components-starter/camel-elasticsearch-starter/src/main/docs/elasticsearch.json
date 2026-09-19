@@ -85,13 +85,6 @@
       "defaultValue": false
     },
     {
-      "name": "camel.component.elasticsearch.max-retry-timeout",
-      "type": "java.lang.Integer",
-      "description": "The time in ms before retry",
-      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
-      "defaultValue": 30000
-    },
-    {
       "name": "camel.component.elasticsearch.password",
       "type": "java.lang.String",
       "description": "Password for authenticating",
@@ -136,6 +129,15 @@
       "type": "java.lang.String",
       "description": "Basic authenticate user",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.elasticsearch.max-retry-timeout",
+      "type": "java.lang.Integer",
+      "description": "The time in ms before retry",
+      "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
+      "defaultValue": 30000,
+      "deprecated": true,
+      "deprecation": {}
     }
   ],
   "hints": [],

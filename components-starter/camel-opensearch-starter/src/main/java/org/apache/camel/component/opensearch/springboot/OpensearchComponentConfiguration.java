@@ -21,6 +21,7 @@ import org.apache.camel.support.jsse.SSLContextParameters;
 import org.opensearch.client.RestClient;
 import org.opensearch.client.opensearch.OpenSearchClient;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Send requests to OpenSearch via Java Client API.
@@ -61,6 +62,7 @@ public class OpensearchComponentConfiguration
     /**
      * The time in ms before retry
      */
+    @Deprecated
     private Integer maxRetryTimeout = 30000;
     /**
      * The timeout in ms to wait before the socket will time out.
@@ -151,10 +153,13 @@ public class OpensearchComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Integer getMaxRetryTimeout() {
         return maxRetryTimeout;
     }
 
+    @Deprecated
     public void setMaxRetryTimeout(Integer maxRetryTimeout) {
         this.maxRetryTimeout = maxRetryTimeout;
     }
