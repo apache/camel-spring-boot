@@ -33,7 +33,7 @@
       <dependency>
         <groupId>com.aliyun.openservices</groupId>
         <artifactId>tablestore</artifactId>
-        <version>5.17.13</version>
+        <version>5.17.14</version>
       </dependency>
       <dependency>
         <groupId>com.aliyun</groupId>
@@ -99,7 +99,7 @@
       <dependency>
         <groupId>com.openai</groupId>
         <artifactId>openai-java</artifactId>
-        <version>4.63.1</version>
+        <version>4.63.2</version>
       </dependency>
       <dependency>
         <groupId>eu.maveniverse.maven.mima.runtime</groupId>
@@ -310,12 +310,12 @@
       <dependency>
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy</artifactId>
-        <version>1.18.13</version>
+        <version>1.18.14</version>
       </dependency>
       <dependency>
         <groupId>net.bytebuddy</groupId>
         <artifactId>byte-buddy-agent</artifactId>
-        <version>1.18.13</version>
+        <version>1.18.14</version>
       </dependency>
       <dependency>
         <groupId>org.apache.avro</groupId>

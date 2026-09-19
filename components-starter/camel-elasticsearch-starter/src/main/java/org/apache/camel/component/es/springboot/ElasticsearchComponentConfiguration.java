@@ -20,6 +20,7 @@ import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.elasticsearch.client.RestClient;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Send requests to Elasticsearch via Java Client API.
@@ -70,6 +71,7 @@ public class ElasticsearchComponentConfiguration
     /**
      * The time in ms before retry
      */
+    @Deprecated
     private Integer maxRetryTimeout = 30000;
     /**
      * The timeout in ms to wait before the socket will time out.
@@ -167,10 +169,13 @@ public class ElasticsearchComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Integer getMaxRetryTimeout() {
         return maxRetryTimeout;
     }
 
+    @Deprecated
     public void setMaxRetryTimeout(Integer maxRetryTimeout) {
         this.maxRetryTimeout = maxRetryTimeout;
     }
