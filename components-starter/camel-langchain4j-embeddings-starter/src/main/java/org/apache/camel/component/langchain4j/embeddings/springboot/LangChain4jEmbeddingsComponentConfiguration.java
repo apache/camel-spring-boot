@@ -16,6 +16,8 @@
  */
 package org.apache.camel.component.langchain4j.embeddings.springboot;
 
+import java.time.Duration;
+import java.util.Map;
 import dev.langchain4j.model.embedding.EmbeddingModel;
 import org.apache.camel.component.langchain4j.embeddings.LangChain4jEmbeddingsConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -42,8 +44,8 @@ public class LangChain4jEmbeddingsComponentConfiguration
      */
     private LangChain4jEmbeddingsConfiguration configuration;
     /**
-     * The EmbeddingModel engine to use. The option is a
-     * dev.langchain4j.model.embedding.EmbeddingModel type.
+     * The EmbeddingModel engine to use. Either this or a provider is required.
+     * The option is a dev.langchain4j.model.embedding.EmbeddingModel type.
      */
     private EmbeddingModel embeddingModel;
     /**
@@ -66,6 +68,57 @@ public class LangChain4jEmbeddingsComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * The URL of the provider's API (http://localhost:11434 for a local
+     * Ollama), when the model is created from the provider. The provider's
+     * default when not set.
+     */
+    private String baseUrl;
+    /**
+     * The name of the model at the provider (qwen2.5, gpt-4o-mini, ...), when
+     * the model is created from the provider.
+     */
+    private String modelName;
+    /**
+     * The LangChain4j provider of the embedding model, to create the model from
+     * the options here (modelName, baseUrl, apiKey, temperature, timeout, and
+     * provider-specific model. properties) instead of a EmbeddingModel bean.
+     * The LangChain4j module of the provider
+     * (dev.langchain4j:langchain4j-ollama, ...) must be on the classpath; Camel
+     * JBang downloads it. Ignored when a EmbeddingModel is configured. For a
+     * provider not listed, set customProvider instead.
+     */
+    private String provider;
+    /**
+     * The sampling temperature of the model, when the model is created from the
+     * provider.
+     */
+    private Double temperature;
+    /**
+     * The request timeout of the model (30s, 2m), when the model is created
+     * from the provider.
+     */
+    private Duration timeout;
+    /**
+     * The fully qualified class name of the LangChain4j model class of a
+     * provider that is not listed in provider
+     * (dev.langchain4j.model.jlama.JlamaChatModel), created from the options
+     * here through its builder() as a listed provider is. Set either provider
+     * or customProvider.
+     */
+    private String customProvider;
+    /**
+     * Provider-specific properties of the model, set on the model's builder as
+     * they are (model.numPredict=512 for Ollama, model.maxTokens=1024 for
+     * OpenAI), when the model is created from the provider. This is a
+     * multi-value option with prefix: model.
+     */
+    private Map<String, Object> modelProperties;
+    /**
+     * The API key or access token of the provider, when the model is created
+     * from the provider.
+     */
+    private String apiKey;
 
     public LangChain4jEmbeddingsConfiguration getConfiguration() {
         return configuration;
@@ -98,5 +151,69 @@ public class LangChain4jEmbeddingsComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public String getBaseUrl() {
+        return baseUrl;
+    }
+
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(String provider) {
+        this.provider = provider;
+    }
+
+    public Double getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(Double temperature) {
+        this.temperature = temperature;
+    }
+
+    public Duration getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(Duration timeout) {
+        this.timeout = timeout;
+    }
+
+    public String getCustomProvider() {
+        return customProvider;
+    }
+
+    public void setCustomProvider(String customProvider) {
+        this.customProvider = customProvider;
+    }
+
+    public Map<String, Object> getModelProperties() {
+        return modelProperties;
+    }
+
+    public void setModelProperties(Map<String, Object> modelProperties) {
+        this.modelProperties = modelProperties;
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
     }
 }
