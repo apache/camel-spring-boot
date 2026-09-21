@@ -48,7 +48,7 @@
       <dependency>
         <groupId>com.aliyun</groupId>
         <artifactId>eventbridge20200401</artifactId>
-        <version>7.5.0</version>
+        <version>7.7.0</version>
       </dependency>
       <dependency>
         <groupId>com.aliyun</groupId>
