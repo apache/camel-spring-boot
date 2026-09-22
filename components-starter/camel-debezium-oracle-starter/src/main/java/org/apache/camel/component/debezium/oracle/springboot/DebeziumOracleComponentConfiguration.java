@@ -152,7 +152,8 @@ public class DebeziumOracleComponentConfiguration
      * Oracle'primary' (the default) captures changes from the primary,
      * specified by database. configurations, 'physical_standby' captures
      * changes from a read-only physical standby, specified by secondary.
-     * configurations.
+     * configurations, 'downstream' captures changes from a downstream real-time
+     * mining database, specified by secondary. configurations.
      */
     private String captureMode = "primary";
     /**
@@ -417,12 +418,6 @@ public class DebeziumOracleComponentConfiguration
      */
     private String logMiningBufferEhcacheProcessedtransactionsConfig;
     /**
-     * Specifies the inner body the Ehcache tag for the rollbacks cache, but
-     * should not include the nor the attributes as these are managed by
-     * Debezium.
-     */
-    private String logMiningBufferEhcacheRollbacksConfig;
-    /**
      * Specifies the inner body the Ehcache tag for the schema changes cache,
      * but should not include the nor the attributes as these are managed by
      * Debezium.
@@ -447,10 +442,6 @@ public class DebeziumOracleComponentConfiguration
      * 'processed-transactions' cache
      */
     private String logMiningBufferInfinispanCacheProcessedTransactions;
-    /**
-     * Specifies the XML configuration for the Infinispan 'rollbacks' cache
-     */
-    private String logMiningBufferInfinispanCacheRollbacks;
     /**
      * Specifies the XML configuration for the Infinispan 'schema-changes' cache
      */
@@ -1547,15 +1538,6 @@ public class DebeziumOracleComponentConfiguration
         this.logMiningBufferEhcacheProcessedtransactionsConfig = logMiningBufferEhcacheProcessedtransactionsConfig;
     }
 
-    public String getLogMiningBufferEhcacheRollbacksConfig() {
-        return logMiningBufferEhcacheRollbacksConfig;
-    }
-
-    public void setLogMiningBufferEhcacheRollbacksConfig(
-            String logMiningBufferEhcacheRollbacksConfig) {
-        this.logMiningBufferEhcacheRollbacksConfig = logMiningBufferEhcacheRollbacksConfig;
-    }
-
     public String getLogMiningBufferEhcacheSchemachangesConfig() {
         return logMiningBufferEhcacheSchemachangesConfig;
     }
@@ -1599,15 +1581,6 @@ public class DebeziumOracleComponentConfiguration
     public void setLogMiningBufferInfinispanCacheProcessedTransactions(
             String logMiningBufferInfinispanCacheProcessedTransactions) {
         this.logMiningBufferInfinispanCacheProcessedTransactions = logMiningBufferInfinispanCacheProcessedTransactions;
-    }
-
-    public String getLogMiningBufferInfinispanCacheRollbacks() {
-        return logMiningBufferInfinispanCacheRollbacks;
-    }
-
-    public void setLogMiningBufferInfinispanCacheRollbacks(
-            String logMiningBufferInfinispanCacheRollbacks) {
-        this.logMiningBufferInfinispanCacheRollbacks = logMiningBufferInfinispanCacheRollbacks;
     }
 
     public String getLogMiningBufferInfinispanCacheSchemaChanges() {

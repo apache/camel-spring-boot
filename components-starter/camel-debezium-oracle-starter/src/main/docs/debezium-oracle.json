@@ -56,7 +56,7 @@
     {
       "name": "camel.component.debezium-oracle.capture-mode",
       "type": "java.lang.String",
-      "description": "Specifies the capture mode used to capture streaming changes from Oracle'primary' (the default) captures changes from the primary, specified by database. configurations, 'physical_standby' captures changes from a read-only physical standby, specified by secondary. configurations.",
+      "description": "Specifies the capture mode used to capture streaming changes from Oracle'primary' (the default) captures changes from the primary, specified by database. configurations, 'physical_standby' captures changes from a read-only physical standby, specified by secondary. configurations, 'downstream' captures changes from a downstream real-time mining database, specified by secondary. configurations.",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration",
       "defaultValue": "primary"
     },
@@ -376,12 +376,6 @@
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
     },
     {
-      "name": "camel.component.debezium-oracle.log-mining-buffer-ehcache-rollbacks-config",
-      "type": "java.lang.String",
-      "description": "Specifies the inner body the Ehcache tag for the rollbacks cache, but should not include the nor the attributes as these are managed by Debezium.",
-      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
-    },
-    {
       "name": "camel.component.debezium-oracle.log-mining-buffer-ehcache-schemachanges-config",
       "type": "java.lang.String",
       "description": "Specifies the inner body the Ehcache tag for the schema changes cache, but should not include the nor the attributes as these are managed by Debezium.",
@@ -409,12 +403,6 @@
       "name": "camel.component.debezium-oracle.log-mining-buffer-infinispan-cache-processed-transactions",
       "type": "java.lang.String",
       "description": "Specifies the XML configuration for the Infinispan 'processed-transactions' cache",
-      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
-    },
-    {
-      "name": "camel.component.debezium-oracle.log-mining-buffer-infinispan-cache-rollbacks",
-      "type": "java.lang.String",
-      "description": "Specifies the XML configuration for the Infinispan 'rollbacks' cache",
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
     },
     {

@@ -213,28 +213,26 @@ public class MailComponentConfiguration
     private String to;
     /**
      * Whether message headers From and Sender override the sender
-     * pre-configured in the endpoint URI. Defaults to true. Set to false to
-     * always use the endpoint URI sender, ignoring any From or Sender headers
-     * from the message.
+     * pre-configured in the endpoint URI. Defaults to false. Set to true to let
+     * message headers From and Sender override the endpoint URI sender.
      */
     private Boolean useHeaderFrom = false;
     /**
      * Whether message headers To, CC, and BCC override the recipients
-     * pre-configured in the endpoint URI. Defaults to true. Set to false to
-     * always use the endpoint URI recipients, ignoring any recipient headers
-     * from the message.
+     * pre-configured in the endpoint URI. Defaults to false. Set to true to let
+     * message headers override the endpoint URI recipients.
      */
     private Boolean useHeaderRecipients = false;
     /**
      * Whether message header Reply-To overrides the replyTo pre-configured in
-     * the endpoint URI. Defaults to true. Set to false to always use the
-     * endpoint URI replyTo, ignoring any Reply-To header from the message.
+     * the endpoint URI. Defaults to false. Set to true to let the message
+     * Reply-To header override the endpoint URI replyTo.
      */
     private Boolean useHeaderReplyTo = false;
     /**
      * Whether message header Subject overrides the subject pre-configured in
-     * the endpoint URI. Defaults to true. Set to false to always use the
-     * endpoint URI subject, ignoring any Subject header from the message.
+     * the endpoint URI. Defaults to false. Set to true to let the message
+     * Subject header override the endpoint URI subject.
      */
     private Boolean useHeaderSubject = false;
     /**

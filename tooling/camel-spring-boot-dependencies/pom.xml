@@ -73,7 +73,7 @@
       <dependency>
         <groupId>com.aliyun</groupId>
         <artifactId>tea-openapi</artifactId>
-        <version>0.3.15</version>
+        <version>0.3.16</version>
       </dependency>
       <dependency>
         <groupId>com.google.api.grpc</groupId>
@@ -99,7 +99,7 @@
       <dependency>
         <groupId>com.openai</groupId>
         <artifactId>openai-java</artifactId>
-        <version>4.63.2</version>
+        <version>4.65.0</version>
       </dependency>
       <dependency>
         <groupId>eu.maveniverse.maven.mima.runtime</groupId>

@@ -15,7 +15,7 @@
 
 == Spring Boot Auto-Configuration
 
-The starter supports 123 options, which are listed below.
+The starter supports 131 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -60,28 +60,36 @@ The starter supports 123 options, which are listed below.
 | camel.cloud.kubernetes.service-discovery.trust-certs | Sets whether to turn on trust certificate check when using client lookup | false | Boolean
 | camel.cloud.kubernetes.service-discovery.username | Sets the username for authentication when using client lookup |  | String
 | camel.language.constant.enabled | Whether to enable auto configuration of the constant language. This is enabled by default. |  | Boolean
+| camel.language.constant.resolve-resource | Whether a result of the expression that is a String starting with resource: is loaded as a resource and its content becomes the result, e.g. a script that returns resource:file:order.json or resource:classpath:templates/order.json (a name without a scheme is a classpath resource). Off by default; the resource: prefix on the expression text itself is always resolved. Applies to the expression used as a value, not as a predicate. | false | Boolean
 | camel.language.constant.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. | true | Boolean
 | camel.language.exchange-property.enabled | Whether to enable auto configuration of the exchangeProperty language. This is enabled by default. |  | Boolean
+| camel.language.exchange-property.resolve-resource | Whether a result of the expression that is a String starting with resource: is loaded as a resource and its content becomes the result, e.g. a script that returns resource:file:order.json or resource:classpath:templates/order.json (a name without a scheme is a classpath resource). Off by default; the resource: prefix on the expression text itself is always resolved. Applies to the expression used as a value, not as a predicate. | false | Boolean
 | camel.language.exchange-property.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. | true | Boolean
 | camel.language.file.enabled | Whether to enable auto configuration of the file language. This is enabled by default. |  | Boolean
 | camel.language.file.nested | If the result is a nested simple expression should this expression be evaluated as well. | false | Boolean
 | camel.language.file.pretty | To pretty format the output (only JSon or XML supported). | false | Boolean
+| camel.language.file.resolve-resource | Whether a result of the expression that is a String starting with resource: is loaded as a resource and its content becomes the result, e.g. a script that returns resource:file:order.json or resource:classpath:templates/order.json (a name without a scheme is a classpath resource). Off by default; the resource: prefix on the expression text itself is always resolved. Applies to the expression used as a value, not as a predicate. | false | Boolean
 | camel.language.file.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. | true | Boolean
 | camel.language.file.trim-result | Whether to trim the returned values when this language is in use. | false | Boolean
 | camel.language.header.enabled | Whether to enable auto configuration of the header language. This is enabled by default. |  | Boolean
+| camel.language.header.resolve-resource | Whether a result of the expression that is a String starting with resource: is loaded as a resource and its content becomes the result, e.g. a script that returns resource:file:order.json or resource:classpath:templates/order.json (a name without a scheme is a classpath resource). Off by default; the resource: prefix on the expression text itself is always resolved. Applies to the expression used as a value, not as a predicate. | false | Boolean
 | camel.language.header.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. | true | Boolean
 | camel.language.ref.enabled | Whether to enable auto configuration of the ref language. This is enabled by default. |  | Boolean
+| camel.language.ref.resolve-resource | Whether a result of the expression that is a String starting with resource: is loaded as a resource and its content becomes the result, e.g. a script that returns resource:file:order.json or resource:classpath:templates/order.json (a name without a scheme is a classpath resource). Off by default; the resource: prefix on the expression text itself is always resolved. Applies to the expression used as a value, not as a predicate. | false | Boolean
 | camel.language.ref.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. | true | Boolean
 | camel.language.simple.enabled | Whether to enable auto configuration of the simple language. This is enabled by default. |  | Boolean
 | camel.language.simple.nested | If the result is a nested simple expression should this expression be evaluated as well. | false | Boolean
 | camel.language.simple.pretty | To pretty format the output (only JSon or XML supported). | false | Boolean
+| camel.language.simple.resolve-resource | Whether a result of the expression that is a String starting with resource: is loaded as a resource and its content becomes the result, e.g. a script that returns resource:file:order.json or resource:classpath:templates/order.json (a name without a scheme is a classpath resource). Off by default; the resource: prefix on the expression text itself is always resolved. Applies to the expression used as a value, not as a predicate. | false | Boolean
 | camel.language.simple.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. | true | Boolean
 | camel.language.simple.trim-result | Whether to trim the returned values when this language is in use. | false | Boolean
 | camel.language.tokenize.enabled | Whether to enable auto configuration of the tokenize language. This is enabled by default. |  | Boolean
 | camel.language.tokenize.group-delimiter | Sets the delimiter to use when grouping. If this has not been set then token will be used as the delimiter. |  | String
+| camel.language.tokenize.resolve-resource | Whether a result of the expression that is a String starting with resource: is loaded as a resource and its content becomes the result, e.g. a script that returns resource:file:order.json or resource:classpath:templates/order.json (a name without a scheme is a classpath resource). Off by default; the resource: prefix on the expression text itself is always resolved. Applies to the expression used as a value, not as a predicate. | false | Boolean
 | camel.language.tokenize.source | Source to use, instead of message body. You can prefix with variable:, header:, or property: to specify kind of source. Otherwise, the source is assumed to be a variable. Use empty or null to use default source, which is the message body. |  | String
 | camel.language.tokenize.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. | true | Boolean
 | camel.language.variable.enabled | Whether to enable auto configuration of the variable language. This is enabled by default. |  | Boolean
+| camel.language.variable.resolve-resource | Whether a result of the expression that is a String starting with resource: is loaded as a resource and its content becomes the result, e.g. a script that returns resource:file:order.json or resource:classpath:templates/order.json (a name without a scheme is a classpath resource). Off by default; the resource: prefix on the expression text itself is always resolved. Applies to the expression used as a value, not as a predicate. | false | Boolean
 | camel.language.variable.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. | true | Boolean
 | camel.resilience4j.asynchronous | Whether to use asynchronous (non-blocking) processing with CompletionStage-based circuit breaker decorators. When enabled, the circuit breaker releases the caller thread immediately and completes processing asynchronously. This is most valuable when the downstream processor supports asynchronous processing (e.g. Netty HTTP, Kafka). When used with timeout, the timeoutExecutorService must be a ScheduledExecutorService. | false | Boolean
 | camel.resilience4j.automatic-transition-from-open-to-half-open-enabled | Enables automatic transition from OPEN to HALF_OPEN state once the waitDurationInOpenState has passed. | false | Boolean
