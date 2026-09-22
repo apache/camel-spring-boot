@@ -456,7 +456,7 @@
       "type": "java.lang.String",
       "description": "The cipher algorithm to be used for encryption\/decryption of the XML message content.",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
-      "defaultValue": "AES-256-GCM"
+      "defaultValue": "AES_256_GCM"
     }
   ],
   "hints": [],
