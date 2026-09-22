@@ -288,6 +288,11 @@
         <version>1.12.0</version>
       </dependency>
       <dependency>
+        <groupId>org.apache.camel.kamelets</groupId>
+        <artifactId>camel-kamelets-bom</artifactId>
+        <version>4.22.1</version>
+      </dependency>
+      <dependency>
         <groupId>org.apache.camel.maven</groupId>
         <artifactId>camel-debezium-maven-plugin</artifactId>
         <version>4.22.1</version>

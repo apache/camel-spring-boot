@@ -209,6 +209,11 @@
         <version>${jna-version}</version>
       </dependency>
       <dependency>
+        <groupId>org.apache.camel.kamelets</groupId>
+        <artifactId>camel-kamelets-bom</artifactId>
+        <version>${camel-kamelets-version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.apache.tomcat</groupId>
         <artifactId>tomcat-catalina</artifactId>
         <version>${tomcat-version}</version>
