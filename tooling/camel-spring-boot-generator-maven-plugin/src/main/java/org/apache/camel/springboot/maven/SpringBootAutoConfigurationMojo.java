@@ -730,6 +730,18 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             // generate inner class for non-primitive options
             type = getSimpleJavaType(type);
 
+            // spring-boot auto configuration does not support complex types
+            // (unless they are enum, nested)
+            // and if so then we should use a String type so spring-boot and its
+            // tooling support that
+            // as Camel will be able to convert the string value into a lookup
+            // of the bean in the registry anyway
+            boolean complex = isComplexTypeOrDuration(option) && isBlank(option.getEnums());
+            if (complex) {
+                // force to use a string type
+                type = "java.lang.String";
+            }
+
             Property prop = javaClass.addProperty(type, option.getName());
             if (option.isDeprecated()) {
                 prop.getField().addAnnotation(Deprecated.class);
@@ -740,7 +752,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             }
             if (!Strings.isNullOrEmpty(option.getDescription())) {
                 String desc = option.getDescription();
-                boolean complex = isComplexTypeOrDuration(option) && isBlank(option.getEnums());
                 if (complex) {
                     if (!desc.endsWith(".")) {
                         desc = desc + ".";
@@ -750,7 +761,10 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 prop.getField().getJavaDoc().setFullText(desc);
             }
             if (!isBlank(option.getDefaultValue())) {
-                if ("java.lang.String".equals(option.getJavaType())) {
+                if (complex) {
+                    // field type was converted to String; default value must also be a String literal
+                    prop.getField().setStringInitializer(option.getDefaultValue().toString());
+                } else if ("java.lang.String".equals(option.getJavaType())) {
                     prop.getField().setStringInitializer(option.getDefaultValue().toString());
                 } else if ("duration".equals(option.getType())) {
                     String value = convertDurationToMills(option.getDefaultValue().toString());
