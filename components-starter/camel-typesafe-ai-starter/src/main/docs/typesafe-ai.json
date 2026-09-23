@@ -1,0 +1,171 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.typesafe-ai",
+      "type": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration",
+      "sourceType": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.typesafe-ai.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.language.typesafe-ai",
+      "type": "org.apache.camel.language.typesafeai.springboot.TypeSafeAiLanguageConfiguration",
+      "sourceType": "org.apache.camel.language.typesafeai.springboot.TypeSafeAiLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.typesafe-ai.customizer",
+      "type": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.language.typesafeai.springboot.TypeSafeAiLanguageConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.typesafe-ai.api-key",
+      "type": "java.lang.String",
+      "description": "The API key used for Bearer authentication.",
+      "sourceType": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.typesafe-ai.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.typesafe-ai.base-url",
+      "type": "java.lang.String",
+      "description": "The API base URL. The client appends \/v1\/systemone. Redirects are not followed.",
+      "sourceType": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration",
+      "defaultValue": "https:\/\/api.typesafe.ai"
+    },
+    {
+      "name": "camel.component.typesafe-ai.configuration",
+      "type": "org.apache.camel.component.typesafeai.TypeSafeAiConfiguration",
+      "description": "Default configuration shared by TypeSafe AI endpoints. The option is a org.apache.camel.component.typesafeai.TypeSafeAiConfiguration type.",
+      "sourceType": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.typesafe-ai.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.typesafe-ai.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the typesafe-ai component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.typesafe-ai.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.typesafe-ai.max-concurrent-requests",
+      "type": "java.lang.Integer",
+      "description": "Maximum concurrent evaluations per endpoint, shared by producers and predicates. Excess requests fail immediately with RejectedExecutionException without being queued or sent. Must be positive.",
+      "sourceType": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration",
+      "defaultValue": 64
+    },
+    {
+      "name": "camel.component.typesafe-ai.model",
+      "type": "java.lang.String",
+      "description": "The model ID or alias. Use a versioned ID to pin decision behavior.",
+      "sourceType": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration",
+      "defaultValue": "jev-latest"
+    },
+    {
+      "name": "camel.component.typesafe-ai.questions",
+      "type": "java.lang.String",
+      "description": "A JSON object mapping question names to Noul, Choice or Score question objects. When set, producers evaluate the selected message state; otherwise the body must contain a complete request map.",
+      "sourceType": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.typesafe-ai.questions-resource",
+      "type": "java.lang.String",
+      "description": "Camel resource URI for a UTF-8 JSON object mapping question names to Noul, Choice or Score questions. Loaded and validated when the endpoint starts. Cannot be combined with questions.",
+      "sourceType": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.typesafe-ai.request-timeout",
+      "type": "java.lang.Long",
+      "description": "The timeout in milliseconds for the complete HTTP request and response body. Must be positive.",
+      "sourceType": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration",
+      "defaultValue": 30000
+    },
+    {
+      "name": "camel.component.typesafe-ai.result-property",
+      "type": "java.lang.String",
+      "description": "Store the producer response in this exchange property, preserving the original message body.",
+      "sourceType": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.typesafe-ai.state",
+      "type": "java.lang.String",
+      "description": "The Simple expression selecting state for configured producer questions and the TypeSafe AI language. If not set, the message body is used.",
+      "sourceType": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.typesafe-ai.threshold",
+      "type": "java.lang.Double",
+      "description": "Default inclusive probability threshold for the TypeSafe AI language. Must be within 0,1.",
+      "sourceType": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.typesafe-ai.uncertainty",
+      "type": "java.lang.Double",
+      "description": "Default half-width of the inclusive uncertainty band for the TypeSafe AI language. Zero disables the band.",
+      "sourceType": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration"
+    },
+    {
+      "name": "camel.component.typesafe-ai.uncertainty-policy",
+      "type": "org.apache.camel.language.typesafeai.TypeSafeAiLanguage$UncertaintyPolicy",
+      "description": "Default action for the TypeSafe AI language within the uncertainty band: NonMatch or Fail.",
+      "sourceType": "org.apache.camel.component.typesafeai.springboot.TypeSafeAiComponentConfiguration",
+      "defaultValue": "nonmatch"
+    },
+    {
+      "name": "camel.language.typesafe-ai.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.language.typesafe-ai.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the typesafe-ai language. This is enabled by default.",
+      "sourceType": "org.apache.camel.language.typesafeai.springboot.TypeSafeAiLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.typesafe-ai.language",
+      "type": "java.lang.String",
+      "description": "The name of the language to use.",
+      "sourceType": "org.apache.camel.language.typesafeai.springboot.TypeSafeAiLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.typesafe-ai.resolve-resource",
+      "type": "java.lang.Boolean",
+      "description": "Whether a result of the expression that is a String starting with resource: is loaded as a resource and its content becomes the result, e.g. a script that returns resource:file:order.json or resource:classpath:templates\/order.json (a name without a scheme is a classpath resource). Off by default; the resource: prefix on the expression text itself is always resolved. Applies to the expression used as a value, not as a predicate.",
+      "sourceType": "org.apache.camel.language.typesafeai.springboot.TypeSafeAiLanguageConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.language.typesafe-ai.trim",
+      "type": "java.lang.Boolean",
+      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks.",
+      "sourceType": "org.apache.camel.language.typesafeai.springboot.TypeSafeAiLanguageConfiguration",
+      "defaultValue": true
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

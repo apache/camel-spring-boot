@@ -401,6 +401,7 @@
 ** xref:starters/toon.adoc[TOON]
 ** xref:starters/twilio.adoc[Twilio]
 ** xref:starters/twitter.adoc[Twitter Direct Message]
+** xref:starters/typesafe-ai.adoc[TypeSafe AI]
 ** xref:starters/ubl.adoc[UBL]
 ** xref:starters/undertow-spring-security.adoc[Undertow Spring Security]
 ** xref:starters/undertow.adoc[Undertow]
