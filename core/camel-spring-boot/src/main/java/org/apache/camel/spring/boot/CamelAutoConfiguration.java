@@ -93,6 +93,15 @@ public class CamelAutoConfiguration {
     private static final Logger LOG = LoggerFactory.getLogger(CamelAutoConfiguration.class);
 
     /**
+     * Stops Spring Boot from binding into the internals of third party types held by the options of the Camel
+     * configuration classes, unless the application configured them.
+     */
+    @Bean
+    static CamelConfigurationPropertiesBindHandlerAdvisor camelConfigurationPropertiesBindHandlerAdvisor() {
+        return new CamelConfigurationPropertiesBindHandlerAdvisor();
+    }
+
+    /**
      * Spring-aware Camel context for the application. Auto-detects and loads all routes available in the Spring
      * context.
      */
