@@ -651,27 +651,6 @@
       "defaultValue": false
     },
     {
-      "name": "camel.main.exchange-factory",
-      "type": "java.lang.String",
-      "description": "Controls whether to pool (reuse) exchanges or create new exchanges (prototype). Using pooled will reduce JVM garbage collection overhead by avoiding to re-create Exchange instances per message each consumer receives. The default is prototype mode.",
-      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
-      "defaultValue": "default"
-    },
-    {
-      "name": "camel.main.exchange-factory-capacity",
-      "type": "java.lang.Integer",
-      "description": "The capacity the pool (for each consumer) uses for storing exchanges. The default capacity is 100.",
-      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
-      "defaultValue": 100
-    },
-    {
-      "name": "camel.main.exchange-factory-statistics-enabled",
-      "type": "java.lang.Boolean",
-      "description": "Configures whether statistics is enabled on exchange factory.",
-      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
-      "defaultValue": false
-    },
-    {
       "name": "camel.main.file-configurations",
       "type": "java.lang.String",
       "description": "Directory to load additional properties files that contains configurations that takes precedence (except for camel.main.xxx configurations). This can be used to refer to files that may have secret configuration that has been mounted on the file system for containers. You can specify a pattern to load from file-system (not classpath) and a name pattern such as \/var\/app\/secret\/*.properties, multiple directories can be separated by comma.",
@@ -2190,6 +2169,33 @@
       "type": "java.lang.String",
       "sourceType": "org.apache.camel.spring.boot.actuate.accesslog.ManagementAccessLogProperties",
       "defaultValue": "common"
+    },
+    {
+      "name": "camel.main.exchange-factory",
+      "type": "java.lang.String",
+      "description": "Controls whether to pool (reuse) exchanges or create new exchanges (prototype). Using pooled will reduce JVM garbage collection overhead by avoiding to re-create Exchange instances per message each consumer receives. The default is prototype mode. @deprecated Exchange pooling is deprecated and will be removed in a future release.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": "default",
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "camel.main.exchange-factory-capacity",
+      "type": "java.lang.Integer",
+      "description": "The capacity the pool (for each consumer) uses for storing exchanges. The default capacity is 100. @deprecated Exchange pooling is deprecated and will be removed in a future release.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": 100,
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "camel.main.exchange-factory-statistics-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Configures whether statistics is enabled on exchange factory. @deprecated Exchange pooling is deprecated and will be removed in a future release.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": false,
+      "deprecated": true,
+      "deprecation": {}
     },
     {
       "name": "camel.main.main-run-controller",
