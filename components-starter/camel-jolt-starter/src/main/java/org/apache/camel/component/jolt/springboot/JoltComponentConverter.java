@@ -40,7 +40,7 @@ public class JoltComponentConverter implements GenericConverter {
 
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
-        answer.add(new ConvertiblePair(String.class, com.bazaarvoice.jolt.Transform.class));
+        answer.add(new ConvertiblePair(String.class, io.joltcommunity.jolt.Transform.class));
         return answer;
     }
 

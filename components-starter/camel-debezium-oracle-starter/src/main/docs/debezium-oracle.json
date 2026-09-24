@@ -135,12 +135,6 @@
       "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
     },
     {
-      "name": "camel.component.debezium-oracle.database-out-server-name",
-      "type": "java.lang.String",
-      "description": "Name of the XStream Outbound server to connect to.",
-      "sourceType": "org.apache.camel.component.debezium.oracle.springboot.DebeziumOracleComponentConfiguration"
-    },
-    {
       "name": "camel.component.debezium-oracle.database-password",
       "type": "java.lang.String",
       "description": "Password of the database user to be used when connecting to the database.",

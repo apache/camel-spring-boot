@@ -213,10 +213,6 @@ public class DebeziumOracleComponentConfiguration
      */
     private String databaseHostname;
     /**
-     * Name of the XStream Outbound server to connect to.
-     */
-    private String databaseOutServerName;
-    /**
      * Password of the database user to be used when connecting to the database.
      */
     private String databasePassword;
@@ -1260,14 +1256,6 @@ public class DebeziumOracleComponentConfiguration
 
     public void setDatabaseHostname(String databaseHostname) {
         this.databaseHostname = databaseHostname;
-    }
-
-    public String getDatabaseOutServerName() {
-        return databaseOutServerName;
-    }
-
-    public void setDatabaseOutServerName(String databaseOutServerName) {
-        this.databaseOutServerName = databaseOutServerName;
     }
 
     public String getDatabasePassword() {
