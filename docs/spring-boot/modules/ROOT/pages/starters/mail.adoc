@@ -29,7 +29,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 60 options, which are listed below.
+The starter supports 61 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -69,6 +69,7 @@ The starter supports 60 options, which are listed below.
 | camel.component.mail.java-mail-sender | To use a custom org.apache.camel.component.mail.JavaMailSender for sending emails. The option is a org.apache.camel.component.mail.JavaMailSender type. |  | JavaMailSender
 | camel.component.mail.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.mail.map-mail-message | Specifies whether Camel should map the received mail message to Camel body/headers/attachments. If set to true, the body of the mail message is mapped to the body of the Camel IN message, the mail headers are mapped to IN headers, and the attachments to Camel IN attachment message. If this option is set to false, then the IN message contains a raw jakarta.mail.Message. You can retrieve this raw message by calling exchange.getIn().getBody(jakarta.mail.Message.class). | true | Boolean
+| camel.component.mail.max-multipart-depth | The maximum nesting depth of multipart MIME parts the consumer descends into when extracting attachments. A message nested deeper than this has its deeper parts skipped, so a crafted deeply nested multipart cannot exhaust the stack. Increase it only if a legitimate source produces unusually deep nesting. | 20 | Integer
 | camel.component.mail.mime-decode-headers | This option enables transparent MIME decoding and unfolding for mail headers. | false | Boolean
 | camel.component.mail.move-to | After processing a mail message, it can be moved to a mail folder with the given name. You can override this configuration value with a header with the key moveTo, allowing you to move messages to folder names configured at runtime. |  | String
 | camel.component.mail.password | The password for login. See also setAuthenticator(MailAuthenticator). |  | String

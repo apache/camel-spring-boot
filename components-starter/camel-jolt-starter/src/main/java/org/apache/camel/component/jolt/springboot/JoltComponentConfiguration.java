@@ -16,7 +16,7 @@
  */
 package org.apache.camel.component.jolt.springboot;
 
-import com.bazaarvoice.jolt.Transform;
+import io.joltcommunity.jolt.Transform;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -69,7 +69,7 @@ public class JoltComponentConfiguration
     /**
      * Explicitly sets the Transform to use. If not set a Transform specified by
      * the transformDsl will be created. The option is a
-     * com.bazaarvoice.jolt.Transform type.
+     * io.joltcommunity.jolt.Transform type.
      */
     private Transform transform;
 

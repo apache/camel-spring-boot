@@ -322,6 +322,14 @@ public class MailComponentConfiguration
      */
     private Properties javaMailProperties;
     /**
+     * The maximum nesting depth of multipart MIME parts the consumer descends
+     * into when extracting attachments. A message nested deeper than this has
+     * its deeper parts skipped, so a crafted deeply nested multipart cannot
+     * exhaust the stack. Increase it only if a legitimate source produces
+     * unusually deep nesting.
+     */
+    private Integer maxMultipartDepth = 20;
+    /**
      * Specifies the mail session that camel should use for all mail
      * interactions. Useful in scenarios where mail sessions are created and
      * managed by some other resource, such as a JavaEE container. When using a
@@ -729,6 +737,14 @@ public class MailComponentConfiguration
 
     public void setJavaMailProperties(Properties javaMailProperties) {
         this.javaMailProperties = javaMailProperties;
+    }
+
+    public Integer getMaxMultipartDepth() {
+        return maxMultipartDepth;
+    }
+
+    public void setMaxMultipartDepth(Integer maxMultipartDepth) {
+        this.maxMultipartDepth = maxMultipartDepth;
     }
 
     public Session getSession() {

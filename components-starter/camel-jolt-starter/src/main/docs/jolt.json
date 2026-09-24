@@ -54,8 +54,8 @@
     },
     {
       "name": "camel.component.jolt.transform",
-      "type": "com.bazaarvoice.jolt.Transform",
-      "description": "Explicitly sets the Transform to use. If not set a Transform specified by the transformDsl will be created. The option is a com.bazaarvoice.jolt.Transform type.",
+      "type": "io.joltcommunity.jolt.Transform",
+      "description": "Explicitly sets the Transform to use. If not set a Transform specified by the transformDsl will be created. The option is a io.joltcommunity.jolt.Transform type.",
       "sourceType": "org.apache.camel.component.jolt.springboot.JoltComponentConfiguration"
     }
   ],
