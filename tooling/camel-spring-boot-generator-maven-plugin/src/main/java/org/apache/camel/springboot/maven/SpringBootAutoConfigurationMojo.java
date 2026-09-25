@@ -1279,11 +1279,12 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         for (LanguageOptionModel option : model.getOptions()) {
             checkReservedOptionName("language", model.getName(), option.getName());
             // skip option with name id, or expression in language as we do not
-            // need that and skip resultType as they are not global options
+            // need that and skip resultType, trim, resolveResource as they are not global options
             if ("id".equals(option.getName()) || "expression".equals(option.getName())
-                    || "resultType".equals(option.getName())) {
+                    || "resultType".equals(option.getName()) || "trim".equals(option.getName())
+                    || "resolveResource".equals(option.getName())) {
                 continue;
-            }
+            } 
             // CHECKSTYLE:OFF
             if ("bean".equals(model.getName())) {
                 // and skip following as they are not global options

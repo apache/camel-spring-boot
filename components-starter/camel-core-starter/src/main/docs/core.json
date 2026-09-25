@@ -368,20 +368,6 @@
       "sourceType": "org.apache.camel.language.constant.springboot.ConstantLanguageConfiguration"
     },
     {
-      "name": "camel.language.constant.resolve-resource",
-      "type": "java.lang.Boolean",
-      "description": "Whether a result of the expression that is a String starting with resource: is loaded as a resource and its content becomes the result, e.g. a script that returns resource:file:order.json or resource:classpath:templates\/order.json (a name without a scheme is a classpath resource). Off by default; the resource: prefix on the expression text itself is always resolved. Applies to the expression used as a value, not as a predicate.",
-      "sourceType": "org.apache.camel.language.constant.springboot.ConstantLanguageConfiguration",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.language.constant.trim",
-      "type": "java.lang.Boolean",
-      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks.",
-      "sourceType": "org.apache.camel.language.constant.springboot.ConstantLanguageConfiguration",
-      "defaultValue": true
-    },
-    {
       "name": "camel.language.exchange-property.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties"
@@ -391,20 +377,6 @@
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the exchangeProperty language. This is enabled by default.",
       "sourceType": "org.apache.camel.language.property.springboot.ExchangePropertyLanguageConfiguration"
-    },
-    {
-      "name": "camel.language.exchange-property.resolve-resource",
-      "type": "java.lang.Boolean",
-      "description": "Whether a result of the expression that is a String starting with resource: is loaded as a resource and its content becomes the result, e.g. a script that returns resource:file:order.json or resource:classpath:templates\/order.json (a name without a scheme is a classpath resource). Off by default; the resource: prefix on the expression text itself is always resolved. Applies to the expression used as a value, not as a predicate.",
-      "sourceType": "org.apache.camel.language.property.springboot.ExchangePropertyLanguageConfiguration",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.language.exchange-property.trim",
-      "type": "java.lang.Boolean",
-      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks.",
-      "sourceType": "org.apache.camel.language.property.springboot.ExchangePropertyLanguageConfiguration",
-      "defaultValue": true
     },
     {
       "name": "camel.language.file.customizer.enabled",
@@ -432,20 +404,6 @@
       "defaultValue": false
     },
     {
-      "name": "camel.language.file.resolve-resource",
-      "type": "java.lang.Boolean",
-      "description": "Whether a result of the expression that is a String starting with resource: is loaded as a resource and its content becomes the result, e.g. a script that returns resource:file:order.json or resource:classpath:templates\/order.json (a name without a scheme is a classpath resource). Off by default; the resource: prefix on the expression text itself is always resolved. Applies to the expression used as a value, not as a predicate.",
-      "sourceType": "org.apache.camel.language.simple.springboot.FileLanguageConfiguration",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.language.file.trim",
-      "type": "java.lang.Boolean",
-      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks.",
-      "sourceType": "org.apache.camel.language.simple.springboot.FileLanguageConfiguration",
-      "defaultValue": true
-    },
-    {
       "name": "camel.language.file.trim-result",
       "type": "java.lang.Boolean",
       "description": "Whether to trim the returned values when this language is in use.",
@@ -464,20 +422,6 @@
       "sourceType": "org.apache.camel.language.header.springboot.HeaderLanguageConfiguration"
     },
     {
-      "name": "camel.language.header.resolve-resource",
-      "type": "java.lang.Boolean",
-      "description": "Whether a result of the expression that is a String starting with resource: is loaded as a resource and its content becomes the result, e.g. a script that returns resource:file:order.json or resource:classpath:templates\/order.json (a name without a scheme is a classpath resource). Off by default; the resource: prefix on the expression text itself is always resolved. Applies to the expression used as a value, not as a predicate.",
-      "sourceType": "org.apache.camel.language.header.springboot.HeaderLanguageConfiguration",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.language.header.trim",
-      "type": "java.lang.Boolean",
-      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks.",
-      "sourceType": "org.apache.camel.language.header.springboot.HeaderLanguageConfiguration",
-      "defaultValue": true
-    },
-    {
       "name": "camel.language.ref.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties"
@@ -487,20 +431,6 @@
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the ref language. This is enabled by default.",
       "sourceType": "org.apache.camel.language.ref.springboot.RefLanguageConfiguration"
-    },
-    {
-      "name": "camel.language.ref.resolve-resource",
-      "type": "java.lang.Boolean",
-      "description": "Whether a result of the expression that is a String starting with resource: is loaded as a resource and its content becomes the result, e.g. a script that returns resource:file:order.json or resource:classpath:templates\/order.json (a name without a scheme is a classpath resource). Off by default; the resource: prefix on the expression text itself is always resolved. Applies to the expression used as a value, not as a predicate.",
-      "sourceType": "org.apache.camel.language.ref.springboot.RefLanguageConfiguration",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.language.ref.trim",
-      "type": "java.lang.Boolean",
-      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks.",
-      "sourceType": "org.apache.camel.language.ref.springboot.RefLanguageConfiguration",
-      "defaultValue": true
     },
     {
       "name": "camel.language.simple.customizer.enabled",
@@ -528,20 +458,6 @@
       "defaultValue": false
     },
     {
-      "name": "camel.language.simple.resolve-resource",
-      "type": "java.lang.Boolean",
-      "description": "Whether a result of the expression that is a String starting with resource: is loaded as a resource and its content becomes the result, e.g. a script that returns resource:file:order.json or resource:classpath:templates\/order.json (a name without a scheme is a classpath resource). Off by default; the resource: prefix on the expression text itself is always resolved. Applies to the expression used as a value, not as a predicate.",
-      "sourceType": "org.apache.camel.language.simple.springboot.SimpleLanguageConfiguration",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.language.simple.trim",
-      "type": "java.lang.Boolean",
-      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks.",
-      "sourceType": "org.apache.camel.language.simple.springboot.SimpleLanguageConfiguration",
-      "defaultValue": true
-    },
-    {
       "name": "camel.language.simple.trim-result",
       "type": "java.lang.Boolean",
       "description": "Whether to trim the returned values when this language is in use.",
@@ -566,24 +482,10 @@
       "sourceType": "org.apache.camel.language.tokenizer.springboot.TokenizeLanguageConfiguration"
     },
     {
-      "name": "camel.language.tokenize.resolve-resource",
-      "type": "java.lang.Boolean",
-      "description": "Whether a result of the expression that is a String starting with resource: is loaded as a resource and its content becomes the result, e.g. a script that returns resource:file:order.json or resource:classpath:templates\/order.json (a name without a scheme is a classpath resource). Off by default; the resource: prefix on the expression text itself is always resolved. Applies to the expression used as a value, not as a predicate.",
-      "sourceType": "org.apache.camel.language.tokenizer.springboot.TokenizeLanguageConfiguration",
-      "defaultValue": false
-    },
-    {
       "name": "camel.language.tokenize.source",
       "type": "java.lang.String",
       "description": "Source to use, instead of message body. You can prefix with variable:, header:, or property: to specify kind of source. Otherwise, the source is assumed to be a variable. Use empty or null to use default source, which is the message body.",
       "sourceType": "org.apache.camel.language.tokenizer.springboot.TokenizeLanguageConfiguration"
-    },
-    {
-      "name": "camel.language.tokenize.trim",
-      "type": "java.lang.Boolean",
-      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks.",
-      "sourceType": "org.apache.camel.language.tokenizer.springboot.TokenizeLanguageConfiguration",
-      "defaultValue": true
     },
     {
       "name": "camel.language.variable.customizer.enabled",
@@ -595,20 +497,6 @@
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the variable language. This is enabled by default.",
       "sourceType": "org.apache.camel.language.variable.springboot.VariableLanguageConfiguration"
-    },
-    {
-      "name": "camel.language.variable.resolve-resource",
-      "type": "java.lang.Boolean",
-      "description": "Whether a result of the expression that is a String starting with resource: is loaded as a resource and its content becomes the result, e.g. a script that returns resource:file:order.json or resource:classpath:templates\/order.json (a name without a scheme is a classpath resource). Off by default; the resource: prefix on the expression text itself is always resolved. Applies to the expression used as a value, not as a predicate.",
-      "sourceType": "org.apache.camel.language.variable.springboot.VariableLanguageConfiguration",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.language.variable.trim",
-      "type": "java.lang.Boolean",
-      "description": "Whether to trim the source code to remove leading and trailing whitespaces and line breaks.",
-      "sourceType": "org.apache.camel.language.variable.springboot.VariableLanguageConfiguration",
-      "defaultValue": true
     },
     {
       "name": "camel.resilience4j.asynchronous",

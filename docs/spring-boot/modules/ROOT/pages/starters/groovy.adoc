@@ -25,7 +25,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 7 options, which are listed below.
+The starter supports 5 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -35,6 +35,4 @@ The starter supports 7 options, which are listed below.
 | camel.dataformat.groovy-xml.attribute-mapping | Whether to enable attribute mapping. When enabled, keys that start with _ or character will be mapped to an XML attribute, and vice versa. | true | Boolean
 | camel.dataformat.groovy-xml.enabled | Whether to enable auto configuration of the groovyXml data format. This is enabled by default. |  | Boolean
 | camel.language.groovy.enabled | Whether to enable auto configuration of the groovy language. This is enabled by default. |  | Boolean
-| camel.language.groovy.resolve-resource | Whether a result of the expression that is a String starting with resource: is loaded as a resource and its content becomes the result, e.g. a script that returns resource:file:order.json or resource:classpath:templates/order.json (a name without a scheme is a classpath resource). Off by default; the resource: prefix on the expression text itself is always resolved. Applies to the expression used as a value, not as a predicate. | false | Boolean
-| camel.language.groovy.trim | Whether to trim the source code to remove leading and trailing whitespaces and line breaks. | true | Boolean
 |===
