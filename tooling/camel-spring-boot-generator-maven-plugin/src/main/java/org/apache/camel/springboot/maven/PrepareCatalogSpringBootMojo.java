@@ -40,7 +40,8 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
 @Mojo(name = "prepare-catalog-springboot", threadSafe = true, requiresDependencyCollection = ResolutionScope.COMPILE_PLUS_RUNTIME, requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME, defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
 public class PrepareCatalogSpringBootMojo extends AbstractSpringBootGenerator {
 
-    private static final String[] IGNORE_MODULES = { "camel-spring-boot-xml", "camel-spring-boot-engine" };
+    private static final String[] IGNORE_MODULES = { "camel-spring-boot-xml", "camel-spring-boot-engine",
+            "camel-typesafe-ai" };
 
     /**
      * The catalog directory

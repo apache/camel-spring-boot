@@ -144,9 +144,39 @@
       "sourceType": "org.apache.camel.language.typesafeai.springboot.TypeSafeAiLanguageConfiguration"
     },
     {
+      "name": "camel.language.typesafe-ai.endpoint",
+      "type": "java.lang.String",
+      "description": "Target endpoint URI for TypeSafe AI processing.",
+      "sourceType": "org.apache.camel.language.typesafeai.springboot.TypeSafeAiLanguageConfiguration"
+    },
+    {
       "name": "camel.language.typesafe-ai.language",
       "type": "java.lang.String",
       "description": "The name of the language to use.",
+      "sourceType": "org.apache.camel.language.typesafeai.springboot.TypeSafeAiLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.typesafe-ai.state",
+      "type": "java.lang.String",
+      "description": "Simple expression selecting state for the TypeSafe AI language.",
+      "sourceType": "org.apache.camel.language.typesafeai.springboot.TypeSafeAiLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.typesafe-ai.threshold",
+      "type": "java.lang.Double",
+      "description": "Minimum confidence threshold for the TypeSafe AI language. Must be within [0,1].",
+      "sourceType": "org.apache.camel.language.typesafeai.springboot.TypeSafeAiLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.typesafe-ai.uncertainty",
+      "type": "java.lang.Double",
+      "description": "Half-width of the inclusive uncertainty band for the TypeSafe AI language.",
+      "sourceType": "org.apache.camel.language.typesafeai.springboot.TypeSafeAiLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.typesafe-ai.uncertainty-policy",
+      "type": "java.lang.String",
+      "description": "Action for the TypeSafe AI language within the uncertainty band.",
       "sourceType": "org.apache.camel.language.typesafeai.springboot.TypeSafeAiLanguageConfiguration"
     }
   ],

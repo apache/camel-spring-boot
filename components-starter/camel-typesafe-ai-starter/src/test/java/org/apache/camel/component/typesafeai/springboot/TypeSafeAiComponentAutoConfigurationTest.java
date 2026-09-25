@@ -35,7 +35,11 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
                 "camel.component.typesafe-ai.base-url=http://127.0.0.1:8000",
                 "camel.component.typesafe-ai.model=local-model",
                 "camel.component.typesafe-ai.api-key=test-key",
-                "camel.component.typesafe-ai.threshold=0.75" })
+                "camel.component.typesafe-ai.threshold=0.75",
+                "camel.language.typesafe-ai.endpoint=direct:ai-test",
+                "camel.language.typesafe-ai.threshold=0.85",
+                "camel.language.typesafe-ai.uncertainty=0.15",
+                "camel.language.typesafe-ai.state=active" })
 class TypeSafeAiComponentAutoConfigurationTest {
 
     @Autowired
@@ -49,6 +53,11 @@ class TypeSafeAiComponentAutoConfigurationTest {
         assertEquals("local-model", component.getConfiguration().getModel());
         assertEquals("test-key", component.getConfiguration().getApiKey());
         assertEquals(0.75, component.getConfiguration().getThreshold());
-        assertInstanceOf(TypeSafeAiLanguage.class, context.resolveLanguage("typesafe-ai"));
+
+        TypeSafeAiLanguage language = assertInstanceOf(TypeSafeAiLanguage.class, context.resolveLanguage("typesafe-ai"));
+        assertEquals("direct:ai-test", language.getEndpoint());
+        assertEquals(0.85, language.getThreshold());
+        assertEquals(0.15, language.getUncertainty());
+        assertEquals("active", language.getState());
     }
 }
