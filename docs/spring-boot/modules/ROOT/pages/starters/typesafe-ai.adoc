@@ -37,17 +37,18 @@ camel.component.typesafe-ai.model=jev-latest
 camel.component.typesafe-ai.api-key=test-key
 camel.component.typesafe-ai.threshold=0.75
 
-camel.language.typesafe-ai.endpoint=direct:ai-test
+camel.language.typesafe-ai.endpoint=typesafe-ai:ai-test
 camel.language.typesafe-ai.threshold=0.85
 camel.language.typesafe-ai.uncertainty=0.15
 camel.language.typesafe-ai.uncertainty-policy=NonMatch
 camel.language.typesafe-ai.state=active
 ----
 
-The starter supports 24 options, which are listed below.
+The starter supports 23 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 
+|===
 | Name | Description | Default | Type
 | camel.component.typesafe-ai.api-key | The API key used for Bearer authentication. |  | String
 | camel.component.typesafe-ai.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
@@ -72,3 +73,4 @@ The starter supports 24 options, which are listed below.
 | camel.language.typesafe-ai.threshold | Minimum confidence threshold for the TypeSafe AI language. Must be within [0,1]. |  | Double
 | camel.language.typesafe-ai.uncertainty | Half-width of the inclusive uncertainty band for the TypeSafe AI language. |  | Double
 | camel.language.typesafe-ai.uncertainty-policy | Action for the TypeSafe AI language within the uncertainty band. |  | String
+|===

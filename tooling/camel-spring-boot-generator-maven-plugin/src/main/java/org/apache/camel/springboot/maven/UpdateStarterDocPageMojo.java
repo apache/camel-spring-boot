@@ -55,8 +55,7 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
       defaultPhase = LifecyclePhase.PACKAGE)
 public class UpdateStarterDocPageMojo extends AbstractSpringBootGenerator {
 
-    private static final String[] IGNORE_MODULES = { "camel-spring-boot-xml", "camel-spring-boot-engine",
-            "camel-typesafe-ai" };
+    private static final String[] IGNORE_MODULES = { "camel-spring-boot-xml", "camel-spring-boot-engine" };
 
     @Parameter(defaultValue = "${maven.multiModuleProjectDirectory}")
     protected File multiModuleDir;
