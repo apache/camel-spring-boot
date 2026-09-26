@@ -28,6 +28,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.opa.batch",
+      "type": "java.lang.Boolean",
+      "description": "Authorize a whole collection in one call. When enabled the producer expects a List body, evaluates one input document per element - each element as the body, sharing the exchange's headers and properties - and returns the per-element verdicts in the CamelOpaBatchDecision header, a List parallel to the input. An element whose evaluation could not be reached is denied, unless failOpen is set; the batch is never allowed or denied as a whole because one element failed. Only for {code evaluationMode=rest}: it saves the per-element HTTP round-trip via OPA's batch API, which has no meaning for in-process wasm.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.opa.bearer-token",
       "type": "java.lang.String",
       "description": "Bearer token sent to the OPA server in the Authorization header, for an OPA instance that has its API authentication enabled.",

@@ -40,6 +40,7 @@ The starter supports 32 options, which are listed below.
 | camel.component.iggy.consumers-count | Camel Iggy consumers count | 1 | Integer
 | camel.component.iggy.enabled | Whether to enable auto configuration of the iggy component. This is enabled by default. |  | Boolean
 | camel.component.iggy.host | Iggy server hostname or IP address | localhost | String
+| camel.component.iggy.iggy-header-options | Options provided when creating a topic |  | String>
 | camel.component.iggy.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.iggy.max-topic-size | Maximum topic size in bytes (0 means unlimited) | 0 | Long
 | camel.component.iggy.message-expiry | Message expiry time in seconds (0 means no expiry) | 0 | Long
@@ -50,7 +51,6 @@ The starter supports 32 options, which are listed below.
 | camel.component.iggy.poll-batch-size | The consumer poll batch size | 10 | Long
 | camel.component.iggy.polling-strategy | Polling strategy | next | String
 | camel.component.iggy.port | Iggy server port number | 8090 | Integer
-| camel.component.iggy.replication-factor | Replication factor for the topic |  | Short
 | camel.component.iggy.shutdown-timeout | Camel Iggy shutdown timeout | 30000 | Integer
 | camel.component.iggy.ssl-context-parameters | SSL configuration using an org.apache.camel.support.jsse.SSLContextParameters instance. This takes precedence over tlsEnabled and tlsCertificatePath when configured. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
 | camel.component.iggy.starting-offset | Defines the initial message offset position when autoCommit is disabled. Use 0 to start from the beginning of the stream, or specify a custom offset to resume from a particular point | 0 | Long
