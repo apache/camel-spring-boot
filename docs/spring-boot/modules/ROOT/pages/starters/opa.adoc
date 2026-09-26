@@ -23,13 +23,14 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 23 options, which are listed below.
+The starter supports 24 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
 | camel.component.opa.allow-key | The key to read the allow/deny verdict from when the policy returns an object rather than a plain boolean. For a policy returning \{allow: true, reasons: } the default value of allow is what you want. A dotted path reaches a verdict nested inside the document: \{code allowKey=result.allow} reads \{result: \{allow: true}}. A key with no dot is looked up directly at the top level. | allow | String
 | camel.component.opa.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
+| camel.component.opa.batch | Authorize a whole collection in one call. When enabled the producer expects a List body, evaluates one input document per element - each element as the body, sharing the exchange's headers and properties - and returns the per-element verdicts in the CamelOpaBatchDecision header, a List parallel to the input. An element whose evaluation could not be reached is denied, unless failOpen is set; the batch is never allowed or denied as a whole because one element failed. Only for \{code evaluationMode=rest}: it saves the per-element HTTP round-trip via OPA's batch API, which has no meaning for in-process wasm. | false | Boolean
 | camel.component.opa.bearer-token | Bearer token sent to the OPA server in the Authorization header, for an OPA instance that has its API authentication enabled. |  | String
 | camel.component.opa.borrow-timeout | How long an exchange waits for a free WebAssembly policy instance in wasm mode before the evaluation fails. An exchange that cannot get an instance is not denied by a policy, so it is reported as an evaluation failure and handled like any other: failing closed, or proceeding if failOpen is set. Raise it, or poolSize, for a route whose concurrency exceeds the pool. The option is a long type. | 30000 | Long
 | camel.component.opa.configuration | The component configuration. The option is a org.apache.camel.component.opa.OpaConfiguration type. |  | OpaConfiguration

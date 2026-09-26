@@ -100,6 +100,12 @@
       "defaultValue": "localhost"
     },
     {
+      "name": "camel.component.iggy.iggy-header-options",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "description": "Options provided when creating a topic",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
+    },
+    {
       "name": "camel.component.iggy.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
@@ -165,12 +171,6 @@
       "description": "Iggy server port number",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
       "defaultValue": 8090
-    },
-    {
-      "name": "camel.component.iggy.replication-factor",
-      "type": "java.lang.Short",
-      "description": "Replication factor for the topic",
-      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
     },
     {
       "name": "camel.component.iggy.shutdown-timeout",

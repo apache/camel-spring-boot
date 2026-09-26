@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.iggy.springboot;
 
+import java.util.Map;
 import org.apache.camel.component.iggy.IggyComponent;
 import org.apache.camel.component.iggy.IggyConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -66,6 +67,10 @@ public class IggyComponentConfiguration
      */
     private String host = "localhost";
     /**
+     * Options provided when creating a topic
+     */
+    private Map<String, String> iggyHeaderOptions;
+    /**
      * Maximum topic size in bytes (0 means unlimited)
      */
     private Long maxTopicSize = 0L;
@@ -85,10 +90,6 @@ public class IggyComponentConfiguration
      * Iggy server port number
      */
     private Integer port = 8090;
-    /**
-     * Replication factor for the topic
-     */
-    private Short replicationFactor;
     /**
      * Stream identifier
      */
@@ -246,6 +247,14 @@ public class IggyComponentConfiguration
         this.host = host;
     }
 
+    public Map<String, String> getIggyHeaderOptions() {
+        return iggyHeaderOptions;
+    }
+
+    public void setIggyHeaderOptions(Map<String, String> iggyHeaderOptions) {
+        this.iggyHeaderOptions = iggyHeaderOptions;
+    }
+
     public Long getMaxTopicSize() {
         return maxTopicSize;
     }
@@ -284,14 +293,6 @@ public class IggyComponentConfiguration
 
     public void setPort(Integer port) {
         this.port = port;
-    }
-
-    public Short getReplicationFactor() {
-        return replicationFactor;
-    }
-
-    public void setReplicationFactor(Short replicationFactor) {
-        this.replicationFactor = replicationFactor;
     }
 
     public Long getStreamId() {

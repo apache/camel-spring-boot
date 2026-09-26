@@ -48,6 +48,18 @@ public class OpaComponentConfiguration
      */
     private String allowKey = "allow";
     /**
+     * Authorize a whole collection in one call. When enabled the producer
+     * expects a List body, evaluates one input document per element - each
+     * element as the body, sharing the exchange's headers and properties - and
+     * returns the per-element verdicts in the CamelOpaBatchDecision header, a
+     * List parallel to the input. An element whose evaluation could not be
+     * reached is denied, unless failOpen is set; the batch is never allowed or
+     * denied as a whole because one element failed. Only for {code
+     * evaluationMode=rest}: it saves the per-element HTTP round-trip via OPA's
+     * batch API, which has no meaning for in-process wasm.
+     */
+    private Boolean batch = false;
+    /**
      * The component configuration. The option is a
      * org.apache.camel.component.opa.OpaConfiguration type.
      */
@@ -213,6 +225,14 @@ public class OpaComponentConfiguration
 
     public void setAllowKey(String allowKey) {
         this.allowKey = allowKey;
+    }
+
+    public Boolean getBatch() {
+        return batch;
+    }
+
+    public void setBatch(Boolean batch) {
+        this.batch = batch;
     }
 
     public OpaConfiguration getConfiguration() {

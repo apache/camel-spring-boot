@@ -335,6 +335,12 @@
       "defaultValue": "convert-to-markdown"
     },
     {
+      "name": "camel.component.docling.output-base-directory",
+      "type": "java.lang.String",
+      "description": "When set, the output directory passed to the docling CLI must resolve inside this directory once normalized. Applies to the CamelDoclingOutputFilePath header. The check is lexical and does not resolve symbolic links, matching inputBaseDirectory. When empty, no directory restriction is applied and the header value is only normalized.",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
+    },
+    {
       "name": "camel.component.docling.output-format",
       "type": "java.lang.String",
       "description": "Output format for document conversion",
