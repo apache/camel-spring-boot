@@ -70,6 +70,43 @@ class UpdateStarterDocPageMojoTest {
         assertThat(countCells(nullRow)).isEqualTo(4);
     }
 
+    @Test
+    @DisplayName("TypeSafe AI language properties keep 4 table columns and match starter metadata")
+    void typeSafeAiLanguagePropertiesAreDocumented() {
+        List<SBProperty> properties = List.of(
+                new SBProperty("camel.language.typesafe-ai.endpoint",
+                        "Target endpoint URI for TypeSafe AI processing.", "java.lang.String", null),
+                new SBProperty("camel.language.typesafe-ai.threshold",
+                        "Minimum confidence threshold for the TypeSafe AI language. Must be within [0,1].",
+                        "java.lang.Double", null),
+                new SBProperty("camel.language.typesafe-ai.uncertainty",
+                        "Half-width of the inclusive uncertainty band for the TypeSafe AI language.",
+                        "java.lang.Double", null),
+                new SBProperty("camel.language.typesafe-ai.uncertainty-policy",
+                        "Action for the TypeSafe AI language within the uncertainty band.", "java.lang.String",
+                        null),
+                new SBProperty("camel.language.typesafe-ai.state",
+                        "Simple expression selecting state for the TypeSafe AI language.", "java.lang.String",
+                        null));
+
+        String page = new UpdateStarterDocPageMojo().generatePage("camel-typesafe-ai-starter", "typesafe-ai",
+                "TypeSafe AI", null, List.of(), properties, null, null, null, null);
+
+        assertThat(page).contains("The starter supports 5 options");
+        for (SBProperty property : properties) {
+            String row = page.lines()
+                    .filter(line -> line.startsWith("| " + property.name() + " "))
+                    .findFirst()
+                    .orElseThrow(() -> new AssertionError("No table row for " + property.name() + " in:\n" + page));
+            assertThat(countCells(row)).isEqualTo(4);
+            assertThat(row).contains(" | " + property.description() + " |  | " + simpleName(property.type()));
+        }
+    }
+
+    private static String simpleName(String fqcn) {
+        return fqcn.substring(fqcn.lastIndexOf('.') + 1);
+    }
+
     private static String generateRow(SBProperty property) {
         String page = new UpdateStarterDocPageMojo().generatePage("camel-test-starter", "test", "Test", null,
                 List.of(), List.of(property), null, null, null, null);

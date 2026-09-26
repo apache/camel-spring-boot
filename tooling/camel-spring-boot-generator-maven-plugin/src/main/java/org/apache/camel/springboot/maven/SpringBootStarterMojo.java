@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Properties;
@@ -67,6 +68,9 @@ import org.w3c.dom.NodeList;
 @Mojo(name = "prepare-spring-boot-starter", threadSafe = true, requiresDependencyCollection = ResolutionScope.COMPILE_PLUS_RUNTIME, requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME, defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
 public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
 
+    private static final String[] IGNORE_MODULES = { "camel-spring-boot-xml", "camel-spring-boot-engine",
+            "camel-typesafe-ai" };
+
     private static final String GENERATED_SECTION_START = "START OF GENERATED CODE";
     private static final String GENERATED_SECTION_START_COMMENT = "<!--" + GENERATED_SECTION_START + "-->";
     private static final String GENERATED_SECTION_END = "END OF GENERATED CODE";
@@ -86,6 +90,11 @@ public class SpringBootStarterMojo extends AbstractSpringBootGenerator {
 
     @Inject
     private ProjectBuilder projectBuilder;
+
+    @Override
+    protected boolean isIgnore(String artifactId) {
+        return Arrays.asList(IGNORE_MODULES).contains(artifactId);
+    }
 
     @Override
     protected void executeAll() throws MojoExecutionException, MojoFailureException {

@@ -24,9 +24,30 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 18 options, which are listed below.
+The starter auto-configures both the TypeSafe AI component (`camel.component.typesafe-ai.*`)
+and the TypeSafe AI language (`camel.language.typesafe-ai.*`). Component properties
+configure the API client and producer defaults. Language properties configure the
+`typesafe-ai` language independently: `endpoint`, `threshold`, `uncertainty`,
+`uncertainty-policy`, and `state`.
+
+[source,properties]
+----
+camel.component.typesafe-ai.base-url=https://api.typesafe.ai
+camel.component.typesafe-ai.model=jev-latest
+camel.component.typesafe-ai.api-key=test-key
+camel.component.typesafe-ai.threshold=0.75
+
+camel.language.typesafe-ai.endpoint=typesafe-ai:ai-test
+camel.language.typesafe-ai.threshold=0.85
+camel.language.typesafe-ai.uncertainty=0.15
+camel.language.typesafe-ai.uncertainty-policy=NonMatch
+camel.language.typesafe-ai.state=active
+----
+
+The starter supports 23 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
+
 |===
 | Name | Description | Default | Type
 | camel.component.typesafe-ai.api-key | The API key used for Bearer authentication. |  | String
@@ -46,5 +67,10 @@ The starter supports 18 options, which are listed below.
 | camel.component.typesafe-ai.uncertainty | Default half-width of the inclusive uncertainty band for the TypeSafe AI language. Zero disables the band. |  | Double
 | camel.component.typesafe-ai.uncertainty-policy | Default action for the TypeSafe AI language within the uncertainty band: NonMatch or Fail. | nonmatch | TypeSafeAiLanguage$UncertaintyPolicy
 | camel.language.typesafe-ai.enabled | Whether to enable auto configuration of the typesafe-ai language. This is enabled by default. |  | Boolean
+| camel.language.typesafe-ai.endpoint | Target endpoint URI for TypeSafe AI processing. |  | String
 | camel.language.typesafe-ai.language | The name of the language to use. |  | String
+| camel.language.typesafe-ai.state | Simple expression selecting state for the TypeSafe AI language. |  | String
+| camel.language.typesafe-ai.threshold | Minimum confidence threshold for the TypeSafe AI language. Must be within [0,1]. |  | Double
+| camel.language.typesafe-ai.uncertainty | Half-width of the inclusive uncertainty band for the TypeSafe AI language. |  | Double
+| camel.language.typesafe-ai.uncertainty-policy | Action for the TypeSafe AI language within the uncertainty band. |  | String
 |===

@@ -81,7 +81,8 @@ import org.springframework.context.annotation.Lazy;
 @Mojo(name = "prepare-spring-boot-auto-configuration", threadSafe = true, requiresDependencyCollection = ResolutionScope.COMPILE_PLUS_RUNTIME, requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME, defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
 public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator {
 
-    private static final String[] IGNORE_MODULES = { "camel-spring-boot-xml", "camel-spring-boot-engine" };
+    private static final String[] IGNORE_MODULES = { "camel-spring-boot-xml", "camel-spring-boot-engine",
+            "camel-typesafe-ai" };
 
     /**
      * Useful to move configuration towards starters. Warning: the spring.factories files sometimes are used also on the

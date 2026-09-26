@@ -1,0 +1,19 @@
+The starter auto-configures both the TypeSafe AI component (`camel.component.typesafe-ai.*`)
+and the TypeSafe AI language (`camel.language.typesafe-ai.*`). Component properties
+configure the API client and producer defaults. Language properties configure the
+`typesafe-ai` language independently: `endpoint`, `threshold`, `uncertainty`,
+`uncertainty-policy`, and `state`.
+
+[source,properties]
+----
+camel.component.typesafe-ai.base-url=https://api.typesafe.ai
+camel.component.typesafe-ai.model=jev-latest
+camel.component.typesafe-ai.api-key=test-key
+camel.component.typesafe-ai.threshold=0.75
+
+camel.language.typesafe-ai.endpoint=direct:ai-test
+camel.language.typesafe-ai.threshold=0.85
+camel.language.typesafe-ai.uncertainty=0.15
+camel.language.typesafe-ai.uncertainty-policy=NonMatch
+camel.language.typesafe-ai.state=active
+----
