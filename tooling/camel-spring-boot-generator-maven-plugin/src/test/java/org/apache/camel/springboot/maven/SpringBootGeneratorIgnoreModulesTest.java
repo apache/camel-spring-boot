@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class SpringBootGeneratorIgnoreModulesTest {
 
     @Test
-    @DisplayName("Hand-crafted and core Spring Boot modules are ignored by all generator mojos")
+    @DisplayName("Hand-crafted and core Spring Boot modules are ignored by generator mojos")
     void ignoredModulesAreSkipped() {
         AbstractSpringBootGenerator[] mojos = {
                 new SpringBootStarterMojo(),
@@ -37,9 +37,6 @@ class SpringBootGeneratorIgnoreModulesTest {
         };
 
         for (AbstractSpringBootGenerator mojo : mojos) {
-            assertThat(mojo.isIgnore("camel-typesafe-ai"))
-                    .as("%s should ignore camel-typesafe-ai", mojo.getClass().getSimpleName())
-                    .isTrue();
             assertThat(mojo.isIgnore("camel-spring-boot-xml"))
                     .as("%s should ignore camel-spring-boot-xml", mojo.getClass().getSimpleName())
                     .isTrue();
@@ -50,6 +47,13 @@ class SpringBootGeneratorIgnoreModulesTest {
                     .as("%s should not ignore camel-http", mojo.getClass().getSimpleName())
                     .isFalse();
         }
+
+        assertThat(new PrepareCatalogSpringBootMojo().isIgnore("camel-typesafe-ai"))
+                .as("PrepareCatalogSpringBootMojo should not ignore camel-typesafe-ai")
+                .isFalse();
+        assertThat(new UpdateStarterDocPageMojo().isIgnore("camel-typesafe-ai"))
+                .as("UpdateStarterDocPageMojo should not ignore camel-typesafe-ai")
+                .isFalse();
     }
 
 }
