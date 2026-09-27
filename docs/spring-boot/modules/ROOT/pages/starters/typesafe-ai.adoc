@@ -37,7 +37,7 @@ camel.component.typesafe-ai.model=jev-latest
 camel.component.typesafe-ai.api-key=test-key
 camel.component.typesafe-ai.threshold=0.75
 
-camel.language.typesafe-ai.endpoint=typesafe-ai:ai-test
+camel.language.typesafe-ai.endpoint=direct:ai-test
 camel.language.typesafe-ai.threshold=0.85
 camel.language.typesafe-ai.uncertainty=0.15
 camel.language.typesafe-ai.uncertainty-policy=NonMatch
@@ -47,7 +47,6 @@ camel.language.typesafe-ai.state=active
 The starter supports 23 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
-
 |===
 | Name | Description | Default | Type
 | camel.component.typesafe-ai.api-key | The API key used for Bearer authentication. |  | String
