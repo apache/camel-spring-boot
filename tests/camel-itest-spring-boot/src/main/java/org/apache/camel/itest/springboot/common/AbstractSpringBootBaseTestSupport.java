@@ -78,7 +78,7 @@ public abstract class AbstractSpringBootBaseTestSupport {
         Path projectDir = archetype.getGeneratedProject().getProjectDir();
 
         List<String> command = new ArrayList<>(List.of(
-                System.getProperty("mvn-command"), "-q", "compile", "dependency:build-classpath",
+                ArchetypeGenerationExtension.resolveMavenCommand(), "-q", "compile", "dependency:build-classpath",
                 "-DincludeScope=runtime",
                 "-Dmdep.outputFile=" + CLASSPATH_FILE,
                 "-B"));

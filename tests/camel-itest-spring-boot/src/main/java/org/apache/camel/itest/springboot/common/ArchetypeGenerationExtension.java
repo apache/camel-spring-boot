@@ -107,18 +107,8 @@ public class ArchetypeGenerationExtension implements BeforeAllCallback, BeforeEa
                         + ". Run 'mvn install -pl archetypes/camel-archetype-spring-boot -am -DskipTests' first.");
             }
 
-            // Resolve absolute path to Maven wrapper
-            String mvnwPath = System.getProperty("mvn-command");
-            if (mvnwPath.startsWith("./")) {
-                // Convert relative path to absolute based on multiModuleProjectDirectory
-                String projectRoot = System.getProperty("maven.multiModuleProjectDirectory");
-                if (projectRoot != null) {
-                    mvnwPath = Path.of(projectRoot, mvnwPath.substring(2)).toString();
-                }
-            }
-
             List<String> command = new ArrayList<>(List.of(
-                    mvnwPath, "-q", "archetype:generate",
+                    resolveMavenCommand(), "-q", "archetype:generate",
                     "-B",
                     "-DarchetypeGroupId=" + ARCHETYPE_GROUP_ID,
                     "-DarchetypeArtifactId=" + ARCHETYPE_ARTIFACT_ID,
@@ -163,6 +153,15 @@ public class ArchetypeGenerationExtension implements BeforeAllCallback, BeforeEa
             throw new RuntimeException("Required system property '" + key + "' is not set");
         }
         return value;
+    }
+
+    static String resolveMavenCommand() {
+        String command = requireSystemProperty("mvn-command");
+        if (command.startsWith("./")) {
+            String projectRoot = requireSystemProperty("maven.multiModuleProjectDirectory");
+            return Path.of(projectRoot, command.substring(2)).toString();
+        }
+        return command;
     }
 
     private File resolveArchetypeJar(String version) {
