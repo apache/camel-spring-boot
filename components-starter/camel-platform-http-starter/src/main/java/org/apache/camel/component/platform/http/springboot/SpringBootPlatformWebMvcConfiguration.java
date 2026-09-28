@@ -16,7 +16,10 @@
  */
 package org.apache.camel.component.platform.http.springboot;
 
+import java.time.Duration;
+
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
@@ -28,24 +31,26 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SpringBootPlatformWebMvcConfiguration implements WebMvcConfigurer {
 
     private final PlatformHttpComponentConfiguration platformHttpComponentConfiguration;
-    private final WebMvcProperties webMvcProperties;
+    private final ObjectProvider<WebMvcProperties> webMvcProperties;
 
+    // WebMvcProperties is only registered in a servlet web application
     public SpringBootPlatformWebMvcConfiguration(PlatformHttpComponentConfiguration platformHttpComponentConfiguration,
-                                                 WebMvcProperties webMvcProperties) {
+                                                 ObjectProvider<WebMvcProperties> webMvcProperties) {
         this.platformHttpComponentConfiguration = platformHttpComponentConfiguration;
         this.webMvcProperties = webMvcProperties;
     }
 
     @Override
     public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
-        if (webMvcProperties.getAsync().getRequestTimeout() == null &&
-                platformHttpComponentConfiguration.getRequestTimeout() != null) {
+        WebMvcProperties properties = webMvcProperties.getIfAvailable();
+        Duration requestTimeout = properties != null ? properties.getAsync().getRequestTimeout() : null;
+
+        if (requestTimeout == null && platformHttpComponentConfiguration.getRequestTimeout() != null) {
             configurer.setDefaultTimeout(platformHttpComponentConfiguration.getRequestTimeout());
         }
 
-        if (webMvcProperties.getAsync().getRequestTimeout() != null &&
-                platformHttpComponentConfiguration.getRequestTimeout() == null) {
-            platformHttpComponentConfiguration.setRequestTimeout(webMvcProperties.getAsync().getRequestTimeout().toMillis());
+        if (requestTimeout != null && platformHttpComponentConfiguration.getRequestTimeout() == null) {
+            platformHttpComponentConfiguration.setRequestTimeout(requestTimeout.toMillis());
         }
     }
 }

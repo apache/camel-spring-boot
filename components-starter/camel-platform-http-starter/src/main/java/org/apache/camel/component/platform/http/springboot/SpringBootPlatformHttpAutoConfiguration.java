@@ -44,7 +44,7 @@ public class SpringBootPlatformHttpAutoConfiguration {
 
     @Bean(name = "platform-http-engine")
     @ConditionalOnMissingBean(PlatformHttpEngine.class)
-    public PlatformHttpEngine springBootPlatformHttpEngine(Environment env, ServerProperties serverProperties,
+    public PlatformHttpEngine springBootPlatformHttpEngine(Environment env, ObjectProvider<ServerProperties> serverProperties,
                                                            List<Executor> executors,
                                                            SpringBootPlatformHttpServerProperties serverHttpProperties) {
         if (executors == null || executors.isEmpty()) {
@@ -88,7 +88,10 @@ public class SpringBootPlatformHttpAutoConfiguration {
         } else {
             LOG.debug("Using executor: {}", executor.getClass().getName());
         }
-        int port = serverProperties.getPort() != null ? serverProperties.getPort() : 8080;
+        // ServerProperties is only registered in a servlet web application
+        ServerProperties server = serverProperties.getIfAvailable();
+        int port = server != null && server.getPort() != null
+                ? server.getPort() : env.getProperty("server.port", Integer.class, 8080);
         return new SpringBootPlatformHttpEngine(port, executor, serverHttpProperties.isDeleteUploadedFilesOnEnd());
     }
 
