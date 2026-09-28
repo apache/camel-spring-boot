@@ -31,6 +31,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <spring.boot-version>${spring-boot-version}</spring.boot-version>
+    <!-- Spring Boot 4.1 manages jOOQ 3.20+, which requires Java 21. -->
+    <jooq.version>3.19.30</jooq.version>
     <surefire.plugin.version>3.0.0-M4</surefire.plugin.version>
   </properties>
 
@@ -51,6 +53,11 @@
         <version>${spring.boot-version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.jooq</groupId>
+        <artifactId>jooq</artifactId>
+        <version>${jooq.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

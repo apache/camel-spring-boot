@@ -23,6 +23,6 @@ public class CamelJoorIT extends AbstractSpringBootBaseTestSupport {
 
     @Test
     void languageTest() {
-        assertLanguage(inferComponentName(getClass()));
+        assertLanguage("java");
     }
 }
