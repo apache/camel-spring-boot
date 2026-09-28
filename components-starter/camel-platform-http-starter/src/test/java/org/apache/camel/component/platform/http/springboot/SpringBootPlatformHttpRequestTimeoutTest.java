@@ -16,6 +16,10 @@
  */
 package org.apache.camel.component.platform.http.springboot;
 
+import java.time.Duration;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
+
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
@@ -31,6 +35,10 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+
+import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 
 @EnableAutoConfiguration(exclude = {OAuth2ClientAutoConfiguration.class, SecurityAutoConfiguration.class})
 @CamelSpringBootTest
@@ -44,14 +52,43 @@ public class SpringBootPlatformHttpRequestTimeoutTest {
     @Autowired
     TestRestTemplate restTemplate;
 
+    @Autowired
+    TestConfiguration testConfiguration;
+
     @Test
-    public void testGetAsync() throws Exception {
-        Assertions.assertThat(restTemplate.getForEntity("/slow-get", String.class).getStatusCode())
-                .isEqualTo(HttpStatusCode.valueOf(503));
+    public void testGetAsync() {
+        testConfiguration.routeRelease = new CompletableFuture<>();
+        try {
+            assertTimeoutResponse("/slow-get");
+        } finally {
+            testConfiguration.routeRelease.complete(null);
+        }
+    }
+
+    @Test
+    public void testInterruptedRoute() {
+        testConfiguration.interruptibleRouteRelease = new CountDownLatch(1);
+        try {
+            assertTimeoutResponse("/slow-interruptible-get");
+        } finally {
+            testConfiguration.interruptibleRouteRelease.countDown();
+        }
+    }
+
+    private void assertTimeoutResponse(String path) {
+        ResponseEntity<String> response = assertTimeoutPreemptively(Duration.ofSeconds(10),
+                () -> restTemplate.getForEntity(path, String.class));
+        Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(503));
+        Assertions.assertThat(response.getHeaders().getContentType())
+                .satisfies(contentType -> Assertions.assertThat(contentType.isCompatibleWith(MediaType.APPLICATION_JSON)).isTrue());
+        Assertions.assertThat(response.getBody()).contains("\"status\":503");
     }
 
     @Configuration
     public static class TestConfiguration {
+
+        private volatile CompletableFuture<Void> routeRelease;
+        private volatile CountDownLatch interruptibleRouteRelease;
 
         @Bean
         public RouteBuilder platformHttpRouteBuilder() {
@@ -59,7 +96,10 @@ public class SpringBootPlatformHttpRequestTimeoutTest {
                 @Override
                 public void configure() {
                     from("platform-http:/slow-get").id("slow-route")
-                            .process(exchange -> Thread.sleep(1000))
+                            .process(exchange -> routeRelease.join())
+                            .setBody().constant("get");
+                    from("platform-http:/slow-interruptible-get").id("slow-interruptible-route")
+                            .process(exchange -> interruptibleRouteRelease.await())
                             .setBody().constant("get");
                 }
             };

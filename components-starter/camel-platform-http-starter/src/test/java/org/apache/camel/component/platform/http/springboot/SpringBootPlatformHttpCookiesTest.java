@@ -105,7 +105,7 @@ public class SpringBootPlatformHttpCookiesTest {
                             })
                             .setBody().constant("replace");
 
-                    from("platform-http:/echo")
+                    from("platform-http:/echo?returnHttpRequestHeaders=true")
                             .setBody().constant("echo");
                 }
             };
