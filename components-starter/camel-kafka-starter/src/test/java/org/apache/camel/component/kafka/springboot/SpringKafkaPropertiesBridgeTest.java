@@ -17,7 +17,9 @@
 package org.apache.camel.component.kafka.springboot;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.Component;
 import org.apache.camel.component.kafka.KafkaComponent;
+import org.apache.camel.spi.ComponentCustomizer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
@@ -61,6 +63,56 @@ class SpringKafkaPropertiesBridgeTest {
                             .getComponent("kafka", KafkaComponent.class);
                     assertThat(kafka.getConfiguration().getBrokers())
                             .isEqualTo("my-broker:9092");
+                });
+    }
+
+    @Test
+    void shouldPreserveApplicationCustomizerValue() {
+        contextRunner
+                .withBean(ComponentCustomizer.class, () -> new ComponentCustomizer() {
+                    @Override
+                    public void configure(String name, Component target) {
+                        if (target instanceof KafkaComponent kafka) {
+                            kafka.getConfiguration().setBrokers("custom-broker:9092");
+                        }
+                    }
+                })
+                .withPropertyValues(
+                        "spring.kafka.bootstrap-servers=broker1:9092",
+                        "camel.component.kafka.enabled=true")
+                .run(context -> {
+                    KafkaComponent kafka = context.getBean(CamelContext.class)
+                            .getComponent("kafka", KafkaComponent.class);
+                    assertThat(kafka.getConfiguration().getBrokers())
+                            .isEqualTo("custom-broker:9092");
+                });
+    }
+
+    @Test
+    void shouldRespectKafkaCustomizerDisableSwitch() {
+        contextRunner
+                .withPropertyValues(
+                        "spring.kafka.bootstrap-servers=broker1:9092",
+                        "camel.component.kafka.customizer.enabled=false",
+                        "camel.component.kafka.enabled=true")
+                .run(context -> {
+                    KafkaComponent kafka = context.getBean(CamelContext.class)
+                            .getComponent("kafka", KafkaComponent.class);
+                    assertThat(kafka.getConfiguration().getBrokers()).isNull();
+                });
+    }
+
+    @Test
+    void shouldRespectGlobalCustomizerDisableSwitch() {
+        contextRunner
+                .withPropertyValues(
+                        "spring.kafka.bootstrap-servers=broker1:9092",
+                        "camel.component.customizer.enabled=false",
+                        "camel.component.kafka.enabled=true")
+                .run(context -> {
+                    KafkaComponent kafka = context.getBean(CamelContext.class)
+                            .getComponent("kafka", KafkaComponent.class);
+                    assertThat(kafka.getConfiguration().getBrokers()).isNull();
                 });
     }
 

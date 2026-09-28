@@ -23,6 +23,7 @@ import org.apache.camel.Component;
 import org.apache.camel.component.kafka.KafkaComponent;
 import org.apache.camel.component.kafka.KafkaConfiguration;
 import org.apache.camel.spi.ComponentCustomizer;
+import org.apache.camel.spring.boot.util.HierarchicalPropertiesEvaluator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -65,11 +66,13 @@ public class SpringKafkaPropertiesAutoConfiguration {
 
     private final KafkaProperties kafkaProperties;
     private final Binder binder;
+    private final Environment environment;
 
     public SpringKafkaPropertiesAutoConfiguration(
             KafkaProperties kafkaProperties,
             Environment environment) {
         this.kafkaProperties = kafkaProperties;
+        this.environment = environment;
         this.binder = Binder.get(environment);
     }
 
@@ -85,8 +88,15 @@ public class SpringKafkaPropertiesAutoConfiguration {
             }
 
             @Override
+            public boolean isEnabled(String name, Component target) {
+                return target instanceof KafkaComponent
+                        && HierarchicalPropertiesEvaluator.evaluate(environment,
+                                "camel.component.customizer", "camel.component.kafka.customizer");
+            }
+
+            @Override
             public int getOrder() {
-                return Ordered.LOWEST;
+                return Ordered.HIGHEST;
             }
         };
     }
