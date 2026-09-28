@@ -18,8 +18,11 @@ package org.apache.camel.component.kafka.springboot;
 
 import java.util.Map;
 
-import jakarta.annotation.PostConstruct;
-
+import org.apache.camel.Ordered;
+import org.apache.camel.Component;
+import org.apache.camel.component.kafka.KafkaComponent;
+import org.apache.camel.component.kafka.KafkaConfiguration;
+import org.apache.camel.spi.ComponentCustomizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -30,6 +33,8 @@ import org.springframework.boot.context.properties.bind.Bindable;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.boot.kafka.autoconfigure.KafkaAutoConfiguration;
 import org.springframework.boot.kafka.autoconfigure.KafkaProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 
@@ -59,34 +64,48 @@ public class SpringKafkaPropertiesAutoConfiguration {
     private static final String SPRING_KAFKA_PREFIX = "spring.kafka.";
 
     private final KafkaProperties kafkaProperties;
-    private final KafkaComponentConfiguration camelKafkaConfig;
     private final Binder binder;
 
     public SpringKafkaPropertiesAutoConfiguration(
             KafkaProperties kafkaProperties,
-            KafkaComponentConfiguration camelKafkaConfig,
             Environment environment) {
         this.kafkaProperties = kafkaProperties;
-        this.camelKafkaConfig = camelKafkaConfig;
         this.binder = Binder.get(environment);
     }
 
-    @PostConstruct
-    public void bridgeProperties() {
+    @Lazy
+    @Bean
+    public ComponentCustomizer configureSpringKafkaProperties() {
+        return new ComponentCustomizer() {
+            @Override
+            public void configure(String name, Component target) {
+                if (target instanceof KafkaComponent kafkaComponent) {
+                    bridgeProperties(kafkaComponent.getConfiguration());
+                }
+            }
+
+            @Override
+            public int getOrder() {
+                return Ordered.LOWEST;
+            }
+        };
+    }
+
+    private void bridgeProperties(KafkaConfiguration configuration) {
         boolean bridged = false;
 
         // Bootstrap servers — KafkaProperties defaults to ["localhost:9092"],
         // so we must check if the user explicitly set spring.kafka.bootstrap-servers
         if (!isCamelPropertyBound("brokers") && isSpringPropertyBound("bootstrap-servers")) {
             String brokers = String.join(",", kafkaProperties.getBootstrapServers());
-            camelKafkaConfig.setBrokers(brokers);
+            configuration.setBrokers(brokers);
             LOG.debug("Bridged spring.kafka.bootstrap-servers -> camel.component.kafka.brokers: {}", brokers);
             bridged = true;
         }
 
         // Client ID
         if (!isCamelPropertyBound("client-id") && kafkaProperties.getClientId() != null) {
-            camelKafkaConfig.setClientId(kafkaProperties.getClientId());
+            configuration.setClientId(kafkaProperties.getClientId());
             LOG.debug("Bridged spring.kafka.client-id -> camel.component.kafka.client-id");
             bridged = true;
         }
@@ -95,7 +114,7 @@ public class SpringKafkaPropertiesAutoConfiguration {
         if (!isCamelPropertyBound("security-protocol")
                 && kafkaProperties.getSecurity() != null
                 && kafkaProperties.getSecurity().getProtocol() != null) {
-            camelKafkaConfig.setSecurityProtocol(kafkaProperties.getSecurity().getProtocol());
+            configuration.setSecurityProtocol(kafkaProperties.getSecurity().getProtocol());
             LOG.debug("Bridged spring.kafka.security.protocol -> camel.component.kafka.security-protocol");
             bridged = true;
         }
@@ -104,23 +123,23 @@ public class SpringKafkaPropertiesAutoConfiguration {
         if (!isCamelPropertyBound("group-id")
                 && kafkaProperties.getConsumer() != null
                 && kafkaProperties.getConsumer().getGroupId() != null) {
-            camelKafkaConfig.setGroupId(kafkaProperties.getConsumer().getGroupId());
+            configuration.setGroupId(kafkaProperties.getConsumer().getGroupId());
             LOG.debug("Bridged spring.kafka.consumer.group-id -> camel.component.kafka.group-id");
             bridged = true;
         }
 
         // SSL properties
-        bridged |= bridgeSslProperties();
+        bridged |= bridgeSslProperties(configuration);
 
         // SASL properties from spring.kafka.properties map
-        bridged |= bridgeSaslProperties();
+        bridged |= bridgeSaslProperties(configuration);
 
         if (bridged) {
             LOG.info("Bridged spring.kafka.* properties to camel.component.kafka.*");
         }
     }
 
-    private boolean bridgeSslProperties() {
+    private boolean bridgeSslProperties(KafkaConfiguration configuration) {
         KafkaProperties.Ssl ssl = kafkaProperties.getSsl();
         if (ssl == null) {
             return false;
@@ -129,35 +148,35 @@ public class SpringKafkaPropertiesAutoConfiguration {
         boolean bridged = false;
 
         if (!isCamelPropertyBound("ssl-key-password") && ssl.getKeyPassword() != null) {
-            camelKafkaConfig.setSslKeyPassword(ssl.getKeyPassword());
+            configuration.setSslKeyPassword(ssl.getKeyPassword());
             bridged = true;
         }
         if (!isCamelPropertyBound("ssl-keystore-location") && ssl.getKeyStoreLocation() != null) {
-            camelKafkaConfig.setSslKeystoreLocation(resourceToPath(ssl.getKeyStoreLocation()));
+            configuration.setSslKeystoreLocation(resourceToPath(ssl.getKeyStoreLocation()));
             bridged = true;
         }
         if (!isCamelPropertyBound("ssl-keystore-password") && ssl.getKeyStorePassword() != null) {
-            camelKafkaConfig.setSslKeystorePassword(ssl.getKeyStorePassword());
+            configuration.setSslKeystorePassword(ssl.getKeyStorePassword());
             bridged = true;
         }
         if (!isCamelPropertyBound("ssl-keystore-type") && ssl.getKeyStoreType() != null) {
-            camelKafkaConfig.setSslKeystoreType(ssl.getKeyStoreType());
+            configuration.setSslKeystoreType(ssl.getKeyStoreType());
             bridged = true;
         }
         if (!isCamelPropertyBound("ssl-truststore-location") && ssl.getTrustStoreLocation() != null) {
-            camelKafkaConfig.setSslTruststoreLocation(resourceToPath(ssl.getTrustStoreLocation()));
+            configuration.setSslTruststoreLocation(resourceToPath(ssl.getTrustStoreLocation()));
             bridged = true;
         }
         if (!isCamelPropertyBound("ssl-truststore-password") && ssl.getTrustStorePassword() != null) {
-            camelKafkaConfig.setSslTruststorePassword(ssl.getTrustStorePassword());
+            configuration.setSslTruststorePassword(ssl.getTrustStorePassword());
             bridged = true;
         }
         if (!isCamelPropertyBound("ssl-truststore-type") && ssl.getTrustStoreType() != null) {
-            camelKafkaConfig.setSslTruststoreType(ssl.getTrustStoreType());
+            configuration.setSslTruststoreType(ssl.getTrustStoreType());
             bridged = true;
         }
         if (!isCamelPropertyBound("ssl-protocol") && ssl.getProtocol() != null) {
-            camelKafkaConfig.setSslProtocol(ssl.getProtocol());
+            configuration.setSslProtocol(ssl.getProtocol());
             bridged = true;
         }
 
@@ -167,7 +186,7 @@ public class SpringKafkaPropertiesAutoConfiguration {
         return bridged;
     }
 
-    private boolean bridgeSaslProperties() {
+    private boolean bridgeSaslProperties(KafkaConfiguration configuration) {
         Map<String, String> rawProps = kafkaProperties.getProperties();
         if (rawProps == null || rawProps.isEmpty()) {
             return false;
@@ -177,19 +196,19 @@ public class SpringKafkaPropertiesAutoConfiguration {
 
         if (!isCamelPropertyBound("sasl-mechanism")
                 && rawProps.containsKey("sasl.mechanism")) {
-            camelKafkaConfig.setSaslMechanism(rawProps.get("sasl.mechanism"));
+            configuration.setSaslMechanism(rawProps.get("sasl.mechanism"));
             LOG.debug("Bridged spring.kafka.properties[sasl.mechanism] -> camel.component.kafka.sasl-mechanism");
             bridged = true;
         }
         if (!isCamelPropertyBound("sasl-jaas-config")
                 && rawProps.containsKey("sasl.jaas.config")) {
-            camelKafkaConfig.setSaslJaasConfig(rawProps.get("sasl.jaas.config"));
+            configuration.setSaslJaasConfig(rawProps.get("sasl.jaas.config"));
             LOG.debug("Bridged spring.kafka.properties[sasl.jaas.config] -> camel.component.kafka.sasl-jaas-config");
             bridged = true;
         }
         if (!isCamelPropertyBound("sasl-kerberos-service-name")
                 && rawProps.containsKey("sasl.kerberos.service.name")) {
-            camelKafkaConfig.setSaslKerberosServiceName(rawProps.get("sasl.kerberos.service.name"));
+            configuration.setSaslKerberosServiceName(rawProps.get("sasl.kerberos.service.name"));
             LOG.debug("Bridged spring.kafka.properties[sasl.kerberos.service.name] -> camel.component.kafka.sasl-kerberos-service-name");
             bridged = true;
         }

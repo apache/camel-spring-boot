@@ -55,7 +55,7 @@ public class SqlTransactedRouteTest extends BaseSql {
     private JdbcTemplate jdbc;
 
     private static String startEndpoint = "direct:start";
-    private static String sqlEndpoint = "sql:overriddenByTheHeader?dataSource=#testdb";
+    private static String sqlEndpoint = "sql:overriddenByTheHeader?dataSource=#testdb&allowQueryFromHeader=true";
 
     @Autowired
     private DataSource ds;
