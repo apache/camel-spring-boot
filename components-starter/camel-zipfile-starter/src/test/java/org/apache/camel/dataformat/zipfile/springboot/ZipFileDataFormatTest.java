@@ -355,7 +355,7 @@ public class ZipFileDataFormatTest {
                                 public void process(Exchange exchange) throws Exception {
                                     ZipFile zfile = new ZipFile(new File("src/test/resources/hello.odt"));
                                     ZipEntry entry = new ZipEntry(
-                                            (String) exchange.getIn().getHeader(Exchange.FILE_NAME));
+                                            (String) exchange.getIn().getHeader("zipFileName"));
                                     String outputDirectory = "hello_out";
                                     File file = new File(outputDirectory, entry.getName());
 

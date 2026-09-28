@@ -17,21 +17,12 @@
 package org.apache.camel.itest.springboot;
 
 import org.apache.camel.itest.springboot.common.AbstractSpringBootBaseTestSupport;
-import org.apache.camel.itest.springboot.common.ArchetypeConfig;
 import org.junit.jupiter.api.Test;
 
-public class CamelJooqIT extends AbstractSpringBootBaseTestSupport {
-
-    @Override
-    protected ArchetypeConfig getArchetypeConfig() {
-        // Spring Boot manages a Java 21 version of jOOQ; this test runs on Java 17.
-        return baseArchetypeConfig()
-                .dependency("org.jooq:jooq:" + System.getProperty("jooq-version"))
-                .build();
-    }
+public class CamelJactlIT extends AbstractSpringBootBaseTestSupport {
 
     @Test
-    void componentTest() {
-        assertComponent(inferComponentName(getClass()));
+    void languageTest() {
+        assertLanguage(inferComponentName(getClass()));
     }
 }
