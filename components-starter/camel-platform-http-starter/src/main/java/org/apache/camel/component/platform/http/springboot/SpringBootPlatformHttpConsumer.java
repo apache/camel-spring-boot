@@ -18,6 +18,7 @@ package org.apache.camel.component.platform.http.springboot;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -43,11 +44,13 @@ import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.scheduling.concurrent.ConcurrentTaskExecutor;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.async.AsyncRequestTimeoutException;
 import org.springframework.web.context.request.async.WebAsyncTask;
 
 public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements PlatformHttpConsumer, Suspendable, SuspendableService {
 
     private static final Logger LOG = LoggerFactory.getLogger(SpringBootPlatformHttpConsumer.class);
+    private static final String REQUEST_TIMED_OUT = SpringBootPlatformHttpConsumer.class.getName() + ".requestTimedOut";
 
     private HttpBinding binding;
     private final boolean handleWriteResponseError;
@@ -99,6 +102,8 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
      */
     @ResponseBody
     public WebAsyncTask<Void> service(HttpServletRequest request, HttpServletResponse response) {
+        AtomicBoolean requestTimedOut = new AtomicBoolean();
+        request.setAttribute(REQUEST_TIMED_OUT, requestTimedOut);
         AsyncTaskExecutor asyncExecutor = (executor instanceof AsyncTaskExecutor ate)
                 ? ate
                 : new ConcurrentTaskExecutor(executor);
@@ -110,7 +115,7 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
                 // do not leak exception back to caller
                 LOG.warn("Error handling request due to: {}", e.getMessage(), e);
                 try {
-                    if (!response.isCommitted()) {
+                    if (!requestTimedOut.get() && !response.isCommitted()) {
                         response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                     }
                 } catch (Exception e1) {
@@ -118,6 +123,14 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
                 }
             }
             return null;
+        });
+        task.onTimeout(() -> {
+            requestTimedOut.set(true);
+            if (!response.isCommitted()) {
+                response.setContentType(null);
+            }
+            // Let Spring MVC resolve the timeout so Boot can render its normal error response.
+            throw new AsyncRequestTimeoutException();
         });
         return task;
     }
@@ -130,6 +143,7 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         }
 
         Exchange exchange = createExchange(true);
+        exchange.setProperty(REQUEST_TIMED_OUT, request.getAttribute(REQUEST_TIMED_OUT));
         exchange.setPattern(ExchangePattern.InOut);
         HttpHelper.setCharsetFromContentType(request.getContentType(), exchange);
         boolean streaming = getEndpoint().isUseStreaming();
@@ -168,7 +182,14 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
             if (LOG.isTraceEnabled()) {
                 LOG.trace("Writing res for exchangeId: {}", exchange.getExchangeId());
             }
-            binding.writeResponse(exchange, response);
+            AtomicBoolean requestTimedOut = exchange.getProperty(REQUEST_TIMED_OUT, AtomicBoolean.class);
+            // Spring cancels the worker before invoking the timeout callback. An interrupted route can
+            // finish in that interval, so it must not write over Spring MVC's 503 error response.
+            boolean cancelled = requestTimedOut != null
+                    && (requestTimedOut.get() || exchange.getException() instanceof InterruptedException);
+            if (!cancelled) {
+                binding.writeResponse(exchange, response);
+            }
         } catch (Exception e) {
             writeFailure = true;
             handleFailure(exchange, e);
@@ -249,5 +270,3 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
         }
     }
 }
-
-
