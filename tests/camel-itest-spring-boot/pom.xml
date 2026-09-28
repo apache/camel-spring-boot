@@ -138,6 +138,7 @@
                     <systemPropertyVariables>
                         <camel-version>${camel-version}</camel-version>
                         <spring-boot-version>${spring-boot-version}</spring-boot-version>
+                        <jooq-version>${jooq-version}</jooq-version>
                         <maven-compiler-plugin-version>${maven-compiler-plugin-version}</maven-compiler-plugin-version>
                         <project-version>${project.version}</project-version>
                         <project.build.directory>${project.build.directory}</project.build.directory>
