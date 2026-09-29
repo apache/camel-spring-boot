@@ -17,6 +17,7 @@
 
 package org.apache.camel.component.file.remote.springboot.ftp;
 
+import org.apache.camel.test.AvailablePortFinder;
 import org.apache.camel.test.infra.common.services.AbstractTestService;
 import org.apache.camel.test.infra.ftp.common.FtpProperties;
 import org.apache.camel.test.infra.ftp.services.FtpService;
@@ -63,6 +64,9 @@ public class FtpEmbeddedService extends AbstractTestService implements FtpServic
     private ExtensionContext context;
 
     public FtpEmbeddedService() {
+        // Reserve the port up front: Spring builds the Camel routes (and their FTP URIs) before
+        // beforeEach starts the server, so the port must be known before the first test runs
+        port = AvailablePortFinder.getNextAvailable();
     }
 
     public void setUp() throws Exception {
