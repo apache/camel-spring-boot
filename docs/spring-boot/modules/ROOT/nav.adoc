@@ -299,7 +299,7 @@
 ** xref:starters/olingo4.adoc[Olingo4]
 ** xref:starters/once.adoc[Once]
 ** xref:starters/opa.adoc[OPA]
-** xref:starters/openai.adoc[OpenAI]
+** xref:starters/openai.adoc[LLM]
 ** xref:starters/openapi-java.adoc[Openapi Java]
 ** xref:starters/openapi-validator.adoc[Openapi Validator]
 ** xref:starters/opensearch.adoc[OpenSearch]
