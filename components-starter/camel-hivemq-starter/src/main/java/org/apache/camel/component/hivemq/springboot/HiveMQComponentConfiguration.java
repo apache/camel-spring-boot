@@ -67,10 +67,6 @@ public class HiveMQComponentConfiguration
      */
     private Boolean retained = false;
     /**
-     * Whether to enable SSL/TLS encryption for the broker connection.
-     */
-    private Boolean ssl = false;
-    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions (if possible) occurred while the Camel consumer
      * is trying to pickup incoming messages, or the likes, will now be
@@ -108,6 +104,10 @@ public class HiveMQComponentConfiguration
      * Password for authentication with the HiveMQ broker.
      */
     private String password;
+    /**
+     * Whether to enable SSL/TLS encryption for the broker connection.
+     */
+    private Boolean ssl = false;
     /**
      * Username for authentication with the HiveMQ broker.
      */
@@ -169,14 +169,6 @@ public class HiveMQComponentConfiguration
         this.retained = retained;
     }
 
-    public Boolean getSsl() {
-        return ssl;
-    }
-
-    public void setSsl(Boolean ssl) {
-        this.ssl = ssl;
-    }
-
     public Boolean getBridgeErrorHandler() {
         return bridgeErrorHandler;
     }
@@ -207,6 +199,14 @@ public class HiveMQComponentConfiguration
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getSsl() {
+        return ssl;
+    }
+
+    public void setSsl(Boolean ssl) {
+        this.ssl = ssl;
     }
 
     public String getUsername() {
