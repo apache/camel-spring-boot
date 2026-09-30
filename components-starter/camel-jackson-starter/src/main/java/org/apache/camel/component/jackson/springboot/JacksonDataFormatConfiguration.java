@@ -104,13 +104,17 @@ public class JacksonDataFormatConfiguration
     /**
      * Set of features to enable on the Jackson
      * com.fasterxml.jackson.databind.ObjectMapper. Multiple features can be
-     * separated by comma.
+     * separated by comma. When using Jackson 3, a feature can be qualified with
+     * its enum class name (e.g. SerializationFeature.WRAP_ROOT_VALUE) to tell
+     * apart features with the same name.
      */
     private String enableFeatures;
     /**
      * Set of features to disable on the Jackson
      * com.fasterxml.jackson.databind.ObjectMapper. Multiple features can be
-     * separated by comma.
+     * separated by comma. When using Jackson 3, a feature can be qualified with
+     * its enum class name (e.g. SerializationFeature.WRAP_ROOT_VALUE) to tell
+     * apart features with the same name.
      */
     private String disableFeatures;
     /**

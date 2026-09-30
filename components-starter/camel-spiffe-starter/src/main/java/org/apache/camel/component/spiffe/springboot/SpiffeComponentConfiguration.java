@@ -20,6 +20,7 @@ import io.spiffe.workloadapi.WorkloadApiClient;
 import org.apache.camel.component.spiffe.SpiffeComponent;
 import org.apache.camel.component.spiffe.SpiffeConfiguration;
 import org.apache.camel.component.spiffe.SpiffeOperation;
+import org.apache.camel.component.spiffe.SpiffeX509Response;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -97,6 +98,16 @@ public class SpiffeComponentConfiguration
      * the SPIFFE_ENDPOINT_SOCKET environment variable is used.
      */
     private String spiffeSocketPath;
+    /**
+     * What the fetchX509Svid operation returns in the message body. Defaults to
+     * chain: the X.509 certificate chain without the private key, so a route
+     * never handles key material unless it asks for it. Choose svid to get the
+     * whole X509Svid including the private key (needed for programmatic mTLS),
+     * or id to leave the body untouched. The SPIFFE ID and expiry are exposed
+     * through the CamelSpiffeSpiffeId and CamelSpiffeExpiry headers in every
+     * case.
+     */
+    private SpiffeX509Response x509Response = SpiffeX509Response.chain;
 
     public String getAudience() {
         return audience;
@@ -160,5 +171,13 @@ public class SpiffeComponentConfiguration
 
     public void setSpiffeSocketPath(String spiffeSocketPath) {
         this.spiffeSocketPath = spiffeSocketPath;
+    }
+
+    public SpiffeX509Response getX509Response() {
+        return x509Response;
+    }
+
+    public void setX509Response(SpiffeX509Response x509Response) {
+        this.x509Response = x509Response;
     }
 }

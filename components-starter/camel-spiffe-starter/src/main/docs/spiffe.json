@@ -75,6 +75,13 @@
       "type": "io.spiffe.workloadapi.WorkloadApiClient",
       "description": "An existing WorkloadApiClient to use. When set, the component does not create or close its own client and spiffeSocketPath is ignored. The option is a io.spiffe.workloadapi.WorkloadApiClient type.",
       "sourceType": "org.apache.camel.component.spiffe.springboot.SpiffeComponentConfiguration"
+    },
+    {
+      "name": "camel.component.spiffe.x509-response",
+      "type": "org.apache.camel.component.spiffe.SpiffeX509Response",
+      "description": "What the fetchX509Svid operation returns in the message body. Defaults to chain: the X.509 certificate chain without the private key, so a route never handles key material unless it asks for it. Choose svid to get the whole X509Svid including the private key (needed for programmatic mTLS), or id to leave the body untouched. The SPIFFE ID and expiry are exposed through the CamelSpiffeSpiffeId and CamelSpiffeExpiry headers in every case.",
+      "sourceType": "org.apache.camel.component.spiffe.springboot.SpiffeComponentConfiguration",
+      "defaultValue": "chain"
     }
   ],
   "hints": [],
