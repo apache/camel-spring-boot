@@ -30,13 +30,15 @@ The `stop` action of the tooling (for example `camel stop`) closes the Spring ap
 
 === WebSocket transport
 
-With `camel.cli.transport = websocket`, the application connects to the tool at `camel.cli.websocket.url`. See the CLI Connector documentation of Camel for the protocol and the security rules: *the tool gets full control of the application*, the transport is for development only and is refused with the `prod` profile.
+With `camel.cli.transport = websocket`, the application connects to the tool at `camel.cli.websocket.url`. See the CLI Connector documentation of Camel for the protocol and the security rules: *the tool gets full control of the application*, so the transport is for development only. Set it in a development profile, for example in `application-dev.properties`:
 
 [source,properties]
 ----
 camel.cli.transport = websocket
 camel.cli.websocket.url = ws://127.0.0.1:8000/connect
 ----
+
+The transport refuses to start when the Spring `prod` profile is active, as with the Camel `prod` profile (`camel.main.profile = prod`).
 
 The WebSocket client of Spring is used when the application has `spring-websocket` and a Jakarta WebSocket client, for example with `spring-boot-starter-websocket`. Otherwise, the JDK client is used: the starter does not add any dependency for it. The log, and the `transport` field of the `hello` frame sent to the tool, say which client is used (`spring` or `jdk`). Set `camel.cli.websocket.client = jdk` to always use the JDK client.
 

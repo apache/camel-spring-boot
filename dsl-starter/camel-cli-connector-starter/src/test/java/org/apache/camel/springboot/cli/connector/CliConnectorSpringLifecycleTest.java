@@ -28,12 +28,13 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.awaitility.Awaitility.await;
 
 /**
- * The stop action closes the Spring application context, so the application exits.
+ * How the connector stops a Spring Boot application, and refuses to run where it should not.
  */
-class CliConnectorStopActionTest {
+class CliConnectorSpringLifecycleTest {
 
     private final ToolServer tool = new ToolServer();
     private ConfigurableApplicationContext context;
@@ -64,5 +65,24 @@ class CliConnectorStopActionTest {
 
         assertThat(tool.awaitResult("r1").getBoolean("ok")).isTrue();
         await().atMost(20, TimeUnit.SECONDS).untilAsserted(() -> assertThat(context.isActive()).isFalse());
+    }
+
+    @Test
+    void refusesTheWebSocketTransportWithTheSpringProdProfile() throws Exception {
+        tool.start();
+        SpringApplicationBuilder app = new SpringApplicationBuilder(
+                CamelAutoConfiguration.class, CliConnectorAutoConfiguration.class,
+                CliConnectorWebSocketTestSupport.Routes.class)
+                .web(WebApplicationType.NONE)
+                .profiles("prod")
+                .properties(
+                        "camel.cli.transport=websocket",
+                        "camel.cli.websocket.url=" + tool.url());
+
+        assertThatThrownBy(app::run).hasRootCauseMessage(
+                "The Camel CLI connector websocket transport gives the connected tool full control of this application"
+                                                         + " and cannot be used with the Spring prod profile."
+                                                         + " Remove camel.cli.transport=websocket, or use another profile.");
+        assertThat(tool.sessions).isEmpty();
     }
 }
