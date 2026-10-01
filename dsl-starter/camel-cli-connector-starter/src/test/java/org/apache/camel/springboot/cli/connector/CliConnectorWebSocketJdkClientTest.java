@@ -35,7 +35,7 @@ import org.springframework.test.annotation.DirtiesContext;
                 properties = {
                         "camel.cli.transport=websocket",
                         "camel.cli.websocket.snapshot-interval=200",
-                 "camel.cli.websocket.client=jdk" })
+                        "camel.cli.websocket.client=jdk" })
 class CliConnectorWebSocketJdkClientTest extends CliConnectorWebSocketTestSupport {
 
     @Override

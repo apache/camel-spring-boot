@@ -137,7 +137,11 @@ public class SpringCliWebSocketClient implements CliWebSocketClient {
                     // pings and close frames are blocking sends
                     properties.put(BLOCKING_SEND_TIMEOUT_PROPERTY, timeout);
                     answer.setUserProperties(properties);
-                    answer.setTaskExecutor(new SimpleAsyncTaskExecutor("CliConnectorWebSocketConnect-"));
+                    SimpleAsyncTaskExecutor executor = new SimpleAsyncTaskExecutor("CliConnectorWebSocketConnect-");
+                    // as the threads of the transport: when the application fails to start, Camel never stops the
+                    // connector, which keeps reconnecting, and a connect in progress must not keep the JVM alive
+                    executor.setDaemon(true);
+                    answer.setTaskExecutor(executor);
                     client = answer;
                 }
             }

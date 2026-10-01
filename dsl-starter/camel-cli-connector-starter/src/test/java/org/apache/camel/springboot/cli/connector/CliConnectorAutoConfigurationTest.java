@@ -20,6 +20,7 @@ import javax.net.ssl.SSLContext;
 
 import org.apache.camel.cli.connector.CliWebSocketClient;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.ssl.DefaultSslBundleRegistry;
 import org.springframework.boot.ssl.SslBundle;
@@ -27,10 +28,14 @@ import org.springframework.boot.ssl.SslBundles;
 import org.springframework.boot.ssl.SslStoreBundle;
 import org.springframework.boot.test.context.FilteredClassLoader;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
+import org.springframework.boot.test.system.CapturedOutput;
+import org.springframework.boot.test.system.OutputCaptureExtension;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(OutputCaptureExtension.class)
 class CliConnectorAutoConfigurationTest {
 
     private final ApplicationContextRunner runner = new ApplicationContextRunner()
@@ -53,6 +58,39 @@ class CliConnectorAutoConfigurationTest {
     void leavesTheJdkClientToCamelWithoutJakartaWebSocket() {
         runner.withClassLoader(new FilteredClassLoader("jakarta.websocket."))
                 .run(context -> assertThat(context).hasNotFailed().doesNotHaveBean(CliWebSocketClient.class));
+    }
+
+    @Test
+    void leavesTheJdkClientToCamelWithoutJakartaWebSocketImplementation() {
+        // spring-websocket and the Jakarta WebSocket API, but no implementation (no Tomcat, Jetty, ...)
+        runner.withClassLoader(new FilteredClassLoader(
+                new ClassPathResource("META-INF/services/" + OnSpringWebSocketClientCondition.PROVIDER_CLASS)))
+                .run(context -> assertThat(context).hasNotFailed().doesNotHaveBean(CliWebSocketClient.class));
+    }
+
+    @Test
+    void noSpringClientWhenTheJdkClientIsAskedFor() {
+        runner.withPropertyValues("camel.cli.websocket.client=jdk")
+                .run(context -> assertThat(context).hasNotFailed().doesNotHaveBean(CliWebSocketClient.class));
+    }
+
+    @Test
+    void warnsThatTheSslBundleIsIgnoredWithTheJdkClient(CapturedOutput output) {
+        runner.withPropertyValues("camel.cli.transport=websocket", "camel.cli.websocket.ssl-bundle=tool",
+                "camel.cli.websocket.client=jdk")
+                .run(context -> assertThat(output).contains(
+                        "camel.cli.websocket.ssl-bundle=tool is ignored: the JDK WebSocket client is used"
+                                                            + " (camel.cli.websocket.client=jdk)"));
+    }
+
+    @Test
+    void warnsThatTheSslBundleIsIgnoredWithoutSpringWebSocket(CapturedOutput output) {
+        runner.withClassLoader(new FilteredClassLoader(StandardWebSocketClient.class))
+                .withPropertyValues("camel.cli.transport=websocket", "camel.cli.websocket.ssl-bundle=tool")
+                .run(context -> assertThat(output).contains(
+                        "camel.cli.websocket.ssl-bundle=tool is ignored: the JDK WebSocket client is used"
+                                                            + " (the application has no spring-websocket and Jakarta"
+                                                            + " WebSocket implementation)"));
     }
 
     @Test

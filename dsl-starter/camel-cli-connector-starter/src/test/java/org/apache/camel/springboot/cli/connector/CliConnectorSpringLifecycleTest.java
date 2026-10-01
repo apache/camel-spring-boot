@@ -16,6 +16,8 @@
  */
 package org.apache.camel.springboot.cli.connector;
 
+import java.io.File;
+import java.nio.file.Path;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -23,6 +25,7 @@ import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.util.json.JsonObject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -65,6 +68,28 @@ class CliConnectorSpringLifecycleTest {
 
         assertThat(tool.awaitResult("r1").getBoolean("ok")).isTrue();
         await().atMost(20, TimeUnit.SECONDS).untilAsserted(() -> assertThat(context.isActive()).isFalse());
+    }
+
+    @Test
+    void camelStopClosesTheApplicationContext(@TempDir Path home) throws Exception {
+        // the file transport (camel stop deletes the lock file ~/.camel/{pid}): keep the test away from the real one
+        String oldHome = System.getProperty("user.home");
+        System.setProperty("user.home", home.toString());
+        try {
+            context = new SpringApplicationBuilder(
+                    CamelAutoConfiguration.class, CliConnectorAutoConfiguration.class,
+                    CliConnectorWebSocketTestSupport.Routes.class)
+                    .web(WebApplicationType.NONE)
+                    .run();
+            File lockFile = home.resolve(".camel").resolve(String.valueOf(ProcessHandle.current().pid())).toFile();
+            await().atMost(20, TimeUnit.SECONDS).until(lockFile::exists);
+
+            assertThat(lockFile.delete()).isTrue();
+
+            await().atMost(20, TimeUnit.SECONDS).untilAsserted(() -> assertThat(context.isActive()).isFalse());
+        } finally {
+            System.setProperty("user.home", oldHome);
+        }
     }
 
     @Test

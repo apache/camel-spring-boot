@@ -65,7 +65,8 @@ public class CliConnectorConfiguration {
 
     /**
      * Options of the WebSocket transport. Camel reads them from the Spring environment: they are declared here so they
-     * are documented and completed by IDEs.
+     * are documented and completed by IDEs. The defaults must be kept in line with the ones of
+     * org.apache.camel.cli.connector.WebSocketCliConnectorTransport (camel-cli-connector), which are the ones used.
      */
     public static class Websocket {
 
