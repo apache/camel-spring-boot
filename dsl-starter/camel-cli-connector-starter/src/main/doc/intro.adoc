@@ -1,0 +1,3 @@
+Spring Boot auto-configuration for the Camel CLI connector.
+
+The connector lets developer tools manage a running Spring Boot application: the Camel CLI (`camel get`, `camel trace`, `camel stop`, ...) through files in `~/.camel`, or a tool such as an IDE over a WebSocket the application dials out to.
