@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,11 +61,14 @@ public class SpringCliWebSocketClient implements CliWebSocketClient {
     static final String IO_TIMEOUT_PROPERTY = "org.apache.tomcat.websocket.IO_TIMEOUT_MS";
     static final String BLOCKING_SEND_TIMEOUT_PROPERTY = "org.apache.tomcat.websocket.BLOCKING_SEND_TIMEOUT";
     private static final long TIMEOUT = 10000;
+    // each step of the Tomcat handshake has its own timeout: the connection must be open within a few of them
+    private static final int CONNECT_TIMEOUTS = 3;
 
     // Jakarta WebSocket has no status code for a rejected upgrade: Tomcat puts it in the message, as [401]
     private static final Pattern HTTP_STATUS = Pattern.compile("\\[([1-5][0-9]{2})]");
 
     private final SSLContext sslContext;
+    private final long timeout;
     private volatile StandardWebSocketClient client;
 
     public SpringCliWebSocketClient() {
@@ -75,7 +79,12 @@ public class SpringCliWebSocketClient implements CliWebSocketClient {
      * @param sslContext for wss:// urls, or null for the default one
      */
     public SpringCliWebSocketClient(SSLContext sslContext) {
+        this(sslContext, TIMEOUT);
+    }
+
+    SpringCliWebSocketClient(SSLContext sslContext, long timeout) {
         this.sslContext = sslContext;
+        this.timeout = timeout;
     }
 
     @Override
@@ -92,18 +101,22 @@ public class SpringCliWebSocketClient implements CliWebSocketClient {
         WebSocketHttpHeaders handshakeHeaders = new WebSocketHttpHeaders();
         headers.forEach(handshakeHeaders::add);
         Handler handler = new Handler(listener);
+        CompletableFuture<Channel> answer = new CompletableFuture<>();
         try {
-            return client().execute(handler, handshakeHeaders, url)
-                    .handle((session, e) -> {
-                        if (e != null) {
-                            throw new CompletionException(translate(e));
-                        }
-                        return handler.channel;
-                    });
+            client().execute(handler, handshakeHeaders, url).whenComplete((session, e) -> {
+                if (e != null) {
+                    answer.completeExceptionally(translate(e));
+                } else if (!answer.complete(handler.channel)) {
+                    // opened after the connect timed out: nobody uses it
+                    SpringChannel.abort(session);
+                }
+            });
         } catch (RuntimeException e) {
             // no Jakarta WebSocket implementation on the classpath
-            return CompletableFuture.failedFuture(e);
+            answer.completeExceptionally(e);
         }
+        // the transport only reconnects once this completes: never wait forever, whatever the Jakarta implementation
+        return answer.orTimeout(timeout * CONNECT_TIMEOUTS, TimeUnit.MILLISECONDS);
     }
 
     /**
@@ -119,10 +132,10 @@ public class SpringCliWebSocketClient implements CliWebSocketClient {
                     answer = new StandardWebSocketClient(ContainerProvider.getWebSocketContainer());
                     answer.setSslContext(sslContext);
                     Map<String, Object> properties = new HashMap<>();
-                    // the JDK client times out a connect after 10 seconds too
-                    properties.put(IO_TIMEOUT_PROPERTY, Long.toString(TIMEOUT));
+                    // connecting, the TLS handshake, and each read and write of the HTTP upgrade: as the JDK client
+                    properties.put(IO_TIMEOUT_PROPERTY, Long.toString(timeout));
                     // pings and close frames are blocking sends
-                    properties.put(BLOCKING_SEND_TIMEOUT_PROPERTY, TIMEOUT);
+                    properties.put(BLOCKING_SEND_TIMEOUT_PROPERTY, timeout);
                     answer.setUserProperties(properties);
                     answer.setTaskExecutor(new SimpleAsyncTaskExecutor("CliConnectorWebSocketConnect-"));
                     client = answer;

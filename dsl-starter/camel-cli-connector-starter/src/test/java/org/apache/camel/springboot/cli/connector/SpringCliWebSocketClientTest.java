@@ -16,9 +16,20 @@
  */
 package org.apache.camel.springboot.cli.connector;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.URI;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.util.Base64;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -70,6 +81,36 @@ class SpringCliWebSocketClientTest {
 
         channel.close(1000, "bye").toCompletableFuture().get(10, TimeUnit.SECONDS);
         await().atMost(10, TimeUnit.SECONDS).until(tool.sessions::isEmpty);
+    }
+
+    @Test
+    void failsWhenTheToolNeverAnswersTheUpgrade() throws Exception {
+        // the TCP connection is accepted (a paused tool, a port-forward with nothing behind it), the upgrade not answered
+        SpringCliWebSocketClient fast = new SpringCliWebSocketClient(null, 500);
+        try (ServerSocket server = new ServerSocket(0, 1, InetAddress.getLoopbackAddress())) {
+            CompletableFuture<?> connect = fast.connect(
+                    URI.create("ws://127.0.0.1:" + server.getLocalPort() + "/connect"), Map.of(), listener)
+                    .toCompletableFuture();
+
+            await().atMost(10, TimeUnit.SECONDS).until(connect::isDone);
+            assertThat(connect).isCompletedExceptionally();
+        }
+    }
+
+    @Test
+    void receivesALargeMessageSentInASingleFrame() throws Exception {
+        // Tomcat (the tool server of the other tests) fragments what it sends: some tools send one frame per message
+        String text = "x".repeat(1024 * 1024);
+        try (ServerSocket server = new ServerSocket(0, 1, InetAddress.getLoopbackAddress())) {
+            Thread tool = new Thread(() -> sendInOneFrame(server, text));
+            tool.setDaemon(true);
+            tool.start();
+
+            client.connect(URI.create("ws://127.0.0.1:" + server.getLocalPort() + "/connect"), Map.of(), listener)
+                    .toCompletableFuture().get(10, TimeUnit.SECONDS);
+
+            assertThat(listener.texts.poll(10, TimeUnit.SECONDS)).isEqualTo(text);
+        }
     }
 
     @Test
@@ -143,6 +184,36 @@ class SpringCliWebSocketClientTest {
         @Override
         public void onError(Throwable error) {
             this.error = error;
+        }
+    }
+
+    /**
+     * Accepts one WebSocket connection, and sends the text in a single unfragmented frame.
+     */
+    private static void sendInOneFrame(ServerSocket server, String text) {
+        try {
+            Socket socket = server.accept();
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.ISO_8859_1));
+            String key = null;
+            for (String line = in.readLine(); line != null && !line.isEmpty(); line = in.readLine()) {
+                if (line.regionMatches(true, 0, "Sec-WebSocket-Key:", 0, 18)) {
+                    key = line.substring(18).trim();
+                }
+            }
+            String accept = Base64.getEncoder().encodeToString(MessageDigest.getInstance("SHA-1")
+                    .digest((key + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11").getBytes(StandardCharsets.ISO_8859_1)));
+            OutputStream out = socket.getOutputStream();
+            out.write(("HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\n"
+                       + "Sec-WebSocket-Accept: " + accept + "\r\n\r\n").getBytes(StandardCharsets.ISO_8859_1));
+            byte[] payload = text.getBytes(StandardCharsets.UTF_8);
+            // FIN + text, 64-bit length, not masked (server to client)
+            out.write(0x81);
+            out.write(127);
+            out.write(ByteBuffer.allocate(8).putLong(payload.length).array());
+            out.write(payload);
+            out.flush();
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
         }
     }
 }
