@@ -48,6 +48,8 @@ public class SpringLocalCliConnector extends LocalCliConnector {
     @Override
     public void sigterm() {
         try {
+            // starts a thread that stops Camel, while close() below stops it too (as stop() did): Camel stops a context
+            // under a lock, so whichever comes second waits for the first one, then finds it stopped
             super.sigterm();
         } finally {
             // close, not only stop: a stopped context keeps the JVM running (for example the embedded web server),

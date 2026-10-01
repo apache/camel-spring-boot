@@ -98,6 +98,20 @@ class SpringCliWebSocketClientTest {
     }
 
     @Test
+    void connectsOnDaemonThreads() throws Exception {
+        // the connector is not stopped when the application fails to start: connecting must not keep the JVM alive
+        SpringCliWebSocketClient slow = new SpringCliWebSocketClient(null, 5000);
+        try (ServerSocket server = new ServerSocket(0, 1, InetAddress.getLoopbackAddress())) {
+            slow.connect(URI.create("ws://127.0.0.1:" + server.getLocalPort() + "/connect"), Map.of(), listener);
+
+            await().atMost(10, TimeUnit.SECONDS).untilAsserted(() -> assertThat(Thread.getAllStackTraces().keySet())
+                    .filteredOn(t -> t.getName().startsWith("CliConnectorWebSocketConnect-"))
+                    .isNotEmpty()
+                    .allMatch(Thread::isDaemon));
+        }
+    }
+
+    @Test
     void receivesALargeMessageSentInASingleFrame() throws Exception {
         // Tomcat (the tool server of the other tests) fragments what it sends: some tools send one frame per message
         String text = "x".repeat(1024 * 1024);
