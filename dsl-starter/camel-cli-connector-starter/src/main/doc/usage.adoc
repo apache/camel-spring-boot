@@ -1,0 +1,30 @@
+Adding this starter to the classpath enables the connector with the file transport, used by the Camel CLI. It can be turned off with:
+
+[source,properties]
+----
+camel.cli.enabled = false
+----
+
+The `stop` action of the tooling (for example `camel stop`) closes the Spring application context, so the application exits.
+
+=== WebSocket transport
+
+With `camel.cli.transport = websocket`, the application connects to the tool at `camel.cli.websocket.url`. See the CLI Connector documentation of Camel for the protocol and the security rules: *the tool gets full control of the application*, the transport is for development only and is refused with the `prod` profile.
+
+[source,properties]
+----
+camel.cli.transport = websocket
+camel.cli.websocket.url = ws://127.0.0.1:8000/connect
+----
+
+The WebSocket client of Spring is used when the application has `spring-websocket` and a Jakarta WebSocket client, for example with `spring-boot-starter-websocket`. Otherwise, the JDK client is used: the starter does not add any dependency for it. The log, and the `transport` field of the `hello` frame sent to the tool, say which client is used (`spring` or `jdk`). Set `camel.cli.websocket.client = jdk` to always use the JDK client.
+
+For a `wss://` URL, the Spring client can trust the tool with an SSL bundle:
+
+[source,properties]
+----
+spring.ssl.bundle.pem.tool.truststore.certificate = classpath:tool.crt
+camel.cli.websocket.url = wss://tool.example.com/connect
+camel.cli.websocket.token = ${TOOL_TOKEN}
+camel.cli.websocket.ssl-bundle = tool
+----

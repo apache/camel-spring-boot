@@ -4,6 +4,12 @@
       "name": "camel.cli",
       "type": "org.apache.camel.springboot.cli.connector.CliConnectorConfiguration",
       "sourceType": "org.apache.camel.springboot.cli.connector.CliConnectorConfiguration"
+    },
+    {
+      "name": "camel.cli.websocket",
+      "type": "org.apache.camel.springboot.cli.connector.CliConnectorConfiguration$Websocket",
+      "sourceType": "org.apache.camel.springboot.cli.connector.CliConnectorConfiguration",
+      "sourceMethod": "getWebsocket()"
     }
   ],
   "properties": [
@@ -13,7 +19,77 @@
       "description": "Whether CLI connector is enabled.",
       "sourceType": "org.apache.camel.springboot.cli.connector.CliConnectorConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.cli.transport",
+      "type": "java.lang.String",
+      "description": "How the connector talks to the tooling: file (exchanges files in ~\/.camel with the Camel CLI) or websocket (dials out to a developer tool over a WebSocket, see camel.cli.websocket).",
+      "sourceType": "org.apache.camel.springboot.cli.connector.CliConnectorConfiguration",
+      "defaultValue": "file"
+    },
+    {
+      "name": "camel.cli.websocket.allow-insecure",
+      "type": "java.lang.Boolean",
+      "description": "Allow ws:\/\/ (unencrypted) to a host that is not a loopback address. Prefer wss:\/\/ or a tunnel.",
+      "sourceType": "org.apache.camel.springboot.cli.connector.CliConnectorConfiguration$Websocket",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.cli.websocket.client",
+      "type": "java.lang.String",
+      "description": "The WebSocket client: auto uses the Spring WebSocket client when the application has spring-websocket and a Jakarta WebSocket implementation (such as with spring-boot-starter-websocket), otherwise the JDK client; jdk always uses the JDK client.",
+      "sourceType": "org.apache.camel.springboot.cli.connector.CliConnectorConfiguration$Websocket",
+      "defaultValue": "auto"
+    },
+    {
+      "name": "camel.cli.websocket.heartbeat-interval",
+      "type": "java.lang.Long",
+      "description": "How often the connection is checked with a ping, in millis. The connection is re-established when the tool does not answer for three intervals.",
+      "sourceType": "org.apache.camel.springboot.cli.connector.CliConnectorConfiguration$Websocket",
+      "defaultValue": 10000
+    },
+    {
+      "name": "camel.cli.websocket.reconnect-delay",
+      "type": "java.lang.Long",
+      "description": "Delay before reconnecting, in millis. It doubles after each failed attempt (with some random jitter).",
+      "sourceType": "org.apache.camel.springboot.cli.connector.CliConnectorConfiguration$Websocket",
+      "defaultValue": 1000
+    },
+    {
+      "name": "camel.cli.websocket.reconnect-max-delay",
+      "type": "java.lang.Long",
+      "description": "Maximum delay before reconnecting, in millis.",
+      "sourceType": "org.apache.camel.springboot.cli.connector.CliConnectorConfiguration$Websocket",
+      "defaultValue": 30000
+    },
+    {
+      "name": "camel.cli.websocket.snapshot-interval",
+      "type": "java.lang.Long",
+      "description": "How often snapshots are sent, in millis.",
+      "sourceType": "org.apache.camel.springboot.cli.connector.CliConnectorConfiguration$Websocket",
+      "defaultValue": 1000
+    },
+    {
+      "name": "camel.cli.websocket.ssl-bundle",
+      "type": "java.lang.String",
+      "description": "The name of an SSL bundle (spring.ssl.bundle) to trust the tool with wss:\/\/ when using the Spring WebSocket client.",
+      "sourceType": "org.apache.camel.springboot.cli.connector.CliConnectorConfiguration$Websocket"
+    },
+    {
+      "name": "camel.cli.websocket.token",
+      "type": "java.lang.String",
+      "description": "Sent as Authorization: Bearer token when connecting. Required unless the URL is a loopback address. Prefer the CAMEL_CLI_WEBSOCKET_TOKEN environment variable to keep it out of the process list.",
+      "sourceType": "org.apache.camel.springboot.cli.connector.CliConnectorConfiguration$Websocket"
+    },
+    {
+      "name": "camel.cli.websocket.url",
+      "type": "java.lang.String",
+      "description": "The ws:\/\/ or wss:\/\/ URL of the tool. Required when camel.cli.transport=websocket.",
+      "sourceType": "org.apache.camel.springboot.cli.connector.CliConnectorConfiguration$Websocket"
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

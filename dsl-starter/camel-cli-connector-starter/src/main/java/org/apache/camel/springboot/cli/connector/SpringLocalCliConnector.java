@@ -35,7 +35,9 @@ public class SpringLocalCliConnector extends LocalCliConnector {
         try {
             super.sigterm();
         } finally {
-            applicationContext.stop();
+            // close, not only stop: a stopped context keeps the JVM running (for example the embedded web server),
+            // while the Camel CLI (camel stop) and the websocket tools expect the application to exit
+            applicationContext.close();
         }
     }
 }

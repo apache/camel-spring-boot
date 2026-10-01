@@ -21,12 +21,16 @@ import java.net.URL;
 import java.util.Enumeration;
 import java.util.jar.Manifest;
 
+import org.apache.camel.cli.connector.CliWebSocketClient;
 import org.apache.camel.spi.CliConnectorFactory;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.ssl.SslBundles;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -69,4 +73,30 @@ public class CliConnectorAutoConfiguration {
         return answer;
     }
 
+    /**
+     * The Spring WebSocket client for the websocket transport, when the application has spring-websocket and a Jakarta
+     * WebSocket client (such as Tomcat with spring-boot-starter-websocket). Otherwise Camel uses the JDK client.
+     */
+    @Configuration(proxyBeanMethods = false)
+    @ConditionalOnClass(name = {
+            "org.springframework.web.socket.client.standard.StandardWebSocketClient",
+            "jakarta.websocket.ContainerProvider" })
+    static class SpringWebSocketClientConfiguration {
+
+        @Bean
+        @ConditionalOnMissingBean(CliWebSocketClient.class)
+        public CliWebSocketClient cliWebSocketClient(
+                CliConnectorConfiguration config, ObjectProvider<SslBundles> sslBundles) {
+            String bundle = config.getWebsocket().getSslBundle();
+            if (bundle == null || bundle.isBlank()) {
+                return new SpringCliWebSocketClient();
+            }
+            SslBundles bundles = sslBundles.getIfAvailable();
+            if (bundles == null) {
+                throw new IllegalStateException(
+                        "camel.cli.websocket.ssl-bundle=" + bundle + " but there are no SSL bundles (spring.ssl.bundle)");
+            }
+            return new SpringCliWebSocketClient(bundles.getBundle(bundle).createSslContext());
+        }
+    }
 }
