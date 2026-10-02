@@ -45,7 +45,7 @@ public class CamelSecurityPolicyAutoConfigurationTest {
 
     @Test
     public void policyAllowShouldIgnoreInsecureConfig() {
-        runner.withPropertyValues("camel.security.policy=allow", "camel.component.http.trustAllCertificates=true")
+        runner.withPropertyValues("camel.security.policy=allow", "camel.component.aws2-s3.trustAllCertificates=true")
                 .run(context -> {
                     assertThat(context).hasNotFailed();
                     SecurityPolicyResult result = context.getBean(SecurityPolicyResult.class);
@@ -55,7 +55,7 @@ public class CamelSecurityPolicyAutoConfigurationTest {
 
     @Test
     public void policyWarnShouldStartWithViolations() {
-        runner.withPropertyValues("camel.security.policy=warn", "camel.component.http.trustAllCertificates=true")
+        runner.withPropertyValues("camel.security.policy=warn", "camel.component.aws2-s3.trustAllCertificates=true")
                 .run(context -> {
                     assertThat(context).hasNotFailed();
                     SecurityPolicyResult result = context.getBean(SecurityPolicyResult.class);
@@ -67,7 +67,7 @@ public class CamelSecurityPolicyAutoConfigurationTest {
 
     @Test
     public void policyFailShouldPreventStartup() {
-        runner.withPropertyValues("camel.security.policy=fail", "camel.component.http.trustAllCertificates=true")
+        runner.withPropertyValues("camel.security.policy=fail", "camel.component.aws2-s3.trustAllCertificates=true")
                 .run(context -> {
                     assertThat(context).hasFailed();
                     assertThat(context.getStartupFailure()).rootCause().isInstanceOf(RuntimeCamelException.class)
@@ -78,7 +78,7 @@ public class CamelSecurityPolicyAutoConfigurationTest {
     @Test
     public void categoryOverrideShouldTakePrecedence() {
         runner.withPropertyValues("camel.security.policy=fail", "camel.security.insecure-ssl-policy=allow",
-                "camel.component.http.trustAllCertificates=true").run(context -> {
+                "camel.component.aws2-s3.trustAllCertificates=true").run(context -> {
                     assertThat(context).hasNotFailed();
                     SecurityPolicyResult result = context.getBean(SecurityPolicyResult.class);
                     assertThat(result.hasViolations()).isFalse();
@@ -88,7 +88,7 @@ public class CamelSecurityPolicyAutoConfigurationTest {
     @Test
     public void categoryOverrideWarnWhileGlobalFail() {
         runner.withPropertyValues("camel.security.policy=fail", "camel.security.insecure-ssl-policy=warn",
-                "camel.component.http.trustAllCertificates=true").run(context -> {
+                "camel.component.aws2-s3.trustAllCertificates=true").run(context -> {
                     assertThat(context).hasNotFailed();
                     SecurityPolicyResult result = context.getBean(SecurityPolicyResult.class);
                     assertThat(result.hasViolations()).isTrue();
@@ -99,8 +99,8 @@ public class CamelSecurityPolicyAutoConfigurationTest {
     @Test
     public void allowedPropertiesShouldExcludeFromChecks() {
         runner.withPropertyValues("camel.security.policy=fail",
-                "camel.security.allowed-properties=camel.component.http.trustAllCertificates",
-                "camel.component.http.trustAllCertificates=true").run(context -> {
+                "camel.security.allowed-properties=camel.component.aws2-s3.trustAllCertificates",
+                "camel.component.aws2-s3.trustAllCertificates=true").run(context -> {
                     assertThat(context).hasNotFailed();
                     SecurityPolicyResult result = context.getBean(SecurityPolicyResult.class);
                     assertThat(result.hasViolations()).isFalse();
@@ -109,8 +109,8 @@ public class CamelSecurityPolicyAutoConfigurationTest {
 
     @Test
     public void multipleViolationsDetected() {
-        runner.withPropertyValues("camel.security.policy=warn", "camel.component.http.trustAllCertificates=true",
-                "camel.component.netty.allowJavaSerializedObject=true").run(context -> {
+        runner.withPropertyValues("camel.security.policy=warn", "camel.component.aws2-s3.trustAllCertificates=true",
+                "camel.component.netty.transferExchange=true").run(context -> {
                     assertThat(context).hasNotFailed();
                     SecurityPolicyResult result = context.getBean(SecurityPolicyResult.class);
                     assertThat(result.getViolationCount()).isGreaterThanOrEqualTo(2);
@@ -128,7 +128,7 @@ public class CamelSecurityPolicyAutoConfigurationTest {
     @Test
     public void insecureSerializationPolicyOverride() {
         runner.withPropertyValues("camel.security.policy=fail", "camel.security.insecure-serialization-policy=warn",
-                "camel.component.netty.allowJavaSerializedObject=true").run(context -> {
+                "camel.component.netty.transferExchange=true").run(context -> {
                     assertThat(context).hasNotFailed();
                     SecurityPolicyResult result = context.getBean(SecurityPolicyResult.class);
                     assertThat(result.hasViolations()).isTrue();
@@ -137,7 +137,7 @@ public class CamelSecurityPolicyAutoConfigurationTest {
 
 
     /**
-     * The same option configured as an environment variable arrives as CAMEL_COMPONENT_HTTP_TRUSTALLCERTIFICATES,
+     * The same option configured as an environment variable arrives as CAMEL_COMPONENT_AWS2S3_TRUSTALLCERTIFICATES,
      * which never matched the "camel." prefix - so every option set through the environment, the usual way to
      * configure a containerised application, escaped the policy check entirely.
      */
@@ -146,7 +146,7 @@ public class CamelSecurityPolicyAutoConfigurationTest {
         runner.withPropertyValues("camel.security.policy=warn")
                 .withInitializer(ctx -> ctx.getEnvironment().getPropertySources()
                         .addFirst(new SystemEnvironmentPropertySource("testSystemEnvironment",
-                                Map.of("CAMEL_COMPONENT_HTTP_TRUSTALLCERTIFICATES", "true"))))
+                                Map.of("CAMEL_COMPONENT_AWS2S3_TRUSTALLCERTIFICATES", "true"))))
                 .run(context -> {
                     assertThat(context).hasNotFailed();
                     SecurityPolicyResult result = context.getBean(SecurityPolicyResult.class);
