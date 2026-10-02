@@ -295,6 +295,7 @@
 ** xref:starters/observability-services.adoc[Observability Services]
 ** xref:starters/observation.adoc[Observation]
 ** xref:starters/ocsf.adoc[OCSF]
+** xref:starters/odata.adoc[OData]
 ** xref:starters/ognl.adoc[OGNL]
 ** xref:starters/olingo2.adoc[Olingo2]
 ** xref:starters/olingo4.adoc[Olingo4]
