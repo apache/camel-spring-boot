@@ -14,6 +14,13 @@
   ],
   "properties": [
     {
+      "name": "camel.component.jgroups.accept-all-objects",
+      "type": "java.lang.Boolean",
+      "description": "Whether to start the consumer and accept any object deserialized from the cluster even when no pre-read deserialization control is configured. When false (the default) the consumer fails to start on an unauthenticated default channel unless a JVM-wide -Djdk.serialFilter, the JGroups jgroups.deserialization.filter system property, or an authenticated\/encrypted channel is configured. Set to true to accept any serialized type and bypass the start-up guard; this also disables the post-read class check, so it is an insecure setting.",
+      "sourceType": "org.apache.camel.component.jgroups.springboot.JGroupsComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.jgroups.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",

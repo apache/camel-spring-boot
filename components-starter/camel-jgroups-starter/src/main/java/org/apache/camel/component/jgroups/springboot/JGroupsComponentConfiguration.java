@@ -84,6 +84,17 @@ public class JGroupsComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * Whether to start the consumer and accept any object deserialized from the
+     * cluster even when no pre-read deserialization control is configured. When
+     * false (the default) the consumer fails to start on an unauthenticated
+     * default channel unless a JVM-wide -Djdk.serialFilter, the JGroups
+     * jgroups.deserialization.filter system property, or an
+     * authenticated/encrypted channel is configured. Set to true to accept any
+     * serialized type and bypass the start-up guard; this also disables the
+     * post-read class check, so it is an insecure setting.
+     */
+    private Boolean acceptAllObjects = false;
+    /**
      * Sets an ObjectInputFilter pattern (jdk.serialFilter syntax) applied as a
      * defense-in-depth check on the class of the message body deserialized by
      * org.jgroups.Message.getObject(). The pattern is evaluated after JGroups
@@ -143,6 +154,14 @@ public class JGroupsComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Boolean getAcceptAllObjects() {
+        return acceptAllObjects;
+    }
+
+    public void setAcceptAllObjects(Boolean acceptAllObjects) {
+        this.acceptAllObjects = acceptAllObjects;
     }
 
     public String getDeserializationFilter() {
