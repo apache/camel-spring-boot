@@ -147,6 +147,13 @@
       "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration"
     },
     {
+      "name": "camel.component.rest-openapi.unmatched-request-handling",
+      "type": "java.lang.String",
+      "description": "Who answers requests that match no operation in the OpenAPI specification: the HTTP layer (platform) or Camel via the unmatched request handler (camel). Can be overridden in endpoint configuration.",
+      "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration",
+      "defaultValue": "platform"
+    },
+    {
       "name": "camel.component.rest-openapi.use-global-ssl-context-parameters",
       "type": "java.lang.Boolean",
       "description": "Enable usage of global SSL context parameters.",
