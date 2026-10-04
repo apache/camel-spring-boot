@@ -114,6 +114,12 @@ public class RestOpenApiComponentConfiguration
      */
     private RestOpenapiProcessorStrategy restOpenapiProcessorStrategy;
     /**
+     * Who answers requests that match no operation in the OpenAPI
+     * specification: the HTTP layer (platform) or Camel via the unmatched
+     * request handler (camel). Can be overridden in endpoint configuration.
+     */
+    private String unmatchedRequestHandling = "platform";
+    /**
      * Scheme hostname and port to direct the HTTP requests to in the form of
      * https://hostname:port. Can be configured at the endpoint, component or in
      * the corresponding REST configuration in the Camel Context. If you give
@@ -269,6 +275,14 @@ public class RestOpenApiComponentConfiguration
     public void setRestOpenapiProcessorStrategy(
             RestOpenapiProcessorStrategy restOpenapiProcessorStrategy) {
         this.restOpenapiProcessorStrategy = restOpenapiProcessorStrategy;
+    }
+
+    public String getUnmatchedRequestHandling() {
+        return unmatchedRequestHandling;
+    }
+
+    public void setUnmatchedRequestHandling(String unmatchedRequestHandling) {
+        this.unmatchedRequestHandling = unmatchedRequestHandling;
     }
 
     public String getHost() {

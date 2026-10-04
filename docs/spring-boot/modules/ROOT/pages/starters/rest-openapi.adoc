@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 21 options, which are listed below.
+The starter supports 22 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -48,5 +48,6 @@ The starter supports 21 options, which are listed below.
 | camel.component.rest-openapi.rest-openapi-processor-strategy | To use a custom strategy for how to process Rest DSL requests. The option is a org.apache.camel.component.rest.openapi.RestOpenapiProcessorStrategy type. |  | RestOpenapiProcessorStrategy
 | camel.component.rest-openapi.specification-uri | Path to the OpenApi specification file. The scheme, host base path are taken from this specification, but these can be overridden with properties on the component or endpoint level. If not given the component tries to load openapi.json resource. Note that the host defined on the component and endpoint of this Component should contain the scheme, hostname and optionally the port in the URI syntax (i.e. https://api.example.com:8080). Can be overridden in endpoint configuration. |  | String
 | camel.component.rest-openapi.ssl-context-parameters | Customize TLS parameters used by the component. If not set defaults to the TLS parameters set in the Camel context. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
+| camel.component.rest-openapi.unmatched-request-handling | Who answers requests that match no operation in the OpenAPI specification: the HTTP layer (platform) or Camel via the unmatched request handler (camel). Can be overridden in endpoint configuration. | platform | String
 | camel.component.rest-openapi.use-global-ssl-context-parameters | Enable usage of global SSL context parameters. | false | Boolean
 |===
