@@ -2,6 +2,7 @@
 * xref:spring-boot.adoc[Camel Context starter]
 * xref:list.adoc[List of starters]
 * xref:starter-configuration.adoc[Starter Configuration]
+* xref:jackson.adoc[Jackson 2 and Jackson 3]
 * Starters
 // starters: START
 ** xref:starters/a2a.adoc[A2A]
