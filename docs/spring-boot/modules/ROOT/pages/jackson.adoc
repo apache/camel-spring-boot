@@ -30,8 +30,8 @@ use different Java packages. Only the Camel Jackson modules listed above must no
   `camel-mongodb-gridfs-starter`, `camel-jq-starter`, `camel-neo4j-starter`, `camel-aws-bedrock-starter`,
   `camel-google-vertexai-starter` and `camel-dhis2-starter`. If you combine them with `camel-jackson3-starter`, the
   order of the dependencies decides, without any warning, which data format `marshal().json()`, REST DSL binding and
-  the JSON transformers use. When the Jackson 2 data format wins, the `camel.dataformat.jackson.*` properties are not
-  applied at all, because they only apply to the Jackson 3 data format.
+  the JSON transformers use. When the Jackson 2 data format wins, the `camel.dataformat.jackson.*` properties are
+  ignored: the `camel-jackson3-starter` only applies them to Jackson 3 data format instances.
 +
 Check with:
 +
@@ -42,8 +42,11 @@ mvn dependency:tree -Dincludes=org.apache.camel:camel-jackson,org.apache.camel:c
 +
 In that case, either declare `camel-jackson3-starter` before those starters, or reference the data format explicitly:
 `marshal("jackson")` with a Jackson 3 `JacksonDataFormat` bean, or an instance passed to `marshal()`. Configure that
-bean in Java: while `camel-jackson` comes first on the classpath, setting any `camel.dataformat.jackson.*` property
-makes the application fail to start with a `PropertyBindingException`. Do not exclude `camel-jackson` from those starters: they need it.
+bean in Java, not with `camel.dataformat.jackson.*` properties. The starter does apply those properties to this
+Jackson 3 instance, but Camel binds them through the property configurer named after the data format
+(`jackson-dataformat`), which both modules provide. While `camel-jackson` comes first on the classpath, its Jackson 2
+configurer is used, and the application fails to start with a `PropertyBindingException`. Do not exclude
+`camel-jackson` from those starters: they need it.
 * Kamelet schema resolution (`camel-kamelet`) only supports the Jackson 2 modules. Applications that rely on it must
   stay on `camel-jackson-starter`.
 
