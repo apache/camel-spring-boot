@@ -41,6 +41,7 @@ public class AiToolComponentConverter implements GenericConverter {
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.ai.tool.AiToolConfiguration.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.AuthorizationPolicy.class));
         return answer;
     }
 

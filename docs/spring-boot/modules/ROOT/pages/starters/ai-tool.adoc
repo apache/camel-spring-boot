@@ -23,12 +23,13 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 16 options, which are listed below.
+The starter supports 17 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
 | camel.component.ai-tool.arg-schema | Raw JSON Schema for tool input parameters. Supports inline JSON and resource references (classpath:, file:, resource:). Mutually exclusive with the parameter multi-value options. Use for nested objects, arrays, oneOf, and other complex schemas. |  | String
+| camel.component.ai-tool.authorization-policy | Reference to an org.apache.camel.spi.AuthorizationPolicy used to authorize tool calls before the route runs. Set it on the component to guard every tool route by construction, or per endpoint to override. The policy authorizes on trustworthy input only: the tool name comes from the route (never from model output), and the caller identity is carried as an exchange property set before the agent ran (for example by camel-spiffe or camel-keycloak), which the model cannot set. Authorize on exchange properties or validated tokens only, never on message headers (on a tool route the headers carry the model-controlled tool arguments). A denied call surfaces to the model as a short refusal rather than a stack trace. The option is a org.apache.camel.spi.AuthorizationPolicy type. |  | AuthorizationPolicy
 | camel.component.ai-tool.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.ai-tool.bridge-error-handler | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | camel.component.ai-tool.configuration | The component configuration. The option is a org.apache.camel.component.ai.tool.AiToolConfiguration type. |  | AiToolConfiguration
