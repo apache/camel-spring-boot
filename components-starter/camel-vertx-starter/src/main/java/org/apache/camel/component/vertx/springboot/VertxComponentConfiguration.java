@@ -17,8 +17,8 @@
 package org.apache.camel.component.vertx.springboot;
 
 import io.vertx.core.Vertx;
+import io.vertx.core.VertxBuilder;
 import io.vertx.core.VertxOptions;
-import io.vertx.core.impl.VertxBuilder;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -96,7 +96,7 @@ public class VertxComponentConfiguration
     private Boolean autowiredEnabled = true;
     /**
      * To use a custom VertxFactory implementation. The option is a
-     * io.vertx.core.impl.VertxBuilder type.
+     * io.vertx.core.VertxBuilder type.
      */
     private VertxBuilder vertxFactory;
 

@@ -72,8 +72,8 @@
     },
     {
       "name": "camel.component.vertx.vertx-factory",
-      "type": "io.vertx.core.impl.VertxBuilder",
-      "description": "To use a custom VertxFactory implementation. The option is a io.vertx.core.impl.VertxBuilder type.",
+      "type": "io.vertx.core.VertxBuilder",
+      "description": "To use a custom VertxFactory implementation. The option is a io.vertx.core.VertxBuilder type.",
       "sourceType": "org.apache.camel.component.vertx.springboot.VertxComponentConfiguration"
     },
     {

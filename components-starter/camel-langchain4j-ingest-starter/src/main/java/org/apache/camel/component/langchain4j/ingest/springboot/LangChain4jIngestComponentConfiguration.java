@@ -21,6 +21,8 @@ import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.store.embedding.EmbeddingStore;
 import org.apache.camel.Predicate;
+import org.apache.camel.component.langchain4j.ingest.IngestModality;
+import org.apache.camel.component.langchain4j.ingest.LangChain4jIngestComponent;
 import org.apache.camel.component.langchain4j.ingest.LangChain4jIngestConfiguration;
 import org.apache.camel.spi.IdempotentRepository;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -47,6 +49,21 @@ public class LangChain4jIngestComponentConfiguration
      * org.apache.camel.component.langchain4j.ingest.LangChain4jIngestConfiguration type.
      */
     private LangChain4jIngestConfiguration configuration;
+    /**
+     * MIME type of a media body, such as audio/wav or image/png, handed to the
+     * embedding model; matched case-insensitively, parameters after a semicolon
+     * are dropped. When not set, it is derived from the document id's file
+     * extension through Camel's own MIME table (the x- audio variants rewritten
+     * to their registered form): wav, mp3, flac, ogg, opus, m4a, aac, aiff,
+     * png, jpg, gif, webp, mp4, mov, webm (video), pdf and every other
+     * extension the table knows. A document whose type cannot be determined,
+     * whose type is no medium (text/plain, say), or whose medium the model does
+     * not declare, fails the exchange before its dedup claim and before its
+     * body is read. Only valid with modality=media - with modality=text the
+     * endpoint refuses to start, the option being a sign that modality=media
+     * was forgotten.
+     */
+    private String contentType;
     /**
      * Name of the header carrying the document id, such as CamelAwsS3Key for an
      * S3 consumer or CamelKafkaKey for a Kafka one. The
@@ -100,6 +117,17 @@ public class LangChain4jIngestComponentConfiguration
      */
     private Integer maxSegmentSize = 500;
     /**
+     * What the message body is. text, the default, is read as a String, split
+     * into segments and embedded segment by segment. media is read as bytes and
+     * embedded whole, as one vector: audio, an image, video or a PDF, told
+     * apart by the MIME type, each needing an embedding model whose
+     * supportedContentTypes() include the matching type - the endpoint refuses
+     * to start with a text-only model. In media mode the splitter options and
+     * embeddingBatchSize do not apply, documentSplitter must not be set, and
+     * maxDocumentSize and minDocumentSize count bytes.
+     */
+    private IngestModality modality = IngestModality.TEXT;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -137,12 +165,14 @@ public class LangChain4jIngestComponentConfiguration
      */
     private IdempotentRepository idempotentRepository;
     /**
-     * Maximum size of one document in characters, applied to the text about to
-     * be split; 0, the default, means no limit. The pipeline holds a document
-     * in memory whole, so the cap is the protection against oversized - on a
-     * consumer-fed pipeline, attacker-sized - payloads. An oversized document
-     * fails the exchange cleanly and, with a repository configured, releases
-     * its dedup claim.
+     * Maximum size of one document: characters of the text about to be split,
+     * or bytes of a media body with modality=media; 0, the default, means no
+     * limit. The pipeline holds a document in memory whole, so the cap is the
+     * protection against oversized - on a consumer-fed pipeline, attacker-sized
+     * - payloads. An oversized document fails the exchange cleanly and, with a
+     * repository configured, releases its dedup claim. With modality=media the
+     * size a file consumer announces in CamelFileLength is checked before the
+     * body is read.
      */
     private Integer maxDocumentSize = 0;
     /**
@@ -150,9 +180,10 @@ public class LangChain4jIngestComponentConfiguration
      * #bean:name and evaluated with the message body available. A rejected
      * delivery is answered with a filtered result and releases its dedup claim.
      * Runs after the id patterns and after the dedup claim, so a duplicate is
-     * answered skipped without the filter being evaluated. Not looked up by
-     * type on purpose - an application may hold unrelated predicates. The
-     * option is a org.apache.camel.Predicate type.
+     * answered skipped without the filter being evaluated. The body is still as
+     * the consumer delivered it, a file or stream say, not yet read as text or
+     * bytes. Not looked up by type on purpose - an application may hold
+     * unrelated predicates. The option is a org.apache.camel.Predicate type.
      */
     private Predicate documentFilter;
     /**
@@ -175,10 +206,10 @@ public class LangChain4jIngestComponentConfiguration
      */
     private String includeId;
     /**
-     * Minimum size of one document in characters; 0, the default, means no
-     * minimum. A shorter document - boilerplate too small to carry retrievable
-     * content - is answered with a filtered result instead of being written,
-     * and releases its dedup claim like a blank one.
+     * Minimum size of one document in characters (bytes with modality=media);
+     * 0, the default, means no minimum. A shorter document - boilerplate too
+     * small to carry retrievable content - is answered with a filtered result
+     * instead of being written, and releases its dedup claim like a blank one.
      */
     private Integer minDocumentSize = 0;
 
@@ -188,6 +219,14 @@ public class LangChain4jIngestComponentConfiguration
 
     public void setConfiguration(LangChain4jIngestConfiguration configuration) {
         this.configuration = configuration;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
     }
 
     public String getDocumentIdHeader() {
@@ -244,6 +283,14 @@ public class LangChain4jIngestComponentConfiguration
 
     public void setMaxSegmentSize(Integer maxSegmentSize) {
         this.maxSegmentSize = maxSegmentSize;
+    }
+
+    public IngestModality getModality() {
+        return modality;
+    }
+
+    public void setModality(IngestModality modality) {
+        this.modality = modality;
     }
 
     public Boolean getAutowiredEnabled() {

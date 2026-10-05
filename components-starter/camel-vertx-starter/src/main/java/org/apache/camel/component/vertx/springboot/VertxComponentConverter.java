@@ -42,7 +42,7 @@ public class VertxComponentConverter implements GenericConverter {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, io.vertx.core.Vertx.class));
         answer.add(new ConvertiblePair(String.class, io.vertx.core.VertxOptions.class));
-        answer.add(new ConvertiblePair(String.class, io.vertx.core.impl.VertxBuilder.class));
+        answer.add(new ConvertiblePair(String.class, io.vertx.core.VertxBuilder.class));
         return answer;
     }
 
