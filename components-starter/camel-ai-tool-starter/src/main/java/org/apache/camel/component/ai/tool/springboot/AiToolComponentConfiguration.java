@@ -18,6 +18,7 @@ package org.apache.camel.component.ai.tool.springboot;
 
 import java.util.Map;
 import org.apache.camel.component.ai.tool.AiToolConfiguration;
+import org.apache.camel.spi.AuthorizationPolicy;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -139,6 +140,20 @@ public class AiToolComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * Reference to an org.apache.camel.spi.AuthorizationPolicy used to
+     * authorize tool calls before the route runs. Set it on the component to
+     * guard every tool route by construction, or per endpoint to override. The
+     * policy authorizes on trustworthy input only: the tool name comes from the
+     * route (never from model output), and the caller identity is carried as an
+     * exchange property set before the agent ran (for example by camel-spiffe
+     * or camel-keycloak), which the model cannot set. Authorize on exchange
+     * properties or validated tokens only, never on message headers (on a tool
+     * route the headers carry the model-controlled tool arguments). A denied
+     * call surfaces to the model as a short refusal rather than a stack trace.
+     * The option is a org.apache.camel.spi.AuthorizationPolicy type.
+     */
+    private AuthorizationPolicy authorizationPolicy;
 
     public String getArgSchema() {
         return argSchema;
@@ -258,5 +273,13 @@ public class AiToolComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public AuthorizationPolicy getAuthorizationPolicy() {
+        return authorizationPolicy;
+    }
+
+    public void setAuthorizationPolicy(AuthorizationPolicy authorizationPolicy) {
+        this.authorizationPolicy = authorizationPolicy;
     }
 }

@@ -107,6 +107,14 @@ public class OpenFgaComponentConfiguration
      */
     private String contextualTuples;
     /**
+     * The page to read from, for readTuples and readChanges. Evaluated as a
+     * Simple expression against the exchange, so a route can feed back the
+     * token the previous page returned -
+     * ${header.CamelOpenFgaContinuationToken} - and page through without the
+     * token being configured statically.
+     */
+    private String continuationToken;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -127,6 +135,12 @@ public class OpenFgaComponentConfiguration
      */
     private String object;
     /**
+     * How many entries a readTuples or readChanges page returns. Left unset,
+     * OpenFGA's own default applies. A page is one request: this bounds the
+     * answer, not the number of requests a route makes.
+     */
+    private Integer pageSize;
+    /**
      * The relation to demand, such as reader or owner. Evaluated as a Simple
      * expression against each exchange, though a literal is what you usually
      * want. The relation is the permission being demanded, so resolving it from
@@ -141,6 +155,15 @@ public class OpenFgaComponentConfiguration
      * come back.
      */
     private String relations;
+    /**
+     * The earliest change readChanges returns, as an ISO-8601 timestamp such as
+     * {code 2026-10-01T00:00:00Z}. Without it a first read starts at the
+     * beginning of the store's change log, which on a busy store is a lot of
+     * history to page through before reaching anything current. Parsed when the
+     * endpoint starts, so a malformed value fails there rather than on the
+     * first exchange.
+     */
+    private String startTime;
     /**
      * The identifier of the OpenFGA store holding the relationship tuples and
      * the authorization model, as returned by {code fga store create}. The
@@ -347,6 +370,14 @@ public class OpenFgaComponentConfiguration
         this.contextualTuples = contextualTuples;
     }
 
+    public String getContinuationToken() {
+        return continuationToken;
+    }
+
+    public void setContinuationToken(String continuationToken) {
+        this.continuationToken = continuationToken;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
@@ -363,6 +394,14 @@ public class OpenFgaComponentConfiguration
         this.object = object;
     }
 
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
     public String getRelation() {
         return relation;
     }
@@ -377,6 +416,14 @@ public class OpenFgaComponentConfiguration
 
     public void setRelations(String relations) {
         this.relations = relations;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
     public String getStoreId() {

@@ -95,6 +95,12 @@
       "sourceType": "org.apache.camel.component.openfga.springboot.OpenFgaComponentConfiguration"
     },
     {
+      "name": "camel.component.openfga.continuation-token",
+      "type": "java.lang.String",
+      "description": "The page to read from, for readTuples and readChanges. Evaluated as a Simple expression against the exchange, so a route can feed back the token the previous page returned - ${header.CamelOpenFgaContinuationToken} - and page through without the token being configured statically.",
+      "sourceType": "org.apache.camel.component.openfga.springboot.OpenFgaComponentConfiguration"
+    },
+    {
       "name": "camel.component.openfga.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
@@ -160,6 +166,12 @@
       "sourceType": "org.apache.camel.component.openfga.springboot.OpenFgaComponentConfiguration"
     },
     {
+      "name": "camel.component.openfga.page-size",
+      "type": "java.lang.Integer",
+      "description": "How many entries a readTuples or readChanges page returns. Left unset, OpenFGA's own default applies. A page is one request: this bounds the answer, not the number of requests a route makes.",
+      "sourceType": "org.apache.camel.component.openfga.springboot.OpenFgaComponentConfiguration"
+    },
+    {
       "name": "camel.component.openfga.read-timeout",
       "type": "java.lang.Long",
       "description": "How long to wait for one request to OpenFGA to complete once connected. A request that times out is a failure to obtain a verdict rather than a deny, so it fails closed - or proceeds when failOpen is set. The option is a long type.",
@@ -188,6 +200,12 @@
       "name": "camel.component.openfga.ssl-context-parameters",
       "type": "org.apache.camel.support.jsse.SSLContextParameters",
       "description": "TLS configuration for the connection to OpenFGA. Needed to trust a server whose certificate comes from a private CA, and to present a client certificate to a server that requires mutual TLS - a SPIFFE X.509-SVID obtained with {code camel-spiffe}, for instance, so the workload authenticates to the decision point as itself. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
+      "sourceType": "org.apache.camel.component.openfga.springboot.OpenFgaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openfga.start-time",
+      "type": "java.lang.String",
+      "description": "The earliest change readChanges returns, as an ISO-8601 timestamp such as {code 2026-10-01T00:00:00Z}. Without it a first read starts at the beginning of the store's change log, which on a busy store is a lot of history to page through before reaching anything current. Parsed when the endpoint starts, so a malformed value fails there rather than on the first exchange.",
       "sourceType": "org.apache.camel.component.openfga.springboot.OpenFgaComponentConfiguration"
     },
     {
