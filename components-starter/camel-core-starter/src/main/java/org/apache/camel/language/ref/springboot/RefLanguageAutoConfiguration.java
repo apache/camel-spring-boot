@@ -65,4 +65,15 @@ public class RefLanguageAutoConfiguration {
             public void configure(String name, Language target) {
                 CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
                         "camel.language.ref", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Language target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.language.customizer",
+                        "camel.language.ref.customizer")
+                    && target instanceof RefLanguage;
+            }
+        };
+    }
 }

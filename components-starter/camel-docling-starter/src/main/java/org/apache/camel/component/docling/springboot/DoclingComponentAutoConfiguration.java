@@ -64,4 +64,15 @@ public class DoclingComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.docling", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.docling.customizer")
+                    && target instanceof DoclingComponent;
+            }
+        };
+    }
 }

@@ -64,4 +64,15 @@ public class TahuHostComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.tahu-host", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.tahu-host.customizer")
+                    && target instanceof TahuHostComponent;
+            }
+        };
+    }
 }

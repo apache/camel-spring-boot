@@ -64,4 +64,15 @@ public class RefComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.ref", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.ref.customizer")
+                    && target instanceof RefComponent;
+            }
+        };
+    }
 }

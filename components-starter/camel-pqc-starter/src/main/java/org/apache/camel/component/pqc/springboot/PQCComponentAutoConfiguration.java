@@ -64,4 +64,15 @@ public class PQCComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.pqc", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.pqc.customizer")
+                    && target instanceof PQCComponent;
+            }
+        };
+    }
 }

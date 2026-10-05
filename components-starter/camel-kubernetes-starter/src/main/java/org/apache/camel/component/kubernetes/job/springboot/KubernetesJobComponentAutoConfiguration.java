@@ -64,4 +64,15 @@ public class KubernetesJobComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.kubernetes-job", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.kubernetes-job.customizer")
+                    && target instanceof KubernetesJobComponent;
+            }
+        };
+    }
 }

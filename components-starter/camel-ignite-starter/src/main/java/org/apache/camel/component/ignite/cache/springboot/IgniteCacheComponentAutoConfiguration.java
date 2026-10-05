@@ -64,4 +64,15 @@ public class IgniteCacheComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.ignite-cache", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.ignite-cache.customizer")
+                    && target instanceof IgniteCacheComponent;
+            }
+        };
+    }
 }

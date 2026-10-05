@@ -64,4 +64,15 @@ public class XmlVerifierComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.xmlsecurity-verify", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.xmlsecurity-verify.customizer")
+                    && target instanceof XmlVerifierComponent;
+            }
+        };
+    }
 }

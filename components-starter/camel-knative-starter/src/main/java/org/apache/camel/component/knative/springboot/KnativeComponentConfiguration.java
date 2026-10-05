@@ -108,6 +108,11 @@ public class KnativeComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * If enabled and an Exchange failed processing on the consumer side the
+     * response's body won't contain the exception's stack trace.
+     */
+    private Boolean muteException = true;
+    /**
      * Transforms the reply into a cloud event that will be processed by the
      * caller. When listening to events from a Knative Broker, if this flag is
      * enabled, replies will be published to the same Broker where the request
@@ -267,6 +272,14 @@ public class KnativeComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getMuteException() {
+        return muteException;
+    }
+
+    public void setMuteException(Boolean muteException) {
+        this.muteException = muteException;
     }
 
     public Boolean getReplyWithCloudEvent() {

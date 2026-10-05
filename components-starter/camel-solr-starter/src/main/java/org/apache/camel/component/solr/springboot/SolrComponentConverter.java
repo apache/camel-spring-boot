@@ -49,4 +49,5 @@ public class SolrComponentConverter implements GenericConverter {
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
         return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.solr");
+    }
 }

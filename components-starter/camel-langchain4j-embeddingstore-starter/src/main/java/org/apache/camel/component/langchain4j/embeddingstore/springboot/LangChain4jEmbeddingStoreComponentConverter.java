@@ -53,4 +53,5 @@ public class LangChain4jEmbeddingStoreComponentConverter
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
         return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.langchain4j-embeddingstore");
+    }
 }

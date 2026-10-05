@@ -65,4 +65,15 @@ public class GsonDataFormatAutoConfiguration {
             public void configure(String name, DataFormat target) {
                 CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
                         "camel.dataformat.gson", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, DataFormat target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.dataformat.customizer",
+                        "camel.dataformat.gson.customizer")
+                    && target instanceof GsonDataFormat;
+            }
+        };
+    }
 }

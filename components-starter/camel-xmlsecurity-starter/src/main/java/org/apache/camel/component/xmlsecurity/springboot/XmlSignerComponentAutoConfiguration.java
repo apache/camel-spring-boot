@@ -64,4 +64,15 @@ public class XmlSignerComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.xmlsecurity-sign", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.xmlsecurity-sign.customizer")
+                    && target instanceof XmlSignerComponent;
+            }
+        };
+    }
 }

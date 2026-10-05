@@ -62,7 +62,8 @@ public class StompComponentAutoConfiguration {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
+                CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
+                        "camel.component.stomp", configuration, target);
             }
             @Override
             public boolean isEnabled(String name, Component target) {

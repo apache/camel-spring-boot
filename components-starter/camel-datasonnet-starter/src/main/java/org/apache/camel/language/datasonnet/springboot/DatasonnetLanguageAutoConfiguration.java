@@ -65,4 +65,15 @@ public class DatasonnetLanguageAutoConfiguration {
             public void configure(String name, Language target) {
                 CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
                         "camel.language.datasonnet", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Language target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.language.customizer",
+                        "camel.language.datasonnet.customizer")
+                    && target instanceof DatasonnetLanguage;
+            }
+        };
+    }
 }

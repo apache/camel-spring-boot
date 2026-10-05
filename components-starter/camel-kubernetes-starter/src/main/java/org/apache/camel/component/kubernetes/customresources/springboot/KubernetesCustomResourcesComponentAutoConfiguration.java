@@ -64,4 +64,15 @@ public class KubernetesCustomResourcesComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.kubernetes-custom-resources", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.kubernetes-custom-resources.customizer")
+                    && target instanceof KubernetesCustomResourcesComponent;
+            }
+        };
+    }
 }

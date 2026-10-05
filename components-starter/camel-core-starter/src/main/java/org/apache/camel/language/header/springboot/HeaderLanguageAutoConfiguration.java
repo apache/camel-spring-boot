@@ -65,4 +65,15 @@ public class HeaderLanguageAutoConfiguration {
             public void configure(String name, Language target) {
                 CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
                         "camel.language.header", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Language target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.language.customizer",
+                        "camel.language.header.customizer")
+                    && target instanceof HeaderLanguage;
+            }
+        };
+    }
 }

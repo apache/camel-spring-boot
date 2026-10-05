@@ -39,6 +39,14 @@ public class SmooksDataFormatConfiguration
      * Path to the Smooks configuration file.
      */
     private String smooksConfig;
+    /**
+     * Whether to allow the XML reader used by Smooks to resolve external XML
+     * entities (external general and parameter entities) when parsing XML
+     * input. This is disabled by default so that external entities in the
+     * message body are not resolved; enable it only for trusted legacy
+     * configurations that rely on external entity resolution.
+     */
+    private Boolean allowExternalEntities = false;
 
     public String getSmooksConfig() {
         return smooksConfig;
@@ -46,5 +54,13 @@ public class SmooksDataFormatConfiguration
 
     public void setSmooksConfig(String smooksConfig) {
         this.smooksConfig = smooksConfig;
+    }
+
+    public Boolean getAllowExternalEntities() {
+        return allowExternalEntities;
+    }
+
+    public void setAllowExternalEntities(Boolean allowExternalEntities) {
+        this.allowExternalEntities = allowExternalEntities;
     }
 }

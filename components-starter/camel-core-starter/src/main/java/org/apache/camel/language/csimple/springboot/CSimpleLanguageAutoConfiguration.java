@@ -63,7 +63,8 @@ public class CSimpleLanguageAutoConfiguration {
         return new LanguageCustomizer() {
             @Override
             public void configure(String name, Language target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
+                CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
+                        "camel.language.csimple", configuration, target);
             }
             @Override
             public boolean isEnabled(String name, Language target) {

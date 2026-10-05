@@ -64,4 +64,15 @@ public class GoogleCalendarStreamComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.google-calendar-stream", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.google-calendar-stream.customizer")
+                    && target instanceof GoogleCalendarStreamComponent;
+            }
+        };
+    }
 }

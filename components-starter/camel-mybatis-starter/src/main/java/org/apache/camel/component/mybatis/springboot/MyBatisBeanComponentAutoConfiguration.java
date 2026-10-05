@@ -64,4 +64,15 @@ public class MyBatisBeanComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.mybatis-bean", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.mybatis-bean.customizer")
+                    && target instanceof MyBatisBeanComponent;
+            }
+        };
+    }
 }

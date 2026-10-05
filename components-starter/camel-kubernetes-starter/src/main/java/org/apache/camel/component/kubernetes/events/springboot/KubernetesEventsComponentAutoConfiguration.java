@@ -64,4 +64,15 @@ public class KubernetesEventsComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.kubernetes-events", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.kubernetes-events.customizer")
+                    && target instanceof KubernetesEventsComponent;
+            }
+        };
+    }
 }

@@ -63,7 +63,8 @@ public class GroovyXmlDataFormatAutoConfiguration {
         return new DataFormatCustomizer() {
             @Override
             public void configure(String name, DataFormat target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
+                CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
+                        "camel.dataformat.groovy-xml", configuration, target);
             }
             @Override
             public boolean isEnabled(String name, DataFormat target) {

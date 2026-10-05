@@ -65,4 +65,15 @@ public class XQueryLanguageAutoConfiguration {
             public void configure(String name, Language target) {
                 CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
                         "camel.language.xquery", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Language target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.language.customizer",
+                        "camel.language.xquery.customizer")
+                    && target instanceof XQueryLanguage;
+            }
+        };
+    }
 }

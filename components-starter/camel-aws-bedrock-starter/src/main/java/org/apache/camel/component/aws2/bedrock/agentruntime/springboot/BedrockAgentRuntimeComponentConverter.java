@@ -52,4 +52,5 @@ public class BedrockAgentRuntimeComponentConverter
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
         return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.aws-bedrock-agent-runtime");
+    }
 }

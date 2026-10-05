@@ -65,4 +65,15 @@ public class ParquetAvroDataFormatAutoConfiguration {
             public void configure(String name, DataFormat target) {
                 CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
                         "camel.dataformat.parquet-avro", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, DataFormat target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.dataformat.customizer",
+                        "camel.dataformat.parquet-avro.customizer")
+                    && target instanceof ParquetAvroDataFormat;
+            }
+        };
+    }
 }

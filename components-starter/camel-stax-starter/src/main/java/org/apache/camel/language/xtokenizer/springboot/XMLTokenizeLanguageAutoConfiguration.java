@@ -65,4 +65,15 @@ public class XMLTokenizeLanguageAutoConfiguration {
             public void configure(String name, Language target) {
                 CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
                         "camel.language.xtokenize", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Language target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.language.customizer",
+                        "camel.language.xtokenize.customizer")
+                    && target instanceof XMLTokenizeLanguage;
+            }
+        };
+    }
 }

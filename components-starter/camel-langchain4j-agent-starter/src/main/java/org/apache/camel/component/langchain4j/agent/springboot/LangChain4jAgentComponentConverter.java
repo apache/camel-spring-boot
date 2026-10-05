@@ -51,4 +51,5 @@ public class LangChain4jAgentComponentConverter implements GenericConverter {
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
         return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.langchain4j-agent");
+    }
 }

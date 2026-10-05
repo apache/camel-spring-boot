@@ -51,4 +51,5 @@ public class ElasticsearchRestClientComponentConverter
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
         return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.elasticsearch-rest-client");
+    }
 }

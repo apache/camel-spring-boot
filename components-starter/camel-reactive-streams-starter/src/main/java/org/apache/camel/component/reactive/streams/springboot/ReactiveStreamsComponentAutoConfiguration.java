@@ -64,4 +64,15 @@ public class ReactiveStreamsComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.reactive-streams", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.reactive-streams.customizer")
+                    && target instanceof ReactiveStreamsComponent;
+            }
+        };
+    }
 }

@@ -64,4 +64,15 @@ public class CloudtrailComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.aws-cloudtrail", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.aws-cloudtrail.customizer")
+                    && target instanceof CloudtrailComponent;
+            }
+        };
+    }
 }

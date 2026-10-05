@@ -65,4 +65,15 @@ public class Iso8583DataFormatAutoConfiguration {
             public void configure(String name, DataFormat target) {
                 CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
                         "camel.dataformat.iso8583", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, DataFormat target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.dataformat.customizer",
+                        "camel.dataformat.iso8583.customizer")
+                    && target instanceof Iso8583DataFormat;
+            }
+        };
+    }
 }

@@ -62,7 +62,8 @@ public class GooglePubsubLiteComponentAutoConfiguration {
         return new ComponentCustomizer() {
             @Override
             public void configure(String name, Component target) {
-                CamelPropertiesHelper.copyProperties(camelContext, configuration, target);
+                CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
+                        "camel.component.google-pubsub-lite", configuration, target);
             }
             @Override
             public boolean isEnabled(String name, Component target) {

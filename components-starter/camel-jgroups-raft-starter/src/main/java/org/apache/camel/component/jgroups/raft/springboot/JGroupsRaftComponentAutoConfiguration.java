@@ -64,4 +64,15 @@ public class JGroupsRaftComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.jgroups-raft", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.jgroups-raft.customizer")
+                    && target instanceof JGroupsRaftComponent;
+            }
+        };
+    }
 }

@@ -65,4 +65,15 @@ public class ExchangePropertyLanguageAutoConfiguration {
             public void configure(String name, Language target) {
                 CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
                         "camel.language.exchange-property", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Language target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.language.customizer",
+                        "camel.language.exchange-property.customizer")
+                    && target instanceof ExchangePropertyLanguage;
+            }
+        };
+    }
 }

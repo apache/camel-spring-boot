@@ -64,4 +64,15 @@ public class WebsocketComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.atmosphere-websocket", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.atmosphere-websocket.customizer")
+                    && target instanceof WebsocketComponent;
+            }
+        };
+    }
 }

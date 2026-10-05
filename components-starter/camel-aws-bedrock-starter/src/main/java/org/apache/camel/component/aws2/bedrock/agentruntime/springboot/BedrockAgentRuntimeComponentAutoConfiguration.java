@@ -64,4 +64,15 @@ public class BedrockAgentRuntimeComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.aws-bedrock-agent-runtime", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.aws-bedrock-agent-runtime.customizer")
+                    && target instanceof BedrockAgentRuntimeComponent;
+            }
+        };
+    }
 }

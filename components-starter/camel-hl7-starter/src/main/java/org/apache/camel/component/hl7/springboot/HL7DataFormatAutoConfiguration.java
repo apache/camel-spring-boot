@@ -65,4 +65,15 @@ public class HL7DataFormatAutoConfiguration {
             public void configure(String name, DataFormat target) {
                 CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
                         "camel.dataformat.hl7", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, DataFormat target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.dataformat.customizer",
+                        "camel.dataformat.hl7.customizer")
+                    && target instanceof HL7DataFormat;
+            }
+        };
+    }
 }

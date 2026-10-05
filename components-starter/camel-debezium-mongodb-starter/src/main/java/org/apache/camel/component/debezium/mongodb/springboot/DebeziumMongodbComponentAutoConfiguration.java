@@ -64,4 +64,15 @@ public class DebeziumMongodbComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.debezium-mongodb", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.debezium-mongodb.customizer")
+                    && target instanceof DebeziumMongodbComponent;
+            }
+        };
+    }
 }

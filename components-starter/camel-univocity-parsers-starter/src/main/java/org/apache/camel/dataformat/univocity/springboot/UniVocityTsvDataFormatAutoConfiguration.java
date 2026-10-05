@@ -65,4 +65,15 @@ public class UniVocityTsvDataFormatAutoConfiguration {
             public void configure(String name, DataFormat target) {
                 CamelPropertiesHelper.copyConfigurationProperties(camelContext, applicationContext,
                         "camel.dataformat.univocity-tsv", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, DataFormat target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.dataformat.customizer",
+                        "camel.dataformat.univocity-tsv.customizer")
+                    && target instanceof UniVocityTsvDataFormat;
+            }
+        };
+    }
 }

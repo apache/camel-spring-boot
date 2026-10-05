@@ -64,4 +64,15 @@ public class SpringBatchComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.spring-batch", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.spring-batch.customizer")
+                    && target instanceof SpringBatchComponent;
+            }
+        };
+    }
 }

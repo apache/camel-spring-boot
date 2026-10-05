@@ -53,4 +53,5 @@ public class PQCComponentConverter implements GenericConverter {
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
         return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.pqc");
+    }
 }

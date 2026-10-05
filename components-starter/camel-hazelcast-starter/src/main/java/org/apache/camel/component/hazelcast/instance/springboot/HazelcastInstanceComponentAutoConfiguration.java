@@ -64,4 +64,15 @@ public class HazelcastInstanceComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.hazelcast-instance", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.hazelcast-instance.customizer")
+                    && target instanceof HazelcastInstanceComponent;
+            }
+        };
+    }
 }

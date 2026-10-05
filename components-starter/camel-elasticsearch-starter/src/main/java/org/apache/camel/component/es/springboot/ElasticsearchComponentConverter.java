@@ -49,4 +49,5 @@ public class ElasticsearchComponentConverter implements GenericConverter {
             TypeDescriptor sourceType,
             TypeDescriptor targetType) {
         return BeanReferenceHelper.resolveBeanReference(applicationContext, source, targetType, "camel.component.elasticsearch");
+    }
 }

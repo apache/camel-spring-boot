@@ -64,4 +64,15 @@ public class AWS2S3ComponentAutoConfiguration {
             public void configure(String name, Component target) {
                 CamelPropertiesHelper.copyConfigurationProperties(target.getCamelContext(), applicationContext,
                         "camel.component.aws2-s3", configuration, target);
+            }
+            @Override
+            public boolean isEnabled(String name, Component target) {
+                return HierarchicalPropertiesEvaluator.evaluate(
+                        applicationContext,
+                        "camel.component.customizer",
+                        "camel.component.aws2-s3.customizer")
+                    && target instanceof AWS2S3Component;
+            }
+        };
+    }
 }
