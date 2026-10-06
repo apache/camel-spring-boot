@@ -152,6 +152,34 @@
     </build>
 
     <profiles>
+        <!--
+            On GitHub Actions run only the catalog coverage check and the starter integration tests
+            changed by the pull request (passed as -Ditest.changed=,CamelFooIT,CamelBarIT), the whole
+            suite builds one project per starter and runs on the Jenkins daily build.
+        -->
+        <profile>
+            <id>github-ci</id>
+            <activation>
+                <property>
+                    <name>ci.env.name</name>
+                    <value>github.com</value>
+                </property>
+            </activation>
+            <properties>
+                <itest.changed></itest.changed>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <test>**/catalog/*IT${itest.changed}</test>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>generate</id>
             <properties>
