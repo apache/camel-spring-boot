@@ -1,0 +1,256 @@
+= Jackson 2 and Jackson 3
+
+Since version 4.19, Camel Spring Boot is based on Spring Boot 4, which uses Jackson 3 (`tools.jackson`) by default.
+Camel supports both Jackson lines:
+
+[options="header"]
+|===
+| Jackson 2 (`com.fasterxml.jackson`) | Jackson 3 (`tools.jackson`)
+| xref:starters/jackson.adoc[`camel-jackson-starter`] | xref:starters/jackson3.adoc[`camel-jackson3-starter`]
+| xref:starters/jacksonxml.adoc[`camel-jacksonxml-starter`] | xref:starters/jackson3xml.adoc[`camel-jackson3xml-starter`]
+| xref:starters/jackson-avro.adoc[`camel-jackson-avro-starter`] | xref:starters/jackson3-avro.adoc[`camel-jackson3-avro-starter`]
+| xref:starters/jackson-protobuf.adoc[`camel-jackson-protobuf-starter`] | xref:starters/jackson3-protobuf.adoc[`camel-jackson3-protobuf-starter`]
+|===
+
+Both lines register the same data format names (`jackson`, `jacksonXml`, `avroJackson`, `protobufJackson`), the same
+data type transformers (`application-json`, ...) and the same configuration prefix (`camel.dataformat.jackson.*`), so
+routes and properties do not need to change when switching. As a consequence, *only one line can be used in an
+application*.
+
+Many Camel components (for example Kafka, Salesforce, OpenAPI, Micrometer) use Jackson 2 internally, so the Jackson 2
+libraries are often on the classpath next to Spring Boot's Jackson 3. This is expected and supported: the two lines
+use different Java packages. Only the Camel Jackson modules listed above must not be mixed.
+
+== Rules
+
+* Use either `camel-jackson-starter` or `camel-jackson3-starter`, never both. With both on the classpath the
+  application fails to start with a `BeanDefinitionOverrideException` for `configureJacksonDataFormatFactory`.
+  The same applies to the XML, Avro and Protobuf variants.
+* Some starters bring `camel-jackson` (Jackson 2) transitively: `camel-mongodb-starter`,
+  `camel-mongodb-gridfs-starter`, `camel-jq-starter`, `camel-neo4j-starter`, `camel-aws-bedrock-starter`,
+  `camel-google-vertexai-starter` and `camel-dhis2-starter`. If you combine them with `camel-jackson3-starter`, the
+  order of the dependencies decides, without any warning, which data format `marshal().json()`, REST DSL binding and
+  the JSON transformers use. When the Jackson 2 data format wins, the `camel.dataformat.jackson.*` properties are
+  ignored: the `camel-jackson3-starter` only applies them to Jackson 3 data format instances.
++
+Check with:
++
+[source,bash]
+----
+mvn dependency:tree -Dincludes=org.apache.camel:camel-jackson,org.apache.camel:camel-jackson3
+----
++
+In that case, either declare `camel-jackson3-starter` before those starters, or reference the data format explicitly:
+`marshal("jackson")` with a Jackson 3 `JacksonDataFormat` bean, or an instance passed to `marshal()`. Configure that
+bean in Java, not with `camel.dataformat.jackson.*` properties. The starter does apply those properties to this
+Jackson 3 instance, but Camel binds them through the property configurer named after the data format
+(`jackson-dataformat`), which both modules provide. While `camel-jackson` comes first on the classpath, its Jackson 2
+configurer is used, and the application fails to start with a `PropertyBindingException`. Do not exclude
+`camel-jackson` from those starters: they need it.
+* Kamelet schema resolution (`camel-kamelet`) only supports the Jackson 2 modules. Applications that rely on it must
+  stay on `camel-jackson-starter`.
+
+== Upgrading from Camel Spring Boot 4.18
+
+Upgrade first with the Jackson line you already use (`camel-jackson-starter`), and move to Jackson 3 as a separate
+step.
+
+=== Staying on Jackson 2
+
+Spring Boot 4 no longer creates a Jackson 2 `ObjectMapper`. If you relied on
+`camel.dataformat.jackson.auto-discover-object-mapper=true` to reuse Spring's mapper (and `spring.jackson.*`
+properties), Camel now silently uses its own default mapper instead. Either:
+
+* declare your own Jackson 2 mapper, which Camel discovers:
++
+[source,java]
+----
+@Bean
+com.fasterxml.jackson.databind.ObjectMapper camelObjectMapper() {
+    return new com.fasterxml.jackson.databind.ObjectMapper(); // configure as needed
+}
+----
+* or add `org.springframework.boot:spring-boot-jackson2` (deprecated in Spring Boot 4) and rename your
+  `spring.jackson.*` properties to `spring.jackson2.*`. Properties under `spring.jackson.*` only configure
+  Spring Boot's Jackson 3 mapper.
+
+Custom mappers given to components that use Jackson 2 internally (for example the `objectMapper` option of
+camel-salesforce or camel-servicenow) must be Jackson 2 `ObjectMapper` instances.
+
+== Moving to Jackson 3
+
+The Camel Jackson 3 data formats use Jackson's default configuration and do not override it, so every Jackson 3
+change applies to your routes: package names, annotations, default settings, date/time handling and exceptions.
+The Jackson project documents these changes:
+
+* https://github.com/FasterXML/jackson/blob/main/jackson3/MIGRATING_TO_JACKSON_3.md[Jackson 3 Migration Guide]
+* https://github.com/FasterXML/jackson-future-ideas/wiki/JSTEP-2[JSTEP-2: Jackson 3 default settings, behavior changes]
+  (complete list of default changes)
+
+The steps below cover what is specific to Camel and Camel Spring Boot.
+
+=== Before you start
+
+* Check that the application can move:
+** Kamelets that resolve data type schemas require the Jackson 2 modules. Stay on `camel-jackson-starter`.
+** If the application uses one of the starters that bring `camel-jackson`, read the <<_rules,Rules>> first.
+* Find the Jackson 2 code in your application:
++
+[source,bash]
+----
+grep -rlE 'com\.fasterxml\.jackson\.(core|databind|datatype|dataformat|module)' src/
+mvn dependency:tree -Dincludes=com.fasterxml.jackson.core,com.fasterxml.jackson.datatype,org.apache.camel:camel-jackson
+----
++
+`com.fasterxml.jackson.annotation` imports (`@JsonProperty`, `@JsonIgnore`, `@JsonFormat`, ...) are shared by
+Jackson 2 and Jackson 3 and do not need to change.
+* Add tests that capture the JSON your routes and REST endpoints produce and accept today: marshal a representative
+  object and compare it with a stored file, and unmarshal stored payloads. Run them before and after the migration.
+  Most Jackson 3 changes do not raise errors; they produce different JSON.
+
+=== Update the dependencies
+
+. Replace each Camel Jackson 2 starter with its Jackson 3 counterpart, as listed in the table at the top of this page.
+. Replace the direct Jackson 2 dependencies of your own code: `com.fasterxml.jackson.core:jackson-databind` becomes
+  `tools.jackson.core:jackson-databind`, and Jackson 2 modules become the `tools.jackson.*` modules of the same name.
+  Remove `jackson-datatype-jsr310`, `jackson-datatype-jdk8` and `jackson-module-parameter-names`: Jackson 3 includes
+  them. Keep `com.fasterxml.jackson.core:jackson-annotations`, which Jackson 3 uses too.
+. Do not remove or exclude the Jackson 2 libraries that Camel components bring transitively. They are still needed.
+
+=== Migrate the Java code
+
+The https://docs.openrewrite.org/recipes/java/jackson/upgradejackson_2_3[OpenRewrite recipe] performs most of the
+mechanical changes: packages, Maven coordinates, renamed types and methods, and exception types.
+
+[source,bash]
+----
+mvn -U org.openrewrite.maven:rewrite-maven-plugin:run \
+  -Drewrite.recipeArtifactCoordinates=org.openrewrite.recipe:rewrite-jackson:RELEASE \
+  -Drewrite.activeRecipes=org.openrewrite.java.jackson.UpgradeJackson_2_3
+----
+
+Review the result against the Jackson 3 Migration Guide. Pay attention to the databind annotations
+(`@JsonSerialize`, `@JsonDeserialize`, `@JsonNaming`, ...): they moved to `tools.jackson.databind.annotation`, and
+Jackson 3 silently ignores the old `com.fasterxml.jackson.databind.annotation` ones.
+
+Spring Boot customizations of the Jackson mapper change as well:
+
+[options="header"]
+|===
+| Spring Boot 3 / Jackson 2 | Spring Boot 4 / Jackson 3
+| `Jackson2ObjectMapperBuilderCustomizer` | `JsonMapperBuilderCustomizer`
+| `@JsonComponent`, `JsonObjectSerializer`, `JsonObjectDeserializer` | `@JacksonComponent`, `ObjectValueSerializer`, `ObjectValueDeserializer`
+| `ObjectMapper` bean | `JsonMapper` bean
+|===
+
+=== Migrate the Camel configuration
+
+* *Routes.* `marshal().json()`, `json(JsonLibrary.Jackson)`, `marshal("jackson")`, REST DSL binding and the
+  `application-json` transformers keep working unchanged. Only Java code that creates the data format changes its
+  import: `org.apache.camel.component.jackson.JacksonDataFormat` becomes
+  `org.apache.camel.component.jackson3.JacksonDataFormat`. The same applies to `ListJacksonDataFormat`, to the XML,
+  Avro and Protobuf data formats, and to class names referenced in YAML or XML routes.
+* *Custom mapper.* The `objectMapper` option and the `camel.dataformat.jackson.object-mapper` property take a
+  Jackson 3 `tools.jackson.databind.ObjectMapper`, for example a `JsonMapper`.
+* *Modules.* `camel.dataformat.jackson.module-class-names` and `module-refs` must reference Jackson 3 modules
+  (`tools.jackson.databind.JacksonModule`).
+* *Features.* In `enable-features` and `disable-features`, use plain feature names, or the Jackson 3 class name as the
+  prefix. Some features moved to another class in Jackson 3, and the old prefix fails at startup:
++
+[source,properties]
+----
+# works on both Jackson 2 and Jackson 3
+camel.dataformat.jackson.enable-features=WRITE_DATES_AS_TIMESTAMPS
+# fails at startup on Jackson 3: the feature moved to DateTimeFeature
+# camel.dataformat.jackson.enable-features=SerializationFeature.WRITE_DATES_AS_TIMESTAMPS
+----
++
+Feature names that were removed in Jackson 3 also fail at startup, with `IllegalArgumentException: Enable feature: ...
+cannot be converted to an accepted enum`.
+* *Reusing the Spring Boot mapper.* Set `camel.dataformat.jackson.auto-discover-object-mapper=true` so routes use the
+  `JsonMapper` that Spring Boot creates: routes and Spring MVC controllers then produce the same JSON, and
+  `spring.jackson.*` applies to both. Without it, Camel uses its own mapper and `spring.jackson.*` has no effect on
+  routes. Two things to know:
+** Camel does not apply its own `camel.dataformat.jackson.*` customizations, such as features, modules, `timezone` or
+   `naming-strategy`, to a discovered mapper. Configure them with `spring.jackson.*` or a `JsonMapperBuilderCustomizer`
+   instead.
+** Discovery only works when exactly one Jackson 3 `ObjectMapper` bean exists. Otherwise Camel silently creates its own
+   default mapper.
+* *Error handling.* Jackson 3 exceptions are unchecked and are not ``IOException``s. Replace
+  `onException(IOException.class)` and `onException(JsonProcessingException.class)` clauses that handle JSON errors
+  with `onException(tools.jackson.core.JacksonException.class)`.
+
+=== Review the payload changes
+
+Because Camel's Jackson 3 data formats use Jackson's defaults, the JSON your routes produce and accept changes. The
+most visible changes are:
+
+[options="header"]
+|===
+| Change | Effect
+| Properties are sorted alphabetically | Output order changes, usually the first visible difference
+| `java.util.Date` is written as an ISO-8601 string | `0` becomes `"1970-01-01T00:00:00.000Z"`
+| `java.time` and `Optional` are supported without modules | Serialization that failed before now works
+| Enums use `toString()` when it is overridden | Enum values change, both when writing and when reading
+| Unknown properties are ignored | Payloads with extra fields no longer fail
+| `null` for a primitive fails | `MismatchedInputException` instead of `0`
+| Collections with only a getter and `final` fields are no longer populated | Data is silently missing after unmarshalling
+| Properties without a view are excluded when a `@JsonView` is active | Fields disappear from the output
+| `com.fasterxml.jackson.databind.annotation` annotations are ignored | Custom serializers silently stop applying
+|===
+
+See JSTEP-2 for the complete list.
+
+Payloads written by a Jackson 2 data format are not always readable by a Jackson 3 data format with default settings,
+and the other way round (for example enums with a custom `toString()`). If other services still read or write
+Jackson 2 payloads, upgrade producers and consumers together, or keep the previous format with one of these options:
+
+* Reuse the Spring Boot mapper (`auto-discover-object-mapper=true`) and set
+  `spring.jackson.use-jackson2-defaults=true`. This also changes the JSON of your Spring MVC controllers.
+* Or give only Camel a mapper with Jackson 2 defaults, using a `DataFormatCustomizer` bean. The
+  `camel.dataformat.jackson.*` properties are still applied on top of it:
++
+[source,java]
+----
+@Bean
+DataFormatCustomizer camelJackson2Defaults() {
+    return DataFormatCustomizer.forType(org.apache.camel.component.jackson3.JacksonDataFormat.class,
+            df -> df.setObjectMapper(JsonMapper.builderWithJackson2Defaults().build()));
+}
+----
++
+Do not declare the mapper as a `JsonMapper` bean for this purpose: it replaces the mapper that Spring Boot creates,
+so your Spring MVC controllers would use it as well.
+
+Neither option restores every Jackson 2 default. `@JsonView` default inclusion, property names derived from getters
+such as `getXName()`, and Jackson 2 databind annotations still behave differently. Fix those in your model classes and
+cover them with the tests from <<_before_you_start,Before you start>>.
+
+=== Verify
+
+. Check that only the Jackson 3 Camel modules are present:
++
+[source,bash]
+----
+mvn dependency:tree -Dincludes=org.apache.camel:camel-jackson,org.apache.camel:camel-jackson3
+----
++
+`camel-jackson` must not appear, unless a starter that requires it brings it; in that case see <<_rules,Rules>>.
+. Run the payload tests. Investigate every difference, even when the JSON is equivalent: other systems may depend on
+  the exact format.
+. Start the application and exercise the routes that parse invalid input, to confirm that the new `onException`
+  clauses are triggered.
+
+== Jackson versions
+
+The `camel-spring-boot-bom` does not manage Jackson, so the Jackson 2 and Jackson 3 versions come from the Spring Boot
+BOM (`spring-boot-dependencies`). They can differ from the versions Camel is built and tested with (the
+`jackson2-version` and `jackson3-version` properties of the Camel parent POM). Check the resolved versions with:
+
+[source,bash]
+----
+mvn dependency:list | grep -E 'jackson-(databind|annotations)'
+----
+
+If you override them, override both lines together and use matching release trains (for example Jackson 2.22.x with
+Jackson 3.2.x), because both lines share `com.fasterxml.jackson.core:jackson-annotations`.
