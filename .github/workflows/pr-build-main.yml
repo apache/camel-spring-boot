@@ -52,12 +52,58 @@ jobs:
         java-version: ${{ matrix.java }}
         distribution: 'temurin'
         cache: 'maven'
+    # The starter integration tests build a project generated from the archetype with a nested Maven
+    # invocation, which needs the Apache snapshots repository to resolve the camel-spring-boot BOM and
+    # the starters that are not part of the incremental build
+    - name: Configure Apache snapshots repository
+      run: |
+        mkdir -p ~/.m2
+        cat > ~/.m2/settings.xml <<'EOF'
+        <settings>
+          <profiles>
+            <profile>
+              <id>apache-snapshots</id>
+              <repositories>
+                <repository>
+                  <id>apache.snapshots</id>
+                  <url>https://repository.apache.org/snapshots/</url>
+                  <releases><enabled>false</enabled></releases>
+                  <snapshots><enabled>true</enabled></snapshots>
+                </repository>
+              </repositories>
+              <pluginRepositories>
+                <pluginRepository>
+                  <id>apache.snapshots</id>
+                  <url>https://repository.apache.org/snapshots/</url>
+                  <releases><enabled>false</enabled></releases>
+                  <snapshots><enabled>true</enabled></snapshots>
+                </pluginRepository>
+              </pluginRepositories>
+            </profile>
+          </profiles>
+          <activeProfiles>
+            <activeProfile>apache-snapshots</activeProfile>
+          </activeProfiles>
+        </settings>
+        EOF
+    # Only the starter integration tests changed by the pull request run on GitHub Actions,
+    # see the github-ci profile in tests/camel-itest-spring-boot/pom.xml
+    - name: Select changed starter integration tests
+      id: itests
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PR_ID: ${{ github.event.number }}
+      run: |
+        changed=$(gh pr diff "$PR_ID" --repo apache/camel-spring-boot --name-only \
+          | grep -E '^tests/camel-itest-spring-boot/src/test/java/org/apache/camel/itest/springboot/Camel[^/]*IT\.java$' \
+          | xargs -r -n1 basename | sed 's/\.java$//' | paste -sd, - || true)
+        echo "Changed starter integration tests: ${changed:-none}"
+        echo "maven-extra-args=${changed:+-Ditest.changed=,$changed}" >> "$GITHUB_OUTPUT"
     - name: Maven Test
       uses: apache/camel/.github/actions/incremental-build@main
       with:
-        mode: test
         pr-id: ${{ github.event.number }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
         skip-mvnd-install: 'false'
         github-repo: apache/camel-spring-boot
-        artifact-upload-suffix: java-${{ matrix.java }}
+        maven-extra-args: ${{ steps.itests.outputs.maven-extra-args }}
