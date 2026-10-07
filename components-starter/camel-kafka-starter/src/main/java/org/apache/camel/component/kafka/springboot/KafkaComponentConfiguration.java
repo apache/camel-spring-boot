@@ -78,6 +78,11 @@ public class KafkaComponentConfiguration
      */
     private KafkaConfiguration configuration;
     /**
+     * Close idle connections after the number of milliseconds specified by this
+     * config.
+     */
+    private Integer connectionMaxIdleMs = 540000;
+    /**
      * To use a custom HeaderFilterStrategy to filter header to and from Camel
      * message. The option is a org.apache.camel.spi.HeaderFilterStrategy type.
      */
@@ -89,6 +94,25 @@ public class KafkaComponentConfiguration
      */
     private Integer metadataMaxAgeMs = 300000;
     /**
+     * A list of classes to use as metrics reporters. Implementing the
+     * MetricReporter interface allows plugging in classes that will be notified
+     * of new metric creation. The JmxReporter is always included to register
+     * JMX statistics.
+     */
+    private String metricReporters;
+    /**
+     * The window of time a metrics sample is computed over.
+     */
+    private Integer metricsSampleWindowMs = 30000;
+    /**
+     * The number of samples maintained to compute metrics.
+     */
+    private Integer noOfMetricsSample = 2;
+    /**
+     * The size of the TCP receive buffer (SO_RCVBUF) to use when reading data.
+     */
+    private Integer receiveBufferBytes = 65536;
+    /**
      * The maximum amount of time in milliseconds to wait when reconnecting to a
      * broker that has repeatedly failed to connect. If provided, the backoff
      * per host will increase exponentially for each consecutive connection
@@ -96,6 +120,12 @@ public class KafkaComponentConfiguration
      * random jitter is added to avoid connection storms.
      */
     private Integer reconnectBackoffMaxMs = 1000;
+    /**
+     * The amount of time to wait before attempting to reconnect to a given
+     * host. This avoids repeatedly connecting to a host in a tight loop. This
+     * backoff applies to all requests sent by the consumer to the broker.
+     */
+    private Integer reconnectBackoffMs = 50;
     /**
      * The maximum amount of time in milliseconds to wait when retrying a
      * request to the broker that has repeatedly failed. If provided, the
@@ -116,6 +146,10 @@ public class KafkaComponentConfiguration
      * to the retry.backoff.max.ms value.
      */
     private Integer retryBackoffMs = 100;
+    /**
+     * Socket write buffer size
+     */
+    private Integer sendBufferBytes = 131072;
     /**
      * Timeout in milliseconds to wait gracefully for the consumer or producer
      * to shut down and terminate its worker threads.
@@ -495,11 +529,6 @@ public class KafkaComponentConfiguration
      */
     private String compressionCodec = "none";
     /**
-     * Close idle connections after the number of milliseconds specified by this
-     * config.
-     */
-    private Integer connectionMaxIdleMs = 540000;
-    /**
      * An upper bound on the time to report success or failure after a call to
      * send() returns. This limits the total time that a record will be delayed
      * prior to sending, the time to await acknowledgement from the broker (if
@@ -596,21 +625,6 @@ public class KafkaComponentConfiguration
      */
     private Integer maxRequestSize = 1048576;
     /**
-     * A list of classes to use as metrics reporters. Implementing the
-     * MetricReporter interface allows plugging in classes that will be notified
-     * of new metric creation. The JmxReporter is always included to register
-     * JMX statistics.
-     */
-    private String metricReporters;
-    /**
-     * The window of time a metrics sample is computed over.
-     */
-    private Integer metricsSampleWindowMs = 30000;
-    /**
-     * The number of samples maintained to compute metrics.
-     */
-    private Integer noOfMetricsSample = 2;
-    /**
      * The partitioner class for partitioning messages amongst sub-topics. The
      * default partitioner is based on the hash of the key.
      */
@@ -646,16 +660,6 @@ public class KafkaComponentConfiguration
      */
     @Deprecated
     private Integer queueBufferingMaxMessages = 10000;
-    /**
-     * The size of the TCP receive buffer (SO_RCVBUF) to use when reading data.
-     */
-    private Integer receiveBufferBytes = 65536;
-    /**
-     * The amount of time to wait before attempting to reconnect to a given
-     * host. This avoids repeatedly connecting to a host in a tight loop. This
-     * backoff applies to all requests sent by the consumer to the broker.
-     */
-    private Integer reconnectBackoffMs = 50;
     /**
      * The number of acknowledgments the producer requires the leader to have
      * received before considering a request complete. This controls the
@@ -704,10 +708,6 @@ public class KafkaComponentConfiguration
      * first.
      */
     private Integer retries;
-    /**
-     * Socket write buffer size
-     */
-    private Integer sendBufferBytes = 131072;
     /**
      * Indicates to create a transactional.id kafka property by using the
      * endpoint id and route id. This property is ignored in case there is
@@ -1032,6 +1032,14 @@ public class KafkaComponentConfiguration
         this.configuration = configuration;
     }
 
+    public Integer getConnectionMaxIdleMs() {
+        return connectionMaxIdleMs;
+    }
+
+    public void setConnectionMaxIdleMs(Integer connectionMaxIdleMs) {
+        this.connectionMaxIdleMs = connectionMaxIdleMs;
+    }
+
     public HeaderFilterStrategy getHeaderFilterStrategy() {
         return headerFilterStrategy;
     }
@@ -1049,12 +1057,52 @@ public class KafkaComponentConfiguration
         this.metadataMaxAgeMs = metadataMaxAgeMs;
     }
 
+    public String getMetricReporters() {
+        return metricReporters;
+    }
+
+    public void setMetricReporters(String metricReporters) {
+        this.metricReporters = metricReporters;
+    }
+
+    public Integer getMetricsSampleWindowMs() {
+        return metricsSampleWindowMs;
+    }
+
+    public void setMetricsSampleWindowMs(Integer metricsSampleWindowMs) {
+        this.metricsSampleWindowMs = metricsSampleWindowMs;
+    }
+
+    public Integer getNoOfMetricsSample() {
+        return noOfMetricsSample;
+    }
+
+    public void setNoOfMetricsSample(Integer noOfMetricsSample) {
+        this.noOfMetricsSample = noOfMetricsSample;
+    }
+
+    public Integer getReceiveBufferBytes() {
+        return receiveBufferBytes;
+    }
+
+    public void setReceiveBufferBytes(Integer receiveBufferBytes) {
+        this.receiveBufferBytes = receiveBufferBytes;
+    }
+
     public Integer getReconnectBackoffMaxMs() {
         return reconnectBackoffMaxMs;
     }
 
     public void setReconnectBackoffMaxMs(Integer reconnectBackoffMaxMs) {
         this.reconnectBackoffMaxMs = reconnectBackoffMaxMs;
+    }
+
+    public Integer getReconnectBackoffMs() {
+        return reconnectBackoffMs;
+    }
+
+    public void setReconnectBackoffMs(Integer reconnectBackoffMs) {
+        this.reconnectBackoffMs = reconnectBackoffMs;
     }
 
     public Integer getRetryBackoffMaxMs() {
@@ -1071,6 +1119,14 @@ public class KafkaComponentConfiguration
 
     public void setRetryBackoffMs(Integer retryBackoffMs) {
         this.retryBackoffMs = retryBackoffMs;
+    }
+
+    public Integer getSendBufferBytes() {
+        return sendBufferBytes;
+    }
+
+    public void setSendBufferBytes(Integer sendBufferBytes) {
+        this.sendBufferBytes = sendBufferBytes;
     }
 
     public Integer getShutdownTimeout() {
@@ -1463,14 +1519,6 @@ public class KafkaComponentConfiguration
         this.compressionCodec = compressionCodec;
     }
 
-    public Integer getConnectionMaxIdleMs() {
-        return connectionMaxIdleMs;
-    }
-
-    public void setConnectionMaxIdleMs(Integer connectionMaxIdleMs) {
-        this.connectionMaxIdleMs = connectionMaxIdleMs;
-    }
-
     public Integer getDeliveryTimeoutMs() {
         return deliveryTimeoutMs;
     }
@@ -1551,30 +1599,6 @@ public class KafkaComponentConfiguration
         this.maxRequestSize = maxRequestSize;
     }
 
-    public String getMetricReporters() {
-        return metricReporters;
-    }
-
-    public void setMetricReporters(String metricReporters) {
-        this.metricReporters = metricReporters;
-    }
-
-    public Integer getMetricsSampleWindowMs() {
-        return metricsSampleWindowMs;
-    }
-
-    public void setMetricsSampleWindowMs(Integer metricsSampleWindowMs) {
-        this.metricsSampleWindowMs = metricsSampleWindowMs;
-    }
-
-    public Integer getNoOfMetricsSample() {
-        return noOfMetricsSample;
-    }
-
-    public void setNoOfMetricsSample(Integer noOfMetricsSample) {
-        this.noOfMetricsSample = noOfMetricsSample;
-    }
-
     public String getPartitioner() {
         return partitioner;
     }
@@ -1618,22 +1642,6 @@ public class KafkaComponentConfiguration
         this.queueBufferingMaxMessages = queueBufferingMaxMessages;
     }
 
-    public Integer getReceiveBufferBytes() {
-        return receiveBufferBytes;
-    }
-
-    public void setReceiveBufferBytes(Integer receiveBufferBytes) {
-        this.receiveBufferBytes = receiveBufferBytes;
-    }
-
-    public Integer getReconnectBackoffMs() {
-        return reconnectBackoffMs;
-    }
-
-    public void setReconnectBackoffMs(Integer reconnectBackoffMs) {
-        this.reconnectBackoffMs = reconnectBackoffMs;
-    }
-
     public String getRequestRequiredAcks() {
         return requestRequiredAcks;
     }
@@ -1656,14 +1664,6 @@ public class KafkaComponentConfiguration
 
     public void setRetries(Integer retries) {
         this.retries = retries;
-    }
-
-    public Integer getSendBufferBytes() {
-        return sendBufferBytes;
-    }
-
-    public void setSendBufferBytes(Integer sendBufferBytes) {
-        this.sendBufferBytes = sendBufferBytes;
     }
 
     public Boolean getTransacted() {
