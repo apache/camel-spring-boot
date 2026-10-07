@@ -103,7 +103,7 @@ public class Transcribe2ComponentConfiguration
     /**
      * If we want to trust all certificates in case of overriding the endpoint
      */
-    private Boolean trustAllCertificates = true;
+    private Boolean trustAllCertificates = false;
     /**
      * Set the overriding uri endpoint. This option needs to be used in
      * combination with overrideEndpoint option

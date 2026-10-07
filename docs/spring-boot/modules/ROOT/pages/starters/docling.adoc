@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 58 options, which are listed below.
+The starter supports 59 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -42,6 +42,7 @@ The starter supports 58 options, which are listed below.
 | camel.component.docling.batch-parallelism | Number of parallel threads for batch processing | 4 | Integer
 | camel.component.docling.batch-size | Number of documents to submit per sub-batch. Documents are partitioned into sub-batches of this size and each sub-batch is processed before starting the next one. Within each sub-batch, up to batchParallelism threads are used concurrently. This controls memory usage and back-pressure when processing large document sets. | 10 | Integer
 | camel.component.docling.batch-timeout | Maximum time to wait for batch completion in milliseconds | 300000 | Long
+| camel.component.docling.bridge-error-handler | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | camel.component.docling.chunking-include-raw-text | Include raw text in chunk output | false | Boolean
 | camel.component.docling.chunking-max-tokens | Maximum number of tokens per chunk for hybrid chunking |  | Integer
 | camel.component.docling.chunking-merge-peers | Whether to merge peer chunks in hybrid chunking | true | Boolean

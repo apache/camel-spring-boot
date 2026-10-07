@@ -143,7 +143,7 @@
       "type": "java.lang.Boolean",
       "description": "If we want to trust all certificates in case of overriding the endpoint",
       "sourceType": "org.apache.camel.component.aws2.transcribe.springboot.Transcribe2ComponentConfiguration",
-      "defaultValue": true
+      "defaultValue": false
     },
     {
       "name": "camel.component.aws2-transcribe.uri-endpoint-override",
