@@ -57,9 +57,11 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- only the pom model is needed; the whole Maven runtime (guava, guice, asm...) would otherwise
+             sit on the parent classloader of the application under test and shadow its own versions -->
         <dependency>
             <groupId>org.apache.maven</groupId>
-            <artifactId>maven-core</artifactId>
+            <artifactId>maven-model</artifactId>
             <version>${maven-version}</version>
         </dependency>
         <dependency>
@@ -88,10 +90,6 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>

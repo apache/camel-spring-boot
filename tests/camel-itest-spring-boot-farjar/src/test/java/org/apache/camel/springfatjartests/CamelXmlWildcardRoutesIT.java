@@ -41,10 +41,11 @@ public class CamelXmlWildcardRoutesIT {
 
     @Test
     public void shouldDetectRoutes() {
-        // When
-        Route route = camelContext.getRoute("foobar-route");
-        // Then
-        assertNotNull(route);
+        // routes live in two directories of the camel-itest-resources-for-fatjar jar
+        for (String routeId : new String[] { "foobar-route", "abc-route", "xyz-route" }) {
+            Route route = camelContext.getRoute(routeId);
+            assertNotNull(route, "route not loaded from jar: " + routeId);
+        }
     }
 
 }

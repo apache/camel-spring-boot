@@ -6,8 +6,8 @@ Integration tests that verify each Camel Spring Boot starter can be compiled, st
 
 Each test class (e.g. `CamelActivemq6IT`) follows these steps:
 
-. **Archetype generation** -- The `ArchetypeGenerationExtension` JUnit 6 extension generates a minimal Spring Boot project from `camel-archetype-spring-boot`. The generated project is then customized: test-scoped dependencies and the demo `camel-stream-starter` are removed, the starter under test is added, and any extra dependencies or `application.properties` entries from the test config are applied.
-. **Compilation** -- The generated project is compiled via `mvn compile dependency:build-classpath`, which also writes the full runtime classpath to a file for the next step.
+. **Archetype generation** -- The `ArchetypeGenerationExtension` JUnit 6 extension generates a minimal Spring Boot project from `camel-archetype-spring-boot`. Because `archetype:generate` is a Maven JVM start per invocation, the project is generated once per build into `target/archetype-templates/<key>` (the key covers the archetype jar and the versions passed to it, concurrent forks are serialised with a file lock) and copied for every test. The copy is then customized: the artifactId is set, test-scoped dependencies and the demo `camel-stream-starter` are removed, the starter under test is added, and any extra dependencies or `application.properties` entries from the test config are applied.
+. **Compilation** -- The generated project is compiled via `mvn compile dependency:build-classpath`, which also writes the full runtime classpath to a file for the next step. Both nested Maven invocations run with `-nsu` (the reactor build just installed every snapshot they need) and a 1 GB heap instead of the one in `.mvn/jvm.config`.
 . **Classloader isolation** -- A child `URLClassLoader` is created with the compiled classes and all resolved dependency JARs, parented by the test classloader. Only `camel-api` and `spring-context` live on the parent classloader so that assertion types (`CamelContext`, `Component`, `DataFormat`, `Language`, `CamelClusterService`) are shared.
 . **Spring Boot startup** -- `SpringApplication` is loaded from the child classloader and started via reflection. A `DefaultResourceLoader` pointing at the child classloader ensures the generated project's `application.properties` is picked up. By default, the embedded web server is disabled (`spring.main.web-application-type=none`). When `webRequired` is set to `true`, the web stack is kept and the server binds to a random port (`server.port=0`) to avoid conflicts during parallel execution.
 . **Assertions** -- Tests verify the `CamelContext` is running, components/dataformats/languages can be resolved, and no dependency version mismatches exist.
@@ -45,7 +45,7 @@ AbstractSpringBootBaseTestSupport        archetype generation via @RegisterExten
 Every subclass of `AbstractSpringBootBaseTestSupport` automatically inherits two `@Test` methods:
 
 * **`camelContextIsRunning`** -- Verifies the `CamelContext` bean exists and is started.
-* **`dependencyVersionMismatchTest`** -- Parses the resolved runtime classpath (Maven local repository JAR paths), groups artifacts by `groupId:artifactPrefix`, and fails if the same artifact appears with multiple versions that differ in major or minor (patch-only differences are reported as warnings). Warning reports are written to `target/failsafe-reports/<module>-version-mismatches.txt`.
+* **`dependencyVersionMismatchTest`** -- Parses the resolved runtime classpath (Maven local repository JAR paths), groups artifacts by `groupId:artifactPrefix`, and fails if artifacts of Camel's own groups (`org.apache.camel`, `org.apache.camel.springboot`) disagree on their version. For any other group, versions differing in major or minor are reported as warnings. Warning reports are written to `target/failsafe-reports/<module>-version-mismatches.txt`.
 
 == Configuration
 
@@ -132,6 +132,10 @@ mvn verify -pl tests/camel-itest-spring-boot -Dit.test=CamelActivemq6IT
 | `it.test`
 | (all)
 | Run specific test(s), e.g. `-Dit.test=CamelCoreIT,CamelFtpIT`
+
+| `mvn-command`
+| `./mvnw`
+| Maven command used for the nested invocations (archetype generation, compilation). With the Maven daemon installed, `-Dmvn-command=mvnd` cuts each nested invocation by roughly half to two thirds.
 |===
 
 == Parallelism
