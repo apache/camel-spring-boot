@@ -55,7 +55,7 @@ public class KafkaComponentConfiguration
      * case they can't be set directly on the camel configurations (e.g.: new
      * Kafka properties that are not reflected yet in Camel configurations), the
      * properties have to be prefixed with additionalProperties., e.g.:
-     * additionalProperties.transactional.id=12345&additionalProperties.schema.registry.url=http://localhost:8811/avro. If the properties are set in the application.properties file, they must be prefixed with camel.component.kafka.additional-properties followed by the property name enclosed in square brackets, for example the delivery.timeout.ms property in square brackets. This is a multi-value option with prefix: additionalProperties.
+     * additionalProperties.transactional.id=12345&additionalProperties.schema.registry.url=http://localhost:8811/avro. If the properties are set in the application.properties file, they must be prefixed with camel.component.kafka.additional-properties (camel.component.kafka-share.additional-properties for the Kafka Share component) followed by the property name enclosed in square brackets, for example the delivery.timeout.ms property in square brackets. This is a multi-value option with prefix: additionalProperties.
      */
     private Map<String, Object> additionalProperties;
     /**
