@@ -16,24 +16,27 @@
  */
 package org.apache.camel.itest.springboot.common;
 
-import ch.qos.logback.classic.LoggerContext;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
 import org.apache.camel.cluster.CamelClusterService;
 import org.apache.camel.spi.DataFormat;
 import org.apache.camel.spi.Language;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -47,9 +50,19 @@ public abstract class AbstractSpringBootBaseTestSupport {
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractSpringBootBaseTestSupport.class);
     private static final String CLASSPATH_FILE = "target/classpath.txt";
+    private static final String STARTER_ARTIFACT_ID = "camel-spring-boot-starter";
+    /**
+     * Artifacts of these groups all come from a single release, so any version disagreement among them is
+     * a real mismatch, not a potential one.
+     */
+    private static final Set<String> CAMEL_GROUP_IDS = Set.of("org.apache.camel", "org.apache.camel.springboot");
+    /** artifacts versioned independently of the others sharing their groupId and prefix, by groupId:artifactId prefix */
+    private static final List<String> IGNORED_ARTIFACTS = List.of("io.netty:netty-tcnative");
 
+    // the supplier is resolved lazily by the extension, so a subclass may override getArchetypeConfig()
+    // using its own fields even though this field is initialised before them
     @RegisterExtension
-    ArchetypeGenerationExtension archetype = new ArchetypeGenerationExtension(getArchetypeConfig());
+    ArchetypeGenerationExtension archetype = new ArchetypeGenerationExtension(this::getArchetypeConfig);
 
     private List<String> classpathEntries;
 
@@ -73,32 +86,12 @@ public abstract class AbstractSpringBootBaseTestSupport {
 
     @BeforeAll
     void compileAndStartApp() throws Exception {
-        ((LoggerContext) LoggerFactory.getILoggerFactory()).setName(inferModuleName(getClass()));
-
         Path projectDir = archetype.getGeneratedProject().getProjectDir();
+        ArchetypeConfig config = archetype.getArchetypeConfig();
 
-        List<String> command = new ArrayList<>(List.of(
-                ArchetypeGenerationExtension.resolveMavenCommand(), "-q", "compile", "dependency:build-classpath",
+        ArchetypeGenerationExtension.runMaven(projectDir, "compile", "dependency:build-classpath",
                 "-DincludeScope=runtime",
-                "-Dmdep.outputFile=" + CLASSPATH_FILE,
-                "-B"));
-        String localRepo = System.getProperty("maven.repo.local");
-        if (localRepo != null) {
-            command.add("-Dmaven.repo.local=" + localRepo);
-        }
-
-        LOG.debug("running: {}", String.join(" ", command));
-
-        ProcessBuilder pb = new ProcessBuilder(command)
-                .directory(projectDir.toFile())
-                .redirectErrorStream(true);
-        Process process = pb.start();
-        String output = new String(process.getInputStream().readAllBytes());
-        int exitCode = process.waitFor();
-        if (exitCode != 0) {
-            throw new RuntimeException(String.join(" ", command) + " failed (exit code "
-                    + exitCode + ") for " + projectDir + ":" + System.lineSeparator() + output);
-        }
+                "-Dmdep.outputFile=" + CLASSPATH_FILE);
 
         Path classpathFile = projectDir.resolve(CLASSPATH_FILE);
         String cpContent = Files.readString(classpathFile).trim();
@@ -114,15 +107,12 @@ public abstract class AbstractSpringBootBaseTestSupport {
             urls.add(new File(entry).toURI().toURL());
         }
 
-        appClassLoader = new URLClassLoader(
-                urls.toArray(URL[]::new),
-                Thread.currentThread().getContextClassLoader());
-
         originalClassLoader = Thread.currentThread().getContextClassLoader();
+        appClassLoader = new URLClassLoader(urls.toArray(URL[]::new), originalClassLoader);
         Thread.currentThread().setContextClassLoader(appClassLoader);
 
         Class<?> springAppClass = appClassLoader.loadClass("org.springframework.boot.SpringApplication");
-        Class<?> appClass = appClassLoader.loadClass(getArchetypeConfig().getMainClassFqn());
+        Class<?> appClass = appClassLoader.loadClass(config.getMainClassFqn());
 
         Object springApp = springAppClass.getConstructor(Class[].class)
                 .newInstance((Object) new Class<?>[]{appClass});
@@ -142,7 +132,7 @@ public abstract class AbstractSpringBootBaseTestSupport {
         // Bridge CamelClusterService beans from Spring to the CamelContext service registry.
         // The child classloader prevents DefaultConfigurationConfigurer.afterConfigure()
         // from discovering these beans via the Camel registry.
-        if (getArchetypeConfig().isRegisterClusterServices()) {
+        if (config.isRegisterClusterServices()) {
             Map<String, CamelClusterService> clusterServices
                     = applicationContext.getBeansOfType(CamelClusterService.class);
             for (CamelClusterService css : clusterServices.values()) {
@@ -174,7 +164,9 @@ public abstract class AbstractSpringBootBaseTestSupport {
                 applicationContext.close();
             }
         } finally {
-            Thread.currentThread().setContextClassLoader(originalClassLoader);
+            if (originalClassLoader != null) {
+                Thread.currentThread().setContextClassLoader(originalClassLoader);
+            }
             if (appClassLoader != null) {
                 appClassLoader.close();
             }
@@ -236,42 +228,49 @@ public abstract class AbstractSpringBootBaseTestSupport {
     }
 
     /**
-     * Parses the runtime classpath entries (Maven local repository JAR paths) and detects
-     * version mismatches among artifacts sharing the same groupId and artifact prefix.
+     * Parses the runtime classpath entries (Maven local repository JAR paths) and detects version
+     * mismatches among artifacts sharing the same groupId and artifact prefix.
      * <p>
      * Maven repository paths follow the layout:
      * {@code <repo>/<groupId-dirs>/<artifactId>/<version>/<artifactId>-<version>.jar}
+     * <p>
+     * Artifacts of Camel's own groups ({@link #CAMEL_GROUP_IDS}) must all have the same version, any
+     * disagreement fails the test. For other groups, versions differing in major or minor are reported
+     * as potential mismatches: logged as a warning and written to
+     * {@code target/failsafe-reports/<module>-version-mismatches.txt}.
      */
     protected void assertNoVersionMismatch() {
         Assertions.assertNotNull(classpathEntries, "Classpath not resolved yet");
 
         record Artifact(String groupId, String artifactId, String version) {}
 
+        Path localRepository = localRepository();
         List<Artifact> artifacts = new ArrayList<>();
         for (String entry : classpathEntries) {
-            Path path = Path.of(entry);
-            String fileName = path.getFileName().toString();
-            if (!fileName.endsWith(".jar")) {
+            Path path = Path.of(entry).toAbsolutePath().normalize();
+            if (!path.getFileName().toString().endsWith(".jar") || !path.startsWith(localRepository)) {
                 continue;
             }
+            // <groupId-dirs>/<artifactId>/<version>/<jar>
+            Path relative = localRepository.relativize(path);
+            int count = relative.getNameCount();
+            if (count < 4) {
+                continue;
+            }
+            String version = relative.getName(count - 2).toString();
+            String artifactId = relative.getName(count - 3).toString();
+            StringBuilder groupId = new StringBuilder();
+            for (int i = 0; i < count - 3; i++) {
+                if (i > 0) {
+                    groupId.append('.');
+                }
+                groupId.append(relative.getName(i));
+            }
 
-            Path versionDir = path.getParent();
-            if (versionDir == null) continue;
-            Path artifactDir = versionDir.getParent();
-            if (artifactDir == null) continue;
-
-            String version = versionDir.getFileName().toString();
-            String artifactId = artifactDir.getFileName().toString();
-
-            String fullPath = artifactDir.getParent() == null ? "" : artifactDir.getParent().toString();
-            int repoIdx = fullPath.indexOf("repository" + File.separator);
-            if (repoIdx < 0) continue;
-            String groupPath = fullPath.substring(repoIdx + "repository".length() + 1);
-            String groupId = groupPath.replace(File.separatorChar, '.');
-
-            artifacts.add(new Artifact(groupId, artifactId, version));
+            artifacts.add(new Artifact(groupId.toString(), artifactId, version));
             LOG.debug("Dependency: {}:{}:{}", groupId, artifactId, version);
         }
+        Assertions.assertFalse(artifacts.isEmpty(), "No artifacts from " + localRepository + " on the classpath");
 
         Map<String, Map<String, Set<String>>> status = new TreeMap<>();
         for (Artifact a : artifacts) {
@@ -281,6 +280,9 @@ public abstract class AbstractSpringBootBaseTestSupport {
             }
             String prefixId = a.groupId() + ":" + artifactPrefix;
             String identifier = a.groupId() + ":" + a.artifactId();
+            if (IGNORED_ARTIFACTS.stream().anyMatch(identifier::startsWith)) {
+                continue;
+            }
 
             status.computeIfAbsent(prefixId, k -> new TreeMap<>())
                     .computeIfAbsent(identifier, k -> new LinkedHashSet<>())
@@ -302,11 +304,10 @@ public abstract class AbstractSpringBootBaseTestSupport {
                 continue;
             }
 
-            boolean exactMismatch = artifactVersions.values().stream()
-                    .anyMatch(v -> v.size() > 1 && !differOnlyInPatch(v));
-            if (exactMismatch) {
+            String groupId = prefixId.substring(0, prefixId.indexOf(':'));
+            if (CAMEL_GROUP_IDS.contains(groupId)) {
                 mismatches.add(prefixId);
-            } else {
+            } else if (!differOnlyInPatch(allVersions)) {
                 potentialMismatches.add(prefixId);
             }
         }
@@ -346,8 +347,26 @@ public abstract class AbstractSpringBootBaseTestSupport {
     }
 
     /**
+     * Locates the Maven local repository from the classpath entry of {@code camel-spring-boot-starter},
+     * which every generated project depends on. This does not rely on the repository's location or name,
+     * which can be configured in settings.xml and is not visible from here.
+     */
+    private Path localRepository() {
+        String starterJar = STARTER_ARTIFACT_ID + "-" + System.getProperty("project-version") + ".jar";
+        for (String entry : classpathEntries) {
+            Path path = Path.of(entry).toAbsolutePath().normalize();
+            if (path.getFileName().toString().equals(starterJar)) {
+                // <repo>/org/apache/camel/springboot/camel-spring-boot-starter/<version>/<jar>
+                return path.getParent().getParent().getParent()
+                        .getParent().getParent().getParent().getParent();
+            }
+        }
+        throw new AssertionError(starterJar + " not found on the runtime classpath: " + classpathEntries);
+    }
+
+    /**
      * Returns the major.minor prefix of a semantic version string.
-     * E.g. {@code "1.2.3"} -> {@code "1.2"}, {@code "4.23.0-SNAPSHOT"} -> {@code "4.19"}.
+     * E.g. {@code "1.2.3"} -> {@code "1.2"}, {@code "4.23.0-SNAPSHOT"} -> {@code "4.23"}.
      * Returns the full version if it has fewer than two dot-separated segments.
      */
     private static String majorMinor(String version) {
