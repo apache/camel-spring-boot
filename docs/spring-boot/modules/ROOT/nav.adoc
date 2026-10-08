@@ -243,6 +243,7 @@
 ** xref:starters/jsoup.adoc[Jsoup]
 ** xref:starters/jt400.adoc[JT400]
 ** xref:starters/jte.adoc[JTE]
+** xref:starters/kafka-share.adoc[Kafka Share]
 ** xref:starters/kafka.adoc[Kafka]
 ** xref:starters/kamelet.adoc[Kamelet]
 ** xref:starters/keycloak.adoc[Keycloak]

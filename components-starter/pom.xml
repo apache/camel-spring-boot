@@ -342,6 +342,7 @@
     <module>camel-jsoup-starter</module>
     <module>camel-jt400-starter</module>
     <module>camel-jte-starter</module>
+    <module>camel-kafka-share-starter</module>
     <module>camel-kafka-starter</module>
     <module>camel-kamelet-starter</module>
     <module>camel-keycloak-starter</module>
