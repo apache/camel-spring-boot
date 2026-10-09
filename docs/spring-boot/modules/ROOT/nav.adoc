@@ -306,6 +306,7 @@
 ** xref:starters/openai.adoc[LLM]
 ** xref:starters/openapi-java.adoc[Openapi Java]
 ** xref:starters/openapi-validator.adoc[Openapi Validator]
+** xref:starters/openfeature.adoc[OpenFeature]
 ** xref:starters/openfga.adoc[OpenFGA]
 ** xref:starters/opensearch.adoc[OpenSearch]
 ** xref:starters/openstack.adoc[OpenStack Cinder]

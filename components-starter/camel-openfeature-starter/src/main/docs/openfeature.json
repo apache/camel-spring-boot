@@ -1,0 +1,163 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.openfeature",
+      "type": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openfeature.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    },
+    {
+      "name": "camel.language.openfeature",
+      "type": "org.apache.camel.language.openfeature.springboot.OpenFeatureLanguageConfiguration",
+      "sourceType": "org.apache.camel.language.openfeature.springboot.OpenFeatureLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.openfeature.customizer",
+      "type": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.language.openfeature.springboot.OpenFeatureLanguageConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.openfeature.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.openfeature.cert-path",
+      "type": "java.lang.String",
+      "description": "Path to the TLS certificate for the remote flagd connection.",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openfeature.configuration",
+      "type": "org.apache.camel.component.openfeature.OpenFeatureConfiguration",
+      "description": "Default configuration shared by OpenFeature endpoints. The option is a org.apache.camel.component.openfeature.OpenFeatureConfiguration type.",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openfeature.context-from-body",
+      "type": "java.lang.Boolean",
+      "description": "When true, a Map message body is used as the evaluation context. When false (default), the body is not used as context. The CamelOpenFeatureEvaluationContext header is always used regardless of this setting.",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.openfeature.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.openfeature.deadline",
+      "type": "java.lang.Integer",
+      "description": "Deadline in milliseconds for the remote flagd connection.",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration",
+      "defaultValue": 500
+    },
+    {
+      "name": "camel.component.openfeature.default-value",
+      "type": "java.lang.String",
+      "description": "Default value when flag evaluation fails. When evaluationType is not set, also determines the evaluation type: true or false (case-insensitive) selects boolean evaluation, any other value selects string evaluation.",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration",
+      "defaultValue": "false"
+    },
+    {
+      "name": "camel.component.openfeature.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the openfeature component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openfeature.evaluation-type",
+      "type": "java.lang.String",
+      "description": "The evaluation type. 'boolean' and 'isEnabled' use boolean evaluation (getBooleanValue). 'variant' uses string evaluation (getStringValue). When not set, the type is inferred from defaultValue. Can also be set as a path parameter in the endpoint URI, which takes precedence.",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openfeature.flag-key",
+      "type": "java.lang.String",
+      "description": "The feature flag key to evaluate. Can be overridden per message via the CamelOpenFeatureFlagKey header.",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openfeature.flags",
+      "type": "java.lang.String",
+      "description": "A JSON object defining feature flags in flagd format (inline). Mutually exclusive with flagsResource.",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openfeature.flags-resource",
+      "type": "java.lang.String",
+      "description": "Camel resource URI pointing to a feature flag definition file in flagd format. Mutually exclusive with flags. When provider is also set, the provider takes precedence.",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openfeature.host",
+      "type": "java.lang.String",
+      "description": "Remote flagd service host. When set, the flagd RPC resolver is used.",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openfeature.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.openfeature.port",
+      "type": "java.lang.Integer",
+      "description": "Remote flagd service port.",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration",
+      "defaultValue": 8013
+    },
+    {
+      "name": "camel.component.openfeature.provider",
+      "type": "java.lang.String",
+      "description": "Bean reference to a custom FeatureProvider (e.g. #myProvider). When set, takes precedence over flags, flagsResource, and host.",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openfeature.result-property",
+      "type": "java.lang.String",
+      "description": "Store the evaluation result in this exchange property, preserving the original message body.",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openfeature.tls",
+      "type": "java.lang.Boolean",
+      "description": "Whether to use TLS for the remote flagd connection.",
+      "sourceType": "org.apache.camel.component.openfeature.springboot.OpenFeatureComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.language.openfeature.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.language.openfeature.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the openfeature language. This is enabled by default.",
+      "sourceType": "org.apache.camel.language.openfeature.springboot.OpenFeatureLanguageConfiguration"
+    },
+    {
+      "name": "camel.language.openfeature.language",
+      "type": "java.lang.String",
+      "description": "The name of the language to use.",
+      "sourceType": "org.apache.camel.language.openfeature.springboot.OpenFeatureLanguageConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

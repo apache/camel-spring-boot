@@ -405,6 +405,7 @@
     <module>camel-openai-starter</module>
     <module>camel-openapi-java-starter</module>
     <module>camel-openapi-validator-starter</module>
+    <module>camel-openfeature-starter</module>
     <module>camel-openfga-starter</module>
     <module>camel-opensearch-starter</module>
     <module>camel-openstack-starter</module>
