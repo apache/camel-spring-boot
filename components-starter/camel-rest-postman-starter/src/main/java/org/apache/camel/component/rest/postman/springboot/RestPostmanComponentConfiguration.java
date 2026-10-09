@@ -233,6 +233,17 @@ public class RestPostmanComponentConfiguration
      */
     private String postmanApiKeyHeader = "X-Api-Key";
     /**
+     * Whether a {{variable}} placeholder that neither the collection nor the
+     * variables option defines is resolved from Camel properties, which by
+     * default also cover JVM system properties and OS environment variables.
+     * With auto, this is done for a collection read from the classpath or the
+     * file system, and not for one fetched from the Postman cloud, over HTTP or
+     * through any other resource scheme, because whoever edits or serves such a
+     * collection could otherwise copy those values into an outgoing request.
+     * Use enabled or disabled to decide explicitly for any source.
+     */
+    private String resolveVariablesFromProperties = "auto";
+    /**
      * Customize TLS parameters used by the component. If not set defaults to
      * the TLS parameters set in the Camel context. These parameters are used
      * both when fetching a collection from the Postman cloud and by the
@@ -482,6 +493,15 @@ public class RestPostmanComponentConfiguration
 
     public void setPostmanApiKeyHeader(String postmanApiKeyHeader) {
         this.postmanApiKeyHeader = postmanApiKeyHeader;
+    }
+
+    public String getResolveVariablesFromProperties() {
+        return resolveVariablesFromProperties;
+    }
+
+    public void setResolveVariablesFromProperties(
+            String resolveVariablesFromProperties) {
+        this.resolveVariablesFromProperties = resolveVariablesFromProperties;
     }
 
     public SSLContextParameters getSslContextParameters() {

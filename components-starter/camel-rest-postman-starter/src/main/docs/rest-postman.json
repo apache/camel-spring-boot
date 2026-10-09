@@ -202,6 +202,13 @@
       "defaultValue": 30000
     },
     {
+      "name": "camel.component.rest-postman.resolve-variables-from-properties",
+      "type": "java.lang.String",
+      "description": "Whether a {{variable}} placeholder that neither the collection nor the variables option defines is resolved from Camel properties, which by default also cover JVM system properties and OS environment variables. With auto, this is done for a collection read from the classpath or the file system, and not for one fetched from the Postman cloud, over HTTP or through any other resource scheme, because whoever edits or serves such a collection could otherwise copy those values into an outgoing request. Use enabled or disabled to decide explicitly for any source.",
+      "sourceType": "org.apache.camel.component.rest.postman.springboot.RestPostmanComponentConfiguration",
+      "defaultValue": "auto"
+    },
+    {
       "name": "camel.component.rest-postman.rest-postman-processor-strategy",
       "type": "org.apache.camel.component.rest.postman.RestPostmanProcessorStrategy",
       "description": "To use a custom strategy for how to service the requests of the collection. The option is a org.apache.camel.component.rest.postman.RestPostmanProcessorStrategy type.",

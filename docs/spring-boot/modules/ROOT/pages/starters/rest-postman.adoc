@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 33 options, which are listed below.
+The starter supports 34 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -56,6 +56,7 @@ The starter supports 33 options, which are listed below.
 | camel.component.rest-postman.query-parameter-mode | How to treat the query parameters declared in the collection. With placeholder the parameter names are bound to message headers and the values in the collection are ignored as sample data. With literal the values in the collection are sent as-is. | placeholder | String
 | camel.component.rest-postman.request-filter | Filters which requests of the collection are used, as comma separated Ant-style patterns matched against the folder qualified request id. Prefix a pattern with ! to exclude. |  | String
 | camel.component.rest-postman.request-timeout | Request timeout in milliseconds when fetching a collection from the Postman cloud. | 30000 | Long
+| camel.component.rest-postman.resolve-variables-from-properties | Whether a \{\{variable}} placeholder that neither the collection nor the variables option defines is resolved from Camel properties, which by default also cover JVM system properties and OS environment variables. With auto, this is done for a collection read from the classpath or the file system, and not for one fetched from the Postman cloud, over HTTP or through any other resource scheme, because whoever edits or serves such a collection could otherwise copy those values into an outgoing request. Use enabled or disabled to decide explicitly for any source. | auto | String
 | camel.component.rest-postman.rest-postman-processor-strategy | To use a custom strategy for how to service the requests of the collection. The option is a org.apache.camel.component.rest.postman.RestPostmanProcessorStrategy type. |  | RestPostmanProcessorStrategy
 | camel.component.rest-postman.run-fail-fast | When the endpoint runs more than one request, that is when it selects a folder or the whole collection, whether to stop and fail on the first request that fails. When false every request is attempted and the failure is recorded in its result. | true | Boolean
 | camel.component.rest-postman.ssl-context-parameters | Customize TLS parameters used by the component. If not set defaults to the TLS parameters set in the Camel context. These parameters are used both when fetching a collection from the Postman cloud and by the delegate producer. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
