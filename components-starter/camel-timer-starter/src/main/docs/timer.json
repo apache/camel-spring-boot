@@ -41,7 +41,7 @@
     {
       "name": "camel.component.timer.include-metadata",
       "type": "java.lang.Boolean",
-      "description": "Whether to include metadata in the exchange such as fired time, timer name, timer count etc.",
+      "description": "Whether to include metadata in the exchange: the exchange properties CamelTimerCounter (the fire count, 1 on the first fire), CamelTimerName, CamelTimerPeriod, CamelTimerFiredTime and CamelTimerTime (when the time option is set), and the headers CamelTimerFiredTime and CamelMessageTimestamp.",
       "sourceType": "org.apache.camel.component.timer.springboot.TimerComponentConfiguration",
       "defaultValue": false
     }
