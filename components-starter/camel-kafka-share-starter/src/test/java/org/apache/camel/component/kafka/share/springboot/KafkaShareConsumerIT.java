@@ -114,7 +114,7 @@ class KafkaShareConsumerIT {
 
         produce(WORK_TOPIC, 5);
 
-        work.assertIsSatisfied(60000);
+        MockEndpoint.assertIsSatisfied(60, TimeUnit.SECONDS, work);
     }
 
     @Test
