@@ -19,6 +19,8 @@ package org.apache.camel.component.kafka.integration;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.StreamSupport;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.builder.RouteBuilder;
@@ -30,6 +32,7 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.Uuid;
 import org.apache.kafka.common.header.internals.RecordHeader;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -57,7 +60,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
         KafkaConsumerFullIT.class, KafkaConsumerFullIT.TestConfiguration.class, })
 @DisabledIfSystemProperty(named = "ci.env.name", matches = "github.com", disabledReason = "Disabled on GH Action due to Docker limit")
 public class KafkaConsumerFullIT extends BaseEmbeddedKafkaTestSupport {
-    public static final String TOPIC = "test-full";
+    public static final String TOPIC = "test-full-" + Uuid.randomUuid();
+    public static final String ROUTE = "full-it-" + Uuid.randomUuid();
 
     private static final Logger LOG = LoggerFactory.getLogger(KafkaConsumerFullIT.class);
 
@@ -79,12 +83,18 @@ public class KafkaConsumerFullIT extends BaseEmbeddedKafkaTestSupport {
     }
 
     @AfterEach
-    public void after() {
+    public void after() throws Exception {
         if (producer != null) {
             producer.close();
         }
         // clean all test topics
-        kafkaAdminClient.deleteTopics(Collections.singletonList(TOPIC)).all();
+        // wait for the topic to be actually deleted, so the next test does not race with it
+        try {
+            kafkaAdminClient.deleteTopics(Collections.singletonList(TOPIC)).all().get(60, TimeUnit.SECONDS);
+        } catch (ExecutionException e) {
+            // the topic may not exist if the test did not produce any record
+            LOG.debug("Unable to delete topic {}: {}", TOPIC, e.getMessage());
+        }
         to.reset();
     }
 
@@ -110,7 +120,7 @@ public class KafkaConsumerFullIT extends BaseEmbeddedKafkaTestSupport {
             producer.send(data);
         }
 
-        to.assertIsSatisfied(3000);
+        MockEndpoint.assertIsSatisfied(30, TimeUnit.SECONDS, to);
 
         assertEquals(5, StreamSupport
                 .stream(MockConsumerInterceptor.recordsCaptured.get(0).records(TOPIC).spliterator(), false).count());
@@ -131,7 +141,7 @@ public class KafkaConsumerFullIT extends BaseEmbeddedKafkaTestSupport {
         data.headers().add(new RecordHeader(propagatedHeaderKey, propagatedHeaderValue));
         producer.send(data);
 
-        to.assertIsSatisfied(3000);
+        MockEndpoint.assertIsSatisfied(30, TimeUnit.SECONDS, to);
 
         Map<String, Object> headers = to.getExchanges().get(0).getIn().getHeaders();
         assertTrue(headers.containsKey(KafkaConstants.TOPIC),
@@ -149,7 +159,7 @@ public class KafkaConsumerFullIT extends BaseEmbeddedKafkaTestSupport {
             ProducerRecord<String, String> data = new ProducerRecord<>(TOPIC, "1", msg);
             producer.send(data);
         }
-        to.assertIsSatisfied(3000);
+        MockEndpoint.assertIsSatisfied(30, TimeUnit.SECONDS, to);
 
         to.reset();
 
@@ -158,15 +168,15 @@ public class KafkaConsumerFullIT extends BaseEmbeddedKafkaTestSupport {
         to.expectedBodiesReceivedInAnyOrder("message-0", "message-1", "message-2", "message-3", "message-4");
 
         // Restart endpoint,
-        context.getRouteController().stopRoute("full-it");
+        context.getRouteController().stopRoute(ROUTE);
 
         KafkaEndpoint kafkaEndpoint = (KafkaEndpoint) context.getEndpoint(from);
         kafkaEndpoint.getConfiguration().setSeekTo(SeekPolicy.BEGINNING);
 
-        context.getRouteController().startRoute("full-it");
+        context.getRouteController().startRoute(ROUTE);
 
         // As wee set seek to beginning we should re-consume all messages
-        to.assertIsSatisfied(3000);
+        MockEndpoint.assertIsSatisfied(30, TimeUnit.SECONDS, to);
     }
 
     @Order(4)
@@ -179,19 +189,19 @@ public class KafkaConsumerFullIT extends BaseEmbeddedKafkaTestSupport {
             ProducerRecord<String, String> data = new ProducerRecord<>(TOPIC, "1", msg);
             producer.send(data);
         }
-        to.assertIsSatisfied(3000);
+        MockEndpoint.assertIsSatisfied(30, TimeUnit.SECONDS, to);
 
         to.reset();
 
         to.expectedMessageCount(0);
 
         // Restart endpoint,
-        context.getRouteController().stopRoute("full-it");
+        context.getRouteController().stopRoute(ROUTE);
 
         KafkaEndpoint kafkaEndpoint = (KafkaEndpoint) context.getEndpoint(from);
         kafkaEndpoint.getConfiguration().setSeekTo(SeekPolicy.END);
 
-        context.getRouteController().startRoute("full-it");
+        context.getRouteController().startRoute(ROUTE);
 
         to.assertIsSatisfied(3000);
     }
@@ -213,7 +223,7 @@ public class KafkaConsumerFullIT extends BaseEmbeddedKafkaTestSupport {
                 public void configure() {
                     from(from).process(
                             exchange -> LOG.trace("Captured on the processor: {}", exchange.getMessage().getBody()))
-                            .routeId("full-it").to(to);
+                            .routeId(ROUTE).to(to);
                 }
             };
         }
