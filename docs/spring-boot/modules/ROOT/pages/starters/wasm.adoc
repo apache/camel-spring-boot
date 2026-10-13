@@ -3,11 +3,11 @@
 = Wasm
 :artifactid: camel-wasm-starter
 
-Invoke Wasm functions.
+Run Wasm programs (WASI Preview 1 command modules) with the message body as standard input.
 
 == What's inside
 
-* xref:{csb-camel-components}::wasm-component.adoc[Wasm component], URI syntax: `wasm:functionName`
+* xref:{csb-camel-components}::wasm-component.adoc[Wasm component], URI syntax: `wasm:module`
 * xref:{csb-camel-components}:languages:wasm-language.adoc[Wasm language]
 
 Please refer to the above links for usage and configuration details.
