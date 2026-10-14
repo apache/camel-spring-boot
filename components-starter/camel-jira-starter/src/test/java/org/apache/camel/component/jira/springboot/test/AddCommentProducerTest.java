@@ -51,6 +51,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import io.atlassian.util.concurrent.Promise;
 import io.atlassian.util.concurrent.Promises;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,14 +103,14 @@ public class AddCommentProducerTest {
                         .thenReturn(jiraClient);
                 lenient().when(jiraClient.getIssueClient()).thenReturn(issueRestClient);
 
-                when(issueRestClient.addComment(any(), any())).then((Answer<Void>) inv -> {
+                when(issueRestClient.addComment(any(), any())).then((Answer<Promise<Void>>) inv -> {
                     Collection<Comment> comments = new ArrayList<>();
                     for (Comment c : backendIssue.getComments()) {
                         comments.add(c);
                     }
                     comments.add(newComment(backendIssue.getId(), comments.size() + 1, comment));
                     backendIssue = createIssueWithComments(backendIssue.getId(), comments);
-                    return null;
+                    return Promises.promise(null);
                 });
                 backendIssue = createIssueWithComments(1, 1);
                 when(issueRestClient.getIssue(any())).then(inv -> Promises.promise(backendIssue));
