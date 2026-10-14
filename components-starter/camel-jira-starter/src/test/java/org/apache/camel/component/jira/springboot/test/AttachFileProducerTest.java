@@ -123,7 +123,7 @@ public class AttachFileProducerTest {
                     issue = createIssueWithAttachment(issue.getId(), issue.getSummary(), issue.getKey(),
                             issue.getIssueType(), issue.getDescription(), issue.getPriority(), issue.getAssignee(),
                             attachments);
-                    return null;
+                    return Promises.promise(null);
                 });
 
                 camelContext.getRegistry().bind(JIRA_REST_CLIENT_FACTORY, jiraRestClientFactory);

@@ -61,6 +61,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import io.atlassian.util.concurrent.Promise;
 import io.atlassian.util.concurrent.Promises;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,11 +130,11 @@ public class AddWorkLogProducerTest {
         headers.put(MINUTES_SPENT, minutesSpent);
         String comment = "A new test comment " + new Date();
 
-        when(issueRestClient.addWorklog(any(URI.class), any(WorklogInput.class))).then((Answer<Void>) inv -> {
+        when(issueRestClient.addWorklog(any(URI.class), any(WorklogInput.class))).then((Answer<Promise<Void>>) inv -> {
             Collection<Worklog> workLogs = new ArrayList<>();
             workLogs.add(newWorkLog(backendIssue.getId(), minutesSpent, comment));
             backendIssue = createIssueWithWorkLogs(backendIssue.getId(), workLogs);
-            return null;
+            return Promises.promise(null);
         });
 
         template.sendBodyAndHeaders(comment, headers);

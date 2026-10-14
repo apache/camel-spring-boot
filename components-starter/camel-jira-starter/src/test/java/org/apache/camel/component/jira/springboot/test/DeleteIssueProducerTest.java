@@ -102,7 +102,7 @@ public class DeleteIssueProducerTest {
                 when(issueRestClient.getIssue(any())).then(inv -> Promises.promise(issue));
                 when(issueRestClient.deleteIssue(anyString(), anyBoolean())).then(inv -> {
                     issue = null;
-                    return null;
+                    return Promises.promise(null);
                 });
 
                 camelContext.getRegistry().bind(JIRA_REST_CLIENT_FACTORY, jiraRestClientFactory);

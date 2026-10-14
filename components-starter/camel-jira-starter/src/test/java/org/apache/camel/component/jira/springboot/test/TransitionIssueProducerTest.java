@@ -110,7 +110,7 @@ public class TransitionIssueProducerTest {
                     Status status = new Status(doneStatusUri, 1L, "Done", "Done", null, null);
                     Resolution resolution = new Resolution(doneResolutionUri, 1L, "Resolution", "Resolution");
                     issue = transitionIssueDone(issue, status, resolution);
-                    return null;
+                    return Promises.promise(null);
                 });
 
                 camelContext.getRegistry().bind(JIRA_REST_CLIENT_FACTORY, jiraRestClientFactory);
