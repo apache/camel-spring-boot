@@ -8,6 +8,18 @@
   ],
   "properties": [
     {
+      "name": "camel.lra.allowed-coordinator-urls",
+      "type": "java.lang.String",
+      "description": "Comma-separated URLs, including the context path, of further LRA coordinators whose LRAs may be joined, completed or compensated. By default, only an LRA hosted by the configured coordinator is accepted. Use it when participants reach the same coordinator under different URLs, for example with different host names.",
+      "sourceType": "org.apache.camel.service.lra.springboot.LraServiceConfiguration"
+    },
+    {
+      "name": "camel.lra.callback-secret",
+      "type": "java.lang.String",
+      "description": "Secret used to sign the participant callback URLs that are enlisted with the LRA coordinator, and to verify them when the coordinator calls back. When set, a compensation or completion callback with a missing or invalid signature is rejected with HTTP 403. All the instances of a participant must use the same secret.",
+      "sourceType": "org.apache.camel.service.lra.springboot.LraServiceConfiguration"
+    },
+    {
       "name": "camel.lra.coordinator-context-path",
       "type": "java.lang.String",
       "description": "The context path of the LRA coordinator service",

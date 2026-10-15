@@ -52,6 +52,20 @@ public class LraServiceConfiguration {
      */
     private String localParticipantContextPath = DEFAULT_LOCAL_PARTICIPANT_CONTEXT_PATH;
 
+    /**
+     * Comma-separated URLs, including the context path, of further LRA coordinators whose LRAs may be joined, completed
+     * or compensated. By default, only an LRA hosted by the configured coordinator is accepted. Use it when
+     * participants reach the same coordinator under different URLs, for example with different host names.
+     */
+    private String allowedCoordinatorUrls;
+
+    /**
+     * Secret used to sign the participant callback URLs that are enlisted with the LRA coordinator, and to verify them
+     * when the coordinator calls back. When set, a compensation or completion callback with a missing or invalid
+     * signature is rejected with HTTP 403. All the instances of a participant must use the same secret.
+     */
+    private String callbackSecret;
+
     public boolean isEnabled() {
         return enabled;
     }
@@ -90,5 +104,21 @@ public class LraServiceConfiguration {
 
     public void setLocalParticipantContextPath(String localParticipantContextPath) {
         this.localParticipantContextPath = localParticipantContextPath;
+    }
+
+    public String getAllowedCoordinatorUrls() {
+        return allowedCoordinatorUrls;
+    }
+
+    public void setAllowedCoordinatorUrls(String allowedCoordinatorUrls) {
+        this.allowedCoordinatorUrls = allowedCoordinatorUrls;
+    }
+
+    public String getCallbackSecret() {
+        return callbackSecret;
+    }
+
+    public void setCallbackSecret(String callbackSecret) {
+        this.callbackSecret = callbackSecret;
     }
 }

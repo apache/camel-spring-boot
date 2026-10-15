@@ -19,11 +19,13 @@ This starter integrates Camel's Saga EIP with a https://download.eclipse.org/mic
 
 == Spring Boot Auto-Configuration
 
-The starter supports 5 options, which are listed below.
+The starter supports 7 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
+| camel.lra.allowed-coordinator-urls | Comma-separated URLs, including the context path, of further LRA coordinators whose LRAs may be joined, completed or compensated. By default, only an LRA hosted by the configured coordinator is accepted. Use it when participants reach the same coordinator under different URLs, for example with different host names. |  | String
+| camel.lra.callback-secret | Secret used to sign the participant callback URLs that are enlisted with the LRA coordinator, and to verify them when the coordinator calls back. When set, a compensation or completion callback with a missing or invalid signature is rejected with HTTP 403. All the instances of a participant must use the same secret. |  | String
 | camel.lra.coordinator-context-path | The context path of the LRA coordinator service |  | String
 | camel.lra.coordinator-url | The base URL of the LRA coordinator service (e.g. http://lra-host:8080) |  | String
 | camel.lra.enabled | Global option to enable/disable component auto-configuration, default is true. | true | Boolean
