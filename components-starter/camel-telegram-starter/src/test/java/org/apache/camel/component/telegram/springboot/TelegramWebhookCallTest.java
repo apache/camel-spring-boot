@@ -17,11 +17,13 @@
 package org.apache.camel.component.telegram.springboot;
 
 import java.io.InputStream;
+import java.util.Map;
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
+import org.apache.camel.component.telegram.TelegramWebhookProcessor;
 import org.apache.camel.component.webhook.WebhookConfiguration;
 import org.apache.camel.component.webhook.WebhookEndpoint;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
@@ -43,6 +45,8 @@ import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
         TelegramWebhookCallTest.TestConfiguration.class })
 public class TelegramWebhookCallTest extends TelegramTestSupport {
 
+    private static final String SECRET_TOKEN = "spring-boot-secret-token";
+
     private static int port;
 
     @EndpointInject("mock:endpoint")
@@ -59,7 +63,8 @@ public class TelegramWebhookCallTest extends TelegramTestSupport {
             mock.expectedBodiesReceived("aho");
             mock.expectedMinimumMessageCount(1);
 
-            template.sendBodyAndHeader("netty-http:" + url, content, Exchange.CONTENT_TYPE, "application/json");
+            template.sendBodyAndHeaders("netty-http:" + url, content, Map.of(Exchange.CONTENT_TYPE, "application/json",
+                    TelegramWebhookProcessor.SECRET_TOKEN_HEADER, SECRET_TOKEN));
             mock.assertIsSatisfied();
         }
     }
@@ -82,7 +87,8 @@ public class TelegramWebhookCallTest extends TelegramTestSupport {
                 public void configure() {
                     restConfiguration().host("localhost").port(port);
 
-                    from("webhook:telegram:bots?authorizationToken=mock-token&webhookAutoRegister=false").id("webhook")
+                    from("webhook:telegram:bots?authorizationToken=mock-token&webhookAutoRegister=false"
+                         + "&webhookSecretToken=" + SECRET_TOKEN).id("webhook")
                             .convertBodyTo(String.class).to("mock:endpoint");
                 }
             };
