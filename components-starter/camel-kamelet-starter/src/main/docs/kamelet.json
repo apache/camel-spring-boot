@@ -14,6 +14,13 @@
   ],
   "properties": [
     {
+      "name": "camel.component.kamelet.advanced-options",
+      "type": "java.lang.Boolean",
+      "description": "Whether to forward extra URI parameters to the endpoint wrapped by the Kamelet. When enabled, parameters that are not Kamelet template properties or reserved Kamelet options are appended to the wrapped source or sink endpoint. Disabled by default.",
+      "sourceType": "org.apache.camel.component.kamelet.springboot.KameletComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.kamelet.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",

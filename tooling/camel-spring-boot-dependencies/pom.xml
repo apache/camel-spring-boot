@@ -99,7 +99,7 @@
       <dependency>
         <groupId>com.openai</groupId>
         <artifactId>openai-java</artifactId>
-        <version>4.76.0</version>
+        <version>4.78.0</version>
       </dependency>
       <dependency>
         <groupId>dev.openfeature.contrib.tools</groupId>
@@ -4756,6 +4756,21 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-semantic-openai</artifactId>
+        <version>4.24.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-semantic-typesafe-ai</artifactId>
+        <version>4.24.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-semantic-wolf-defender</artifactId>
+        <version>4.24.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-servicenow</artifactId>
         <version>4.24.0-SNAPSHOT</version>
       </dependency>
@@ -5182,11 +5197,6 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-whatsapp</artifactId>
-        <version>4.24.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.camel</groupId>
-        <artifactId>camel-wolf-defender</artifactId>
         <version>4.24.0-SNAPSHOT</version>
       </dependency>
       <dependency>

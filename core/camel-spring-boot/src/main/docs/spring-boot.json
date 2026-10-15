@@ -904,6 +904,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.main.routes-reload-interval",
+      "type": "java.lang.Long",
+      "description": "How often to scan the reload directory for changed files, in millis. A change is reloaded at the next scan, so a shorter interval reloads it sooner. A longer interval groups more of one save together: two files saved a second apart are one change at 2000 and two at 1000.",
+      "sourceType": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+      "defaultValue": 2000
+    },
+    {
       "name": "camel.main.routes-reload-pattern",
       "type": "java.lang.String",
       "description": "Used for inclusive filtering of routes from directories. Typical used for specifying to accept routes in XML or YAML files, such as <tt>*.yaml,*.xml<\/tt>. Multiple patterns can be specified separated by comma.",

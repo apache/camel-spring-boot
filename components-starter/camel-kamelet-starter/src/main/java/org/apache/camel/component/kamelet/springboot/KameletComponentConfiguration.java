@@ -86,6 +86,13 @@ public class KameletComponentConfiguration
      */
     private Long timeout = 30000L;
     /**
+     * Whether to forward extra URI parameters to the endpoint wrapped by the
+     * Kamelet. When enabled, parameters that are not Kamelet template
+     * properties or reserved Kamelet options are appended to the wrapped source
+     * or sink endpoint. Disabled by default.
+     */
+    private Boolean advancedOptions = false;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -166,6 +173,14 @@ public class KameletComponentConfiguration
 
     public void setTimeout(Long timeout) {
         this.timeout = timeout;
+    }
+
+    public Boolean getAdvancedOptions() {
+        return advancedOptions;
+    }
+
+    public void setAdvancedOptions(Boolean advancedOptions) {
+        this.advancedOptions = advancedOptions;
     }
 
     public Boolean getAutowiredEnabled() {
