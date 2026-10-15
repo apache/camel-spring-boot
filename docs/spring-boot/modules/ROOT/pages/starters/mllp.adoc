@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 35 options, which are listed below.
+The starter supports 36 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -42,6 +42,7 @@ The starter supports 35 options, which are listed below.
 | camel.component.mllp.enabled | Whether to enable auto configuration of the mllp component. This is enabled by default. |  | Boolean
 | camel.component.mllp.exchange-pattern | Sets the exchange pattern when the consumer creates an exchange. | inout | ExchangePattern
 | camel.component.mllp.hl7-headers | Enable/Disable the automatic generation of message headers from the HL7 Message MLLP Consumers only | true | Boolean
+| camel.component.mllp.hostname-verification | Whether the producer checks that the certificate of the server matches the host it connects to, when SSL/TLS is used. When disabled, any certificate accepted by the trust store is accepted, whatever host it was issued for. | true | Boolean
 | camel.component.mllp.idle-timeout | The approximate idle time allowed before the Client TCP Connection will be reset. A null value or a value less than or equal to zero will disable the idle timeout. |  | Integer
 | camel.component.mllp.idle-timeout-strategy | decide what action to take when idle timeout occurs. Possible values are : RESET: set SO_LINGER to 0 and reset the socket CLOSE: close the socket gracefully default is RESET. | reset | MllpIdleTimeoutStrategy
 | camel.component.mllp.keep-alive | Enable/disable the SO_KEEPALIVE socket option. | true | Boolean
