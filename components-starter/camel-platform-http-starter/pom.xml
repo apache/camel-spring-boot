@@ -89,6 +89,13 @@
       <version>${rest-assured-version}</version>
       <scope>test</scope>
     </dependency>
+    <!-- camel-oauth reads the request headers of the platform-http message -->
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-oauth</artifactId>
+      <version>${camel-version}</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
