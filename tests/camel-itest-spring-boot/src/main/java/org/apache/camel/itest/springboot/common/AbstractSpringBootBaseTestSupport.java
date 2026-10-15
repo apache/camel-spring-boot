@@ -366,7 +366,7 @@ public abstract class AbstractSpringBootBaseTestSupport {
 
     /**
      * Returns the major.minor prefix of a semantic version string.
-     * E.g. {@code "1.2.3"} -> {@code "1.2"}, {@code "4.23.0-SNAPSHOT"} -> {@code "4.23"}.
+     * E.g. {@code "1.2.3"} -> {@code "1.2"}, {@code "4.24.0-SNAPSHOT"} -> {@code "4.23"}.
      * Returns the full version if it has fewer than two dot-separated segments.
      */
     private static String majorMinor(String version) {
