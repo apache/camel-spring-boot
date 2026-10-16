@@ -96,6 +96,13 @@
       "defaultValue": 60000
     },
     {
+      "name": "camel.component.smpp.hostname-verification",
+      "type": "java.lang.Boolean",
+      "description": "Whether to check that the certificate of the SMSC matches the host Camel connects to, when SSL is used. When disabled, any certificate trusted by the JVM is accepted, whatever host it was issued for.",
+      "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.smpp.http-proxy-host",
       "type": "java.lang.String",
       "description": "If you need to tunnel SMPP through a HTTP proxy, set this attribute to the hostname or ip address of your HTTP proxy.",

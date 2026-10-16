@@ -112,6 +112,13 @@
       "sourceType": "org.apache.camel.component.mina.springboot.MinaComponentConfiguration"
     },
     {
+      "name": "camel.component.mina.hostname-verification",
+      "type": "java.lang.Boolean",
+      "description": "Whether to check that the certificate of the server matches the host Camel connects to, when SSL is used by the producer, or by the consumer in client mode. When disabled, any certificate accepted by the trust store is accepted, whatever host it was issued for.",
+      "sourceType": "org.apache.camel.component.mina.springboot.MinaComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.mina.lazy-session-creation",
       "type": "java.lang.Boolean",
       "description": "Sessions can be lazily created to avoid exceptions, if the remote server is not up and running when the Camel producer is started.",

@@ -308,6 +308,12 @@ public class SmppComponentConfiguration
      */
     private Map<String, String> proxyHeaders;
     /**
+     * Whether to check that the certificate of the SMSC matches the host Camel
+     * connects to, when SSL is used. When disabled, any certificate trusted by
+     * the JVM is accepted, whatever host it was issued for.
+     */
+    private Boolean hostnameVerification = true;
+    /**
      * The password for connecting to SMSC server.
      */
     private String password;
@@ -639,6 +645,14 @@ public class SmppComponentConfiguration
 
     public void setProxyHeaders(Map<String, String> proxyHeaders) {
         this.proxyHeaders = proxyHeaders;
+    }
+
+    public Boolean getHostnameVerification() {
+        return hostnameVerification;
+    }
+
+    public void setHostnameVerification(Boolean hostnameVerification) {
+        this.hostnameVerification = hostnameVerification;
     }
 
     public String getPassword() {

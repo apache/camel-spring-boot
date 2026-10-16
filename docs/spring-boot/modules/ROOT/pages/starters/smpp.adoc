@@ -24,7 +24,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 44 options, which are listed below.
+The starter supports 45 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -41,6 +41,7 @@ The starter supports 44 options, which are listed below.
 | camel.component.smpp.enabled | Whether to enable auto configuration of the smpp component. This is enabled by default. |  | Boolean
 | camel.component.smpp.encoding | Defines the encoding scheme of the short message user data. Only for SubmitSm, ReplaceSm and SubmitMulti. | ISO-8859-1 | String
 | camel.component.smpp.enquire-link-timer | Defines the interval in milliseconds between the confidence checks. The confidence check is used to test the communication path between an ESME and an SMSC. | 60000 | Integer
+| camel.component.smpp.hostname-verification | Whether to check that the certificate of the SMSC matches the host Camel connects to, when SSL is used. When disabled, any certificate trusted by the JVM is accepted, whatever host it was issued for. | true | Boolean
 | camel.component.smpp.http-proxy-host | If you need to tunnel SMPP through a HTTP proxy, set this attribute to the hostname or ip address of your HTTP proxy. |  | String
 | camel.component.smpp.http-proxy-password | If your HTTP proxy requires basic authentication, set this attribute to the password required for your HTTP proxy. |  | String
 | camel.component.smpp.http-proxy-port | If you need to tunnel SMPP through a HTTP proxy, set this attribute to the port of your HTTP proxy. | 3128 | Integer

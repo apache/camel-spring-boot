@@ -114,6 +114,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.mllp.hostname-verification",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer checks that the certificate of the server matches the host it connects to, when SSL\/TLS is used. When disabled, any certificate accepted by the trust store is accepted, whatever host it was issued for.",
+      "sourceType": "org.apache.camel.component.mllp.springboot.MllpComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.mllp.idle-timeout",
       "type": "java.lang.Integer",
       "description": "The approximate idle time allowed before the Client TCP Connection will be reset. A null value or a value less than or equal to zero will disable the idle timeout.",

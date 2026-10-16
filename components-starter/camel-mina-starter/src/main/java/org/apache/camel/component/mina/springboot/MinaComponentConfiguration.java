@@ -209,6 +209,13 @@ public class MinaComponentConfiguration
      */
     private MinaTextLineDelimiter textlineDelimiter;
     /**
+     * Whether to check that the certificate of the server matches the host
+     * Camel connects to, when SSL is used by the producer, or by the consumer
+     * in client mode. When disabled, any certificate accepted by the trust
+     * store is accepted, whatever host it was issued for.
+     */
+    private Boolean hostnameVerification = true;
+    /**
      * To configure SSL security. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
@@ -435,6 +442,14 @@ public class MinaComponentConfiguration
 
     public void setTextlineDelimiter(MinaTextLineDelimiter textlineDelimiter) {
         this.textlineDelimiter = textlineDelimiter;
+    }
+
+    public Boolean getHostnameVerification() {
+        return hostnameVerification;
+    }
+
+    public void setHostnameVerification(Boolean hostnameVerification) {
+        this.hostnameVerification = hostnameVerification;
     }
 
     public SSLContextParameters getSslContextParameters() {
