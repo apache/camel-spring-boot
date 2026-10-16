@@ -202,8 +202,9 @@ public class MailComponentConfiguration
      */
     private String replyTo;
     /**
-     * The Subject of the message being sent. Note: Setting the subject in the
-     * header takes precedence over this option.
+     * The Subject of the message being sent. The Subject message header is
+     * ignored unless useHeaderSubject=true, in which case it overrides this
+     * option.
      */
     private String subject;
     /**
@@ -213,28 +214,26 @@ public class MailComponentConfiguration
     private String to;
     /**
      * Whether message headers From and Sender override the sender
-     * pre-configured in the endpoint URI. Defaults to true. Set to false to
-     * always use the endpoint URI sender, ignoring any From or Sender headers
-     * from the message.
+     * pre-configured in the endpoint URI. Defaults to false. Set to true to let
+     * message headers From and Sender override the endpoint URI sender.
      */
     private Boolean useHeaderFrom = false;
     /**
      * Whether message headers To, CC, and BCC override the recipients
-     * pre-configured in the endpoint URI. Defaults to true. Set to false to
-     * always use the endpoint URI recipients, ignoring any recipient headers
-     * from the message.
+     * pre-configured in the endpoint URI. Defaults to false. Set to true to let
+     * message headers override the endpoint URI recipients.
      */
     private Boolean useHeaderRecipients = false;
     /**
      * Whether message header Reply-To overrides the replyTo pre-configured in
-     * the endpoint URI. Defaults to true. Set to false to always use the
-     * endpoint URI replyTo, ignoring any Reply-To header from the message.
+     * the endpoint URI. Defaults to false. Set to true to let the message
+     * Reply-To header override the endpoint URI replyTo.
      */
     private Boolean useHeaderReplyTo = false;
     /**
      * Whether message header Subject overrides the subject pre-configured in
-     * the endpoint URI. Defaults to true. Set to false to always use the
-     * endpoint URI subject, ignoring any Subject header from the message.
+     * the endpoint URI. Defaults to false. Set to true to let the message
+     * Subject header override the endpoint URI subject.
      */
     private Boolean useHeaderSubject = false;
     /**
@@ -323,6 +322,14 @@ public class MailComponentConfiguration
      * java.util.Properties type.
      */
     private Properties javaMailProperties;
+    /**
+     * The maximum nesting depth of multipart MIME parts the consumer descends
+     * into when extracting attachments. A message nested deeper than this has
+     * its deeper parts skipped, so a crafted deeply nested multipart cannot
+     * exhaust the stack. Increase it only if a legitimate source produces
+     * unusually deep nesting.
+     */
+    private Integer maxMultipartDepth = 20;
     /**
      * Specifies the mail session that camel should use for all mail
      * interactions. Useful in scenarios where mail sessions are created and
@@ -731,6 +738,14 @@ public class MailComponentConfiguration
 
     public void setJavaMailProperties(Properties javaMailProperties) {
         this.javaMailProperties = javaMailProperties;
+    }
+
+    public Integer getMaxMultipartDepth() {
+        return maxMultipartDepth;
+    }
+
+    public void setMaxMultipartDepth(Integer maxMultipartDepth) {
+        this.maxMultipartDepth = maxMultipartDepth;
     }
 
     public Session getSession() {

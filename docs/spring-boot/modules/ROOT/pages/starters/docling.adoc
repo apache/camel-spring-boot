@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 57 options, which are listed below.
+The starter supports 58 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -75,6 +75,7 @@ The starter supports 57 options, which are listed below.
 | camel.component.docling.ocr-engine | OCR engine to use |  | String
 | camel.component.docling.ocr-language | Language code for OCR processing | en | String
 | camel.component.docling.operation | The operation to perform | convert-to-markdown | DoclingOperations
+| camel.component.docling.output-base-directory | When set, the output directory passed to the docling CLI must resolve inside this directory once normalized. Applies to the CamelDoclingOutputFilePath header. The check is lexical and does not resolve symbolic links, matching inputBaseDirectory. When empty, no directory restriction is applied and the header value is only normalized. |  | String
 | camel.component.docling.output-format | Output format for document conversion | markdown | String
 | camel.component.docling.pdf-backend | PDF parsing backend |  | String
 | camel.component.docling.pipeline | Processing pipeline to use |  | String
