@@ -57,6 +57,8 @@ public class LraServiceAutoConfiguration {
         service.setCoordinatorContextPath(configuration.getCoordinatorContextPath());
         service.setLocalParticipantUrl(configuration.getLocalParticipantUrl());
         service.setLocalParticipantContextPath(configuration.getLocalParticipantContextPath());
+        service.setAllowedCoordinatorUrls(configuration.getAllowedCoordinatorUrls());
+        service.setCallbackSecret(configuration.getCallbackSecret());
 
         camelContext.addService(service);
         return service;
