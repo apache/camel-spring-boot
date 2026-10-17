@@ -610,6 +610,56 @@ public class MyRoute extends RouteBuilder {
 }
 ----
 
+== Spring Cache State Store Support
+
+The `camel-spring-boot` module provides an auto-configured Apache Camel `KeyValueRepository` backed by Spring's `CacheManager` abstraction (`org.springframework.cache.CacheManager`).
+
+When a `CacheManager` bean is present in the Spring application context and no explicit `KeyValueRepository` bean is defined, a `SpringCacheKeyValueRepository` is automatically registered. This allows any caching backend supported by Spring Boot (such as Caffeine, Redis via Lettuce, Ehcache, Hazelcast, or JCache) to seamlessly function as an Apache Camel state store backend without requiring extra component-specific dependencies.
+
+=== Configuration Example (Caffeine)
+
+[source,yaml]
+----
+spring:
+  cache:
+    type: caffeine
+    cache-names: myStore
+    caffeine:
+      spec: maximumSize=10000,expireAfterWrite=600s
+----
+
+[source,java]
+----
+from("direct:store")
+    .setHeader("CamelStateStoreKey", constant("myKey"))
+    .to("state-store:myStore?operation=put");
+
+from("direct:retrieve")
+    .setHeader("CamelStateStoreKey", constant("myKey"))
+    .to("state-store:myStore?operation=get");
+----
+
+=== Configuration Example (Redis / Lettuce)
+
+[source,yaml]
+----
+spring:
+  cache:
+    type: redis
+    cache-names: myStore
+  data:
+    redis:
+      host: localhost
+      port: 6379
+----
+
+=== Design Considerations & Constraints
+
+* **Store Name Mapping:** Each Camel `state-store:storeName` endpoint maps 1:1 to the Spring Cache name looked up via `CacheManager.getCache(storeName)`.
+* **TTL Support:** Per-entry TTL arguments in the SPI are acknowledged with a one-time warning log and stored without expiration. To enforce TTL, configure it at the underlying provider/CacheManager spec level.
+* **Atomicity:** CAS operations (`putIfAbsent`, `replace`, etc.) delegate to Spring Cache's `putIfAbsent()`, whose atomicity guarantees depend on the underlying provider (e.g., atomic in Caffeine, potentially non-atomic in distributed stores like Redis).
+* **Enumeration:** `keys()` and `size()` are non-portable in Spring Cache and will throw an `UnsupportedOperationException`.
+
 ===== Undertow Metrics
 
 When using the Platform HTTP component with Undertow as the underlying web server, comprehensive metrics are automatically available through Spring Boot Actuator. To enable Undertow metrics:
