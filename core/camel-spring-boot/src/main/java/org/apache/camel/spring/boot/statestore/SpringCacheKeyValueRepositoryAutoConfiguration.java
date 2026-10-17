@@ -18,21 +18,21 @@ package org.apache.camel.spring.boot.statestore;
 
 import org.apache.camel.spi.KeyValueRepository;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 
-@AutoConfiguration
+@AutoConfiguration(afterName = "org.springframework.boot.cache.autoconfigure.CacheAutoConfiguration")
 @ConditionalOnClass({ CacheManager.class, KeyValueRepository.class })
-@ConditionalOnBean(CacheManager.class)
-@AutoConfigureAfter(name = { "org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration" })
+@ConditionalOnProperty(prefix = "camel.spring.cache.state-store", name = "enabled", havingValue = "true")
 public class SpringCacheKeyValueRepositoryAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(KeyValueRepository.class)
+    @ConditionalOnBean(CacheManager.class)
     public KeyValueRepository springCacheKeyValueRepository(CacheManager cacheManager) {
         return new SpringCacheKeyValueRepository(cacheManager);
     }

@@ -28,20 +28,21 @@ import org.springframework.cache.CacheManager;
 import org.springframework.util.Assert;
 
 /**
- * An Apache Camel {@link KeyValueRepository} adapter backed by Spring's {@link CacheManager}.
- *
- * <h3>Design Constraints &amp; Backend Behavior:</h3>
- * <ul>
- *   <li><strong>TTL Support:</strong> Spring Cache has no standard per-entry TTL API. Providing a TTL argument
- *       triggers a single {@code WARN} log per repository instance and stores the entry without expiration.
- *       Users requiring TTL must configure it at the underlying provider/CacheManager spec level (e.g., Caffeine spec).</li>
- *   <li><strong>Atomicity:</strong> CAS operations ({@code putIfAbsent}, {@code replace}, conditional delete)
- *       delegate to Spring Cache's {@code Cache.putIfAbsent()}. Atomicity guarantees are provider-dependent
- *       (e.g., atomic in Caffeine, but potentially non-atomic in distributed backends like Lettuce/Redis).</li>
- *   <li><strong>Enumeration:</strong> {@link #keys()} and {@link #size()} intentionally throw
- *       {@link UnsupportedOperationException} as Spring Cache does not provide a portable key enumeration API.</li>
- *   <li><strong>Scope &amp; Multi-Store:</strong> Backed by a single global {@link CacheManager}. Multiple endpoints
- *       can isolate state by specifying distinct cache/store names while sharing the same underlying manager.</li>
+* An Apache Camel {@link KeyValueRepository} adapter backed by Spring's {@link CacheManager}.
+*
+* <h3>Design Constraints &amp; Backend Behavior:</h3>
+* <ul>
+*   <li><strong>TTL Support:</strong> Spring Cache has no standard per-entry TTL API. Providing a TTL argument
+*       triggers a single {@code WARN} log per repository instance and stores the entry without expiration.
+*       Users requiring TTL must configure it at the underlying provider/CacheManager spec level (e.g., Caffeine spec).</li>
+*   <li><strong>Atomicity:</strong> Only {@code putIfAbsent} delegates directly to Spring Cache's {@code Cache.putIfAbsent()}
+*       (with provider-dependent atomicity). Conditional operations like {@code replace} and conditional {@code delete}
+*       rely on SPI default implementations (non-atomic check-then-act via {@code get} and {@code put}/{@code evict}).</li>
+*   <li><strong>Enumeration:</strong> {@link #keys()} and {@link #size()} intentionally throw
+*       {@link UnsupportedOperationException} as Spring Cache does not provide a portable key enumeration API.</li>
+ *   <li><strong>Scope &amp; Multi-Store:</strong> Bound to a specific cache name (defaulting to {@code camel-kvr}).
+ *       When auto-configured as a single singleton bean, the State Store component shares this repository instance
+ *       across endpoints, resulting in a shared cache unless separate instances are explicitly bound per endpoint via backend references.</li>
  * </ul>
  */
 public class SpringCacheKeyValueRepository implements KeyValueRepository {
@@ -125,7 +126,7 @@ public class SpringCacheKeyValueRepository implements KeyValueRepository {
         Cache cache = getCache();
         Cache.ValueWrapper oldWrapper = cache.get(key);
         Object oldValue = oldWrapper != null ? oldWrapper.get() : null;
-        cache.evict(key);
+        cache.evictIfPresent(key);
         return oldValue;
     }
 
@@ -136,7 +137,8 @@ public class SpringCacheKeyValueRepository implements KeyValueRepository {
 
     @Override
     public void clear() {
-        getCache().clear();
+        Cache cache = getCache();
+        cache.invalidate();
     }
 
     @Override

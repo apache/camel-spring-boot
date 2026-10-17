@@ -610,56 +610,6 @@ public class MyRoute extends RouteBuilder {
 }
 ----
 
-== Spring Cache State Store Support
-
-The `camel-spring-boot` module provides an auto-configured Apache Camel `KeyValueRepository` backed by Spring's `CacheManager` abstraction (`org.springframework.cache.CacheManager`).
-
-When a `CacheManager` bean is present in the Spring application context and no explicit `KeyValueRepository` bean is defined, a `SpringCacheKeyValueRepository` is automatically registered. This allows any caching backend supported by Spring Boot (such as Caffeine, Redis via Lettuce, Ehcache, Hazelcast, or JCache) to seamlessly function as an Apache Camel state store backend without requiring extra component-specific dependencies.
-
-=== Configuration Example (Caffeine)
-
-[source,yaml]
-----
-spring:
-  cache:
-    type: caffeine
-    cache-names: myStore
-    caffeine:
-      spec: maximumSize=10000,expireAfterWrite=600s
-----
-
-[source,java]
-----
-from("direct:store")
-    .setHeader("CamelStateStoreKey", constant("myKey"))
-    .to("state-store:myStore?operation=put");
-
-from("direct:retrieve")
-    .setHeader("CamelStateStoreKey", constant("myKey"))
-    .to("state-store:myStore?operation=get");
-----
-
-=== Configuration Example (Redis / Lettuce)
-
-[source,yaml]
-----
-spring:
-  cache:
-    type: redis
-    cache-names: myStore
-  data:
-    redis:
-      host: localhost
-      port: 6379
-----
-
-=== Design Considerations & Constraints
-
-* **Store Name Mapping:** Each Camel `state-store:storeName` endpoint maps 1:1 to the Spring Cache name looked up via `CacheManager.getCache(storeName)`.
-* **TTL Support:** Per-entry TTL arguments in the SPI are acknowledged with a one-time warning log and stored without expiration. To enforce TTL, configure it at the underlying provider/CacheManager spec level.
-* **Atomicity:** CAS operations (`putIfAbsent`, `replace`, etc.) delegate to Spring Cache's `putIfAbsent()`, whose atomicity guarantees depend on the underlying provider (e.g., atomic in Caffeine, potentially non-atomic in distributed stores like Redis).
-* **Enumeration:** `keys()` and `size()` are non-portable in Spring Cache and will throw an `UnsupportedOperationException`.
-
 ===== Undertow Metrics
 
 When using the Platform HTTP component with Undertow as the underlying web server, comprehensive metrics are automatically available through Spring Boot Actuator. To enable Undertow metrics:
@@ -806,3 +756,35 @@ If you encounter issues with virtual threads:
 2. **Verify Property Setting**: Confirm `spring.threads.virtual.enabled=true` is set
 3. **Review Logs**: Check for virtual thread configuration messages in startup logs
 4. **Monitor Thread Usage**: Use JVM monitoring tools to observe virtual thread behavior
+
+== Spring Cache State Store Support
+
+The `camel-spring-boot` module provides an auto-configured Apache Camel `KeyValueRepository` backed by Spring's `CacheManager` abstraction (`org.springframework.cache.CacheManager`).
+
+When a `CacheManager` bean is present in the Spring application context, no explicit `KeyValueRepository` bean is defined, and `camel.spring.cache.state-store.enabled=true` is set, a `SpringCacheKeyValueRepository` is automatically registered. This allows any caching backend supported by Spring Boot (such as Caffeine, Redis via Lettuce, Ehcache, Hazelcast, or JCache) to seamlessly function as an Apache Camel state store backend without requiring extra component-specific dependencies.
+
+=== Configuration Example
+
+[source,properties]
+----
+camel.spring.cache.state-store.enabled=true
+spring.cache.type=simple
+spring.cache.cache-names=camel-kvr
+----
+
+[NOTE]
+====
+* **Caching Enablement:** Spring Boot's `CacheAutoConfiguration` requires `@EnableCaching` on your application/configuration class (or an explicit user-defined `CacheManager` bean) to instantiate a `CacheManager`. Without `@EnableCaching`, the cache manager is not created, and the state store falls back silently without registering the repository.
+* **Cache Names Requirement:** If `spring.cache.cache-names` is specified, it **must** include `camel-kvr` (the default cache name used by the repository). Otherwise, the cache manager remains static, and repository operations will fail with an `IllegalStateException`.
+====
+
+=== Design Considerations & Constraints
+
+- **Shared Cache Scope & EIP Auto-Discovery:**
+  Turning on `camel.spring.cache.state-store.enabled=true` registers a default `KeyValueRepository` bean. Once registered, unconfigured stateful EIPs across Camel—specifically **AggregateProcessor**, **IdempotentConsumer**, and **Cache EIP**—will automatically discover and share this single bean via registry lookup (`findSingleByType(KeyValueRepository.class)`) if they do not define an explicit repository of their own.
+  * **Aggregator Impact:** Because `keys()` throws `UnsupportedOperationException`, aggregators relying on key-based recovery may log recovery warnings or experience startup constraints when using completion timeouts.
+  * **Cache EIP Impact:** Per-entry TTL specifications on the Cache EIP are ignored by the underlying Spring Cache abstraction.
+  * **Collision & Clear Consequence:** Because the repository is bound to a single cache name (`camel-kvr`), all endpoints sharing this instance will collide on keys. Invoking `clear()` on any component will empty the entire shared cache, removing idempotent keys, in-flight aggregations, and Cache EIP results simultaneously. To isolate state across endpoints, separate repository instances must be explicitly bound per endpoint using backend references.
+- **TTL Support:** Spring Cache has no standard per-entry TTL API. Providing a TTL argument triggers a single `WARN` log per repository instance and stores the entry without expiration. To enforce TTL, configure it at the underlying provider/CacheManager spec level.
+- **Atomicity:** Only `putIfAbsent` delegates directly to Spring Cache's `putIfAbsent()` (with provider-dependent atomicity). Conditional operations like `replace` and conditional `delete` are not overridden and rely on SPI default non-atomic implementations.
+- **Enumeration:** `keys()` and `size()` intentionally throw `UnsupportedOperationException` as Spring Cache does not provide a portable key enumeration API.
