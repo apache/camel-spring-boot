@@ -62,6 +62,20 @@ public class CloudtrailComponentConfiguration
      */
     private String eventSource;
     /**
+     * How often the consumer looks up the lookBackWindow again for events that
+     * CloudTrail made visible late. A late event is routed at most this long
+     * after it became visible. Must be above 0 unless lookBackWindow is 0. The
+     * option is a long type.
+     */
+    private Long lookBackInterval = 60000L;
+    /**
+     * How far back the consumer looks again, every lookBackInterval, for events
+     * that CloudTrail made visible after a newer event (CloudTrail typically
+     * delivers an event within 5 minutes). Events not routed yet are routed.
+     * Set to 0 to disable. The option is a long type.
+     */
+    private Long lookBackWindow = 600000L;
+    /**
      * Maximum number of records that will be fetched in each lookup page. Each
      * poll drains all pages, so this controls the page size rather than the
      * total per poll. AWS allows up to 50.
@@ -183,6 +197,22 @@ public class CloudtrailComponentConfiguration
 
     public void setEventSource(String eventSource) {
         this.eventSource = eventSource;
+    }
+
+    public Long getLookBackInterval() {
+        return lookBackInterval;
+    }
+
+    public void setLookBackInterval(Long lookBackInterval) {
+        this.lookBackInterval = lookBackInterval;
+    }
+
+    public Long getLookBackWindow() {
+        return lookBackWindow;
+    }
+
+    public void setLookBackWindow(Long lookBackWindow) {
+        this.lookBackWindow = lookBackWindow;
     }
 
     public Integer getMaxResults() {
