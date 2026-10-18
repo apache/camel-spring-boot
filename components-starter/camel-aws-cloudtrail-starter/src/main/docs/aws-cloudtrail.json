@@ -77,6 +77,20 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.aws-cloudtrail.look-back-interval",
+      "type": "java.lang.Long",
+      "description": "How often the consumer looks up the lookBackWindow again for events that CloudTrail made visible late. A late event is routed at most this long after it became visible. Must be above 0 unless lookBackWindow is 0. The option is a long type.",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration",
+      "defaultValue": 60000
+    },
+    {
+      "name": "camel.component.aws-cloudtrail.look-back-window",
+      "type": "java.lang.Long",
+      "description": "How far back the consumer looks again, every lookBackInterval, for events that CloudTrail made visible after a newer event (CloudTrail typically delivers an event within 5 minutes). Events not routed yet are routed. Set to 0 to disable. The option is a long type.",
+      "sourceType": "org.apache.camel.component.aws.cloudtrail.springboot.CloudtrailComponentConfiguration",
+      "defaultValue": 600000
+    },
+    {
       "name": "camel.component.aws-cloudtrail.max-results",
       "type": "java.lang.Integer",
       "description": "Maximum number of records that will be fetched in each lookup page. Each poll drains all pages, so this controls the page size rather than the total per poll. AWS allows up to 50.",
