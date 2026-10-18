@@ -17,10 +17,24 @@
 package org.apache.camel.spring.boot.statestore;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.AppenderBase;
+
+import org.slf4j.LoggerFactory;
 
 import org.apache.camel.spi.KeyValueRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -28,6 +42,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.cache.autoconfigure.CacheAutoConfiguration;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
+import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.ProxyCachingConfiguration;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
@@ -78,6 +93,54 @@ class SpringCacheKeyValueRepositoryAutoConfigurationTest {
                 .run(context -> {
                     assertThat(context).hasBean("springCacheKeyValueRepository");
                     assertThat(context).hasSingleBean(KeyValueRepository.class);
+
+                    KeyValueRepository repo = context.getBean(KeyValueRepository.class);
+                    repo.put("simple-key", "simple-val");
+                    assertThat(repo.keys()).containsExactly("simple-key");
+                    assertThat(repo.size()).isEqualTo(1);
+                });
+    }
+
+    @Test
+    @DisplayName("Should not create CacheManager or repository from spring.cache.type without @EnableCaching")
+    void shouldNotCreateRepositoryFromCacheTypeWithoutEnableCaching() {
+        new ApplicationContextRunner()
+                .withConfiguration(AutoConfigurations.of(
+                        CacheAutoConfiguration.class,
+                        SpringCacheKeyValueRepositoryAutoConfiguration.class
+                ))
+                .withPropertyValues(
+                        "spring.cache.type=simple",
+                        "spring.cache.cache-names=camel-kvr",
+                        "camel.spring.cache.state-store.enabled=true"
+                )
+                .run(context -> {
+                    assertThat(context).doesNotHaveBean(CacheManager.class);
+                    assertThat(context).doesNotHaveBean("springCacheKeyValueRepository");
+                    assertThat(context).doesNotHaveBean(KeyValueRepository.class);
+                });
+    }
+
+    @Test
+    @DisplayName("Should fail operations when spring.cache.cache-names omits camel-kvr")
+    void shouldFailWhenCacheNamesOmitDefaultCache() {
+        new ApplicationContextRunner()
+                .withConfiguration(AutoConfigurations.of(
+                        CacheAutoConfiguration.class,
+                        SpringCacheKeyValueRepositoryAutoConfiguration.class
+                ))
+                .withUserConfiguration(ProxyCachingConfiguration.class)
+                .withPropertyValues(
+                        "spring.cache.type=simple",
+                        "spring.cache.cache-names=other-cache",
+                        "camel.spring.cache.state-store.enabled=true"
+                )
+                .run(context -> {
+                    assertThat(context).hasBean("springCacheKeyValueRepository");
+                    KeyValueRepository repo = context.getBean(KeyValueRepository.class);
+                    assertThatThrownBy(() -> repo.get("key1"))
+                            .isInstanceOf(IllegalStateException.class)
+                            .hasMessageContaining("Spring Cache 'camel-kvr' not found in CacheManager");
                 });
     }
 
@@ -236,18 +299,51 @@ class SpringCacheKeyValueRepositoryAutoConfigurationTest {
     }
 
     @Test
-    @DisplayName("Should throw UnsupportedOperationException for non-portable keys() and size()")
-    void shouldThrowUnsupportedForKeysAndSize() {
+    @DisplayName("Should enumerate String keys and size from a ConcurrentMap native cache")
+    void shouldEnumerateKeysAndSizeForConcurrentMapNativeCache() {
         CacheManager cacheManager = new ConcurrentMapCacheManager("camel-kvr");
         try (SafeRepoResource resource = new SafeRepoResource(new SpringCacheKeyValueRepository(cacheManager))) {
+            SpringCacheKeyValueRepository repo = resource.repo;
+            repo.put("key1", "val1");
+            repo.put("key2", "val2");
+
+            Cache cache = cacheManager.getCache("camel-kvr");
+            assertThat(cache).isNotNull();
+            assertThat(cache.getNativeCache()).isInstanceOf(ConcurrentMap.class);
+            cache.put(42, "non-string-key");
+
+            Set<String> keys = repo.keys();
+            assertThat(keys).containsExactlyInAnyOrder("key1", "key2");
+            assertThat(repo.size()).isEqualTo(2);
+            assertThat(repo.size()).isEqualTo(keys.size());
+
+            repo.put("key3", "val3");
+            assertThat(keys).doesNotContain("key3");
+            assertThat(keys).isUnmodifiable();
+            assertThat(repo.keys()).containsExactlyInAnyOrder("key1", "key2", "key3");
+            assertThat(repo.size()).isEqualTo(3);
+        }
+    }
+
+    @Test
+    @DisplayName("Should throw UnsupportedOperationException for keys() and size() when native cache is not a ConcurrentMap")
+    void shouldThrowUnsupportedForKeysAndSizeWhenNativeCacheIsNotConcurrentMap() {
+        CacheManager cacheManager = new SingleCacheManager(new NonConcurrentNativeCache("camel-kvr"));
+        try (SafeRepoResource resource = new SafeRepoResource(new SpringCacheKeyValueRepository(cacheManager))) {
             KeyValueRepository repo = resource.repo;
+            repo.put("key1", "val1");
+
             assertThatThrownBy(repo::keys)
                     .isInstanceOf(UnsupportedOperationException.class)
-                    .hasMessageContaining("portable key enumeration API");
+                    .hasMessageContaining("portable key enumeration API")
+                    .hasMessageContaining("ConcurrentMap");
 
             assertThatThrownBy(repo::size)
                     .isInstanceOf(UnsupportedOperationException.class)
-                    .hasMessageContaining("portable size API");
+                    .hasMessageContaining("portable key enumeration API")
+                    .hasMessageContaining("ConcurrentMap");
+
+            assertThat(repo.get("key1")).isEqualTo("val1");
         }
     }
 
@@ -299,6 +395,199 @@ class SpringCacheKeyValueRepositoryAutoConfigurationTest {
             repo.put("myKey", "myVal");
             assertThat(repo.get("myKey")).isEqualTo("myVal");
             assertThat(repo.getCacheName()).isEqualTo("myStore");
+        }
+    }
+
+    @Test
+    @DisplayName("TTL warning should be logged exactly once per repository instance")
+    void ttlWarningLoggedOnlyOnce() {
+        String cacheName = uniqueCacheName();
+        Logger logger = (Logger) LoggerFactory.getLogger(SpringCacheKeyValueRepository.class);
+        ThreadSafeTestAppender appender = attachAppender(logger);
+
+        try {
+            CacheManager cacheManager = new ConcurrentMapCacheManager(cacheName);
+            KeyValueRepository first = new SpringCacheKeyValueRepository(cacheManager, cacheName);
+            KeyValueRepository second = new SpringCacheKeyValueRepository(cacheManager, cacheName);
+
+            // Multiple positive TTL calls on the first instance should log only once.
+            first.put("key1", "value1", Duration.ofSeconds(10));
+            first.put("key2", "value2", Duration.ofSeconds(20));
+
+            // The second instance has its own once-only warning guard.
+            second.put("key3", "value3", Duration.ofSeconds(10));
+
+            assertThat(ttlWarningCount(appender.getEvents(), cacheName)).isEqualTo(2);
+        } finally {
+            detachAppender(logger, appender);
+        }
+    }
+
+    @Test
+    @DisplayName("Null, zero, or negative TTL should not trigger warning or consume once-only guard")
+    void nonPositiveTtlShouldNotTriggerWarningOrConsumeGuard() {
+        String cacheName = uniqueCacheName();
+        Logger logger = (Logger) LoggerFactory.getLogger(SpringCacheKeyValueRepository.class);
+        ThreadSafeTestAppender appender = attachAppender(logger);
+
+        try {
+            CacheManager cacheManager = new ConcurrentMapCacheManager(cacheName);
+            KeyValueRepository repository =
+                    new SpringCacheKeyValueRepository(cacheManager, cacheName);
+
+            // Null, zero, and negative TTLs should not trigger a warning.
+            repository.put("key-null", "value", null);
+            repository.put("key-zero", "value", Duration.ZERO);
+            repository.put("key-negative", "value", Duration.ofSeconds(-5));
+
+            assertThat(ttlWarningCount(appender.getEvents(), cacheName)).isZero();
+
+            // A positive TTL should still trigger the first warning.
+            repository.put("key-positive", "value", Duration.ofSeconds(10));
+
+            assertThat(ttlWarningCount(appender.getEvents(), cacheName)).isEqualTo(1);
+        } finally {
+            detachAppender(logger, appender);
+        }
+    }
+
+    public static class ThreadSafeTestAppender extends AppenderBase<ILoggingEvent> {
+        private final List<ILoggingEvent> events = new CopyOnWriteArrayList<>();
+
+        @Override
+        protected void append(ILoggingEvent eventObject) {
+            events.add(eventObject);
+        }
+
+        public List<ILoggingEvent> getEvents() {
+            return events;
+        }
+    }
+
+    private String uniqueCacheName() {
+        return "ttl-warning-test-" + UUID.randomUUID();
+    }
+
+    private ThreadSafeTestAppender attachAppender(Logger logger) {
+        ThreadSafeTestAppender appender = new ThreadSafeTestAppender();
+        appender.setContext(logger.getLoggerContext());
+        appender.start();
+        logger.addAppender(appender);
+        return appender;
+    }
+
+    private void detachAppender(Logger logger, ThreadSafeTestAppender appender) {
+        logger.detachAppender(appender);
+        appender.stop();
+    }
+
+    private long ttlWarningCount(List<ILoggingEvent> events, String cacheName) {
+        List<ILoggingEvent> snapshot = new ArrayList<>(events);
+        String expectedStore = "store '" + cacheName + "'";
+
+        return snapshot.stream()
+                .filter(event -> event.getLevel() == Level.WARN)
+                .filter(event -> SpringCacheKeyValueRepository.class.getName().equals(event.getLoggerName()))
+                .filter(event -> event.getFormattedMessage().contains("Per-entry TTL"))
+                .filter(event -> event.getFormattedMessage().contains(expectedStore))
+                .count();
+    }
+
+    static final class NonConcurrentNativeCache implements Cache {
+        private final String name;
+        private final Map<Object, Object> store = new HashMap<>();
+
+        NonConcurrentNativeCache(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public Object getNativeCache() {
+            return this;
+        }
+
+        @Override
+        public ValueWrapper get(Object key) {
+            if (!store.containsKey(key)) {
+                return null;
+            }
+            Object value = store.get(key);
+            return () -> value;
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        public <T> T get(Object key, Class<T> type) {
+            Object value = store.get(key);
+            if (value != null && type != null && !type.isInstance(value)) {
+                throw new IllegalStateException("Cached value is not of required type [" + type.getName() + "]: " + value);
+            }
+            return (T) value;
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        public <T> T get(Object key, Callable<T> valueLoader) {
+            if (store.containsKey(key)) {
+                return (T) store.get(key);
+            }
+            try {
+                T value = valueLoader.call();
+                store.put(key, value);
+                return value;
+            } catch (Exception ex) {
+                throw new ValueRetrievalException(key, valueLoader, ex);
+            }
+        }
+
+        @Override
+        public void put(Object key, Object value) {
+            store.put(key, value);
+        }
+
+        @Override
+        public void evict(Object key) {
+            store.remove(key);
+        }
+
+        @Override
+        public boolean evictIfPresent(Object key) {
+            return store.remove(key) != null;
+        }
+
+        @Override
+        public void clear() {
+            store.clear();
+        }
+
+        @Override
+        public boolean invalidate() {
+            boolean hadEntries = !store.isEmpty();
+            store.clear();
+            return hadEntries;
+        }
+    }
+
+    static final class SingleCacheManager implements CacheManager {
+        private final Cache cache;
+
+        SingleCacheManager(Cache cache) {
+            this.cache = cache;
+        }
+
+        @Override
+        public Cache getCache(String name) {
+            return cache.getName().equals(name) ? cache : null;
+        }
+
+        @Override
+        public Collection<String> getCacheNames() {
+            return Collections.singleton(cache.getName());
         }
     }
 
