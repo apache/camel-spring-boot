@@ -15,3 +15,4 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 org.apache.camel.component.statestore.springboot.StateStoreComponentAutoConfiguration
+org.apache.camel.component.statestore.springboot.StateStoreComponentConverter

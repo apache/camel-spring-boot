@@ -21,6 +21,12 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.state-store.backend-factory",
+      "type": "org.apache.camel.component.statestore.StateStoreBackendFactory",
+      "description": "Factory that creates a dedicated backend for each store name. When set, it takes precedence over registry auto-discovery for endpoints without an explicit backend. The option is a org.apache.camel.component.statestore.StateStoreBackendFactory type.",
+      "sourceType": "org.apache.camel.component.statestore.springboot.StateStoreComponentConfiguration"
+    },
+    {
       "name": "camel.component.state-store.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
