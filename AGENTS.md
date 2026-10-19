@@ -7,7 +7,7 @@ Guidelines for AI agents working on this codebase.
 Apache Camel Spring Boot provides Spring Boot auto-configuration and starter modules for Apache Camel components.
 
 - Version: 4.24.0-SNAPSHOT
-- Java: 17+
+- Java: 21+
 - Build: Maven (use `./mvnw` wrapper)
 - Issue tracker: [JIRA (CAMEL project)](https://issues.apache.org/jira/browse/CAMEL)
 - Related repository: [apache/camel](https://github.com/apache/camel) — Camel core
