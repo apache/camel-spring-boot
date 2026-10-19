@@ -23,12 +23,6 @@
       "type": "java.lang.Boolean",
       "description": "Whether access logging is enabled for the management server. When false and using a separate management port, access logs are disabled for actuator endpoints.",
       "defaultValue": true
-    },
-    {
-      "name": "camel.spring.cache.state-store.enabled",
-      "type": "java.lang.Boolean",
-      "description": "Whether to auto-configure a Spring Cache-backed KeyValueRepository when a CacheManager bean is present and no user-defined KeyValueRepository takes precedence. When enabled, the bean is the default KeyValueRepository for Aggregate, Idempotent Consumer, and Cache EIP if those EIPs do not define their own repository. The adapter is bound to the cache named camel-kvr by default.",
-      "defaultValue": false
     }
   ]
 }

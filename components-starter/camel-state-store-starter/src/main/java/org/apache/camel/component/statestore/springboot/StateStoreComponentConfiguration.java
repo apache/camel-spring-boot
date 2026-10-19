@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.statestore.springboot;
 
+import org.apache.camel.component.statestore.StateStoreBackendFactory;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -54,6 +55,13 @@ public class StateStoreComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * Factory that creates a dedicated backend for each store name. When set,
+     * it takes precedence over registry auto-discovery for endpoints without an
+     * explicit backend. The option is a
+     * org.apache.camel.component.statestore.StateStoreBackendFactory type.
+     */
+    private StateStoreBackendFactory backendFactory;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -69,5 +77,13 @@ public class StateStoreComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public StateStoreBackendFactory getBackendFactory() {
+        return backendFactory;
+    }
+
+    public void setBackendFactory(StateStoreBackendFactory backendFactory) {
+        this.backendFactory = backendFactory;
     }
 }

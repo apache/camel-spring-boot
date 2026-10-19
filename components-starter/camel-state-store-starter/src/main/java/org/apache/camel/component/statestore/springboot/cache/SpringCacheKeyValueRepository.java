@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.camel.spring.boot.statestore;
+package org.apache.camel.component.statestore.springboot.cache;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -28,11 +28,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.util.Assert;
 
 /**
  * An Apache Camel {@link KeyValueRepository} adapter backed by Spring's
- * {@link CacheManager}.
+ * {@link CacheManager}. Each instance is bound to one Spring cache whose name
+ * matches the Camel state-store name.
  * <h3>Design Constraints and Backend Behavior</h3>
  * <ul>
  *   <li><strong>TTL support:</strong> Spring Cache does not define a standard
@@ -43,50 +45,45 @@ import org.springframework.util.Assert;
  *       requiring expiration must configure it through the underlying cache
  *       provider or {@link CacheManager}, for example using a Caffeine cache
  *       specification.</li>
- *   <li><strong>Atomicity:</strong> {@code putIfAbsent} delegates to Spring
- *       Cache's {@link Cache#putIfAbsent(Object, Object)}, whose atomicity
- *       depends on the provider. Conditional operations such as {@code replace}
- *       and conditional {@code delete} are not overridden and use the
- *       {@link KeyValueRepository} SPI default implementations, which may
- *       perform non-atomic check-then-act operations.</li>
+ *   <li><strong>Atomicity:</strong> Spring Cache has no atomic get-and-put
+ *       API. {@code put} and {@code delete} read the previous value and then
+ *       write or evict in a second call, so the returned old value is not
+ *       atomic. {@code putIfAbsent} delegates to
+ *       {@link Cache#putIfAbsent(Object, Object)}, whose atomicity depends on
+ *       the provider. Conditional operations such as {@code replace} and
+ *       conditional {@code delete} use the {@link KeyValueRepository} SPI
+ *       default implementations and may perform non-atomic check-then-act
+ *       operations.</li>
  *   <li><strong>Enumeration:</strong> {@link #keys()} and {@link #size()} are
  *       supported only when {@link Cache#getNativeCache()} is a
- *       {@link ConcurrentMap}, for example
- *       {@link org.springframework.cache.concurrent.ConcurrentMapCache} used by
- *       {@code spring.cache.type=simple}. They operate on a snapshot of current
- *       {@link String} keys; {@link #size()} is the size of that snapshot, and
- *       non-{@link String} native keys are ignored. Other native cache types
- *       throw {@link UnsupportedOperationException} from {@link #keys()} and
+ *       {@link ConcurrentMap}, for example {@link ConcurrentMapCache}. They
+ *       operate on a snapshot of current {@link String} keys; {@link #size()}
+ *       is the size of that snapshot, and non-{@link String} native keys are
+ *       ignored. Other native cache types throw
+ *       {@link UnsupportedOperationException} from {@link #keys()} and
  *       {@link #size()} only; {@code get}, {@code put}, {@code delete}, and
  *       related operations still delegate to Spring Cache. Spring's Caffeine,
  *       Redis, and JCache adapters do not return a {@code ConcurrentMap} from
- *       {@code getNativeCache()}, so Camel operations that enumerate keys
- *       (Aggregate recovery, {@code completionTimeout} restore via
- *       {@code getKeys()}, and Idempotent Consumer {@code clear()}) require a
- *       {@code ConcurrentMap} native cache.</li>
- *   <li><strong>Scope and multiple stores:</strong> The repository is bound
- *       to a specific cache name, defaulting to {@code camel-kvr}. When
- *       auto-configured as a singleton bean, the same repository instance
- *       may be shared across endpoints and EIPs, so those consumers share the
- *       underlying cache. {@link #clear()} invalidates that entire cache.
- *       Use separate repository instances with distinct cache names and bind
- *       them explicitly when isolation is required.</li>
+ *       {@code getNativeCache()}, so enumeration is unsupported for those
+ *       backends. When this adapter is bound explicitly, Camel operations that
+ *       enumerate keys (Aggregate recovery, {@code completionTimeout} restore
+ *       via {@code getKeys()}, and Idempotent Consumer {@code clear()})
+ *       therefore require a {@code ConcurrentMap} native cache.</li>
+ *   <li><strong>Scope:</strong> The repository is bound to the cache named by
+ *       the constructor. {@link #clear()} invalidates that entire cache. Use a
+ *       distinct store name (and therefore cache name) for each isolated
+ *       store.</li>
  * </ul>
  */
 public class SpringCacheKeyValueRepository implements KeyValueRepository {
 
     private static final Logger LOG = LoggerFactory.getLogger(SpringCacheKeyValueRepository.class);
-    private static final String DEFAULT_CACHE_NAME = "camel-kvr";
     private static final String ENUMERATION_UNSUPPORTED
             = "Spring Cache does not provide a portable key enumeration API; keys() and size() are supported only when Cache.getNativeCache() is a ConcurrentMap.";
 
     private final CacheManager cacheManager;
     private final String cacheName;
     private final AtomicBoolean ttlWarningLogged = new AtomicBoolean(false);
-
-    public SpringCacheKeyValueRepository(CacheManager cacheManager) {
-        this(cacheManager, DEFAULT_CACHE_NAME);
-    }
 
     public SpringCacheKeyValueRepository(CacheManager cacheManager, String cacheName) {
         Assert.notNull(cacheManager, "CacheManager must not be null");
