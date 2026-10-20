@@ -756,39 +756,3 @@ If you encounter issues with virtual threads:
 2. **Verify Property Setting**: Confirm `spring.threads.virtual.enabled=true` is set
 3. **Review Logs**: Check for virtual thread configuration messages in startup logs
 4. **Monitor Thread Usage**: Use JVM monitoring tools to observe virtual thread behavior
-
-== Spring Cache State Store Support
-
-The `camel-state-store-starter` can register a `StateStoreBackendFactory` backed by Spring's `CacheManager`. The factory creates one `SpringCacheKeyValueRepository` per Camel state-store name. The Spring cache name is the store name: `state-store:orders` uses the cache named `orders`, and `state-store:users` uses `users`.
-
-The property `camel.state-store.spring-cache.enabled` is disabled by default. When it is `true`, a single `CacheManager` bean is present (`@ConditionalOnSingleCandidate`), and no other `StateStoreBackendFactory` bean exists (`@ConditionalOnMissingBean`), the starter registers that factory. It does not register a global `KeyValueRepository` bean. Aggregate, Idempotent Consumer, and Cache EIP therefore do not auto-discover this adapter through `findSingleByType(KeyValueRepository.class)`.
-
-`keys()` and `size()` are not supported on Caffeine, Redis, or JCache. They work only when `Cache.getNativeCache()` is a `ConcurrentMap` (for example `spring.cache.type=simple`). Other operations (`get` / `put` / `delete` / `contains`) still delegate to Spring Cache on those providers.
-
-=== Configuration Example
-
-[source,properties]
-----
-spring.cache.type=caffeine
-spring.cache.cache-names=orders,users
-camel.state-store.spring-cache.enabled=true
-----
-
-[source,java]
-----
-from("direct:order")
-    .setHeader("CamelStateStoreKey", simple("${header.orderId}"))
-    .to("state-store:orders?operation=put");
-----
-
-Provide a `CacheManager` bean, or use Spring Boot cache auto-configuration (`@EnableCaching` plus `spring-boot-starter-cache`). Setting `spring.cache.type` alone does not create a `CacheManager` in Spring Boot 4.1, because `CacheAutoConfiguration` is `@ConditionalOnBean(CacheAspectSupport.class)`.
-
-If `spring.cache.cache-names` defines a fixed set of cache names, include every state-store name you use. Otherwise repository operations fail with an `IllegalStateException` because the named cache is unavailable. A dynamic `CacheManager` such as `ConcurrentMapCacheManager` can create caches on demand.
-
-=== Design Considerations & Constraints
-
-- **Per-store caches:** Each store name maps to its own Spring cache. `clear()` invalidates only that store's cache.
-- **No global KeyValueRepository:** The auto-configuration registers only a `StateStoreBackendFactory`. Unrelated EIPs do not pick up a Spring Cache repository unless you bind one explicitly.
-- **Provider-level expiration:** Spring Cache does not define a portable per-entry TTL API. A positive, non-zero TTL logs a `WARN` once per repository instance and the entry is stored without applying that TTL. Null, zero, and negative TTL values do not trigger this warning. Configure expiration on the underlying cache provider, for example `spring.cache.redis.time-to-live` or a Caffeine specification.
-- **Non-atomic compare-and-set:** Spring `Cache` has no atomic get-and-put. `put` and `delete` read the previous value and then write or evict in a second call, so the returned old value is not atomic. `putIfAbsent` delegates to Spring Cache `putIfAbsent()`, whose atomicity depends on the provider. Conditional `replace` and conditional `delete` use the `KeyValueRepository` SPI defaults and may be non-atomic check-then-act operations.
-- **Enumeration:** `keys()` and `size()` are supported only on a `ConcurrentMap` native cache. They operate on a snapshot of current `String` keys; `size()` is the size of that snapshot. Caffeine, Redis, and JCache throw `UnsupportedOperationException` from `keys()` and `size()` only.

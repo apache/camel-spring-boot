@@ -1,0 +1,11 @@
+=== Spring Cache
+
+Spring Cache provides a common API, but some operations depend on the underlying cache provider.
+
+* **Per-entry TTL:** Spring Cache has no portable per-entry TTL API. A positive, non-zero TTL requested through the repository is not applied by the Spring adapter. Configure expiration using the underlying cache provider, for example with `spring.cache.redis.time-to-live` or a Caffeine specification.
+* **Atomic operations:** Spring Cache does not provide a portable atomic get-and-put operation. The adapter's `put` and `delete` read the previous value and then write or evict separately, so the returned previous value is not atomic. `putIfAbsent` delegates to the provider's Spring Cache implementation; its atomicity depends on that provider. Conditional `replace` and conditional `delete` may use non-atomic check-then-act operations.
+* **Key enumeration and size:** `keys()` and `size()` are supported only when `Cache.getNativeCache()` returns a `ConcurrentMap`, such as with the simple cache provider. They operate on a snapshot of current string keys. Other providers, including Caffeine, Redis, and JCache, do not support these operations through the Spring adapter.
+
+=== Camel KeyValueRepository
+
+Choose a Camel repository when you need capabilities beyond the portable Spring Cache API, such as per-entry TTL, atomic `putIfAbsent` or `replace`, conditional deletion, and key enumeration or size. Actual support and guarantees depend on the selected repository implementation.

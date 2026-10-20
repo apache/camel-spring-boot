@@ -1,0 +1,43 @@
+=== Choosing a backend
+
+The State Store component supports Spring Cache and Camel `KeyValueRepository` backends.
+
+==== Spring Cache
+
+Set `camel.state-store.spring-cache.enabled=true` to register a `StateStoreBackendFactory` backed by Spring's `CacheManager`. Each state-store name maps to a Spring cache with the same name, reusing the application's `spring.cache.*` configuration.
+
+The factory is registered when a single `CacheManager` candidate is available and no other `StateStoreBackendFactory` bean is defined. It does not register a global `KeyValueRepository` bean.
+
+==== Camel KeyValueRepository
+
+Alternatively, use a Camel `KeyValueRepository` implementation, such as `camel-redis`, `camel-caffeine`, `camel-jcache`, `camel-sql`, or `camel-infinispan`. Define the repository as a bean and leave `camel.state-store.spring-cache.enabled` disabled. The State Store component automatically discovers the repository.
+
+These repositories can also be discovered by Camel features that support `KeyValueRepository`, including the Aggregate EIP, Idempotent Consumer, and Cache EIP.
+
+==== Configuration examples
+
+To use Spring Cache, configure a cache provider and enable the factory:
+
+[source,properties]
+----
+spring.cache.type=caffeine
+spring.cache.cache-names=orders,users
+camel.state-store.spring-cache.enabled=true
+----
+
+Provide a `CacheManager` bean or configure Spring Boot cache auto-configuration. If `spring.cache.cache-names` specifies a fixed set of names, include every state-store name you use. A dynamic cache manager can create caches on demand.
+
+To use a specific Camel repository, register it as a bean, for example under the name `redisRepo`, and select it on the endpoint:
+
+[source,java]
+----
+from("direct:order")
+    .setHeader("CamelStateStoreKey", simple("${header.orderId}"))
+    .to("state-store:orders?backend=#redisRepo");
+----
+
+==== Using both backends
+
+When the Spring Cache factory is enabled, it is the default backend for state-store endpoints unless an endpoint explicitly selects another backend or a component-level backend factory takes precedence.
+
+You can therefore use Spring Cache for ordinary stores and explicitly select a Camel repository for stores that need its additional capabilities.
