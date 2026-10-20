@@ -20,7 +20,6 @@ Please refer to the above links for usage and configuration details.
     <artifactId>camel-state-store-starter</artifactId>
 </dependency>
 ----
-
 == Spring Boot Auto-Configuration
 
 The starter supports 5 options, which are listed below.

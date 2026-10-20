@@ -169,9 +169,11 @@ public class SshComponentConfiguration
      */
     private String ciphers;
     /**
-     * Specifies whether a connection to an unknown SSH server host key should
-     * fail. When false, host keys that are not present in the known_hosts
-     * resource are accepted.
+     * Specifies whether a connection to a server whose host has no entry
+     * without a marker in the known_hosts resource should fail. When false,
+     * such a server is accepted. A server whose host has entries without a
+     * marker is always rejected when it presents a key that none of them lists,
+     * and a key listed in a matching revoked entry is always rejected.
      */
     private Boolean failOnUnknownHost = false;
     /**
@@ -195,8 +197,11 @@ public class SshComponentConfiguration
     private String keyType;
     /**
      * Sets the resource path for a known_hosts file used to verify the SSH
-     * server host key. When not set, the client does not verify the server host
-     * key against a known_hosts file.
+     * server host key. The file uses the OpenSSH known_hosts format, and its
+     * entries are matched against the host and port configured on the endpoint.
+     * A resource that cannot be read, or that has a line that cannot be read,
+     * makes every connection fail. When not set, the client does not verify the
+     * server host key against a known_hosts file.
      */
     private String knownHostsResource;
     /**
