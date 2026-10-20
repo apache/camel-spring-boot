@@ -173,6 +173,30 @@ public class GoogleCloudStorageComponentConfiguration
      * camel.health.producersEnabled=true.
      */
     private Boolean healthCheckProducerEnabled = true;
+    /**
+     * The email of a service account to impersonate with the credentials of
+     * Workload Identity Federation, so the workload gets the permissions of
+     * that service account. Used when useWorkloadIdentityFederation is enabled;
+     * the federated identity needs the Service Account Token Creator role on
+     * the service account.
+     */
+    private String impersonatedServiceAccount;
+    /**
+     * Whether to authenticate with Workload Identity Federation instead of a
+     * service account key: with the credential configuration file given in
+     * workloadIdentityConfig or, when it is not set, with the Application
+     * Default Credentials, which detect Workload Identity on GKE.
+     */
+    private Boolean useWorkloadIdentityFederation = false;
+    /**
+     * The Workload Identity Federation credential configuration file (JSON, of
+     * type external_account), which says how to exchange a token of an external
+     * identity provider, such as AWS, Azure or an OIDC provider, for Google
+     * credentials. Used when useWorkloadIdentityFederation is enabled. It is
+     * loaded from the classpath by default; prefix it with classpath:, file:,
+     * http: or https: to load it from another location.
+     */
+    private String workloadIdentityConfig;
 
     public Boolean getAutoCreateBucket() {
         return autoCreateBucket;
@@ -340,5 +364,30 @@ public class GoogleCloudStorageComponentConfiguration
 
     public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
         this.healthCheckProducerEnabled = healthCheckProducerEnabled;
+    }
+
+    public String getImpersonatedServiceAccount() {
+        return impersonatedServiceAccount;
+    }
+
+    public void setImpersonatedServiceAccount(String impersonatedServiceAccount) {
+        this.impersonatedServiceAccount = impersonatedServiceAccount;
+    }
+
+    public Boolean getUseWorkloadIdentityFederation() {
+        return useWorkloadIdentityFederation;
+    }
+
+    public void setUseWorkloadIdentityFederation(
+            Boolean useWorkloadIdentityFederation) {
+        this.useWorkloadIdentityFederation = useWorkloadIdentityFederation;
+    }
+
+    public String getWorkloadIdentityConfig() {
+        return workloadIdentityConfig;
+    }
+
+    public void setWorkloadIdentityConfig(String workloadIdentityConfig) {
+        this.workloadIdentityConfig = workloadIdentityConfig;
     }
 }

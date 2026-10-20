@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 22 options, which are listed below.
+The starter supports 25 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -39,6 +39,7 @@ The starter supports 22 options, which are listed below.
 | camel.component.google-storage.filter | A regular expression to include only blobs with name matching it. |  | String
 | camel.component.google-storage.health-check-consumer-enabled | Used for enabling or disabling all consumer based health checks from this component | true | Boolean
 | camel.component.google-storage.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
+| camel.component.google-storage.impersonated-service-account | The email of a service account to impersonate with the credentials of Workload Identity Federation, so the workload gets the permissions of that service account. Used when useWorkloadIdentityFederation is enabled; the federated identity needs the Service Account Token Creator role on the service account. |  | String
 | camel.component.google-storage.include-body | If it is true, the Object exchange will be consumed and put into the body. If false the Object stream will be put raw into the body and the headers will be set with the object metadata. | true | Boolean
 | camel.component.google-storage.include-folders | If it is true, the folders/directories will be consumed. If it is false, they will be ignored, and Exchanges will not be created for those | true | Boolean
 | camel.component.google-storage.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
@@ -50,4 +51,6 @@ The starter supports 22 options, which are listed below.
 | camel.component.google-storage.storage-class | The Cloud Storage class to use when creating the new buckets. The option is a com.google.cloud.storage.StorageClass type. |  | StorageClass
 | camel.component.google-storage.storage-client | The storage client. The option is a com.google.cloud.storage.Storage type. |  | Storage
 | camel.component.google-storage.storage-location | The Cloud Storage location to use when creating the new buckets | US-EAST1 | String
+| camel.component.google-storage.use-workload-identity-federation | Whether to authenticate with Workload Identity Federation instead of a service account key: with the credential configuration file given in workloadIdentityConfig or, when it is not set, with the Application Default Credentials, which detect Workload Identity on GKE. | false | Boolean
+| camel.component.google-storage.workload-identity-config | The Workload Identity Federation credential configuration file (JSON, of type external_account), which says how to exchange a token of an external identity provider, such as AWS, Azure or an OIDC provider, for Google credentials. Used when useWorkloadIdentityFederation is enabled. It is loaded from the classpath by default; prefix it with classpath:, file:, http: or https: to load it from another location. |  | String
 |===

@@ -91,6 +91,12 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.google-storage.impersonated-service-account",
+      "type": "java.lang.String",
+      "description": "The email of a service account to impersonate with the credentials of Workload Identity Federation, so the workload gets the permissions of that service account. Used when useWorkloadIdentityFederation is enabled; the federated identity needs the Service Account Token Creator role on the service account.",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
+    },
+    {
       "name": "camel.component.google-storage.include-body",
       "type": "java.lang.Boolean",
       "description": "If it is true, the Object exchange will be consumed and put into the body. If false the Object stream will be put raw into the body and the headers will be set with the object metadata.",
@@ -160,6 +166,19 @@
       "description": "The Cloud Storage location to use when creating the new buckets",
       "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration",
       "defaultValue": "US-EAST1"
+    },
+    {
+      "name": "camel.component.google-storage.use-workload-identity-federation",
+      "type": "java.lang.Boolean",
+      "description": "Whether to authenticate with Workload Identity Federation instead of a service account key: with the credential configuration file given in workloadIdentityConfig or, when it is not set, with the Application Default Credentials, which detect Workload Identity on GKE.",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.google-storage.workload-identity-config",
+      "type": "java.lang.String",
+      "description": "The Workload Identity Federation credential configuration file (JSON, of type external_account), which says how to exchange a token of an external identity provider, such as AWS, Azure or an OIDC provider, for Google credentials. Used when useWorkloadIdentityFederation is enabled. It is loaded from the classpath by default; prefix it with classpath:, file:, http: or https: to load it from another location.",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
     }
   ],
   "hints": [],

@@ -23,7 +23,7 @@
     {
       "name": "camel.dataformat.jackson.allow-unmarshall-type",
       "type": "java.lang.Boolean",
-      "description": "If enabled then Jackson is allowed to attempt to use the CamelJacksonUnmarshalType header during the unmarshalling. This should only be enabled when desired to be used.",
+      "description": "If enabled then Jackson, Gson or JSON-B is allowed to attempt to use the CamelJacksonUnmarshalType, CamelGsonUnmarshalType or CamelJsonbUnmarshallType header during the unmarshalling. This should only be enabled when desired to be used.",
       "sourceType": "org.apache.camel.component.jackson3.springboot.JacksonDataFormatConfiguration",
       "defaultValue": false
     },

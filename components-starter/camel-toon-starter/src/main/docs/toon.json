@@ -46,16 +46,9 @@
       "defaultValue": 2
     },
     {
-      "name": "camel.dataformat.toon.length-marker",
-      "type": "java.lang.Boolean",
-      "description": "Whether to prefix array lengths with a hash marker so arrays render as hash-prefixed lengths instead of plain lengths.",
-      "sourceType": "org.apache.camel.dataformat.toon.springboot.ToonDataFormatConfiguration",
-      "defaultValue": false
-    },
-    {
       "name": "camel.dataformat.toon.strict",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable strict validation when unmarshalling TOON. When false, JToon uses best-effort parsing.",
+      "description": "Whether to enable strict validation when unmarshalling TOON. When false, the decoder applies the non-strict recoveries of the TOON specification, such as accepting an array whose length differs from the declared length; other malformed TOON still fails.",
       "sourceType": "org.apache.camel.dataformat.toon.springboot.ToonDataFormatConfiguration",
       "defaultValue": true
     }

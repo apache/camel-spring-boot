@@ -23,11 +23,12 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 4 options, which are listed below.
+The starter supports 5 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
+| camel.dataformat.jsonb.allow-unmarshall-type | If enabled then Jackson, Gson or JSON-B is allowed to attempt to use the CamelJacksonUnmarshalType, CamelGsonUnmarshalType or CamelJsonbUnmarshallType header during the unmarshalling. This should only be enabled when desired to be used. | false | Boolean
 | camel.dataformat.jsonb.enabled | Whether to enable auto configuration of the jsonb data format. This is enabled by default. |  | Boolean
 | camel.dataformat.jsonb.object-mapper | Lookup and use the existing Jsonb instance with the given id. |  | String
 | camel.dataformat.jsonb.pretty-print | To enable pretty printing output nicely formatted. Is by default false. | false | Boolean

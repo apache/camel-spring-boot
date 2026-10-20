@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 6 options, which are listed below.
+The starter supports 5 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -32,6 +32,5 @@ The starter supports 6 options, which are listed below.
 | camel.dataformat.toon.delimiter | Delimiter used for tabular array rows and inline primitive arrays. | COMMA | String
 | camel.dataformat.toon.enabled | Whether to enable auto configuration of the toon data format. This is enabled by default. |  | Boolean
 | camel.dataformat.toon.indent | Number of spaces per indentation level. | 2 | Integer
-| camel.dataformat.toon.length-marker | Whether to prefix array lengths with a hash marker so arrays render as hash-prefixed lengths instead of plain lengths. | false | Boolean
-| camel.dataformat.toon.strict | Whether to enable strict validation when unmarshalling TOON. When false, JToon uses best-effort parsing. | true | Boolean
+| camel.dataformat.toon.strict | Whether to enable strict validation when unmarshalling TOON. When false, the decoder applies the non-strict recoveries of the TOON specification, such as accepting an array whose length differs from the declared length; other malformed TOON still fails. | true | Boolean
 |===

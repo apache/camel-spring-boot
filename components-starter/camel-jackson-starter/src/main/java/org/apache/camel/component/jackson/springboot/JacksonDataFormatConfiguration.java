@@ -118,8 +118,9 @@ public class JacksonDataFormatConfiguration
      */
     private String disableFeatures;
     /**
-     * If enabled then Jackson is allowed to attempt to use the
-     * CamelJacksonUnmarshalType header during the unmarshalling. This should
+     * If enabled then Jackson, Gson or JSON-B is allowed to attempt to use the
+     * CamelJacksonUnmarshalType, CamelGsonUnmarshalType or
+     * CamelJsonbUnmarshallType header during the unmarshalling. This should
      * only be enabled when desired to be used.
      */
     private Boolean allowUnmarshallType = false;

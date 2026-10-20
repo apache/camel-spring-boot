@@ -44,13 +44,10 @@ public class ToonDataFormatConfiguration
      */
     private String delimiter = "COMMA";
     /**
-     * Whether to prefix array lengths with a hash marker so arrays render as
-     * hash-prefixed lengths instead of plain lengths.
-     */
-    private Boolean lengthMarker = false;
-    /**
      * Whether to enable strict validation when unmarshalling TOON. When false,
-     * JToon uses best-effort parsing.
+     * the decoder applies the non-strict recoveries of the TOON specification,
+     * such as accepting an array whose length differs from the declared length;
+     * other malformed TOON still fails.
      */
     private Boolean strict = true;
     /**
@@ -73,14 +70,6 @@ public class ToonDataFormatConfiguration
 
     public void setDelimiter(String delimiter) {
         this.delimiter = delimiter;
-    }
-
-    public Boolean getLengthMarker() {
-        return lengthMarker;
-    }
-
-    public void setLengthMarker(Boolean lengthMarker) {
-        this.lengthMarker = lengthMarker;
     }
 
     public Boolean getStrict() {

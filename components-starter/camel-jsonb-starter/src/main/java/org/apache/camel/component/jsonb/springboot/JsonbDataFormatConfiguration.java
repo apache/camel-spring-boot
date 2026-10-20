@@ -46,6 +46,13 @@ public class JsonbDataFormatConfiguration
      * Class name of the java type to use when unmarshalling.
      */
     private String unmarshalType;
+    /**
+     * If enabled then Jackson, Gson or JSON-B is allowed to attempt to use the
+     * CamelJacksonUnmarshalType, CamelGsonUnmarshalType or
+     * CamelJsonbUnmarshallType header during the unmarshalling. This should
+     * only be enabled when desired to be used.
+     */
+    private Boolean allowUnmarshallType = false;
 
     public String getObjectMapper() {
         return objectMapper;
@@ -69,5 +76,13 @@ public class JsonbDataFormatConfiguration
 
     public void setUnmarshalType(String unmarshalType) {
         this.unmarshalType = unmarshalType;
+    }
+
+    public Boolean getAllowUnmarshallType() {
+        return allowUnmarshallType;
+    }
+
+    public void setAllowUnmarshallType(Boolean allowUnmarshallType) {
+        this.allowUnmarshallType = allowUnmarshallType;
     }
 }
