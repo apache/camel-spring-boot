@@ -55,6 +55,16 @@ class SpringCacheStateStoreAutoConfigurationTest {
             .withUserConfiguration(StateStoreComponentConverter.class)
             .withPropertyValues("spring.main.banner-mode=off");
 
+    private final ApplicationContextRunner mixedBackendRunner = new ApplicationContextRunner()
+            .withConfiguration(AutoConfigurations.of(
+                    CamelAutoConfiguration.class,
+                    StateStoreComponentAutoConfiguration.class,
+                    SpringCacheStateStoreAutoConfiguration.class))
+            .withUserConfiguration(StateStoreComponentConverter.class)
+            .withBean(CacheManager.class, ConcurrentMapCacheManager::new)
+            .withBean("camelRepo", MemoryKeyValueRepository.class, MemoryKeyValueRepository::new)
+            .withPropertyValues("spring.main.banner-mode=off");
+
     @Test
     void doesNotRegisterFactoryWhenPropertyIsAbsent() {
         contextRunner
@@ -193,6 +203,44 @@ class SpringCacheStateStoreAutoConfigurationTest {
                     assertThat(cacheManager.getCache("orders").get("id").get()).isEqualTo("order-1");
                     assertThat(cacheManager.getCache("users").get("id").get()).isEqualTo("user-1");
                 });
+    }
+
+    @Test
+    void springFactoryAndCamelRepositoryCoexist() {
+        mixedBackendRunner
+                .withPropertyValues("camel.state-store.spring-cache.enabled=true")
+                .run(ctx -> {
+                    ProducerTemplate template = ctx.getBean(CamelContext.class).createProducerTemplate();
+                    try {
+                        template.sendBodyAndHeader("state-store:orders?operation=put", "o1",
+                                StateStoreConstants.KEY, "1");
+                        template.sendBodyAndHeader("state-store:sessions?operation=put&backend=#camelRepo", "s1",
+                                StateStoreConstants.KEY, "1");
+
+                        assertThat(ctx.getBean(CacheManager.class).getCache("orders").get("1").get())
+                                .isEqualTo("o1");
+                        assertThat(ctx.getBean("camelRepo", MemoryKeyValueRepository.class).get("1"))
+                                .isEqualTo("s1");
+                        assertThat(ctx.getBean(CacheManager.class).getCache("sessions").get("1")).isNull();
+                    } finally {
+                        template.stop();
+                    }
+                });
+    }
+
+    @Test
+    void camelRepositoryIsUsedWhenSpringCacheIsDisabled() {
+        mixedBackendRunner.run(ctx -> {
+            ProducerTemplate template = ctx.getBean(CamelContext.class).createProducerTemplate();
+            try {
+                template.sendBodyAndHeader("state-store:orders?operation=put", "o1",
+                        StateStoreConstants.KEY, "1");
+
+                assertThat(ctx.getBean("camelRepo", MemoryKeyValueRepository.class).get("1")).isEqualTo("o1");
+            } finally {
+                template.stop();
+            }
+        });
     }
 
     @Test

@@ -29,6 +29,7 @@ import org.apache.camel.component.statestore.springboot.StateStoreComponentConve
 import org.apache.camel.spi.KeyValueRepository;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.support.DefaultExchange;
+import org.apache.camel.support.DefaultExchangeHolder;
 import org.apache.camel.support.KeyValueAggregationRepository;
 import org.apache.camel.support.KeyValueIdempotentRepository;
 import org.apache.camel.test.infra.redis.services.RedisService;
@@ -69,7 +70,6 @@ class SpringCacheStateStoreRedisIT {
                         "camel.state-store.spring-cache.enabled=true",
                         "spring.cache.type=redis",
                         "spring.cache.cache-names=orders,users,idempotent,aggregate",
-                        "spring.cache.redis.time-to-live=250ms",
                         "spring.data.redis.host=" + redis.host(),
                         "spring.data.redis.port=" + redis.port());
     }
@@ -156,7 +156,7 @@ class SpringCacheStateStoreRedisIT {
                 aggregationRepository.add(camelContext, "corr-1", exchange);
 
                 assertThat(aggregateStore.get("aggregate:corr-1"))
-                        .isInstanceOf(org.apache.camel.support.DefaultExchangeHolder.class);
+                        .isInstanceOf(DefaultExchangeHolder.class);
 
                 Exchange restored = aggregationRepository.get(camelContext, "corr-1");
                 assertThat(restored).isNotNull();

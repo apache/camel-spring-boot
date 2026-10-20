@@ -36,7 +36,7 @@ import org.springframework.context.annotation.Bean;
  */
 @AutoConfiguration(after = CamelAutoConfiguration.class,
         afterName = "org.springframework.boot.cache.autoconfigure.CacheAutoConfiguration")
-@ConditionalOnClass({ CacheManager.class, StateStoreBackendFactory.class, KeyValueRepository.class })
+@ConditionalOnClass({ CacheManager.class, StateStoreBackendFactory.class })
 @ConditionalOnProperty(prefix = "camel.state-store.spring-cache", name = "enabled", havingValue = "true")
 public class SpringCacheStateStoreAutoConfiguration {
 
