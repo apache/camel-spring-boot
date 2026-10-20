@@ -869,7 +869,7 @@
       "type": "java.lang.Boolean",
       "description": "Whether to skip binding on output if there is a custom HTTP error code header. This allows to build custom error messages that do not bind to json \/ xml etc, as success messages otherwise will do.",
       "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties",
-      "defaultValue": false
+      "defaultValue": true
     },
     {
       "name": "camel.rest.use-x-forward-headers",

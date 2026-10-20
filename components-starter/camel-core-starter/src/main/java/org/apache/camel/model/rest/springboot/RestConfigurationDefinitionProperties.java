@@ -120,7 +120,7 @@ public class RestConfigurationDefinitionProperties {
      * header. This allows to build custom error messages that do not bind to
      * json / xml etc, as success messages otherwise will do.
      */
-    private Boolean skipBindingOnErrorCode = false;
+    private Boolean skipBindingOnErrorCode = true;
     /**
      * Whether to enable validation of the client request to check whether
      * Content-Type/Accept headers, required parameters, and message body are

@@ -5478,7 +5478,7 @@
       <dependency>
         <groupId>org.jooq</groupId>
         <artifactId>jooq</artifactId>
-        <version>3.19.30</version>
+        <version>3.21.9</version>
       </dependency>
       <dependency>
         <groupId>org.jspecify</groupId>

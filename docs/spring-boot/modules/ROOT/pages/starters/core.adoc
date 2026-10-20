@@ -131,7 +131,7 @@ The starter supports 115 options, which are listed below.
 | camel.rest.producer-api-doc | Sets the location of the api document the REST producer will use to validate the REST uri and query parameters are valid accordingly to the api document. |  | String
 | camel.rest.producer-component | Sets the name of the Camel component to use as the REST producer. |  | String
 | camel.rest.scheme | The scheme to use for exposing the REST service. Usually http or https is supported. |  | String
-| camel.rest.skip-binding-on-error-code | Whether to skip binding on output if there is a custom HTTP error code header. This allows to build custom error messages that do not bind to json / xml etc, as success messages otherwise will do. | false | Boolean
+| camel.rest.skip-binding-on-error-code | Whether to skip binding on output if there is a custom HTTP error code header. This allows to build custom error messages that do not bind to json / xml etc, as success messages otherwise will do. | true | Boolean
 | camel.rest.use-x-forward-headers | Whether to use X-Forward headers to set host etc. for OpenApi. This may be needed in special cases involving reverse-proxy and networking going from HTTP to HTTPS etc. | false | Boolean
 | camel.rest.validation-levels | Allows to configure custom validation levels when using camel-openapi-validator with client request/response validator. |  | Object>
 | camel.rest.xml-data-format | Name of specific XML data format to use. By default jaxb will be used. Important: This option is only for setting a custom name of the data format, not to refer to an existing data format instance. | jaxb | String
