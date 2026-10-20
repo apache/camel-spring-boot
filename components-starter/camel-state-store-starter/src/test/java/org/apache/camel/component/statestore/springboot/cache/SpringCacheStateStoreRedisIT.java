@@ -155,6 +155,9 @@ class SpringCacheStateStoreRedisIT {
                 exchange.getMessage().setBody("payload");
                 aggregationRepository.add(camelContext, "corr-1", exchange);
 
+                assertThat(aggregateStore.get("aggregate:corr-1"))
+                        .isInstanceOf(org.apache.camel.support.DefaultExchangeHolder.class);
+
                 Exchange restored = aggregationRepository.get(camelContext, "corr-1");
                 assertThat(restored).isNotNull();
                 assertThat(restored.getMessage().getBody()).isEqualTo("payload");
@@ -166,15 +169,17 @@ class SpringCacheStateStoreRedisIT {
 
     @Test
     void providerLevelTimeToLiveExpiresEntries() {
-        runner().run(context -> {
-            StateStoreBackendFactory factory = context.getBean(StateStoreBackendFactory.class);
-            KeyValueRepository repository = factory.createBackend("orders");
-            repository.put("expiring", "value");
-            assertThat(repository.get("expiring")).isEqualTo("value");
+        runner()
+                .withPropertyValues("spring.cache.redis.time-to-live=2s")
+                .run(context -> {
+                    StateStoreBackendFactory factory = context.getBean(StateStoreBackendFactory.class);
+                    KeyValueRepository repository = factory.createBackend("orders");
+                    repository.put("expiring", "value");
+                    assertThat(repository.get("expiring")).isEqualTo("value");
 
-            await().atMost(5, TimeUnit.SECONDS)
-                    .pollInterval(Duration.ofMillis(50))
-                    .untilAsserted(() -> assertThat(repository.get("expiring")).isNull());
-        });
+                    await().atMost(5, TimeUnit.SECONDS)
+                            .pollInterval(Duration.ofMillis(50))
+                            .untilAsserted(() -> assertThat(repository.get("expiring")).isNull());
+                });
     }
 }
