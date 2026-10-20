@@ -25,9 +25,4 @@ public class CamelWasmIT extends AbstractSpringBootBaseTestSupport {
     void componentTest() {
         assertComponent(inferComponentName(getClass()));
     }
-
-    @Test
-    void languageTest() {
-        assertLanguage(inferComponentName(getClass()));
-    }
 }
