@@ -16,3 +16,4 @@
 ## ---------------------------------------------------------------------------
 org.apache.camel.component.statestore.springboot.StateStoreComponentAutoConfiguration
 org.apache.camel.component.statestore.springboot.StateStoreComponentConverter
+org.apache.camel.component.statestore.springboot.cache.SpringCacheStateStoreAutoConfiguration
