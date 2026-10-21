@@ -103,7 +103,8 @@ public class NettyHttpComponentConfiguration
     private Boolean bridgeErrorHandler = false;
     /**
      * If enabled and an Exchange failed processing on the consumer side the
-     * response's body won't contain the exception's stack trace.
+     * response written back to the remote peer won't contain the exception's
+     * class, message or stack trace.
      */
     private Boolean muteException = true;
     /**

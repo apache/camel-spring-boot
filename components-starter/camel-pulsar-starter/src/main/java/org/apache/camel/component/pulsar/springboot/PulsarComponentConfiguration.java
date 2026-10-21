@@ -254,7 +254,8 @@ public class PulsarComponentConfiguration
     private String hashingScheme = "JavaStringHash";
     /**
      * The first message published will have a sequence Id of initialSequenceId
-     * 1.
+     * plus one. The default -1 leaves it to the Pulsar client, which continues
+     * after the last sequence id the broker has for the producer name.
      */
     private Long initialSequenceId = -1L;
     /**

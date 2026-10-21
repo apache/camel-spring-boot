@@ -229,6 +229,13 @@
       "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration"
     },
     {
+      "name": "camel.component.netty.mute-exception",
+      "type": "java.lang.Boolean",
+      "description": "If enabled and an Exchange failed processing on the consumer side the response written back to the remote peer won't contain the exception's class, message or stack trace.",
+      "sourceType": "org.apache.camel.component.netty.springboot.NettyComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.netty.native-transport",
       "type": "java.lang.Boolean",
       "description": "Whether to use native transport instead of NIO. Native transport takes advantage of the host operating system and is only supported on some platforms. You need to add the netty JAR for the host operating system you are using. See more details at: http:\/\/netty.io\/wiki\/native-transports.html",

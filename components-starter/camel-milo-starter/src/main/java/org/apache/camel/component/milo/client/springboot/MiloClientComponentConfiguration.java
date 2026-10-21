@@ -154,6 +154,12 @@ public class MiloClientComponentConfiguration
      */
     private String productUri = "http://camel.apache.org/EclipseMilo";
     /**
+     * The delay in milliseconds before the client tries again to connect to the
+     * server after an attempt failed. It is not used while the OPC UA client
+     * recovers a lost session on its own.
+     */
+    private Long reconnectTimeout = 10000L;
+    /**
      * The requested publishing interval in milliseconds
      */
     private Double requestedPublishingInterval;
@@ -386,6 +392,14 @@ public class MiloClientComponentConfiguration
 
     public void setProductUri(String productUri) {
         this.productUri = productUri;
+    }
+
+    public Long getReconnectTimeout() {
+        return reconnectTimeout;
+    }
+
+    public void setReconnectTimeout(Long reconnectTimeout) {
+        this.reconnectTimeout = reconnectTimeout;
     }
 
     public Double getRequestedPublishingInterval() {

@@ -25,7 +25,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 84 options, which are listed below.
+The starter supports 86 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -54,6 +54,7 @@ The starter supports 84 options, which are listed below.
 | camel.component.milo-browse.override-port | Override the server reported endpoint port with the port from the endpoint URI. | false | Boolean
 | camel.component.milo-browse.password | The password for authentication. Use this instead of embedding credentials in the endpoint URI when the password contains special characters (such as \{code }, \{code /}, \{code }, \{code &}). |  | String
 | camel.component.milo-browse.product-uri | The product URI | http://camel.apache.org/EclipseMilo | String
+| camel.component.milo-browse.reconnect-timeout | The delay in milliseconds before the client tries again to connect to the server after an attempt failed. It is not used while the OPC UA client recovers a lost session on its own. | 10000 | Long
 | camel.component.milo-browse.request-timeout | Request timeout in milliseconds |  | Long
 | camel.component.milo-browse.requested-publishing-interval | The requested publishing interval in milliseconds |  | Double
 | camel.component.milo-browse.session-name | Session name |  | String
@@ -86,6 +87,7 @@ The starter supports 84 options, which are listed below.
 | camel.component.milo-client.override-port | Override the server reported endpoint port with the port from the endpoint URI. | false | Boolean
 | camel.component.milo-client.password | The password for authentication. Use this instead of embedding credentials in the endpoint URI when the password contains special characters (such as \{code }, \{code /}, \{code }, \{code &}). |  | String
 | camel.component.milo-client.product-uri | The product URI | http://camel.apache.org/EclipseMilo | String
+| camel.component.milo-client.reconnect-timeout | The delay in milliseconds before the client tries again to connect to the server after an attempt failed. It is not used while the OPC UA client recovers a lost session on its own. | 10000 | Long
 | camel.component.milo-client.request-timeout | Request timeout in milliseconds |  | Long
 | camel.component.milo-client.requested-publishing-interval | The requested publishing interval in milliseconds |  | Double
 | camel.component.milo-client.session-name | Session name |  | String

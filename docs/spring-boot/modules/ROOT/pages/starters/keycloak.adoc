@@ -50,7 +50,7 @@ The starter supports 34 options, which are listed below.
 | camel.component.keycloak.ip-address | Filter events by IP address |  | String
 | camel.component.keycloak.keycloak-client | To use an existing configured Keycloak admin client. The option is a org.keycloak.admin.client.Keycloak type. |  | Keycloak
 | camel.component.keycloak.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.keycloak.max-results | Maximum number of events to retrieve per poll | 100 | Integer
+| camel.component.keycloak.max-results | The number of events the first poll retrieves, and the page size of the later polls, which read every event since the previous poll | 100 | Integer
 | camel.component.keycloak.operation | The operation to perform |  | KeycloakOperations
 | camel.component.keycloak.operation-types | Filter admin events by operation types (comma-separated list, e.g., CREATE,UPDATE,DELETE) |  | String
 | camel.component.keycloak.password | Keycloak password |  | String

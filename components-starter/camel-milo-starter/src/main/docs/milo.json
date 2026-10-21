@@ -192,6 +192,13 @@
       "defaultValue": "http:\/\/camel.apache.org\/EclipseMilo"
     },
     {
+      "name": "camel.component.milo-browse.reconnect-timeout",
+      "type": "java.lang.Long",
+      "description": "The delay in milliseconds before the client tries again to connect to the server after an attempt failed. It is not used while the OPC UA client recovers a lost session on its own.",
+      "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration",
+      "defaultValue": 10000
+    },
+    {
       "name": "camel.component.milo-browse.request-timeout",
       "type": "java.lang.Long",
       "description": "Request timeout in milliseconds",
@@ -396,6 +403,13 @@
       "description": "The product URI",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration",
       "defaultValue": "http:\/\/camel.apache.org\/EclipseMilo"
+    },
+    {
+      "name": "camel.component.milo-client.reconnect-timeout",
+      "type": "java.lang.Long",
+      "description": "The delay in milliseconds before the client tries again to connect to the server after an attempt failed. It is not used while the OPC UA client recovers a lost session on its own.",
+      "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration",
+      "defaultValue": 10000
     },
     {
       "name": "camel.component.milo-client.request-timeout",

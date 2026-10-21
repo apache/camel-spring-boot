@@ -161,7 +161,7 @@
     {
       "name": "camel.component.keycloak.max-results",
       "type": "java.lang.Integer",
-      "description": "Maximum number of events to retrieve per poll",
+      "description": "The number of events the first poll retrieves, and the page size of the later polls, which read every event since the previous poll",
       "sourceType": "org.apache.camel.component.keycloak.springboot.KeycloakComponentConfiguration",
       "defaultValue": 100
     },

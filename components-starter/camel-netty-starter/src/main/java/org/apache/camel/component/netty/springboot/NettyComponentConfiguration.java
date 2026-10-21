@@ -110,6 +110,12 @@ public class NettyComponentConfiguration
      */
     private Boolean clientMode = false;
     /**
+     * If enabled and an Exchange failed processing on the consumer side the
+     * response written back to the remote peer won't contain the exception's
+     * class, message or stack trace.
+     */
+    private Boolean muteException = true;
+    /**
      * Used only in clientMode in consumer, the consumer will attempt to
      * reconnect on disconnection if this is enabled
      */
@@ -585,6 +591,14 @@ public class NettyComponentConfiguration
 
     public void setClientMode(Boolean clientMode) {
         this.clientMode = clientMode;
+    }
+
+    public Boolean getMuteException() {
+        return muteException;
+    }
+
+    public void setMuteException(Boolean muteException) {
+        this.muteException = muteException;
     }
 
     public Boolean getReconnect() {

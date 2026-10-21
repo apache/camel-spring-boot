@@ -189,7 +189,7 @@
     {
       "name": "camel.component.pulsar.initial-sequence-id",
       "type": "java.lang.Long",
-      "description": "The first message published will have a sequence Id of initialSequenceId 1.",
+      "description": "The first message published will have a sequence Id of initialSequenceId plus one. The default -1 leaves it to the Pulsar client, which continues after the last sequence id the broker has for the producer name.",
       "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration",
       "defaultValue": -1
     },
