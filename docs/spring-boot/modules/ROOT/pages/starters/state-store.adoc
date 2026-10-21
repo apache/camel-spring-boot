@@ -50,7 +50,7 @@ spring.cache.cache-names=orders,users
 camel.state-store.spring-cache.enabled=true
 ----
 
-Provide a `CacheManager` bean or configure Spring Boot cache auto-configuration. If `spring.cache.cache-names` specifies a fixed set of names, include every state-store name you use. A dynamic cache manager can create caches on demand.
+Spring Boot creates the `CacheManager` from `spring.cache.*` only when the application enables caching with `@EnableCaching`; otherwise, provide your own `CacheManager` bean. Without a single eligible `CacheManager`, the factory is not registered, and stores may fall back to the default in-memory repository. If `spring.cache.cache-names` specifies a fixed set of names, include every state-store name you use. A dynamic cache manager can create caches on demand.
 
 To use a specific Camel repository, register it as a bean, for example under the name `redisRepo`, and select it on the endpoint:
 
