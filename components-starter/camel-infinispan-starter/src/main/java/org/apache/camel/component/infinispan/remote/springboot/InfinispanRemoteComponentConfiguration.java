@@ -93,8 +93,9 @@ public class InfinispanRemoteComponentConfiguration
      */
     private Object defaultValue;
     /**
-     * Set a specific key for producer operations. The option is a
-     * java.lang.Object type.
+     * Set a specific key for producer operations. When set, it takes precedence
+     * over the CamelInfinispanKey header. The option is a java.lang.Object
+     * type.
      */
     private Object key;
     /**
