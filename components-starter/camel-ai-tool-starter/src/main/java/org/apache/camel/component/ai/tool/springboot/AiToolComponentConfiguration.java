@@ -46,6 +46,13 @@ public class AiToolComponentConfiguration
      */
     private String argSchema;
     /**
+     * Whether to populate the message body with the tool arguments as a JSON
+     * string, excluding undeclared arguments and reserved names. Declared
+     * argument headers remain available. When disabled, the message body is
+     * left unchanged.
+     */
+    private Boolean argumentsAsBody = false;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions (if possible) occurred while the Camel consumer
      * is trying to pickup incoming messages, or the likes, will now be
@@ -161,6 +168,14 @@ public class AiToolComponentConfiguration
 
     public void setArgSchema(String argSchema) {
         this.argSchema = argSchema;
+    }
+
+    public Boolean getArgumentsAsBody() {
+        return argumentsAsBody;
+    }
+
+    public void setArgumentsAsBody(Boolean argumentsAsBody) {
+        this.argumentsAsBody = argumentsAsBody;
     }
 
     public Boolean getBridgeErrorHandler() {
