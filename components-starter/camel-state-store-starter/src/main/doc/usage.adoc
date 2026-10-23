@@ -27,6 +27,19 @@ camel.state-store.spring-cache.enabled=true
 
 Spring Boot creates the `CacheManager` from `spring.cache.*` only when the application enables caching with `@EnableCaching`; otherwise, provide your own `CacheManager` bean. Without a single eligible `CacheManager`, the factory is not registered, and stores may fall back to the default in-memory repository. If `spring.cache.cache-names` specifies a fixed set of names, include every state-store name you use. A dynamic cache manager can create caches on demand.
 
+When the cache provider is Redis with the Lettuce driver, Spring Data Redis 4 writes cache entries asynchronously by default, so a value may not be readable right after the state store writes it. Enable immediate writes on the cache writer that Spring Boot uses for its `RedisCacheManager`:
+
+[source,java]
+----
+@Bean
+RedisCacheManagerBuilderCustomizer immediateWritesCustomizer(RedisConnectionFactory connectionFactory) {
+    return builder -> builder.cacheWriter(
+            RedisCacheWriter.create(connectionFactory, RedisCacheWriter.RedisCacheWriterConfigurer::immediateWrites));
+}
+----
+
+This setting applies to every cache of that `CacheManager`. If you define your own `RedisCacheManager`, create its `RedisCacheWriter` with `immediateWrites()` in the same way.
+
 To use a specific Camel repository, register it as a bean, for example under the name `redisRepo`, and select it on the endpoint:
 
 [source,java]
