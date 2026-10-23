@@ -45,6 +45,11 @@ import org.springframework.util.Assert;
  *       requiring expiration must configure it through the underlying cache
  *       provider or {@link CacheManager}, for example using a Caffeine cache
  *       specification.</li>
+ *   <li><strong>Write visibility:</strong> {@link Cache#put(Object, Object)}
+ *       may register the entry asynchronously, so a following {@code get}
+ *       may not see it yet. Spring Data Redis 4 does this by default with
+ *       Lettuce; enable immediate writes on its {@code RedisCacheWriter} to
+ *       get the read-your-writes behavior that Camel EIPs expect.</li>
  *   <li><strong>Atomicity:</strong> Spring Cache has no atomic get-and-put
  *       API. {@code put} and {@code delete} read the previous value and then
  *       write or evict in a second call, so the returned old value is not

@@ -39,11 +39,16 @@ import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.cache.autoconfigure.CacheAutoConfiguration;
+import org.springframework.boot.cache.autoconfigure.RedisCacheManagerBuilderCustomizer;
 import org.springframework.boot.data.redis.autoconfigure.DataRedisAutoConfiguration;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.ProxyCachingConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.cache.RedisCacheWriter;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -64,7 +69,8 @@ class SpringCacheStateStoreRedisIT {
                         CacheAutoConfiguration.class,
                         StateStoreComponentAutoConfiguration.class,
                         SpringCacheStateStoreAutoConfiguration.class))
-                .withUserConfiguration(ProxyCachingConfiguration.class, StateStoreComponentConverter.class)
+                .withUserConfiguration(ProxyCachingConfiguration.class, StateStoreComponentConverter.class,
+                        ImmediateWritesConfiguration.class)
                 .withPropertyValues(
                         "spring.main.banner-mode=off",
                         "camel.state-store.spring-cache.enabled=true",
@@ -168,6 +174,18 @@ class SpringCacheStateStoreRedisIT {
     }
 
     @Test
+    void putIsVisibleToSubsequentGet() {
+        runner().run(context -> {
+            StateStoreBackendFactory factory = context.getBean(StateStoreBackendFactory.class);
+            KeyValueRepository repository = factory.createBackend("orders");
+            for (int i = 0; i < 500; i++) {
+                repository.put("visible", "value-" + i);
+                assertThat(repository.get("visible")).isEqualTo("value-" + i);
+            }
+        });
+    }
+
+    @Test
     void providerLevelTimeToLiveExpiresEntries() {
         runner()
                 .withPropertyValues("spring.cache.redis.time-to-live=2s")
@@ -181,5 +199,20 @@ class SpringCacheStateStoreRedisIT {
                             .pollInterval(Duration.ofMillis(50))
                             .untilAsserted(() -> assertThat(repository.get("expiring")).isNull());
                 });
+    }
+
+    /**
+     * With Lettuce, Spring Data Redis writes cache entries asynchronously by default, so a get that follows a put may
+     * not see the new value. The state store needs read-your-writes semantics, so enable immediate writes as
+     * documented for the Spring Cache backend.
+     */
+    @Configuration(proxyBeanMethods = false)
+    static class ImmediateWritesConfiguration {
+
+        @Bean
+        RedisCacheManagerBuilderCustomizer immediateWritesCustomizer(RedisConnectionFactory connectionFactory) {
+            return builder -> builder.cacheWriter(
+                    RedisCacheWriter.create(connectionFactory, RedisCacheWriter.RedisCacheWriterConfigurer::immediateWrites));
+        }
     }
 }
