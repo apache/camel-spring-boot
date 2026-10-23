@@ -25,7 +25,7 @@
                 <constant>org.apache.camel.component.gson.springboot.TestPojo</constant>
             </setHeader>
             <unmarshal>
-                <json library="Gson" />
+                <json library="Gson" allowUnmarshallType="true"/>
             </unmarshal>
         </route>
 
