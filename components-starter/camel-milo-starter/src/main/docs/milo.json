@@ -194,7 +194,7 @@
     {
       "name": "camel.component.milo-browse.reconnect-timeout",
       "type": "java.lang.Long",
-      "description": "The delay in milliseconds before the client tries again to connect to the server after an attempt failed. It is not used while the OPC UA client recovers a lost session on its own.",
+      "description": "The delay in milliseconds before the client tries again to connect to the server after an attempt failed, and between two attempts to create the monitored items that the server refused. Neither attempt is made while the OPC UA client recovers a lost session on its own.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration",
       "defaultValue": 10000
     },
@@ -407,7 +407,7 @@
     {
       "name": "camel.component.milo-client.reconnect-timeout",
       "type": "java.lang.Long",
-      "description": "The delay in milliseconds before the client tries again to connect to the server after an attempt failed. It is not used while the OPC UA client recovers a lost session on its own.",
+      "description": "The delay in milliseconds before the client tries again to connect to the server after an attempt failed, and between two attempts to create the monitored items that the server refused. Neither attempt is made while the OPC UA client recovers a lost session on its own.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration",
       "defaultValue": 10000
     },

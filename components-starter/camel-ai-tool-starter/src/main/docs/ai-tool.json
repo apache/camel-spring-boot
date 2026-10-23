@@ -20,6 +20,13 @@
       "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration"
     },
     {
+      "name": "camel.component.ai-tool.arguments-as-body",
+      "type": "java.lang.Boolean",
+      "description": "Whether to populate the message body with the tool arguments as a JSON string, excluding undeclared arguments and reserved names. Declared argument headers remain available. When disabled, the message body is left unchanged.",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.ai-tool.authorization-policy",
       "type": "org.apache.camel.spi.AuthorizationPolicy",
       "description": "Reference to an org.apache.camel.spi.AuthorizationPolicy used to authorize tool calls before the route runs. Set it on the component to guard every tool route by construction, or per endpoint to override. The policy authorizes on trustworthy input only: the tool name comes from the route (never from model output), and the caller identity is carried as an exchange property set before the agent ran (for example by camel-spiffe or camel-keycloak), which the model cannot set. Authorize on exchange properties or validated tokens only, never on message headers (on a tool route the headers carry the model-controlled tool arguments). A denied call surfaces to the model as a short refusal rather than a stack trace. The option is a org.apache.camel.spi.AuthorizationPolicy type.",
