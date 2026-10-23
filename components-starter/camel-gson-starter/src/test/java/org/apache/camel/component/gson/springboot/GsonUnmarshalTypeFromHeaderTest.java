@@ -16,14 +16,18 @@
  */
 package org.apache.camel.component.gson.springboot;
 
+import java.util.Map;
+
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.gson.GsonConstants;
+import org.apache.camel.model.dataformat.JsonDataFormat;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +56,15 @@ public class GsonUnmarshalTypeFromHeaderTest {
         assertEquals("my-name", pojo.getName());
     }
 
+    @Test
+    public void testUnmarshalTypeFromHeaderIsIgnoredByDefault() {
+        String body = "{\"name\":\"my-name\"}";
+        String unmarshallType = "org.apache.camel.component.gson.springboot.TestPojo";
+        Object result = template.requestBodyAndHeader("direct:unmarshalTypeFromHeaderNotAllowed", body,
+                GsonConstants.UNMARSHAL_TYPE, unmarshallType);
+        assertInstanceOf(Map.class, result);
+    }
+
     // *************************************
     // Config
     // *************************************
@@ -64,7 +77,9 @@ public class GsonUnmarshalTypeFromHeaderTest {
             return new RouteBuilder() {
                 @Override
                 public void configure() {
-                    from("direct:unmarshalTypeFromHeader").unmarshal().json(JsonLibrary.Gson);
+                    from("direct:unmarshalTypeFromHeader")
+                            .unmarshal(new JsonDataFormat(JsonLibrary.Gson).allowUnmarshallType(true));
+                    from("direct:unmarshalTypeFromHeaderNotAllowed").unmarshal().json(JsonLibrary.Gson);
                 }
             };
         }
