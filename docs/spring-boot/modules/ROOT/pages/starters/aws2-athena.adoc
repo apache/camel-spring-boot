@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 40 options, which are listed below.
+The starter supports 41 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -55,7 +55,7 @@ The starter supports 40 options, which are listed below.
 | camel.component.aws2-athena.proxy-port | To define a proxy port when instantiating the Athena client. |  | Integer
 | camel.component.aws2-athena.proxy-protocol | To define a proxy protocol when instantiating the Athena client. | https | Protocol
 | camel.component.aws2-athena.query-execution-id | The unique ID identifying the query execution. |  | String
-| camel.component.aws2-athena.query-string | The SQL query to run. Except for simple queries, prefer setting this as the body of the Exchange or as a header using Athena2Constants.QUERY_STRING to avoid having to deal with URL encoding issues. |  | String
+| camel.component.aws2-athena.query-string | The SQL query to run. The CamelAwsAthenaQueryString header takes precedence over this option, and when useMessageBodyForSql is enabled, so does a non-empty message body. Except for simple queries, prefer setting the query in the header to avoid having to deal with URL encoding issues. |  | String
 | camel.component.aws2-athena.region | The region in which Athena client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1). |  | String
 | camel.component.aws2-athena.reset-wait-timeout-on-retry | Reset the waitTimeout countdown in the event of a query retry. If set to true, potential max time spent waiting for queries is equal to waitTimeout x maxAttempts. See the section Waiting for Query Completion and Retrying Failed Queries to learn more. | true | Boolean
 | camel.component.aws2-athena.retry | Optional comma separated list of error types to retry the query for. Use: 'retryable' to retry all retryable failure conditions (e.g. generic errors and resources exhausted), 'generic' to retry 'GENERIC_INTERNAL_ERROR' failures, 'exhausted' to retry queries that have exhausted resource limits, 'always' to always retry regardless of failure condition, or 'never' or null to never retry (default). See the section Waiting for Query Completion and Retrying Failed Queries to learn more. | never | String
@@ -64,6 +64,7 @@ The starter supports 40 options, which are listed below.
 | camel.component.aws2-athena.trust-all-certificates | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
 | camel.component.aws2-athena.uri-endpoint-override | Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option |  | String
 | camel.component.aws2-athena.use-default-credentials-provider | Set whether the Athena client should expect to load credentials through a default credentials provider or to expect static credentials to be passed in | false | Boolean
+| camel.component.aws2-athena.use-message-body-for-sql | Whether to use the message body as the SQL query to run. When enabled, a non-empty message body takes precedence over the CamelAwsAthenaQueryString header and the queryString option. When disabled, the message body is not used as the query. | false | Boolean
 | camel.component.aws2-athena.use-profile-credentials-provider | Set whether the Athena client should expect to load credentials through a profile credentials provider. | false | Boolean
 | camel.component.aws2-athena.use-session-credentials | Set whether the Athena client should expect to use Session Credentials. This is useful in a situation in which the user needs to assume an IAM role for doing operations in Athena. | false | Boolean
 | camel.component.aws2-athena.wait-timeout | Optional max wait time in millis to wait for a successful query completion. See the section Waiting for Query Completion and Retrying Failed Queries to learn more. | 0 | Long

@@ -117,10 +117,10 @@ public class Athena2ComponentConfiguration
      */
     private String queryExecutionId;
     /**
-     * The SQL query to run. Except for simple queries, prefer setting this as
-     * the body of the Exchange or as a header using
-     * Athena2Constants.QUERY_STRING to avoid having to deal with URL encoding
-     * issues.
+     * The SQL query to run. The CamelAwsAthenaQueryString header takes
+     * precedence over this option, and when useMessageBodyForSql is enabled, so
+     * does a non-empty message body. Except for simple queries, prefer setting
+     * the query in the header to avoid having to deal with URL encoding issues.
      */
     private String queryString;
     /**
@@ -151,6 +151,13 @@ public class Athena2ComponentConfiguration
      * combination with overrideEndpoint option
      */
     private String uriEndpointOverride;
+    /**
+     * Whether to use the message body as the SQL query to run. When enabled, a
+     * non-empty message body takes precedence over the
+     * CamelAwsAthenaQueryString header and the queryString option. When
+     * disabled, the message body is not used as the query.
+     */
+    private Boolean useMessageBodyForSql = false;
     /**
      * Optional max wait time in millis to wait for a successful query
      * completion. See the section Waiting for Query Completion and Retrying
@@ -399,6 +406,14 @@ public class Athena2ComponentConfiguration
 
     public void setUriEndpointOverride(String uriEndpointOverride) {
         this.uriEndpointOverride = uriEndpointOverride;
+    }
+
+    public Boolean getUseMessageBodyForSql() {
+        return useMessageBodyForSql;
+    }
+
+    public void setUseMessageBodyForSql(Boolean useMessageBodyForSql) {
+        this.useMessageBodyForSql = useMessageBodyForSql;
     }
 
     public Long getWaitTimeout() {

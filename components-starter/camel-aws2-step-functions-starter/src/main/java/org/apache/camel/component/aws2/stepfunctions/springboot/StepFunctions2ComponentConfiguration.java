@@ -57,8 +57,7 @@ public class StepFunctions2ComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * The operation to perform. It can be listFunctions, getFunction,
-     * createFunction, deleteFunction or invokeFunction
+     * The operation to perform
      */
     private StepFunctions2Operations operation;
     /**

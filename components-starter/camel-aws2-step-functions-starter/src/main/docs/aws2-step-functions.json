@@ -73,7 +73,7 @@
     {
       "name": "camel.component.aws2-step-functions.operation",
       "type": "org.apache.camel.component.aws2.stepfunctions.StepFunctions2Operations",
-      "description": "The operation to perform. It can be listFunctions, getFunction, createFunction, deleteFunction or invokeFunction",
+      "description": "The operation to perform",
       "sourceType": "org.apache.camel.component.aws2.stepfunctions.springboot.StepFunctions2ComponentConfiguration"
     },
     {
