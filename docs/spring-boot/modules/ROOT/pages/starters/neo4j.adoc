@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 20 options, which are listed below.
+The starter supports 21 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -41,6 +41,7 @@ The starter supports 20 options, which are listed below.
 | camel.component.neo4j.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.neo4j.max-results | Maximum results for Vector Similarity search | 3 | Integer
 | camel.component.neo4j.min-score | Minimum score for Vector Similarity search |  | Double
+| camel.component.neo4j.operation | The operation to perform. The CamelNeo4jOperation header, when set, wins over this option. |  | Neo4Operation
 | camel.component.neo4j.password | Basic authentication database password |  | String
 | camel.component.neo4j.query | Cypher Query |  | String
 | camel.component.neo4j.realm | Basic authentication database realm |  | String

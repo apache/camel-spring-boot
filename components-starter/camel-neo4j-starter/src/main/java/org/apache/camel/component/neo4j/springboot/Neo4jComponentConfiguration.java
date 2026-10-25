@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.neo4j.springboot;
 
+import org.apache.camel.component.neo4j.Neo4Operation;
 import org.apache.camel.component.neo4j.Neo4jComponent;
 import org.apache.camel.component.neo4j.Neo4jConfiguration;
 import org.apache.camel.component.neo4j.Neo4jSimilarityFunction;
@@ -83,6 +84,11 @@ public class Neo4jComponentConfiguration
      * Minimum score for Vector Similarity search
      */
     private Double minScore;
+    /**
+     * The operation to perform. The CamelNeo4jOperation header, when set, wins
+     * over this option.
+     */
+    private Neo4Operation operation;
     /**
      * Cypher Query
      */
@@ -199,6 +205,14 @@ public class Neo4jComponentConfiguration
 
     public void setMinScore(Double minScore) {
         this.minScore = minScore;
+    }
+
+    public Neo4Operation getOperation() {
+        return operation;
+    }
+
+    public void setOperation(Neo4Operation operation) {
+        this.operation = operation;
     }
 
     public String getQuery() {

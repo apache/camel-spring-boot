@@ -17,6 +17,7 @@
 package org.apache.camel.component.pgvector.springboot;
 
 import javax.sql.DataSource;
+import org.apache.camel.component.pgvector.PgVectorAction;
 import org.apache.camel.component.pgvector.PgVectorComponent;
 import org.apache.camel.component.pgvector.PgVectorConfiguration;
 import org.apache.camel.component.pgvector.PgVectorDistanceType;
@@ -38,6 +39,11 @@ public class PgVectorComponentConfiguration
      * enabled by default.
      */
     private Boolean enabled;
+    /**
+     * The action to perform. The CamelPgVectorAction header, when set, wins
+     * over this option.
+     */
+    private PgVectorAction action;
     /**
      * The configuration;. The option is a
      * org.apache.camel.component.pgvector.PgVectorConfiguration type.
@@ -76,6 +82,14 @@ public class PgVectorComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+
+    public PgVectorAction getAction() {
+        return action;
+    }
+
+    public void setAction(PgVectorAction action) {
+        this.action = action;
+    }
 
     public PgVectorConfiguration getConfiguration() {
         return configuration;

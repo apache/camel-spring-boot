@@ -101,6 +101,12 @@
       "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
     },
     {
+      "name": "camel.component.neo4j.operation",
+      "type": "org.apache.camel.component.neo4j.Neo4Operation",
+      "description": "The operation to perform. The CamelNeo4jOperation header, when set, wins over this option.",
+      "sourceType": "org.apache.camel.component.neo4j.springboot.Neo4jComponentConfiguration"
+    },
+    {
       "name": "camel.component.neo4j.password",
       "type": "java.lang.String",
       "description": "Basic authentication database password",

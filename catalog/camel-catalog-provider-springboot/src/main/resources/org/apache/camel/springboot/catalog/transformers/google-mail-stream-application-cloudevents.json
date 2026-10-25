@@ -9,6 +9,19 @@
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-google-mail-starter",
     "version": "4.24.0-SNAPSHOT"
+  },
+  "bodyTypes": {
+    "transformerIn": {
+      "carriers": [
+        "any"
+      ]
+    },
+    "transformerOut": {
+      "carriers": [
+        "unchanged"
+      ],
+      "description": "Only the CloudEvent headers are set"
+    }
   }
 }
 

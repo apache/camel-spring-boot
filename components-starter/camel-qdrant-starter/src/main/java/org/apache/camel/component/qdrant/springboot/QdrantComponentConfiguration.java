@@ -18,6 +18,7 @@ package org.apache.camel.component.qdrant.springboot;
 
 import java.time.Duration;
 import io.qdrant.client.grpc.Common.Filter;
+import org.apache.camel.component.qdrant.QdrantAction;
 import org.apache.camel.component.qdrant.QdrantConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -37,6 +38,11 @@ public class QdrantComponentConfiguration
      * enabled by default.
      */
     private Boolean enabled;
+    /**
+     * The action to perform. The CamelQdrantAction header, when set, wins over
+     * this option.
+     */
+    private QdrantAction action;
     /**
      * The configuration;. The option is a
      * org.apache.camel.component.qdrant.QdrantConfiguration type.
@@ -92,6 +98,14 @@ public class QdrantComponentConfiguration
      * communications
      */
     private Boolean tls = false;
+
+    public QdrantAction getAction() {
+        return action;
+    }
+
+    public void setAction(QdrantAction action) {
+        this.action = action;
+    }
 
     public QdrantConfiguration getConfiguration() {
         return configuration;

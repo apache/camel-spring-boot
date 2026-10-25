@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.weaviate.springboot;
 
+import org.apache.camel.component.weaviate.WeaviateVectorDbAction;
 import org.apache.camel.component.weaviate.WeaviateVectorDbConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -35,6 +36,11 @@ public class WeaviateVectorDbComponentConfiguration
      * enabled by default.
      */
     private Boolean enabled;
+    /**
+     * The action to perform. The CamelWeaviateAction header, when set, wins
+     * over this option.
+     */
+    private WeaviateVectorDbAction action;
     /**
      * API Key to authenticate to weaviate with
      */
@@ -80,6 +86,14 @@ public class WeaviateVectorDbComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+
+    public WeaviateVectorDbAction getAction() {
+        return action;
+    }
+
+    public void setAction(WeaviateVectorDbAction action) {
+        this.action = action;
+    }
 
     public String getApiKey() {
         return apiKey;
