@@ -23,11 +23,12 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 11 options, which are listed below.
+The starter supports 12 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
+| camel.component.qdrant.action | The action to perform. The CamelQdrantAction header, when set, wins over this option. |  | QdrantAction
 | camel.component.qdrant.api-key | Sets the API key to use for authentication |  | String
 | camel.component.qdrant.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.qdrant.configuration | The configuration;. The option is a org.apache.camel.component.qdrant.QdrantConfiguration type. |  | QdrantConfiguration

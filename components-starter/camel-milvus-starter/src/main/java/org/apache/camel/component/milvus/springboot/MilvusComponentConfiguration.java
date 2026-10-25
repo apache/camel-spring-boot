@@ -16,6 +16,7 @@
  */
 package org.apache.camel.component.milvus.springboot;
 
+import org.apache.camel.component.milvus.MilvusAction;
 import org.apache.camel.component.milvus.MilvusConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -35,6 +36,11 @@ public class MilvusComponentConfiguration
      * enabled by default.
      */
     private Boolean enabled;
+    /**
+     * The action to perform. The CamelMilvusAction header, when set, wins over
+     * this option.
+     */
+    private MilvusAction action;
     /**
      * The configuration;. The option is a
      * org.apache.camel.component.milvus.MilvusConfiguration type.
@@ -76,6 +82,14 @@ public class MilvusComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+
+    public MilvusAction getAction() {
+        return action;
+    }
+
+    public void setAction(MilvusAction action) {
+        this.action = action;
+    }
 
     public MilvusConfiguration getConfiguration() {
         return configuration;

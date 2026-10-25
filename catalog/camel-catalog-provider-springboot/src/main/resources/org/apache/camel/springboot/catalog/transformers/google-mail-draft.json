@@ -9,6 +9,20 @@
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-google-mail-starter",
     "version": "4.24.0-SNAPSHOT"
+  },
+  "bodyTypes": {
+    "transformerIn": {
+      "carriers": [
+        "any"
+      ],
+      "description": "The text of the mail: a body Camel can convert to a String that is not empty"
+    },
+    "transformerOut": {
+      "carriers": [
+        "pojo"
+      ],
+      "javaType": "com.google.api.services.gmail.model.Draft"
+    }
   }
 }
 
