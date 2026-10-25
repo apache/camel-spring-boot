@@ -35,7 +35,9 @@ public class BarcodeDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * Barcode format such as QR-Code.
+     * Barcode format such as QR-Code. MAXICODE, RSS_14, RSS_EXPANDED and
+     * UPC_EAN_EXTENSION cannot be written by marshal, as there is no encoder
+     * for them; unmarshal reads the format of the image.
      */
     private String barcodeFormat = "QR_CODE";
     /**

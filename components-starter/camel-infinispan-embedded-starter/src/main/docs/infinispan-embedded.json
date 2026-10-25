@@ -54,13 +54,13 @@
     {
       "name": "camel.component.infinispan-embedded.cache-container",
       "type": "org.infinispan.manager.EmbeddedCacheManager",
-      "description": "Specifies the cache Container to connect. The option is a org.infinispan.manager.EmbeddedCacheManager type.",
+      "description": "Specifies the cache Container to connect Read on the component only, as the cache manager is shared by all the endpoints of the component: set on an endpoint, this option is not used. The option is a org.infinispan.manager.EmbeddedCacheManager type.",
       "sourceType": "org.apache.camel.component.infinispan.embedded.springboot.InfinispanEmbeddedComponentConfiguration"
     },
     {
       "name": "camel.component.infinispan-embedded.cache-container-configuration",
       "type": "org.infinispan.configuration.cache.Configuration",
-      "description": "The CacheContainer configuration. Used if the cacheContainer is not defined. The option is a org.infinispan.configuration.cache.Configuration type.",
+      "description": "The CacheContainer configuration. Used if the cacheContainer is not defined. Read on the component only, as the cache manager is shared by all the endpoints of the component: set on an endpoint, this option is not used. The option is a org.infinispan.configuration.cache.Configuration type.",
       "sourceType": "org.apache.camel.component.infinispan.embedded.springboot.InfinispanEmbeddedComponentConfiguration"
     },
     {
@@ -108,7 +108,7 @@
     {
       "name": "camel.component.infinispan-embedded.flags",
       "type": "java.lang.String",
-      "description": "A comma separated list of org.infinispan.context.Flag to be applied by default on each cache invocation",
+      "description": "A comma separated list of org.infinispan.context.Flag to be applied by default on each cache invocation Read on the component only, as the cache manager is shared by all the endpoints of the component: set on an endpoint, this option is not used.",
       "sourceType": "org.apache.camel.component.infinispan.embedded.springboot.InfinispanEmbeddedComponentConfiguration"
     },
     {

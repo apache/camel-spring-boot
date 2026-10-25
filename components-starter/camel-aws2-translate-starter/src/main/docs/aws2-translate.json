@@ -22,7 +22,7 @@
     {
       "name": "camel.component.aws2-translate.autodetect-source-language",
       "type": "java.lang.Boolean",
-      "description": "Being able to autodetect the source language",
+      "description": "Being able to autodetect the source language. When enabled, the source language is auto, and the sourceLanguage option and the CamelAwsTranslateSourceLanguage header are not used.",
       "sourceType": "org.apache.camel.component.aws2.translate.springboot.Translate2ComponentConfiguration",
       "defaultValue": false
     },
@@ -138,13 +138,13 @@
     {
       "name": "camel.component.aws2-translate.source-language",
       "type": "java.lang.String",
-      "description": "Source language to use",
+      "description": "Source language to use. When not set, the CamelAwsTranslateSourceLanguage header is used. It is not used when autodetectSourceLanguage is enabled.",
       "sourceType": "org.apache.camel.component.aws2.translate.springboot.Translate2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-translate.target-language",
       "type": "java.lang.String",
-      "description": "Target language to use",
+      "description": "Target language to use. When not set, the CamelAwsTranslateTargetLanguage header is used.",
       "sourceType": "org.apache.camel.component.aws2.translate.springboot.Translate2ComponentConfiguration"
     },
     {

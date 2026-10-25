@@ -82,7 +82,7 @@ The starter supports 63 options, which are listed below.
 | camel.dataformat.xml-security.add-key-value-for-encrypted-key | Whether to add the public key used to encrypt the session key as a KeyValue in the EncryptedKey structure or not. | true | Boolean
 | camel.dataformat.xml-security.digest-algorithm | The digest algorithm to use with the RSA OAEP algorithm. | SHA1 | String
 | camel.dataformat.xml-security.enabled | Whether to enable auto configuration of the xmlSecurity data format. This is enabled by default. |  | Boolean
-| camel.dataformat.xml-security.key-cipher-algorithm | The cipher algorithm to be used for encryption/decryption of the asymmetric key. | RSA_OAEP | String
+| camel.dataformat.xml-security.key-cipher-algorithm | The cipher algorithm to be used for encryption/decryption of the asymmetric key. When not set, marshal uses RSA_OAEP when the recipientKeyAlias is set, and unmarshal decrypts with the symmetric key of the passPhrase. |  | String
 | camel.dataformat.xml-security.key-or-trust-store-parameters | Refers to a KeyStore instance to lookup in the registry, which is used for configuration options for creating and loading a KeyStore instance that represents the sender's trustStore or recipient's keyStore. The option is a org.apache.camel.support.jsse.KeyStoreParameters type. |  | String
 | camel.dataformat.xml-security.key-password | The password to be used for retrieving the private key from the KeyStore. This key is used for asymmetric decryption. |  | String
 | camel.dataformat.xml-security.mgf-algorithm | The MGF Algorithm to use with the RSA OAEP algorithm. | MGF1_SHA1 | String
@@ -91,6 +91,6 @@ The starter supports 63 options, which are listed below.
 | camel.dataformat.xml-security.pass-phrase-byte | A byte used as passPhrase to encrypt/decrypt content. |  | Byte[]
 | camel.dataformat.xml-security.recipient-key-alias | The key alias to be used when retrieving the recipient's public or private key from a KeyStore when performing asymmetric key encryption or decryption. |  | String
 | camel.dataformat.xml-security.secure-tag | The XPath reference to the XML Element selected for encryption/decryption. If no tag is specified, the entire payload is encrypted/decrypted. |  | String
-| camel.dataformat.xml-security.secure-tag-contents | A boolean value to specify whether the XML Element is to be encrypted or the contents of the XML Element. false = Element Level, true = Element Content Level. | false | Boolean
+| camel.dataformat.xml-security.secure-tag-contents | A boolean value to specify whether the XML Element is to be encrypted or the contents of the XML Element. false = Element Level, true = Element Content Level. | true | Boolean
 | camel.dataformat.xml-security.xml-cipher-algorithm | The cipher algorithm to be used for encryption/decryption of the XML message content. | AES_256_GCM | String
 |===

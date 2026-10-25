@@ -42,7 +42,7 @@
     {
       "name": "camel.component.aws2-s3-vectors.consumer-metadata-filter",
       "type": "java.lang.String",
-      "description": "Optional metadata filter for the consumer to filter vectors during polling",
+      "description": "The metadata filter of the similarity search of the consumer, as a JSON object with the filter operators of S3 Vectors, such as {genre: {$eq: drama}}. Only the vectors whose metadata match the filter are consumed.",
       "sourceType": "org.apache.camel.component.aws2.s3vectors.springboot.AWS2S3VectorsComponentConfiguration"
     },
     {
@@ -59,7 +59,7 @@
     {
       "name": "camel.component.aws2-s3-vectors.data-type",
       "type": "java.lang.String",
-      "description": "The data type of the vector. Options: float32, float16",
+      "description": "The data type of the vectors of the index to create. S3 Vectors supports float32 only.",
       "sourceType": "org.apache.camel.component.aws2.s3vectors.springboot.AWS2S3VectorsComponentConfiguration",
       "defaultValue": "float32"
     },
@@ -80,7 +80,7 @@
     {
       "name": "camel.component.aws2-s3-vectors.distance-metric",
       "type": "java.lang.String",
-      "description": "The distance metric to use for similarity search. Options: cosine, euclidean, dot-product",
+      "description": "The distance metric of the index to create, which the similarity search uses. Options: cosine, euclidean",
       "sourceType": "org.apache.camel.component.aws2.s3vectors.springboot.AWS2S3VectorsComponentConfiguration",
       "defaultValue": "cosine"
     },
@@ -181,12 +181,6 @@
       "sourceType": "org.apache.camel.component.aws2.s3vectors.springboot.AWS2S3VectorsComponentConfiguration"
     },
     {
-      "name": "camel.component.aws2-s3-vectors.similarity-threshold",
-      "type": "java.lang.Float",
-      "description": "The minimum similarity threshold for results",
-      "sourceType": "org.apache.camel.component.aws2.s3vectors.springboot.AWS2S3VectorsComponentConfiguration"
-    },
-    {
       "name": "camel.component.aws2-s3-vectors.top-k",
       "type": "java.lang.Integer",
       "description": "The number of top similar vectors to return in a query",
@@ -239,6 +233,14 @@
       "type": "java.lang.String",
       "description": "The name of the vector index",
       "sourceType": "org.apache.camel.component.aws2.s3vectors.springboot.AWS2S3VectorsComponentConfiguration"
+    },
+    {
+      "name": "camel.component.aws2-s3-vectors.similarity-threshold",
+      "type": "java.lang.Float",
+      "description": "(deprecated) Never used: S3 Vectors has no similarity threshold. The consumer sets the CamelAwsS3VectorsDistance header to the distance of each vector from the query vector. Deprecation note: S3 Vectors has no similarity threshold, the component never used this option. Filter the results on their CamelAwsS3VectorsDistance header instead.",
+      "sourceType": "org.apache.camel.component.aws2.s3vectors.springboot.AWS2S3VectorsComponentConfiguration",
+      "deprecated": true,
+      "deprecation": {}
     }
   ],
   "hints": [],

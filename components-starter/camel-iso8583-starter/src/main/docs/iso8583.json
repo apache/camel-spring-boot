@@ -23,7 +23,7 @@
     {
       "name": "camel.dataformat.iso8583.config-file",
       "type": "java.lang.String",
-      "description": "The j8583 configuration file to load from classpath",
+      "description": "The j8583 configuration file. It is loaded from the classpath by default; use the file: or http: prefix to load it from somewhere else.",
       "sourceType": "org.apache.camel.dataformat.iso8583.springboot.Iso8583DataFormatConfiguration",
       "defaultValue": "j8583-config.xml"
     },

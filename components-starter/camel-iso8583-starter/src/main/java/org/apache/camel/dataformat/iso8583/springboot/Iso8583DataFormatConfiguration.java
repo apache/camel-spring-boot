@@ -35,7 +35,8 @@ public class Iso8583DataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * The j8583 configuration file to load from classpath
+     * The j8583 configuration file. It is loaded from the classpath by default;
+     * use the file: or http: prefix to load it from somewhere else.
      */
     private String configFile = "j8583-config.xml";
     /**

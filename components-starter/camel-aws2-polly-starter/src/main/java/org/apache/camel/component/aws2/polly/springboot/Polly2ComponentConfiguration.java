@@ -85,9 +85,10 @@ public class Polly2ComponentConfiguration
      */
     private Polly2Operations operation = Polly2Operations.synthesizeSpeech;
     /**
-     * The audio output format
+     * The audio output format. When neither this option nor the
+     * CamelAwsPollyOutputFormat header is set, MP3 is used.
      */
-    private OutputFormat outputFormat = OutputFormat.MP3;
+    private OutputFormat outputFormat;
     /**
      * Set the need for overriding the endpoint. This option needs to be used in
      * combination with the uriEndpointOverride option
@@ -125,9 +126,10 @@ public class Polly2ComponentConfiguration
      */
     private String taskId;
     /**
-     * The type of text input (text or ssml)
+     * The type of text input (text or ssml). When neither this option nor the
+     * CamelAwsPollyTextType header is set, TEXT is used.
      */
-    private TextType textType = TextType.TEXT;
+    private TextType textType;
     /**
      * Set the overriding uri endpoint. This option needs to be used in
      * combination with overrideEndpoint option

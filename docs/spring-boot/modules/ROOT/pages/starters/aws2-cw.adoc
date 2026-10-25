@@ -48,7 +48,7 @@ The starter supports 26 options, which are listed below.
 | camel.component.aws2-cw.session-token | Amazon AWS Session Token used when the user needs to assume an IAM role |  | String
 | camel.component.aws2-cw.timestamp | The metric timestamp |  | Instant
 | camel.component.aws2-cw.trust-all-certificates | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
-| camel.component.aws2-cw.unit | The metric unit |  | String
+| camel.component.aws2-cw.unit | The metric unit, the name of a StandardUnit such as Count or Bytes, in any case |  | String
 | camel.component.aws2-cw.uri-endpoint-override | Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option |  | String
 | camel.component.aws2-cw.use-default-credentials-provider | Set whether the S3 client should expect to load credentials through a default credentials provider or to expect static credentials to be passed in. | false | Boolean
 | camel.component.aws2-cw.use-profile-credentials-provider | Set whether the Cloudwatch client should expect to load credentials through a profile credentials provider. | false | Boolean

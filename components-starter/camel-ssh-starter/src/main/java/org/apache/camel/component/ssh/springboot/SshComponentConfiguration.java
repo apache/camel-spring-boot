@@ -39,7 +39,8 @@ public class SshComponentConfiguration
     private Boolean enabled;
     /**
      * Sets the timeout in milliseconds to wait in establishing the remote SSH
-     * server connection. Defaults to 30000 milliseconds.
+     * server connection: connecting, authenticating and opening the channel. It
+     * does not limit how long the command runs. Defaults to 30000 milliseconds.
      */
     private Long timeout = 30000L;
     /**
@@ -132,7 +133,7 @@ public class SshComponentConfiguration
     private Long idleTimeout;
     /**
      * Sets the shellPrompt to be dropped when response is read after command
-     * execution
+     * execution. Required when the channelType is shell.
      */
     private String shellPrompt;
     /**

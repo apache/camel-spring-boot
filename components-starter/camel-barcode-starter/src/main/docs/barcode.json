@@ -16,7 +16,7 @@
     {
       "name": "camel.dataformat.barcode.barcode-format",
       "type": "java.lang.String",
-      "description": "Barcode format such as QR-Code.",
+      "description": "Barcode format such as QR-Code. MAXICODE, RSS_14, RSS_EXPANDED and UPC_EAN_EXTENSION cannot be written by marshal, as there is no encoder for them; unmarshal reads the format of the image.",
       "sourceType": "org.apache.camel.dataformat.barcode.springboot.BarcodeDataFormatConfiguration",
       "defaultValue": "QR_CODE"
     },

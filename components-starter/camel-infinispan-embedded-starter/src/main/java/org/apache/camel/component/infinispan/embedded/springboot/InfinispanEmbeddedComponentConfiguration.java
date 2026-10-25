@@ -136,14 +136,18 @@ public class InfinispanEmbeddedComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * Specifies the cache Container to connect. The option is a
+     * Specifies the cache Container to connect Read on the component only, as
+     * the cache manager is shared by all the endpoints of the component: set on
+     * an endpoint, this option is not used. The option is a
      * org.infinispan.manager.EmbeddedCacheManager type.
      */
     private EmbeddedCacheManager cacheContainer;
     /**
      * The CacheContainer configuration. Used if the cacheContainer is not
-     * defined. The option is a org.infinispan.configuration.cache.Configuration
-     * type.
+     * defined. Read on the component only, as the cache manager is shared by
+     * all the endpoints of the component: set on an endpoint, this option is
+     * not used. The option is a
+     * org.infinispan.configuration.cache.Configuration type.
      */
     private Configuration cacheContainerConfiguration;
     /**
@@ -152,7 +156,9 @@ public class InfinispanEmbeddedComponentConfiguration
     private String configurationUri;
     /**
      * A comma separated list of org.infinispan.context.Flag to be applied by
-     * default on each cache invocation
+     * default on each cache invocation Read on the component only, as the cache
+     * manager is shared by all the endpoints of the component: set on an
+     * endpoint, this option is not used.
      */
     private String flags;
     /**
