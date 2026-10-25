@@ -41,7 +41,7 @@ The starter supports 36 options, which are listed below.
 | camel.component.aws2-polly.lexicon-name | The name of the lexicon to use for getLexicon, putLexicon, or deleteLexicon operations |  | String
 | camel.component.aws2-polly.lexicon-names | Lexicon names to apply during synthesis |  | String
 | camel.component.aws2-polly.operation | The operation to perform | synthesizespeech | Polly2Operations
-| camel.component.aws2-polly.output-format | The audio output format | mp3 | OutputFormat
+| camel.component.aws2-polly.output-format | The audio output format. When neither this option nor the CamelAwsPollyOutputFormat header is set, MP3 is used. |  | OutputFormat
 | camel.component.aws2-polly.override-endpoint | Set the need for overriding the endpoint. This option needs to be used in combination with the uriEndpointOverride option | false | Boolean
 | camel.component.aws2-polly.pojo-request | If we want to use a POJO request as body or not | false | Boolean
 | camel.component.aws2-polly.polly-client | To use an existing configured AWS Polly client. The option is a software.amazon.awssdk.services.polly.PollyClient type. |  | PollyClient
@@ -57,7 +57,7 @@ The starter supports 36 options, which are listed below.
 | camel.component.aws2-polly.session-token | Amazon AWS Session Token used when the user needs to assume an IAM role |  | String
 | camel.component.aws2-polly.sns-topic-arn | The SNS topic ARN for startSpeechSynthesisTask notifications |  | String
 | camel.component.aws2-polly.task-id | The task ID for getSpeechSynthesisTask operation |  | String
-| camel.component.aws2-polly.text-type | The type of text input (text or ssml) | text | TextType
+| camel.component.aws2-polly.text-type | The type of text input (text or ssml). When neither this option nor the CamelAwsPollyTextType header is set, TEXT is used. |  | TextType
 | camel.component.aws2-polly.trust-all-certificates | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
 | camel.component.aws2-polly.uri-endpoint-override | Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option |  | String
 | camel.component.aws2-polly.use-default-credentials-provider | Set whether the Polly client should expect to load credentials through a default credentials provider or to expect static credentials to be passed in. | false | Boolean

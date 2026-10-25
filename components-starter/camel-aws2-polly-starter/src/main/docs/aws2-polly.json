@@ -104,9 +104,8 @@
     {
       "name": "camel.component.aws2-polly.output-format",
       "type": "software.amazon.awssdk.services.polly.model.OutputFormat",
-      "description": "The audio output format",
-      "sourceType": "org.apache.camel.component.aws2.polly.springboot.Polly2ComponentConfiguration",
-      "defaultValue": "mp3"
+      "description": "The audio output format. When neither this option nor the CamelAwsPollyOutputFormat header is set, MP3 is used.",
+      "sourceType": "org.apache.camel.component.aws2.polly.springboot.Polly2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-polly.override-endpoint",
@@ -204,9 +203,8 @@
     {
       "name": "camel.component.aws2-polly.text-type",
       "type": "software.amazon.awssdk.services.polly.model.TextType",
-      "description": "The type of text input (text or ssml)",
-      "sourceType": "org.apache.camel.component.aws2.polly.springboot.Polly2ComponentConfiguration",
-      "defaultValue": "text"
+      "description": "The type of text input (text or ssml). When neither this option nor the CamelAwsPollyTextType header is set, TEXT is used.",
+      "sourceType": "org.apache.camel.component.aws2.polly.springboot.Polly2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-polly.trust-all-certificates",

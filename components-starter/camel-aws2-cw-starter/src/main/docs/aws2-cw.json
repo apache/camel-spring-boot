@@ -149,7 +149,7 @@
     {
       "name": "camel.component.aws2-cw.unit",
       "type": "java.lang.String",
-      "description": "The metric unit",
+      "description": "The metric unit, the name of a StandardUnit such as Count or Bytes, in any case",
       "sourceType": "org.apache.camel.component.aws2.cw.springboot.Cw2ComponentConfiguration"
     },
     {

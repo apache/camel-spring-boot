@@ -304,7 +304,7 @@
     {
       "name": "camel.component.aws-bedrock-agent.data-source-id",
       "type": "java.lang.String",
-      "description": "Define the Data source Id we are going to use",
+      "description": "Define the Data source Id we are going to use. The consumer and all the operations need it; the CamelAwsBedrockAgentDataSourceId header overrides it for the producer",
       "sourceType": "org.apache.camel.component.aws2.bedrock.agent.springboot.BedrockAgentComponentConfiguration"
     },
     {
@@ -330,13 +330,13 @@
     {
       "name": "camel.component.aws-bedrock-agent.ingestion-job-id",
       "type": "java.lang.String",
-      "description": "Define the Ingestion Job Id we want to track",
+      "description": "Define the Ingestion Job Id we want to track. The consumer and the getIngestionJob operation need it; the CamelAwsBedrockAgentIngestionJobId header overrides it for the producer",
       "sourceType": "org.apache.camel.component.aws2.bedrock.agent.springboot.BedrockAgentComponentConfiguration"
     },
     {
       "name": "camel.component.aws-bedrock-agent.knowledge-base-id",
       "type": "java.lang.String",
-      "description": "Define the Knowledge Base Id we are going to use",
+      "description": "Define the Knowledge Base Id we are going to use. The consumer and all the operations need it; the CamelAwsBedrockAgentKnowledgeBaseId header overrides it for the producer",
       "sourceType": "org.apache.camel.component.aws2.bedrock.agent.springboot.BedrockAgentComponentConfiguration"
     },
     {
@@ -349,7 +349,7 @@
     {
       "name": "camel.component.aws-bedrock-agent.operation",
       "type": "org.apache.camel.component.aws2.bedrock.agent.BedrockAgentOperations",
-      "description": "The operation to perform",
+      "description": "The operation to perform. It can be startIngestionJob, listIngestionJobs or getIngestionJob",
       "sourceType": "org.apache.camel.component.aws2.bedrock.agent.springboot.BedrockAgentComponentConfiguration"
     },
     {
@@ -607,7 +607,7 @@
     {
       "name": "camel.component.aws-bedrock.stream-output-mode",
       "type": "java.lang.String",
-      "description": "The streaming output mode (complete or chunks). In complete mode, the full response is accumulated and returned as a single message. In chunks mode, each chunk is emitted as a separate exchange.",
+      "description": "The streaming output mode (complete or chunks). In complete mode, the full response is accumulated and returned as a single message. In chunks mode, the message body is a List of the chunks.",
       "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration",
       "defaultValue": "complete"
     },

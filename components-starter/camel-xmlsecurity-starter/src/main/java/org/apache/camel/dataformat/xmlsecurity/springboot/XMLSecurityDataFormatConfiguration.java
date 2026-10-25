@@ -59,12 +59,14 @@ public class XMLSecurityDataFormatConfiguration
      * the contents of the XML Element. false = Element Level, true = Element
      * Content Level.
      */
-    private Boolean secureTagContents = false;
+    private Boolean secureTagContents = true;
     /**
      * The cipher algorithm to be used for encryption/decryption of the
-     * asymmetric key.
+     * asymmetric key. When not set, marshal uses RSA_OAEP when the
+     * recipientKeyAlias is set, and unmarshal decrypts with the symmetric key
+     * of the passPhrase.
      */
-    private String keyCipherAlgorithm = "RSA_OAEP";
+    private String keyCipherAlgorithm;
     /**
      * The key alias to be used when retrieving the recipient's public or
      * private key from a KeyStore when performing asymmetric key encryption or

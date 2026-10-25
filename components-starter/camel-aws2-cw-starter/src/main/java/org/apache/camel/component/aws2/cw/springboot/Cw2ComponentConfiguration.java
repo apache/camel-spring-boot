@@ -80,7 +80,8 @@ public class Cw2ComponentConfiguration
      */
     private Instant timestamp;
     /**
-     * The metric unit
+     * The metric unit, the name of a StandardUnit such as Count or Bytes, in
+     * any case
      */
     private String unit;
     /**

@@ -56,8 +56,8 @@ public class Lambda2ComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * The operation to perform. It can be listFunctions, getFunction,
-     * createFunction, deleteFunction or invokeFunction
+     * The operation to perform. See the list of available operations in the
+     * component documentation.
      */
     private Lambda2Operations operation = Lambda2Operations.invokeFunction;
     /**

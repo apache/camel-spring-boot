@@ -40,7 +40,9 @@ public class Translate2ComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Being able to autodetect the source language
+     * Being able to autodetect the source language. When enabled, the source
+     * language is auto, and the sourceLanguage option and the
+     * CamelAwsTranslateSourceLanguage header are not used.
      */
     private Boolean autodetectSourceLanguage = false;
     /**
@@ -80,11 +82,13 @@ public class Translate2ComponentConfiguration
      */
     private String region;
     /**
-     * Source language to use
+     * Source language to use. When not set, the CamelAwsTranslateSourceLanguage
+     * header is used. It is not used when autodetectSourceLanguage is enabled.
      */
     private String sourceLanguage;
     /**
-     * Target language to use
+     * Target language to use. When not set, the CamelAwsTranslateTargetLanguage
+     * header is used.
      */
     private String targetLanguage;
     /**

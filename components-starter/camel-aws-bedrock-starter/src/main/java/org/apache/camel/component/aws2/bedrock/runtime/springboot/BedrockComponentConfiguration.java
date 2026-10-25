@@ -107,7 +107,7 @@ public class BedrockComponentConfiguration
     /**
      * The streaming output mode (complete or chunks). In complete mode, the
      * full response is accumulated and returned as a single message. In chunks
-     * mode, each chunk is emitted as a separate exchange.
+     * mode, the message body is a List of the chunks.
      */
     private String streamOutputMode = "complete";
     /**

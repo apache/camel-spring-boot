@@ -21,6 +21,7 @@ import org.apache.camel.component.aws2.s3vectors.AWS2S3VectorsConfiguration;
 import org.apache.camel.component.aws2.s3vectors.AWS2S3VectorsOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
 import software.amazon.awssdk.services.s3vectors.S3VectorsClient;
 
@@ -47,12 +48,13 @@ public class AWS2S3VectorsComponentConfiguration
      */
     private AWS2S3VectorsConfiguration configuration;
     /**
-     * The data type of the vector. Options: float32, float16
+     * The data type of the vectors of the index to create. S3 Vectors supports
+     * float32 only.
      */
     private String dataType = "float32";
     /**
-     * The distance metric to use for similarity search. Options: cosine,
-     * euclidean, dot-product
+     * The distance metric of the index to create, which the similarity search
+     * uses. Options: cosine, euclidean
      */
     private String distanceMetric = "cosine";
     /**
@@ -67,8 +69,13 @@ public class AWS2S3VectorsComponentConfiguration
      */
     private String region;
     /**
-     * The minimum similarity threshold for results
+     * (deprecated) Never used: S3 Vectors has no similarity threshold. The
+     * consumer sets the CamelAwsS3VectorsDistance header to the distance of
+     * each vector from the query vector. Deprecation note: S3 Vectors has no
+     * similarity threshold, the component never used this option. Filter the
+     * results on their CamelAwsS3VectorsDistance header instead.
      */
+    @Deprecated
     private Float similarityThreshold;
     /**
      * The number of top similar vectors to return in a query
@@ -103,8 +110,9 @@ public class AWS2S3VectorsComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
-     * Optional metadata filter for the consumer to filter vectors during
-     * polling
+     * The metadata filter of the similarity search of the consumer, as a JSON
+     * object with the filter operators of S3 Vectors, such as {genre: {$eq:
+     * drama}}. Only the vectors whose metadata match the filter are consumed.
      */
     private String consumerMetadataFilter;
     /**
@@ -257,10 +265,13 @@ public class AWS2S3VectorsComponentConfiguration
         this.region = region;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Float getSimilarityThreshold() {
         return similarityThreshold;
     }
 
+    @Deprecated
     public void setSimilarityThreshold(Float similarityThreshold) {
         this.similarityThreshold = similarityThreshold;
     }

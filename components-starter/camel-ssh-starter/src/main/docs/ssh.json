@@ -190,7 +190,7 @@
     {
       "name": "camel.component.ssh.shell-prompt",
       "type": "java.lang.String",
-      "description": "Sets the shellPrompt to be dropped when response is read after command execution",
+      "description": "Sets the shellPrompt to be dropped when response is read after command execution. Required when the channelType is shell.",
       "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
     },
     {
@@ -209,7 +209,7 @@
     {
       "name": "camel.component.ssh.timeout",
       "type": "java.lang.Long",
-      "description": "Sets the timeout in milliseconds to wait in establishing the remote SSH server connection. Defaults to 30000 milliseconds.",
+      "description": "Sets the timeout in milliseconds to wait in establishing the remote SSH server connection: connecting, authenticating and opening the channel. It does not limit how long the command runs. Defaults to 30000 milliseconds.",
       "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration",
       "defaultValue": 30000
     },

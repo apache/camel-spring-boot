@@ -391,9 +391,8 @@
     {
       "name": "camel.dataformat.xml-security.key-cipher-algorithm",
       "type": "java.lang.String",
-      "description": "The cipher algorithm to be used for encryption\/decryption of the asymmetric key.",
-      "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
-      "defaultValue": "RSA_OAEP"
+      "description": "The cipher algorithm to be used for encryption\/decryption of the asymmetric key. When not set, marshal uses RSA_OAEP when the recipientKeyAlias is set, and unmarshal decrypts with the symmetric key of the passPhrase.",
+      "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.xml-security.key-or-trust-store-parameters",
@@ -449,7 +448,7 @@
       "type": "java.lang.Boolean",
       "description": "A boolean value to specify whether the XML Element is to be encrypted or the contents of the XML Element. false = Element Level, true = Element Content Level.",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration",
-      "defaultValue": false
+      "defaultValue": true
     },
     {
       "name": "camel.dataformat.xml-security.xml-cipher-algorithm",

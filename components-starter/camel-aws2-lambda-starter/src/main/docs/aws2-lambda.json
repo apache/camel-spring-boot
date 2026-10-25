@@ -73,7 +73,7 @@
     {
       "name": "camel.component.aws2-lambda.operation",
       "type": "org.apache.camel.component.aws2.lambda.Lambda2Operations",
-      "description": "The operation to perform. It can be listFunctions, getFunction, createFunction, deleteFunction or invokeFunction",
+      "description": "The operation to perform. See the list of available operations in the component documentation.",
       "sourceType": "org.apache.camel.component.aws2.lambda.springboot.Lambda2ComponentConfiguration",
       "defaultValue": "invokefunction"
     },

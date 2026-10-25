@@ -3,7 +3,7 @@
 = AWS MQ
 :artifactid: camel-aws2-mq-starter
 
-Send messages to AWS MQ.
+Manage AWS MQ instances.
 
 == What's inside
 
@@ -36,7 +36,7 @@ The starter supports 23 options, which are listed below.
 | camel.component.aws2-mq.health-check-consumer-enabled | Used for enabling or disabling all consumer based health checks from this component | true | Boolean
 | camel.component.aws2-mq.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
 | camel.component.aws2-mq.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.aws2-mq.operation | The operation to perform. It can be listBrokers, createBroker, deleteBroker |  | MQ2Operations
+| camel.component.aws2-mq.operation | The operation to perform |  | MQ2Operations
 | camel.component.aws2-mq.override-endpoint | Set the need for overriding the endpoint. This option needs to be used in combination with the uriEndpointOverride option | false | Boolean
 | camel.component.aws2-mq.pojo-request | If we want to use a POJO request as body or not | false | Boolean
 | camel.component.aws2-mq.profile-credentials-name | If using a profile credentials provider, this parameter will set the profile name |  | String

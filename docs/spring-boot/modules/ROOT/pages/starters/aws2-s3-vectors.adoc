@@ -32,12 +32,12 @@ The starter supports 34 options, which are listed below.
 | camel.component.aws2-s3-vectors.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.aws2-s3-vectors.bridge-error-handler | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | camel.component.aws2-s3-vectors.configuration | The component configuration. The option is a org.apache.camel.component.aws2.s3vectors.AWS2S3VectorsConfiguration type. |  | AWS2S3VectorsConfiguration
-| camel.component.aws2-s3-vectors.consumer-metadata-filter | Optional metadata filter for the consumer to filter vectors during polling |  | String
+| camel.component.aws2-s3-vectors.consumer-metadata-filter | The metadata filter of the similarity search of the consumer, as a JSON object with the filter operators of S3 Vectors, such as \{genre: \{$eq: drama}}. Only the vectors whose metadata match the filter are consumed. |  | String
 | camel.component.aws2-s3-vectors.consumer-query-vector | The query vector to use for the consumer to poll for similar vectors. Specified as comma-separated float values (e.g., 0.1,0.2,0.3). If not specified, the consumer will not poll. |  | String
-| camel.component.aws2-s3-vectors.data-type | The data type of the vector. Options: float32, float16 | float32 | String
+| camel.component.aws2-s3-vectors.data-type | The data type of the vectors of the index to create. S3 Vectors supports float32 only. | float32 | String
 | camel.component.aws2-s3-vectors.delay | Milliseconds before the next poll for the consumer | 500 | Long
 | camel.component.aws2-s3-vectors.delete-after-read | Delete vectors after they have been consumed | false | Boolean
-| camel.component.aws2-s3-vectors.distance-metric | The distance metric to use for similarity search. Options: cosine, euclidean, dot-product | cosine | String
+| camel.component.aws2-s3-vectors.distance-metric | The distance metric of the index to create, which the similarity search uses. Options: cosine, euclidean | cosine | String
 | camel.component.aws2-s3-vectors.enabled | Whether to enable auto configuration of the aws2-s3-vectors component. This is enabled by default. |  | Boolean
 | camel.component.aws2-s3-vectors.health-check-consumer-enabled | Used for enabling or disabling all consumer based health checks from this component | true | Boolean
 | camel.component.aws2-s3-vectors.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
@@ -53,7 +53,6 @@ The starter supports 34 options, which are listed below.
 | camel.component.aws2-s3-vectors.s3-vectors-client | Reference to a software.amazon.awssdk.services.s3vectors.S3VectorsClient in the registry. The option is a software.amazon.awssdk.services.s3vectors.S3VectorsClient type. |  | S3VectorsClient
 | camel.component.aws2-s3-vectors.secret-key | Amazon AWS Secret Key |  | String
 | camel.component.aws2-s3-vectors.session-token | Amazon AWS Session Token used when the user needs to assume an IAM role |  | String
-| camel.component.aws2-s3-vectors.similarity-threshold | The minimum similarity threshold for results |  | Float
 | camel.component.aws2-s3-vectors.top-k | The number of top similar vectors to return in a query | 10 | Integer
 | camel.component.aws2-s3-vectors.trust-all-certificates | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
 | camel.component.aws2-s3-vectors.uri-endpoint-override | Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option |  | String
@@ -62,4 +61,5 @@ The starter supports 34 options, which are listed below.
 | camel.component.aws2-s3-vectors.use-session-credentials | Set whether the S3 Vectors client should expect to use Session Credentials. This is useful in a situation in which the user needs to assume an IAM role for doing operations in S3 Vectors. | false | Boolean
 | camel.component.aws2-s3-vectors.vector-dimensions | The dimensions of the vector embeddings (default: 1536, which is the dimension for OpenAI text-embedding-3-small) | 1536 | Integer
 | camel.component.aws2-s3-vectors.vector-index-name | The name of the vector index |  | String
+| camel.component.aws2-s3-vectors.similarity-threshold | (deprecated) Never used: S3 Vectors has no similarity threshold. The consumer sets the CamelAwsS3VectorsDistance header to the distance of each vector from the query vector. Deprecation note: S3 Vectors has no similarity threshold, the component never used this option. Filter the results on their CamelAwsS3VectorsDistance header instead. |  | Float
 |===

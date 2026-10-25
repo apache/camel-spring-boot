@@ -46,15 +46,26 @@ public class BedrockAgentComponentConfiguration
      */
     private BedrockAgentConfiguration configuration;
     /**
-     * Define the Data source Id we are going to use
+     * Define the Data source Id we are going to use. The consumer and all the
+     * operations need it; the CamelAwsBedrockAgentDataSourceId header overrides
+     * it for the producer
      */
     private String dataSourceId;
     /**
-     * Define the Knowledge Base Id we are going to use
+     * Define the Ingestion Job Id we want to track. The consumer and the
+     * getIngestionJob operation need it; the CamelAwsBedrockAgentIngestionJobId
+     * header overrides it for the producer
+     */
+    private String ingestionJobId;
+    /**
+     * Define the Knowledge Base Id we are going to use. The consumer and all
+     * the operations need it; the CamelAwsBedrockAgentKnowledgeBaseId header
+     * overrides it for the producer
      */
     private String knowledgeBaseId;
     /**
-     * The operation to perform
+     * The operation to perform. It can be startIngestionJob, listIngestionJobs
+     * or getIngestionJob
      */
     private BedrockAgentOperations operation;
     /**
@@ -108,10 +119,6 @@ public class BedrockAgentComponentConfiguration
      * with exceptions, that will be logged at WARN or ERROR level and ignored.
      */
     private Boolean bridgeErrorHandler = false;
-    /**
-     * Define the Ingestion Job Id we want to track
-     */
-    private String ingestionJobId;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -200,6 +207,14 @@ public class BedrockAgentComponentConfiguration
         this.dataSourceId = dataSourceId;
     }
 
+    public String getIngestionJobId() {
+        return ingestionJobId;
+    }
+
+    public void setIngestionJobId(String ingestionJobId) {
+        this.ingestionJobId = ingestionJobId;
+    }
+
     public String getKnowledgeBaseId() {
         return knowledgeBaseId;
     }
@@ -280,14 +295,6 @@ public class BedrockAgentComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
-    }
-
-    public String getIngestionJobId() {
-        return ingestionJobId;
-    }
-
-    public void setIngestionJobId(String ingestionJobId) {
-        this.ingestionJobId = ingestionJobId;
     }
 
     public Boolean getLazyStartProducer() {
