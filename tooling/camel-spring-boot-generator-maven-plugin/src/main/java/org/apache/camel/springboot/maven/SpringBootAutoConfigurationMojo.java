@@ -300,7 +300,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                     prop.getField().setLiteralInitializer(option.getDefaultValue().toString());
                 } else if (!isBlank(option.getEnums())) {
                     String enumShortName = type.substring(type.lastIndexOf(".") + 1);
-                    prop.getField().setLiteralInitializer(enumShortName + "." + option.getDefaultValue());
+                    prop.getField().setLiteralInitializer(enumShortName + "." + enumConstantName(type, option.getDefaultValue().toString()));
                     commonClass.addImport(model.getJavaType());
                 }
             }
@@ -412,7 +412,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                     prop.getField().setLiteralInitializer(option.getDefaultValue().toString());
                 } else if (!isBlank(option.getEnums())) {
                     String enumShortName = type.substring(type.lastIndexOf(".") + 1);
-                    prop.getField().setLiteralInitializer(enumShortName + "." + option.getDefaultValue());
+                    prop.getField().setLiteralInitializer(enumShortName + "." + enumConstantName(type, option.getDefaultValue().toString()));
                     javaClass.addImport(model.getJavaType());
                 }
             }
@@ -773,7 +773,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                     prop.getField().setLiteralInitializer(option.getDefaultValue().toString());
                 } else if (!isBlank(option.getEnums())) {
                     String enumShortName = type.substring(type.lastIndexOf(".") + 1);
-                    prop.getField().setLiteralInitializer(enumShortName + "." + option.getDefaultValue());
+                    prop.getField().setLiteralInitializer(enumShortName + "." + enumConstantName(type, option.getDefaultValue().toString()));
                     javaClass.addImport(model.getJavaType());
                 }
             }
@@ -886,6 +886,24 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         } catch (ClassNotFoundException e) {
             throw new MojoFailureException("Unable to load type", e);
         }
+    }
+
+    // the enum constant matching the default value, as the documented enum values may use another case
+    private String enumConstantName(String enumType, String value) {
+        try {
+            Class<?> clazz = loadClass(enumType);
+            if (clazz.isEnum()) {
+                for (Object constant : clazz.getEnumConstants()) {
+                    String name = ((Enum<?>) constant).name();
+                    if (name.equalsIgnoreCase(value)) {
+                        return name;
+                    }
+                }
+            }
+        } catch (MojoFailureException e) {
+            // ignore and use the value as-is
+        }
+        return value;
     }
 
     // try loading class, looking for inner classes if needed
@@ -1238,7 +1256,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                     prop.getField().setLiteralInitializer(defaultValue.toString());
                 } else if (!isBlank(option.getEnums())) {
                     String enumShortName = type.substring(type.lastIndexOf(".") + 1);
-                    prop.getField().setLiteralInitializer(enumShortName + "." + defaultValue);
+                    prop.getField().setLiteralInitializer(enumShortName + "." + enumConstantName(type, defaultValue.toString()));
                     javaClass.addImport(model.getJavaType());
                 }
             }
@@ -1368,7 +1386,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                     prop.getField().setLiteralInitializer(option.getDefaultValue().toString());
                 } else if (isBlank(option.getEnums())) {
                     String enumShortName = type.substring(type.lastIndexOf(".") + 1);
-                    prop.getField().setLiteralInitializer(enumShortName + "." + option.getDefaultValue());
+                    prop.getField().setLiteralInitializer(enumShortName + "." + enumConstantName(type, option.getDefaultValue().toString()));
                     javaClass.addImport(model.getJavaType());
                 }
             }

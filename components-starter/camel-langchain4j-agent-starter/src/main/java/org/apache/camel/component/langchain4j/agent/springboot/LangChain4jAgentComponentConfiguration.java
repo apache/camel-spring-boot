@@ -20,6 +20,9 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import dev.langchain4j.mcp.client.McpClient;
+import dev.langchain4j.model.embedding.EmbeddingModel;
+import org.apache.camel.component.ai.tool.AiToolSearchStrategy;
+import org.apache.camel.component.langchain4j.agent.LangChain4jAgentComponent;
 import org.apache.camel.component.langchain4j.agent.LangChain4jAgentConfiguration;
 import org.apache.camel.component.langchain4j.agent.api.Agent;
 import org.apache.camel.component.langchain4j.agent.api.AgentConfiguration;
@@ -121,6 +124,33 @@ public class LangChain4jAgentComponentConfiguration
      * Tags for discovering and calling Camel route tools
      */
     private String tags;
+    /**
+     * When true, route tools marked searchable and remote MCP tools are omitted
+     * from the initial model request and exposed through one synthetic search
+     * tool. Directly visible route tools and customTools stay in the request.
+     * Search is a visibility policy, not authorization. Enabling it does not
+     * skip MCP tools/list. A dynamic tool provider registered outside Camel is
+     * not searched. Only supported in inline agent creation mode.
+     */
+    private Boolean toolSearch = false;
+    /**
+     * LangChain4j embedding model used when toolSearchStrategy=vector. Required
+     * for vector search. The option is a
+     * dev.langchain4j.model.embedding.EmbeddingModel type.
+     */
+    private EmbeddingModel toolSearchEmbeddingModel;
+    /**
+     * Maximum number of tools returned by one tool search. Route and MCP tools
+     * are ranked together.
+     */
+    private Integer toolSearchMaxResults = 5;
+    /**
+     * How tool search ranks route and MCP tools. 'keyword' matches the tool
+     * name and description. 'vector' uses cosine similarity and requires
+     * toolSearchEmbeddingModel. Vector search does not fall back to keyword
+     * search.
+     */
+    private AiToolSearchStrategy toolSearchStrategy = AiToolSearchStrategy.KEYWORD;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
@@ -284,6 +314,39 @@ public class LangChain4jAgentComponentConfiguration
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public Boolean getToolSearch() {
+        return toolSearch;
+    }
+
+    public void setToolSearch(Boolean toolSearch) {
+        this.toolSearch = toolSearch;
+    }
+
+    public EmbeddingModel getToolSearchEmbeddingModel() {
+        return toolSearchEmbeddingModel;
+    }
+
+    public void setToolSearchEmbeddingModel(
+            EmbeddingModel toolSearchEmbeddingModel) {
+        this.toolSearchEmbeddingModel = toolSearchEmbeddingModel;
+    }
+
+    public Integer getToolSearchMaxResults() {
+        return toolSearchMaxResults;
+    }
+
+    public void setToolSearchMaxResults(Integer toolSearchMaxResults) {
+        this.toolSearchMaxResults = toolSearchMaxResults;
+    }
+
+    public AiToolSearchStrategy getToolSearchStrategy() {
+        return toolSearchStrategy;
+    }
+
+    public void setToolSearchStrategy(AiToolSearchStrategy toolSearchStrategy) {
+        this.toolSearchStrategy = toolSearchStrategy;
     }
 
     public Boolean getAutowiredEnabled() {

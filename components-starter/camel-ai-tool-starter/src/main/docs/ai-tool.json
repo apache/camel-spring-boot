@@ -123,6 +123,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.ai-tool.searchable",
+      "type": "java.lang.Boolean",
+      "description": "When true, this route tool is eligible for tool search and is omitted from the initial model request while the producer has tool search enabled. When false, the tool stays directly visible to the model. Searchability is a visibility policy, not an authorization policy, and has no effect when tool search is disabled.",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.ai-tool.tags",
       "type": "java.lang.String",
       "description": "Comma-separated list of tags used to group tools. Producers filter the registry by these tags to select which tools to expose to the LLM. When omitted, the tool goes into a default pool available to all producers.",
