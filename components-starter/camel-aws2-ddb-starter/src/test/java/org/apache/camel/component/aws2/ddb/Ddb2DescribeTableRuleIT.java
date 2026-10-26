@@ -35,6 +35,7 @@ import software.amazon.awssdk.services.dynamodb.model.ScalarAttributeType;
 import software.amazon.awssdk.services.dynamodb.model.TableStatus;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @CamelSpringBootTest
@@ -59,7 +60,7 @@ public class Ddb2DescribeTableRuleIT extends BaseDdb2 {
             }
         });
 
-        assertEquals(tableName, exchange.getIn().getHeader(Ddb2Constants.TABLE_NAME));
+        assertNull(exchange.getIn().getHeader(Ddb2Constants.TABLE_NAME));
         assertEquals(TableStatus.ACTIVE, exchange.getIn().getHeader(Ddb2Constants.TABLE_STATUS));
         assertEquals(0L, exchange.getIn().getHeader(Ddb2Constants.TABLE_SIZE));
     }
