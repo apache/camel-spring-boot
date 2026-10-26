@@ -128,6 +128,14 @@ public class AiToolComponentConfiguration
      */
     private Boolean returnDirect = false;
     /**
+     * When true, this route tool is eligible for tool search and is omitted
+     * from the initial model request while the producer has tool search
+     * enabled. When false, the tool stays directly visible to the model.
+     * Searchability is a visibility policy, not an authorization policy, and
+     * has no effect when tool search is disabled.
+     */
+    private Boolean searchable = false;
+    /**
      * Comma-separated list of tags used to group tools. Producers filter the
      * registry by these tags to select which tools to expose to the LLM. When
      * omitted, the tool goes into a default pool available to all producers.
@@ -264,6 +272,14 @@ public class AiToolComponentConfiguration
 
     public void setReturnDirect(Boolean returnDirect) {
         this.returnDirect = returnDirect;
+    }
+
+    public Boolean getSearchable() {
+        return searchable;
+    }
+
+    public void setSearchable(Boolean searchable) {
+        this.searchable = searchable;
     }
 
     public String getTags() {

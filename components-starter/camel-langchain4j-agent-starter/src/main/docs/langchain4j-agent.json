@@ -160,6 +160,33 @@
       "type": "java.time.Duration",
       "description": "The request timeout of the model (30s, 2m), when the model is created from the provider.",
       "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration"
+    },
+    {
+      "name": "camel.component.langchain4j-agent.tool-search",
+      "type": "java.lang.Boolean",
+      "description": "When true, route tools marked searchable and remote MCP tools are omitted from the initial model request and exposed through one synthetic search tool. Directly visible route tools and customTools stay in the request. Search is a visibility policy, not authorization. Enabling it does not skip MCP tools\/list. A dynamic tool provider registered outside Camel is not searched. Only supported in inline agent creation mode.",
+      "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.langchain4j-agent.tool-search-embedding-model",
+      "type": "dev.langchain4j.model.embedding.EmbeddingModel",
+      "description": "LangChain4j embedding model used when toolSearchStrategy=VECTOR. Required for vector search. The option is a dev.langchain4j.model.embedding.EmbeddingModel type.",
+      "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration"
+    },
+    {
+      "name": "camel.component.langchain4j-agent.tool-search-max-results",
+      "type": "java.lang.Integer",
+      "description": "Maximum number of tools returned by one tool search. Route and MCP tools are ranked together.",
+      "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration",
+      "defaultValue": 5
+    },
+    {
+      "name": "camel.component.langchain4j-agent.tool-search-strategy",
+      "type": "org.apache.camel.component.ai.tool.AiToolSearchStrategy",
+      "description": "How tool search ranks route and MCP tools. 'KEYWORD' matches the tool name and description. 'VECTOR' uses cosine similarity and requires toolSearchEmbeddingModel. Vector search does not fall back to keyword search.",
+      "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration",
+      "defaultValue": "keyword"
     }
   ],
   "hints": [],

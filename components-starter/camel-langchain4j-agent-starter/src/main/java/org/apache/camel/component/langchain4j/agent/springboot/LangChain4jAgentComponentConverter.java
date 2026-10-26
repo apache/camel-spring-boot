@@ -44,6 +44,7 @@ public class LangChain4jAgentComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.langchain4j.agent.api.AgentConfiguration.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.langchain4j.agent.api.AgentFactory.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.langchain4j.agent.LangChain4jAgentConfiguration.class));
+        answer.add(new ConvertiblePair(String.class, dev.langchain4j.model.embedding.EmbeddingModel.class));
         return answer;
     }
 
