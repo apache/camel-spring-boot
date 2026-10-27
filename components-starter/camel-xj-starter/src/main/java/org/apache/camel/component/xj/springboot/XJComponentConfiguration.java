@@ -91,13 +91,6 @@ public class XJComponentConfiguration
      */
     private String saxonExtensionFunctions;
     /**
-     * Feature for XML secure processing (see javax.xml.XMLConstants). This is
-     * enabled by default. However, when using Saxon Professional you may need
-     * to turn this off to allow Saxon to be able to use Java extension
-     * functions.
-     */
-    private Boolean secureProcessing = true;
-    /**
      * To use a custom XSLT transformer factory, specified as a FQN class name
      */
     private String transformerFactoryClass;
@@ -126,6 +119,15 @@ public class XJComponentConfiguration
      * instance used by each endpoint, not as a JVM-global system property.
      */
     private Integer xpathTotalOpLimit = 10000;
+    /**
+     * Feature for XML secure processing (see javax.xml.XMLConstants). This is
+     * enabled by default. However, when using Saxon Professional you may need
+     * to turn this off to allow Saxon to be able to use Java extension
+     * functions. Note that turning it off also restores the previous,
+     * unrestricted parsing of a Source message body that is still to be parsed,
+     * so only do so for trusted input.
+     */
+    private Boolean secureProcessing = true;
 
     public Boolean getAllowTemplateFromHeader() {
         return allowTemplateFromHeader;
@@ -184,14 +186,6 @@ public class XJComponentConfiguration
         this.saxonExtensionFunctions = saxonExtensionFunctions;
     }
 
-    public Boolean getSecureProcessing() {
-        return secureProcessing;
-    }
-
-    public void setSecureProcessing(Boolean secureProcessing) {
-        this.secureProcessing = secureProcessing;
-    }
-
     public String getTransformerFactoryClass() {
         return transformerFactoryClass;
     }
@@ -231,5 +225,13 @@ public class XJComponentConfiguration
 
     public void setXpathTotalOpLimit(Integer xpathTotalOpLimit) {
         this.xpathTotalOpLimit = xpathTotalOpLimit;
+    }
+
+    public Boolean getSecureProcessing() {
+        return secureProcessing;
+    }
+
+    public void setSecureProcessing(Boolean secureProcessing) {
+        this.secureProcessing = secureProcessing;
     }
 }
