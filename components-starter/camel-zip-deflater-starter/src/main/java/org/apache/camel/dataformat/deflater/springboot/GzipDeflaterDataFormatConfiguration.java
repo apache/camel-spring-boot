@@ -34,4 +34,19 @@ public class GzipDeflaterDataFormatConfiguration
      * This is enabled by default.
      */
     private Boolean enabled;
+    /**
+     * Set the maximum decompressed size of the data (in bytes). The default
+     * value if not specified corresponds to 1 gigabyte. An IOException is
+     * thrown if the decompressed size exceeds this amount. Set to -1 to disable
+     * setting a maximum decompressed size.
+     */
+    private Long maxDecompressedSize = 1073741824L;
+
+    public Long getMaxDecompressedSize() {
+        return maxDecompressedSize;
+    }
+
+    public void setMaxDecompressedSize(Long maxDecompressedSize) {
+        this.maxDecompressedSize = maxDecompressedSize;
+    }
 }

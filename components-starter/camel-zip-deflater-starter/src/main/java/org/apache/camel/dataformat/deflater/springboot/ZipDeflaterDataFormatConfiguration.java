@@ -40,6 +40,13 @@ public class ZipDeflaterDataFormatConfiguration
      * compression, and 9 is the best compression.
      */
     private Integer compressionLevel = -1;
+    /**
+     * Set the maximum decompressed size of the data (in bytes). The default
+     * value if not specified corresponds to 1 gigabyte. An IOException is
+     * thrown if the decompressed size exceeds this amount. Set to -1 to disable
+     * setting a maximum decompressed size.
+     */
+    private Long maxDecompressedSize = 1073741824L;
 
     public Integer getCompressionLevel() {
         return compressionLevel;
@@ -47,5 +54,13 @@ public class ZipDeflaterDataFormatConfiguration
 
     public void setCompressionLevel(Integer compressionLevel) {
         this.compressionLevel = compressionLevel;
+    }
+
+    public Long getMaxDecompressedSize() {
+        return maxDecompressedSize;
+    }
+
+    public void setMaxDecompressedSize(Long maxDecompressedSize) {
+        this.maxDecompressedSize = maxDecompressedSize;
     }
 }

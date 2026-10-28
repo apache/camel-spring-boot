@@ -24,12 +24,14 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 3 options, which are listed below.
+The starter supports 5 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
 | camel.dataformat.gzip-deflater.enabled | Whether to enable auto configuration of the gzipDeflater data format. This is enabled by default. |  | Boolean
+| camel.dataformat.gzip-deflater.max-decompressed-size | Set the maximum decompressed size of the data (in bytes). The default value if not specified corresponds to 1 gigabyte. An IOException is thrown if the decompressed size exceeds this amount. Set to -1 to disable setting a maximum decompressed size. | 1073741824 | Long
 | camel.dataformat.zip-deflater.compression-level | Compression level to use (0-9). -1 is default compression, 0 is no compression, and 9 is the best compression. | -1 | Integer
 | camel.dataformat.zip-deflater.enabled | Whether to enable auto configuration of the zipDeflater data format. This is enabled by default. |  | Boolean
+| camel.dataformat.zip-deflater.max-decompressed-size | Set the maximum decompressed size of the data (in bytes). The default value if not specified corresponds to 1 gigabyte. An IOException is thrown if the decompressed size exceeds this amount. Set to -1 to disable setting a maximum decompressed size. | 1073741824 | Long
 |===

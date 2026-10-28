@@ -36,6 +36,13 @@
       "sourceType": "org.apache.camel.dataformat.deflater.springboot.GzipDeflaterDataFormatConfiguration"
     },
     {
+      "name": "camel.dataformat.gzip-deflater.max-decompressed-size",
+      "type": "java.lang.Long",
+      "description": "Set the maximum decompressed size of the data (in bytes). The default value if not specified corresponds to 1 gigabyte. An IOException is thrown if the decompressed size exceeds this amount. Set to -1 to disable setting a maximum decompressed size.",
+      "sourceType": "org.apache.camel.dataformat.deflater.springboot.GzipDeflaterDataFormatConfiguration",
+      "defaultValue": 1073741824
+    },
+    {
       "name": "camel.dataformat.zip-deflater.compression-level",
       "type": "java.lang.Integer",
       "description": "Compression level to use (0-9). -1 is default compression, 0 is no compression, and 9 is the best compression.",
@@ -52,6 +59,13 @@
       "type": "java.lang.Boolean",
       "description": "Whether to enable auto configuration of the zipDeflater data format. This is enabled by default.",
       "sourceType": "org.apache.camel.dataformat.deflater.springboot.ZipDeflaterDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.zip-deflater.max-decompressed-size",
+      "type": "java.lang.Long",
+      "description": "Set the maximum decompressed size of the data (in bytes). The default value if not specified corresponds to 1 gigabyte. An IOException is thrown if the decompressed size exceeds this amount. Set to -1 to disable setting a maximum decompressed size.",
+      "sourceType": "org.apache.camel.dataformat.deflater.springboot.ZipDeflaterDataFormatConfiguration",
+      "defaultValue": 1073741824
     }
   ],
   "hints": [],
