@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 22 options, which are listed below.
+The starter supports 23 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -39,6 +39,7 @@ The starter supports 22 options, which are listed below.
 | camel.component.rest-openapi.consumer-component-name | Name of the Camel component that will service the requests. The component must be present in Camel registry and it must implement RestOpenApiConsumerFactory service provider interface. If not set CLASSPATH is searched for single component that implements RestOpenApiConsumerFactory SPI. Can be overridden in endpoint configuration. |  | String
 | camel.component.rest-openapi.consumes | What payload type this component capable of consuming. Could be one type, like application/json or multiple types as application/json, application/xml; q=0.5 according to the RFC7231. This equates to the value of Accept HTTP header. If set overrides any value found in the OpenApi specification. Can be overridden in endpoint configuration |  | String
 | camel.component.rest-openapi.enabled | Whether to enable auto configuration of the rest-openapi component. This is enabled by default. |  | Boolean
+| camel.component.rest-openapi.external-references | Which external references ($ref) the OpenAPI specification may use: all allows any reference, local allows references to the classpath and the file system only, and none allows only references inside the document. A reference the option does not allow fails the start. Can be overridden in endpoint configuration. | all | String
 | camel.component.rest-openapi.host | Scheme hostname and port to direct the HTTP requests to in the form of https://hostname:port. Can be configured at the endpoint, component or in the corresponding REST configuration in the Camel Context. If you give this component a name (e.g. petstore) that REST configuration is consulted first, rest-openapi next, and global configuration last. If set overrides any value found in the OpenApi specification, RestConfiguration. Can be overridden in endpoint configuration. |  | String
 | camel.component.rest-openapi.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.rest-openapi.missing-operation | Whether the consumer should fail,ignore or return a mock response for OpenAPI operations that are not mapped to a corresponding route. | fail | String
