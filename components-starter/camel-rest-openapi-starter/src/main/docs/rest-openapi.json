@@ -89,6 +89,13 @@
       "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration"
     },
     {
+      "name": "camel.component.rest-openapi.external-references",
+      "type": "java.lang.String",
+      "description": "Which external references ($ref) the OpenAPI specification may use: all allows any reference, local allows references to the classpath and the file system only, and none allows only references inside the document. A reference the option does not allow fails the start. Can be overridden in endpoint configuration.",
+      "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration",
+      "defaultValue": "all"
+    },
+    {
       "name": "camel.component.rest-openapi.host",
       "type": "java.lang.String",
       "description": "Scheme hostname and port to direct the HTTP requests to in the form of https:\/\/hostname:port. Can be configured at the endpoint, component or in the corresponding REST configuration in the Camel Context. If you give this component a name (e.g. petstore) that REST configuration is consulted first, rest-openapi next, and global configuration last. If set overrides any value found in the OpenApi specification, RestConfiguration. Can be overridden in endpoint configuration.",

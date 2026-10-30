@@ -178,6 +178,14 @@ public class RestOpenApiComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * Which external references ($ref) the OpenAPI specification may use: all
+     * allows any reference, local allows references to the classpath and the
+     * file system only, and none allows only references inside the document. A
+     * reference the option does not allow fails the start. Can be overridden in
+     * endpoint configuration.
+     */
+    private String externalReferences = "all";
+    /**
      * Customize TLS parameters used by the component. If not set defaults to
      * the TLS parameters set in the Camel context. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
@@ -339,6 +347,14 @@ public class RestOpenApiComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public String getExternalReferences() {
+        return externalReferences;
+    }
+
+    public void setExternalReferences(String externalReferences) {
+        this.externalReferences = externalReferences;
     }
 
     public SSLContextParameters getSslContextParameters() {
