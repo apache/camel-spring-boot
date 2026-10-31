@@ -3120,6 +3120,11 @@
       </dependency>
       <dependency>
         <groupId>org.apache.camel</groupId>
+        <artifactId>camel-chaos</artifactId>
+        <version>4.24.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
         <artifactId>camel-chatscript</artifactId>
         <version>4.24.0-SNAPSHOT</version>
       </dependency>
@@ -3952,6 +3957,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-jbang-plugin-test</artifactId>
+        <version>4.24.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-jbang-run</artifactId>
         <version>4.24.0-SNAPSHOT</version>
       </dependency>
       <dependency>
