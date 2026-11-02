@@ -138,6 +138,10 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
             hintBuilder.openWorldHint(annotations.openWorldHint());
             hasHints = true;
         }
+        if (annotations.returnDirect() != null) {
+            hintBuilder.returnDirect(annotations.returnDirect());
+            hasHints = true;
+        }
         if (hasHints) {
             builder.annotations(hintBuilder.build());
         }

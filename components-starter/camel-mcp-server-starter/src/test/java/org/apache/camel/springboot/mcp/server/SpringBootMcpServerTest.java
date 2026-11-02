@@ -119,7 +119,8 @@ public class SpringBootMcpServerTest {
                     from("ai-tool:annotated_tool?tags=conformance&description=Tool with annotation hints"
                          + "&title=Annotated tool"
                          + "&readOnlyHint=true"
-                         + "&idempotentHint=true")
+                         + "&idempotentHint=true"
+                         + "&returnDirect=true")
                             .setBody(constant("annotated"));
                 }
             };
@@ -166,6 +167,7 @@ public class SpringBootMcpServerTest {
         assertThat(tool.annotations()).isNotNull();
         assertThat(tool.annotations().readOnlyHint()).isTrue();
         assertThat(tool.annotations().idempotentHint()).isTrue();
+        assertThat(tool.annotations().returnDirect()).isTrue();
     }
 
     @Test
