@@ -35,7 +35,7 @@ public class MicrometerObservabilityConfigurationProperties {
      * Setting this to true will create new telemetry spans for each Camel custom Processors. Use the excludePattern
      * property to filter out Processors.
      */
-    private Boolean traceProcessors;
+    private boolean traceProcessors;
     /**
      * Disable any inner core processors (any core DSL processor provided in the route, for example `bean`, `log`, ...).
      */

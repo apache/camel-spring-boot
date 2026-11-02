@@ -29,5 +29,5 @@ The starter supports 4 options, which are listed below.
 | camel.micrometer.observability.disable-core-processors | Disable any inner core processors (any core DSL processor provided in the route, for example `bean`, `log`, ...). | false | Boolean
 | camel.micrometer.observability.exclude-patterns | Sets exclude pattern(s) that will disable tracing for Camel processors that matches the pattern. Multiple patterns can be separated by comma. |  | String
 | camel.micrometer.observability.include-patterns | Sets include pattern(s) that will explicitly enable tracing for Camel processors that matches the pattern. Multiple patterns can be separated by comma. All processors included by default if nothing is specified. |  | String
-| camel.micrometer.observability.trace-processors | Setting this to true will create new telemetry spans for each Camel custom Processors. Use the excludePattern property to filter out Processors. |  | Boolean
+| camel.micrometer.observability.trace-processors | Setting this to true will create new telemetry spans for each Camel custom Processors. Use the excludePattern property to filter out Processors. | false | Boolean
 |===

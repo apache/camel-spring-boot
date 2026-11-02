@@ -30,7 +30,8 @@
       "name": "camel.micrometer.observability.trace-processors",
       "type": "java.lang.Boolean",
       "description": "Setting this to true will create new telemetry spans for each Camel custom Processors. Use the excludePattern property to filter out Processors.",
-      "sourceType": "org.apache.camel.micrometer.observability.starter.MicrometerObservabilityConfigurationProperties"
+      "sourceType": "org.apache.camel.micrometer.observability.starter.MicrometerObservabilityConfigurationProperties",
+      "defaultValue": false
     }
   ],
   "hints": [],
