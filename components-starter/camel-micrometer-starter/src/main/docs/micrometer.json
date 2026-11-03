@@ -118,6 +118,13 @@
       "defaultValue": "default"
     },
     {
+      "name": "camel.metrics.record-last-exchange-timestamp",
+      "type": "java.lang.Boolean",
+      "description": "Set whether to record the timestamp of the last exchange as a metric for the exchange event notifier (default, `true`).",
+      "sourceType": "org.apache.camel.component.micrometer.springboot.metrics.CamelMetricsConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.metrics.route-policy-exclude-pattern",
       "type": "java.lang.String",
       "description": "Pattern to exclude routes (by id) to capture. Multiple route ids can be separated by comma.",

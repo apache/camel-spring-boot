@@ -76,6 +76,7 @@ public class CamelMetricsAutoConfiguration {
             notifier.setCamelContext(camelContext);
             notifier.setMeterRegistry(meterRegistry);
             notifier.setLogMetricsOnShutdown(configuration.isLogMetricsOnShutdown());
+            notifier.setRecordLastExchangeTimestamp(configuration.isRecordLastExchangeTimestamp());
             if (configuration.getLogMetricsOnShutdownFilters() != null){
                 String[] shutdownFilters = configuration.getLogMetricsOnShutdownFilters().split(",");
                 notifier.setLogMetricsOnShutdownFilters(shutdownFilters);
