@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 22 options, which are listed below.
+The starter supports 23 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -49,5 +49,6 @@ The starter supports 22 options, which are listed below.
 | camel.component.azure-functions.storage-account-connection-string | Storage account connection string for function app |  | String
 | camel.component.azure-functions.subscription-id | The Azure subscription ID (required for management operations) |  | String
 | camel.component.azure-functions.tenant-id | Azure AD Tenant ID |  | String
+| camel.component.azure-functions.throw-exception-on-failure | Option to disable throwing the HttpOperationFailedException when the function answers invokeFunction with an HTTP status of 400 or above. This allows you to get all responses regardless of the HTTP status code, with the status in the CamelAzureFunctionsStatusCode header. | true | Boolean
 | camel.component.azure-functions.token-credential | A TokenCredential instance for Azure AD authentication. The option is a com.azure.core.credential.TokenCredential type. |  | TokenCredential
 |===

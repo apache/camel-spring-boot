@@ -111,9 +111,12 @@ public class RocketMQComponentConfiguration
      */
     private String replyToTopic;
     /**
-     * Whether waiting for send result before routing to next endpoint.
+     * Whether waiting for send result before routing to next endpoint. When
+     * true, a failed send fails the exchange. When false, an InOnly exchange
+     * continues as soon as the message is handed to the RocketMQ client, and a
+     * failed send is only logged. An InOut exchange always waits for its reply.
      */
-    private Boolean waitForSendResult = false;
+    private Boolean waitForSendResult = true;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the

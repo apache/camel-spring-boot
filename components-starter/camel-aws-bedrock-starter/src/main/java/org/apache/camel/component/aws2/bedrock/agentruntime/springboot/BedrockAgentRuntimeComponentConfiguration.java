@@ -46,7 +46,8 @@ public class BedrockAgentRuntimeComponentConfiguration
      */
     private BedrockAgentRuntimeConfiguration configuration;
     /**
-     * Define the Knowledge Base Id we are going to use
+     * Define the Knowledge Base Id we are going to use (used by the retrieve
+     * and retrieveAndGenerate operations)
      */
     private String knowledgeBaseId;
     /**
@@ -61,7 +62,8 @@ public class BedrockAgentRuntimeComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Define the model Id we are going to use
+     * Define the model Id we are going to use (used by the retrieveAndGenerate
+     * operation)
      */
     private String modelId;
     /**

@@ -137,7 +137,7 @@
     {
       "name": "camel.component.aws-bedrock-agent-runtime.knowledge-base-id",
       "type": "java.lang.String",
-      "description": "Define the Knowledge Base Id we are going to use",
+      "description": "Define the Knowledge Base Id we are going to use (used by the retrieve and retrieveAndGenerate operations)",
       "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
     },
     {
@@ -150,7 +150,7 @@
     {
       "name": "camel.component.aws-bedrock-agent-runtime.model-id",
       "type": "java.lang.String",
-      "description": "Define the model Id we are going to use",
+      "description": "Define the model Id we are going to use (used by the retrieveAndGenerate operation)",
       "sourceType": "org.apache.camel.component.aws2.bedrock.agentruntime.springboot.BedrockAgentRuntimeComponentConfiguration"
     },
     {
@@ -543,7 +543,7 @@
     {
       "name": "camel.component.aws-bedrock.operation",
       "type": "org.apache.camel.component.aws2.bedrock.runtime.BedrockOperations",
-      "description": "The operation to perform",
+      "description": "The operation to perform. The invokeImageModelStreaming and invokeEmbeddingsModelStreaming operations are deprecated, as the image generation and embedding models do not stream: use invokeImageModel, invokeEmbeddingsModel or invokeTextModelStreaming instead.",
       "sourceType": "org.apache.camel.component.aws2.bedrock.runtime.springboot.BedrockComponentConfiguration"
     },
     {
