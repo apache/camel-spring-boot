@@ -80,7 +80,10 @@ public class BedrockComponentConfiguration
      */
     private String modelId;
     /**
-     * The operation to perform
+     * The operation to perform. The invokeImageModelStreaming and
+     * invokeEmbeddingsModelStreaming operations are deprecated, as the image
+     * generation and embedding models do not stream: use invokeImageModel,
+     * invokeEmbeddingsModel or invokeTextModelStreaming instead.
      */
     private BedrockOperations operation;
     /**

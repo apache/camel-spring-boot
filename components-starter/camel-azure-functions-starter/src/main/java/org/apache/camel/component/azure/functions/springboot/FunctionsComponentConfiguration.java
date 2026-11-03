@@ -89,6 +89,13 @@ public class FunctionsComponentConfiguration
      */
     private String storageAccountConnectionString;
     /**
+     * Option to disable throwing the HttpOperationFailedException when the
+     * function answers invokeFunction with an HTTP status of 400 or above. This
+     * allows you to get all responses regardless of the HTTP status code, with
+     * the status in the CamelAzureFunctionsStatusCode header.
+     */
+    private Boolean throwExceptionOnFailure = true;
+    /**
      * An AppServiceManager instance for management operations. The option is a
      * com.azure.resourcemanager.appservice.AppServiceManager type.
      */
@@ -220,6 +227,14 @@ public class FunctionsComponentConfiguration
     public void setStorageAccountConnectionString(
             String storageAccountConnectionString) {
         this.storageAccountConnectionString = storageAccountConnectionString;
+    }
+
+    public Boolean getThrowExceptionOnFailure() {
+        return throwExceptionOnFailure;
+    }
+
+    public void setThrowExceptionOnFailure(Boolean throwExceptionOnFailure) {
+        this.throwExceptionOnFailure = throwExceptionOnFailure;
     }
 
     public AppServiceManager getAppServiceManager() {

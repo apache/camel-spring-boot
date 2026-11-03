@@ -579,7 +579,7 @@
     {
       "name": "camel.component.salesforce.raw-payload",
       "type": "java.lang.Boolean",
-      "description": "Use raw payload String for request and response (either JSON or XML depending on format), instead of DTOs, false by default",
+      "description": "Use raw payload for request and response, instead of DTOs, false by default. The REST, apexCall and composite operations return the response as is, as an InputStream, and the streaming subscribe consumer gives the message as JSON text.",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration",
       "defaultValue": false
     },

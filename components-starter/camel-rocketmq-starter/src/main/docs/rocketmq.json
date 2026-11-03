@@ -152,9 +152,9 @@
     {
       "name": "camel.component.rocketmq.wait-for-send-result",
       "type": "java.lang.Boolean",
-      "description": "Whether waiting for send result before routing to next endpoint.",
+      "description": "Whether waiting for send result before routing to next endpoint. When true, a failed send fails the exchange. When false, an InOnly exchange continues as soon as the message is handed to the RocketMQ client, and a failed send is only logged. An InOut exchange always waits for its reply.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
-      "defaultValue": false
+      "defaultValue": true
     }
   ],
   "hints": [],

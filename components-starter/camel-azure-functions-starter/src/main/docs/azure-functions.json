@@ -152,6 +152,13 @@
       "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration"
     },
     {
+      "name": "camel.component.azure-functions.throw-exception-on-failure",
+      "type": "java.lang.Boolean",
+      "description": "Option to disable throwing the HttpOperationFailedException when the function answers invokeFunction with an HTTP status of 400 or above. This allows you to get all responses regardless of the HTTP status code, with the status in the CamelAzureFunctionsStatusCode header.",
+      "sourceType": "org.apache.camel.component.azure.functions.springboot.FunctionsComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.azure-functions.token-credential",
       "type": "com.azure.core.credential.TokenCredential",
       "description": "A TokenCredential instance for Azure AD authentication. The option is a com.azure.core.credential.TokenCredential type.",

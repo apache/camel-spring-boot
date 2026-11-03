@@ -48,5 +48,5 @@ The starter supports 21 options, which are listed below.
 | camel.component.rocketmq.send-tag | Each message would be sent with this tag. |  | String
 | camel.component.rocketmq.subscribe-sql | Subscribe SQL of consumer. See https://rocketmq.apache.org/docs/featureBehavior/07messagefilter/#attribute-based-sql-filtering for more details. | 1 = 1 | String
 | camel.component.rocketmq.subscribe-tags | Subscribe tags of consumer. Multiple tags could be split by , such as TagATagB | * | String
-| camel.component.rocketmq.wait-for-send-result | Whether waiting for send result before routing to next endpoint. | false | Boolean
+| camel.component.rocketmq.wait-for-send-result | Whether waiting for send result before routing to next endpoint. When true, a failed send fails the exchange. When false, an InOnly exchange continues as soon as the message is handed to the RocketMQ client, and a failed send is only logged. An InOut exchange always waits for its reply. | true | Boolean
 |===
