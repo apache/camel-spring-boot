@@ -203,14 +203,15 @@ public class ArchetypeGenerationExtension implements BeforeAllCallback, BeforeEa
     /**
      * Runs Maven in {@code workDir} and returns its output, failing with the output on a non-zero exit.
      * <p>
-     * The invocation is quiet, in batch mode and skips snapshot update checks ({@code -nsu}): every snapshot
-     * the generated project needs was just installed by the reactor build, and the remote metadata check
-     * costs up to a second per invocation. Missing artifacts are still downloaded.
+     * The invocation is quiet and in batch mode. It deliberately keeps the default update policy instead of
+     * {@code -nsu}: that flag makes Maven never refresh any cached metadata, release metadata included, so a
+     * version range in a starter's dependency tree would be resolved against whatever the shared local
+     * repository cached before newer versions were released, and fail with "No versions available".
      */
     static String runMaven(Path workDir, String... args) throws IOException, InterruptedException {
         List<String> command = new ArrayList<>();
         command.add(resolveMavenCommand());
-        command.addAll(List.of("-q", "-B", "-nsu"));
+        command.addAll(List.of("-q", "-B"));
         command.addAll(List.of(args));
         String localRepo = System.getProperty("maven.repo.local");
         if (localRepo != null) {
