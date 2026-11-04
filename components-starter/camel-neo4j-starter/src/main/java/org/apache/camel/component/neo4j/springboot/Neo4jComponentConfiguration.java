@@ -23,6 +23,7 @@ import org.apache.camel.component.neo4j.Neo4jSimilarityFunction;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.neo4j.driver.Driver;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Perform operations on the Neo4j Graph Database
@@ -90,8 +91,12 @@ public class Neo4jComponentConfiguration
      */
     private Neo4Operation operation;
     /**
-     * Cypher Query
+     * Cypher Query. Deprecation note: Not used:
+     * RETRIEVE_NODES_AND_UPDATE_WITH_CYPHER_QUERY and
+     * ADD_OR_DELETE_NODE_WITH_CYPHER_QUERY take the Cypher query from the
+     * message body
      */
+    @Deprecated
     private String query;
     /**
      * Similarity Function of Vector Index
@@ -215,10 +220,13 @@ public class Neo4jComponentConfiguration
         this.operation = operation;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public String getQuery() {
         return query;
     }
 
+    @Deprecated
     public void setQuery(String query) {
         this.query = query;
     }

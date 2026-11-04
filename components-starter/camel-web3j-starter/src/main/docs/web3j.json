@@ -171,7 +171,7 @@
     {
       "name": "camel.component.web3j.operation",
       "type": "java.lang.String",
-      "description": "Operation to use.",
+      "description": "Operation to use. The producer needs an operation, set with this option or the CamelWeb3jOperation header. The consumer needs one of the observable operations: ETH_LOG_OBSERVABLE, ETH_BLOCK_HASH_OBSERVABLE, ETH_PENDING_TRANSACTION_HASH_OBSERVABLE, TRANSACTION_OBSERVABLE, PENDING_TRANSACTION_OBSERVABLE, BLOCK_OBSERVABLE, REPLAY_BLOCKS_OBSERVABLE or REPLAY_TRANSACTIONS_OBSERVABLE.",
       "sourceType": "org.apache.camel.component.web3j.springboot.Web3jComponentConfiguration",
       "defaultValue": "transaction"
     },

@@ -62,6 +62,20 @@ public class HuggingFaceComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * The maximum number of chat histories, one per memory ID, that the chat
+     * task keeps in memory. When there are more, the history that was updated
+     * least recently is evicted first. Zero or a negative value keeps them all
+     */
+    private Integer maxChatHistories = 1000;
+    /**
+     * The maximum number of messages that the chat task keeps in a chat
+     * history, besides the system prompt. The oldest messages are dropped
+     * first, and the kept messages start with a user message, so an odd value
+     * keeps one message less. 0 keeps every message. 1 and negative values are
+     * rejected, as they would keep no reply
+     */
+    private Integer maxHistoryMessages = 50;
+    /**
      * Max tokens for generation tasks
      */
     private Integer maxTokens;
@@ -185,6 +199,22 @@ public class HuggingFaceComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Integer getMaxChatHistories() {
+        return maxChatHistories;
+    }
+
+    public void setMaxChatHistories(Integer maxChatHistories) {
+        this.maxChatHistories = maxChatHistories;
+    }
+
+    public Integer getMaxHistoryMessages() {
+        return maxHistoryMessages;
+    }
+
+    public void setMaxHistoryMessages(Integer maxHistoryMessages) {
+        this.maxHistoryMessages = maxHistoryMessages;
     }
 
     public Integer getMaxTokens() {

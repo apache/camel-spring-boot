@@ -63,6 +63,8 @@ public class ZooKeeperComponentConfiguration
     private Boolean bridgeErrorHandler = false;
     /**
      * Should changes to the znode be 'watched' and repeatedly processed.
+     * Without it, the consumer emits the data (or the child listing) of the
+     * znode once and does not follow later changes.
      */
     private Boolean repeat = false;
     /**

@@ -82,7 +82,7 @@
     {
       "name": "camel.component.zookeeper.repeat",
       "type": "java.lang.Boolean",
-      "description": "Should changes to the znode be 'watched' and repeatedly processed.",
+      "description": "Should changes to the znode be 'watched' and repeatedly processed. Without it, the consumer emits the data (or the child listing) of the znode once and does not follow later changes.",
       "sourceType": "org.apache.camel.component.zookeeper.springboot.ZooKeeperComponentConfiguration",
       "defaultValue": false
     },

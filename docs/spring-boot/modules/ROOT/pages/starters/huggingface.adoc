@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 24 options, which are listed below.
+The starter supports 26 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -37,6 +37,8 @@ The starter supports 24 options, which are listed below.
 | camel.component.huggingface.health-check-consumer-enabled | Used for enabling or disabling all consumer based health checks from this component | true | Boolean
 | camel.component.huggingface.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
 | camel.component.huggingface.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| camel.component.huggingface.max-chat-histories | The maximum number of chat histories, one per memory ID, that the chat task keeps in memory. When there are more, the history that was updated least recently is evicted first. Zero or a negative value keeps them all | 1000 | Integer
+| camel.component.huggingface.max-history-messages | The maximum number of messages that the chat task keeps in a chat history, besides the system prompt. The oldest messages are dropped first, and the kept messages start with a user message, so an odd value keeps one message less. 0 keeps every message. 1 and negative values are rejected, as they would keep no reply | 50 | Integer
 | camel.component.huggingface.max-tokens | Max tokens for generation tasks |  | Integer
 | camel.component.huggingface.memory-id-header | Header name for conversation memory ID (for multi-user chats) | CamelChatMemoryId | String
 | camel.component.huggingface.min-length | Min tokens for summarization tasks |  | Integer
