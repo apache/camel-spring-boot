@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 130 options, which are listed below.
+The starter supports 131 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -54,6 +54,7 @@ The starter supports 130 options, which are listed below.
 | camel.component.kafka.delivery-timeout-ms | An upper bound on the time to report success or failure after a call to send() returns. This limits the total time that a record will be delayed prior to sending, the time to await acknowledgement from the broker (if expected), and the time allowed for retriable send failures. | 120000 | Integer
 | camel.component.kafka.enable-idempotence | When set to 'true', the producer will ensure that exactly one copy of each message is written in the stream. If 'false', producer retries due to broker failures, etc., may write duplicates of the retried message in the stream. Note that enabling idempotence requires max.in.flight.requests.per.connection to be less than or equal to 5 (with message ordering preserved for any allowable value), retries to be greater than 0, and acks must be 'all'. Idempotence is enabled by default if no conflicting configurations are set. If conflicting configurations are set and idempotence is not explicitly enabled, idempotence is disabled. If idempotence is explicitly enabled and conflicting configurations are set, a ConfigException is thrown. | true | Boolean
 | camel.component.kafka.enabled | Whether to enable auto configuration of the kafka component. This is enabled by default. |  | Boolean
+| camel.component.kafka.exactly-once | Enables Kafka read-process-write exactly-once mode. On the source endpoint, also configure \{code allowManualCommit=true}, \{code autoCommitEnable=false}, \{code breakOnFirstError=true} and an explicit, non-blank groupId. On the destination endpoint, configure an explicit transactionalId base that is unique to this Camel runtime instance and stable across restarts. Camel appends the owning route id so producers in different routes do not share a Kafka transactional id. \{code transacted=true} without an explicit transactional id is not sufficient for exactly-once mode. | false | Boolean
 | camel.component.kafka.fetch-max-bytes | The maximum amount of data the server should return for a fetch request. This is not an absolute maximum, if the first message in the first non-empty partition of the fetch is larger than this value, the message will still be returned to ensure that the consumer can make progress. The maximum message size accepted by the broker is defined via message.max.bytes (broker config) or max.message.bytes (topic config). Note that the consumer performs multiple fetches in parallel. | 52428800 | Integer
 | camel.component.kafka.fetch-min-bytes | The minimum amount of data the server should return for a fetch request. If insufficient data is available, the request will wait for that much data to accumulate before answering the request. | 1 | Integer
 | camel.component.kafka.fetch-wait-max-ms | The maximum amount of time the server will block before answering the fetch request if there isn't enough data to immediately satisfy fetch.min.bytes | 500 | Integer

@@ -73,7 +73,7 @@
     {
       "name": "camel.component.docker.host",
       "type": "java.lang.String",
-      "description": "Docker host",
+      "description": "Docker host. In socket mode (socket=true), the path of the unix socket of the Docker daemon, where the default localhost means \/var\/run\/docker.sock. A host with a tcp:\/\/ or unix:\/\/ scheme (such as tcp:\/\/myhost:2376 or unix:\/\/\/var\/run\/docker.sock) is used as is, and then the port and socket options are not used.",
       "sourceType": "org.apache.camel.component.docker.springboot.DockerComponentConfiguration",
       "defaultValue": "localhost"
     },
@@ -147,9 +147,9 @@
     {
       "name": "camel.component.docker.socket",
       "type": "java.lang.Boolean",
-      "description": "Socket connection mode",
+      "description": "Socket connection mode. When enabled, connects to the unix socket of the Docker daemon, whose path is given by the host option (the default localhost means \/var\/run\/docker.sock), and the port is not used. When disabled, connects over TCP to the host and port.",
       "sourceType": "org.apache.camel.component.docker.springboot.DockerComponentConfiguration",
-      "defaultValue": true
+      "defaultValue": false
     },
     {
       "name": "camel.component.docker.tls-verify",

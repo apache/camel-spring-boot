@@ -194,6 +194,13 @@
       "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration"
     },
     {
+      "name": "camel.component.kafka.exactly-once",
+      "type": "java.lang.Boolean",
+      "description": "Enables Kafka read-process-write exactly-once mode. On the source endpoint, also configure {code allowManualCommit=true}, {code autoCommitEnable=false}, {code breakOnFirstError=true} and an explicit, non-blank groupId. On the destination endpoint, configure an explicit transactionalId base that is unique to this Camel runtime instance and stable across restarts. Camel appends the owning route id so producers in different routes do not share a Kafka transactional id. {code transacted=true} without an explicit transactional id is not sufficient for exactly-once mode.",
+      "sourceType": "org.apache.camel.component.kafka.springboot.KafkaComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.kafka.fetch-max-bytes",
       "type": "java.lang.Integer",
       "description": "The maximum amount of data the server should return for a fetch request. This is not an absolute maximum, if the first message in the first non-empty partition of the fetch is larger than this value, the message will still be returned to ensure that the consumer can make progress. The maximum message size accepted by the broker is defined via message.max.bytes (broker config) or max.message.bytes (topic config). Note that the consumer performs multiple fetches in parallel.",
