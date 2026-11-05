@@ -192,7 +192,7 @@
     {
       "name": "camel.component.azure-storage-datalake.position",
       "type": "java.lang.Long",
-      "description": "This parameter allows the caller to upload data in parallel and control the order in which it is appended to the file.",
+      "description": "The final length of the file, including previously committed data, used by flushToFile.",
       "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
     },
     {

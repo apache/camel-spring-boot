@@ -82,7 +82,12 @@ public class RestConfigurationDefinitionProperties {
      */
     private String contextPath;
     /**
-     * Sets a leading context-path the REST API will be using.
+     * The path, such as /api-doc, where the REST DSL serves the API
+     * documentation of the REST services, as an OpenAPI document. The API
+     * documentation is only served when this option is set. This requires
+     * camel-openapi-java on the classpath. The document is JSON by default, or
+     * YAML when the request path ends with .yaml. The path is relative to
+     * contextPath, when that option is set.
      */
     private String apiContextPath;
     /**
