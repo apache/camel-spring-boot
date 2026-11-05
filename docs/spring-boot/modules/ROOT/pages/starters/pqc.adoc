@@ -24,11 +24,12 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 39 options, which are listed below.
+The starter supports 40 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
+| camel.component.pqc.allow-shared-stateful-key | Whether to sign with a stateful key (XMSS, XMSSMT, LMS/HSS) that the configured KeyLifecycleManager cannot claim for this process alone. These are one-time-signature schemes: when two processes load the same key from a shared store, both sign from the same index and the key is broken. Only enable it when something outside Camel guarantees a single signer. | false | Boolean
 | camel.component.pqc.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.pqc.classical-k-e-m-algorithm | The classical key agreement algorithm to use in hybrid KEM operations |  | String
 | camel.component.pqc.classical-key-agreement | The classical KeyAgreement instance to be used in hybrid KEM operations. The option is a javax.crypto.KeyAgreement type. |  | KeyAgreement

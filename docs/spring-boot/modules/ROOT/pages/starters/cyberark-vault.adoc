@@ -32,7 +32,7 @@ The starter supports 15 options, which are listed below.
 | camel.component.cyberark-vault.api-key | The API key for authentication with CyberArk Conjur |  | String
 | camel.component.cyberark-vault.auth-token | Pre-authenticated token to use for CyberArk Conjur |  | String
 | camel.component.cyberark-vault.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
-| camel.component.cyberark-vault.certificate-path | Path to the SSL certificate for verification |  | String
+| camel.component.cyberark-vault.certificate-path | Path of a file with the SSL certificate to trust when connecting to CyberArk Conjur, for example the certificate of a private CA, in PEM or DER format. The certificates in the file are trusted instead of the default trust store of the JVM. Not used when verifySsl is false. |  | String
 | camel.component.cyberark-vault.configuration | Component configuration. The option is a org.apache.camel.component.cyberark.vault.CyberArkVaultConfiguration type. |  | CyberArkVaultConfiguration
 | camel.component.cyberark-vault.conjur-client | Reference to a ConjurClient instance in the registry. The option is a org.apache.camel.component.cyberark.vault.client.ConjurClient type. |  | ConjurClient
 | camel.component.cyberark-vault.enabled | Whether to enable auto configuration of the cyberark-vault component. This is enabled by default. |  | Boolean
@@ -42,5 +42,5 @@ The starter supports 15 options, which are listed below.
 | camel.component.cyberark-vault.secret-id | The secret ID to retrieve from CyberArk Conjur |  | String
 | camel.component.cyberark-vault.url | The CyberArk Conjur instance URL |  | String
 | camel.component.cyberark-vault.username | The username for authentication with CyberArk Conjur |  | String
-| camel.component.cyberark-vault.verify-ssl | Whether to verify SSL certificates when connecting to CyberArk Conjur | true | Boolean
+| camel.component.cyberark-vault.verify-ssl | Whether to verify the SSL certificate and the host name of the CyberArk Conjur server. Setting it to false trusts any server, so use it only for testing. | true | Boolean
 |===

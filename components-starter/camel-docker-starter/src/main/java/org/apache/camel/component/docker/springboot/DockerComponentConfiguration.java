@@ -132,6 +132,17 @@ public class DockerComponentConfiguration
      */
     private Boolean socket = false;
     /**
+     * Whether to allow overriding the connection and credential settings of the
+     * endpoint with the CamelDockerHost, CamelDockerPort,
+     * CamelDockerSocketEnabled, CamelDockerSecure, CamelDockerTlsVerify,
+     * CamelDockerCertPath, CamelDockerCmdExecFactory, CamelDockerUsername,
+     * CamelDockerPassword and CamelDockerServerAddress headers. Disabled by
+     * default; enable it only when the header source is trusted, since it lets
+     * a message choose the Docker daemon that the client connects to and how,
+     * and the registry that receives the username and password of the endpoint.
+     */
+    private Boolean allowConnectionAndCredentialsFromHeaders = false;
+    /**
      * Location containing the SSL certificate chain
      */
     private String certPath;
@@ -278,6 +289,15 @@ public class DockerComponentConfiguration
 
     public void setSocket(Boolean socket) {
         this.socket = socket;
+    }
+
+    public Boolean getAllowConnectionAndCredentialsFromHeaders() {
+        return allowConnectionAndCredentialsFromHeaders;
+    }
+
+    public void setAllowConnectionAndCredentialsFromHeaders(
+            Boolean allowConnectionAndCredentialsFromHeaders) {
+        this.allowConnectionAndCredentialsFromHeaders = allowConnectionAndCredentialsFromHeaders;
     }
 
     public String getCertPath() {

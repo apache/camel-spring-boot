@@ -25,6 +25,13 @@
   ],
   "properties": [
     {
+      "name": "camel.component.pqc.allow-shared-stateful-key",
+      "type": "java.lang.Boolean",
+      "description": "Whether to sign with a stateful key (XMSS, XMSSMT, LMS\/HSS) that the configured KeyLifecycleManager cannot claim for this process alone. These are one-time-signature schemes: when two processes load the same key from a shared store, both sign from the same index and the key is broken. Only enable it when something outside Camel guarantees a single signer.",
+      "sourceType": "org.apache.camel.component.pqc.springboot.PQCComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.pqc.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",

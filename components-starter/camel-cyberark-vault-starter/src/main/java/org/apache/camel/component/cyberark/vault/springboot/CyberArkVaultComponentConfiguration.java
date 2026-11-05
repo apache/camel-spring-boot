@@ -43,10 +43,6 @@ public class CyberArkVaultComponentConfiguration
      */
     private String account;
     /**
-     * Path to the SSL certificate for verification
-     */
-    private String certificatePath;
-    /**
      * Component configuration. The option is a
      * org.apache.camel.component.cyberark.vault.CyberArkVaultConfiguration
      * type.
@@ -81,10 +77,6 @@ public class CyberArkVaultComponentConfiguration
      */
     private String url;
     /**
-     * Whether to verify SSL certificates when connecting to CyberArk Conjur
-     */
-    private Boolean verifySsl = true;
-    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -102,6 +94,13 @@ public class CyberArkVaultComponentConfiguration
      */
     private String authToken;
     /**
+     * Path of a file with the SSL certificate to trust when connecting to
+     * CyberArk Conjur, for example the certificate of a private CA, in PEM or
+     * DER format. The certificates in the file are trusted instead of the
+     * default trust store of the JVM. Not used when verifySsl is false.
+     */
+    private String certificatePath;
+    /**
      * The password for authentication with CyberArk Conjur
      */
     private String password;
@@ -109,6 +108,12 @@ public class CyberArkVaultComponentConfiguration
      * The username for authentication with CyberArk Conjur
      */
     private String username;
+    /**
+     * Whether to verify the SSL certificate and the host name of the CyberArk
+     * Conjur server. Setting it to false trusts any server, so use it only for
+     * testing.
+     */
+    private Boolean verifySsl = true;
 
     public String getAccount() {
         return account;
@@ -116,14 +121,6 @@ public class CyberArkVaultComponentConfiguration
 
     public void setAccount(String account) {
         this.account = account;
-    }
-
-    public String getCertificatePath() {
-        return certificatePath;
-    }
-
-    public void setCertificatePath(String certificatePath) {
-        this.certificatePath = certificatePath;
     }
 
     public CyberArkVaultConfiguration getConfiguration() {
@@ -174,14 +171,6 @@ public class CyberArkVaultComponentConfiguration
         this.url = url;
     }
 
-    public Boolean getVerifySsl() {
-        return verifySsl;
-    }
-
-    public void setVerifySsl(Boolean verifySsl) {
-        this.verifySsl = verifySsl;
-    }
-
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
@@ -206,6 +195,14 @@ public class CyberArkVaultComponentConfiguration
         this.authToken = authToken;
     }
 
+    public String getCertificatePath() {
+        return certificatePath;
+    }
+
+    public void setCertificatePath(String certificatePath) {
+        this.certificatePath = certificatePath;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -220,5 +217,13 @@ public class CyberArkVaultComponentConfiguration
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Boolean getVerifySsl() {
+        return verifySsl;
+    }
+
+    public void setVerifySsl(Boolean verifySsl) {
+        this.verifySsl = verifySsl;
     }
 }

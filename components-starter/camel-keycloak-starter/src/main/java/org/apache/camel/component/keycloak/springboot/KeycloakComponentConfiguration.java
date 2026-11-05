@@ -205,6 +205,15 @@ public class KeycloakComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * Whether the CamelKeycloakOperation header may override the configured
+     * operation. Disabled by default: the operation decides what the endpoint
+     * does with its admin client, from reading a user to deleting a realm, so a
+     * message that can set the header can run any operation that the
+     * credentials of the endpoint allow. Enable it only on routes whose input
+     * is trusted.
+     */
+    private Boolean allowOperationHeader = false;
 
     public String getAccessToken() {
         return accessToken;
@@ -468,5 +477,13 @@ public class KeycloakComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Boolean getAllowOperationHeader() {
+        return allowOperationHeader;
+    }
+
+    public void setAllowOperationHeader(Boolean allowOperationHeader) {
+        this.allowOperationHeader = allowOperationHeader;
     }
 }

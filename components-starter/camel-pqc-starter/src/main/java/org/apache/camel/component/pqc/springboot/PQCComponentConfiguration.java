@@ -221,6 +221,14 @@ public class PQCComponentConfiguration
      * camel.health.producersEnabled=true.
      */
     private Boolean healthCheckProducerEnabled = true;
+    /**
+     * Whether to sign with a stateful key (XMSS, XMSSMT, LMS/HSS) that the
+     * configured KeyLifecycleManager cannot claim for this process alone. These
+     * are one-time-signature schemes: when two processes load the same key from
+     * a shared store, both sign from the same index and the key is broken. Only
+     * enable it when something outside Camel guarantees a single signer.
+     */
+    private Boolean allowSharedStatefulKey = false;
 
     public PQCConfiguration getConfiguration() {
         return configuration;
@@ -472,5 +480,13 @@ public class PQCComponentConfiguration
 
     public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
         this.healthCheckProducerEnabled = healthCheckProducerEnabled;
+    }
+
+    public Boolean getAllowSharedStatefulKey() {
+        return allowSharedStatefulKey;
+    }
+
+    public void setAllowSharedStatefulKey(Boolean allowSharedStatefulKey) {
+        this.allowSharedStatefulKey = allowSharedStatefulKey;
     }
 }

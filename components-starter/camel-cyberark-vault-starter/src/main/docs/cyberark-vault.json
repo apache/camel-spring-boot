@@ -41,7 +41,7 @@
     {
       "name": "camel.component.cyberark-vault.certificate-path",
       "type": "java.lang.String",
-      "description": "Path to the SSL certificate for verification",
+      "description": "Path of a file with the SSL certificate to trust when connecting to CyberArk Conjur, for example the certificate of a private CA, in PEM or DER format. The certificates in the file are trusted instead of the default trust store of the JVM. Not used when verifySsl is false.",
       "sourceType": "org.apache.camel.component.cyberark.vault.springboot.CyberArkVaultComponentConfiguration"
     },
     {
@@ -108,7 +108,7 @@
     {
       "name": "camel.component.cyberark-vault.verify-ssl",
       "type": "java.lang.Boolean",
-      "description": "Whether to verify SSL certificates when connecting to CyberArk Conjur",
+      "description": "Whether to verify the SSL certificate and the host name of the CyberArk Conjur server. Setting it to false trusts any server, so use it only for testing.",
       "sourceType": "org.apache.camel.component.cyberark.vault.springboot.CyberArkVaultComponentConfiguration",
       "defaultValue": true
     }
