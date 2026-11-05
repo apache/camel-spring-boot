@@ -117,8 +117,8 @@ public class DataLakeComponentConfiguration
      */
     private String permission;
     /**
-     * This parameter allows the caller to upload data in parallel and control
-     * the order in which it is appended to the file.
+     * The final length of the file, including previously committed data, used
+     * by flushToFile.
      */
     private Long position;
     /**

@@ -55,7 +55,7 @@ The starter supports 39 options, which are listed below.
 | camel.component.azure-storage-datalake.operation | operation to be performed | listfilesystem | DataLakeOperationsDefinition
 | camel.component.azure-storage-datalake.path | path in azure data lake for operations |  | String
 | camel.component.azure-storage-datalake.permission | permission string for the file |  | String
-| camel.component.azure-storage-datalake.position | This parameter allows the caller to upload data in parallel and control the order in which it is appended to the file. |  | Long
+| camel.component.azure-storage-datalake.position | The final length of the file, including previously committed data, used by flushToFile. |  | Long
 | camel.component.azure-storage-datalake.recursive | recursively include all paths | false | Boolean
 | camel.component.azure-storage-datalake.regex | regular expression for matching file names |  | String
 | camel.component.azure-storage-datalake.retain-uncommited-data | Whether or not uncommitted data is to be retained after the operation | false | Boolean

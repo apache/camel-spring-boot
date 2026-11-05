@@ -45,7 +45,7 @@ The starter supports 41 options, which are listed below.
 | camel.component.google-calendar-stream.enabled | Whether to enable auto configuration of the google-calendar-stream component. This is enabled by default. |  | Boolean
 | camel.component.google-calendar-stream.health-check-consumer-enabled | Used for enabling or disabling all consumer based health checks from this component | true | Boolean
 | camel.component.google-calendar-stream.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
-| camel.component.google-calendar-stream.max-results | Max results to be returned | 10 | Integer
+| camel.component.google-calendar-stream.max-results | Maximum number of events returned per Google Calendar API page. With syncFlow=false and considerLastUpdate=true, each poll reads all pages; otherwise each poll reads one page. | 10 | Integer
 | camel.component.google-calendar-stream.p12-file-name | The name of the p12 file which has the private key to use with the Google Service Account. |  | String
 | camel.component.google-calendar-stream.query | The query to execute on calendar |  | String
 | camel.component.google-calendar-stream.refresh-token | OAuth 2 refresh token. Using this, the Google Calendar component can obtain a new accessToken whenever the current one expires - a necessity if the application is long-lived. |  | String

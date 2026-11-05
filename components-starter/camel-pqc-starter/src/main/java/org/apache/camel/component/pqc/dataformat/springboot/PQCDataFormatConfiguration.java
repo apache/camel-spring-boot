@@ -47,9 +47,10 @@ public class PQCDataFormatConfiguration
      */
     private String symmetricKeyAlgorithm = "AES";
     /**
-     * The length (in bits) of the symmetric key.
+     * The length (in bits) of the symmetric key. SEED and SM4 only accept 128;
+     * GOST3412_2015 and CHACHA7539 only accept 256.
      */
-    private Integer symmetricKeyLength = 128;
+    private Integer symmetricKeyLength = 256;
     /**
      * Refers to the KeyPair to lookup from the registry to use for KEM
      * operations. The option is a java.security.KeyPair type.
