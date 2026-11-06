@@ -27,6 +27,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.debezium-mongodb.binary-handling-mode",
+      "type": "java.lang.String",
+      "description": "Specify how binary (blob, binary, etc.) columns should be represented in change events, including: 'bytes' represents binary data as byte array (default); 'base64' represents binary data as base64-encoded string; 'base64-url-safe' represents binary data as base64-url-safe-encoded string; 'hex' represents binary data as hex-encoded (base16) string",
+      "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": "bytes"
+    },
+    {
       "name": "camel.component.debezium-mongodb.bridge-error-handler",
       "type": "java.lang.Boolean",
       "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
@@ -39,6 +46,19 @@
       "description": "The method used to capture changes from MongoDB server. Options include: 'change_streams' to capture changes via MongoDB Change Streams, update events do not contain full documents; 'change_streams_update_full' (the default) to capture changes via MongoDB Change Streams, update events contain full documents",
       "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
       "defaultValue": "change_streams_update_full"
+    },
+    {
+      "name": "camel.component.debezium-mongodb.capture-scope",
+      "type": "java.lang.String",
+      "description": "The scope of captured changes. Options include: 'deployment' (the default) to capture changes from the entire MongoDB deployment; 'database' to capture changes from a specific MongoDB database'collection' to capture changes from a specific MongoDB collection",
+      "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": "deployment"
+    },
+    {
+      "name": "camel.component.debezium-mongodb.capture-target",
+      "type": "java.lang.String",
+      "description": "The target to capture changes from. For 'database' scope, this is the database name. For 'collection' scope, this is the collection name as ..",
+      "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration"
     },
     {
       "name": "camel.component.debezium-mongodb.collection-exclude-list",
@@ -80,7 +100,7 @@
     {
       "name": "camel.component.debezium-mongodb.custom-metric-tags",
       "type": "java.lang.String",
-      "description": "The custom metric tags will accept key-value pairs to customize the MBean object name which should be appended the end of regular name, each key would represent a tag for the MBean object name, and the corresponding value would be the value of that tag the key is. For example: k1=v1,k2=v2",
+      "description": "A comma-separated list of key-value pairs that are appended to the MBean object name. Keys must be valid JMX ObjectName property keys. For example: k1=v1,k2=v2",
       "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration"
     },
     {
@@ -121,6 +141,13 @@
       "defaultValue": -1
     },
     {
+      "name": "camel.component.debezium-mongodb.event-converting-failure-handling-mode",
+      "type": "java.lang.String",
+      "description": "Specify how failures during converting of event should be handled, including: 'fail' throw an exception that the column of event conversion is failed with unmatched schema type, causing the connector to be stopped. it could need schema recovery to covert successfully; 'warn' (the default) the value of column of event that conversion failed will be null and be logged with warn level; 'skip' the value of column of event that conversion failed will be null and be logged with debug level.",
+      "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": "warn"
+    },
+    {
       "name": "camel.component.debezium-mongodb.event-processing-failure-handling-mode",
       "type": "java.lang.String",
       "description": "Specify how failures during processing of events (i.e. when encountering a corrupted event) should be handled, including: 'fail' (the default) an exception indicating the problematic event and its position is raised, causing the connector to be stopped; 'warn' the problematic event and its position will be logged and the event will be skipped; 'ignore' the problematic event will be skipped.",
@@ -146,6 +173,13 @@
       "type": "java.lang.String",
       "description": "A comma-separated list of the fully-qualified names of fields that should be excluded from change event message values",
       "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-mongodb.field-name-adjustment-mode",
+      "type": "java.lang.String",
+      "description": "Specify how field names should be adjusted for compatibility with the message converter used by the connector, including: 'avro' replaces the characters that cannot be used in the Avro type name with underscore; 'avro_unicode' replaces the underscore or characters that cannot be used in the Avro type name with corresponding unicode like _uxxxx. Note: _ is an escape sequence like backslash in Java;'none' does not apply any adjustment (default)",
+      "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": "none"
     },
     {
       "name": "camel.component.debezium-mongodb.field-renames",
@@ -182,6 +216,20 @@
       "defaultValue": "__debezium-heartbeat"
     },
     {
+      "name": "camel.component.debezium-mongodb.incremental-snapshot-allow-schema-changes",
+      "type": "java.lang.Boolean",
+      "description": "Detect schema change during an incremental snapshot and re-select a current chunk to avoid locking DDLs. Note that changes to a primary key are not supported and can cause incorrect results if performed during an incremental snapshot. Another limitation is that if a schema change affects only columns' default values, then the change won't be detected until the DDL is processed from the binlog stream. This doesn't affect the snapshot events' values, but the schema of snapshot events may have outdated defaults.",
+      "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-mongodb.incremental-snapshot-chunk-size",
+      "type": "java.lang.Integer",
+      "description": "The maximum size of chunk (number of documents\/rows) for incremental snapshotting",
+      "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": 1024
+    },
+    {
       "name": "camel.component.debezium-mongodb.incremental-snapshot-watermarking-strategy",
       "type": "java.lang.String",
       "description": "Specify the strategy used for watermarking during an incremental snapshot: 'insert_insert' both open and close signal is written into signal data collection (default); 'insert_delete' only open signal is written on signal data collection, the close will delete the relative open signal;",
@@ -201,6 +249,13 @@
       "description": "The Converter class that should be used to serialize and deserialize value data for offsets. The default is JSON converter.",
       "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
       "defaultValue": "org.apache.kafka.connect.json.JsonConverter"
+    },
+    {
+      "name": "camel.component.debezium-mongodb.json-serialization-mode",
+      "type": "java.lang.String",
+      "description": "Controls the Extended JSON serialization mode used for MongoDB event payload fields. Options include: 'legacy' (the default) uses MongoDB Extended JSON v1 strict mode for full document fields and MongoDB Extended JSON v2 relaxed mode for update fields. 'strict' uses MongoDB Extended JSON v1 strict mode. 'extended' uses MongoDB Extended JSON v2 canonical mode. 'relaxed' uses MongoDB Extended JSON v2 relaxed mode.",
+      "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": "legacy"
     },
     {
       "name": "camel.component.debezium-mongodb.legacy-snapshot-max-threads",
@@ -311,6 +366,33 @@
       "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-mongodb.notification-http-allow-private-networks",
+      "type": "java.lang.Boolean",
+      "description": "When true, the SSRF guard permits notification URLs that resolve to loopback, site-local or link-local addresses (e.g. an in-cluster Service). Defaults to false so only public addresses are allowed.",
+      "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-mongodb.notification-http-retries",
+      "type": "java.lang.Integer",
+      "description": "Number of retries after the first failed HTTP notification delivery attempt. Terminal notifications (COMPLETED\/ABORTED\/SKIPPED) are always retried at least 3 times.",
+      "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": 2
+    },
+    {
+      "name": "camel.component.debezium-mongodb.notification-http-timeout-ms",
+      "type": "java.lang.Integer",
+      "description": "Connect and read timeout, in milliseconds, for HTTP notification delivery. The option is a int type.",
+      "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": 5000
+    },
+    {
+      "name": "camel.component.debezium-mongodb.notification-http-url",
+      "type": "java.lang.String",
+      "description": "The URL to which notifications are POSTed as JSON. Required when 'http' is in the list of enabled channels.",
+      "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration"
+    },
+    {
       "name": "camel.component.debezium-mongodb.notification-sink-topic-name",
       "type": "java.lang.String",
       "description": "The name of the topic for the notifications. This is required in case 'sink' is in the list of enabled channels",
@@ -415,7 +497,7 @@
     {
       "name": "camel.component.debezium-mongodb.poll-interval-ms",
       "type": "java.lang.Long",
-      "description": "Time to wait for new change events to appear after receiving no events, given in milliseconds. Defaults to 500 ms. The option is a long type.",
+      "description": "Time to wait for new change events to appear after receiving no events, given in milliseconds. Defaults to 500 ms. Values will be capped at 5000 ms. The option is a long type.",
       "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
       "defaultValue": 500
     },
@@ -466,6 +548,20 @@
       "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-mongodb.signal-emit-failure-backoff-ms",
+      "type": "java.lang.Long",
+      "description": "Duration to sleep for after encountering an error emitting a window event, given in milliseconds. Defaults to 10 seconds. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": 10000
+    },
+    {
+      "name": "camel.component.debezium-mongodb.signal-emit-failure-max-retries",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of retries after encountering an error emitting a window event (-1 = no limit, 0 = disabled, 0 = num of retries). Defaults to 0.",
+      "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
       "name": "camel.component.debezium-mongodb.signal-enabled-channels",
       "type": "java.lang.String",
       "description": "List of channels names that are enabled. Source channel is enabled by default",
@@ -478,6 +574,13 @@
       "description": "Interval for looking for new signals in registered channels, given in milliseconds. Defaults to 5 seconds. The option is a long type.",
       "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
       "defaultValue": 5000
+    },
+    {
+      "name": "camel.component.debezium-mongodb.skip-messages-without-change",
+      "type": "java.lang.Boolean",
+      "description": "Enable to skip publishing messages when there is no change in included columns.This would essentially filter messages to be sent when there is no change in columns included as per column.include.list\/column.exclude.list.For Postgres - this would require REPLICA IDENTITY of table to be FULL.",
+      "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.debezium-mongodb.skipped-operations",

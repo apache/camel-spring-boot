@@ -129,6 +129,14 @@ public class DebeziumMongodbComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * Specify how binary (blob, binary, etc.) columns should be represented in
+     * change events, including: 'bytes' represents binary data as byte array
+     * (default); 'base64' represents binary data as base64-encoded string;
+     * 'base64-url-safe' represents binary data as base64-url-safe-encoded
+     * string; 'hex' represents binary data as hex-encoded (base16) string
+     */
+    private String binaryHandlingMode = "bytes";
+    /**
      * The method used to capture changes from MongoDB server. Options include:
      * 'change_streams' to capture changes via MongoDB Change Streams, update
      * events do not contain full documents; 'change_streams_update_full' (the
@@ -136,6 +144,19 @@ public class DebeziumMongodbComponentConfiguration
      * contain full documents
      */
     private String captureMode = "change_streams_update_full";
+    /**
+     * The scope of captured changes. Options include: 'deployment' (the
+     * default) to capture changes from the entire MongoDB deployment;
+     * 'database' to capture changes from a specific MongoDB
+     * database'collection' to capture changes from a specific MongoDB
+     * collection
+     */
+    private String captureScope = "deployment";
+    /**
+     * The target to capture changes from. For 'database' scope, this is the
+     * database name. For 'collection' scope, this is the collection name as ..
+     */
+    private String captureTarget;
     /**
      * A comma-separated list of regular expressions or literals that match the
      * collection names for which changes are to be excluded
@@ -163,10 +184,9 @@ public class DebeziumMongodbComponentConfiguration
      */
     private Integer cursorMaxAwaitTimeMs;
     /**
-     * The custom metric tags will accept key-value pairs to customize the MBean
-     * object name which should be appended the end of regular name, each key
-     * would represent a tag for the MBean object name, and the corresponding
-     * value would be the value of that tag the key is. For example: k1=v1,k2=v2
+     * A comma-separated list of key-value pairs that are appended to the MBean
+     * object name. Keys must be valid JMX ObjectName property keys. For
+     * example: k1=v1,k2=v2
      */
     private String customMetricTags;
     /**
@@ -190,6 +210,16 @@ public class DebeziumMongodbComponentConfiguration
      * no limit, 0 = disabled, 0 = num of retries).
      */
     private Integer errorsMaxRetries = -1;
+    /**
+     * Specify how failures during converting of event should be handled,
+     * including: 'fail' throw an exception that the column of event conversion
+     * is failed with unmatched schema type, causing the connector to be
+     * stopped. it could need schema recovery to covert successfully; 'warn'
+     * (the default) the value of column of event that conversion failed will be
+     * null and be logged with warn level; 'skip' the value of column of event
+     * that conversion failed will be null and be logged with debug level.
+     */
+    private String eventConvertingFailureHandlingMode = "warn";
     /**
      * Specify how failures during processing of events (i.e. when encountering
      * a corrupted event) should be handled, including: 'fail' (the default) an
@@ -215,6 +245,16 @@ public class DebeziumMongodbComponentConfiguration
      * be excluded from change event message values
      */
     private String fieldExcludeList;
+    /**
+     * Specify how field names should be adjusted for compatibility with the
+     * message converter used by the connector, including: 'avro' replaces the
+     * characters that cannot be used in the Avro type name with underscore;
+     * 'avro_unicode' replaces the underscore or characters that cannot be used
+     * in the Avro type name with corresponding unicode like _uxxxx. Note: _ is
+     * an escape sequence like backslash in Java;'none' does not apply any
+     * adjustment (default)
+     */
+    private String fieldNameAdjustmentMode = "none";
     /**
      * A comma-separated list of the fully-qualified replacements of fields that
      * should be used to rename fields in change event message values.
@@ -251,6 +291,22 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String heartbeatTopicsPrefix = "__debezium-heartbeat";
     /**
+     * Detect schema change during an incremental snapshot and re-select a
+     * current chunk to avoid locking DDLs. Note that changes to a primary key
+     * are not supported and can cause incorrect results if performed during an
+     * incremental snapshot. Another limitation is that if a schema change
+     * affects only columns' default values, then the change won't be detected
+     * until the DDL is processed from the binlog stream. This doesn't affect
+     * the snapshot events' values, but the schema of snapshot events may have
+     * outdated defaults.
+     */
+    private Boolean incrementalSnapshotAllowSchemaChanges = false;
+    /**
+     * The maximum size of chunk (number of documents/rows) for incremental
+     * snapshotting
+     */
+    private Integer incrementalSnapshotChunkSize = 1024;
+    /**
      * Specify the strategy used for watermarking during an incremental
      * snapshot: 'insert_insert' both open and close signal is written into
      * signal data collection (default); 'insert_delete' only open signal is
@@ -258,6 +314,15 @@ public class DebeziumMongodbComponentConfiguration
      * open signal;
      */
     private String incrementalSnapshotWatermarkingStrategy = "INSERT_INSERT";
+    /**
+     * Controls the Extended JSON serialization mode used for MongoDB event
+     * payload fields. Options include: 'legacy' (the default) uses MongoDB
+     * Extended JSON v1 strict mode for full document fields and MongoDB
+     * Extended JSON v2 relaxed mode for update fields. 'strict' uses MongoDB
+     * Extended JSON v1 strict mode. 'extended' uses MongoDB Extended JSON v2
+     * canonical mode. 'relaxed' uses MongoDB Extended JSON v2 relaxed mode.
+     */
+    private String jsonSerializationMode = "legacy";
     /**
      * When enabled, uses the legacy table-per-thread parallel snapshot
      * algorithm. When set to false (the default), tables are split into chunks
@@ -337,6 +402,28 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String notificationEnabledChannels;
     /**
+     * When true, the SSRF guard permits notification URLs that resolve to
+     * loopback, site-local or link-local addresses (e.g. an in-cluster
+     * Service). Defaults to false so only public addresses are allowed.
+     */
+    private Boolean notificationHttpAllowPrivateNetworks = false;
+    /**
+     * Number of retries after the first failed HTTP notification delivery
+     * attempt. Terminal notifications (COMPLETED/ABORTED/SKIPPED) are always
+     * retried at least 3 times.
+     */
+    private Integer notificationHttpRetries = 2;
+    /**
+     * Connect and read timeout, in milliseconds, for HTTP notification
+     * delivery. The option is a int type.
+     */
+    private Integer notificationHttpTimeoutMs = 5000;
+    /**
+     * The URL to which notifications are POSTed as JSON. Required when 'http'
+     * is in the list of enabled channels.
+     */
+    private String notificationHttpUrl;
+    /**
      * The name of the topic for the notifications. This is required in case
      * 'sink' is in the list of enabled channels
      */
@@ -374,7 +461,8 @@ public class DebeziumMongodbComponentConfiguration
     private String openlineageIntegrationJobTags;
     /**
      * Time to wait for new change events to appear after receiving no events,
-     * given in milliseconds. Defaults to 500 ms. The option is a long type.
+     * given in milliseconds. Defaults to 500 ms. Values will be capped at 5000
+     * ms. The option is a long type.
      */
     private Long pollIntervalMs = 500L;
     /**
@@ -419,6 +507,18 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String signalDataCollection;
     /**
+     * Duration to sleep for after encountering an error emitting a window
+     * event, given in milliseconds. Defaults to 10 seconds. The option is a
+     * long type.
+     */
+    private Long signalEmitFailureBackoffMs = 10000L;
+    /**
+     * The maximum number of retries after encountering an error emitting a
+     * window event (-1 = no limit, 0 = disabled, 0 = num of retries). Defaults
+     * to 0.
+     */
+    private Integer signalEmitFailureMaxRetries = 0;
+    /**
      * List of channels names that are enabled. Source channel is enabled by
      * default
      */
@@ -428,6 +528,14 @@ public class DebeziumMongodbComponentConfiguration
      * milliseconds. Defaults to 5 seconds. The option is a long type.
      */
     private Long signalPollIntervalMs = 5000L;
+    /**
+     * Enable to skip publishing messages when there is no change in included
+     * columns.This would essentially filter messages to be sent when there is
+     * no change in columns included as per
+     * column.include.list/column.exclude.list.For Postgres - this would require
+     * REPLICA IDENTITY of table to be FULL.
+     */
+    private Boolean skipMessagesWithoutChange = false;
     /**
      * The comma-separated list of operations to skip during streaming, defined
      * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes, 't' for
@@ -673,12 +781,36 @@ public class DebeziumMongodbComponentConfiguration
         this.autowiredEnabled = autowiredEnabled;
     }
 
+    public String getBinaryHandlingMode() {
+        return binaryHandlingMode;
+    }
+
+    public void setBinaryHandlingMode(String binaryHandlingMode) {
+        this.binaryHandlingMode = binaryHandlingMode;
+    }
+
     public String getCaptureMode() {
         return captureMode;
     }
 
     public void setCaptureMode(String captureMode) {
         this.captureMode = captureMode;
+    }
+
+    public String getCaptureScope() {
+        return captureScope;
+    }
+
+    public void setCaptureScope(String captureScope) {
+        this.captureScope = captureScope;
+    }
+
+    public String getCaptureTarget() {
+        return captureTarget;
+    }
+
+    public void setCaptureTarget(String captureTarget) {
+        this.captureTarget = captureTarget;
     }
 
     public String getCollectionExcludeList() {
@@ -762,6 +894,15 @@ public class DebeziumMongodbComponentConfiguration
         this.errorsMaxRetries = errorsMaxRetries;
     }
 
+    public String getEventConvertingFailureHandlingMode() {
+        return eventConvertingFailureHandlingMode;
+    }
+
+    public void setEventConvertingFailureHandlingMode(
+            String eventConvertingFailureHandlingMode) {
+        this.eventConvertingFailureHandlingMode = eventConvertingFailureHandlingMode;
+    }
+
     public String getEventProcessingFailureHandlingMode() {
         return eventProcessingFailureHandlingMode;
     }
@@ -793,6 +934,14 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setFieldExcludeList(String fieldExcludeList) {
         this.fieldExcludeList = fieldExcludeList;
+    }
+
+    public String getFieldNameAdjustmentMode() {
+        return fieldNameAdjustmentMode;
+    }
+
+    public void setFieldNameAdjustmentMode(String fieldNameAdjustmentMode) {
+        this.fieldNameAdjustmentMode = fieldNameAdjustmentMode;
     }
 
     public String getFieldRenames() {
@@ -836,6 +985,24 @@ public class DebeziumMongodbComponentConfiguration
         this.heartbeatTopicsPrefix = heartbeatTopicsPrefix;
     }
 
+    public Boolean getIncrementalSnapshotAllowSchemaChanges() {
+        return incrementalSnapshotAllowSchemaChanges;
+    }
+
+    public void setIncrementalSnapshotAllowSchemaChanges(
+            Boolean incrementalSnapshotAllowSchemaChanges) {
+        this.incrementalSnapshotAllowSchemaChanges = incrementalSnapshotAllowSchemaChanges;
+    }
+
+    public Integer getIncrementalSnapshotChunkSize() {
+        return incrementalSnapshotChunkSize;
+    }
+
+    public void setIncrementalSnapshotChunkSize(
+            Integer incrementalSnapshotChunkSize) {
+        this.incrementalSnapshotChunkSize = incrementalSnapshotChunkSize;
+    }
+
     public String getIncrementalSnapshotWatermarkingStrategy() {
         return incrementalSnapshotWatermarkingStrategy;
     }
@@ -843,6 +1010,14 @@ public class DebeziumMongodbComponentConfiguration
     public void setIncrementalSnapshotWatermarkingStrategy(
             String incrementalSnapshotWatermarkingStrategy) {
         this.incrementalSnapshotWatermarkingStrategy = incrementalSnapshotWatermarkingStrategy;
+    }
+
+    public String getJsonSerializationMode() {
+        return jsonSerializationMode;
+    }
+
+    public void setJsonSerializationMode(String jsonSerializationMode) {
+        this.jsonSerializationMode = jsonSerializationMode;
     }
 
     public Boolean getLegacySnapshotMaxThreads() {
@@ -975,6 +1150,39 @@ public class DebeziumMongodbComponentConfiguration
     public void setNotificationEnabledChannels(
             String notificationEnabledChannels) {
         this.notificationEnabledChannels = notificationEnabledChannels;
+    }
+
+    public Boolean getNotificationHttpAllowPrivateNetworks() {
+        return notificationHttpAllowPrivateNetworks;
+    }
+
+    public void setNotificationHttpAllowPrivateNetworks(
+            Boolean notificationHttpAllowPrivateNetworks) {
+        this.notificationHttpAllowPrivateNetworks = notificationHttpAllowPrivateNetworks;
+    }
+
+    public Integer getNotificationHttpRetries() {
+        return notificationHttpRetries;
+    }
+
+    public void setNotificationHttpRetries(Integer notificationHttpRetries) {
+        this.notificationHttpRetries = notificationHttpRetries;
+    }
+
+    public Integer getNotificationHttpTimeoutMs() {
+        return notificationHttpTimeoutMs;
+    }
+
+    public void setNotificationHttpTimeoutMs(Integer notificationHttpTimeoutMs) {
+        this.notificationHttpTimeoutMs = notificationHttpTimeoutMs;
+    }
+
+    public String getNotificationHttpUrl() {
+        return notificationHttpUrl;
+    }
+
+    public void setNotificationHttpUrl(String notificationHttpUrl) {
+        this.notificationHttpUrl = notificationHttpUrl;
     }
 
     public String getNotificationSinkTopicName() {
@@ -1114,6 +1322,23 @@ public class DebeziumMongodbComponentConfiguration
         this.signalDataCollection = signalDataCollection;
     }
 
+    public Long getSignalEmitFailureBackoffMs() {
+        return signalEmitFailureBackoffMs;
+    }
+
+    public void setSignalEmitFailureBackoffMs(Long signalEmitFailureBackoffMs) {
+        this.signalEmitFailureBackoffMs = signalEmitFailureBackoffMs;
+    }
+
+    public Integer getSignalEmitFailureMaxRetries() {
+        return signalEmitFailureMaxRetries;
+    }
+
+    public void setSignalEmitFailureMaxRetries(
+            Integer signalEmitFailureMaxRetries) {
+        this.signalEmitFailureMaxRetries = signalEmitFailureMaxRetries;
+    }
+
     public String getSignalEnabledChannels() {
         return signalEnabledChannels;
     }
@@ -1128,6 +1353,14 @@ public class DebeziumMongodbComponentConfiguration
 
     public void setSignalPollIntervalMs(Long signalPollIntervalMs) {
         this.signalPollIntervalMs = signalPollIntervalMs;
+    }
+
+    public Boolean getSkipMessagesWithoutChange() {
+        return skipMessagesWithoutChange;
+    }
+
+    public void setSkipMessagesWithoutChange(Boolean skipMessagesWithoutChange) {
+        this.skipMessagesWithoutChange = skipMessagesWithoutChange;
     }
 
     public String getSkippedOperations() {

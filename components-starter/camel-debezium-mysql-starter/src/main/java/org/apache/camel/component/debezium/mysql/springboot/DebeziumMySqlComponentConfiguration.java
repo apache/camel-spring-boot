@@ -139,6 +139,14 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String bigintUnsignedHandlingMode = "long";
     /**
+     * Specify how binary (blob, binary, etc.) columns should be represented in
+     * change events, including: 'bytes' represents binary data as byte array
+     * (default); 'base64' represents binary data as base64-encoded string;
+     * 'base64-url-safe' represents binary data as base64-url-safe-encoded
+     * string; 'hex' represents binary data as hex-encoded (base16) string
+     */
+    private String binaryHandlingMode = "bytes";
+    /**
      * The size of a look-ahead buffer used by the binlog reader to decide
      * whether the transaction in progress is going to be committed or rolled
      * back. Use 0 to disable look-ahead buffering. Defaults to 0 (i.e.
@@ -190,6 +198,14 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Long connectKeepAliveIntervalMs = 60000L;
     /**
+     * Number of consecutive attempts the keep alive thread makes to restore a
+     * lost binlog connection before the connector fails. A connection that can
+     * never be restored otherwise leaves the connector running without emitting
+     * any change events. Defaults to 0, meaning the keep alive thread retries
+     * indefinitely.
+     */
+    private Integer connectKeepAliveMaxReconnectAttempts = 0;
+    /**
      * Maximum time to wait after trying to connect to the database before
      * timing out, given in milliseconds. Defaults to 30 seconds (30,000 ms).
      * The option is a int type.
@@ -202,10 +218,9 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String converters;
     /**
-     * The custom metric tags will accept key-value pairs to customize the MBean
-     * object name which should be appended the end of regular name, each key
-     * would represent a tag for the MBean object name, and the corresponding
-     * value would be the value of that tag the key is. For example: k1=v1,k2=v2
+     * A comma-separated list of key-value pairs that are appended to the MBean
+     * object name. Keys must be valid JMX ObjectName property keys. For
+     * example: k1=v1,k2=v2
      */
     private String customMetricTags;
     /**
@@ -347,6 +362,16 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Integer errorsMaxRetries = -1;
     /**
+     * Specify how failures during converting of event should be handled,
+     * including: 'fail' throw an exception that the column of event conversion
+     * is failed with unmatched schema type, causing the connector to be
+     * stopped. it could need schema recovery to covert successfully; 'warn'
+     * (the default) the value of column of event that conversion failed will be
+     * null and be logged with warn level; 'skip' the value of column of event
+     * that conversion failed will be null and be logged with debug level.
+     */
+    private String eventConvertingFailureHandlingMode = "warn";
+    /**
      * Specify how failures during deserialization of binlog events (i.e. when
      * encountering a corrupted event) should be handled, including: 'fail' (the
      * default) an exception indicating the problematic event and its binlog
@@ -375,6 +400,16 @@ public class DebeziumMySqlComponentConfiguration
      * processing systems.
      */
     private Boolean extendedHeadersEnabled = true;
+    /**
+     * Specify how field names should be adjusted for compatibility with the
+     * message converter used by the connector, including: 'avro' replaces the
+     * characters that cannot be used in the Avro type name with underscore;
+     * 'avro_unicode' replaces the underscore or characters that cannot be used
+     * in the Avro type name with corresponding unicode like _uxxxx. Note: _ is
+     * an escape sequence like backslash in Java;'none' does not apply any
+     * adjustment (default)
+     */
+    private String fieldNameAdjustmentMode = "none";
     /**
      * Whether the connector should ignore GTID during recovery and restart from
      * the binlog file and position instead. GTID mode on the server remains
@@ -551,6 +586,28 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String notificationEnabledChannels;
     /**
+     * When true, the SSRF guard permits notification URLs that resolve to
+     * loopback, site-local or link-local addresses (e.g. an in-cluster
+     * Service). Defaults to false so only public addresses are allowed.
+     */
+    private Boolean notificationHttpAllowPrivateNetworks = false;
+    /**
+     * Number of retries after the first failed HTTP notification delivery
+     * attempt. Terminal notifications (COMPLETED/ABORTED/SKIPPED) are always
+     * retried at least 3 times.
+     */
+    private Integer notificationHttpRetries = 2;
+    /**
+     * Connect and read timeout, in milliseconds, for HTTP notification
+     * delivery. The option is a int type.
+     */
+    private Integer notificationHttpTimeoutMs = 5000;
+    /**
+     * The URL to which notifications are POSTed as JSON. Required when 'http'
+     * is in the list of enabled channels.
+     */
+    private String notificationHttpUrl;
+    /**
      * The name of the topic for the notifications. This is required in case
      * 'sink' is in the list of enabled channels
      */
@@ -588,7 +645,8 @@ public class DebeziumMySqlComponentConfiguration
     private String openlineageIntegrationJobTags;
     /**
      * Time to wait for new change events to appear after receiving no events,
-     * given in milliseconds. Defaults to 500 ms. The option is a long type.
+     * given in milliseconds. Defaults to 500 ms. Values will be capped at 5000
+     * ms. The option is a long type.
      */
     private Long pollIntervalMs = 500L;
     /**
@@ -606,6 +664,13 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Integer queryFetchSize = 0;
     /**
+     * When a CREATE TABLE ... LIKE statement reference a table whose schema is
+     * not in the internal cache(e.g., excluded by table filters), automatically
+     * fetch the reference table's schema via SHOW CREATE TABLE and retry DDL
+     * parsing. Default: false.
+     */
+    private Boolean resolveCreateTableLikeSchema = false;
+    /**
      * Time to wait before restarting connector after retriable exception
      * occurs. Defaults to 10000ms. The option is a long type.
      */
@@ -621,6 +686,11 @@ public class DebeziumMySqlComponentConfiguration
      * history
      */
     private String schemaHistoryInternalFileFilename;
+    /**
+     * Controls how Debezium deduplicates identical schema objects (tables,
+     * columns, attributes) in memory using an interner.
+     */
+    private String schemaHistoryInternalMemoryOptimization = "off";
     /**
      * Controls the action Debezium will take when it meets a DDL statement in
      * binlog, that it cannot parse.By default the connector will stop operating
@@ -659,6 +729,18 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String signalDataCollection;
     /**
+     * Duration to sleep for after encountering an error emitting a window
+     * event, given in milliseconds. Defaults to 10 seconds. The option is a
+     * long type.
+     */
+    private Long signalEmitFailureBackoffMs = 10000L;
+    /**
+     * The maximum number of retries after encountering an error emitting a
+     * window event (-1 = no limit, 0 = disabled, 0 = num of retries). Defaults
+     * to 0.
+     */
+    private Integer signalEmitFailureMaxRetries = 0;
+    /**
      * List of channels names that are enabled. Source channel is enabled by
      * default
      */
@@ -668,6 +750,14 @@ public class DebeziumMySqlComponentConfiguration
      * milliseconds. Defaults to 5 seconds. The option is a long type.
      */
     private Long signalPollIntervalMs = 5000L;
+    /**
+     * Enable to skip publishing messages when there is no change in included
+     * columns.This would essentially filter messages to be sent when there is
+     * no change in columns included as per
+     * column.include.list/column.exclude.list.For Postgres - this would require
+     * REPLICA IDENTITY of table to be FULL.
+     */
+    private Boolean skipMessagesWithoutChange = false;
     /**
      * The comma-separated list of operations to skip during streaming, defined
      * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes, 't' for
@@ -853,7 +943,11 @@ public class DebeziumMySqlComponentConfiguration
      * time fields always use microseconds precision; 'connect': always
      * represents time, date and timestamp values using Kafka Connect's built-in
      * representations for Time, Date, and Timestamp, which uses millisecond
-     * precision regardless of the database columns' precision.
+     * precision regardless of the database columns' precision; 'isostring':
+     * represents time, date, and datetime values as ISO-8601 formatted strings
+     * at the UTC time zone; 'structured': represents time, date, timestamp, and
+     * datetime values as Kafka Connect structs with separate calendar and clock
+     * components.
      */
     private String timePrecisionMode = "adaptive_time_microseconds";
     /**
@@ -1010,6 +1104,14 @@ public class DebeziumMySqlComponentConfiguration
         this.bigintUnsignedHandlingMode = bigintUnsignedHandlingMode;
     }
 
+    public String getBinaryHandlingMode() {
+        return binaryHandlingMode;
+    }
+
+    public void setBinaryHandlingMode(String binaryHandlingMode) {
+        this.binaryHandlingMode = binaryHandlingMode;
+    }
+
     public Integer getBinlogBufferSize() {
         return binlogBufferSize;
     }
@@ -1081,6 +1183,15 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setConnectKeepAliveIntervalMs(Long connectKeepAliveIntervalMs) {
         this.connectKeepAliveIntervalMs = connectKeepAliveIntervalMs;
+    }
+
+    public Integer getConnectKeepAliveMaxReconnectAttempts() {
+        return connectKeepAliveMaxReconnectAttempts;
+    }
+
+    public void setConnectKeepAliveMaxReconnectAttempts(
+            Integer connectKeepAliveMaxReconnectAttempts) {
+        this.connectKeepAliveMaxReconnectAttempts = connectKeepAliveMaxReconnectAttempts;
     }
 
     public Integer getConnectTimeoutMs() {
@@ -1294,6 +1405,15 @@ public class DebeziumMySqlComponentConfiguration
         this.errorsMaxRetries = errorsMaxRetries;
     }
 
+    public String getEventConvertingFailureHandlingMode() {
+        return eventConvertingFailureHandlingMode;
+    }
+
+    public void setEventConvertingFailureHandlingMode(
+            String eventConvertingFailureHandlingMode) {
+        this.eventConvertingFailureHandlingMode = eventConvertingFailureHandlingMode;
+    }
+
     public String getEventDeserializationFailureHandlingMode() {
         return eventDeserializationFailureHandlingMode;
     }
@@ -1326,6 +1446,14 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setExtendedHeadersEnabled(Boolean extendedHeadersEnabled) {
         this.extendedHeadersEnabled = extendedHeadersEnabled;
+    }
+
+    public String getFieldNameAdjustmentMode() {
+        return fieldNameAdjustmentMode;
+    }
+
+    public void setFieldNameAdjustmentMode(String fieldNameAdjustmentMode) {
+        this.fieldNameAdjustmentMode = fieldNameAdjustmentMode;
     }
 
     public Boolean getGtidIgnoreOnRecovery() {
@@ -1536,6 +1664,39 @@ public class DebeziumMySqlComponentConfiguration
         this.notificationEnabledChannels = notificationEnabledChannels;
     }
 
+    public Boolean getNotificationHttpAllowPrivateNetworks() {
+        return notificationHttpAllowPrivateNetworks;
+    }
+
+    public void setNotificationHttpAllowPrivateNetworks(
+            Boolean notificationHttpAllowPrivateNetworks) {
+        this.notificationHttpAllowPrivateNetworks = notificationHttpAllowPrivateNetworks;
+    }
+
+    public Integer getNotificationHttpRetries() {
+        return notificationHttpRetries;
+    }
+
+    public void setNotificationHttpRetries(Integer notificationHttpRetries) {
+        this.notificationHttpRetries = notificationHttpRetries;
+    }
+
+    public Integer getNotificationHttpTimeoutMs() {
+        return notificationHttpTimeoutMs;
+    }
+
+    public void setNotificationHttpTimeoutMs(Integer notificationHttpTimeoutMs) {
+        this.notificationHttpTimeoutMs = notificationHttpTimeoutMs;
+    }
+
+    public String getNotificationHttpUrl() {
+        return notificationHttpUrl;
+    }
+
+    public void setNotificationHttpUrl(String notificationHttpUrl) {
+        this.notificationHttpUrl = notificationHttpUrl;
+    }
+
     public String getNotificationSinkTopicName() {
         return notificationSinkTopicName;
     }
@@ -1639,6 +1800,15 @@ public class DebeziumMySqlComponentConfiguration
         this.queryFetchSize = queryFetchSize;
     }
 
+    public Boolean getResolveCreateTableLikeSchema() {
+        return resolveCreateTableLikeSchema;
+    }
+
+    public void setResolveCreateTableLikeSchema(
+            Boolean resolveCreateTableLikeSchema) {
+        this.resolveCreateTableLikeSchema = resolveCreateTableLikeSchema;
+    }
+
     public Long getRetriableRestartConnectorWaitMs() {
         return retriableRestartConnectorWaitMs;
     }
@@ -1663,6 +1833,15 @@ public class DebeziumMySqlComponentConfiguration
     public void setSchemaHistoryInternalFileFilename(
             String schemaHistoryInternalFileFilename) {
         this.schemaHistoryInternalFileFilename = schemaHistoryInternalFileFilename;
+    }
+
+    public String getSchemaHistoryInternalMemoryOptimization() {
+        return schemaHistoryInternalMemoryOptimization;
+    }
+
+    public void setSchemaHistoryInternalMemoryOptimization(
+            String schemaHistoryInternalMemoryOptimization) {
+        this.schemaHistoryInternalMemoryOptimization = schemaHistoryInternalMemoryOptimization;
     }
 
     public Boolean getSchemaHistoryInternalSkipUnparseableDdl() {
@@ -1708,6 +1887,23 @@ public class DebeziumMySqlComponentConfiguration
         this.signalDataCollection = signalDataCollection;
     }
 
+    public Long getSignalEmitFailureBackoffMs() {
+        return signalEmitFailureBackoffMs;
+    }
+
+    public void setSignalEmitFailureBackoffMs(Long signalEmitFailureBackoffMs) {
+        this.signalEmitFailureBackoffMs = signalEmitFailureBackoffMs;
+    }
+
+    public Integer getSignalEmitFailureMaxRetries() {
+        return signalEmitFailureMaxRetries;
+    }
+
+    public void setSignalEmitFailureMaxRetries(
+            Integer signalEmitFailureMaxRetries) {
+        this.signalEmitFailureMaxRetries = signalEmitFailureMaxRetries;
+    }
+
     public String getSignalEnabledChannels() {
         return signalEnabledChannels;
     }
@@ -1722,6 +1918,14 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setSignalPollIntervalMs(Long signalPollIntervalMs) {
         this.signalPollIntervalMs = signalPollIntervalMs;
+    }
+
+    public Boolean getSkipMessagesWithoutChange() {
+        return skipMessagesWithoutChange;
+    }
+
+    public void setSkipMessagesWithoutChange(Boolean skipMessagesWithoutChange) {
+        this.skipMessagesWithoutChange = skipMessagesWithoutChange;
     }
 
     public String getSkippedOperations() {

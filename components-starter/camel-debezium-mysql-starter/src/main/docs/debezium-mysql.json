@@ -34,6 +34,13 @@
       "defaultValue": "long"
     },
     {
+      "name": "camel.component.debezium-mysql.binary-handling-mode",
+      "type": "java.lang.String",
+      "description": "Specify how binary (blob, binary, etc.) columns should be represented in change events, including: 'bytes' represents binary data as byte array (default); 'base64' represents binary data as base64-encoded string; 'base64-url-safe' represents binary data as base64-url-safe-encoded string; 'hex' represents binary data as hex-encoded (base16) string",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": "bytes"
+    },
+    {
       "name": "camel.component.debezium-mysql.binlog-buffer-size",
       "type": "java.lang.Integer",
       "description": "The size of a look-ahead buffer used by the binlog reader to decide whether the transaction in progress is going to be committed or rolled back. Use 0 to disable look-ahead buffering. Defaults to 0 (i.e. buffering is disabled.",
@@ -100,6 +107,13 @@
       "defaultValue": 60000
     },
     {
+      "name": "camel.component.debezium-mysql.connect-keep-alive-max-reconnect-attempts",
+      "type": "java.lang.Integer",
+      "description": "Number of consecutive attempts the keep alive thread makes to restore a lost binlog connection before the connector fails. A connection that can never be restored otherwise leaves the connector running without emitting any change events. Defaults to 0, meaning the keep alive thread retries indefinitely.",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
       "name": "camel.component.debezium-mysql.connect-timeout-ms",
       "type": "java.lang.Integer",
       "description": "Maximum time to wait after trying to connect to the database before timing out, given in milliseconds. Defaults to 30 seconds (30,000 ms). The option is a int type.",
@@ -122,7 +136,7 @@
     {
       "name": "camel.component.debezium-mysql.custom-metric-tags",
       "type": "java.lang.String",
-      "description": "The custom metric tags will accept key-value pairs to customize the MBean object name which should be appended the end of regular name, each key would represent a tag for the MBean object name, and the corresponding value would be the value of that tag the key is. For example: k1=v1,k2=v2",
+      "description": "A comma-separated list of key-value pairs that are appended to the MBean object name. Keys must be valid JMX ObjectName property keys. For example: k1=v1,k2=v2",
       "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration"
     },
     {
@@ -286,6 +300,13 @@
       "defaultValue": -1
     },
     {
+      "name": "camel.component.debezium-mysql.event-converting-failure-handling-mode",
+      "type": "java.lang.String",
+      "description": "Specify how failures during converting of event should be handled, including: 'fail' throw an exception that the column of event conversion is failed with unmatched schema type, causing the connector to be stopped. it could need schema recovery to covert successfully; 'warn' (the default) the value of column of event that conversion failed will be null and be logged with warn level; 'skip' the value of column of event that conversion failed will be null and be logged with debug level.",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": "warn"
+    },
+    {
       "name": "camel.component.debezium-mysql.event-deserialization-failure-handling-mode",
       "type": "java.lang.String",
       "description": "Specify how failures during deserialization of binlog events (i.e. when encountering a corrupted event) should be handled, including: 'fail' (the default) an exception indicating the problematic event and its binlog position is raised, causing the connector to be stopped; 'warn' the problematic event and its binlog position will be logged and the event will be skipped; 'ignore' the problematic event will be skipped.",
@@ -312,6 +333,13 @@
       "description": "Enable\/Disable Debezium context headers that provides essential metadata for tracking and identifying the source of CDC events in downstream processing systems.",
       "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.component.debezium-mysql.field-name-adjustment-mode",
+      "type": "java.lang.String",
+      "description": "Specify how field names should be adjusted for compatibility with the message converter used by the connector, including: 'avro' replaces the characters that cannot be used in the Avro type name with underscore; 'avro_unicode' replaces the underscore or characters that cannot be used in the Avro type name with corresponding unicode like _uxxxx. Note: _ is an escape sequence like backslash in Java;'none' does not apply any adjustment (default)",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": "none"
     },
     {
       "name": "camel.component.debezium-mysql.gtid-ignore-on-recovery",
@@ -498,6 +526,33 @@
       "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-mysql.notification-http-allow-private-networks",
+      "type": "java.lang.Boolean",
+      "description": "When true, the SSRF guard permits notification URLs that resolve to loopback, site-local or link-local addresses (e.g. an in-cluster Service). Defaults to false so only public addresses are allowed.",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-mysql.notification-http-retries",
+      "type": "java.lang.Integer",
+      "description": "Number of retries after the first failed HTTP notification delivery attempt. Terminal notifications (COMPLETED\/ABORTED\/SKIPPED) are always retried at least 3 times.",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": 2
+    },
+    {
+      "name": "camel.component.debezium-mysql.notification-http-timeout-ms",
+      "type": "java.lang.Integer",
+      "description": "Connect and read timeout, in milliseconds, for HTTP notification delivery. The option is a int type.",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": 5000
+    },
+    {
+      "name": "camel.component.debezium-mysql.notification-http-url",
+      "type": "java.lang.String",
+      "description": "The URL to which notifications are POSTed as JSON. Required when 'http' is in the list of enabled channels.",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration"
+    },
+    {
       "name": "camel.component.debezium-mysql.notification-sink-topic-name",
       "type": "java.lang.String",
       "description": "The name of the topic for the notifications. This is required in case 'sink' is in the list of enabled channels",
@@ -602,7 +657,7 @@
     {
       "name": "camel.component.debezium-mysql.poll-interval-ms",
       "type": "java.lang.Long",
-      "description": "Time to wait for new change events to appear after receiving no events, given in milliseconds. Defaults to 500 ms. The option is a long type.",
+      "description": "Time to wait for new change events to appear after receiving no events, given in milliseconds. Defaults to 500 ms. Values will be capped at 5000 ms. The option is a long type.",
       "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": 500
     },
@@ -627,6 +682,13 @@
       "defaultValue": 0
     },
     {
+      "name": "camel.component.debezium-mysql.resolve-create-table-like-schema",
+      "type": "java.lang.Boolean",
+      "description": "When a CREATE TABLE ... LIKE statement reference a table whose schema is not in the internal cache(e.g., excluded by table filters), automatically fetch the reference table's schema via SHOW CREATE TABLE and retry DDL parsing. Default: false.",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.debezium-mysql.retriable-restart-connector-wait-ms",
       "type": "java.lang.Long",
       "description": "Time to wait before restarting connector after retriable exception occurs. Defaults to 10000ms. The option is a long type.",
@@ -645,6 +707,13 @@
       "type": "java.lang.String",
       "description": "The path to the file that will be used to record the database schema history",
       "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-mysql.schema-history-internal-memory-optimization",
+      "type": "java.lang.String",
+      "description": "Controls how Debezium deduplicates identical schema objects (tables, columns, attributes) in memory using an interner.",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": "off"
     },
     {
       "name": "camel.component.debezium-mysql.schema-history-internal-skip-unparseable-ddl",
@@ -681,6 +750,20 @@
       "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-mysql.signal-emit-failure-backoff-ms",
+      "type": "java.lang.Long",
+      "description": "Duration to sleep for after encountering an error emitting a window event, given in milliseconds. Defaults to 10 seconds. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": 10000
+    },
+    {
+      "name": "camel.component.debezium-mysql.signal-emit-failure-max-retries",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of retries after encountering an error emitting a window event (-1 = no limit, 0 = disabled, 0 = num of retries). Defaults to 0.",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
       "name": "camel.component.debezium-mysql.signal-enabled-channels",
       "type": "java.lang.String",
       "description": "List of channels names that are enabled. Source channel is enabled by default",
@@ -693,6 +776,13 @@
       "description": "Interval for looking for new signals in registered channels, given in milliseconds. Defaults to 5 seconds. The option is a long type.",
       "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": 5000
+    },
+    {
+      "name": "camel.component.debezium-mysql.skip-messages-without-change",
+      "type": "java.lang.Boolean",
+      "description": "Enable to skip publishing messages when there is no change in included columns.This would essentially filter messages to be sent when there is no change in columns included as per column.include.list\/column.exclude.list.For Postgres - this would require REPLICA IDENTITY of table to be FULL.",
+      "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.debezium-mysql.skipped-operations",
@@ -865,7 +955,7 @@
     {
       "name": "camel.component.debezium-mysql.time-precision-mode",
       "type": "java.lang.String",
-      "description": "Time, date and timestamps can be represented with different kinds of precisions, including: 'adaptive_time_microseconds': the precision of date and timestamp values is based the database column's precision; but time fields always use microseconds precision; 'connect': always represents time, date and timestamp values using Kafka Connect's built-in representations for Time, Date, and Timestamp, which uses millisecond precision regardless of the database columns' precision.",
+      "description": "Time, date and timestamps can be represented with different kinds of precisions, including: 'adaptive_time_microseconds': the precision of date and timestamp values is based the database column's precision; but time fields always use microseconds precision; 'connect': always represents time, date and timestamp values using Kafka Connect's built-in representations for Time, Date, and Timestamp, which uses millisecond precision regardless of the database columns' precision; 'isostring': represents time, date, and datetime values as ISO-8601 formatted strings at the UTC time zone; 'structured': represents time, date, timestamp, and datetime values as Kafka Connect structs with separate calendar and clock components.",
       "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": "adaptive_time_microseconds"
     },

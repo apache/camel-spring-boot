@@ -80,7 +80,7 @@
     {
       "name": "camel.component.debezium-postgres.custom-metric-tags",
       "type": "java.lang.String",
-      "description": "The custom metric tags will accept key-value pairs to customize the MBean object name which should be appended the end of regular name, each key would represent a tag for the MBean object name, and the corresponding value would be the value of that tag the key is. For example: k1=v1,k2=v2",
+      "description": "A comma-separated list of key-value pairs that are appended to the MBean object name. Keys must be valid JMX ObjectName property keys. For example: k1=v1,k2=v2",
       "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration"
     },
     {
@@ -102,9 +102,21 @@
       "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-postgres.database-exclude-list",
+      "type": "java.lang.String",
+      "description": "A comma-separated list of regular expressions that match database names to be excluded from monitoring",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration"
+    },
+    {
       "name": "camel.component.debezium-postgres.database-hostname",
       "type": "java.lang.String",
       "description": "Resolvable hostname or IP address of the database server.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration"
+    },
+    {
+      "name": "camel.component.debezium-postgres.database-include-list",
+      "type": "java.lang.String",
+      "description": "The databases for which changes are to be captured",
       "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration"
     },
     {
@@ -210,6 +222,13 @@
       "defaultValue": -1
     },
     {
+      "name": "camel.component.debezium-postgres.event-converting-failure-handling-mode",
+      "type": "java.lang.String",
+      "description": "Specify how failures during converting of event should be handled, including: 'fail' throw an exception that the column of event conversion is failed with unmatched schema type, causing the connector to be stopped. it could need schema recovery to covert successfully; 'warn' (the default) the value of column of event that conversion failed will be null and be logged with warn level; 'skip' the value of column of event that conversion failed will be null and be logged with debug level.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": "warn"
+    },
+    {
       "name": "camel.component.debezium-postgres.event-processing-failure-handling-mode",
       "type": "java.lang.String",
       "description": "Specify how failures during processing of events (i.e. when encountering a corrupted event) should be handled, including: 'fail' (the default) an exception indicating the problematic event and its position is raised, causing the connector to be stopped; 'warn' the problematic event and its position will be logged and the event will be skipped; 'ignore' the problematic event will be skipped.",
@@ -229,6 +248,13 @@
       "description": "Enable\/Disable Debezium context headers that provides essential metadata for tracking and identifying the source of CDC events in downstream processing systems.",
       "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.component.debezium-postgres.field-name-adjustment-mode",
+      "type": "java.lang.String",
+      "description": "Specify how field names should be adjusted for compatibility with the message converter used by the connector, including: 'avro' replaces the characters that cannot be used in the Avro type name with underscore; 'avro_unicode' replaces the underscore or characters that cannot be used in the Avro type name with corresponding unicode like _uxxxx. Note: _ is an escape sequence like backslash in Java;'none' does not apply any adjustment (default)",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": "none"
     },
     {
       "name": "camel.component.debezium-postgres.guardrail-collections-limit-action",
@@ -282,6 +308,13 @@
       "name": "camel.component.debezium-postgres.include-unknown-datatypes",
       "type": "java.lang.Boolean",
       "description": "Specify whether the fields of data type not supported by Debezium should be processed: 'false' (the default) omits the fields; 'true' converts the field into an implementation dependent binary representation.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-postgres.incremental-snapshot-allow-schema-changes",
+      "type": "java.lang.Boolean",
+      "description": "Detect schema change during an incremental snapshot and re-select a current chunk to avoid locking DDLs. Note that changes to a primary key are not supported and can cause incorrect results if performed during an incremental snapshot. Another limitation is that if a schema change affects only columns' default values, then the change won't be detected until the DDL is processed from the binlog stream. This doesn't affect the snapshot events' values, but the schema of snapshot events may have outdated defaults.",
       "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
       "defaultValue": false
     },
@@ -407,6 +440,33 @@
       "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-postgres.notification-http-allow-private-networks",
+      "type": "java.lang.Boolean",
+      "description": "When true, the SSRF guard permits notification URLs that resolve to loopback, site-local or link-local addresses (e.g. an in-cluster Service). Defaults to false so only public addresses are allowed.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.debezium-postgres.notification-http-retries",
+      "type": "java.lang.Integer",
+      "description": "Number of retries after the first failed HTTP notification delivery attempt. Terminal notifications (COMPLETED\/ABORTED\/SKIPPED) are always retried at least 3 times.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": 2
+    },
+    {
+      "name": "camel.component.debezium-postgres.notification-http-timeout-ms",
+      "type": "java.lang.Integer",
+      "description": "Connect and read timeout, in milliseconds, for HTTP notification delivery. The option is a int type.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": 5000
+    },
+    {
+      "name": "camel.component.debezium-postgres.notification-http-url",
+      "type": "java.lang.String",
+      "description": "The URL to which notifications are POSTed as JSON. Required when 'http' is in the list of enabled channels.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration"
+    },
+    {
       "name": "camel.component.debezium-postgres.notification-sink-topic-name",
       "type": "java.lang.String",
       "description": "The name of the topic for the notifications. This is required in case 'sink' is in the list of enabled channels",
@@ -518,7 +578,7 @@
     {
       "name": "camel.component.debezium-postgres.poll-interval-ms",
       "type": "java.lang.Long",
-      "description": "Time to wait for new change events to appear after receiving no events, given in milliseconds. Defaults to 500 ms. The option is a long type.",
+      "description": "Time to wait for new change events to appear after receiving no events, given in milliseconds. Defaults to 500 ms. Values will be capped at 5000 ms. The option is a long type.",
       "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
       "defaultValue": 500
     },
@@ -615,6 +675,20 @@
       "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration"
     },
     {
+      "name": "camel.component.debezium-postgres.signal-emit-failure-backoff-ms",
+      "type": "java.lang.Long",
+      "description": "Duration to sleep for after encountering an error emitting a window event, given in milliseconds. Defaults to 10 seconds. The option is a long type.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": 10000
+    },
+    {
+      "name": "camel.component.debezium-postgres.signal-emit-failure-max-retries",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of retries after encountering an error emitting a window event (-1 = no limit, 0 = disabled, 0 = num of retries). Defaults to 0.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
       "name": "camel.component.debezium-postgres.signal-enabled-channels",
       "type": "java.lang.String",
       "description": "List of channels names that are enabled. Source channel is enabled by default",
@@ -627,6 +701,13 @@
       "description": "Interval for looking for new signals in registered channels, given in milliseconds. Defaults to 5 seconds. The option is a long type.",
       "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
       "defaultValue": 5000
+    },
+    {
+      "name": "camel.component.debezium-postgres.skip-messages-without-change",
+      "type": "java.lang.Boolean",
+      "description": "Enable to skip publishing messages when there is no change in included columns.This would essentially filter messages to be sent when there is no change in columns included as per column.include.list\/column.exclude.list.For Postgres - this would require REPLICA IDENTITY of table to be FULL.",
+      "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.debezium-postgres.skipped-operations",
@@ -860,7 +941,7 @@
     {
       "name": "camel.component.debezium-postgres.time-precision-mode",
       "type": "java.lang.String",
-      "description": "Time, date, and timestamps can be represented with different kinds of precisions, including: 'adaptive' (the default) bases the precision of time, date, and timestamp values on the database column's precision; 'adaptive_time_microseconds' like 'adaptive' mode, but TIME fields always use microseconds precision; 'connect' always represents time, date, and timestamp values using Kafka Connect's built-in representations for Time, Date, and Timestamp, which uses millisecond precision regardless of the database columns' precision; 'isostring' represents time, date, and timestamp values as ISO-8601 formatted strings at the UTC time zone; 'microseconds' always represents time, date, and timestamp values using microsecond precision; 'nanoseconds' always represents time, date, and timestamp values using nanosecond precision.",
+      "description": "Time, date, and timestamps can be represented with different kinds of precisions, including: 'adaptive' (the default) bases the precision of time, date, and timestamp values on the database column's precision; 'adaptive_time_microseconds' like 'adaptive' mode, but TIME fields always use microseconds precision; 'connect' always represents time, date, and timestamp values using Kafka Connect's built-in representations for Time, Date, and Timestamp, which uses millisecond precision regardless of the database columns' precision; 'isostring' represents time, date, and timestamp values as ISO-8601 formatted strings at the UTC time zone; 'structured' represents time, date, timestamp, and datetime values as Kafka Connect structs with separate calendar and clock components; 'microseconds' always represents time, date, and timestamp values using microsecond precision; 'nanoseconds' always represents time, date, and timestamp values using nanosecond precision.",
       "sourceType": "org.apache.camel.component.debezium.postgres.springboot.DebeziumPostgresComponentConfiguration",
       "defaultValue": "adaptive"
     },

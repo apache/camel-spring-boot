@@ -165,10 +165,9 @@ public class DebeziumDb2ComponentConfiguration
      */
     private String converters;
     /**
-     * The custom metric tags will accept key-value pairs to customize the MBean
-     * object name which should be appended the end of regular name, each key
-     * would represent a tag for the MBean object name, and the corresponding
-     * value would be the value of that tag the key is. For example: k1=v1,k2=v2
+     * A comma-separated list of key-value pairs that are appended to the MBean
+     * object name. Keys must be valid JMX ObjectName property keys. For
+     * example: k1=v1,k2=v2
      */
     private String customMetricTags;
     /**
@@ -182,9 +181,18 @@ public class DebeziumDb2ComponentConfiguration
      */
     private String databaseDbname;
     /**
+     * A comma-separated list of regular expressions that match database names
+     * to be excluded from monitoring
+     */
+    private String databaseExcludeList;
+    /**
      * Resolvable hostname or IP address of the database server.
      */
     private String databaseHostname;
+    /**
+     * The databases for which changes are to be captured
+     */
+    private String databaseIncludeList;
     /**
      * Password of the database user to be used when connecting to the database.
      */
@@ -193,6 +201,12 @@ public class DebeziumDb2ComponentConfiguration
      * Port of the database server.
      */
     private Integer databasePort = 50000;
+    /**
+     * Time to wait for a query to execute, given in milliseconds. Defaults to
+     * 600 seconds (600,000 ms); zero means there is no limit. The option is a
+     * int type.
+     */
+    private Integer databaseQueryTimeoutMs = 600000;
     /**
      * Name of the database user to be used when connecting to the database.
      */
@@ -226,6 +240,16 @@ public class DebeziumDb2ComponentConfiguration
      */
     private Integer errorsMaxRetries = -1;
     /**
+     * Specify how failures during converting of event should be handled,
+     * including: 'fail' throw an exception that the column of event conversion
+     * is failed with unmatched schema type, causing the connector to be
+     * stopped. it could need schema recovery to covert successfully; 'warn'
+     * (the default) the value of column of event that conversion failed will be
+     * null and be logged with warn level; 'skip' the value of column of event
+     * that conversion failed will be null and be logged with debug level.
+     */
+    private String eventConvertingFailureHandlingMode = "warn";
+    /**
      * Specify how failures during processing of events (i.e. when encountering
      * a corrupted event) should be handled, including: 'fail' (the default) an
      * exception indicating the problematic event and its position is raised,
@@ -245,6 +269,16 @@ public class DebeziumDb2ComponentConfiguration
      * processing systems.
      */
     private Boolean extendedHeadersEnabled = true;
+    /**
+     * Specify how field names should be adjusted for compatibility with the
+     * message converter used by the connector, including: 'avro' replaces the
+     * characters that cannot be used in the Avro type name with underscore;
+     * 'avro_unicode' replaces the underscore or characters that cannot be used
+     * in the Avro type name with corresponding unicode like _uxxxx. Note: _ is
+     * an escape sequence like backslash in Java;'none' does not apply any
+     * adjustment (default)
+     */
+    private String fieldNameAdjustmentMode = "none";
     /**
      * Specify the action to take when a guardrail collections limit is
      * exceeded: 'warn' (the default) logs a warning message and continues
@@ -348,6 +382,28 @@ public class DebeziumDb2ComponentConfiguration
      */
     private String notificationEnabledChannels;
     /**
+     * When true, the SSRF guard permits notification URLs that resolve to
+     * loopback, site-local or link-local addresses (e.g. an in-cluster
+     * Service). Defaults to false so only public addresses are allowed.
+     */
+    private Boolean notificationHttpAllowPrivateNetworks = false;
+    /**
+     * Number of retries after the first failed HTTP notification delivery
+     * attempt. Terminal notifications (COMPLETED/ABORTED/SKIPPED) are always
+     * retried at least 3 times.
+     */
+    private Integer notificationHttpRetries = 2;
+    /**
+     * Connect and read timeout, in milliseconds, for HTTP notification
+     * delivery. The option is a int type.
+     */
+    private Integer notificationHttpTimeoutMs = 5000;
+    /**
+     * The URL to which notifications are POSTed as JSON. Required when 'http'
+     * is in the list of enabled channels.
+     */
+    private String notificationHttpUrl;
+    /**
      * The name of the topic for the notifications. This is required in case
      * 'sink' is in the list of enabled channels
      */
@@ -385,7 +441,8 @@ public class DebeziumDb2ComponentConfiguration
     private String openlineageIntegrationJobTags;
     /**
      * Time to wait for new change events to appear after receiving no events,
-     * given in milliseconds. Defaults to 500 ms. The option is a long type.
+     * given in milliseconds. Defaults to 500 ms. Values will be capped at 5000
+     * ms. The option is a long type.
      */
     private Long pollIntervalMs = 500L;
     /**
@@ -419,6 +476,11 @@ public class DebeziumDb2ComponentConfiguration
      * history
      */
     private String schemaHistoryInternalFileFilename;
+    /**
+     * Controls how Debezium deduplicates identical schema objects (tables,
+     * columns, attributes) in memory using an interner.
+     */
+    private String schemaHistoryInternalMemoryOptimization = "off";
     /**
      * Controls the action Debezium will take when it meets a DDL statement in
      * binlog, that it cannot parse.By default the connector will stop operating
@@ -457,6 +519,18 @@ public class DebeziumDb2ComponentConfiguration
      */
     private String signalDataCollection;
     /**
+     * Duration to sleep for after encountering an error emitting a window
+     * event, given in milliseconds. Defaults to 10 seconds. The option is a
+     * long type.
+     */
+    private Long signalEmitFailureBackoffMs = 10000L;
+    /**
+     * The maximum number of retries after encountering an error emitting a
+     * window event (-1 = no limit, 0 = disabled, 0 = num of retries). Defaults
+     * to 0.
+     */
+    private Integer signalEmitFailureMaxRetries = 0;
+    /**
      * List of channels names that are enabled. Source channel is enabled by
      * default
      */
@@ -466,6 +540,14 @@ public class DebeziumDb2ComponentConfiguration
      * milliseconds. Defaults to 5 seconds. The option is a long type.
      */
     private Long signalPollIntervalMs = 5000L;
+    /**
+     * Enable to skip publishing messages when there is no change in included
+     * columns.This would essentially filter messages to be sent when there is
+     * no change in columns included as per
+     * column.include.list/column.exclude.list.For Postgres - this would require
+     * REPLICA IDENTITY of table to be FULL.
+     */
+    private Boolean skipMessagesWithoutChange = false;
     /**
      * The comma-separated list of operations to skip during streaming, defined
      * as: 'c' for inserts/create; 'u' for updates; 'd' for deletes, 't' for
@@ -488,6 +570,33 @@ public class DebeziumDb2ComponentConfiguration
      * snapshot must be taken on creating or restarting the connector.
      */
     private String snapshotIncludeCollectionList;
+    /**
+     * Controls which transaction isolation level is used and how long the
+     * connector locks the monitored tables. The default is 'repeatable_read',
+     * which means that repeatable read isolation level is used. In addition,
+     * exclusive locks are taken only during schema snapshot. Using a value of
+     * 'exclusive' ensures that the connector holds the exclusive lock (and thus
+     * prevents any reads and updates) for all monitored tables during the
+     * entire snapshot duration. In 'read_committed' mode no table locks or any
+     * long-lasting row-level locks are acquired, but connector does not
+     * guarantee snapshot consistency.In 'read_uncommitted' mode neither table
+     * nor row-level locks are acquired, but connector does not guarantee
+     * snapshot consistency.
+     */
+    private String snapshotIsolationMode = "repeatable_read";
+    /**
+     * Controls how the connector holds locks on tables while performing the
+     * schema snapshot when snapshot.isolation.mode is REPEATABLE_READ or
+     * EXCLUSIVE. The 'exclusive' which means the connector will hold a table
+     * lock for exclusive table access for just the initial portion of the
+     * snapshot while the database schemas and other metadata are being read.
+     * The remaining work in a snapshot involves selecting all rows from each
+     * table, and this is done using a flashback query that requires no locks.
+     * However, in some cases it may be desirable to avoid locks entirely which
+     * can be done by specifying 'none'. This mode is only safe to use if no
+     * schema changes are happening while the snapshot is taken.
+     */
+    private String snapshotLockingMode = "exclusive";
     /**
      * The maximum number of millis to wait for table locks at the beginning of
      * a snapshot. If locks cannot be acquired in this time frame, the snapshot
@@ -584,6 +693,13 @@ public class DebeziumDb2ComponentConfiguration
      */
     private Long streamingDelayMs = 0L;
     /**
+     * The maximum number of seconds for a streaming query to include that
+     * query's result set, starting from the earliest row in this query. Used to
+     * limit the size of queries when the change table is large to avoid
+     * excessive resource usage. If 0, no timespan limit will apply.
+     */
+    private Integer streamingQueryTimespanSeconds = 0;
+    /**
      * A comma-separated list of regular expressions that match the
      * fully-qualified names of tables to be excluded from monitoring
      */
@@ -606,6 +722,8 @@ public class DebeziumDb2ComponentConfiguration
      * Date, and Timestamp, which uses millisecond precision regardless of the
      * database columns' precision; 'isostring' represents time, date, and
      * timestamp values as ISO-8601 formatted strings at the UTC time zone;
+     * 'structured' represents time, date, timestamp, and datetime values as
+     * Kafka Connect structs with separate calendar and clock components;
      * 'microseconds' always represents time, date, and timestamp values using
      * microsecond precision; 'nanoseconds' always represents time, date, and
      * timestamp values using nanosecond precision.
@@ -637,6 +755,54 @@ public class DebeziumDb2ComponentConfiguration
      * Class to make transaction context & transaction struct/schemas
      */
     private String transactionMetadataFactory = "io.debezium.pipeline.txmetadata.DefaultTransactionMetadataFactory";
+    /**
+     * The apply_qual name that represents the apply agent (this instance) to
+     * the subscription set.
+     */
+    private String updateCaptureTablePruneApplyQual;
+    /**
+     * A switch to control if the connector instance is responsible for updating
+     * the prune table (usually done by IBM Apply agent) which will cause the
+     * IBM Capture agent to prune read data from the change tables. default
+     * false.
+     */
+    private Boolean updateCaptureTablePruneInd = false;
+    /**
+     * An switch to decrement the prune lsn/syncpoint by one to avoid allowing
+     * the last lsn processed to get pruned to avoid the risk of an unnecessary
+     * snapshot due to the last processed lsn not being present in the change
+     * table.
+     */
+    private Boolean updateCaptureTablePruneLsnDecrement = true;
+    /**
+     * The minimum number of milliseconds between the connector instance's
+     * update of the prune point for the subscription set. Default is 10000 (10
+     * seconds). The option is a int type.
+     */
+    private Integer updateCaptureTablePruneMinIntervalMs = 10000;
+    /**
+     * The name of a prepared statement in the database that will be used
+     * instead of direct sql to allow for DBA control of the update code where
+     * needed.
+     */
+    private String updateCaptureTablePruneProcedureOverrideName;
+    /**
+     * If set to update the prune table, this will identify the prune set name
+     * that should be used when updating the table for this instance.
+     */
+    private String updateCaptureTablePruneSetName;
+    /**
+     * The target_server name that represents the apply agent's target (where
+     * the data is going) for the subscription set.
+     */
+    private String updateCaptureTablePruneTargetServer;
+    /**
+     * If true, causes the connector to ignore the stop LSN value from the
+     * IBMSNAP_REGISTER.CD_OLD_SYNCHPOINT column when polling. Apply this if
+     * events are getting dropped due to the stop LSN being smaller than the
+     * current range of LSNs. Only applies to z/OS platform.
+     */
+    private Boolean zStopLsnIgnore = false;
 
     public Map<String, Object> getAdditionalProperties() {
         return additionalProperties;
@@ -833,12 +999,28 @@ public class DebeziumDb2ComponentConfiguration
         this.databaseDbname = databaseDbname;
     }
 
+    public String getDatabaseExcludeList() {
+        return databaseExcludeList;
+    }
+
+    public void setDatabaseExcludeList(String databaseExcludeList) {
+        this.databaseExcludeList = databaseExcludeList;
+    }
+
     public String getDatabaseHostname() {
         return databaseHostname;
     }
 
     public void setDatabaseHostname(String databaseHostname) {
         this.databaseHostname = databaseHostname;
+    }
+
+    public String getDatabaseIncludeList() {
+        return databaseIncludeList;
+    }
+
+    public void setDatabaseIncludeList(String databaseIncludeList) {
+        this.databaseIncludeList = databaseIncludeList;
     }
 
     public String getDatabasePassword() {
@@ -855,6 +1037,14 @@ public class DebeziumDb2ComponentConfiguration
 
     public void setDatabasePort(Integer databasePort) {
         this.databasePort = databasePort;
+    }
+
+    public Integer getDatabaseQueryTimeoutMs() {
+        return databaseQueryTimeoutMs;
+    }
+
+    public void setDatabaseQueryTimeoutMs(Integer databaseQueryTimeoutMs) {
+        this.databaseQueryTimeoutMs = databaseQueryTimeoutMs;
     }
 
     public String getDatabaseUser() {
@@ -898,6 +1088,15 @@ public class DebeziumDb2ComponentConfiguration
         this.errorsMaxRetries = errorsMaxRetries;
     }
 
+    public String getEventConvertingFailureHandlingMode() {
+        return eventConvertingFailureHandlingMode;
+    }
+
+    public void setEventConvertingFailureHandlingMode(
+            String eventConvertingFailureHandlingMode) {
+        this.eventConvertingFailureHandlingMode = eventConvertingFailureHandlingMode;
+    }
+
     public String getEventProcessingFailureHandlingMode() {
         return eventProcessingFailureHandlingMode;
     }
@@ -921,6 +1120,14 @@ public class DebeziumDb2ComponentConfiguration
 
     public void setExtendedHeadersEnabled(Boolean extendedHeadersEnabled) {
         this.extendedHeadersEnabled = extendedHeadersEnabled;
+    }
+
+    public String getFieldNameAdjustmentMode() {
+        return fieldNameAdjustmentMode;
+    }
+
+    public void setFieldNameAdjustmentMode(String fieldNameAdjustmentMode) {
+        this.fieldNameAdjustmentMode = fieldNameAdjustmentMode;
     }
 
     public String getGuardrailCollectionsLimitAction() {
@@ -1047,6 +1254,39 @@ public class DebeziumDb2ComponentConfiguration
     public void setNotificationEnabledChannels(
             String notificationEnabledChannels) {
         this.notificationEnabledChannels = notificationEnabledChannels;
+    }
+
+    public Boolean getNotificationHttpAllowPrivateNetworks() {
+        return notificationHttpAllowPrivateNetworks;
+    }
+
+    public void setNotificationHttpAllowPrivateNetworks(
+            Boolean notificationHttpAllowPrivateNetworks) {
+        this.notificationHttpAllowPrivateNetworks = notificationHttpAllowPrivateNetworks;
+    }
+
+    public Integer getNotificationHttpRetries() {
+        return notificationHttpRetries;
+    }
+
+    public void setNotificationHttpRetries(Integer notificationHttpRetries) {
+        this.notificationHttpRetries = notificationHttpRetries;
+    }
+
+    public Integer getNotificationHttpTimeoutMs() {
+        return notificationHttpTimeoutMs;
+    }
+
+    public void setNotificationHttpTimeoutMs(Integer notificationHttpTimeoutMs) {
+        this.notificationHttpTimeoutMs = notificationHttpTimeoutMs;
+    }
+
+    public String getNotificationHttpUrl() {
+        return notificationHttpUrl;
+    }
+
+    public void setNotificationHttpUrl(String notificationHttpUrl) {
+        this.notificationHttpUrl = notificationHttpUrl;
     }
 
     public String getNotificationSinkTopicName() {
@@ -1178,6 +1418,15 @@ public class DebeziumDb2ComponentConfiguration
         this.schemaHistoryInternalFileFilename = schemaHistoryInternalFileFilename;
     }
 
+    public String getSchemaHistoryInternalMemoryOptimization() {
+        return schemaHistoryInternalMemoryOptimization;
+    }
+
+    public void setSchemaHistoryInternalMemoryOptimization(
+            String schemaHistoryInternalMemoryOptimization) {
+        this.schemaHistoryInternalMemoryOptimization = schemaHistoryInternalMemoryOptimization;
+    }
+
     public Boolean getSchemaHistoryInternalSkipUnparseableDdl() {
         return schemaHistoryInternalSkipUnparseableDdl;
     }
@@ -1221,6 +1470,23 @@ public class DebeziumDb2ComponentConfiguration
         this.signalDataCollection = signalDataCollection;
     }
 
+    public Long getSignalEmitFailureBackoffMs() {
+        return signalEmitFailureBackoffMs;
+    }
+
+    public void setSignalEmitFailureBackoffMs(Long signalEmitFailureBackoffMs) {
+        this.signalEmitFailureBackoffMs = signalEmitFailureBackoffMs;
+    }
+
+    public Integer getSignalEmitFailureMaxRetries() {
+        return signalEmitFailureMaxRetries;
+    }
+
+    public void setSignalEmitFailureMaxRetries(
+            Integer signalEmitFailureMaxRetries) {
+        this.signalEmitFailureMaxRetries = signalEmitFailureMaxRetries;
+    }
+
     public String getSignalEnabledChannels() {
         return signalEnabledChannels;
     }
@@ -1235,6 +1501,14 @@ public class DebeziumDb2ComponentConfiguration
 
     public void setSignalPollIntervalMs(Long signalPollIntervalMs) {
         this.signalPollIntervalMs = signalPollIntervalMs;
+    }
+
+    public Boolean getSkipMessagesWithoutChange() {
+        return skipMessagesWithoutChange;
+    }
+
+    public void setSkipMessagesWithoutChange(Boolean skipMessagesWithoutChange) {
+        this.skipMessagesWithoutChange = skipMessagesWithoutChange;
     }
 
     public String getSkippedOperations() {
@@ -1268,6 +1542,22 @@ public class DebeziumDb2ComponentConfiguration
     public void setSnapshotIncludeCollectionList(
             String snapshotIncludeCollectionList) {
         this.snapshotIncludeCollectionList = snapshotIncludeCollectionList;
+    }
+
+    public String getSnapshotIsolationMode() {
+        return snapshotIsolationMode;
+    }
+
+    public void setSnapshotIsolationMode(String snapshotIsolationMode) {
+        this.snapshotIsolationMode = snapshotIsolationMode;
+    }
+
+    public String getSnapshotLockingMode() {
+        return snapshotLockingMode;
+    }
+
+    public void setSnapshotLockingMode(String snapshotLockingMode) {
+        this.snapshotLockingMode = snapshotLockingMode;
     }
 
     public Long getSnapshotLockTimeoutMs() {
@@ -1390,6 +1680,15 @@ public class DebeziumDb2ComponentConfiguration
         this.streamingDelayMs = streamingDelayMs;
     }
 
+    public Integer getStreamingQueryTimespanSeconds() {
+        return streamingQueryTimespanSeconds;
+    }
+
+    public void setStreamingQueryTimespanSeconds(
+            Integer streamingQueryTimespanSeconds) {
+        this.streamingQueryTimespanSeconds = streamingQueryTimespanSeconds;
+    }
+
     public String getTableExcludeList() {
         return tableExcludeList;
     }
@@ -1452,5 +1751,75 @@ public class DebeziumDb2ComponentConfiguration
 
     public void setTransactionMetadataFactory(String transactionMetadataFactory) {
         this.transactionMetadataFactory = transactionMetadataFactory;
+    }
+
+    public String getUpdateCaptureTablePruneApplyQual() {
+        return updateCaptureTablePruneApplyQual;
+    }
+
+    public void setUpdateCaptureTablePruneApplyQual(
+            String updateCaptureTablePruneApplyQual) {
+        this.updateCaptureTablePruneApplyQual = updateCaptureTablePruneApplyQual;
+    }
+
+    public Boolean getUpdateCaptureTablePruneInd() {
+        return updateCaptureTablePruneInd;
+    }
+
+    public void setUpdateCaptureTablePruneInd(Boolean updateCaptureTablePruneInd) {
+        this.updateCaptureTablePruneInd = updateCaptureTablePruneInd;
+    }
+
+    public Boolean getUpdateCaptureTablePruneLsnDecrement() {
+        return updateCaptureTablePruneLsnDecrement;
+    }
+
+    public void setUpdateCaptureTablePruneLsnDecrement(
+            Boolean updateCaptureTablePruneLsnDecrement) {
+        this.updateCaptureTablePruneLsnDecrement = updateCaptureTablePruneLsnDecrement;
+    }
+
+    public Integer getUpdateCaptureTablePruneMinIntervalMs() {
+        return updateCaptureTablePruneMinIntervalMs;
+    }
+
+    public void setUpdateCaptureTablePruneMinIntervalMs(
+            Integer updateCaptureTablePruneMinIntervalMs) {
+        this.updateCaptureTablePruneMinIntervalMs = updateCaptureTablePruneMinIntervalMs;
+    }
+
+    public String getUpdateCaptureTablePruneProcedureOverrideName() {
+        return updateCaptureTablePruneProcedureOverrideName;
+    }
+
+    public void setUpdateCaptureTablePruneProcedureOverrideName(
+            String updateCaptureTablePruneProcedureOverrideName) {
+        this.updateCaptureTablePruneProcedureOverrideName = updateCaptureTablePruneProcedureOverrideName;
+    }
+
+    public String getUpdateCaptureTablePruneSetName() {
+        return updateCaptureTablePruneSetName;
+    }
+
+    public void setUpdateCaptureTablePruneSetName(
+            String updateCaptureTablePruneSetName) {
+        this.updateCaptureTablePruneSetName = updateCaptureTablePruneSetName;
+    }
+
+    public String getUpdateCaptureTablePruneTargetServer() {
+        return updateCaptureTablePruneTargetServer;
+    }
+
+    public void setUpdateCaptureTablePruneTargetServer(
+            String updateCaptureTablePruneTargetServer) {
+        this.updateCaptureTablePruneTargetServer = updateCaptureTablePruneTargetServer;
+    }
+
+    public Boolean getZStopLsnIgnore() {
+        return zStopLsnIgnore;
+    }
+
+    public void setZStopLsnIgnore(Boolean zStopLsnIgnore) {
+        this.zStopLsnIgnore = zStopLsnIgnore;
     }
 }
