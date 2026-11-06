@@ -40,7 +40,7 @@
     {
       "name": "camel.dataformat.base64.url-safe",
       "type": "java.lang.Boolean",
-      "description": "Instead of emitting and \/ we emit - and _ respectively. urlSafe is only applied to encode operations. Decoding seamlessly handles both modes.",
+      "description": "Instead of emitting + and \/ we emit - and _ respectively. urlSafe is only applied to encode operations. Decoding seamlessly handles both modes.",
       "sourceType": "org.apache.camel.dataformat.base64.springboot.Base64DataFormatConfiguration",
       "defaultValue": false
     }

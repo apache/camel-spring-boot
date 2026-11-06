@@ -16,7 +16,7 @@
     {
       "name": "camel.component.rocketmq.access-channel",
       "type": "java.lang.String",
-      "description": "Access channel of RocketMQ cluster. LOCAL or CLOUD, LOCAL by default",
+      "description": "Access channel of RocketMQ cluster. LOCAL or CLOUD, [LOCAL] by default",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
       "defaultValue": "LOCAL"
     },
@@ -74,7 +74,7 @@
     {
       "name": "camel.component.rocketmq.message-selector-type",
       "type": "java.lang.String",
-      "description": "Message Selector Type, TAG or SQL TAG by default",
+      "description": "Message Selector Type, TAG or SQL [TAG] by default",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
       "defaultValue": "tag"
     },
@@ -145,7 +145,7 @@
     {
       "name": "camel.component.rocketmq.subscribe-tags",
       "type": "java.lang.String",
-      "description": "Subscribe tags of consumer. Multiple tags could be split by , such as TagATagB",
+      "description": "Subscribe tags of consumer. Multiple tags could be split by ||, such as TagA||TagB",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
       "defaultValue": "*"
     },

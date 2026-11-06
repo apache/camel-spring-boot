@@ -14,6 +14,13 @@
   ],
   "properties": [
     {
+      "name": "camel.component.dapr.allow-secret-store-and-key-from-headers",
+      "type": "java.lang.Boolean",
+      "description": "Whether to allow overriding the secret store, the key and the metadata of the endpoint with the CamelDaprSecretStore, CamelDaprKey and CamelDaprMetadata headers for the secret operation. Disabled by default; enable it only when the header source is trusted, since it lets a message choose the secret store and the secret that the secret operation reads.",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.dapr.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
@@ -153,6 +160,12 @@
       "name": "camel.component.dapr.lock-owner",
       "type": "java.lang.String",
       "description": "The lock owner identifier for the lock",
+      "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
+    },
+    {
+      "name": "camel.component.dapr.metadata",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "description": "Additional key-value pairs to pass to the Dapr building block, such as metadata.namespace=production. The CamelDaprMetadata header takes the place of these for one message, except for the secret operation unless allowSecretStoreAndKeyFromHeaders is enabled. This is a multi-value option with prefix: metadata.",
       "sourceType": "org.apache.camel.component.dapr.springboot.DaprComponentConfiguration"
     },
     {

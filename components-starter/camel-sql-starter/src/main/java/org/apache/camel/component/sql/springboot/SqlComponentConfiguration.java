@@ -105,7 +105,7 @@ public class SqlComponentConfiguration
     private Boolean serviceLocationEnabled = true;
     /**
      * Sets whether to use placeholder and replace all placeholder characters
-     * with sign in the SQL queries. This option is default true
+     * with ? sign in the SQL queries. This option is default true
      */
     private Boolean usePlaceholder = true;
     /**

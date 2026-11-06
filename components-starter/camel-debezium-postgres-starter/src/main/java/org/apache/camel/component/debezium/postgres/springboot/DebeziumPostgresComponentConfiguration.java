@@ -591,8 +591,8 @@ public class DebeziumPostgresComponentConfiguration
      */
     private String publicationAutocreateMode = "all_tables";
     /**
-     * The name of the Postgres 10 publication used for streaming changes from a
-     * plugin. Defaults to 'dbz_publication'
+     * The name of the Postgres 10+ publication used for streaming changes from
+     * a plugin. Defaults to 'dbz_publication'
      */
     private String publicationName = "dbz_publication";
     /**
@@ -718,7 +718,7 @@ public class DebeziumPostgresComponentConfiguration
     /**
      * Whether or not to create a failover slot. This is only supported when
      * connecting to a primary server of a Postgres cluster, version 17 or
-     * newer. When not specified, or when not connecting to a Postgres 17
+     * newer. When not specified, or when not connecting to a Postgres 17+
      * primary, no failover slot will be created.
      */
     private Boolean slotFailover = false;
@@ -804,7 +804,7 @@ public class DebeziumPostgresComponentConfiguration
      * default behavior is to take 'row_count/snapshot.max.threads' to compute
      * the number of rows per chunks. This may not be ideal for larger tables,
      * and using the multiplier, the formula is adjusted to increase the number
-     * of chunks by using 'row_count/(snapshot.max.threads
+     * of chunks by using 'row_count/(snapshot.max.threads *
      * snapshot.max.threads.multiplier).
      */
     private Integer snapshotMaxThreadsMultiplier = 1;
@@ -880,8 +880,8 @@ public class DebeziumPostgresComponentConfiguration
      * specific connectors. Select statements for the individual tables are
      * specified in further configuration properties, one for each table,
      * identified by the id
-     * 'snapshot.select.statement.overrides.DB_NAME.TABLE_NAME' or
-     * 'snapshot.select.statement.overrides.SCHEMA_NAME.TABLE_NAME',
+     * 'snapshot.select.statement.overrides.[DB_NAME].[TABLE_NAME]' or
+     * 'snapshot.select.statement.overrides.[SCHEMA_NAME].[TABLE_NAME]',
      * respectively. The value of those properties is the select statement to
      * use when retrieving data from the specific table during snapshotting. A
      * possible use case for large append-only tables is setting a specific

@@ -141,7 +141,7 @@
     {
       "name": "camel.component.ssh.kex",
       "type": "java.lang.String",
-      "description": "Comma-separated list of allowed\/supported key exchange algorithms in their order of preference.",
+      "description": "Comma-separated list of allowed\/supported key exchange algorithms in their **order** of preference.",
       "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
     },
     {
@@ -172,7 +172,7 @@
     {
       "name": "camel.component.ssh.macs",
       "type": "java.lang.String",
-      "description": "Comma-separated list of allowed\/supported message authentication code algorithms in their order of preference. The MAC algorithm is used for data integrity protection.",
+      "description": "Comma-separated list of allowed\/supported message authentication code algorithms in their **order** of preference. The MAC algorithm is used for data integrity protection.",
       "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
     },
     {

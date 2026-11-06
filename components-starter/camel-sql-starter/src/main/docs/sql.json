@@ -145,7 +145,7 @@
     {
       "name": "camel.component.sql.use-placeholder",
       "type": "java.lang.Boolean",
-      "description": "Sets whether to use placeholder and replace all placeholder characters with sign in the SQL queries. This option is default true",
+      "description": "Sets whether to use placeholder and replace all placeholder characters with ? sign in the SQL queries. This option is default true",
       "sourceType": "org.apache.camel.component.sql.springboot.SqlComponentConfiguration",
       "defaultValue": true
     }

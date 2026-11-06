@@ -35,7 +35,7 @@ public class RocketMQComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Access channel of RocketMQ cluster. LOCAL or CLOUD, LOCAL by default
+     * Access channel of RocketMQ cluster. LOCAL or CLOUD, [LOCAL] by default
      */
     private String accessChannel = "LOCAL";
     /**
@@ -74,7 +74,7 @@ public class RocketMQComponentConfiguration
      */
     private String consumerGroup;
     /**
-     * Message Selector Type, TAG or SQL TAG by default
+     * Message Selector Type, TAG or SQL [TAG] by default
      */
     private String messageSelectorType = "tag";
     /**
@@ -83,8 +83,8 @@ public class RocketMQComponentConfiguration
      */
     private String subscribeSql = "1 = 1";
     /**
-     * Subscribe tags of consumer. Multiple tags could be split by , such as
-     * TagATagB
+     * Subscribe tags of consumer. Multiple tags could be split by ||, such as
+     * TagA||TagB
      */
     private String subscribeTags = "*";
     /**

@@ -60,9 +60,10 @@ public class MllpComponentConfiguration
     private Boolean hl7Headers = true;
     /**
      * Enable/Disable strict compliance to the MLLP standard. The MLLP standard
-     * specifies START_OF_BLOCKhl7 payloadEND_OF_BLOCKEND_OF_DATA, however, some
-     * systems do not send the final END_OF_DATA byte. This setting controls
-     * whether or not the final END_OF_DATA byte is required or optional.
+     * specifies [START_OF_BLOCK]hl7 payload[END_OF_BLOCK][END_OF_DATA],
+     * however, some systems do not send the final END_OF_DATA byte. This
+     * setting controls whether or not the final END_OF_DATA byte is required or
+     * optional.
      */
     private Boolean requireEndOfData = true;
     /**
@@ -174,7 +175,8 @@ public class MllpComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * Set the default character set to use for byte to/from String conversions.
+     * Set the default character set to use for byte[] to/from String
+     * conversions.
      */
     private String defaultCharset = "ISO-8859-1";
     /**

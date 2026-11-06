@@ -91,7 +91,7 @@ public class LangChain4jChatComponentConfiguration
     /**
      * The LangChain4j provider of the chat model, to create the model from the
      * options here (modelName, baseUrl, apiKey, temperature, timeout, and
-     * provider-specific model. properties) instead of a ChatModel bean. The
+     * provider-specific model.* properties) instead of a ChatModel bean. The
      * LangChain4j module of the provider (dev.langchain4j:langchain4j-ollama,
      * ...) must be on the classpath; Camel JBang downloads it. Ignored when a
      * ChatModel is configured. For a provider not listed, set customProvider

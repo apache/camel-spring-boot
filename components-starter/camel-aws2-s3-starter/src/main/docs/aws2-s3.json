@@ -202,7 +202,7 @@
     {
       "name": "camel.component.aws2-s3.ignore-body",
       "type": "java.lang.Boolean",
-      "description": "If it is true, the S3 Object Body will be ignored completely if it is set to false, the S3 Object will be put in the body. Setting this to true will override any behavior defined by includeBody option.",
+      "description": "If it is true, the S3 Object Body will be ignored completely if it is set to false, the S3 Object will be put in the body. Setting this to true will override any behavior defined by includeBody option. When it is true, the consumer and the getObject operation send a HEAD request, which returns the metadata of the object without downloading its content.",
       "sourceType": "org.apache.camel.component.aws2.s3.springboot.AWS2S3ComponentConfiguration",
       "defaultValue": false
     },

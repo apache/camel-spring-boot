@@ -36,7 +36,7 @@
     {
       "name": "camel.component.azure-servicebus.binary",
       "type": "java.lang.Boolean",
-      "description": "Set binary mode. If true, message body will be sent as byte. By default, it is false.",
+      "description": "Set binary mode. If true, message body will be sent as byte[]. By default, it is false.",
       "sourceType": "org.apache.camel.component.azure.servicebus.springboot.ServiceBusComponentConfiguration",
       "defaultValue": false
     },

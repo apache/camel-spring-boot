@@ -469,7 +469,7 @@ public class SalesforceComponentConfiguration
      */
     private String rawMethod;
     /**
-     * The portion of the endpoint URL after the domain name. E.g.,
+     * The portion of the endpoint URL after the domain name. E.g., +
      * '/services/data/v52.0/sobjects/Account/'
      */
     private String rawPath;

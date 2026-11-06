@@ -428,7 +428,7 @@
     {
       "name": "camel.dataformat.xml-security.pass-phrase-byte",
       "type": "java.lang.Byte[]",
-      "description": "A byte used as passPhrase to encrypt\/decrypt content.",
+      "description": "A byte[] used as passPhrase to encrypt\/decrypt content.",
       "sourceType": "org.apache.camel.dataformat.xmlsecurity.springboot.XMLSecurityDataFormatConfiguration"
     },
     {

@@ -430,7 +430,7 @@ public class ActiveMQComponentConfiguration
      * that are invalid according to JMS specification. For example, some
      * message systems, such as WMQ, do this with header names using prefix
      * JMS_IBM_MQMD_ containing values with byte array or other invalid types.
-     * You can specify multiple header names separated by comma, and use as
+     * You can specify multiple header names separated by comma, and use * as
      * suffix for wildcard matching.
      */
     private String allowAdditionalHeaders;
@@ -861,8 +861,8 @@ public class ActiveMQComponentConfiguration
      * ObjectInputStream; to block such attacks, also configure the JMS
      * provider's own deserialization filter and/or the JVM-wide
      * -Djdk.serialFilter. When this option is not set and no JVM-wide filter is
-     * configured, a conservative default filter denying java.net. and otherwise
-     * allowing java., javax. and org.apache.camel. is applied.
+     * configured, a conservative default filter denying java.net.** and
+     * otherwise allowing java.**, javax.** and org.apache.camel.** is applied.
      */
     private String deserializationFilter;
     /**

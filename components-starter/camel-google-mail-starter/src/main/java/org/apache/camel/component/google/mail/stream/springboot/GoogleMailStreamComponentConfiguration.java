@@ -137,7 +137,7 @@ public class GoogleMailStreamComponentConfiguration
      */
     private String refreshToken;
     /**
-     * Sets .json file with credentials for Service account
+     * Sets *.json file with credentials for Service account
      */
     private String serviceAccountKey;
 

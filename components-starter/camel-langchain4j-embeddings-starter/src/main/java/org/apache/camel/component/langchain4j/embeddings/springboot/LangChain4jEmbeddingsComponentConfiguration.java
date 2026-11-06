@@ -82,7 +82,7 @@ public class LangChain4jEmbeddingsComponentConfiguration
     /**
      * The LangChain4j provider of the embedding model, to create the model from
      * the options here (modelName, baseUrl, apiKey, temperature, timeout, and
-     * provider-specific model. properties) instead of a EmbeddingModel bean.
+     * provider-specific model.* properties) instead of a EmbeddingModel bean.
      * The LangChain4j module of the provider
      * (dev.langchain4j:langchain4j-ollama, ...) must be on the classpath; Camel
      * JBang downloads it. Ignored when a EmbeddingModel is configured. For a

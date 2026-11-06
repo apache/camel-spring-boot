@@ -41,10 +41,10 @@ public class OpaComponentConfiguration
     /**
      * The key to read the allow/deny verdict from when the policy returns an
      * object rather than a plain boolean. For a policy returning {allow: true,
-     * reasons: } the default value of allow is what you want. A dotted path
-     * reaches a verdict nested inside the document: {code
-     * allowKey=result.allow} reads {result: {allow: true}}. A key with no dot
-     * is looked up directly at the top level.
+     * reasons: []} the default value of allow is what you want. A dotted path
+     * reaches a verdict nested inside the document: allowKey=result.allow reads
+     * {result: {allow: true}}. A key with no dot is looked up directly at the
+     * top level.
      */
     private String allowKey = "allow";
     /**
@@ -55,8 +55,8 @@ public class OpaComponentConfiguration
      * List parallel to the input. An element whose evaluation failed is denied,
      * unless failOpen is set and its decision point was unavailable; the batch
      * is never allowed or denied as a whole because one element failed. Only
-     * for {code evaluationMode=rest}: it saves the per-element HTTP round-trip
-     * via OPA's batch API, which has no meaning for in-process wasm.
+     * for evaluationMode=rest: it saves the per-element HTTP round-trip via
+     * OPA's batch API, which has no meaning for in-process wasm.
      */
     private Boolean batch = false;
     /**
@@ -67,8 +67,8 @@ public class OpaComponentConfiguration
     /**
      * The compiled entrypoint to evaluate in wasm mode. This is not the same
      * thing as the policy path: an entrypoint is fixed when the bundle is
-     * built, with {code opa build -e}. Defaults to the endpoint's policy path,
-     * which is the name {code opa build} gives it.
+     * built, with opa build -e. Defaults to the endpoint's policy path, which
+     * is the name opa build gives it.
      */
     private String entrypoint;
     /**
@@ -90,26 +90,25 @@ public class OpaComponentConfiguration
     private Boolean includeBody = false;
     /**
      * Comma-separated list of message header names to send to OPA in the input
-     * document. The default of {code } sends every header except those that
-     * carry a caller credential verbatim - Authorization, {code
-     * Proxy-Authorization}, Cookie and {code Set-Cookie} - which are withheld
-     * because OPA's decision logging ships the whole input document, often off
-     * the box. A policy that genuinely needs one can still have it by naming
-     * the header here. Narrow the list when the policy only needs a few
-     * headers.
+     * document. The default of * sends every header except those that carry a
+     * caller credential verbatim - Authorization, Proxy-Authorization, Cookie
+     * and Set-Cookie - which are withheld because OPA's decision logging ships
+     * the whole input document, often off the box. A policy that genuinely
+     * needs one can still have it by naming the header here. Narrow the list
+     * when the policy only needs a few headers.
      */
     private String includeHeaders = "*";
     /**
      * Comma-separated list of exchange property names to send to OPA in the
-     * input document, or {code } for all of them. Empty by default, so no
-     * properties are sent unless asked for. This is where the authentication
-     * components put the identity they verified: {code camel-keycloak} stores
-     * the access token and its subject as exchange properties and prefers them
-     * over the equivalent headers, precisely because headers can be set by the
-     * caller. List those property names here to let a policy authorize the
-     * identity an earlier step established, instead of copying it into a header
-     * first. Only custom properties are sent; Camel's own internal exchange
-     * properties are never included.
+     * input document, or * for all of them. Empty by default, so no properties
+     * are sent unless asked for. This is where the authentication components
+     * put the identity they verified: camel-keycloak stores the access token
+     * and its subject as exchange properties and prefers them over the
+     * equivalent headers, precisely because headers can be set by the caller.
+     * List those property names here to let a policy authorize the identity an
+     * earlier step established, instead of copying it into a header first. Only
+     * custom properties are sent; Camel's own internal exchange properties are
+     * never included.
      */
     private String includeProperties;
     /**
@@ -124,17 +123,16 @@ public class OpaComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * The WebAssembly policy to evaluate in wasm mode, as produced by {code opa
-     * build -t wasm}. Accepts a {code file:}, {code classpath:} or {code http:}
-     * location holding either the bundle.tar.gz that {code opa build} emits or
-     * a bare .wasm module. Required when {code evaluationMode=wasm}. Prefer the
-     * bundle: it also carries the data document the policy reads as {code
-     * data.}, which a bare module does not.
+     * The WebAssembly policy to evaluate in wasm mode, as produced by opa build
+     * -t wasm. Accepts a file:, classpath: or http: location holding either the
+     * bundle.tar.gz that opa build emits or a bare .wasm module. Required when
+     * evaluationMode=wasm. Prefer the bundle: it also carries the data document
+     * the policy reads as data.*, which a bare module does not.
      */
     private String policyBundle;
     /**
-     * The base URL of the OPA server, without the {code /v1/data} suffix. The
-     * default assumes OPA running as a sidecar on the standard port.
+     * The base URL of the OPA server, without the /v1/data suffix. The default
+     * assumes OPA running as a sidecar on the standard port.
      */
     private String serverUrl = "http://localhost:8181";
     /**

@@ -184,7 +184,7 @@
     {
       "name": "camel.component.debezium-mongodb.field-renames",
       "type": "java.lang.String",
-      "description": "A comma-separated list of the fully-qualified replacements of fields that should be used to rename fields in change event message values. Fully-qualified replacements for fields are of the form databaseName.collectionName.fieldName.nestedFieldName:newNestedFieldName, where databaseName and collectionName may contain the wildcard () which matches any characters, the colon character (:) is used to determine rename mapping of field.",
+      "description": "A comma-separated list of the fully-qualified replacements of fields that should be used to rename fields in change event message values. Fully-qualified replacements for fields are of the form databaseName.collectionName.fieldName.nestedFieldName:newNestedFieldName, where databaseName and collectionName may contain the wildcard (*) which matches any characters, the colon character (:) is used to determine rename mapping of field.",
       "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration"
     },
     {
@@ -624,7 +624,7 @@
     {
       "name": "camel.component.debezium-mongodb.snapshot-max-threads-multiplier",
       "type": "java.lang.Integer",
-      "description": "The factor used to scale the number of snapshot chunks per table. The default behavior is to take 'row_count\/snapshot.max.threads' to compute the number of rows per chunks. This may not be ideal for larger tables, and using the multiplier, the formula is adjusted to increase the number of chunks by using 'row_count\/(snapshot.max.threads snapshot.max.threads.multiplier).",
+      "description": "The factor used to scale the number of snapshot chunks per table. The default behavior is to take 'row_count\/snapshot.max.threads' to compute the number of rows per chunks. This may not be ideal for larger tables, and using the multiplier, the formula is adjusted to increase the number of chunks by using 'row_count\/(snapshot.max.threads * snapshot.max.threads.multiplier).",
       "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
       "defaultValue": 1
     },

@@ -335,7 +335,7 @@ public class DebeziumMySqlComponentConfiguration
     /**
      * Specifies which ANTLR grammar to use for parsing MySQL DDL statements.
      * 'default' uses the Oracle MySQL grammar, which is actively maintained and
-     * supports MySQL 8.0 features. 'legacy' uses the Positive Technologies
+     * supports MySQL 8.0+ features. 'legacy' uses the Positive Technologies
      * grammar for backward compatibility with existing deployments.
      */
     private String ddlParserType = "default";
@@ -814,7 +814,7 @@ public class DebeziumMySqlComponentConfiguration
      * default behavior is to take 'row_count/snapshot.max.threads' to compute
      * the number of rows per chunks. This may not be ideal for larger tables,
      * and using the multiplier, the formula is adjusted to increase the number
-     * of chunks by using 'row_count/(snapshot.max.threads
+     * of chunks by using 'row_count/(snapshot.max.threads *
      * snapshot.max.threads.multiplier).
      */
     private Integer snapshotMaxThreadsMultiplier = 1;
@@ -891,8 +891,8 @@ public class DebeziumMySqlComponentConfiguration
      * specific connectors. Select statements for the individual tables are
      * specified in further configuration properties, one for each table,
      * identified by the id
-     * 'snapshot.select.statement.overrides.DB_NAME.TABLE_NAME' or
-     * 'snapshot.select.statement.overrides.SCHEMA_NAME.TABLE_NAME',
+     * 'snapshot.select.statement.overrides.[DB_NAME].[TABLE_NAME]' or
+     * 'snapshot.select.statement.overrides.[SCHEMA_NAME].[TABLE_NAME]',
      * respectively. The value of those properties is the select statement to
      * use when retrieving data from the specific table during snapshotting. A
      * possible use case for large append-only tables is setting a specific

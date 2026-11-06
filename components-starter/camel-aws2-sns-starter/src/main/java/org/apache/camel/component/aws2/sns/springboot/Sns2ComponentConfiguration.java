@@ -69,16 +69,16 @@ public class Sns2ComponentConfiguration
     private Boolean lazyStartProducer = false;
     /**
      * Only for FIFO Topic. Strategy for setting the messageDeduplicationId on
-     * the message. It can be one of the following options: useExchangeId,
-     * useContentBasedDeduplication. For the useContentBasedDeduplication
+     * the message. It can be one of the following options: *useExchangeId*,
+     * *useContentBasedDeduplication*. For the *useContentBasedDeduplication*
      * option, no messageDeduplicationId will be set on the message.
      */
     private String messageDeduplicationIdStrategy = "useExchangeId";
     /**
      * Only for FIFO Topic. Strategy for setting the messageGroupId on the
-     * message. It can be one of the following options: useConstant,
-     * useExchangeId, usePropertyValue. For the usePropertyValue option, the
-     * value of property CamelAwsSnsMessageGroupId will be used.
+     * message. It can be one of the following options: *useConstant*,
+     * *useExchangeId*, *usePropertyValue*. For the *usePropertyValue* option,
+     * the value of property CamelAwsSnsMessageGroupId will be used.
      */
     private String messageGroupIdStrategy;
     /**

@@ -41,7 +41,7 @@ The starter supports 21 options, which are listed below.
 | camel.component.vertx-http.proxy-port | The proxy server port |  | Integer
 | camel.component.vertx-http.proxy-type | The proxy server type |  | ProxyType
 | camel.component.vertx-http.proxy-username | The proxy server username if authentication is required |  | String
-| camel.component.vertx-http.response-payload-as-byte-array | Whether the response body should be byte or as io.vertx.core.buffer.Buffer | true | Boolean
+| camel.component.vertx-http.response-payload-as-byte-array | Whether the response body should be byte[] or as io.vertx.core.buffer.Buffer | true | Boolean
 | camel.component.vertx-http.ssl-context-parameters | To configure security using SSLContextParameters. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
 | camel.component.vertx-http.tracing-policy | The tracing policy used by the HTTP client when integrating with observability frameworks such as OpenTelemetry. If not specified the HTTP client applies a default tracing policy of PROPAGATE. |  | TracingPolicy
 | camel.component.vertx-http.use-global-ssl-context-parameters | Enable usage of global SSL context parameters | false | Boolean

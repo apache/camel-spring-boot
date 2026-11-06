@@ -185,14 +185,14 @@
     {
       "name": "camel.component.aws2-sqs.message-deduplication-id-strategy",
       "type": "java.lang.String",
-      "description": "Only for FIFO queues. Strategy for setting the messageDeduplicationId on the message. It can be one of the following options: useExchangeId, useContentBasedDeduplication. For the useContentBasedDeduplication option, no messageDeduplicationId will be set on the message.",
+      "description": "Only for FIFO queues. Strategy for setting the messageDeduplicationId on the message. It can be one of the following options: *useExchangeId*, *useContentBasedDeduplication*. For the *useContentBasedDeduplication* option, no messageDeduplicationId will be set on the message.",
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration",
       "defaultValue": "useExchangeId"
     },
     {
       "name": "camel.component.aws2-sqs.message-group-id-strategy",
       "type": "java.lang.String",
-      "description": "Only for FIFO queues. Strategy for setting the messageGroupId on the message. It can be one of the following options: useConstant, useExchangeId, usePropertyValue. For the usePropertyValue option, the value of property CamelAwsMessageGroupId will be used.",
+      "description": "Only for FIFO queues. Strategy for setting the messageGroupId on the message. It can be one of the following options: *useConstant*, *useExchangeId*, *usePropertyValue*. For the *usePropertyValue* option, the value of property CamelAwsMessageGroupId will be used.",
       "sourceType": "org.apache.camel.component.aws2.sqs.springboot.Sqs2ComponentConfiguration"
     },
     {

@@ -201,8 +201,8 @@ public class PulsarComponentConfiguration
      */
     private RegexSubscriptionMode subscriptionTopicsMode = RegexSubscriptionMode.PersistentOnly;
     /**
-     * Type of the subscription EXCLUSIVESHAREDFAILOVERKEY_SHARED, defaults to
-     * EXCLUSIVE
+     * Type of the subscription [EXCLUSIVE|SHARED|FAILOVER|KEY_SHARED], defaults
+     * to EXCLUSIVE
      */
     private SubscriptionType subscriptionType = SubscriptionType.EXCLUSIVE;
     /**
@@ -276,7 +276,7 @@ public class PulsarComponentConfiguration
     private Integer maxPendingMessages = 1000;
     /**
      * The maximum number of pending messages for partitioned topics. The
-     * maxPendingMessages value will be reduced if (number of partitions
+     * maxPendingMessages value will be reduced if (number of partitions *
      * maxPendingMessages) exceeds this value. Partitioned topics have a pending
      * message queue for each partition.
      */

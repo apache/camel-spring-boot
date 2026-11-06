@@ -94,10 +94,10 @@ public class OpenFgaComponentConfiguration
      * lives in the token rather than in the store, or a fact about the request
      * such as which network it arrived on. A contextual tuple grants. It is
      * read exactly like a stored tuple, so user:anne,owner,document:secret
-     * makes {code check(user:anne, owner, document:secret)} answer true
-     * whatever the store contains. That is why this option is endpoint-only and
-     * is never taken from the message: a tuple the caller could choose would
-     * let it assert the very relationship being checked. By the same token, an
+     * makes check(user:anne, owner, document:secret) answer true whatever the
+     * store contains. That is why this option is endpoint-only and is never
+     * taken from the message: a tuple the caller could choose would let it
+     * assert the very relationship being checked. By the same token, an
      * expression here that reads an inbound header hands the caller that power
      * anyway - keep these literal, or derive them from something the route
      * established rather than from what it received. A part that resolves to
@@ -126,8 +126,8 @@ public class OpenFgaComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * The object being accessed, as an OpenFGA object identifier such as {code
-     * document:budget}. Evaluated as a Simple expression against each exchange,
+     * The object being accessed, as an OpenFGA object identifier such as
+     * document:budget. Evaluated as a Simple expression against each exchange,
      * so document:${header.documentId} names the resource the message is about.
      * Unlike the subject, taking the object from a header is normal and safe:
      * the caller is entitled to say which resource it wants, and the check is
@@ -157,18 +157,18 @@ public class OpenFgaComponentConfiguration
     private String relations;
     /**
      * The earliest change readChanges returns, as an ISO-8601 timestamp such as
-     * {code 2026-10-01T00:00:00Z}. Without it a first read starts at the
-     * beginning of the store's change log, which on a busy store is a lot of
-     * history to page through before reaching anything current. Parsed when the
-     * endpoint starts, so a malformed value fails there rather than on the
-     * first exchange.
+     * 2026-10-01T00:00:00Z. Without it a first read starts at the beginning of
+     * the store's change log, which on a busy store is a lot of history to page
+     * through before reaching anything current. Parsed when the endpoint
+     * starts, so a malformed value fails there rather than on the first
+     * exchange.
      */
     private String startTime;
     /**
      * The identifier of the OpenFGA store holding the relationship tuples and
-     * the authorization model, as returned by {code fga store create}. The
-     * store is the relationship graph that judges the exchange, so it comes
-     * from the endpoint only and is never taken from a message header.
+     * the authorization model, as returned by fga store create. The store is
+     * the relationship graph that judges the exchange, so it comes from the
+     * endpoint only and is never taken from a message header.
      */
     private String storeId;
     /**
@@ -178,8 +178,8 @@ public class OpenFgaComponentConfiguration
      */
     private String type;
     /**
-     * The subject to authorize, as an OpenFGA user identifier such as {code
-     * user:anne}. Evaluated as a Simple expression against each exchange, so a
+     * The subject to authorize, as an OpenFGA user identifier such as
+     * user:anne. Evaluated as a Simple expression against each exchange, so a
      * literal is used as-is and
      * user:${exchangeProperty.CamelKeycloakTokenSubject} resolves whatever an
      * earlier step established. Read it from an exchange property rather than a
@@ -187,15 +187,15 @@ public class OpenFgaComponentConfiguration
      * - by the step that verified the caller - and nothing outside the route
      * can set one. A header, by contrast, is often whatever the caller sent,
      * and an endpoint configured as user:${header.userId} lets the caller
-     * choose who to be. {code camel-keycloak}'s KeycloakSecurityPolicy already
-     * follows that reasoning: it reads the subject from the
-     * CamelKeycloakTokenSubject exchange property in preference to the header
-     * of the same name, its preferPropertyOverHeader option defaulting to true.
-     * Nothing in Camel sets the property for you, so the step that validates
-     * the token has to record it - but recording it under that name lets one
-     * identity serve both. An expression that resolves to blank, or to a bare
-     * {code user:} prefix, denies the exchange: an exchange carrying no
-     * identity is not authorized, and failOpen does not apply to it.
+     * choose who to be. camel-keycloak's KeycloakSecurityPolicy already follows
+     * that reasoning: it reads the subject from the CamelKeycloakTokenSubject
+     * exchange property in preference to the header of the same name, its
+     * preferPropertyOverHeader option defaulting to true. Nothing in Camel sets
+     * the property for you, so the step that validates the token has to record
+     * it - but recording it under that name lets one identity serve both. An
+     * expression that resolves to blank, or to a bare user: prefix, denies the
+     * exchange: an exchange carrying no identity is not authorized, and
+     * failOpen does not apply to it.
      */
     private String user;
     /**
@@ -269,7 +269,7 @@ public class OpenFgaComponentConfiguration
     private String apiAudience;
     /**
      * Pre-shared token sent to OpenFGA in the Authorization header, for a
-     * server started with {code --authn-method preshared}.
+     * server started with --authn-method preshared.
      */
     private String apiToken;
     /**
@@ -312,8 +312,8 @@ public class OpenFgaComponentConfiguration
      * TLS configuration for the connection to OpenFGA. Needed to trust a server
      * whose certificate comes from a private CA, and to present a client
      * certificate to a server that requires mutual TLS - a SPIFFE X.509-SVID
-     * obtained with {code camel-spiffe}, for instance, so the workload
-     * authenticates to the decision point as itself. The option is a
+     * obtained with camel-spiffe, for instance, so the workload authenticates
+     * to the decision point as itself. The option is a
      * org.apache.camel.support.jsse.SSLContextParameters type.
      */
     private SSLContextParameters sslContextParameters;

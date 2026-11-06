@@ -23,11 +23,12 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 41 options, which are listed below.
+The starter supports 43 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
+| camel.component.dapr.allow-secret-store-and-key-from-headers | Whether to allow overriding the secret store, the key and the metadata of the endpoint with the CamelDaprSecretStore, CamelDaprKey and CamelDaprMetadata headers for the secret operation. Disabled by default; enable it only when the header source is trusted, since it lets a message choose the secret store and the secret that the secret operation reads. | false | Boolean
 | camel.component.dapr.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.dapr.binding-name | The name of the Dapr binding to invoke |  | String
 | camel.component.dapr.binding-operation | The operation to perform on the binding |  | String
@@ -50,6 +51,7 @@ The starter supports 41 options, which are listed below.
 | camel.component.dapr.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.dapr.lock-operation | The lock operation to perform on the store. Required for DaprOperation.lock operation | trylock | LockOperation
 | camel.component.dapr.lock-owner | The lock owner identifier for the lock |  | String
+| camel.component.dapr.metadata | Additional key-value pairs to pass to the Dapr building block, such as metadata.namespace=production. The CamelDaprMetadata header takes the place of these for one message, except for the secret operation unless allowSecretStoreAndKeyFromHeaders is enabled. This is a multi-value option with prefix: metadata. |  | String>
 | camel.component.dapr.method-to-invoke | The name of the method or route to invoke on the target service |  | String
 | camel.component.dapr.preview-client | The Dapr Preview Client. The option is a io.dapr.client.DaprPreviewClient type. |  | DaprPreviewClient
 | camel.component.dapr.pub-sub-name | The name of the Dapr Pub/Sub component to use. This identifies which underlying messaging system Dapr will interact with for publishing or subscribing to events. |  | String

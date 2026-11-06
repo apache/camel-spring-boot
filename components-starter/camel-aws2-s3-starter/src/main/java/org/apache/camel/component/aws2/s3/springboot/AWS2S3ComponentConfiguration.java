@@ -67,7 +67,9 @@ public class AWS2S3ComponentConfiguration
     /**
      * If it is true, the S3 Object Body will be ignored completely if it is set
      * to false, the S3 Object will be put in the body. Setting this to true
-     * will override any behavior defined by includeBody option.
+     * will override any behavior defined by includeBody option. When it is
+     * true, the consumer and the getObject operation send a HEAD request, which
+     * returns the metadata of the object without downloading its content.
      */
     private Boolean ignoreBody = false;
     /**

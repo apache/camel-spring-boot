@@ -44,7 +44,7 @@ public class Base64DataFormatConfiguration
      */
     private String lineSeparator;
     /**
-     * Instead of emitting and / we emit - and _ respectively. urlSafe is only
+     * Instead of emitting + and / we emit - and _ respectively. urlSafe is only
      * applied to encode operations. Decoding seamlessly handles both modes.
      */
     private Boolean urlSafe = false;

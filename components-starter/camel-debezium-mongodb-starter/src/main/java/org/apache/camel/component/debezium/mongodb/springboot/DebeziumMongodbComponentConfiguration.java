@@ -260,7 +260,7 @@ public class DebeziumMongodbComponentConfiguration
      * should be used to rename fields in change event message values.
      * Fully-qualified replacements for fields are of the form
      * databaseName.collectionName.fieldName.nestedFieldName:newNestedFieldName,
-     * where databaseName and collectionName may contain the wildcard () which
+     * where databaseName and collectionName may contain the wildcard (*) which
      * matches any characters, the colon character (:) is used to determine
      * rename mapping of field.
      */
@@ -575,7 +575,7 @@ public class DebeziumMongodbComponentConfiguration
      * default behavior is to take 'row_count/snapshot.max.threads' to compute
      * the number of rows per chunks. This may not be ideal for larger tables,
      * and using the multiplier, the formula is adjusted to increase the number
-     * of chunks by using 'row_count/(snapshot.max.threads
+     * of chunks by using 'row_count/(snapshot.max.threads *
      * snapshot.max.threads.multiplier).
      */
     private Integer snapshotMaxThreadsMultiplier = 1;

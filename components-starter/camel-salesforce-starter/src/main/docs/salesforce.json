@@ -573,7 +573,7 @@
     {
       "name": "camel.component.salesforce.raw-path",
       "type": "java.lang.String",
-      "description": "The portion of the endpoint URL after the domain name. E.g., '\/services\/data\/v52.0\/sobjects\/Account\/'",
+      "description": "The portion of the endpoint URL after the domain name. E.g., + '\/services\/data\/v52.0\/sobjects\/Account\/'",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {

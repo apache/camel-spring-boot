@@ -102,7 +102,7 @@
     {
       "name": "camel.component.vertx-http.response-payload-as-byte-array",
       "type": "java.lang.Boolean",
-      "description": "Whether the response body should be byte or as io.vertx.core.buffer.Buffer",
+      "description": "Whether the response body should be byte[] or as io.vertx.core.buffer.Buffer",
       "sourceType": "org.apache.camel.component.vertx.http.springboot.VertxHttpComponentConfiguration",
       "defaultValue": true
     },

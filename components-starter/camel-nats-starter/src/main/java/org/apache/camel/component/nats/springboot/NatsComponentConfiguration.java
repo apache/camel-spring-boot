@@ -196,19 +196,20 @@ public class NatsComponentConfiguration
     private Integer poolSize = 10;
     /**
      * Maximum number of messages to fetch per pull request when using a
-     * JetStream Pull Subscription. Only used when {code pullSubscription=true}.
+     * JetStream Pull Subscription. Only used when pullSubscription=true.
      */
     private Integer pullBatchSize = 10;
     /**
      * Maximum time (in milliseconds) to wait for a batch of messages to be
      * available on the server during a single fetch when using a JetStream Pull
-     * Subscription. Only used when {code pullSubscription=true}.
+     * Subscription. Only used when pullSubscription=true.
      */
     private Long pullFetchTimeout = 1000L;
     /**
      * Sets the consumer subscription type for JetStream. Set to true to use a
-     * Pull Subscription (consumer explicitly requests messages). Set to false
-     * to use a Push Subscription (messages are automatically delivered).
+     * **Pull Subscription** (consumer explicitly requests messages). Set to
+     * false to use a **Push Subscription** (messages are automatically
+     * delivered).
      */
     private Boolean pullSubscription = true;
     /**

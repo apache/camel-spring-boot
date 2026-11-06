@@ -47,7 +47,7 @@ The starter supports 36 options, which are listed below.
 | camel.component.google-sheets-stream.range | Specifies the range of rows and columns in a sheet to get data from. |  | String
 | camel.component.google-sheets-stream.refresh-token | OAuth 2 refresh token. Using this, the Google Sheets component can obtain a new accessToken whenever the current one expires - a necessity if the application is long-lived. |  | String
 | camel.component.google-sheets-stream.scopes | Specifies the level of permissions you want a sheets application to have to a user account. See https://developers.google.com/identity/protocols/googlescopes for more info. Multiple scopes can be separated by comma. |  | String
-| camel.component.google-sheets-stream.service-account-key | Sets .json file with credentials for Service account |  | String
+| camel.component.google-sheets-stream.service-account-key | Sets *.json file with credentials for Service account |  | String
 | camel.component.google-sheets-stream.split-results | True if value range result should be split into rows or columns to process each of them individually. When true each row or column is represented with a separate exchange in batch processing. Otherwise value range object is used as exchange junk size. | false | Boolean
 | camel.component.google-sheets-stream.value-render-option | Determines how values should be rendered in the output. | FORMATTED_VALUE | String
 | camel.component.google-sheets.access-token | OAuth 2 access token. This typically expires after an hour so refreshToken is recommended for long term usage. |  | String
@@ -63,6 +63,6 @@ The starter supports 36 options, which are listed below.
 | camel.component.google-sheets.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.google-sheets.refresh-token | OAuth 2 refresh token. Using this, the Google Sheets component can obtain a new accessToken whenever the current one expires - a necessity if the application is long-lived. |  | String
 | camel.component.google-sheets.scopes | Specifies the level of permissions you want a sheets application to have to a user account. See https://developers.google.com/identity/protocols/googlescopes for more info. Multiple scopes can be separated by comma. |  | String
-| camel.component.google-sheets.service-account-key | Sets .json file with credentials for Service account |  | String
+| camel.component.google-sheets.service-account-key | Sets *.json file with credentials for Service account |  | String
 | camel.component.google-sheets.split-result | When consumer return an array or collection this will generate one exchange per element, and their routes will be executed once for each exchange. Set this value to false to use a single exchange for the entire list or array. | true | Boolean
 |===

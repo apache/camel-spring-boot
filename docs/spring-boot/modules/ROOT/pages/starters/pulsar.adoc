@@ -76,7 +76,7 @@ The starter supports 51 options, which are listed below.
 | camel.component.pulsar.subscription-mode | Determines the subscription mode for the consumer. Durable subscriptions persist the cursor position if the consumer disconnects while non-durable subscriptions do not. | durable | SubscriptionMode
 | camel.component.pulsar.subscription-name | Name of the subscription to use | subs | String
 | camel.component.pulsar.subscription-topics-mode | Determines to which topics this consumer should be subscribed to - Persistent, Non-Persistent, or both. Only used with pattern subscriptions. | persistentonly | RegexSubscriptionMode
-| camel.component.pulsar.subscription-type | Type of the subscription EXCLUSIVESHAREDFAILOVERKEY_SHARED, defaults to EXCLUSIVE | exclusive | SubscriptionType
+| camel.component.pulsar.subscription-type | Type of the subscription [EXCLUSIVE\|SHARED\|FAILOVER\|KEY_SHARED], defaults to EXCLUSIVE | exclusive | SubscriptionType
 | camel.component.pulsar.topics-pattern | Whether the topic is a pattern (regular expression) that allows the consumer to subscribe to all matching topics in the namespace | false | Boolean
-| camel.component.pulsar.max-pending-messages-across-partitions | The maximum number of pending messages for partitioned topics. The maxPendingMessages value will be reduced if (number of partitions maxPendingMessages) exceeds this value. Partitioned topics have a pending message queue for each partition. | 50000 | Integer
+| camel.component.pulsar.max-pending-messages-across-partitions | The maximum number of pending messages for partitioned topics. The maxPendingMessages value will be reduced if (number of partitions * maxPendingMessages) exceeds this value. Partitioned topics have a pending message queue for each partition. | 50000 | Integer
 |===

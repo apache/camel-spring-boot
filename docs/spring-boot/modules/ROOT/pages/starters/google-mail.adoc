@@ -48,7 +48,7 @@ The starter supports 34 options, which are listed below.
 | camel.component.google-mail-stream.raw | Whether to store the entire email message in an RFC 2822 formatted and base64url encoded string (in JSon format), in the Camel message body. | false | Boolean
 | camel.component.google-mail-stream.refresh-token | OAuth 2 refresh token. Using this, the Google Mail component can obtain a new accessToken whenever the current one expires - a necessity if the application is long-lived. |  | String
 | camel.component.google-mail-stream.scopes | Specifies the level of permissions you want a calendar application to have to a user account. See https://developers.google.com/identity/protocols/googlescopes for more info. Multiple scopes can be separated by comma. |  | String
-| camel.component.google-mail-stream.service-account-key | Sets .json file with credentials for Service account |  | String
+| camel.component.google-mail-stream.service-account-key | Sets *.json file with credentials for Service account |  | String
 | camel.component.google-mail.access-token | OAuth 2 access token. This typically expires after an hour so refreshToken is recommended for long term usage. |  | String
 | camel.component.google-mail.application-name | Google mail application name. Example would be camel-google-mail/1.0 |  | String
 | camel.component.google-mail.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean

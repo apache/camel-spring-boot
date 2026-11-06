@@ -29,7 +29,7 @@ The starter supports 59 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | camel.component.docling.abort-on-error | Abort processing on error | false | Boolean
-| camel.component.docling.allow-file-path-source | Whether a String message body that starts with / or contains \ is interpreted as a local filesystem path to read. When disabled, such a body is rejected instead of being read. This does not affect the CamelDoclingInputFilePath header, nor File, byte or explicit path collection bodies used by the batch operations. | false | Boolean
+| camel.component.docling.allow-file-path-source | Whether a String message body that starts with / or contains \ is interpreted as a local filesystem path to read. When disabled, such a body is rejected instead of being read. This does not affect the CamelDoclingInputFilePath header, nor File, byte[] or explicit path collection bodies used by the batch operations. | false | Boolean
 | camel.component.docling.allow-url-source | Whether a String message body that starts with http:// or https:// is interpreted as a remote URL for Docling to fetch. When disabled, such a body is rejected instead of being fetched. This does not affect the CamelDoclingInputFilePath header, nor bodies of any other type. | false | Boolean
 | camel.component.docling.api-key-header | Header name for API key authentication | X-API-Key | String
 | camel.component.docling.async-poll-interval | Polling interval for async conversion status in milliseconds | 2000 | Long

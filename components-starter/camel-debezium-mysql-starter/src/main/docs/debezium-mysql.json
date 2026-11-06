@@ -268,7 +268,7 @@
     {
       "name": "camel.component.debezium-mysql.ddl-parser-type",
       "type": "java.lang.String",
-      "description": "Specifies which ANTLR grammar to use for parsing MySQL DDL statements. 'default' uses the Oracle MySQL grammar, which is actively maintained and supports MySQL 8.0 features. 'legacy' uses the Positive Technologies grammar for backward compatibility with existing deployments.",
+      "description": "Specifies which ANTLR grammar to use for parsing MySQL DDL statements. 'default' uses the Oracle MySQL grammar, which is actively maintained and supports MySQL 8.0+ features. 'legacy' uses the Positive Technologies grammar for backward compatibility with existing deployments.",
       "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": "default"
     },
@@ -834,7 +834,7 @@
     {
       "name": "camel.component.debezium-mysql.snapshot-max-threads-multiplier",
       "type": "java.lang.Integer",
-      "description": "The factor used to scale the number of snapshot chunks per table. The default behavior is to take 'row_count\/snapshot.max.threads' to compute the number of rows per chunks. This may not be ideal for larger tables, and using the multiplier, the formula is adjusted to increase the number of chunks by using 'row_count\/(snapshot.max.threads snapshot.max.threads.multiplier).",
+      "description": "The factor used to scale the number of snapshot chunks per table. The default behavior is to take 'row_count\/snapshot.max.threads' to compute the number of rows per chunks. This may not be ideal for larger tables, and using the multiplier, the formula is adjusted to increase the number of chunks by using 'row_count\/(snapshot.max.threads * snapshot.max.threads.multiplier).",
       "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration",
       "defaultValue": 1
     },
@@ -902,7 +902,7 @@
     {
       "name": "camel.component.debezium-mysql.snapshot-select-statement-overrides",
       "type": "java.lang.String",
-      "description": "This property contains a comma-separated list of fully-qualified tables (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connectors. Select statements for the individual tables are specified in further configuration properties, one for each table, identified by the id 'snapshot.select.statement.overrides.DB_NAME.TABLE_NAME' or 'snapshot.select.statement.overrides.SCHEMA_NAME.TABLE_NAME', respectively. The value of those properties is the select statement to use when retrieving data from the specific table during snapshotting. A possible use case for large append-only tables is setting a specific point where to start (resume) snapshotting, in case a previous snapshotting was interrupted.",
+      "description": "This property contains a comma-separated list of fully-qualified tables (DB_NAME.TABLE_NAME) or (SCHEMA_NAME.TABLE_NAME), depending on the specific connectors. Select statements for the individual tables are specified in further configuration properties, one for each table, identified by the id 'snapshot.select.statement.overrides.[DB_NAME].[TABLE_NAME]' or 'snapshot.select.statement.overrides.[SCHEMA_NAME].[TABLE_NAME]', respectively. The value of those properties is the select statement to use when retrieving data from the specific table during snapshotting. A possible use case for large append-only tables is setting a specific point where to start (resume) snapshotting, in case a previous snapshotting was interrupted.",
       "sourceType": "org.apache.camel.component.debezium.mysql.springboot.DebeziumMySqlComponentConfiguration"
     },
     {

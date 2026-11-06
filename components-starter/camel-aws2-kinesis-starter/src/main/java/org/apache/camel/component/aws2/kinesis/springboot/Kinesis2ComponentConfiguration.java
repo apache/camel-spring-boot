@@ -88,9 +88,11 @@ public class Kinesis2ComponentConfiguration
      */
     private ShardIteratorType iteratorType = ShardIteratorType.TRIM_HORIZON;
     /**
-     * Maximum number of records that will be fetched in each poll
+     * Maximum number of records fetched from each shard in each poll: the Limit
+     * of the GetRecords request, from 1 to 10000. Not used by the KCL consumer
+     * (useKclConsumers).
      */
-    private Integer maxResultsPerRequest = 1;
+    private Integer maxResultsPerRequest = 1000;
     /**
      * The message timestamp to start polling from. Required if iteratorType is
      * set to AT_TIMESTAMP

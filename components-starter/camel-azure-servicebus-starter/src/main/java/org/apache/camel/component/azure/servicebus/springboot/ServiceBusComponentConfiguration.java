@@ -161,8 +161,8 @@ public class ServiceBusComponentConfiguration
      */
     private String subscriptionName;
     /**
-     * Set binary mode. If true, message body will be sent as byte. By default,
-     * it is false.
+     * Set binary mode. If true, message body will be sent as byte[]. By
+     * default, it is false.
      */
     private Boolean binary = false;
     /**

@@ -173,7 +173,7 @@ public class MiloBrowseComponentConfiguration
     /**
      * The password for authentication. Use this instead of embedding
      * credentials in the endpoint URI when the password contains special
-     * characters (such as {code }, {code /}, {code }, {code &}).
+     * characters (such as ?, /, , &).
      */
     private String password;
     /**
@@ -200,7 +200,7 @@ public class MiloBrowseComponentConfiguration
     /**
      * The username for authentication. Use this instead of embedding
      * credentials in the endpoint URI when the username contains special
-     * characters (such as {code }, {code /}, {code }, {code &}).
+     * characters (such as ?, /, , &).
      */
     private String username;
 

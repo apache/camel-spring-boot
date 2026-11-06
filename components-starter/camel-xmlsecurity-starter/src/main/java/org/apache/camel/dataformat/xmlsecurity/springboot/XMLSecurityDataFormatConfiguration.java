@@ -45,7 +45,7 @@ public class XMLSecurityDataFormatConfiguration
      */
     private String passPhrase;
     /**
-     * A byte used as passPhrase to encrypt/decrypt content.
+     * A byte[] used as passPhrase to encrypt/decrypt content.
      */
     private byte[] passPhraseByte;
     /**

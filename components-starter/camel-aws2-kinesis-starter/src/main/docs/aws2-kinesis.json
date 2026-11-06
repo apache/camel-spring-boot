@@ -283,9 +283,9 @@
     {
       "name": "camel.component.aws2-kinesis.max-results-per-request",
       "type": "java.lang.Integer",
-      "description": "Maximum number of records that will be fetched in each poll",
+      "description": "Maximum number of records fetched from each shard in each poll: the Limit of the GetRecords request, from 1 to 10000. Not used by the KCL consumer (useKclConsumers).",
       "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration",
-      "defaultValue": 1
+      "defaultValue": 1000
     },
     {
       "name": "camel.component.aws2-kinesis.message-timestamp",

@@ -217,8 +217,8 @@ public class JettyHttpComponentConfiguration12
      * application/x-java-serialized-object (only used when
      * allowJavaSerializedObject or transferException is enabled). When not set,
      * the JVM-wide jdk.serialFilter is used if present; otherwise a
-     * conservative default filter denying java.net. and otherwise allowing
-     * java., javax. and org.apache.camel. packages is applied.
+     * conservative default filter denying java.net.* and otherwise allowing
+     * java.*, javax.* and org.apache.camel.* packages is applied.
      */
     private String deserializationFilter;
     /**

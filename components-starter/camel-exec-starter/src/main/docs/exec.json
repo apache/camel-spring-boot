@@ -16,7 +16,7 @@
     {
       "name": "camel.component.exec.allow-control-headers",
       "type": "java.lang.Boolean",
-      "description": "Whether {code CamelExec} in-headers may override URI options (default false since Camel 4.20). When false, CamelExecCommandExecutable, CamelExecCommandArgs, CamelExecCommandOutFile, CamelExecCommandWorkingDir, CamelExecCommandTimeout, CamelExecExitValues, CamelExecUseStderrOnEmptyStdout, and CamelExecCommandLogLevel are ignored. Enable only when those headers come from a trusted route, not from an untrusted consumer.",
+      "description": "Whether CamelExec* in-headers may override URI options (default false since Camel 4.20). When false, CamelExecCommandExecutable, CamelExecCommandArgs, CamelExecCommandOutFile, CamelExecCommandWorkingDir, CamelExecCommandTimeout, CamelExecExitValues, CamelExecUseStderrOnEmptyStdout, and CamelExecCommandLogLevel are ignored. Enable only when those headers come from a trusted route, not from an untrusted consumer.",
       "sourceType": "org.apache.camel.component.exec.springboot.ExecComponentConfiguration",
       "defaultValue": false
     },

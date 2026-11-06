@@ -18,6 +18,7 @@ package org.apache.camel.component.dapr.springboot;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Map;
 import io.dapr.client.DaprClient;
 import io.dapr.client.DaprPreviewClient;
 import io.dapr.client.domain.HttpExtension;
@@ -167,6 +168,14 @@ public class DaprComponentConfiguration
      */
     private String lockOwner;
     /**
+     * Additional key-value pairs to pass to the Dapr building block, such as
+     * metadata.namespace=production. The CamelDaprMetadata header takes the
+     * place of these for one message, except for the secret operation unless
+     * allowSecretStoreAndKeyFromHeaders is enabled. This is a multi-value
+     * option with prefix: metadata.
+     */
+    private Map<String, String> metadata;
+    /**
      * The name of the method or route to invoke on the target service
      */
     private String methodToInvoke;
@@ -250,6 +259,14 @@ public class DaprComponentConfiguration
      * message. The option is a org.apache.camel.spi.HeaderFilterStrategy type.
      */
     private HeaderFilterStrategy headerFilterStrategy;
+    /**
+     * Whether to allow overriding the secret store, the key and the metadata of
+     * the endpoint with the CamelDaprSecretStore, CamelDaprKey and
+     * CamelDaprMetadata headers for the secret operation. Disabled by default;
+     * enable it only when the header source is trusted, since it lets a message
+     * choose the secret store and the secret that the secret operation reads.
+     */
+    private Boolean allowSecretStoreAndKeyFromHeaders = false;
 
     public DaprClient getClient() {
         return client;
@@ -427,6 +444,14 @@ public class DaprComponentConfiguration
         this.lockOwner = lockOwner;
     }
 
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
+    }
+
     public String getMethodToInvoke() {
         return methodToInvoke;
     }
@@ -570,5 +595,14 @@ public class DaprComponentConfiguration
     public void setHeaderFilterStrategy(
             HeaderFilterStrategy headerFilterStrategy) {
         this.headerFilterStrategy = headerFilterStrategy;
+    }
+
+    public Boolean getAllowSecretStoreAndKeyFromHeaders() {
+        return allowSecretStoreAndKeyFromHeaders;
+    }
+
+    public void setAllowSecretStoreAndKeyFromHeaders(
+            Boolean allowSecretStoreAndKeyFromHeaders) {
+        this.allowSecretStoreAndKeyFromHeaders = allowSecretStoreAndKeyFromHeaders;
     }
 }

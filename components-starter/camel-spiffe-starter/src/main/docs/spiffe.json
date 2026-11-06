@@ -67,7 +67,7 @@
     {
       "name": "camel.component.spiffe.spiffe-socket-path",
       "type": "java.lang.String",
-      "description": "The address of the SPIFFE Workload API endpoint (for example {code unix:\/\/\/tmp\/agent.sock} or {code tcp:\/\/127.0.0.1:8082}). When not set, the SPIFFE_ENDPOINT_SOCKET environment variable is used.",
+      "description": "The address of the SPIFFE Workload API endpoint (for example unix:\/\/\/tmp\/agent.sock or tcp:\/\/127.0.0.1:8082). When not set, the SPIFFE_ENDPOINT_SOCKET environment variable is used.",
       "sourceType": "org.apache.camel.component.spiffe.springboot.SpiffeComponentConfiguration"
     },
     {

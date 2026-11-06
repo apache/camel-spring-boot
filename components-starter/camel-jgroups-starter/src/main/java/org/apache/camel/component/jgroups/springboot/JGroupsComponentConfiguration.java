@@ -103,8 +103,8 @@ public class JGroupsComponentConfiguration
      * block such attacks, also configure the JVM-wide -Djdk.serialFilter and
      * secure the channel with AUTH and encryption. When this option is not set
      * and no JVM-wide filter is configured, a conservative default filter
-     * denying java.net. and otherwise allowing java., javax. and
-     * org.apache.camel. is applied. Use to accept any type.
+     * denying java.net.** and otherwise allowing java.**, javax.** and
+     * org.apache.camel.** is applied. Use * to accept any type.
      */
     private String deserializationFilter;
 

@@ -40,7 +40,7 @@ public class AvroDataFormatConfiguration
     private String instanceClassName;
     /**
      * Comma-separated list of additional packages that contain trusted Avro
-     * model classes. Avro 1.12 validates classes resolved from schemas; Camel
+     * model classes. Avro 1.12+ validates classes resolved from schemas; Camel
      * automatically trusts packages derived from the configured schema or
      * instance class.
      */

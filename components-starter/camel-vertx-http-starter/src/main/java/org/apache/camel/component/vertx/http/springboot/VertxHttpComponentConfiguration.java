@@ -54,7 +54,7 @@ public class VertxHttpComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Whether the response body should be byte or as
+     * Whether the response body should be byte[] or as
      * io.vertx.core.buffer.Buffer
      */
     private Boolean responsePayloadAsByteArray = true;

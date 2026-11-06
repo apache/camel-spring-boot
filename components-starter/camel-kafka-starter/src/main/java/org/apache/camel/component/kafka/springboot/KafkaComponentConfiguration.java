@@ -84,14 +84,13 @@ public class KafkaComponentConfiguration
     private Integer connectionMaxIdleMs = 540000;
     /**
      * Enables Kafka read-process-write exactly-once mode. On the source
-     * endpoint, also configure {code allowManualCommit=true}, {code
-     * autoCommitEnable=false}, {code breakOnFirstError=true} and an explicit,
-     * non-blank groupId. On the destination endpoint, configure an explicit
-     * transactionalId base that is unique to this Camel runtime instance and
-     * stable across restarts. Camel appends the owning route id so producers in
-     * different routes do not share a Kafka transactional id. {code
-     * transacted=true} without an explicit transactional id is not sufficient
-     * for exactly-once mode.
+     * endpoint, also configure allowManualCommit=true, autoCommitEnable=false,
+     * breakOnFirstError=true and an explicit, non-blank groupId. On the
+     * destination endpoint, configure an explicit transactionalId base that is
+     * unique to this Camel runtime instance and stable across restarts. Camel
+     * appends the owning route id so producers in different routes do not share
+     * a Kafka transactional id. transacted=true without an explicit
+     * transactional id is not sufficient for exactly-once mode.
      */
     private Boolean exactlyOnce = false;
     /**
@@ -208,7 +207,7 @@ public class KafkaComponentConfiguration
      * not reached the maximum size defined by maxPollRecords. Notice the
      * trigger is not exact at the given interval, as this can only happen
      * between kafka polls (see pollTimeoutMs option). So for example setting
-     * this to 10000, then the trigger happens in the interval 10000
+     * this to 10000, then the trigger happens in the interval 10000 +
      * pollTimeoutMs. The default value for pollTimeoutMs is 5000, so this would
      * mean a trigger interval at about every 15 seconds.
      */
@@ -346,7 +345,7 @@ public class KafkaComponentConfiguration
     private String keyDeserializer = "org.apache.kafka.common.serialization.StringDeserializer";
     /**
      * The maximum amount of data per-partition the server will return. The
-     * maximum total memory used for a request will be #partitions
+     * maximum total memory used for a request will be #partitions *
      * max.partition.fetch.bytes. This size must be at least as large as the
      * maximum message size the server allows or else it is possible for the
      * producer to send messages larger than the consumer can fetch. If that

@@ -128,7 +128,7 @@ public class RestPostmanComponentConfiguration
     private RestPostmanProcessorStrategy restPostmanProcessorStrategy;
     /**
      * Scheme hostname and port to direct the HTTP requests to in the form of
-     * https://hostname:port. If set overrides any value derived from the
+     * http[s]://hostname[:port]. If set overrides any value derived from the
      * collection.
      */
     private String host;

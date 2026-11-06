@@ -121,9 +121,9 @@ public class RestOpenApiComponentConfiguration
     private String unmatchedRequestHandling = "platform";
     /**
      * Scheme hostname and port to direct the HTTP requests to in the form of
-     * https://hostname:port. Can be configured at the endpoint, component or in
-     * the corresponding REST configuration in the Camel Context. If you give
-     * this component a name (e.g. petstore) that REST configuration is
+     * http[s]://hostname[:port]. Can be configured at the endpoint, component
+     * or in the corresponding REST configuration in the Camel Context. If you
+     * give this component a name (e.g. petstore) that REST configuration is
      * consulted first, rest-openapi next, and global configuration last. If set
      * overrides any value found in the OpenApi specification,
      * RestConfiguration. Can be overridden in endpoint configuration.

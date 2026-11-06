@@ -146,7 +146,7 @@
     {
       "name": "camel.component.google-sheets-stream.service-account-key",
       "type": "java.lang.String",
-      "description": "Sets .json file with credentials for Service account",
+      "description": "Sets *.json file with credentials for Service account",
       "sourceType": "org.apache.camel.component.google.sheets.stream.springboot.GoogleSheetsStreamComponentConfiguration"
     },
     {
@@ -252,7 +252,7 @@
     {
       "name": "camel.component.google-sheets.service-account-key",
       "type": "java.lang.String",
-      "description": "Sets .json file with credentials for Service account",
+      "description": "Sets *.json file with credentials for Service account",
       "sourceType": "org.apache.camel.component.google.sheets.springboot.GoogleSheetsComponentConfiguration"
     },
     {

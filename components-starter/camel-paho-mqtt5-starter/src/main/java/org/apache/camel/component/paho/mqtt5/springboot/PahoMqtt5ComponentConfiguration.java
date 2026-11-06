@@ -295,23 +295,24 @@ public class PahoMqtt5ComponentConfiguration
      * example /mydir/etc/key.p12 com.ibm.ssl.keyStorePassword The password for
      * the KeyStore object that you want the KeyManager to use. The password can
      * either be in plain-text, or may be obfuscated using the static method:
-     * com.ibm.micro.security.Password.obfuscate(char password). This obfuscates
-     * the password using a simple and insecure XOR and Base64 encoding
-     * mechanism. Note that this is only a simple scrambler to obfuscate
-     * clear-text passwords. com.ibm.ssl.keyStoreType Type of key store, for
-     * example PKCS12, JKS, or JCEKS. com.ibm.ssl.keyStoreProvider Key store
-     * provider, for example IBMJCE or IBMJCEFIPS. com.ibm.ssl.trustStore The
-     * name of the file that contains the KeyStore object that you want the
-     * TrustManager to use. com.ibm.ssl.trustStorePassword The password for the
-     * TrustStore object that you want the TrustManager to use. The password can
-     * either be in plain-text, or may be obfuscated using the static method:
-     * com.ibm.micro.security.Password.obfuscate(char password). This obfuscates
-     * the password using a simple and insecure XOR and Base64 encoding
-     * mechanism. Note that this is only a simple scrambler to obfuscate
-     * clear-text passwords. com.ibm.ssl.trustStoreType The type of KeyStore
-     * object that you want the default TrustManager to use. Same possible
-     * values as keyStoreType. com.ibm.ssl.trustStoreProvider Trust store
-     * provider, for example IBMJCE or IBMJCEFIPS.
+     * com.ibm.micro.security.Password.obfuscate(char[] password). This
+     * obfuscates the password using a simple and insecure XOR and Base64
+     * encoding mechanism. Note that this is only a simple scrambler to
+     * obfuscate clear-text passwords. com.ibm.ssl.keyStoreType Type of key
+     * store, for example PKCS12, JKS, or JCEKS. com.ibm.ssl.keyStoreProvider
+     * Key store provider, for example IBMJCE or IBMJCEFIPS.
+     * com.ibm.ssl.trustStore The name of the file that contains the KeyStore
+     * object that you want the TrustManager to use.
+     * com.ibm.ssl.trustStorePassword The password for the TrustStore object
+     * that you want the TrustManager to use. The password can either be in
+     * plain-text, or may be obfuscated using the static method:
+     * com.ibm.micro.security.Password.obfuscate(char[] password). This
+     * obfuscates the password using a simple and insecure XOR and Base64
+     * encoding mechanism. Note that this is only a simple scrambler to
+     * obfuscate clear-text passwords. com.ibm.ssl.trustStoreType The type of
+     * KeyStore object that you want the default TrustManager to use. Same
+     * possible values as keyStoreType. com.ibm.ssl.trustStoreProvider Trust
+     * store provider, for example IBMJCE or IBMJCEFIPS.
      * com.ibm.ssl.enabledCipherSuites A list of which ciphers are enabled.
      * Values are dependent on the provider, for example:
      * SSL_RSA_WITH_AES_128_CBC_SHA;SSL_RSA_WITH_3DES_EDE_CBC_SHA.
