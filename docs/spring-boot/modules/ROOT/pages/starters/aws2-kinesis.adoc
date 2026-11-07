@@ -24,7 +24,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 58 options, which are listed below.
+The starter supports 59 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -66,6 +66,7 @@ The starter supports 58 options, which are listed below.
 | camel.component.aws2-kinesis.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
 | camel.component.aws2-kinesis.iterator-type | Defines where in the Kinesis stream to start getting records | trim-horizon | ShardIteratorType
 | camel.component.aws2-kinesis.kcl-disable-cloudwatch-metrics-export | If we want to use a KCL Consumer and disable the CloudWatch Metrics Export | false | Boolean
+| camel.component.aws2-kinesis.kcl-stop-checkpoint-on-failure | If we want to use a KCL Consumer and keep the checkpoint of a shard before the first record whose exchange fails, so the next holder of the lease of the shard (the route started again, or another worker) consumes the records from that one on again. The consumer goes on routing the shard, so these records can be routed twice and out of order. By default a failed record is reported to the exception handler and checkpointed with its batch. See the KCL consumer section of the docs. | false | Boolean
 | camel.component.aws2-kinesis.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.aws2-kinesis.max-results-per-request | Maximum number of records fetched from each shard in each poll: the Limit of the GetRecords request, from 1 to 10000. Not used by the KCL consumer (useKclConsumers). | 1000 | Integer
 | camel.component.aws2-kinesis.message-timestamp | The message timestamp to start polling from. Required if iteratorType is set to AT_TIMESTAMP |  | String

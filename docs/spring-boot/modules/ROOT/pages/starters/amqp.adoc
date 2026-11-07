@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 122 options, which are listed below.
+The starter supports 123 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -46,6 +46,7 @@ The starter supports 122 options, which are listed below.
 | camel.component.amqp.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.amqp.broker-url | Remote URL to broker. The URL is used to setup connection factory and is broker specific (such as ActiveMQ). |  | String
 | camel.component.amqp.browse-limit | Maximum number of messages to keep in memory available for browsing. Use 0 for unlimited. | 100 | Integer
+| camel.component.amqp.cache-connection | Whether the producers send over one shared connection to the broker, when the component creates the connection factory: from brokerUrl, from the host, port, username, password and useSsl options, or with the amqpComponent factory methods. Turn it off to open and close a connection for every message sent. The consumers keep their own connections. A connectionFactory that you set yourself, on the component or on the endpoint, is used as it is. | true | Boolean
 | camel.component.amqp.cache-level | Sets the cache level by ID for the underlying JMS resources. See cacheLevelName option for more details. |  | Integer
 | camel.component.amqp.cache-level-name | Sets the cache level by name for the underlying JMS resources. Possible values are: CACHE_AUTO, CACHE_CONNECTION, CACHE_CONSUMER, CACHE_NONE, and CACHE_SESSION. The default setting is CACHE_AUTO. See the Spring documentation and Transactions Cache Levels for more information. | CACHE_AUTO | String
 | camel.component.amqp.client-id | Sets the JMS client ID to use. Note that this value, if specified, must be unique and can only be used by a single JMS connection instance. It is typically only required for durable topic subscriptions with JMS 1.1. |  | String

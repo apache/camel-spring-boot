@@ -274,6 +274,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.aws2-kinesis.kcl-stop-checkpoint-on-failure",
+      "type": "java.lang.Boolean",
+      "description": "If we want to use a KCL Consumer and keep the checkpoint of a shard before the first record whose exchange fails, so the next holder of the lease of the shard (the route started again, or another worker) consumes the records from that one on again. The consumer goes on routing the shard, so these records can be routed twice and out of order. By default a failed record is reported to the exception handler and checkpointed with its batch. See the KCL consumer section of the docs.",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.aws2-kinesis.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
