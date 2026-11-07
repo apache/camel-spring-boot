@@ -117,6 +117,16 @@ public class Kinesis2ComponentConfiguration
      */
     private String shardId;
     /**
+     * If we want to use a KCL Consumer and keep the checkpoint of a shard
+     * before the first record whose exchange fails, so the next holder of the
+     * lease of the shard (the route started again, or another worker) consumes
+     * the records from that one on again. The consumer goes on routing the
+     * shard, so these records can be routed twice and out of order. By default
+     * a failed record is reported to the exception handler and checkpointed
+     * with its batch. See the KCL consumer section of the docs.
+     */
+    private Boolean kclStopCheckpointOnFailure = false;
+    /**
      * The interval in milliseconds to wait between shard polling
      */
     private Long shardMonitorInterval = 10000L;
@@ -337,6 +347,14 @@ public class Kinesis2ComponentConfiguration
 
     public void setShardId(String shardId) {
         this.shardId = shardId;
+    }
+
+    public Boolean getKclStopCheckpointOnFailure() {
+        return kclStopCheckpointOnFailure;
+    }
+
+    public void setKclStopCheckpointOnFailure(Boolean kclStopCheckpointOnFailure) {
+        this.kclStopCheckpointOnFailure = kclStopCheckpointOnFailure;
     }
 
     public Long getShardMonitorInterval() {

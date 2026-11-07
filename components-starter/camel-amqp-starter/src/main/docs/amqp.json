@@ -137,6 +137,13 @@
       "defaultValue": 100
     },
     {
+      "name": "camel.component.amqp.cache-connection",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producers send over one shared connection to the broker, when the component creates the connection factory: from brokerUrl, from the host, port, username, password and useSsl options, or with the amqpComponent factory methods. Turn it off to open and close a connection for every message sent. The consumers keep their own connections. A connectionFactory that you set yourself, on the component or on the endpoint, is used as it is.",
+      "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.amqp.cache-level",
       "type": "java.lang.Integer",
       "description": "Sets the cache level by ID for the underlying JMS resources. See cacheLevelName option for more details.",

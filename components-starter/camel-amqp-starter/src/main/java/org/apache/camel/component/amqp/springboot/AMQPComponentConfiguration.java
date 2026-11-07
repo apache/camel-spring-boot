@@ -51,6 +51,16 @@ public class AMQPComponentConfiguration
      */
     private String brokerUrl;
     /**
+     * Whether the producers send over one shared connection to the broker, when
+     * the component creates the connection factory: from brokerUrl, from the
+     * host, port, username, password and useSsl options, or with the
+     * amqpComponent factory methods. Turn it off to open and close a connection
+     * for every message sent. The consumers keep their own connections. A
+     * connectionFactory that you set yourself, on the component or on the
+     * endpoint, is used as it is.
+     */
+    private Boolean cacheConnection = true;
+    /**
      * Sets the JMS client ID to use. Note that this value, if specified, must
      * be unique and can only be used by a single JMS connection instance. It is
      * typically only required for durable topic subscriptions with JMS 1.1.
@@ -939,6 +949,14 @@ public class AMQPComponentConfiguration
 
     public void setBrokerUrl(String brokerUrl) {
         this.brokerUrl = brokerUrl;
+    }
+
+    public Boolean getCacheConnection() {
+        return cacheConnection;
+    }
+
+    public void setCacheConnection(Boolean cacheConnection) {
+        this.cacheConnection = cacheConnection;
     }
 
     public String getClientId() {
