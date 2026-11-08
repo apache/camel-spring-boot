@@ -1945,6 +1945,19 @@
       "defaultValue": false
     },
     {
+      "name": "camel.vault.hashicorp.auth-mount-path",
+      "type": "java.lang.String",
+      "description": "The path the login method is mounted at in hashicorp vault (without auth\/), when it is not the default path of the login method: approle, kubernetes or jwt",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.hashicorp.authentication",
+      "type": "java.lang.String",
+      "description": "How to log in to hashicorp vault: token (a fixed token), approle (a role ID and a secret ID), kubernetes (the service account token of the pod) or jwt (a JWT, such as a workload identity token). Camel renews the token before it expires, and logs in again when the token can no longer be renewed.",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties",
+      "defaultValue": "token"
+    },
+    {
       "name": "camel.vault.hashicorp.cloud",
       "type": "java.lang.Boolean",
       "description": "Determine if the Hashicorp Vault is deployed on Hashicorp Cloud or not",
@@ -1955,6 +1968,18 @@
       "name": "camel.vault.hashicorp.host",
       "type": "java.lang.String",
       "description": "The Hashicorp Vault Host for accessing the service",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.hashicorp.jwt",
+      "type": "java.lang.String",
+      "description": "The JWT to log in with, for the jwt and kubernetes logins. For a JWT that is replaced over time, such as a projected service account token, use jwtFile instead.",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.hashicorp.jwt-file",
+      "type": "java.lang.String",
+      "description": "The file to read the JWT from at every login, for the jwt and kubernetes logins. The kubernetes login reads \/var\/run\/secrets\/kubernetes.io\/serviceaccount\/token when neither jwt nor jwtFile is set.",
       "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
     },
     {
@@ -1984,9 +2009,27 @@
       "defaultValue": 60000
     },
     {
+      "name": "camel.vault.hashicorp.role",
+      "type": "java.lang.String",
+      "description": "The hashicorp vault role to log in as, for the kubernetes and jwt logins. The jwt login can leave it out when the login method has a default role.",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.hashicorp.role-id",
+      "type": "java.lang.String",
+      "description": "The role ID of the AppRole, for the approle login",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
       "name": "camel.vault.hashicorp.scheme",
       "type": "java.lang.String",
       "description": "The Hashicorp Vault Scheme for accessing the service",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.hashicorp.secret-id",
+      "type": "java.lang.String",
+      "description": "The secret ID of the AppRole, for the approle login",
       "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
     },
     {

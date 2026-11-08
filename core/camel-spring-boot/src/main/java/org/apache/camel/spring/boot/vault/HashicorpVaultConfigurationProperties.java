@@ -23,9 +23,51 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class HashicorpVaultConfigurationProperties {
 
     /**
+     * How to log in to hashicorp vault: token (a fixed token), approle (a role ID and a secret ID), kubernetes (the
+     * service account token of the pod) or jwt (a JWT, such as a workload identity token). Camel renews the token
+     * before it expires, and logs in again when the token can no longer be renewed.
+     */
+    @Metadata(defaultValue = "token", enums = "token,approle,kubernetes,jwt")
+    private String authentication = "token";
+
+    /**
      * The Hashicorp Vault Token for accessing the service
      */
     private String token;
+
+    /**
+     * The role ID of the AppRole, for the approle login
+     */
+    private String roleId;
+
+    /**
+     * The secret ID of the AppRole, for the approle login
+     */
+    private String secretId;
+
+    /**
+     * The hashicorp vault role to log in as, for the kubernetes and jwt logins. The jwt login can leave it out when the
+     * login method has a default role.
+     */
+    private String role;
+
+    /**
+     * The JWT to log in with, for the jwt and kubernetes logins. For a JWT that is replaced over time, such as a
+     * projected service account token, use jwtFile instead.
+     */
+    private String jwt;
+
+    /**
+     * The file to read the JWT from at every login, for the jwt and kubernetes logins. The kubernetes login reads
+     * /var/run/secrets/kubernetes.io/serviceaccount/token when neither jwt nor jwtFile is set.
+     */
+    private String jwtFile;
+
+    /**
+     * The path the login method is mounted at in hashicorp vault (without auth/), when it is not the default path of
+     * the login method: approle, kubernetes or jwt
+     */
+    private String authMountPath;
 
     /**
      * The Hashicorp Vault Host for accessing the service
@@ -67,12 +109,68 @@ public class HashicorpVaultConfigurationProperties {
      */
     private String secrets;
 
+    public String getAuthentication() {
+        return authentication;
+    }
+
+    public void setAuthentication(String authentication) {
+        this.authentication = authentication;
+    }
+
     public String getToken() {
         return token;
     }
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getSecretId() {
+        return secretId;
+    }
+
+    public void setSecretId(String secretId) {
+        this.secretId = secretId;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getJwt() {
+        return jwt;
+    }
+
+    public void setJwt(String jwt) {
+        this.jwt = jwt;
+    }
+
+    public String getJwtFile() {
+        return jwtFile;
+    }
+
+    public void setJwtFile(String jwtFile) {
+        this.jwtFile = jwtFile;
+    }
+
+    public String getAuthMountPath() {
+        return authMountPath;
+    }
+
+    public void setAuthMountPath(String authMountPath) {
+        this.authMountPath = authMountPath;
     }
 
     public String getHost() {
