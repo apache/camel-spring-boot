@@ -1,0 +1,247 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.vertx-mqtt",
+      "type": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration"
+    },
+    {
+      "name": "camel.component.vertx-mqtt.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.vertx-mqtt.ack-timeout",
+      "type": "java.lang.Integer",
+      "description": "How long a message of quality of service 1 or 2 waits for its acknowledgement, in seconds. The exchange fails when the time is up. 0 or less waits without a limit.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": 30
+    },
+    {
+      "name": "camel.component.vertx-mqtt.automatic-reconnect",
+      "type": "java.lang.Boolean",
+      "description": "Whether the client connects again when the connection is lost, and keeps trying when the first connection fails. Without, a failed first connection fails the start of the route.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.vertx-mqtt.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.vertx-mqtt.bridge-error-handler",
+      "type": "java.lang.Boolean",
+      "description": "Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.vertx-mqtt.broker-url",
+      "type": "java.lang.String",
+      "description": "The URL of the broker: tcp:\/\/host:port or mqtt:\/\/host:port for a plain connection, ssl:\/\/host:port or mqtts:\/\/host:port for TLS. Without a port 1883 is used for a plain connection and 8883 for TLS.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": "tcp:\/\/localhost:1883"
+    },
+    {
+      "name": "camel.component.vertx-mqtt.clean-start",
+      "type": "java.lang.Boolean",
+      "description": "Whether the broker discards the session of the client when it connects, the clean session flag of MQTT 3.1.1.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.vertx-mqtt.client-id",
+      "type": "java.lang.String",
+      "description": "The client identifier. A random one is generated if none is set. A broker allows one connection per client identifier, so two endpoints must not share one.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration"
+    },
+    {
+      "name": "camel.component.vertx-mqtt.configuration",
+      "type": "org.apache.camel.component.vertx.mqtt.VertxMqttConfiguration",
+      "description": "The shared configuration of the endpoints. The option is a org.apache.camel.component.vertx.mqtt.VertxMqttConfiguration type.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration"
+    },
+    {
+      "name": "camel.component.vertx-mqtt.connect-timeout",
+      "type": "java.lang.Long",
+      "description": "How long to wait for the connection to the broker, in milliseconds. The option is a long type.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": 30000
+    },
+    {
+      "name": "camel.component.vertx-mqtt.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.vertx-mqtt.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the vertx-mqtt component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration"
+    },
+    {
+      "name": "camel.component.vertx-mqtt.keep-alive-interval",
+      "type": "java.lang.Integer",
+      "description": "The keep alive interval in seconds. 0 switches keep alive off.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": 30
+    },
+    {
+      "name": "camel.component.vertx-mqtt.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.vertx-mqtt.manual-acks-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether a message of quality of service 1 or 2 is acknowledged only once its exchange completed successfully. Otherwise the client acknowledges it as soon as it arrives.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.vertx-mqtt.max-inflight-queue",
+      "type": "java.lang.Integer",
+      "description": "The most messages of quality of service 1 and 2 the client has sent without an acknowledgement. A message beyond it fails.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": 10
+    },
+    {
+      "name": "camel.component.vertx-mqtt.max-message-size",
+      "type": "java.lang.Integer",
+      "description": "The largest message in bytes the client receives, the protocol maximum by default. Every message is read into memory as a whole, so lower it for a broker whose publishers are not trusted.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": 268435455
+    },
+    {
+      "name": "camel.component.vertx-mqtt.max-pending-messages",
+      "type": "java.lang.Integer",
+      "description": "The most received messages waiting for their exchange to complete. Beyond it the client stops reading from the connection until the consumer caught up, which holds back the broker for every quality of service.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": 1000
+    },
+    {
+      "name": "camel.component.vertx-mqtt.max-reconnect-delay",
+      "type": "java.lang.Long",
+      "description": "The longest delay between two attempts to reconnect, in milliseconds. The option is a long type.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": 60000
+    },
+    {
+      "name": "camel.component.vertx-mqtt.mqtt-version",
+      "type": "org.apache.camel.component.vertx.mqtt.VertxMqttVersion",
+      "description": "The version of the MQTT protocol.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": "mqtt-5-0"
+    },
+    {
+      "name": "camel.component.vertx-mqtt.password",
+      "type": "java.lang.String",
+      "description": "The password to authenticate with.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration"
+    },
+    {
+      "name": "camel.component.vertx-mqtt.qos",
+      "type": "java.lang.Integer",
+      "description": "The quality of service: 0 (at most once), 1 (at least once) or 2 (exactly once). For a consumer the maximum quality of service of its subscription.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": 1
+    },
+    {
+      "name": "camel.component.vertx-mqtt.receive-maximum",
+      "type": "java.lang.Integer",
+      "description": "MQTT 5 only. The most messages of quality of service 1 and 2 the broker sends before the client acknowledges them. 0 leaves it to the broker.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.vertx-mqtt.reconnect-delay",
+      "type": "java.lang.Long",
+      "description": "The delay before the first attempt to reconnect, in milliseconds. Every further attempt doubles it, up to the maximum reconnect delay. The option is a long type.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": 1000
+    },
+    {
+      "name": "camel.component.vertx-mqtt.retained",
+      "type": "java.lang.Boolean",
+      "description": "Whether the broker retains a published message for subscribers that arrive later.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.vertx-mqtt.session-expiry-interval",
+      "type": "java.lang.Long",
+      "description": "MQTT 5 only. How long the broker keeps the session after the connection closed, in seconds. 0 ends it with the connection.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.vertx-mqtt.ssl-context-parameters",
+      "type": "org.apache.camel.support.jsse.SSLContextParameters",
+      "description": "The TLS configuration of a connection to an ssl:\/\/ or mqtts:\/\/ broker: key managers for a client certificate, trust managers, protocols and cipher suites. Without it the trust store of the JVM is used. The host name of the broker is always verified against its certificate: there is intentionally no option to switch the check off. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration"
+    },
+    {
+      "name": "camel.component.vertx-mqtt.use-global-ssl-context-parameters",
+      "type": "java.lang.Boolean",
+      "description": "Whether to use the global SSL context parameters of the Camel context for an endpoint that sets none.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.vertx-mqtt.username",
+      "type": "java.lang.String",
+      "description": "The user name to authenticate with.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration"
+    },
+    {
+      "name": "camel.component.vertx-mqtt.vertx",
+      "type": "io.vertx.core.Vertx",
+      "description": "The Vert.x instance to use. Without, the one of the registry if there is exactly one, else a Vert.x instance of the component's own, closed when the component stops. The option is a io.vertx.core.Vertx type.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration"
+    },
+    {
+      "name": "camel.component.vertx-mqtt.vertx-options",
+      "type": "io.vertx.core.VertxOptions",
+      "description": "The options of the Vert.x instance the component creates when none is given. The option is a io.vertx.core.VertxOptions type.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration"
+    },
+    {
+      "name": "camel.component.vertx-mqtt.will-payload",
+      "type": "java.lang.String",
+      "description": "The payload of the will message.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration"
+    },
+    {
+      "name": "camel.component.vertx-mqtt.will-qos",
+      "type": "java.lang.Integer",
+      "description": "The quality of service of the will message.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
+      "name": "camel.component.vertx-mqtt.will-retained",
+      "type": "java.lang.Boolean",
+      "description": "Whether the will message is retained.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.vertx-mqtt.will-topic",
+      "type": "java.lang.String",
+      "description": "The topic of the will message the broker publishes when the client goes away without disconnecting.",
+      "sourceType": "org.apache.camel.component.vertx.mqtt.springboot.VertxMqttComponentConfiguration"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
