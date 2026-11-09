@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
@@ -100,7 +101,14 @@ public final class CamelPropertiesHelper {
         // only the options the application configured are copied, the others merely carry their catalog default
         Set<ConfigurationPropertyName> bound = boundProperties(applicationContext);
         if (bound != null && propertyPrefix != null && !propertyPrefix.isEmpty()) {
-            properties.keySet().removeIf(key -> !isConfigured(bound, optionKey(propertyPrefix, key)));
+            // Also keep properties that were assigned programmatically in Java (not via Spring Boot
+            // property binding), detected by comparing against a fresh default instance of the
+            // configuration class. This handles cases like SpringBootPlatformWebMvcConfiguration
+            // setting requestTimeout on PlatformHttpComponentConfiguration from code.
+            Map<String, Object> defaults = defaultProperties(camelContext, source);
+            properties.keySet().removeIf(
+                    key -> !isConfigured(bound, optionKey(propertyPrefix, key))
+                            && !isDifferentFromDefault(key, properties, defaults));
         }
 
         // the options that could be set are removed from the map, so what is left could not be set
@@ -151,6 +159,32 @@ public final class CamelPropertiesHelper {
                     e.getMessage(), e);
             return null;
         }
+    }
+
+    /**
+     * Gets the default properties of a freshly-constructed instance of the same class as the given source, or an empty
+     * map when the class has no accessible no-arg constructor. Used to detect values that were assigned
+     * programmatically in Java (not via Spring Boot property binding).
+     */
+    private static Map<String, Object> defaultProperties(CamelContext camelContext, Object source) {
+        try {
+            Object defaults = source.getClass().getDeclaredConstructor().newInstance();
+            return getNonNullProperties(camelContext, defaults);
+        } catch (Exception e) {
+            LOG.debug("Cannot instantiate default of {} to detect programmatic assignments: {}",
+                    ObjectHelper.classCanonicalName(source), e.getMessage());
+            return Map.of();
+        }
+    }
+
+    /**
+     * Whether the value of the given key in {@code properties} differs from the value in {@code defaults}. When the
+     * current value is not equal to the default, it was assigned programmatically in Java and must be copied to the
+     * target even if it was not bound by Spring Boot.
+     */
+    private static boolean isDifferentFromDefault(String key, Map<String, Object> properties,
+            Map<String, Object> defaults) {
+        return !Objects.equals(properties.get(key), defaults.get(key));
     }
 
     /**

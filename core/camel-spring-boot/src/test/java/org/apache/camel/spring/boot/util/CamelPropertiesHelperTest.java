@@ -81,6 +81,8 @@ public class CamelPropertiesHelperTest {
         private MyOption option;
         private Boolean secure = false;
         private Boolean verifyHostname = true;
+        // null by default — suitable for testing programmatic assignment (CAMEL-26782)
+        private Long requestTimeout;
 
         public String getName() {
             return name;
@@ -112,6 +114,14 @@ public class CamelPropertiesHelperTest {
 
         public void setVerifyHostname(Boolean verifyHostname) {
             this.verifyHostname = verifyHostname;
+        }
+
+        public Long getRequestTimeout() {
+            return requestTimeout;
+        }
+
+        public void setRequestTimeout(Long requestTimeout) {
+            this.requestTimeout = requestTimeout;
         }
     }
 
@@ -151,6 +161,7 @@ public class CamelPropertiesHelperTest {
         private MyFooClass myFooClass;
         private boolean secure;
         private boolean verifyHostname;
+        private Long requestTimeout;
 
         public int getId() {
             return id;
@@ -206,6 +217,14 @@ public class CamelPropertiesHelperTest {
 
         public void setMyFooClass(MyFooClass myFooClass) {
             this.myFooClass = myFooClass;
+        }
+
+        public Long getRequestTimeout() {
+            return requestTimeout;
+        }
+
+        public void setRequestTimeout(Long requestTimeout) {
+            this.requestTimeout = requestTimeout;
         }
     }
 
@@ -397,6 +416,39 @@ public class CamelPropertiesHelperTest {
                 target);
 
         Assertions.assertTrue(target.isVerifyHostname(), "A configured option must be applied whatever its value");
+    }
+
+    @Test
+    void testCopyConfigurationPropertiesCopiesProgrammaticallyAssignedValue() {
+        MyClass target = new MyClass();
+
+        // Simulate the same pattern as SpringBootPlatformWebMvcConfiguration: an auto-configuration class
+        // sets a value on the configuration bean in Java (not from Spring Boot application properties).
+        // Before the fix (CAMEL-26782), this programmatically-assigned value was silently dropped because
+        // it was not recorded in BoundConfigurationProperties.
+        MyConfiguration cfg = configWithoutDrift();
+        cfg.setRequestTimeout(30000L); // assigned in Java, not via application properties
+
+        CamelPropertiesHelper.copyConfigurationProperties(camelContext, context, PREFIX, cfg, target);
+
+        Assertions.assertEquals(30000L, target.getRequestTimeout(),
+                "A value assigned programmatically in Java must be copied to the target");
+    }
+
+    @Test
+    void testCopyConfigurationPropertiesDoesNotCopyProgrammaticValueMatchingDefault() {
+        MyClass target = new MyClass();
+
+        // secure defaults to false in MyConfiguration. Setting it to the same value programmatically
+        // must not be copied — if it were, it could overwrite a value the target already has set.
+        MyConfiguration cfg = configWithoutDrift();
+        cfg.setSecure(false); // same as the field initializer default
+
+        target.setSecure(true); // the target has its own value
+        CamelPropertiesHelper.copyConfigurationProperties(camelContext, context, PREFIX, cfg, target);
+
+        Assertions.assertTrue(target.isSecure(),
+                "A programmatic assignment that matches the class default must not overwrite the target's value");
     }
 
     /**
