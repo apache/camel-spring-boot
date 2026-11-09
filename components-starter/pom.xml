@@ -516,6 +516,7 @@
     <module>camel-validator-starter</module>
     <module>camel-velocity-starter</module>
     <module>camel-vertx-http-starter</module>
+    <module>camel-vertx-mqtt-starter</module>
     <module>camel-vertx-starter</module>
     <module>camel-vertx-websocket-starter</module>
     <module>camel-wasm-starter</module>

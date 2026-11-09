@@ -417,6 +417,7 @@
 ** xref:starters/validator.adoc[Validator]
 ** xref:starters/velocity.adoc[Velocity]
 ** xref:starters/vertx-http.adoc[Vert.x HTTP Client]
+** xref:starters/vertx-mqtt.adoc[Vert.x MQTT]
 ** xref:starters/vertx-websocket.adoc[Vert.x WebSocket]
 ** xref:starters/vertx.adoc[Vert.x]
 ** xref:starters/wasm.adoc[Wasm]
