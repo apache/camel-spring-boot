@@ -74,9 +74,8 @@ public class JacksonAvroDataFormatConfiguration
      */
     private Boolean useList = false;
     /**
-     * To use custom Jackson modules com.fasterxml.jackson.databind.Module
-     * specified as a String with FQN class names. Multiple classes can be
-     * separated by comma.
+     * To use custom Jackson modules specified as a String with FQN class names.
+     * Multiple classes can be separated by comma.
      */
     private String moduleClassNames;
     /**
@@ -85,15 +84,13 @@ public class JacksonAvroDataFormatConfiguration
      */
     private String moduleRefs;
     /**
-     * Set of features to enable on the Jackson
-     * com.fasterxml.jackson.databind.ObjectMapper. Multiple features can be
-     * separated by comma.
+     * Set of features to enable on the Jackson ObjectMapper. Multiple features
+     * can be separated by comma.
      */
     private String enableFeatures;
     /**
-     * Set of features to disable on the Jackson
-     * com.fasterxml.jackson.databind.ObjectMapper. Multiple features can be
-     * separated by comma.
+     * Set of features to disable on the Jackson ObjectMapper. Multiple features
+     * can be separated by comma.
      */
     private String disableFeatures;
     /**

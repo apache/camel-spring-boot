@@ -17,11 +17,11 @@
 package org.apache.camel.component.salesforce.springboot.dto.generated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.apache.camel.component.salesforce.api.StringMultiSelectPicklistDeserializer;
 import org.apache.camel.component.salesforce.api.StringMultiSelectPicklistSerializer;
 import org.apache.camel.component.salesforce.api.dto.AbstractSObjectBase;
+import tools.jackson.databind.annotation.JsonDeserialize;
+import tools.jackson.databind.annotation.JsonSerialize;
 
 /**
  * Sample POJO for MSP tests using Strings instead of Constants.

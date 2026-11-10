@@ -19,7 +19,6 @@ package org.apache.camel.component.salesforce.springboot;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.salesforce.eventbus.protobuf.ReplayPreset;
 import org.apache.camel.component.salesforce.AuthenticationType;
 import org.apache.camel.component.salesforce.NotFoundBehaviour;
@@ -39,6 +38,7 @@ import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.KeyStoreParameters;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import tools.jackson.databind.ObjectMapper;
 
 /**
  * Communicate with Salesforce using Java DTOs.
@@ -205,8 +205,8 @@ public class SalesforceComponentConfiguration
     private Boolean notifyForOperationUpdate = false;
     /**
      * Custom Jackson ObjectMapper to use when serializing/deserializing
-     * Salesforce objects. The option is a
-     * com.fasterxml.jackson.databind.ObjectMapper type.
+     * Salesforce objects. The option is a tools.jackson.databind.ObjectMapper
+     * type.
      */
     private ObjectMapper objectMapper;
     /**

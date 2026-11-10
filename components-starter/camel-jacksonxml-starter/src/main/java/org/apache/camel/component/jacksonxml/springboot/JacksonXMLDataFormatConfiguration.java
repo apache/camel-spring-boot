@@ -91,9 +91,8 @@ public class JacksonXMLDataFormatConfiguration
      */
     private Boolean enableJaxbAnnotationModule = false;
     /**
-     * To use custom Jackson modules com.fasterxml.jackson.databind.Module
-     * specified as a String with FQN class names. Multiple classes can be
-     * separated by comma.
+     * To use custom Jackson modules specified as a String with FQN class names.
+     * Multiple classes can be separated by comma.
      */
     private String moduleClassNames;
     /**
@@ -102,9 +101,8 @@ public class JacksonXMLDataFormatConfiguration
      */
     private String moduleRefs;
     /**
-     * Set of features to enable on the Jackson
-     * com.fasterxml.jackson.databind.ObjectMapper. The features should be a
-     * name that matches a enum from SerializationFeature,
+     * Set of features to enable on the Jackson ObjectMapper. The features
+     * should be a name that matches a enum from SerializationFeature,
      * DeserializationFeature, MapperFeature, DateTimeFeature, EnumFeature,
      * JsonNodeFeature, StreamReadFeature, StreamWriteFeature, XmlReadFeature or
      * XmlWriteFeature. Multiple features can be separated by comma. When using
@@ -114,9 +112,8 @@ public class JacksonXMLDataFormatConfiguration
      */
     private String enableFeatures;
     /**
-     * Set of features to disable on the Jackson
-     * com.fasterxml.jackson.databind.ObjectMapper. The features should be a
-     * name that matches a enum from SerializationFeature,
+     * Set of features to disable on the Jackson ObjectMapper. The features
+     * should be a name that matches a enum from SerializationFeature,
      * DeserializationFeature, MapperFeature, DateTimeFeature, EnumFeature,
      * JsonNodeFeature, StreamReadFeature, StreamWriteFeature, XmlReadFeature or
      * XmlWriteFeature. Multiple features can be separated by comma. When using

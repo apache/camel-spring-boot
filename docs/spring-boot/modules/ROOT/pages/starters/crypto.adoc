@@ -34,7 +34,7 @@ The starter supports 32 options, which are listed below.
 | camel.component.crypto.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.crypto.buffer-size | Set the size of the buffer used to read in the Exchange payload data. | 2048 | Integer
 | camel.component.crypto.certificate | Set the Certificate that should be used to verify the signature in the exchange based on its payload. The option is a java.security.cert.Certificate type. |  | Certificate
-| camel.component.crypto.certificate-name | Sets the reference name for a PrivateKey that can be found in the registry. |  | String
+| camel.component.crypto.certificate-name | Sets the reference name for a Certificate that can be found in the registry. |  | String
 | camel.component.crypto.clear-headers | Determines if the Signature specific headers be cleared after signing and verification. Defaults to true, and should only be made otherwise at your extreme peril as vital private information such as Keys and passwords may escape if unset. | true | Boolean
 | camel.component.crypto.configuration | To use the shared DigitalSignatureConfiguration as configuration. The option is a org.apache.camel.component.crypto.DigitalSignatureConfiguration type. |  | DigitalSignatureConfiguration
 | camel.component.crypto.enabled | Whether to enable auto configuration of the crypto component. This is enabled by default. |  | Boolean

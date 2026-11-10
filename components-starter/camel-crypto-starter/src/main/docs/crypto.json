@@ -60,7 +60,7 @@
     {
       "name": "camel.component.crypto.certificate-name",
       "type": "java.lang.String",
-      "description": "Sets the reference name for a PrivateKey that can be found in the registry.",
+      "description": "Sets the reference name for a Certificate that can be found in the registry.",
       "sourceType": "org.apache.camel.component.crypto.springboot.DigitalSignatureComponentConfiguration"
     },
     {

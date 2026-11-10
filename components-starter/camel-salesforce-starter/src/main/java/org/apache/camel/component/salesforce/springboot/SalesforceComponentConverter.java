@@ -41,7 +41,7 @@ public class SalesforceComponentConverter implements GenericConverter {
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.SalesforceHttpClient.class));
-        answer.add(new ConvertiblePair(String.class, com.fasterxml.jackson.databind.ObjectMapper.class));
+        answer.add(new ConvertiblePair(String.class, tools.jackson.databind.ObjectMapper.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.api.dto.analytics.reports.ReportMetadata.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.salesforce.SalesforceEndpointConfig.class));
         answer.add(new ConvertiblePair(String.class, java.util.concurrent.ExecutorService.class));

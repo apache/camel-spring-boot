@@ -25,8 +25,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.junit.jupiter.api.Test;
@@ -35,6 +33,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -80,7 +80,7 @@ class A2AStarterSmokeTest {
                 HttpResponse.BodyHandlers.ofString());
         assertEquals(200, response.statusCode(), response.body());
         JsonNode card = MAPPER.readTree(response.body());
-        assertEquals("SpringBootAgent", card.get("name").asText());
+        assertEquals("SpringBootAgent", card.get("name").asString());
     }
 
     @Test
@@ -89,7 +89,7 @@ class A2AStarterSmokeTest {
         assertEquals(200, response.statusCode(), response.body());
         JsonNode body = MAPPER.readTree(response.body());
         assertTrue(body.has("task"), response.body());
-        assertFalse(body.get("task").get("id").asText().isEmpty());
+        assertFalse(body.get("task").get("id").asString().isEmpty());
     }
 
     @Test
@@ -99,8 +99,8 @@ class A2AStarterSmokeTest {
         HttpResponse<String> response = post("/rpc/", request, "application/json");
         assertEquals(200, response.statusCode(), response.body());
         JsonNode body = MAPPER.readTree(response.body());
-        assertEquals("2.0", body.get("jsonrpc").asText());
-        assertEquals("req-1", body.get("id").asText());
+        assertEquals("2.0", body.get("jsonrpc").asString());
+        assertEquals("req-1", body.get("id").asString());
         assertNotNull(body.get("result").get("task").get("id"));
     }
 

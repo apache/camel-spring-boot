@@ -161,8 +161,8 @@
     },
     {
       "name": "camel.component.servicenow.mapper",
-      "type": "com.fasterxml.jackson.databind.ObjectMapper",
-      "description": "Sets Jackson's ObjectMapper to use for request\/reply. The option is a com.fasterxml.jackson.databind.ObjectMapper type.",
+      "type": "tools.jackson.databind.ObjectMapper",
+      "description": "Sets Jackson's ObjectMapper to use for request\/reply. The option is a tools.jackson.databind.ObjectMapper type.",
       "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
     },
     {

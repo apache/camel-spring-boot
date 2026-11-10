@@ -81,9 +81,8 @@ public class JacksonProtobufDataFormatConfiguration
      */
     private Boolean useList = false;
     /**
-     * To use custom Jackson modules tools.jackson.databind.JacksonModule
-     * specified as a String with FQN class names. Multiple classes can be
-     * separated by comma.
+     * To use custom Jackson modules specified as a String with FQN class names.
+     * Multiple classes can be separated by comma.
      */
     private String moduleClassNames;
     /**
@@ -92,21 +91,13 @@ public class JacksonProtobufDataFormatConfiguration
      */
     private String moduleRefs;
     /**
-     * Set of features to enable on the Jackson
-     * tools.jackson.databind.ObjectMapper. The features should be a name that
-     * matches a enum from tools.jackson.databind.SerializationFeature,
-     * tools.jackson.databind.DeserializationFeature, or
-     * tools.jackson.databind.MapperFeature Multiple features can be separated
-     * by comma
+     * Set of features to enable on the Jackson ObjectMapper. Multiple features
+     * can be separated by comma.
      */
     private String enableFeatures;
     /**
-     * Set of features to disable on the Jackson
-     * tools.jackson.databind.ObjectMapper. The features should be a name that
-     * matches a enum from tools.jackson.databind.SerializationFeature,
-     * tools.jackson.databind.DeserializationFeature, or
-     * tools.jackson.databind.MapperFeature Multiple features can be separated
-     * by comma
+     * Set of features to disable on the Jackson ObjectMapper. Multiple features
+     * can be separated by comma.
      */
     private String disableFeatures;
     /**

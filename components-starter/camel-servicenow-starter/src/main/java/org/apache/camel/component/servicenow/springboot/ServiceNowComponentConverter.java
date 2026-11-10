@@ -42,7 +42,7 @@ public class ServiceNowComponentConverter implements GenericConverter {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.servicenow.ServiceNowConfiguration.class));
         answer.add(new ConvertiblePair(String.class, org.apache.cxf.transports.http.configuration.HTTPClientPolicy.class));
-        answer.add(new ConvertiblePair(String.class, com.fasterxml.jackson.databind.ObjectMapper.class));
+        answer.add(new ConvertiblePair(String.class, tools.jackson.databind.ObjectMapper.class));
         answer.add(new ConvertiblePair(String.class, org.apache.cxf.configuration.security.ProxyAuthorizationPolicy.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         return answer;

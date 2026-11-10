@@ -17,7 +17,6 @@
 package org.apache.camel.component.servicenow.springboot;
 
 import java.util.Map;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.camel.component.servicenow.ServiceNowComponent;
 import org.apache.camel.component.servicenow.ServiceNowConfiguration;
 import org.apache.camel.component.servicenow.ServiceNowRelease;
@@ -26,6 +25,7 @@ import org.apache.camel.support.jsse.SSLContextParameters;
 import org.apache.cxf.configuration.security.ProxyAuthorizationPolicy;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import tools.jackson.databind.ObjectMapper;
 
 /**
  * Interact with ServiceNow via its REST API.
@@ -211,7 +211,7 @@ public class ServiceNowComponentConfiguration
     private String instanceName;
     /**
      * Sets Jackson's ObjectMapper to use for request/reply. The option is a
-     * com.fasterxml.jackson.databind.ObjectMapper type.
+     * tools.jackson.databind.ObjectMapper type.
      */
     private ObjectMapper mapper;
     /**

@@ -470,8 +470,8 @@
     },
     {
       "name": "camel.component.salesforce.object-mapper",
-      "type": "com.fasterxml.jackson.databind.ObjectMapper",
-      "description": "Custom Jackson ObjectMapper to use when serializing\/deserializing Salesforce objects. The option is a com.fasterxml.jackson.databind.ObjectMapper type.",
+      "type": "tools.jackson.databind.ObjectMapper",
+      "description": "Custom Jackson ObjectMapper to use when serializing\/deserializing Salesforce objects. The option is a tools.jackson.databind.ObjectMapper type.",
       "sourceType": "org.apache.camel.component.salesforce.springboot.SalesforceComponentConfiguration"
     },
     {

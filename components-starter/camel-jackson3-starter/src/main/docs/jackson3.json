@@ -69,13 +69,13 @@
     {
       "name": "camel.dataformat.jackson.disable-features",
       "type": "java.lang.String",
-      "description": "Set of features to disable on the Jackson com.fasterxml.jackson.databind.ObjectMapper. Multiple features can be separated by comma. When using Jackson 3, a feature can be qualified with its enum class name (e.g. SerializationFeature.WRAP_ROOT_VALUE) to tell apart features with the same name.",
+      "description": "Set of features to disable on the Jackson ObjectMapper. Multiple features can be separated by comma. A feature can be qualified with its enum class name (e.g. SerializationFeature.WRAP_ROOT_VALUE) to tell apart features with the same name.",
       "sourceType": "org.apache.camel.component.jackson3.springboot.JacksonDataFormatConfiguration"
     },
     {
       "name": "camel.dataformat.jackson.enable-features",
       "type": "java.lang.String",
-      "description": "Set of features to enable on the Jackson com.fasterxml.jackson.databind.ObjectMapper. Multiple features can be separated by comma. When using Jackson 3, a feature can be qualified with its enum class name (e.g. SerializationFeature.WRAP_ROOT_VALUE) to tell apart features with the same name.",
+      "description": "Set of features to enable on the Jackson ObjectMapper. Multiple features can be separated by comma. A feature can be qualified with its enum class name (e.g. SerializationFeature.WRAP_ROOT_VALUE) to tell apart features with the same name.",
       "sourceType": "org.apache.camel.component.jackson3.springboot.JacksonDataFormatConfiguration"
     },
     {
@@ -105,7 +105,7 @@
     {
       "name": "camel.dataformat.jackson.module-class-names",
       "type": "java.lang.String",
-      "description": "To use custom Jackson modules com.fasterxml.jackson.databind.Module specified as a String with FQN class names. Multiple classes can be separated by comma.",
+      "description": "To use custom Jackson modules specified as a String with FQN class names. Multiple classes can be separated by comma.",
       "sourceType": "org.apache.camel.component.jackson3.springboot.JacksonDataFormatConfiguration"
     },
     {

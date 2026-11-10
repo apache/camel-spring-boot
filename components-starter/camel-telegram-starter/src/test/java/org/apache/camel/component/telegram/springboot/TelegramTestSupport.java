@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.telegram.TelegramComponent;
@@ -31,6 +30,8 @@ import org.apache.camel.spring.boot.CamelContextConfiguration;
 import org.apache.camel.test.AvailablePortFinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.BeforeAll;
 
@@ -95,7 +96,7 @@ public class TelegramTestSupport {
         try (InputStream stream = TelegramTestSupport.class.getClassLoader().getResourceAsStream(fileName)) {
             T value = mapper.readValue(stream, clazz);
             return value;
-        } catch (IOException e) {
+        } catch (IOException | JacksonException e) {
             throw new IllegalArgumentException("Unable to load file " + fileName, e);
         }
     }

@@ -55,7 +55,7 @@ public class DigitalSignatureComponentConfiguration
      */
     private String alias;
     /**
-     * Sets the reference name for a PrivateKey that can be found in the
+     * Sets the reference name for a Certificate that can be found in the
      * registry.
      */
     private String certificateName;

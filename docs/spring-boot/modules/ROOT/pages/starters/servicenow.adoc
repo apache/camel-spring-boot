@@ -49,7 +49,7 @@ The starter supports 49 options, which are listed below.
 | camel.component.servicenow.instance-name | The ServiceNow instance name |  | String
 | camel.component.servicenow.key | Set this parameter to true to return only scorecards for key indicators. | false | Boolean
 | camel.component.servicenow.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.servicenow.mapper | Sets Jackson's ObjectMapper to use for request/reply. The option is a com.fasterxml.jackson.databind.ObjectMapper type. |  | ObjectMapper
+| camel.component.servicenow.mapper | Sets Jackson's ObjectMapper to use for request/reply. The option is a tools.jackson.databind.ObjectMapper type. |  | ObjectMapper
 | camel.component.servicenow.models | Defines both request and response models. This is a multi-value option with prefix: model. |  | Object>>
 | camel.component.servicenow.oauth-client-id | OAuth2 ClientID |  | String
 | camel.component.servicenow.oauth-client-secret | OAuth2 ClientSecret |  | String

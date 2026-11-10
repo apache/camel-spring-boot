@@ -91,9 +91,8 @@ public class JacksonDataFormatConfiguration
      */
     private Boolean useList = false;
     /**
-     * To use custom Jackson modules com.fasterxml.jackson.databind.Module
-     * specified as a String with FQN class names. Multiple classes can be
-     * separated by comma.
+     * To use custom Jackson modules specified as a String with FQN class names.
+     * Multiple classes can be separated by comma.
      */
     private String moduleClassNames;
     /**
@@ -102,19 +101,17 @@ public class JacksonDataFormatConfiguration
      */
     private String moduleRefs;
     /**
-     * Set of features to enable on the Jackson
-     * com.fasterxml.jackson.databind.ObjectMapper. Multiple features can be
-     * separated by comma. When using Jackson 3, a feature can be qualified with
-     * its enum class name (e.g. SerializationFeature.WRAP_ROOT_VALUE) to tell
-     * apart features with the same name.
+     * Set of features to enable on the Jackson ObjectMapper. Multiple features
+     * can be separated by comma. A feature can be qualified with its enum class
+     * name (e.g. SerializationFeature.WRAP_ROOT_VALUE) to tell apart features
+     * with the same name.
      */
     private String enableFeatures;
     /**
-     * Set of features to disable on the Jackson
-     * com.fasterxml.jackson.databind.ObjectMapper. Multiple features can be
-     * separated by comma. When using Jackson 3, a feature can be qualified with
-     * its enum class name (e.g. SerializationFeature.WRAP_ROOT_VALUE) to tell
-     * apart features with the same name.
+     * Set of features to disable on the Jackson ObjectMapper. Multiple features
+     * can be separated by comma. A feature can be qualified with its enum class
+     * name (e.g. SerializationFeature.WRAP_ROOT_VALUE) to tell apart features
+     * with the same name.
      */
     private String disableFeatures;
     /**

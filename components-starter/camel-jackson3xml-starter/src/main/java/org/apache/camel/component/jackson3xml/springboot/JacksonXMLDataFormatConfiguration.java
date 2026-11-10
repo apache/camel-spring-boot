@@ -91,9 +91,8 @@ public class JacksonXMLDataFormatConfiguration
      */
     private Boolean enableJaxbAnnotationModule = false;
     /**
-     * To use custom Jackson modules tools.jackson.databind.JacksonModule
-     * specified as a String with FQN class names. Multiple classes can be
-     * separated by comma.
+     * To use custom Jackson modules specified as a String with FQN class names.
+     * Multiple classes can be separated by comma.
      */
     private String moduleClassNames;
     /**
@@ -102,21 +101,25 @@ public class JacksonXMLDataFormatConfiguration
      */
     private String moduleRefs;
     /**
-     * Set of features to enable on the Jackson
-     * tools.jackson.databind.ObjectMapper. The features should be a name that
-     * matches a enum from tools.jackson.databind.SerializationFeature,
-     * tools.jackson.databind.DeserializationFeature, or
-     * tools.jackson.databind.MapperFeature Multiple features can be separated
-     * by comma
+     * Set of features to enable on the Jackson ObjectMapper. The features
+     * should be a name that matches a enum from SerializationFeature,
+     * DeserializationFeature, MapperFeature, DateTimeFeature, EnumFeature,
+     * JsonNodeFeature, StreamReadFeature, StreamWriteFeature, XmlReadFeature or
+     * XmlWriteFeature. Multiple features can be separated by comma. A feature
+     * can be qualified with its enum class name (e.g.
+     * SerializationFeature.WRAP_ROOT_VALUE) to tell apart features with the
+     * same name.
      */
     private String enableFeatures;
     /**
-     * Set of features to disable on the Jackson
-     * tools.jackson.databind.ObjectMapper. The features should be a name that
-     * matches a enum from tools.jackson.databind.SerializationFeature,
-     * tools.jackson.databind.DeserializationFeature, or
-     * tools.jackson.databind.MapperFeature Multiple features can be separated
-     * by comma
+     * Set of features to disable on the Jackson ObjectMapper. The features
+     * should be a name that matches a enum from SerializationFeature,
+     * DeserializationFeature, MapperFeature, DateTimeFeature, EnumFeature,
+     * JsonNodeFeature, StreamReadFeature, StreamWriteFeature, XmlReadFeature or
+     * XmlWriteFeature. Multiple features can be separated by comma. A feature
+     * can be qualified with its enum class name (e.g.
+     * SerializationFeature.WRAP_ROOT_VALUE) to tell apart features with the
+     * same name.
      */
     private String disableFeatures;
     /**
