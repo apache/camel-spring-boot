@@ -47,6 +47,11 @@ public class StateStoreComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * Whether to use a store-specific namespace prefix to isolate keys on a
+     * shared backend repository.
+     */
+    private Boolean namespaced = true;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -69,6 +74,14 @@ public class StateStoreComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public Boolean getNamespaced() {
+        return namespaced;
+    }
+
+    public void setNamespaced(Boolean namespaced) {
+        this.namespaced = namespaced;
     }
 
     public Boolean getAutowiredEnabled() {
