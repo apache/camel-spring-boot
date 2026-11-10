@@ -70,6 +70,12 @@
       <artifactId>camel-ai-tool</artifactId>
       <version>${camel-version}</version>
     </dependency>
+    <!-- puts the ai-tool starter auto-configuration on the test classpath, so SpringBootMcpServerTest checks that a tool without hints has no annotations -->
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-ai-tool-starter</artifactId>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.awaitility</groupId>
       <artifactId>awaitility</artifactId>

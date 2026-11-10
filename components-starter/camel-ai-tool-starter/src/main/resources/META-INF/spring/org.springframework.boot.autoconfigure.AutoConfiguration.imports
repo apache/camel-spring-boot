@@ -16,3 +16,4 @@
 ## ---------------------------------------------------------------------------
 org.apache.camel.component.ai.tool.springboot.AiToolComponentConverter
 org.apache.camel.component.ai.tool.springboot.AiToolComponentAutoConfiguration
+org.apache.camel.component.ai.tool.springboot.AiToolUnsetHintsAutoConfiguration
