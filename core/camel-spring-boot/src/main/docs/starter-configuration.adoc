@@ -62,6 +62,10 @@ The `Bean` name has to be equal to that of the Component, Dataformat or Language
 
 External configuration is still applied on top of such a `Bean`: every `camel.[component|language|dataformat].[name].[parameter]` that is set in the external configuration is copied onto it. A parameter that is not set in the external configuration is left alone, so a value set on the `Bean` in Java is kept, even when it differs from the documented default of that parameter.
 
+Camel also detects values that were assigned programmatically in Java directly to the generated `@ConfigurationProperties` class (for example, in an auto-configuration class that calls `cfg.setRequestTimeout(30000L)` before returning the bean). Such a value is copied to the target component even when it was not bound from external configuration, provided it differs from the class's default value. This allows Spring Boot auto-configuration classes to programmatically set component options that are then correctly propagated to the component.
+
+NOTE: A programmatic assignment that equals the class default (for example `cfg.setSkipRequestHeaders(false)` on a configuration class that already defaults `skipRequestHeaders` to `false`) is not detected as a programmatic assignment and is therefore not copied. If that is not the desired behaviour, set the option explicitly in the external configuration instead.
+
 Typical Camel Spring Boot projects will use a combination of external configuration and Beans to configure their application. For more complete examples on how to configure your Camel Spring Boot project, you can refer to our example https://github.com/apache/camel-spring-boot-examples[repository].
 
 All contributions are welcome!

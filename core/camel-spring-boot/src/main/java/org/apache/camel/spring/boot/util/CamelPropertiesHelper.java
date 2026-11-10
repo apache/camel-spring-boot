@@ -105,10 +105,16 @@ public final class CamelPropertiesHelper {
             // property binding), detected by comparing against a fresh default instance of the
             // configuration class. This handles cases like SpringBootPlatformWebMvcConfiguration
             // setting requestTimeout on PlatformHttpComponentConfiguration from code.
+            // When the class has no accessible no-arg constructor the detection is skipped and only
+            // bound options are copied (safe fallback: same behaviour as before this fix).
             Map<String, Object> defaults = defaultProperties(camelContext, source);
-            properties.keySet().removeIf(
-                    key -> !isConfigured(bound, optionKey(propertyPrefix, key))
-                            && !isDifferentFromDefault(key, properties, defaults));
+            if (defaults != null) {
+                properties.keySet().removeIf(
+                        key -> !isConfigured(bound, optionKey(propertyPrefix, key))
+                                && !isDifferentFromDefault(key, properties, defaults));
+            } else {
+                properties.keySet().removeIf(key -> !isConfigured(bound, optionKey(propertyPrefix, key)));
+            }
         }
 
         // the options that could be set are removed from the map, so what is left could not be set
@@ -162,9 +168,10 @@ public final class CamelPropertiesHelper {
     }
 
     /**
-     * Gets the default properties of a freshly-constructed instance of the same class as the given source, or an empty
-     * map when the class has no accessible no-arg constructor. Used to detect values that were assigned
-     * programmatically in Java (not via Spring Boot property binding).
+     * Gets the default properties of a freshly-constructed instance of the same class as the given source, or
+     * {@code null} when the class has no accessible no-arg constructor. Used to detect values that were assigned
+     * programmatically in Java (not via Spring Boot property binding). A {@code null} return means detection is not
+     * possible; the caller falls back to copying only bound options (same behaviour as before this fix).
      */
     private static Map<String, Object> defaultProperties(CamelContext camelContext, Object source) {
         try {
@@ -173,7 +180,7 @@ public final class CamelPropertiesHelper {
         } catch (Exception e) {
             LOG.debug("Cannot instantiate default of {} to detect programmatic assignments: {}",
                     ObjectHelper.classCanonicalName(source), e.getMessage());
-            return Map.of();
+            return null;
         }
     }
 
