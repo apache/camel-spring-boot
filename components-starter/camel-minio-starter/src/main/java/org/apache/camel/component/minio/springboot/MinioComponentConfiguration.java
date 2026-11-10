@@ -86,8 +86,8 @@ public class MinioComponentConfiguration
      * If this option is true and includeBody is true, then the
      * MinioObject.close() method will be called on exchange completion. This
      * option is strongly related to includeBody option. In case of setting
-     * includeBody to true and autocloseBody to false, it will be up to the
-     * caller to close the MinioObject stream. Setting autocloseBody to true,
+     * includeBody to true and autoCloseBody to false, it will be up to the
+     * caller to close the MinioObject stream. Setting autoCloseBody to true,
      * will close the MinioObject stream automatically.
      */
     private Boolean autoCloseBody = true;
@@ -138,9 +138,9 @@ public class MinioComponentConfiguration
      * If it is true, the exchange body will be set to a stream to the contents
      * of the file. If false, the headers will be set with the Minio object
      * metadata, but the body will be null. This option is strongly related to
-     * autocloseBody option. In case of setting includeBody to true and
-     * autocloseBody to false, it will be up to the caller to close the
-     * MinioObject stream. Setting autocloseBody to true, will close the
+     * autoCloseBody option. In case of setting includeBody to true and
+     * autoCloseBody to false, it will be up to the caller to close the
+     * MinioObject stream. Setting autoCloseBody to true, will close the
      * MinioObject stream automatically.
      */
     private Boolean includeBody = true;
@@ -183,9 +183,9 @@ public class MinioComponentConfiguration
     private ZonedDateTime modifiedSince;
     /**
      * Move objects from bucket to a different bucket after they have been
-     * retrieved. To accomplish the operation the destinationBucket option must
-     * be set. The copy bucket operation is only performed if the Exchange is
-     * committed. If a rollback occurs, the object is not moved.
+     * retrieved. To accomplish the operation the destinationBucketName option
+     * must be set. The copy bucket operation is only performed if the Exchange
+     * is committed. If a rollback occurs, the object is not moved.
      */
     private Boolean moveAfterRead = false;
     /**
