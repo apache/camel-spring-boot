@@ -18,6 +18,7 @@ package org.apache.camel.component.ai.tool.springboot;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
@@ -41,7 +42,7 @@ import org.springframework.test.annotation.DirtiesContext;
 @DirtiesContext
 @CamelSpringBootTest
 @SpringBootTest(classes = { CamelAutoConfiguration.class, AiToolComponentConverter.class,
-        AiToolComponentAutoConfiguration.class,
+        AiToolComponentAutoConfiguration.class, AiToolUnsetHintsAutoConfiguration.class,
         AiToolComponentAutoConfigurationTest.TestConfiguration.class }, properties = {
                 "camel.component.ai-tool.tags = demo" })
 public class AiToolComponentAutoConfigurationTest {
@@ -75,6 +76,16 @@ public class AiToolComponentAutoConfigurationTest {
         // set through camel.component.ai-tool.tags, so this asserts the Spring Boot
         // properties are copied onto the component by the starter
         assertEquals("demo", component.getConfiguration().getTags());
+    }
+
+    @Test
+    public void unsetMcpHintsStayUnsetOnTheComponent() {
+        AiToolComponent component = assertInstanceOf(AiToolComponent.class, context.getComponent("ai-tool"));
+        assertNull(component.getConfiguration().getReadOnlyHint());
+        assertNull(component.getConfiguration().getDestructiveHint());
+        assertNull(component.getConfiguration().getIdempotentHint());
+        assertNull(component.getConfiguration().getOpenWorldHint());
+        assertNull(component.getConfiguration().getReturnDirect());
     }
 
     @Test
