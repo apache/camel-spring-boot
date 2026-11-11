@@ -122,7 +122,7 @@ public class JiraComponentConfiguration
     private String username;
     /**
      * (OAuth only) The verification code from Jira generated in the first step
-     * of the authorization proccess.
+     * of the authorization process.
      */
     private String verificationCode;
 

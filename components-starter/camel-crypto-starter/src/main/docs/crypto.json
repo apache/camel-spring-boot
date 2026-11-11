@@ -90,13 +90,13 @@
     {
       "name": "camel.component.crypto.key-store-parameters",
       "type": "org.apache.camel.support.jsse.KeyStoreParameters",
-      "description": "Sets the KeyStore that can contain keys and Certficates for use in signing and verifying exchanges based on the given KeyStoreParameters. A KeyStore is typically used with an alias, either one supplied in the Route definition or dynamically via the message header CamelSignatureKeyStoreAlias. If no alias is supplied and there is only a single entry in the Keystore, then this single entry will be used. The option is a org.apache.camel.support.jsse.KeyStoreParameters type.",
+      "description": "Sets the KeyStore that can contain keys and Certificates for use in signing and verifying exchanges based on the given KeyStoreParameters. A KeyStore is typically used with an alias, either one supplied in the Route definition or dynamically via the message header CamelSignatureKeyStoreAlias. If no alias is supplied and there is only a single entry in the Keystore, then this single entry will be used. The option is a org.apache.camel.support.jsse.KeyStoreParameters type.",
       "sourceType": "org.apache.camel.component.crypto.springboot.DigitalSignatureComponentConfiguration"
     },
     {
       "name": "camel.component.crypto.keystore",
       "type": "java.security.KeyStore",
-      "description": "Sets the KeyStore that can contain keys and Certficates for use in signing and verifying exchanges. A KeyStore is typically used with an alias, either one supplied in the Route definition or dynamically via the message header CamelSignatureKeyStoreAlias. If no alias is supplied and there is only a single entry in the Keystore, then this single entry will be used. The option is a java.security.KeyStore type.",
+      "description": "Sets the KeyStore that can contain keys and Certificates for use in signing and verifying exchanges. A KeyStore is typically used with an alias, either one supplied in the Route definition or dynamically via the message header CamelSignatureKeyStoreAlias. If no alias is supplied and there is only a single entry in the Keystore, then this single entry will be used. The option is a java.security.KeyStore type.",
       "sourceType": "org.apache.camel.component.crypto.springboot.DigitalSignatureComponentConfiguration"
     },
     {

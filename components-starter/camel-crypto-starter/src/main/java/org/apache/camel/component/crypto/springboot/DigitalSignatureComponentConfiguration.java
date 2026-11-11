@@ -60,7 +60,7 @@ public class DigitalSignatureComponentConfiguration
      */
     private String certificateName;
     /**
-     * Sets the KeyStore that can contain keys and Certficates for use in
+     * Sets the KeyStore that can contain keys and Certificates for use in
      * signing and verifying exchanges. A KeyStore is typically used with an
      * alias, either one supplied in the Route definition or dynamically via the
      * message header CamelSignatureKeyStoreAlias. If no alias is supplied and
@@ -145,7 +145,7 @@ public class DigitalSignatureComponentConfiguration
      */
     private DigitalSignatureConfiguration configuration;
     /**
-     * Sets the KeyStore that can contain keys and Certficates for use in
+     * Sets the KeyStore that can contain keys and Certificates for use in
      * signing and verifying exchanges based on the given KeyStoreParameters. A
      * KeyStore is typically used with an alias, either one supplied in the
      * Route definition or dynamically via the message header

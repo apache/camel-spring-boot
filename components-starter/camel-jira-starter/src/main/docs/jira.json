@@ -111,7 +111,7 @@
     {
       "name": "camel.component.jira.verification-code",
       "type": "java.lang.String",
-      "description": "(OAuth only) The verification code from Jira generated in the first step of the authorization proccess.",
+      "description": "(OAuth only) The verification code from Jira generated in the first step of the authorization process.",
       "sourceType": "org.apache.camel.component.jira.springboot.JiraComponentConfiguration"
     }
   ],
