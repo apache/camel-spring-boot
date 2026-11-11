@@ -68,7 +68,7 @@ public class KnativeComponentConfiguration
      */
     private KnativeEnvironment environment;
     /**
-     * The path ot the environment definition
+     * The path of the environment definition
      */
     private String environmentPath;
     /**

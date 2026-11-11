@@ -49,7 +49,7 @@ The starter supports 52 options, which are listed below.
 | camel.component.robotframework.log | Sets the path to the generated log String. |  | String
 | camel.component.robotframework.log-level | Sets the threshold level for logging. |  | String
 | camel.component.robotframework.log-title | Sets a title for the generated tests log. |  | String
-| camel.component.robotframework.metadata | Sets free metadata for the top level tests suites. comma seperated list of string resulting as List |  | String
+| camel.component.robotframework.metadata | Sets free metadata for the top level tests suites. comma separated list of string resulting as List |  | String
 | camel.component.robotframework.monitor-colors | Using ANSI colors in console. Normally colors work in unixes but not in Windows. Default is 'on'. 'on' - use colors in unixes but not in Windows 'off' - never use colors 'force' - always use colors (also in Windows) |  | String
 | camel.component.robotframework.monitor-width | Width of the monitor output. Default is 78. | 78 | String
 | camel.component.robotframework.name | Sets the name of the top-level tests suites. |  | String

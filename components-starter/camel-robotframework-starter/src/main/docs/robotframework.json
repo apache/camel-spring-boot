@@ -154,7 +154,7 @@
     {
       "name": "camel.component.robotframework.metadata",
       "type": "java.lang.String",
-      "description": "Sets free metadata for the top level tests suites. comma seperated list of string resulting as List",
+      "description": "Sets free metadata for the top level tests suites. comma separated list of string resulting as List",
       "sourceType": "org.apache.camel.component.robotframework.springboot.RobotFrameworkComponentConfiguration"
     },
     {

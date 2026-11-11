@@ -85,7 +85,7 @@
     {
       "name": "camel.component.knative.environment-path",
       "type": "java.lang.String",
-      "description": "The path ot the environment definition",
+      "description": "The path of the environment definition",
       "sourceType": "org.apache.camel.component.knative.springboot.KnativeComponentConfiguration"
     },
     {

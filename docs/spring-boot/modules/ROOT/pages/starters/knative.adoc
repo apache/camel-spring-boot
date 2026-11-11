@@ -38,7 +38,7 @@ The starter supports 24 options, which are listed below.
 | camel.component.knative.consumer-factory | The protocol consumer factory. The option is a org.apache.camel.component.knative.spi.KnativeConsumerFactory type. |  | KnativeConsumerFactory
 | camel.component.knative.enabled | Whether to enable auto configuration of the knative component. This is enabled by default. |  | Boolean
 | camel.component.knative.environment | The environment. The option is a org.apache.camel.component.knative.spi.KnativeEnvironment type. |  | KnativeEnvironment
-| camel.component.knative.environment-path | The path ot the environment definition |  | String
+| camel.component.knative.environment-path | The path of the environment definition |  | String
 | camel.component.knative.filters | Set the filters. |  | String>
 | camel.component.knative.health-check-consumer-enabled | Used for enabling or disabling all consumer based health checks from this component | true | Boolean
 | camel.component.knative.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean

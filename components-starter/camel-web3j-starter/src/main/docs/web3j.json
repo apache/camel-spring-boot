@@ -178,7 +178,7 @@
     {
       "name": "camel.component.web3j.position",
       "type": "java.math.BigInteger",
-      "description": "The transaction index position withing a block. The option is a java.math.BigInteger type.",
+      "description": "The transaction index position within a block. The option is a java.math.BigInteger type.",
       "sourceType": "org.apache.camel.component.web3j.springboot.Web3jComponentConfiguration"
     },
     {

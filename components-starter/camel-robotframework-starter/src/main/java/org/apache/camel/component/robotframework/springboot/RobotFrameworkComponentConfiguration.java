@@ -110,7 +110,7 @@ public class RobotFrameworkComponentConfiguration
      */
     private String logTitle;
     /**
-     * Sets free metadata for the top level tests suites. comma seperated list
+     * Sets free metadata for the top level tests suites. comma separated list
      * of string resulting as List
      */
     private String metadata;

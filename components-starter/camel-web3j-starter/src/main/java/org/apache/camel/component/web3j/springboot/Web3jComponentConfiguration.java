@@ -189,7 +189,7 @@ public class Web3jComponentConfiguration
      */
     private String nonce;
     /**
-     * The transaction index position withing a block. The option is a
+     * The transaction index position within a block. The option is a
      * java.math.BigInteger type.
      */
     private BigInteger position;
