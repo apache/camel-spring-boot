@@ -46,6 +46,7 @@ public class KafkaComponentConverter implements GenericConverter {
         answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.StateRepository.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.kafka.consumer.KafkaManualCommitFactory.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.kafka.PollExceptionStrategy.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.component.kafka.PollExceptionStrategyFactory.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.kafka.serde.KafkaHeaderSerializer.class));
         answer.add(new ConvertiblePair(String.class, java.util.concurrent.ExecutorService.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.kafka.KafkaClientFactory.class));

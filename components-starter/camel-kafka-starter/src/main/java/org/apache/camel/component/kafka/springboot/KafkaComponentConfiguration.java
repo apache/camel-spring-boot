@@ -22,6 +22,7 @@ import org.apache.camel.component.kafka.KafkaClientFactory;
 import org.apache.camel.component.kafka.KafkaComponent;
 import org.apache.camel.component.kafka.KafkaConfiguration;
 import org.apache.camel.component.kafka.PollExceptionStrategy;
+import org.apache.camel.component.kafka.PollExceptionStrategyFactory;
 import org.apache.camel.component.kafka.PollOnError;
 import org.apache.camel.component.kafka.SeekPolicy;
 import org.apache.camel.component.kafka.consumer.KafkaManualCommitFactory;
@@ -484,6 +485,19 @@ public class KafkaComponentConfiguration
      * option is a org.apache.camel.component.kafka.PollExceptionStrategy type.
      */
     private PollExceptionStrategy pollExceptionStrategy;
+    /**
+     * Factory to create a PollExceptionStrategy per Kafka consumer fetch
+     * thread. Unlike the pollExceptionStrategy option, which shares a single
+     * strategy across all consumer threads, the factory is invoked each time a
+     * fetch thread creates its Kafka consumer (on start and on every
+     * reconnect), so each thread gets its own strategy bound to its current
+     * consumer. This is required by strategies that drive the consumer (such as
+     * the built-in reconnect, stop, and bridge strategies), and it also works
+     * correctly when an endpoint uses multiple consumer threads. The factory
+     * may be called concurrently and must be thread-safe. The option is a
+     * org.apache.camel.component.kafka.PollExceptionStrategyFactory type.
+     */
+    private PollExceptionStrategyFactory pollExceptionStrategyFactory;
     /**
      * The delay in millis seconds to wait before trying again to subscribe to
      * the kafka broker.
@@ -1481,6 +1495,15 @@ public class KafkaComponentConfiguration
     public void setPollExceptionStrategy(
             PollExceptionStrategy pollExceptionStrategy) {
         this.pollExceptionStrategy = pollExceptionStrategy;
+    }
+
+    public PollExceptionStrategyFactory getPollExceptionStrategyFactory() {
+        return pollExceptionStrategyFactory;
+    }
+
+    public void setPollExceptionStrategyFactory(
+            PollExceptionStrategyFactory pollExceptionStrategyFactory) {
+        this.pollExceptionStrategyFactory = pollExceptionStrategyFactory;
     }
 
     @Deprecated

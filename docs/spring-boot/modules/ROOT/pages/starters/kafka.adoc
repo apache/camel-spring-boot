@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 131 options, which are listed below.
+The starter supports 132 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -103,6 +103,7 @@ The starter supports 131 options, which are listed below.
 | camel.component.kafka.partitioner | The partitioner class for partitioning messages amongst sub-topics. The default partitioner is based on the hash of the key. |  | String
 | camel.component.kafka.partitioner-ignore-keys | Whether the message keys should be ignored when computing the partition. This setting has effect only when partitioner is not set | false | Boolean
 | camel.component.kafka.poll-exception-strategy | To use a custom strategy with the consumer to control how to handle exceptions thrown from the Kafka broker while polling messages. The option is a org.apache.camel.component.kafka.PollExceptionStrategy type. |  | PollExceptionStrategy
+| camel.component.kafka.poll-exception-strategy-factory | Factory to create a PollExceptionStrategy per Kafka consumer fetch thread. Unlike the pollExceptionStrategy option, which shares a single strategy across all consumer threads, the factory is invoked each time a fetch thread creates its Kafka consumer (on start and on every reconnect), so each thread gets its own strategy bound to its current consumer. This is required by strategies that drive the consumer (such as the built-in reconnect, stop, and bridge strategies), and it also works correctly when an endpoint uses multiple consumer threads. The factory may be called concurrently and must be thread-safe. The option is a org.apache.camel.component.kafka.PollExceptionStrategyFactory type. |  | PollExceptionStrategyFactory
 | camel.component.kafka.poll-on-error | What to do if kafka threw an exception while polling for new messages. Will by default use the value from the component configuration unless an explicit value has been configured on the endpoint level. DISCARD will discard the message and continue to poll the next message. ERROR_HANDLER will use Camel's error handler to process the exception, and afterwards continue to poll the next message. RECONNECT will re-connect the consumer and try polling the message again. RETRY will let the consumer retry poll the same message again. STOP will stop the consumer (it has to be manually started/restarted if the consumer should be able to consume messages again) | error-handler | PollOnError
 | camel.component.kafka.poll-timeout-ms | The timeout used when polling the KafkaConsumer. The option is a java.lang.Long type. | 5000 | Long
 | camel.component.kafka.pre-validate-host-and-port | Whether to eager validate that broker host:port is valid and can be DNS resolved to known host during starting this consumer. If the validation fails, then an exception is thrown, which makes Camel fail fast. Disabling this will postpone the validation after the consumer is started, and Camel will keep re-connecting in case of validation or DNS resolution error. | true | Boolean
