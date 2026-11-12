@@ -57,6 +57,15 @@
                 <version>${avro-version}</version>
             </dependency>
 
+            <!-- json-path (version from Camel): camel-jsonpath uses the Jackson 3 providers of json-path 3,
+                 while Spring Boot 4.1 manages json-path 2.x, which it only uses in spring-boot-starter-test.
+                 Remove when upgrading to Spring Boot 4.2, which manages json-path 3.0.0. -->
+            <dependency>
+                <groupId>com.jayway.jsonpath</groupId>
+                <artifactId>json-path</artifactId>
+                <version>${json-path-version}</version>
+            </dependency>
+
             <!-- Dependencies from Camel parent at the end -->
             <dependency>
                 <groupId>org.apache.camel</groupId>
