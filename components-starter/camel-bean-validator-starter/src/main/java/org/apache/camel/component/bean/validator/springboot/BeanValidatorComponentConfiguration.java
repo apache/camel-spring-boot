@@ -79,7 +79,7 @@ public class BeanValidatorComponentConfiguration
      */
     private TraversableResolver traversableResolver;
     /**
-     * To use a a custom ValidationProviderResolver. The option is a
+     * To use a custom ValidationProviderResolver. The option is a
      * jakarta.validation.ValidationProviderResolver type.
      */
     private ValidationProviderResolver validationProviderResolver;

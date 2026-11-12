@@ -22,6 +22,7 @@ import org.apache.camel.component.docling.DoclingConfiguration;
 import org.apache.camel.component.docling.DoclingOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Process documents using Docling library for parsing and conversion.
@@ -283,9 +284,11 @@ public class DoclingComponentConfiguration
      */
     private Boolean allowUrlSource = false;
     /**
-     * Header name for API key authentication
+     * Header name for API key authentication. Deprecation note: Not used: the
+     * docling-serve client always sends the API key in the X-Api-Key header
      */
-    private String apiKeyHeader = "X-API-Key";
+    @Deprecated
+    private String apiKeyHeader = "X-Api-Key";
     /**
      * Authentication scheme (BEARER, API_KEY, NONE)
      */
@@ -729,10 +732,13 @@ public class DoclingComponentConfiguration
         this.allowUrlSource = allowUrlSource;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public String getApiKeyHeader() {
         return apiKeyHeader;
     }
 
+    @Deprecated
     public void setApiKeyHeader(String apiKeyHeader) {
         this.apiKeyHeader = apiKeyHeader;
     }

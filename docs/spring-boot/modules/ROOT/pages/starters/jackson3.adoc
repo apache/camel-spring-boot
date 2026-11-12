@@ -43,7 +43,7 @@ The starter supports 23 options, which are listed below.
 | camel.dataformat.jackson.max-string-length | Sets the maximum string length (in chars or bytes, depending on input context). The default is 20,000,000. |  | Integer
 | camel.dataformat.jackson.module-class-names | To use custom Jackson modules specified as a String with FQN class names. Multiple classes can be separated by comma. |  | String
 | camel.dataformat.jackson.module-refs | To use custom Jackson modules referred from the Camel registry. Multiple modules can be separated by comma. |  | String
-| camel.dataformat.jackson.naming-strategy | If set then Jackson will use the the defined Property Naming Strategy.Possible values are: LOWER_CAMEL_CASE, LOWER_DOT_CASE, LOWER_CASE, KEBAB_CASE, SNAKE_CASE and UPPER_CAMEL_CASE |  | String
+| camel.dataformat.jackson.naming-strategy | If set then Jackson will use the defined Property Naming Strategy. Possible values are: LOWER_CAMEL_CASE, LOWER_DOT_CASE, LOWER_CASE, KEBAB_CASE, SNAKE_CASE and UPPER_CAMEL_CASE |  | String
 | camel.dataformat.jackson.object-mapper | Lookup and use the existing ObjectMapper with the given id when using Jackson. |  | String
 | camel.dataformat.jackson.pretty-print | To enable pretty printing output nicely formatted. Is by default false. | false | Boolean
 | camel.dataformat.jackson.schema-resolver | Optional schema resolver used to lookup schemas for the data in transit. The option is a org.apache.camel.component.jackson.SchemaResolver type. |  | String

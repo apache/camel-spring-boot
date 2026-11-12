@@ -136,9 +136,9 @@ public class JacksonDataFormatConfiguration
      */
     private Boolean autoDiscoverSchemaResolver = true;
     /**
-     * If set then Jackson will use the the defined Property Naming
-     * Strategy.Possible values are: LOWER_CAMEL_CASE, LOWER_DOT_CASE,
-     * LOWER_CASE, KEBAB_CASE, SNAKE_CASE and UPPER_CAMEL_CASE
+     * If set then Jackson will use the defined Property Naming Strategy.
+     * Possible values are: LOWER_CAMEL_CASE, LOWER_DOT_CASE, LOWER_CASE,
+     * KEBAB_CASE, SNAKE_CASE and UPPER_CAMEL_CASE
      */
     private String namingStrategy;
     /**

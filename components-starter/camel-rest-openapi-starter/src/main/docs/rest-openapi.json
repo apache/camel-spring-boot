@@ -111,7 +111,7 @@
     {
       "name": "camel.component.rest-openapi.missing-operation",
       "type": "java.lang.String",
-      "description": "Whether the consumer should fail,ignore or return a mock response for OpenAPI operations that are not mapped to a corresponding route.",
+      "description": "Whether the consumer should fail, ignore or return a mock response for OpenAPI operations that are not mapped to a corresponding route.",
       "sourceType": "org.apache.camel.component.rest.openapi.springboot.RestOpenApiComponentConfiguration",
       "defaultValue": "fail"
     },

@@ -31,7 +31,6 @@ The starter supports 59 options, which are listed below.
 | camel.component.docling.abort-on-error | Abort processing on error | false | Boolean
 | camel.component.docling.allow-file-path-source | Whether a String message body that starts with / or contains \ is interpreted as a local filesystem path to read. When disabled, such a body is rejected instead of being read. This does not affect the CamelDoclingInputFilePath header, nor File, byte[] or explicit path collection bodies used by the batch operations. | false | Boolean
 | camel.component.docling.allow-url-source | Whether a String message body that starts with http:// or https:// is interpreted as a remote URL for Docling to fetch. When disabled, such a body is rejected instead of being fetched. This does not affect the CamelDoclingInputFilePath header, nor bodies of any other type. | false | Boolean
-| camel.component.docling.api-key-header | Header name for API key authentication | X-API-Key | String
 | camel.component.docling.async-poll-interval | Polling interval for async conversion status in milliseconds | 2000 | Long
 | camel.component.docling.async-task-ttl | Time-to-live for pending async conversion tasks in milliseconds. Tasks older than this will be evicted from memory to prevent leaks. | 86400000 | Long
 | camel.component.docling.async-timeout | Maximum time to wait for async conversion completion in milliseconds | 300000 | Long
@@ -87,4 +86,5 @@ The starter supports 59 options, which are listed below.
 | camel.component.docling.use-async-mode | Use asynchronous conversion mode (docling-serve API only) | false | Boolean
 | camel.component.docling.use-docling-serve | Use docling-serve API instead of CLI command | false | Boolean
 | camel.component.docling.working-directory | Working directory for Docling execution |  | String
+| camel.component.docling.api-key-header | Header name for API key authentication. Deprecation note: Not used: the docling-serve client always sends the API key in the X-Api-Key header | X-Api-Key | String
 |===

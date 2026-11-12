@@ -167,7 +167,7 @@ public class NettyComponentConfiguration
      * then the consumer thread pool will be 17. This thread pool is used to
      * route messages received from Netty by Camel. We use a separate thread
      * pool to ensure ordering of messages and also in case some messages will
-     * block, then nettys worker threads (event loop) wont be affected.
+     * block, then netty's worker threads (event loop) won't be affected.
      */
     private Integer maximumPoolSize;
     /**
