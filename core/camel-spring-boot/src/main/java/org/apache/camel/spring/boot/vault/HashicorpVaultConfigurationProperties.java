@@ -24,10 +24,11 @@ public class HashicorpVaultConfigurationProperties {
 
     /**
      * How to log in to hashicorp vault: token (a fixed token), approle (a role ID and a secret ID), kubernetes (the
-     * service account token of the pod) or jwt (a JWT, such as a workload identity token). Camel renews the token
-     * before it expires, and logs in again when the token can no longer be renewed.
+     * service account token of the pod), jwt (a JWT, such as a workload identity token) or cert (the TLS client
+     * certificate of the keyStore). Camel renews the token before it expires, and logs in again when the token can no
+     * longer be renewed.
      */
-    @Metadata(defaultValue = "token", enums = "token,approle,kubernetes,jwt")
+    @Metadata(defaultValue = "token", enums = "token,approle,kubernetes,jwt,cert")
     private String authentication = "token";
 
     /**
@@ -68,6 +69,30 @@ public class HashicorpVaultConfigurationProperties {
      * the login method: approle, kubernetes or jwt
      */
     private String authMountPath;
+
+    /**
+     * The file with the certificates to trust for the TLS connection to hashicorp vault, such as the CA certificate of
+     * a private CA: a PKCS12 or JKS trust store, or PEM certificates. When not set, the JVM trusts the certificate as
+     * for any other TLS connection.
+     */
+    private String trustStore;
+
+    /**
+     * The password of the trust store, when it is a PKCS12 or JKS trust store
+     */
+    private String trustStorePassword;
+
+    /**
+     * The file with the TLS client certificate and its private key, which Camel presents to hashicorp vault: for the
+     * cert login, or for a Vault that requires client certificates. A PKCS12 or JKS key store, or PEM with the
+     * certificate and the PKCS#8 private key.
+     */
+    private String keyStore;
+
+    /**
+     * The password of the key store and of its private key, when it is a PKCS12 or JKS key store
+     */
+    private String keyStorePassword;
 
     /**
      * The Hashicorp Vault Host for accessing the service
@@ -171,6 +196,38 @@ public class HashicorpVaultConfigurationProperties {
 
     public void setAuthMountPath(String authMountPath) {
         this.authMountPath = authMountPath;
+    }
+
+    public String getTrustStore() {
+        return trustStore;
+    }
+
+    public void setTrustStore(String trustStore) {
+        this.trustStore = trustStore;
+    }
+
+    public String getTrustStorePassword() {
+        return trustStorePassword;
+    }
+
+    public void setTrustStorePassword(String trustStorePassword) {
+        this.trustStorePassword = trustStorePassword;
+    }
+
+    public String getKeyStore() {
+        return keyStore;
+    }
+
+    public void setKeyStore(String keyStore) {
+        this.keyStore = keyStore;
+    }
+
+    public String getKeyStorePassword() {
+        return keyStorePassword;
+    }
+
+    public void setKeyStorePassword(String keyStorePassword) {
+        this.keyStorePassword = keyStorePassword;
     }
 
     public String getHost() {
