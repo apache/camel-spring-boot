@@ -22,7 +22,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Component;
 import org.apache.camel.PropertyBindingException;
@@ -59,6 +61,16 @@ public final class CamelPropertiesHelper {
      */
     private static final Set<String> AUTO_CONFIGURATION_OPTIONS = Set.of("enabled", "customizer");
 
+    /**
+     * Cache of class → default-instance properties. Avoids constructing a new default instance on every customizer
+     * call. The sentinel value {@link #NO_DEFAULTS} means the class has no accessible no-arg constructor and
+     * programmatic-assignment detection is unavailable for it.
+     */
+    private static final ConcurrentHashMap<Class<?>, Map<String, Object>> DEFAULTS_CACHE = new ConcurrentHashMap<>();
+
+    /** Sentinel placed in {@link #DEFAULTS_CACHE} when instantiation failed. */
+    private static final Map<String, Object> NO_DEFAULTS = Map.of();
+
     private CamelPropertiesHelper() {
     }
 
@@ -66,12 +78,19 @@ public final class CamelPropertiesHelper {
      * Copies the options from a generated Spring Boot configuration class onto the Camel component, data format or
      * language it configures.
      * <p/>
-     * Only the options the application configured are copied, as recorded by Spring Boot in
-     * {@link BoundConfigurationProperties} when it bound the configuration class. The other options merely carry the
-     * default value the generator took from the Camel catalog as field initializer, and must not overwrite the value
-     * the target already holds, such as one set programmatically on a user supplied bean. The options that belong to
-     * the auto configuration layer itself (<tt>enabled</tt> and <tt>customizer</tt>) are never copied, as they are not
+     * An option is copied when it was set by the application, either via Spring Boot property binding (application
+     * properties / environment) as recorded in {@link BoundConfigurationProperties}, or programmatically in Java
+     * directly onto the generated configuration class (detected by comparing the current value against the value a
+     * freshly-constructed default instance of that class would carry). Options that only carry the catalog default the
+     * generator wrote as a field initializer are <em>not</em> copied, so they cannot overwrite a value the target
+     * already holds — for example one set programmatically on a user-supplied bean. The options that belong to the
+     * auto configuration layer itself (<tt>enabled</tt> and <tt>customizer</tt>) are never copied, as they are not
      * options on the target bean.
+     * <p/>
+     * <strong>Known gap:</strong> a programmatic assignment whose value happens to equal the class field initializer
+     * (e.g. {@code cfg.setSkipRequestHeaders(false)} when the initializer is already {@code false}) is indistinguishable
+     * from a catalog default and will not be copied. This matters only when the target holds a different value and the
+     * intent was to reset it.
      * <p/>
      * A configured option that cannot be set on the target fails fast with an {@link IllegalArgumentException},
      * instead of being dropped without a trace. Set {@link #LENIENT_CONFIGURATION_BINDING} to <tt>true</tt> to log it
@@ -100,7 +119,29 @@ public final class CamelPropertiesHelper {
         // only the options the application configured are copied, the others merely carry their catalog default
         Set<ConfigurationPropertyName> bound = boundProperties(applicationContext);
         if (bound != null && propertyPrefix != null && !propertyPrefix.isEmpty()) {
-            properties.keySet().removeIf(key -> !isConfigured(bound, optionKey(propertyPrefix, key)));
+            // Also keep properties that were assigned programmatically in Java (not via Spring Boot
+            // property binding), detected by comparing against a fresh default instance of the
+            // configuration class (cached per class to avoid repeated instantiation).
+            // When the class has no accessible no-arg constructor the detection is skipped and only
+            // bound options are copied (safe fallback: same behaviour as before this fix).
+            Map<String, Object> defaults = defaultProperties(camelContext, source);
+            if (defaults != null) {
+                properties.keySet().removeIf(key -> {
+                    String optionKey = optionKey(propertyPrefix, key);
+                    if (isConfigured(bound, optionKey)) {
+                        return false; // keep — explicitly configured via Spring Boot
+                    }
+                    if (isDifferentFromDefault(key, properties, defaults)) {
+                        LOG.debug("Copying programmatically-assigned option [{}] onto [{}]", optionKey,
+                                ObjectHelper.classCanonicalName(target));
+                        return false; // keep — assigned in Java, differs from class default
+                    }
+                    LOG.debug("Skipping option [{}] — not configured and equals the class default", optionKey);
+                    return true; // drop — only carries the catalog default
+                });
+            } else {
+                properties.keySet().removeIf(key -> !isConfigured(bound, optionKey(propertyPrefix, key)));
+            }
         }
 
         // the options that could be set are removed from the map, so what is left could not be set
@@ -145,12 +186,50 @@ public final class CamelPropertiesHelper {
             return null;
         }
         try {
-            return BoundConfigurationProperties.get(applicationContext).getAll().keySet();
+            BoundConfigurationProperties bound = BoundConfigurationProperties.get(applicationContext);
+            if (bound == null) {
+                return null;
+            }
+            // Copy inside the try so a failure in getAll() is also caught
+            return Set.copyOf(bound.getAll().keySet());
         } catch (Exception e) {
             LOG.warn("Cannot determine which options were configured due to: {}. Copying all options.",
                     e.getMessage(), e);
             return null;
         }
+    }
+
+    /**
+     * Gets the default properties of a freshly-constructed instance of the same class as the given source, cached per
+     * class. Returns {@code null} when the class has no accessible no-arg constructor, meaning programmatic-assignment
+     * detection is unavailable; the caller falls back to copying only bound options (same as before this fix).
+     */
+    private static Map<String, Object> defaultProperties(CamelContext camelContext, Object source) {
+        Map<String, Object> cached = DEFAULTS_CACHE.get(source.getClass());
+        if (cached != null) {
+            return cached == NO_DEFAULTS ? null : cached;
+        }
+        try {
+            Object defaults = source.getClass().getDeclaredConstructor().newInstance();
+            Map<String, Object> result = getNonNullProperties(camelContext, defaults);
+            DEFAULTS_CACHE.put(source.getClass(), result);
+            return result;
+        } catch (Exception e) {
+            LOG.debug("Cannot instantiate default of {} to detect programmatic assignments: {}",
+                    ObjectHelper.classCanonicalName(source), e.getMessage());
+            DEFAULTS_CACHE.put(source.getClass(), NO_DEFAULTS);
+            return null;
+        }
+    }
+
+    /**
+     * Whether the value of the given key in {@code properties} differs from the value in {@code defaults}. When the
+     * current value is not equal to the default, it was assigned programmatically in Java and must be copied to the
+     * target even if it was not bound by Spring Boot.
+     */
+    private static boolean isDifferentFromDefault(String key, Map<String, Object> properties,
+            Map<String, Object> defaults) {
+        return !Objects.equals(properties.get(key), defaults.get(key));
     }
 
     /**

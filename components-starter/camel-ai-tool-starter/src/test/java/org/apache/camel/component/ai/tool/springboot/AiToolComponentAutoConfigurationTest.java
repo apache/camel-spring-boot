@@ -18,6 +18,7 @@ package org.apache.camel.component.ai.tool.springboot;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
@@ -90,5 +91,18 @@ public class AiToolComponentAutoConfigurationTest {
         assertEquals("Greet a person by name", spec.getDescription());
         assertTrue(spec.getParametersJsonSchema().contains("\"name\""),
                 "expected the declared parameter in the JSON schema, but was: " + spec.getParametersJsonSchema());
+    }
+
+    @Test
+    public void mcpHintsStayNullWhenNotConfigured() {
+        // The MCP hints (readOnlyHint, destructiveHint, idempotentHint, openWorldHint) default to
+        // false in AiToolComponentConfiguration but to null in AiToolComponent. CAMEL-26782 must
+        // not copy the configuration-class defaults onto the component when they were not explicitly
+        // set by the user, because null carries meaning in the MCP protocol.
+        AiToolComponent component = assertInstanceOf(AiToolComponent.class, context.getComponent("ai-tool"));
+        assertNull(component.getConfiguration().getReadOnlyHint(), "readOnlyHint must stay null when not configured");
+        assertNull(component.getConfiguration().getDestructiveHint(), "destructiveHint must stay null when not configured");
+        assertNull(component.getConfiguration().getIdempotentHint(), "idempotentHint must stay null when not configured");
+        assertNull(component.getConfiguration().getOpenWorldHint(), "openWorldHint must stay null when not configured");
     }
 }

@@ -18,6 +18,8 @@ package org.apache.camel.component.platform.http.springboot;
 
 import java.time.Duration;
 
+import org.apache.camel.CamelContext;
+import org.apache.camel.component.platform.http.PlatformHttpComponent;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -30,12 +32,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableConfigurationProperties({ ComponentConfigurationProperties.class, PlatformHttpComponentConfiguration.class })
 public class SpringBootPlatformWebMvcConfiguration implements WebMvcConfigurer {
 
+    private final CamelContext camelContext;
     private final PlatformHttpComponentConfiguration platformHttpComponentConfiguration;
     private final ObjectProvider<WebMvcProperties> webMvcProperties;
 
     // WebMvcProperties is only registered in a servlet web application
-    public SpringBootPlatformWebMvcConfiguration(PlatformHttpComponentConfiguration platformHttpComponentConfiguration,
+    public SpringBootPlatformWebMvcConfiguration(CamelContext camelContext,
+                                                 PlatformHttpComponentConfiguration platformHttpComponentConfiguration,
                                                  ObjectProvider<WebMvcProperties> webMvcProperties) {
+        this.camelContext = camelContext;
         this.platformHttpComponentConfiguration = platformHttpComponentConfiguration;
         this.webMvcProperties = webMvcProperties;
     }
@@ -50,7 +55,17 @@ public class SpringBootPlatformWebMvcConfiguration implements WebMvcConfigurer {
         }
 
         if (requestTimeout != null && platformHttpComponentConfiguration.getRequestTimeout() == null) {
-            platformHttpComponentConfiguration.setRequestTimeout(requestTimeout.toMillis());
+            long timeoutMillis = requestTimeout.toMillis();
+            // Write onto the configuration bean so it is picked up if the component is configured later
+            platformHttpComponentConfiguration.setRequestTimeout(timeoutMillis);
+            // Also set directly on the component: the customizer may have already run before this
+            // configurer is called (the eager platformHttpEngineRequestMapping bean forces it), so
+            // setting the configuration bean alone is not sufficient in that case.
+            PlatformHttpComponent component
+                    = (PlatformHttpComponent) camelContext.getComponent("platform-http", false, false);
+            if (component != null && component.getRequestTimeout() == 0) {
+                component.setRequestTimeout(timeoutMillis);
+            }
         }
     }
 }

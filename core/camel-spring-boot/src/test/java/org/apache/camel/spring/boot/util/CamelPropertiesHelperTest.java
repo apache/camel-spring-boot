@@ -39,7 +39,8 @@ import org.springframework.test.annotation.DirtiesContext;
 @SpringBootApplication
 @SpringBootTest(
                 classes = { CamelPropertiesHelperTest.TestConfiguration.class },
-                properties = { "camel.test.my-config.name = Donald Duck",
+                properties = { "camel.test.my-config.enabled = true",
+                        "camel.test.my-config.name = Donald Duck",
                         "camel.test.my-config.verify-hostname = true",
                         "camel.test.my-config.no-such-option-on-the-target = bar" })
 public class CamelPropertiesHelperTest {
@@ -81,6 +82,8 @@ public class CamelPropertiesHelperTest {
         private MyOption option;
         private Boolean secure = false;
         private Boolean verifyHostname = true;
+        // null by default — suitable for testing programmatic assignment (CAMEL-26782)
+        private Long requestTimeout;
 
         public String getName() {
             return name;
@@ -112,6 +115,14 @@ public class CamelPropertiesHelperTest {
 
         public void setVerifyHostname(Boolean verifyHostname) {
             this.verifyHostname = verifyHostname;
+        }
+
+        public Long getRequestTimeout() {
+            return requestTimeout;
+        }
+
+        public void setRequestTimeout(Long requestTimeout) {
+            this.requestTimeout = requestTimeout;
         }
     }
 
@@ -151,6 +162,7 @@ public class CamelPropertiesHelperTest {
         private MyFooClass myFooClass;
         private boolean secure;
         private boolean verifyHostname;
+        private Long requestTimeout;
 
         public int getId() {
             return id;
@@ -206,6 +218,14 @@ public class CamelPropertiesHelperTest {
 
         public void setMyFooClass(MyFooClass myFooClass) {
             this.myFooClass = myFooClass;
+        }
+
+        public Long getRequestTimeout() {
+            return requestTimeout;
+        }
+
+        public void setRequestTimeout(Long requestTimeout) {
+            this.requestTimeout = requestTimeout;
         }
     }
 
@@ -397,6 +417,42 @@ public class CamelPropertiesHelperTest {
                 target);
 
         Assertions.assertTrue(target.isVerifyHostname(), "A configured option must be applied whatever its value");
+    }
+
+    @Test
+    void testCopyConfigurationPropertiesCopiesProgrammaticallyAssignedValue() {
+        MyClass target = new MyClass();
+
+        // Simulate the same pattern as SpringBootPlatformWebMvcConfiguration: an auto-configuration class
+        // sets a value on the configuration bean in Java (not from Spring Boot application properties).
+        // Before the fix (CAMEL-26782), this programmatically-assigned value was silently dropped because
+        // it was not recorded in BoundConfigurationProperties.
+        MyConfiguration cfg = configWithoutDrift();
+        cfg.setRequestTimeout(30000L); // assigned in Java, not via application properties
+
+        CamelPropertiesHelper.copyConfigurationProperties(camelContext, context, PREFIX, cfg, target);
+
+        Assertions.assertEquals(30000L, target.getRequestTimeout(),
+                "A value assigned programmatically in Java must be copied to the target");
+    }
+
+    @Test
+    void testCopyConfigurationPropertiesDoesNotCopyProgrammaticValueMatchingDefault() {
+        // anotherOptionOnlyCarryingItsDefault has the field initializer "false" in MyDriftedConfiguration
+        // and is NOT configured via application properties. It has no setter on MyClass, so if it were
+        // passed to the target it would cause a startup failure (lenient binding is off).
+        // The fix must recognise it as carrying only its catalog default and drop it silently.
+        MyClass target = new MyClass();
+        MyDriftedConfiguration cfg = new MyDriftedConfiguration();
+        cfg.setName(config.getName());
+        cfg.setVerifyHostname(config.getVerifyHostname());
+        // anotherOptionOnlyCarryingItsDefault is left at its "false" field initializer — not Spring-bound
+
+        // must not throw and must not set anything that wasn't configured
+        CamelPropertiesHelper.copyConfigurationProperties(camelContext, context, PREFIX, cfg, target);
+
+        Assertions.assertEquals("Donald Duck", target.getName(),
+                "The Spring-bound name must still be applied");
     }
 
     /**
