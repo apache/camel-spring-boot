@@ -67,6 +67,7 @@
 ** xref:starters/azure-eventhubs.adoc[Azure Event Hubs]
 ** xref:starters/azure-files.adoc[Azure Files]
 ** xref:starters/azure-functions.adoc[Azure Functions]
+** xref:starters/azure-iothub.adoc[Azure IoT Hub]
 ** xref:starters/azure-key-vault.adoc[Azure Key Vault]
 ** xref:starters/azure-servicebus.adoc[Azure ServiceBus]
 ** xref:starters/azure-storage-blob.adoc[Azure Storage Blob Service]

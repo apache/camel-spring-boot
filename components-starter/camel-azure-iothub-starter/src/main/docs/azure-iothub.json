@@ -1,0 +1,100 @@
+{
+  "groups": [
+    {
+      "name": "camel.component.azure-iothub",
+      "type": "org.apache.camel.component.azure.iothub.springboot.IoTHubComponentConfiguration",
+      "sourceType": "org.apache.camel.component.azure.iothub.springboot.IoTHubComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-iothub.customizer",
+      "type": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.component.azure.iothub.springboot.IoTHubComponentConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.component.azure-iothub.autowired-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
+      "sourceType": "org.apache.camel.component.azure.iothub.springboot.IoTHubComponentConfiguration",
+      "defaultValue": true
+    },
+    {
+      "name": "camel.component.azure-iothub.configuration",
+      "type": "org.apache.camel.component.azure.iothub.IoTHubConfiguration",
+      "description": "The shared component configuration. The option is a org.apache.camel.component.azure.iothub.IoTHubConfiguration type.",
+      "sourceType": "org.apache.camel.component.azure.iothub.springboot.IoTHubComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-iothub.connection-string",
+      "type": "java.lang.String",
+      "description": "The IoT Hub device connection string. Can be overridden per message via the CamelAzureIoTHubConnectionString header.",
+      "sourceType": "org.apache.camel.component.azure.iothub.springboot.IoTHubComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-iothub.content-type",
+      "type": "java.lang.String",
+      "description": "Content type applied to telemetry messages.",
+      "sourceType": "org.apache.camel.component.azure.iothub.springboot.IoTHubComponentConfiguration",
+      "defaultValue": "application\/json"
+    },
+    {
+      "name": "camel.component.azure-iothub.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.component.azure-iothub.delivery-mode",
+      "type": "org.apache.camel.component.azure.iothub.IoTHubDeliveryMode",
+      "description": "How the message body is delivered: telemetry, device twin reported properties, or both.",
+      "sourceType": "org.apache.camel.component.azure.iothub.springboot.IoTHubComponentConfiguration",
+      "defaultValue": "telemetry"
+    },
+    {
+      "name": "camel.component.azure-iothub.device-client-eviction-interval",
+      "type": "java.time.Duration",
+      "description": "How often the pool is scanned for idle device clients to evict.",
+      "sourceType": "org.apache.camel.component.azure.iothub.springboot.IoTHubComponentConfiguration",
+      "defaultValue": "30000ms"
+    },
+    {
+      "name": "camel.component.azure-iothub.device-client-idle-timeout",
+      "type": "java.time.Duration",
+      "description": "Idle time after which a pooled device client is evicted and closed.",
+      "sourceType": "org.apache.camel.component.azure.iothub.springboot.IoTHubComponentConfiguration",
+      "defaultValue": "300000ms"
+    },
+    {
+      "name": "camel.component.azure-iothub.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the azure-iothub component. This is enabled by default.",
+      "sourceType": "org.apache.camel.component.azure.iothub.springboot.IoTHubComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-iothub.lazy-start-producer",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
+      "sourceType": "org.apache.camel.component.azure.iothub.springboot.IoTHubComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.azure-iothub.protocol",
+      "type": "com.microsoft.azure.sdk.iot.device.IotHubClientProtocol",
+      "description": "The protocol used to connect to Azure IoT Hub.",
+      "sourceType": "org.apache.camel.component.azure.iothub.springboot.IoTHubComponentConfiguration",
+      "defaultValue": "mqtt"
+    },
+    {
+      "name": "camel.component.azure-iothub.send-timeout",
+      "type": "java.time.Duration",
+      "description": "Timeout for telemetry sends and twin reported-property updates.",
+      "sourceType": "org.apache.camel.component.azure.iothub.springboot.IoTHubComponentConfiguration",
+      "defaultValue": "10000ms"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}
