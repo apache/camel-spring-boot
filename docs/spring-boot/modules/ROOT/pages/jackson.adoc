@@ -254,3 +254,33 @@ mvn dependency:list | grep -E 'jackson-(databind|annotations)'
 
 If you override them, override both lines together and use matching release trains (for example Jackson 2.22.x with
 Jackson 3.2.x), because both lines share `com.fasterxml.jackson.core:jackson-annotations`.
+
+== JSONPath and Spring Boot 4.1
+
+The JSONPath language (`camel-jsonpath-starter`) uses Jackson 3 through the `Jackson3JsonProvider` and
+`Jackson3MappingProvider` of json-path 3. Spring Boot 4.1 manages json-path 2.10.0, which does not have them, and the
+Spring Boot version wins over the one Camel brings. An application with a route that uses JSONPath then fails to start
+with `NoClassDefFoundError: com/jayway/jsonpath/spi/json/Jackson3JsonProvider`. Spring Boot 4.2 manages json-path
+3.0.0.
+
+With Spring Boot 4.1, use json-path 3.0.0. When the project inherits from `spring-boot-starter-parent`, set the
+property:
+
+[source,xml]
+----
+<properties>
+    <json-path.version>3.0.0</json-path.version>
+</properties>
+----
+
+When the project imports the `spring-boot-dependencies` BOM, add json-path to the `dependencyManagement` section of the
+project, which wins over the imported BOMs:
+
+[source,xml]
+----
+<dependency>
+    <groupId>com.jayway.jsonpath</groupId>
+    <artifactId>json-path</artifactId>
+    <version>3.0.0</version>
+</dependency>
+----
