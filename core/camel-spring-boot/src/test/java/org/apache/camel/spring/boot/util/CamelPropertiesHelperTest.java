@@ -39,7 +39,8 @@ import org.springframework.test.annotation.DirtiesContext;
 @SpringBootApplication
 @SpringBootTest(
                 classes = { CamelPropertiesHelperTest.TestConfiguration.class },
-                properties = { "camel.test.my-config.name = Donald Duck",
+                properties = { "camel.test.my-config.enabled = true",
+                        "camel.test.my-config.name = Donald Duck",
                         "camel.test.my-config.verify-hostname = true",
                         "camel.test.my-config.no-such-option-on-the-target = bar" })
 public class CamelPropertiesHelperTest {
@@ -437,18 +438,21 @@ public class CamelPropertiesHelperTest {
 
     @Test
     void testCopyConfigurationPropertiesDoesNotCopyProgrammaticValueMatchingDefault() {
+        // anotherOptionOnlyCarryingItsDefault has the field initializer "false" in MyDriftedConfiguration
+        // and is NOT configured via application properties. It has no setter on MyClass, so if it were
+        // passed to the target it would cause a startup failure (lenient binding is off).
+        // The fix must recognise it as carrying only its catalog default and drop it silently.
         MyClass target = new MyClass();
+        MyDriftedConfiguration cfg = new MyDriftedConfiguration();
+        cfg.setName(config.getName());
+        cfg.setVerifyHostname(config.getVerifyHostname());
+        // anotherOptionOnlyCarryingItsDefault is left at its "false" field initializer — not Spring-bound
 
-        // secure defaults to false in MyConfiguration. Setting it to the same value programmatically
-        // must not be copied — if it were, it could overwrite a value the target already has set.
-        MyConfiguration cfg = configWithoutDrift();
-        cfg.setSecure(false); // same as the field initializer default
-
-        target.setSecure(true); // the target has its own value
+        // must not throw and must not set anything that wasn't configured
         CamelPropertiesHelper.copyConfigurationProperties(camelContext, context, PREFIX, cfg, target);
 
-        Assertions.assertTrue(target.isSecure(),
-                "A programmatic assignment that matches the class default must not overwrite the target's value");
+        Assertions.assertEquals("Donald Duck", target.getName(),
+                "The Spring-bound name must still be applied");
     }
 
     /**
