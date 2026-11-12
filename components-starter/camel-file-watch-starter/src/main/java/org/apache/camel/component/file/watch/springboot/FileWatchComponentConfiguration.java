@@ -87,7 +87,7 @@ public class FileWatchComponentConfiguration
     private Integer pollThreads = 1;
     /**
      * Maximum size of queue between WatchService and consumer. Unbounded by
-     * default.
+     * default. When the queue is full, file events are dropped.
      */
     private Integer queueSize = 2147483647;
 

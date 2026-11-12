@@ -61,7 +61,7 @@
     {
       "name": "camel.component.file-watch.queue-size",
       "type": "java.lang.Integer",
-      "description": "Maximum size of queue between WatchService and consumer. Unbounded by default.",
+      "description": "Maximum size of queue between WatchService and consumer. Unbounded by default. When the queue is full, file events are dropped.",
       "sourceType": "org.apache.camel.component.file.watch.springboot.FileWatchComponentConfiguration",
       "defaultValue": 2147483647
     },
