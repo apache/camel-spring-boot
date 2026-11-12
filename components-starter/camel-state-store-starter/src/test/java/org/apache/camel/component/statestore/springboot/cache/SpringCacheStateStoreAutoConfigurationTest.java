@@ -219,8 +219,10 @@ class SpringCacheStateStoreAutoConfigurationTest {
 
                         assertThat(ctx.getBean(CacheManager.class).getCache("orders").get("1").get())
                                 .isEqualTo("o1");
-                        assertThat(ctx.getBean("camelRepo", MemoryKeyValueRepository.class).get("1"))
-                                .isEqualTo("s1");
+                        // backend=#camelRepo is a shared repository, so the store keys are namespaced
+                        MemoryKeyValueRepository camelRepo = ctx.getBean("camelRepo", MemoryKeyValueRepository.class);
+                        assertThat(camelRepo.get("statestore:sessions:1")).isEqualTo("s1");
+                        assertThat(camelRepo.get("1")).isNull();
                         assertThat(ctx.getBean(CacheManager.class).getCache("sessions").get("1")).isNull();
                     } finally {
                         template.stop();
@@ -236,11 +238,35 @@ class SpringCacheStateStoreAutoConfigurationTest {
                 template.sendBodyAndHeader("state-store:orders?operation=put", "o1",
                         StateStoreConstants.KEY, "1");
 
-                assertThat(ctx.getBean("camelRepo", MemoryKeyValueRepository.class).get("1")).isEqualTo("o1");
+                // the auto-discovered camelRepo is a shared repository, so the store keys are namespaced
+                MemoryKeyValueRepository camelRepo = ctx.getBean("camelRepo", MemoryKeyValueRepository.class);
+                assertThat(camelRepo.get("statestore:orders:1")).isEqualTo("o1");
+                assertThat(camelRepo.get("1")).isNull();
+                assertThat(template.requestBodyAndHeader("state-store:orders?operation=get", null,
+                        StateStoreConstants.KEY, "1")).isEqualTo("o1");
             } finally {
                 template.stop();
             }
         });
+    }
+
+    @Test
+    void camelRepositoryKeysAreNotNamespacedWhenNamespacedIsDisabled() {
+        mixedBackendRunner
+                .withPropertyValues("camel.component.state-store.namespaced=false")
+                .run(ctx -> {
+                    ProducerTemplate template = ctx.getBean(CamelContext.class).createProducerTemplate();
+                    try {
+                        template.sendBodyAndHeader("state-store:orders?operation=put", "o1",
+                                StateStoreConstants.KEY, "1");
+
+                        MemoryKeyValueRepository camelRepo = ctx.getBean("camelRepo", MemoryKeyValueRepository.class);
+                        assertThat(camelRepo.get("1")).isEqualTo("o1");
+                        assertThat(camelRepo.get("statestore:orders:1")).isNull();
+                    } finally {
+                        template.stop();
+                    }
+                });
     }
 
     @Test
