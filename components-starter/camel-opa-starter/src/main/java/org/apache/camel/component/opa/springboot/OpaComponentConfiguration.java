@@ -162,6 +162,13 @@ public class OpaComponentConfiguration
      */
     private Long connectionTimeout = 10000L;
     /**
+     * Whether the server readiness check also requires activation of OPA's
+     * configured bundles. Sends /health?bundles=true. Does not enable health
+     * checks, change policy evaluation or guarantee a particular policy
+     * revision. Not used in wasm mode or with an injected client.
+     */
+    private Boolean healthCheckBundles = false;
+    /**
      * An existing OPAClient to use. When set, serverUrl and bearerToken are
      * ignored. The option is a com.styra.opa.OPAClient type.
      */
@@ -332,6 +339,14 @@ public class OpaComponentConfiguration
 
     public void setConnectionTimeout(Long connectionTimeout) {
         this.connectionTimeout = connectionTimeout;
+    }
+
+    public Boolean getHealthCheckBundles() {
+        return healthCheckBundles;
+    }
+
+    public void setHealthCheckBundles(Boolean healthCheckBundles) {
+        this.healthCheckBundles = healthCheckBundles;
     }
 
     public OPAClient getOpaClient() {

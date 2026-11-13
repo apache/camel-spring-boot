@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 24 options, which are listed below.
+The starter supports 25 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -39,6 +39,7 @@ The starter supports 24 options, which are listed below.
 | camel.component.opa.entrypoint | The compiled entrypoint to evaluate in wasm mode. This is not the same thing as the policy path: an entrypoint is fixed when the bundle is built, with opa build -e. Defaults to the endpoint's policy path, which is the name opa build gives it. |  | String
 | camel.component.opa.evaluation-mode | How the policy is evaluated. rest (the default) calls a running OPA server over its Data API. wasm evaluates a WebAssembly bundle in-process, with no server involved - so there is no network hop and no unreachable decision point, at the cost of the policy being a build-time artefact rather than something a server distributes and updates. serverUrl, bearerToken and failOpen do not apply in wasm mode. | rest | String
 | camel.component.opa.fail-open | Whether to allow the exchange to proceed when the policy decision point is unavailable: in rest mode the OPA server cannot be reached, times out, or a gateway in front of it answers 502, 503, 504 or 429; in wasm mode no instance frees up within borrowTimeout. It never applies to an answer: an undefined decision, a rejected request (400, or any other 4xx such as a wrong or expired bearer token) and an error evaluating the policy (500) fail closed even when this is set. Disabled by default so that an unavailable policy decision point denies rather than grants access. Do not enable this in production. | false | Boolean
+| camel.component.opa.health-check-bundles | Whether the server readiness check also requires activation of OPA's configured bundles. Sends /health?bundles=true. Does not enable health checks, change policy evaluation or guarantee a particular policy revision. Not used in wasm mode or with an injected client. | false | Boolean
 | camel.component.opa.health-check-consumer-enabled | Used for enabling or disabling all consumer based health checks from this component | true | Boolean
 | camel.component.opa.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
 | camel.component.opa.include-body | Whether to send the message body to OPA as part of the input document. Disabled by default: bodies can be large or streaming, and most authorization decisions only need headers. When enabled on a streaming body, enable stream caching so that the body is still readable by the rest of the route. | false | Boolean

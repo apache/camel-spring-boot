@@ -92,6 +92,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.opa.health-check-bundles",
+      "type": "java.lang.Boolean",
+      "description": "Whether the server readiness check also requires activation of OPA's configured bundles. Sends \/health?bundles=true. Does not enable health checks, change policy evaluation or guarantee a particular policy revision. Not used in wasm mode or with an injected client.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.opa.health-check-consumer-enabled",
       "type": "java.lang.Boolean",
       "description": "Used for enabling or disabling all consumer based health checks from this component",

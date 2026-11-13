@@ -3,7 +3,7 @@
 = CXF
 :artifactid: camel-cxf-soap-starter
 
-Expose SOAP WebServices using Apache CXF or connect to external WebServices using CXF WS client.
+Expose SOAP services, or invoke operations of SOAP services, using Apache CXF.
 
 == What's inside
 
