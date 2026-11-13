@@ -17,16 +17,24 @@
 package org.apache.camel.component.hashicorp.vault.springboot;
 
 import org.apache.camel.RuntimeCamelException;
+import org.apache.camel.component.hashicorp.vault.HashicorpVaultClient;
+import org.apache.camel.component.hashicorp.vault.HashicorpVaultClientSettings;
 import org.apache.camel.component.hashicorp.vault.HashicorpVaultPropertiesFunction;
 import org.apache.camel.spi.PropertiesFunction;
 import org.apache.camel.spring.boot.AbstractEarlyResolutionPropertiesParser;
 import org.apache.camel.util.ObjectHelper;
+import org.apache.camel.vault.HashicorpVaultConfiguration;
+import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.core.env.ConfigurableEnvironment;
-import org.springframework.vault.authentication.TokenAuthentication;
-import org.springframework.vault.client.VaultEndpoint;
-import org.springframework.vault.core.VaultTemplate;
 
+/**
+ * Resolves the {@code {{hashicorp:...}}} placeholders of the Spring Boot properties before the CamelContext exists. It
+ * logs in to HashiCorp Vault with the {@code camel.vault.hashicorp} options, as the properties function of the
+ * CamelContext does, and revokes the token of its login once the properties are resolved.
+ */
 public class SpringBootHashicorpVaultPropertiesParser extends AbstractEarlyResolutionPropertiesParser {
+
+    private static final String PREFIX = "camel.vault.hashicorp";
 
     @Override
     protected String getEarlyResolutionProperty() {
@@ -40,35 +48,62 @@ public class SpringBootHashicorpVaultPropertiesParser extends AbstractEarlyResol
 
     @Override
     protected PropertiesFunction createPropertiesFunction(ConfigurableEnvironment environment) {
-        String token = required(environment, "camel.vault.hashicorp.token", "Hashicorp Vault token is required");
-        String host = required(environment, "camel.vault.hashicorp.host", "Hashicorp Vault host is required");
-        String portValue = required(environment, "camel.vault.hashicorp.port", "Hashicorp Vault port is required");
-        String scheme = required(environment, "camel.vault.hashicorp.scheme", "Hashicorp Vault scheme is required");
-
-        int port;
+        // bound as Spring Boot binds the options of the CamelContext, such as camel.vault.hashicorp.role-id
+        HashicorpVaultConfiguration configuration = Binder.get(environment)
+                .bind(PREFIX, HashicorpVaultConfiguration.class)
+                .orElseGet(HashicorpVaultConfiguration::new);
+        if (isTokenLogin(configuration)) {
+            required(configuration.getToken(), "token", "Hashicorp Vault token is required");
+        }
+        required(configuration.getHost(), "host", "Hashicorp Vault host is required");
+        required(configuration.getPort(), "port", "Hashicorp Vault port is required");
+        required(configuration.getScheme(), "scheme", "Hashicorp Vault scheme is required");
         try {
-            port = Integer.parseInt(portValue);
+            Integer.parseInt(configuration.getPort());
         } catch (NumberFormatException e) {
             throw new RuntimeCamelException(
-                    "camel.vault.hashicorp.port must be a number but was: " + portValue, e);
+                    PREFIX + ".port must be a number but was: " + configuration.getPort(), e);
         }
 
-        VaultEndpoint vaultEndpoint = new VaultEndpoint();
-        vaultEndpoint.setHost(host);
-        vaultEndpoint.setPort(port);
-        vaultEndpoint.setScheme(scheme);
-
-        VaultTemplate client = new VaultTemplate(
-                vaultEndpoint,
-                new TokenAuthentication(token));
-        return new HashicorpVaultPropertiesFunction(client);
+        HashicorpVaultClient client;
+        try {
+            client = HashicorpVaultClient.create(HashicorpVaultClientSettings.fromConfiguration(configuration));
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeCamelException(
+                    "Cannot create the Hashicorp Vault client of the " + PREFIX + " options: " + e.getMessage(), e);
+        }
+        return new EarlyResolutionFunction(client);
     }
 
-    private static String required(ConfigurableEnvironment environment, String key, String message) {
-        String value = environment.getProperty(key);
-        if (ObjectHelper.isEmpty(value)) {
-            throw new RuntimeCamelException(message + " (set " + key + ")");
+    @Override
+    protected void release(PropertiesFunction propertiesFunction) {
+        if (propertiesFunction instanceof EarlyResolutionFunction function) {
+            // stops renewing the token, and revokes the token of the login (but not a token given for the token login)
+            function.client.close();
         }
-        return value;
+    }
+
+    private static boolean isTokenLogin(HashicorpVaultConfiguration configuration) {
+        String authentication = configuration.getAuthentication();
+        return ObjectHelper.isEmpty(authentication) || "token".equalsIgnoreCase(authentication.trim());
+    }
+
+    private static void required(String value, String option, String message) {
+        if (ObjectHelper.isEmpty(value)) {
+            throw new RuntimeCamelException(message + " (set " + PREFIX + "." + option + ")");
+        }
+    }
+
+    /**
+     * The properties function of the early resolution, with the client it reads the secrets with.
+     */
+    private static final class EarlyResolutionFunction extends HashicorpVaultPropertiesFunction {
+
+        private final HashicorpVaultClient client;
+
+        private EarlyResolutionFunction(HashicorpVaultClient client) {
+            super(client.getVaultTemplate());
+            this.client = client;
+        }
     }
 }
