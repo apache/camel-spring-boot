@@ -21,6 +21,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * Bridge-owned configuration of the Camel MCP server. Serving concerns (endpoint path, protocol, server identity)
  * are owned by the Spring AI MCP server and configured via {@code spring.ai.mcp.server.*}.
+ * The Streamable HTTP transport also uses {@code allowed-origins} to validate browser request origins.
  * <p/>
  * Note that {@code spring.ai.mcp.server.*} provides no authentication: the MCP endpoint is served on the
  * application's own HTTP port and must be protected by the application, for example with a Spring Security filter
@@ -47,6 +48,15 @@ public class McpServerConfigurationProperties {
      */
     private long toolTimeout = 20000;
 
+    /**
+     * Comma-separated list of origins allowed to call the Streamable HTTP MCP endpoint.
+     * Entries may be exact origins (for example, {@code https://app.example.com}) or
+     * use a wildcard port (for example, {@code http://localhost:*}).
+     * When unset, only loopback origins are allowed. Requests without an Origin header
+     * are accepted.
+     */
+    private String allowedOrigins;
+
     public boolean isEnabled() {
         return enabled;
     }
@@ -69,5 +79,13 @@ public class McpServerConfigurationProperties {
 
     public void setToolTimeout(long toolTimeout) {
         this.toolTimeout = toolTimeout;
+    }
+
+    public String getAllowedOrigins() {
+        return allowedOrigins;
+    }
+
+    public void setAllowedOrigins(String allowedOrigins) {
+        this.allowedOrigins = allowedOrigins;
     }
 }

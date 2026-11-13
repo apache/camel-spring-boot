@@ -43,6 +43,155 @@ camel.mcp-server.tags = crm,notify
 camel.mcp-server.tool-timeout = 10000
 ----
 
+=== Resources and resource templates
+
+Expose a fixed resource with an `ai-resource` route. The route body supplies
+the resource content and the component metadata supplies its URI and MIME type:
+
+[source,java]
+----
+from("ai-resource:app_config?resourceUri=camel:///config/app.json"
+     + "&tags=crm&description=Application configuration&mimeType=application/json")
+    .setBody(constant("{\\"env\\":\\"production\\"}"));
+----
+
+A resource template can expose resources selected by URI path variables:
+
+[source,java]
+----
+from("ai-resource:customer_template?uriTemplate=camel:///customers/{customerId}"
+     + "&tags=crm&description=Customer selected by id&mimeType=application/json")
+    .process(exchange -> {
+        String customerId = exchange.getMessage().getHeader(
+                "CamelAiResourceTemplateVariable.customerId", String.class);
+
+        // Validate the identifier against application policy before using it.
+        if (customerId == null || !customerId.matches("[A-Za-z0-9-]{1,64}")) {
+            throw new IllegalArgumentException("Invalid customer identifier");
+        }
+
+        exchange.getMessage().setBody("{\\"customerId\\":\\"" + customerId + "\\"}");
+    });
+----
+
+A route declares either `resourceUri` for a fixed resource or `uriTemplate`
+for a resource template. Template variables are client input: validate them
+before using them in filesystem paths, database queries, authorization
+decisions, or downstream requests. Do not treat a syntactically valid URI
+variable as proof that the caller may access the referenced data.
+
+Resources and resource templates are selected using the same
+`camel.mcp-server.tags` setting as tools. Their registration follows the
+Camel route lifecycle.
+
+=== Prompts
+
+Expose a prompt with an `ai-prompt` route. Prompt arguments are strings and
+arrive as message headers:
+
+[source,java]
+----
+from("ai-prompt:greeting?tags=crm&description=Say hello&title=Greeting"
+     + "&argument.name.description=Who to greet&argument.name.required=true")
+    .setBody(simple("Hello ${header.name}"));
+----
+
+A string route result becomes one user message. For a multi-message result,
+return a list containing strings and/or maps with `role` and `content` fields.
+The supported roles are `user` and `assistant`. Content may be plain text or
+an MCP content block:
+
+[source,java]
+----
+from("ai-prompt:multi_turn?tags=crm&description=Return a user and assistant message")
+    .setBody(constant(List.of(
+        "Plain user message",
+        Map.of("role", "assistant", "content", "Assistant reply"))));
+----
+
+Prompt routes follow the same tag selection and route lifecycle rules.
+Content assembled from external systems, including resource content and
+prompt messages, must be treated as untrusted data. It may contain prompt
+injection instructions; do not grant such content authority over system
+instructions, tool permissions, or application security policy.
+
+To advertise resource and prompt capabilities and their list-change
+notifications, configure the corresponding Spring AI server properties:
+
+[source,properties]
+----
+spring.ai.mcp.server.capabilities.resource = true
+spring.ai.mcp.server.capabilities.prompt = true
+spring.ai.mcp.server.resource-change-notification = true
+spring.ai.mcp.server.prompt-change-notification = true
+----
+
+=== Origin validation
+
+The Streamable HTTP transport validates the `Origin` header on every request
+to the MCP endpoint, including `POST`, the SSE `GET`, and `DELETE`:
+
+* A request without an `Origin` header is accepted. Process-based MCP clients
+  commonly omit this header.
+* A request with an allowed origin is accepted. Any other origin is rejected
+  with HTTP 403 before it reaches an MCP operation.
+* When `camel.mcp-server.allowed-origins` is not set, only loopback origins
+  are allowed: `localhost`, `127.0.0.1`, and `[::1]`, using HTTP or HTTPS and
+  any port.
+* When configured, the property replaces the loopback defaults. Each entry
+  is an exact origin or uses `:*` to match any port.
+
+For example, to allow a remote browser client and local development tools:
+
+[source,properties]
+----
+camel.mcp-server.allowed-origins = https://app.example.com, http://localhost:*
+----
+
+Add the loopback origins explicitly to the list when you still need local
+browser-based clients. Scheme and host matching is case-insensitive, and
+default HTTP and HTTPS ports are normalized.
+
+With the Spring AI 2.0.2 WebMVC transport, an Origin rejection currently
+returns HTTP 403 with a plain-text `Invalid Origin header` response body.
+The rejection occurs before MCP request dispatch, but this response body is
+not the JSON-RPC error envelope returned by the Camel Main HTTP engine.
+Treat the HTTP status and pre-dispatch rejection as the enforced transport
+security boundary; the response-envelope difference remains a runtime parity
+limitation of the current Spring AI WebMVC transport.
+
+Origin validation is independent of CORS. Configure CORS separately when a
+browser client needs cross-origin response access; CORS response headers do
+not replace the server-side Origin check.
+
+If the MCP server should only be reachable from the local machine, also bind
+the Spring Boot HTTP server to the loopback interface:
+
+[source,properties]
+----
+server.address = 127.0.0.1
+----
+
+A custom application-provided `WebMvcStreamableServerTransportProvider`
+takes precedence over Camel's auto-configured transport. It does not inherit
+Camel's Origin validator or authenticated-caller context extractor. To retain
+caller identity in Camel tool routes, install the public Camel extractor on
+the provider builder:
+
+[source,java]
+----
+.contextExtractor(SpringAiMcpTransportContext::extract)
+----
+
+Import
+`org.apache.camel.springboot.mcp.server.SpringAiMcpTransportContext`
+where the provider is configured. The extractor copies the authenticated
+Spring MVC request principal and its Spring Security authorities into the
+MCP transport context; it does not authenticate the request. The custom
+provider must also configure an Origin validator equivalent to, or stricter
+than, the policy described above. The `camel.mcp-server.allowed-origins`
+property is applied only to Camel's auto-configured provider.
+
 The streamable HTTP transport has to be selected explicitly with
 `spring.ai.mcp.server.protocol=STREAMABLE`; when the property is not set,
 Spring AI serves the deprecated SSE transport instead and there is no
