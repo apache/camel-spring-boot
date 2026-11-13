@@ -7,7 +7,7 @@
     "deprecated": false,
     "firstVersion": "2.21.0",
     "label": "microservice",
-    "supportLevel": "Preview",
+    "supportLevel": "Stable",
     "groupId": "org.apache.camel.springboot",
     "artifactId": "camel-lra-starter",
     "version": "4.24.0-SNAPSHOT"

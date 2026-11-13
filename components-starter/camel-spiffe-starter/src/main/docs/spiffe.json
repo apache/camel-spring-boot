@@ -65,6 +65,13 @@
       "defaultValue": "fetchx509svid"
     },
     {
+      "name": "camel.component.spiffe.preserve-body",
+      "type": "java.lang.Boolean",
+      "description": "Whether validateJwtSvid leaves the application body untouched and publishes the verified identity through the CamelSpiffeJwtIdentity exchange property. In this mode the token must be in CamelSpiffeToken or an Authorization Bearer header: the body is never read as a token. The default returns the JwtSvid in the body as before.",
+      "sourceType": "org.apache.camel.component.spiffe.springboot.SpiffeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.spiffe.spiffe-socket-path",
       "type": "java.lang.String",
       "description": "The address of the SPIFFE Workload API endpoint (for example unix:\/\/\/tmp\/agent.sock or tcp:\/\/127.0.0.1:8082). When not set, the SPIFFE_ENDPOINT_SOCKET environment variable is used.",

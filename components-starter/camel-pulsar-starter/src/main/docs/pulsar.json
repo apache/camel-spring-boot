@@ -353,6 +353,15 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.pulsar.allow-java-serialized-object",
+      "type": "java.lang.Boolean",
+      "description": "Whether the producer sends a body that does not convert to a byte array (such as a Map, a List, a number or a POJO) with Java serialization, as Camel did before 4.24. Such a message can only be read by a Java client that deserializes it. By default the producer fails such a body: marshal it first, for example to JSON. Deprecation note: Java serialization of the body is kept only for compatibility, and will be removed: marshal the body before sending it",
+      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration",
+      "defaultValue": false,
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
       "name": "camel.component.pulsar.max-pending-messages-across-partitions",
       "type": "java.lang.Integer",
       "description": "The maximum number of pending messages for partitioned topics. The maxPendingMessages value will be reduced if (number of partitions * maxPendingMessages) exceeds this value. Partitioned topics have a pending message queue for each partition.",

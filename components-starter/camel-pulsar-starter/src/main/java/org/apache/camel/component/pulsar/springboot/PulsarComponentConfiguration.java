@@ -300,6 +300,17 @@ public class PulsarComponentConfiguration
      */
     private Integer sendTimeoutMs = 30000;
     /**
+     * Whether the producer sends a body that does not convert to a byte array
+     * (such as a Map, a List, a number or a POJO) with Java serialization, as
+     * Camel did before 4.24. Such a message can only be read by a Java client
+     * that deserializes it. By default the producer fails such a body: marshal
+     * it first, for example to JSON. Deprecation note: Java serialization of
+     * the body is kept only for compatibility, and will be removed: marshal the
+     * body before sending it
+     */
+    @Deprecated
+    private Boolean allowJavaSerializedObject = false;
+    /**
      * The pulsar auto configuration. The option is a
      * org.apache.camel.component.pulsar.utils.AutoConfiguration type.
      */
@@ -705,6 +716,17 @@ public class PulsarComponentConfiguration
 
     public void setSendTimeoutMs(Integer sendTimeoutMs) {
         this.sendTimeoutMs = sendTimeoutMs;
+    }
+
+    @Deprecated
+    @DeprecatedConfigurationProperty
+    public Boolean getAllowJavaSerializedObject() {
+        return allowJavaSerializedObject;
+    }
+
+    @Deprecated
+    public void setAllowJavaSerializedObject(Boolean allowJavaSerializedObject) {
+        this.allowJavaSerializedObject = allowJavaSerializedObject;
     }
 
     public AutoConfiguration getAutoConfiguration() {

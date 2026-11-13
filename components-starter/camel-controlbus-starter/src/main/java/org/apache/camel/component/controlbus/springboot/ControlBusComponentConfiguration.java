@@ -54,6 +54,15 @@ public class ControlBusComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * The names of the languages the language command may use, separated by
+     * comma, such as simple. The language command evaluates the message body as
+     * an expression, so it is off until the language is in this list: a
+     * controlbus:language endpoint whose language is not listed fails when it
+     * is created. The route actions are not affected. An endpoint can set its
+     * own list.
+     */
+    private String allowedLanguages;
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -69,5 +78,13 @@ public class ControlBusComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public String getAllowedLanguages() {
+        return allowedLanguages;
+    }
+
+    public void setAllowedLanguages(String allowedLanguages) {
+        this.allowedLanguages = allowedLanguages;
     }
 }

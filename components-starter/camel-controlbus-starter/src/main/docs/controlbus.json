@@ -14,6 +14,12 @@
   ],
   "properties": [
     {
+      "name": "camel.component.controlbus.allowed-languages",
+      "type": "java.lang.String",
+      "description": "The names of the languages the language command may use, separated by comma, such as simple. The language command evaluates the message body as an expression, so it is off until the language is in this list: a controlbus:language endpoint whose language is not listed fails when it is created. The route actions are not affected. An endpoint can set its own list.",
+      "sourceType": "org.apache.camel.component.controlbus.springboot.ControlBusComponentConfiguration"
+    },
+    {
       "name": "camel.component.controlbus.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",

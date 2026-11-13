@@ -70,6 +70,14 @@ public class SpiffeComponentConfiguration
      */
     private SpiffeOperation operation = SpiffeOperation.fetchX509Svid;
     /**
+     * Whether validateJwtSvid leaves the application body untouched and
+     * publishes the verified identity through the CamelSpiffeJwtIdentity
+     * exchange property. In this mode the token must be in CamelSpiffeToken or
+     * an Authorization Bearer header: the body is never read as a token. The
+     * default returns the JwtSvid in the body as before.
+     */
+    private Boolean preserveBody = false;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -139,6 +147,14 @@ public class SpiffeComponentConfiguration
 
     public void setOperation(SpiffeOperation operation) {
         this.operation = operation;
+    }
+
+    public Boolean getPreserveBody() {
+        return preserveBody;
+    }
+
+    public void setPreserveBody(Boolean preserveBody) {
+        this.preserveBody = preserveBody;
     }
 
     public Boolean getAutowiredEnabled() {

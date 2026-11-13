@@ -62,7 +62,11 @@ public class CxfRsComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Sets whether synchronous processing should be strictly used
+     * Whether to always process the exchange synchronously. If true, the
+     * producer sends each request without an InvocationCallback and waits for
+     * the response, and the consumer runs the route without a CXF continuation.
+     * The component sets the value on each endpoint that it creates, including
+     * a bean: endpoint, unless the endpoint URI sets synchronous.
      */
     private Boolean synchronous = false;
     /**
@@ -81,7 +85,10 @@ public class CxfRsComponentConfiguration
      */
     private HeaderFilterStrategy headerFilterStrategy;
     /**
-     * Enable usage of global SSL context parameters.
+     * Whether to use the global SSL context parameters of the CamelContext for
+     * each endpoint that the component creates and that has no
+     * sslContextParameters. The producer uses them for the HTTPS requests that
+     * it sends. The consumer does not use them.
      */
     private Boolean useGlobalSslContextParameters = false;
 

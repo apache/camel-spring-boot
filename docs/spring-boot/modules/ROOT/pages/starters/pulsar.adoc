@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 51 options, which are listed below.
+The starter supports 52 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -78,5 +78,6 @@ The starter supports 51 options, which are listed below.
 | camel.component.pulsar.subscription-topics-mode | Determines to which topics this consumer should be subscribed to - Persistent, Non-Persistent, or both. Only used with pattern subscriptions. | persistentonly | RegexSubscriptionMode
 | camel.component.pulsar.subscription-type | Type of the subscription [EXCLUSIVE\|SHARED\|FAILOVER\|KEY_SHARED], defaults to EXCLUSIVE | exclusive | SubscriptionType
 | camel.component.pulsar.topics-pattern | Whether the topic is a pattern (regular expression) that allows the consumer to subscribe to all matching topics in the namespace | false | Boolean
+| camel.component.pulsar.allow-java-serialized-object | Whether the producer sends a body that does not convert to a byte array (such as a Map, a List, a number or a POJO) with Java serialization, as Camel did before 4.24. Such a message can only be read by a Java client that deserializes it. By default the producer fails such a body: marshal it first, for example to JSON. Deprecation note: Java serialization of the body is kept only for compatibility, and will be removed: marshal the body before sending it | false | Boolean
 | camel.component.pulsar.max-pending-messages-across-partitions | The maximum number of pending messages for partitioned topics. The maxPendingMessages value will be reduced if (number of partitions * maxPendingMessages) exceeds this value. Partitioned topics have a pending message queue for each partition. | 50000 | Integer
 |===
