@@ -32,6 +32,6 @@ The starter supports 6 options, which are listed below.
 | camel.component.json-validator.content-cache | Sets whether to use resource content cache or not | true | Boolean
 | camel.component.json-validator.enabled | Whether to enable auto configuration of the json-validator component. This is enabled by default. |  | Boolean
 | camel.component.json-validator.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.json-validator.object-mapper | Lookup and use the existing ObjectMapper with the given id. |  | String
-| camel.component.json-validator.use-default-object-mapper | Whether to lookup and use default Jackson ObjectMapper from the registry. | true | Boolean
+| camel.component.json-validator.object-mapper | Lookup and use the existing Jackson 3 (tools.jackson) ObjectMapper with the given id. |  | String
+| camel.component.json-validator.use-default-object-mapper | Whether to lookup and use the default Jackson 3 (tools.jackson) ObjectMapper from the registry. | true | Boolean
 |===

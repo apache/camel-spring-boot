@@ -62,14 +62,23 @@ public class CxfComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Sets whether synchronous processing should be strictly used
+     * Whether to always process the exchange synchronously. If true, the
+     * producer invokes the CXF Client without a callback and waits until the
+     * invocation returns, and the consumer runs the route without a CXF
+     * continuation. The component sets the value on each endpoint that it
+     * creates, including a bean: endpoint, unless the endpoint URI sets
+     * synchronous.
      */
     private Boolean synchronous = false;
     /**
-     * This option controls whether the CXF component, when running in PAYLOAD
-     * mode, will DOM parse the incoming messages into DOM Elements or keep the
-     * payload as a javax.xml.transform.Source object that would allow streaming
-     * in some cases.
+     * Whether to allow CXF to keep the last message part of an incoming SOAP
+     * message as a javax.xml.transform.Source read from the stream, instead of
+     * parsing it into a DOM. Only used when dataFormat is PAYLOAD. The
+     * component sets the value on each endpoint that it creates, including a
+     * bean: endpoint, unless the endpoint URI sets allowStreaming. If not set,
+     * an endpoint that has no allowStreaming value uses the JVM system property
+     * org.apache.camel.component.cxf.streaming, and allows streaming when that
+     * property is not set either.
      */
     private Boolean allowStreaming = false;
     /**
@@ -88,7 +97,10 @@ public class CxfComponentConfiguration
      */
     private HeaderFilterStrategy headerFilterStrategy;
     /**
-     * Enable usage of global SSL context parameters.
+     * Whether to use the global SSL context parameters of the CamelContext for
+     * each endpoint that the component creates and that has no
+     * sslContextParameters. The producer uses them for the HTTPS requests that
+     * it sends. The consumer does not use them.
      */
     private Boolean useGlobalSslContextParameters = false;
 

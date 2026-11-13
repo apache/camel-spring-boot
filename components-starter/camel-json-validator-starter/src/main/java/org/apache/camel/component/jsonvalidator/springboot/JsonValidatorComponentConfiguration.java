@@ -50,7 +50,8 @@ public class JsonValidatorComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Whether to lookup and use default Jackson ObjectMapper from the registry.
+     * Whether to lookup and use the default Jackson 3 (tools.jackson)
+     * ObjectMapper from the registry.
      */
     private Boolean useDefaultObjectMapper = true;
     /**
@@ -63,7 +64,8 @@ public class JsonValidatorComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * Lookup and use the existing ObjectMapper with the given id.
+     * Lookup and use the existing Jackson 3 (tools.jackson) ObjectMapper with
+     * the given id.
      */
     private String objectMapper;
 
