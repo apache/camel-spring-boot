@@ -17,6 +17,7 @@
 package org.apache.camel.component.hashicorp.vault.springboot;
 
 import org.apache.camel.RuntimeCamelException;
+import org.apache.camel.spi.PropertiesFunction;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.StandardEnvironment;
@@ -116,5 +117,40 @@ public class SpringBootHashicorpVaultPropertiesParserTest {
                 "the failure must name the malformed property, was: " + thrown.getMessage());
         assertInstanceOf(NumberFormatException.class, thrown.getCause(),
                 "the cause must be preserved so the original NumberFormatException is not lost");
+    }
+
+    @Test
+    void anAppRoleLoginNeedsNoToken() {
+        // the kebab-case names of Spring Boot, as for the options of the CamelContext
+        PropertiesFunction function = parser.createPropertiesFunction(environmentWith(Map.of(
+                "camel.vault.hashicorp.host", "127.0.0.1",
+                "camel.vault.hashicorp.port", "8200",
+                "camel.vault.hashicorp.scheme", "http",
+                "camel.vault.hashicorp.authentication", "approle",
+                "camel.vault.hashicorp.role-id", "a-role-id",
+                "camel.vault.hashicorp.secret-id", "a-secret-id")));
+        try {
+            assertEquals("hashicorp", function.getName());
+        } finally {
+            // the client logs in at its first request, so there is no token to revoke
+            parser.release(function);
+        }
+    }
+
+    @Test
+    void anIncompleteLoginFailsAsACamelExceptionNamingTheOptions() {
+        RuntimeCamelException thrown = assertThrows(RuntimeCamelException.class,
+                () -> parser.createPropertiesFunction(environmentWith(Map.of(
+                        "camel.vault.hashicorp.host", "127.0.0.1",
+                        "camel.vault.hashicorp.port", "8200",
+                        "camel.vault.hashicorp.scheme", "http",
+                        "camel.vault.hashicorp.authentication", "approle",
+                        "camel.vault.hashicorp.role-id", "a-role-id"))));
+
+        assertTrue(thrown.getMessage().contains("secret ID"),
+                "the failure must name what the login misses, was: " + thrown.getMessage());
+        assertTrue(thrown.getMessage().contains("camel.vault.hashicorp"),
+                "the failure must name the options, was: " + thrown.getMessage());
+        assertInstanceOf(IllegalArgumentException.class, thrown.getCause());
     }
 }
