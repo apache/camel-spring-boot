@@ -88,8 +88,7 @@
       "name": "camel.component.servicenow.favorites",
       "type": "java.lang.Boolean",
       "description": "Set this parameter to true to return only scorecards that are favorites of the querying user.",
-      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
     },
     {
       "name": "camel.component.servicenow.http-client-policy",
@@ -149,8 +148,7 @@
       "name": "camel.component.servicenow.key",
       "type": "java.lang.Boolean",
       "description": "Set this parameter to true to return only scorecards for key indicators.",
-      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
     },
     {
       "name": "camel.component.servicenow.lazy-start-producer",
@@ -306,8 +304,7 @@
       "name": "camel.component.servicenow.target",
       "type": "java.lang.Boolean",
       "description": "Set this parameter to true to return only scorecards that have a target.",
-      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
     },
     {
       "name": "camel.component.servicenow.time-format",
@@ -320,8 +317,7 @@
       "name": "camel.component.servicenow.top-level-only",
       "type": "java.lang.Boolean",
       "description": "Gets only those categories whose parent is a catalog.",
-      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.servicenow.springboot.ServiceNowComponentConfiguration"
     },
     {
       "name": "camel.component.servicenow.use-global-ssl-context-parameters",

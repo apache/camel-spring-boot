@@ -34,8 +34,8 @@ The starter supports 36 options, which are listed below.
 | camel.component.ibm-watsonx-ai.configuration | The component configuration. The option is a org.apache.camel.component.ibm.watsonx.ai.WatsonxAiConfiguration type. |  | WatsonxAiConfiguration
 | camel.component.ibm-watsonx-ai.cos-url | Cloud Object Storage URL |  | String
 | camel.component.ibm-watsonx-ai.deployment-id | Deployed model ID (for deployment operations) |  | String
-| camel.component.ibm-watsonx-ai.detect-hap | Whether to detect HAP (Harmful, Abusive, Profane content) | false | Boolean
-| camel.component.ibm-watsonx-ai.detect-pii | Whether to detect PII (Personal Identifiable Information) | false | Boolean
+| camel.component.ibm-watsonx-ai.detect-hap | Whether to detect HAP (Harmful, Abusive, Profane content) |  | Boolean
+| camel.component.ibm-watsonx-ai.detect-pii | Whether to detect PII (Personal Identifiable Information) |  | Boolean
 | camel.component.ibm-watsonx-ai.detection-threshold | Detection threshold (0.0 to 1.0) |  | Double
 | camel.component.ibm-watsonx-ai.document-bucket | COS bucket for document storage |  | String
 | camel.component.ibm-watsonx-ai.document-connection-id | COS connection ID for document storage |  | String
@@ -55,7 +55,7 @@ The starter supports 36 options, which are listed below.
 | camel.component.ibm-watsonx-ai.rerank-top-n | Number of top results to return for reranking |  | Integer
 | camel.component.ibm-watsonx-ai.result-bucket | COS bucket for result storage |  | String
 | camel.component.ibm-watsonx-ai.result-connection-id | COS connection ID for result storage |  | String
-| camel.component.ibm-watsonx-ai.return-documents | Whether to return documents in rerank response | false | Boolean
+| camel.component.ibm-watsonx-ai.return-documents | Whether to return documents in rerank response |  | Boolean
 | camel.component.ibm-watsonx-ai.space-id | IBM Cloud deployment space ID (alternative to projectId) |  | String
 | camel.component.ibm-watsonx-ai.temperature | Temperature for randomness (0.0 to 2.0) |  | Double
 | camel.component.ibm-watsonx-ai.timeout | Request timeout in milliseconds |  | Long

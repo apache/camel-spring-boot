@@ -80,7 +80,7 @@ public class CxfComponentConfiguration
      * org.apache.camel.component.cxf.streaming, and allows streaming when that
      * property is not set either.
      */
-    private Boolean allowStreaming = false;
+    private Boolean allowStreaming;
     /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the

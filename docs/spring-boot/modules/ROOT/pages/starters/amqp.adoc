@@ -144,8 +144,8 @@ The starter supports 123 options, which are listed below.
 | camel.component.amqp.trust-store-password | The SSL truststore password. |  | String
 | camel.component.amqp.trust-store-type | The SSL truststore type. | JKS | String
 | camel.component.amqp.use-message-id-as-correlation-id | Specifies whether JMSMessageID should always be used as JMSCorrelationID for InOut messages. | false | Boolean
-| camel.component.amqp.use-ssl | Whether to enable SSL when connecting to the AMQP Broker. | false | Boolean
-| camel.component.amqp.use-topic-prefix | Whether to configure topics with a topic:// prefix. | false | Boolean
+| camel.component.amqp.use-ssl | Whether to enable SSL when connecting to the AMQP Broker. |  | Boolean
+| camel.component.amqp.use-topic-prefix | Whether to configure topics with a topic:// prefix. |  | Boolean
 | camel.component.amqp.username | Username to use with the ConnectionFactory. You can also configure username/password directly on the ConnectionFactory. |  | String
 | camel.component.amqp.wait-for-provision-correlation-to-be-updated-counter | Number of times to wait for provisional correlation id to be updated to the actual correlation id when doing request/reply over JMS and when the option useMessageIDAsCorrelationID is enabled. | 50 | Integer
 | camel.component.amqp.wait-for-provision-correlation-to-be-updated-thread-sleeping-time | Interval in millis to sleep each time while waiting for provisional correlation id to be updated. The option is a long type. | 100 | Long

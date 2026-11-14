@@ -17,8 +17,7 @@
       "name": "camel.component.cxf.allow-streaming",
       "type": "java.lang.Boolean",
       "description": "Whether to allow CXF to keep the last message part of an incoming SOAP message as a javax.xml.transform.Source read from the stream, instead of parsing it into a DOM. Only used when dataFormat is PAYLOAD. The component sets the value on each endpoint that it creates, including a bean: endpoint, unless the endpoint URI sets allowStreaming. If not set, an endpoint that has no allowStreaming value uses the JVM system property org.apache.camel.component.cxf.streaming, and allows streaming when that property is not set either.",
-      "sourceType": "org.apache.camel.component.cxf.jaxws.springboot.CxfComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.cxf.jaxws.springboot.CxfComponentConfiguration"
     },
     {
       "name": "camel.component.cxf.autowired-enabled",

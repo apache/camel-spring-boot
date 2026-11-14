@@ -63,7 +63,7 @@
       "type": "java.lang.Boolean",
       "description": "check for closing stream after read",
       "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration",
-      "defaultValue": false
+      "defaultValue": true
     },
     {
       "name": "camel.component.azure-storage-datalake.configuration",

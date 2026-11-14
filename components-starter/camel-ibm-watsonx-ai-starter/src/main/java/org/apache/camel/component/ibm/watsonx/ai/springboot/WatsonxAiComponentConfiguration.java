@@ -70,7 +70,7 @@ public class WatsonxAiComponentConfiguration
     /**
      * Whether to detect HAP (Harmful, Abusive, Profane content)
      */
-    private Boolean detectHap = false;
+    private Boolean detectHap;
     /**
      * Detection threshold (0.0 to 1.0)
      */
@@ -78,7 +78,7 @@ public class WatsonxAiComponentConfiguration
     /**
      * Whether to detect PII (Personal Identifiable Information)
      */
-    private Boolean detectPii = false;
+    private Boolean detectPii;
     /**
      * COS bucket for document storage
      */
@@ -141,7 +141,7 @@ public class WatsonxAiComponentConfiguration
     /**
      * Whether to return documents in rerank response
      */
-    private Boolean returnDocuments = false;
+    private Boolean returnDocuments;
     /**
      * Temperature for randomness (0.0 to 2.0)
      */
