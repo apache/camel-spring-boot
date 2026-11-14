@@ -27,7 +27,7 @@
   <artifactId>camel-mcp-server-starter</artifactId>
   <packaging>jar</packaging>
   <name>Camel SB Starters :: MCP Server</name>
-  <description>Spring Boot Starter to expose ai-tool routes as MCP tools through the Spring AI MCP server</description>
+  <description>Spring Boot Starter to expose Camel ai-tool routes as MCP tools, ai-resource routes as MCP resources, and ai-prompt routes as MCP prompts through Spring AI</description>
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -62,6 +62,18 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+      <version>${spring-boot-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+      <version>${spring-boot-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
       <version>${spring-boot-version}</version>
       <scope>test</scope>
     </dependency>

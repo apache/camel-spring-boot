@@ -1,9 +1,10 @@
-The MCP Server starter exposes Camel routes registered via the `ai-tool`
-component as tools of a Model Context Protocol (MCP) server, served through
-the Spring AI MCP server over streamable HTTP. No route is needed for the
+The MCP Server starter exposes Camel routes registered via the `ai-tool`,
+`ai-resource`, and `ai-prompt` components as tools, resources (including URI
+templates), and prompts of a Model Context Protocol (MCP) server. The server
+is provided by Spring AI over streamable HTTP. No route is needed for the
 server itself: add the starter, tag the `ai-tool` routes to expose, and any
 MCP client (another Camel application, an IDE, a coding agent) can discover
-and call them.
+and use the published capabilities.
 
 Tool semantics — tag-based opt-in (the untagged default pool is never
 exposed), flat-namespace collision refusal, per-call timeout and error
@@ -15,29 +16,157 @@ configured via `spring.ai.mcp.server.*`; use
 
 == Securing the MCP endpoint
 
-`spring.ai.mcp.server.*` provides **no authentication**. The MCP endpoint is
-served on the application's own HTTP port, and anything that can reach it can
-list and call every exposed tool. Protecting it is the application's
-responsibility.
+The Spring AI MCP HTTP transport is authentication-agnostic. It does not
+authenticate requests or authorize tool, resource, and prompt operations.
+The MCP endpoint is served on the application's HTTP port, so any client that
+can reach an unprotected endpoint can list and invoke the capabilities exposed
+by the server. Protecting the endpoint is the application's responsibility.
 
-Nothing is exposed until `camel.mcp-server.tags` is set — the untagged default
-pool is never served — so the surface is opt-in. Once tags are configured,
-secure the endpoint path, for example with a Spring Security filter chain:
+Tools, resources, resource templates, and prompts use the same
+`camel.mcp-server.tags` selection. Nothing is exposed until tags are configured.
+The untagged default pools are never served; setting tags is not an authentication
+boundary.
+
+=== OAuth 2.0 with Spring Security
+
+For JWT bearer-token authentication, add Spring Security and its OAuth2
+Resource Server starter. Let Spring Boot manage their versions:
+
+[source,xml]
+----
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+</dependency>
+----
+
+Configure the authorization server issuer and select the Streamable HTTP
+transport:
+
+[source,properties]
+----
+spring.ai.mcp.server.protocol = STREAMABLE
+spring.security.oauth2.resourceserver.jwt.issuer-uri = https://idp.example.com/issuer
+
+# Application-specific properties used by this example; not Camel starter options.
+# Canonical, externally visible URLs for this protected MCP resource.
+mcp.security.resource-uri = https://mcp.example.com/mcp
+mcp.security.resource-metadata-uri = https://mcp.example.com/.well-known/oauth-protected-resource/mcp
+----
+
+The following example protects the MCP endpoint and publishes OAuth 2.0
+Protected Resource Metadata using the Spring Security 7 API. The metadata
+endpoint must be included in the security filter chain and permitted without
+authentication so MCP clients can discover the authorization server.
 
 [source,java]
 ----
-@Bean
-SecurityFilterChain mcpSecurity(HttpSecurity http) throws Exception {
-    return http.securityMatcher("/mcp/**")
-            .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
-            .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
-            .build();
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationEntryPoint;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+public class McpSecurityConfiguration {
+
+    @Bean
+    SecurityFilterChain mcpSecurity(
+            HttpSecurity http,
+            @Value("${mcp.security.resource-uri}") String resourceUri,
+            @Value("${mcp.security.resource-metadata-uri}") String resourceMetadataUri)
+            throws Exception {
+        // Use operator-configured canonical URLs, never request-derived host information.
+        BearerTokenAuthenticationEntryPoint bearerEntryPoint =
+                new BearerTokenAuthenticationEntryPoint();
+        bearerEntryPoint.setResourceMetadataParameterResolver(ignored -> resourceMetadataUri);
+
+        return http
+                .securityMatcher(
+                        "/mcp", "/mcp/**",
+                        "/.well-known/oauth-protected-resource",
+                        "/.well-known/oauth-protected-resource/**")
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/mcp", "/mcp/**"))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/.well-known/oauth-protected-resource",
+                                "/.well-known/oauth-protected-resource/**").permitAll()
+                        .anyRequest().authenticated())
+                .oauth2ResourceServer(oauth2 -> oauth2
+                        .jwt(Customizer.withDefaults())
+                        .authenticationEntryPoint(bearerEntryPoint)
+                        .protectedResourceMetadata(metadata -> metadata
+                                .protectedResourceMetadataCustomizer(builder -> builder
+                                        .resource(resourceUri)
+                                        .authorizationServer("https://idp.example.com/issuer")
+                                        .scope("mcp:access"))))
+                .build();
+    }
 }
 ----
 
-Adjust the matcher to whatever `spring.ai.mcp.server` is configured to serve on.
-A network policy that keeps the port off untrusted networks is an alternative
-where the deployment allows it.
+The issuer in `authorizationServer` must identify the authorization server
+that issues tokens accepted by this resource server. Spring Security validates
+JWT bearer tokens using the configured issuer. Its protected-resource metadata
+support publishes the metadata document. For the `/mcp` endpoint, configure
+`mcp.security.resource-uri` as `https://mcp.example.com/mcp` and
+`mcp.security.resource-metadata-uri` as
+`https://mcp.example.com/.well-known/oauth-protected-resource/mcp`.
+
+The `resource` value identifies the protected MCP endpoint. The metadata URL
+identifies the document that describes that resource; they are different
+values and both must be configured.
+
+Both values must be canonical externally visible URLs. For deployments behind
+a reverse proxy, configure the public URLs used by MCP clients. Do not derive
+either value from the incoming request URL or from `Host`, `Forwarded`, or
+`X-Forwarded-*` headers. Such request headers must not define the protected
+resource's identity. Configure forwarded-header processing separately and only
+when the proxy boundary is explicitly trusted.
+
+The `scope` entry advertises a scope supported by this resource. It does not
+grant or enforce that scope by itself. To require the advertised scope for
+MCP requests, replace `.anyRequest().authenticated()` with:
+
+[source,java]
+----
+.anyRequest().hasAuthority("SCOPE_mcp:access")
+----
+
+With Spring Security's default JWT authority conversion, the corresponding
+scope must be present in the token. Applications with a custom JWT authority
+converter should use the authority names produced by that converter.
+
+The example ignores CSRF only for the MCP endpoint because MCP clients send
+bearer tokens rather than browser session-based CSRF tokens. Do not disable
+CSRF protection globally when the application uses it for other endpoints.
+If your MCP endpoint is configured at a path other than `/mcp`, update the
+security matchers and both canonical URL properties accordingly.
+
+For MCP tool calls, the Camel Spring Boot engine captures the authenticated
+Spring principal and its name. Spring Security authorities are normalized before
+they are passed to the Camel bridge: the `ROLE_` prefix is removed, `FACTOR_*`
+authorities are ignored, and `SCOPE_*` authorities are mapped to OAuth scopes.
+For a `JwtAuthenticationToken`, the token subject, scopes, and claims are also
+propagated. The values are available through `McpToolCallContext` exchange
+properties, allowing route-level authorization to use the authenticated caller
+as well as the HTTP security boundary. The resulting role names are unprefixed,
+for example `MCP_ADMIN` rather than `ROLE_MCP_ADMIN`.
+
+A network policy that keeps the application port off untrusted networks is
+another useful layer of protection.
+
+See the
+https://docs.spring.io/spring-security/reference/7.1/servlet/oauth2/resource-server/protected-resource-metadata.html[Spring Security protected resource metadata documentation]
+and the
+https://docs.spring.io/spring-ai/reference/api/mcp/mcp-server-boot-starter-docs.html[Spring AI MCP Server documentation]
+for additional details.
 
 See the camel-mcp-server component documentation for the trust boundary this
 sits in: external MCP clients are untrusted senders under the Camel security
