@@ -35,7 +35,7 @@ The starter supports 39 options, which are listed below.
 | camel.component.azure-storage-datalake.client-secret | client secret for azure account |  | String
 | camel.component.azure-storage-datalake.client-secret-credential | client secret credential for authentication. The option is a com.azure.identity.ClientSecretCredential type. |  | ClientSecretCredential
 | camel.component.azure-storage-datalake.close | Whether or not a file changed event raised indicates completion (true) or modification (false) | false | Boolean
-| camel.component.azure-storage-datalake.close-stream-after-read | check for closing stream after read | false | Boolean
+| camel.component.azure-storage-datalake.close-stream-after-read | check for closing stream after read | true | Boolean
 | camel.component.azure-storage-datalake.configuration | configuration object for data lake. The option is a org.apache.camel.component.azure.storage.datalake.DataLakeConfiguration type. |  | DataLakeConfiguration
 | camel.component.azure-storage-datalake.credential-type | Determines the credential strategy to adopt | client-secret | CredentialType
 | camel.component.azure-storage-datalake.data-count | count number of bytes to download |  | Long

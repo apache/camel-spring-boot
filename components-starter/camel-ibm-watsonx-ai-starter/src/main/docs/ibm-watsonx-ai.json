@@ -59,15 +59,13 @@
       "name": "camel.component.ibm-watsonx-ai.detect-hap",
       "type": "java.lang.Boolean",
       "description": "Whether to detect HAP (Harmful, Abusive, Profane content)",
-      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
     },
     {
       "name": "camel.component.ibm-watsonx-ai.detect-pii",
       "type": "java.lang.Boolean",
       "description": "Whether to detect PII (Personal Identifiable Information)",
-      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
     },
     {
       "name": "camel.component.ibm-watsonx-ai.detection-threshold",
@@ -190,8 +188,7 @@
       "name": "camel.component.ibm-watsonx-ai.return-documents",
       "type": "java.lang.Boolean",
       "description": "Whether to return documents in rerank response",
-      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.ibm.watsonx.ai.springboot.WatsonxAiComponentConfiguration"
     },
     {
       "name": "camel.component.ibm-watsonx-ai.space-id",

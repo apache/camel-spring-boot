@@ -108,7 +108,7 @@ public class DoclingComponentConfiguration
     /**
      * Abort processing on error
      */
-    private Boolean abortOnError = false;
+    private Boolean abortOnError;
     /**
      * Polling interval for async conversion status in milliseconds
      */
@@ -138,7 +138,7 @@ public class DoclingComponentConfiguration
     /**
      * Enable code enrichment in document processing
      */
-    private Boolean doCodeEnrichment = false;
+    private Boolean doCodeEnrichment;
     /**
      * Document processing timeout in seconds
      */
@@ -146,28 +146,28 @@ public class DoclingComponentConfiguration
     /**
      * Enable formula enrichment in document processing
      */
-    private Boolean doFormulaEnrichment = false;
+    private Boolean doFormulaEnrichment;
     /**
      * Enable OCR processing in docling-serve API mode. When not set, the server
      * uses its own defaults. Set enableOCR to false to explicitly disable OCR.
      */
-    private Boolean doOcr = false;
+    private Boolean doOcr;
     /**
      * Enable picture classification in document processing
      */
-    private Boolean doPictureClassification = false;
+    private Boolean doPictureClassification;
     /**
      * Enable picture description generation in document processing
      */
-    private Boolean doPictureDescription = false;
+    private Boolean doPictureDescription;
     /**
      * Enable table structure recognition
      */
-    private Boolean doTableStructure = false;
+    private Boolean doTableStructure;
     /**
      * Force OCR processing even for digital documents
      */
-    private Boolean forceOcr = false;
+    private Boolean forceOcr;
     /**
      * Image export mode for referenced images
      */
@@ -179,7 +179,7 @@ public class DoclingComponentConfiguration
     /**
      * Include images in the conversion output
      */
-    private Boolean includeImages = false;
+    private Boolean includeImages;
     /**
      * Placeholder string for page breaks in markdown output
      */
@@ -203,7 +203,7 @@ public class DoclingComponentConfiguration
     /**
      * Enable table cell matching post-processing
      */
-    private Boolean tableCellMatching = false;
+    private Boolean tableCellMatching;
     /**
      * Table structure recognition mode
      */

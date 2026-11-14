@@ -54,8 +54,7 @@
       "name": "camel.component.langchain4j-agent.compensate-on-tool-errors",
       "type": "java.lang.Boolean",
       "description": "Whether LangChain4j should compensate when a tool execution fails. Only supported in inline agent creation mode (agentConfiguration without agent or agentFactory). URI value overrides the same option on the agentConfiguration bean.",
-      "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration"
     },
     {
       "name": "camel.component.langchain4j-agent.configuration",
@@ -84,8 +83,7 @@
       "name": "camel.component.langchain4j-agent.execute-tools-concurrently",
       "type": "java.lang.Boolean",
       "description": "Whether multiple tools requested in a single LLM turn are executed concurrently. Camel route tools run on isolated exchange copies. Only supported in inline agent creation mode (agentConfiguration without agent or agentFactory). URI value overrides the same option on the agentConfiguration bean.",
-      "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.langchain4j.agent.springboot.LangChain4jAgentComponentConfiguration"
     },
     {
       "name": "camel.component.langchain4j-agent.json-schema",

@@ -57,7 +57,7 @@ public class DataLakeComponentConfiguration
     /**
      * check for closing stream after read
      */
-    private Boolean closeStreamAfterRead = false;
+    private Boolean closeStreamAfterRead = true;
     /**
      * configuration object for data lake. The option is a
      * org.apache.camel.component.azure.storage.datalake.DataLakeConfiguration

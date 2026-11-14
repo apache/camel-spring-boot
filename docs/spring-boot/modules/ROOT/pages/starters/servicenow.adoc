@@ -38,7 +38,7 @@ The starter supports 49 options, which are listed below.
 | camel.component.servicenow.display-value | Return the display value (true), actual value (false), or both (all) for reference fields (default: false) | false | String
 | camel.component.servicenow.enabled | Whether to enable auto configuration of the servicenow component. This is enabled by default. |  | Boolean
 | camel.component.servicenow.exclude-reference-link | True to exclude Table API links for reference fields (default: false) | false | Boolean
-| camel.component.servicenow.favorites | Set this parameter to true to return only scorecards that are favorites of the querying user. | false | Boolean
+| camel.component.servicenow.favorites | Set this parameter to true to return only scorecards that are favorites of the querying user. |  | Boolean
 | camel.component.servicenow.http-client-policy | To configure http-client. The option is a org.apache.cxf.transports.http.configuration.HTTPClientPolicy type. |  | HTTPClientPolicy
 | camel.component.servicenow.include-aggregates | Set this parameter to true to always return all available aggregates for an indicator, including when an aggregate has already been applied. If a value is not specified, this parameter defaults to false and returns no aggregates. | false | Boolean
 | camel.component.servicenow.include-available-aggregates | Set this parameter to true to return all available aggregates for an indicator when no aggregate has been applied. If a value is not specified, this parameter defaults to false and returns no aggregates. | false | Boolean
@@ -47,7 +47,7 @@ The starter supports 49 options, which are listed below.
 | camel.component.servicenow.include-scores | Set this parameter to true to return all scores for a scorecard. If a value is not specified, this parameter defaults to false and returns only the most recent score value. | false | Boolean
 | camel.component.servicenow.input-display-value | True to set raw value of input fields (default: false) | false | Boolean
 | camel.component.servicenow.instance-name | The ServiceNow instance name |  | String
-| camel.component.servicenow.key | Set this parameter to true to return only scorecards for key indicators. | false | Boolean
+| camel.component.servicenow.key | Set this parameter to true to return only scorecards for key indicators. |  | Boolean
 | camel.component.servicenow.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.servicenow.mapper | Sets Jackson's ObjectMapper to use for request/reply. The option is a tools.jackson.databind.ObjectMapper type. |  | ObjectMapper
 | camel.component.servicenow.models | Defines both request and response models. This is a multi-value option with prefix: model. |  | Object>>
@@ -72,9 +72,9 @@ The starter supports 49 options, which are listed below.
 | camel.component.servicenow.suppress-auto-sys-field | True to suppress auto generation of system fields (default: false) | false | Boolean
 | camel.component.servicenow.suppress-pagination-header | Set this value to true to remove the Link header from the response. The Link header allows you to request additional pages of data when the number of records matching your query exceeds the query limit | false | Boolean
 | camel.component.servicenow.table | The default table, can be overridden by header CamelServiceNowTable |  | String
-| camel.component.servicenow.target | Set this parameter to true to return only scorecards that have a target. | false | Boolean
+| camel.component.servicenow.target | Set this parameter to true to return only scorecards that have a target. |  | Boolean
 | camel.component.servicenow.time-format | The time format used for Json serialization/deserialization | HH:mm:ss | String
-| camel.component.servicenow.top-level-only | Gets only those categories whose parent is a catalog. | false | Boolean
+| camel.component.servicenow.top-level-only | Gets only those categories whose parent is a catalog. |  | Boolean
 | camel.component.servicenow.use-global-ssl-context-parameters | Enable usage of global SSL context parameters. | false | Boolean
 | camel.component.servicenow.user-name | ServiceNow user account name, MUST be provided |  | String
 |===

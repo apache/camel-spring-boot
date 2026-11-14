@@ -129,7 +129,7 @@ public class SalesforceComponentConfiguration
     /**
      * Include details in Salesforce1 Analytics report, defaults to false.
      */
-    private Boolean includeDetails = false;
+    private Boolean includeDetails;
     /**
      * Replay IDs to start from per channel name.
      */
@@ -184,11 +184,11 @@ public class SalesforceComponentConfiguration
     /**
      * Notify for create operation, defaults to false (API version &gt;= 29.0)
      */
-    private Boolean notifyForOperationCreate = false;
+    private Boolean notifyForOperationCreate;
     /**
      * Notify for delete operation, defaults to false (API version &gt;= 29.0)
      */
-    private Boolean notifyForOperationDelete = false;
+    private Boolean notifyForOperationDelete;
     /**
      * Notify for operations, options are ALL, CREATE, EXTENDED, UPDATE (API
      * version &lt; 29.0)
@@ -198,11 +198,11 @@ public class SalesforceComponentConfiguration
      * Notify for un-delete operation, defaults to false (API version &gt;=
      * 29.0)
      */
-    private Boolean notifyForOperationUndelete = false;
+    private Boolean notifyForOperationUndelete;
     /**
      * Notify for update operation, defaults to false (API version &gt;= 29.0)
      */
-    private Boolean notifyForOperationUpdate = false;
+    private Boolean notifyForOperationUpdate;
     /**
      * Custom Jackson ObjectMapper to use when serializing/deserializing
      * Salesforce objects. The option is a tools.jackson.databind.ObjectMapper

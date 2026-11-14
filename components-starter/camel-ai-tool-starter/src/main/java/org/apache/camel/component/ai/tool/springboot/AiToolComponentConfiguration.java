@@ -81,17 +81,17 @@ public class AiToolComponentConfiguration
      * MCP hint that the tool may perform destructive or irreversible updates.
      * Advisory for MCP clients; not enforced by Camel.
      */
-    private Boolean destructiveHint = false;
+    private Boolean destructiveHint;
     /**
      * MCP hint that repeating the tool call with the same arguments has no
      * additional effect. Advisory for MCP clients; not enforced by Camel.
      */
-    private Boolean idempotentHint = false;
+    private Boolean idempotentHint;
     /**
      * MCP hint that the tool interacts with external systems outside the
      * application's control. Advisory for MCP clients; not enforced by Camel.
      */
-    private Boolean openWorldHint = false;
+    private Boolean openWorldHint;
     /**
      * Tool output schema fields. Format: outputParameter.NAME=TYPE,
      * outputParameter.NAME.description=TEXT. Supported types: string, integer,
@@ -119,7 +119,7 @@ public class AiToolComponentConfiguration
      * MCP hint that the tool only reads data and does not modify state.
      * Advisory for MCP clients; not enforced by Camel.
      */
-    private Boolean readOnlyHint = false;
+    private Boolean readOnlyHint;
     /**
      * When true, AI producers that support agentic tool loops (such as
      * camel-openai) return this tool's result directly to the caller without

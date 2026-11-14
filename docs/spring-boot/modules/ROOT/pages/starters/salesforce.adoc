@@ -74,7 +74,7 @@ The starter supports 110 options, which are listed below.
 | camel.component.salesforce.http-proxy-username | Username to use to authenticate against the HTTP proxy server. |  | String
 | camel.component.salesforce.http-request-buffer-size | HTTP request buffer size. May need to be increased for large SOQL queries. | 8192 | Integer
 | camel.component.salesforce.http-request-timeout | Timeout value for HTTP requests. | 60000 | Long
-| camel.component.salesforce.include-details | Include details in Salesforce1 Analytics report, defaults to false. | false | Boolean
+| camel.component.salesforce.include-details | Include details in Salesforce1 Analytics report, defaults to false. |  | Boolean
 | camel.component.salesforce.initial-replay-id-map | Replay IDs to start from per channel name. |  | Long>
 | camel.component.salesforce.initial-reply-id-timeout | Timeout in seconds to validate when a custom pubSubReplayId has been configured, when starting the Camel Salesforce consumer. | 30 | Integer
 | camel.component.salesforce.instance-id | Salesforce1 Analytics report execution instance ID |  | String
@@ -93,10 +93,10 @@ The starter supports 110 options, which are listed below.
 | camel.component.salesforce.max-records | The maximum number of records to retrieve per set of results for a Bulk 2.0 Query. The request is still subject to the size limits. If you are working with a very large number of query results, you may experience a timeout before receiving all the data from Salesforce. To prevent a timeout, specify the maximum number of records your client is expecting to receive in the maxRecords parameter. This splits the results into smaller sets with this value as the maximum size. |  | Integer
 | camel.component.salesforce.not-found-behaviour | Sets the behaviour of 404 not found status received from Salesforce API. Should the body be set to NULL NotFoundBehaviour#NULL or should a exception be signaled on the exchange NotFoundBehaviour#EXCEPTION - the default. | exception | NotFoundBehaviour
 | camel.component.salesforce.notify-for-fields | Notify for fields, options are ALL, REFERENCED, SELECT, WHERE |  | NotifyForFieldsEnum
-| camel.component.salesforce.notify-for-operation-create | Notify for create operation, defaults to false (API version &gt;= 29.0) | false | Boolean
-| camel.component.salesforce.notify-for-operation-delete | Notify for delete operation, defaults to false (API version &gt;= 29.0) | false | Boolean
-| camel.component.salesforce.notify-for-operation-undelete | Notify for un-delete operation, defaults to false (API version &gt;= 29.0) | false | Boolean
-| camel.component.salesforce.notify-for-operation-update | Notify for update operation, defaults to false (API version &gt;= 29.0) | false | Boolean
+| camel.component.salesforce.notify-for-operation-create | Notify for create operation, defaults to false (API version &gt;= 29.0) |  | Boolean
+| camel.component.salesforce.notify-for-operation-delete | Notify for delete operation, defaults to false (API version &gt;= 29.0) |  | Boolean
+| camel.component.salesforce.notify-for-operation-undelete | Notify for un-delete operation, defaults to false (API version &gt;= 29.0) |  | Boolean
+| camel.component.salesforce.notify-for-operation-update | Notify for update operation, defaults to false (API version &gt;= 29.0) |  | Boolean
 | camel.component.salesforce.notify-for-operations | Notify for operations, options are ALL, CREATE, EXTENDED, UPDATE (API version &lt; 29.0) |  | NotifyForOperationsEnum
 | camel.component.salesforce.object-mapper | Custom Jackson ObjectMapper to use when serializing/deserializing Salesforce objects. The option is a tools.jackson.databind.ObjectMapper type. |  | ObjectMapper
 | camel.component.salesforce.packages | In what packages are the generated DTO classes. Typically the classes would be generated using camel-salesforce-maven-plugin. Set it if using the generated DTOs to gain the benefit of using short SObject names in parameters/header values. Multiple packages can be separated by comma. |  | String

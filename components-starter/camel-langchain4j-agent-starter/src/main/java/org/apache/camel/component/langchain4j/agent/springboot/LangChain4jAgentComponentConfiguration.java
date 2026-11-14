@@ -70,7 +70,7 @@ public class LangChain4jAgentComponentConfiguration
      * or agentFactory). URI value overrides the same option on the
      * agentConfiguration bean.
      */
-    private Boolean compensateOnToolErrors = false;
+    private Boolean compensateOnToolErrors;
     /**
      * The configuration. The option is a
      * org.apache.camel.component.langchain4j.agent.LangChain4jAgentConfiguration type.
@@ -83,7 +83,7 @@ public class LangChain4jAgentComponentConfiguration
      * or agentFactory). URI value overrides the same option on the
      * agentConfiguration bean.
      */
-    private Boolean executeToolsConcurrently = false;
+    private Boolean executeToolsConcurrently;
     /**
      * JSON schema for structured output validation. Only supported in inline
      * agent creation mode: agentConfiguration must be set and neither agent nor

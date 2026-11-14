@@ -66,7 +66,7 @@ public class ServiceNowComponentConfiguration
      * Set this parameter to true to return only scorecards that are favorites
      * of the querying user.
      */
-    private Boolean favorites = false;
+    private Boolean favorites;
     /**
      * Set this parameter to true to always return all available aggregates for
      * an indicator, including when an aggregate has already been applied. If a
@@ -105,7 +105,7 @@ public class ServiceNowComponentConfiguration
     /**
      * Set this parameter to true to return only scorecards for key indicators.
      */
-    private Boolean key = false;
+    private Boolean key;
     /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
@@ -174,11 +174,11 @@ public class ServiceNowComponentConfiguration
     /**
      * Set this parameter to true to return only scorecards that have a target.
      */
-    private Boolean target = false;
+    private Boolean target;
     /**
      * Gets only those categories whose parent is a catalog.
      */
-    private Boolean topLevelOnly = false;
+    private Boolean topLevelOnly;
     /**
      * The ServiceNow REST API version, default latest
      */

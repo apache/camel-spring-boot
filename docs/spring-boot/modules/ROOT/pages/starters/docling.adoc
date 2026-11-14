@@ -28,7 +28,7 @@ The starter supports 59 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| camel.component.docling.abort-on-error | Abort processing on error | false | Boolean
+| camel.component.docling.abort-on-error | Abort processing on error |  | Boolean
 | camel.component.docling.allow-file-path-source | Whether a String message body that starts with / or contains \ is interpreted as a local filesystem path to read. When disabled, such a body is rejected instead of being read. This does not affect the CamelDoclingInputFilePath header, nor File, byte[] or explicit path collection bodies used by the batch operations. | false | Boolean
 | camel.component.docling.allow-url-source | Whether a String message body that starts with http:// or https:// is interpreted as a remote URL for Docling to fetch. When disabled, such a body is rejected instead of being fetched. This does not affect the CamelDoclingInputFilePath header, nor bodies of any other type. | false | Boolean
 | camel.component.docling.async-poll-interval | Polling interval for async conversion status in milliseconds | 2000 | Long
@@ -49,21 +49,21 @@ The starter supports 59 options, which are listed below.
 | camel.component.docling.chunking-use-markdown-tables | Use markdown format for tables in chunk output | false | Boolean
 | camel.component.docling.configuration | The configuration for the Docling Endpoint. The option is a org.apache.camel.component.docling.DoclingConfiguration type. |  | DoclingConfiguration
 | camel.component.docling.content-in-body | Include the content of the output file in the exchange body and delete the output file | false | Boolean
-| camel.component.docling.do-code-enrichment | Enable code enrichment in document processing | false | Boolean
-| camel.component.docling.do-formula-enrichment | Enable formula enrichment in document processing | false | Boolean
-| camel.component.docling.do-ocr | Enable OCR processing in docling-serve API mode. When not set, the server uses its own defaults. Set enableOCR to false to explicitly disable OCR. | false | Boolean
-| camel.component.docling.do-picture-classification | Enable picture classification in document processing | false | Boolean
-| camel.component.docling.do-picture-description | Enable picture description generation in document processing | false | Boolean
-| camel.component.docling.do-table-structure | Enable table structure recognition | false | Boolean
+| camel.component.docling.do-code-enrichment | Enable code enrichment in document processing |  | Boolean
+| camel.component.docling.do-formula-enrichment | Enable formula enrichment in document processing |  | Boolean
+| camel.component.docling.do-ocr | Enable OCR processing in docling-serve API mode. When not set, the server uses its own defaults. Set enableOCR to false to explicitly disable OCR. |  | Boolean
+| camel.component.docling.do-picture-classification | Enable picture classification in document processing |  | Boolean
+| camel.component.docling.do-picture-description | Enable picture description generation in document processing |  | Boolean
+| camel.component.docling.do-table-structure | Enable table structure recognition |  | Boolean
 | camel.component.docling.docling-command | Path to Docling Python executable or command |  | String
 | camel.component.docling.docling-serve-url | Docling-serve API URL (e.g., http://localhost:5001) | http://localhost:5001 | String
 | camel.component.docling.document-timeout | Document processing timeout in seconds |  | Long
 | camel.component.docling.enable-o-c-r | Enable OCR processing for scanned documents | true | Boolean
 | camel.component.docling.enabled | Whether to enable auto configuration of the docling component. This is enabled by default. |  | Boolean
-| camel.component.docling.force-ocr | Force OCR processing even for digital documents | false | Boolean
+| camel.component.docling.force-ocr | Force OCR processing even for digital documents |  | Boolean
 | camel.component.docling.image-export-mode | Image export mode for referenced images |  | String
 | camel.component.docling.images-scale | Scale factor for exported images |  | Double
-| camel.component.docling.include-images | Include images in the conversion output | false | Boolean
+| camel.component.docling.include-images | Include images in the conversion output |  | Boolean
 | camel.component.docling.include-layout-info | Show layout information with bounding boxes | false | Boolean
 | camel.component.docling.include-metadata-in-headers | Include metadata in message headers when extracting metadata | true | Boolean
 | camel.component.docling.include-raw-metadata | Include raw metadata as returned by the parser | false | Boolean
@@ -81,7 +81,7 @@ The starter supports 59 options, which are listed below.
 | camel.component.docling.pipeline | Processing pipeline to use |  | String
 | camel.component.docling.process-timeout | Timeout for Docling process execution in milliseconds | 30000 | Long
 | camel.component.docling.split-batch-results | Split batch results into individual exchanges (one per document) instead of single BatchProcessingResults | false | Boolean
-| camel.component.docling.table-cell-matching | Enable table cell matching post-processing | false | Boolean
+| camel.component.docling.table-cell-matching | Enable table cell matching post-processing |  | Boolean
 | camel.component.docling.table-mode | Table structure recognition mode |  | String
 | camel.component.docling.use-async-mode | Use asynchronous conversion mode (docling-serve API only) | false | Boolean
 | camel.component.docling.use-docling-serve | Use docling-serve API instead of CLI command | false | Boolean

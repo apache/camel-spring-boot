@@ -17,8 +17,7 @@
       "name": "camel.component.docling.abort-on-error",
       "type": "java.lang.Boolean",
       "description": "Abort processing on error",
-      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
     },
     {
       "name": "camel.component.docling.allow-file-path-source",
@@ -165,43 +164,37 @@
       "name": "camel.component.docling.do-code-enrichment",
       "type": "java.lang.Boolean",
       "description": "Enable code enrichment in document processing",
-      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
     },
     {
       "name": "camel.component.docling.do-formula-enrichment",
       "type": "java.lang.Boolean",
       "description": "Enable formula enrichment in document processing",
-      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
     },
     {
       "name": "camel.component.docling.do-ocr",
       "type": "java.lang.Boolean",
       "description": "Enable OCR processing in docling-serve API mode. When not set, the server uses its own defaults. Set enableOCR to false to explicitly disable OCR.",
-      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
     },
     {
       "name": "camel.component.docling.do-picture-classification",
       "type": "java.lang.Boolean",
       "description": "Enable picture classification in document processing",
-      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
     },
     {
       "name": "camel.component.docling.do-picture-description",
       "type": "java.lang.Boolean",
       "description": "Enable picture description generation in document processing",
-      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
     },
     {
       "name": "camel.component.docling.do-table-structure",
       "type": "java.lang.Boolean",
       "description": "Enable table structure recognition",
-      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
     },
     {
       "name": "camel.component.docling.docling-command",
@@ -239,8 +232,7 @@
       "name": "camel.component.docling.force-ocr",
       "type": "java.lang.Boolean",
       "description": "Force OCR processing even for digital documents",
-      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
     },
     {
       "name": "camel.component.docling.image-export-mode",
@@ -258,8 +250,7 @@
       "name": "camel.component.docling.include-images",
       "type": "java.lang.Boolean",
       "description": "Include images in the conversion output",
-      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
     },
     {
       "name": "camel.component.docling.include-layout-info",
@@ -377,8 +368,7 @@
       "name": "camel.component.docling.table-cell-matching",
       "type": "java.lang.Boolean",
       "description": "Enable table cell matching post-processing",
-      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
-      "defaultValue": false
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
     },
     {
       "name": "camel.component.docling.table-mode",
