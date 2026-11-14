@@ -99,7 +99,7 @@ public class SpringBootMcpServerCustomTransportTest {
                     .collect(Collectors.joining());
 
             assertThat(text)
-                    .contains("principalPresent=true", "name=custom-user", "ROLE_MCP_USER");
+                    .contains("principalPresent=true", "name=custom-user", "MCP_USER");
         } finally {
             client.closeGracefully();
         }

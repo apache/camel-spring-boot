@@ -27,7 +27,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -45,6 +44,8 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mcp.server.McpToolCallContext;
 import org.apache.camel.spi.AuthorizationPolicy;
 import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
+import org.springframework.ai.mcp.annotation.McpPrompt;
+import org.springframework.ai.mcp.annotation.McpResource;
 import org.springframework.ai.mcp.annotation.McpTool;
 import org.springframework.ai.mcp.annotation.McpToolParam;
 import org.junit.jupiter.api.AfterEach;
@@ -122,6 +123,33 @@ public class SpringBootMcpServerTest {
                 @McpToolParam(description = "First addend", required = true) int a,
                 @McpToolParam(description = "Second addend", required = true) int b) {
             return String.valueOf(a + b);
+        }
+
+        @McpResource(
+                uri = "camel:///spring-defined/config.json",
+                name = "spring_defined_config",
+                description = "Spring-defined configuration",
+                mimeType = "text/plain")
+        public String springDefinedConfig() {
+            return "spring-defined-resource";
+        }
+
+        @McpResource(
+                uri = "camel:///spring-defined/customers/{customerId}",
+                name = "spring_defined_customer",
+                description = "Spring-defined customer",
+                mimeType = "text/plain")
+        public String springDefinedCustomer(String customerId) {
+            return "spring-defined-customer:" + customerId;
+        }
+
+        @McpPrompt(name = "spring_defined_prompt", description = "Spring-defined prompt")
+        public McpSchema.GetPromptResult springDefinedPrompt() {
+            return new McpSchema.GetPromptResult(
+                    "Spring-defined prompt",
+                    List.of(new McpSchema.PromptMessage(
+                            McpSchema.Role.USER,
+                            new McpSchema.TextContent("spring-defined-prompt"))));
         }
     }
 
@@ -213,6 +241,26 @@ public class SpringBootMcpServerTest {
                                 exchange.getMessage().setBody("admin access granted");
                             });
 
+                    // These deliberately collide with Spring-defined MCP items. The engine
+                    // must refuse the Camel registrations without replacing the Spring handlers.
+                    from("ai-tool:add_numbers?tags=conformance&description=Duplicate Spring-defined tool")
+                            .routeId("spring-tool-collision-route")
+                            .setBody(constant("camel collision"));
+
+                    from("ai-resource:spring_defined_config?resourceUri=camel:///spring-defined/config.json"
+                         + "&tags=conformance&description=Duplicate Spring-defined resource&mimeType=text/plain")
+                            .routeId("spring-resource-collision-route")
+                            .setBody(constant("camel collision"));
+
+                    from("ai-resource:spring_defined_customer?uriTemplate=camel:///spring-defined/customers/{customerId}"
+                         + "&tags=conformance&description=Duplicate Spring-defined template&mimeType=text/plain")
+                            .routeId("spring-resource-template-collision-route")
+                            .setBody(constant("camel collision"));
+
+                    from("ai-prompt:spring_defined_prompt?tags=conformance&description=Duplicate Spring-defined prompt")
+                            .routeId("spring-prompt-collision-route")
+                            .setBody(constant("camel collision"));
+
                     from("ai-tool:fail_tool?tags=conformance&description=Always fails")
                             .process(e -> {
                                 throw new IllegalStateException("secret internal detail");
@@ -276,8 +324,8 @@ public class SpringBootMcpServerTest {
     }
 
     /**
-     * Allows tool execution only when Spring Security supplied ROLE_MCP_ADMIN
-     * and the MCP transport propagated it to the Camel exchange.
+     * Allows tool execution only when Spring Security supplied ROLE_MCP_ADMIN,
+     * normalized to MCP_ADMIN, and the MCP transport propagated it to the exchange.
      */
     private static final class RequireMcpAdminPolicy implements AuthorizationPolicy {
         @Override
@@ -290,7 +338,7 @@ public class SpringBootMcpServerTest {
             return exchange -> {
                 Object roleValue = exchange.getProperty(
                         McpToolCallContext.SECURITY_PRINCIPAL_ROLES_PROPERTY);
-                if (!(roleValue instanceof Collection<?> roles) || !roles.contains("ROLE_MCP_ADMIN")) {
+                if (!(roleValue instanceof Collection<?> roles) || !roles.contains("MCP_ADMIN")) {
                     throw new CamelAuthorizationException("Caller is not authorized", exchange);
                 }
                 processor.process(exchange);
@@ -378,7 +426,7 @@ public class SpringBootMcpServerTest {
 
         assertThat(result.isError()).isNotEqualTo(Boolean.TRUE);
         assertThat(textOf(result))
-                .contains("principalPresent=true", "name=mcp-user", "ROLE_MCP_USER", "ROLE_MCP_ADMIN");
+                .contains("principalPresent=true", "name=mcp-user", "MCP_USER", "MCP_ADMIN");
     }
 
     @Test
@@ -402,8 +450,8 @@ public class SpringBootMcpServerTest {
                     new McpSchema.CallToolRequest("who_am_i", Map.of()));
             assertThat(identityResult.isError()).as(textOf(identityResult)).isNotEqualTo(Boolean.TRUE);
             assertThat(textOf(identityResult))
-                    .contains("principalPresent=true", "name=mcp-readonly", "ROLE_MCP_USER")
-                    .doesNotContain("ROLE_MCP_ADMIN");
+                    .contains("principalPresent=true", "name=mcp-readonly", "MCP_USER")
+                    .doesNotContain("MCP_ADMIN");
 
             McpSchema.CallToolResult deniedResult = readOnlyClient.callTool(
                     new McpSchema.CallToolRequest("admin_only_tool", Map.of()));
@@ -416,6 +464,82 @@ public class SpringBootMcpServerTest {
         } finally {
             readOnlyClient.closeGracefully();
         }
+    }
+
+    @Test
+    void testCamelRoutesDoNotReplaceSpringDefinedMcpItems() throws Exception {
+        withRouteRestoredToStarted("spring-tool-collision-route", () ->
+                withRouteRestoredToStarted("spring-resource-collision-route", () ->
+                        withRouteRestoredToStarted("spring-resource-template-collision-route", () ->
+                                withRouteRestoredToStarted("spring-prompt-collision-route", () -> {
+                                    assertThat(client().listTools().tools())
+                                            .extracting(McpSchema.Tool::name)
+                                            .contains("add_numbers");
+
+                                    assertThat(client().listResources().resources())
+                                            .extracting(McpSchema.Resource::uri)
+                                            .contains("camel:///spring-defined/config.json");
+
+                                    assertThat(client().listResourceTemplates().resourceTemplates())
+                                            .extracting(McpSchema.ResourceTemplate::uriTemplate)
+                                            .contains("camel:///spring-defined/customers/{customerId}");
+
+                                    assertThat(client().listPrompts().prompts())
+                                            .extracting(McpSchema.Prompt::name)
+                                            .contains("spring_defined_prompt");
+
+                                    camelContext.getRouteController().stopRoute("spring-tool-collision-route");
+                                    camelContext.getRouteController().stopRoute("spring-resource-collision-route");
+                                    camelContext.getRouteController()
+                                            .stopRoute("spring-resource-template-collision-route");
+                                    camelContext.getRouteController().stopRoute("spring-prompt-collision-route");
+
+                                    await().atMost(10, TimeUnit.SECONDS).untilAsserted(() -> {
+                                        assertThat(client().listTools().tools())
+                                                .extracting(McpSchema.Tool::name)
+                                                .contains("add_numbers");
+
+                                        assertThat(client().listResources().resources())
+                                                .extracting(McpSchema.Resource::uri)
+                                                .contains("camel:///spring-defined/config.json");
+
+                                        assertThat(client().listResourceTemplates().resourceTemplates())
+                                                .extracting(McpSchema.ResourceTemplate::uriTemplate)
+                                                .contains("camel:///spring-defined/customers/{customerId}");
+
+                                        assertThat(client().listPrompts().prompts())
+                                                .extracting(McpSchema.Prompt::name)
+                                                .contains("spring_defined_prompt");
+                                    });
+
+                                    McpSchema.CallToolResult toolResult = client().callTool(
+                                            new McpSchema.CallToolRequest("add_numbers", Map.of("a", 17, "b", 25)));
+                                    assertThat(toolResult.isError()).isNotEqualTo(Boolean.TRUE);
+                                    assertThat(textOf(toolResult)).isEqualTo("42");
+
+                                    McpSchema.ReadResourceResult configResult = client().readResource(
+                                            new McpSchema.ReadResourceRequest("camel:///spring-defined/config.json"));
+                                    assertThat(configResult.contents().get(0))
+                                            .isInstanceOf(McpSchema.TextResourceContents.class);
+                                    assertThat(((McpSchema.TextResourceContents) configResult.contents().get(0)).text())
+                                            .isEqualTo("spring-defined-resource");
+
+                                    McpSchema.ReadResourceResult customerResult = client().readResource(
+                                            new McpSchema.ReadResourceRequest(
+                                                    "camel:///spring-defined/customers/42"));
+                                    assertThat(customerResult.contents().get(0))
+                                            .isInstanceOf(McpSchema.TextResourceContents.class);
+                                    assertThat(((McpSchema.TextResourceContents) customerResult.contents().get(0)).text())
+                                            .isEqualTo("spring-defined-customer:42");
+
+                                    McpSchema.GetPromptResult promptResult = client().getPrompt(
+                                            new McpSchema.GetPromptRequest("spring_defined_prompt", Map.of()));
+                                    assertThat(promptResult.messages()).hasSize(1);
+                                    assertThat(promptResult.messages().get(0).content())
+                                            .isInstanceOf(McpSchema.TextContent.class);
+                                    assertThat(((McpSchema.TextContent) promptResult.messages().get(0).content()).text())
+                                            .isEqualTo("spring-defined-prompt");
+                                }))));
     }
 
     @Test
@@ -676,46 +800,53 @@ public class SpringBootMcpServerTest {
     @Test
     void testResourceAndPromptChangeNotificationsAreDelivered() throws Exception {
         AtomicInteger toolsNotificationCount = new AtomicInteger();
-        AtomicBoolean resourceNotificationReceived = new AtomicBoolean();
-        AtomicBoolean promptNotificationReceived = new AtomicBoolean();
+        AtomicInteger resourceNotificationCount = new AtomicInteger();
+        AtomicInteger promptNotificationCount = new AtomicInteger();
 
         withRouteRestoredToStarted("say-hello-route", () ->
                 withRouteRestoredToStarted("app-config-route", () ->
-                        withRouteRestoredToStarted("greeting-prompt-route", () -> {
-                            McpSyncClient notificationClient = notificationClient(
-                                    toolsNotificationCount,
-                                    resourceNotificationReceived,
-                                    promptNotificationReceived);
+                        withRouteRestoredToStarted("customer-template-route", () ->
+                                withRouteRestoredToStarted("greeting-prompt-route", () -> {
+                                    McpSyncClient notificationClient = notificationClient(
+                                            toolsNotificationCount,
+                                            resourceNotificationCount,
+                                            promptNotificationCount);
 
-                            try {
-                                notificationClient.initialize();
+                                    try {
+                                        notificationClient.initialize();
 
-                                // Use two real tools/list_changed notifications as a protocol-level
-                                // readiness barrier. The client has received server-to-client SSE
-                                // notifications before resource and prompt changes are triggered.
-                                camelContext.getRouteController().stopRoute("say-hello-route");
+                                        // Use two real tools/list_changed notifications as a protocol-level
+                                        // readiness barrier. The client has received server-to-client SSE
+                                        // notifications before resource and prompt changes are triggered.
+                                        camelContext.getRouteController().stopRoute("say-hello-route");
 
-                                await().atMost(10, TimeUnit.SECONDS)
-                                        .until(() -> toolsNotificationCount.get() >= 1);
+                                        await().atMost(10, TimeUnit.SECONDS)
+                                                .until(() -> toolsNotificationCount.get() >= 1);
 
-                                camelContext.getRouteController().startRoute("say-hello-route");
+                                        camelContext.getRouteController().startRoute("say-hello-route");
 
-                                await().atMost(10, TimeUnit.SECONDS)
-                                        .until(() -> toolsNotificationCount.get() >= 2);
+                                        await().atMost(10, TimeUnit.SECONDS)
+                                                .until(() -> toolsNotificationCount.get() >= 2);
 
-                                camelContext.getRouteController().stopRoute("app-config-route");
+                                        camelContext.getRouteController().stopRoute("app-config-route");
 
-                                await().atMost(10, TimeUnit.SECONDS).untilAsserted(() ->
-                                        assertThat(resourceNotificationReceived.get()).isTrue());
+                                        await().atMost(10, TimeUnit.SECONDS)
+                                                .until(() -> resourceNotificationCount.get() >= 1);
 
-                                camelContext.getRouteController().stopRoute("greeting-prompt-route");
+                                        // Template removal has an explicit resources/list_changed notification.
+                                        camelContext.getRouteController().stopRoute("customer-template-route");
 
-                                await().atMost(10, TimeUnit.SECONDS).untilAsserted(() ->
-                                        assertThat(promptNotificationReceived.get()).isTrue());
-                            } finally {
-                                notificationClient.closeGracefully();
-                            }
-                        })));
+                                        await().atMost(10, TimeUnit.SECONDS)
+                                                .until(() -> resourceNotificationCount.get() >= 2);
+
+                                        camelContext.getRouteController().stopRoute("greeting-prompt-route");
+
+                                        await().atMost(10, TimeUnit.SECONDS)
+                                                .until(() -> promptNotificationCount.get() >= 1);
+                                    } finally {
+                                        notificationClient.closeGracefully();
+                                    }
+                                }))));
     }
 
     @Test
@@ -993,8 +1124,8 @@ public class SpringBootMcpServerTest {
 
     private McpSyncClient notificationClient(
             AtomicInteger toolsNotificationCount,
-            AtomicBoolean resourceNotificationReceived,
-            AtomicBoolean promptNotificationReceived) {
+            AtomicInteger resourceNotificationCount,
+            AtomicInteger promptNotificationCount) {
 
         return McpClient.sync(
                 HttpClientStreamableHttpTransport.builder("http://localhost:" + port)
@@ -1005,8 +1136,8 @@ public class SpringBootMcpServerTest {
                 .requestTimeout(Duration.ofSeconds(10))
                 .initializationTimeout(Duration.ofSeconds(10))
                 .toolsChangeConsumer(tools -> toolsNotificationCount.incrementAndGet())
-                .resourcesChangeConsumer(resources -> resourceNotificationReceived.set(true))
-                .promptsChangeConsumer(prompts -> promptNotificationReceived.set(true))
+                .resourcesChangeConsumer(resources -> resourceNotificationCount.incrementAndGet())
+                .promptsChangeConsumer(prompts -> promptNotificationCount.incrementAndGet())
                 .build();
     }
 

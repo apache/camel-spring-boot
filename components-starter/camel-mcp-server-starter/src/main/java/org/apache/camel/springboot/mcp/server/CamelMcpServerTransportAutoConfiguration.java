@@ -55,6 +55,11 @@ import tools.jackson.databind.json.JsonMapper;
 })
 @Conditional(McpServerStdioDisabledCondition.class)
 @ConditionalOnProperty(
+        prefix = "camel.mcp-server",
+        name = "enabled",
+        havingValue = "true",
+        matchIfMissing = true)
+@ConditionalOnProperty(
         prefix = "spring.ai.mcp.server",
         name = "protocol",
         havingValue = "STREAMABLE",
@@ -91,6 +96,8 @@ public class CamelMcpServerTransportAutoConfiguration {
      * Creates the MCP SDK validator using Camel's shared origin parser and normalizer.
      * Requests without an Origin header are accepted by the SDK validator.
      */
+    // Spring AI 2.0.2 exposes only this deprecated validator type on the
+    // WebMVC transport builder.
     @SuppressWarnings("deprecation")
     private static ServerTransportSecurityValidator createOriginValidator(String configuredAllowedOrigins) {
         List<String> allowedOrigins = McpServerOrigins.parseAllowedOrigins(configuredAllowedOrigins);

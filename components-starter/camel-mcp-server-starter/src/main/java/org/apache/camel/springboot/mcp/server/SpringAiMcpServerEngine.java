@@ -36,6 +36,7 @@ import org.apache.camel.component.mcp.server.McpResourceReadResult;
 import org.apache.camel.component.mcp.server.McpServerEngine;
 import org.apache.camel.component.mcp.server.McpServerInfo;
 import org.apache.camel.component.mcp.server.McpServerPrompt;
+import org.apache.camel.component.mcp.server.McpServerRefusedException;
 import org.apache.camel.component.mcp.server.McpServerResource;
 import org.apache.camel.component.mcp.server.McpServerResourceTemplate;
 import org.apache.camel.component.mcp.server.McpServerTool;
@@ -89,6 +90,11 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
     @Override
     public void toolAdded(McpServerTool tool) {
+        if (server.listTools().stream().anyMatch(existing -> existing.name().equals(tool.name()))) {
+            throw new McpServerRefusedException(
+                    "An MCP tool named '" + tool.name() + "' is already registered");
+        }
+
         String schema = tool.inputSchemaJson() != null ? tool.inputSchemaJson() : EMPTY_OBJECT_SCHEMA;
         McpSchema.Tool.Builder builder = McpSchema.Tool.builder(tool.name(), jsonMapper, schema)
                 .description(tool.description());
@@ -132,6 +138,11 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
     @Override
     public void resourceAdded(McpServerResource resource) {
+        if (server.listResources().stream().anyMatch(existing -> existing.uri().equals(resource.uri()))) {
+            throw new McpServerRefusedException(
+                    "An MCP resource with URI '" + resource.uri() + "' is already registered");
+        }
+
         McpSchema.Resource mcpResource = buildMcpResource(resource);
 
         McpServerFeatures.SyncResourceSpecification spec =
@@ -179,11 +190,18 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
     @Override
     public boolean supportsResources() {
-        return true;
+        McpSchema.ServerCapabilities capabilities = server.getServerCapabilities();
+        return capabilities != null && capabilities.resources() != null;
     }
 
     @Override
     public void resourceTemplateAdded(McpServerResourceTemplate resourceTemplate) {
+        if (server.listResourceTemplates().stream()
+                .anyMatch(existing -> existing.uriTemplate().equals(resourceTemplate.uriTemplate()))) {
+            throw new McpServerRefusedException(
+                    "An MCP resource template '" + resourceTemplate.uriTemplate() + "' is already registered");
+        }
+
         McpSchema.ResourceTemplate.Builder builder = McpSchema.ResourceTemplate
                 .builder(resourceTemplate.uriTemplate(), resourceTemplate.name())
                 .description(resourceTemplate.description())
@@ -247,11 +265,17 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
     @Override
     public boolean supportsResourceTemplates() {
-        return true;
+        McpSchema.ServerCapabilities capabilities = server.getServerCapabilities();
+        return capabilities != null && capabilities.resources() != null;
     }
 
     @Override
     public void promptAdded(McpServerPrompt prompt) {
+        if (server.listPrompts().stream().anyMatch(existing -> existing.name().equals(prompt.name()))) {
+            throw new McpServerRefusedException(
+                    "An MCP prompt named '" + prompt.name() + "' is already registered");
+        }
+
         server.addPrompt(buildPromptSpecification(prompt));
         LOG.debug("MCP prompt added: {}", prompt.name());
     }
@@ -268,7 +292,8 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
     @Override
     public boolean supportsPrompts() {
-        return true;
+        McpSchema.ServerCapabilities capabilities = server.getServerCapabilities();
+        return capabilities != null && capabilities.prompts() != null;
     }
 
     private static McpSchema.Resource buildMcpResource(McpServerResource resource) {

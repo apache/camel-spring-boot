@@ -22,9 +22,10 @@ The MCP endpoint is served on the application's HTTP port, so any client that
 can reach an unprotected endpoint can list and invoke the capabilities exposed
 by the server. Protecting the endpoint is the application's responsibility.
 
-No tools are exposed until `camel.mcp-server.tags` is set. Resources, resource
-templates, and prompts are registered separately. The untagged default tool
-pool is never served; setting tags is not an authentication boundary.
+Tools, resources, resource templates, and prompts use the same
+`camel.mcp-server.tags` selection. Nothing is exposed until tags are configured.
+The untagged default pools are never served; setting tags is not an authentication
+boundary.
 
 === OAuth 2.0 with Spring Security
 
@@ -51,6 +52,7 @@ transport:
 spring.ai.mcp.server.protocol = STREAMABLE
 spring.security.oauth2.resourceserver.jwt.issuer-uri = https://idp.example.com/issuer
 
+# Application-specific properties used by this example; not Camel starter options.
 # Canonical, externally visible URLs for this protected MCP resource.
 mcp.security.resource-uri = https://mcp.example.com/mcp
 mcp.security.resource-metadata-uri = https://mcp.example.com/.well-known/oauth-protected-resource/mcp
@@ -148,11 +150,14 @@ If your MCP endpoint is configured at a path other than `/mcp`, update the
 security matchers and both canonical URL properties accordingly.
 
 For MCP tool calls, the Camel Spring Boot engine captures the authenticated
-Spring principal, its name, and its Spring Security granted authorities.
-These are passed to the Camel bridge through `McpToolCallContext` and made
-available as exchange properties to tool routes. This allows route-level
-authorization to use the authenticated caller as well as the HTTP security
-boundary.
+Spring principal and its name. Spring Security authorities are normalized before
+they are passed to the Camel bridge: the `ROLE_` prefix is removed, `FACTOR_*`
+authorities are ignored, and `SCOPE_*` authorities are mapped to OAuth scopes.
+For a `JwtAuthenticationToken`, the token subject, scopes, and claims are also
+propagated. The values are available through `McpToolCallContext` exchange
+properties, allowing route-level authorization to use the authenticated caller
+as well as the HTTP security boundary. The resulting role names are unprefixed,
+for example `MCP_ADMIN` rather than `ROLE_MCP_ADMIN`.
 
 A network policy that keeps the application port off untrusted networks is
 another useful layer of protection.

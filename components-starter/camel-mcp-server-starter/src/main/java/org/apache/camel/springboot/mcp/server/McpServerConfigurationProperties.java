@@ -31,8 +31,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class McpServerConfigurationProperties {
 
     /**
-     * Whether to expose ai-tool routes as MCP tools through the Spring AI MCP server. Enabled by default when the
-     * starter is on the classpath.
+     * Whether to enable Camel MCP integration for ai-tool, ai-resource, and ai-prompt routes through the Spring AI
+     * MCP server. Enabled by default when the starter is on the classpath.
      */
     private boolean enabled = true;
 
@@ -50,10 +50,8 @@ public class McpServerConfigurationProperties {
 
     /**
      * Comma-separated list of origins allowed to call the Streamable HTTP MCP endpoint.
-     * Entries may be exact origins (for example, {@code https://app.example.com}) or
-     * use a wildcard port (for example, {@code http://localhost:*}).
-     * When unset, only loopback origins are allowed. Requests without an Origin header
-     * are accepted.
+     * Entries may be exact origins or use a wildcard port, for example http://localhost:*.
+     * When unset, only loopback origins are allowed. Requests without an Origin header are accepted.
      */
     private String allowedOrigins;
 
