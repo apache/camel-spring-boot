@@ -176,11 +176,6 @@ public class NettyComponentConfiguration
      */
     private NettyServerBootstrapFactory nettyServerBootstrapFactory;
     /**
-     * If sync is enabled this option dictates NettyConsumer which logging level
-     * to use when logging a there is no reply to send back.
-     */
-    private LoggingLevel noReplyLogLevel = LoggingLevel.WARN;
-    /**
      * If the server (NettyConsumer) catches an
      * java.nio.channels.ClosedChannelException then its logged using this
      * logging level. This is used to avoid logging the closed channel
@@ -344,6 +339,12 @@ public class NettyComponentConfiguration
      * http://netty.io/wiki/native-transports.html
      */
     private Boolean nativeTransport = false;
+    /**
+     * The logging level to use when there is nothing to send: on the consumer
+     * (if sync is enabled) when there is no reply to send back, and on the
+     * producer when the message has no body.
+     */
+    private LoggingLevel noReplyLogLevel = LoggingLevel.WARN;
     /**
      * Allows to configure additional netty options using option. as prefix. For
      * example option.child.keepAlive=false. See the Netty documentation for
@@ -688,14 +689,6 @@ public class NettyComponentConfiguration
         this.nettyServerBootstrapFactory = nettyServerBootstrapFactory;
     }
 
-    public LoggingLevel getNoReplyLogLevel() {
-        return noReplyLogLevel;
-    }
-
-    public void setNoReplyLogLevel(LoggingLevel noReplyLogLevel) {
-        this.noReplyLogLevel = noReplyLogLevel;
-    }
-
     public LoggingLevel getServerClosedChannelExceptionCaughtLogLevel() {
         return serverClosedChannelExceptionCaughtLogLevel;
     }
@@ -885,6 +878,14 @@ public class NettyComponentConfiguration
 
     public void setNativeTransport(Boolean nativeTransport) {
         this.nativeTransport = nativeTransport;
+    }
+
+    public LoggingLevel getNoReplyLogLevel() {
+        return noReplyLogLevel;
+    }
+
+    public void setNoReplyLogLevel(LoggingLevel noReplyLogLevel) {
+        this.noReplyLogLevel = noReplyLogLevel;
     }
 
     public Map<String, Object> getOptions() {

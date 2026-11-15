@@ -20,6 +20,7 @@ import java.util.Map;
 import org.apache.camel.component.docker.DockerConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Manage Docker containers.
@@ -101,12 +102,16 @@ public class DockerComponentConfiguration
      */
     private String cmdExecFactory = "com.github.dockerjava.netty.NettyDockerCmdExecFactory";
     /**
-     * Whether to follow redirect filter
+     * Whether to follow redirect filter. Deprecation note: Not used: nothing
+     * reads this option when the Docker client is built
      */
+    @Deprecated
     private Boolean followRedirectFilter = false;
     /**
-     * Whether to use logging filter
+     * Whether to use logging filter. Deprecation note: Not used: nothing reads
+     * this option when the Docker client is built
      */
+    @Deprecated
     private Boolean loggingFilter = false;
     /**
      * Maximum route connections
@@ -235,18 +240,24 @@ public class DockerComponentConfiguration
         this.cmdExecFactory = cmdExecFactory;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getFollowRedirectFilter() {
         return followRedirectFilter;
     }
 
+    @Deprecated
     public void setFollowRedirectFilter(Boolean followRedirectFilter) {
         this.followRedirectFilter = followRedirectFilter;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Boolean getLoggingFilter() {
         return loggingFilter;
     }
 
+    @Deprecated
     public void setLoggingFilter(Boolean loggingFilter) {
         this.loggingFilter = loggingFilter;
     }

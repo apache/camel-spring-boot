@@ -65,7 +65,7 @@ The starter supports 77 options, which are listed below.
 | camel.component.netty.need-client-auth | Configures whether the server needs client authentication when using SSL. | false | Boolean
 | camel.component.netty.netty-server-bootstrap-factory | To use a custom NettyServerBootstrapFactory. The option is a org.apache.camel.component.netty.NettyServerBootstrapFactory type. |  | NettyServerBootstrapFactory
 | camel.component.netty.network-interface | When using UDP then this option can be used to specify a network interface by its name, such as eth0 to join a multicast group. |  | String
-| camel.component.netty.no-reply-log-level | If sync is enabled this option dictates NettyConsumer which logging level to use when logging a there is no reply to send back. | warn | LoggingLevel
+| camel.component.netty.no-reply-log-level | The logging level to use when there is nothing to send: on the consumer (if sync is enabled) when there is no reply to send back, and on the producer when the message has no body. | warn | LoggingLevel
 | camel.component.netty.options | Allows to configure additional netty options using option. as prefix. For example option.child.keepAlive=false. See the Netty documentation for possible options that can be used. This is a multi-value option with prefix: option. |  | Object>
 | camel.component.netty.passphrase | Password to use for the keyStore and trustStore. The same password must be configured for both resources. |  | String
 | camel.component.netty.producer-pool-block-when-exhausted | Sets the value for the blockWhenExhausted configuration attribute. It determines whether to block when the borrowObject() method is invoked when the pool is exhausted (the maximum number of active objects has been reached). | true | Boolean

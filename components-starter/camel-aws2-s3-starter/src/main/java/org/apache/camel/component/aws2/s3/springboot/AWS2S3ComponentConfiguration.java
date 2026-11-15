@@ -117,6 +117,10 @@ public class AWS2S3ComponentConfiguration
      */
     private String customerKeyMD5;
     /**
+     * Define if Customer Key must be used or not
+     */
+    private Boolean useCustomerKey = false;
+    /**
      * Allows for bridging the consumer to the Camel routing Error Handler,
      * which mean any exceptions (if possible) occurred while the Camel consumer
      * is trying to pickup incoming messages, or the likes, will now be
@@ -308,10 +312,6 @@ public class AWS2S3ComponentConfiguration
      * Define if KMS must be used or not
      */
     private Boolean useAwsKMS = false;
-    /**
-     * Define if Customer Key must be used or not
-     */
-    private Boolean useCustomerKey = false;
     /**
      * Define if SSE S3 must be used or not
      */
@@ -508,6 +508,14 @@ public class AWS2S3ComponentConfiguration
 
     public void setCustomerKeyMD5(String customerKeyMD5) {
         this.customerKeyMD5 = customerKeyMD5;
+    }
+
+    public Boolean getUseCustomerKey() {
+        return useCustomerKey;
+    }
+
+    public void setUseCustomerKey(Boolean useCustomerKey) {
+        this.useCustomerKey = useCustomerKey;
     }
 
     public Boolean getBridgeErrorHandler() {
@@ -764,14 +772,6 @@ public class AWS2S3ComponentConfiguration
 
     public void setUseAwsKMS(Boolean useAwsKMS) {
         this.useAwsKMS = useAwsKMS;
-    }
-
-    public Boolean getUseCustomerKey() {
-        return useCustomerKey;
-    }
-
-    public void setUseCustomerKey(Boolean useCustomerKey) {
-        this.useCustomerKey = useCustomerKey;
     }
 
     public Boolean getUseSSES3() {
