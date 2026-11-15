@@ -84,6 +84,38 @@ class SpringAiMcpServerEngineTest {
     }
 
     @Test
+    void ignoresUnsupportedSpringTemplateWhenUriSchemesDiffer() {
+        McpSyncServer server = mock(McpSyncServer.class);
+        SpringAiMcpServerEngine engine = new SpringAiMcpServerEngine(server);
+        McpSchema.ResourceTemplate existing = McpSchema.ResourceTemplate
+                .builder("document://{id}", "spring-document")
+                .build();
+        when(server.listResourceTemplates()).thenReturn(List.of(existing));
+
+        engine.resourceTemplateAdded(resourceTemplate("camel:///customers/{customerId}"));
+
+        verify(server).addResourceTemplate(any());
+    }
+
+    @Test
+    void refusesUnsupportedSpringTemplateWhenUriSchemesMatch() {
+        McpSyncServer server = mock(McpSyncServer.class);
+        SpringAiMcpServerEngine engine = new SpringAiMcpServerEngine(server);
+        McpSchema.ResourceTemplate existing = McpSchema.ResourceTemplate
+                .builder("camel://{id}", "spring-camel")
+                .build();
+        when(server.listResourceTemplates()).thenReturn(List.of(existing));
+
+        assertThatThrownBy(() -> engine.resourceTemplateAdded(
+                resourceTemplate("camel:///customers/{customerId}")))
+                .isInstanceOf(McpServerRefusedException.class)
+                .hasMessageContaining("Cannot safely check")
+                .hasCauseInstanceOf(IllegalArgumentException.class);
+
+        verify(server, never()).addResourceTemplate(any());
+    }
+
+    @Test
     void translatesInvalidToolSchemaIntoServerRefusal() {
         McpSyncServer server = mock(McpSyncServer.class);
         SpringAiMcpServerEngine engine = new SpringAiMcpServerEngine(server);

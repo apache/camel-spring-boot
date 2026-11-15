@@ -222,10 +222,24 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
             try {
                 existingMatcher = new AiResourceUriTemplate(existing.uriTemplate());
             } catch (IllegalArgumentException e) {
-                // Fail closed: Camel cannot prove that an unsupported Spring template does not overlap.
+                String candidateScheme = uriScheme(resourceTemplate.uriTemplate());
+                String existingScheme = uriScheme(existing.uriTemplate());
+
+                // Unsupported Spring URI-template syntax in another scheme cannot
+                // overlap with this Camel template. For the same or an unknown
+                // scheme, retain the fail-closed behavior.
+                if (candidateScheme != null && existingScheme != null
+                    && !candidateScheme.equalsIgnoreCase(existingScheme)) {
+                    LOG.warn(
+                            "Skipping overlap check between MCP resource template '{}' and unsupported "
+                                    + "Spring template '{}' because their URI schemes differ",
+                            resourceTemplate.uriTemplate(), existing.uriTemplate());
+                    continue;
+                }
+
                 throw new McpServerRefusedException(
-                        "Cannot safely check whether MCP resource template '" + resourceTemplate.uriTemplate()
-                                + "' overlaps existing Spring template '" + existing.uriTemplate() + "'", e);
+                    "Cannot safely check whether MCP resource template '" + resourceTemplate.uriTemplate() +
+                    "' overlaps existing Spring template '" + existing.uriTemplate() + "'", e);
             }
             if (candidate.overlaps(existingMatcher)) {
                 throw new McpServerRefusedException(
@@ -488,4 +502,19 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
             builder.annotations(hintBuilder.build());
         }
     }
+
+    private static String uriScheme(String uriTemplate) {
+        if (uriTemplate == null) {
+            return null;
+        }
+
+        int colon = uriTemplate.indexOf(':');
+        if (colon <= 0) {
+            return null;
+        }
+
+        String scheme = uriTemplate.substring(0, colon);
+        return scheme.matches("[A-Za-z][A-Za-z0-9+.-]*") ? scheme : null;
+    }
+
 }
