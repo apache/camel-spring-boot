@@ -107,11 +107,14 @@ public class Sqs2ComponentConfiguration
      */
     private Integer concurrentRequestLimit = 50;
     /**
-     * The default visibility timeout (in seconds)
+     * The visibility timeout (in seconds) of the queue. When the endpoint
+     * starts, it sets the VisibilityTimeout attribute of the queue, which
+     * applies to every consumer of the queue that does not set its own
+     * visibilityTimeout.
      */
     private Integer defaultVisibilityTimeout;
     /**
-     * Delete message from SQS after it has been read
+     * Delete the message from SQS when the exchange completes successfully
      */
     private Boolean deleteAfterRead = true;
     /**
@@ -123,8 +126,8 @@ public class Sqs2ComponentConfiguration
     /**
      * If enabled, then a scheduled background task will keep extending the
      * message visibility on SQS. This is needed if it takes a long time to
-     * process the message. If set to true defaultVisibilityTimeout must be set.
-     * See details at Amazon docs.
+     * process the message. If set to true visibilityTimeout must be set. See
+     * details at Amazon docs.
      */
     private Boolean extendMessageVisibility = false;
     /**
@@ -159,10 +162,10 @@ public class Sqs2ComponentConfiguration
     /**
      * The duration (in seconds) that the received messages are hidden from
      * subsequent retrieve requests after being retrieved by a ReceiveMessage
-     * request to set in the
-     * com.amazonaws.services.sqs.model.SetQueueAttributesRequest. This only
-     * makes sense if it's different from defaultVisibilityTimeout. It changes
-     * the queue visibility timeout attribute permanently.
+     * request. It is sent with each ReceiveMessage request and does not change
+     * the queue: use defaultVisibilityTimeout to set the visibility timeout
+     * attribute of the queue. extendMessageVisibility extends the visibility of
+     * a message by this duration.
      */
     private Integer visibilityTimeout;
     /**
