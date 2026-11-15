@@ -48,7 +48,7 @@
     {
       "name": "camel.component.spring-ws.use-global-ssl-context-parameters",
       "type": "java.lang.Boolean",
-      "description": "Enable usage of global SSL context parameters.",
+      "description": "Whether to use the global SSL context parameters of the CamelContext for each endpoint that the component creates and that has no sslContextParameters. The producer uses them for the HTTPS requests that it sends, as described for the sslContextParameters option. The consumer does not use them.",
       "sourceType": "org.apache.camel.component.spring.ws.springboot.SpringWebserviceComponentConfiguration",
       "defaultValue": false
     }

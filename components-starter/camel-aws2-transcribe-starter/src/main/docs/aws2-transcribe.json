@@ -77,13 +77,6 @@
       "sourceType": "org.apache.camel.component.aws2.transcribe.springboot.Transcribe2ComponentConfiguration"
     },
     {
-      "name": "camel.component.aws2-transcribe.protocol",
-      "type": "software.amazon.awssdk.core.Protocol",
-      "description": "To define a proxy protocol when instantiating the Transcribe client",
-      "sourceType": "org.apache.camel.component.aws2.transcribe.springboot.Transcribe2ComponentConfiguration",
-      "defaultValue": "https"
-    },
-    {
       "name": "camel.component.aws2-transcribe.proxy-host",
       "type": "java.lang.String",
       "description": "To define a proxy host when instantiating the Transcribe client",
@@ -171,6 +164,15 @@
       "description": "Set whether the Transcribe client should expect to use Session Credentials. This is useful in a situation in which the user needs to assume a IAM role for doing the operations.",
       "sourceType": "org.apache.camel.component.aws2.transcribe.springboot.Transcribe2ComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-transcribe.protocol",
+      "type": "software.amazon.awssdk.core.Protocol",
+      "description": "The protocol to use when instantiating the Transcribe client. Deprecation note: Not used: nothing reads this option when the Transcribe client is built",
+      "sourceType": "org.apache.camel.component.aws2.transcribe.springboot.Transcribe2ComponentConfiguration",
+      "defaultValue": "https",
+      "deprecated": true,
+      "deprecation": {}
     }
   ],
   "hints": [],

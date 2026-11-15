@@ -262,7 +262,7 @@
       "type": "java.lang.String",
       "description": "If eagerLoadingOfProperties is enabled and the JMS message payload (JMS body or JMS properties) is poison (cannot be read\/mapped), then set this text as the message body instead so the message can be processed (the cause of the poison are already stored as exception on the Exchange). This can be turned off by setting eagerPoisonBody=false. See also the option eagerLoadingOfProperties.",
       "sourceType": "org.apache.camel.component.activemq.springboot.ActiveMQComponentConfiguration",
-      "defaultValue": "Poison JMS message due to ${exception.message}"
+      "defaultValue": "Poison JMS message payload: ${exception.message}"
     },
     {
       "name": "camel.component.activemq.embedded",
