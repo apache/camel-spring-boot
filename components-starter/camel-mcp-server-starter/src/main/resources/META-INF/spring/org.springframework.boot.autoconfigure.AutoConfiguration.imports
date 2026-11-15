@@ -15,3 +15,4 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 org.apache.camel.springboot.mcp.server.CamelMcpServerAutoConfiguration
+org.apache.camel.springboot.mcp.server.CamelMcpServerTransportAutoConfiguration

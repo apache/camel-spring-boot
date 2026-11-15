@@ -16,17 +16,30 @@
  */
 package org.apache.camel.springboot.mcp.server;
 
+import java.util.Base64;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import io.modelcontextprotocol.json.McpJsonDefaults;
 import io.modelcontextprotocol.json.McpJsonMapper;
 import io.modelcontextprotocol.server.McpServerFeatures;
 import io.modelcontextprotocol.server.McpSyncServer;
+import io.modelcontextprotocol.spec.McpError;
 import io.modelcontextprotocol.spec.McpSchema;
 import org.apache.camel.CamelContext;
+import org.apache.camel.component.ai.resource.AiResourceUriTemplate;
 import org.apache.camel.component.ai.tool.AiToolAnnotations;
+import org.apache.camel.component.mcp.server.McpPromptMessage;
+import org.apache.camel.component.mcp.server.McpPromptResult;
+import org.apache.camel.component.mcp.server.McpResourceReadResult;
 import org.apache.camel.component.mcp.server.McpServerEngine;
 import org.apache.camel.component.mcp.server.McpServerInfo;
+import org.apache.camel.component.mcp.server.McpServerPrompt;
+import org.apache.camel.component.mcp.server.McpServerRefusedException;
+import org.apache.camel.component.mcp.server.McpServerResource;
+import org.apache.camel.component.mcp.server.McpServerResourceTemplate;
 import org.apache.camel.component.mcp.server.McpServerTool;
 import org.apache.camel.component.mcp.server.McpToolCallResult;
 import org.apache.camel.support.service.ServiceSupport;
@@ -78,23 +91,44 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
     @Override
     public void toolAdded(McpServerTool tool) {
+        if (server.listTools().stream().anyMatch(existing -> existing.name().equals(tool.name()))) {
+            throw new McpServerRefusedException(
+                    "An MCP tool named '" + tool.name() + "' is already registered");
+        }
+
         String schema = tool.inputSchemaJson() != null ? tool.inputSchemaJson() : EMPTY_OBJECT_SCHEMA;
-        McpSchema.Tool.Builder builder = McpSchema.Tool.builder(tool.name(), jsonMapper, schema)
-                .description(tool.description());
-        applyAnnotations(builder, tool.annotations());
-        McpSchema.Tool mcpTool = builder.build();
-        McpServerFeatures.SyncToolSpecification spec = McpServerFeatures.SyncToolSpecification.builder()
-                .tool(mcpTool)
-                .callHandler((exchange, request) -> {
-                    Map<String, Object> arguments = request.arguments() != null ? request.arguments() : Map.of();
-                    McpToolCallResult result = tool.handler().call(arguments);
-                    return McpSchema.CallToolResult.builder()
-                            .addTextContent(result.text())
-                            .isError(result.isError())
-                            .build();
-                })
-                .build();
-        server.addTool(spec);
+        try {
+            McpSchema.Tool.Builder builder = McpSchema.Tool.builder(tool.name(), jsonMapper, schema)
+                    .description(tool.description());
+
+            if (tool.outputSchemaJson() != null && !tool.outputSchemaJson().isBlank()) {
+                builder.outputSchema(jsonMapper, tool.outputSchemaJson());
+            }
+
+            applyAnnotations(builder, tool.annotations());
+            McpSchema.Tool mcpTool = builder.build();
+            McpServerFeatures.SyncToolSpecification spec = McpServerFeatures.SyncToolSpecification.builder()
+                    .tool(mcpTool)
+                    .callHandler((exchange, request) -> {
+                        Map<String, Object> arguments = request.arguments() != null ? request.arguments() : Map.of();
+                        McpToolCallResult result = tool.handler().call(
+                                arguments, SpringAiMcpTransportContext.from(exchange));
+                        McpSchema.CallToolResult.Builder resultBuilder = McpSchema.CallToolResult.builder()
+                                .addTextContent(result.text())
+                                .isError(result.isError());
+
+                        if (result.structuredContent() != null) {
+                            resultBuilder.structuredContent(result.structuredContent());
+                        }
+
+                        return resultBuilder.build();
+                    })
+                    .build();
+            server.addTool(spec);
+        } catch (IllegalArgumentException e) {
+            throw new McpServerRefusedException(
+                    "MCP tool '" + tool.name() + "' has an invalid input or output schema: " + e.getMessage(), e);
+        }
         LOG.debug("MCP tool added: {}", tool.name());
     }
 
@@ -106,6 +140,328 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
         } catch (Exception e) {
             LOG.debug("Failed to remove MCP tool {}: {}", toolName, e.getMessage());
         }
+    }
+
+    @Override
+    public void resourceAdded(McpServerResource resource) {
+        if (server.listResources().stream().anyMatch(existing -> existing.uri().equals(resource.uri()))) {
+            throw new McpServerRefusedException(
+                    "An MCP resource with URI '" + resource.uri() + "' is already registered");
+        }
+
+        McpSchema.Resource mcpResource = buildMcpResource(resource);
+
+        McpServerFeatures.SyncResourceSpecification spec =
+                new McpServerFeatures.SyncResourceSpecification(
+                        mcpResource,
+                        (exchange, request) -> {
+                            McpResourceReadResult result = resource.handler().read();
+
+                            if (result.isError()) {
+                                throw McpError.builder(McpSchema.ErrorCodes.INTERNAL_ERROR)
+                                        .message(result.errorMessage())
+                                        .build();
+                            }
+
+                            McpSchema.ResourceContents contents;
+
+                            if (result.blob() != null) {
+                                contents = McpSchema.BlobResourceContents.builder(
+                                resource.uri(),
+                                Base64.getEncoder().encodeToString(result.blob()))
+                                .mimeType(resource.mimeType())
+                                .build();
+                            } else {
+                                contents = McpSchema.TextResourceContents.builder(resource.uri(), result.text())
+                                .mimeType(resource.mimeType())
+                                .build();
+                            }
+
+                            return McpSchema.ReadResourceResult.builder(List.of(contents)).build();
+                        });
+
+        server.addResource(spec);
+        LOG.debug("MCP resource added: {}", resource.uri());
+    }
+
+    @Override
+    public void resourceRemoved(String resourceUri) {
+        try {
+            server.removeResource(resourceUri);
+            LOG.debug("MCP resource removed: {}", resourceUri);
+        } catch (Exception e) {
+            LOG.debug("Failed to remove MCP resource {}: {}", resourceUri, e.getMessage());
+        }
+    }
+
+    @Override
+    public boolean supportsResources() {
+        McpSchema.ServerCapabilities capabilities = server.getServerCapabilities();
+        return capabilities != null && capabilities.resources() != null;
+    }
+
+    @Override
+    public void resourceTemplateAdded(McpServerResourceTemplate resourceTemplate) {
+        List<McpSchema.ResourceTemplate> existingTemplates = server.listResourceTemplates();
+        if (existingTemplates.stream()
+                .anyMatch(existing -> existing.uriTemplate().equals(resourceTemplate.uriTemplate()))) {
+            throw new McpServerRefusedException(
+                    "An MCP resource template '" + resourceTemplate.uriTemplate() + "' is already registered");
+        }
+
+        AiResourceUriTemplate candidate;
+        try {
+            candidate = new AiResourceUriTemplate(resourceTemplate.uriTemplate());
+        } catch (IllegalArgumentException e) {
+            throw new McpServerRefusedException(
+                    "Invalid MCP resource template '" + resourceTemplate.uriTemplate() + "': " + e.getMessage(), e);
+        }
+
+        for (McpSchema.ResourceTemplate existing : existingTemplates) {
+            AiResourceUriTemplate existingMatcher;
+            try {
+                existingMatcher = new AiResourceUriTemplate(existing.uriTemplate());
+            } catch (IllegalArgumentException e) {
+                String candidateScheme = uriScheme(resourceTemplate.uriTemplate());
+                String existingScheme = uriScheme(existing.uriTemplate());
+
+                // Unsupported Spring URI-template syntax in another scheme cannot
+                // overlap with this Camel template. For the same or an unknown
+                // scheme, retain the fail-closed behavior.
+                if (candidateScheme != null && existingScheme != null
+                    && !candidateScheme.equalsIgnoreCase(existingScheme)) {
+                    LOG.warn(
+                            "Skipping overlap check between MCP resource template '{}' and unsupported "
+                                    + "Spring template '{}' because their URI schemes differ",
+                            resourceTemplate.uriTemplate(), existing.uriTemplate());
+                    continue;
+                }
+
+                throw new McpServerRefusedException(
+                    "Cannot safely check whether MCP resource template '" + resourceTemplate.uriTemplate() +
+                    "' overlaps existing Spring template '" + existing.uriTemplate() + "'", e);
+            }
+            if (candidate.overlaps(existingMatcher)) {
+                throw new McpServerRefusedException(
+                        "MCP resource template '" + resourceTemplate.uriTemplate()
+                                + "' overlaps existing template '" + existing.uriTemplate() + "'");
+            }
+        }
+
+        McpSchema.ResourceTemplate.Builder builder = McpSchema.ResourceTemplate
+                .builder(resourceTemplate.uriTemplate(), resourceTemplate.name())
+                .description(resourceTemplate.description())
+                .mimeType(resourceTemplate.mimeType());
+
+        if (resourceTemplate.title() != null && !resourceTemplate.title().isBlank()) {
+            builder.title(resourceTemplate.title());
+        }
+
+        McpServerFeatures.SyncResourceTemplateSpecification spec =
+                new McpServerFeatures.SyncResourceTemplateSpecification(
+                        builder.build(),
+                        (exchange, request) -> {
+                            McpResourceReadResult result =
+                                    resourceTemplate.handler().read(request.uri());
+
+                            if (result.isError()) {
+                                throw McpError.builder(McpSchema.ErrorCodes.INTERNAL_ERROR)
+                                        .message(result.errorMessage())
+                                        .build();
+                            }
+
+                            McpSchema.ResourceContents contents;
+
+                            if (result.blob() != null) {
+                                contents = McpSchema.BlobResourceContents.builder(
+                                request.uri(),
+                                Base64.getEncoder().encodeToString(result.blob()))
+                                .mimeType(resourceTemplate.mimeType())
+                                .build();
+                            } else {
+                                contents = McpSchema.TextResourceContents.builder(request.uri(), result.text())
+                                .mimeType(resourceTemplate.mimeType())
+                                .build();
+                            }
+
+                            return McpSchema.ReadResourceResult.builder(List.of(contents)).build();
+                        });
+
+        server.addResourceTemplate(spec);
+        LOG.debug("MCP resource template added: {}", resourceTemplate.uriTemplate());
+    }
+
+    @Override
+    public void resourceTemplateRemoved(String uriTemplate) {
+        try {
+            boolean registered = server.listResourceTemplates().stream()
+                    .anyMatch(existing -> existing.uriTemplate().equals(uriTemplate));
+            if (!registered) {
+                LOG.debug("MCP resource template was not registered; nothing to remove: {}", uriTemplate);
+                return;
+            }
+
+            server.removeResourceTemplate(uriTemplate);
+
+            McpSchema.ServerCapabilities capabilities = server.getServerCapabilities();
+            if (capabilities != null && capabilities.resources() != null
+                    && Boolean.TRUE.equals(capabilities.resources().listChanged())) {
+                // MCP Java SDK 2.1.0 does not notify on template removal; notify only when advertised.
+                server.notifyResourcesListChanged();
+            }
+
+            LOG.debug("MCP resource template removed: {}", uriTemplate);
+        } catch (Exception e) {
+            LOG.debug(
+                    "Failed to remove MCP resource template {} or notify clients: {}",
+                    uriTemplate,
+                    e.getMessage());
+        }
+    }
+
+    @Override
+    public boolean supportsResourceTemplates() {
+        McpSchema.ServerCapabilities capabilities = server.getServerCapabilities();
+        return capabilities != null && capabilities.resources() != null;
+    }
+
+    @Override
+    public void promptAdded(McpServerPrompt prompt) {
+        if (server.listPrompts().stream().anyMatch(existing -> existing.name().equals(prompt.name()))) {
+            throw new McpServerRefusedException(
+                    "An MCP prompt named '" + prompt.name() + "' is already registered");
+        }
+
+        server.addPrompt(buildPromptSpecification(prompt));
+        LOG.debug("MCP prompt added: {}", prompt.name());
+    }
+
+    @Override
+    public void promptRemoved(String promptName) {
+        try {
+            server.removePrompt(promptName);
+            LOG.debug("MCP prompt removed: {}", promptName);
+        } catch (Exception e) {
+            LOG.debug("Failed to remove MCP prompt {}: {}", promptName, e.getMessage());
+        }
+    }
+
+    @Override
+    public boolean supportsPrompts() {
+        McpSchema.ServerCapabilities capabilities = server.getServerCapabilities();
+        return capabilities != null && capabilities.prompts() != null;
+    }
+
+    private static McpSchema.Resource buildMcpResource(McpServerResource resource) {
+        McpSchema.Resource.Builder builder = McpSchema.Resource.builder(resource.uri(), resource.name())
+                .description(resource.description())
+                .mimeType(resource.mimeType());
+
+        if (resource.title() != null && !resource.title().isBlank()) {
+            builder.title(resource.title());
+        }
+
+        return builder.build();
+    }
+
+    /*
+     * This adapter uses the MCP Java SDK types directly. The equivalent Camel Main
+     * helper lives in camel-mcp-server, which is deliberately not a dependency here.
+     */
+    private McpServerFeatures.SyncPromptSpecification buildPromptSpecification(
+            McpServerPrompt prompt) {
+
+        McpSchema.Prompt.Builder builder = McpSchema.Prompt.builder(prompt.name())
+                .description(prompt.description())
+                .arguments(prompt.arguments().stream()
+                        .map(argument -> McpSchema.PromptArgument.builder(argument.name())
+                                .description(argument.description())
+                                .required(argument.required())
+                                .build())
+                        .toList());
+
+        if (prompt.title() != null && !prompt.title().isBlank()) {
+            builder.title(prompt.title());
+        }
+
+        return new McpServerFeatures.SyncPromptSpecification(
+                builder.build(),
+                (exchange, request) -> {
+                    Map<String, String> arguments = new LinkedHashMap<>();
+
+                    if (request.arguments() != null) {
+                        request.arguments().forEach((name, value) -> {
+                            if (!(value instanceof String stringValue)) {
+                                throw McpError.builder(McpSchema.ErrorCodes.INVALID_PARAMS)
+                                        .message("Prompt arguments must be strings")
+                                        .build();
+                            }
+
+                            arguments.put(name, stringValue);
+                        });
+                    }
+
+                    McpPromptResult result = prompt.handler().get(arguments);
+
+                    if (result == null) {
+                        throw McpError.builder(McpSchema.ErrorCodes.INTERNAL_ERROR)
+                                .message("Prompt execution failed")
+                                .build();
+                    }
+
+                    if (result.isError()) {
+                        int code = result.argumentError()
+                                ? McpSchema.ErrorCodes.INVALID_PARAMS
+                                : McpSchema.ErrorCodes.INTERNAL_ERROR;
+
+                        throw McpError.builder(code)
+                                .message(result.errorMessage())
+                                .build();
+                    }
+
+                    List<McpSchema.PromptMessage> messages = result.messages().stream()
+                            .map(this::toPromptMessage)
+                            .toList();
+
+                    return McpSchema.GetPromptResult.builder(messages)
+                            .description(result.description())
+                            .build();
+                });
+    }
+
+    private McpSchema.PromptMessage toPromptMessage(McpPromptMessage message) {
+        McpSchema.Role role;
+
+        try {
+            role = McpSchema.Role.valueOf(message.role().toUpperCase(Locale.ROOT));
+        } catch (RuntimeException e) {
+            throw McpError.builder(McpSchema.ErrorCodes.INTERNAL_ERROR)
+                    .message("Prompt returned an invalid message role")
+                    .build();
+        }
+
+        Object value = message.content();
+        McpSchema.Content content;
+
+        if (value instanceof String text) {
+            content = McpSchema.TextContent.builder(text).build();
+        } else if (value instanceof McpSchema.Content mcpContent) {
+            content = mcpContent;
+        } else if (value instanceof Map<?, ?> map) {
+            try {
+                content = jsonMapper.convertValue(map, McpSchema.Content.class);
+            } catch (RuntimeException e) {
+                throw McpError.builder(McpSchema.ErrorCodes.INTERNAL_ERROR)
+                        .message("Prompt returned an invalid MCP content block")
+                        .build();
+            }
+        } else {
+            throw McpError.builder(McpSchema.ErrorCodes.INTERNAL_ERROR)
+                    .message("Prompt returned an unsupported content value")
+                    .build();
+        }
+
+        return McpSchema.PromptMessage.builder(role, content).build();
     }
 
     /**
@@ -146,4 +502,19 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
             builder.annotations(hintBuilder.build());
         }
     }
+
+    private static String uriScheme(String uriTemplate) {
+        if (uriTemplate == null) {
+            return null;
+        }
+
+        int colon = uriTemplate.indexOf(':');
+        if (colon <= 0) {
+            return null;
+        }
+
+        String scheme = uriTemplate.substring(0, colon);
+        return scheme.matches("[A-Za-z][A-Za-z0-9+.-]*") ? scheme : null;
+    }
+
 }
