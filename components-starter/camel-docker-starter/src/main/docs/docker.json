@@ -71,13 +71,6 @@
       "sourceType": "org.apache.camel.component.docker.springboot.DockerComponentConfiguration"
     },
     {
-      "name": "camel.component.docker.follow-redirect-filter",
-      "type": "java.lang.Boolean",
-      "description": "Whether to follow redirect filter",
-      "sourceType": "org.apache.camel.component.docker.springboot.DockerComponentConfiguration",
-      "defaultValue": false
-    },
-    {
       "name": "camel.component.docker.host",
       "type": "java.lang.String",
       "description": "Docker host. In socket mode (socket=true), the path of the unix socket of the Docker daemon, where the default localhost means \/var\/run\/docker.sock. A host with a tcp:\/\/ or unix:\/\/ scheme (such as tcp:\/\/myhost:2376 or unix:\/\/\/var\/run\/docker.sock) is used as is, and then the port and socket options are not used.",
@@ -88,13 +81,6 @@
       "name": "camel.component.docker.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
-      "sourceType": "org.apache.camel.component.docker.springboot.DockerComponentConfiguration",
-      "defaultValue": false
-    },
-    {
-      "name": "camel.component.docker.logging-filter",
-      "type": "java.lang.Boolean",
-      "description": "Whether to use logging filter",
       "sourceType": "org.apache.camel.component.docker.springboot.DockerComponentConfiguration",
       "defaultValue": false
     },
@@ -170,6 +156,24 @@
       "type": "java.lang.String",
       "description": "User name to authenticate with",
       "sourceType": "org.apache.camel.component.docker.springboot.DockerComponentConfiguration"
+    },
+    {
+      "name": "camel.component.docker.follow-redirect-filter",
+      "type": "java.lang.Boolean",
+      "description": "Whether to follow redirect filter. Deprecation note: Not used: nothing reads this option when the Docker client is built",
+      "sourceType": "org.apache.camel.component.docker.springboot.DockerComponentConfiguration",
+      "defaultValue": false,
+      "deprecated": true,
+      "deprecation": {}
+    },
+    {
+      "name": "camel.component.docker.logging-filter",
+      "type": "java.lang.Boolean",
+      "description": "Whether to use logging filter. Deprecation note: Not used: nothing reads this option when the Docker client is built",
+      "sourceType": "org.apache.camel.component.docker.springboot.DockerComponentConfiguration",
+      "defaultValue": false,
+      "deprecated": true,
+      "deprecation": {}
     }
   ],
   "hints": [],

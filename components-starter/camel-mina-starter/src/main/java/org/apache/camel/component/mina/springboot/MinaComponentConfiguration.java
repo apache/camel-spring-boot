@@ -94,11 +94,6 @@ public class MinaComponentConfiguration
      */
     private Boolean muteException = true;
     /**
-     * If sync is enabled this option dictates MinaConsumer which logging level
-     * to use when logging a there is no reply to send back.
-     */
-    private LoggingLevel noReplyLogLevel = LoggingLevel.WARN;
-    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -143,6 +138,12 @@ public class MinaComponentConfiguration
      * Number of worker threads in the worker pool for TCP and UDP
      */
     private Integer maximumPoolSize = 16;
+    /**
+     * The logging level to use when there is nothing to send: on the consumer
+     * (if sync is enabled) when there is no reply to send back, and on the
+     * producer when the message has no body.
+     */
+    private LoggingLevel noReplyLogLevel = LoggingLevel.WARN;
     /**
      * Whether to use ordered thread pool, to ensure events are processed
      * orderly on the same channel.
@@ -296,14 +297,6 @@ public class MinaComponentConfiguration
         this.muteException = muteException;
     }
 
-    public LoggingLevel getNoReplyLogLevel() {
-        return noReplyLogLevel;
-    }
-
-    public void setNoReplyLogLevel(LoggingLevel noReplyLogLevel) {
-        this.noReplyLogLevel = noReplyLogLevel;
-    }
-
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
@@ -358,6 +351,14 @@ public class MinaComponentConfiguration
 
     public void setMaximumPoolSize(Integer maximumPoolSize) {
         this.maximumPoolSize = maximumPoolSize;
+    }
+
+    public LoggingLevel getNoReplyLogLevel() {
+        return noReplyLogLevel;
+    }
+
+    public void setNoReplyLogLevel(LoggingLevel noReplyLogLevel) {
+        this.noReplyLogLevel = noReplyLogLevel;
     }
 
     public Boolean getOrderedThreadPoolExecutor() {
