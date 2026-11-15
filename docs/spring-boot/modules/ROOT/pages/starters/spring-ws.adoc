@@ -3,7 +3,7 @@
 = Spring WebService
 :artifactid: camel-spring-ws-starter
 
-Access external web services as a client or expose your own web services.
+Expose SOAP services, or send requests to SOAP services, using Spring Web Services.
 
 == What's inside
 
@@ -32,5 +32,5 @@ The starter supports 5 options, which are listed below.
 | camel.component.spring-ws.bridge-error-handler | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | camel.component.spring-ws.enabled | Whether to enable auto configuration of the spring-ws component. This is enabled by default. |  | Boolean
 | camel.component.spring-ws.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.spring-ws.use-global-ssl-context-parameters | Enable usage of global SSL context parameters. | false | Boolean
+| camel.component.spring-ws.use-global-ssl-context-parameters | Whether to use the global SSL context parameters of the CamelContext for each endpoint that the component creates and that has no sslContextParameters. The producer uses them for the HTTPS requests that it sends, as described for the sslContextParameters option. The consumer does not use them. | false | Boolean
 |===

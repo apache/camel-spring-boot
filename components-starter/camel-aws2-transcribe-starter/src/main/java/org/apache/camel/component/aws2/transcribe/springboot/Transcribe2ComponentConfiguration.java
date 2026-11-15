@@ -21,6 +21,7 @@ import org.apache.camel.component.aws2.transcribe.Transcribe2Configuration;
 import org.apache.camel.component.aws2.transcribe.Transcribe2Operations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import software.amazon.awssdk.core.Protocol;
 import software.amazon.awssdk.services.transcribe.TranscribeClient;
 
@@ -74,8 +75,11 @@ public class Transcribe2ComponentConfiguration
      */
     private String profileCredentialsName;
     /**
-     * To define a proxy protocol when instantiating the Transcribe client
+     * The protocol to use when instantiating the Transcribe client. Deprecation
+     * note: Not used: nothing reads this option when the Transcribe client is
+     * built
      */
+    @Deprecated
     private Protocol protocol = Protocol.HTTPS;
     /**
      * To define a proxy host when instantiating the Transcribe client
@@ -204,10 +208,13 @@ public class Transcribe2ComponentConfiguration
         this.profileCredentialsName = profileCredentialsName;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Protocol getProtocol() {
         return protocol;
     }
 
+    @Deprecated
     public void setProtocol(Protocol protocol) {
         this.protocol = protocol;
     }

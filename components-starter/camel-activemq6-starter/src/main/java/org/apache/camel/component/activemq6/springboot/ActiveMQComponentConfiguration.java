@@ -292,7 +292,7 @@ public class ActiveMQComponentConfiguration
      * This can be turned off by setting eagerPoisonBody=false. See also the
      * option eagerLoadingOfProperties.
      */
-    private String eagerPoisonBody = "Poison JMS message due to ${exception.message}";
+    private String eagerPoisonBody = "Poison JMS message payload: ${exception.message}";
     /**
      * Specifies whether the listener session should be exposed when consuming
      * messages.
