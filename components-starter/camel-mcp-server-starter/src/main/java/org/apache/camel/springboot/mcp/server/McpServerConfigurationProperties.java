@@ -16,6 +16,7 @@
  */
 package org.apache.camel.springboot.mcp.server;
 
+import org.apache.camel.component.mcp.server.McpServerConstants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -37,21 +38,44 @@ public class McpServerConfigurationProperties {
     private boolean enabled = true;
 
     /**
-     * Comma-separated list of ai-tool tags to expose as MCP tools. Only tools registered under one of these tags are
-     * exposed; the untagged default pool is never exposed. When not set, no tools are exposed.
+     * Whether to replace Spring AI's default Streamable HTTP transport with Camel's transport.
+     * When unset, replacement is enabled only when {@code tags} is configured. Set this to true
+     * to enable Camel Origin validation and caller-context extraction without Camel routes, or
+     * false to keep Spring AI's provider while leaving the Camel bridge independently enabled.
+     */
+    private Boolean transportEnabled;
+
+    /**
+     * Comma-separated tag patterns used to select ai-tool, ai-resource, and ai-prompt routes for MCP exposure.
+     * Only matching routes are published; the untagged default pools are never exposed. When not set,
+     * no Camel tools, resources, resource templates, or prompts are published.
      */
     private String tags;
 
     /**
      * Per-call tool execution timeout in milliseconds. A call exceeding the timeout returns an error result to the MCP
      * client; the underlying route keeps running until it completes on its own.
+          * The default is 20000 milliseconds.
+*/
+    private long toolTimeout = McpServerConstants.DEFAULT_TOOL_TIMEOUT;
+
+    /**
+     * Per-read resource execution timeout in milliseconds. A read exceeding the timeout returns an error
+     * to the MCP client; the underlying route keeps running until it completes on its own.
      */
-    private long toolTimeout = 20000;
+    private long resourceTimeout = McpServerConstants.DEFAULT_RESOURCE_TIMEOUT;
+
+    /**
+     * Per-request prompt execution timeout in milliseconds. A request exceeding the timeout returns an error
+     * to the MCP client; the underlying route may continue running until it completes.
+     */
+    private long promptTimeout = McpServerConstants.DEFAULT_PROMPT_TIMEOUT;
 
     /**
      * Comma-separated list of origins allowed to call the Streamable HTTP MCP endpoint.
      * Entries may be exact origins or use a wildcard port, for example http://localhost:*.
      * When unset, only loopback origins are allowed. Requests without an Origin header are accepted.
+     * This setting is applied when Camel's Streamable HTTP transport provider is selected.
      */
     private String allowedOrigins;
 
@@ -61,6 +85,14 @@ public class McpServerConfigurationProperties {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Boolean getTransportEnabled() {
+        return transportEnabled;
+    }
+
+    public void setTransportEnabled(Boolean transportEnabled) {
+        this.transportEnabled = transportEnabled;
     }
 
     public String getTags() {
@@ -77,6 +109,22 @@ public class McpServerConfigurationProperties {
 
     public void setToolTimeout(long toolTimeout) {
         this.toolTimeout = toolTimeout;
+    }
+
+    public long getResourceTimeout() {
+        return resourceTimeout;
+    }
+
+    public void setResourceTimeout(long resourceTimeout) {
+        this.resourceTimeout = resourceTimeout;
+    }
+
+    public long getPromptTimeout() {
+        return promptTimeout;
+    }
+
+    public void setPromptTimeout(long promptTimeout) {
+        this.promptTimeout = promptTimeout;
     }
 
     public String getAllowedOrigins() {

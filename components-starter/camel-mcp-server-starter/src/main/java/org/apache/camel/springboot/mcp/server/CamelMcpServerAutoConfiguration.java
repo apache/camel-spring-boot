@@ -30,6 +30,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
+import org.springframework.util.StringUtils;
 
 /**
  * Auto-configures the Camel MCP server bridge over the Spring AI MCP server: every ai-tool route whose tags match
@@ -55,21 +57,54 @@ public class CamelMcpServerAutoConfiguration {
     // Camel handles the lifecycle of this bean
     @ConditionalOnMissingBean(McpServerBridge.class)
     McpServerBridge camelMcpServerBridge(
-            CamelContext camelContext, McpServerConfigurationProperties properties)
+            CamelContext camelContext, McpServerConfigurationProperties properties, Environment environment)
             throws Exception {
+        warnIfTransportIsNotActive(properties, environment);
         McpServerConfiguration configuration = new McpServerConfiguration();
         configuration.setTags(properties.getTags());
         configuration.setToolTimeout(properties.getToolTimeout());
+        configuration.setResourceTimeout(properties.getResourceTimeout());
+        configuration.setPromptTimeout(properties.getPromptTimeout());
         McpServerBridge bridge = new McpServerBridge(configuration);
         camelContext.addService(bridge);
         if (properties.getTags() != null && !properties.getTags().isBlank()) {
             // exposing tools is opt-in, but once opted in the endpoint is reachable by anything that can reach
             // the application HTTP port - spring.ai.mcp.server.* has no authentication of its own
-            LOG.info("Exposing ai-tool routes tagged [{}] as MCP tools. The MCP endpoint is served on the"
+            LOG.info("Exposing Camel MCP routes tagged [{}] as MCP capabilities. The MCP endpoint is served on the"
                      + " application HTTP port and is not authenticated by the Spring AI MCP server; secure it in"
                      + " the application, for example with a Spring Security filter chain on its path.",
                     properties.getTags());
         }
         return bridge;
     }
+    private static void warnIfTransportIsNotActive(
+            McpServerConfigurationProperties properties, Environment environment) {
+
+        boolean tagsConfigured = StringUtils.hasText(properties.getTags());
+        boolean originsConfigured = StringUtils.hasText(properties.getAllowedOrigins());
+        boolean transportExplicitlyEnabled = Boolean.TRUE.equals(properties.getTransportEnabled());
+        if (!tagsConfigured && !originsConfigured && !transportExplicitlyEnabled) {
+            return;
+        }
+
+        String protocol = environment.getProperty("spring.ai.mcp.server.protocol");
+        if (!"STREAMABLE".equalsIgnoreCase(protocol)) {
+            LOG.warn("Camel MCP routes or Origin settings are configured, but "
+                     + "spring.ai.mcp.server.protocol is not STREAMABLE. Camel's Origin validation "
+                     + "and authenticated caller-context extraction are not active; configure "
+                     + "spring.ai.mcp.server.protocol=STREAMABLE to enable them.");
+            return;
+        }
+
+        boolean transportActive = properties.getTransportEnabled() != null
+                ? properties.getTransportEnabled()
+                : tagsConfigured;
+        if (!transportActive) {
+            LOG.warn("Camel MCP routes or Origin settings are configured, but Camel's Streamable HTTP "
+                     + "transport replacement is disabled. Origin validation and caller-context "
+                     + "extraction are not installed. Set camel.mcp-server.transport-enabled=true "
+                     + "or configure those features on the application-provided transport.");
+        }
+    }
+
 }

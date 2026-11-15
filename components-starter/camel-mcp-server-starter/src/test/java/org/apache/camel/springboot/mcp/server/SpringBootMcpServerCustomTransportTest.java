@@ -19,7 +19,6 @@ package org.apache.camel.springboot.mcp.server;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.Base64;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -27,7 +26,6 @@ import io.modelcontextprotocol.client.McpClient;
 import io.modelcontextprotocol.client.McpSyncClient;
 import io.modelcontextprotocol.client.transport.HttpClientStreamableHttpTransport;
 import io.modelcontextprotocol.json.jackson3.JacksonMcpJsonMapper;
-import io.modelcontextprotocol.server.transport.DefaultServerTransportSecurityValidator;
 import io.modelcontextprotocol.spec.McpSchema;
 import org.apache.camel.component.mcp.server.McpToolCallContext;
 import org.apache.camel.builder.RouteBuilder;
@@ -139,12 +137,9 @@ public class SpringBootMcpServerCustomTransportTest {
                     .mcpEndpoint(serverProperties.getMcpEndpoint())
                     .keepAliveInterval(serverProperties.getKeepAliveInterval())
                     .disallowDelete(serverProperties.isDisallowDelete())
-                    .securityValidator(DefaultServerTransportSecurityValidator.builder()
-                            .allowedOrigins(List.of(
-                                    "http://localhost:*",
-                                    "https://localhost:*"))
-                            .build())
-                    .contextExtractor(SpringAiMcpTransportContext::extract)
+                    .securityValidator(CamelMcpServerTransportAutoConfiguration.createOriginValidator(null))
+                    .contextExtractor(request -> SpringAiMcpTransportContext.extract(
+                            request, Map.of("application", "custom-provider")))
                     .build();
         }
 

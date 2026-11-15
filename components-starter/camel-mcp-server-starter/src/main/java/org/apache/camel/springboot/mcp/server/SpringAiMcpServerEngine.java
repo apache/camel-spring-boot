@@ -29,6 +29,7 @@ import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.spec.McpError;
 import io.modelcontextprotocol.spec.McpSchema;
 import org.apache.camel.CamelContext;
+import org.apache.camel.component.ai.resource.AiResourceUriTemplate;
 import org.apache.camel.component.ai.tool.AiToolAnnotations;
 import org.apache.camel.component.mcp.server.McpPromptMessage;
 import org.apache.camel.component.mcp.server.McpPromptResult;
@@ -96,33 +97,38 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
         }
 
         String schema = tool.inputSchemaJson() != null ? tool.inputSchemaJson() : EMPTY_OBJECT_SCHEMA;
-        McpSchema.Tool.Builder builder = McpSchema.Tool.builder(tool.name(), jsonMapper, schema)
-                .description(tool.description());
+        try {
+            McpSchema.Tool.Builder builder = McpSchema.Tool.builder(tool.name(), jsonMapper, schema)
+                    .description(tool.description());
 
-        if (tool.outputSchemaJson() != null && !tool.outputSchemaJson().isBlank()) {
-            builder.outputSchema(jsonMapper, tool.outputSchemaJson());
+            if (tool.outputSchemaJson() != null && !tool.outputSchemaJson().isBlank()) {
+                builder.outputSchema(jsonMapper, tool.outputSchemaJson());
+            }
+
+            applyAnnotations(builder, tool.annotations());
+            McpSchema.Tool mcpTool = builder.build();
+            McpServerFeatures.SyncToolSpecification spec = McpServerFeatures.SyncToolSpecification.builder()
+                    .tool(mcpTool)
+                    .callHandler((exchange, request) -> {
+                        Map<String, Object> arguments = request.arguments() != null ? request.arguments() : Map.of();
+                        McpToolCallResult result = tool.handler().call(
+                                arguments, SpringAiMcpTransportContext.from(exchange));
+                        McpSchema.CallToolResult.Builder resultBuilder = McpSchema.CallToolResult.builder()
+                                .addTextContent(result.text())
+                                .isError(result.isError());
+
+                        if (result.structuredContent() != null) {
+                            resultBuilder.structuredContent(result.structuredContent());
+                        }
+
+                        return resultBuilder.build();
+                    })
+                    .build();
+            server.addTool(spec);
+        } catch (IllegalArgumentException e) {
+            throw new McpServerRefusedException(
+                    "MCP tool '" + tool.name() + "' has an invalid input or output schema: " + e.getMessage(), e);
         }
-
-        applyAnnotations(builder, tool.annotations());
-        McpSchema.Tool mcpTool = builder.build();
-        McpServerFeatures.SyncToolSpecification spec = McpServerFeatures.SyncToolSpecification.builder()
-                .tool(mcpTool)
-                .callHandler((exchange, request) -> {
-                    Map<String, Object> arguments = request.arguments() != null ? request.arguments() : Map.of();
-                    McpToolCallResult result = tool.handler().call(
-                            arguments, SpringAiMcpTransportContext.from(exchange));
-                    McpSchema.CallToolResult.Builder resultBuilder = McpSchema.CallToolResult.builder()
-                            .addTextContent(result.text())
-                            .isError(result.isError());
-
-                    if (result.structuredContent() != null) {
-                        resultBuilder.structuredContent(result.structuredContent());
-                    }
-
-                    return resultBuilder.build();
-                })
-                .build();
-        server.addTool(spec);
         LOG.debug("MCP tool added: {}", tool.name());
     }
 
@@ -160,18 +166,18 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
                             McpSchema.ResourceContents contents;
 
                             if (result.blob() != null) {
-                                contents = new McpSchema.BlobResourceContents(
-                                        resource.uri(),
-                                        resource.mimeType(),
-                                        Base64.getEncoder().encodeToString(result.blob()));
+                                contents = McpSchema.BlobResourceContents.builder(
+                                resource.uri(),
+                                Base64.getEncoder().encodeToString(result.blob()))
+                                .mimeType(resource.mimeType())
+                                .build();
                             } else {
-                                contents = new McpSchema.TextResourceContents(
-                                        resource.uri(),
-                                        resource.mimeType(),
-                                        result.text());
+                                contents = McpSchema.TextResourceContents.builder(resource.uri(), result.text())
+                                .mimeType(resource.mimeType())
+                                .build();
                             }
 
-                            return new McpSchema.ReadResourceResult(List.of(contents));
+                            return McpSchema.ReadResourceResult.builder(List.of(contents)).build();
                         });
 
         server.addResource(spec);
@@ -196,10 +202,36 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
     @Override
     public void resourceTemplateAdded(McpServerResourceTemplate resourceTemplate) {
-        if (server.listResourceTemplates().stream()
+        List<McpSchema.ResourceTemplate> existingTemplates = server.listResourceTemplates();
+        if (existingTemplates.stream()
                 .anyMatch(existing -> existing.uriTemplate().equals(resourceTemplate.uriTemplate()))) {
             throw new McpServerRefusedException(
                     "An MCP resource template '" + resourceTemplate.uriTemplate() + "' is already registered");
+        }
+
+        AiResourceUriTemplate candidate;
+        try {
+            candidate = new AiResourceUriTemplate(resourceTemplate.uriTemplate());
+        } catch (IllegalArgumentException e) {
+            throw new McpServerRefusedException(
+                    "Invalid MCP resource template '" + resourceTemplate.uriTemplate() + "': " + e.getMessage(), e);
+        }
+
+        for (McpSchema.ResourceTemplate existing : existingTemplates) {
+            AiResourceUriTemplate existingMatcher;
+            try {
+                existingMatcher = new AiResourceUriTemplate(existing.uriTemplate());
+            } catch (IllegalArgumentException e) {
+                // Fail closed: Camel cannot prove that an unsupported Spring template does not overlap.
+                throw new McpServerRefusedException(
+                        "Cannot safely check whether MCP resource template '" + resourceTemplate.uriTemplate()
+                                + "' overlaps existing Spring template '" + existing.uriTemplate() + "'", e);
+            }
+            if (candidate.overlaps(existingMatcher)) {
+                throw new McpServerRefusedException(
+                        "MCP resource template '" + resourceTemplate.uriTemplate()
+                                + "' overlaps existing template '" + existing.uriTemplate() + "'");
+            }
         }
 
         McpSchema.ResourceTemplate.Builder builder = McpSchema.ResourceTemplate
@@ -227,18 +259,18 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
                             McpSchema.ResourceContents contents;
 
                             if (result.blob() != null) {
-                                contents = new McpSchema.BlobResourceContents(
-                                        request.uri(),
-                                        resourceTemplate.mimeType(),
-                                        Base64.getEncoder().encodeToString(result.blob()));
+                                contents = McpSchema.BlobResourceContents.builder(
+                                request.uri(),
+                                Base64.getEncoder().encodeToString(result.blob()))
+                                .mimeType(resourceTemplate.mimeType())
+                                .build();
                             } else {
-                                contents = new McpSchema.TextResourceContents(
-                                        request.uri(),
-                                        resourceTemplate.mimeType(),
-                                        result.text());
+                                contents = McpSchema.TextResourceContents.builder(request.uri(), result.text())
+                                .mimeType(resourceTemplate.mimeType())
+                                .build();
                             }
 
-                            return new McpSchema.ReadResourceResult(List.of(contents));
+                            return McpSchema.ReadResourceResult.builder(List.of(contents)).build();
                         });
 
         server.addResourceTemplate(spec);
@@ -248,11 +280,21 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
     @Override
     public void resourceTemplateRemoved(String uriTemplate) {
         try {
+            boolean registered = server.listResourceTemplates().stream()
+                    .anyMatch(existing -> existing.uriTemplate().equals(uriTemplate));
+            if (!registered) {
+                LOG.debug("MCP resource template was not registered; nothing to remove: {}", uriTemplate);
+                return;
+            }
+
             server.removeResourceTemplate(uriTemplate);
 
-            // The MCP SDK does not emit resources/list_changed for template removal.
-            // Keep this explicit notification so clients see route lifecycle changes.
-            server.notifyResourcesListChanged();
+            McpSchema.ServerCapabilities capabilities = server.getServerCapabilities();
+            if (capabilities != null && capabilities.resources() != null
+                    && Boolean.TRUE.equals(capabilities.resources().listChanged())) {
+                // MCP Java SDK 2.1.0 does not notify on template removal; notify only when advertised.
+                server.notifyResourcesListChanged();
+            }
 
             LOG.debug("MCP resource template removed: {}", uriTemplate);
         } catch (Exception e) {
@@ -297,9 +339,7 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
     }
 
     private static McpSchema.Resource buildMcpResource(McpServerResource resource) {
-        McpSchema.Resource.Builder builder = McpSchema.Resource.builder()
-                .uri(resource.uri())
-                .name(resource.name())
+        McpSchema.Resource.Builder builder = McpSchema.Resource.builder(resource.uri(), resource.name())
                 .description(resource.description())
                 .mimeType(resource.mimeType());
 

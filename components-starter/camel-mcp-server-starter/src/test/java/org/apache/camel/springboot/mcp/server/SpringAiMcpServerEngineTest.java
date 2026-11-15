@@ -16,12 +16,26 @@
  */
 package org.apache.camel.springboot.mcp.server;
 
+import java.util.List;
+import java.util.Map;
+
+import io.modelcontextprotocol.server.McpServerFeatures;
 import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.spec.McpSchema;
+import org.apache.camel.component.mcp.server.McpResourceTemplateReadHandler;
+import org.apache.camel.component.mcp.server.McpServerRefusedException;
+import org.apache.camel.component.mcp.server.McpServerResourceTemplate;
+import org.apache.camel.component.mcp.server.McpServerTool;
+import org.apache.camel.component.mcp.server.McpToolCallHandler;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class SpringAiMcpServerEngineTest {
@@ -51,4 +65,137 @@ class SpringAiMcpServerEngineTest {
         assertThat(engine.supportsResourceTemplates()).isTrue();
         assertThat(engine.supportsPrompts()).isTrue();
     }
+    @Test
+    void refusesOverlappingSpringDefinedResourceTemplates() {
+        McpSyncServer server = mock(McpSyncServer.class);
+        SpringAiMcpServerEngine engine = new SpringAiMcpServerEngine(server);
+        McpSchema.ResourceTemplate existing = McpSchema.ResourceTemplate
+                .builder("camel:///customers/{id}", "spring-customers")
+                .build();
+        when(server.listResourceTemplates()).thenReturn(List.of(existing));
+
+        assertThatThrownBy(() -> engine.resourceTemplateAdded(
+                resourceTemplate("camel:///customers/{customerId}")))
+                .isInstanceOf(McpServerRefusedException.class)
+                .hasMessageContaining("overlaps")
+                .hasMessageContaining("camel:///customers/{id}");
+
+        verify(server, never()).addResourceTemplate(any());
+    }
+
+    @Test
+    void translatesInvalidToolSchemaIntoServerRefusal() {
+        McpSyncServer server = mock(McpSyncServer.class);
+        SpringAiMcpServerEngine engine = new SpringAiMcpServerEngine(server);
+        when(server.listTools()).thenReturn(List.of());
+        doThrow(new IllegalArgumentException("invalid JSON schema"))
+                .when(server).addTool(any(McpServerFeatures.SyncToolSpecification.class));
+
+        assertThatThrownBy(() -> engine.toolAdded(toolWithInvalidOutputSchema()))
+                .isInstanceOf(McpServerRefusedException.class)
+                .hasMessageContaining("invalid input or output schema")
+                .hasCauseInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void notifiesTemplateRemovalOnlyWhenAdvertisedAndActuallyRemoved() {
+        String uriTemplate = "camel:///customers/{id}";
+        McpSchema.ResourceTemplate template = McpSchema.ResourceTemplate
+                .builder(uriTemplate, "customers")
+                .build();
+
+        McpSyncServer notifyingServer = mock(McpSyncServer.class);
+        when(notifyingServer.listResourceTemplates()).thenReturn(List.of(template));
+        when(notifyingServer.getServerCapabilities()).thenReturn(
+                new McpSchema.ServerCapabilities(
+                        null, null, null, null,
+                        new McpSchema.ServerCapabilities.ResourceCapabilities(false, true), null));
+        new SpringAiMcpServerEngine(notifyingServer).resourceTemplateRemoved(uriTemplate);
+        verify(notifyingServer).removeResourceTemplate(uriTemplate);
+        verify(notifyingServer).notifyResourcesListChanged();
+
+        McpSyncServer nonNotifyingServer = mock(McpSyncServer.class);
+        when(nonNotifyingServer.listResourceTemplates()).thenReturn(List.of(template));
+        when(nonNotifyingServer.getServerCapabilities()).thenReturn(
+                new McpSchema.ServerCapabilities(
+                        null, null, null, null,
+                        new McpSchema.ServerCapabilities.ResourceCapabilities(false, false), null));
+        new SpringAiMcpServerEngine(nonNotifyingServer).resourceTemplateRemoved(uriTemplate);
+        verify(nonNotifyingServer).removeResourceTemplate(uriTemplate);
+        verify(nonNotifyingServer, never()).notifyResourcesListChanged();
+
+        McpSyncServer absentServer = mock(McpSyncServer.class);
+        when(absentServer.listResourceTemplates()).thenReturn(List.of());
+        when(absentServer.getServerCapabilities()).thenReturn(
+                new McpSchema.ServerCapabilities(
+                        null, null, null, null,
+                        new McpSchema.ServerCapabilities.ResourceCapabilities(false, true), null));
+        new SpringAiMcpServerEngine(absentServer).resourceTemplateRemoved(uriTemplate);
+        verify(absentServer, never()).removeResourceTemplate(uriTemplate);
+        verify(absentServer, never()).notifyResourcesListChanged();
+    }
+
+    private static McpServerResourceTemplate resourceTemplate(String uriTemplate) {
+        return new McpServerResourceTemplate() {
+            @Override
+            public String uriTemplate() {
+                return uriTemplate;
+            }
+
+            @Override
+            public String name() {
+                return "customer-template";
+            }
+
+            @Override
+            public String description() {
+                return "Customer selected by id";
+            }
+
+            @Override
+            public String mimeType() {
+                return "text/plain";
+            }
+
+            @Override
+            public McpResourceTemplateReadHandler handler() {
+                return null;
+            }
+        };
+    }
+
+    private static McpServerTool toolWithInvalidOutputSchema() {
+        return new McpServerTool() {
+            @Override
+            public String name() {
+                return "invalid_schema_tool";
+            }
+
+            @Override
+            public String description() {
+                return "Tool with invalid output schema";
+            }
+
+            @Override
+            public String inputSchemaJson() {
+                return "{\"type\":\"object\"}";
+            }
+
+            @Override
+            public Map<String, org.apache.camel.component.ai.tool.AiToolParameterHelper.ParameterDef> parameters() {
+                return Map.of();
+            }
+
+            @Override
+            public McpToolCallHandler handler() {
+                return null;
+            }
+
+            @Override
+            public String outputSchemaJson() {
+                return "{\"type\":\"obj\"}";
+            }
+        };
+    }
+
 }

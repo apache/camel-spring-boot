@@ -18,7 +18,6 @@ package org.apache.camel.springboot.mcp.server;
 
 import java.lang.reflect.Method;
 import java.security.Principal;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -43,8 +42,10 @@ import org.springframework.web.servlet.function.ServerRequest;
  * <p>
  * Spring authorities with the ROLE_ prefix are exposed without that prefix. SCOPE_ authorities
  * are mapped to OAuth scopes, and FACTOR_ authorities are not treated as application roles.
- * When the principal is a JwtAuthenticationToken, its subject, scopes and claims are also
- * propagated to the Camel tool exchange.
+ * When the principal is a Spring OAuth2 token authentication, including JWT and opaque bearer-token
+ * authentication, its subject and token attributes are also propagated to the Camel tool exchange.
+ * Only Spring Security authorities are used to derive Camel roles and scopes; raw token claims are
+ * retained as OAuth claims and never promoted to authorization roles.
  * <p>
  * Applications that provide their own {@code WebMvcStreamableServerTransportProvider}
  * can preserve caller identity by installing
@@ -52,15 +53,16 @@ import org.springframework.web.servlet.function.ServerRequest;
  */
 public final class SpringAiMcpTransportContext {
 
-    static final String CALL_CONTEXT_KEY =
+    /** Key used to store Camel's authenticated caller context in the MCP transport context. */
+    public static final String CALL_CONTEXT_KEY =
             SpringAiMcpTransportContext.class.getName() + ".toolCallContext";
 
     private static final String AUTHENTICATION_CLASS =
             "org.springframework.security.core.Authentication";
     private static final String GRANTED_AUTHORITY_CLASS =
             "org.springframework.security.core.GrantedAuthority";
-    private static final String JWT_AUTHENTICATION_CLASS =
-            "org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken";
+    private static final String OAUTH2_TOKEN_AUTHENTICATION_CLASS =
+            "org.springframework.security.oauth2.server.resource.authentication.AbstractOAuth2TokenAuthenticationToken";
 
     private static final ClassValue<AuthenticationAccessors> ACCESSORS = new ClassValue<>() {
         @Override
@@ -82,9 +84,10 @@ public final class SpringAiMcpTransportContext {
 
                 Method getTokenAttributes = null;
                 try {
-                    Class<?> jwtAuthenticationType = Class.forName(JWT_AUTHENTICATION_CLASS, false, loader);
-                    if (jwtAuthenticationType.isAssignableFrom(type)) {
-                        getTokenAttributes = jwtAuthenticationType.getMethod("getTokenAttributes");
+                    Class<?> oauth2TokenAuthenticationType =
+                            Class.forName(OAUTH2_TOKEN_AUTHENTICATION_CLASS, false, loader);
+                    if (oauth2TokenAuthenticationType.isAssignableFrom(type)) {
+                        getTokenAttributes = oauth2TokenAuthenticationType.getMethod("getTokenAttributes");
                     }
                 } catch (ReflectiveOperationException | LinkageError | SecurityException ignored) {
                     // OAuth2 Resource Server is optional.
@@ -107,12 +110,33 @@ public final class SpringAiMcpTransportContext {
      * @return an MCP transport context containing the caller, or the empty context
      */
     public static McpTransportContext extract(ServerRequest request) {
-        Principal principal = request.principal().orElse(null);
-        if (principal == null) {
-            return McpTransportContext.EMPTY;
+        return extract(request, Map.of());
+    }
+
+    /**
+     * Extracts the authenticated caller and composes Camel's caller context with application-owned entries.
+     * The Camel caller-context key is reserved and cannot be replaced by an application entry.
+     *
+     * @param request the Spring MVC request received by the MCP transport
+     * @param additionalEntries application-owned transport-context entries; may be null
+     * @return the composed transport context, or the empty context when it has no entries
+     */
+    public static McpTransportContext extract(ServerRequest request, Map<String, ?> additionalEntries) {
+        Map<String, Object> context = new LinkedHashMap<>();
+        if (additionalEntries != null) {
+            additionalEntries.forEach((key, value) -> {
+                if (key != null && value != null && !CALL_CONTEXT_KEY.equals(key)) {
+                    context.put(key, value);
+                }
+            });
         }
 
-        return McpTransportContext.create(Map.of(CALL_CONTEXT_KEY, toCallContext(principal)));
+        Principal principal = request.principal().orElse(null);
+        if (principal != null) {
+            context.put(CALL_CONTEXT_KEY, toCallContext(principal));
+        }
+
+        return context.isEmpty() ? McpTransportContext.EMPTY : McpTransportContext.create(context);
     }
 
     /**
@@ -150,9 +174,6 @@ public final class SpringAiMcpTransportContext {
                 oauthSubject = value;
             }
 
-            addScopeClaim(scopes, claims.get("scope"));
-            addScopeClaim(scopes, claims.get("scp"));
-            addClaimRoles(claims, roles);
         }
 
         return new McpToolCallContext(
@@ -240,55 +261,37 @@ public final class SpringAiMcpTransportContext {
         }
     }
 
-    private static void addScopeClaim(Set<String> scopes, Object value) {
-        if (value instanceof String text) {
-            for (String scope : text.trim().split("\\s+")) {
-                addScope(scopes, scope);
-            }
-        } else if (value instanceof Iterable<?> values) {
-            for (Object scope : values) {
-                if (scope instanceof String name) {
-                    addScope(scopes, name);
-                }
-            }
-        }
-    }
-
     private static void addScope(Set<String> scopes, String scope) {
         if (scope != null && !scope.isBlank()) {
             scopes.add(scope);
         }
     }
 
-    /**
-     * Mirrors the common claim shapes supported by the Camel Main MCP engine.
-     * The first available claim shape wins: roles, realm_access.roles, then groups.
-     */
-    private static void addClaimRoles(Map<String, Object> claims, Set<String> roles) {
-        Object value = claims.get("roles");
+    private static final class AuthenticationAccessors {
 
-        if (!(value instanceof Collection<?>)) {
-            Object realmAccess = claims.get("realm_access");
-            if (realmAccess instanceof Map<?, ?> realmMap) {
-                value = realmMap.get("roles");
-            }
-        }
-
-        if (!(value instanceof Collection<?>)) {
-            value = claims.get("groups");
-        }
-
-        if (value instanceof Collection<?> values) {
-            for (Object role : values) {
-                if (role instanceof String name) {
-                    addRole(roles, name);
-                }
-            }
-        }
-    }
-
-    private record AuthenticationAccessors(
-            Method getAuthorities, Method getAuthority, Method getTokenAttributes) {
         private static final AuthenticationAccessors NONE = new AuthenticationAccessors(null, null, null);
+
+        private final Method getAuthorities;
+        private final Method getAuthority;
+        private final Method getTokenAttributes;
+
+        private AuthenticationAccessors(
+                Method getAuthorities, Method getAuthority, Method getTokenAttributes) {
+            this.getAuthorities = getAuthorities;
+            this.getAuthority = getAuthority;
+            this.getTokenAttributes = getTokenAttributes;
+        }
+
+        private Method getAuthorities() {
+            return getAuthorities;
+        }
+
+        private Method getAuthority() {
+            return getAuthority;
+        }
+
+        private Method getTokenAttributes() {
+            return getTokenAttributes;
+        }
     }
 }

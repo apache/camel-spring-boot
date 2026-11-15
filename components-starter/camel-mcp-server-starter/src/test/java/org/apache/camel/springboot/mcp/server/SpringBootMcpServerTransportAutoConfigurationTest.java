@@ -24,6 +24,7 @@ import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.server.McpTransportContextExtractor;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.mcp.server.McpServerBridge;
+import org.apache.camel.component.mcp.server.McpServerConfiguration;
 import org.apache.camel.component.mcp.server.McpServerEngine;
 import org.apache.camel.component.mcp.server.McpToolCallContext;
 import org.junit.jupiter.api.Test;
@@ -41,8 +42,7 @@ import static org.mockito.Mockito.when;
 
 class SpringBootMcpServerTransportAutoConfigurationTest {
 
-    private static final String CALL_CONTEXT_KEY =
-            SpringAiMcpTransportContext.class.getName() + ".toolCallContext";
+    private static final String CALL_CONTEXT_KEY = SpringAiMcpTransportContext.CALL_CONTEXT_KEY;
 
     private final WebApplicationContextRunner contextRunner = new WebApplicationContextRunner()
             .withBean(CamelContext.class, () -> mock(CamelContext.class))
@@ -55,8 +55,8 @@ class SpringBootMcpServerTransportAutoConfigurationTest {
             .withPropertyValues("spring.ai.mcp.server.protocol=STREAMABLE");
 
     @Test
-    void camelTransportIsUsedByDefaultAndExtractsCallerContext() {
-        contextRunner.run(context -> {
+    void camelTransportIsUsedWhenCamelRoutesAreSelected() {
+        contextRunner.withPropertyValues("camel.mcp-server.tags=conformance").run(context -> {
             assertThat(context).hasNotFailed();
             assertThat(context).hasSingleBean(WebMvcStreamableServerTransportProvider.class);
 
@@ -97,7 +97,7 @@ class SpringBootMcpServerTransportAutoConfigurationTest {
                         .mcpEndpoint("/custom")
                         .build();
 
-        contextRunner.withBean(
+        contextRunner.withPropertyValues("camel.mcp-server.tags=conformance").withBean(
                 "applicationProvidedProvider",
                 WebMvcStreamableServerTransportProvider.class,
                 () -> custom)
@@ -111,7 +111,9 @@ class SpringBootMcpServerTransportAutoConfigurationTest {
 
     @Test
     void wildcardOriginFailsApplicationStartup() {
-        contextRunner.withPropertyValues("camel.mcp-server.allowed-origins=*").run(context -> {
+        contextRunner.withPropertyValues(
+                "camel.mcp-server.tags=conformance",
+                "camel.mcp-server.allowed-origins=*").run(context -> {
             assertThat(context).hasFailed();
             assertThat(exceptionMessages(context.getStartupFailure()))
                     .contains("MCP allowed origin * is not supported");
@@ -140,4 +142,71 @@ class SpringBootMcpServerTransportAutoConfigurationTest {
         }
         return result.toString();
     }
+    @Test
+    void keepsSpringAiTransportWhenOnlySpringDefinedCapabilitiesAreUsed() {
+        contextRunner.run(context -> {
+            assertThat(context).hasNotFailed();
+            WebMvcStreamableServerTransportProvider provider =
+                    context.getBean(WebMvcStreamableServerTransportProvider.class);
+            McpTransportContext transportContext = extractor(provider).extract(requestWithPrincipal());
+            assertThat(transportContext.get(CALL_CONTEXT_KEY)).isNull();
+        });
+    }
+
+    @Test
+    void explicitlyEnablesCamelTransportWithoutCamelTags() {
+        contextRunner.withPropertyValues("camel.mcp-server.transport-enabled=true").run(context -> {
+            assertThat(context).hasNotFailed();
+            WebMvcStreamableServerTransportProvider provider =
+                    context.getBean(WebMvcStreamableServerTransportProvider.class);
+            McpTransportContext transportContext = extractor(provider).extract(requestWithPrincipal());
+            assertThat(transportContext.get(CALL_CONTEXT_KEY)).isInstanceOf(McpToolCallContext.class);
+        });
+    }
+
+    @Test
+    void explicitlyKeepsSpringAiTransportWhenCamelTagsAreConfigured() {
+        contextRunner.withPropertyValues(
+                "camel.mcp-server.tags=conformance",
+                "camel.mcp-server.transport-enabled=false").run(context -> {
+                    assertThat(context).hasNotFailed();
+                    WebMvcStreamableServerTransportProvider provider =
+                            context.getBean(WebMvcStreamableServerTransportProvider.class);
+                    McpTransportContext transportContext = extractor(provider).extract(requestWithPrincipal());
+                    assertThat(transportContext.get(CALL_CONTEXT_KEY)).isNull();
+                    assertThat(context).hasSingleBean(McpServerBridge.class);
+                });
+    }
+
+    @Test
+    void enabledOnUsesTheSameConditionForBridgeAndTransport() {
+        contextRunner.withPropertyValues(
+                "camel.mcp-server.enabled=on",
+                "camel.mcp-server.tags=conformance").run(context -> {
+                    assertThat(context).hasNotFailed();
+                    WebMvcStreamableServerTransportProvider provider =
+                            context.getBean(WebMvcStreamableServerTransportProvider.class);
+                    McpTransportContext transportContext = extractor(provider).extract(requestWithPrincipal());
+                    assertThat(transportContext.get(CALL_CONTEXT_KEY)).isInstanceOf(McpToolCallContext.class);
+                    assertThat(context).hasSingleBean(McpServerBridge.class);
+                });
+    }
+
+    @Test
+    void mapsToolResourceAndPromptTimeoutPropertiesIntoTheCommonBridge() {
+        contextRunner.withPropertyValues(
+                "camel.mcp-server.tags=conformance",
+                "camel.mcp-server.tool-timeout=1234",
+                "camel.mcp-server.resource-timeout=2345",
+                "camel.mcp-server.prompt-timeout=3456").run(context -> {
+                    assertThat(context).hasNotFailed();
+                    McpServerBridge bridge = context.getBean(McpServerBridge.class);
+                    McpServerConfiguration configuration = (McpServerConfiguration)
+                            ReflectionTestUtils.getField(bridge, "configuration");
+                    assertThat(configuration.getToolTimeout()).isEqualTo(1234);
+                    assertThat(configuration.getResourceTimeout()).isEqualTo(2345);
+                    assertThat(configuration.getPromptTimeout()).isEqualTo(3456);
+                });
+    }
+
 }

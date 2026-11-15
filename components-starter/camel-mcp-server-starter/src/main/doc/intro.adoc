@@ -150,14 +150,18 @@ If your MCP endpoint is configured at a path other than `/mcp`, update the
 security matchers and both canonical URL properties accordingly.
 
 For MCP tool calls, the Camel Spring Boot engine captures the authenticated
-Spring principal and its name. Spring Security authorities are normalized before
-they are passed to the Camel bridge: the `ROLE_` prefix is removed, `FACTOR_*`
-authorities are ignored, and `SCOPE_*` authorities are mapped to OAuth scopes.
-For a `JwtAuthenticationToken`, the token subject, scopes, and claims are also
-propagated. The values are available through `McpToolCallContext` exchange
-properties, allowing route-level authorization to use the authenticated caller
-as well as the HTTP security boundary. The resulting role names are unprefixed,
-for example `MCP_ADMIN` rather than `ROLE_MCP_ADMIN`.
+Spring principal and its name. Camel roles and OAuth scopes are derived only
+from the authorities supplied by Spring Security's configured authentication
+provider or JWT authority converter: the `ROLE_` prefix is removed, `FACTOR_*`
+authorities are ignored, and `SCOPE_*` authorities become OAuth scopes.
+For JWT and opaque bearer-token authentication, the token subject and raw
+attributes are also propagated through `McpToolCallContext` as OAuth data.
+Raw claims such as `roles`, `realm_access.roles`, and `groups` are not promoted
+to Camel security roles. This preserves the application's Spring Security
+authority-conversion policy. When claim-derived roles are required, configure
+the application's JWT authority converter to grant the corresponding Spring
+authorities. The resulting Camel role names are unprefixed, for example
+`MCP_ADMIN` rather than `ROLE_MCP_ADMIN`.
 
 A network policy that keeps the application port off untrusted networks is
 another useful layer of protection.

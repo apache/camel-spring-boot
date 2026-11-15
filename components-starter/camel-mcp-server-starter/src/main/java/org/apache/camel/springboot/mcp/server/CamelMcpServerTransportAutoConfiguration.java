@@ -16,12 +16,13 @@
  */
 package org.apache.camel.springboot.mcp.server;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import io.modelcontextprotocol.json.jackson3.JacksonMcpJsonMapper;
 import io.modelcontextprotocol.server.transport.DefaultServerTransportSecurityValidator;
+import io.modelcontextprotocol.server.transport.HeaderAccessor;
+import io.modelcontextprotocol.server.transport.ServerHttpHeaderValidator;
 import io.modelcontextprotocol.server.transport.ServerTransportSecurityValidator;
 import org.apache.camel.component.mcp.server.McpServerOrigins;
 import org.springframework.ai.mcp.server.common.autoconfigure.McpServerStdioDisabledCondition;
@@ -53,11 +54,13 @@ import tools.jackson.databind.json.JsonMapper;
         WebMvcStreamableServerTransportProvider.class,
         JacksonMcpJsonMapper.class
 })
-@Conditional(McpServerStdioDisabledCondition.class)
+@Conditional({
+        McpServerStdioDisabledCondition.class,
+        CamelMcpServerTransportCondition.class
+})
 @ConditionalOnProperty(
         prefix = "camel.mcp-server",
         name = "enabled",
-        havingValue = "true",
         matchIfMissing = true)
 @ConditionalOnProperty(
         prefix = "spring.ai.mcp.server",
@@ -70,11 +73,16 @@ import tools.jackson.databind.json.JsonMapper;
 })
 public class CamelMcpServerTransportAutoConfiguration {
 
-    private static final List<String> DEFAULT_ALLOWED_ORIGINS = List.of(
+    /**
+     * Default loopback origins accepted by the Camel Streamable HTTP transport.
+     * Applications that provide their own Spring AI transport can reuse this immutable list.
+     */
+    public static final List<String> DEFAULT_ALLOWED_ORIGINS = List.of(
             "http://localhost:*", "https://localhost:*",
             "http://127.0.0.1:*", "https://127.0.0.1:*",
             "http://[::1]:*", "https://[::1]:*");
 
+    @SuppressWarnings("deprecation")
     @Bean
     @ConditionalOnMissingBean(WebMvcStreamableServerTransportProvider.class)
     WebMvcStreamableServerTransportProvider webMvcStreamableServerTransportProvider(
@@ -93,13 +101,13 @@ public class CamelMcpServerTransportAutoConfiguration {
     }
 
     /**
-     * Creates the MCP SDK validator using Camel's shared origin parser and normalizer.
-     * Requests without an Origin header are accepted by the SDK validator.
+     * Creates the non-deprecated MCP SDK HTTP header validator using Camel's
+     * shared Origin parser and normalizer.
+     *
+     * @param configuredAllowedOrigins comma-separated allowed origins, or null for loopback defaults
+     * @return the MCP SDK HTTP header validator
      */
-    // Spring AI 2.0.2 exposes only this deprecated validator type on the
-    // WebMVC transport builder.
-    @SuppressWarnings("deprecation")
-    private static ServerTransportSecurityValidator createOriginValidator(String configuredAllowedOrigins) {
+    public static ServerHttpHeaderValidator createOriginHeaderValidator(String configuredAllowedOrigins) {
         List<String> allowedOrigins = McpServerOrigins.parseAllowedOrigins(configuredAllowedOrigins);
         if (allowedOrigins == null) {
             allowedOrigins = DEFAULT_ALLOWED_ORIGINS;
@@ -109,15 +117,65 @@ public class CamelMcpServerTransportAutoConfiguration {
                 .allowedOrigins(allowedOrigins)
                 .build();
 
-        return headers -> {
-            Map<String, List<String>> normalizedHeaders = new LinkedHashMap<>(headers);
-            headers.forEach((name, values) -> {
+        return headers -> delegate.validate(new HeaderAccessor() {
+            @Override
+            public List<String> getHeader(String name) {
+                List<String> values = headers.getHeader(name);
                 if (name != null && "Origin".equalsIgnoreCase(name) && values != null) {
-                    normalizedHeaders.put(name,
-                            values.stream().map(McpServerOrigins::normalizeOrigin).toList());
+                    return values.stream().map(McpServerOrigins::normalizeOrigin).toList();
                 }
-            });
-            delegate.validateHeaders(normalizedHeaders);
-        };
+                return values;
+            }
+
+            @Override
+            public List<String> getHeaderNames() {
+                return headers.getHeaderNames();
+            }
+        });
+    }
+
+    /**
+     * Compatibility adapter for Spring AI 2.0.2. Its WebMVC provider builder
+     * still accepts ServerTransportSecurityValidator rather than the newer
+     * ServerHttpHeaderValidator. The validation itself is performed by the
+     * non-deprecated SDK validator above.
+     *
+     * Remove this adapter when Spring AI exposes httpHeaderValidator(...) on
+     * WebMvcStreamableServerTransportProvider.Builder.
+     */
+    @SuppressWarnings("deprecation")
+    public static ServerTransportSecurityValidator createOriginValidator(String configuredAllowedOrigins) {
+        ServerHttpHeaderValidator validator = createOriginHeaderValidator(configuredAllowedOrigins);
+        return headers -> validator.validate(new MapHeaderAccessor(headers));
+    }
+
+    /**
+     * Adapts Spring AI 2.0.2's legacy map-based callback to the MCP SDK
+     * HeaderAccessor API.
+     */
+    private static final class MapHeaderAccessor implements HeaderAccessor {
+
+        private final Map<String, List<String>> headers;
+
+        private MapHeaderAccessor(Map<String, List<String>> headers) {
+            this.headers = headers;
+        }
+
+        @Override
+        public List<String> getHeader(String name) {
+            return headers.entrySet().stream()
+                    .filter(entry -> entry.getKey() != null && entry.getKey().equalsIgnoreCase(name))
+                    .map(Map.Entry::getValue)
+                    .filter(values -> values != null)
+                    .findFirst()
+                    .orElse(List.of());
+        }
+
+        @Override
+        public List<String> getHeaderNames() {
+            return headers.keySet().stream()
+                    .filter(name -> name != null)
+                    .toList();
+        }
     }
 }
