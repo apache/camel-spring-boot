@@ -63,14 +63,38 @@ public class SpringBootHashicorpVaultPropertiesParserTest {
     }
 
     @Test
-    public void missingTokenFailsAsACamelExceptionNamingTheProperty() {
+    public void missingTokenFailsAsACamelExceptionNamingTheOptions() {
+        // the token is checked with the other settings of the login, by Camel
         RuntimeCamelException thrown = assertThrows(RuntimeCamelException.class,
-                () -> parser.createPropertiesFunction(environmentWith(Map.of())),
+                () -> parser.createPropertiesFunction(environmentWith(Map.of(
+                        "camel.vault.hashicorp.host", "127.0.0.1",
+                        "camel.vault.hashicorp.port", "8200",
+                        "camel.vault.hashicorp.scheme", "http"))),
                 "a missing setting is an operator error, not a programming defect, so it must not surface "
                         + "as NullPointerException");
 
         assertTrue(thrown.getMessage().contains("token"),
                 "the failure must name the missing setting, was: " + thrown.getMessage());
+        assertTrue(thrown.getMessage().contains("camel.vault.hashicorp"),
+                "the failure must name the options, was: " + thrown.getMessage());
+    }
+
+    @Test
+    void anUnresolvablePlaceholderFailsAtOnce() {
+        RuntimeException thrown = assertThrows(RuntimeException.class,
+                () -> parser.createPropertiesFunction(environmentWith(Map.of(
+                        "camel.vault.hashicorp.host", "127.0.0.1",
+                        "camel.vault.hashicorp.port", "8200",
+                        "camel.vault.hashicorp.scheme", "http",
+                        "camel.vault.hashicorp.token", "${VAULT_TOKEN}"))),
+                "the literal placeholder would otherwise be sent to Vault as the token");
+
+        Throwable cause = thrown;
+        while (cause.getCause() != null) {
+            cause = cause.getCause();
+        }
+        assertTrue(cause.getMessage().contains("VAULT_TOKEN"),
+                "the failure must name the placeholder, was: " + cause.getMessage());
     }
 
     @Test

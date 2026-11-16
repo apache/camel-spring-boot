@@ -77,7 +77,7 @@ public abstract class AbstractEarlyResolutionPropertiesParser
 
     /**
      * Releases what the properties function holds, such as the login of its client, once the properties are resolved,
-     * also when they could not be. Does nothing by default.
+     * also when they could not be. A failure to release is logged and ignored. Does nothing by default.
      */
     protected void release(PropertiesFunction propertiesFunction) {
     }
@@ -100,7 +100,13 @@ public abstract class AbstractEarlyResolutionPropertiesParser
         try {
             resolve(environment, propertiesFunction);
         } finally {
-            release(propertiesFunction);
+            try {
+                release(propertiesFunction);
+            } catch (RuntimeException e) {
+                // neither hides the error of the resolution nor aborts a startup whose properties are resolved
+                LOG.warn("Failed to release the {} properties function. This exception is ignored.",
+                        propertiesFunction.getName(), e);
+            }
         }
     }
 

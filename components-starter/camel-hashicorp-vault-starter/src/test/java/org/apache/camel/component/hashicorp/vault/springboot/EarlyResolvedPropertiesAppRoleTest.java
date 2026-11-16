@@ -30,6 +30,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.vault.VaultException;
 import org.springframework.vault.authentication.TokenAuthentication;
 import org.springframework.vault.client.VaultEndpoint;
 import org.springframework.vault.core.VaultKeyValueOperations;
@@ -37,6 +38,7 @@ import org.springframework.vault.core.VaultKeyValueOperationsSupport;
 import org.springframework.vault.core.VaultTemplate;
 import org.springframework.vault.support.VaultMount;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -128,11 +130,19 @@ class EarlyResolvedPropertiesAppRoleTest {
     // the accessors of the tokens that the AppRole login gave and Vault has not revoked
     private static List<String> appRoleTokens() {
         VaultTemplate root = root();
-        return root.list("auth/token/accessors").stream()
-                .filter(accessor -> "auth/approle/login".equals(
-                        root.write("auth/token/lookup-accessor", Map.of("accessor", accessor))
-                                .getRequiredData().get("path")))
-                .toList();
+        List<String> tokens = new ArrayList<>();
+        for (String accessor : root.list("auth/token/accessors")) {
+            try {
+                Object path = root.write("auth/token/lookup-accessor", Map.of("accessor", accessor))
+                        .getRequiredData().get("path");
+                if ("auth/approle/login".equals(path)) {
+                    tokens.add(accessor);
+                }
+            } catch (VaultException e) {
+                // the token was revoked after the accessors were listed
+            }
+        }
+        return tokens;
     }
 
     @Configuration
