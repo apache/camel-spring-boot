@@ -41,6 +41,8 @@ public class JacksonAvroDataFormatConfiguration
     private String objectMapper;
     /**
      * Whether to lookup and use default Jackson ObjectMapper from the registry.
+     * The registry is only searched when autoDiscoverObjectMapper is true as
+     * well.
      */
     private Boolean useDefaultObjectMapper = true;
     /**
@@ -103,8 +105,11 @@ public class JacksonAvroDataFormatConfiguration
      */
     private String timezone;
     /**
-     * If set to true then Jackson will lookup for an objectMapper into the
-     * registry.
+     * If set to true (and useDefaultObjectMapper is true) then Camel will look
+     * for a Jackson AvroMapper in the registry, and use it when there is
+     * exactly one. The options of this data format that configure the mapper,
+     * such as include, enableFeatures and disableFeatures, are not applied to
+     * that AvroMapper.
      */
     private Boolean autoDiscoverObjectMapper = false;
     /**

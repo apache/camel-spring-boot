@@ -41,11 +41,16 @@ public class JacksonDataFormatConfiguration
     private String objectMapper;
     /**
      * Whether to lookup and use default Jackson ObjectMapper from the registry.
+     * The registry is only searched when autoDiscoverObjectMapper is true as
+     * well.
      */
     private Boolean useDefaultObjectMapper = true;
     /**
-     * If set to true then Jackson will look for an objectMapper to use from the
-     * registry.
+     * If set to true (and useDefaultObjectMapper is true) then Camel will look
+     * for a Jackson ObjectMapper in the registry, and use it when there is
+     * exactly one. The options of this data format that configure the mapper,
+     * such as include, prettyPrint, enableFeatures and disableFeatures, are not
+     * applied to that ObjectMapper.
      */
     private Boolean autoDiscoverObjectMapper = false;
     /**

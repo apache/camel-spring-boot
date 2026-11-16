@@ -30,7 +30,7 @@ The starter supports 19 options, which are listed below.
 | Name | Description | Default | Type
 | camel.dataformat.avro-jackson.allow-jms-type | Used for JMS users to allow the JMSType header from the JMS spec to specify a FQN classname to use to unmarshal to. | false | Boolean
 | camel.dataformat.avro-jackson.allow-unmarshall-type | If enabled then Jackson is allowed to attempt to use the CamelJacksonUnmarshalType header during the unmarshalling. | false | Boolean
-| camel.dataformat.avro-jackson.auto-discover-object-mapper | If set to true then Jackson will lookup for an objectMapper into the registry. | false | Boolean
+| camel.dataformat.avro-jackson.auto-discover-object-mapper | If set to true (and useDefaultObjectMapper is true) then Camel will look for a Jackson AvroMapper in the registry, and use it when there is exactly one. The options of this data format that configure the mapper, such as include, enableFeatures and disableFeatures, are not applied to that AvroMapper. | false | Boolean
 | camel.dataformat.avro-jackson.auto-discover-schema-resolver | When not disabled, the SchemaResolver will be looked up into the registry. | true | Boolean
 | camel.dataformat.avro-jackson.collection-type | Refers to a custom collection type to lookup in the registry to use. |  | String
 | camel.dataformat.avro-jackson.content-type-header | Whether the data format should set the Content-Type header with the type from the data format. For example application/xml for data formats marshalling to XML, or application/json for data formats marshalling to JSON | true | Boolean
@@ -45,6 +45,6 @@ The starter supports 19 options, which are listed below.
 | camel.dataformat.avro-jackson.schema-resolver | Optional schema resolver used to lookup schemas for the data in transit. |  | String
 | camel.dataformat.avro-jackson.timezone | If set then Jackson will use the Timezone when marshalling/unmarshalling. |  | String
 | camel.dataformat.avro-jackson.unmarshal-type | Class name of the java type to use when unmarshalling. |  | String
-| camel.dataformat.avro-jackson.use-default-object-mapper | Whether to lookup and use default Jackson ObjectMapper from the registry. | true | Boolean
+| camel.dataformat.avro-jackson.use-default-object-mapper | Whether to lookup and use default Jackson ObjectMapper from the registry. The registry is only searched when autoDiscoverObjectMapper is true as well. | true | Boolean
 | camel.dataformat.avro-jackson.use-list | To unmarshal to a List of Map or a List of Pojo. | false | Boolean
 |===
