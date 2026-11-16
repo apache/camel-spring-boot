@@ -91,6 +91,8 @@ public class AbstractEarlyResolutionPropertiesParserTest {
     private static final class TestParser extends AbstractEarlyResolutionPropertiesParser {
         private final StubPropertiesFunction function;
         private int factoryCalls;
+        private int releaseCalls;
+        private boolean failingRelease;
 
         TestParser(StubPropertiesFunction function) {
             this.function = function;
@@ -110,6 +112,15 @@ public class AbstractEarlyResolutionPropertiesParserTest {
         protected PropertiesFunction createPropertiesFunction(ConfigurableEnvironment environment) {
             factoryCalls++;
             return function;
+        }
+
+        @Override
+        protected void release(PropertiesFunction propertiesFunction) {
+            assertEquals(function, propertiesFunction);
+            releaseCalls++;
+            if (failingRelease) {
+                throw new IllegalStateException("cannot release");
+            }
         }
     }
 
@@ -142,6 +153,53 @@ public class AbstractEarlyResolutionPropertiesParserTest {
                         + "application that never opted in");
         assertNull(environment.getPropertySources().get(OVERRIDE_SOURCE),
                 "no override property source may be added when early resolution is disabled");
+    }
+
+    @Test
+    void releasesThePropertiesFunctionOnceResolved() {
+        RecordingEnvironment environment = environmentWith(Map.of(GUARD, "true", "my.secret", "{{test:db}}"));
+        TestParser parser = new TestParser(new StubPropertiesFunction(Map.of("db", "pazzword"), Set.of()));
+
+        parser.onApplicationEvent(eventFor(environment));
+
+        assertEquals("pazzword", environment.getProperty("my.secret"));
+        assertEquals(1, parser.releaseCalls, "the function is released once the properties are resolved");
+    }
+
+    @Test
+    void releasesThePropertiesFunctionAlsoWhenResolutionFails() {
+        RecordingEnvironment environment = environmentWith(Map.of(GUARD, "true", "my.secret", "{{test:missing}}"));
+        TestParser parser = new TestParser(new StubPropertiesFunction(Map.of(), Set.of("missing")));
+
+        assertThrows(RuntimeCamelException.class, () -> parser.onApplicationEvent(eventFor(environment)));
+
+        assertEquals(1, parser.releaseCalls, "the function is released also when startup is aborted");
+    }
+
+    @Test
+    void aFailingReleaseDoesNotHideTheResolutionError() {
+        RecordingEnvironment environment = environmentWith(Map.of(GUARD, "true", "my.secret", "{{test:missing}}"));
+        TestParser parser = new TestParser(new StubPropertiesFunction(Map.of(), Set.of("missing")));
+        parser.failingRelease = true;
+
+        RuntimeCamelException thrown = assertThrows(RuntimeCamelException.class,
+                () -> parser.onApplicationEvent(eventFor(environment)));
+
+        assertTrue(thrown.getMessage().contains("my.secret"),
+                "the error must still name the unresolved property, was: " + thrown.getMessage());
+        assertEquals(1, parser.releaseCalls);
+    }
+
+    @Test
+    void aFailingReleaseDoesNotAbortStartup() {
+        RecordingEnvironment environment = environmentWith(Map.of(GUARD, "true", "my.secret", "{{test:db}}"));
+        TestParser parser = new TestParser(new StubPropertiesFunction(Map.of("db", "pazzword"), Set.of()));
+        parser.failingRelease = true;
+
+        parser.onApplicationEvent(eventFor(environment));
+
+        assertEquals("pazzword", environment.getProperty("my.secret"));
+        assertEquals(1, parser.releaseCalls);
     }
 
     @Test

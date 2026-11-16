@@ -76,6 +76,13 @@ public abstract class AbstractEarlyResolutionPropertiesParser
     protected abstract PropertiesFunction createPropertiesFunction(ConfigurableEnvironment environment);
 
     /**
+     * Releases what the properties function holds, such as the login of its client, once the properties are resolved,
+     * also when they could not be. A failure to release is logged and ignored. Does nothing by default.
+     */
+    protected void release(PropertiesFunction propertiesFunction) {
+    }
+
+    /**
      * Wording used in diagnostics to name where a value was being resolved from.
      */
     protected String getSourceDescription() {
@@ -89,12 +96,26 @@ public abstract class AbstractEarlyResolutionPropertiesParser
             return;
         }
 
+        PropertiesFunction propertiesFunction = createPropertiesFunction(environment);
+        try {
+            resolve(environment, propertiesFunction);
+        } finally {
+            try {
+                release(propertiesFunction);
+            } catch (RuntimeException e) {
+                // neither hides the error of the resolution nor aborts a startup whose properties are resolved
+                LOG.warn("Failed to release the {} properties function. This exception is ignored.",
+                        propertiesFunction.getName(), e);
+            }
+        }
+    }
+
+    private void resolve(ConfigurableEnvironment environment, PropertiesFunction propertiesFunction) {
         // an unresolved placeholder would otherwise stay in the property value and become the effective
         // secret, so resolution failures abort startup unless the operator opts back into the old behaviour
         final boolean ignoreResolutionFailures
                 = Boolean.parseBoolean(environment.getProperty(IGNORE_RESOLUTION_FAILURES));
 
-        PropertiesFunction propertiesFunction = createPropertiesFunction(environment);
         LOG.debug("Early resolving properties using the {} function", propertiesFunction.getName());
 
         final String prefix = "{{" + propertiesFunction.getName() + ":";

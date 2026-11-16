@@ -16,17 +16,29 @@
  */
 package org.apache.camel.component.hashicorp.vault.springboot;
 
+import java.util.Locale;
 import org.apache.camel.RuntimeCamelException;
+import org.apache.camel.component.hashicorp.vault.HashicorpVaultClientSettings;
 import org.apache.camel.component.hashicorp.vault.HashicorpVaultPropertiesFunction;
 import org.apache.camel.spi.PropertiesFunction;
 import org.apache.camel.spring.boot.AbstractEarlyResolutionPropertiesParser;
+import org.apache.camel.support.service.ServiceHelper;
 import org.apache.camel.util.ObjectHelper;
+import org.apache.camel.vault.HashicorpVaultConfiguration;
+import org.springframework.boot.context.properties.bind.Binder;
+import org.springframework.boot.context.properties.source.ConfigurationPropertySources;
 import org.springframework.core.env.ConfigurableEnvironment;
-import org.springframework.vault.authentication.TokenAuthentication;
-import org.springframework.vault.client.VaultEndpoint;
-import org.springframework.vault.core.VaultTemplate;
 
+/**
+ * Resolves the {@code {{hashicorp:...}}} placeholders of the Spring Boot properties before the CamelContext exists. It
+ * reads the secrets as the properties function of the CamelContext does, with the same settings: the
+ * {@code CAMEL_HASHICORP_VAULT_*} environment variables when one of them is set, else the {@code camel.vault.hashicorp}
+ * options. It logs in once, and revokes the token of its login once the properties are resolved.
+ */
 public class SpringBootHashicorpVaultPropertiesParser extends AbstractEarlyResolutionPropertiesParser {
+
+    private static final String PREFIX = "camel.vault.hashicorp";
+    private static final String ENVIRONMENT_PREFIX = "CAMEL_HASHICORP_VAULT_";
 
     @Override
     protected String getEarlyResolutionProperty() {
@@ -40,35 +52,47 @@ public class SpringBootHashicorpVaultPropertiesParser extends AbstractEarlyResol
 
     @Override
     protected PropertiesFunction createPropertiesFunction(ConfigurableEnvironment environment) {
-        String token = required(environment, "camel.vault.hashicorp.token", "Hashicorp Vault token is required");
-        String host = required(environment, "camel.vault.hashicorp.host", "Hashicorp Vault host is required");
-        String portValue = required(environment, "camel.vault.hashicorp.port", "Hashicorp Vault port is required");
-        String scheme = required(environment, "camel.vault.hashicorp.scheme", "Hashicorp Vault scheme is required");
-
-        int port;
+        // bound as Spring Boot binds the options of the CamelContext, such as camel.vault.hashicorp.role-id, while a
+        // ${...} placeholder that cannot be resolved fails, as when the property is read from the environment
+        HashicorpVaultConfiguration configuration = new Binder(ConfigurationPropertySources.get(environment),
+                value -> value instanceof String text ? environment.resolveRequiredPlaceholders(text) : value)
+                .bind(PREFIX, HashicorpVaultConfiguration.class)
+                .orElseGet(HashicorpVaultConfiguration::new);
+        HashicorpVaultClientSettings settings = HashicorpVaultClientSettings.fromEnvironmentOrConfiguration(configuration);
+        required(settings.getHost(), "host", "Hashicorp Vault host is required");
+        required(settings.getPort(), "port", "Hashicorp Vault port is required");
+        required(settings.getScheme(), "scheme", "Hashicorp Vault scheme is required");
         try {
-            port = Integer.parseInt(portValue);
+            Integer.parseInt(settings.getPort());
         } catch (NumberFormatException e) {
             throw new RuntimeCamelException(
-                    "camel.vault.hashicorp.port must be a number but was: " + portValue, e);
+                    PREFIX + ".port (or " + ENVIRONMENT_PREFIX + "PORT) must be a number but was: " + settings.getPort(), e);
         }
 
-        VaultEndpoint vaultEndpoint = new VaultEndpoint();
-        vaultEndpoint.setHost(host);
-        vaultEndpoint.setPort(port);
-        vaultEndpoint.setScheme(scheme);
-
-        VaultTemplate client = new VaultTemplate(
-                vaultEndpoint,
-                new TokenAuthentication(token));
-        return new HashicorpVaultPropertiesFunction(client);
+        try {
+            return new HashicorpVaultPropertiesFunction(settings);
+        } catch (RuntimeException e) {
+            throw new RuntimeCamelException(
+                    "Cannot create the Hashicorp Vault client of the early resolution: " + e.getMessage() + " (set the "
+                                            + PREFIX + " options, or the " + ENVIRONMENT_PREFIX
+                                            + "* environment variables)",
+                    e);
+        }
     }
 
-    private static String required(ConfigurableEnvironment environment, String key, String message) {
-        String value = environment.getProperty(key);
+    @Override
+    protected void release(PropertiesFunction propertiesFunction) {
+        // stopping the function closes its client: it stops renewing the token, and revokes the token of the login (but
+        // not a token given for the token login)
+        ServiceHelper.stopService(propertiesFunction);
+    }
+
+    private static void required(String value, String option, String message) {
         if (ObjectHelper.isEmpty(value)) {
-            throw new RuntimeCamelException(message + " (set " + key + ")");
+            throw new RuntimeCamelException(
+                    message + " (set " + PREFIX + "." + option + ", or " + ENVIRONMENT_PREFIX
+                                            + option.toUpperCase(Locale.ROOT) + " when a " + ENVIRONMENT_PREFIX
+                                            + "* environment variable is set)");
         }
-        return value;
     }
 }
