@@ -16,11 +16,14 @@
  */
 package org.apache.camel.spring.boot.actuate.health;
 
+import java.util.Set;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.health.HealthCheck;
 import org.apache.camel.health.HealthCheckRegistry;
 import org.apache.camel.health.HealthCheckRepository;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
+import org.apache.camel.spring.boot.util.RemovedPropertiesHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -32,6 +35,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.health.contributor.HealthIndicator;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 
 @AutoConfiguration(after = CamelAutoConfiguration.class)
 @ConditionalOnClass({ HealthIndicator.class })
@@ -47,6 +51,9 @@ public class CamelHealthCheckAutoConfiguration {
     @ConditionalOnProperty(prefix = "camel.health", name = "enabled", matchIfMissing = true)
     public HealthIndicator camelHealthCheckIndicator(ApplicationContext applicationContext,
             CamelContext camelContext, CamelHealthCheckConfigurationProperties config) {
+
+        // Spring Boot ignores the removed camel.health options without a log line
+        warnRemovedProperties(applicationContext.getEnvironment());
 
         // auto-detect camel-health on classpath
         HealthCheckRegistry hcr = camelContext.getCamelContextExtension()
@@ -127,6 +134,17 @@ public class CamelHealthCheckAutoConfiguration {
         }
 
         return new CamelHealthCheckIndicator(applicationContext, camelContext, config.getExposureLevel());
+    }
+
+    /**
+     * Logs a WARN for each removed camel.health option the application sets, with the option to use instead.
+     */
+    static void warnRemovedProperties(Environment environment) {
+        RemovedPropertiesHelper.warnRemovedProperties(environment, "camel.health.components-enabled",
+                "the option was renamed in Camel 4.0", Set.of(), name -> "camel.health.producers-enabled");
+        RemovedPropertiesHelper.warnRemovedProperties(environment, "camel.health.config",
+                "the configuration of the health checks by id was removed in Camel 3.16", Set.of(),
+                name -> "camel.health.exclude-pattern");
     }
 
 }

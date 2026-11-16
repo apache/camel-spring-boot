@@ -16,9 +16,6 @@
  */
 package org.apache.camel.component.servlet.springboot;
 
-import java.util.Map;
-import java.util.Set;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.servlet.CamelHttpTransportServlet;
 import org.apache.camel.component.servlet.ServletComponent;
@@ -78,10 +75,8 @@ public class ServletMappingAutoConfiguration {
      * names without a log line.
      */
     static void warnRemovedMappingProperties(Environment environment) {
-        Map<String, String> options = RemovedPropertiesHelper.dashedPropertyNames(ServletMappingConfiguration.class);
-        RemovedPropertiesHelper.warnRemovedProperties(environment, "camel.component.servlet.mapping",
-                "the servlet mapping options were renamed to camel.servlet.mapping in Camel 3.10", Set.of(),
-                name -> options.containsKey(name) ? "camel.servlet.mapping." + options.get(name) : null);
+        RemovedPropertiesHelper.warnRenamedProperties(environment, "camel.component.servlet.mapping",
+                "camel.servlet.mapping", "3.10", ServletMappingConfiguration.class);
     }
 
     /**

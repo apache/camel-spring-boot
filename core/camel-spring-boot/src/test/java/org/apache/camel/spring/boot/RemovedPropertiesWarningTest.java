@@ -25,6 +25,8 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.health.HealthCheckRegistry;
+import org.apache.camel.health.HealthCheckRepository;
 import org.junit.jupiter.api.Test;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.WebApplicationType;
@@ -42,8 +44,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * The properties under the <tt>camel.springboot.</tt> prefix, which was removed in Camel 4.13, are not bound. Each one
- * is logged at WARN when the application starts, with the property to use instead.
+ * The properties under a prefix that was removed or renamed, such as <tt>camel.springboot.</tt> (removed in Camel
+ * 4.13), are not bound. Each one is logged at WARN when the application starts, with the property to use instead.
  */
 public class RemovedPropertiesWarningTest {
 
@@ -200,11 +202,74 @@ public class RemovedPropertiesWarningTest {
 
     @Test
     public void optionWithoutReplacementIsReported() {
-        try (Started app = start("camel.springboot.xml-routes=classpath:routes.xml")) {
-            String warning = app.warningAbout("camel.springboot.xml-routes");
+        try (Started app = start("camel.springboot.xml-routes-reload-directory=src/main/resources/camel")) {
+            String warning = app.warningAbout("camel.springboot.xml-routes-reload-directory");
             assertTrue(warning.contains("has no effect"), warning);
             assertFalse(warning.contains(" Use "), warning);
         }
+    }
+
+    @Test
+    public void xmlRoutesAreReportedWithRoutesIncludePattern() {
+        try (Started app = start("camel.springboot.xml-routes=classpath:camel/*.xml",
+                "camel.springboot.xml-rests=classpath:camel-rest/*.xml",
+                "camel.springboot.xml-route-templates=classpath:camel-template/*.xml")) {
+            for (String option : List.of("xml-routes", "xml-rests", "xml-route-templates")) {
+                String warning = app.warningAbout("camel.springboot." + option);
+                assertTrue(warning.contains("Use camel.main.routes-include-pattern instead"), warning);
+            }
+        }
+    }
+
+    @Test
+    public void supervisingControllerOptionsAreReportedWithTheirReplacement() {
+        try (Started app = start("camel.supervising.controller.enabled=true",
+                "camel.supervising.controller.default-back-off.delay=1000")) {
+            assertFalse(app.camel().getRouteController().isSupervising(),
+                    "camel.supervising.controller.enabled is not bound");
+            String enabled = app.warningAbout("camel.supervising.controller.enabled");
+            assertTrue(enabled.contains("Use camel.routecontroller.enabled instead"), enabled);
+            String delay = app.warningAbout("camel.supervising.controller.default-back-off.delay");
+            assertTrue(delay.contains("Use camel.routecontroller.back-off-delay instead"), delay);
+        }
+    }
+
+    @Test
+    public void renamedDataFormatsAreReportedWithTheirNewName() {
+        try (Started app = start("camel.dataformat.securexml.key-cipher-algorithm=RSA_OAEP",
+                "camel.dataformat.yaml-snakeyaml.prettyFlow=true")) {
+            String secureXml = app.warningAbout("camel.dataformat.securexml.key-cipher-algorithm");
+            assertTrue(secureXml.contains("Use camel.dataformat.xml-security.key-cipher-algorithm instead"), secureXml);
+            String snakeYaml = app.warningAbout("camel.dataformat.yaml-snakeyaml.prettyFlow");
+            assertTrue(snakeYaml.contains("Use camel.dataformat.snake-yaml.pretty-flow instead"), snakeYaml);
+        }
+    }
+
+    @Test
+    public void removedHealthOptionsAreReportedWithTheirReplacement() {
+        try (Started app = start("camel.health.components-enabled=true", "camel.health.config[netty].enabled=false")) {
+            assertFalse(producerHealthChecksEnabled(app), "camel.health.components-enabled is not bound");
+            String components = app.warningAbout("camel.health.components-enabled");
+            assertTrue(components.contains("Use camel.health.producers-enabled instead"), components);
+            String config = app.warningAbout("camel.health.config[netty].enabled");
+            assertTrue(config.contains("Use camel.health.exclude-pattern instead"), config);
+        }
+    }
+
+    @Test
+    public void currentOptionsAreAppliedAndNotReported() {
+        try (Started app = start("camel.health.producers-enabled=true", "camel.dataformat.snake-yaml.pretty-flow=true",
+                "camel.routecontroller.back-off-delay=1000")) {
+            assertTrue(producerHealthChecksEnabled(app));
+            assertTrue(app.warnings().stream().noneMatch(m -> m.contains("has no effect")),
+                    "no WARN about current options: " + app.warnings());
+        }
+    }
+
+    private static boolean producerHealthChecksEnabled(Started app) {
+        HealthCheckRegistry registry
+                = app.camel().getCamelContextExtension().getContextPlugin(HealthCheckRegistry.class);
+        return registry.getRepository("producers").map(HealthCheckRepository::isEnabled).orElse(false);
     }
 
     @Test

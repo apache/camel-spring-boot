@@ -22,10 +22,12 @@ import org.apache.camel.cluster.CamelClusterService;
 import org.apache.camel.component.kubernetes.cluster.KubernetesClusterService;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.cluster.ClusteredRouteControllerAutoConfiguration;
+import org.apache.camel.spring.boot.util.RemovedPropertiesHelper;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 
 @AutoConfiguration(before = { ClusteredRouteControllerAutoConfiguration.class, CamelAutoConfiguration.class })
 @ConditionalOnProperty(prefix = "camel.cluster.kubernetes", name = "enabled", matchIfMissing = true)
@@ -34,8 +36,12 @@ public class KubernetesClusterServiceAutoConfiguration {
 
     private final KubernetesClusterServiceConfiguration configuration;
 
-    public KubernetesClusterServiceAutoConfiguration(KubernetesClusterServiceConfiguration configuration) {
+    public KubernetesClusterServiceAutoConfiguration(KubernetesClusterServiceConfiguration configuration,
+            Environment environment) {
         this.configuration = configuration;
+        // the options were renamed in Camel 3.10, and Spring Boot ignores the old names without a log line
+        RemovedPropertiesHelper.warnRenamedProperties(environment, "camel.component.kubernetes.cluster.service",
+                "camel.cluster.kubernetes", "3.10", KubernetesClusterServiceConfiguration.class);
     }
 
     @Bean(name = "kubernetes-cluster-service")

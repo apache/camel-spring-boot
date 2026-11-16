@@ -22,12 +22,14 @@ import org.apache.camel.service.lra.LRASagaService;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans;
 import org.apache.camel.spring.boot.util.GroupCondition;
+import org.apache.camel.spring.boot.util.RemovedPropertiesHelper;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
+import org.springframework.core.env.Environment;
 
 @AutoConfiguration(after = CamelAutoConfiguration.class)
 @Conditional({ ConditionalOnCamelContextAndAutoConfigurationBeans.class,
@@ -37,8 +39,11 @@ public class LraServiceAutoConfiguration {
 
     private final CamelContext camelContext;
 
-    public LraServiceAutoConfiguration(CamelContext camelContext) {
+    public LraServiceAutoConfiguration(CamelContext camelContext, Environment environment) {
         this.camelContext = camelContext;
+        // the options were renamed in Camel 3.4, and Spring Boot ignores the old names without a log line
+        RemovedPropertiesHelper.warnRenamedProperties(environment, "camel.service.lra", "camel.lra", "3.4",
+                LraServiceConfiguration.class);
     }
 
     static class GroupConditions extends GroupCondition {

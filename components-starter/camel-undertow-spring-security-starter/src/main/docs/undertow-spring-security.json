@@ -16,7 +16,7 @@
     {
       "name": "camel.security.undertow.keycloak",
       "type": "org.apache.camel.undertow.spring.boot.providers.KeycloakProviderConfiguration",
-      "description": "Properties defined for keycloak provider. Value is gathered together from properties with prefix \"camel.component.undertow.spring.security.keycloak\"",
+      "description": "Properties defined for keycloak provider. Value is gathered together from properties with prefix \"camel.security.undertow.keycloak\"",
       "sourceType": "org.apache.camel.undertow.spring.boot.UndertowSpringSecurityConfiguration"
     },
     {

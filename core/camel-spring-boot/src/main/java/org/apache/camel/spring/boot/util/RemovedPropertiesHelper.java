@@ -24,6 +24,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,13 +56,15 @@ public final class RemovedPropertiesHelper {
     }
 
     /**
-     * Logs a WARN for each property below the given prefix that a property source of the environment holds, naming the
-     * property to use instead. A property set in several property sources is logged once.
+     * Logs a WARN for each property below the given prefix, or named as the prefix, that a property source of the
+     * environment holds, naming the property to use instead. A property set in several property sources is logged
+     * once.
      *
      * @param environment
      *                    the environment of the application
      * @param prefix
-     *                    the prefix that is no longer read, such as <tt>camel.springboot</tt>
+     *                    the prefix that is no longer read, such as <tt>camel.springboot</tt>, or the name of a single
+     *                    property that is no longer read, such as <tt>camel.health.components-enabled</tt>
      * @param reason
      *                    why the properties below the prefix have no effect, such as <tt>the camel.springboot. prefix
      *                    was removed in Camel 4.13</tt>
@@ -76,40 +79,48 @@ public final class RemovedPropertiesHelper {
     public static void warnRemovedProperties(
             Environment environment, String prefix, String reason, Set<String> stillRead,
             Function<String, String> replacement) {
-        if (!(environment instanceof ConfigurableEnvironment)) {
-            return;
-        }
-        ConfigurationPropertyName prefixName = ConfigurationPropertyName.of(prefix);
-        Set<ConfigurationPropertyName> reported = new HashSet<>();
-        for (ConfigurationPropertySource source : ConfigurationPropertySources.get(environment)) {
-            if (!(source instanceof IterableConfigurationPropertySource iterable)) {
-                continue;
+        warnProperties(environment, prefix, reason, relative -> stillRead.contains(uniformName(relative)),
+                relative -> replacement.apply(uniformName(relative)));
+    }
+
+    /**
+     * Logs a WARN for each property below a prefix that was renamed, naming the option of the same name below the new
+     * prefix. A property set in several property sources is logged once.
+     *
+     * @param environment
+     *                    the environment of the application
+     * @param prefix
+     *                    the prefix that is no longer read, such as <tt>camel.component.file.cluster.service</tt>
+     * @param newPrefix
+     *                    the prefix the options were renamed to, such as <tt>camel.cluster.file</tt>
+     * @param since
+     *                    the Camel version that renamed the prefix, such as <tt>3.10</tt>
+     * @param type
+     *                    the configuration class bound to the new prefix, whose properties are the options to use
+     *                    instead, or <tt>null</tt> when the options kept their name
+     */
+    public static void warnRenamedProperties(
+            Environment environment, String prefix, String newPrefix, String since, Class<?> type) {
+        Map<String, String> options = type != null ? dashedPropertyNames(type) : null;
+        String reason = "the " + prefix + ". prefix was renamed to " + newPrefix + ". in Camel " + since;
+        warnProperties(environment, prefix, reason, relative -> false, relative -> {
+            if (relative.isEmpty()) {
+                return newPrefix;
             }
-            List<ConfigurationPropertyName> names = iterable.stream().filter(prefixName::isAncestorOf).toList();
-            for (ConfigurationPropertyName name : names) {
-                String uniform = uniformName(prefixName, name);
-                if (stillRead.contains(uniform) || !reported.add(name)) {
-                    continue;
-                }
-                ConfigurationProperty property = source.getConfigurationProperty(name);
-                Origin origin = property != null ? property.getOrigin() : null;
-                String key = name.toString();
-                String location = origin != null ? origin.toString() : "unknown location";
-                if (origin instanceof PropertySourceOrigin pso) {
-                    key = pso.getPropertyName();
-                    location = pso.getOrigin() != null
-                            ? pso.getOrigin().toString() : "property source " + pso.getPropertySource().getName();
-                }
-                String use = replacement.apply(uniform);
-                if (use != null) {
-                    LOG.warn("Property {} ({}) has no effect, as {}. Use {} instead.", key, location, reason, use);
-                } else {
-                    LOG.warn("Property {} ({}) has no effect, as {}, and there is no option of the same name to use"
-                             + " instead.",
-                            key, location, reason);
-                }
+            String option = options != null
+                    ? options.get(relative.getElement(0, Form.UNIFORM))
+                    : DataObjectPropertyName.toDashedForm(relative.getElement(0, Form.ORIGINAL));
+            if (option == null) {
+                return null;
             }
-        }
+            String answer = newPrefix + "." + option;
+            if (relative.getNumberOfElements() > 1) {
+                // the keys of a map or the elements of a list, kept as they are
+                String rest = relative.subName(1).toString();
+                answer += rest.startsWith("[") ? rest : "." + rest;
+            }
+            return answer;
+        });
     }
 
     /**
@@ -126,9 +137,59 @@ public final class RemovedPropertiesHelper {
         return answer;
     }
 
-    private static String uniformName(ConfigurationPropertyName prefix, ConfigurationPropertyName name) {
+    /**
+     * Logs a WARN for each property below the given prefix, or named as the prefix, that a property source of the
+     * environment holds.
+     *
+     * @param skip
+     *                    tells, from the part of the name below the prefix, whether the property is still read
+     * @param replacement
+     *                    gives, from the part of the name below the prefix, the property to use instead, or
+     *                    <tt>null</tt> when there is none
+     */
+    private static void warnProperties(
+            Environment environment, String prefix, String reason, Predicate<ConfigurationPropertyName> skip,
+            Function<ConfigurationPropertyName, String> replacement) {
+        if (!(environment instanceof ConfigurableEnvironment)) {
+            return;
+        }
+        ConfigurationPropertyName prefixName = ConfigurationPropertyName.of(prefix);
+        Set<ConfigurationPropertyName> reported = new HashSet<>();
+        for (ConfigurationPropertySource source : ConfigurationPropertySources.get(environment)) {
+            if (!(source instanceof IterableConfigurationPropertySource iterable)) {
+                continue;
+            }
+            List<ConfigurationPropertyName> names = iterable.stream()
+                    .filter(name -> prefixName.equals(name) || prefixName.isAncestorOf(name)).toList();
+            for (ConfigurationPropertyName name : names) {
+                ConfigurationPropertyName relative = name.subName(prefixName.getNumberOfElements());
+                if (skip.test(relative) || !reported.add(name)) {
+                    continue;
+                }
+                ConfigurationProperty property = source.getConfigurationProperty(name);
+                Origin origin = property != null ? property.getOrigin() : null;
+                String key = name.toString();
+                String location = origin != null ? origin.toString() : "unknown location";
+                if (origin instanceof PropertySourceOrigin pso) {
+                    key = pso.getPropertyName();
+                    location = pso.getOrigin() != null
+                            ? pso.getOrigin().toString() : "property source " + pso.getPropertySource().getName();
+                }
+                String use = replacement.apply(relative);
+                if (use != null) {
+                    LOG.warn("Property {} ({}) has no effect, as {}. Use {} instead.", key, location, reason, use);
+                } else {
+                    LOG.warn("Property {} ({}) has no effect, as {}, and there is no option of the same name to use"
+                             + " instead.",
+                            key, location, reason);
+                }
+            }
+        }
+    }
+
+    private static String uniformName(ConfigurationPropertyName name) {
         StringBuilder answer = new StringBuilder();
-        for (int i = prefix.getNumberOfElements(); i < name.getNumberOfElements(); i++) {
+        for (int i = 0; i < name.getNumberOfElements(); i++) {
             answer.append(name.getElement(i, Form.UNIFORM));
         }
         return answer.toString();

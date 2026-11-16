@@ -20,10 +20,12 @@ import org.apache.camel.cluster.CamelClusterService;
 import org.apache.camel.component.consul.cluster.ConsulClusterService;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.cluster.ClusteredRouteControllerAutoConfiguration;
+import org.apache.camel.spring.boot.util.RemovedPropertiesHelper;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 
 import java.util.Optional;
 
@@ -34,8 +36,12 @@ public class ConsulClusterServiceAutoConfiguration {
 
     private final ConsulClusterServiceConfiguration configuration;
 
-    public ConsulClusterServiceAutoConfiguration(ConsulClusterServiceConfiguration configuration) {
+    public ConsulClusterServiceAutoConfiguration(ConsulClusterServiceConfiguration configuration,
+            Environment environment) {
         this.configuration = configuration;
+        // the options were renamed in Camel 3.10, and Spring Boot ignores the old names without a log line
+        RemovedPropertiesHelper.warnRenamedProperties(environment, "camel.component.consul.cluster.service",
+                "camel.cluster.consul", "3.10", ConsulClusterServiceConfiguration.class);
     }
 
     @Bean(name = "consul-cluster-service")

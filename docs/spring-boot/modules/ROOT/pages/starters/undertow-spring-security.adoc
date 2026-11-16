@@ -42,7 +42,7 @@ The starter supports 6 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| camel.security.undertow.keycloak | Properties defined for keycloak provider. Value is gathered together from properties with prefix "camel.component.undertow.spring.security.keycloak" |  | KeycloakProviderConfiguration
+| camel.security.undertow.keycloak | Properties defined for keycloak provider. Value is gathered together from properties with prefix "camel.security.undertow.keycloak" |  | KeycloakProviderConfiguration
 | camel.security.undertow.keycloak.client-id | Client id from the Keycloak server used for authentication. |  | String
 | camel.security.undertow.keycloak.realm-id | Realm id from the keycloak server used for authentication. |  | String
 | camel.security.undertow.keycloak.url | Url to keycloak server which will be used in spring security configuration. (Example "http://localhost:8080") |  | String

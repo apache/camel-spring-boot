@@ -139,8 +139,9 @@ public class CamelAutoConfiguration {
                                                        CamelConfigurationProperties config,
                                                        CamelSpringBootApplicationController controller) throws Exception {
 
-        // Spring Boot ignores the removed camel.springboot.* options without a log line
+        // Spring Boot ignores the options under a removed or renamed prefix without a log line
         warnRemovedSpringbootProperties(applicationContext.getEnvironment());
+        warnRenamedProperties(applicationContext.getEnvironment());
 
         // inject camel context on controller
         CamelContextAware.trySetCamelContext(controller, camelContext);
@@ -267,6 +268,10 @@ public class CamelAutoConfiguration {
                     if ("mainruncontroller".equals(name)) {
                         return "camel.main.run-controller";
                     }
+                    // the XML routes, rests and route templates options became routes-include-pattern in Camel 3.8
+                    if (Set.of("xmlroutes", "xmlrests", "xmlroutetemplates").contains(name)) {
+                        return "camel.main.routes-include-pattern";
+                    }
                     if ("typeconversion".equals(name)) {
                         return "camel.main.type-conversion";
                     }
@@ -282,6 +287,29 @@ public class CamelAutoConfiguration {
                     option = main.get(name);
                     return option != null ? "camel.main." + option : null;
                 });
+    }
+
+    /**
+     * Logs a WARN for each option the application sets under a renamed prefix, with the option to use instead: the
+     * camel.supervising.controller.* options (removed in Camel 3.3, now camel.routecontroller.*), and the two data
+     * formats whose name changed in Camel 3.15 by more than a dash. Spring Boot ignores the dashes, so the options of
+     * the other renamed data formats, such as camel.dataformat.zipfile.*, are still bound.
+     */
+    static void warnRenamedProperties(Environment environment) {
+        Map<String, String> routeController = RemovedPropertiesHelper
+                .dashedPropertyNames(SupervisingRouteControllerConfiguration.class);
+        RemovedPropertiesHelper.warnRemovedProperties(environment, "camel.supervising.controller",
+                "the camel.supervising.controller. prefix was removed in Camel 3.3", Set.of(),
+                name -> {
+                    // default-back-off.delay is back-off-delay
+                    String option = routeController
+                            .get(name.startsWith("defaultbackoff") ? name.substring("default".length()) : name);
+                    return option != null ? "camel.routecontroller." + option : null;
+                });
+        RemovedPropertiesHelper.warnRenamedProperties(environment, "camel.dataformat.securexml",
+                "camel.dataformat.xml-security", "3.15", null);
+        RemovedPropertiesHelper.warnRenamedProperties(environment, "camel.dataformat.yaml-snakeyaml",
+                "camel.dataformat.snake-yaml", "3.15", null);
     }
 
     /**

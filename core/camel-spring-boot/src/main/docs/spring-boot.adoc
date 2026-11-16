@@ -187,11 +187,35 @@ such as `camel.main.name` for `camel.springboot.name`. The run controller option
 the route controller options are under `camel.routecontroller.*`, such as `camel.routecontroller.enabled`. Only
 `camel.springboot.lenient-configuration-binding` keeps its name.
 
-The servlet mapping options of the `camel-servlet-starter` are `camel.servlet.mapping.*`, such as
-`camel.servlet.mapping.context-path`, and no longer `camel.component.servlet.mapping.*`.
+The options under the following prefixes were renamed. An option keeps its name under the new prefix, such as
+`camel.cluster.file.root` for `camel.component.file.cluster.service.root`:
+
+[width="100%",cols="2m,2m,1,2",options="header"]
+|===
+| Old prefix | New prefix | Since | Starter
+| camel.supervising.controller | camel.routecontroller | 3.3 | `camel-spring-boot-starter`
+| camel.service.lra | camel.lra | 3.4 | `camel-lra-starter`
+| camel.component.consul.cluster.service | camel.cluster.consul | 3.10 | `camel-consul-cluster-service-starter`
+| camel.component.file.cluster.service | camel.cluster.file | 3.10 | `camel-file-cluster-service-starter`
+| camel.component.jgroups.raft.cluster.service | camel.cluster.jgroups-raft | 3.10 | `camel-jgroups-raft-cluster-service-starter`
+| camel.component.kubernetes.cluster.service | camel.cluster.kubernetes | 3.10 | `camel-kubernetes-cluster-service-starter`
+| camel.component.zookeeper.cluster.service | camel.cluster.zookeeper | 3.10 | `camel-zookeeper-cluster-service-starter`
+| camel.component.servlet.mapping | camel.servlet.mapping | 3.10 | `camel-servlet-starter`
+| camel.component.undertow.spring.security | camel.security.undertow | 3.10 | `camel-undertow-spring-security-starter`
+| camel.dataformat.securexml | camel.dataformat.xml-security | 3.15 | `camel-spring-boot-starter`
+| camel.dataformat.yaml-snakeyaml | camel.dataformat.snake-yaml | 3.15 | `camel-spring-boot-starter`
+|===
+
+The `camel.supervising.controller.default-back-off.*` options are `camel.routecontroller.back-off-*`, such as
+`camel.routecontroller.back-off-delay`. The `camel.springboot.xml-routes`, `camel.springboot.xml-rests` and
+`camel.springboot.xml-route-templates` options are replaced by `camel.main.routes-include-pattern`.
+
+Two health check options were removed: `camel.health.components-enabled` is `camel.health.producers-enabled` since
+Camel 4.0, and the `camel.health.config[id].*` options were replaced by `camel.health.exclude-pattern` in Camel 3.16.
 
 Spring Boot ignores a property that no configuration class binds, so an option under one of these old prefixes has no
-effect. Camel logs a `WARN` at startup for each one, with the option to use instead:
+effect. Camel logs a `WARN` at startup for each one, with the option to use instead. The starter in the table logs it,
+so the `WARN` shows only when that starter is on the classpath. For example:
 
 [source,text]
 ----
