@@ -36,7 +36,9 @@ public class JaxbDataFormatConfiguration
      */
     private Boolean enabled;
     /**
-     * Package name where your JAXB classes are located.
+     * Package name where your JAXB classes are located. The package must have
+     * an ObjectFactory class or a jaxb.index file that lists the classes. To
+     * use a class name instead, set contextPathIsClassName to true.
      */
     private String contextPath;
     /**
@@ -59,7 +61,7 @@ public class JaxbDataFormatConfiguration
      */
     private Integer schemaSeverityLevel = 0;
     /**
-     * To enable pretty printing output nicely formatted. Is by default false.
+     * To enable pretty printing output nicely formatted. Is by default true.
      */
     private Boolean prettyPrint = true;
     /**
@@ -73,9 +75,10 @@ public class JaxbDataFormatConfiguration
      */
     private Boolean ignoreJAXBElement = true;
     /**
-     * Whether marshalling must be java objects with JAXB annotations. And if
-     * not then it fails. This option can be set to false to relax that, such as
-     * when the data is already in XML format.
+     * Whether marshalling must be java objects with JAXB annotations. By
+     * default, any other message body is written as it is, such as when the
+     * data is already in XML format. Set this option to true to fail with an
+     * InvalidPayloadException instead.
      */
     private Boolean mustBeJAXBElement = false;
     /**
@@ -87,9 +90,10 @@ public class JaxbDataFormatConfiguration
      */
     private String encoding;
     /**
-     * To turn on marshalling XML fragment trees. This is useful when generated
-     * code does not have XmlRootElement annotation and you need to unmarshall
-     * only part of the tree.
+     * To omit the XML declaration when marshalling, by setting the
+     * JAXB_FRAGMENT property on the JAXB marshaller. To marshal or unmarshal
+     * only part of the tree, or classes without the XmlRootElement annotation,
+     * use partClass and partNamespace instead.
      */
     private Boolean fragment = false;
     /**
@@ -112,7 +116,8 @@ public class JaxbDataFormatConfiguration
      */
     private String xmlStreamWriterWrapper;
     /**
-     * To define the location of the schema.
+     * To set the xsi:schemaLocation attribute in the marshalled XML. This does
+     * not validate the XML; use the schema option to validate.
      */
     private String schemaLocation;
     /**
