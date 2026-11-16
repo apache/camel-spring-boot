@@ -187,55 +187,6 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
             createEipModelConfigurationSource(pkg, model, "camel.resilience4j", true);
         }
 
-        // Consul
-        json = loadModelJson(files, "consulServiceDiscovery");
-        if (json != null) {
-            EipModel model = JsonMapper.generateEipModel(json);
-
-            int pos = model.getJavaType().lastIndexOf(".");
-            String pkg = model.getJavaType().substring(0, pos) + ".springboot";
-
-            // Generate properties, auto-configuration for camel-core-starter
-            createEipModelConfigurationSource(pkg, model, "camel.cloud.consul.service-discovery", true);
-        }
-
-        // DNS
-        json = loadModelJson(files, "dnsServiceDiscovery");
-        if (json != null) {
-            EipModel model = JsonMapper.generateEipModel(json);
-
-            int pos = model.getJavaType().lastIndexOf(".");
-            String pkg = model.getJavaType().substring(0, pos) + ".springboot";
-
-            // Generate properties, auto-configuration for camel-core-starter
-            createEipModelConfigurationSource(pkg, model, "camel.cloud.dns.service-discovery", true);
-        }
-
-        // Etcd
-        json = loadModelJson(files, "etcdServiceDiscovery");
-        if (json != null) {
-            EipModel model = JsonMapper.generateEipModel(json);
-
-            int pos = model.getJavaType().lastIndexOf(".");
-            String pkg = model.getJavaType().substring(0, pos) + ".springboot";
-
-            // Generate properties, auto-configuration for camel-core-starter
-            createEipModelConfigurationSource(pkg, model, "camel.cloud.etcd.service-discovery", true);
-        }
-
-        // Kubernetes
-        json = loadModelJson(files, "kubernetesServiceDiscovery");
-        if (json != null) {
-            EipModel model = JsonMapper.generateEipModel(json);
-
-            int pos = model.getJavaType().lastIndexOf(".");
-            String pkg = model.getJavaType().substring(0, pos) + ".springboot";
-
-            // Generate properties, auto-configuration happens in
-            // camel-kubernetes-starter
-            createEipModelConfigurationSource(pkg, model, "camel.cloud.kubernetes.service-discovery", true);
-        }
-
         // Rest
         json = loadModelJson(files, "restConfiguration");
         if (json != null) {
