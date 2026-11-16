@@ -213,13 +213,45 @@ The `camel.supervising.controller.default-back-off.*` options are `camel.routeco
 Two health check options were removed: `camel.health.components-enabled` is `camel.health.producers-enabled` since
 Camel 4.0, and the `camel.health.config[id].*` options were replaced by `camel.health.exclude-pattern` in Camel 3.16.
 
+The following `camel.main.*` options were moved to another group or replaced:
+
+[width="100%",cols="2m,2m,1",options="header"]
+|===
+| Old option | Option to use | Since
+| camel.main.xml-routes, camel.main.xml-rests, camel.main.xml-route-templates | camel.main.routes-include-pattern | 3.8
+| camel.main.debugging | camel.debug.enabled | 4.2
+| camel.main.route-controller-* | camel.routecontroller.* | 4.4
+| camel.main.backlog-tracing, camel.main.backlog-tracing-standby, camel.main.backlog-tracing-templates | camel.trace.enabled, camel.trace.standby, camel.trace.trace-templates | 4.5
+| camel.main.error-registry-* | camel.errorregistry.* | 4.21
+|===
+
+The route controller and error registry options keep their name in the new group, such as
+`camel.routecontroller.back-off-delay` for `camel.main.route-controller-back-off-delay`. The exceptions are
+`camel.main.route-controller-supervise-enabled`, which is `camel.routecontroller.enabled`, and
+`camel.main.error-registry-stack-trace-enabled`, which was removed. The `camel.debug.*` options need the
+`camel-debug-starter`.
+
+Some options of Camel Main standalone are not options of Camel on Spring Boot, such as `camel.main.base-package-scan`
+and `camel.main.routes-builder-classes`: Camel on Spring Boot uses the `RouteBuilder` classes that are Spring beans.
+
 Spring Boot ignores a property that no configuration class binds, so an option under one of these old prefixes has no
-effect. Camel logs a `WARN` at startup for each one, with the option to use instead. The starter in the table logs it,
-so the `WARN` shows only when that starter is on the classpath. For example:
+effect. Camel logs a `WARN` at startup for each one, with the option to use instead. The starter in the first table
+logs it, so the `WARN` shows only when that starter is on the classpath. For example:
 
 [source,text]
 ----
 Property camel.springboot.name (class path resource [application.properties] - 3:1) has no effect, as the camel.springboot. prefix was removed in Camel 4.13. Use camel.main.name instead.
+----
+
+Camel also logs a `WARN` for any other `camel.main.*` property that is not an option of Camel on Spring Boot, such as
+a typo or an option of Camel Main standalone. As Spring Boot does for the properties it does not know, it does not
+check the environment variables and the system properties for these, as the name of an environment variable cannot
+tell a dash from a dot. The old `camel.main.*` options of the table above are logged from every property source, with
+the option to use instead:
+
+[source,text]
+----
+Property camel.main.backlog-tracing (class path resource [application.properties] - 4:1) has no effect, as Camel on Spring Boot has no camel.main option of this name. Use camel.trace.enabled instead.
 ----
 
 == Custom Camel context configuration

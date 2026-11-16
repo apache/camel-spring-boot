@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.function.Function;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.CamelContextAware;
@@ -53,6 +54,7 @@ import org.apache.camel.spi.StartupConditionStrategy;
 import org.apache.camel.spi.StartupStepRecorder;
 import org.apache.camel.spi.VariableRepository;
 import org.apache.camel.spi.VariableRepositoryFactory;
+import org.apache.camel.spring.boot.errorregistry.CamelErrorRegistryConfigurationProperties;
 import org.apache.camel.spring.boot.routecontroller.SupervisingRouteControllerConfiguration;
 import org.apache.camel.spring.boot.util.RemovedPropertiesHelper;
 import org.apache.camel.spring.spi.ApplicationContextBeanRepository;
@@ -142,6 +144,8 @@ public class CamelAutoConfiguration {
         // Spring Boot ignores the options under a removed or renamed prefix without a log line
         warnRemovedSpringbootProperties(applicationContext.getEnvironment());
         warnRenamedProperties(applicationContext.getEnvironment());
+        // and a camel.main option that has no field, such as an option that Camel moved, or a typo
+        warnUnboundMainProperties(applicationContext.getEnvironment());
 
         // inject camel context on controller
         CamelContextAware.trySetCamelContext(controller, camelContext);
@@ -260,33 +264,67 @@ public class CamelAutoConfiguration {
      */
     static void warnRemovedSpringbootProperties(Environment environment) {
         Map<String, String> main = RemovedPropertiesHelper.dashedPropertyNames(CamelConfigurationProperties.Main.class);
-        Map<String, String> routeController = RemovedPropertiesHelper
-                .dashedPropertyNames(SupervisingRouteControllerConfiguration.class);
+        Function<String, String> moved = movedMainOptions();
         RemovedPropertiesHelper.warnRemovedProperties(environment, "camel.springboot",
                 "the camel.springboot. prefix was removed in Camel 4.13", Set.of("lenientconfigurationbinding"),
                 name -> {
                     if ("mainruncontroller".equals(name)) {
                         return "camel.main.run-controller";
                     }
-                    // the XML routes, rests and route templates options became routes-include-pattern in Camel 3.8
-                    if (Set.of("xmlroutes", "xmlrests", "xmlroutetemplates").contains(name)) {
-                        return "camel.main.routes-include-pattern";
-                    }
                     if ("typeconversion".equals(name)) {
                         return "camel.main.type-conversion";
                     }
-                    // the route controller options moved to camel.routecontroller in Camel 4.4
-                    if ("routecontrollersuperviseenabled".equals(name)) {
-                        return "camel.routecontroller.enabled";
-                    }
-                    String option = name.startsWith("routecontroller")
-                            ? routeController.get(name.substring("routecontroller".length())) : null;
-                    if (option != null) {
-                        return "camel.routecontroller." + option;
-                    }
-                    option = main.get(name);
-                    return option != null ? "camel.main." + option : null;
+                    String option = main.get(name);
+                    return option != null ? "camel.main." + option : moved.apply(name);
                 });
+    }
+
+    /**
+     * Logs a WARN for each camel.main.* property the application sets that is not an option of Camel on Spring Boot:
+     * an option that Camel moved, with the option to use instead, an option of Camel Main standalone, such as
+     * camel.main.base-package-scan, or a typo. camel.main.type-conversion is read by
+     * {@link TypeConversionConfiguration}.
+     */
+    static void warnUnboundMainProperties(Environment environment) {
+        RemovedPropertiesHelper.warnUnboundProperties(environment, "camel.main",
+                CamelConfigurationProperties.Main.class, Set.of("typeconversion"), movedMainOptions());
+    }
+
+    /**
+     * Gives the option to use instead of a camel.main option that Camel moved or replaced, from its name in uniform
+     * form, or null: the debugger option (camel.debug.enabled since Camel 4.2), the route controller options
+     * (camel.routecontroller.* since Camel 4.4), the backlog tracer options (camel.trace.* since Camel 4.5), the error
+     * registry options (camel.errorregistry.* since Camel 4.21), and the XML routes, rests and route templates options
+     * (camel.main.routes-include-pattern since Camel 3.8).
+     */
+    static Function<String, String> movedMainOptions() {
+        Map<String, String> routeController = RemovedPropertiesHelper
+                .dashedPropertyNames(SupervisingRouteControllerConfiguration.class);
+        Map<String, String> errorRegistry = RemovedPropertiesHelper
+                .dashedPropertyNames(CamelErrorRegistryConfigurationProperties.class);
+        return name -> switch (name) {
+            // the option was camel.main.debugging, which the Camel 4.2 upgrade guide names camel.main.debugger
+            case "debugging", "debugger" -> "camel.debug.enabled";
+            case "backlogtracing" -> "camel.trace.enabled";
+            case "backlogtracingstandby" -> "camel.trace.standby";
+            case "backlogtracingtemplates" -> "camel.trace.trace-templates";
+            case "routecontrollersuperviseenabled" -> "camel.routecontroller.enabled";
+            case "xmlroutes", "xmlrests", "xmlroutetemplates" -> "camel.main.routes-include-pattern";
+            default -> {
+                String option = optionInGroup(name, "routecontroller", "camel.routecontroller", routeController);
+                yield option != null
+                        ? option : optionInGroup(name, "errorregistry", "camel.errorregistry", errorRegistry);
+            }
+        };
+    }
+
+    /**
+     * The option of the same name in a group, such as camel.routecontroller.back-off-delay for
+     * routecontrollerbackoffdelay, or null.
+     */
+    private static String optionInGroup(String name, String group, String prefix, Map<String, String> options) {
+        String option = name.startsWith(group) ? options.get(name.substring(group.length())) : null;
+        return option != null ? prefix + "." + option : null;
     }
 
     /**

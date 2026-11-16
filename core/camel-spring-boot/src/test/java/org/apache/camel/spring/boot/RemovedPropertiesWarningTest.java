@@ -16,8 +16,17 @@
  */
 package org.apache.camel.spring.boot;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
@@ -32,20 +41,33 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.bind.BindException;
+import org.springframework.boot.context.properties.bind.BindHandler;
+import org.springframework.boot.context.properties.bind.Bindable;
+import org.springframework.boot.context.properties.bind.Binder;
+import org.springframework.boot.context.properties.bind.UnboundConfigurationPropertiesException;
+import org.springframework.boot.context.properties.bind.handler.NoUnboundElementsBindHandler;
+import org.springframework.boot.context.properties.source.MapConfigurationPropertySource;
+import org.springframework.boot.json.JsonParserFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.env.SystemEnvironmentPropertySource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The properties under a prefix that was removed or renamed, such as <tt>camel.springboot.</tt> (removed in Camel
- * 4.13), are not bound. Each one is logged at WARN when the application starts, with the property to use instead.
+ * 4.13), and the <tt>camel.main.</tt> properties that are not an option, such as <tt>camel.main.backlog-tracing</tt>
+ * (moved to <tt>camel.trace.enabled</tt> in Camel 4.5), are not bound. Each one is logged at WARN when the application
+ * starts, with the property to use instead.
  */
 public class RemovedPropertiesWarningTest {
 
@@ -287,5 +309,177 @@ public class RemovedPropertiesWarningTest {
             assertTrue(app.warnings().stream().noneMatch(m -> m.contains("has no effect")),
                     "no WARN about camel.main options: " + app.warnings());
         }
+    }
+
+    /**
+     * The camel.main options that Camel moved to another prefix or replaced, with the option to use instead.
+     */
+    private static final Map<String, String> MOVED_MAIN_OPTIONS = movedMainOptions();
+
+    private static Map<String, String> movedMainOptions() {
+        Map<String, String> answer = new HashMap<>();
+        answer.put("camel.main.debugging", "camel.debug.enabled");
+        answer.put("camel.main.debugger", "camel.debug.enabled");
+        answer.put("camel.main.backlog-tracing", "camel.trace.enabled");
+        answer.put("camel.main.backlog-tracing-standby", "camel.trace.standby");
+        answer.put("camel.main.backlog-tracing-templates", "camel.trace.trace-templates");
+        answer.put("camel.main.route-controller-supervise-enabled", "camel.routecontroller.enabled");
+        answer.put("camel.main.route-controller-back-off-delay", "camel.routecontroller.back-off-delay");
+        answer.put("camel.main.route-controller-include-routes", "camel.routecontroller.include-routes");
+        answer.put("camel.main.error-registry-enabled", "camel.errorregistry.enabled");
+        answer.put("camel.main.error-registry-maximum-entries", "camel.errorregistry.maximum-entries");
+        answer.put("camel.main.error-registry-time-to-live-seconds", "camel.errorregistry.time-to-live-seconds");
+        answer.put("camel.main.xml-routes", "camel.main.routes-include-pattern");
+        answer.put("camel.main.xml-rests", "camel.main.routes-include-pattern");
+        answer.put("camel.main.xml-route-templates", "camel.main.routes-include-pattern");
+        return Collections.unmodifiableMap(answer);
+    }
+
+    @Test
+    public void movedMainOptionsAreNotBound() {
+        MapConfigurationPropertySource source = new MapConfigurationPropertySource();
+        MOVED_MAIN_OPTIONS.keySet().forEach(key -> source.put(key, "1000"));
+        source.put("camel.main.name", "Bound");
+        CamelConfigurationProperties.Main main = new CamelConfigurationProperties().getMain();
+
+        BindException e = assertThrows(BindException.class, () -> new Binder(source).bind("camel.main",
+                Bindable.ofInstance(main), new NoUnboundElementsBindHandler(BindHandler.DEFAULT)));
+
+        UnboundConfigurationPropertiesException unbound
+                = assertInstanceOf(UnboundConfigurationPropertiesException.class, e.getCause());
+        assertEquals(MOVED_MAIN_OPTIONS.keySet(), unbound.getUnboundProperties().stream()
+                .map(p -> p.getName().toString()).collect(Collectors.toSet()));
+        assertEquals("Bound", main.getName());
+    }
+
+    @Test
+    public void movedMainOptionsAreReportedWithTheirReplacement() {
+        String[] properties = MOVED_MAIN_OPTIONS.keySet().stream().map(key -> key + "=true").toArray(String[]::new);
+        try (Started app = start(properties)) {
+            assertNotEquals(Boolean.TRUE, app.camel().isBacklogTracing(), "camel.main.backlog-tracing is not bound");
+            assertNotEquals(Boolean.TRUE, app.camel().isDebugging(), "camel.main.debugging is not bound");
+            assertFalse(app.camel().getRouteController().isSupervising(),
+                    "camel.main.route-controller-supervise-enabled is not bound");
+            assertFalse(app.camel().getErrorRegistry().isEnabled(), "camel.main.error-registry-enabled is not bound");
+            for (Map.Entry<String, String> option : MOVED_MAIN_OPTIONS.entrySet()) {
+                String warning = app.warningAbout(option.getKey());
+                assertTrue(warning.contains("has no effect"), warning);
+                assertTrue(warning.contains("Use " + option.getValue() + " instead"), warning);
+            }
+        }
+    }
+
+    @Test
+    public void camelCaseMovedMainOptionIsReportedAsWritten() {
+        try (Started app = start("camel.main.backlogTracingStandby=true",
+                "camel.main.routeControllerBackOffDelay=5000")) {
+            String standby = app.warningAbout("camel.main.backlogTracingStandby");
+            assertTrue(standby.contains("Use camel.trace.standby instead"), standby);
+            String delay = app.warningAbout("camel.main.routeControllerBackOffDelay");
+            assertTrue(delay.contains("Use camel.routecontroller.back-off-delay instead"), delay);
+        }
+    }
+
+    @Test
+    public void springbootOptionMovedFromMainIsReportedWithItsReplacement() {
+        try (Started app = start("camel.springboot.backlog-tracing=true")) {
+            String warning = app.warningAbout("camel.springboot.backlog-tracing");
+            assertTrue(warning.contains("Use camel.trace.enabled instead"), warning);
+        }
+    }
+
+    @Test
+    public void unknownMainOptionIsReported() {
+        try (Started app = start("camel.main.nmae=Typo", "camel.main.error-registry-stack-trace-enabled=true")) {
+            assertNotEquals("Typo", app.camel().getName(), "camel.main.nmae is not bound");
+            for (String property : List.of("camel.main.nmae", "camel.main.error-registry-stack-trace-enabled")) {
+                String warning = app.warningAbout(property);
+                assertTrue(warning.endsWith("as Camel on Spring Boot has no camel.main option of this name."), warning);
+                assertFalse(warning.contains(" Use "), warning);
+            }
+        }
+    }
+
+    @Test
+    public void camelMainStandaloneOptionIsReported() {
+        try (Started app = start("camel.main.base-package-scan=com.acme.routes",
+                "camel.main.routes-builder-classes=com.acme.routes.MyRoute")) {
+            for (String property : List.of("camel.main.base-package-scan", "camel.main.routes-builder-classes")) {
+                String warning = app.warningAbout(property);
+                assertTrue(warning.contains("has no effect"), warning);
+            }
+        }
+    }
+
+    @Test
+    public void mainOptionsInEveryFormAreAppliedAndNotReported() {
+        try (Started app = start("camel.main.streamCachingEnabled=false", "camel.main.shutdown_timeout=7",
+                "camel.main.global-options[CamelLogDebugBodyMaxChars]=500", "camel.main.global-options.foo=bar",
+                "camel.main.type-conversion=true", "camel.main.main-run-controller=false",
+                "camel.main.include-non-singletons=false", "camel.main.warn-on-early-shutdown=true")) {
+            assertFalse(app.camel().isStreamCaching());
+            assertEquals(7, app.camel().getShutdownStrategy().getTimeout());
+            assertEquals("500", app.camel().getGlobalOptions().get("CamelLogDebugBodyMaxChars"));
+            assertEquals("bar", app.camel().getGlobalOptions().get("foo"));
+            assertTrue(app.warnings().stream().noneMatch(m -> m.contains("has no effect")),
+                    "no WARN about camel.main options: " + app.warnings());
+        }
+    }
+
+    @Test
+    public void mainEnvironmentVariablesAreReportedOnlyWhenMoved() {
+        try (Started app = start(Map.of("CAMEL_MAIN_SHUTDOWN_TIMEOUT", "5", "CAMEL_MAIN_BACKLOG_TRACING", "true",
+                "CAMEL_MAIN_NMAE", "Typo"), new String[0])) {
+            assertEquals(5, app.camel().getShutdownStrategy().getTimeout());
+            String warning = app.warningAbout("CAMEL_MAIN_BACKLOG_TRACING");
+            assertTrue(warning.contains("Use camel.trace.enabled instead"), warning);
+            // the name of an environment variable cannot tell a dash from a dot, so a typo is not reported
+            assertEquals(List.of(warning), app.warnings().stream().filter(m -> m.contains("has no effect")).toList());
+        }
+    }
+
+    @Test
+    public void everyDocumentedMainOptionIsNotReported() throws IOException {
+        Map<String, Object> properties = new HashMap<>();
+        documentedMainOptions().forEach(option -> properties.put(option, "x"));
+        assertTrue(properties.size() > 100, "the camel.main options of the metadata: " + properties.keySet());
+        properties.put("camel.main.type-conversion", "x");
+        properties.put("camel.main.global-options.foo", "x");
+        StandardEnvironment environment = new StandardEnvironment();
+        environment.getPropertySources().addFirst(new MapPropertySource("test", properties));
+
+        ListAppender<ILoggingEvent> appender = new ListAppender<>();
+        appender.start();
+        rootLogger().addAppender(appender);
+        try {
+            CamelAutoConfiguration.warnUnboundMainProperties(environment);
+        } finally {
+            rootLogger().detachAppender(appender);
+            appender.stop();
+        }
+        assertEquals(List.of(), appender.list.stream().map(ILoggingEvent::getFormattedMessage).toList());
+    }
+
+    /**
+     * The camel.main options in the Spring Boot configuration metadata of this module.
+     */
+    @SuppressWarnings("unchecked")
+    private static Set<String> documentedMainOptions() throws IOException {
+        List<URL> urls = Collections.list(RemovedPropertiesWarningTest.class.getClassLoader()
+                .getResources("META-INF/spring-configuration-metadata.json"));
+        List<String> answer = new ArrayList<>();
+        for (URL url : urls) {
+            try (InputStream is = url.openStream()) {
+                Map<String, Object> metadata = JsonParserFactory.getJsonParser()
+                        .parseMap(new String(is.readAllBytes(), StandardCharsets.UTF_8));
+                for (Object property : (List<Object>) metadata.getOrDefault("properties", List.of())) {
+                    String name = (String) ((Map<String, Object>) property).get("name");
+                    if (name.startsWith("camel.main.")) {
+                        answer.add(name);
+                    }
+                }
+            }
+        }
+        return Set.copyOf(answer);
     }
 }
