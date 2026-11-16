@@ -90,7 +90,7 @@ import static org.awaitility.Awaitility.await;
                         "spring.ai.mcp.server.prompt-change-notification=true",
                         "camel.mcp-server.tags=conformance",
                         "camel.mcp-server.tool-timeout=2000",
-                        "camel.springboot.main-run-controller=false" })
+                        "camel.main.run-controller=false" })
 public class SpringBootMcpServerTest {
 
     private static final String MCP_TEST_AUTHORIZATION = "Basic " + Base64.getEncoder()

@@ -61,7 +61,7 @@ import static org.assertj.core.api.Assertions.assertThat;
                 properties = {
                         "spring.main.banner-mode=off",
                         "camel.mcp-server.tags=stdio-conformance",
-                        "camel.springboot.main-run-controller=false" })
+                        "camel.main.run-controller=false" })
 public class SpringBootMcpServerStdioTest {
 
     private static final PipedOutputStream TO_SERVER;

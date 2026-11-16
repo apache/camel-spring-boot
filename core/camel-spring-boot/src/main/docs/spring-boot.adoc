@@ -180,6 +180,24 @@ public class MyRouter extends RouteBuilder {
 }
 ----
 
+=== Removed configuration prefixes
+
+The `camel.springboot.*` options were removed in Camel 4.13. Use the `camel.main.*` option of the same name instead,
+such as `camel.main.name` for `camel.springboot.name`. The run controller option is `camel.main.run-controller`, and
+the route controller options are under `camel.routecontroller.*`, such as `camel.routecontroller.enabled`. Only
+`camel.springboot.lenient-configuration-binding` keeps its name.
+
+The servlet mapping options of the `camel-servlet-starter` are `camel.servlet.mapping.*`, such as
+`camel.servlet.mapping.context-path`, and no longer `camel.component.servlet.mapping.*`.
+
+Spring Boot ignores a property that no configuration class binds, so an option under one of these old prefixes has no
+effect. Camel logs a `WARN` at startup for each one, with the option to use instead:
+
+[source,text]
+----
+Property camel.springboot.name (class path resource [application.properties] - 3:1) has no effect, as the camel.springboot. prefix was removed in Camel 4.13. Use camel.main.name instead.
+----
+
 == Custom Camel context configuration
 
 If you would like to perform some operations on `CamelContext` bean

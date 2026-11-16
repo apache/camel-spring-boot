@@ -23,6 +23,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.CamelContextAware;
@@ -52,6 +53,8 @@ import org.apache.camel.spi.StartupConditionStrategy;
 import org.apache.camel.spi.StartupStepRecorder;
 import org.apache.camel.spi.VariableRepository;
 import org.apache.camel.spi.VariableRepositoryFactory;
+import org.apache.camel.spring.boot.routecontroller.SupervisingRouteControllerConfiguration;
+import org.apache.camel.spring.boot.util.RemovedPropertiesHelper;
 import org.apache.camel.spring.spi.ApplicationContextBeanRepository;
 import org.apache.camel.spring.spi.CamelBeanPostProcessor;
 import org.apache.camel.support.DefaultRegistry;
@@ -135,6 +138,9 @@ public class CamelAutoConfiguration {
     public static CamelContext doConfigureCamelContext(ApplicationContext applicationContext, CamelContext camelContext,
                                                        CamelConfigurationProperties config,
                                                        CamelSpringBootApplicationController controller) throws Exception {
+
+        // Spring Boot ignores the removed camel.springboot.* options without a log line
+        warnRemovedSpringbootProperties(applicationContext.getEnvironment());
 
         // inject camel context on controller
         CamelContextAware.trySetCamelContext(controller, camelContext);
@@ -244,6 +250,38 @@ public class CamelAutoConfiguration {
         }
 
         return camelContext;
+    }
+
+    /**
+     * Logs a WARN for each camel.springboot.* option the application sets, with the option to use instead. The
+     * camel.springboot. prefix was removed in Camel 4.13, so these options have no effect, except
+     * camel.springboot.lenient-configuration-binding which is still read.
+     */
+    static void warnRemovedSpringbootProperties(Environment environment) {
+        Map<String, String> main = RemovedPropertiesHelper.dashedPropertyNames(CamelConfigurationProperties.Main.class);
+        Map<String, String> routeController = RemovedPropertiesHelper
+                .dashedPropertyNames(SupervisingRouteControllerConfiguration.class);
+        RemovedPropertiesHelper.warnRemovedProperties(environment, "camel.springboot",
+                "the camel.springboot. prefix was removed in Camel 4.13", Set.of("lenientconfigurationbinding"),
+                name -> {
+                    if ("mainruncontroller".equals(name)) {
+                        return "camel.main.run-controller";
+                    }
+                    if ("typeconversion".equals(name)) {
+                        return "camel.main.type-conversion";
+                    }
+                    // the route controller options moved to camel.routecontroller in Camel 4.4
+                    if ("routecontrollersuperviseenabled".equals(name)) {
+                        return "camel.routecontroller.enabled";
+                    }
+                    String option = name.startsWith("routecontroller")
+                            ? routeController.get(name.substring("routecontroller".length())) : null;
+                    if (option != null) {
+                        return "camel.routecontroller." + option;
+                    }
+                    option = main.get(name);
+                    return option != null ? "camel.main." + option : null;
+                });
     }
 
     /**
