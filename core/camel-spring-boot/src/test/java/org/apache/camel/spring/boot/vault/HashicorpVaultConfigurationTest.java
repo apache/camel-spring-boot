@@ -47,5 +47,9 @@ public class HashicorpVaultConfigurationTest {
         Assertions.assertEquals(true, camelContext.getVaultConfiguration().hashicorp().isRefreshEnabled());
         Assertions.assertEquals(10000, camelContext.getVaultConfiguration().hashicorp().getRefreshPeriod());
         Assertions.assertEquals("secret1,secret2", camelContext.getVaultConfiguration().hashicorp().getSecrets());
+        // options left unset keep the Camel defaults, as the properties are copied onto the Camel configuration
+        Assertions.assertEquals("token", camelContext.getVaultConfiguration().hashicorp().getAuthentication());
+        Assertions.assertEquals("https://management.azure.com/",
+                camelContext.getVaultConfiguration().hashicorp().getAzureResource());
     }
 }

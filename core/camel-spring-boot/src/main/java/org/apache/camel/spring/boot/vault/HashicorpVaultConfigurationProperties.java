@@ -24,11 +24,12 @@ public class HashicorpVaultConfigurationProperties {
 
     /**
      * How to log in to hashicorp vault: token (a fixed token), approle (a role ID and a secret ID), kubernetes (the
-     * service account token of the pod), jwt (a JWT, such as a workload identity token) or cert (the TLS client
-     * certificate of the keyStore). Camel renews the token before it expires, and logs in again when the token can no
-     * longer be renewed.
+     * service account token of the pod), jwt (a JWT, such as a workload identity token), cert (the TLS client
+     * certificate of the keyStore), aws-iam (the AWS credentials of the application), azure-msi (the Azure managed
+     * identity) or gcp-gce (the service account of the Google Compute Engine instance). Camel renews the token before
+     * it expires, and logs in again when the token can no longer be renewed.
      */
-    @Metadata(defaultValue = "token", enums = "token,approle,kubernetes,jwt,cert")
+    @Metadata(defaultValue = "token", enums = "token,approle,kubernetes,jwt,cert,aws-iam,azure-msi,gcp-gce")
     private String authentication = "token";
 
     /**
@@ -47,8 +48,10 @@ public class HashicorpVaultConfigurationProperties {
     private String secretId;
 
     /**
-     * The hashicorp vault role to log in as, for the kubernetes and jwt logins. The jwt login can leave it out when the
-     * login method has a default role.
+     * The hashicorp vault role to log in as, for the kubernetes, jwt, cert, aws-iam, azure-msi and gcp-gce logins. The
+     * jwt login can leave it out when the login method has a default role, the aws-iam login to log in as the role
+     * named as the IAM principal, and the cert login to let Vault pick the certificate role that trusts the
+     * certificate.
      */
     private String role;
 
@@ -66,7 +69,7 @@ public class HashicorpVaultConfigurationProperties {
 
     /**
      * The path the login method is mounted at in hashicorp vault (without auth/), when it is not the default path of
-     * the login method: approle, kubernetes or jwt
+     * the login method: approle, kubernetes, jwt, cert, aws (for aws-iam), azure (for azure-msi) or gcp (for gcp-gce)
      */
     private String authMountPath;
 
@@ -85,7 +88,7 @@ public class HashicorpVaultConfigurationProperties {
     /**
      * The file with the TLS client certificate and its private key, which Camel presents to hashicorp vault: for the
      * cert login, or for a Vault that requires client certificates. A PKCS12 or JKS key store, or PEM with the
-     * certificate and the PKCS#8 private key.
+     * certificate and its unencrypted private key, in PKCS#8 or, for an RSA key, in PKCS#1.
      */
     private String keyStore;
 
@@ -93,6 +96,37 @@ public class HashicorpVaultConfigurationProperties {
      * The password of the key store and of its private key, when it is a PKCS12 or JKS key store
      */
     private String keyStorePassword;
+
+    /**
+     * The value of the X-Vault-AWS-IAM-Server-ID header of the aws-iam login, when the AWS login of hashicorp vault
+     * requires one (iam_server_id_header_value)
+     */
+    private String awsIamServerId;
+
+    /**
+     * The AWS region the aws-iam login signs its request for, which must be the region of awsStsEndpoint. When not set:
+     * us-east-1 with the global endpoint, else the region of the AWS SDK default region chain (such as the AWS_REGION
+     * environment variable).
+     */
+    private String awsRegion;
+
+    /**
+     * The AWS STS endpoint of the aws-iam login, which the AWS login of hashicorp vault must accept (its sts_endpoint).
+     * When not set, the global endpoint https://sts.amazonaws.com/.
+     */
+    private String awsStsEndpoint;
+
+    /**
+     * The resource (audience) of the managed identity token of the azure-msi login, which must be the resource of the
+     * Azure login of hashicorp vault
+     */
+    private String azureResource = "https://management.azure.com/";
+
+    /**
+     * The client ID of a user-assigned managed identity, for the azure-msi login. When not set, the system-assigned
+     * managed identity.
+     */
+    private String azureClientId;
 
     /**
      * The Hashicorp Vault Host for accessing the service
@@ -228,6 +262,46 @@ public class HashicorpVaultConfigurationProperties {
 
     public void setKeyStorePassword(String keyStorePassword) {
         this.keyStorePassword = keyStorePassword;
+    }
+
+    public String getAwsIamServerId() {
+        return awsIamServerId;
+    }
+
+    public void setAwsIamServerId(String awsIamServerId) {
+        this.awsIamServerId = awsIamServerId;
+    }
+
+    public String getAwsRegion() {
+        return awsRegion;
+    }
+
+    public void setAwsRegion(String awsRegion) {
+        this.awsRegion = awsRegion;
+    }
+
+    public String getAwsStsEndpoint() {
+        return awsStsEndpoint;
+    }
+
+    public void setAwsStsEndpoint(String awsStsEndpoint) {
+        this.awsStsEndpoint = awsStsEndpoint;
+    }
+
+    public String getAzureResource() {
+        return azureResource;
+    }
+
+    public void setAzureResource(String azureResource) {
+        this.azureResource = azureResource;
+    }
+
+    public String getAzureClientId() {
+        return azureClientId;
+    }
+
+    public void setAzureClientId(String azureClientId) {
+        this.azureClientId = azureClientId;
     }
 
     public String getHost() {

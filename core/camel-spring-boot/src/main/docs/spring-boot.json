@@ -1947,15 +1947,46 @@
     {
       "name": "camel.vault.hashicorp.auth-mount-path",
       "type": "java.lang.String",
-      "description": "The path the login method is mounted at in hashicorp vault (without auth\/), when it is not the default path of the login method: approle, kubernetes or jwt",
+      "description": "The path the login method is mounted at in hashicorp vault (without auth\/), when it is not the default path of the login method: approle, kubernetes, jwt, cert, aws (for aws-iam), azure (for azure-msi) or gcp (for gcp-gce)",
       "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
     },
     {
       "name": "camel.vault.hashicorp.authentication",
       "type": "java.lang.String",
-      "description": "How to log in to hashicorp vault: token (a fixed token), approle (a role ID and a secret ID), kubernetes (the service account token of the pod), jwt (a JWT, such as a workload identity token) or cert (the TLS client certificate of the keyStore). Camel renews the token before it expires, and logs in again when the token can no longer be renewed.",
+      "description": "How to log in to hashicorp vault: token (a fixed token), approle (a role ID and a secret ID), kubernetes (the service account token of the pod), jwt (a JWT, such as a workload identity token), cert (the TLS client certificate of the keyStore), aws-iam (the AWS credentials of the application), azure-msi (the Azure managed identity) or gcp-gce (the service account of the Google Compute Engine instance). Camel renews the token before it expires, and logs in again when the token can no longer be renewed.",
       "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties",
       "defaultValue": "token"
+    },
+    {
+      "name": "camel.vault.hashicorp.aws-iam-server-id",
+      "type": "java.lang.String",
+      "description": "The value of the X-Vault-AWS-IAM-Server-ID header of the aws-iam login, when the AWS login of hashicorp vault requires one (iam_server_id_header_value)",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.hashicorp.aws-region",
+      "type": "java.lang.String",
+      "description": "The AWS region the aws-iam login signs its request for, which must be the region of awsStsEndpoint. When not set: us-east-1 with the global endpoint, else the region of the AWS SDK default region chain (such as the AWS_REGION environment variable).",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.hashicorp.aws-sts-endpoint",
+      "type": "java.lang.String",
+      "description": "The AWS STS endpoint of the aws-iam login, which the AWS login of hashicorp vault must accept (its sts_endpoint). When not set, the global endpoint https:\/\/sts.amazonaws.com\/.",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.hashicorp.azure-client-id",
+      "type": "java.lang.String",
+      "description": "The client ID of a user-assigned managed identity, for the azure-msi login. When not set, the system-assigned managed identity.",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+    },
+    {
+      "name": "camel.vault.hashicorp.azure-resource",
+      "type": "java.lang.String",
+      "description": "The resource (audience) of the managed identity token of the azure-msi login, which must be the resource of the Azure login of hashicorp vault",
+      "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties",
+      "defaultValue": "https:\/\/management.azure.com\/"
     },
     {
       "name": "camel.vault.hashicorp.cloud",
@@ -1985,7 +2016,7 @@
     {
       "name": "camel.vault.hashicorp.key-store",
       "type": "java.lang.String",
-      "description": "The file with the TLS client certificate and its private key, which Camel presents to hashicorp vault: for the cert login, or for a Vault that requires client certificates. A PKCS12 or JKS key store, or PEM with the certificate and the PKCS#8 private key.",
+      "description": "The file with the TLS client certificate and its private key, which Camel presents to hashicorp vault: for the cert login, or for a Vault that requires client certificates. A PKCS12 or JKS key store, or PEM with the certificate and its unencrypted private key, in PKCS#8 or, for an RSA key, in PKCS#1.",
       "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
     },
     {
@@ -2023,7 +2054,7 @@
     {
       "name": "camel.vault.hashicorp.role",
       "type": "java.lang.String",
-      "description": "The hashicorp vault role to log in as, for the kubernetes and jwt logins. The jwt login can leave it out when the login method has a default role.",
+      "description": "The hashicorp vault role to log in as, for the kubernetes, jwt, cert, aws-iam, azure-msi and gcp-gce logins. The jwt login can leave it out when the login method has a default role, the aws-iam login to log in as the role named as the IAM principal, and the cert login to let Vault pick the certificate role that trusts the certificate.",
       "sourceType": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
     },
     {
