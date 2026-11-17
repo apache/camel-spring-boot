@@ -51,7 +51,7 @@ class AiObservabilityAutoConfigurationKebabCaseTest {
         assertThat(GenAiObservability.isEnabled(camelContext)).isFalse();
 
         PropertiesComponent pc = (PropertiesComponent) camelContext.getPropertiesComponent();
-        assertThat(pc.getLocalProperties())
+        assertThat(pc.getOverrideProperties())
                 .containsEntry(GenAiObservabilityProperties.ENABLED, "false");
     }
 

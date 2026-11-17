@@ -16,11 +16,8 @@
  */
 package org.apache.camel.ai.observability.starter;
 
-import java.util.Properties;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.ai.observability.GenAiObservabilityProperties;
-import org.apache.camel.component.properties.PropertiesComponent;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.CamelContextConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -62,13 +59,13 @@ public class AiObservabilityAutoConfiguration {
                 .orElse(true);
     }
 
+    /**
+     * Hands the option to the Camel PropertiesComponent as an override property, matching Camel Main and JBang. The AI
+     * producers read it on the threads that route the exchanges; the local properties of the PropertiesComponent belong
+     * to the thread that sets them, so they would only be seen at startup.
+     */
     static void applyEnabledProperty(CamelContext camelContext, boolean enabled) {
-        PropertiesComponent pc = (PropertiesComponent) camelContext.getPropertiesComponent();
-        Properties local = pc.getLocalProperties();
-        if (local == null) {
-            local = new Properties();
-            pc.setLocalProperties(local);
-        }
-        local.setProperty(GenAiObservabilityProperties.ENABLED, Boolean.toString(enabled));
+        camelContext.getPropertiesComponent().addOverrideProperty(GenAiObservabilityProperties.ENABLED,
+                Boolean.toString(enabled));
     }
 }

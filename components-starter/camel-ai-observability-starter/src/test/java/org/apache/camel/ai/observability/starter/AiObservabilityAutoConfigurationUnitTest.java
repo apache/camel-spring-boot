@@ -16,6 +16,9 @@
  */
 package org.apache.camel.ai.observability.starter;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.camel.component.ai.observability.GenAiObservability;
 import org.apache.camel.component.ai.observability.GenAiObservabilityProperties;
 import org.apache.camel.component.properties.PropertiesComponent;
@@ -51,28 +54,38 @@ class AiObservabilityAutoConfigurationUnitTest {
     }
 
     @Test
-    void shouldApplyDisabledPropertyToLocalProperties() throws Exception {
+    void shouldApplyDisabledPropertyAsOverrideProperty() throws Exception {
         try (DefaultCamelContext camelContext = new DefaultCamelContext()) {
-            camelContext.getPropertiesComponent().setLocalProperties(null);
-
             AiObservabilityAutoConfiguration.applyEnabledProperty(camelContext, false);
 
             PropertiesComponent pc = (PropertiesComponent) camelContext.getPropertiesComponent();
-            assertThat(pc.getLocalProperties())
+            assertThat(pc.getOverrideProperties())
                     .containsEntry(GenAiObservabilityProperties.ENABLED, "false");
             assertThat(GenAiObservability.isEnabled(camelContext)).isFalse();
         }
     }
 
     @Test
-    void shouldApplyEnabledPropertyToExistingLocalProperties() throws Exception {
+    void shouldApplyEnabledPropertyAsOverrideProperty() throws Exception {
         try (DefaultCamelContext camelContext = new DefaultCamelContext()) {
             AiObservabilityAutoConfiguration.applyEnabledProperty(camelContext, true);
 
             PropertiesComponent pc = (PropertiesComponent) camelContext.getPropertiesComponent();
-            assertThat(pc.getLocalProperties())
+            assertThat(pc.getOverrideProperties())
                     .containsEntry(GenAiObservabilityProperties.ENABLED, "true");
             assertThat(GenAiObservability.isEnabled(camelContext)).isTrue();
+        }
+    }
+
+    @Test
+    void shouldMakeTheOptionVisibleToOtherThreads() throws Exception {
+        try (DefaultCamelContext camelContext = new DefaultCamelContext()) {
+            AiObservabilityAutoConfiguration.applyEnabledProperty(camelContext, false);
+
+            // the AI producers read the option on the threads that route the exchanges, not on the startup thread
+            CompletableFuture<Boolean> enabled
+                    = CompletableFuture.supplyAsync(() -> GenAiObservability.isEnabled(camelContext));
+            assertThat(enabled.get(10, TimeUnit.SECONDS)).isFalse();
         }
     }
 }

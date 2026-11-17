@@ -53,7 +53,7 @@ class AiObservabilityAutoConfigurationDefaultTest {
         assertThat(GenAiObservability.isEnabled(camelContext)).isTrue();
 
         PropertiesComponent pc = (PropertiesComponent) camelContext.getPropertiesComponent();
-        assertThat(pc.getLocalProperties())
+        assertThat(pc.getOverrideProperties())
                 .containsEntry(GenAiObservabilityProperties.ENABLED, "true");
     }
 
