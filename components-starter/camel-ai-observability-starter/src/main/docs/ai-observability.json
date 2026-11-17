@@ -8,11 +8,32 @@
   ],
   "properties": [
     {
+      "name": "camel.aiobservability.content-max-length",
+      "type": "java.lang.Integer",
+      "description": "The maximum length of every text (message, tool argument or result) recorded at level full. Longer texts are cut.",
+      "sourceType": "org.apache.camel.ai.observability.starter.AiObservabilityConfigurationProperties",
+      "defaultValue": 8192
+    },
+    {
+      "name": "camel.aiobservability.defer-to-framework",
+      "type": "java.lang.Boolean",
+      "description": "When the AI framework behind a component already traces its model calls and tool calls (Spring AI with an ObservationRegistry, quarkus-langchain4j, a LangChain4j model with an observation listener), Camel does not record its own span and metrics for them, so that they are counted once.",
+      "sourceType": "org.apache.camel.ai.observability.starter.AiObservabilityConfigurationProperties",
+      "defaultValue": true
+    },
+    {
       "name": "camel.aiobservability.enabled",
       "type": "java.lang.Boolean",
       "description": "Enables GenAI observability for Camel AI producers (OpenTelemetry spans and Micrometer metrics when backends are present).",
       "sourceType": "org.apache.camel.ai.observability.starter.AiObservabilityConfigurationProperties",
       "defaultValue": true
+    },
+    {
+      "name": "camel.aiobservability.level",
+      "type": "java.lang.String",
+      "description": "How much GenAI telemetry is recorded: basic, detailed or full. basic records one span per LLM call with model, token usage and finish reason. detailed adds the structure of agent runs (an agent span with one span per LLM call and per tool call), request parameters, cached tokens and the conversation id. full adds prompts, completions and tool arguments and results, which may hold personal or confidential data. Metrics are not affected.",
+      "sourceType": "org.apache.camel.ai.observability.starter.AiObservabilityConfigurationProperties",
+      "defaultValue": "basic"
     }
   ],
   "hints": [],

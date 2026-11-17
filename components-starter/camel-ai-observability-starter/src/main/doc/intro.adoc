@@ -1,13 +1,22 @@
 Spring Boot auto-configuration for Camel GenAI observability.
 
-Add this starter to opt in to GenAI observability configuration for Camel AI producers. Camel 4.23+ AI producers emit OpenTelemetry spans and Micrometer metrics when `camel-ai-observability` and a tracing or metrics backend are on the classpath.
+Add this starter to opt in to GenAI observability for Camel AI producers. It brings `camel-ai-observability`, so the AI
+producers emit OpenTelemetry spans and Micrometer metrics once a tracing or metrics backend is on the classpath as
+well, for example `camel-opentelemetry2-starter`. `camel-observability-services-starter` does not include it: add this
+starter as well when the application uses it.
 
-Configure the global toggle in `application.properties`:
+Configure it in `application.properties`:
 
 [source,properties]
 ----
 # Disable GenAI observability for all AI producers (default is true)
 camel.aiobservability.enabled=false
+# How much is recorded: basic (default), detailed or full; full records prompts and completions
+camel.aiobservability.level=detailed
+# Maximum length of every text recorded at level full (default 8192)
+camel.aiobservability.content-max-length=4096
+# Do not record a model or tool call that the AI framework already traces, such as Spring AI (default true)
+camel.aiobservability.defer-to-framework=true
 ----
 
-Relaxed binding also accepts `camel.aiObservability.enabled` and `camel.ai-observability.enabled`. The property is handed to the Camel `PropertiesComponent` as the override property `camel.aiObservability.enabled`, matching Camel Main and JBang, so the AI producers see it on every thread.
+Relaxed binding also accepts `camel.aiObservability.*` and `camel.ai-observability.*`. The options are handed to the Camel `PropertiesComponent` as override properties named `camel.aiObservability.enabled`, `camel.aiObservability.level`, `camel.aiObservability.contentMaxLength` and `camel.aiObservability.deferToFramework`, matching Camel Main and JBang.

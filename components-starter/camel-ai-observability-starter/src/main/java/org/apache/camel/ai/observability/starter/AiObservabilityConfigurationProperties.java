@@ -27,11 +27,57 @@ public class AiObservabilityConfigurationProperties {
      */
     private boolean enabled = true;
 
+    /**
+     * How much GenAI telemetry is recorded: basic, detailed or full. basic records one span per LLM call with model,
+     * token usage and finish reason. detailed adds the structure of agent runs (an agent span with one span per LLM
+     * call and per tool call), request parameters, cached tokens and the conversation id. full adds prompts,
+     * completions and tool arguments and results, which may hold personal or confidential data. Metrics are not
+     * affected.
+     */
+    private String level = "basic";
+
+    /**
+     * The maximum length of every text (message, tool argument or result) recorded at level full. Longer texts are
+     * cut.
+     */
+    private int contentMaxLength = 8192;
+
+    /**
+     * When the AI framework behind a component already traces its model calls and tool calls (Spring AI with an
+     * ObservationRegistry, quarkus-langchain4j, a LangChain4j model with an observation listener), Camel does not
+     * record its own span and metrics for them, so that they are counted once.
+     */
+    private boolean deferToFramework = true;
+
     public boolean isEnabled() {
         return enabled;
     }
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public int getContentMaxLength() {
+        return contentMaxLength;
+    }
+
+    public void setContentMaxLength(int contentMaxLength) {
+        this.contentMaxLength = contentMaxLength;
+    }
+
+    public boolean isDeferToFramework() {
+        return deferToFramework;
+    }
+
+    public void setDeferToFramework(boolean deferToFramework) {
+        this.deferToFramework = deferToFramework;
     }
 }
