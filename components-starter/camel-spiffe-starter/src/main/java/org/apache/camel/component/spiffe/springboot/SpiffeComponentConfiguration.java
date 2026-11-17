@@ -101,6 +101,16 @@ public class SpiffeComponentConfiguration
      */
     private Boolean allowOperationHeader = false;
     /**
+     * The exact local SPIFFE ID to use when the Workload API supplies several
+     * identities: fetchX509Svid selects that X.509-SVID instead of the SDK's
+     * default one, and fetchJwtSvid mints the JWT-SVID with it as the subject.
+     * A configured identity that is absent, or that the workload is not
+     * entitled to, fails without selecting a different identity. This option
+     * comes only from endpoint configuration, never from a message header;
+     * validateJwtSvid has no local identity to choose and ignores it.
+     */
+    private String localSpiffeId;
+    /**
      * The address of the SPIFFE Workload API endpoint (for example
      * unix:///tmp/agent.sock or tcp://127.0.0.1:8082). When not set, the
      * SPIFFE_ENDPOINT_SOCKET environment variable is used.
@@ -179,6 +189,14 @@ public class SpiffeComponentConfiguration
 
     public void setAllowOperationHeader(Boolean allowOperationHeader) {
         this.allowOperationHeader = allowOperationHeader;
+    }
+
+    public String getLocalSpiffeId() {
+        return localSpiffeId;
+    }
+
+    public void setLocalSpiffeId(String localSpiffeId) {
+        this.localSpiffeId = localSpiffeId;
     }
 
     public String getSpiffeSocketPath() {

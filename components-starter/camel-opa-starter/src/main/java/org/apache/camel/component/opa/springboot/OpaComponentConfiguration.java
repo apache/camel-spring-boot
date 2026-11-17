@@ -17,6 +17,7 @@
 package org.apache.camel.component.opa.springboot;
 
 import com.styra.opa.OPAClient;
+import org.apache.camel.Expression;
 import org.apache.camel.component.opa.OpaConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
@@ -168,6 +169,15 @@ public class OpaComponentConfiguration
      * revision. Not used in wasm mode or with an injected client.
      */
     private Boolean healthCheckBundles = false;
+    /**
+     * An expression producing the complete policy input as a Map, object JSON
+     * node or POJO. Replaces the default input envelope; includeHeaders,
+     * includeProperties and includeBody then do not apply. In batch mode it
+     * sees each element as the body on an exchange copy. Null, scalar and
+     * streaming results fail closed. Reference a configured expression bean.
+     * The option is a org.apache.camel.Expression type.
+     */
+    private Expression inputExpression;
     /**
      * An existing OPAClient to use. When set, serverUrl and bearerToken are
      * ignored. The option is a com.styra.opa.OPAClient type.
@@ -347,6 +357,14 @@ public class OpaComponentConfiguration
 
     public void setHealthCheckBundles(Boolean healthCheckBundles) {
         this.healthCheckBundles = healthCheckBundles;
+    }
+
+    public Expression getInputExpression() {
+        return inputExpression;
+    }
+
+    public void setInputExpression(Expression inputExpression) {
+        this.inputExpression = inputExpression;
     }
 
     public OPAClient getOpaClient() {

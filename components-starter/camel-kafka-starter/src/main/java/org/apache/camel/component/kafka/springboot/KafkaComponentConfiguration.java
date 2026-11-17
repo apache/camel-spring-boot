@@ -265,6 +265,10 @@ public class KafkaComponentConfiguration
     /**
      * The number of consumers that connect to kafka server. Each consumer is
      * run on a separate thread that retrieves and process the incoming data.
+     * Each consumer is a member of the consumer group, so the consumers beyond
+     * the number of partitions of the topic (counting the consumers of all the
+     * application instances) get no records. With groupInstanceId, each
+     * consumer gets its own group instance id.
      */
     private Integer consumersCount = 1;
     /**
@@ -304,7 +308,9 @@ public class KafkaComponentConfiguration
      * combination with a larger session timeout to avoid group rebalances
      * caused by transient unavailability (e.g., process restarts). If not set,
      * the consumer will join the group as a dynamic member, which is the
-     * traditional behavior.
+     * traditional behavior. When consumersCount is greater than 1, each
+     * consumer is a static member of its own, with this ID followed by a dash
+     * and the index of the consumer (myId-0, myId-1, ...).
      */
     private String groupInstanceId;
     /**

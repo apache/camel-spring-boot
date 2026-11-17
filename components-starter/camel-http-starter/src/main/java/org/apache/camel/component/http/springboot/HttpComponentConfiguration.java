@@ -158,6 +158,16 @@ public class HttpComponentConfiguration
      */
     private HttpClientConnectionManager clientConnectionManager;
     /**
+     * The maximum time (in millis) a pooled connection can stay idle and still
+     * be reused. A connection idle for longer is closed when it would be
+     * reused, and the request opens a new one, whatever Keep-Alive timeout the
+     * server announced. Set it below the idle timeout of a NAT, firewall or
+     * load balancer that drops idle connections silently: the next request on
+     * such a connection would otherwise wait for the read timeout and fail.
+     * Zero (the default) or a negative value means no limit.
+     */
+    private Long connectionIdleTimeout;
+    /**
      * The maximum number of connections per route.
      */
     private Integer connectionsPerRoute = 20;
@@ -219,6 +229,17 @@ public class HttpComponentConfiguration
      * HTTP Client
      */
     private Boolean useSystemProperties = false;
+    /**
+     * The time (in millis) a pooled connection must have been idle before it is
+     * checked, prior to its reuse, for having been closed by the server. A
+     * request sent on a connection that the server closed fails with
+     * NoHttpResponseException, and HttpClient retries it only for idempotent
+     * methods. Zero checks the connection before each reuse, at the cost of a
+     * read of up to 1 millisecond per request; a negative value disables the
+     * check. The check cannot see a connection that a NAT or firewall dropped
+     * silently: use connectionIdleTimeout for that.
+     */
+    private Long validateAfterInactivity = 2000L;
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
@@ -477,6 +498,14 @@ public class HttpComponentConfiguration
         this.clientConnectionManager = clientConnectionManager;
     }
 
+    public Long getConnectionIdleTimeout() {
+        return connectionIdleTimeout;
+    }
+
+    public void setConnectionIdleTimeout(Long connectionIdleTimeout) {
+        this.connectionIdleTimeout = connectionIdleTimeout;
+    }
+
     public Integer getConnectionsPerRoute() {
         return connectionsPerRoute;
     }
@@ -580,6 +609,14 @@ public class HttpComponentConfiguration
 
     public void setUseSystemProperties(Boolean useSystemProperties) {
         this.useSystemProperties = useSystemProperties;
+    }
+
+    public Long getValidateAfterInactivity() {
+        return validateAfterInactivity;
+    }
+
+    public void setValidateAfterInactivity(Long validateAfterInactivity) {
+        this.validateAfterInactivity = validateAfterInactivity;
     }
 
     public HeaderFilterStrategy getHeaderFilterStrategy() {

@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 11 options, which are listed below.
+The starter supports 12 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -34,6 +34,7 @@ The starter supports 11 options, which are listed below.
 | camel.component.spiffe.configuration | The component configuration. The option is a org.apache.camel.component.spiffe.SpiffeConfiguration type. |  | SpiffeConfiguration
 | camel.component.spiffe.enabled | Whether to enable auto configuration of the spiffe component. This is enabled by default. |  | Boolean
 | camel.component.spiffe.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| camel.component.spiffe.local-spiffe-id | The exact local SPIFFE ID to use when the Workload API supplies several identities: fetchX509Svid selects that X.509-SVID instead of the SDK's default one, and fetchJwtSvid mints the JWT-SVID with it as the subject. A configured identity that is absent, or that the workload is not entitled to, fails without selecting a different identity. This option comes only from endpoint configuration, never from a message header; validateJwtSvid has no local identity to choose and ignores it. |  | String
 | camel.component.spiffe.operation | The operation to perform on the SPIFFE Workload API. | fetchx509svid | SpiffeOperation
 | camel.component.spiffe.preserve-body | Whether validateJwtSvid leaves the application body untouched and publishes the verified identity through the CamelSpiffeJwtIdentity exchange property. In this mode the token must be in CamelSpiffeToken or an Authorization Bearer header: the body is never read as a token. The default returns the JwtSvid in the body as before. | false | Boolean
 | camel.component.spiffe.spiffe-socket-path | The address of the SPIFFE Workload API endpoint (for example unix:///tmp/agent.sock or tcp://127.0.0.1:8082). When not set, the SPIFFE_ENDPOINT_SOCKET environment variable is used. |  | String

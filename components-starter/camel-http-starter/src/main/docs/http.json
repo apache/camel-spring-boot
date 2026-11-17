@@ -61,6 +61,12 @@
       "defaultValue": 180000
     },
     {
+      "name": "camel.component.http.connection-idle-timeout",
+      "type": "java.lang.Long",
+      "description": "The maximum time (in millis) a pooled connection can stay idle and still be reused. A connection idle for longer is closed when it would be reused, and the request opens a new one, whatever Keep-Alive timeout the server announced. Set it below the idle timeout of a NAT, firewall or load balancer that drops idle connections silently: the next request on such a connection would otherwise wait for the read timeout and fail. Zero (the default) or a negative value means no limit.",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
+    },
+    {
       "name": "camel.component.http.connection-request-timeout",
       "type": "java.lang.Long",
       "description": "Returns the connection lease request timeout (in millis) used when requesting a connection from the connection manager. A timeout value of zero is interpreted as a disabled timeout.",
@@ -357,6 +363,13 @@
       "type": "java.lang.String",
       "description": "To set a custom HTTP User-Agent request header",
       "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration"
+    },
+    {
+      "name": "camel.component.http.validate-after-inactivity",
+      "type": "java.lang.Long",
+      "description": "The time (in millis) a pooled connection must have been idle before it is checked, prior to its reuse, for having been closed by the server. A request sent on a connection that the server closed fails with NoHttpResponseException, and HttpClient retries it only for idempotent methods. Zero checks the connection before each reuse, at the cost of a read of up to 1 millisecond per request; a negative value disables the check. The check cannot see a connection that a NAT or firewall dropped silently: use connectionIdleTimeout for that.",
+      "sourceType": "org.apache.camel.component.http.springboot.HttpComponentConfiguration",
+      "defaultValue": 2000
     },
     {
       "name": "camel.component.http.x509-hostname-verifier",

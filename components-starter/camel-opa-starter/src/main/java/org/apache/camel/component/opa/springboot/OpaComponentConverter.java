@@ -41,6 +41,7 @@ public class OpaComponentConverter implements GenericConverter {
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.opa.OpaConfiguration.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.Expression.class));
         answer.add(new ConvertiblePair(String.class, com.styra.opa.OPAClient.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));
         return answer;
