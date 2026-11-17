@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 26 options, which are listed below.
+The starter supports 27 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -49,6 +49,7 @@ The starter supports 26 options, which are listed below.
 | camel.component.opa.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.opa.opa-client | An existing OPAClient to use. When set, serverUrl and bearerToken are ignored. The option is a com.styra.opa.OPAClient type. |  | OPAClient
 | camel.component.opa.policy-bundle | The WebAssembly policy to evaluate in wasm mode, as produced by opa build -t wasm. Accepts a file:, classpath: or http: location holding either the bundle.tar.gz that opa build emits or a bare .wasm module. Required when evaluationMode=wasm. Prefer the bundle: it also carries the data document the policy reads as data.*, which a bare module does not. |  | String
+| camel.component.opa.policy-reload-interval | How often, in milliseconds, to check the configured WASM resource for changed policy or data. Zero disables automatic reload. Replacements are validated before publication; failed reloads retain the active revision. This option applies only to wasm mode. The option is a long type. | 0 | Long
 | camel.component.opa.pool-size | How many WebAssembly policy instances to pool in wasm mode. An instance carries mutable state and is not thread-safe, so each exchange borrows one; this bounds how many exchanges evaluate at once. | 8 | Integer
 | camel.component.opa.request-timeout | How long to wait for the decision once connected, in rest mode. A request that times out is an evaluation failure rather than a deny, so it fails closed - or proceeds when failOpen is set - like any other failure to reach a verdict. The option is a long type. | 30000 | Long
 | camel.component.opa.server-url | The base URL of the OPA server, without the /v1/data suffix. The default assumes OPA running as a sidecar on the standard port. | http://localhost:8181 | String

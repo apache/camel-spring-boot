@@ -158,6 +158,13 @@
       "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration"
     },
     {
+      "name": "camel.component.opa.policy-reload-interval",
+      "type": "java.lang.Long",
+      "description": "How often, in milliseconds, to check the configured WASM resource for changed policy or data. Zero disables automatic reload. Replacements are validated before publication; failed reloads retain the active revision. This option applies only to wasm mode. The option is a long type.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
       "name": "camel.component.opa.pool-size",
       "type": "java.lang.Integer",
       "description": "How many WebAssembly policy instances to pool in wasm mode. An instance carries mutable state and is not thread-safe, so each exchange borrows one; this bounds how many exchanges evaluate at once.",

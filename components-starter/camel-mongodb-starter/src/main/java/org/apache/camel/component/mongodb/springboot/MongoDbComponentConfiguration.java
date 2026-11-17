@@ -37,8 +37,9 @@ public class MongoDbComponentConfiguration
     private Boolean enabled;
     /**
      * Shared client used for connection. All endpoints generated from the
-     * component will share this connection client. The option is a
-     * com.mongodb.client.MongoClient type.
+     * component will share this connection client, except the endpoints that
+     * set hosts or connectionUriString, which create their own client. The
+     * option is a com.mongodb.client.MongoClient type.
      */
     private MongoClient mongoConnection;
     /**

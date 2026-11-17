@@ -71,8 +71,8 @@ public class RestConfigurationDefinitionProperties {
     private Boolean useXForwardHeaders = false;
     /**
      * Sets the location of the api document the REST producer will use to
-     * validate the REST uri and query parameters are valid accordingly to the
-     * api document.
+     * validate the REST uri and query parameters are valid according to the api
+     * document.
      */
     private String producerApiDoc;
     /**

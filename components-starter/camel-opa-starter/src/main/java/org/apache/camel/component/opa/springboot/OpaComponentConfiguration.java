@@ -184,6 +184,13 @@ public class OpaComponentConfiguration
      */
     private OPAClient opaClient;
     /**
+     * How often, in milliseconds, to check the configured WASM resource for
+     * changed policy or data. Zero disables automatic reload. Replacements are
+     * validated before publication; failed reloads retain the active revision.
+     * This option applies only to wasm mode. The option is a long type.
+     */
+    private Long policyReloadInterval = 0L;
+    /**
      * How many WebAssembly policy instances to pool in wasm mode. An instance
      * carries mutable state and is not thread-safe, so each exchange borrows
      * one; this bounds how many exchanges evaluate at once.
@@ -373,6 +380,14 @@ public class OpaComponentConfiguration
 
     public void setOpaClient(OPAClient opaClient) {
         this.opaClient = opaClient;
+    }
+
+    public Long getPolicyReloadInterval() {
+        return policyReloadInterval;
+    }
+
+    public void setPolicyReloadInterval(Long policyReloadInterval) {
+        this.policyReloadInterval = policyReloadInterval;
     }
 
     public Integer getPoolSize() {

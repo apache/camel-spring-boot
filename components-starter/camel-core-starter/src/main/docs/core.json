@@ -593,7 +593,7 @@
     {
       "name": "camel.rest.producer-api-doc",
       "type": "java.lang.String",
-      "description": "Sets the location of the api document the REST producer will use to validate the REST uri and query parameters are valid accordingly to the api document.",
+      "description": "Sets the location of the api document the REST producer will use to validate the REST uri and query parameters are valid according to the api document.",
       "sourceType": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
     },
     {

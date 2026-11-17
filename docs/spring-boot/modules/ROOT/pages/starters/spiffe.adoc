@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 12 options, which are listed below.
+The starter supports 15 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -33,6 +33,9 @@ The starter supports 12 options, which are listed below.
 | camel.component.spiffe.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.spiffe.configuration | The component configuration. The option is a org.apache.camel.component.spiffe.SpiffeConfiguration type. |  | SpiffeConfiguration
 | camel.component.spiffe.enabled | Whether to enable auto configuration of the spiffe component. This is enabled by default. |  | Boolean
+| camel.component.spiffe.health-check-consumer-enabled | Used for enabling or disabling all consumer based health checks from this component | true | Boolean
+| camel.component.spiffe.health-check-expiry-threshold | Minimum remaining X.509-SVID validity, in milliseconds, for the producer readiness check to report UP. A certificate at or below this threshold reports DOWN before expiry. Zero requires only an unexpired identity. Does not apply to JWT-bundle readiness because bundles have no expiry timestamp. The option is a long type. | 60000 | Long
+| camel.component.spiffe.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
 | camel.component.spiffe.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.spiffe.local-spiffe-id | The exact local SPIFFE ID to use when the Workload API supplies several identities: fetchX509Svid selects that X.509-SVID instead of the SDK's default one, and fetchJwtSvid mints the JWT-SVID with it as the subject. A configured identity that is absent, or that the workload is not entitled to, fails without selecting a different identity. This option comes only from endpoint configuration, never from a message header; validateJwtSvid has no local identity to choose and ignores it. |  | String
 | camel.component.spiffe.operation | The operation to perform on the SPIFFE Workload API. | fetchx509svid | SpiffeOperation

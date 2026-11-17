@@ -93,6 +93,26 @@ public class SpiffeComponentConfiguration
      */
     private WorkloadApiClient workloadApiClient;
     /**
+     * Used for enabling or disabling all consumer based health checks from this
+     * component
+     */
+    private Boolean healthCheckConsumerEnabled = true;
+    /**
+     * Minimum remaining X.509-SVID validity, in milliseconds, for the producer
+     * readiness check to report UP. A certificate at or below this threshold
+     * reports DOWN before expiry. Zero requires only an unexpired identity.
+     * Does not apply to JWT-bundle readiness because bundles have no expiry
+     * timestamp. The option is a long type.
+     */
+    private Long healthCheckExpiryThreshold = 60000L;
+    /**
+     * Used for enabling or disabling all producer based health checks from this
+     * component. Notice: Camel has by default disabled all producer based
+     * health-checks. You can turn on producer checks globally by setting
+     * camel.health.producersEnabled=true.
+     */
+    private Boolean healthCheckProducerEnabled = true;
+    /**
      * Whether the CamelSpiffeOperation header may override the configured
      * operation. Disabled by default: the operation decides whether this
      * endpoint validates a token or mints one, so a message that can set it can
@@ -181,6 +201,30 @@ public class SpiffeComponentConfiguration
 
     public void setWorkloadApiClient(WorkloadApiClient workloadApiClient) {
         this.workloadApiClient = workloadApiClient;
+    }
+
+    public Boolean getHealthCheckConsumerEnabled() {
+        return healthCheckConsumerEnabled;
+    }
+
+    public void setHealthCheckConsumerEnabled(Boolean healthCheckConsumerEnabled) {
+        this.healthCheckConsumerEnabled = healthCheckConsumerEnabled;
+    }
+
+    public Long getHealthCheckExpiryThreshold() {
+        return healthCheckExpiryThreshold;
+    }
+
+    public void setHealthCheckExpiryThreshold(Long healthCheckExpiryThreshold) {
+        this.healthCheckExpiryThreshold = healthCheckExpiryThreshold;
+    }
+
+    public Boolean getHealthCheckProducerEnabled() {
+        return healthCheckProducerEnabled;
+    }
+
+    public void setHealthCheckProducerEnabled(Boolean healthCheckProducerEnabled) {
+        this.healthCheckProducerEnabled = healthCheckProducerEnabled;
     }
 
     public Boolean getAllowOperationHeader() {

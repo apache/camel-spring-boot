@@ -21,6 +21,7 @@ import dev.openfga.sdk.api.client.OpenFgaClient;
 import org.apache.camel.component.openfga.OpenFgaBatchCheckMode;
 import org.apache.camel.component.openfga.OpenFgaComponent;
 import org.apache.camel.component.openfga.OpenFgaConfiguration;
+import org.apache.camel.component.openfga.OpenFgaStreamingClient;
 import org.apache.camel.component.openfga.OpenFgaWriteConflictMode;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
@@ -230,6 +231,23 @@ public class OpenFgaComponentConfiguration
      */
     private String userFilters;
     /**
+     * Transport for streamedListObjects. Required with an injected
+     * OpenFgaClient, whose HTTP configuration is opaque. The caller owns this
+     * transport's lifecycle. storeId and readTimeout remain required for
+     * streaming. The option is a
+     * org.apache.camel.component.openfga.OpenFgaStreamingClient type.
+     */
+    private OpenFgaStreamingClient streamingClient;
+    /**
+     * Maximum characters in one streamed JSON record; must be positive.
+     */
+    private Integer streamMaxLineLength = 65536;
+    /**
+     * Maximum streamed objects before iteration fails; must be positive. No
+     * partial answer is silently truncated.
+     */
+    private Integer streamMaxResults = 10000;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -270,7 +288,8 @@ public class OpenFgaComponentConfiguration
      * An existing OpenFgaClient to use. When set, every option describing how
      * to reach the server - apiUrl, storeId, the credentials, the timeouts and
      * sslContextParameters - is ignored, because they are baked into the client
-     * that was handed over. The option is a
+     * that was handed over. streamedListObjects additionally needs an explicit
+     * streamingClient, a storeId and a positive readTimeout. The option is a
      * dev.openfga.sdk.api.client.OpenFgaClient type.
      */
     private OpenFgaClient openFgaClient;
@@ -511,6 +530,30 @@ public class OpenFgaComponentConfiguration
 
     public void setUserFilters(String userFilters) {
         this.userFilters = userFilters;
+    }
+
+    public OpenFgaStreamingClient getStreamingClient() {
+        return streamingClient;
+    }
+
+    public void setStreamingClient(OpenFgaStreamingClient streamingClient) {
+        this.streamingClient = streamingClient;
+    }
+
+    public Integer getStreamMaxLineLength() {
+        return streamMaxLineLength;
+    }
+
+    public void setStreamMaxLineLength(Integer streamMaxLineLength) {
+        this.streamMaxLineLength = streamMaxLineLength;
+    }
+
+    public Integer getStreamMaxResults() {
+        return streamMaxResults;
+    }
+
+    public void setStreamMaxResults(Integer streamMaxResults) {
+        this.streamMaxResults = streamMaxResults;
     }
 
     public Boolean getAutowiredEnabled() {

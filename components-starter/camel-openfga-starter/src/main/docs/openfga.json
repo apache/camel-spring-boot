@@ -190,7 +190,7 @@
     {
       "name": "camel.component.openfga.open-fga-client",
       "type": "dev.openfga.sdk.api.client.OpenFgaClient",
-      "description": "An existing OpenFgaClient to use. When set, every option describing how to reach the server - apiUrl, storeId, the credentials, the timeouts and sslContextParameters - is ignored, because they are baked into the client that was handed over. The option is a dev.openfga.sdk.api.client.OpenFgaClient type.",
+      "description": "An existing OpenFgaClient to use. When set, every option describing how to reach the server - apiUrl, storeId, the credentials, the timeouts and sslContextParameters - is ignored, because they are baked into the client that was handed over. streamedListObjects additionally needs an explicit streamingClient, a storeId and a positive readTimeout. The option is a dev.openfga.sdk.api.client.OpenFgaClient type.",
       "sourceType": "org.apache.camel.component.openfga.springboot.OpenFgaComponentConfiguration"
     },
     {
@@ -240,6 +240,26 @@
       "name": "camel.component.openfga.store-id",
       "type": "java.lang.String",
       "description": "The identifier of the OpenFGA store holding the relationship tuples and the authorization model, as returned by fga store create. The store is the relationship graph that judges the exchange, so it comes from the endpoint only and is never taken from a message header.",
+      "sourceType": "org.apache.camel.component.openfga.springboot.OpenFgaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openfga.stream-max-line-length",
+      "type": "java.lang.Integer",
+      "description": "Maximum characters in one streamed JSON record; must be positive.",
+      "sourceType": "org.apache.camel.component.openfga.springboot.OpenFgaComponentConfiguration",
+      "defaultValue": 65536
+    },
+    {
+      "name": "camel.component.openfga.stream-max-results",
+      "type": "java.lang.Integer",
+      "description": "Maximum streamed objects before iteration fails; must be positive. No partial answer is silently truncated.",
+      "sourceType": "org.apache.camel.component.openfga.springboot.OpenFgaComponentConfiguration",
+      "defaultValue": 10000
+    },
+    {
+      "name": "camel.component.openfga.streaming-client",
+      "type": "org.apache.camel.component.openfga.OpenFgaStreamingClient",
+      "description": "Transport for streamedListObjects. Required with an injected OpenFgaClient, whose HTTP configuration is opaque. The caller owns this transport's lifecycle. storeId and readTimeout remain required for streaming. The option is a org.apache.camel.component.openfga.OpenFgaStreamingClient type.",
       "sourceType": "org.apache.camel.component.openfga.springboot.OpenFgaComponentConfiguration"
     },
     {
