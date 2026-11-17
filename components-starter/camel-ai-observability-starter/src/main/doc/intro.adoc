@@ -10,4 +10,4 @@ Configure the global toggle in `application.properties`:
 camel.aiobservability.enabled=false
 ----
 
-Relaxed binding also accepts `camel.aiObservability.enabled` and `camel.ai-observability.enabled`. The property is written to the Camel `PropertiesComponent` local properties as `camel.aiObservability.enabled`, matching Camel Main and JBang.
+Relaxed binding also accepts `camel.aiObservability.enabled` and `camel.ai-observability.enabled`. The property is handed to the Camel `PropertiesComponent` as the override property `camel.aiObservability.enabled`, matching Camel Main and JBang, so the AI producers see it on every thread.
