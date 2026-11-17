@@ -21,6 +21,15 @@ Please refer to the above links for usage and configuration details.
 </dependency>
 ----
 
+== Usage
+
+The routes run on an executor thread, not on the servlet thread that received the request. When
+`io.micrometer:context-propagation` is on the classpath (it comes with Micrometer Tracing, for example with
+`spring-boot-starter-opentelemetry`), the consumer captures the context of the servlet thread, such as the Micrometer
+Observation that Spring MVC opens for the request, and restores it on the executor thread. The spans of the route then
+belong to the trace of the HTTP request, and other context registered with context-propagation is available in the
+route as well.
+
 == Spring Boot Auto-Configuration
 
 The starter supports 10 options, which are listed below.
