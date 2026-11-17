@@ -35,8 +35,9 @@
       <version>${spring-boot-version}</version>
     </dependency>
     <dependency>
+      <!-- the implementation that the AI producers load reflectively (it brings camel-ai-observability-api) -->
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-ai-observability-api</artifactId>
+      <artifactId>camel-ai-observability</artifactId>
       <version>${camel-version}</version>
     </dependency>
     <!-- Testing dependencies -->
