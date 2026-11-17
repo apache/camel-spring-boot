@@ -24,10 +24,12 @@ import org.apache.camel.component.file.cluster.FileLockClusterService;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.spring.boot.cluster.ClusteredRouteControllerAutoConfiguration;
 import org.apache.camel.spring.boot.cluster.TimePatternConverter;
+import org.apache.camel.spring.boot.util.RemovedPropertiesHelper;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 
 @AutoConfiguration(before = { ClusteredRouteControllerAutoConfiguration.class, CamelAutoConfiguration.class })
 @ConditionalOnProperty(prefix = "camel.cluster.file", name = "enabled", matchIfMissing = true)
@@ -36,8 +38,12 @@ public class FileLockClusterServiceAutoConfiguration {
 
     private final FileLockClusterServiceConfiguration configuration;
 
-    public FileLockClusterServiceAutoConfiguration(FileLockClusterServiceConfiguration configuration) {
+    public FileLockClusterServiceAutoConfiguration(FileLockClusterServiceConfiguration configuration,
+            Environment environment) {
         this.configuration = configuration;
+        // the options were renamed in Camel 3.10, and Spring Boot ignores the old names without a log line
+        RemovedPropertiesHelper.warnRenamedProperties(environment, "camel.component.file.cluster.service",
+                "camel.cluster.file", "3.10", FileLockClusterServiceConfiguration.class);
     }
 
     @Bean(name = "file-lock-cluster-service")

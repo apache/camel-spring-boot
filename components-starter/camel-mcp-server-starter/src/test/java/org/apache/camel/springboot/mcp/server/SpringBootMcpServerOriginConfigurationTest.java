@@ -53,7 +53,7 @@ import static org.assertj.core.api.Assertions.assertThat;
                 "spring.ai.mcp.server.protocol=STREAMABLE",
                 "camel.mcp-server.tags=origin-tests",
                 "camel.mcp-server.allowed-origins=https://trusted.example",
-                "camel.springboot.main-run-controller=false"
+                "camel.main.run-controller=false"
         })
 public class SpringBootMcpServerOriginConfigurationTest {
 

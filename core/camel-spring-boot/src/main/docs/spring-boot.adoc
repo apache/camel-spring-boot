@@ -180,6 +180,80 @@ public class MyRouter extends RouteBuilder {
 }
 ----
 
+=== Removed configuration prefixes
+
+The `camel.springboot.*` options were removed in Camel 4.13. Use the `camel.main.*` option of the same name instead,
+such as `camel.main.name` for `camel.springboot.name`. The run controller option is `camel.main.run-controller`, and
+the route controller options are under `camel.routecontroller.*`, such as `camel.routecontroller.enabled`. Only
+`camel.springboot.lenient-configuration-binding` keeps its name.
+
+The options under the following prefixes were renamed. An option keeps its name under the new prefix, such as
+`camel.cluster.file.root` for `camel.component.file.cluster.service.root`:
+
+[width="100%",cols="2m,2m,1,2",options="header"]
+|===
+| Old prefix | New prefix | Since | Starter
+| camel.supervising.controller | camel.routecontroller | 3.3 | `camel-spring-boot-starter`
+| camel.service.lra | camel.lra | 3.4 | `camel-lra-starter`
+| camel.component.consul.cluster.service | camel.cluster.consul | 3.10 | `camel-consul-cluster-service-starter`
+| camel.component.file.cluster.service | camel.cluster.file | 3.10 | `camel-file-cluster-service-starter`
+| camel.component.jgroups.raft.cluster.service | camel.cluster.jgroups-raft | 3.10 | `camel-jgroups-raft-cluster-service-starter`
+| camel.component.kubernetes.cluster.service | camel.cluster.kubernetes | 3.10 | `camel-kubernetes-cluster-service-starter`
+| camel.component.zookeeper.cluster.service | camel.cluster.zookeeper | 3.10 | `camel-zookeeper-cluster-service-starter`
+| camel.component.servlet.mapping | camel.servlet.mapping | 3.10 | `camel-servlet-starter`
+| camel.component.undertow.spring.security | camel.security.undertow | 3.10 | `camel-undertow-spring-security-starter`
+| camel.dataformat.securexml | camel.dataformat.xml-security | 3.15 | `camel-spring-boot-starter`
+| camel.dataformat.yaml-snakeyaml | camel.dataformat.snake-yaml | 3.15 | `camel-spring-boot-starter`
+|===
+
+The `camel.supervising.controller.default-back-off.*` options are `camel.routecontroller.back-off-*`, such as
+`camel.routecontroller.back-off-delay`. The `camel.springboot.xml-routes`, `camel.springboot.xml-rests` and
+`camel.springboot.xml-route-templates` options are replaced by `camel.main.routes-include-pattern`.
+
+Two health check options were removed: `camel.health.components-enabled` is `camel.health.producers-enabled` since
+Camel 4.0, and the `camel.health.config[id].*` options were replaced by `camel.health.exclude-pattern` in Camel 3.16.
+
+The following `camel.main.*` options were moved to another group or replaced:
+
+[width="100%",cols="2m,2m,1",options="header"]
+|===
+| Old option | Option to use | Since
+| camel.main.xml-routes, camel.main.xml-rests, camel.main.xml-route-templates | camel.main.routes-include-pattern | 3.8
+| camel.main.debugging | camel.debug.enabled | 4.2
+| camel.main.route-controller-* | camel.routecontroller.* | 4.4
+| camel.main.backlog-tracing, camel.main.backlog-tracing-standby, camel.main.backlog-tracing-templates | camel.trace.enabled, camel.trace.standby, camel.trace.trace-templates | 4.5
+| camel.main.error-registry-* | camel.errorregistry.* | 4.21
+|===
+
+The route controller and error registry options keep their name in the new group, such as
+`camel.routecontroller.back-off-delay` for `camel.main.route-controller-back-off-delay`. The exceptions are
+`camel.main.route-controller-supervise-enabled`, which is `camel.routecontroller.enabled`, and
+`camel.main.error-registry-stack-trace-enabled`, which was removed. The `camel.debug.*` options need the
+`camel-debug-starter`.
+
+Some options of Camel Main standalone are not options of Camel on Spring Boot, such as `camel.main.base-package-scan`
+and `camel.main.routes-builder-classes`: Camel on Spring Boot uses the `RouteBuilder` classes that are Spring beans.
+
+Spring Boot ignores a property that no configuration class binds, so an option under one of these old prefixes has no
+effect. Camel logs a `WARN` at startup for each one, with the option to use instead. The starter in the first table
+logs it, so the `WARN` shows only when that starter is on the classpath. For example:
+
+[source,text]
+----
+Property camel.springboot.name (class path resource [application.properties] - 3:1) has no effect, as the camel.springboot. prefix was removed in Camel 4.13. Use camel.main.name instead.
+----
+
+Camel also logs a `WARN` for any other `camel.main.*` property that is not an option of Camel on Spring Boot, such as
+a typo or an option of Camel Main standalone. As Spring Boot does for the properties it does not know, it does not
+check the environment variables and the system properties for these, as the name of an environment variable cannot
+tell a dash from a dot. The old `camel.main.*` options of the table above are logged from every property source, with
+the option to use instead:
+
+[source,text]
+----
+Property camel.main.backlog-tracing (class path resource [application.properties] - 4:1) has no effect, as Camel on Spring Boot has no camel.main option of this name. Use camel.trace.enabled instead.
+----
+
 == Custom Camel context configuration
 
 If you would like to perform some operations on `CamelContext` bean

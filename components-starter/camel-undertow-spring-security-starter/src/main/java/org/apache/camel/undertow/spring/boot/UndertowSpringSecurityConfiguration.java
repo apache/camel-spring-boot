@@ -32,7 +32,7 @@ public class UndertowSpringSecurityConfiguration {
 
     /**
      * Properties defined for keycloak provider. Value is gathered together from properties with prefix
-     * "camel.component.undertow.spring.security.keycloak"
+     * "camel.security.undertow.keycloak"
      */
     private KeycloakProviderConfiguration keycloak;
 

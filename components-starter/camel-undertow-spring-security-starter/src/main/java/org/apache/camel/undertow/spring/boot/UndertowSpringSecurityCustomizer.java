@@ -28,12 +28,14 @@ import org.apache.camel.spi.ComponentCustomizer;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.apache.camel.undertow.spring.boot.providers.AbstractProviderConfiguration;
 import org.apache.camel.spring.boot.ComponentConfigurationProperties;
+import org.apache.camel.spring.boot.util.RemovedPropertiesHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.DelegatingFilterProxyRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -65,6 +67,12 @@ public class UndertowSpringSecurityCustomizer implements ComponentCustomizer {
 
     @Autowired
     private DelegatingFilterProxyRegistrationBean delegatingFilterProxyRegistrationBean;
+
+    public UndertowSpringSecurityCustomizer(Environment environment) {
+        // the options were renamed in Camel 3.10, and Spring Boot ignores the old names without a log line
+        RemovedPropertiesHelper.warnRenamedProperties(environment, "camel.component.undertow.spring.security",
+                "camel.security.undertow", "3.10", UndertowSpringSecurityConfiguration.class);
+    }
 
     @Override
     public void configure(String name, Component target) {
@@ -158,7 +166,8 @@ public class UndertowSpringSecurityCustomizer implements ComponentCustomizer {
 
             if (definedProviders.isEmpty()) {
                 throw new IllegalArgumentException(String.format(
-                        "Properties camel.component.undertow.spring.security.provider.* are not defined. Allowed providers are (%s)",
+                        "No provider is configured: set the camel.security.undertow.<provider>.* options, such as"
+                                + " camel.security.undertow.keycloak.url. Allowed providers are (%s)",
                         ProviderType.values()));
             }
             if (definedProviders.size() > 1) {

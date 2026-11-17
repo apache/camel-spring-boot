@@ -19,6 +19,7 @@ package org.apache.camel.component.servlet.springboot;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.servlet.CamelHttpTransportServlet;
 import org.apache.camel.component.servlet.ServletComponent;
+import org.apache.camel.spring.boot.util.RemovedPropertiesHelper;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -29,6 +30,7 @@ import org.springframework.boot.servlet.autoconfigure.MultipartProperties;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.core.env.Environment;
 
 /**
  * Servlet mapping auto-configuration.
@@ -54,7 +56,8 @@ public class ServletMappingAutoConfiguration {
      */
     @Bean
     ServletRegistrationBean camelServletRegistrationBean(CamelHttpTransportServlet servlet,
-            ServletMappingConfiguration config, MultipartProperties multipartProperties) {
+            ServletMappingConfiguration config, MultipartProperties multipartProperties, Environment environment) {
+        warnRemovedMappingProperties(environment);
         ServletRegistrationBean mapping = new ServletRegistrationBean();
         mapping.setServlet(servlet);
         mapping.addUrlMappings(config.getContextPath());
@@ -64,6 +67,16 @@ public class ServletMappingAutoConfiguration {
             mapping.setMultipartConfig(multipartProperties.createMultipartConfig());
         }
         return mapping;
+    }
+
+    /**
+     * Logs a WARN for each camel.component.servlet.mapping.* option the application sets, with the option to use
+     * instead. These options were renamed to camel.servlet.mapping.* in Camel 3.10, and Spring Boot ignores the old
+     * names without a log line.
+     */
+    static void warnRemovedMappingProperties(Environment environment) {
+        RemovedPropertiesHelper.warnRenamedProperties(environment, "camel.component.servlet.mapping",
+                "camel.servlet.mapping", "3.10", ServletMappingConfiguration.class);
     }
 
     /**

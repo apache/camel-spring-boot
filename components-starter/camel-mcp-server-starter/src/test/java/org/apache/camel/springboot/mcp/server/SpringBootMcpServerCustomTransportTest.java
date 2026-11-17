@@ -61,7 +61,7 @@ import static org.assertj.core.api.Assertions.assertThat;
                 "spring.main.banner-mode=off",
                 "spring.ai.mcp.server.protocol=STREAMABLE",
                 "camel.mcp-server.tags=custom-provider",
-                "camel.springboot.main-run-controller=false"
+                "camel.main.run-controller=false"
         })
 public class SpringBootMcpServerCustomTransportTest {
 
