@@ -33,9 +33,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import java.sql.Timestamp;
-import java.util.concurrent.TimeUnit;
 
-import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -74,7 +72,7 @@ public class JdbcOrphanLockAwareIdempotentRepositoryTest extends BaseSql {
     }
 
     @Test
-    public void testLockKeepAliveWorks() {
+    public void testLockKeepAliveWorks() throws Exception {
         assertFalse(jdbcMessageIdRepository.contains("FILE_4"));
         jdbcMessageIdRepository.insert("FILE_4");
         assertTrue(jdbcMessageIdRepository.contains("FILE_4"));
@@ -83,9 +81,18 @@ public class JdbcOrphanLockAwareIdempotentRepositoryTest extends BaseSql {
         template.update("UPDATE CAMEL_MESSAGEPROCESSED SET createdAT = ? WHERE processorName = ? AND messageId = ?",
                 timestamp, APP_NAME, "FILE_4");
 
-        await().atMost(5, TimeUnit.SECONDS).until(() -> !jdbcMessageIdRepository.contains("FILE_4"));
-        jdbcMessageIdRepository.keepAlive();
+        // the lease is older than the lock max age: another instance takes it for an orphan, while this instance, which
+        // holds the key, does not
+        JdbcOrphanLockAwareIdempotentRepository otherInstance = new JdbcOrphanLockAwareIdempotentRepository(dataSource,
+                APP_NAME, new DefaultCamelContext());
+        otherInstance.setLockMaxAgeMillis(3000_00L);
+        otherInstance.setLockKeepAliveIntervalMillis(3000L);
+        otherInstance.doInit();
+        assertFalse(otherInstance.contains("FILE_4"));
         assertTrue(jdbcMessageIdRepository.contains("FILE_4"));
+
+        jdbcMessageIdRepository.keepAlive();
+        assertTrue(otherInstance.contains("FILE_4"));
     }
 
     @Test
