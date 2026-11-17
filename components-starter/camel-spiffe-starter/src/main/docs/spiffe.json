@@ -58,6 +58,12 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.spiffe.local-spiffe-id",
+      "type": "java.lang.String",
+      "description": "The exact local SPIFFE ID to use when the Workload API supplies several identities: fetchX509Svid selects that X.509-SVID instead of the SDK's default one, and fetchJwtSvid mints the JWT-SVID with it as the subject. A configured identity that is absent, or that the workload is not entitled to, fails without selecting a different identity. This option comes only from endpoint configuration, never from a message header; validateJwtSvid has no local identity to choose and ignores it.",
+      "sourceType": "org.apache.camel.component.spiffe.springboot.SpiffeComponentConfiguration"
+    },
+    {
       "name": "camel.component.spiffe.operation",
       "type": "org.apache.camel.component.spiffe.SpiffeOperation",
       "description": "The operation to perform on the SPIFFE Workload API.",

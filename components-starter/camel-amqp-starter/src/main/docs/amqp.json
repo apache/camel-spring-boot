@@ -165,7 +165,7 @@
     {
       "name": "camel.component.amqp.concurrent-consumers",
       "type": "java.lang.Integer",
-      "description": "Specifies the default number of concurrent consumers when consuming from JMS (not for request\/reply over JMS). See also the maxMessagesPerTask option to control dynamic scaling up\/down of threads. When doing request\/reply over JMS then the option replyToConcurrentConsumers is used to control number of concurrent consumers on the reply message listener.",
+      "description": "Specifies the default number of concurrent consumers when consuming from JMS (not for request\/reply over JMS). See also the maxMessagesPerTask option to control dynamic scaling up\/down of threads. When doing request\/reply over JMS then the option replyToConcurrentConsumers is used to control number of concurrent consumers on the reply message listener. On a topic, each consumer has its own subscription and receives every message, unless subscriptionShared is enabled.",
       "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration",
       "defaultValue": 1
     },
@@ -446,7 +446,7 @@
     {
       "name": "camel.component.amqp.max-concurrent-consumers",
       "type": "java.lang.Integer",
-      "description": "Specifies the maximum number of concurrent consumers when consuming from JMS (not for request\/reply over JMS). See also the maxMessagesPerTask option to control dynamic scaling up\/down of threads. When doing request\/reply over JMS then the option replyToMaxConcurrentConsumers is used to control number of concurrent consumers on the reply message listener.",
+      "description": "Specifies the maximum number of concurrent consumers when consuming from JMS (not for request\/reply over JMS). See also the maxMessagesPerTask option to control dynamic scaling up\/down of threads. When doing request\/reply over JMS then the option replyToMaxConcurrentConsumers is used to control number of concurrent consumers on the reply message listener. On a topic, each consumer has its own subscription and receives every message, unless subscriptionShared is enabled.",
       "sourceType": "org.apache.camel.component.amqp.springboot.AMQPComponentConfiguration"
     },
     {

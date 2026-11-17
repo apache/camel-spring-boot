@@ -52,6 +52,13 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.openfga.batch-check-mode",
+      "type": "org.apache.camel.component.openfga.OpenFgaBatchCheckMode",
+      "description": "Whether batchCheck fans out individual checks (client, the compatible default) or uses the native server BatchCheck API (server, requires OpenFGA 1.8.0 or later). Server mode chunks checks by maxBatchSize and correlates responses back to the original objects. Failures never fall back to an unfiltered result or another mode.",
+      "sourceType": "org.apache.camel.component.openfga.springboot.OpenFgaComponentConfiguration",
+      "defaultValue": "client"
+    },
+    {
       "name": "camel.component.openfga.client-id",
       "type": "java.lang.String",
       "description": "Client identifier for the OAuth 2.0 client-credentials flow, for a server that authenticates through an OIDC provider. Setting it selects that flow, so clientSecret, apiTokenIssuer and apiAudience are then required too.",
@@ -140,9 +147,16 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.openfga.max-batch-size",
+      "type": "java.lang.Integer",
+      "description": "Maximum number of checks per native server BatchCheck request, from 1 to 50. Applies only when batchCheckMode=server; the SDK splits larger input lists into requests of at most this size. 50 is the default per-request limit of an OpenFGA server (max-checks-per-batch-check).",
+      "sourceType": "org.apache.camel.component.openfga.springboot.OpenFgaComponentConfiguration",
+      "defaultValue": 50
+    },
+    {
       "name": "camel.component.openfga.max-parallel-requests",
       "type": "java.lang.Integer",
-      "description": "How many of a batchCheck's checks may be in flight at once. The batch is issued as one request per object, so this bounds the load one exchange puts on the server.",
+      "description": "How many HTTP requests a batchCheck may have in flight at once. In client mode each request checks one object; in server mode each request checks up to maxBatchSize objects.",
       "sourceType": "org.apache.camel.component.openfga.springboot.OpenFgaComponentConfiguration",
       "defaultValue": 10
     },
@@ -158,6 +172,20 @@
       "type": "java.lang.String",
       "description": "The object being accessed, as an OpenFGA object identifier such as document:budget. Evaluated as a Simple expression against each exchange, so document:${header.documentId} names the resource the message is about. Unlike the subject, taking the object from a header is normal and safe: the caller is entitled to say which resource it wants, and the check is what decides whether it may have it.",
       "sourceType": "org.apache.camel.component.openfga.springboot.OpenFgaComponentConfiguration"
+    },
+    {
+      "name": "camel.component.openfga.on-duplicate",
+      "type": "org.apache.camel.component.openfga.OpenFgaWriteConflictMode",
+      "description": "How writeTuples and write handle an existing relationship: error (the default) fails the operation, while ignore leaves that relationship unchanged and continues. The ignore mode requires OpenFGA 1.10.0 or later.",
+      "sourceType": "org.apache.camel.component.openfga.springboot.OpenFgaComponentConfiguration",
+      "defaultValue": "error"
+    },
+    {
+      "name": "camel.component.openfga.on-missing",
+      "type": "org.apache.camel.component.openfga.OpenFgaWriteConflictMode",
+      "description": "How deleteTuples and write handle an absent relationship: error (the default) fails the operation, while ignore skips that deletion and continues. The ignore mode requires OpenFGA 1.10.0 or later.",
+      "sourceType": "org.apache.camel.component.openfga.springboot.OpenFgaComponentConfiguration",
+      "defaultValue": "error"
     },
     {
       "name": "camel.component.openfga.open-fga-client",

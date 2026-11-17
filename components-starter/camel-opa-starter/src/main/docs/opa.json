@@ -133,6 +133,12 @@
       "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration"
     },
     {
+      "name": "camel.component.opa.input-expression",
+      "type": "org.apache.camel.Expression",
+      "description": "An expression producing the complete policy input as a Map, object JSON node or POJO. Replaces the default input envelope; includeHeaders, includeProperties and includeBody then do not apply. In batch mode it sees each element as the body on an exchange copy. Null, scalar and streaming results fail closed. Reference a configured expression bean. The option is a org.apache.camel.Expression type.",
+      "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration"
+    },
+    {
       "name": "camel.component.opa.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
