@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Properties;
 import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.spi.PropertiesFunction;
+import org.apache.camel.support.service.ServiceHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
@@ -76,10 +77,15 @@ public abstract class AbstractEarlyResolutionPropertiesParser
     protected abstract PropertiesFunction createPropertiesFunction(ConfigurableEnvironment environment);
 
     /**
-     * Releases what the properties function holds, such as the login of its client, once the properties are resolved,
-     * also when they could not be. A failure to release is logged and ignored. Does nothing by default.
+     * Releases what the properties function holds, such as its client, once the properties are resolved, also when
+     * they could not be. A failure to release is logged and ignored.
+     * <p/>
+     * By default, stops the function when it is a Camel {@code Service}: the properties functions of the Camel vaults
+     * close their client when they stop, also when they were never started. A parser whose function is shared with
+     * something else can override this to do nothing.
      */
     protected void release(PropertiesFunction propertiesFunction) {
+        ServiceHelper.stopService(propertiesFunction);
     }
 
     /**

@@ -18,6 +18,7 @@ package org.apache.camel.component.hashicorp.vault.springboot;
 
 import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.spi.PropertiesFunction;
+import org.apache.camel.support.service.ServiceHelper;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.StandardEnvironment;
@@ -156,8 +157,9 @@ public class SpringBootHashicorpVaultPropertiesParserTest {
         try {
             assertEquals("hashicorp", function.getName());
         } finally {
-            // the client logs in at its first request, so there is no token to revoke
-            parser.release(function);
+            // stopping the function closes its client, which logs in at its first request: so there is no token to
+            // revoke
+            ServiceHelper.stopService(function);
         }
     }
 
