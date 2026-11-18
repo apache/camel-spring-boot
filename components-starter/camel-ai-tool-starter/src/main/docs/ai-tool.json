@@ -14,6 +14,19 @@
   ],
   "properties": [
     {
+      "name": "camel.component.ai-tool.all-roles-required",
+      "type": "java.lang.Boolean",
+      "description": "Whether the caller needs all the roles in allowedRoles, rather than any one of them. Has no effect when allowedRoles is not set.",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.ai-tool.allowed-roles",
+      "type": "java.lang.String",
+      "description": "Comma-separated list of the roles a caller needs to call the tool, for example finance,controlling. Any one of them is enough unless allRolesRequired is set. The roles are checked before the route runs, against the caller's roles in the exchange property CamelAiToolSecurityPrincipalRoles: a call without that property is refused. A value that is set but names no role refuses every call. Set it on the component as the default of every tool route, or per endpoint to replace it.",
+      "sourceType": "org.apache.camel.component.ai.tool.springboot.AiToolComponentConfiguration"
+    },
+    {
       "name": "camel.component.ai-tool.arg-schema",
       "type": "java.lang.String",
       "description": "Raw JSON Schema for tool input parameters. Supports inline JSON and resource references (classpath:, file:, resource:). Mutually exclusive with the parameter multi-value options. Use for nested objects, arrays, oneOf, and other complex schemas.",

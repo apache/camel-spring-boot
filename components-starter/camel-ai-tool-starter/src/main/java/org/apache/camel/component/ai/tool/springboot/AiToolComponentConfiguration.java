@@ -156,6 +156,22 @@ public class AiToolComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
+     * Comma-separated list of the roles a caller needs to call the tool, for
+     * example finance,controlling. Any one of them is enough unless
+     * allRolesRequired is set. The roles are checked before the route runs,
+     * against the caller's roles in the exchange property
+     * CamelAiToolSecurityPrincipalRoles: a call without that property is
+     * refused. A value that is set but names no role refuses every call. Set it
+     * on the component as the default of every tool route, or per endpoint to
+     * replace it.
+     */
+    private String allowedRoles;
+    /**
+     * Whether the caller needs all the roles in allowedRoles, rather than any
+     * one of them. Has no effect when allowedRoles is not set.
+     */
+    private Boolean allRolesRequired = false;
+    /**
      * Reference to an org.apache.camel.spi.AuthorizationPolicy used to
      * authorize tool calls before the route runs. Set it on the component to
      * guard every tool route by construction, or per endpoint to override. The
@@ -304,6 +320,22 @@ public class AiToolComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public String getAllowedRoles() {
+        return allowedRoles;
+    }
+
+    public void setAllowedRoles(String allowedRoles) {
+        this.allowedRoles = allowedRoles;
+    }
+
+    public Boolean getAllRolesRequired() {
+        return allRolesRequired;
+    }
+
+    public void setAllRolesRequired(Boolean allRolesRequired) {
+        this.allRolesRequired = allRolesRequired;
     }
 
     public AuthorizationPolicy getAuthorizationPolicy() {
