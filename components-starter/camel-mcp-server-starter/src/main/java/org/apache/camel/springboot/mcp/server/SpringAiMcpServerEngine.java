@@ -21,11 +21,16 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.function.BiFunction;
 
+import io.modelcontextprotocol.common.McpTransportContext;
 import io.modelcontextprotocol.json.McpJsonDefaults;
 import io.modelcontextprotocol.json.McpJsonMapper;
 import io.modelcontextprotocol.server.McpServerFeatures;
+import io.modelcontextprotocol.server.McpStatelessServerFeatures;
+import io.modelcontextprotocol.server.McpStatelessSyncServer;
 import io.modelcontextprotocol.server.McpSyncServer;
+import io.modelcontextprotocol.server.McpSyncServerExchange;
 import io.modelcontextprotocol.spec.McpError;
 import io.modelcontextprotocol.spec.McpSchema;
 import org.apache.camel.CamelContext;
@@ -49,9 +54,11 @@ import org.slf4j.LoggerFactory;
 /**
  * {@link McpServerEngine} publishing tools into the Spring AI MCP server: {@code toolAdded}/{@code toolRemoved} map to
  * the auto-configured {@link McpSyncServer}'s {@code addTool}/{@code removeTool}, which emit
- * {@code notifications/tools/list_changed} to connected clients. Serving concerns (endpoint path, protocol, server
- * identity) are owned by the Spring AI MCP server configuration ({@code spring.ai.mcp.server.*}), which provides
- * no authentication - the endpoint must be protected by the application.
+ * {@code notifications/tools/list_changed} to connected clients. With {@code spring.ai.mcp.server.protocol=STATELESS},
+ * Spring AI auto-configures an {@link McpStatelessSyncServer} instead: every request is served on its own, without a
+ * session, and clients are not notified of changes. Serving concerns (endpoint path, protocol, server identity) are
+ * owned by the Spring AI MCP server configuration ({@code spring.ai.mcp.server.*}), which provides no authentication -
+ * the endpoint must be protected by the application.
  */
 public class SpringAiMcpServerEngine extends ServiceSupport implements McpServerEngine {
 
@@ -65,12 +72,19 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
             }
             """;
 
-    private final McpSyncServer server;
+    private final ServerOperations server;
     private final McpJsonMapper jsonMapper = McpJsonDefaults.getMapper();
     private CamelContext camelContext;
 
     public SpringAiMcpServerEngine(McpSyncServer server) {
-        this.server = server;
+        this.server = new SessionServerOperations(server);
+    }
+
+    /**
+     * Publishes into the Spring AI stateless MCP server ({@code spring.ai.mcp.server.protocol=STATELESS}).
+     */
+    public SpringAiMcpServerEngine(McpStatelessSyncServer server) {
+        this.server = new StatelessServerOperations(server);
     }
 
     @Override
@@ -107,24 +121,20 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
             applyAnnotations(builder, tool.annotations());
             McpSchema.Tool mcpTool = builder.build();
-            McpServerFeatures.SyncToolSpecification spec = McpServerFeatures.SyncToolSpecification.builder()
-                    .tool(mcpTool)
-                    .callHandler((exchange, request) -> {
-                        Map<String, Object> arguments = request.arguments() != null ? request.arguments() : Map.of();
-                        McpToolCallResult result = tool.handler().call(
-                                arguments, SpringAiMcpTransportContext.from(exchange));
-                        McpSchema.CallToolResult.Builder resultBuilder = McpSchema.CallToolResult.builder()
-                                .addTextContent(result.text())
-                                .isError(result.isError());
+            server.addTool(mcpTool, (transportContext, request) -> {
+                Map<String, Object> arguments = request.arguments() != null ? request.arguments() : Map.of();
+                McpToolCallResult result = tool.handler().call(
+                        arguments, SpringAiMcpTransportContext.from(transportContext));
+                McpSchema.CallToolResult.Builder resultBuilder = McpSchema.CallToolResult.builder()
+                        .addTextContent(result.text())
+                        .isError(result.isError());
 
-                        if (result.structuredContent() != null) {
-                            resultBuilder.structuredContent(result.structuredContent());
-                        }
+                if (result.structuredContent() != null) {
+                    resultBuilder.structuredContent(result.structuredContent());
+                }
 
-                        return resultBuilder.build();
-                    })
-                    .build();
-            server.addTool(spec);
+                return resultBuilder.build();
+            });
         } catch (IllegalArgumentException e) {
             throw new McpServerRefusedException(
                     "MCP tool '" + tool.name() + "' has an invalid input or output schema: " + e.getMessage(), e);
@@ -151,10 +161,9 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
         McpSchema.Resource mcpResource = buildMcpResource(resource);
 
-        McpServerFeatures.SyncResourceSpecification spec =
-                new McpServerFeatures.SyncResourceSpecification(
+        server.addResource(
                         mcpResource,
-                        (exchange, request) -> {
+                        (transportContext, request) -> {
                             McpResourceReadResult result = resource.handler().read();
 
                             if (result.isError()) {
@@ -179,8 +188,6 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
                             return McpSchema.ReadResourceResult.builder(List.of(contents)).build();
                         });
-
-        server.addResource(spec);
         LOG.debug("MCP resource added: {}", resource.uri());
     }
 
@@ -196,7 +203,7 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
     @Override
     public boolean supportsResources() {
-        McpSchema.ServerCapabilities capabilities = server.getServerCapabilities();
+        McpSchema.ServerCapabilities capabilities = server.capabilities();
         return capabilities != null && capabilities.resources() != null;
     }
 
@@ -257,10 +264,9 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
             builder.title(resourceTemplate.title());
         }
 
-        McpServerFeatures.SyncResourceTemplateSpecification spec =
-                new McpServerFeatures.SyncResourceTemplateSpecification(
+        server.addResourceTemplate(
                         builder.build(),
-                        (exchange, request) -> {
+                        (transportContext, request) -> {
                             McpResourceReadResult result =
                                     resourceTemplate.handler().read(request.uri());
 
@@ -286,8 +292,6 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
                             return McpSchema.ReadResourceResult.builder(List.of(contents)).build();
                         });
-
-        server.addResourceTemplate(spec);
         LOG.debug("MCP resource template added: {}", resourceTemplate.uriTemplate());
     }
 
@@ -303,7 +307,7 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
             server.removeResourceTemplate(uriTemplate);
 
-            McpSchema.ServerCapabilities capabilities = server.getServerCapabilities();
+            McpSchema.ServerCapabilities capabilities = server.capabilities();
             if (capabilities != null && capabilities.resources() != null
                     && Boolean.TRUE.equals(capabilities.resources().listChanged())) {
                 // MCP Java SDK 2.1.0 does not notify on template removal; notify only when advertised.
@@ -321,7 +325,7 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
     @Override
     public boolean supportsResourceTemplates() {
-        McpSchema.ServerCapabilities capabilities = server.getServerCapabilities();
+        McpSchema.ServerCapabilities capabilities = server.capabilities();
         return capabilities != null && capabilities.resources() != null;
     }
 
@@ -332,7 +336,7 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
                     "An MCP prompt named '" + prompt.name() + "' is already registered");
         }
 
-        server.addPrompt(buildPromptSpecification(prompt));
+        server.addPrompt(buildPrompt(prompt), (transportContext, request) -> getPrompt(prompt, request));
         LOG.debug("MCP prompt added: {}", prompt.name());
     }
 
@@ -348,7 +352,7 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
     @Override
     public boolean supportsPrompts() {
-        McpSchema.ServerCapabilities capabilities = server.getServerCapabilities();
+        McpSchema.ServerCapabilities capabilities = server.capabilities();
         return capabilities != null && capabilities.prompts() != null;
     }
 
@@ -368,8 +372,7 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
      * This adapter uses the MCP Java SDK types directly. The equivalent Camel Main
      * helper lives in camel-mcp-server, which is deliberately not a dependency here.
      */
-    private McpServerFeatures.SyncPromptSpecification buildPromptSpecification(
-            McpServerPrompt prompt) {
+    private static McpSchema.Prompt buildPrompt(McpServerPrompt prompt) {
 
         McpSchema.Prompt.Builder builder = McpSchema.Prompt.builder(prompt.name())
                 .description(prompt.description())
@@ -384,9 +387,10 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
             builder.title(prompt.title());
         }
 
-        return new McpServerFeatures.SyncPromptSpecification(
-                builder.build(),
-                (exchange, request) -> {
+        return builder.build();
+    }
+
+    private McpSchema.GetPromptResult getPrompt(McpServerPrompt prompt, McpSchema.GetPromptRequest request) {
                     Map<String, String> arguments = new LinkedHashMap<>();
 
                     if (request.arguments() != null) {
@@ -426,7 +430,6 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
                     return McpSchema.GetPromptResult.builder(messages)
                             .description(result.description())
                             .build();
-                });
     }
 
     private McpSchema.PromptMessage toPromptMessage(McpPromptMessage message) {
@@ -515,6 +518,231 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
         String scheme = uriTemplate.substring(0, colon);
         return scheme.matches("[A-Za-z][A-Za-z0-9+.-]*") ? scheme : null;
+    }
+
+    /**
+     * The calls the engine makes on a Spring AI MCP server, whether it keeps sessions or not. Every handler receives
+     * the MCP transport context of the request, which carries the caller identity.
+     */
+    private interface ServerOperations {
+
+        McpSchema.ServerCapabilities capabilities();
+
+        List<McpSchema.Tool> listTools();
+
+        void addTool(
+                McpSchema.Tool tool,
+                BiFunction<McpTransportContext, McpSchema.CallToolRequest, McpSchema.CallToolResult> handler);
+
+        void removeTool(String name);
+
+        List<McpSchema.Resource> listResources();
+
+        void addResource(
+                McpSchema.Resource resource,
+                BiFunction<McpTransportContext, McpSchema.ReadResourceRequest, McpSchema.ReadResourceResult> handler);
+
+        void removeResource(String uri);
+
+        List<McpSchema.ResourceTemplate> listResourceTemplates();
+
+        void addResourceTemplate(
+                McpSchema.ResourceTemplate template,
+                BiFunction<McpTransportContext, McpSchema.ReadResourceRequest, McpSchema.ReadResourceResult> handler);
+
+        void removeResourceTemplate(String uriTemplate);
+
+        List<McpSchema.Prompt> listPrompts();
+
+        void addPrompt(
+                McpSchema.Prompt prompt,
+                BiFunction<McpTransportContext, McpSchema.GetPromptRequest, McpSchema.GetPromptResult> handler);
+
+        void removePrompt(String name);
+
+        void notifyResourcesListChanged();
+    }
+
+    /**
+     * The Spring AI MCP server that keeps a session per client ({@code SSE} or {@code STREAMABLE}).
+     */
+    private record SessionServerOperations(McpSyncServer server) implements ServerOperations {
+
+        private static McpTransportContext transportContext(
+                McpSyncServerExchange exchange) {
+            return exchange != null ? exchange.transportContext() : null;
+        }
+
+        @Override
+        public McpSchema.ServerCapabilities capabilities() {
+            return server.getServerCapabilities();
+        }
+
+        @Override
+        public List<McpSchema.Tool> listTools() {
+            return server.listTools();
+        }
+
+        @Override
+        public void addTool(
+                McpSchema.Tool tool,
+                BiFunction<McpTransportContext, McpSchema.CallToolRequest, McpSchema.CallToolResult> handler) {
+            server.addTool(McpServerFeatures.SyncToolSpecification.builder()
+                    .tool(tool)
+                    .callHandler((exchange, request) -> handler.apply(transportContext(exchange), request))
+                    .build());
+        }
+
+        @Override
+        public void removeTool(String name) {
+            server.removeTool(name);
+        }
+
+        @Override
+        public List<McpSchema.Resource> listResources() {
+            return server.listResources();
+        }
+
+        @Override
+        public void addResource(
+                McpSchema.Resource resource,
+                BiFunction<McpTransportContext, McpSchema.ReadResourceRequest, McpSchema.ReadResourceResult> handler) {
+            server.addResource(new McpServerFeatures.SyncResourceSpecification(
+                    resource, (exchange, request) -> handler.apply(transportContext(exchange), request)));
+        }
+
+        @Override
+        public void removeResource(String uri) {
+            server.removeResource(uri);
+        }
+
+        @Override
+        public List<McpSchema.ResourceTemplate> listResourceTemplates() {
+            return server.listResourceTemplates();
+        }
+
+        @Override
+        public void addResourceTemplate(
+                McpSchema.ResourceTemplate template,
+                BiFunction<McpTransportContext, McpSchema.ReadResourceRequest, McpSchema.ReadResourceResult> handler) {
+            server.addResourceTemplate(new McpServerFeatures.SyncResourceTemplateSpecification(
+                    template, (exchange, request) -> handler.apply(transportContext(exchange), request)));
+        }
+
+        @Override
+        public void removeResourceTemplate(String uriTemplate) {
+            server.removeResourceTemplate(uriTemplate);
+        }
+
+        @Override
+        public List<McpSchema.Prompt> listPrompts() {
+            return server.listPrompts();
+        }
+
+        @Override
+        public void addPrompt(
+                McpSchema.Prompt prompt,
+                BiFunction<McpTransportContext, McpSchema.GetPromptRequest, McpSchema.GetPromptResult> handler) {
+            server.addPrompt(new McpServerFeatures.SyncPromptSpecification(
+                    prompt, (exchange, request) -> handler.apply(transportContext(exchange), request)));
+        }
+
+        @Override
+        public void removePrompt(String name) {
+            server.removePrompt(name);
+        }
+
+        @Override
+        public void notifyResourcesListChanged() {
+            server.notifyResourcesListChanged();
+        }
+    }
+
+    /**
+     * The Spring AI stateless MCP server ({@code STATELESS}): no session, so no notification can reach a client.
+     */
+    private record StatelessServerOperations(McpStatelessSyncServer server) implements ServerOperations {
+
+        @Override
+        public McpSchema.ServerCapabilities capabilities() {
+            return server.getServerCapabilities();
+        }
+
+        @Override
+        public List<McpSchema.Tool> listTools() {
+            return server.listTools();
+        }
+
+        @Override
+        public void addTool(
+                McpSchema.Tool tool,
+                BiFunction<McpTransportContext, McpSchema.CallToolRequest, McpSchema.CallToolResult> handler) {
+            server.addTool(McpStatelessServerFeatures.SyncToolSpecification.builder()
+                    .tool(tool)
+                    .callHandler(handler)
+                    .build());
+        }
+
+        @Override
+        public void removeTool(String name) {
+            server.removeTool(name);
+        }
+
+        @Override
+        public List<McpSchema.Resource> listResources() {
+            return server.listResources();
+        }
+
+        @Override
+        public void addResource(
+                McpSchema.Resource resource,
+                BiFunction<McpTransportContext, McpSchema.ReadResourceRequest, McpSchema.ReadResourceResult> handler) {
+            server.addResource(new McpStatelessServerFeatures.SyncResourceSpecification(resource, handler));
+        }
+
+        @Override
+        public void removeResource(String uri) {
+            server.removeResource(uri);
+        }
+
+        @Override
+        public List<McpSchema.ResourceTemplate> listResourceTemplates() {
+            return server.listResourceTemplates();
+        }
+
+        @Override
+        public void addResourceTemplate(
+                McpSchema.ResourceTemplate template,
+                BiFunction<McpTransportContext, McpSchema.ReadResourceRequest, McpSchema.ReadResourceResult> handler) {
+            server.addResourceTemplate(new McpStatelessServerFeatures.SyncResourceTemplateSpecification(template, handler));
+        }
+
+        @Override
+        public void removeResourceTemplate(String uriTemplate) {
+            server.removeResourceTemplate(uriTemplate);
+        }
+
+        @Override
+        public List<McpSchema.Prompt> listPrompts() {
+            return server.listPrompts();
+        }
+
+        @Override
+        public void addPrompt(
+                McpSchema.Prompt prompt,
+                BiFunction<McpTransportContext, McpSchema.GetPromptRequest, McpSchema.GetPromptResult> handler) {
+            server.addPrompt(new McpStatelessServerFeatures.SyncPromptSpecification(prompt, handler));
+        }
+
+        @Override
+        public void removePrompt(String name) {
+            server.removePrompt(name);
+        }
+
+        @Override
+        public void notifyResourcesListChanged() {
+            // a stateless server has no session to notify
+        }
     }
 
 }

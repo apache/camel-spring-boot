@@ -146,11 +146,22 @@ public final class SpringAiMcpTransportContext {
      * @return the captured caller context, or the empty context
      */
     static McpToolCallContext from(McpSyncServerExchange exchange) {
-        if (exchange == null || exchange.transportContext() == null) {
+        return from(exchange != null ? exchange.transportContext() : null);
+    }
+
+    /**
+     * Retrieves the caller context attached to the MCP request by the transport extractor, as the stateless MCP server
+     * passes it to the handlers.
+     *
+     * @param transportContext the MCP transport context of the request
+     * @return the captured caller context, or the empty context
+     */
+    static McpToolCallContext from(McpTransportContext transportContext) {
+        if (transportContext == null) {
             return McpToolCallContext.EMPTY;
         }
 
-        Object value = exchange.transportContext().get(CALL_CONTEXT_KEY);
+        Object value = transportContext.get(CALL_CONTEXT_KEY);
         return value instanceof McpToolCallContext context
                 ? context
                 : McpToolCallContext.EMPTY;

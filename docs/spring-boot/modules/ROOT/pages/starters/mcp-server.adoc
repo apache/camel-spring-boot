@@ -327,9 +327,10 @@ spring.ai.mcp.server.prompt-change-notification = true
 
 === Origin validation
 
-Camel's principal-aware Streamable HTTP provider is selected only when
-`spring.ai.mcp.server.protocol=STREAMABLE` and the Camel transport activation
-condition is satisfied:
+Camel's principal-aware HTTP transport is selected only when
+`spring.ai.mcp.server.protocol` is `STREAMABLE` or `STATELESS` (see
+<<_serving_without_sessions>>) and the Camel transport activation condition is
+satisfied:
 
 * By default, the Camel provider is selected when `camel.mcp-server.tags` is
   configured. This enables the Origin validator and authenticated caller
@@ -372,10 +373,11 @@ browser-based clients. Scheme and host matching is case-insensitive, and
 default HTTP and HTTPS ports are normalized.
 
 If Camel tags or Origin settings are configured while the Spring AI protocol
-is unset or uses SSE, the Camel Streamable HTTP provider is not installed.
+is unset or uses SSE, the Camel HTTP transport is not installed.
 The starter logs a warning because Origin validation and caller-context
 extraction are not active in that configuration. Select
-`spring.ai.mcp.server.protocol=STREAMABLE` when those protections are required.
+`spring.ai.mcp.server.protocol=STREAMABLE` (or `STATELESS`) when those
+protections are required.
 
 With the Spring AI 2.0.2 WebMVC transport, an Origin rejection currently
 returns HTTP 403 with a plain-text `Invalid Origin header` response body.
@@ -438,6 +440,41 @@ spring.ai.mcp.server.name = my-integration-app
 spring.ai.mcp.server.version = 1.0.0
 spring.ai.mcp.server.streamable-http.mcp-endpoint = /mcp
 ----
+
+=== Serving without sessions
+
+With `spring.ai.mcp.server.protocol=STREAMABLE`, the Spring AI MCP server keeps
+a session for each client in memory: the session ends when the application
+restarts, and a request that reaches another instance finds no session, so
+several instances need session affinity in front of them.
+
+With `spring.ai.mcp.server.protocol=STATELESS`, Spring AI serves each request on
+its own, and the starter registers the Camel routes on that stateless server.
+No `Mcp-Session-Id` is returned, so a restart or another instance is invisible
+to the client. Camel's Origin validation and caller-context extraction apply as
+with `STREAMABLE`, through `WebMvcStatelessServerTransport`; an
+application-provided `WebMvcStatelessServerTransport` takes precedence.
+
+[source,properties]
+----
+spring.ai.mcp.server.protocol = STATELESS
+camel.mcp-server.tags = crm
+----
+
+Without a session, the server cannot send anything outside the answer to a
+request:
+
+* clients are not notified when Camel routes add or remove tools, resources or
+  prompts; they see the change at their next list request,
+* a `GET` on the endpoint (the stream for server-initiated messages) is answered
+  with HTTP 405,
+* features that need a server-initiated request, such as sampling or
+  elicitation, are not available.
+
+The stateless mode serves the MCP protocol versions that open with an
+`initialize` handshake (2025-11-25 and earlier). Protocol version 2026-07-28,
+which has no session by design, is not served by this starter yet: it needs
+Spring AI 2.1.0.
 
 === Connecting MCP clients
 
