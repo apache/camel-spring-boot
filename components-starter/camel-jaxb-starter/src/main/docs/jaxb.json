@@ -20,6 +20,13 @@
       "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration"
     },
     {
+      "name": "camel.dataformat.jaxb.allow-part-class-from-header",
+      "type": "java.lang.Boolean",
+      "description": "Whether the CamelJaxbPartClass and CamelJaxbPartNamespace headers are used, when set, instead of the partClass and partNamespace options when marshalling and unmarshalling. Enable it only when the route sets these headers itself, not on routes that receive them from external systems.",
+      "sourceType": "org.apache.camel.converter.jaxb.springboot.JaxbDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.dataformat.jaxb.content-type-header",
       "type": "java.lang.Boolean",
       "description": "Whether the data format should set the Content-Type header with the type from the data format. For example application\/xml for data formats marshalling to XML, or application\/json for data formats marshalling to JSON",

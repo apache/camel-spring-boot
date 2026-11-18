@@ -105,6 +105,13 @@ public class JaxbDataFormatConfiguration
      */
     private String partNamespace;
     /**
+     * Whether the CamelJaxbPartClass and CamelJaxbPartNamespace headers are
+     * used, when set, instead of the partClass and partNamespace options when
+     * marshalling and unmarshalling. Enable it only when the route sets these
+     * headers itself, not on routes that receive them from external systems.
+     */
+    private Boolean allowPartClassFromHeader = false;
+    /**
      * When marshalling using JAXB or SOAP then the JAXB implementation will
      * automatically assign namespace prefixes, such as ns2, ns3, ns4 etc. To
      * control this mapping, Camel allows you to refer to a map which contains
@@ -245,6 +252,14 @@ public class JaxbDataFormatConfiguration
 
     public void setPartNamespace(String partNamespace) {
         this.partNamespace = partNamespace;
+    }
+
+    public Boolean getAllowPartClassFromHeader() {
+        return allowPartClassFromHeader;
+    }
+
+    public void setAllowPartClassFromHeader(Boolean allowPartClassFromHeader) {
+        this.allowPartClassFromHeader = allowPartClassFromHeader;
     }
 
     public Map getNamespacePrefix() {
