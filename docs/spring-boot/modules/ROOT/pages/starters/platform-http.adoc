@@ -35,8 +35,12 @@ spring.task.execution.propagate-context=true
 
 It needs `io.micrometer:context-propagation`, which comes with Micrometer Tracing (for example with
 `spring-boot-starter-opentelemetry`). It carries over any context registered with context propagation, such as the
-Spring Security context or the MDC when their accessors are registered. It applies to the executors that Spring Boot
-builds; an executor bean that you build yourself needs a `ContextPropagatingTaskDecorator` of its own.
+Spring Security context or the MDC when their accessors are registered.
+
+The property applies to the executors that Spring Boot builds. If the application defines its own executor bean,
+Spring Boot does not create `applicationTaskExecutor` and the starter uses that bean instead: build it with Spring
+Boot's `ThreadPoolTaskExecutorBuilder` or `SimpleAsyncTaskExecutorBuilder`, which add the decorator, or set a
+`ContextPropagatingTaskDecorator` on it.
 
 == Spring Boot Auto-Configuration
 
