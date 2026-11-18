@@ -282,13 +282,6 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Long databaseServerId;
     /**
-     * Only relevant if parallel snapshotting is configured. During parallel
-     * snapshotting, multiple (4) connections open to the database client, and
-     * they each need their own unique connection ID. This offset is used to
-     * generate those IDs from the base configured cluster ID.
-     */
-    private Long databaseServerIdOffset = 10000L;
-    /**
      * The location of the key store file. This is optional and can be used for
      * two-way authentication between the client and the database.
      */
@@ -977,6 +970,13 @@ public class DebeziumMySqlComponentConfiguration
      */
     private String transactionMetadataFactory = "io.debezium.pipeline.txmetadata.DefaultTransactionMetadataFactory";
     /**
+     * Specify the constant that will be provided by Debezium to indicate that
+     * the original value is unavailable and not provided by the database. If
+     * starts with 'hex:' prefix it is expected that the rest of the string
+     * represents hexadecimal encoded octets.
+     */
+    private String unavailableValuePlaceholder = "__debezium_unavailable_value";
+    /**
      * Whether to use socket.setSoLinger(true, 0) when BinaryLogClient keepalive
      * thread triggers a disconnect for a stale connection.
      */
@@ -1304,14 +1304,6 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setDatabaseServerId(Long databaseServerId) {
         this.databaseServerId = databaseServerId;
-    }
-
-    public Long getDatabaseServerIdOffset() {
-        return databaseServerIdOffset;
-    }
-
-    public void setDatabaseServerIdOffset(Long databaseServerIdOffset) {
-        this.databaseServerIdOffset = databaseServerIdOffset;
     }
 
     public String getDatabaseSslKeystore() {
@@ -2176,6 +2168,15 @@ public class DebeziumMySqlComponentConfiguration
 
     public void setTransactionMetadataFactory(String transactionMetadataFactory) {
         this.transactionMetadataFactory = transactionMetadataFactory;
+    }
+
+    public String getUnavailableValuePlaceholder() {
+        return unavailableValuePlaceholder;
+    }
+
+    public void setUnavailableValuePlaceholder(
+            String unavailableValuePlaceholder) {
+        this.unavailableValuePlaceholder = unavailableValuePlaceholder;
     }
 
     public Boolean getUseNongracefulDisconnect() {

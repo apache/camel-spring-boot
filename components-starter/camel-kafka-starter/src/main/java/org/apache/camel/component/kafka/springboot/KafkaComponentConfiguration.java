@@ -433,7 +433,10 @@ public class KafkaComponentConfiguration
      * This enables the use of a specific Avro reader for use with the in
      * multiple Schema registries documentation with Avro Deserializers
      * implementation. This option is only available externally (not standard
-     * Apache Kafka)
+     * Apache Kafka). When schemaRegistryVendor is set, it is set under the
+     * property of the vendor (for apicurio
+     * apicurio.registry.use-specific-avro-reader, for aws-glue
+     * avroRecordType=SPECIFIC_RECORD).
      */
     private Boolean specificAvroReader = false;
     /**
@@ -841,12 +844,37 @@ public class KafkaComponentConfiguration
      */
     private String interceptorClasses;
     /**
+     * The format of the record values in the schema registry, which selects the
+     * serializer and deserializer of the schemaRegistryVendor. Not every vendor
+     * supports every format: azure supports only avro. Only used when
+     * schemaRegistryVendor is set.
+     */
+    private String schemaFormat = "avro";
+    /**
      * URL of the schema registry servers to use. The format is
      * host1:port1,host2:port2. This is known as schema.registry.url in multiple
      * Schema registries documentation. This option is only available externally
-     * (not standard Apache Kafka)
+     * (not standard Apache Kafka). When schemaRegistryVendor is set, the URL is
+     * set under the property of the vendor: schema.registry.url for confluent,
+     * apicurio.registry.url for apicurio (the URL of the registry API, such as
+     * http://localhost:8080/apis/registry/v3), schema.registry.url for azure
+     * (the fully qualified namespace, such as
+     * my-namespace.servicebus.windows.net), and endpoint for aws-glue
+     * (optional, as Glue is addressed by the AWS region).
      */
     private String schemaRegistryURL;
+    /**
+     * The schema registry vendor, which sets up the value serializer
+     * (producer), the value deserializer (consumer) and the registry properties
+     * of the vendor for the schemaFormat, so that you do not need to know the
+     * class names or the property names of the vendor. The schemaRegistryURL is
+     * set as the registry URL of the vendor. A valueSerializer or
+     * valueDeserializer other than the default, and additionalProperties, take
+     * precedence. The serde jars of the vendor must be on the classpath, as
+     * Camel does not include them. Leave it unset to configure the serializer,
+     * deserializer and registry properties yourself.
+     */
+    private String schemaRegistryVendor;
     /**
      * Login thread sleep time between refresh attempts.
      */
@@ -1833,12 +1861,28 @@ public class KafkaComponentConfiguration
         this.interceptorClasses = interceptorClasses;
     }
 
+    public String getSchemaFormat() {
+        return schemaFormat;
+    }
+
+    public void setSchemaFormat(String schemaFormat) {
+        this.schemaFormat = schemaFormat;
+    }
+
     public String getSchemaRegistryURL() {
         return schemaRegistryURL;
     }
 
     public void setSchemaRegistryURL(String schemaRegistryURL) {
         this.schemaRegistryURL = schemaRegistryURL;
+    }
+
+    public String getSchemaRegistryVendor() {
+        return schemaRegistryVendor;
+    }
+
+    public void setSchemaRegistryVendor(String schemaRegistryVendor) {
+        this.schemaRegistryVendor = schemaRegistryVendor;
     }
 
     public Integer getKerberosBeforeReloginMinTime() {
