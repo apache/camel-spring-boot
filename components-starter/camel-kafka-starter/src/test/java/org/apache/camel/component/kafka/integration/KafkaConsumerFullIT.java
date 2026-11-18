@@ -122,8 +122,9 @@ public class KafkaConsumerFullIT extends BaseEmbeddedKafkaTestSupport {
 
         MockEndpoint.assertIsSatisfied(30, TimeUnit.SECONDS, to);
 
-        assertEquals(5, StreamSupport
-                .stream(MockConsumerInterceptor.recordsCaptured.get(0).records(TOPIC).spliterator(), false).count());
+        // the records may be fetched in more than one poll, so count them across all the captured batches
+        assertEquals(5, MockConsumerInterceptor.recordsCaptured.stream()
+                .flatMap(i -> StreamSupport.stream(i.records(TOPIC).spliterator(), false)).count());
 
         Map<String, Object> headers = to.getExchanges().get(0).getIn().getHeaders();
         assertFalse(headers.containsKey(skippedHeaderKey), "Should not receive skipped header");
