@@ -23,12 +23,20 @@ Please refer to the above links for usage and configuration details.
 
 == Usage
 
-The routes run on an executor thread, not on the servlet thread that received the request. When
-`io.micrometer:context-propagation` is on the classpath (it comes with Micrometer Tracing, for example with
-`spring-boot-starter-opentelemetry`), the consumer captures the context of the servlet thread, such as the Micrometer
-Observation that Spring MVC opens for the request, and restores it on the executor thread. The spans of the route then
-belong to the trace of the HTTP request, and other context registered with context-propagation is available in the
-route as well.
+The routes run on a thread of a task executor (normally Spring Boot's `applicationTaskExecutor`), not on the servlet
+thread that received the request. To run them with the context of the request, for example so that with Micrometer
+Tracing the spans of the route belong to the trace of the HTTP request instead of starting a new one, enable Spring
+Boot's context propagation for its task executors:
+
+[source,properties]
+----
+spring.task.execution.propagate-context=true
+----
+
+It needs `io.micrometer:context-propagation`, which comes with Micrometer Tracing (for example with
+`spring-boot-starter-opentelemetry`). It carries over any context registered with context propagation, such as the
+Spring Security context or the MDC when their accessors are registered. It applies to the executors that Spring Boot
+builds; an executor bean that you build yourself needs a `ContextPropagatingTaskDecorator` of its own.
 
 == Spring Boot Auto-Configuration
 

@@ -42,25 +42,11 @@ import org.apache.camel.http.common.HttpHelper;
 import org.apache.camel.support.DefaultConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.task.TaskDecorator;
-import org.springframework.core.task.support.ContextPropagatingTaskDecorator;
-import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements PlatformHttpConsumer, Suspendable, SuspendableService {
 
     private static final Logger LOG = LoggerFactory.getLogger(SpringBootPlatformHttpConsumer.class);
-
-    /**
-     * The route runs on an executor thread, not on the servlet thread that received the request. This decorator
-     * captures the context of the servlet thread (such as the Micrometer Observation of the request, and with it the
-     * current trace) and restores it on the executor thread, so the route spans belong to the trace of the request. It
-     * needs io.micrometer:context-propagation, which comes with Micrometer Tracing; without it the task runs as is.
-     */
-    private static final TaskDecorator CONTEXT_PROPAGATION
-            = ClassUtils.isPresent("io.micrometer.context.ContextSnapshotFactory",
-                    SpringBootPlatformHttpConsumer.class.getClassLoader())
-                            ? new ContextPropagatingTaskDecorator() : task -> task;
 
     private HttpBinding binding;
     private final boolean handleWriteResponseError;
@@ -129,8 +115,7 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
      */
     @ResponseBody
     public CompletableFuture<Void> service(HttpServletRequest request, HttpServletResponse response) {
-        // the context is captured here, on the servlet thread, and restored around the task
-        return CompletableFuture.runAsync(CONTEXT_PROPAGATION.decorate(() -> {
+        return CompletableFuture.runAsync(() -> {
             LOG.trace("Service: {}", request);
             try {
                 handleService(request, response);
@@ -145,7 +130,7 @@ public class SpringBootPlatformHttpConsumer extends DefaultConsumer implements P
                     // ignore
                 }
             }
-        }), executor);
+        }, executor);
     }
 
     protected void handleService(HttpServletRequest request, HttpServletResponse response) throws Exception {

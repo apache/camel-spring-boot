@@ -84,10 +84,10 @@
       <optional>true</optional>
     </dependency>
     <dependency>
-      <!-- carries the observation of the request over to the thread that runs the route -->
+      <!-- needed by spring.task.execution.propagate-context, see SpringBootPlatformHttpContextPropagationTest -->
       <groupId>io.micrometer</groupId>
       <artifactId>context-propagation</artifactId>
-      <optional>true</optional>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>io.rest-assured</groupId>

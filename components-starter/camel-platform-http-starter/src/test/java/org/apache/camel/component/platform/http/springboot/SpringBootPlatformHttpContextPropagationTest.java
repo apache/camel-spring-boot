@@ -40,12 +40,14 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.startsWith;
 
 /**
- * The route runs on an executor thread, but it must still see the Micrometer Observation that Spring MVC opened for the
- * request, so that the route spans belong to the trace of the request.
+ * The route runs on an executor thread. With Spring Boot's spring.task.execution.propagate-context, that thread gets the
+ * context of the request, so the route sees the Micrometer Observation that Spring MVC opened for it and the route spans
+ * belong to the trace of the request.
  */
 @EnableAutoConfiguration
 @CamelSpringBootTest
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = { CamelAutoConfiguration.class,
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+                properties = "spring.task.execution.propagate-context=true", classes = { CamelAutoConfiguration.class,
         SpringBootPlatformHttpContextPropagationTest.class,
         SpringBootPlatformHttpContextPropagationTest.TestConfiguration.class,
         PlatformHttpComponentAutoConfiguration.class, SpringBootPlatformHttpAutoConfiguration.class })
