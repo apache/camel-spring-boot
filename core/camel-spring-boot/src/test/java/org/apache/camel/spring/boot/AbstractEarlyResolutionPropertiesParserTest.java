@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.spi.PropertiesFunction;
+import org.apache.camel.support.service.ServiceSupport;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.bootstrap.DefaultBootstrapContext;
@@ -85,6 +86,63 @@ public class AbstractEarlyResolutionPropertiesParserTest {
                 throw new IllegalStateException("cannot resolve " + remainder);
             }
             return values.get(remainder);
+        }
+    }
+
+    /**
+     * A properties function that is a Camel service, as the functions of the Camel vaults are, and counts how often it
+     * was stopped.
+     */
+    private static final class StubServiceFunction extends ServiceSupport implements PropertiesFunction {
+        private final Map<String, String> values;
+        private int stops;
+
+        StubServiceFunction(Map<String, String> values) {
+            this.values = values;
+        }
+
+        @Override
+        public String getName() {
+            return "test";
+        }
+
+        @Override
+        public String apply(String remainder) {
+            if (!values.containsKey(remainder)) {
+                throw new IllegalStateException("cannot resolve " + remainder);
+            }
+            return values.get(remainder);
+        }
+
+        @Override
+        protected void doStop() {
+            stops++;
+        }
+    }
+
+    /**
+     * A parser that keeps the default release of the properties function.
+     */
+    private static final class DefaultReleaseParser extends AbstractEarlyResolutionPropertiesParser {
+        private final PropertiesFunction function;
+
+        DefaultReleaseParser(PropertiesFunction function) {
+            this.function = function;
+        }
+
+        @Override
+        protected String getEarlyResolutionProperty() {
+            return GUARD;
+        }
+
+        @Override
+        protected String getOverridePropertySourceName() {
+            return OVERRIDE_SOURCE;
+        }
+
+        @Override
+        protected PropertiesFunction createPropertiesFunction(ConfigurableEnvironment environment) {
+            return function;
         }
     }
 
@@ -200,6 +258,39 @@ public class AbstractEarlyResolutionPropertiesParserTest {
 
         assertEquals("pazzword", environment.getProperty("my.secret"));
         assertEquals(1, parser.releaseCalls);
+    }
+
+    @Test
+    void stopsAPropertiesFunctionThatIsAServiceByDefault() {
+        RecordingEnvironment environment = environmentWith(Map.of(GUARD, "true", "my.secret", "{{test:db}}"));
+        StubServiceFunction function = new StubServiceFunction(Map.of("db", "pazzword"));
+
+        new DefaultReleaseParser(function).onApplicationEvent(eventFor(environment));
+
+        assertEquals("pazzword", environment.getProperty("my.secret"));
+        assertEquals(1, function.stops, "stopping the function closes what it holds, such as the client of a vault");
+    }
+
+    @Test
+    void stopsAPropertiesFunctionThatIsAServiceByDefaultAlsoWhenResolutionFails() {
+        RecordingEnvironment environment = environmentWith(Map.of(GUARD, "true", "my.secret", "{{test:missing}}"));
+        StubServiceFunction function = new StubServiceFunction(Map.of());
+        DefaultReleaseParser parser = new DefaultReleaseParser(function);
+
+        assertThrows(RuntimeCamelException.class, () -> parser.onApplicationEvent(eventFor(environment)));
+
+        assertEquals(1, function.stops, "the function is stopped also when startup is aborted");
+    }
+
+    @Test
+    void releasesAPropertiesFunctionThatIsNotAServiceByDefault() {
+        RecordingEnvironment environment = environmentWith(Map.of(GUARD, "true", "my.secret", "{{test:db}}"));
+        DefaultReleaseParser parser
+                = new DefaultReleaseParser(new StubPropertiesFunction(Map.of("db", "pazzword"), Set.of()));
+
+        parser.onApplicationEvent(eventFor(environment));
+
+        assertEquals("pazzword", environment.getProperty("my.secret"));
     }
 
     @Test

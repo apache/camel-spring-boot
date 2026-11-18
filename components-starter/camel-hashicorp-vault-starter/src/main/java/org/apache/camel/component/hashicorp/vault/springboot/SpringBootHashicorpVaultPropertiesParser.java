@@ -22,7 +22,6 @@ import org.apache.camel.component.hashicorp.vault.HashicorpVaultClientSettings;
 import org.apache.camel.component.hashicorp.vault.HashicorpVaultPropertiesFunction;
 import org.apache.camel.spi.PropertiesFunction;
 import org.apache.camel.spring.boot.AbstractEarlyResolutionPropertiesParser;
-import org.apache.camel.support.service.ServiceHelper;
 import org.apache.camel.util.ObjectHelper;
 import org.apache.camel.vault.HashicorpVaultConfiguration;
 import org.springframework.boot.context.properties.bind.Binder;
@@ -33,7 +32,8 @@ import org.springframework.core.env.ConfigurableEnvironment;
  * Resolves the {@code {{hashicorp:...}}} placeholders of the Spring Boot properties before the CamelContext exists. It
  * reads the secrets as the properties function of the CamelContext does, with the same settings: the
  * {@code CAMEL_HASHICORP_VAULT_*} environment variables when one of them is set, else the {@code camel.vault.hashicorp}
- * options. It logs in once, and revokes the token of its login once the properties are resolved.
+ * options. It logs in once, and revokes the token of its login once the properties are resolved: the base class stops
+ * the function, which closes its client.
  */
 public class SpringBootHashicorpVaultPropertiesParser extends AbstractEarlyResolutionPropertiesParser {
 
@@ -78,13 +78,6 @@ public class SpringBootHashicorpVaultPropertiesParser extends AbstractEarlyResol
                                             + "* environment variables)",
                     e);
         }
-    }
-
-    @Override
-    protected void release(PropertiesFunction propertiesFunction) {
-        // stopping the function closes its client: it stops renewing the token, and revokes the token of the login (but
-        // not a token given for the token login)
-        ServiceHelper.stopService(propertiesFunction);
     }
 
     private static void required(String value, String option, String message) {
