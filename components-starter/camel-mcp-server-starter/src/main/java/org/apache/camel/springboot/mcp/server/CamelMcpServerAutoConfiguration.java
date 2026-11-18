@@ -16,6 +16,7 @@
  */
 package org.apache.camel.springboot.mcp.server;
 
+import io.modelcontextprotocol.server.McpStatelessSyncServer;
 import io.modelcontextprotocol.server.McpSyncServer;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.mcp.server.McpServerBridge;
@@ -24,22 +25,28 @@ import org.apache.camel.component.mcp.server.McpServerEngine;
 import org.apache.camel.spring.boot.CamelAutoConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.AnyNestedCondition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
 
 /**
  * Auto-configures the Camel MCP server bridge over the Spring AI MCP server: every ai-tool route whose tags match
- * {@code camel.mcp-server.tags} is exposed as an MCP tool of the auto-configured {@link McpSyncServer}.
+ * {@code camel.mcp-server.tags} is exposed as an MCP tool of the auto-configured {@link McpSyncServer}, or of the
+ * {@link McpStatelessSyncServer} when {@code spring.ai.mcp.server.protocol=STATELESS}.
  */
 @AutoConfiguration(after = CamelAutoConfiguration.class,
-                   afterName = "org.springframework.ai.mcp.server.common.autoconfigure.McpServerAutoConfiguration")
-@ConditionalOnBean(McpSyncServer.class)
+                   afterName = {
+                           "org.springframework.ai.mcp.server.common.autoconfigure.McpServerAutoConfiguration",
+                           "org.springframework.ai.mcp.server.common.autoconfigure.McpServerStatelessAutoConfiguration" })
+@Conditional(CamelMcpServerAutoConfiguration.OnSpringAiMcpServerCondition.class)
 @ConditionalOnProperty(value = "camel.mcp-server.enabled", matchIfMissing = true)
 @EnableConfigurationProperties(McpServerConfigurationProperties.class)
 public class CamelMcpServerAutoConfiguration {
@@ -49,8 +56,12 @@ public class CamelMcpServerAutoConfiguration {
     @Bean(initMethod = "", destroyMethod = "")
     // Camel handles the lifecycle of this bean
     @ConditionalOnMissingBean(McpServerEngine.class)
-    McpServerEngine camelMcpServerEngine(McpSyncServer mcpSyncServer) {
-        return new SpringAiMcpServerEngine(mcpSyncServer);
+    McpServerEngine camelMcpServerEngine(
+            ObjectProvider<McpSyncServer> mcpSyncServer, ObjectProvider<McpStatelessSyncServer> mcpStatelessSyncServer) {
+        McpSyncServer server = mcpSyncServer.getIfAvailable();
+        return server != null
+                ? new SpringAiMcpServerEngine(server)
+                : new SpringAiMcpServerEngine(mcpStatelessSyncServer.getObject());
     }
 
     @Bean(initMethod = "", destroyMethod = "")
@@ -88,11 +99,11 @@ public class CamelMcpServerAutoConfiguration {
         }
 
         String protocol = environment.getProperty("spring.ai.mcp.server.protocol");
-        if (!"STREAMABLE".equalsIgnoreCase(protocol)) {
+        if (!"STREAMABLE".equalsIgnoreCase(protocol) && !"STATELESS".equalsIgnoreCase(protocol)) {
             LOG.warn("Camel MCP routes or Origin settings are configured, but "
-                     + "spring.ai.mcp.server.protocol is not STREAMABLE. Camel's Origin validation "
+                     + "spring.ai.mcp.server.protocol is neither STREAMABLE nor STATELESS. Camel's Origin validation "
                      + "and authenticated caller-context extraction are not active; configure "
-                     + "spring.ai.mcp.server.protocol=STREAMABLE to enable them.");
+                     + "spring.ai.mcp.server.protocol=STREAMABLE or STATELESS to enable them.");
             return;
         }
 
@@ -100,10 +111,29 @@ public class CamelMcpServerAutoConfiguration {
                 ? properties.getTransportEnabled()
                 : tagsConfigured;
         if (!transportActive) {
-            LOG.warn("Camel MCP routes or Origin settings are configured, but Camel's Streamable HTTP "
+            LOG.warn("Camel MCP routes or Origin settings are configured, but Camel's HTTP "
                      + "transport replacement is disabled. Origin validation and caller-context "
                      + "extraction are not installed. Set camel.mcp-server.transport-enabled=true "
                      + "or configure those features on the application-provided transport.");
+        }
+    }
+
+    /**
+     * Matches when Spring AI auto-configured a synchronous MCP server: with sessions ({@code SSE},
+     * {@code STREAMABLE}) or stateless ({@code STATELESS}).
+     */
+    static final class OnSpringAiMcpServerCondition extends AnyNestedCondition {
+
+        OnSpringAiMcpServerCondition() {
+            super(ConfigurationPhase.REGISTER_BEAN);
+        }
+
+        @ConditionalOnBean(McpSyncServer.class)
+        static final class OnSessionServer {
+        }
+
+        @ConditionalOnBean(McpStatelessSyncServer.class)
+        static final class OnStatelessServer {
         }
     }
 

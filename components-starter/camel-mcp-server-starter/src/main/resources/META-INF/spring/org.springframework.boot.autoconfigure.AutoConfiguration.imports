@@ -16,3 +16,4 @@
 ## ---------------------------------------------------------------------------
 org.apache.camel.springboot.mcp.server.CamelMcpServerAutoConfiguration
 org.apache.camel.springboot.mcp.server.CamelMcpServerTransportAutoConfiguration
+org.apache.camel.springboot.mcp.server.CamelMcpServerStatelessTransportAutoConfiguration
