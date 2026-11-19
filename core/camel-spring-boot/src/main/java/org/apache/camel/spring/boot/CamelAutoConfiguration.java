@@ -152,6 +152,10 @@ public class CamelAutoConfiguration {
 
         // setup startup recorder before building context
         configureStartupRecorder(camelContext, config);
+        // the type converter registry is created by build(), and its statistics cannot be enabled afterwards
+        if (config.getMain().isTypeConverterStatisticsEnabled()) {
+            camelContext.setTypeConverterStatisticsEnabled(true);
+        }
 
         camelContext.build();
 
