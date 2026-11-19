@@ -187,6 +187,13 @@
       "defaultValue": "JavaStringHash"
     },
     {
+      "name": "camel.component.pulsar.hostname-verification",
+      "type": "java.lang.Boolean",
+      "description": "Whether to check that the certificate of the broker matches the host Camel connects to, with pulsar+ssl:\/\/. When disabled, any certificate trusted by the client is accepted, whatever host it was issued for. Not used when a pulsarClient is given.",
+      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.pulsar.initial-sequence-id",
       "type": "java.lang.Long",
       "description": "The first message published will have a sequence Id of initialSequenceId plus one. The default -1 leaves it to the Pulsar client, which continues after the last sequence id the broker has for the producer name.",
@@ -344,6 +351,12 @@
       "description": "Type of the subscription [EXCLUSIVE|SHARED|FAILOVER|KEY_SHARED], defaults to EXCLUSIVE",
       "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration",
       "defaultValue": "exclusive"
+    },
+    {
+      "name": "camel.component.pulsar.tls-trust-certs-file-path",
+      "type": "java.lang.String",
+      "description": "The path of a PEM file with the certificates of the certificate authorities to trust, for a broker on pulsar+ssl:\/\/ whose certificate is not signed by an authority that the JVM trusts. Not used when a pulsarClient is given.",
+      "sourceType": "org.apache.camel.component.pulsar.springboot.PulsarComponentConfiguration"
     },
     {
       "name": "camel.component.pulsar.topics-pattern",

@@ -110,6 +110,13 @@
       "sourceType": "org.apache.camel.component.nats.springboot.NatsComponentConfiguration"
     },
     {
+      "name": "camel.component.nats.hostname-verification",
+      "type": "java.lang.Boolean",
+      "description": "Whether to check that the certificate of the NATS server matches the host Camel connects to, when TLS is used. The client then keeps the host name of a server for TLS, and connects to the fastest of its IP addresses. A server that is given, or that the cluster announces, by its IP address needs a certificate that names that address. When disabled, any certificate trusted by the JVM, or by the sslContextParameters, is accepted, whatever host it was issued for.",
+      "sourceType": "org.apache.camel.component.nats.springboot.NatsComponentConfiguration",
+      "defaultValue": true
+    },
+    {
       "name": "camel.component.nats.jetstream-async",
       "type": "java.lang.Boolean",
       "description": "Sets whether to operate JetStream requests asynchronously.",

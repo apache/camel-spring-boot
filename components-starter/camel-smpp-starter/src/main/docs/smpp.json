@@ -20,6 +20,13 @@
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
+      "name": "camel.component.smpp.allow-system-id-and-password-from-headers",
+      "type": "java.lang.Boolean",
+      "description": "Whether a producer with lazySessionCreation=true may take the system id and the password, with which it connects to the SMSC, from the 'CamelSmppSystemId' and 'CamelSmppPassword' headers of the first exchange. When both headers are present, the producer connects with them in place of the systemId and password of the endpoint, and keeps using them when it reconnects. This is disabled by default, and the headers are then ignored. Enable this only when the route sets these headers itself.",
+      "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.smpp.alphabet",
       "type": "java.lang.Byte",
       "description": "Defines encoding of data according the SMPP 3.4 specification, section 5.2.19. 0: SMSC Default Alphabet 4: 8 bit Alphabet 8: UCS2 Alphabet",
@@ -144,7 +151,7 @@
     {
       "name": "camel.component.smpp.lazy-session-creation",
       "type": "java.lang.Boolean",
-      "description": "Sessions can be lazily created to avoid exceptions, if the SMSC is not available when the Camel producer is started. Camel will check the in message headers 'CamelSmppSystemId' and 'CamelSmppPassword' of the first exchange. If they are present, Camel will use these data to connect to the SMSC.",
+      "description": "Sessions can be lazily created to avoid exceptions, if the SMSC is not available when the Camel producer is started. The session is then created when the first exchange is sent, with the systemId and password of the endpoint. See the allowSystemIdAndPasswordFromHeaders option to take them from the message headers instead.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
       "defaultValue": false
     },
