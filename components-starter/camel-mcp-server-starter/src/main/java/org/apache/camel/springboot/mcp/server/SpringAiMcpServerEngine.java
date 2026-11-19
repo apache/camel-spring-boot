@@ -305,14 +305,8 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
                 return;
             }
 
+            // The MCP Java SDK sends notifications/resources/list_changed itself when the server advertises it
             server.removeResourceTemplate(uriTemplate);
-
-            McpSchema.ServerCapabilities capabilities = server.capabilities();
-            if (capabilities != null && capabilities.resources() != null
-                    && Boolean.TRUE.equals(capabilities.resources().listChanged())) {
-                // MCP Java SDK 2.1.0 does not notify on template removal; notify only when advertised.
-                server.notifyResourcesListChanged();
-            }
 
             LOG.debug("MCP resource template removed: {}", uriTemplate);
         } catch (Exception e) {

@@ -833,7 +833,7 @@ public class SpringBootMcpServerTest {
                                         await().atMost(10, TimeUnit.SECONDS)
                                                 .until(() -> resourceNotificationCount.get() >= 1);
 
-                                        // Template removal has an explicit resources/list_changed notification.
+                                        // Template removal sends one resources/list_changed notification.
                                         camelContext.getRouteController().stopRoute("customer-template-route");
 
                                         await().atMost(10, TimeUnit.SECONDS)
@@ -843,6 +843,10 @@ public class SpringBootMcpServerTest {
 
                                         await().atMost(10, TimeUnit.SECONDS)
                                                 .until(() -> promptNotificationCount.get() >= 1);
+
+                                        // The notifications of a session arrive in order, so a second notification
+                                        // for the template removal would be here before the prompt one.
+                                        assertThat(resourceNotificationCount).hasValue(2);
                                     } finally {
                                         notificationClient.closeGracefully();
                                     }

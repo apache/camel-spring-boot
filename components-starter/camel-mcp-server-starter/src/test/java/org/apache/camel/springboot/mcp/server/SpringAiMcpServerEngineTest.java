@@ -130,31 +130,22 @@ class SpringAiMcpServerEngineTest {
     }
 
     @Test
-    void notifiesTemplateRemovalOnlyWhenAdvertisedAndActuallyRemoved() {
+    void removesOnlyARegisteredTemplateAndLeavesTheNotificationToTheSdk() {
         String uriTemplate = "camel:///customers/{id}";
         McpSchema.ResourceTemplate template = McpSchema.ResourceTemplate
                 .builder(uriTemplate, "customers")
                 .build();
 
-        McpSyncServer notifyingServer = mock(McpSyncServer.class);
-        when(notifyingServer.listResourceTemplates()).thenReturn(List.of(template));
-        when(notifyingServer.getServerCapabilities()).thenReturn(
+        // The MCP Java SDK sends resources/list_changed itself when it removes a template
+        McpSyncServer registeredServer = mock(McpSyncServer.class);
+        when(registeredServer.listResourceTemplates()).thenReturn(List.of(template));
+        when(registeredServer.getServerCapabilities()).thenReturn(
                 new McpSchema.ServerCapabilities(
                         null, null, null, null,
                         new McpSchema.ServerCapabilities.ResourceCapabilities(false, true), null));
-        new SpringAiMcpServerEngine(notifyingServer).resourceTemplateRemoved(uriTemplate);
-        verify(notifyingServer).removeResourceTemplate(uriTemplate);
-        verify(notifyingServer).notifyResourcesListChanged();
-
-        McpSyncServer nonNotifyingServer = mock(McpSyncServer.class);
-        when(nonNotifyingServer.listResourceTemplates()).thenReturn(List.of(template));
-        when(nonNotifyingServer.getServerCapabilities()).thenReturn(
-                new McpSchema.ServerCapabilities(
-                        null, null, null, null,
-                        new McpSchema.ServerCapabilities.ResourceCapabilities(false, false), null));
-        new SpringAiMcpServerEngine(nonNotifyingServer).resourceTemplateRemoved(uriTemplate);
-        verify(nonNotifyingServer).removeResourceTemplate(uriTemplate);
-        verify(nonNotifyingServer, never()).notifyResourcesListChanged();
+        new SpringAiMcpServerEngine(registeredServer).resourceTemplateRemoved(uriTemplate);
+        verify(registeredServer).removeResourceTemplate(uriTemplate);
+        verify(registeredServer, never()).notifyResourcesListChanged();
 
         McpSyncServer absentServer = mock(McpSyncServer.class);
         when(absentServer.listResourceTemplates()).thenReturn(List.of());
