@@ -133,9 +133,10 @@ spring.ai.mcp.server.prompt-change-notification = true
 === Origin validation
 
 Camel's principal-aware HTTP transport is selected only when
-`spring.ai.mcp.server.protocol` is `STREAMABLE` or `STATELESS` (see
-<<_serving_without_sessions>>) and the Camel transport activation condition is
-satisfied:
+`spring.ai.mcp.server.protocol` is `STREAMABLE`, `STATELESS` (see
+<<_serving_without_sessions>>) or `MODERN` (see
+<<_mcp_protocol_version_2026_07_28>>) and the Camel transport activation
+condition is satisfied:
 
 * By default, the Camel provider is selected when `camel.mcp-server.tags` is
   configured. This enables the Origin validator and authenticated caller
@@ -181,8 +182,8 @@ If Camel tags or Origin settings are configured while the Spring AI protocol
 is unset or uses SSE, the Camel HTTP transport is not installed.
 The starter logs a warning because Origin validation and caller-context
 extraction are not active in that configuration. Select
-`spring.ai.mcp.server.protocol=STREAMABLE` (or `STATELESS`) when those
-protections are required.
+`spring.ai.mcp.server.protocol=STREAMABLE` (or `STATELESS` or `MODERN`) when
+those protections are required.
 
 With the Spring AI 2.0.2 WebMVC transport, an Origin rejection currently
 returns HTTP 403 with a plain-text `Invalid Origin header` response body.
@@ -278,8 +279,47 @@ request:
 
 The stateless mode serves the MCP protocol versions that open with an
 `initialize` handshake (2025-11-25 and earlier). Protocol version 2026-07-28,
-which has no session by design, is not served by this starter yet: it needs
-Spring AI 2.1.0.
+which has no session by design, is served with `MODERN`.
+
+=== MCP protocol version 2026-07-28
+
+With `spring.ai.mcp.server.protocol=MODERN`, Spring AI serves MCP protocol
+version 2026-07-28, and the starter adds the Camel routes to that server. A
+client of 2026-07-28 has no handshake and no session: every request carries its
+protocol version and is served on its own, so a restart or another instance is
+invisible to the client. Unlike with `STATELESS`, the client is still told about
+changes: when a Camel route adds or removes a tool, resource or prompt, a client
+listening with a `subscriptions/listen` request receives the list change.
+
+[source,properties]
+----
+spring.ai.mcp.server.protocol = MODERN
+camel.mcp-server.tags = crm
+----
+
+The Camel routes are added to the tool, resource and prompt repositories that
+Spring AI auto-configures, next to the application's own tools, resources and
+prompts. A Camel route with the name or URI of one of them is refused, as with
+the other protocols. Camel's Origin validation and caller-context extraction
+apply to every request: the starter provides them to Spring AI's
+`WebMvcModernServerTransport` as `ServerHttpHeaderValidator` and
+`McpTransportContextExtractor` beans, and beans of those types defined by the
+application take precedence.
+
+Be aware that:
+
+* Spring AI serves one protocol per application: with `MODERN`, a client that
+  opens with an `initialize` handshake (protocol version 2025-11-25 and
+  earlier) is answered with HTTP 400 and cannot connect. Clients that try
+  2026-07-28 first and fall back to `initialize` connect with 2026-07-28. Camel
+  Main and Camel JBang serve both kinds of client on the same endpoint (see
+  xref:components:others:mcp-server.adoc[MCP Server]);
+* only `spring.ai.mcp.server.type=SYNC`, the default, is supported: with
+  `ASYNC`, the starter does not register the Camel routes;
+* if the application defines its own tool, resource or prompt repository, the
+  Camel routes of that kind are not served, and the starter logs a warning;
+* protocol version 2026-07-28 is built on the `io.modelcontextprotocol.modern`
+  API of the MCP Java SDK, which may still change in minor releases.
 
 === Connecting MCP clients
 
