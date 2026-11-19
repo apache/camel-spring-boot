@@ -102,11 +102,6 @@
         </exclusions>
       </dependency>
       <dependency>
-        <groupId>com.jayway.jsonpath</groupId>
-        <artifactId>json-path</artifactId>
-        <version>3.0.0</version>
-      </dependency>
-      <dependency>
         <groupId>com.openai</groupId>
         <artifactId>openai-java</artifactId>
         <version>4.78.0</version>
@@ -295,37 +290,37 @@
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-commons</artifactId>
-        <version>1.17.2</version>
+        <version>1.18.0</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-observation</artifactId>
-        <version>1.17.2</version>
+        <version>1.18.0</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-registry-jmx</artifactId>
-        <version>1.17.2</version>
+        <version>1.18.0</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-registry-prometheus</artifactId>
-        <version>1.17.2</version>
+        <version>1.18.0</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-tracing</artifactId>
-        <version>1.7.2</version>
+        <version>1.8.0</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-tracing-bridge-otel</artifactId>
-        <version>1.7.2</version>
+        <version>1.8.0</version>
       </dependency>
       <dependency>
         <groupId>io.micrometer</groupId>
         <artifactId>micrometer-tracing-test</artifactId>
-        <version>1.7.2</version>
+        <version>1.8.0</version>
       </dependency>
       <dependency>
         <groupId>io.opentelemetry.proto</groupId>
