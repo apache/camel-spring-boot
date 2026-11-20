@@ -256,7 +256,9 @@ public class SpringBootMcpServerModernTest {
 
         assertThat(post(DISCOVER, discover).statusCode()).isEqualTo(200);
         assertThat(post(DISCOVER, withOrigin(discover, "http://localhost:3000")).statusCode()).isEqualTo(200);
-        assertThat(post(DISCOVER, withOrigin(discover, "https://attacker.example")).statusCode()).isEqualTo(403);
+        HttpResponse<String> rejected = post(DISCOVER, withOrigin(discover, "https://attacker.example"));
+        assertThat(rejected.statusCode()).isEqualTo(403);
+        assertThat(rejected.body()).contains("Invalid Origin header");
     }
 
     private McpSyncClient client() {

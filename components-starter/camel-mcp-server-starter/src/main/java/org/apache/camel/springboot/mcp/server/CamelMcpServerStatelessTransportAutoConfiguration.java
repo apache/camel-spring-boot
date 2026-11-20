@@ -66,7 +66,7 @@ import tools.jackson.databind.json.JsonMapper;
 })
 public class CamelMcpServerStatelessTransportAutoConfiguration {
 
-    // Spring AI 2.0.2's builder still takes the deprecated ServerTransportSecurityValidator, see
+    // Spring AI 2.1's builder still takes the deprecated ServerTransportSecurityValidator, see
     // CamelMcpServerTransportAutoConfiguration#createOriginValidator
     @SuppressWarnings("deprecation")
     @Bean
