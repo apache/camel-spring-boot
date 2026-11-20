@@ -282,6 +282,16 @@ public class NatsComponentConfiguration
      */
     private String credentialsFilePath;
     /**
+     * Whether to check that the certificate of the NATS server matches the host
+     * Camel connects to, when TLS is used. The client then keeps the host name
+     * of a server for TLS, and connects to the fastest of its IP addresses. A
+     * server that is given, or that the cluster announces, by its IP address
+     * needs a certificate that names that address. When disabled, any
+     * certificate trusted by the JVM, or by the sslContextParameters, is
+     * accepted, whatever host it was issued for.
+     */
+    private Boolean hostnameVerification = true;
+    /**
      * Set secure option indicating TLS is required
      */
     private Boolean secure = false;
@@ -623,6 +633,14 @@ public class NatsComponentConfiguration
 
     public void setCredentialsFilePath(String credentialsFilePath) {
         this.credentialsFilePath = credentialsFilePath;
+    }
+
+    public Boolean getHostnameVerification() {
+        return hostnameVerification;
+    }
+
+    public void setHostnameVerification(Boolean hostnameVerification) {
+        this.hostnameVerification = hostnameVerification;
     }
 
     public Boolean getSecure() {

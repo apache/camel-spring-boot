@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 51 options, which are listed below.
+The starter supports 53 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -53,6 +53,7 @@ The starter supports 51 options, which are listed below.
 | camel.component.pulsar.enable-retry | To enable retry letter topic mode. The default retry letter topic uses this format: topicname-subscriptionname-RETRY | false | Boolean
 | camel.component.pulsar.enabled | Whether to enable auto configuration of the pulsar component. This is enabled by default. |  | Boolean
 | camel.component.pulsar.hashing-scheme | Hashing function to use when choosing the partition to use for a particular message | JavaStringHash | String
+| camel.component.pulsar.hostname-verification | Whether to check that the certificate of the broker matches the host Camel connects to, with pulsarssl://. When disabled, any certificate trusted by the client is accepted, whatever host it was issued for. Not used when a pulsarClient is given. | true | Boolean
 | camel.component.pulsar.initial-sequence-id | The first message published will have a sequence Id of initialSequenceId 1. | -1 | Long
 | camel.component.pulsar.key-shared-policy | Policy to use by consumer when using key-shared subscription type. |  | String
 | camel.component.pulsar.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
@@ -77,6 +78,7 @@ The starter supports 51 options, which are listed below.
 | camel.component.pulsar.subscription-name | Name of the subscription to use | subs | String
 | camel.component.pulsar.subscription-topics-mode | Determines to which topics this consumer should be subscribed to - Persistent, Non-Persistent, or both. Only used with pattern subscriptions. | persistentonly | RegexSubscriptionMode
 | camel.component.pulsar.subscription-type | Type of the subscription EXCLUSIVESHAREDFAILOVERKEY_SHARED, defaults to EXCLUSIVE | exclusive | SubscriptionType
+| camel.component.pulsar.tls-trust-certs-file-path | The path of a PEM file with the certificates of the certificate authorities to trust, for a broker on pulsarssl:// whose certificate is not signed by an authority that the JVM trusts. Not used when a pulsarClient is given. |  | String
 | camel.component.pulsar.topics-pattern | Whether the topic is a pattern (regular expression) that allows the consumer to subscribe to all matching topics in the namespace | false | Boolean
 | camel.component.pulsar.max-pending-messages-across-partitions | The maximum number of pending messages for partitioned topics. The maxPendingMessages value will be reduced if (number of partitions maxPendingMessages) exceeds this value. Partitioned topics have a pending message queue for each partition. | 50000 | Integer
 |===

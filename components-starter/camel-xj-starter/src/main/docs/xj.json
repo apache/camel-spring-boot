@@ -55,7 +55,7 @@
     {
       "name": "camel.component.xj.saxon-configuration",
       "type": "net.sf.saxon.Configuration",
-      "description": "To use a custom Saxon configuration. The option is a net.sf.saxon.Configuration type.",
+      "description": "To use a custom Saxon configuration. It is shared by all the endpoints of this component that do not set their own. The secureProcessing option is applied to this configuration, which Saxon uses by reference, so endpoints that share the same configuration must use the same secureProcessing value. The option is a net.sf.saxon.Configuration type.",
       "sourceType": "org.apache.camel.component.xj.springboot.XJComponentConfiguration"
     },
     {
@@ -73,7 +73,7 @@
     {
       "name": "camel.component.xj.secure-processing",
       "type": "java.lang.Boolean",
-      "description": "Feature for XML secure processing (see javax.xml.XMLConstants). This is enabled by default. However, when using Saxon Professional you may need to turn this off to allow Saxon to be able to use Java extension functions.",
+      "description": "Feature for XML secure processing (see javax.xml.XMLConstants). This is enabled by default. However, when using Saxon Professional you may need to turn this off to allow Saxon to be able to use Java extension functions. Note that turning it off also restores the previous, unrestricted parsing of a Source message body that is still to be parsed, so only do so for trusted input. With a saxonConfiguration, the feature is set on that configuration, so endpoints that share the same configuration must use the same secureProcessing value.",
       "sourceType": "org.apache.camel.component.xj.springboot.XJComponentConfiguration",
       "defaultValue": true
     },

@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 45 options, which are listed below.
+The starter supports 46 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -42,6 +42,7 @@ The starter supports 45 options, which are listed below.
 | camel.component.nats.flush-connection | Define if we want to flush connection when stopping or not | true | Boolean
 | camel.component.nats.flush-timeout | Set the flush timeout (in milliseconds) | 1000 | Integer
 | camel.component.nats.header-filter-strategy | To use a custom header filter strategy. The option is a org.apache.camel.spi.HeaderFilterStrategy type. |  | HeaderFilterStrategy
+| camel.component.nats.hostname-verification | Whether to check that the certificate of the NATS server matches the host Camel connects to, when TLS is used. The client then keeps the host name of a server for TLS, and connects to the fastest of its IP addresses. A server that is given, or that the cluster announces, by its IP address needs a certificate that names that address. When disabled, any certificate trusted by the JVM, or by the sslContextParameters, is accepted, whatever host it was issued for. | true | Boolean
 | camel.component.nats.jetstream-async | Sets whether to operate JetStream requests asynchronously. | true | Boolean
 | camel.component.nats.jetstream-enabled | Sets whether to enable JetStream support for this endpoint. | false | Boolean
 | camel.component.nats.jetstream-name | Sets the name of the JetStream stream to use. |  | String
