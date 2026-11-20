@@ -163,7 +163,9 @@ public class SpringBootMcpServerStatelessTest {
     @Test
     void originIsValidated() throws Exception {
         assertThat(post(INITIALIZE, "http://localhost:3000").statusCode()).isEqualTo(200);
-        assertThat(post(INITIALIZE, "https://attacker.example").statusCode()).isEqualTo(403);
+        HttpResponse<String> rejected = post(INITIALIZE, "https://attacker.example");
+        assertThat(rejected.statusCode()).isEqualTo(403);
+        assertThat(rejected.body()).contains("Invalid Origin header");
     }
 
     private HttpResponse<String> post(String body, String origin) throws Exception {

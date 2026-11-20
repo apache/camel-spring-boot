@@ -135,13 +135,15 @@ public class CamelMcpServerTransportAutoConfiguration {
     }
 
     /**
-     * Compatibility adapter for Spring AI 2.0.2. Its WebMVC provider builder
-     * still accepts ServerTransportSecurityValidator rather than the newer
-     * ServerHttpHeaderValidator. The validation itself is performed by the
-     * non-deprecated SDK validator above.
+     * Compatibility adapter for Spring AI 2.1. Its WebMVC Streamable HTTP and
+     * stateless transport builders still accept ServerTransportSecurityValidator
+     * rather than the newer ServerHttpHeaderValidator, which only its MCP
+     * protocol version 2026-07-28 transport takes. The validation itself is
+     * performed by the non-deprecated SDK validator above.
      *
      * Remove this adapter when Spring AI exposes httpHeaderValidator(...) on
-     * WebMvcStreamableServerTransportProvider.Builder.
+     * WebMvcStreamableServerTransportProvider.Builder and
+     * WebMvcStatelessServerTransport.Builder.
      */
     @SuppressWarnings("deprecation")
     public static ServerTransportSecurityValidator createOriginValidator(String configuredAllowedOrigins) {
@@ -150,7 +152,7 @@ public class CamelMcpServerTransportAutoConfiguration {
     }
 
     /**
-     * Adapts Spring AI 2.0.2's legacy map-based callback to the MCP SDK
+     * Adapts Spring AI 2.1's legacy map-based callback to the MCP SDK
      * HeaderAccessor API.
      */
     private static final class MapHeaderAccessor implements HeaderAccessor {
