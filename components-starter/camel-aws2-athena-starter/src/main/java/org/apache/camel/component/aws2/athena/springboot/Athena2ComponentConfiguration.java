@@ -117,10 +117,11 @@ public class Athena2ComponentConfiguration
      */
     private String queryExecutionId;
     /**
-     * The SQL query to run. Except for simple queries, prefer setting this as
-     * the body of the Exchange or as a header using
-     * Athena2Constants.QUERY_STRING to avoid having to deal with URL encoding
-     * issues.
+     * The SQL query to run. The CamelAwsAthenaQueryString header takes
+     * precedence over this option, and the message body is used as the query
+     * only when neither the header nor this option is set. Except for simple
+     * queries, prefer setting the query in the header or as the body of the
+     * Exchange to avoid having to deal with URL encoding issues.
      */
     private String queryString;
     /**

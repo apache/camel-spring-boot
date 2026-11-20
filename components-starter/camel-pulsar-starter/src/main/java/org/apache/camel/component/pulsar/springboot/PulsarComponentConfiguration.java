@@ -302,6 +302,20 @@ public class PulsarComponentConfiguration
      * org.apache.pulsar.client.api.PulsarClient type.
      */
     private PulsarClient pulsarClient;
+    /**
+     * Whether to check that the certificate of the broker matches the host
+     * Camel connects to, with pulsarssl://. When disabled, any certificate
+     * trusted by the client is accepted, whatever host it was issued for. Not
+     * used when a pulsarClient is given.
+     */
+    private Boolean hostnameVerification = true;
+    /**
+     * The path of a PEM file with the certificates of the certificate
+     * authorities to trust, for a broker on pulsarssl:// whose certificate is
+     * not signed by an authority that the JVM trusts. Not used when a
+     * pulsarClient is given.
+     */
+    private String tlsTrustCertsFilePath;
 
     public String getAuthenticationClass() {
         return authenticationClass;
@@ -696,5 +710,21 @@ public class PulsarComponentConfiguration
 
     public void setPulsarClient(PulsarClient pulsarClient) {
         this.pulsarClient = pulsarClient;
+    }
+
+    public Boolean getHostnameVerification() {
+        return hostnameVerification;
+    }
+
+    public void setHostnameVerification(Boolean hostnameVerification) {
+        this.hostnameVerification = hostnameVerification;
+    }
+
+    public String getTlsTrustCertsFilePath() {
+        return tlsTrustCertsFilePath;
+    }
+
+    public void setTlsTrustCertsFilePath(String tlsTrustCertsFilePath) {
+        this.tlsTrustCertsFilePath = tlsTrustCertsFilePath;
     }
 }

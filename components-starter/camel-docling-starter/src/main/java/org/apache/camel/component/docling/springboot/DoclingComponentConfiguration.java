@@ -265,6 +265,14 @@ public class DoclingComponentConfiguration
      * Maximum file size in bytes for processing
      */
     private Long maxFileSize = 52428800L;
+    /**
+     * When set, the output directory passed to the docling CLI must resolve
+     * inside this directory once normalized. Applies to the
+     * CamelDoclingOutputFilePath header. The check is lexical and does not
+     * resolve symbolic links, matching inputBaseDirectory. When empty, no
+     * directory restriction is applied and the header value is only normalized.
+     */
+    private String outputBaseDirectory;
 
     public DoclingConfiguration getConfiguration() {
         return configuration;
@@ -657,5 +665,13 @@ public class DoclingComponentConfiguration
 
     public void setMaxFileSize(Long maxFileSize) {
         this.maxFileSize = maxFileSize;
+    }
+
+    public String getOutputBaseDirectory() {
+        return outputBaseDirectory;
+    }
+
+    public void setOutputBaseDirectory(String outputBaseDirectory) {
+        this.outputBaseDirectory = outputBaseDirectory;
     }
 }
