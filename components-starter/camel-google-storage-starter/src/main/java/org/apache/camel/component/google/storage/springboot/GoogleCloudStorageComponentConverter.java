@@ -41,7 +41,6 @@ public class GoogleCloudStorageComponentConverter implements GenericConverter {
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.google.storage.GoogleCloudStorageConfiguration.class));
-        answer.add(new ConvertiblePair(String.class, com.google.cloud.storage.StorageClass.class));
         answer.add(new ConvertiblePair(String.class, com.google.cloud.storage.Storage.class));
         return answer;
     }

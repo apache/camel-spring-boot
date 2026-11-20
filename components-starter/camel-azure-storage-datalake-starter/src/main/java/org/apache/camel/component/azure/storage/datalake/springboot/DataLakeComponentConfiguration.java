@@ -174,6 +174,12 @@ public class DataLakeComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Delete a file from the file system once its exchange has completed. When
+     * the exchange fails, the file is not deleted, so it is consumed again at
+     * the next poll.
+     */
+    private Boolean deleteAfterRead = false;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -455,6 +461,14 @@ public class DataLakeComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getDeleteAfterRead() {
+        return deleteAfterRead;
+    }
+
+    public void setDeleteAfterRead(Boolean deleteAfterRead) {
+        this.deleteAfterRead = deleteAfterRead;
     }
 
     public Boolean getLazyStartProducer() {

@@ -18,6 +18,7 @@ package org.apache.camel.component.google.storage.springboot;
 
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageClass;
+import org.apache.camel.component.google.storage.GoogleCloudStorageComponent;
 import org.apache.camel.component.google.storage.GoogleCloudStorageConfiguration;
 import org.apache.camel.component.google.storage.GoogleCloudStorageOperations;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
@@ -61,10 +62,9 @@ public class GoogleCloudStorageComponentConfiguration
      */
     private String serviceAccountKey;
     /**
-     * The Cloud Storage class to use when creating the new buckets. The option
-     * is a com.google.cloud.storage.StorageClass type.
+     * The Cloud Storage class to use when creating the new buckets
      */
-    private StorageClass storageClass;
+    private StorageClass storageClass = StorageClass.STANDARD;
     /**
      * The storage client. The option is a com.google.cloud.storage.Storage
      * type.
@@ -148,6 +148,12 @@ public class GoogleCloudStorageComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * The Cloud Storage class of the objects that the producer uploads. When
+     * not set, an object gets the default storage class of its bucket. The
+     * CamelGoogleCloudStorageStorageClass header overrides it per message.
+     */
+    private StorageClass objectStorageClass;
     /**
      * Set the operation for the producer
      */
@@ -332,6 +338,14 @@ public class GoogleCloudStorageComponentConfiguration
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public StorageClass getObjectStorageClass() {
+        return objectStorageClass;
+    }
+
+    public void setObjectStorageClass(StorageClass objectStorageClass) {
+        this.objectStorageClass = objectStorageClass;
     }
 
     public GoogleCloudStorageOperations getOperation() {

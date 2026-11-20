@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 134 options, which are listed below.
+The starter supports 140 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -124,7 +124,13 @@ The starter supports 134 options, which are listed below.
 | camel.component.kafka.sasl-password | Password for SASL authentication. Used when saslAuthType is set to PLAIN, SCRAM_SHA_256, or SCRAM_SHA_512. |  | String
 | camel.component.kafka.sasl-username | Username for SASL authentication. Used when saslAuthType is set to PLAIN, SCRAM_SHA_256, or SCRAM_SHA_512. |  | String
 | camel.component.kafka.schema-format | The format of the record values in the schema registry, which selects the serializer and deserializer of the schemaRegistryVendor. Not every vendor supports every format: azure supports only avro. Only used when schemaRegistryVendor is set. | avro | String
+| camel.component.kafka.schema-registry-oauth-client-id | The OAuth2 client id to log in to the schema registry with client credentials. Used with schemaRegistryVendor confluent and apicurio. |  | String
+| camel.component.kafka.schema-registry-oauth-client-secret | The OAuth2 client secret to log in to the schema registry with client credentials. |  | String
+| camel.component.kafka.schema-registry-oauth-scope | The OAuth2 scope to ask for when logging in to the schema registry with client credentials (optional). |  | String
+| camel.component.kafka.schema-registry-oauth-token-endpoint | The token endpoint of the OAuth2 server to log in to the schema registry with client credentials, with schemaRegistryOauthClientId and schemaRegistryOauthClientSecret. Used with schemaRegistryVendor confluent (bearer.auth.issuer.endpoint.url) and apicurio (apicurio.registry.auth.service.token.endpoint, such as the token endpoint of a Keycloak realm). |  | String
+| camel.component.kafka.schema-registry-password | The password to log in to the schema registry with basic auth, with schemaRegistryUsername. For Confluent Cloud, the API secret. |  | String
 | camel.component.kafka.schema-registry-u-r-l | URL of the schema registry servers to use. The format is host1:port1,host2:port2. This is known as schema.registry.url in multiple Schema registries documentation. This option is only available externally (not standard Apache Kafka). When schemaRegistryVendor is set, the URL is set under the property of the vendor: schema.registry.url for confluent, apicurio.registry.url for apicurio (the URL of the registry API, such as http://localhost:8080/apis/registry/v3), schema.registry.url for azure (the fully qualified namespace, such as my-namespace.servicebus.windows.net), and endpoint for aws-glue (optional, as Glue is addressed by the AWS region). |  | String
+| camel.component.kafka.schema-registry-username | The username to log in to the schema registry with basic auth, with schemaRegistryPassword. Used with schemaRegistryVendor confluent (basic.auth.user.info, which is the API key for Confluent Cloud) and apicurio (apicurio.registry.auth.username). The azure and aws-glue vendors log in with the credentials of the environment instead. |  | String
 | camel.component.kafka.schema-registry-vendor | The schema registry vendor, which sets up the value serializer (producer), the value deserializer (consumer) and the registry properties of the vendor for the schemaFormat, so that you do not need to know the class names or the property names of the vendor. The schemaRegistryURL is set as the registry URL of the vendor. A valueSerializer or valueDeserializer other than the default, and additionalProperties, take precedence. The serde jars of the vendor must be on the classpath, as Camel does not include them. Leave it unset to configure the serializer, deserializer and registry properties yourself. |  | String
 | camel.component.kafka.security-protocol | Protocol used to communicate with brokers. SASL_PLAINTEXT, PLAINTEXT, SASL_SSL and SSL are supported | PLAINTEXT | String
 | camel.component.kafka.seek-to | Set if KafkaConsumer should read from the beginning or the end on startup: SeekPolicy.BEGINNING: read from the beginning. SeekPolicy.END: read from the end. |  | SeekPolicy

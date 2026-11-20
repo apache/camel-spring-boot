@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 9 options, which are listed below.
+The starter supports 10 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -33,7 +33,8 @@ The starter supports 9 options, which are listed below.
 | camel.component.spring-ai-vector-store.enabled | Whether to enable auto configuration of the spring-ai-vector-store component. This is enabled by default. |  | Boolean
 | camel.component.spring-ai-vector-store.filter-expression | Filter expression for metadata-based filtering in searches. |  | String
 | camel.component.spring-ai-vector-store.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.spring-ai-vector-store.operation | The operation to perform on the vector store (ADD, DELETE, SIMILARITY_SEARCH). | add | SpringAiVectorStoreOperation
+| camel.component.spring-ai-vector-store.operation | The operation to perform on the vector store (ADD, DELETE, SIMILARITY_SEARCH, UPSERT). | add | SpringAiVectorStoreOperation
+| camel.component.spring-ai-vector-store.search-by-vector | Whether SIMILARITY_SEARCH of a float[] body, such as the vector of spring-ai-embeddings, searches with this vector. By default it searches for the text of the CamelSpringAiEmbeddingInputText header, which the vector store embeds again. The vector store must support the search with a vector, and the vector must come from the same embedding model as the stored vectors. | false | Boolean
 | camel.component.spring-ai-vector-store.similarity-threshold | The minimum similarity score threshold (0-1) for similarity search. |  | Double
 | camel.component.spring-ai-vector-store.top-k | The maximum number of similar documents to return for similarity search. | 5 | Integer
 | camel.component.spring-ai-vector-store.vector-store | The VectorStore to use for vector operations. The option is a org.springframework.ai.vectorstore.VectorStore type. |  | VectorStore

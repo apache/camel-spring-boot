@@ -961,6 +961,43 @@ public class KafkaComponentConfiguration
      */
     private String saslUsername;
     /**
+     * The OAuth2 client id to log in to the schema registry with client
+     * credentials. Used with schemaRegistryVendor confluent and apicurio.
+     */
+    private String schemaRegistryOauthClientId;
+    /**
+     * The OAuth2 client secret to log in to the schema registry with client
+     * credentials.
+     */
+    private String schemaRegistryOauthClientSecret;
+    /**
+     * The OAuth2 scope to ask for when logging in to the schema registry with
+     * client credentials (optional).
+     */
+    private String schemaRegistryOauthScope;
+    /**
+     * The token endpoint of the OAuth2 server to log in to the schema registry
+     * with client credentials, with schemaRegistryOauthClientId and
+     * schemaRegistryOauthClientSecret. Used with schemaRegistryVendor confluent
+     * (bearer.auth.issuer.endpoint.url) and apicurio
+     * (apicurio.registry.auth.service.token.endpoint, such as the token
+     * endpoint of a Keycloak realm).
+     */
+    private String schemaRegistryOauthTokenEndpoint;
+    /**
+     * The password to log in to the schema registry with basic auth, with
+     * schemaRegistryUsername. For Confluent Cloud, the API secret.
+     */
+    private String schemaRegistryPassword;
+    /**
+     * The username to log in to the schema registry with basic auth, with
+     * schemaRegistryPassword. Used with schemaRegistryVendor confluent
+     * (basic.auth.user.info, which is the API key for Confluent Cloud) and
+     * apicurio (apicurio.registry.auth.username). The azure and aws-glue
+     * vendors log in with the credentials of the environment instead.
+     */
+    private String schemaRegistryUsername;
+    /**
      * Protocol used to communicate with brokers. SASL_PLAINTEXT, PLAINTEXT,
      * SASL_SSL and SSL are supported
      */
@@ -2013,6 +2050,57 @@ public class KafkaComponentConfiguration
 
     public void setSaslUsername(String saslUsername) {
         this.saslUsername = saslUsername;
+    }
+
+    public String getSchemaRegistryOauthClientId() {
+        return schemaRegistryOauthClientId;
+    }
+
+    public void setSchemaRegistryOauthClientId(
+            String schemaRegistryOauthClientId) {
+        this.schemaRegistryOauthClientId = schemaRegistryOauthClientId;
+    }
+
+    public String getSchemaRegistryOauthClientSecret() {
+        return schemaRegistryOauthClientSecret;
+    }
+
+    public void setSchemaRegistryOauthClientSecret(
+            String schemaRegistryOauthClientSecret) {
+        this.schemaRegistryOauthClientSecret = schemaRegistryOauthClientSecret;
+    }
+
+    public String getSchemaRegistryOauthScope() {
+        return schemaRegistryOauthScope;
+    }
+
+    public void setSchemaRegistryOauthScope(String schemaRegistryOauthScope) {
+        this.schemaRegistryOauthScope = schemaRegistryOauthScope;
+    }
+
+    public String getSchemaRegistryOauthTokenEndpoint() {
+        return schemaRegistryOauthTokenEndpoint;
+    }
+
+    public void setSchemaRegistryOauthTokenEndpoint(
+            String schemaRegistryOauthTokenEndpoint) {
+        this.schemaRegistryOauthTokenEndpoint = schemaRegistryOauthTokenEndpoint;
+    }
+
+    public String getSchemaRegistryPassword() {
+        return schemaRegistryPassword;
+    }
+
+    public void setSchemaRegistryPassword(String schemaRegistryPassword) {
+        this.schemaRegistryPassword = schemaRegistryPassword;
+    }
+
+    public String getSchemaRegistryUsername() {
+        return schemaRegistryUsername;
+    }
+
+    public void setSchemaRegistryUsername(String schemaRegistryUsername) {
+        this.schemaRegistryUsername = schemaRegistryUsername;
     }
 
     public String getSecurityProtocol() {

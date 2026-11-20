@@ -36,7 +36,7 @@ The starter supports 54 options, which are listed below.
 | camel.component.pulsar.authentication-params | The Authentication Parameters to be used while creating the client from URI |  | String
 | camel.component.pulsar.auto-configuration | The pulsar auto configuration. The option is a org.apache.camel.component.pulsar.utils.AutoConfiguration type. |  | AutoConfiguration
 | camel.component.pulsar.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
-| camel.component.pulsar.batcher-builder | Control batching method used by the producer. | default | BatcherBuilder
+| camel.component.pulsar.batcher-builder | Control batching method used by the producer. DEFAULT batches the messages together regardless of their key. KEY_BASED batches the messages of each key separately, so that a Key_Shared subscription spreads the keys over its consumers. A custom BatcherBuilder can be given as a bean reference. | default | BatcherBuilder
 | camel.component.pulsar.batching-enabled | Control whether automatic batching of messages is enabled for the producer. | true | Boolean
 | camel.component.pulsar.batching-max-messages | The maximum size to batch messages. | 1000 | Integer
 | camel.component.pulsar.batching-max-publish-delay-micros | The maximum time period within which the messages sent will be batched if batchingEnabled is true. | 1000 | Long

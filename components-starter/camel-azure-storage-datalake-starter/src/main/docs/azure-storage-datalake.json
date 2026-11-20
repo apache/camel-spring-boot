@@ -90,6 +90,13 @@
       "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration"
     },
     {
+      "name": "camel.component.azure-storage-datalake.delete-after-read",
+      "type": "java.lang.Boolean",
+      "description": "Delete a file from the file system once its exchange has completed. When the exchange fails, the file is not deleted, so it is consumed again at the next poll.",
+      "sourceType": "org.apache.camel.component.azure.storage.datalake.springboot.DataLakeComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.azure-storage-datalake.directory-name",
       "type": "java.lang.String",
       "description": "directory of the file to be handled in component",
