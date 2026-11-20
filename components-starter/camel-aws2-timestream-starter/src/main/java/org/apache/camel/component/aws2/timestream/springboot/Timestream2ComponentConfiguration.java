@@ -77,6 +77,13 @@ public class Timestream2ComponentConfiguration
      */
     private String profileCredentialsName;
     /**
+     * For the query operation: read all the pages of the result, and give all
+     * the rows in one QueryResponse. Without it, the body is one page, and the
+     * CamelAwsTimestreamQueryNextToken header gives the token of the next page.
+     * Not used with pojoRequest.
+     */
+    private Boolean queryAllPages = false;
+    /**
      * The region in which the Timestream client needs to work. When using this
      * parameter, the configuration will expect the lowercase name of the region
      * (for example, ap-east-1) You'll need to use the name
@@ -215,6 +222,14 @@ public class Timestream2ComponentConfiguration
 
     public void setProfileCredentialsName(String profileCredentialsName) {
         this.profileCredentialsName = profileCredentialsName;
+    }
+
+    public Boolean getQueryAllPages() {
+        return queryAllPages;
+    }
+
+    public void setQueryAllPages(Boolean queryAllPages) {
+        this.queryAllPages = queryAllPages;
     }
 
     public String getRegion() {

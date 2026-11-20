@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 39 options, which are listed below.
+The starter supports 40 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -39,6 +39,7 @@ The starter supports 39 options, which are listed below.
 | camel.component.azure-storage-datalake.configuration | configuration object for data lake. The option is a org.apache.camel.component.azure.storage.datalake.DataLakeConfiguration type. |  | DataLakeConfiguration
 | camel.component.azure-storage-datalake.credential-type | Determines the credential strategy to adopt | client-secret | CredentialType
 | camel.component.azure-storage-datalake.data-count | count number of bytes to download |  | Long
+| camel.component.azure-storage-datalake.delete-after-read | Delete a file from the file system once its exchange has completed. When the exchange fails, the file is not deleted, so it is consumed again at the next poll. | false | Boolean
 | camel.component.azure-storage-datalake.directory-name | directory of the file to be handled in component |  | String
 | camel.component.azure-storage-datalake.download-link-expiration | download link expiration time |  | Long
 | camel.component.azure-storage-datalake.enabled | Whether to enable auto configuration of the azure-storage-datalake component. This is enabled by default. |  | Boolean

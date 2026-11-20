@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 23 options, which are listed below.
+The starter supports 25 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -35,7 +35,9 @@ The starter supports 23 options, which are listed below.
 | camel.component.aws2-lambda.enabled | Whether to enable auto configuration of the aws2-lambda component. This is enabled by default. |  | Boolean
 | camel.component.aws2-lambda.health-check-consumer-enabled | Used for enabling or disabling all consumer based health checks from this component | true | Boolean
 | camel.component.aws2-lambda.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
+| camel.component.aws2-lambda.invocation-type | How invokeFunction invokes the function. RequestResponse waits until the function has finished and gives its result. Event queues the event for an asynchronous invocation and answers at once with status code 202 and an empty body. DryRun only checks that the function can be invoked (status code 204). The CamelAwsLambdaInvocationType header overrides it per message. Not used with pojoRequest. | RequestResponse | String
 | camel.component.aws2-lambda.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| camel.component.aws2-lambda.log-type | Set to Tail to get the last 4 KB of the execution log of a RequestResponse invocation in the CamelAwsLambdaLogResult header (base64-encoded). The CamelAwsLambdaLogType header overrides it per message. Not used with pojoRequest. | None | String
 | camel.component.aws2-lambda.operation | The operation to perform. See the list of available operations in the component documentation. | invokefunction | Lambda2Operations
 | camel.component.aws2-lambda.override-endpoint | Set the need for overriding the endpoint. This option needs to be used in combination with the uriEndpointOverride option | false | Boolean
 | camel.component.aws2-lambda.pojo-request | If we want to use a POJO request as body or not | false | Boolean

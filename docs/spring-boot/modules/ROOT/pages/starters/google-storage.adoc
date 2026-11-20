@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 25 options, which are listed below.
+The starter supports 26 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -45,10 +45,11 @@ The starter supports 25 options, which are listed below.
 | camel.component.google-storage.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.google-storage.move-after-read | Move objects from the origin bucket to a different bucket after they have been retrieved. To accomplish the operation the destinationBucket option must be set. The copy bucket operation is only performed if the Exchange is committed. If a rollback occurs, the object is not moved. | false | Boolean
 | camel.component.google-storage.object-name | The Object name inside the bucket |  | String
+| camel.component.google-storage.object-storage-class | The Cloud Storage class of the objects that the producer uploads. When not set, an object gets the default storage class of its bucket. The CamelGoogleCloudStorageStorageClass header overrides it per message. |  | StorageClass
 | camel.component.google-storage.operation | Set the operation for the producer |  | GoogleCloudStorageOperations
 | camel.component.google-storage.prefix | The prefix which is used in the BlobListOptions to only consume objects we are interested in |  | String
 | camel.component.google-storage.service-account-key | The Service account key that can be used as credentials for the Storage client. It can be loaded by default from classpath, but you can prefix with classpath:, file:, or http: to load the resource from different systems. |  | String
-| camel.component.google-storage.storage-class | The Cloud Storage class to use when creating the new buckets. The option is a com.google.cloud.storage.StorageClass type. |  | StorageClass
+| camel.component.google-storage.storage-class | The Cloud Storage class to use when creating the new buckets | standard | StorageClass
 | camel.component.google-storage.storage-client | The storage client. The option is a com.google.cloud.storage.Storage type. |  | Storage
 | camel.component.google-storage.storage-location | The Cloud Storage location to use when creating the new buckets | US-EAST1 | String
 | camel.component.google-storage.use-workload-identity-federation | Whether to authenticate with Workload Identity Federation instead of a service account key: with the credential configuration file given in workloadIdentityConfig or, when it is not set, with the Application Default Credentials, which detect Workload Identity on GKE. | false | Boolean

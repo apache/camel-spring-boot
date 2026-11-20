@@ -64,11 +64,25 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.aws2-lambda.invocation-type",
+      "type": "java.lang.String",
+      "description": "How invokeFunction invokes the function. RequestResponse waits until the function has finished and gives its result. Event queues the event for an asynchronous invocation and answers at once with status code 202 and an empty body. DryRun only checks that the function can be invoked (status code 204). The CamelAwsLambdaInvocationType header overrides it per message. Not used with pojoRequest.",
+      "sourceType": "org.apache.camel.component.aws2.lambda.springboot.Lambda2ComponentConfiguration",
+      "defaultValue": "RequestResponse"
+    },
+    {
       "name": "camel.component.aws2-lambda.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
       "sourceType": "org.apache.camel.component.aws2.lambda.springboot.Lambda2ComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.aws2-lambda.log-type",
+      "type": "java.lang.String",
+      "description": "Set to Tail to get the last 4 KB of the execution log of a RequestResponse invocation in the CamelAwsLambdaLogResult header (base64-encoded). The CamelAwsLambdaLogType header overrides it per message. Not used with pojoRequest.",
+      "sourceType": "org.apache.camel.component.aws2.lambda.springboot.Lambda2ComponentConfiguration",
+      "defaultValue": "None"
     },
     {
       "name": "camel.component.aws2-lambda.operation",

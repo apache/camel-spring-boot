@@ -45,6 +45,15 @@ public class Lambda2ComponentConfiguration
      */
     private Lambda2Configuration configuration;
     /**
+     * How invokeFunction invokes the function. RequestResponse waits until the
+     * function has finished and gives its result. Event queues the event for an
+     * asynchronous invocation and answers at once with status code 202 and an
+     * empty body. DryRun only checks that the function can be invoked (status
+     * code 204). The CamelAwsLambdaInvocationType header overrides it per
+     * message. Not used with pojoRequest.
+     */
+    private String invocationType = "RequestResponse";
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -55,6 +64,13 @@ public class Lambda2ComponentConfiguration
      * and prolong the total processing time of the processing.
      */
     private Boolean lazyStartProducer = false;
+    /**
+     * Set to Tail to get the last 4 KB of the execution log of a
+     * RequestResponse invocation in the CamelAwsLambdaLogResult header
+     * (base64-encoded). The CamelAwsLambdaLogType header overrides it per
+     * message. Not used with pojoRequest.
+     */
+    private String logType = "None";
     /**
      * The operation to perform. See the list of available operations in the
      * component documentation.
@@ -166,12 +182,28 @@ public class Lambda2ComponentConfiguration
         this.configuration = configuration;
     }
 
+    public String getInvocationType() {
+        return invocationType;
+    }
+
+    public void setInvocationType(String invocationType) {
+        this.invocationType = invocationType;
+    }
+
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
     }
 
     public void setLazyStartProducer(Boolean lazyStartProducer) {
         this.lazyStartProducer = lazyStartProducer;
+    }
+
+    public String getLogType() {
+        return logType;
+    }
+
+    public void setLogType(String logType) {
+        this.logType = logType;
     }
 
     public Lambda2Operations getOperation() {

@@ -53,9 +53,16 @@
     {
       "name": "camel.component.spring-ai-vector-store.operation",
       "type": "org.apache.camel.component.springai.vectorstore.SpringAiVectorStoreOperation",
-      "description": "The operation to perform on the vector store (ADD, DELETE, SIMILARITY_SEARCH).",
+      "description": "The operation to perform on the vector store (ADD, DELETE, SIMILARITY_SEARCH, UPSERT).",
       "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration",
       "defaultValue": "add"
+    },
+    {
+      "name": "camel.component.spring-ai-vector-store.search-by-vector",
+      "type": "java.lang.Boolean",
+      "description": "Whether SIMILARITY_SEARCH of a float[] body, such as the vector of spring-ai-embeddings, searches with this vector. By default it searches for the text of the CamelSpringAiEmbeddingInputText header, which the vector store embeds again. The vector store must support the search with a vector, and the vector must come from the same embedding model as the stored vectors.",
+      "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration",
+      "defaultValue": false
     },
     {
       "name": "camel.component.spring-ai-vector-store.similarity-threshold",

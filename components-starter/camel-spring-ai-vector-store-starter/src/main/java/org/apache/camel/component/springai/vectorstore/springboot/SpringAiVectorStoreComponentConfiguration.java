@@ -60,9 +60,18 @@ public class SpringAiVectorStoreComponentConfiguration
     private Boolean lazyStartProducer = false;
     /**
      * The operation to perform on the vector store (ADD, DELETE,
-     * SIMILARITY_SEARCH).
+     * SIMILARITY_SEARCH, UPSERT).
      */
     private SpringAiVectorStoreOperation operation = SpringAiVectorStoreOperation.ADD;
+    /**
+     * Whether SIMILARITY_SEARCH of a float[] body, such as the vector of
+     * spring-ai-embeddings, searches with this vector. By default it searches
+     * for the text of the CamelSpringAiEmbeddingInputText header, which the
+     * vector store embeds again. The vector store must support the search with
+     * a vector, and the vector must come from the same embedding model as the
+     * stored vectors.
+     */
+    private Boolean searchByVector = false;
     /**
      * The minimum similarity score threshold (0-1) for similarity search.
      */
@@ -116,6 +125,14 @@ public class SpringAiVectorStoreComponentConfiguration
 
     public void setOperation(SpringAiVectorStoreOperation operation) {
         this.operation = operation;
+    }
+
+    public Boolean getSearchByVector() {
+        return searchByVector;
+    }
+
+    public void setSearchByVector(Boolean searchByVector) {
+        this.searchByVector = searchByVector;
     }
 
     public Double getSimilarityThreshold() {

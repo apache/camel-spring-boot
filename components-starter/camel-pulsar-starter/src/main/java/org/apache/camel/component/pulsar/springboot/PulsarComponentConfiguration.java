@@ -217,7 +217,11 @@ public class PulsarComponentConfiguration
      */
     private PulsarMessageReceiptFactory pulsarMessageReceiptFactory;
     /**
-     * Control batching method used by the producer.
+     * Control batching method used by the producer. DEFAULT batches the
+     * messages together regardless of their key. KEY_BASED batches the messages
+     * of each key separately, so that a Key_Shared subscription spreads the
+     * keys over its consumers. A custom BatcherBuilder can be given as a bean
+     * reference.
      */
     private BatcherBuilder batcherBuilder = BatcherBuilder.DEFAULT;
     /**

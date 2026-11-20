@@ -131,6 +131,12 @@
       "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
     },
     {
+      "name": "camel.component.google-storage.object-storage-class",
+      "type": "com.google.cloud.storage.StorageClass",
+      "description": "The Cloud Storage class of the objects that the producer uploads. When not set, an object gets the default storage class of its bucket. The CamelGoogleCloudStorageStorageClass header overrides it per message.",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
+    },
+    {
       "name": "camel.component.google-storage.operation",
       "type": "org.apache.camel.component.google.storage.GoogleCloudStorageOperations",
       "description": "Set the operation for the producer",
@@ -151,8 +157,9 @@
     {
       "name": "camel.component.google-storage.storage-class",
       "type": "com.google.cloud.storage.StorageClass",
-      "description": "The Cloud Storage class to use when creating the new buckets. The option is a com.google.cloud.storage.StorageClass type.",
-      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration"
+      "description": "The Cloud Storage class to use when creating the new buckets",
+      "sourceType": "org.apache.camel.component.google.storage.springboot.GoogleCloudStorageComponentConfiguration",
+      "defaultValue": "standard"
     },
     {
       "name": "camel.component.google-storage.storage-client",
