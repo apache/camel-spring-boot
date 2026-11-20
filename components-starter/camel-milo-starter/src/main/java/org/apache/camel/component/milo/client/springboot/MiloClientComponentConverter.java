@@ -42,6 +42,7 @@ public class MiloClientComponentConverter implements GenericConverter {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.milo.client.MiloClientConfiguration.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.milo.client.MiloClientConnectionManager.class));
+        answer.add(new ConvertiblePair(String.class, org.eclipse.milo.opcua.stack.core.security.CertificateValidator.class));
         return answer;
     }
 

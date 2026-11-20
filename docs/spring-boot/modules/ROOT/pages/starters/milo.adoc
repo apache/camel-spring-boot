@@ -25,7 +25,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 78 options, which are listed below.
+The starter supports 84 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -34,6 +34,7 @@ The starter supports 78 options, which are listed below.
 | camel.component.milo-browse.application-name | The application name | Apache Camel adapter for Eclipse Milo | String
 | camel.component.milo-browse.application-uri | The application URI | http://camel.apache.org/EclipseMilo/Client | String
 | camel.component.milo-browse.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
+| camel.component.milo-browse.certificate-validator | A custom validator for the certificate of the OPC UA server. When set, it is used instead of the trust list configured with trustListDirectory. Endpoints share a connection only when they use the same validator instance. The option is a org.eclipse.milo.opcua.stack.core.security.CertificateValidator type. |  | CertificateValidator
 | camel.component.milo-browse.channel-lifetime | Channel lifetime in milliseconds |  | Long
 | camel.component.milo-browse.client-id | A virtual client id to force the creation of a new connection instance |  | String
 | camel.component.milo-browse.configuration | All default options for client configurations. The option is a org.apache.camel.component.milo.client.MiloClientConfiguration type. |  | MiloClientConfiguration
@@ -57,12 +58,15 @@ The starter supports 78 options, which are listed below.
 | camel.component.milo-browse.requested-publishing-interval | The requested publishing interval in milliseconds |  | Double
 | camel.component.milo-browse.session-name | Session name |  | String
 | camel.component.milo-browse.session-timeout | Session timeout in milliseconds |  | Long
+| camel.component.milo-browse.trust-all-certificates | Whether to accept any certificate presented by the OPC UA server. This is insecure: the connection is encrypted, but the client does not authenticate the server it talks to. It only applies when neither certificateValidator nor trustListDirectory is configured. | false | Boolean
+| camel.component.milo-browse.trust-list-directory | The directory holding the trust list used to validate the certificate of the OPC UA server, in the layout used by Eclipse Milo: trusted certificates in trusted/certs, CRLs of trusted certificates in trusted/crl, certificates of issuing CAs in issuer/certs and their CRLs in issuer/crl. The directories are created if they do not exist. Besides the chain of trust, the validity period, the revocation by a CRL of the trust list and the application URI of the server certificate are checked. A certificate issued by a CA is refused when the trust list holds no CRL of that CA; an empty CRL is enough. A server certificate that does not chain up to a trusted certificate is written to rejected/certs, from where it can be moved to trusted/certs once it has been checked. |  | String
 | camel.component.milo-browse.username | The username for authentication. Use this instead of embedding credentials in the endpoint URI when the username contains special characters (such as \{code }, \{code /}, \{code }, \{code &}). |  | String
 | camel.component.milo-client.allowed-security-policies | A set of allowed security policy URIs. Default is to accept all and use the highest. |  | String
 | camel.component.milo-client.application-name | The application name | Apache Camel adapter for Eclipse Milo | String
 | camel.component.milo-client.application-uri | The application URI | http://camel.apache.org/EclipseMilo/Client | String
 | camel.component.milo-client.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.milo-client.bridge-error-handler | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
+| camel.component.milo-client.certificate-validator | A custom validator for the certificate of the OPC UA server. When set, it is used instead of the trust list configured with trustListDirectory. Endpoints share a connection only when they use the same validator instance. The option is a org.eclipse.milo.opcua.stack.core.security.CertificateValidator type. |  | CertificateValidator
 | camel.component.milo-client.channel-lifetime | Channel lifetime in milliseconds |  | Long
 | camel.component.milo-client.client-id | A virtual client id to force the creation of a new connection instance |  | String
 | camel.component.milo-client.configuration | All default options for client configurations. The option is a org.apache.camel.component.milo.client.MiloClientConfiguration type. |  | MiloClientConfiguration
@@ -86,6 +90,8 @@ The starter supports 78 options, which are listed below.
 | camel.component.milo-client.requested-publishing-interval | The requested publishing interval in milliseconds |  | Double
 | camel.component.milo-client.session-name | Session name |  | String
 | camel.component.milo-client.session-timeout | Session timeout in milliseconds |  | Long
+| camel.component.milo-client.trust-all-certificates | Whether to accept any certificate presented by the OPC UA server. This is insecure: the connection is encrypted, but the client does not authenticate the server it talks to. It only applies when neither certificateValidator nor trustListDirectory is configured. | false | Boolean
+| camel.component.milo-client.trust-list-directory | The directory holding the trust list used to validate the certificate of the OPC UA server, in the layout used by Eclipse Milo: trusted certificates in trusted/certs, CRLs of trusted certificates in trusted/crl, certificates of issuing CAs in issuer/certs and their CRLs in issuer/crl. The directories are created if they do not exist. Besides the chain of trust, the validity period, the revocation by a CRL of the trust list and the application URI of the server certificate are checked. A certificate issued by a CA is refused when the trust list holds no CRL of that CA; an empty CRL is enough. A server certificate that does not chain up to a trusted certificate is written to rejected/certs, from where it can be moved to trusted/certs once it has been checked. |  | String
 | camel.component.milo-client.username | The username for authentication. Use this instead of embedding credentials in the endpoint URI when the username contains special characters (such as \{code }, \{code /}, \{code }, \{code &}). |  | String
 | camel.component.milo-server.application-name | The application name |  | String
 | camel.component.milo-server.application-uri | The application URI |  | String
