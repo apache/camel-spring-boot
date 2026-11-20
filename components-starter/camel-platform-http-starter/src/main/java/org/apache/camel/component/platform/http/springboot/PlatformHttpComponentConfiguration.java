@@ -75,6 +75,17 @@ public class PlatformHttpComponentConfiguration
      */
     private Boolean serverRequestValidation = true;
     /**
+     * Whether the consumers route each request synchronously, as the default
+     * for the endpoints of this component. When true, the route runs on a
+     * thread of the Vert.x worker pool, which waits until the route is
+     * complete, so the size of the worker pool limits how many requests are
+     * routed at the same time. When false, the worker thread is free as soon as
+     * the route continues on another thread (such as an asynchronous producer).
+     * See the synchronous endpoint option. (currently only supported by
+     * camel-platform-http-vertx)
+     */
+    private Boolean synchronous = false;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -125,6 +136,14 @@ public class PlatformHttpComponentConfiguration
 
     public void setServerRequestValidation(Boolean serverRequestValidation) {
         this.serverRequestValidation = serverRequestValidation;
+    }
+
+    public Boolean getSynchronous() {
+        return synchronous;
+    }
+
+    public void setSynchronous(Boolean synchronous) {
+        this.synchronous = synchronous;
     }
 
     public Boolean getAutowiredEnabled() {

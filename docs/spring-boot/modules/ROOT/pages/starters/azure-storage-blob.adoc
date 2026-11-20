@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 52 options, which are listed below.
+The starter supports 53 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -65,7 +65,8 @@ The starter supports 52 options, which are listed below.
 | camel.component.azure-storage-blob.lease-blob | Sets whether a lease should be acquired when accessing the blob. When set to true, the component will acquire a lease before performing blob operations that require exclusive access. | false | Boolean
 | camel.component.azure-storage-blob.lease-duration-in-seconds | Sets the lease duration in seconds. Use -1 for infinite or a value between 15 and 60 for fixed leases. | 60 | Integer
 | camel.component.azure-storage-blob.max-concurrency | The maximum number of parallel requests to use during upload with uploadBlockBlobChunked operation. Default is determined by the Azure SDK based on available processors. |  | Integer
-| camel.component.azure-storage-blob.max-results-per-page | Specifies the maximum number of blobs to return, including all BlobPrefix elements. If the request does not specify maxResultsPerPage or specifies a value greater than 5,000, the server will return up to 5,000 items. |  | Integer
+| camel.component.azure-storage-blob.max-messages-per-poll | Maximum number of blobs to retrieve during one consumer polling cycle. A value of 0 or less means unlimited. | 0 | Integer
+| camel.component.azure-storage-blob.max-results-per-page | Specifies the maximum number of blobs to return per listing page, including all BlobPrefix elements. If not set or greater than 5,000, Azure Storage returns up to 5,000 items per page. |  | Integer
 | camel.component.azure-storage-blob.max-retry-requests | Specifies the maximum number of additional HTTP Get requests that will be made while reading the data from a response body. | 0 | Integer
 | camel.component.azure-storage-blob.max-single-upload-size | The maximum size in bytes for a single upload request with uploadBlockBlobChunked operation. Files smaller than this will be uploaded in a single request. Files larger will use chunked upload with blocks of size blockSize. Default is 256MB. |  | Long
 | camel.component.azure-storage-blob.move-after-read | Move blobs from the container to a different container after they have been retrieved. To accomplish the operation, the destinationContainer option must be set. The copy blob operation is only performed if the Exchange is committed. If a rollback occurs, the blob is not moved. | false | Boolean

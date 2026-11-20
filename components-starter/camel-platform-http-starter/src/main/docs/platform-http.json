@@ -93,6 +93,13 @@
       "description": "Use camel logging for undertow http access log.",
       "sourceType": "org.apache.camel.component.platform.http.springboot.customizer.UndertowAccessLogProperties",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.platform-http.synchronous",
+      "type": "java.lang.Boolean",
+      "description": "Whether the consumers route each request synchronously, as the default for the endpoints of this component. When true, the route runs on a thread of the Vert.x worker pool, which waits until the route is complete, so the size of the worker pool limits how many requests are routed at the same time. When false, the worker thread is free as soon as the route continues on another thread (such as an asynchronous producer). See the synchronous endpoint option. (currently only supported by camel-platform-http-vertx)",
+      "sourceType": "org.apache.camel.component.platform.http.springboot.PlatformHttpComponentConfiguration",
+      "defaultValue": false
     }
   ],
   "hints": [],

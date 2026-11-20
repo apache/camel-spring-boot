@@ -259,9 +259,16 @@
       "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
     },
     {
+      "name": "camel.component.azure-storage-blob.max-messages-per-poll",
+      "type": "java.lang.Integer",
+      "description": "Maximum number of blobs to retrieve during one consumer polling cycle. A value of 0 or less means unlimited.",
+      "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration",
+      "defaultValue": 0
+    },
+    {
       "name": "camel.component.azure-storage-blob.max-results-per-page",
       "type": "java.lang.Integer",
-      "description": "Specifies the maximum number of blobs to return, including all BlobPrefix elements. If the request does not specify maxResultsPerPage or specifies a value greater than 5,000, the server will return up to 5,000 items.",
+      "description": "Specifies the maximum number of blobs to return per listing page, including all BlobPrefix elements. If not set or greater than 5,000, Azure Storage returns up to 5,000 items per page.",
       "sourceType": "org.apache.camel.component.azure.storage.blob.springboot.BlobComponentConfiguration"
     },
     {

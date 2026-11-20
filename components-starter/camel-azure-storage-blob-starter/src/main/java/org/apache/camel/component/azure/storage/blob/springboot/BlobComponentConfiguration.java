@@ -100,9 +100,9 @@ public class BlobComponentConfiguration
      */
     private Integer leaseDurationInSeconds = 60;
     /**
-     * Specifies the maximum number of blobs to return, including all BlobPrefix
-     * elements. If the request does not specify maxResultsPerPage or specifies
-     * a value greater than 5,000, the server will return up to 5,000 items.
+     * Specifies the maximum number of blobs to return per listing page,
+     * including all BlobPrefix elements. If not set or greater than 5,000,
+     * Azure Storage returns up to 5,000 items per page.
      */
     private Integer maxResultsPerPage;
     /**
@@ -193,6 +193,11 @@ public class BlobComponentConfiguration
      * moveAfterRead is set to true.
      */
     private String destinationContainer;
+    /**
+     * Maximum number of blobs to retrieve during one consumer polling cycle. A
+     * value of 0 or less means unlimited.
+     */
+    private Integer maxMessagesPerPoll = 0;
     /**
      * Move blobs from the container to a different container after they have
      * been retrieved. To accomplish the operation, the destinationContainer
@@ -540,6 +545,14 @@ public class BlobComponentConfiguration
 
     public void setDestinationContainer(String destinationContainer) {
         this.destinationContainer = destinationContainer;
+    }
+
+    public Integer getMaxMessagesPerPoll() {
+        return maxMessagesPerPoll;
+    }
+
+    public void setMaxMessagesPerPoll(Integer maxMessagesPerPoll) {
+        this.maxMessagesPerPoll = maxMessagesPerPoll;
     }
 
     public Boolean getMoveAfterRead() {
