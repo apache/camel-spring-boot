@@ -39,6 +39,20 @@ public class ProtobufDataFormatConfiguration
      */
     private String instanceClass;
     /**
+     * The protobuf schema, the text of a .proto file, used instead of
+     * instanceClass with the GoogleProtobuf library: messages are read into and
+     * written from a com.google.protobuf.DynamicMessage, so no class generated
+     * by protoc is needed. It may refer to a resource, such as
+     * classpath:order.proto, file:order.proto or an http URL. This needs
+     * camel-protobuf-schema on the classpath.
+     */
+    private String schema;
+    /**
+     * The message type of the schema to use, such as Order, shop.Order or the
+     * nested Order.Line. By default the first message type of the schema.
+     */
+    private String messageName;
+    /**
      * Defines a content type format in which protobuf message will be
      * serialized/deserialized from(to) the Java been. The format can either be
      * native or json for either native protobuf or json fields representation.
@@ -58,6 +72,22 @@ public class ProtobufDataFormatConfiguration
 
     public void setInstanceClass(String instanceClass) {
         this.instanceClass = instanceClass;
+    }
+
+    public String getSchema() {
+        return schema;
+    }
+
+    public void setSchema(String schema) {
+        this.schema = schema;
+    }
+
+    public String getMessageName() {
+        return messageName;
+    }
+
+    public void setMessageName(String messageName) {
+        this.messageName = messageName;
     }
 
     public String getContentTypeFormat() {
