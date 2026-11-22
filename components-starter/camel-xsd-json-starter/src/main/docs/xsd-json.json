@@ -1,0 +1,78 @@
+{
+  "groups": [
+    {
+      "name": "camel.dataformat.xsd-json",
+      "type": "org.apache.camel.dataformat.xsdjson.springboot.XsdJsonDataFormatConfiguration",
+      "sourceType": "org.apache.camel.dataformat.xsdjson.springboot.XsdJsonDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.xsd-json.customizer",
+      "type": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties",
+      "sourceType": "org.apache.camel.dataformat.xsdjson.springboot.XsdJsonDataFormatConfiguration",
+      "sourceMethod": "getCustomizer()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "camel.dataformat.xsd-json.attribute-prefix",
+      "type": "java.lang.String",
+      "description": "A prefix for the JSON fields of XML attributes, such as _. By default attributes and child elements share the JSON object without a prefix.",
+      "sourceType": "org.apache.camel.dataformat.xsdjson.springboot.XsdJsonDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.xsd-json.customizer.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.apache.camel.spring.boot.DataFormatConfigurationPropertiesCommon$CustomizerProperties"
+    },
+    {
+      "name": "camel.dataformat.xsd-json.element",
+      "type": "java.lang.String",
+      "description": "The root element: a global element of the schema, as {namespace}name or as a local name that is unique in the schema. Needed to marshal (JSON to XML) unless includeRoot is enabled. On unmarshal the XML document names its root element, and this option only restricts it. The header CamelXsdJsonElement overrides it per message.",
+      "sourceType": "org.apache.camel.dataformat.xsdjson.springboot.XsdJsonDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.xsd-json.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable auto configuration of the xsdJson data format. This is enabled by default.",
+      "sourceType": "org.apache.camel.dataformat.xsdjson.springboot.XsdJsonDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.xsd-json.ignore-unknown",
+      "type": "java.lang.Boolean",
+      "description": "Whether to skip XML elements and attributes, or JSON fields, that the schema does not declare, instead of failing.",
+      "sourceType": "org.apache.camel.dataformat.xsdjson.springboot.XsdJsonDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.xsd-json.include-root",
+      "type": "java.lang.Boolean",
+      "description": "Whether the JSON holds the root element as its single field, such as {getOrder: {...}}, instead of the content of the root element.",
+      "sourceType": "org.apache.camel.dataformat.xsdjson.springboot.XsdJsonDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.xsd-json.pretty-print",
+      "type": "java.lang.Boolean",
+      "description": "Whether to indent the output, the JSON on unmarshal and the XML on marshal.",
+      "sourceType": "org.apache.camel.dataformat.xsdjson.springboot.XsdJsonDataFormatConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.dataformat.xsd-json.schema",
+      "type": "java.lang.String",
+      "description": "The XML Schema to use: an .xsd file, or a .wsdl file whose types (every xs:schema in wsdl:types) are read. A resource such as classpath:orders.xsd, file:schemas\/orders.wsdl or an https URL. Imports and includes are resolved relative to it, with the same scheme only.",
+      "sourceType": "org.apache.camel.dataformat.xsdjson.springboot.XsdJsonDataFormatConfiguration"
+    },
+    {
+      "name": "camel.dataformat.xsd-json.text-name",
+      "type": "java.lang.String",
+      "description": "The JSON field of the text of an element with simple content and attributes, such as {currency: EUR, value: 9.95}.",
+      "sourceType": "org.apache.camel.dataformat.xsdjson.springboot.XsdJsonDataFormatConfiguration",
+      "defaultValue": "value"
+    }
+  ],
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
+}

@@ -435,6 +435,7 @@
 ** xref:starters/xmlsecurity.adoc[XML Security]
 ** xref:starters/xmpp.adoc[XMPP]
 ** xref:starters/xpath.adoc[XPath]
+** xref:starters/xsd-json.adoc[XSD JSON]
 ** xref:starters/xslt-saxon.adoc[XSLT Saxon]
 ** xref:starters/xslt.adoc[XSLT]
 ** xref:starters/zendesk.adoc[Zendesk]
