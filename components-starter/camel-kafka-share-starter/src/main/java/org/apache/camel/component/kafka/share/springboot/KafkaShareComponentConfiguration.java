@@ -277,6 +277,21 @@ public class KafkaShareComponentConfiguration
      */
     private Boolean preValidateHostAndPort = true;
     /**
+     * Sets the group configuration share.auto.offset.reset of the share group
+     * when the consumer starts, through the Kafka Admin client: earliest,
+     * latest, or by_duration: followed by an ISO-8601 duration (such as
+     * by_duration:PT1H). It decides where a share-partition starts when the
+     * group first consumes it, so earliest lets a new share group read the
+     * records already in the topic (a new share group starts at the latest
+     * records). It is a setting of the group, so it applies to all the
+     * consumers of the group, and it does not move a share-partition that the
+     * group already consumes. The principal of the consumer needs the
+     * ALTER_CONFIGS permission on the group, and the consumer fails to start
+     * when the configuration cannot be set. When not set, the group
+     * configuration is left as it is.
+     */
+    private String shareAutoOffsetReset;
+    /**
      * This enables the use of a specific Avro reader for use with the in
      * multiple Schema registries documentation with Avro Deserializers
      * implementation. This option is only available externally (not standard
@@ -891,6 +906,14 @@ public class KafkaShareComponentConfiguration
 
     public void setPreValidateHostAndPort(Boolean preValidateHostAndPort) {
         this.preValidateHostAndPort = preValidateHostAndPort;
+    }
+
+    public String getShareAutoOffsetReset() {
+        return shareAutoOffsetReset;
+    }
+
+    public void setShareAutoOffsetReset(String shareAutoOffsetReset) {
+        this.shareAutoOffsetReset = shareAutoOffsetReset;
     }
 
     public Boolean getSpecificAvroReader() {

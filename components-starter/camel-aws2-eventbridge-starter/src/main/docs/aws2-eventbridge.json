@@ -54,7 +54,7 @@
     {
       "name": "camel.component.aws2-eventbridge.delete-queue-on-shutdown",
       "type": "java.lang.Boolean",
-      "description": "Whether to delete the auto-created SQS queue and remove the EventBridge target on shutdown.",
+      "description": "Whether to delete the auto-created SQS queue and remove the EventBridge target on shutdown. When false, the queue and its target are kept, so the queue collects the events while the consumer is stopped, and the queue name is derived from the event bus and the rule name, so the next start reuses the queue.",
       "sourceType": "org.apache.camel.component.aws2.eventbridge.springboot.EventbridgeComponentConfiguration",
       "defaultValue": true
     },

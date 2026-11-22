@@ -67,6 +67,13 @@ public class CsvDataFormatConfiguration
      */
     private String header;
     /**
+     * When marshalling a Map, or a List of Maps, and no header is configured,
+     * whether to write a header line with the keys of the first Map. The keys
+     * of the first Map are then the columns of all the rows, as with the header
+     * option: a key that only later rows have is not written.
+     */
+    private Boolean headerFromMapKeys = false;
+    /**
      * Whether to allow missing column names.
      */
     private Boolean allowMissingColumnNames = false;
@@ -217,6 +224,14 @@ public class CsvDataFormatConfiguration
 
     public void setHeader(String header) {
         this.header = header;
+    }
+
+    public Boolean getHeaderFromMapKeys() {
+        return headerFromMapKeys;
+    }
+
+    public void setHeaderFromMapKeys(Boolean headerFromMapKeys) {
+        this.headerFromMapKeys = headerFromMapKeys;
     }
 
     public Boolean getAllowMissingColumnNames() {

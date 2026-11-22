@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 29 options, which are listed below.
+The starter supports 30 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -39,6 +39,7 @@ The starter supports 29 options, which are listed below.
 | camel.dataformat.csv.format | The format to use. | DEFAULT | String
 | camel.dataformat.csv.header | To configure the CSV headers. Multiple headers can be separated by comma. |  | String
 | camel.dataformat.csv.header-disabled | Whether to disable headers. | false | Boolean
+| camel.dataformat.csv.header-from-map-keys | When marshalling a Map, or a List of Maps, and no header is configured, whether to write a header line with the keys of the first Map. The keys of the first Map are then the columns of all the rows, as with the header option: a key that only later rows have is not written. | false | Boolean
 | camel.dataformat.csv.ignore-empty-lines | Whether to ignore empty lines. | false | Boolean
 | camel.dataformat.csv.ignore-header-case | Whether to ignore case when accessing header names. | false | Boolean
 | camel.dataformat.csv.ignore-surrounding-spaces | Whether to ignore surrounding spaces. | false | Boolean

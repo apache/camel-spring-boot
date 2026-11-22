@@ -96,7 +96,10 @@ public class EventbridgeComponentConfiguration
     private Boolean bridgeErrorHandler = false;
     /**
      * Whether to delete the auto-created SQS queue and remove the EventBridge
-     * target on shutdown.
+     * target on shutdown. When false, the queue and its target are kept, so the
+     * queue collects the events while the consumer is stopped, and the queue
+     * name is derived from the event bus and the rule name, so the next start
+     * reuses the queue.
      */
     private Boolean deleteQueueOnShutdown = true;
     /**
