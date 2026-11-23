@@ -3,7 +3,7 @@
 = Alibaba Object Storage Service (OSS)
 :artifactid: camel-alibaba-oss-starter
 
-Alibaba Cloud Object Storage Service (OSS) component
+Store and retrieve objects in Alibaba Cloud Object Storage Service (OSS).
 
 == What's inside
 
