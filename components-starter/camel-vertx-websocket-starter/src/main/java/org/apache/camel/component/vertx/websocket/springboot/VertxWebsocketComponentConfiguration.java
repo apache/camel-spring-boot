@@ -53,6 +53,11 @@ public class VertxWebsocketComponentConfiguration
      */
     private Boolean bridgeErrorHandler = false;
     /**
+     * Whether the consumers route each message synchronously, as the default
+     * for the endpoints of this component. See the synchronous endpoint option.
+     */
+    private Boolean synchronous = false;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -118,6 +123,14 @@ public class VertxWebsocketComponentConfiguration
 
     public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
         this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public Boolean getSynchronous() {
+        return synchronous;
+    }
+
+    public void setSynchronous(Boolean synchronous) {
+        this.synchronous = synchronous;
     }
 
     public Boolean getLazyStartProducer() {

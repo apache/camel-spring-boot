@@ -86,10 +86,11 @@ public class PGPDataFormatConfiguration
     private String provider;
     /**
      * Symmetric key encryption algorithm; possible values are defined in
-     * org.bouncycastle.bcpg.SymmetricKeyAlgorithmTags. Only relevant for
+     * org.bouncycastle.bcpg.SymmetricKeyAlgorithmTags; for example 9 (=
+     * AES_256), 8 (= AES_192), 7 (= AES_128), 3 (= CAST5). Only relevant for
      * encrypting.
      */
-    private Integer algorithm;
+    private Integer algorithm = 9;
     /**
      * Compression algorithm; possible values are defined in
      * org.bouncycastle.bcpg.CompressionAlgorithmTags. Only relevant for
@@ -98,9 +99,11 @@ public class PGPDataFormatConfiguration
     private Integer compressionAlgorithm;
     /**
      * Signature hash algorithm; possible values are defined in
-     * org.bouncycastle.bcpg.HashAlgorithmTags. Only relevant for signing.
+     * org.bouncycastle.bcpg.HashAlgorithmTags; for example 8 (= SHA256), 9 (=
+     * SHA384), 10 (= SHA512), 11 (= SHA224), 2 (= SHA1). Only relevant for
+     * signing.
      */
-    private Integer hashAlgorithm;
+    private Integer hashAlgorithm = 8;
     /**
      * Controls the behavior for verifying the signature during unmarshaling.
      * Possible values: optional, required, ignore, no_signature_allowed.

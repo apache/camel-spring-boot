@@ -79,6 +79,13 @@
       "sourceType": "org.apache.camel.component.vertx.websocket.springboot.VertxWebsocketComponentConfiguration"
     },
     {
+      "name": "camel.component.vertx-websocket.synchronous",
+      "type": "java.lang.Boolean",
+      "description": "Whether the consumers route each message synchronously, as the default for the endpoints of this component. See the synchronous endpoint option.",
+      "sourceType": "org.apache.camel.component.vertx.websocket.springboot.VertxWebsocketComponentConfiguration",
+      "defaultValue": false
+    },
+    {
       "name": "camel.component.vertx-websocket.use-global-ssl-context-parameters",
       "type": "java.lang.Boolean",
       "description": "Enable usage of global SSL context parameters.",

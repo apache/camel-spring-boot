@@ -23,11 +23,12 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 18 options, which are listed below.
+The starter supports 19 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
+| camel.component.elasticsearch.api-key | API key to authenticate with, sent in the Authorization header instead of a user and password. Either the encoded key as Elasticsearch shows it when the key is created, or the id and the key separated by a colon (id:key). The key is only sent to the configured hosts and the nodes found by the sniffer. |  | String
 | camel.component.elasticsearch.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.elasticsearch.certificate-path | The path of the self-signed certificate to use to access to Elasticsearch. |  | String
 | camel.component.elasticsearch.client | To use an existing configured Elasticsearch client, instead of creating a client per endpoint. This allows customizing the client with specific settings. The option is a org.elasticsearch.client.RestClient type. |  | RestClient

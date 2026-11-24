@@ -23,7 +23,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 24 options, which are listed below.
+The starter supports 25 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -50,6 +50,7 @@ The starter supports 24 options, which are listed below.
 | camel.component.knative.reply | If the consumer should construct a full reply to knative request. | true | Boolean
 | camel.component.knative.reply-with-cloud-event | Transforms the reply into a cloud event that will be processed by the caller. When listening to events from a Knative Broker, if this flag is enabled, replies will be published to the same Broker where the request comes from (beware that if you don't change the type of the received message, you may create a loop and receive your same reply). When this flag is disabled, CloudEvent headers are removed from the reply. | false | Boolean
 | camel.component.knative.sink-binding | The SinkBinding configuration. The option is a org.apache.camel.component.knative.spi.KnativeSinkBinding type. |  | KnativeSinkBinding
+| camel.component.knative.synchronous | Whether the consumer routes each request synchronously. When true, the route runs on a thread of the Vert.x worker pool, which waits until the route is complete, so the size of the worker pool limits how many requests are routed at the same time. When false, the route starts on a worker thread with the asynchronous routing engine, and the worker thread is free as soon as the route continues on another thread (such as an asynchronous producer), so the worker pool no longer limits the requests in flight. Keep it false for a route that calls an asynchronous producer using the same Vert.x as the HTTP server (such as vertx-http in Camel Quarkus): with true, such requests can occupy every worker thread while their producers need a worker thread to complete, and then no request completes. (currently only supported by camel-knative-http) | false | Boolean
 | camel.component.knative.transport-options | Set the transport options. |  | Object>
 | camel.component.knative.type-id | The name of the service to lookup from the KnativeEnvironment. |  | String
 |===
