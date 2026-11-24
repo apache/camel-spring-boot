@@ -91,6 +91,12 @@
       "sourceType": "org.apache.camel.language.xquery.springboot.XQueryLanguageConfiguration"
     },
     {
+      "name": "camel.language.xquery.namespace-mappings",
+      "type": "java.lang.String",
+      "description": "The XML Namespaces of prefix to uri mappings in one string, such as p1=uri1,p2=uri2. The mappings are separated by commas or new lines, and the prefix and the uri by the first =. This allows to configure several namespaces from one property placeholder.",
+      "sourceType": "org.apache.camel.language.xquery.springboot.XQueryLanguageConfiguration"
+    },
+    {
       "name": "camel.language.xquery.namespaces-ref",
       "type": "java.lang.String",
       "description": "Reference to a org.apache.camel.support.builder.Namespaces bean in the registry to use for the XML Namespaces of prefix to uri mappings.",

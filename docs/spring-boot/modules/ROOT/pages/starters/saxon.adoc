@@ -24,7 +24,7 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 11 options, which are listed below.
+The starter supports 12 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
@@ -38,6 +38,7 @@ The starter supports 11 options, which are listed below.
 | camel.language.xquery.configuration-ref | Reference to a saxon configuration instance in the registry to use for xquery (requires camel-saxon). |  | String
 | camel.language.xquery.enabled | Whether to enable auto configuration of the xquery language. This is enabled by default. |  | Boolean
 | camel.language.xquery.namespace | Injects the XML Namespaces of prefix to uri mappings. |  | PropertyDefinition>
+| camel.language.xquery.namespace-mappings | The XML Namespaces of prefix to uri mappings in one string, such as p1=uri1,p2=uri2. The mappings are separated by commas or new lines, and the prefix and the uri by the first =. This allows to configure several namespaces from one property placeholder. |  | String
 | camel.language.xquery.namespaces-ref | Reference to a org.apache.camel.support.builder.Namespaces bean in the registry to use for the XML Namespaces of prefix to uri mappings. |  | String
 | camel.language.xquery.source | Source to use, instead of message body. You can prefix with variable:, header:, or property: to specify kind of source. Otherwise, the source is assumed to be a variable. Use empty or null to use default source, which is the message body. |  | String
 |===

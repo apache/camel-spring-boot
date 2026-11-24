@@ -46,6 +46,13 @@ public class XQueryLanguageConfiguration
      */
     private List<PropertyDefinition> namespace;
     /**
+     * The XML Namespaces of prefix to uri mappings in one string, such as
+     * p1=uri1,p2=uri2. The mappings are separated by commas or new lines, and
+     * the prefix and the uri by the first =. This allows to configure several
+     * namespaces from one property placeholder.
+     */
+    private String namespaceMappings;
+    /**
      * Reference to a org.apache.camel.support.builder.Namespaces bean in the
      * registry to use for the XML Namespaces of prefix to uri mappings.
      */
@@ -72,6 +79,14 @@ public class XQueryLanguageConfiguration
 
     public void setNamespace(List<PropertyDefinition> namespace) {
         this.namespace = namespace;
+    }
+
+    public String getNamespaceMappings() {
+        return namespaceMappings;
+    }
+
+    public void setNamespaceMappings(String namespaceMappings) {
+        this.namespaceMappings = namespaceMappings;
     }
 
     public String getNamespacesRef() {
