@@ -107,6 +107,14 @@ public class OpensearchComponentConfiguration
      */
     private Integer snifferInterval = 300000;
     /**
+     * API key to authenticate with, sent in the Authorization header instead of
+     * a user and password: the token OpenSearch returns when the key is created
+     * (it starts with os_), as is. API keys need OpenSearch 3.7 or newer. The
+     * key is only sent to the configured hosts and the nodes found by the
+     * sniffer.
+     */
+    private String apiKey;
+    /**
      * Enable SSL
      */
     private Boolean enableSSL = false;
@@ -218,6 +226,14 @@ public class OpensearchComponentConfiguration
 
     public void setSnifferInterval(Integer snifferInterval) {
         this.snifferInterval = snifferInterval;
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
     }
 
     public Boolean getEnableSSL() {

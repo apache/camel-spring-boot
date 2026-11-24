@@ -23,11 +23,12 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 17 options, which are listed below.
+The starter supports 18 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
+| camel.component.opensearch.api-key | API key to authenticate with, sent in the Authorization header instead of a user and password: the token OpenSearch returns when the key is created (it starts with os_), as is. API keys need OpenSearch 3.7 or newer. The key is only sent to the configured hosts and the nodes found by the sniffer. |  | String
 | camel.component.opensearch.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.opensearch.client | To use an existing configured OpenSearch client, instead of creating a client per endpoint. This allows customizing the client with specific settings. The option is a org.opensearch.client.RestClient type. |  | RestClient
 | camel.component.opensearch.connection-timeout | The time in ms to wait before connection will time out. | 30000 | Integer

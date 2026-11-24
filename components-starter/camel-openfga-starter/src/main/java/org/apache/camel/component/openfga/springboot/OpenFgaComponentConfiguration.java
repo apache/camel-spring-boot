@@ -23,6 +23,7 @@ import org.apache.camel.component.openfga.OpenFgaComponent;
 import org.apache.camel.component.openfga.OpenFgaConfiguration;
 import org.apache.camel.component.openfga.OpenFgaStreamingClient;
 import org.apache.camel.component.openfga.OpenFgaWriteConflictMode;
+import org.apache.camel.spi.StateRepository;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.apache.camel.support.jsse.SSLContextParameters;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -127,17 +128,6 @@ public class OpenFgaComponentConfiguration
      */
     private String continuationToken;
     /**
-     * Whether the producer should be started lazy (on the first message). By
-     * starting lazy you can use this to allow CamelContext and routes to
-     * startup in situations where a producer may otherwise fail during starting
-     * and cause the route to fail being started. By deferring this startup to
-     * be lazy then the startup failure can be handled during routing messages
-     * via Camel's routing error handlers. Beware that when the first message is
-     * processed then creating and starting the producer may take a little time
-     * and prolong the total processing time of the processing.
-     */
-    private Boolean lazyStartProducer = false;
-    /**
      * The object being accessed, as an OpenFGA object identifier such as
      * document:budget. Evaluated as a Simple expression against each exchange,
      * so document:${header.documentId} names the resource the message is about.
@@ -230,6 +220,52 @@ public class OpenFgaComponentConfiguration
      * relation rather than the individual subjects. Defaults to user.
      */
     private String userFilters;
+    /**
+     * Allows for bridging the consumer to the Camel routing Error Handler,
+     * which mean any exceptions (if possible) occurred while the Camel consumer
+     * is trying to pickup incoming messages, or the likes, will now be
+     * processed as a message and handled by the routing Error Handler.
+     * Important: This is only possible if the 3rd party component allows Camel
+     * to be alerted if an exception was thrown. Some components handle this
+     * internally only, and therefore bridgeErrorHandler is not possible. In
+     * other situations we may improve the Camel component to hook into the 3rd
+     * party component and make this possible for future releases. By default
+     * the consumer will use the org.apache.camel.spi.ExceptionHandler to deal
+     * with exceptions, that will be logged at WARN or ERROR level and ignored.
+     */
+    private Boolean bridgeErrorHandler = false;
+    /**
+     * Unique durable cursor key for this store, filter and projection. Only one
+     * consumer may own the key, including when configured at component level.
+     */
+    private String checkpointKey;
+    /**
+     * Durable cursor storage, required for a readChanges consumer. The
+     * repository must persist each update before returning, retain the previous
+     * value on failure, and use finite I/O deadlines. A repository that is a
+     * Camel service and not started yet is started by the consumer and stopped
+     * with it; one the application started stays under the application's
+     * control. The option is a
+     * org.apache.camel.spi.StateRepository<java.lang.String, java.lang.String>
+     * type.
+     */
+    private StateRepository<String, String> checkpointRepository;
+    /**
+     * Maximum time to await the readChanges request for one consumer poll, in
+     * milliseconds. Must be positive. The option is a long type.
+     */
+    private Long changePollTimeout = 30000L;
+    /**
+     * Whether the producer should be started lazy (on the first message). By
+     * starting lazy you can use this to allow CamelContext and routes to
+     * startup in situations where a producer may otherwise fail during starting
+     * and cause the route to fail being started. By deferring this startup to
+     * be lazy then the startup failure can be handled during routing messages
+     * via Camel's routing error handlers. Beware that when the first message is
+     * processed then creating and starting the producer may take a little time
+     * and prolong the total processing time of the processing.
+     */
+    private Boolean lazyStartProducer = false;
     /**
      * Transport for streamedListObjects. Required with an injected
      * OpenFgaClient, whose HTTP configuration is opaque. The caller owns this
@@ -436,14 +472,6 @@ public class OpenFgaComponentConfiguration
         this.continuationToken = continuationToken;
     }
 
-    public Boolean getLazyStartProducer() {
-        return lazyStartProducer;
-    }
-
-    public void setLazyStartProducer(Boolean lazyStartProducer) {
-        this.lazyStartProducer = lazyStartProducer;
-    }
-
     public String getObject() {
         return object;
     }
@@ -530,6 +558,47 @@ public class OpenFgaComponentConfiguration
 
     public void setUserFilters(String userFilters) {
         this.userFilters = userFilters;
+    }
+
+    public Boolean getBridgeErrorHandler() {
+        return bridgeErrorHandler;
+    }
+
+    public void setBridgeErrorHandler(Boolean bridgeErrorHandler) {
+        this.bridgeErrorHandler = bridgeErrorHandler;
+    }
+
+    public String getCheckpointKey() {
+        return checkpointKey;
+    }
+
+    public void setCheckpointKey(String checkpointKey) {
+        this.checkpointKey = checkpointKey;
+    }
+
+    public StateRepository<String, String> getCheckpointRepository() {
+        return checkpointRepository;
+    }
+
+    public void setCheckpointRepository(
+            StateRepository<String, String> checkpointRepository) {
+        this.checkpointRepository = checkpointRepository;
+    }
+
+    public Long getChangePollTimeout() {
+        return changePollTimeout;
+    }
+
+    public void setChangePollTimeout(Long changePollTimeout) {
+        this.changePollTimeout = changePollTimeout;
+    }
+
+    public Boolean getLazyStartProducer() {
+        return lazyStartProducer;
+    }
+
+    public void setLazyStartProducer(Boolean lazyStartProducer) {
+        this.lazyStartProducer = lazyStartProducer;
     }
 
     public OpenFgaStreamingClient getStreamingClient() {

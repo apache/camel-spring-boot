@@ -41,6 +41,7 @@ public class OpenFgaComponentConverter implements GenericConverter {
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.openfga.OpenFgaConfiguration.class));
+        answer.add(new ConvertiblePair(String.class, org.apache.camel.spi.StateRepository.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.openfga.OpenFgaStreamingClient.class));
         answer.add(new ConvertiblePair(String.class, dev.openfga.sdk.api.client.OpenFgaClient.class));
         answer.add(new ConvertiblePair(String.class, org.apache.camel.support.jsse.SSLContextParameters.class));

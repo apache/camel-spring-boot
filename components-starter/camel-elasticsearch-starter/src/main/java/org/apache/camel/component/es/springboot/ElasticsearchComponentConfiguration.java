@@ -110,6 +110,14 @@ public class ElasticsearchComponentConfiguration
      */
     private Integer snifferInterval = 300000;
     /**
+     * API key to authenticate with, sent in the Authorization header instead of
+     * a user and password. Either the encoded key as Elasticsearch shows it
+     * when the key is created, or the id and the key separated by a colon
+     * (id:key). The key is only sent to the configured hosts and the nodes
+     * found by the sniffer.
+     */
+    private String apiKey;
+    /**
      * The path of the self-signed certificate to use to access to
      * Elasticsearch.
      */
@@ -226,6 +234,14 @@ public class ElasticsearchComponentConfiguration
 
     public void setSnifferInterval(Integer snifferInterval) {
         this.snifferInterval = snifferInterval;
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
     }
 
     public String getCertificatePath() {

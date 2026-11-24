@@ -62,14 +62,6 @@ public class CxfRsComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Whether to always process the exchange synchronously. If true, the
-     * producer sends each request without an InvocationCallback and waits for
-     * the response, and the consumer runs the route without a CXF continuation.
-     * The component sets the value on each endpoint that it creates, including
-     * a bean: endpoint, unless the endpoint URI sets synchronous.
-     */
-    private Boolean synchronous = false;
-    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -78,6 +70,14 @@ public class CxfRsComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * Whether to always process the exchange synchronously. If true, the
+     * producer sends each request without an InvocationCallback and waits for
+     * the response, and the consumer runs the route without a CXF continuation.
+     * The component sets the value on each endpoint that it creates, including
+     * a bean: endpoint, unless the endpoint URI sets synchronous.
+     */
+    private Boolean synchronous = false;
     /**
      * To use a custom org.apache.camel.spi.HeaderFilterStrategy to filter
      * header to and from Camel message. The option is a
@@ -108,20 +108,20 @@ public class CxfRsComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getSynchronous() {
-        return synchronous;
-    }
-
-    public void setSynchronous(Boolean synchronous) {
-        this.synchronous = synchronous;
-    }
-
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Boolean getSynchronous() {
+        return synchronous;
+    }
+
+    public void setSynchronous(Boolean synchronous) {
+        this.synchronous = synchronous;
     }
 
     public HeaderFilterStrategy getHeaderFilterStrategy() {

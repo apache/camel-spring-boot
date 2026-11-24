@@ -16,8 +16,9 @@
     {
       "name": "camel.dataformat.pgp.algorithm",
       "type": "java.lang.Integer",
-      "description": "Symmetric key encryption algorithm; possible values are defined in org.bouncycastle.bcpg.SymmetricKeyAlgorithmTags. Only relevant for encrypting.",
-      "sourceType": "org.apache.camel.converter.crypto.springboot.PGPDataFormatConfiguration"
+      "description": "Symmetric key encryption algorithm; possible values are defined in org.bouncycastle.bcpg.SymmetricKeyAlgorithmTags; for example 9 (= AES_256), 8 (= AES_192), 7 (= AES_128), 3 (= CAST5). Only relevant for encrypting.",
+      "sourceType": "org.apache.camel.converter.crypto.springboot.PGPDataFormatConfiguration",
+      "defaultValue": 9
     },
     {
       "name": "camel.dataformat.pgp.armored",
@@ -46,8 +47,9 @@
     {
       "name": "camel.dataformat.pgp.hash-algorithm",
       "type": "java.lang.Integer",
-      "description": "Signature hash algorithm; possible values are defined in org.bouncycastle.bcpg.HashAlgorithmTags. Only relevant for signing.",
-      "sourceType": "org.apache.camel.converter.crypto.springboot.PGPDataFormatConfiguration"
+      "description": "Signature hash algorithm; possible values are defined in org.bouncycastle.bcpg.HashAlgorithmTags; for example 8 (= SHA256), 9 (= SHA384), 10 (= SHA512), 11 (= SHA224), 2 (= SHA1). Only relevant for signing.",
+      "sourceType": "org.apache.camel.converter.crypto.springboot.PGPDataFormatConfiguration",
+      "defaultValue": 8
     },
     {
       "name": "camel.dataformat.pgp.integrity",
