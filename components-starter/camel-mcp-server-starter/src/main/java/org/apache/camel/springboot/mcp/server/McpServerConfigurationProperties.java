@@ -40,7 +40,8 @@ public class McpServerConfigurationProperties {
     /**
      * Whether to install Camel's Origin validation and caller-context extraction on the Spring AI MCP HTTP transport
      * (protocol STREAMABLE, STATELESS or MODERN). When unset, they are installed only when camel.mcp-server.tags is
-     * configured. Set this to true to install them without Camel routes, or false to keep Spring AI's transport as is
+     * configured and spring.ai.mcp.server.type is SYNC, the default. Set this to true to install them without Camel
+     * routes or with an ASYNC server, or false to keep Spring AI's transport as is
      * while leaving the Camel bridge independently enabled.
      */
     private Boolean transportEnabled;

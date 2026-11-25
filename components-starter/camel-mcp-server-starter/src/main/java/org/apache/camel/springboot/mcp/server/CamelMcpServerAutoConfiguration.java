@@ -160,6 +160,9 @@ public class CamelMcpServerAutoConfiguration {
     /**
      * Matches when Spring AI auto-configured a synchronous MCP server: with sessions ({@code SSE},
      * {@code STREAMABLE}), stateless ({@code STATELESS}), or for MCP protocol version 2026-07-28 ({@code MODERN}).
+     * The server type must be {@code SYNC} ({@code spring.ai.mcp.server.type}, the default) for every protocol, as for
+     * Camel's transport (see {@link CamelMcpServerTransportCondition}): a synchronous server of the application over an
+     * {@code ASYNC} one does not serve the Camel routes either.
      */
     static final class OnSpringAiMcpServerCondition extends AnyNestedCondition {
 
@@ -168,10 +171,14 @@ public class CamelMcpServerAutoConfiguration {
         }
 
         @ConditionalOnBean(McpSyncServer.class)
+        @ConditionalOnProperty(prefix = "spring.ai.mcp.server", name = "type", havingValue = "SYNC",
+                               matchIfMissing = true)
         static final class OnSessionServer {
         }
 
         @ConditionalOnBean(McpStatelessSyncServer.class)
+        @ConditionalOnProperty(prefix = "spring.ai.mcp.server", name = "type", havingValue = "SYNC",
+                               matchIfMissing = true)
         static final class OnStatelessServer {
         }
 

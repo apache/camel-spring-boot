@@ -25,9 +25,11 @@ import io.modelcontextprotocol.server.transport.HeaderAccessor;
 import io.modelcontextprotocol.server.transport.ServerHttpHeaderValidator;
 import io.modelcontextprotocol.server.transport.ServerTransportSecurityValidator;
 import org.apache.camel.component.mcp.server.McpServerOrigins;
+import org.springframework.ai.mcp.customizer.McpServerCustomizer;
 import org.springframework.ai.mcp.server.common.autoconfigure.McpServerStdioDisabledCondition;
 import org.springframework.ai.mcp.server.common.autoconfigure.properties.McpServerStreamableHttpProperties;
 import org.springframework.ai.mcp.server.webmvc.transport.WebMvcStreamableServerTransportProvider;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -42,8 +44,13 @@ import tools.jackson.databind.json.JsonMapper;
  * Installs a principal-aware Spring AI WebMVC MCP transport.
  * <p>
  * This configuration runs before Spring AI's default WebMVC transport configuration.
- * It preserves the Spring AI endpoint and keep-alive settings while adding a transport
- * context extractor for authenticated caller identity.
+ * It preserves the Spring AI endpoint and keep-alive settings while adding Camel's Origin
+ * validation and a transport context extractor for authenticated caller identity.
+ * <p>
+ * As Spring AI does for its own transport, every {@code McpServerCustomizer} of the
+ * {@link WebMvcStreamableServerTransportProvider.Builder} is applied, in order, after Camel's
+ * settings: a customizer can override them, for example by setting its own security validator
+ * or context extractor, which then replaces Camel's.
  * <p>
  * An application-defined {@link WebMvcStreamableServerTransportProvider} takes precedence.
  */
@@ -88,16 +95,19 @@ public class CamelMcpServerTransportAutoConfiguration {
     WebMvcStreamableServerTransportProvider webMvcStreamableServerTransportProvider(
             @Qualifier("mcpServerJsonMapper") JsonMapper jsonMapper,
             McpServerStreamableHttpProperties serverProperties,
-            McpServerConfigurationProperties camelProperties) {
+            McpServerConfigurationProperties camelProperties,
+            ObjectProvider<McpServerCustomizer<WebMvcStreamableServerTransportProvider.Builder>> customizers) {
 
-        return WebMvcStreamableServerTransportProvider.builder()
+        WebMvcStreamableServerTransportProvider.Builder builder = WebMvcStreamableServerTransportProvider.builder()
                 .jsonMapper(new JacksonMcpJsonMapper(jsonMapper))
                 .mcpEndpoint(serverProperties.getMcpEndpoint())
                 .keepAliveInterval(serverProperties.getKeepAliveInterval())
                 .disallowDelete(serverProperties.isDisallowDelete())
                 .securityValidator(createOriginValidator(camelProperties.getAllowedOrigins()))
-                .contextExtractor(SpringAiMcpTransportContext::extract)
-                .build();
+                .contextExtractor(SpringAiMcpTransportContext::extract);
+        // the customizers of the application come last, as with Spring AI's own transport bean
+        customizers.orderedStream().forEach(customizer -> customizer.customize(builder));
+        return builder.build();
     }
 
     /**
