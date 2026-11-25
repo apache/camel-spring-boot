@@ -130,6 +130,14 @@ spring.ai.mcp.server.resource-change-notification = true
 spring.ai.mcp.server.prompt-change-notification = true
 ----
 
+When the Spring AI MCP server serves no tools, resources or prompts, for
+example with `spring.ai.mcp.server.capabilities.tool=false`, the Camel routes
+of that kind are not exposed: the application starts, the routes keep running,
+and the starter logs why they are not served. With `MODERN` (see
+<<_mcp_protocol_version_2026_07_28>>), such a property only stops Spring AI
+from auto-configuring the repository of that kind: a repository the
+application defines is still served.
+
 === Origin validation
 
 Camel's principal-aware HTTP transport is selected only when
@@ -346,9 +354,13 @@ camel.mcp-server.tags = crm
 The Camel routes are added to the tool, resource and prompt repositories that
 Spring AI auto-configures, next to the application's own tools, resources and
 prompts. A Camel route with the name or URI of one of them is refused, as with
-the other protocols. Camel's Origin validation and caller-context extraction
-apply to every request: the starter provides them to Spring AI's
-`WebMvcModernServerTransport` as `ServerHttpHeaderValidator` and
+the other protocols. A resource with the URI of a resource template, or a
+template with the URI of a resource, is refused too, because the Spring AI
+resource repository removes both together: when the application registers such
+an entry at runtime, after the Camel route, stopping the route removes it as
+well, and the starter logs a warning. Camel's Origin validation and
+caller-context extraction apply to every request: the starter provides them to
+Spring AI's `WebMvcModernServerTransport` as `ServerHttpHeaderValidator` and
 `McpTransportContextExtractor` beans, and beans of those types defined by the
 application take precedence.
 
