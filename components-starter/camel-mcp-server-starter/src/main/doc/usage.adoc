@@ -375,11 +375,19 @@ the plain `spring-ai-starter-mcp-server`. Swap the transport starter:
 <dependency>
     <groupId>org.springframework.ai</groupId>
     <artifactId>spring-ai-starter-mcp-server</artifactId>
-    <version>2.0.0</version>
+    <!-- the Spring AI version of camel-mcp-server-starter -->
+    <version>2.1.0</version>
 </dependency>
 ----
 
-and enable the stdio transport:
+The version of `spring-ai-starter-mcp-server` must be the Spring AI version
+the starter is built with: the version of `spring-ai-starter-mcp-server-webmvc`
+in the POM of `camel-mcp-server-starter`, 2.1.0 in this release. Another
+version, including one that the dependency management of the application
+imposes, for example with an older Spring AI BOM, can lack MCP Java SDK types
+the starter uses, and the application then fails at startup.
+
+Then enable the stdio transport:
 
 [source,properties]
 ----
