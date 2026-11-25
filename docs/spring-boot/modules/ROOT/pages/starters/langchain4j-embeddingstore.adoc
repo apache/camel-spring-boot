@@ -50,5 +50,5 @@ The starter supports 11 options, which are listed below.
 | camel.component.langchain4j-embeddingstore.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.langchain4j-embeddingstore.max-results | Maximum number of results to return for SEARCH operation | 5 | Integer
 | camel.component.langchain4j-embeddingstore.min-score | Minimum similarity score threshold for SEARCH operation (0.0 to 1.0) |  | Double
-| camel.component.langchain4j-embeddingstore.return-text-content | When true, SEARCH returns List with text content instead of List | false | Boolean
+| camel.component.langchain4j-embeddingstore.return-text-content | When true, SEARCH returns a list of strings with the text content instead of a list of EmbeddingMatch objects | false | Boolean
 |===

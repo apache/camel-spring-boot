@@ -55,11 +55,13 @@ public class RobotFrameworkComponentConfiguration
      */
     private String argumentFiles;
     /**
-     * Creates combined statistics based on tags. Use the format tags:title List
+     * Creates combined statistics based on tags. Use the format tags:title.
+     * Multiple values can be separated by comma.
      */
     private String combinedTagStats;
     /**
-     * Tests that have the given tags are considered critical. List
+     * Tests that have the given tags are considered critical. Multiple values
+     * can be separated by comma.
      */
     private String criticalTags;
     /**
@@ -77,7 +79,8 @@ public class RobotFrameworkComponentConfiguration
      */
     private Boolean dryrun = false;
     /**
-     * Selects the tests cases by tags. List
+     * Selects the tests cases by tags. Multiple values can be separated by
+     * comma.
      */
     private String excludes;
     /**
@@ -85,7 +88,8 @@ public class RobotFrameworkComponentConfiguration
      */
     private Boolean exitOnFailure = false;
     /**
-     * Selects the tests cases by tags. List
+     * Selects the tests cases by tags. Multiple values can be separated by
+     * comma.
      */
     private String includes;
     /**
@@ -94,7 +98,8 @@ public class RobotFrameworkComponentConfiguration
     private String listener;
     /**
      * Sets multiple listeners for monitoring tests execution. Use the format
-     * ListenerWithArgs:arg1:arg2 or simply ListenerWithoutArgs List
+     * ListenerWithArgs:arg1:arg2 or simply ListenerWithoutArgs. Multiple values
+     * can be separated by comma.
      */
     private String listeners;
     /**
@@ -110,8 +115,8 @@ public class RobotFrameworkComponentConfiguration
      */
     private String logTitle;
     /**
-     * Sets free metadata for the top level tests suites. comma separated list
-     * of string resulting as List
+     * Sets free metadata for the top level tests suites. Multiple values can be
+     * separated by comma.
      */
     private String metadata;
     /**
@@ -129,7 +134,8 @@ public class RobotFrameworkComponentConfiguration
      */
     private String name;
     /**
-     * Tests that have the given tags are not critical. List
+     * Tests that have the given tags are not critical. Multiple values can be
+     * separated by comma.
      */
     private String nonCriticalTags;
     /**
@@ -188,7 +194,8 @@ public class RobotFrameworkComponentConfiguration
      */
     private String splitOutputs;
     /**
-     * Selects the tests suites by name. List
+     * Selects the tests suites by name. Multiple values can be separated by
+     * comma.
      */
     private String suites;
     /**
@@ -201,30 +208,33 @@ public class RobotFrameworkComponentConfiguration
      */
     private String summaryTitle;
     /**
-     * Adds documentation to the specified tags. List
+     * Adds documentation to the specified tags. Multiple values can be
+     * separated by comma.
      */
     private String tagDocs;
     /**
-     * Sets the tags(s) to all executed tests cases. List
+     * Sets the tags(s) to all executed tests cases. Multiple values can be
+     * separated by comma.
      */
     private String tags;
     /**
      * Excludes these tags from the Statistics by Tag and Test Details by Tag
-     * tables in outputs. List
+     * tables in outputs. Multiple values can be separated by comma.
      */
     private String tagStatExcludes;
     /**
      * Includes only these tags in the Statistics by Tag and Test Details by Tag
-     * tables in outputs. List
+     * tables in outputs. Multiple values can be separated by comma.
      */
     private String tagStatIncludes;
     /**
      * Adds external links to the Statistics by Tag table in outputs. Use the
-     * format pattern:link:title List
+     * format pattern:link:title. Multiple values can be separated by comma.
      */
     private String tagStatLinks;
     /**
-     * Selects the tests cases by name. List
+     * Selects the tests cases by name. Multiple values can be separated by
+     * comma.
      */
     private String tests;
     /**
@@ -232,11 +242,13 @@ public class RobotFrameworkComponentConfiguration
      */
     private Boolean timestampOutputs = false;
     /**
-     * Sets variables using variables files. Use the format path:args List
+     * Sets variables using variables files. Use the format path:args. Multiple
+     * values can be separated by comma.
      */
     private String variableFiles;
     /**
-     * Sets individual variables. Use the format name:value List
+     * Sets individual variables. Use the format name:value. Multiple values can
+     * be separated by comma.
      */
     private String variables;
     /**

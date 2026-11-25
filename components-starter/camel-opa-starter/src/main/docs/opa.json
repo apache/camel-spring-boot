@@ -30,7 +30,7 @@
     {
       "name": "camel.component.opa.batch",
       "type": "java.lang.Boolean",
-      "description": "Authorize a whole collection in one call. When enabled the producer expects a List body, evaluates one input document per element - each element as the body, sharing the exchange's headers and properties - and returns the per-element verdicts in the CamelOpaBatchDecision header, a List parallel to the input. An element whose evaluation failed is denied, unless failOpen is set and its decision point was unavailable; the batch is never allowed or denied as a whole because one element failed. Only for evaluationMode=rest: it saves the per-element HTTP round-trip via OPA's batch API, which has no meaning for in-process wasm.",
+      "description": "Authorize a whole collection in one call. When enabled the producer expects a List body, evaluates one input document per element - each element as the body, sharing the exchange's headers and properties - and returns the per-element verdicts in the CamelOpaBatchDecision header, a list of booleans parallel to the input. An element whose evaluation failed is denied, unless failOpen is set and its decision point was unavailable; the batch is never allowed or denied as a whole because one element failed. Only for evaluationMode=rest: it saves the per-element HTTP round-trip via OPA's batch API, which has no meaning for in-process wasm.",
       "sourceType": "org.apache.camel.component.opa.springboot.OpaComponentConfiguration",
       "defaultValue": false
     },

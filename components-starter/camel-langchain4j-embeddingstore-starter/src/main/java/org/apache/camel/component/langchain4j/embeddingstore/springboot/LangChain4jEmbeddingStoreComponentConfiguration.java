@@ -89,7 +89,8 @@ public class LangChain4jEmbeddingStoreComponentConfiguration
      */
     private Double minScore;
     /**
-     * When true, SEARCH returns List with text content instead of List
+     * When true, SEARCH returns a list of strings with the text content instead
+     * of a list of EmbeddingMatch objects
      */
     private Boolean returnTextContent = false;
     /**

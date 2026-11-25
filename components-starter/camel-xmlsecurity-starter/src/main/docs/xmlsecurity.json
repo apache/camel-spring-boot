@@ -64,7 +64,7 @@
     {
       "name": "camel.component.xmlsecurity-sign.canonicalization-method",
       "type": "javax.xml.crypto.AlgorithmMethod",
-      "description": "Canonicalization method used to canonicalize the SignedInfo element before the digest is calculated. You can use the helper methods XmlSignatureHelper.getCanonicalizationMethod(String algorithm) or getCanonicalizationMethod(String algorithm, List inclusiveNamespacePrefixes) to create a canonicalization method. The option is a javax.xml.crypto.AlgorithmMethod type.",
+      "description": "Canonicalization method used to canonicalize the SignedInfo element before the digest is calculated. You can use the helper methods XmlSignatureHelper.getCanonicalizationMethod(String algorithm) or getCanonicalizationMethod(String algorithm, List inclusiveNamespacePrefixes), which takes a list of the inclusive namespace prefixes, to create a canonicalization method. The option is a javax.xml.crypto.AlgorithmMethod type.",
       "sourceType": "org.apache.camel.component.xmlsecurity.springboot.XmlSignerComponentConfiguration"
     },
     {

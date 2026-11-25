@@ -57,7 +57,7 @@
     {
       "name": "camel.component.debezium-mongodb.capture-target",
       "type": "java.lang.String",
-      "description": "The target to capture changes from. For 'database' scope, this is the database name. For 'collection' scope, this is the collection name as ..",
+      "description": "The target to capture changes from. For 'database' scope, this is the database name. For 'collection' scope, this is the collection name as {databaseName}.{collectionName}.",
       "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration"
     },
     {
@@ -88,7 +88,7 @@
     {
       "name": "camel.component.debezium-mongodb.converters",
       "type": "java.lang.String",
-      "description": "Optional list of custom converters that would be used instead of default ones. The converters are defined using '.type' config option and configured using options '.'",
+      "description": "Optional list of custom converters that would be used instead of default ones. The converters are defined using '{converter.prefix}.type' config option and configured using options '{converter.prefix}.{option}'",
       "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration"
     },
     {
@@ -136,7 +136,7 @@
     {
       "name": "camel.component.debezium-mongodb.errors-max-retries",
       "type": "java.lang.Integer",
-      "description": "The maximum number of retries on connection errors before failing (-1 = no limit, 0 = disabled, 0 = num of retries).",
+      "description": "The maximum number of retries on connection errors before failing (-1 = no limit, 0 = disabled, > 0 = num of retries).",
       "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
       "defaultValue": -1
     },
@@ -504,7 +504,7 @@
     {
       "name": "camel.component.debezium-mongodb.post-processors",
       "type": "java.lang.String",
-      "description": "Optional list of post processors. The processors are defined using '.type' config option and configured using options ''",
+      "description": "Optional list of post processors. The processors are defined using '{post.processor.prefix}.type' config option and configured using options '{post.processor.prefix}.{option}'",
       "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration"
     },
     {
@@ -557,7 +557,7 @@
     {
       "name": "camel.component.debezium-mongodb.signal-emit-failure-max-retries",
       "type": "java.lang.Integer",
-      "description": "The maximum number of retries after encountering an error emitting a window event (-1 = no limit, 0 = disabled, 0 = num of retries). Defaults to 0.",
+      "description": "The maximum number of retries after encountering an error emitting a window event (-1 = no limit, 0 = disabled, > 0 = num of retries). Defaults to 0.",
       "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration",
       "defaultValue": 0
     },
@@ -592,7 +592,7 @@
     {
       "name": "camel.component.debezium-mongodb.snapshot-collection-filter-overrides",
       "type": "java.lang.String",
-      "description": "This property contains a comma-separated list of ., for which the initial snapshot may be a subset of data present in the data source. The subset would be defined by mongodb filter query specified as value for property snapshot.collection.filter.override..",
+      "description": "This property contains a comma-separated list of {dbName}.{collectionName}, for which the initial snapshot may be a subset of data present in the data source. The subset would be defined by mongodb filter query specified as value for property snapshot.collection.filter.override.{dbname}.{collectionName}",
       "sourceType": "org.apache.camel.component.debezium.mongodb.springboot.DebeziumMongodbComponentConfiguration"
     },
     {

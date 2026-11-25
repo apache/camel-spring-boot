@@ -154,7 +154,8 @@ public class DebeziumMongodbComponentConfiguration
     private String captureScope = "deployment";
     /**
      * The target to capture changes from. For 'database' scope, this is the
-     * database name. For 'collection' scope, this is the collection name as ..
+     * database name. For 'collection' scope, this is the collection name as
+     * {databaseName}.{collectionName}.
      */
     private String captureTarget;
     /**
@@ -174,8 +175,8 @@ public class DebeziumMongodbComponentConfiguration
     private Long connectionValidationTimeoutMs = 60000L;
     /**
      * Optional list of custom converters that would be used instead of default
-     * ones. The converters are defined using '.type' config option and
-     * configured using options '.'
+     * ones. The converters are defined using '{converter.prefix}.type' config
+     * option and configured using options '{converter.prefix}.{option}'
      */
     private String converters;
     /**
@@ -207,7 +208,7 @@ public class DebeziumMongodbComponentConfiguration
     private String databaseIncludeList;
     /**
      * The maximum number of retries on connection errors before failing (-1 =
-     * no limit, 0 = disabled, 0 = num of retries).
+     * no limit, 0 = disabled, > 0 = num of retries).
      */
     private Integer errorsMaxRetries = -1;
     /**
@@ -467,7 +468,8 @@ public class DebeziumMongodbComponentConfiguration
     private Long pollIntervalMs = 500L;
     /**
      * Optional list of post processors. The processors are defined using
-     * '.type' config option and configured using options ''
+     * '{post.processor.prefix}.type' config option and configured using options
+     * '{post.processor.prefix}.{option}'
      */
     private String postProcessors;
     /**
@@ -514,8 +516,8 @@ public class DebeziumMongodbComponentConfiguration
     private Long signalEmitFailureBackoffMs = 10000L;
     /**
      * The maximum number of retries after encountering an error emitting a
-     * window event (-1 = no limit, 0 = disabled, 0 = num of retries). Defaults
-     * to 0.
+     * window event (-1 = no limit, 0 = disabled, > 0 = num of retries).
+     * Defaults to 0.
      */
     private Integer signalEmitFailureMaxRetries = 0;
     /**
@@ -544,10 +546,11 @@ public class DebeziumMongodbComponentConfiguration
      */
     private String skippedOperations = "t";
     /**
-     * This property contains a comma-separated list of ., for which the initial
-     * snapshot may be a subset of data present in the data source. The subset
-     * would be defined by mongodb filter query specified as value for property
-     * snapshot.collection.filter.override..
+     * This property contains a comma-separated list of
+     * {dbName}.{collectionName}, for which the initial snapshot may be a subset
+     * of data present in the data source. The subset would be defined by
+     * mongodb filter query specified as value for property
+     * snapshot.collection.filter.override.{dbname}.{collectionName}
      */
     private String snapshotCollectionFilterOverrides;
     /**
