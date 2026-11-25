@@ -63,7 +63,12 @@ public class NatsComponentConfiguration
      */
     private Boolean jetstreamEnabled = false;
     /**
-     * Sets the name of the JetStream stream to use.
+     * The name of the JetStream stream. The consumer reads from this stream (it
+     * is required for a JetStream consumer). When the stream does not exist,
+     * the consumer creates it with the subject of the topic. The producer
+     * creates it in the same way, unless another stream already takes in the
+     * subject. The producer publishes to the subject, and the message is stored
+     * by the stream that takes in the subject, whatever its name.
      */
     private String jetstreamName;
     /**
@@ -244,7 +249,11 @@ public class NatsComponentConfiguration
      */
     private String replySubject;
     /**
-     * Request timeout in milliseconds
+     * Request timeout in milliseconds. With JetStream, the time to wait for the
+     * acknowledgement of a published message. With jetstreamAsync=true, the
+     * NATS client also gives up on the acknowledgement after
+     * requestCleanupInterval (to twice that), so a longer wait needs a longer
+     * requestCleanupInterval too.
      */
     private Long requestTimeout = 20000L;
     /**

@@ -51,7 +51,7 @@ The starter supports 59 options, which are listed below.
 | camel.component.docling.content-in-body | Include the content of the output file in the exchange body and delete the output file | false | Boolean
 | camel.component.docling.do-code-enrichment | Enable code enrichment in document processing |  | Boolean
 | camel.component.docling.do-formula-enrichment | Enable formula enrichment in document processing |  | Boolean
-| camel.component.docling.do-ocr | Enable OCR processing in docling-serve API mode. When not set, the server uses its own defaults. Set enableOCR to false to explicitly disable OCR. |  | Boolean
+| camel.component.docling.do-ocr | Enable OCR processing in docling-serve API mode. When not set, OCR is turned on if ocrLanguage is set, and otherwise the server uses its own defaults. Set enableOCR to false to explicitly disable OCR. |  | Boolean
 | camel.component.docling.do-picture-classification | Enable picture classification in document processing |  | Boolean
 | camel.component.docling.do-picture-description | Enable picture description generation in document processing |  | Boolean
 | camel.component.docling.do-table-structure | Enable table structure recognition |  | Boolean
@@ -73,7 +73,7 @@ The starter supports 59 options, which are listed below.
 | camel.component.docling.md-page-break-placeholder | Placeholder string for page breaks in markdown output |  | String
 | camel.component.docling.oauth-profile | OAuth profile name for obtaining an access token via the OAuth 2.0 Client Credentials grant. When set, the token is acquired from the configured identity provider and used as authenticationToken. Requires camel-oauth on the classpath. |  | String
 | camel.component.docling.ocr-engine | OCR engine to use |  | String
-| camel.component.docling.ocr-language | Language code for OCR processing | en | String
+| camel.component.docling.ocr-language | Language code for OCR processing. With the docling CLI, en is used when it is not set. With docling-serve, setting it turns OCR on (do_ocr=true) unless enableOCR or doOcr is false, and when it is not set the server uses its own default languages. |  | String
 | camel.component.docling.operation | The operation to perform | convert-to-markdown | DoclingOperations
 | camel.component.docling.output-base-directory | When set, the output directory passed to the docling CLI must resolve inside this directory once normalized. Applies to the CamelDoclingOutputFilePath header. The check is lexical and does not resolve symbolic links, matching inputBaseDirectory. When empty, the header value must be a relative path that does not leave the working directory once normalized; set this option to use absolute output directories. |  | String
 | camel.component.docling.output-format | Output format of the SUBMIT_ASYNC_CONVERSION operation; the other operations always use their own format. The html_split_page value is rejected, as docling-serve does not return the split pages; use html instead | markdown | String

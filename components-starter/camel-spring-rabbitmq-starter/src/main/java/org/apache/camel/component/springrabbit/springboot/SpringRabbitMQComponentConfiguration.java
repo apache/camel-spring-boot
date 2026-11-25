@@ -106,7 +106,8 @@ public class SpringRabbitMQComponentConfiguration
     private String deadLetterRoutingKey;
     /**
      * How many times a Rabbitmq consumer will retry the same message if Camel
-     * failed to process the message
+     * failed to process the message. The first try is not counted, so 5 means
+     * up to 6 tries.
      */
     private Integer maximumRetryAttempts = 5;
     /**
