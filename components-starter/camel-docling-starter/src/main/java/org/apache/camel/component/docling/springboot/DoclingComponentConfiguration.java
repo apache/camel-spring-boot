@@ -62,9 +62,12 @@ public class DoclingComponentConfiguration
      */
     private Boolean includeLayoutInfo = false;
     /**
-     * Language code for OCR processing
+     * Language code for OCR processing. With the docling CLI, en is used when
+     * it is not set. With docling-serve, setting it turns OCR on (do_ocr=true)
+     * unless enableOCR or doOcr is false, and when it is not set the server
+     * uses its own default languages.
      */
-    private String ocrLanguage = "en";
+    private String ocrLanguage;
     /**
      * The operation to perform
      */
@@ -148,8 +151,9 @@ public class DoclingComponentConfiguration
      */
     private Boolean doFormulaEnrichment;
     /**
-     * Enable OCR processing in docling-serve API mode. When not set, the server
-     * uses its own defaults. Set enableOCR to false to explicitly disable OCR.
+     * Enable OCR processing in docling-serve API mode. When not set, OCR is
+     * turned on if ocrLanguage is set, and otherwise the server uses its own
+     * defaults. Set enableOCR to false to explicitly disable OCR.
      */
     private Boolean doOcr;
     /**

@@ -157,7 +157,7 @@
     {
       "name": "camel.component.spring-rabbitmq.maximum-retry-attempts",
       "type": "java.lang.Integer",
-      "description": "How many times a Rabbitmq consumer will retry the same message if Camel failed to process the message",
+      "description": "How many times a Rabbitmq consumer will retry the same message if Camel failed to process the message. The first try is not counted, so 5 means up to 6 tries.",
       "sourceType": "org.apache.camel.component.springrabbit.springboot.SpringRabbitMQComponentConfiguration",
       "defaultValue": 5
     },

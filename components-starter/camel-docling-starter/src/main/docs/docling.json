@@ -175,7 +175,7 @@
     {
       "name": "camel.component.docling.do-ocr",
       "type": "java.lang.Boolean",
-      "description": "Enable OCR processing in docling-serve API mode. When not set, the server uses its own defaults. Set enableOCR to false to explicitly disable OCR.",
+      "description": "Enable OCR processing in docling-serve API mode. When not set, OCR is turned on if ocrLanguage is set, and otherwise the server uses its own defaults. Set enableOCR to false to explicitly disable OCR.",
       "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
     },
     {
@@ -314,9 +314,8 @@
     {
       "name": "camel.component.docling.ocr-language",
       "type": "java.lang.String",
-      "description": "Language code for OCR processing",
-      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration",
-      "defaultValue": "en"
+      "description": "Language code for OCR processing. With the docling CLI, en is used when it is not set. With docling-serve, setting it turns OCR on (do_ocr=true) unless enableOCR or doOcr is false, and when it is not set the server uses its own default languages.",
+      "sourceType": "org.apache.camel.component.docling.springboot.DoclingComponentConfiguration"
     },
     {
       "name": "camel.component.docling.operation",
