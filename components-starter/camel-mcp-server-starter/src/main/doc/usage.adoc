@@ -439,7 +439,7 @@ the plain `spring-ai-starter-mcp-server`. Swap the transport starter:
 
 The version of `spring-ai-starter-mcp-server` must be the Spring AI version
 the starter is built with: the version of `spring-ai-starter-mcp-server-webmvc`
-in the POM of `camel-mcp-server-starter`, 2.1.0 in this release. Another
+in the POM of `camel-mcp-server-starter`. Another
 version, including one that the dependency management of the application
 imposes, for example with an older Spring AI BOM, can lack MCP Java SDK types
 the starter uses, and the application then fails at startup.
