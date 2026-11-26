@@ -16,7 +16,7 @@
     {
       "name": "camel.component.ibm-watsonx-data.api-key",
       "type": "java.lang.String",
-      "description": "IBM Cloud API key for authentication",
+      "description": "IBM Cloud API key for authentication, exchanged at IBM Cloud IAM for an access token. Required unless oauthProfile is set.",
       "sourceType": "org.apache.camel.component.ibm.watsonx.data.springboot.WatsonxDataComponentConfiguration"
     },
     {
@@ -71,7 +71,7 @@
     {
       "name": "camel.component.ibm-watsonx-data.oauth-profile",
       "type": "java.lang.String",
-      "description": "OAuth profile name for obtaining an access token via the OAuth 2.0 Client Credentials grant. When set, the token is acquired from the configured identity provider and used as apiKey. Requires camel-oauth on the classpath.",
+      "description": "OAuth profile name for obtaining an access token via the OAuth 2.0 Client Credentials grant. When set, the token of the configured identity provider is sent to watsonx.data as a Bearer token instead of an IBM Cloud API key, and obtained again when it expires. Requires camel-oauth on the classpath.",
       "sourceType": "org.apache.camel.component.ibm.watsonx.data.springboot.WatsonxDataComponentConfiguration"
     },
     {

@@ -88,6 +88,14 @@ public class Kinesis2ComponentConfiguration
      */
     private ShardIteratorType iteratorType = ShardIteratorType.TRIM_HORIZON;
     /**
+     * Maximum number of shards that the consumer reads at the same time in a
+     * poll, each on a thread of a thread pool of the consumer, which also
+     * routes the records of the shard. With 1 (or less), or a stream of one
+     * shard, the consumer reads the shards one after the other on its own
+     * thread. Not used with shardId, or by the KCL consumer (useKclConsumers).
+     */
+    private Integer maxConcurrentShards = 10;
+    /**
      * Maximum number of records fetched from each shard in each poll: the Limit
      * of the GetRecords request, from 1 to 10000. Not used by the KCL consumer
      * (useKclConsumers).
@@ -313,6 +321,14 @@ public class Kinesis2ComponentConfiguration
 
     public void setIteratorType(ShardIteratorType iteratorType) {
         this.iteratorType = iteratorType;
+    }
+
+    public Integer getMaxConcurrentShards() {
+        return maxConcurrentShards;
+    }
+
+    public void setMaxConcurrentShards(Integer maxConcurrentShards) {
+        this.maxConcurrentShards = maxConcurrentShards;
     }
 
     public Integer getMaxResultsPerRequest() {

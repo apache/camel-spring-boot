@@ -288,6 +288,13 @@
       "defaultValue": false
     },
     {
+      "name": "camel.component.aws2-kinesis.max-concurrent-shards",
+      "type": "java.lang.Integer",
+      "description": "Maximum number of shards that the consumer reads at the same time in a poll, each on a thread of a thread pool of the consumer, which also routes the records of the shard. With 1 (or less), or a stream of one shard, the consumer reads the shards one after the other on its own thread. Not used with shardId, or by the KCL consumer (useKclConsumers).",
+      "sourceType": "org.apache.camel.component.aws2.kinesis.springboot.Kinesis2ComponentConfiguration",
+      "defaultValue": 10
+    },
+    {
       "name": "camel.component.aws2-kinesis.max-results-per-request",
       "type": "java.lang.Integer",
       "description": "Maximum number of records fetched from each shard in each poll: the Limit of the GetRecords request, from 1 to 10000. Not used by the KCL consumer (useKclConsumers).",
