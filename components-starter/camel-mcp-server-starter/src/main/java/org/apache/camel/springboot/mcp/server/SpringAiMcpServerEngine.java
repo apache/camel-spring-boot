@@ -46,6 +46,7 @@ import org.apache.camel.component.mcp.server.McpServerRefusedException;
 import org.apache.camel.component.mcp.server.McpServerResource;
 import org.apache.camel.component.mcp.server.McpServerResourceTemplate;
 import org.apache.camel.component.mcp.server.McpServerTool;
+import org.apache.camel.component.mcp.server.McpToolCallContext;
 import org.apache.camel.component.mcp.server.McpToolCallResult;
 import org.apache.camel.support.service.ServiceSupport;
 import org.slf4j.Logger;
@@ -170,7 +171,8 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
         server.addResource(
                         mcpResource,
                         (transportContext, request) -> {
-                            McpResourceReadResult result = resource.handler().read();
+                            McpResourceReadResult result = resource.handler().read(
+                                    SpringAiMcpTransportContext.from(transportContext));
 
                             if (result.isError()) {
                                 throw McpError.builder(McpSchema.ErrorCodes.INTERNAL_ERROR)
@@ -278,7 +280,8 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
                         builder.build(),
                         (transportContext, request) -> {
                             McpResourceReadResult result =
-                                    resourceTemplate.handler().read(request.uri());
+                                    resourceTemplate.handler().read(request.uri(),
+                                            SpringAiMcpTransportContext.from(transportContext));
 
                             if (result.isError()) {
                                 throw McpError.builder(McpSchema.ErrorCodes.INTERNAL_ERROR)
@@ -343,7 +346,8 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
                     "An MCP prompt named '" + prompt.name() + "' is already registered");
         }
 
-        server.addPrompt(buildPrompt(prompt), (transportContext, request) -> getPrompt(prompt, request));
+        server.addPrompt(buildPrompt(prompt), (transportContext, request) -> getPrompt(prompt, request,
+                SpringAiMcpTransportContext.from(transportContext)));
         LOG.debug("MCP prompt added: {}", prompt.name());
     }
 
@@ -413,7 +417,8 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
         return builder.build();
     }
 
-    private McpSchema.GetPromptResult getPrompt(McpServerPrompt prompt, McpSchema.GetPromptRequest request) {
+    private McpSchema.GetPromptResult getPrompt(
+            McpServerPrompt prompt, McpSchema.GetPromptRequest request, McpToolCallContext caller) {
                     Map<String, String> arguments = new LinkedHashMap<>();
 
                     if (request.arguments() != null) {
@@ -428,7 +433,7 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
                         });
                     }
 
-                    McpPromptResult result = prompt.handler().get(arguments);
+                    McpPromptResult result = prompt.handler().get(arguments, caller);
 
                     if (result == null) {
                         throw McpError.builder(McpSchema.ErrorCodes.INTERNAL_ERROR)
