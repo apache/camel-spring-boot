@@ -82,7 +82,12 @@ A route declares either `resourceUri` for a fixed resource or `uriTemplate`
 for a resource template. Template variables are client input: validate them
 before using them in filesystem paths, database queries, authorization
 decisions, or downstream requests. Do not treat a syntactically valid URI
-variable as proof that the caller may access the referenced data.
+variable as proof that the caller may access the referenced data. With Camel's
+HTTP transport (see <<_origin_validation>>), the route receives the
+authenticated caller in the same exchange properties as a tool route:
+`CamelMcpSecurityPrincipal`, `CamelAiToolSecurityPrincipalName` and
+`CamelAiToolSecurityPrincipalRoles`, plus the `CamelMcpOAuth*` properties for
+an OAuth bearer token.
 
 Resources and resource templates are selected using the same
 `camel.mcp-server.tags` setting as tools. Their registration follows the
@@ -113,7 +118,9 @@ from("ai-prompt:multi_turn?tags=crm&description=Return a user and assistant mess
         Map.of("role", "assistant", "content", "Assistant reply"))));
 ----
 
-Prompt routes follow the same tag selection and route lifecycle rules.
+Prompt routes follow the same tag selection and route lifecycle rules, and
+receive the authenticated caller in the same exchange properties as resource
+routes.
 Content assembled from external systems, including resource content and
 prompt messages, must be treated as untrusted data. It may contain prompt
 injection instructions; do not grant such content authority over system

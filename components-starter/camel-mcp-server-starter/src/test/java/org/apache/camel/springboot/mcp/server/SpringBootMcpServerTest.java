@@ -211,18 +211,30 @@ public class SpringBootMcpServerTest {
                             .routeId("say-hello-route")
                             .setBody(simple("Hello ${header.name}"));
 
+                    Processor callerIdentity = exchange -> {
+                        Object principal = exchange.getProperty(McpToolCallContext.SECURITY_PRINCIPAL_PROPERTY);
+                        Object principalName = exchange.getProperty(
+                                McpToolCallContext.SECURITY_PRINCIPAL_NAME_PROPERTY);
+                        Object principalRoles = exchange.getProperty(
+                                McpToolCallContext.SECURITY_PRINCIPAL_ROLES_PROPERTY);
+                        exchange.getMessage().setBody("principalPresent=" + (principal != null)
+                                                      + ";name=" + principalName + ";roles=" + principalRoles);
+                    };
+
                     from("ai-tool:who_am_i?tags=conformance&description=Return authenticated caller identity")
                             .routeId("who-am-i-route")
-                            .process(exchange -> {
-                                Object principal = exchange.getProperty(
-                                        McpToolCallContext.SECURITY_PRINCIPAL_PROPERTY);
-                                Object principalName = exchange.getProperty(
-                                        McpToolCallContext.SECURITY_PRINCIPAL_NAME_PROPERTY);
-                                Object principalRoles = exchange.getProperty(
-                                        McpToolCallContext.SECURITY_PRINCIPAL_ROLES_PROPERTY);
-                                exchange.getMessage().setBody("principalPresent=" + (principal != null)
-                                        + ";name=" + principalName + ";roles=" + principalRoles);
-                            });
+                            .process(callerIdentity);
+
+                    from("ai-resource:caller?resourceUri=camel:///caller&tags=conformance"
+                         + "&description=The authenticated caller&mimeType=text/plain")
+                            .process(callerIdentity);
+
+                    from("ai-resource:caller_by_id?uriTemplate=camel:///callers/{id}&tags=conformance"
+                         + "&description=The authenticated caller&mimeType=text/plain")
+                            .process(callerIdentity);
+
+                    from("ai-prompt:caller_prompt?tags=conformance&description=Return the authenticated caller")
+                            .process(callerIdentity);
 
                     from("ai-tool:origin_guarded_tool?tags=conformance"
                          + "&description=Tool used to verify rejected Origin requests")
@@ -427,6 +439,26 @@ public class SpringBootMcpServerTest {
         assertThat(result.isError()).isNotEqualTo(Boolean.TRUE);
         assertThat(textOf(result))
                 .contains("principalPresent=true", "name=mcp-user", "MCP_USER", "MCP_ADMIN");
+    }
+
+    @Test
+    void testAuthenticatedCallerIdentityAndRolesReachResourceAndPromptRoutes() {
+        McpSchema.ReadResourceResult resource = client().readResource(
+                new McpSchema.ReadResourceRequest("camel:///caller"));
+        McpSchema.ReadResourceResult template = client().readResource(
+                new McpSchema.ReadResourceRequest("camel:///callers/42"));
+        McpSchema.GetPromptResult prompt = client().getPrompt(
+                new McpSchema.GetPromptRequest("caller_prompt", Map.of()));
+
+        assertThat(List.of(resource.contents().get(0), template.contents().get(0)))
+                .allSatisfy(contents -> assertThat(contents).isInstanceOfSatisfying(
+                        McpSchema.TextResourceContents.class,
+                        text -> assertThat(text.text()).contains(
+                                "principalPresent=true", "name=mcp-user", "MCP_USER", "MCP_ADMIN")));
+        assertThat(prompt.messages()).singleElement().satisfies(message -> assertThat(message.content())
+                .isInstanceOfSatisfying(McpSchema.TextContent.class,
+                        text -> assertThat(text.text()).contains(
+                                "principalPresent=true", "name=mcp-user", "MCP_USER", "MCP_ADMIN")));
     }
 
     @Test

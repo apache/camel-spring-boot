@@ -29,6 +29,7 @@ import io.modelcontextprotocol.client.McpClient;
 import io.modelcontextprotocol.client.McpSyncClient;
 import io.modelcontextprotocol.client.transport.HttpClientStreamableHttpTransport;
 import io.modelcontextprotocol.spec.McpSchema;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mcp.server.McpServerEngine;
 import org.apache.camel.component.mcp.server.McpToolCallContext;
@@ -109,9 +110,22 @@ public class SpringBootMcpServerStatelessTest {
                          + "&parameter.name=string&parameter.name.required=true")
                             .setBody(simple("Hello ${header.name}"));
 
+                    Processor callerName = exchange -> exchange.getMessage().setBody("name=" + exchange.getProperty(
+                            McpToolCallContext.SECURITY_PRINCIPAL_NAME_PROPERTY));
+
                     from("ai-tool:who_am_i?tags=stateless&description=Return the authenticated caller")
-                            .process(exchange -> exchange.getMessage().setBody("name=" + exchange.getProperty(
-                                    McpToolCallContext.SECURITY_PRINCIPAL_NAME_PROPERTY)));
+                            .process(callerName);
+
+                    from("ai-resource:caller?resourceUri=camel:///caller&tags=stateless"
+                         + "&description=The authenticated caller&mimeType=text/plain")
+                            .process(callerName);
+
+                    from("ai-resource:caller_by_id?uriTemplate=camel:///callers/{id}&tags=stateless"
+                         + "&description=The authenticated caller&mimeType=text/plain")
+                            .process(callerName);
+
+                    from("ai-prompt:caller_prompt?tags=stateless&description=Return the authenticated caller")
+                            .process(callerName);
                 }
             };
         }
@@ -122,9 +136,8 @@ public class SpringBootMcpServerStatelessTest {
         assertThat(engine).isInstanceOf(SpringAiMcpServerEngine.class);
     }
 
-    @Test
-    void clientCallsToolsWithoutSession() {
-        McpSyncClient client = McpClient
+    private McpSyncClient newClient() {
+        return McpClient
                 .sync(HttpClientStreamableHttpTransport.builder("http://localhost:" + port)
                         .addHttpRequestCustomizer(
                                 (builder, method, endpoint, body, context) -> builder.header("Authorization",
@@ -133,6 +146,11 @@ public class SpringBootMcpServerStatelessTest {
                 .requestTimeout(Duration.ofSeconds(10))
                 .initializationTimeout(Duration.ofSeconds(10))
                 .build();
+    }
+
+    @Test
+    void clientCallsToolsWithoutSession() {
+        McpSyncClient client = newClient();
         try {
             client.initialize();
 
@@ -144,6 +162,27 @@ public class SpringBootMcpServerStatelessTest {
             McpSchema.CallToolResult caller = client.callTool(
                     McpSchema.CallToolRequest.builder("who_am_i").arguments(Map.of()).build());
             assertThat(caller.content().toString()).contains("name=mcp-user");
+        } finally {
+            client.closeGracefully();
+        }
+    }
+
+    @Test
+    void resourceAndPromptRoutesReceiveTheCaller() {
+        McpSyncClient client = newClient();
+        try {
+            client.initialize();
+
+            assertThat(client.readResource(new McpSchema.ReadResourceRequest("camel:///caller")).contents())
+                    .singleElement().isInstanceOfSatisfying(McpSchema.TextResourceContents.class,
+                            text -> assertThat(text.text()).isEqualTo("name=mcp-user"));
+            assertThat(client.readResource(new McpSchema.ReadResourceRequest("camel:///callers/42")).contents())
+                    .singleElement().isInstanceOfSatisfying(McpSchema.TextResourceContents.class,
+                            text -> assertThat(text.text()).isEqualTo("name=mcp-user"));
+            assertThat(client.getPrompt(new McpSchema.GetPromptRequest("caller_prompt", Map.of())).messages())
+                    .singleElement().satisfies(message -> assertThat(message.content())
+                            .isInstanceOfSatisfying(McpSchema.TextContent.class,
+                                    text -> assertThat(text.text()).isEqualTo("name=mcp-user")));
         } finally {
             client.closeGracefully();
         }

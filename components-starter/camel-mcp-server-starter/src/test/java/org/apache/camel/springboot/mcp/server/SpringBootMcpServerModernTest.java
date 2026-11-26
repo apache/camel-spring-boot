@@ -39,6 +39,7 @@ import io.modelcontextprotocol.modern.client.transport.McpHttpRequestCustomizer;
 import io.modelcontextprotocol.modern.server.McpSyncResponse;
 import io.modelcontextprotocol.modern.server.feature.McpSyncTool;
 import org.apache.camel.CamelContext;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mcp.server.McpServerEngine;
 import org.apache.camel.component.mcp.server.McpToolCallContext;
@@ -141,9 +142,22 @@ public class SpringBootMcpServerModernTest {
                          + "&parameter.name=string&parameter.name.required=true")
                             .setBody(simple("Hello ${header.name}"));
 
+                    Processor callerName = exchange -> exchange.getMessage().setBody("name=" + exchange.getProperty(
+                            McpToolCallContext.SECURITY_PRINCIPAL_NAME_PROPERTY));
+
                     from("ai-tool:who_am_i?tags=modern&description=Return the authenticated caller")
-                            .process(exchange -> exchange.getMessage().setBody("name=" + exchange.getProperty(
-                                    McpToolCallContext.SECURITY_PRINCIPAL_NAME_PROPERTY)));
+                            .process(callerName);
+
+                    from("ai-resource:caller?resourceUri=camel:///caller&tags=modern"
+                         + "&description=The authenticated caller&mimeType=text/plain")
+                            .process(callerName);
+
+                    from("ai-resource:caller_by_id?uriTemplate=camel:///callers/{id}&tags=modern"
+                         + "&description=The authenticated caller&mimeType=text/plain")
+                            .process(callerName);
+
+                    from("ai-prompt:caller_prompt?tags=modern&description=Return the authenticated caller")
+                            .process(callerName);
 
                     // refused: the application already serves a tool with this name
                     from("ai-tool:add_numbers?tags=modern&description=Same name as the application tool")
@@ -188,9 +202,10 @@ public class SpringBootMcpServerModernTest {
         McpSyncClient client = client();
 
         assertThat(client.resources().list().resources()).extracting(McpSchema.Resource::uri)
-                .containsExactly("camel:///readme.txt");
+                .containsExactlyInAnyOrder("camel:///readme.txt", "camel:///caller");
         assertThat(client.resourceTemplates().list().resourceTemplates())
-                .extracting(McpSchema.ResourceTemplate::uriTemplate).containsExactly("camel:///orders/{orderId}");
+                .extracting(McpSchema.ResourceTemplate::uriTemplate)
+                .containsExactlyInAnyOrder("camel:///orders/{orderId}", "camel:///callers/{id}");
         assertThat(client.resource("camel:///readme.txt").read().contents()).singleElement()
                 .isInstanceOfSatisfying(McpSchema.TextResourceContents.class,
                         text -> assertThat(text.text()).isEqualTo("read me"));
@@ -203,13 +218,29 @@ public class SpringBootMcpServerModernTest {
     void getsAPrompt() {
         McpSyncClient client = client();
 
-        assertThat(client.prompts().list().prompts()).extracting(McpSchema.Prompt::name).containsExactly("greet");
+        assertThat(client.prompts().list().prompts()).extracting(McpSchema.Prompt::name)
+                .containsExactlyInAnyOrder("greet", "caller_prompt");
         McpSchema.GetPromptResult result = client.prompt("greet").arguments(Map.of("name", "Camel")).get();
         assertThat(result.messages()).singleElement().satisfies(message -> {
             assertThat(message.role()).isEqualTo(McpSchema.Role.USER);
             assertThat(message.content()).isInstanceOfSatisfying(McpSchema.TextContent.class,
                     text -> assertThat(text.text()).isEqualTo("Hello Camel"));
         });
+    }
+
+    @Test
+    void resourceAndPromptRoutesReceiveTheCaller() {
+        McpSyncClient client = client();
+
+        assertThat(client.resource("camel:///caller").read().contents()).singleElement()
+                .isInstanceOfSatisfying(McpSchema.TextResourceContents.class,
+                        text -> assertThat(text.text()).isEqualTo("name=mcp-user"));
+        assertThat(client.resource("camel:///callers/42").read().contents()).singleElement()
+                .isInstanceOfSatisfying(McpSchema.TextResourceContents.class,
+                        text -> assertThat(text.text()).isEqualTo("name=mcp-user"));
+        assertThat(client.prompt("caller_prompt").arguments(Map.of()).get().messages()).singleElement()
+                .satisfies(message -> assertThat(message.content()).isInstanceOfSatisfying(
+                        McpSchema.TextContent.class, text -> assertThat(text.text()).isEqualTo("name=mcp-user")));
     }
 
     @Test

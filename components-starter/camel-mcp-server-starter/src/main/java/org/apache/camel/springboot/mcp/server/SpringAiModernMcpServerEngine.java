@@ -48,6 +48,7 @@ import org.apache.camel.component.mcp.server.McpServerRefusedException;
 import org.apache.camel.component.mcp.server.McpServerResource;
 import org.apache.camel.component.mcp.server.McpServerResourceTemplate;
 import org.apache.camel.component.mcp.server.McpServerTool;
+import org.apache.camel.component.mcp.server.McpToolCallContext;
 import org.apache.camel.component.mcp.server.McpToolCallResult;
 import org.apache.camel.support.service.ServiceSupport;
 import org.slf4j.Logger;
@@ -226,7 +227,8 @@ public class SpringAiModernMcpServerEngine extends ServiceSupport implements Mcp
         }
         SyncResourceRegistration registration = SyncResourceRegistration.of(builder.build(),
                 (ctx, request) -> McpSyncResponse.result(
-                        readResult(resource.uri(), resource.mimeType(), resource.handler().read())));
+                        readResult(resource.uri(), resource.mimeType(),
+                                resource.handler().read(SpringAiMcpTransportContext.from(ctx.transportContext())))));
         try {
             resources.add(registration);
         } catch (IllegalArgumentException e) {
@@ -292,7 +294,8 @@ public class SpringAiModernMcpServerEngine extends ServiceSupport implements Mcp
         }
         SyncResourceTemplateRegistration registration = SyncResourceTemplateRegistration.of(builder.build(),
                 (ctx, request) -> McpSyncResponse.result(readResult(request.uri(), resourceTemplate.mimeType(),
-                        resourceTemplate.handler().read(request.uri()))));
+                        resourceTemplate.handler().read(request.uri(),
+                                SpringAiMcpTransportContext.from(ctx.transportContext())))));
         try {
             resources.add(registration);
         } catch (IllegalArgumentException e) {
@@ -456,7 +459,8 @@ public class SpringAiModernMcpServerEngine extends ServiceSupport implements Mcp
             builder.title(prompt.title());
         }
         try {
-            prompts.add(McpSyncPrompt.of(builder.build(), (ctx, request) -> getPrompt(prompt, request)));
+            prompts.add(McpSyncPrompt.of(builder.build(), (ctx, request) -> getPrompt(prompt, request,
+                    SpringAiMcpTransportContext.from(ctx.transportContext()))));
         } catch (IllegalArgumentException e) {
             throw new McpServerRefusedException("An MCP prompt named '" + prompt.name() + "' is already registered", e);
         }
@@ -476,9 +480,9 @@ public class SpringAiModernMcpServerEngine extends ServiceSupport implements Mcp
     }
 
     private McpSyncResponse<McpSchema.GetPromptOutcome> getPrompt(
-            McpServerPrompt prompt, McpSchema.GetPromptRequest request) {
+            McpServerPrompt prompt, McpSchema.GetPromptRequest request, McpToolCallContext caller) {
         Map<String, String> arguments = request.arguments() != null ? request.arguments() : Map.of();
-        McpPromptResult result = prompt.handler().get(arguments);
+        McpPromptResult result = prompt.handler().get(arguments, caller);
         if (result == null) {
             throw new McpException(ErrorCodes.INTERNAL_ERROR, "Prompt execution failed");
         }
