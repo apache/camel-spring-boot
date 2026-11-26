@@ -37,7 +37,9 @@ import org.springframework.web.servlet.function.ServerRequest;
  * Spring AI builds that transport with the {@link ServerHttpHeaderValidator} and the
  * {@link McpTransportContextExtractor} beans of the application context, so this configuration provides them and
  * keeps Spring AI's endpoint and settings. A validator or an extractor of the application takes precedence, and so
- * does a {@link WebMvcModernServerTransport} of the application.
+ * does a {@link WebMvcModernServerTransport} of the application. Spring AI applies the {@code McpServerCustomizer}
+ * beans of the {@link WebMvcModernServerTransport.Builder} after these beans, so a customizer can override them, as
+ * with the Streamable HTTP and stateless transports of Camel.
  */
 @AutoConfiguration(
         beforeName = "org.springframework.ai.mcp.server.webmvc.autoconfigure.McpServerModernWebMvcAutoConfiguration")

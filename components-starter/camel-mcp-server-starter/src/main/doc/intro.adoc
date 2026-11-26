@@ -44,13 +44,15 @@ Resource Server starter. Let Spring Boot manage their versions:
 </dependency>
 ----
 
-Configure the authorization server issuer and select the Streamable HTTP
-transport:
+Configure the authorization server issuer and the audience of the accepted
+tokens, and select the Streamable HTTP transport:
 
 [source,properties]
 ----
 spring.ai.mcp.server.protocol = STREAMABLE
 spring.security.oauth2.resourceserver.jwt.issuer-uri = https://idp.example.com/issuer
+# Accept only the tokens issued for this MCP server: its resource URI, as mcp.security.resource-uri below.
+spring.security.oauth2.resourceserver.jwt.audiences = https://mcp.example.com/mcp
 
 # Application-specific properties used by this example; not Camel starter options.
 # Canonical, externally visible URLs for this protected MCP resource.
@@ -68,6 +70,7 @@ authentication so MCP clients can discover the authorization server.
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationEntryPoint;
@@ -77,6 +80,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class McpSecurityConfiguration {
 
     @Bean
+    @Order(1)
     SecurityFilterChain mcpSecurity(
             HttpSecurity http,
             @Value("${mcp.security.resource-uri}") String resourceUri,
@@ -111,10 +115,27 @@ public class McpSecurityConfiguration {
 }
 ----
 
+The `securityMatcher` limits this filter chain to the MCP endpoint and the
+metadata paths. Once the application defines a `SecurityFilterChain`, Spring
+Boot's default chain backs off, so requests to the other endpoints of the
+application match no chain and are not secured: keep a filter chain of the
+application for them, ordered after this one (a higher `@Order` value), as
+Spring Security requires a chain that matches any request to come last.
+
 The issuer in `authorizationServer` must identify the authorization server
 that issues tokens accepted by this resource server. Spring Security validates
-JWT bearer tokens using the configured issuer. Its protected-resource metadata
-support publishes the metadata document. For the `/mcp` endpoint, configure
+JWT bearer tokens using the configured issuer. Spring Boot checks the
+audience (`aud` claim) only when
+`spring.security.oauth2.resourceserver.jwt.audiences` is set: without it, a
+token that the same issuer minted for another API is accepted, while the MCP
+authorization specification requires the server to accept only the tokens
+issued for it. The setting applies to the `JwtDecoder` that Spring Boot
+auto-configures, and so to every filter chain that uses it: when other
+endpoints of the application accept tokens issued for another audience, give
+the MCP chain its own decoder that checks this audience instead, with
+`.jwt(jwt -> jwt.decoder(mcpJwtDecoder))`. Spring Security's protected-resource
+metadata support publishes the metadata document. For the `/mcp` endpoint,
+configure
 `mcp.security.resource-uri` as `https://mcp.example.com/mcp` and
 `mcp.security.resource-metadata-uri` as
 `https://mcp.example.com/.well-known/oauth-protected-resource/mcp`.
@@ -147,7 +168,7 @@ The example ignores CSRF only for the MCP endpoint because MCP clients send
 bearer tokens rather than browser session-based CSRF tokens. Do not disable
 CSRF protection globally when the application uses it for other endpoints.
 If your MCP endpoint is configured at a path other than `/mcp`, update the
-security matchers and both canonical URL properties accordingly.
+security matchers, both canonical URL properties and the audience accordingly.
 
 For MCP tool calls, the Camel Spring Boot engine captures the authenticated
 Spring principal and its name. Camel roles and OAuth scopes are derived only

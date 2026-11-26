@@ -19,11 +19,17 @@ package org.apache.camel.springboot.mcp.server;
 import java.util.List;
 import java.util.Map;
 
+import io.modelcontextprotocol.server.McpServer;
 import io.modelcontextprotocol.server.McpServerFeatures;
+import io.modelcontextprotocol.server.McpStatelessSyncServer;
 import io.modelcontextprotocol.server.McpSyncServer;
 import io.modelcontextprotocol.spec.McpSchema;
+import io.modelcontextprotocol.spec.McpStatelessServerTransport;
+import io.modelcontextprotocol.spec.McpStreamableServerTransportProvider;
 import org.apache.camel.component.mcp.server.McpResourceTemplateReadHandler;
+import org.apache.camel.component.mcp.server.McpServerPrompt;
 import org.apache.camel.component.mcp.server.McpServerRefusedException;
+import org.apache.camel.component.mcp.server.McpServerResource;
 import org.apache.camel.component.mcp.server.McpServerResourceTemplate;
 import org.apache.camel.component.mcp.server.McpServerTool;
 import org.apache.camel.component.mcp.server.McpToolCallHandler;
@@ -39,6 +45,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class SpringAiMcpServerEngineTest {
+
+    private static final McpSchema.ServerCapabilities RESOURCES_CAPABILITY
+            = McpSchema.ServerCapabilities.builder().resources(false, true).build();
 
     @Test
     void reportsResourcesAndPromptsFromActualServerCapabilities() {
@@ -68,6 +77,7 @@ class SpringAiMcpServerEngineTest {
     @Test
     void refusesOverlappingSpringDefinedResourceTemplates() {
         McpSyncServer server = mock(McpSyncServer.class);
+        when(server.getServerCapabilities()).thenReturn(RESOURCES_CAPABILITY);
         SpringAiMcpServerEngine engine = new SpringAiMcpServerEngine(server);
         McpSchema.ResourceTemplate existing = McpSchema.ResourceTemplate
                 .builder("camel:///customers/{id}", "spring-customers")
@@ -86,6 +96,7 @@ class SpringAiMcpServerEngineTest {
     @Test
     void ignoresUnsupportedSpringTemplateWhenUriSchemesDiffer() {
         McpSyncServer server = mock(McpSyncServer.class);
+        when(server.getServerCapabilities()).thenReturn(RESOURCES_CAPABILITY);
         SpringAiMcpServerEngine engine = new SpringAiMcpServerEngine(server);
         McpSchema.ResourceTemplate existing = McpSchema.ResourceTemplate
                 .builder("document://{id}", "spring-document")
@@ -100,6 +111,7 @@ class SpringAiMcpServerEngineTest {
     @Test
     void refusesUnsupportedSpringTemplateWhenUriSchemesMatch() {
         McpSyncServer server = mock(McpSyncServer.class);
+        when(server.getServerCapabilities()).thenReturn(RESOURCES_CAPABILITY);
         SpringAiMcpServerEngine engine = new SpringAiMcpServerEngine(server);
         McpSchema.ResourceTemplate existing = McpSchema.ResourceTemplate
                 .builder("camel://{id}", "spring-camel")
@@ -118,6 +130,7 @@ class SpringAiMcpServerEngineTest {
     @Test
     void translatesInvalidToolSchemaIntoServerRefusal() {
         McpSyncServer server = mock(McpSyncServer.class);
+        when(server.getServerCapabilities()).thenReturn(McpSchema.ServerCapabilities.builder().tools(true).build());
         SpringAiMcpServerEngine engine = new SpringAiMcpServerEngine(server);
         when(server.listTools()).thenReturn(List.of());
         doThrow(new IllegalArgumentException("invalid JSON schema"))
@@ -156,6 +169,95 @@ class SpringAiMcpServerEngineTest {
         new SpringAiMcpServerEngine(absentServer).resourceTemplateRemoved(uriTemplate);
         verify(absentServer, never()).removeResourceTemplate(uriTemplate);
         verify(absentServer, never()).notifyResourcesListChanged();
+    }
+
+    @Test
+    void sessionServerWithoutToolsCapabilityRefusesToolsAndServesTheOtherFeatures() {
+        // without list-change notifications, which the mocked transport cannot send
+        McpSyncServer server = McpServer.sync(mock(McpStreamableServerTransportProvider.class))
+                .capabilities(McpSchema.ServerCapabilities.builder().resources(false, false).prompts(false).build())
+                .build();
+        SpringAiMcpServerEngine engine = new SpringAiMcpServerEngine(server);
+
+        assertThatThrownBy(() -> engine.toolAdded(tool("crm_lookup")))
+                .isInstanceOf(McpServerRefusedException.class)
+                .hasMessageContaining("MCP tool 'crm_lookup' is not served")
+                .hasMessageContaining("no tools capability")
+                .hasMessageContaining("spring.ai.mcp.server.capabilities.tool");
+
+        engine.resourceAdded(resource("camel:///crm/config"));
+        engine.resourceTemplateAdded(resourceTemplate("camel:///crm/customers/{id}"));
+        engine.promptAdded(prompt("crm_prompt"));
+        assertThat(server.listTools()).isEmpty();
+        assertThat(server.listResources()).extracting(McpSchema.Resource::uri).containsExactly("camel:///crm/config");
+        assertThat(server.listResourceTemplates()).extracting(McpSchema.ResourceTemplate::uriTemplate)
+                .containsExactly("camel:///crm/customers/{id}");
+        assertThat(server.listPrompts()).extracting(McpSchema.Prompt::name).containsExactly("crm_prompt");
+    }
+
+    @Test
+    void statelessServerWithoutToolsCapabilityRefusesToolsAndServesTheOtherFeatures() {
+        McpStatelessSyncServer server = McpServer.sync(mock(McpStatelessServerTransport.class))
+                .capabilities(McpSchema.ServerCapabilities.builder().resources(false, false).prompts(false).build())
+                .build();
+        SpringAiMcpServerEngine engine = new SpringAiMcpServerEngine(server);
+
+        assertThatThrownBy(() -> engine.toolAdded(tool("crm_lookup")))
+                .isInstanceOf(McpServerRefusedException.class)
+                .hasMessageContaining("MCP tool 'crm_lookup' is not served")
+                .hasMessageContaining("spring.ai.mcp.server.capabilities.tool");
+
+        engine.resourceAdded(resource("camel:///crm/config"));
+        engine.promptAdded(prompt("crm_prompt"));
+        assertThat(server.listTools()).isEmpty();
+        assertThat(server.listResources()).extracting(McpSchema.Resource::uri).containsExactly("camel:///crm/config");
+        assertThat(server.listPrompts()).extracting(McpSchema.Prompt::name).containsExactly("crm_prompt");
+    }
+
+    @Test
+    void serverWithoutResourcesAndPromptsCapabilitiesRefusesThemAndServesTools() {
+        McpSyncServer server = McpServer.sync(mock(McpStreamableServerTransportProvider.class))
+                .capabilities(McpSchema.ServerCapabilities.builder().tools(false).build())
+                .build();
+        SpringAiMcpServerEngine engine = new SpringAiMcpServerEngine(server);
+
+        assertThatThrownBy(() -> engine.resourceAdded(resource("camel:///crm/config")))
+                .isInstanceOf(McpServerRefusedException.class)
+                .hasMessageContaining("MCP resource 'camel:///crm/config' is not served")
+                .hasMessageContaining("spring.ai.mcp.server.capabilities.resource");
+        assertThatThrownBy(() -> engine.resourceTemplateAdded(resourceTemplate("camel:///crm/customers/{id}")))
+                .isInstanceOf(McpServerRefusedException.class)
+                .hasMessageContaining("MCP resource template 'camel:///crm/customers/{id}' is not served")
+                .hasMessageContaining("spring.ai.mcp.server.capabilities.resource");
+        assertThatThrownBy(() -> engine.promptAdded(prompt("crm_prompt")))
+                .isInstanceOf(McpServerRefusedException.class)
+                .hasMessageContaining("MCP prompt 'crm_prompt' is not served")
+                .hasMessageContaining("spring.ai.mcp.server.capabilities.prompt");
+
+        engine.toolAdded(tool("crm_lookup"));
+        assertThat(server.listTools()).extracting(McpSchema.Tool::name).containsExactly("crm_lookup");
+    }
+
+    private static McpServerTool tool(String name) {
+        McpServerTool tool = mock(McpServerTool.class);
+        when(tool.name()).thenReturn(name);
+        when(tool.description()).thenReturn("A tool");
+        return tool;
+    }
+
+    private static McpServerResource resource(String uri) {
+        McpServerResource resource = mock(McpServerResource.class);
+        when(resource.uri()).thenReturn(uri);
+        when(resource.name()).thenReturn("crm_config");
+        when(resource.mimeType()).thenReturn("text/plain");
+        return resource;
+    }
+
+    private static McpServerPrompt prompt(String name) {
+        McpServerPrompt prompt = mock(McpServerPrompt.class);
+        when(prompt.name()).thenReturn(name);
+        when(prompt.arguments()).thenReturn(List.of());
+        return prompt;
     }
 
     private static McpServerResourceTemplate resourceTemplate(String uriTemplate) {

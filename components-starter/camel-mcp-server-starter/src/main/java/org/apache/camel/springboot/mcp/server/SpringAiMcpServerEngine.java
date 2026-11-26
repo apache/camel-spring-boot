@@ -105,6 +105,9 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
     @Override
     public void toolAdded(McpServerTool tool) {
+        if (!supportsTools()) {
+            throw capabilityMissing("MCP tool '" + tool.name() + "'", "tools", "tool");
+        }
         if (server.listTools().stream().anyMatch(existing -> existing.name().equals(tool.name()))) {
             throw new McpServerRefusedException(
                     "An MCP tool named '" + tool.name() + "' is already registered");
@@ -154,6 +157,9 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
     @Override
     public void resourceAdded(McpServerResource resource) {
+        if (!supportsResources()) {
+            throw capabilityMissing("MCP resource '" + resource.uri() + "'", "resources", "resource");
+        }
         if (server.listResources().stream().anyMatch(existing -> existing.uri().equals(resource.uri()))) {
             throw new McpServerRefusedException(
                     "An MCP resource with URI '" + resource.uri() + "' is already registered");
@@ -209,6 +215,10 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
     @Override
     public void resourceTemplateAdded(McpServerResourceTemplate resourceTemplate) {
+        if (!supportsResourceTemplates()) {
+            throw capabilityMissing(
+                    "MCP resource template '" + resourceTemplate.uriTemplate() + "'", "resources", "resource");
+        }
         List<McpSchema.ResourceTemplate> existingTemplates = server.listResourceTemplates();
         if (existingTemplates.stream()
                 .anyMatch(existing -> existing.uriTemplate().equals(resourceTemplate.uriTemplate()))) {
@@ -325,6 +335,9 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
 
     @Override
     public void promptAdded(McpServerPrompt prompt) {
+        if (!supportsPrompts()) {
+            throw capabilityMissing("MCP prompt '" + prompt.name() + "'", "prompts", "prompt");
+        }
         if (server.listPrompts().stream().anyMatch(existing -> existing.name().equals(prompt.name()))) {
             throw new McpServerRefusedException(
                     "An MCP prompt named '" + prompt.name() + "' is already registered");
@@ -348,6 +361,22 @@ public class SpringAiMcpServerEngine extends ServiceSupport implements McpServer
     public boolean supportsPrompts() {
         McpSchema.ServerCapabilities capabilities = server.capabilities();
         return capabilities != null && capabilities.prompts() != null;
+    }
+
+    private boolean supportsTools() {
+        McpSchema.ServerCapabilities capabilities = server.capabilities();
+        return capabilities != null && capabilities.tools() != null;
+    }
+
+    /**
+     * The MCP Java SDK rejects a feature of a capability the server does not have with an
+     * {@link IllegalStateException}, which would fail the route; the feature is refused instead, so the route and the
+     * other features keep being served.
+     */
+    private static McpServerRefusedException capabilityMissing(String feature, String capability, String property) {
+        return new McpServerRefusedException(
+                feature + " is not served: the Spring AI MCP server has no " + capability
+                                             + " capability (see spring.ai.mcp.server.capabilities." + property + ")");
     }
 
     private static McpSchema.Resource buildMcpResource(McpServerResource resource) {

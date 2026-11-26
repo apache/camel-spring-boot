@@ -130,6 +130,14 @@ spring.ai.mcp.server.resource-change-notification = true
 spring.ai.mcp.server.prompt-change-notification = true
 ----
 
+When the Spring AI MCP server serves no tools, resources or prompts, for
+example with `spring.ai.mcp.server.capabilities.tool=false`, the Camel routes
+of that kind are not exposed: the application starts, the routes keep running,
+and the starter logs why they are not served. With `MODERN` (see
+<<_mcp_protocol_version_2026_07_28>>), such a property only stops Spring AI
+from auto-configuring the repository of that kind: a repository the
+application defines is still served.
+
 === Origin validation
 
 Camel's principal-aware HTTP transport is selected only when
@@ -139,8 +147,9 @@ Camel's principal-aware HTTP transport is selected only when
 condition is satisfied:
 
 * By default, the Camel provider is selected when `camel.mcp-server.tags` is
-  configured. This enables the Origin validator and authenticated caller
-  context needed by Camel route capabilities.
+  configured and the Spring AI MCP server is of the `SYNC` type (see
+  <<_server_type>>). This enables the Origin validator and authenticated
+  caller context needed by Camel route capabilities.
 * Set `camel.mcp-server.transport-enabled=true` to select the Camel provider
   even when no Camel tags are configured, for example when the application
   exposes only Spring-defined `@McpTool`, `@McpResource`, or `@McpPrompt`
@@ -231,6 +240,36 @@ provider must still be configured with an authentication mechanism and the
 appropriate authorization policy. The `camel.mcp-server.allowed-origins`
 property is applied only to Camel's auto-configured provider.
 
+To change a few settings of the transport rather than replace it, define
+`McpServerCustomizer` beans for its builder, as with Spring AI's own
+transports: `McpServerCustomizer<WebMvcStreamableServerTransportProvider.Builder>`
+for `STREAMABLE`, `McpServerCustomizer<WebMvcStatelessServerTransport.Builder>`
+for `STATELESS` and `McpServerCustomizer<WebMvcModernServerTransport.Builder>`
+for `MODERN`. When Camel's transport is selected, they are applied too, in
+their order and after Camel's settings, so a customizer takes precedence over
+Camel:
+
+* a customizer that sets other options, such as the maximum number of
+  sessions or the session idle timeout, keeps Camel's Origin validation and
+  authenticated caller context;
+* a customizer that sets its own security validator (`securityValidator`, or
+  `httpHeaderValidator` for `MODERN`) replaces Camel's Origin validation, and
+  `camel.mcp-server.allowed-origins` no longer applies;
+* a customizer that sets its own context extractor (`contextExtractor`)
+  replaces Camel's authenticated caller context, unless it builds the
+  context with `SpringAiMcpTransportContext.extract(request, entries)` as
+  shown above.
+
+[source,java]
+----
+@Bean
+McpServerCustomizer<WebMvcStreamableServerTransportProvider.Builder> mcpTransportCustomizer() {
+    return builder -> builder
+            .maxSessions(1000)
+            .sessionIdleTimeout(Duration.ofMinutes(30));
+}
+----
+
 The streamable HTTP transport has to be selected explicitly with
 `spring.ai.mcp.server.protocol=STREAMABLE`; when the property is not set,
 Spring AI serves the deprecated SSE transport instead and there is no
@@ -247,6 +286,20 @@ spring.ai.mcp.server.name = my-integration-app
 spring.ai.mcp.server.version = 1.0.0
 spring.ai.mcp.server.streamable-http.mcp-endpoint = /mcp
 ----
+
+=== Server type
+
+Whatever the protocol, the starter serves the Camel routes only on a Spring AI
+MCP server of the `SYNC` type: `spring.ai.mcp.server.type=SYNC`, the default.
+With `spring.ai.mcp.server.type=ASYNC`:
+
+* the Camel routes are not served, and the starter logs a warning when
+  `camel.mcp-server.tags` is configured;
+* Spring AI's transport is kept, without Camel's Origin validation and
+  authenticated caller context, unless
+  `camel.mcp-server.transport-enabled=true` is set with
+  `spring.ai.mcp.server.protocol` `STREAMABLE`, `STATELESS` or `MODERN` and
+  the stdio transport disabled.
 
 === Serving without sessions
 
@@ -301,9 +354,13 @@ camel.mcp-server.tags = crm
 The Camel routes are added to the tool, resource and prompt repositories that
 Spring AI auto-configures, next to the application's own tools, resources and
 prompts. A Camel route with the name or URI of one of them is refused, as with
-the other protocols. Camel's Origin validation and caller-context extraction
-apply to every request: the starter provides them to Spring AI's
-`WebMvcModernServerTransport` as `ServerHttpHeaderValidator` and
+the other protocols. A resource with the URI of a resource template, or a
+template with the URI of a resource, is refused too, because the Spring AI
+resource repository removes both together: when the application registers such
+an entry at runtime, after the Camel route, stopping the route removes it as
+well, and the starter logs a warning. Camel's Origin validation and
+caller-context extraction apply to every request: the starter provides them to
+Spring AI's `WebMvcModernServerTransport` as `ServerHttpHeaderValidator` and
 `McpTransportContextExtractor` beans, and beans of those types defined by the
 application take precedence.
 
@@ -315,8 +372,8 @@ Be aware that:
   2026-07-28 first and fall back to `initialize` connect with 2026-07-28. Camel
   Main and Camel JBang serve both kinds of client on the same endpoint (see
   xref:components:others:mcp-server.adoc[MCP Server]);
-* only `spring.ai.mcp.server.type=SYNC`, the default, is supported: with
-  `ASYNC`, the starter does not register the Camel routes;
+* as with the other protocols, only `spring.ai.mcp.server.type=SYNC`, the
+  default, is supported (see <<_server_type>>);
 * if the application defines its own tool, resource or prompt repository, the
   Camel routes of that kind are not served, and the starter logs a warning;
 * protocol version 2026-07-28 is built on the `io.modelcontextprotocol.modern`
@@ -375,11 +432,19 @@ the plain `spring-ai-starter-mcp-server`. Swap the transport starter:
 <dependency>
     <groupId>org.springframework.ai</groupId>
     <artifactId>spring-ai-starter-mcp-server</artifactId>
-    <version>2.0.0</version>
+    <!-- the Spring AI version of camel-mcp-server-starter -->
+    <version>2.1.0</version>
 </dependency>
 ----
 
-and enable the stdio transport:
+The version of `spring-ai-starter-mcp-server` must be the Spring AI version
+the starter is built with: the version of `spring-ai-starter-mcp-server-webmvc`
+in the POM of `camel-mcp-server-starter`. Another
+version, including one that the dependency management of the application
+imposes, for example with an older Spring AI BOM, can lack MCP Java SDK types
+the starter uses, and the application then fails at startup.
+
+Then enable the stdio transport:
 
 [source,properties]
 ----

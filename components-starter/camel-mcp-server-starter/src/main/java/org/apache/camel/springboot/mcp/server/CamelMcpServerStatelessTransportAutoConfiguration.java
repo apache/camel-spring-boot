@@ -17,9 +17,11 @@
 package org.apache.camel.springboot.mcp.server;
 
 import io.modelcontextprotocol.json.jackson3.JacksonMcpJsonMapper;
+import org.springframework.ai.mcp.customizer.McpServerCustomizer;
 import org.springframework.ai.mcp.server.common.autoconfigure.McpServerStdioDisabledCondition;
 import org.springframework.ai.mcp.server.common.autoconfigure.properties.McpServerStreamableHttpProperties;
 import org.springframework.ai.mcp.server.webmvc.transport.WebMvcStatelessServerTransport;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -37,6 +39,10 @@ import tools.jackson.databind.json.JsonMapper;
  * This configuration runs before Spring AI's default WebMVC stateless transport configuration. It keeps the Spring AI
  * endpoint, and adds Camel's Origin validation and a transport context extractor for the authenticated caller
  * identity.
+ * <p>
+ * As Spring AI does for its own transport, every {@code McpServerCustomizer} of the
+ * {@link WebMvcStatelessServerTransport.Builder} is applied, in order, after Camel's settings: a customizer can
+ * override them, for example by setting its own security validator or context extractor, which then replaces Camel's.
  * <p>
  * An application-defined {@link WebMvcStatelessServerTransport} takes precedence.
  */
@@ -74,14 +80,17 @@ public class CamelMcpServerStatelessTransportAutoConfiguration {
     WebMvcStatelessServerTransport webMvcStatelessServerTransport(
             @Qualifier("mcpServerJsonMapper") JsonMapper jsonMapper,
             McpServerStreamableHttpProperties serverProperties,
-            McpServerConfigurationProperties camelProperties) {
+            McpServerConfigurationProperties camelProperties,
+            ObjectProvider<McpServerCustomizer<WebMvcStatelessServerTransport.Builder>> customizers) {
 
-        return WebMvcStatelessServerTransport.builder()
+        WebMvcStatelessServerTransport.Builder builder = WebMvcStatelessServerTransport.builder()
                 .jsonMapper(new JacksonMcpJsonMapper(jsonMapper))
                 .messageEndpoint(serverProperties.getMcpEndpoint())
                 .securityValidator(
                         CamelMcpServerTransportAutoConfiguration.createOriginValidator(camelProperties.getAllowedOrigins()))
-                .contextExtractor(SpringAiMcpTransportContext::extract)
-                .build();
+                .contextExtractor(SpringAiMcpTransportContext::extract);
+        // the customizers of the application come last, as with Spring AI's own transport bean
+        customizers.orderedStream().forEach(customizer -> customizer.customize(builder));
+        return builder.build();
     }
 }

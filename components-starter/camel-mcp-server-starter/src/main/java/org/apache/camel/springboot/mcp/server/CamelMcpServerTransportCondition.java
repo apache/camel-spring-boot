@@ -19,15 +19,21 @@ package org.apache.camel.springboot.mcp.server;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
+import org.springframework.core.env.PropertyResolver;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.util.StringUtils;
 
 /**
- * Controls whether Camel replaces Spring AI's default Streamable HTTP transport.
- * By default, replacement is enabled only when Camel MCP tags are configured.
- * The explicit transport-enabled property overrides that default.
+ * Controls whether Camel installs its HTTP transport (Origin validation and authenticated caller identity) for the
+ * Spring AI MCP server of protocol {@code STREAMABLE}, {@code STATELESS} or {@code MODERN}.
+ * <p>
+ * By default, it is installed only when Camel MCP tags are configured and the Spring AI MCP server is of the
+ * {@code SYNC} type ({@code spring.ai.mcp.server.type}, the default), the only type the Camel routes are served on.
+ * The explicit {@code camel.mcp-server.transport-enabled} property overrides that default.
  */
 public final class CamelMcpServerTransportCondition implements Condition {
+
+    static final String SERVER_TYPE_PROPERTY = "spring.ai.mcp.server.type";
 
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
@@ -38,6 +44,16 @@ public final class CamelMcpServerTransportCondition implements Condition {
             return explicitlyEnabled;
         }
 
-        return StringUtils.hasText(context.getEnvironment().getProperty("camel.mcp-server.tags"));
+        return StringUtils.hasText(context.getEnvironment().getProperty("camel.mcp-server.tags"))
+                && isSyncServerType(context.getEnvironment());
+    }
+
+    /**
+     * Whether the Spring AI MCP server is of the {@code SYNC} type, with the same rule as Spring AI's
+     * {@code @ConditionalOnProperty(name = "spring.ai.mcp.server.type", havingValue = "SYNC", matchIfMissing = true)}.
+     */
+    static boolean isSyncServerType(PropertyResolver environment) {
+        String type = environment.getProperty(SERVER_TYPE_PROPERTY);
+        return type == null || "SYNC".equalsIgnoreCase(type);
     }
 }

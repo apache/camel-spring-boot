@@ -21,16 +21,20 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import io.modelcontextprotocol.json.McpJsonDefaults;
 import io.modelcontextprotocol.json.McpJsonMapper;
+import io.modelcontextprotocol.json.schema.JsonSchemaValidator;
 import io.modelcontextprotocol.modern.McpException;
 import io.modelcontextprotocol.modern.McpSchema;
 import io.modelcontextprotocol.modern.McpSchema.ErrorCodes;
 import io.modelcontextprotocol.modern.server.McpSyncResponse;
 import io.modelcontextprotocol.modern.server.feature.McpSyncPrompt;
+import io.modelcontextprotocol.modern.server.feature.McpSyncResource;
 import io.modelcontextprotocol.modern.server.feature.McpSyncTool;
 import io.modelcontextprotocol.modern.server.feature.ResourceTemplatesPage;
+import io.modelcontextprotocol.modern.server.feature.ResourcesPage;
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.ai.resource.AiResourceUriTemplate;
 import org.apache.camel.component.ai.tool.AiToolAnnotations;
@@ -61,8 +65,9 @@ import org.springframework.ai.mcp.modern.SyncResourceTemplateRegistration;
  * That server has no session: it takes its tools, resources and prompts from repositories. The routes go into the
  * in-memory repositories Spring AI auto-configures, next to the application's own tools, resources and prompts, and
  * those repositories tell the clients listening with {@code subscriptions/listen} when a list changes. A route with the
- * name or URI of an entry already served is refused. A repository the application defines itself cannot be added to,
- * so the routes of that kind are refused too.
+ * name or URI of an entry already served is refused, and so is a resource with the URI of a resource template, or the
+ * reverse, because the repository removes both together. A repository the application defines itself cannot be added
+ * to, so the routes of that kind are refused too.
  * <p>
  * The conversions mirror {@link SpringAiMcpServerEngine}, with the types of the 2026-07-28 schema of the MCP Java SDK.
  */
@@ -82,6 +87,10 @@ public class SpringAiModernMcpServerEngine extends ServiceSupport implements Mcp
     private final InMemorySyncResourceRepository resources;
     private final InMemorySyncPromptRepository prompts;
     private final McpJsonMapper jsonMapper = McpJsonDefaults.getMapper();
+    // what the routes registered, so that only these are removed: the repository removes the resource and the template
+    // of a URI together, and the application can remove and register entries too
+    private final Map<String, SyncResourceRegistration> camelResources = new ConcurrentHashMap<>();
+    private final Map<String, SyncResourceTemplateRegistration> camelTemplates = new ConcurrentHashMap<>();
     private CamelContext camelContext;
 
     /**
@@ -121,8 +130,9 @@ public class SpringAiModernMcpServerEngine extends ServiceSupport implements Mcp
     public void toolAdded(McpServerTool tool) {
         if (tools == null) {
             throw new McpServerRefusedException(
-                    "MCP tool '" + tool.name() + "' is not served: the Spring AI MCP server serves no tools, or"
-                                                + " serves them from a repository of the application");
+                    "MCP tool '" + tool.name() + "' is not served: the Spring AI MCP server serves no tools (see"
+                                                + " spring.ai.mcp.server.capabilities.tool), or serves them from a"
+                                                + " repository of the application");
         }
         McpSchema.Tool definition;
         try {
@@ -181,7 +191,14 @@ public class SpringAiModernMcpServerEngine extends ServiceSupport implements Mcp
                         .build());
             }
         }
-        return builder.build();
+        McpSchema.Tool definition = builder.build();
+        // the session and stateless servers check the schemas when a tool is added, the tools feature of this server
+        // only when the tool is called: check them here, with the validator Spring AI gives that feature, so the tool
+        // is refused instead
+        JsonSchemaValidator validator = McpJsonDefaults.getSchemaValidator();
+        validator.assertConforms("Tool '" + tool.name() + "' inputSchema", definition.inputSchema());
+        validator.assertConforms("Tool '" + tool.name() + "' outputSchema", definition.outputSchema());
+        return definition;
     }
 
     // ---- resources and resource templates
@@ -191,7 +208,15 @@ public class SpringAiModernMcpServerEngine extends ServiceSupport implements Mcp
         if (resources == null) {
             throw new McpServerRefusedException(
                     "MCP resource '" + resource.uri() + "' is not served: the Spring AI MCP server serves no"
-                                                + " resources, or serves them from a repository of the application");
+                                                + " resources (see spring.ai.mcp.server.capabilities.resource), or"
+                                                + " serves them from a repository of the application");
+        }
+        // the repository's remove(uri) removes the template of that URI too
+        if (resources.findTemplate(null, resource.uri()) != null) {
+            throw new McpServerRefusedException(
+                    "MCP resource '" + resource.uri() + "' is not served: a resource template with the same URI is"
+                                                + " already registered, and the Spring AI resource repository"
+                                                + " removes both together");
         }
         McpSchema.Resource.Builder builder = McpSchema.Resource.builder(resource.uri(), resource.name())
                 .description(resource.description())
@@ -199,21 +224,35 @@ public class SpringAiModernMcpServerEngine extends ServiceSupport implements Mcp
         if (resource.title() != null && !resource.title().isBlank()) {
             builder.title(resource.title());
         }
+        SyncResourceRegistration registration = SyncResourceRegistration.of(builder.build(),
+                (ctx, request) -> McpSyncResponse.result(
+                        readResult(resource.uri(), resource.mimeType(), resource.handler().read())));
         try {
-            resources.add(SyncResourceRegistration.of(builder.build(), (ctx, request) -> McpSyncResponse.result(
-                    readResult(resource.uri(), resource.mimeType(), resource.handler().read()))));
+            resources.add(registration);
         } catch (IllegalArgumentException e) {
             throw new McpServerRefusedException(
                     "An MCP resource with URI '" + resource.uri() + "' is already registered", e);
         }
+        camelResources.put(resource.uri(), registration);
         LOG.debug("MCP resource added: {}", resource.uri());
     }
 
     @Override
     public void resourceRemoved(String resourceUri) {
-        if (resources != null && resources.remove(resourceUri)) {
-            LOG.debug("MCP resource removed: {}", resourceUri);
+        SyncResourceRegistration registration = camelResources.remove(resourceUri);
+        // the repository serves a URI from its resource before any template: another handler means the application
+        // removed the route's resource, and what it registered under that URI since is left alone
+        if (registration == null || resources.find(null, resourceUri) != registration.handler()) {
+            return;
         }
+        boolean templateToo = resources.findTemplate(null, resourceUri) != null;
+        resources.remove(resourceUri);
+        if (templateToo) {
+            LOG.warn("Removing MCP resource '{}' also removed the resource template the application registered with"
+                     + " the same URI after it: the Spring AI resource repository removes both together",
+                    resourceUri);
+        }
+        LOG.debug("MCP resource removed: {}", resourceUri);
     }
 
     @Override
@@ -227,7 +266,8 @@ public class SpringAiModernMcpServerEngine extends ServiceSupport implements Mcp
         if (resources == null) {
             throw new McpServerRefusedException(
                     "MCP resource template '" + uriTemplate + "' is not served: the Spring AI MCP server serves no"
-                                                + " resources, or serves them from a repository of the application");
+                                                + " resources (see spring.ai.mcp.server.capabilities.resource), or"
+                                                + " serves them from a repository of the application");
         }
         List<McpSchema.ResourceTemplate> existingTemplates = listResourceTemplates();
         if (existingTemplates.stream().anyMatch(existing -> existing.uriTemplate().equals(uriTemplate))) {
@@ -235,6 +275,13 @@ public class SpringAiModernMcpServerEngine extends ServiceSupport implements Mcp
                     "An MCP resource template '" + uriTemplate + "' is already registered");
         }
         checkNoOverlap(uriTemplate, existingTemplates);
+        // the repository's remove(uri) removes the resource of that URI too
+        if (hasResource(uriTemplate, null)) {
+            throw new McpServerRefusedException(
+                    "MCP resource template '" + uriTemplate + "' is not served: a resource with the same URI is"
+                                                + " already registered, and the Spring AI resource repository"
+                                                + " removes both together");
+        }
 
         McpSchema.ResourceTemplate.Builder builder = McpSchema.ResourceTemplate.builder(uriTemplate,
                 resourceTemplate.name())
@@ -243,27 +290,67 @@ public class SpringAiModernMcpServerEngine extends ServiceSupport implements Mcp
         if (resourceTemplate.title() != null && !resourceTemplate.title().isBlank()) {
             builder.title(resourceTemplate.title());
         }
+        SyncResourceTemplateRegistration registration = SyncResourceTemplateRegistration.of(builder.build(),
+                (ctx, request) -> McpSyncResponse.result(readResult(request.uri(), resourceTemplate.mimeType(),
+                        resourceTemplate.handler().read(request.uri()))));
         try {
-            resources.add(SyncResourceTemplateRegistration.of(builder.build(),
-                    (ctx, request) -> McpSyncResponse.result(readResult(request.uri(), resourceTemplate.mimeType(),
-                            resourceTemplate.handler().read(request.uri())))));
+            resources.add(registration);
         } catch (IllegalArgumentException e) {
             throw new McpServerRefusedException(
                     "MCP resource template '" + uriTemplate + "' cannot be registered: " + e.getMessage(), e);
         }
+        camelTemplates.put(uriTemplate, registration);
         LOG.debug("MCP resource template added: {}", uriTemplate);
     }
 
     @Override
     public void resourceTemplateRemoved(String uriTemplate) {
-        if (resources != null && resources.remove(uriTemplate)) {
-            LOG.debug("MCP resource template removed: {}", uriTemplate);
+        SyncResourceTemplateRegistration registration = camelTemplates.remove(uriTemplate);
+        // another template under that URI template means the application removed the route's template, and what it
+        // registered under that URI since is left alone
+        if (registration == null || resources.findTemplate(null, uriTemplate) != registration.template()) {
+            return;
         }
+        boolean resourceToo = hasResource(uriTemplate, registration.handler());
+        resources.remove(uriTemplate);
+        if (resourceToo) {
+            LOG.warn("Removing MCP resource template '{}' also removed the resource the application registered with"
+                     + " the same URI after it: the Spring AI resource repository removes both together",
+                    uriTemplate);
+        }
+        LOG.debug("MCP resource template removed: {}", uriTemplate);
     }
 
     @Override
     public boolean supportsResourceTemplates() {
         return resources != null;
+    }
+
+    /**
+     * Whether a resource, the application's included, is registered with this URI. The repository serves a URI from
+     * its resource before any template, so when it finds no handler, or the handler of the given template, there is
+     * none; otherwise the handler may be another template's, and the resources are listed.
+     */
+    private boolean hasResource(String uri, McpSyncResource templateHandler) {
+        try {
+            // the in-memory repository does not read the request context
+            McpSyncResource handler = resources.find(null, uri);
+            if (handler == null || handler == templateHandler) {
+                return false;
+            }
+        } catch (RuntimeException e) {
+            // the URI template is not a read URI, which the template matcher of the repository may reject
+            LOG.debug("Cannot look up MCP resource '{}' directly, listing the resources: {}", uri, e.getMessage());
+        }
+        String cursor = null;
+        do {
+            ResourcesPage page = resources.list(null, cursor);
+            if (page.resources().stream().anyMatch(existing -> existing.uri().equals(uri))) {
+                return true;
+            }
+            cursor = page.nextCursor();
+        } while (cursor != null);
+        return false;
     }
 
     /**
@@ -353,8 +440,9 @@ public class SpringAiModernMcpServerEngine extends ServiceSupport implements Mcp
     public void promptAdded(McpServerPrompt prompt) {
         if (prompts == null) {
             throw new McpServerRefusedException(
-                    "MCP prompt '" + prompt.name() + "' is not served: the Spring AI MCP server serves no prompts,"
-                                                + " or serves them from a repository of the application");
+                    "MCP prompt '" + prompt.name() + "' is not served: the Spring AI MCP server serves no prompts"
+                                                + " (see spring.ai.mcp.server.capabilities.prompt), or serves them"
+                                                + " from a repository of the application");
         }
         McpSchema.Prompt.Builder builder = McpSchema.Prompt.builder(prompt.name())
                 .description(prompt.description())
