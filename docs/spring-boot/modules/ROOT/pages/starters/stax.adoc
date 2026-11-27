@@ -3,7 +3,7 @@
 = StAX
 :artifactid: camel-stax-starter
 
-Process XML payloads by a SAX ContentHandler.
+Parse XML payloads with a StAX reader and send the parse events to a SAX ContentHandler.
 
 == What's inside
 

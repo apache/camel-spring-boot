@@ -23,7 +23,7 @@
     {
       "name": "camel.component.spring-ai-vector-store.configuration",
       "type": "org.apache.camel.component.springai.vectorstore.SpringAiVectorStoreConfiguration",
-      "description": "The configuration. The option is a org.apache.camel.component.springai.vectorstore.SpringAiVectorStoreConfiguration type.",
+      "description": "The configuration that the endpoints start from. Each endpoint uses a copy, so its own options replace the options of this configuration. The option is a org.apache.camel.component.springai.vectorstore.SpringAiVectorStoreConfiguration type.",
       "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration"
     },
     {
@@ -40,7 +40,7 @@
     {
       "name": "camel.component.spring-ai-vector-store.filter-expression",
       "type": "java.lang.String",
-      "description": "Filter expression for metadata-based filtering in searches.",
+      "description": "The filter on the metadata of the documents for SIMILARITY_SEARCH, in the portable filter expression syntax of Spring AI, for example country == 'UK' && year >= 2020. The CamelSpringAiVectorStoreFilterExpression header replaces this option. DELETE does not delete by filter.",
       "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration"
     },
     {
@@ -53,7 +53,7 @@
     {
       "name": "camel.component.spring-ai-vector-store.operation",
       "type": "org.apache.camel.component.springai.vectorstore.SpringAiVectorStoreOperation",
-      "description": "The operation to perform on the vector store (ADD, DELETE, SIMILARITY_SEARCH, UPSERT).",
+      "description": "The operation that the producer performs: ADD adds documents, which the vector store embeds; UPSERT writes documents with their vectors as they are, and replaces a document with the same id; DELETE deletes documents by id; SIMILARITY_SEARCH finds the documents most similar to a query. The CamelSpringAiVectorStoreOperation header replaces this option.",
       "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration",
       "defaultValue": "add"
     },
@@ -67,20 +67,20 @@
     {
       "name": "camel.component.spring-ai-vector-store.similarity-threshold",
       "type": "java.lang.Double",
-      "description": "The minimum similarity score threshold (0-1) for similarity search.",
+      "description": "The minimum similarity score, from 0 to 1, of the documents that SIMILARITY_SEARCH returns. The default 0.0 accepts all documents. The CamelSpringAiVectorStoreSimilarityThreshold header replaces this option.",
       "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration"
     },
     {
       "name": "camel.component.spring-ai-vector-store.top-k",
       "type": "java.lang.Integer",
-      "description": "The maximum number of similar documents to return for similarity search.",
+      "description": "The maximum number of documents that SIMILARITY_SEARCH returns. The value must not be negative. The CamelSpringAiVectorStoreTopK header replaces this option.",
       "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration",
       "defaultValue": 5
     },
     {
       "name": "camel.component.spring-ai-vector-store.vector-store",
       "type": "org.springframework.ai.vectorstore.VectorStore",
-      "description": "The VectorStore to use for vector operations. The option is a org.springframework.ai.vectorstore.VectorStore type.",
+      "description": "The Spring AI org.springframework.ai.vectorstore.VectorStore that the producer uses, such as a Qdrant or PGvector vector store. For ADD and for SIMILARITY_SEARCH of a text, the vector store embeds the text with its own embedding model. The option is a org.springframework.ai.vectorstore.VectorStore type.",
       "sourceType": "org.apache.camel.component.springai.vectorstore.springboot.SpringAiVectorStoreComponentConfiguration"
     }
   ],

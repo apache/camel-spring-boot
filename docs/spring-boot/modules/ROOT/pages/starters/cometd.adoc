@@ -3,7 +3,7 @@
 = CometD
 :artifactid: camel-cometd-starter
 
-Offers publish/subscribe, peer-to-peer (via a server), and RPC style messaging using the CometD/Bayeux protocol.
+Publish messages to web clients and receive their messages with the CometD/Bayeux protocol, through an embedded Jetty server.
 
 == What's inside
 
@@ -32,12 +32,12 @@ The starter supports 11 options, which are listed below.
 | camel.component.cometd.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.cometd.bridge-error-handler | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
 | camel.component.cometd.enabled | Whether to enable auto configuration of the cometd component. This is enabled by default. |  | Boolean
-| camel.component.cometd.extensions | To use a list of custom BayeuxServer.Extension that allows modifying incoming and outgoing requests. |  | BayeuxServer$Extension>
+| camel.component.cometd.extensions | The list of BayeuxServer.Extension that can modify or drop the incoming and outgoing Bayeux messages. They are added to each CometD server that the component starts. |  | BayeuxServer$Extension>
 | camel.component.cometd.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.cometd.security-policy | To use a custom configured SecurityPolicy to control authorization. The option is a org.cometd.bayeux.server.SecurityPolicy type. |  | SecurityPolicy
-| camel.component.cometd.ssl-context-parameters | To configure security using SSLContextParameters. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
-| camel.component.cometd.ssl-key-password | The password for the keystore when using SSL. |  | String
-| camel.component.cometd.ssl-keystore | The path to the keystore. |  | String
-| camel.component.cometd.ssl-password | The password when using SSL. |  | String
-| camel.component.cometd.use-global-ssl-context-parameters | Enable usage of global SSL context parameters. | false | Boolean
+| camel.component.cometd.security-policy | The CometD SecurityPolicy that decides whether a client may handshake, create a channel, subscribe to a channel or publish to it. It is set on each CometD server that the component starts. The option is a org.cometd.bayeux.server.SecurityPolicy type. |  | SecurityPolicy
+| camel.component.cometd.ssl-context-parameters | The SSL configuration of the cometds server, such as the keystore with its certificate. When set, sslKeystore, sslPassword and sslKeyPassword are not used. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
+| camel.component.cometd.ssl-key-password | The password of the keystore that sslKeystore points to, for the cometds server. Not used when SSL context parameters are configured. |  | String
+| camel.component.cometd.ssl-keystore | The path of the keystore file with the certificate and private key of the cometds server. Not used when SSL context parameters are configured. |  | String
+| camel.component.cometd.ssl-password | The password of the private key in the keystore that sslKeystore points to, for the cometds server. Not used when SSL context parameters are configured. |  | String
+| camel.component.cometd.use-global-ssl-context-parameters | Whether the cometds server uses the global SSL context parameters of the CamelContext when sslContextParameters is not set. | false | Boolean
 |===

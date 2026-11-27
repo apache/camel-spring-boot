@@ -16,19 +16,19 @@
     {
       "name": "camel.component.aws2-sns.access-key",
       "type": "java.lang.String",
-      "description": "Amazon AWS Access Key",
+      "description": "The access key ID of the AWS credentials, used together with the secretKey option. The endpoint requires it, unless amazonSNSClient is set or useDefaultCredentialsProvider, useProfileCredentialsProvider or useSessionCredentials is true.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-sns.amazon-s-n-s-client",
       "type": "software.amazon.awssdk.services.sns.SnsClient",
-      "description": "To use the AmazonSNS as the client. The option is a software.amazon.awssdk.services.sns.SnsClient type.",
+      "description": "To use a custom software.amazon.awssdk.services.sns.SnsClient, which is autowired when the registry has a single one. When this option is set, the credentials, region, proxy, endpoint override and trustAllCertificates options are not used. The endpoint does not close a client that is set or autowired. The option is a software.amazon.awssdk.services.sns.SnsClient type.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-sns.auto-create-topic",
       "type": "java.lang.Boolean",
-      "description": "Setting the auto-creation of the topic",
+      "description": "Whether the endpoint creates the topic when it starts, if no topic with this name exists in the region. A name that ends with .fifo creates a FIFO topic. If false and the topic does not exist, the publish fails.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration",
       "defaultValue": false
     },
@@ -42,14 +42,14 @@
     {
       "name": "camel.component.aws2-sns.batch-enabled",
       "type": "java.lang.Boolean",
-      "description": "Define if we are publishing a single message or a batch",
+      "description": "Whether the producer publishes a batch of messages instead of one. The body must then be a List of the PublishBatchRequestEntry of the AWS SDK, at most 10, and the producer replaces it with the PublishBatchResponse. The subject, messageStructure and message group and deduplication options and the headers are not used for a batch.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws2-sns.configuration",
       "type": "org.apache.camel.component.aws2.sns.Sns2Configuration",
-      "description": "Component configuration. The option is a org.apache.camel.component.aws2.sns.Sns2Configuration type.",
+      "description": "The configuration that the endpoints of this component start from. Each endpoint gets a copy of it, and the options of the endpoint replace its values. The option is a org.apache.camel.component.aws2.sns.Sns2Configuration type.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {
@@ -80,7 +80,7 @@
     {
       "name": "camel.component.aws2-sns.kms-master-key-id",
       "type": "java.lang.String",
-      "description": "The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK.",
+      "description": "The ID, alias or ARN of the AWS KMS key that encrypts the topic, for example alias\/aws\/sns for the AWS managed key of Amazon SNS. It is used only when the endpoint creates the topic and serverSideEncryptionEnabled is true, and it is required then.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {
@@ -93,135 +93,135 @@
     {
       "name": "camel.component.aws2-sns.message-deduplication-id-strategy",
       "type": "java.lang.String",
-      "description": "Only for FIFO Topic. Strategy for setting the messageDeduplicationId on the message. It can be one of the following options: *useExchangeId*, *useContentBasedDeduplication*. For the *useContentBasedDeduplication* option, no messageDeduplicationId will be set on the message.",
+      "description": "How the producer sets the message deduplication ID for a FIFO topic: useExchangeId uses the ID of the exchange, and useContentBasedDeduplication sets none, so that Amazon SNS deduplicates by the content of the message, which the topic must enable. A FIFO topic that the endpoint creates with useContentBasedDeduplication has content-based deduplication enabled.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration",
       "defaultValue": "useExchangeId"
     },
     {
       "name": "camel.component.aws2-sns.message-group-id-strategy",
       "type": "java.lang.String",
-      "description": "Only for FIFO Topic. Strategy for setting the messageGroupId on the message. It can be one of the following options: *useConstant*, *useExchangeId*, *usePropertyValue*. For the *usePropertyValue* option, the value of property CamelAwsSnsMessageGroupId will be used.",
+      "description": "How the producer sets the message group ID for a FIFO topic: useConstant puts all messages in one group, useExchangeId uses the ID of the exchange, and usePropertyValue the exchange property CamelAwsSnsMessageGroupId. Amazon SNS requires a message group ID for a FIFO topic, so set this option for one. It is not used for a standard topic.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-sns.message-structure",
       "type": "java.lang.String",
-      "description": "The message structure to use such as json",
+      "description": "Set to json to send a different message for each protocol: the body is then a JSON object with a default key and a key per protocol, such as email or sqs. The CamelAwsSnsMessageStructure header replaces this option. It is not used when batchEnabled is true.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-sns.override-endpoint",
       "type": "java.lang.Boolean",
-      "description": "Set the need for overriding the endpoint. This option needs to be used in combination with the uriEndpointOverride option",
+      "description": "Whether to send the requests to the URI of the uriEndpointOverride option instead of the endpoint of the region. It has no effect when uriEndpointOverride is not set.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws2-sns.policy",
       "type": "java.lang.String",
-      "description": "The policy for this topic. Is loaded by default from classpath, but you can prefix with classpath:, file:, or http: to load the resource from different systems.",
+      "description": "The access policy of the topic, a JSON document that the endpoint sets on the topic when it starts, also on a topic that exists already. It is loaded from the classpath by default; use the prefix file: or http: to load it from another location.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-sns.profile-credentials-name",
       "type": "java.lang.String",
-      "description": "If using a profile credentials provider, this parameter will set the profile name",
+      "description": "The name of the profile in the AWS shared credentials and config files, used when useProfileCredentialsProvider is true. If not set, the AWS SDK uses its default profile, which the AWS_PROFILE environment variable can change.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-sns.proxy-host",
       "type": "java.lang.String",
-      "description": "To define a proxy host when instantiating the SNS client",
+      "description": "The host name of the proxy that the HTTP client of Amazon SNS connects through. The proxy is used only when the proxyPort option is set too.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-sns.proxy-port",
       "type": "java.lang.Integer",
-      "description": "To define a proxy port when instantiating the SNS client",
+      "description": "The port of the proxy that the HTTP client of Amazon SNS connects through. The proxy is used only when the proxyHost option is set too.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-sns.proxy-protocol",
       "type": "software.amazon.awssdk.core.Protocol",
-      "description": "To define a proxy protocol when instantiating the SNS client",
+      "description": "The protocol that the HTTP client of Amazon SNS uses to connect to the proxy. It is used only when the proxyHost and proxyPort options are set.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration",
       "defaultValue": "https"
     },
     {
       "name": "camel.component.aws2-sns.queue-arn",
       "type": "java.lang.String",
-      "description": "The ARN endpoint to subscribe to",
+      "description": "The ARN of the Amazon SQS queue that the endpoint subscribes to the topic when it starts, if subscribeSNStoSQS is true. The access policy of the queue must allow the topic to send messages to it.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-sns.region",
       "type": "java.lang.String",
-      "description": "The region in which the SNS client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example, ap-east-1) You'll need to use the name Region.EU_WEST_1.id()",
+      "description": "The AWS region of Amazon SNS, as a region ID such as eu-west-1, which is the value of Region.EU_WEST_1.id(). If not set, the default region provider chain of the AWS SDK is used. When the topic is given as an ARN, its region replaces the region of the component, and this option on the endpoint replaces both.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-sns.secret-key",
       "type": "java.lang.String",
-      "description": "Amazon AWS Secret Key",
+      "description": "The secret access key of the AWS credentials, used together with the accessKey option. The endpoint requires it, unless amazonSNSClient is set or useDefaultCredentialsProvider, useProfileCredentialsProvider or useSessionCredentials is true.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-sns.server-side-encryption-enabled",
       "type": "java.lang.Boolean",
-      "description": "Define if Server Side Encryption is enabled or not on the topic",
+      "description": "Whether the topic that the endpoint creates, see autoCreateTopic, is encrypted with the AWS KMS key of the kmsMasterKeyId option. It does not change a topic that exists already.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws2-sns.session-token",
       "type": "java.lang.String",
-      "description": "Amazon AWS Session Token used when the user needs to assume an IAM role",
+      "description": "The session token of temporary AWS credentials, for example of an assumed IAM role. It is used only when useSessionCredentials is true, together with the accessKey and secretKey options. When it is not set, the accessKey and secretKey options are used without a session token.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-sns.subject",
       "type": "java.lang.String",
-      "description": "The subject which is used if the message header 'CamelAwsSnsSubject' is not present.",
+      "description": "The subject of the message, which Amazon SNS uses as the Subject line of the email for email subscriptions. The CamelAwsSnsSubject header replaces this option. The producer cuts a subject longer than 100 characters, and does not use it when batchEnabled is true.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-sns.subscribe-s-n-sto-s-q-s",
       "type": "java.lang.Boolean",
-      "description": "Define if the subscription between SNS Topic and SQS must be done or not",
+      "description": "Whether the endpoint subscribes the Amazon SQS queue of the queueArn option to the topic when it starts. The queueArn option is required then.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws2-sns.trust-all-certificates",
       "type": "java.lang.Boolean",
-      "description": "If we want to trust all certificates in case of overriding the endpoint",
+      "description": "Whether the HTTP client of Amazon SNS trusts every TLS certificate without checking it. It applies to any endpoint, not only to an overridden one, so use it only for testing, for example against a local emulator.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws2-sns.uri-endpoint-override",
       "type": "java.lang.String",
-      "description": "Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option",
+      "description": "The URI of the endpoint to use instead of the endpoint of the region, for example http:\/\/localhost:4566 for a local emulator. It is used only when overrideEndpoint is true.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-sns.use-default-credentials-provider",
       "type": "java.lang.Boolean",
-      "description": "Set whether the SNS client should expect to load credentials on an AWS infra instance or to expect static credentials to be passed in.",
+      "description": "Whether to load the credentials with the default credentials provider chain of the AWS SDK, which looks in system properties, environment variables, the shared credentials and config files, and the container or instance role. It takes precedence over the other credentials options.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws2-sns.use-profile-credentials-provider",
       "type": "java.lang.Boolean",
-      "description": "Set whether the SNS client should expect to load credentials through a profile credentials provider.",
+      "description": "Whether to load the credentials from a profile of the AWS shared credentials and config files, the one of the profileCredentialsName option. It is not used when useDefaultCredentialsProvider is true, and it takes precedence over the session and static credentials.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws2-sns.use-session-credentials",
       "type": "java.lang.Boolean",
-      "description": "Set whether the SNS client should expect to use Session Credentials. This is useful in a situation in which the user needs to assume an IAM role for doing operations in SNS.",
+      "description": "Whether to use temporary credentials made of the accessKey, secretKey and sessionToken options, for example those of an assumed IAM role. It is not used when useDefaultCredentialsProvider or useProfileCredentialsProvider is true.",
       "sourceType": "org.apache.camel.component.aws2.sns.springboot.Sns2ComponentConfiguration",
       "defaultValue": false
     }

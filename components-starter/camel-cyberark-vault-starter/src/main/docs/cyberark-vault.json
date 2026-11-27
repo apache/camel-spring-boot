@@ -16,19 +16,19 @@
     {
       "name": "camel.component.cyberark-vault.account",
       "type": "java.lang.String",
-      "description": "The CyberArk Conjur account name",
+      "description": "The Conjur organization account, which is part of the path of every request to the Conjur REST API. Not used when the conjurClient option is set.",
       "sourceType": "org.apache.camel.component.cyberark.vault.springboot.CyberArkVaultComponentConfiguration"
     },
     {
       "name": "camel.component.cyberark-vault.api-key",
       "type": "java.lang.String",
-      "description": "The API key for authentication with CyberArk Conjur",
+      "description": "The API key of the Conjur user or host given by the username option. The component exchanges it for an access token, and again when Conjur rejects the token. Used when the authToken option is not set.",
       "sourceType": "org.apache.camel.component.cyberark.vault.springboot.CyberArkVaultComponentConfiguration"
     },
     {
       "name": "camel.component.cyberark-vault.auth-token",
       "type": "java.lang.String",
-      "description": "Pre-authenticated token to use for CyberArk Conjur",
+      "description": "A Conjur access token, as returned by the Conjur authenticate request, which the component sends Base64-encoded in the Authorization header. It takes precedence over apiKey and password. The component cannot renew it, so the requests fail once the token has expired.",
       "sourceType": "org.apache.camel.component.cyberark.vault.springboot.CyberArkVaultComponentConfiguration"
     },
     {
@@ -47,13 +47,13 @@
     {
       "name": "camel.component.cyberark-vault.configuration",
       "type": "org.apache.camel.component.cyberark.vault.CyberArkVaultConfiguration",
-      "description": "Component configuration. The option is a org.apache.camel.component.cyberark.vault.CyberArkVaultConfiguration type.",
+      "description": "The configuration that the endpoints of the component share: each endpoint starts from a copy of it. The option is a org.apache.camel.component.cyberark.vault.CyberArkVaultConfiguration type.",
       "sourceType": "org.apache.camel.component.cyberark.vault.springboot.CyberArkVaultComponentConfiguration"
     },
     {
       "name": "camel.component.cyberark-vault.conjur-client",
       "type": "org.apache.camel.component.cyberark.vault.client.ConjurClient",
-      "description": "Reference to a ConjurClient instance in the registry. The option is a org.apache.camel.component.cyberark.vault.client.ConjurClient type.",
+      "description": "To use a custom ConjurClient, for example #myClient from the registry. When set, the url, account, credential and SSL options are not used, and the endpoint does not close the client. The option is a org.apache.camel.component.cyberark.vault.client.ConjurClient type.",
       "sourceType": "org.apache.camel.component.cyberark.vault.springboot.CyberArkVaultComponentConfiguration"
     },
     {
@@ -77,32 +77,32 @@
     {
       "name": "camel.component.cyberark-vault.operation",
       "type": "org.apache.camel.component.cyberark.vault.CyberArkVaultOperations",
-      "description": "The operation to perform. It can be getSecret or createSecret",
+      "description": "The operation that the producer performs. getSecret reads the value of the secret into the message body. createSecret stores the message body, or the CamelCyberArkVaultSecretValue header, as a new value of a variable that is declared in Conjur policy. The CamelCyberArkVaultOperation header replaces this option.",
       "sourceType": "org.apache.camel.component.cyberark.vault.springboot.CyberArkVaultComponentConfiguration",
       "defaultValue": "getsecret"
     },
     {
       "name": "camel.component.cyberark-vault.password",
       "type": "java.lang.String",
-      "description": "The password for authentication with CyberArk Conjur",
+      "description": "The password of the Conjur user, used with the username option when neither authToken nor apiKey is set. The component sends it in the Conjur authenticate request, in place of an API key.",
       "sourceType": "org.apache.camel.component.cyberark.vault.springboot.CyberArkVaultComponentConfiguration"
     },
     {
       "name": "camel.component.cyberark-vault.secret-id",
       "type": "java.lang.String",
-      "description": "The secret ID to retrieve from CyberArk Conjur",
+      "description": "The ID of the secret, which is the ID of a Conjur variable, for example db\/password. If not set on the endpoint, the value of the URI path is used. The CamelCyberArkVaultSecretId header replaces this option.",
       "sourceType": "org.apache.camel.component.cyberark.vault.springboot.CyberArkVaultComponentConfiguration"
     },
     {
       "name": "camel.component.cyberark-vault.url",
       "type": "java.lang.String",
-      "description": "The CyberArk Conjur instance URL",
+      "description": "The base URL of the Conjur server, for example https:\/\/conjur.example.com. The component appends the paths of the Conjur REST API, such as \/authn and \/secrets, to it. Not used when the conjurClient option is set.",
       "sourceType": "org.apache.camel.component.cyberark.vault.springboot.CyberArkVaultComponentConfiguration"
     },
     {
       "name": "camel.component.cyberark-vault.username",
       "type": "java.lang.String",
-      "description": "The username for authentication with CyberArk Conjur",
+      "description": "The login of the Conjur user or host to authenticate as, for example admin or host\/myapp. It is used together with the apiKey option or the password option.",
       "sourceType": "org.apache.camel.component.cyberark.vault.springboot.CyberArkVaultComponentConfiguration"
     },
     {

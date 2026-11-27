@@ -3,7 +3,7 @@
 = AWS Elastic Compute Cloud (EC2)
 :artifactid: camel-aws2-ec2-starter
 
-Manage AWS EC2 instances.
+Launch, start, stop, reboot, terminate, describe, monitor and tag instances in AWS Elastic Compute Cloud (EC2).
 
 == What's inside
 
@@ -28,27 +28,27 @@ The starter supports 23 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| camel.component.aws2-ec2.access-key | Amazon AWS Access Key |  | String
-| camel.component.aws2-ec2.amazon-ec2-client | To use an existing configured AmazonEC2Client client. The option is a software.amazon.awssdk.services.ec2.Ec2Client type. |  | Ec2Client
+| camel.component.aws2-ec2.access-key | The access key ID of the AWS credentials, used together with the secretKey option. It is not used when useDefaultCredentialsProvider or useProfileCredentialsProvider is true. |  | String
+| camel.component.aws2-ec2.amazon-ec2-client | To use a custom software.amazon.awssdk.services.ec2.Ec2Client. When this option is set or autowired, the region, credentials, proxy, endpoint override and trustAllCertificates options are not used. The endpoint does not close a client that is set or autowired. The option is a software.amazon.awssdk.services.ec2.Ec2Client type. |  | Ec2Client
 | camel.component.aws2-ec2.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
-| camel.component.aws2-ec2.configuration | The component configuration. The option is a org.apache.camel.component.aws2.ec2.AWS2EC2Configuration type. |  | AWS2EC2Configuration
+| camel.component.aws2-ec2.configuration | The configuration that the endpoints of this component start from. Each endpoint uses a copy of it. The option is a org.apache.camel.component.aws2.ec2.AWS2EC2Configuration type. |  | AWS2EC2Configuration
 | camel.component.aws2-ec2.enabled | Whether to enable auto configuration of the aws2-ec2 component. This is enabled by default. |  | Boolean
 | camel.component.aws2-ec2.health-check-consumer-enabled | Used for enabling or disabling all consumer based health checks from this component | true | Boolean
 | camel.component.aws2-ec2.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
 | camel.component.aws2-ec2.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.aws2-ec2.operation | The operation to perform. It can be createAndRunInstances, startInstances, stopInstances, terminateInstances, describeInstances, describeInstancesStatus, rebootInstances, monitorInstances, unmonitorInstances, createTags or deleteTags |  | AWS2EC2Operations
-| camel.component.aws2-ec2.override-endpoint | Set the need for overriding the endpoint. This option needs to be used in combination with the uriEndpointOverride option | false | Boolean
-| camel.component.aws2-ec2.pojo-request | If we want to use a POJO request as body or not | false | Boolean
-| camel.component.aws2-ec2.profile-credentials-name | If using a profile credentials provider, this parameter will set the profile name |  | String
-| camel.component.aws2-ec2.proxy-host | To define a proxy host when instantiating the EC2 client |  | String
-| camel.component.aws2-ec2.proxy-port | To define a proxy port when instantiating the EC2 client |  | Integer
-| camel.component.aws2-ec2.proxy-protocol | To define a proxy protocol when instantiating the EC2 client | https | Protocol
-| camel.component.aws2-ec2.region | The region in which EC2 client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example, ap-east-1) You'll need to use the name Region.EU_WEST_1.id() |  | String
-| camel.component.aws2-ec2.secret-key | Amazon AWS Secret Key |  | String
-| camel.component.aws2-ec2.session-token | Amazon AWS Session Token used when the user needs to assume an IAM role |  | String
-| camel.component.aws2-ec2.trust-all-certificates | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
-| camel.component.aws2-ec2.uri-endpoint-override | Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option |  | String
-| camel.component.aws2-ec2.use-default-credentials-provider | Set whether the EC2 client should expect to load credentials through a default credentials provider or to expect static credentials to be passed in. | false | Boolean
-| camel.component.aws2-ec2.use-profile-credentials-provider | Set whether the EC2 client should expect to load credentials through a profile credentials provider. | false | Boolean
-| camel.component.aws2-ec2.use-session-credentials | Set whether the EC2 client should expect to use Session Credentials. This is useful in a situation in which the user needs to assume an IAM role for doing operations in EC2. | false | Boolean
+| camel.component.aws2-ec2.operation | The operation that the producer performs. The CamelAwsEC2Operation header replaces this option. |  | AWS2EC2Operations
+| camel.component.aws2-ec2.override-endpoint | Whether the EC2 client sends the requests to the URI of the uriEndpointOverride option instead of the EC2 endpoint of the region. It has no effect when uriEndpointOverride is not set. | false | Boolean
+| camel.component.aws2-ec2.pojo-request | Whether the body is the request of the AWS SDK for the operation, such as a DescribeInstancesRequest for describeInstances. If true, the producer sends that request as it is, and a body of another type fails. If false, the producer builds the request from the headers. | false | Boolean
+| camel.component.aws2-ec2.profile-credentials-name | The name of the profile to load when useProfileCredentialsProvider is true. If not set, the AWS SDK uses its default profile, which the AWS_PROFILE environment variable can set. |  | String
+| camel.component.aws2-ec2.proxy-host | The host name of the proxy that the EC2 client uses. The client uses a proxy only when the proxyPort option is set too. |  | String
+| camel.component.aws2-ec2.proxy-port | The port of the proxy that the EC2 client uses. The client uses a proxy only when the proxyHost option is set too. |  | Integer
+| camel.component.aws2-ec2.proxy-protocol | The protocol of the proxy that the EC2 client uses. It is used only when the proxyHost and proxyPort options are both set. | https | Protocol
+| camel.component.aws2-ec2.region | The ID of the AWS region of the EC2 service, in lower case, for example eu-west-1 (the value of Region.EU_WEST_1.id()). If not set, the AWS SDK resolves the region itself, for example from the AWS_REGION environment variable. |  | String
+| camel.component.aws2-ec2.secret-key | The secret access key of the AWS credentials, used together with the accessKey option. It is not used when useDefaultCredentialsProvider or useProfileCredentialsProvider is true. |  | String
+| camel.component.aws2-ec2.session-token | The session token of temporary AWS credentials, for example of an assumed IAM role. It is used only when useSessionCredentials is true, together with the accessKey and secretKey options. |  | String
+| camel.component.aws2-ec2.trust-all-certificates | Whether the EC2 client accepts any TLS certificate of the server without checking it. It applies whether or not the endpoint is overridden. Use it only for tests, for example with a local emulator. | false | Boolean
+| camel.component.aws2-ec2.uri-endpoint-override | The URI that the EC2 client sends the requests to, for example http://localhost:4566 for a local emulator. It is used only when overrideEndpoint is true. |  | String
+| camel.component.aws2-ec2.use-default-credentials-provider | Whether the EC2 client loads the credentials with the default credentials provider chain of the AWS SDK: system properties, environment variables, web identity token, the shared credentials and config files, and container or instance profile credentials. It takes precedence over the other credentials options. | false | Boolean
+| camel.component.aws2-ec2.use-profile-credentials-provider | Whether the EC2 client loads the credentials of a profile of the shared AWS credentials and config files. The profileCredentialsName option names the profile. It takes precedence over useSessionCredentials and the accessKey and secretKey options. | false | Boolean
+| camel.component.aws2-ec2.use-session-credentials | Whether the EC2 client uses temporary credentials made of the accessKey, secretKey and sessionToken options, for example to assume an IAM role. If one of the three is not set, the session credentials are not used. | false | Boolean
 |===

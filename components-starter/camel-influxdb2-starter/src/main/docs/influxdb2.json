@@ -34,7 +34,7 @@
     {
       "name": "camel.component.influxdb2.influx-d-b-client",
       "type": "com.influxdb.client.InfluxDBClient",
-      "description": "The shared Influx DB to use for all endpoints. The option is a com.influxdb.client.InfluxDBClient type.",
+      "description": "The com.influxdb.client.InfluxDBClient that all endpoints use. When it is set or autowired, the connectionBean of an endpoint is not looked up in the registry. The component does not close this client. The option is a com.influxdb.client.InfluxDBClient type.",
       "sourceType": "org.apache.camel.component.influxdb2.springboot.InfluxDb2ComponentConfiguration"
     },
     {

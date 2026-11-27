@@ -78,7 +78,7 @@
     {
       "name": "camel.component.infinispan.configuration-uri",
       "type": "java.lang.String",
-      "description": "An implementation specific URI for the CacheManager",
+      "description": "The location of the configuration file of the cache manager that Camel creates, read from the classpath unless it has a prefix such as file:. Not used when cacheContainer or cacheContainerConfiguration is set. For infinispan-embedded it is an Infinispan XML configuration file, read on the component only; for infinispan it is a Hot Rod client properties file.",
       "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration"
     },
     {
@@ -173,7 +173,7 @@
     {
       "name": "camel.component.infinispan.operation",
       "type": "org.apache.camel.component.infinispan.InfinispanOperation",
-      "description": "The operation to perform",
+      "description": "The operation that the producer performs. The CamelInfinispanOperation header replaces this option.",
       "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration",
       "defaultValue": "put"
     },
@@ -186,19 +186,19 @@
     {
       "name": "camel.component.infinispan.query-builder",
       "type": "org.apache.camel.component.infinispan.InfinispanQueryBuilder",
-      "description": "Specifies the query builder. The option is a org.apache.camel.component.infinispan.InfinispanQueryBuilder type.",
+      "description": "To use a custom org.apache.camel.component.infinispan.InfinispanQueryBuilder that builds the query of the QUERY operation of the producer, which the CamelInfinispanQueryBuilder header replaces. When set, the consumer registers a continuous query instead of a listener, and receives the CacheEntryJoining, CacheEntryUpdated and CacheEntryLeaving events of the entries that match the query. The option is a org.apache.camel.component.infinispan.InfinispanQueryBuilder type.",
       "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration"
     },
     {
       "name": "camel.component.infinispan.remapping-function",
       "type": "java.util.function.BiFunction",
-      "description": "Set a specific remappingFunction to use in a compute operation. The option is a java.util.function.BiFunction type.",
+      "description": "The java.util.function.BiFunction that the COMPUTE and COMPUTEASYNC operations call with the key and the current value of the entry, or null if there is none, to compute its new value. If the function returns null, the entry is removed. The option is a java.util.function.BiFunction type.",
       "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration"
     },
     {
       "name": "camel.component.infinispan.result-header",
       "type": "java.lang.String",
-      "description": "Store the operation result in a header instead of the message body. By default, resultHeader == null and the query result is stored in the message body, any existing content in the message body is discarded. If resultHeader is set, the value is used as the name of the header to store the query result and the original message body is preserved. This value can be overridden by an in message header named: CamelInfinispanOperationResultHeader",
+      "description": "The name of the header in which the producer stores the result of the operation, keeping the message body. If not set, the result replaces the message body. The CamelInfinispanOperationResultHeader header replaces this option.",
       "sourceType": "org.apache.camel.component.infinispan.remote.springboot.InfinispanRemoteComponentConfiguration"
     },
     {

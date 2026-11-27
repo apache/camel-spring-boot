@@ -23,7 +23,7 @@
     {
       "name": "camel.component.solr.connection-timeout",
       "type": "java.lang.Long",
-      "description": "The time in ms to wait before connection will time out.",
+      "description": "The time in milliseconds that the clients that Camel creates wait to connect to Solr. The connectionTimeout option of an endpoint replaces it.",
       "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration",
       "defaultValue": 60000
     },
@@ -35,13 +35,13 @@
     {
       "name": "camel.component.solr.default-collection",
       "type": "java.lang.String",
-      "description": "Solr default collection name",
+      "description": "The name of the collection, for the endpoints that set no collection.",
       "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration"
     },
     {
       "name": "camel.component.solr.enable-s-s-l",
       "type": "java.lang.Boolean",
-      "description": "Enable SSL",
+      "description": "Whether the clients that Camel creates connect to Solr with HTTPS instead of HTTP. The enableSSL option of an endpoint replaces it.",
       "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration",
       "defaultValue": false
     },
@@ -54,7 +54,7 @@
     {
       "name": "camel.component.solr.host",
       "type": "java.lang.String",
-      "description": "The solr instance host name",
+      "description": "The host name of the Solr server, for the endpoints that set their host to default. If not set, these endpoints use localhost.",
       "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration"
     },
     {
@@ -67,45 +67,45 @@
     {
       "name": "camel.component.solr.password",
       "type": "java.lang.String",
-      "description": "Password for authenticating",
+      "description": "The password for HTTP basic authentication with Solr, for all the endpoints. The password option of an endpoint replaces it.",
       "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration"
     },
     {
       "name": "camel.component.solr.port",
       "type": "java.lang.Integer",
-      "description": "The solr instance port number",
+      "description": "The port of the Solr server, for the endpoints that set no port. If not set, these endpoints use 8983.",
       "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration"
     },
     {
       "name": "camel.component.solr.request-timeout",
       "type": "java.lang.Long",
-      "description": "The timeout in ms to wait before the socket will time out.",
+      "description": "The time in milliseconds that the clients that Camel creates wait for the response to a request. The requestTimeout option of an endpoint replaces it.",
       "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration",
       "defaultValue": 600000
     },
     {
       "name": "camel.component.solr.solr-client",
       "type": "org.apache.solr.client.solrj.SolrClient",
-      "description": "To use an existing configured solr client, instead of creating a client per endpoint. This allows customizing the client with specific advanced settings. The option is a org.apache.solr.client.solrj.SolrClient type.",
+      "description": "To use a custom org.apache.solr.client.solrj.SolrClient for all the endpoints, instead of a client that Camel creates for each endpoint. The solrClient option of an endpoint replaces it. Camel does not close a client that is set or autowired. The option is a org.apache.solr.client.solrj.SolrClient type.",
       "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration"
     },
     {
       "name": "camel.component.solr.ssl-context-parameters",
       "type": "org.apache.camel.support.jsse.SSLContextParameters",
-      "description": "To configure security using SSLContextParameters. When configured, this takes precedence over the certificatePath option. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
+      "description": "The TLS configuration (key store, trust store, protocols, cipher suites, named groups) of the clients that Camel creates, for all the endpoints. It is used when the enableSSL option is enabled. The sslContextParameters option of an endpoint replaces it. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
       "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration"
     },
     {
       "name": "camel.component.solr.use-global-ssl-context-parameters",
       "type": "java.lang.Boolean",
-      "description": "Enable usage of global SSL context parameters.",
+      "description": "Whether the endpoints use the global SSL context parameters of the CamelContext when neither the component nor the endpoint sets the sslContextParameters option.",
       "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.solr.username",
       "type": "java.lang.String",
-      "description": "Basic authenticate user",
+      "description": "The user name for HTTP basic authentication with Solr, for all the endpoints. The username option of an endpoint replaces it.",
       "sourceType": "org.apache.camel.component.solr.springboot.SolrComponentConfiguration"
     }
   ],

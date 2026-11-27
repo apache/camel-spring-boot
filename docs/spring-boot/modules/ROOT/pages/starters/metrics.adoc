@@ -3,7 +3,7 @@
 = Metrics
 :artifactid: camel-metrics-starter
 
-Collect various metrics directly from Camel routes using the DropWizard metrics library.
+Update counters, gauges, histograms, meters and timers of a Dropwizard Metrics registry from Camel routes.
 
 == What's inside
 
@@ -31,5 +31,5 @@ The starter supports 4 options, which are listed below.
 | camel.component.metrics.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.metrics.enabled | Whether to enable auto configuration of the metrics component. This is enabled by default. |  | Boolean
 | camel.component.metrics.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.metrics.metric-registry | To use a custom configured MetricRegistry. The option is a com.codahale.metrics.MetricRegistry type. |  | MetricRegistry
+| camel.component.metrics.metric-registry | The Dropwizard MetricRegistry that holds the metrics. If not set, the component uses the bean named metricRegistry, or the only MetricRegistry bean, of the Camel registry, and else creates a registry whose Slf4jReporter logs the metrics at DEBUG level every 60 seconds. The option is a com.codahale.metrics.MetricRegistry type. |  | MetricRegistry
 |===

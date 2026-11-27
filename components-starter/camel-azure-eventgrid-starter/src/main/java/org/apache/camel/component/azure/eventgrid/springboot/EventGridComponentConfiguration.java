@@ -42,7 +42,9 @@ public class EventGridComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * The component configurations. The option is a
+     * The configuration that the endpoints of this component start from. Each
+     * endpoint gets a copy of it, and the options of the endpoint replace its
+     * values. The option is a
      * org.apache.camel.component.azure.eventgrid.EventGridConfiguration type.
      */
     private EventGridConfiguration configuration;
@@ -58,8 +60,9 @@ public class EventGridComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * The EventGrid publisher client. If provided, it will be used instead of
-     * creating a new one. The option is a
+     * To use a custom com.azure.messaging.eventgrid.EventGridPublisherClient
+     * for CloudEvents. When it is set or autowired, the topicEndpoint and the
+     * credential options are not used. The option is a
      * com.azure.messaging.eventgrid.EventGridPublisherClient<com.azure.core.models.CloudEvent> type.
      */
     private EventGridPublisherClient<CloudEvent> publisherClient;
@@ -73,23 +76,31 @@ public class EventGridComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * The access key for the Event Grid topic. Required when using ACCESS_KEY
-     * credential type.
+     * The access key of the Event Grid topic, for credentialType ACCESS_KEY.
+     * The azureKeyCredential option replaces it, and it is not used when the
+     * tokenCredential option is set.
      */
     private String accessKey;
     /**
-     * The Azure Key Credential for authentication. This is automatically
-     * created from the accessKey if not provided. The option is a
+     * The access key of the Event Grid topic as a
+     * com.azure.core.credential.AzureKeyCredential, for credentialType
+     * ACCESS_KEY. It replaces the accessKey option, and it is not used when the
+     * tokenCredential option is set. The option is a
      * com.azure.core.credential.AzureKeyCredential type.
      */
     private AzureKeyCredential azureKeyCredential;
     /**
-     * Determines the credential strategy to adopt
+     * How the producer authenticates: ACCESS_KEY with the azureKeyCredential or
+     * accessKey option, TOKEN_CREDENTIAL with the tokenCredential option, or
+     * AZURE_IDENTITY with a DefaultAzureCredential of the Azure Identity
+     * library. When one of these credential options is set, the component
+     * chooses the type from it, so set this option only for AZURE_IDENTITY.
      */
     private CredentialType credentialType = CredentialType.ACCESS_KEY;
     /**
-     * Provide custom authentication credentials using an implementation of
-     * TokenCredential. The option is a
+     * The com.azure.core.credential.TokenCredential that authenticates the
+     * producer with Microsoft Entra ID. When it is set, the accessKey and
+     * azureKeyCredential options are not used. The option is a
      * com.azure.core.credential.TokenCredential type.
      */
     private TokenCredential tokenCredential;

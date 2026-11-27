@@ -27,9 +27,27 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.milvus.ca-pem-path",
+      "type": "java.lang.String",
+      "description": "The path of a PEM file with the certificate authority that the client trusts for mutual TLS. Set it together with clientPemPath and clientKeyPath; for one-way TLS use serverPemPath instead. Not used when a MilvusClient is set with MilvusConfiguration.setClient().",
+      "sourceType": "org.apache.camel.component.milvus.springboot.MilvusComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milvus.client-key-path",
+      "type": "java.lang.String",
+      "description": "The path of a PEM file with the private key (PKCS#8) of the client for mutual TLS. Set it together with caPemPath and clientPemPath. Not used when a MilvusClient is set with MilvusConfiguration.setClient().",
+      "sourceType": "org.apache.camel.component.milvus.springboot.MilvusComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milvus.client-pem-path",
+      "type": "java.lang.String",
+      "description": "The path of a PEM file with the certificate of the client for mutual TLS. Set it together with caPemPath and clientKeyPath. Not used when a MilvusClient is set with MilvusConfiguration.setClient().",
+      "sourceType": "org.apache.camel.component.milvus.springboot.MilvusComponentConfiguration"
+    },
+    {
       "name": "camel.component.milvus.configuration",
       "type": "org.apache.camel.component.milvus.MilvusConfiguration",
-      "description": "The configuration;. The option is a org.apache.camel.component.milvus.MilvusConfiguration type.",
+      "description": "The configuration that the endpoints start from. Each endpoint gets a copy, and its options replace the values of the copy. It also holds the MilvusClient that MilvusConfiguration.setClient() sets, which the endpoints share. The option is a org.apache.camel.component.milvus.MilvusConfiguration type.",
       "sourceType": "org.apache.camel.component.milvus.springboot.MilvusComponentConfiguration"
     },
     {
@@ -46,7 +64,7 @@
     {
       "name": "camel.component.milvus.host",
       "type": "java.lang.String",
-      "description": "The host to connect to.",
+      "description": "The host name or IP address of the Milvus server. Not used when a MilvusClient is set with MilvusConfiguration.setClient().",
       "sourceType": "org.apache.camel.component.milvus.springboot.MilvusComponentConfiguration",
       "defaultValue": "localhost"
     },
@@ -60,20 +78,39 @@
     {
       "name": "camel.component.milvus.port",
       "type": "java.lang.Integer",
-      "description": "The port to connect to.",
+      "description": "The gRPC port of the Milvus server. Not used when a MilvusClient is set with MilvusConfiguration.setClient().",
       "sourceType": "org.apache.camel.component.milvus.springboot.MilvusComponentConfiguration",
       "defaultValue": 19530
     },
     {
+      "name": "camel.component.milvus.secure",
+      "type": "java.lang.Boolean",
+      "description": "Whether to connect to the Milvus server with TLS. If not set, the connection is plaintext, and the token is sent in clear text, unless serverPemPath, or caPemPath with clientPemPath and clientKeyPath, is set. Without these options, the client trusts the certificate authorities of the JVM. Not used when a MilvusClient is set with MilvusConfiguration.setClient().",
+      "sourceType": "org.apache.camel.component.milvus.springboot.MilvusComponentConfiguration",
+      "defaultValue": false
+    },
+    {
+      "name": "camel.component.milvus.server-name",
+      "type": "java.lang.String",
+      "description": "The name that the client expects in the certificate of the Milvus server (the authority of the gRPC channel), when it differs from the host. Only used with serverPemPath, where the host is used if not set, or with mutual TLS. Not used when a MilvusClient is set with MilvusConfiguration.setClient().",
+      "sourceType": "org.apache.camel.component.milvus.springboot.MilvusComponentConfiguration"
+    },
+    {
+      "name": "camel.component.milvus.server-pem-path",
+      "type": "java.lang.String",
+      "description": "The path of a PEM file with the certificate of the Milvus server, or of the certificate authority that signed it, that the client trusts for one-way TLS. Setting it connects with TLS. Not used when a MilvusClient is set with MilvusConfiguration.setClient().",
+      "sourceType": "org.apache.camel.component.milvus.springboot.MilvusComponentConfiguration"
+    },
+    {
       "name": "camel.component.milvus.timeout",
       "type": "java.lang.Long",
-      "description": "Sets a default timeout for all requests",
+      "description": "The timeout in milliseconds for connecting to the Milvus server, 10000 if not set. The value must be greater than 0. It is not a timeout of each request: the requests have no deadline. Not used when a MilvusClient is set with MilvusConfiguration.setClient().",
       "sourceType": "org.apache.camel.component.milvus.springboot.MilvusComponentConfiguration"
     },
     {
       "name": "camel.component.milvus.token",
       "type": "java.lang.String",
-      "description": "Sets the API key to use for authentication",
+      "description": "The token that the client sends to authenticate with Milvus: a user name and password joined by a colon, or an API key of Zilliz Cloud. If not set, the client sends no credentials. Not used when a MilvusClient is set with MilvusConfiguration.setClient().",
       "sourceType": "org.apache.camel.component.milvus.springboot.MilvusComponentConfiguration"
     }
   ],

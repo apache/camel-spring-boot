@@ -41,6 +41,7 @@ public class WatsonxAiComponentConverter implements GenericConverter {
     public Set<ConvertiblePair> getConvertibleTypes() {
         Set<ConvertiblePair> answer = new LinkedHashSet<>();
         answer.add(new ConvertiblePair(String.class, org.apache.camel.component.ibm.watsonx.ai.WatsonxAiConfiguration.class));
+        answer.add(new ConvertiblePair(String.class, com.ibm.watsonx.ai.core.auth.Authenticator.class));
         return answer;
     }
 

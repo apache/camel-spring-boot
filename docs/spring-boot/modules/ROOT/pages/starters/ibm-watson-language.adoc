@@ -3,7 +3,7 @@
 = IBM Watson Language
 :artifactid: camel-ibm-watson-language-starter
 
-Perform natural language processing using IBM Watson Natural Language Understanding
+Analyze text and web pages with IBM Watson Natural Language Understanding.
 
 == What's inside
 
@@ -28,19 +28,19 @@ The starter supports 15 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| camel.component.ibm-watson-language.analyze-categories | Enable category classification | false | Boolean
-| camel.component.ibm-watson-language.analyze-concepts | Enable concept extraction | false | Boolean
-| camel.component.ibm-watson-language.analyze-emotion | Enable emotion analysis | false | Boolean
-| camel.component.ibm-watson-language.analyze-entities | Enable entity extraction | true | Boolean
-| camel.component.ibm-watson-language.analyze-keywords | Enable keyword extraction | true | Boolean
-| camel.component.ibm-watson-language.analyze-sentiment | Enable sentiment analysis | true | Boolean
-| camel.component.ibm-watson-language.api-key | The IBM Cloud API key for authentication |  | String
+| camel.component.ibm-watson-language.analyze-categories | Whether to request the categories of the content in a hierarchical taxonomy, by default the top three. The CamelIBMWatsonLanguageAnalyzeCategories header replaces this option. | false | Boolean
+| camel.component.ibm-watson-language.analyze-concepts | Whether to request the high-level concepts of the content, which can include concepts that the text does not name. The CamelIBMWatsonLanguageAnalyzeConcepts header replaces this option. | false | Boolean
+| camel.component.ibm-watson-language.analyze-emotion | Whether to request the emotions of the whole document: a score from 0 to 1 for anger, disgust, fear, joy and sadness. The service supports it for English only. The CamelIBMWatsonLanguageAnalyzeEmotion header replaces this option. | false | Boolean
+| camel.component.ibm-watson-language.analyze-entities | Whether to request the entities, such as people, cities and organizations, that the content mentions. The CamelIBMWatsonLanguageAnalyzeEntities header replaces this option. | true | Boolean
+| camel.component.ibm-watson-language.analyze-keywords | Whether to request the important keywords of the content. The CamelIBMWatsonLanguageAnalyzeKeywords header replaces this option. | true | Boolean
+| camel.component.ibm-watson-language.analyze-sentiment | Whether to request the sentiment of the whole document. The producer then sets the CamelIBMWatsonLanguageSentimentScore and CamelIBMWatsonLanguageSentimentLabel headers. The CamelIBMWatsonLanguageAnalyzeSentiment header replaces this option. | true | Boolean
+| camel.component.ibm-watson-language.api-key | The IBM Cloud API key of the Natural Language Understanding service instance. The IBM Cloud IAM authenticator of the SDK exchanges it for an access token. The endpoint fails to start if it is not set. |  | String
 | camel.component.ibm-watson-language.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
-| camel.component.ibm-watson-language.configuration | Component configuration. The option is a org.apache.camel.component.ibm.watson.language.WatsonLanguageConfiguration type. |  | WatsonLanguageConfiguration
+| camel.component.ibm-watson-language.configuration | The configuration shared by the endpoints. Each endpoint starts from a copy of it, and its endpoint options replace single values. The option is a org.apache.camel.component.ibm.watson.language.WatsonLanguageConfiguration type. |  | WatsonLanguageConfiguration
 | camel.component.ibm-watson-language.enabled | Whether to enable auto configuration of the ibm-watson-language component. This is enabled by default. |  | Boolean
 | camel.component.ibm-watson-language.health-check-consumer-enabled | Used for enabling or disabling all consumer based health checks from this component | true | Boolean
 | camel.component.ibm-watson-language.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
 | camel.component.ibm-watson-language.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.ibm-watson-language.operation | The operation to perform |  | WatsonLanguageOperations
-| camel.component.ibm-watson-language.service-url | The service endpoint URL. If not specified, the default URL will be used. |  | String
+| camel.component.ibm-watson-language.operation | The operation that the producer performs: analyzeText analyzes the given text, and analyzeUrl the web page at the given URL, which the service retrieves. The CamelIBMWatsonLanguageOperation header replaces this option. The producer fails if neither is set. |  | WatsonLanguageOperations
+| camel.component.ibm-watson-language.service-url | The URL of the Natural Language Understanding service instance, as given in its service credentials. If not set, the SDK uses https://api.us-south.natural-language-understanding.watson.cloud.ibm.com (Dallas). |  | String
 |===

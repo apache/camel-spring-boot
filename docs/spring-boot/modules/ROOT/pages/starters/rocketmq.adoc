@@ -3,7 +3,7 @@
 = RocketMQ
 :artifactid: camel-rocketmq-starter
 
-Send and receive messages from RocketMQ cluster.
+Send messages to and receive messages from Apache RocketMQ topics.
 
 == What's inside
 
@@ -28,25 +28,25 @@ The starter supports 21 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| camel.component.rocketmq.access-channel | Access channel of RocketMQ cluster. LOCAL or CLOUD, [LOCAL] by default | LOCAL | String
-| camel.component.rocketmq.access-key | Access key for RocketMQ ACL. |  | String
+| camel.component.rocketmq.access-channel | The access channel of the RocketMQ client: LOCAL for an Apache RocketMQ cluster, or CLOUD for a RocketMQ service of a cloud provider. With CLOUD the message traces go to a trace topic per region, in the format of the cloud service. | LOCAL | String
+| camel.component.rocketmq.access-key | The access key of the RocketMQ ACL credentials. The producer and the consumer sign their requests only when both accessKey and secretKey are set. The consumer of replyToTopic does not use it. |  | String
 | camel.component.rocketmq.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.rocketmq.bridge-error-handler | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
-| camel.component.rocketmq.consumer-group | Consumer group name. |  | String
-| camel.component.rocketmq.enable-trace | Whether to enable trace. | false | Boolean
+| camel.component.rocketmq.consumer-group | The consumer group of the consumer. The consumers of a group share the messages of the topic, and each message goes to one of them. The consumer fails to start if it is not set. |  | String
+| camel.component.rocketmq.enable-trace | Whether the producer and the consumer record message traces, which the RocketMQ client sends to the trace topic RMQ_SYS_TRACE_TOPIC. The consumer of replyToTopic does not record traces. | false | Boolean
 | camel.component.rocketmq.enabled | Whether to enable auto configuration of the rocketmq component. This is enabled by default. |  | Boolean
 | camel.component.rocketmq.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.rocketmq.message-selector-type | Message Selector Type, TAG or SQL [TAG] by default | tag | String
-| camel.component.rocketmq.namespace | Namespace of RocketMQ cluster. You need to specify this if you are using serverless version of RocketMQ. |  | String
-| camel.component.rocketmq.namesrv-addr | Name server address of RocketMQ cluster. | localhost:9876 | String
-| camel.component.rocketmq.producer-group | Producer group name. |  | String
-| camel.component.rocketmq.reply-to-consumer-group | Consumer group name used for receiving response. |  | String
-| camel.component.rocketmq.reply-to-topic | Topic used for receiving response when using in-out pattern. |  | String
-| camel.component.rocketmq.request-timeout-checker-interval-millis | Check interval milliseconds of request timeout. | 1000 | Long
-| camel.component.rocketmq.request-timeout-millis | Timeout milliseconds of receiving response when using in-out pattern. | 10000 | Long
-| camel.component.rocketmq.secret-key | Secret key for RocketMQ ACL. |  | String
-| camel.component.rocketmq.send-tag | Each message would be sent with this tag. |  | String
-| camel.component.rocketmq.subscribe-sql | Subscribe SQL of consumer. See https://rocketmq.apache.org/docs/featureBehavior/07messagefilter/#attribute-based-sql-filtering for more details. | 1 = 1 | String
-| camel.component.rocketmq.subscribe-tags | Subscribe tags of consumer. Multiple tags could be split by \|\|, such as TagA\|\|TagB | * | String
-| camel.component.rocketmq.wait-for-send-result | Whether waiting for send result before routing to next endpoint. When true, a failed send fails the exchange. When false, an InOnly exchange continues as soon as the message is handed to the RocketMQ client, and a failed send is only logged. An InOut exchange always waits for its reply. | true | Boolean
+| camel.component.rocketmq.message-selector-type | How the consumer selects the messages of the topic that it receives: tag uses the subscribeTags option, and sql uses the subscribeSql option. | tag | String
+| camel.component.rocketmq.namespace | The namespace of the topics and groups, which the RocketMQ client sends with each request. Set it for a RocketMQ instance that uses namespaces, such as a serverless instance. The consumer of replyToTopic does not use it. |  | String
+| camel.component.rocketmq.namesrv-addr | The address of the RocketMQ name server, as host:port. Separate several name servers with a semicolon. | localhost:9876 | String
+| camel.component.rocketmq.producer-group | The producer group of the producer. The producer fails to start if it is not set. |  | String
+| camel.component.rocketmq.reply-to-consumer-group | The consumer group that receives the replies on replyToTopic, required with replyToTopic. Use a group per producer: in a shared group a reply can reach another producer, which ignores it, and the exchange times out. |  | String
+| camel.component.rocketmq.reply-to-topic | The topic on which the producer receives the reply of an InOut exchange. The reply must carry the keys of the request, one of which the producer generates to match the reply. If not set, an InOut exchange does not wait for a reply. |  | String
+| camel.component.rocketmq.request-timeout-checker-interval-millis | How often, in milliseconds, the producer checks for InOut exchanges whose requestTimeoutMillis has passed. A timeout can be detected up to this interval late. | 1000 | Long
+| camel.component.rocketmq.request-timeout-millis | How long, in milliseconds, the producer waits for the reply of an InOut exchange on replyToTopic before it fails the exchange with an ExchangeTimedOutException. A value of 0 or less waits for Integer.MAX_VALUE milliseconds (about 24 days). | 10000 | Long
+| camel.component.rocketmq.secret-key | The secret key of the RocketMQ ACL credentials. The producer and the consumer sign their requests only when both accessKey and secretKey are set. The consumer of replyToTopic does not use it. |  | String
+| camel.component.rocketmq.send-tag | The tag of each message that the producer sends. The CamelRocketMQOverrideTag header replaces it. If not set, the messages are sent with an empty tag. |  | String
+| camel.component.rocketmq.subscribe-sql | The SQL92 expression on the message properties that selects the messages that the consumer receives, when messageSelectorType is sql. The broker must have enablePropertyFilter set to true. The default 1 = 1 receives all messages. | 1 = 1 | String
+| camel.component.rocketmq.subscribe-tags | The tags of the messages that the consumer receives, when messageSelectorType is tag. Separate several tags with \|\|, for example TagA\|\|TagB. The default * receives all messages. | * | String
+| camel.component.rocketmq.wait-for-send-result | Whether the producer waits for the send result before the exchange continues. When true, a send that fails, or whose status is not SEND_OK, fails the exchange. When false, an InOnly exchange continues as soon as the message is handed to the RocketMQ client, and a failed send is only logged. An InOut exchange always waits for the send result, and for the reply when replyToTopic is set. | true | Boolean
 |===

@@ -23,13 +23,13 @@
     {
       "name": "camel.component.stitch.configuration",
       "type": "org.apache.camel.component.stitch.StitchConfiguration",
-      "description": "The component configurations. The option is a org.apache.camel.component.stitch.StitchConfiguration type.",
+      "description": "The shared configuration of the endpoints. Each endpoint gets a copy, and the options and the table name of the endpoint URI override its values. The option is a org.apache.camel.component.stitch.StitchConfiguration type.",
       "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
     },
     {
       "name": "camel.component.stitch.connection-provider",
       "type": "reactor.netty.resources.ConnectionProvider",
-      "description": "ConnectionProvider contain configuration for the HttpClient like Maximum connection limit .. etc, you can inject this ConnectionProvider and the StitchClient will initialize HttpClient with this ConnectionProvider. The option is a reactor.netty.resources.ConnectionProvider type.",
+      "description": "A Reactor Netty ConnectionProvider, for example a pool with a maximum number of connections, that the endpoint creates its HttpClient with. Not used when httpClient or stitchClient is set. The option is a reactor.netty.resources.ConnectionProvider type.",
       "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
     },
     {
@@ -46,13 +46,13 @@
     {
       "name": "camel.component.stitch.http-client",
       "type": "reactor.netty.http.client.HttpClient",
-      "description": "Reactor Netty HttpClient, you can injected it if you want to have custom HttpClient. The option is a reactor.netty.http.client.HttpClient type.",
+      "description": "A custom Reactor Netty HttpClient that sends the requests. The endpoint still sets the host of the region and the Authorization and Content-Type headers on it, and does not use connectionProvider. Not used when stitchClient is set. The option is a reactor.netty.http.client.HttpClient type.",
       "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
     },
     {
       "name": "camel.component.stitch.key-names",
       "type": "java.lang.String",
-      "description": "A collection of comma separated strings representing the Primary Key fields in the source table. Stitch use these Primary Keys to de-dupe data during loading If not provided, the table will be loaded in an append-only manner.",
+      "description": "The Primary Key fields of the source table, as a comma separated list without spaces. Stitch uses them to de-duplicate the records when it loads them, and loads the table append-only when there are none. The CamelStitchKeyNames header overrides it, and the names are added to the key_names of a StitchRequestBody or Map body.",
       "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
     },
     {
@@ -65,26 +65,26 @@
     {
       "name": "camel.component.stitch.region",
       "type": "org.apache.camel.component.stitch.client.StitchRegion",
-      "description": "Stitch account region, e.g: europe",
+      "description": "The region of the Stitch account, which selects the host of the Import API: EUROPE (api.eu-central-1.stitchdata.com) or NORTH_AMERICA (api.stitchdata.com). Not used when stitchClient is set.",
       "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration",
       "defaultValue": "europe"
     },
     {
       "name": "camel.component.stitch.stitch-client",
       "type": "org.apache.camel.component.stitch.client.StitchClient",
-      "description": "Set a custom StitchClient that implements org.apache.camel.component.stitch.client.StitchClient interface. The option is a org.apache.camel.component.stitch.client.StitchClient type.",
+      "description": "A custom implementation of the org.apache.camel.component.stitch.client.StitchClient interface that sends the batches. When set, the region, httpClient and connectionProvider options are not used, and the endpoint does not close the client when it stops. The option is a org.apache.camel.component.stitch.client.StitchClient type.",
       "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
     },
     {
       "name": "camel.component.stitch.stitch-schema",
       "type": "org.apache.camel.component.stitch.client.models.StitchSchema",
-      "description": "A schema that describes the record(s). The option is a org.apache.camel.component.stitch.client.models.StitchSchema type.",
+      "description": "The JSON schema that describes the records of the batch; Stitch rejects records that do not conform to it. The CamelStitchSchema header overrides it, and it overrides the schema of a StitchRequestBody or Map body. The option is a org.apache.camel.component.stitch.client.models.StitchSchema type.",
       "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
     },
     {
       "name": "camel.component.stitch.token",
       "type": "java.lang.String",
-      "description": "Stitch access token for the Stitch Import API",
+      "description": "The access token of the Stitch Import API, sent as a Bearer token. It is required, also when stitchClient is set.",
       "sourceType": "org.apache.camel.component.stitch.springboot.StitchComponentConfiguration"
     }
   ],

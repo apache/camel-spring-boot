@@ -47,7 +47,7 @@
     {
       "name": "camel.component.hibernate.hibernate-properties",
       "type": "java.util.Map<java.lang.String,java.lang.Object>",
-      "description": "Arbitrary Hibernate configuration properties passthrough map.",
+      "description": "Hibernate configuration properties, such as hibernate.show_sql, that the component passes to Hibernate when it bootstraps the SessionFactory.",
       "sourceType": "org.apache.camel.component.hibernate.springboot.HibernateComponentConfiguration"
     },
     {
@@ -60,14 +60,14 @@
     {
       "name": "camel.component.hibernate.schema-action",
       "type": "java.lang.String",
-      "description": "Schema generation action: none, validate, update, create, create-drop, create-only, drop.",
+      "description": "The schema management action (hibernate.hbm2ddl.auto) when the component bootstraps the SessionFactory. The default none leaves the schema as it is.",
       "sourceType": "org.apache.camel.component.hibernate.springboot.HibernateComponentConfiguration",
       "defaultValue": "none"
     },
     {
       "name": "camel.component.hibernate.session-factory",
       "type": "org.hibernate.SessionFactory",
-      "description": "The Hibernate SessionFactory to use. The option is a org.hibernate.SessionFactory type.",
+      "description": "The Hibernate SessionFactory for all endpoints. If not set, the single SessionFactory in the registry is used, otherwise the component bootstraps one. The component does not close a SessionFactory that it did not create. The option is a org.hibernate.SessionFactory type.",
       "sourceType": "org.apache.camel.component.hibernate.springboot.HibernateComponentConfiguration"
     }
   ],

@@ -41,7 +41,7 @@
     {
       "name": "camel.component.cometd.extensions",
       "type": "java.util.List<org.cometd.bayeux.server.BayeuxServer$Extension>",
-      "description": "To use a list of custom BayeuxServer.Extension that allows modifying incoming and outgoing requests.",
+      "description": "The list of BayeuxServer.Extension that can modify or drop the incoming and outgoing Bayeux messages. They are added to each CometD server that the component starts.",
       "sourceType": "org.apache.camel.component.cometd.springboot.CometdComponentConfiguration"
     },
     {
@@ -54,37 +54,37 @@
     {
       "name": "camel.component.cometd.security-policy",
       "type": "org.cometd.bayeux.server.SecurityPolicy",
-      "description": "To use a custom configured SecurityPolicy to control authorization. The option is a org.cometd.bayeux.server.SecurityPolicy type.",
+      "description": "The CometD SecurityPolicy that decides whether a client may handshake, create a channel, subscribe to a channel or publish to it. It is set on each CometD server that the component starts. The option is a org.cometd.bayeux.server.SecurityPolicy type.",
       "sourceType": "org.apache.camel.component.cometd.springboot.CometdComponentConfiguration"
     },
     {
       "name": "camel.component.cometd.ssl-context-parameters",
       "type": "org.apache.camel.support.jsse.SSLContextParameters",
-      "description": "To configure security using SSLContextParameters. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
+      "description": "The SSL configuration of the cometds server, such as the keystore with its certificate. When set, sslKeystore, sslPassword and sslKeyPassword are not used. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
       "sourceType": "org.apache.camel.component.cometd.springboot.CometdComponentConfiguration"
     },
     {
       "name": "camel.component.cometd.ssl-key-password",
       "type": "java.lang.String",
-      "description": "The password for the keystore when using SSL.",
+      "description": "The password of the keystore that sslKeystore points to, for the cometds server. Not used when SSL context parameters are configured.",
       "sourceType": "org.apache.camel.component.cometd.springboot.CometdComponentConfiguration"
     },
     {
       "name": "camel.component.cometd.ssl-keystore",
       "type": "java.lang.String",
-      "description": "The path to the keystore.",
+      "description": "The path of the keystore file with the certificate and private key of the cometds server. Not used when SSL context parameters are configured.",
       "sourceType": "org.apache.camel.component.cometd.springboot.CometdComponentConfiguration"
     },
     {
       "name": "camel.component.cometd.ssl-password",
       "type": "java.lang.String",
-      "description": "The password when using SSL.",
+      "description": "The password of the private key in the keystore that sslKeystore points to, for the cometds server. Not used when SSL context parameters are configured.",
       "sourceType": "org.apache.camel.component.cometd.springboot.CometdComponentConfiguration"
     },
     {
       "name": "camel.component.cometd.use-global-ssl-context-parameters",
       "type": "java.lang.Boolean",
-      "description": "Enable usage of global SSL context parameters.",
+      "description": "Whether the cometds server uses the global SSL context parameters of the CamelContext when sslContextParameters is not set.",
       "sourceType": "org.apache.camel.component.cometd.springboot.CometdComponentConfiguration",
       "defaultValue": false
     }

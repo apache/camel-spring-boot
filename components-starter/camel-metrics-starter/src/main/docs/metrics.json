@@ -41,7 +41,7 @@
     {
       "name": "camel.component.metrics.metric-registry",
       "type": "com.codahale.metrics.MetricRegistry",
-      "description": "To use a custom configured MetricRegistry. The option is a com.codahale.metrics.MetricRegistry type.",
+      "description": "The Dropwizard MetricRegistry that holds the metrics. If not set, the component uses the bean named metricRegistry, or the only MetricRegistry bean, of the Camel registry, and else creates a registry whose Slf4jReporter logs the metrics at DEBUG level every 60 seconds. The option is a com.codahale.metrics.MetricRegistry type.",
       "sourceType": "org.apache.camel.component.metrics.springboot.MetricsComponentConfiguration"
     }
   ],

@@ -3,7 +3,7 @@
 = Azure Key Vault
 :artifactid: camel-azure-key-vault-starter
 
-Manage secrets and keys in Azure Key Vault Service
+Create, get, update, delete and purge secrets in Azure Key Vault.
 
 == What's inside
 

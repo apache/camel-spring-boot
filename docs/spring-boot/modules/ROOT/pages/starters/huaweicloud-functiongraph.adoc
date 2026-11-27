@@ -3,7 +3,7 @@
 = Huawei FunctionGraph
 :artifactid: camel-huaweicloud-functiongraph-starter
 
-To call serverless functions on Huawei Cloud
+Invoke serverless functions in Huawei Cloud FunctionGraph.
 
 == What's inside
 

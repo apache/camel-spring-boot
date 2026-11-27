@@ -16,13 +16,13 @@
     {
       "name": "camel.component.huggingface.auth-token",
       "type": "java.lang.String",
-      "description": "HF API token for private models",
+      "description": "The Hugging Face user access token, needed to download gated or private models. When the oauthProfile option is set, the token that it obtains replaces this option.",
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
     },
     {
       "name": "camel.component.huggingface.auto-select",
       "type": "java.lang.Boolean",
-      "description": "If true, auto-select the best label (highest score) for zero-shot classification",
+      "description": "Whether the zero-shot-classification task returns only the label with the highest score, as a String. If false, it returns a DJL Classifications with all the labels and their scores.",
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration",
       "defaultValue": true
     },
@@ -36,7 +36,7 @@
     {
       "name": "camel.component.huggingface.configuration",
       "type": "org.apache.camel.component.huggingface.HuggingFaceConfiguration",
-      "description": "The configuration. The option is a org.apache.camel.component.huggingface.HuggingFaceConfiguration type.",
+      "description": "The configuration that the endpoints of this component start from. Each endpoint uses a copy, in which its own options replace the values. The option is a org.apache.camel.component.huggingface.HuggingFaceConfiguration type.",
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
     },
     {
@@ -47,7 +47,7 @@
     {
       "name": "camel.component.huggingface.device",
       "type": "java.lang.String",
-      "description": "Device for inference (cpu, gpu, auto)",
+      "description": "The device to run the model on, such as auto, cpu, cuda or mps. Most tasks give it to the Transformers pipeline as device_map, where auto spreads the model over the available devices. sentence-embeddings uses cuda for auto when it is available, else cpu, and text-to-image moves the pipeline to this device.",
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
     },
     {
@@ -94,38 +94,38 @@
     {
       "name": "camel.component.huggingface.max-tokens",
       "type": "java.lang.Integer",
-      "description": "Max tokens for generation tasks",
+      "description": "The maximum number of new tokens that the model generates, as max_new_tokens, for the text-generation, summarization and chat tasks.",
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
     },
     {
       "name": "camel.component.huggingface.memory-id-header",
       "type": "java.lang.String",
-      "description": "Header name for conversation memory ID (for multi-user chats)",
+      "description": "The name of the header that holds the memory ID for the chat task. Each memory ID has its own chat history, so that several users can chat at the same time. A message without this header uses the memory ID default.",
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration",
       "defaultValue": "CamelChatMemoryId"
     },
     {
       "name": "camel.component.huggingface.min-length",
       "type": "java.lang.Integer",
-      "description": "Min tokens for summarization tasks",
+      "description": "The minimum length, in tokens, of the summary that the summarization task generates.",
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
     },
     {
       "name": "camel.component.huggingface.model-id",
       "type": "java.lang.String",
-      "description": "Hugging Face model ID (e.g., distilbert-base-uncased-finetuned-sst-2-english)",
+      "description": "The ID of the model on the Hugging Face Hub, for example distilbert-base-uncased-finetuned-sst-2-english or Qwen\/Qwen2.5-3B-Instruct. The model must support the task.",
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
     },
     {
       "name": "camel.component.huggingface.model-loading-timeout",
       "type": "java.lang.Integer",
-      "description": "Model loading timeout in seconds, if negative then use default (240 seconds)",
+      "description": "The time in seconds that DJL waits for the Python process to start and load the model. With 0 or a negative value, DJL uses the MODEL_LOADING_TIMEOUT environment variable, or else 240 seconds.",
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
     },
     {
       "name": "camel.component.huggingface.multi-label",
       "type": "java.lang.Boolean",
-      "description": "Allow multi-label classifications for zero-shot tasks",
+      "description": "Whether the zero-shot-classification task scores each candidate label on its own, so that several labels can be true. If false, the scores of all the labels add up to 1.",
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration",
       "defaultValue": false
     },
@@ -138,51 +138,51 @@
     {
       "name": "camel.component.huggingface.pooling",
       "type": "java.lang.Boolean",
-      "description": "Whether to pool the predictor (keep the Python process alive) or create a new one for each request",
+      "description": "Whether all requests share one Python process, which loads the model once and runs one request at a time. If false, each request starts a new Python process, which loads the model again, and stops it afterwards.",
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.huggingface.predict-timeout",
       "type": "java.lang.Integer",
-      "description": "Predict timeout in seconds, if negative then use default (120 seconds)",
+      "description": "The time in seconds that DJL waits for the Python process to answer one request. With 0 or a negative value, DJL uses the PREDICT_TIMEOUT environment variable, or else 120 seconds.",
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
     },
     {
       "name": "camel.component.huggingface.predictor-bean",
       "type": "java.lang.String",
-      "description": "Bean name of a custom TaskPredictor implementation (for tasks not covered by built-in predictors)",
+      "description": "The name of a bean of type org.apache.camel.component.huggingface.tasks.TaskPredictor that runs the task instead of a built-in predictor. It is required for a task that is not built in. The producer fails to start if the registry has no such bean.",
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
     },
     {
       "name": "camel.component.huggingface.revision",
       "type": "java.lang.String",
-      "description": "Model revision or branch (default: main)",
+      "description": "The revision of the model on the Hugging Face Hub: a branch name, a tag name or a commit ID.",
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
     },
     {
       "name": "camel.component.huggingface.system-prompt",
       "type": "java.lang.String",
-      "description": "Initial system prompt for chat tasks (e.g., 'You are a helpful assistant named Alan.')",
+      "description": "The system message that the chat task puts first in a new chat history, for example You are a helpful assistant named Alan.",
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
     },
     {
       "name": "camel.component.huggingface.temperature",
       "type": "java.lang.Float",
-      "description": "Temperature for sampling (0.0-1.0)",
+      "description": "The sampling temperature for the text-generation, summarization and chat tasks. A higher value gives more random text. A value of 0 or less turns sampling off, so the model picks the most likely token each time.",
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration"
     },
     {
       "name": "camel.component.huggingface.top-k",
       "type": "java.lang.Integer",
-      "description": "Top-k parameter for classification tasks",
+      "description": "The number of labels with the highest scores that the text-classification task returns.",
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration",
       "defaultValue": 5
     },
     {
       "name": "camel.component.huggingface.user-role",
       "type": "java.lang.String",
-      "description": "Role for user messages in chat history (e.g., 'user' or 'human')",
+      "description": "The role of the message that the chat task adds to the chat history from the message body. Set it to the role that the chat template of the model expects, for example human.",
       "sourceType": "org.apache.camel.component.huggingface.springboot.HuggingFaceComponentConfiguration",
       "defaultValue": "user"
     }

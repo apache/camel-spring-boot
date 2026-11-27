@@ -34,7 +34,7 @@
     {
       "name": "camel.component.geocoder.geo-api-context",
       "type": "com.google.maps.GeoApiContext",
-      "description": "Configuration for Google maps API. The option is a com.google.maps.GeoApiContext type.",
+      "description": "To use a custom com.google.maps.GeoApiContext for the requests to Google. When it is set, the apiKey, clientId, clientKey and proxy options of the endpoints are not used. The option is a com.google.maps.GeoApiContext type.",
       "sourceType": "org.apache.camel.component.geocoder.springboot.GeoCoderComponentConfiguration"
     },
     {

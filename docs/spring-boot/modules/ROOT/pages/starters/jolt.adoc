@@ -3,7 +3,7 @@
 = JOLT
 :artifactid: camel-jolt-starter
 
-JSON to JSON transformation using JOLT.
+Transform JSON to JSON with a JOLT specification.
 
 == What's inside
 
@@ -28,10 +28,10 @@ The starter supports 6 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| camel.component.jolt.allow-template-from-header | Whether to allow to use resource template from header or not (default false). Enabling this allows to specify dynamic templates via message header. However this can be seen as a potential security vulnerability if the header is coming from a malicious user, so use this with care. | false | Boolean
+| camel.component.jolt.allow-template-from-header | Whether the endpoints read the CamelJoltResourceUri and CamelJoltContext headers. It is the default of the allowTemplateFromHeader option of each endpoint. Enable it only when the headers come from a trusted source. | false | Boolean
 | camel.component.jolt.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
-| camel.component.jolt.content-cache | Sets whether to use resource content cache or not | true | Boolean
+| camel.component.jolt.content-cache | Whether the endpoints keep the content of their spec resource in memory after the first read. It is the default of the contentCache option of each endpoint. Each endpoint builds its JOLT transform from the spec once, at the first exchange, and keeps it, so false does not make it read a changed spec again. | true | Boolean
 | camel.component.jolt.enabled | Whether to enable auto configuration of the jolt component. This is enabled by default. |  | Boolean
 | camel.component.jolt.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.jolt.transform | Explicitly sets the Transform to use. If not set a Transform specified by the transformDsl will be created. The option is a io.joltcommunity.jolt.Transform type. |  | Transform
+| camel.component.jolt.transform | A JOLT Transform that all endpoints of the component use in place of the transform that they build from their spec. When set, the endpoints do not read their spec resource, and transformDsl and the CamelJoltResourceUri header have no effect. To use the CamelJoltContext header, it must also be a ContextualTransform, such as a Chainr. The option is a io.joltcommunity.jolt.Transform type. |  | Transform
 |===

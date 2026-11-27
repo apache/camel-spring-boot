@@ -3,7 +3,7 @@
 = LangChain4j Web Search
 :artifactid: camel-langchain4j-web-search-starter
 
-LangChain4j Web Search Engine
+Search the web with a LangChain4j web search engine, such as Tavily or Google Custom Search.
 
 == What's inside
 

@@ -34,7 +34,7 @@
     {
       "name": "camel.component.influxdb.influx-d-b",
       "type": "org.influxdb.InfluxDB",
-      "description": "The shared Influx DB to use for all endpoints. The option is a org.influxdb.InfluxDB type.",
+      "description": "The org.influxdb.InfluxDB client that all endpoints of the component use. When it is set or autowired, the endpoints do not look up the bean named in their URI path. The option is a org.influxdb.InfluxDB type.",
       "sourceType": "org.apache.camel.component.influxdb.springboot.InfluxDbComponentConfiguration"
     },
     {

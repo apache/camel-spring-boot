@@ -38,20 +38,20 @@
     {
       "name": "camel.component.milo-browse.allowed-security-policies",
       "type": "java.lang.String",
-      "description": "A set of allowed security policy URIs. Default is to accept all and use the highest.",
+      "description": "A comma-separated list of the security policies that the client may use, as URIs or as names of org.eclipse.milo.opcua.stack.core.security.SecurityPolicy, for example Basic256Sha256. Of the endpoints of the server with an allowed policy, the client uses the one with the highest security level. If not set, every policy is allowed, None included.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
       "name": "camel.component.milo-browse.application-name",
       "type": "java.lang.String",
-      "description": "The application name",
+      "description": "The application name of the client, which it sends to the server in its application description.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration",
       "defaultValue": "Apache Camel adapter for Eclipse Milo"
     },
     {
       "name": "camel.component.milo-browse.application-uri",
       "type": "java.lang.String",
-      "description": "The application URI",
+      "description": "The application URI of the client, which it sends to the server in its application description. With a client certificate, it should match the application URI in that certificate.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration",
       "defaultValue": "http:\/\/camel.apache.org\/EclipseMilo\/Client"
     },
@@ -71,19 +71,19 @@
     {
       "name": "camel.component.milo-browse.channel-lifetime",
       "type": "java.lang.Long",
-      "description": "Channel lifetime in milliseconds",
+      "description": "The requested lifetime in milliseconds of the security token of the secure channel, after which the client renews it. If not set, the default of Eclipse Milo is used.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
       "name": "camel.component.milo-browse.client-id",
       "type": "java.lang.String",
-      "description": "A virtual client id to force the creation of a new connection instance",
+      "description": "An ID that is part of the key of the shared connections: endpoints with the same endpoint URI, requestedPublishingInterval and clientId use the same connection to the server. Set a different value to give an endpoint a connection of its own.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
       "name": "camel.component.milo-browse.configuration",
       "type": "org.apache.camel.component.milo.client.MiloClientConfiguration",
-      "description": "All default options for client configurations. The option is a org.apache.camel.component.milo.client.MiloClientConfiguration type.",
+      "description": "The client configuration that holds the default options of the endpoints of this component. Each endpoint uses a copy of it, with the options that are set on the endpoint. The option is a org.apache.camel.component.milo.client.MiloClientConfiguration type.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
@@ -94,13 +94,13 @@
     {
       "name": "camel.component.milo-browse.discovery-endpoint-suffix",
       "type": "java.lang.String",
-      "description": "A suffix for endpoint URI when discovering",
+      "description": "A suffix that the client appends to the endpoint URI to get the URI of the discovery endpoint, for example \/discovery. Not used when discoveryEndpointUri is set.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
       "name": "camel.component.milo-browse.discovery-endpoint-uri",
       "type": "java.lang.String",
-      "description": "An alternative discovery URI",
+      "description": "The URI of the discovery endpoint that the client gets the endpoint descriptions of the server from, instead of the endpoint URI. It takes precedence over discoveryEndpointSuffix.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
@@ -112,31 +112,31 @@
     {
       "name": "camel.component.milo-browse.key-alias",
       "type": "java.lang.String",
-      "description": "The name of the key in the keystore file",
+      "description": "The alias of the private key and its certificate in the key store. It can be omitted when the key store holds a single entry.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
       "name": "camel.component.milo-browse.key-password",
       "type": "java.lang.String",
-      "description": "The key password",
+      "description": "The password of the private key of keyAlias in the key store.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
       "name": "camel.component.milo-browse.key-store-password",
       "type": "java.lang.String",
-      "description": "The keystore password",
+      "description": "The password of the key store of keyStoreUrl.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
       "name": "camel.component.milo-browse.key-store-type",
       "type": "java.lang.String",
-      "description": "The key store type",
+      "description": "The type of the key store of keyStoreUrl, as a java.security.KeyStore type. The default is PKCS12.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
       "name": "camel.component.milo-browse.key-store-url",
       "type": "java.lang.String",
-      "description": "The URL where the key should be loaded from",
+      "description": "The URL of the key store with the certificate and the private key of the client, for example file:\/etc\/opcua\/client.p12. A security policy other than None needs it.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
@@ -149,32 +149,32 @@
     {
       "name": "camel.component.milo-browse.max-pending-publish-requests",
       "type": "java.lang.Long",
-      "description": "The maximum number of pending publish requests",
+      "description": "The maximum number of publish requests that the client keeps pending at the server for its subscription. If not set, the default of Eclipse Milo is used.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
       "name": "camel.component.milo-browse.max-response-message-size",
       "type": "java.lang.Long",
-      "description": "The maximum number of bytes a response message may have",
+      "description": "The maximum size in bytes of a response message that the client accepts from the server. If not set, the default of Eclipse Milo is used.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
       "name": "camel.component.milo-browse.milo-client-connection-manager",
       "type": "org.apache.camel.component.milo.client.MiloClientConnectionManager",
-      "description": "Instance for managing client connections. The option is a org.apache.camel.component.milo.client.MiloClientConnectionManager type.",
+      "description": "To use a custom org.apache.camel.component.milo.client.MiloClientConnectionManager that creates and releases the connections to the OPC UA servers. The default one shares a connection between the endpoints with the same endpoint URI, clientId, requestedPublishingInterval and validation of the server certificate, and closes it when the last endpoint releases it. The option is a org.apache.camel.component.milo.client.MiloClientConnectionManager type.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
       "name": "camel.component.milo-browse.override-host",
       "type": "java.lang.Boolean",
-      "description": "Override the server reported endpoint host with the host from the endpoint URI.",
+      "description": "Whether to replace the host of the endpoint URL that the server reports with the host of the endpoint URI. Use it when the server reports a host name that the client cannot reach.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.milo-browse.override-port",
       "type": "java.lang.Boolean",
-      "description": "Override the server reported endpoint port with the port from the endpoint URI.",
+      "description": "Whether to replace the port of the endpoint URL that the server reports with the port of the endpoint URI. Use it when the server reports a port that the client cannot reach.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration",
       "defaultValue": false
     },
@@ -187,7 +187,7 @@
     {
       "name": "camel.component.milo-browse.product-uri",
       "type": "java.lang.String",
-      "description": "The product URI",
+      "description": "The product URI of the client, which it sends to the server in its application description.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration",
       "defaultValue": "http:\/\/camel.apache.org\/EclipseMilo"
     },
@@ -201,25 +201,25 @@
     {
       "name": "camel.component.milo-browse.request-timeout",
       "type": "java.lang.Long",
-      "description": "Request timeout in milliseconds",
+      "description": "The timeout in milliseconds of a request to the server. If not set, the default of Eclipse Milo is used.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
       "name": "camel.component.milo-browse.requested-publishing-interval",
       "type": "java.lang.Double",
-      "description": "The requested publishing interval in milliseconds",
+      "description": "The publishing interval in milliseconds that the client requests for the subscription of its connection, which carries the values of the monitored nodes. Endpoints with different values use different connections.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
       "name": "camel.component.milo-browse.session-name",
       "type": "java.lang.String",
-      "description": "Session name",
+      "description": "The name of the session that the client creates on the server. If not set, Eclipse Milo generates one.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
       "name": "camel.component.milo-browse.session-timeout",
       "type": "java.lang.Long",
-      "description": "Session timeout in milliseconds",
+      "description": "The requested timeout in milliseconds of the session, after which the server closes a session without activity. If not set, the default of Eclipse Milo is used.",
       "sourceType": "org.apache.camel.component.milo.browse.springboot.MiloBrowseComponentConfiguration"
     },
     {
@@ -244,20 +244,20 @@
     {
       "name": "camel.component.milo-client.allowed-security-policies",
       "type": "java.lang.String",
-      "description": "A set of allowed security policy URIs. Default is to accept all and use the highest.",
+      "description": "A comma-separated list of the security policies that the client may use, as URIs or as names of org.eclipse.milo.opcua.stack.core.security.SecurityPolicy, for example Basic256Sha256. Of the endpoints of the server with an allowed policy, the client uses the one with the highest security level. If not set, every policy is allowed, None included.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
       "name": "camel.component.milo-client.application-name",
       "type": "java.lang.String",
-      "description": "The application name",
+      "description": "The application name of the client, which it sends to the server in its application description.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration",
       "defaultValue": "Apache Camel adapter for Eclipse Milo"
     },
     {
       "name": "camel.component.milo-client.application-uri",
       "type": "java.lang.String",
-      "description": "The application URI",
+      "description": "The application URI of the client, which it sends to the server in its application description. With a client certificate, it should match the application URI in that certificate.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration",
       "defaultValue": "http:\/\/camel.apache.org\/EclipseMilo\/Client"
     },
@@ -284,19 +284,19 @@
     {
       "name": "camel.component.milo-client.channel-lifetime",
       "type": "java.lang.Long",
-      "description": "Channel lifetime in milliseconds",
+      "description": "The requested lifetime in milliseconds of the security token of the secure channel, after which the client renews it. If not set, the default of Eclipse Milo is used.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
       "name": "camel.component.milo-client.client-id",
       "type": "java.lang.String",
-      "description": "A virtual client id to force the creation of a new connection instance",
+      "description": "An ID that is part of the key of the shared connections: endpoints with the same endpoint URI, requestedPublishingInterval and clientId use the same connection to the server. Set a different value to give an endpoint a connection of its own.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
       "name": "camel.component.milo-client.configuration",
       "type": "org.apache.camel.component.milo.client.MiloClientConfiguration",
-      "description": "All default options for client configurations. The option is a org.apache.camel.component.milo.client.MiloClientConfiguration type.",
+      "description": "The client configuration that holds the default options of the endpoints of this component. Each endpoint uses a copy of it, with the options that are set on the endpoint. The option is a org.apache.camel.component.milo.client.MiloClientConfiguration type.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
@@ -307,13 +307,13 @@
     {
       "name": "camel.component.milo-client.discovery-endpoint-suffix",
       "type": "java.lang.String",
-      "description": "A suffix for endpoint URI when discovering",
+      "description": "A suffix that the client appends to the endpoint URI to get the URI of the discovery endpoint, for example \/discovery. Not used when discoveryEndpointUri is set.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
       "name": "camel.component.milo-client.discovery-endpoint-uri",
       "type": "java.lang.String",
-      "description": "An alternative discovery URI",
+      "description": "The URI of the discovery endpoint that the client gets the endpoint descriptions of the server from, instead of the endpoint URI. It takes precedence over discoveryEndpointSuffix.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
@@ -325,31 +325,31 @@
     {
       "name": "camel.component.milo-client.key-alias",
       "type": "java.lang.String",
-      "description": "The name of the key in the keystore file",
+      "description": "The alias of the private key and its certificate in the key store. It can be omitted when the key store holds a single entry.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
       "name": "camel.component.milo-client.key-password",
       "type": "java.lang.String",
-      "description": "The key password",
+      "description": "The password of the private key of keyAlias in the key store.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
       "name": "camel.component.milo-client.key-store-password",
       "type": "java.lang.String",
-      "description": "The keystore password",
+      "description": "The password of the key store of keyStoreUrl.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
       "name": "camel.component.milo-client.key-store-type",
       "type": "java.lang.String",
-      "description": "The key store type",
+      "description": "The type of the key store of keyStoreUrl, as a java.security.KeyStore type. The default is PKCS12.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
       "name": "camel.component.milo-client.key-store-url",
       "type": "java.lang.String",
-      "description": "The URL where the key should be loaded from",
+      "description": "The URL of the key store with the certificate and the private key of the client, for example file:\/etc\/opcua\/client.p12. A security policy other than None needs it.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
@@ -362,32 +362,32 @@
     {
       "name": "camel.component.milo-client.max-pending-publish-requests",
       "type": "java.lang.Long",
-      "description": "The maximum number of pending publish requests",
+      "description": "The maximum number of publish requests that the client keeps pending at the server for its subscription. If not set, the default of Eclipse Milo is used.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
       "name": "camel.component.milo-client.max-response-message-size",
       "type": "java.lang.Long",
-      "description": "The maximum number of bytes a response message may have",
+      "description": "The maximum size in bytes of a response message that the client accepts from the server. If not set, the default of Eclipse Milo is used.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
       "name": "camel.component.milo-client.milo-client-connection-manager",
       "type": "org.apache.camel.component.milo.client.MiloClientConnectionManager",
-      "description": "Instance for managing client connections. The option is a org.apache.camel.component.milo.client.MiloClientConnectionManager type.",
+      "description": "To use a custom org.apache.camel.component.milo.client.MiloClientConnectionManager that creates and releases the connections to the OPC UA servers. The default one shares a connection between the endpoints with the same endpoint URI, clientId, requestedPublishingInterval and validation of the server certificate, and closes it when the last endpoint releases it. The option is a org.apache.camel.component.milo.client.MiloClientConnectionManager type.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
       "name": "camel.component.milo-client.override-host",
       "type": "java.lang.Boolean",
-      "description": "Override the server reported endpoint host with the host from the endpoint URI.",
+      "description": "Whether to replace the host of the endpoint URL that the server reports with the host of the endpoint URI. Use it when the server reports a host name that the client cannot reach.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.milo-client.override-port",
       "type": "java.lang.Boolean",
-      "description": "Override the server reported endpoint port with the port from the endpoint URI.",
+      "description": "Whether to replace the port of the endpoint URL that the server reports with the port of the endpoint URI. Use it when the server reports a port that the client cannot reach.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration",
       "defaultValue": false
     },
@@ -400,7 +400,7 @@
     {
       "name": "camel.component.milo-client.product-uri",
       "type": "java.lang.String",
-      "description": "The product URI",
+      "description": "The product URI of the client, which it sends to the server in its application description.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration",
       "defaultValue": "http:\/\/camel.apache.org\/EclipseMilo"
     },
@@ -414,25 +414,25 @@
     {
       "name": "camel.component.milo-client.request-timeout",
       "type": "java.lang.Long",
-      "description": "Request timeout in milliseconds",
+      "description": "The timeout in milliseconds of a request to the server. If not set, the default of Eclipse Milo is used.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
       "name": "camel.component.milo-client.requested-publishing-interval",
       "type": "java.lang.Double",
-      "description": "The requested publishing interval in milliseconds",
+      "description": "The publishing interval in milliseconds that the client requests for the subscription of its connection, which carries the values of the monitored nodes. Endpoints with different values use different connections.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
       "name": "camel.component.milo-client.session-name",
       "type": "java.lang.String",
-      "description": "Session name",
+      "description": "The name of the session that the client creates on the server. If not set, Eclipse Milo generates one.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
       "name": "camel.component.milo-client.session-timeout",
       "type": "java.lang.Long",
-      "description": "Session timeout in milliseconds",
+      "description": "The requested timeout in milliseconds of the session, after which the server closes a session without activity. If not set, the default of Eclipse Milo is used.",
       "sourceType": "org.apache.camel.component.milo.client.springboot.MiloClientComponentConfiguration"
     },
     {
@@ -457,13 +457,13 @@
     {
       "name": "camel.component.milo-server.application-name",
       "type": "java.lang.String",
-      "description": "The application name",
+      "description": "The application name of the server. If not set, Apache Camel Milo Server is used.",
       "sourceType": "org.apache.camel.component.milo.server.springboot.MiloServerComponentConfiguration"
     },
     {
       "name": "camel.component.milo-server.application-uri",
       "type": "java.lang.String",
-      "description": "The application URI",
+      "description": "The application URI of the server. If not set, urn:org:apache:camel:milo:server is used.",
       "sourceType": "org.apache.camel.component.milo.server.springboot.MiloServerComponentConfiguration"
     },
     {
@@ -476,7 +476,7 @@
     {
       "name": "camel.component.milo-server.bind-addresses",
       "type": "java.lang.String",
-      "description": "Set the addresses of the local addresses the server should bind to",
+      "description": "A comma-separated list of the local addresses that the server binds to. If not set, it binds to localhost. For each address, the server has endpoints for the host name of the machine and for the host names of that address.",
       "sourceType": "org.apache.camel.component.milo.server.springboot.MiloServerComponentConfiguration"
     },
     {
@@ -489,25 +489,25 @@
     {
       "name": "camel.component.milo-server.build-info",
       "type": "org.eclipse.milo.opcua.stack.core.types.structured.BuildInfo",
-      "description": "Server build info. The option is a org.eclipse.milo.opcua.stack.core.types.structured.BuildInfo type.",
+      "description": "The build information of the server, as an org.eclipse.milo.opcua.stack.core.types.structured.BuildInfo, which clients can read from the Server object. The option is a org.eclipse.milo.opcua.stack.core.types.structured.BuildInfo type.",
       "sourceType": "org.apache.camel.component.milo.server.springboot.MiloServerComponentConfiguration"
     },
     {
       "name": "camel.component.milo-server.certificate",
       "type": "java.security.cert.X509Certificate",
-      "description": "Server certificate. The option is a java.security.cert.X509Certificate type.",
+      "description": "The certificate of the server, as a java.security.cert.X509Certificate, which the endpoints of the server announce. The option is a java.security.cert.X509Certificate type.",
       "sourceType": "org.apache.camel.component.milo.server.springboot.MiloServerComponentConfiguration"
     },
     {
       "name": "camel.component.milo-server.certificate-manager",
       "type": "org.eclipse.milo.opcua.stack.core.security.CertificateManager",
-      "description": "Server certificate manager. The option is a org.eclipse.milo.opcua.stack.core.security.CertificateManager type.",
+      "description": "To use a custom org.eclipse.milo.opcua.stack.core.security.CertificateManager that holds the certificate and the key pair of the server. Not used when defaultCertificateValidator is set. When certificateValidator is set, the certificate groups of this certificate manager validate the certificates of the clients with that validator. The option is a org.eclipse.milo.opcua.stack.core.security.CertificateManager type.",
       "sourceType": "org.apache.camel.component.milo.server.springboot.MiloServerComponentConfiguration"
     },
     {
       "name": "camel.component.milo-server.certificate-validator",
       "type": "org.eclipse.milo.opcua.stack.core.security.CertificateValidator",
-      "description": "Validator for client certificates. The option is a org.eclipse.milo.opcua.stack.core.security.CertificateValidator type.",
+      "description": "To use a custom org.eclipse.milo.opcua.stack.core.security.CertificateValidator that validates the certificates of the OPC UA clients, instead of the validators of the certificate groups of certificateManager. Requires certificateManager, which holds the certificate of the server. Cannot be used together with defaultCertificateValidator. The option is a org.eclipse.milo.opcua.stack.core.security.CertificateValidator type.",
       "sourceType": "org.apache.camel.component.milo.server.springboot.MiloServerComponentConfiguration"
     },
     {
@@ -518,13 +518,13 @@
     {
       "name": "camel.component.milo-server.default-certificate-validator",
       "type": "java.lang.String",
-      "description": "Validator for client certificates using default file based approach",
+      "description": "The directory of a file based trust list for the certificates of the OPC UA clients, in the layout used by Eclipse Milo: trusted certificates in trusted\/certs, their CRLs in trusted\/crl, certificates of issuing CAs in issuer\/certs and their CRLs in issuer\/crl. Rejected certificates are put in rejected\/certs. The directories are created if they do not exist.",
       "sourceType": "org.apache.camel.component.milo.server.springboot.MiloServerComponentConfiguration"
     },
     {
       "name": "camel.component.milo-server.enable-anonymous-authentication",
       "type": "java.lang.Boolean",
-      "description": "Enable anonymous authentication, disabled by default",
+      "description": "Whether the endpoints of the server offer the Anonymous user token policy, for clients that connect without a user name.",
       "sourceType": "org.apache.camel.component.milo.server.springboot.MiloServerComponentConfiguration",
       "defaultValue": false
     },
@@ -544,50 +544,50 @@
     {
       "name": "camel.component.milo-server.namespace-uri",
       "type": "java.lang.String",
-      "description": "The URI of the namespace, defaults to urn:org:apache:camel",
+      "description": "The URI of the namespace that holds the items of the milo-server endpoints. A client addresses an item with this URI and the item ID, for example nsu=urn:org:apache:camel;s=myItem.",
       "sourceType": "org.apache.camel.component.milo.server.springboot.MiloServerComponentConfiguration",
       "defaultValue": "urn:org:apache:camel"
     },
     {
       "name": "camel.component.milo-server.path",
       "type": "java.lang.String",
-      "description": "The path to be appended to the end of the endpoint url. (doesn't need to start with '\/')",
+      "description": "The path of the endpoint URLs of the server, after the host and the port. It does not need to start with a slash. The discovery endpoint always has the path \/discovery.",
       "sourceType": "org.apache.camel.component.milo.server.springboot.MiloServerComponentConfiguration"
     },
     {
       "name": "camel.component.milo-server.port",
       "type": "java.lang.Integer",
-      "description": "The TCP port the server binds to",
+      "description": "The TCP port that the server listens on.",
       "sourceType": "org.apache.camel.component.milo.server.springboot.MiloServerComponentConfiguration"
     },
     {
       "name": "camel.component.milo-server.product-uri",
       "type": "java.lang.String",
-      "description": "The product URI",
+      "description": "The product URI of the server. If not set, urn:org:apache:camel:milo is used.",
       "sourceType": "org.apache.camel.component.milo.server.springboot.MiloServerComponentConfiguration"
     },
     {
       "name": "camel.component.milo-server.security-policies",
       "type": "java.util.Set<org.eclipse.milo.opcua.stack.core.security.SecurityPolicy>",
-      "description": "Security policies",
+      "description": "The security policies of the endpoints of the server, as a Set of org.eclipse.milo.opcua.stack.core.security.SecurityPolicy. Only None and Basic256Sha256 create endpoints, Basic256Sha256 with the security mode SignAndEncrypt. If neither this option nor securityPoliciesById is set, the endpoints use None.",
       "sourceType": "org.apache.camel.component.milo.server.springboot.MiloServerComponentConfiguration"
     },
     {
       "name": "camel.component.milo-server.security-policies-by-id",
       "type": "java.lang.String",
-      "description": "Security policies by URI or name. Multiple policies can be separated by comma.",
+      "description": "A comma-separated list of the security policies of the endpoints of the server, as URIs or as names of org.eclipse.milo.opcua.stack.core.security.SecurityPolicy. They are added to the securityPolicies option. Only None and Basic256Sha256 create endpoints.",
       "sourceType": "org.apache.camel.component.milo.server.springboot.MiloServerComponentConfiguration"
     },
     {
       "name": "camel.component.milo-server.user-authentication-credentials",
       "type": "java.lang.String",
-      "description": "Set user password combinations in the form of user1:pwd1,user2:pwd2 Usernames and passwords will be URL decoded",
+      "description": "The users that the server accepts, as comma-separated user:password pairs, for example user1:pwd1,user2:pwd2. The user names and passwords are URL decoded: URL encode a comma, a percent sign or a plus sign in them, and a colon in a user name.",
       "sourceType": "org.apache.camel.component.milo.server.springboot.MiloServerComponentConfiguration"
     },
     {
       "name": "camel.component.milo-server.username-security-policy-uri",
       "type": "org.eclipse.milo.opcua.stack.core.security.SecurityPolicy",
-      "description": "Set the UserTokenPolicy used when",
+      "description": "The security policy of the UserName user token policy, which the client uses to encrypt the password, as a name of org.eclipse.milo.opcua.stack.core.security.SecurityPolicy. If not set, Basic256Sha256 is used. Only used when userAuthenticationCredentials is set.",
       "sourceType": "org.apache.camel.component.milo.server.springboot.MiloServerComponentConfiguration"
     }
   ],

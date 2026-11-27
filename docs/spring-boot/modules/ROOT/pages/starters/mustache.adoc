@@ -3,7 +3,7 @@
 = Mustache
 :artifactid: camel-mustache-starter
 
-Transform messages using a Mustache template.
+Render a Mustache template with the data of the message and use the text it writes as the new message body.
 
 == What's inside
 
@@ -34,5 +34,5 @@ The starter supports 7 options, which are listed below.
 | camel.component.mustache.content-cache | Sets whether to use resource content cache or not | true | Boolean
 | camel.component.mustache.enabled | Whether to enable auto configuration of the mustache component. This is enabled by default. |  | Boolean
 | camel.component.mustache.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.mustache.mustache-factory | To use a custom MustacheFactory. The option is a com.github.mustachejava.MustacheFactory type. |  | MustacheFactory
+| camel.component.mustache.mustache-factory | To use a custom com.github.mustachejava.MustacheFactory, which compiles the templates of all endpoints of the component and reads the partials that they include. If not set, the component uses a com.github.mustachejava.DefaultMustacheFactory. The startDelimiter and endDelimiter options are only applied with a DefaultMustacheFactory. The option is a com.github.mustachejava.MustacheFactory type. |  | MustacheFactory
 |===

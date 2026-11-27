@@ -37,12 +37,11 @@ public class DebeziumMySqlComponentConfiguration
      */
     private Boolean enabled;
     /**
-     * Additional properties for debezium components in case they can't be set
-     * directly on the camel configurations (e.g: setting Kafka Connect
-     * properties needed by Debezium engine, for example setting
-     * KafkaOffsetBackingStore), the properties have to be prefixed with
-     * additionalProperties.. E.g:
-     * additionalProperties.transactional.id=12345&additionalProperties.schema.registry.url=http://localhost:8811/avro. This is a multi-value option with prefix: additionalProperties.
+     * Properties for the Debezium engine and connector that have no option of
+     * their own, such as the Kafka brokers of the KafkaOffsetBackingStore or
+     * single message transformations, for example
+     * additionalProperties.bootstrap.servers=localhost:9092. This is a
+     * multi-value option with prefix: additionalProperties.
      */
     private Map<String, Object> additionalProperties;
     /**
@@ -65,58 +64,69 @@ public class DebeziumMySqlComponentConfiguration
      */
     private MySqlConnectorEmbeddedDebeziumConfiguration configuration;
     /**
-     * The Converter class that should be used to serialize and deserialize key
-     * data for offsets. The default is JSON converter.
+     * The converter class that Camel passes to Debezium as
+     * internal.key.converter. Debezium does not read this property: it always
+     * stores the keys of the offsets as JSON, so this option has no effect.
      */
     private String internalKeyConverter = "org.apache.kafka.connect.json.JsonConverter";
     /**
-     * The Converter class that should be used to serialize and deserialize
-     * value data for offsets. The default is JSON converter.
+     * The converter class that Camel passes to Debezium as
+     * internal.value.converter. Debezium does not read this property: it always
+     * stores the values of the offsets as JSON, so this option has no effect.
      */
     private String internalValueConverter = "org.apache.kafka.connect.json.JsonConverter";
     /**
-     * The name of the Java class of the commit policy. It defines when offsets
-     * commit has to be triggered based on the number of events processed and
-     * the time elapsed since the last commit. This class must implement the
-     * interface 'OffsetCommitPolicy'. The default is a periodic commit policy
-     * based upon time intervals.
+     * The Java class that decides when the offsets are committed. It must
+     * implement io.debezium.engine.spi.OffsetCommitPolicy. The default
+     * PeriodicCommitOffsetPolicy commits every offsetFlushIntervalMs, and
+     * AlwaysCommitOffsetPolicy commits after each batch of events.
      */
     private String offsetCommitPolicy;
     /**
-     * Maximum number of milliseconds to wait for records to flush and partition
-     * offset data to be committed to offset storage before cancelling the
-     * process and restoring the offset data to be committed in a future
-     * attempt. The default is 5 seconds. The option is a long type.
+     * How long to wait for the offsets to be written to the offset store before
+     * the commit is cancelled; the offsets are then committed in a later
+     * attempt. Camel passes it to Debezium as offset.flush.timeout.ms. The
+     * default is 5 seconds. The option is a long type.
      */
     private Long offsetCommitTimeoutMs = 5000L;
     /**
-     * Interval at which to try committing offsets. The default is 1 minute. The
-     * option is a long type.
+     * How often the default periodic commit policy commits the offsets. The
+     * events processed since the last commit are sent again after a crash. The
+     * default is 1 minute. The option is a long type.
      */
     private Long offsetFlushIntervalMs = 60000L;
     /**
-     * The name of the Java class that is responsible for persistence of
-     * connector offsets.
+     * The Java class of the Kafka Connect OffsetBackingStore that stores the
+     * offsets (the position of the connector in the database log), so that a
+     * restarted consumer continues where it stopped. The default
+     * FileOffsetBackingStore writes them to the offsetStorageFileName file,
+     * KafkaOffsetBackingStore to the offsetStorageTopic topic, and
+     * MemoryOffsetBackingStore keeps them in memory only.
      */
     private String offsetStorage = "org.apache.kafka.connect.storage.FileOffsetBackingStore";
     /**
-     * Path to file where offsets are to be stored. Required when offset.storage
-     * is set to the FileOffsetBackingStore.
+     * The file that the FileOffsetBackingStore writes the offsets to. Required
+     * with the default offsetStorage: creating the endpoint fails when it is
+     * not set, or when its folder does not exist or cannot be written.
      */
     private String offsetStorageFileName;
     /**
-     * The number of partitions used when creating the offset storage topic.
-     * Required when offset.storage is set to the 'KafkaOffsetBackingStore'.
+     * The number of partitions of the offset topic, when the
+     * KafkaOffsetBackingStore creates it. Required when offsetStorage is the
+     * KafkaOffsetBackingStore.
      */
     private Integer offsetStoragePartitions;
     /**
-     * Replication factor used when creating the offset storage topic. Required
-     * when offset.storage is set to the KafkaOffsetBackingStore
+     * The replication factor of the offset topic, when the
+     * KafkaOffsetBackingStore creates it. Required when offsetStorage is the
+     * KafkaOffsetBackingStore.
      */
     private Integer offsetStorageReplicationFactor;
     /**
-     * The name of the Kafka topic where offsets are to be stored. Required when
-     * offset.storage is set to the KafkaOffsetBackingStore.
+     * The Kafka topic that the KafkaOffsetBackingStore writes the offsets to.
+     * Required with that offsetStorage, together with offsetStoragePartitions,
+     * offsetStorageReplicationFactor and the Kafka brokers as
+     * additionalProperties.bootstrap.servers.
      */
     private String offsetStorageTopic;
     /**

@@ -3,7 +3,7 @@
 = MongoDB GridFS
 :artifactid: camel-mongodb-gridfs-starter
 
-Interact with MongoDB GridFS.
+Store, read and remove files in a MongoDB GridFS bucket, and receive the files that are uploaded to it.
 
 == What's inside
 

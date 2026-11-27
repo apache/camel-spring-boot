@@ -62,7 +62,7 @@
     {
       "name": "camel.component.mustache.mustache-factory",
       "type": "com.github.mustachejava.MustacheFactory",
-      "description": "To use a custom MustacheFactory. The option is a com.github.mustachejava.MustacheFactory type.",
+      "description": "To use a custom com.github.mustachejava.MustacheFactory, which compiles the templates of all endpoints of the component and reads the partials that they include. If not set, the component uses a com.github.mustachejava.DefaultMustacheFactory. The startDelimiter and endDelimiter options are only applied with a DefaultMustacheFactory. The option is a com.github.mustachejava.MustacheFactory type.",
       "sourceType": "org.apache.camel.component.mustache.springboot.MustacheComponentConfiguration"
     }
   ],

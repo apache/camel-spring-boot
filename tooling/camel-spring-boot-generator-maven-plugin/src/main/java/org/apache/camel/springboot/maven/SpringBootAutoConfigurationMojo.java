@@ -251,7 +251,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                     prop.getField().setLiteralInitializer(option.getDefaultValue().toString());
                 } else if (!isBlank(option.getEnums())) {
                     String enumShortName = type.substring(type.lastIndexOf(".") + 1);
-                    prop.getField().setLiteralInitializer(enumShortName + "." + option.getDefaultValue());
+                    prop.getField().setLiteralInitializer(enumShortName + "." + resolveEnumConstant(type, option.getDefaultValue().toString()));
                     commonClass.addImport(model.getJavaType());
                 }
             }
@@ -363,7 +363,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                     prop.getField().setLiteralInitializer(option.getDefaultValue().toString());
                 } else if (!isBlank(option.getEnums())) {
                     String enumShortName = type.substring(type.lastIndexOf(".") + 1);
-                    prop.getField().setLiteralInitializer(enumShortName + "." + option.getDefaultValue());
+                    prop.getField().setLiteralInitializer(enumShortName + "." + resolveEnumConstant(type, option.getDefaultValue().toString()));
                     javaClass.addImport(model.getJavaType());
                 }
             }
@@ -724,7 +724,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                     prop.getField().setLiteralInitializer(option.getDefaultValue().toString());
                 } else if (!isBlank(option.getEnums())) {
                     String enumShortName = type.substring(type.lastIndexOf(".") + 1);
-                    prop.getField().setLiteralInitializer(enumShortName + "." + option.getDefaultValue());
+                    prop.getField().setLiteralInitializer(enumShortName + "." + resolveEnumConstant(type, option.getDefaultValue().toString()));
                     javaClass.addImport(model.getJavaType());
                 }
             }
@@ -837,6 +837,45 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
         } catch (ClassNotFoundException e) {
             throw new MojoFailureException("Unable to load type", e);
         }
+    }
+
+    /**
+     * Resolves the name of the Java enum constant to use for the given default value. The catalog may list the enum
+     * values using a display name (such as the value returned by toString()) that differs from the name of the Java
+     * constant, for example <tt>Session</tt> for <tt>ConsistencyLevel.SESSION</tt>.
+     */
+    private String resolveEnumConstant(String javaType, String defaultValue) {
+        Class<?> clazz;
+        try {
+            clazz = loadClass(javaType);
+        } catch (Exception | LinkageError e) {
+            return defaultValue;
+        }
+        if (!clazz.isEnum()) {
+            return defaultValue;
+        }
+        Object[] constants = clazz.getEnumConstants();
+        // exact match on the constant name
+        for (Object c : constants) {
+            if (((Enum<?>) c).name().equals(defaultValue)) {
+                return defaultValue;
+            }
+        }
+        // camelCase to UPPER_UNDERSCORE (BoundedStaleness -> BOUNDED_STALENESS), or case-insensitive match
+        String upper = defaultValue.replaceAll("([a-z0-9])([A-Z])", "$1_$2").replace('-', '_');
+        for (Object c : constants) {
+            String name = ((Enum<?>) c).name();
+            if (name.equalsIgnoreCase(upper) || name.equalsIgnoreCase(defaultValue)) {
+                return name;
+            }
+        }
+        // match on toString()
+        for (Object c : constants) {
+            if (defaultValue.equals(c.toString())) {
+                return ((Enum<?>) c).name();
+            }
+        }
+        return defaultValue;
     }
 
     // try loading class, looking for inner classes if needed
@@ -1189,7 +1228,7 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                     prop.getField().setLiteralInitializer(defaultValue.toString());
                 } else if (!isBlank(option.getEnums())) {
                     String enumShortName = type.substring(type.lastIndexOf(".") + 1);
-                    prop.getField().setLiteralInitializer(enumShortName + "." + defaultValue);
+                    prop.getField().setLiteralInitializer(enumShortName + "." + resolveEnumConstant(type, defaultValue.toString()));
                     javaClass.addImport(model.getJavaType());
                 }
             }
@@ -1317,9 +1356,9 @@ public class SpringBootAutoConfigurationMojo extends AbstractSpringBootGenerator
                 } else if ("integer".equals(option.getType()) || "java.lang.Integer".equals(option.getJavaType())
                         || "boolean".equals(option.getType()) || "java.lang.Boolean".equals(option.getJavaType())) {
                     prop.getField().setLiteralInitializer(option.getDefaultValue().toString());
-                } else if (isBlank(option.getEnums())) {
+                } else if (!isBlank(option.getEnums())) {
                     String enumShortName = type.substring(type.lastIndexOf(".") + 1);
-                    prop.getField().setLiteralInitializer(enumShortName + "." + option.getDefaultValue());
+                    prop.getField().setLiteralInitializer(enumShortName + "." + resolveEnumConstant(type, option.getDefaultValue().toString()));
                     javaClass.addImport(model.getJavaType());
                 }
             }

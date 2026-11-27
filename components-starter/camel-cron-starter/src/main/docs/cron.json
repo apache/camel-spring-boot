@@ -30,7 +30,7 @@
     {
       "name": "camel.component.cron.cron-service",
       "type": "java.lang.String",
-      "description": "The id of the CamelCronService to use when multiple implementations are provided",
+      "description": "The name of the CamelCronService bean in the registry to use, when more than one is bound. If not set, the only CamelCronService in the registry is used. If the registry has none, the one that a module on the classpath provides is used, such as camel-quartz or camel-spring.",
       "sourceType": "org.apache.camel.component.cron.springboot.CronComponentConfiguration"
     },
     {

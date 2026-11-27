@@ -3,7 +3,7 @@
 = Google Cloud Speech To Text
 :artifactid: camel-google-speech-to-text-starter
 
-Transcribe audio to text using Google Cloud Speech-to-Text API
+Transcribe audio to text with the Google Cloud Speech-to-Text API.
 
 == What's inside
 

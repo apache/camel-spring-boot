@@ -56,7 +56,13 @@ public class InfinispanRemoteComponentConfiguration
      */
     private String hosts;
     /**
-     * Specifies the query builder. The option is a
+     * To use a custom
+     * org.apache.camel.component.infinispan.InfinispanQueryBuilder that builds
+     * the query of the QUERY operation of the producer, which the
+     * CamelInfinispanQueryBuilder header replaces. When set, the consumer
+     * registers a continuous query instead of a listener, and receives the
+     * CacheEntryJoining, CacheEntryUpdated and CacheEntryLeaving events of the
+     * entries that match the query. The option is a
      * org.apache.camel.component.infinispan.InfinispanQueryBuilder type.
      */
     private InfinispanQueryBuilder queryBuilder;
@@ -88,14 +94,15 @@ public class InfinispanRemoteComponentConfiguration
      */
     private String eventTypes;
     /**
-     * Set a specific default value for some producer operations. The option is
-     * a java.lang.Object type.
+     * The value that the GETORDEFAULT operation returns when the key is not in
+     * the cache. The CamelInfinispanDefaultValue header replaces this option.
+     * The option is a java.lang.Object type.
      */
     private Object defaultValue;
     /**
-     * Set a specific key for producer operations. When set, it takes precedence
-     * over the CamelInfinispanKey header. The option is a java.lang.Object
-     * type.
+     * The key of the entry for the producer operations that take a key, such as
+     * PUT, GET, REMOVE and COMPUTE. When set, it takes precedence over the
+     * CamelInfinispanKey header. The option is a java.lang.Object type.
      */
     private Object key;
     /**
@@ -110,17 +117,24 @@ public class InfinispanRemoteComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Set a specific old value for some producer operations. The option is a
+     * The value that the REPLACE and REPLACEASYNC operations compare with the
+     * current value of the entry, to replace the entry only if they are equal.
+     * If not set, an existing entry is replaced whatever its value. The
+     * CamelInfinispanOldValue header replaces this option. The option is a
      * java.lang.Object type.
      */
     private Object oldValue;
     /**
-     * The operation to perform
+     * The operation that the producer performs. The CamelInfinispanOperation
+     * header replaces this option.
      */
     private InfinispanOperation operation = InfinispanOperation.PUT;
     /**
-     * Set a specific value for producer operations. The option is a
-     * java.lang.Object type.
+     * The value of the entry for the PUT, PUTIFABSENT and REPLACE operations
+     * and their ASYNC variants, the value to look for with CONTAINSVALUE, and
+     * the value that REMOVE and REMOVEASYNC compare with the current value, to
+     * remove the entry only if they are equal. The CamelInfinispanValue header
+     * replaces this option. The option is a java.lang.Object type.
      */
     private Object value;
     /**
@@ -186,7 +200,12 @@ public class InfinispanRemoteComponentConfiguration
      */
     private Map<String, String> configurationProperties;
     /**
-     * An implementation specific URI for the CacheManager
+     * The location of the configuration file of the cache manager that Camel
+     * creates, read from the classpath unless it has a prefix such as file:.
+     * Not used when cacheContainer or cacheContainerConfiguration is set. For
+     * infinispan-embedded it is an Infinispan XML configuration file, read on
+     * the component only; for infinispan it is a Hot Rod client properties
+     * file.
      */
     private String configurationUri;
     /**
@@ -195,18 +214,17 @@ public class InfinispanRemoteComponentConfiguration
      */
     private String flags;
     /**
-     * Set a specific remappingFunction to use in a compute operation. The
-     * option is a java.util.function.BiFunction type.
+     * The java.util.function.BiFunction that the COMPUTE and COMPUTEASYNC
+     * operations call with the key and the current value of the entry, or null
+     * if there is none, to compute its new value. If the function returns null,
+     * the entry is removed. The option is a java.util.function.BiFunction type.
      */
     private BiFunction remappingFunction;
     /**
-     * Store the operation result in a header instead of the message body. By
-     * default, resultHeader == null and the query result is stored in the
-     * message body, any existing content in the message body is discarded. If
-     * resultHeader is set, the value is used as the name of the header to store
-     * the query result and the original message body is preserved. This value
-     * can be overridden by an in message header named:
-     * CamelInfinispanOperationResultHeader
+     * The name of the header in which the producer stores the result of the
+     * operation, keeping the message body. If not set, the result replaces the
+     * message body. The CamelInfinispanOperationResultHeader header replaces
+     * this option.
      */
     private String resultHeader;
     /**

@@ -3,7 +3,7 @@
 = AWS MQ
 :artifactid: camel-aws2-mq-starter
 
-Manage AWS MQ instances.
+Create, describe, update, reboot, delete and list brokers in Amazon MQ.
 
 == What's inside
 
@@ -28,27 +28,27 @@ The starter supports 23 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| camel.component.aws2-mq.access-key | Amazon AWS Access Key |  | String
-| camel.component.aws2-mq.amazon-mq-client | To use a existing configured AmazonMQClient client. The option is a software.amazon.awssdk.services.mq.MqClient type. |  | MqClient
+| camel.component.aws2-mq.access-key | The access key ID of the AWS credentials, used together with the secretKey option. It is not used when useDefaultCredentialsProvider or useProfileCredentialsProvider is true. |  | String
+| camel.component.aws2-mq.amazon-mq-client | To use a custom software.amazon.awssdk.services.mq.MqClient. When this option is set or autowired, the credentials, region, proxy, endpoint override and trustAllCertificates options are not used. The Camel endpoint does not close a client that is set or autowired. The option is a software.amazon.awssdk.services.mq.MqClient type. |  | MqClient
 | camel.component.aws2-mq.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
-| camel.component.aws2-mq.configuration | Component configuration. The option is a org.apache.camel.component.aws2.mq.MQ2Configuration type. |  | MQ2Configuration
+| camel.component.aws2-mq.configuration | The configuration that the endpoints of the component start from. Each endpoint uses a copy of it, in which its own URI options replace the values. The option is a org.apache.camel.component.aws2.mq.MQ2Configuration type. |  | MQ2Configuration
 | camel.component.aws2-mq.enabled | Whether to enable auto configuration of the aws2-mq component. This is enabled by default. |  | Boolean
 | camel.component.aws2-mq.health-check-consumer-enabled | Used for enabling or disabling all consumer based health checks from this component | true | Boolean
 | camel.component.aws2-mq.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
 | camel.component.aws2-mq.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.aws2-mq.operation | The operation to perform |  | MQ2Operations
-| camel.component.aws2-mq.override-endpoint | Set the need for overriding the endpoint. This option needs to be used in combination with the uriEndpointOverride option | false | Boolean
-| camel.component.aws2-mq.pojo-request | If we want to use a POJO request as body or not | false | Boolean
-| camel.component.aws2-mq.profile-credentials-name | If using a profile credentials provider, this parameter will set the profile name |  | String
-| camel.component.aws2-mq.proxy-host | To define a proxy host when instantiating the MQ client |  | String
-| camel.component.aws2-mq.proxy-port | To define a proxy port when instantiating the MQ client |  | Integer
-| camel.component.aws2-mq.proxy-protocol | To define a proxy protocol when instantiating the MQ client | https | Protocol
-| camel.component.aws2-mq.region | The region in which MQ client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example, ap-east-1) You'll need to use the name Region.EU_WEST_1.id() |  | String
-| camel.component.aws2-mq.secret-key | Amazon AWS Secret Key |  | String
-| camel.component.aws2-mq.session-token | Amazon AWS Session Token used when the user needs to assume an IAM role |  | String
-| camel.component.aws2-mq.trust-all-certificates | If we want to trust all certificates in case of overriding the endpoint | false | Boolean
-| camel.component.aws2-mq.uri-endpoint-override | Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option |  | String
-| camel.component.aws2-mq.use-default-credentials-provider | Set whether the MQ client should expect to load credentials through a default credentials provider or to expect static credentials to be passed in. | false | Boolean
-| camel.component.aws2-mq.use-profile-credentials-provider | Set whether the MQ client should expect to load credentials through a profile credentials provider. | false | Boolean
-| camel.component.aws2-mq.use-session-credentials | Set whether the MQ client should expect to use Session Credentials. This is useful in a situation in which the user needs to assume an IAM role for doing operations in MQ. | false | Boolean
+| camel.component.aws2-mq.operation | The operation that the producer performs. The CamelAwsMQOperation header replaces this option. |  | MQ2Operations
+| camel.component.aws2-mq.override-endpoint | Whether to send the requests to the URI of the uriEndpointOverride option instead of the endpoint of the region. It has no effect when uriEndpointOverride is not set. | false | Boolean
+| camel.component.aws2-mq.pojo-request | Whether the body is the request object of the AWS SDK for the operation, such as a CreateBrokerRequest, which the producer sends as it is. The headers that give the input of the operation are then not used, and a body of another type fails the exchange. | false | Boolean
+| camel.component.aws2-mq.profile-credentials-name | The name of the profile in the AWS shared credentials and config files, used when useProfileCredentialsProvider is true. If not set, the AWS SDK uses its default profile, which the AWS_PROFILE environment variable can change. |  | String
+| camel.component.aws2-mq.proxy-host | The host name of the proxy that the HTTP client of Amazon MQ connects through. The proxy is used only when the proxyPort option is set too. |  | String
+| camel.component.aws2-mq.proxy-port | The port of the proxy that the HTTP client of Amazon MQ connects through. The proxy is used only when the proxyHost option is set too. |  | Integer
+| camel.component.aws2-mq.proxy-protocol | The protocol that the HTTP client of Amazon MQ uses to connect to the proxy. It is used only when the proxyHost and proxyPort options are set. | https | Protocol
+| camel.component.aws2-mq.region | The AWS region of Amazon MQ, as a region ID such as eu-west-1, which is the value of Region.EU_WEST_1.id(). If not set, the AWS SDK takes the region from its default region provider chain, for example the AWS_REGION environment variable. |  | String
+| camel.component.aws2-mq.secret-key | The secret access key of the AWS credentials, used together with the accessKey option. It is not used when useDefaultCredentialsProvider or useProfileCredentialsProvider is true. |  | String
+| camel.component.aws2-mq.session-token | The session token of temporary AWS credentials, for example of an assumed IAM role. It is used only when useSessionCredentials is true, together with the accessKey and secretKey options. |  | String
+| camel.component.aws2-mq.trust-all-certificates | Whether the HTTP client of Amazon MQ trusts every TLS certificate without checking it. It applies to any endpoint, not only to an overridden one, so use it only for testing, for example against a local emulator. | false | Boolean
+| camel.component.aws2-mq.uri-endpoint-override | The URI of the endpoint to use instead of the endpoint of the region, for example http://localhost:4566 for a local emulator. It is used only when overrideEndpoint is true. |  | String
+| camel.component.aws2-mq.use-default-credentials-provider | Whether to load the credentials with the default credentials provider chain of the AWS SDK, which looks in system properties, environment variables, the shared credentials and config files, and the container or instance role. It takes precedence over the other credentials options. | false | Boolean
+| camel.component.aws2-mq.use-profile-credentials-provider | Whether to load the credentials from a profile of the AWS shared credentials and config files, the one of the profileCredentialsName option. It is not used when useDefaultCredentialsProvider is true, and it takes precedence over the session and static credentials. | false | Boolean
+| camel.component.aws2-mq.use-session-credentials | Whether to use temporary credentials made of the accessKey, secretKey and sessionToken options, for example those of an assumed IAM role. It is not used when useDefaultCredentialsProvider or useProfileCredentialsProvider is true. | false | Boolean
 |===

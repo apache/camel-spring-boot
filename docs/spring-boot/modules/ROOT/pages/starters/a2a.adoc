@@ -3,7 +3,7 @@
 = A2A
 :artifactid: camel-a2a-starter
 
-A2A endpoint for agent-to-agent communication.
+Expose a route as an agent and call remote agents with the Agent2Agent (A2A) protocol.
 
 == What's inside
 

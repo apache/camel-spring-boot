@@ -3,7 +3,7 @@
 = Stub
 :artifactid: camel-stub-starter
 
-Stub out any physical endpoints while in development or testing.
+Replace any endpoint with an in-memory queue while developing or testing, by adding stub: in front of its URI.
 
 == What's inside
 
@@ -39,6 +39,6 @@ The starter supports 13 options, which are listed below.
 | camel.component.stub.enabled | Whether to enable auto configuration of the stub component. This is enabled by default. |  | Boolean
 | camel.component.stub.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.stub.queue-size | Sets the default maximum capacity of the SEDA queue (i.e., the number of messages it can hold). | 1000 | Integer
-| camel.component.stub.shadow | If shadow is enabled then the stub component will register a shadow endpoint with the actual uri that refers to the stub endpoint, meaning you can lookup the endpoint via both stub:kafka:cheese and kafka:cheese. | false | Boolean
-| camel.component.stub.shadow-pattern | If shadow is enabled then this pattern can be used to filter which components to match. Multiple patterns can be separated by comma. |  | String
+| camel.component.stub.shadow | Whether to also register each stub endpoint in the endpoint registry under its URI without the stub: prefix, so that looking up kafka:cheese returns the endpoint of stub:kafka:cheese. | false | Boolean
+| camel.component.stub.shadow-pattern | The pattern that selects which stub endpoints shadow is applied to. It is matched against the whole endpoint URI including the stub: prefix, as an exact URI, a wildcard with a trailing * (such as stub:kafka*), or a regular expression. If not set, shadow applies to all stub endpoints. |  | String
 |===

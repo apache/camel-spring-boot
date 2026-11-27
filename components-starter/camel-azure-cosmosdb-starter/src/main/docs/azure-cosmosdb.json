@@ -16,7 +16,7 @@
     {
       "name": "camel.component.azure-cosmosdb.account-key",
       "type": "java.lang.String",
-      "description": "Sets either a master or readonly key used to perform authentication for accessing resource.",
+      "description": "The key of the Azure Cosmos DB account, a read-write key or a read-only key, that authorizes the requests when credentialType is SHARED_ACCOUNT_KEY. Not used when the cosmosAsyncClient option is set.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
     },
     {
@@ -36,87 +36,80 @@
     {
       "name": "camel.component.azure-cosmosdb.change-feed-processor-options",
       "type": "com.azure.cosmos.models.ChangeFeedProcessorOptions",
-      "description": "Sets the ChangeFeedProcessorOptions to be used. Unless specifically set the default values that will be used are: maximum items per page or FeedResponse: 100 lease renew interval: 17 seconds lease acquire interval: 13 seconds lease expiration interval: 60 seconds feed poll delay: 5 seconds maximum scale count: unlimited. The option is a com.azure.cosmos.models.ChangeFeedProcessorOptions type.",
+      "description": "The com.azure.cosmos.models.ChangeFeedProcessorOptions of the change feed processor, for example to start from the beginning of the change feed or from a point in time. If not set, the defaults of the SDK apply: at most 100 items per batch, a lease renew interval of 17 seconds, a lease acquire interval of 13 seconds, a lease expiration interval of 60 seconds, a feed poll delay of 5 seconds, no maximum scale count, and only the changes after the first start. The option is a com.azure.cosmos.models.ChangeFeedProcessorOptions type.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
-    },
-    {
-      "name": "camel.component.azure-cosmosdb.client-telemetry-enabled",
-      "type": "java.lang.Boolean",
-      "description": "Sets the flag to enable client telemetry which will periodically collect database operations aggregation statistics, system information like cpu\/memory and send it to cosmos monitoring service, which will be helpful during debugging. DEFAULT value is false indicating this is an opt-in feature, by default no telemetry collection.",
-      "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration",
-      "defaultValue": false
     },
     {
       "name": "camel.component.azure-cosmosdb.configuration",
       "type": "org.apache.camel.component.azure.cosmosdb.CosmosDbConfiguration",
-      "description": "The component configurations. The option is a org.apache.camel.component.azure.cosmosdb.CosmosDbConfiguration type.",
+      "description": "The configuration of the component. Each endpoint that the component creates starts from a copy of it, to which the options of the endpoint are applied. The option is a org.apache.camel.component.azure.cosmosdb.CosmosDbConfiguration type.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
     },
     {
       "name": "camel.component.azure-cosmosdb.connection-sharing-across-clients-enabled",
       "type": "java.lang.Boolean",
-      "description": "Enables connections sharing across multiple Cosmos Clients. The default is false. When you have multiple instances of Cosmos Client in the same JVM interacting with multiple Cosmos accounts, enabling this allows connection sharing in Direct mode if possible between instances of Cosmos Client. Please note, when setting this option, the connection configuration (e.g., socket timeout config, idle timeout config) of the first instantiated client will be used for all other client instances.",
+      "description": "Whether the client shares its connections in Direct mode with the other clients of the JVM that enable this option, such as the clients of other endpoints or of other accounts. The connection settings of the first of these clients, such as its timeouts, then apply to all of them.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.azure-cosmosdb.consistency-level",
       "type": "com.azure.cosmos.ConsistencyLevel",
-      "description": "Sets the consistency levels supported for Azure Cosmos DB client operations in the Azure Cosmos DB service. The requested ConsistencyLevel must match or be weaker than that provisioned for the database account. Consistency levels by order of strength are STRONG, BOUNDED_STALENESS, SESSION and EVENTUAL. Refer to consistency level documentation for additional details: https:\/\/docs.microsoft.com\/en-us\/azure\/cosmos-db\/consistency-levels",
+      "description": "The default consistency level of the requests of the client. It must be the same as or weaker than the default consistency level of the account. From the strongest to the weakest: Strong, BoundedStaleness, Session, ConsistentPrefix and Eventual.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration",
       "defaultValue": "session"
     },
     {
       "name": "camel.component.azure-cosmosdb.container-partition-key-path",
       "type": "java.lang.String",
-      "description": "Sets the container partition key path.",
+      "description": "The partition key path of a container that the component creates, for example \/myPartitionKey. A \/ is added in front when it is missing. Required by createContainer and when createContainerIfNotExists is true, and the CamelAzureCosmosDbContainerPartitionKeyPath header replaces it for the producer.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
     },
     {
       "name": "camel.component.azure-cosmosdb.content-response-on-write-enabled",
       "type": "java.lang.Boolean",
-      "description": "Sets the boolean to only return the headers and status code in Cosmos DB response in case of Create, Update and Delete operations on CosmosItem. In Consumer, it is enabled by default because of the ChangeFeed in the consumer that needs this flag to be enabled, and thus it shouldn't be overridden. In Producer, it is advised to disable it since it reduces the network overhead",
+      "description": "Whether Cosmos DB returns the item in the response of createItem, upsertItem and replaceItem, which the producer then sets as the body. If false, the body is null after these operations, which saves network traffic. The consumer requires true: its change feed processor fails to start with false.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.azure-cosmosdb.cosmos-async-client",
       "type": "com.azure.cosmos.CosmosAsyncClient",
-      "description": "Inject an external CosmosAsyncClient into the component which provides a client-side logical representation of the Azure Cosmos DB service. This asynchronous client is used to configure and execute requests against the service. The option is a com.azure.cosmos.CosmosAsyncClient type.",
+      "description": "To use a custom com.azure.cosmos.CosmosAsyncClient for all requests. When this option is set or autowired, the databaseEndpoint, accountKey, credentialType, consistencyLevel, preferredRegions, clientTelemetryEnabled, connectionSharingAcrossClientsEnabled, multipleWriteRegionsEnabled, readRequestsFallbackEnabled and contentResponseOnWriteEnabled options are not used. The endpoint does not close a client that is set or autowired. The option is a com.azure.cosmos.CosmosAsyncClient type.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
     },
     {
       "name": "camel.component.azure-cosmosdb.create-container-if-not-exists",
       "type": "java.lang.Boolean",
-      "description": "Sets if the component should create the Cosmos container automatically in case it doesn't exist in the Cosmos database",
+      "description": "Whether to create the container when it does not exist, with the containerPartitionKeyPath and throughputProperties options, and the indexingPolicy option for the producer. The consumer creates it when it starts, and the producer before replaceContainerThroughput and each operation on items except deleteItem. The CamelAzureCosmosDbCreateContainerIfNotExist header replaces it for the producer.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.azure-cosmosdb.create-database-if-not-exists",
       "type": "java.lang.Boolean",
-      "description": "Sets if the component should create the Cosmos database automatically in case it doesn't exist in the Cosmos account",
+      "description": "Whether to create the database when it does not exist, with the throughputProperties option. The consumer creates it when it starts, and the producer before each operation on the database, its containers or their items, except deleteDatabase and deleteContainer. The CamelAzureCosmosDbCreateDatabaseIfNotExist header replaces it for the producer.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.azure-cosmosdb.create-lease-container-if-not-exists",
       "type": "java.lang.Boolean",
-      "description": "Sets if the component should create Cosmos lease container for the consumer automatically in case it doesn't exist in Cosmos database",
+      "description": "Whether the consumer creates the lease container when it does not exist, with the partition key path \/id and the throughputProperties option.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.azure-cosmosdb.create-lease-database-if-not-exists",
       "type": "java.lang.Boolean",
-      "description": "Sets if the component should create the Cosmos lease database for the consumer automatically in case it doesn't exist in the Cosmos account",
+      "description": "Whether the consumer creates the lease database when it does not exist, with the throughputProperties option.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.azure-cosmosdb.credential-type",
       "type": "org.apache.camel.component.azure.common.CredentialType",
-      "description": "Determines the credential strategy to adopt",
+      "description": "How the client authenticates. SHARED_ACCOUNT_KEY: with the accountKey option. AZURE_IDENTITY: with a DefaultAzureCredential of the Azure Identity library, which finds the credentials in the environment, such as environment variables, a managed identity or the Azure CLI. Not used when the cosmosAsyncClient option is set.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration",
       "defaultValue": "shared-account-key"
     },
@@ -128,7 +121,7 @@
     {
       "name": "camel.component.azure-cosmosdb.database-endpoint",
       "type": "java.lang.String",
-      "description": "Sets the Azure Cosmos database endpoint the component will connect to.",
+      "description": "The URI of the Azure Cosmos DB account, for example https:\/\/myaccount.documents.azure.com:443\/. Required unless the cosmosAsyncClient option is set, which replaces it.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
     },
     {
@@ -140,25 +133,25 @@
     {
       "name": "camel.component.azure-cosmosdb.host-name",
       "type": "java.lang.String",
-      "description": "Sets the hostname. The host: a host is an application instance that uses the change feed processor to listen for changes. Multiple instances with the same lease configuration can run in parallel, but each instance should have a different instance name. If not specified, this will be a generated random hostname.",
+      "description": "The name of the host, which identifies this consumer in the leases of the change feed processor. The consumers that share a lease container need different names. If not set, a random name is generated each time the change feed processor is built.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
     },
     {
       "name": "camel.component.azure-cosmosdb.indexing-policy",
       "type": "com.azure.cosmos.models.IndexingPolicy",
-      "description": "The CosmosDB Indexing Policy that will be set in case of container creation, this option is related to createLeaseContainerIfNotExists and it will be taken into account when the latter is true. The option is a com.azure.cosmos.models.IndexingPolicy type.",
+      "description": "The com.azure.cosmos.models.IndexingPolicy of a container that the producer creates, with createContainer or because createContainerIfNotExists is true. If not set, the container gets the default indexing policy of Cosmos DB. The CamelAzureCosmosDbIndexingPolicy header replaces it, and the consumer does not use it. The option is a com.azure.cosmos.models.IndexingPolicy type.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
     },
     {
       "name": "camel.component.azure-cosmosdb.item-id",
       "type": "java.lang.String",
-      "description": "Sets the itemId in case needed for operation on item like delete, replace",
+      "description": "The id of the item for readItem, replaceItem and deleteItem. The CamelAzureCosmosDbItemId header replaces it.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
     },
     {
       "name": "camel.component.azure-cosmosdb.item-partition-key",
       "type": "java.lang.String",
-      "description": "Sets partition key. Represents a partition key value in the Azure Cosmos DB database service. A partition key identifies the partition where the item is stored in.",
+      "description": "The value of the partition key of the item, as a String, for createItem, upsertItem, replaceItem, deleteItem and readItem, and of the items that readAllItems reads. If not set, the partition key value is null. The CamelAzureCosmosDbItemPartitionKey header replaces it.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
     },
     {
@@ -171,60 +164,69 @@
     {
       "name": "camel.component.azure-cosmosdb.lease-container-name",
       "type": "java.lang.String",
-      "description": "Sets the lease container which acts as a state storage and coordinates processing the change feed across multiple workers. The lease container can be stored in the same account as the monitored container or in a separate account. It will be auto-created if createLeaseContainerIfNotExists is set to true.",
+      "description": "The name of the lease container, where the change feed processor of the consumer stores how far it has processed each range of the feed and which host processes it. The consumers that use the same lease container for the same container share the work of processing its changes. The lease container must have the partition key path \/id.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration",
       "defaultValue": "camel-lease"
     },
     {
       "name": "camel.component.azure-cosmosdb.lease-database-name",
       "type": "java.lang.String",
-      "description": "Sets the lease database where the leaseContainerName will be stored. If it is not specified, this component will store the lease container in the same database that is specified in databaseName. It will be auto-created if createLeaseDatabaseIfNotExists is set to true.",
+      "description": "The name of the database of the lease container. If not set, the database of the databaseName option is used.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
     },
     {
       "name": "camel.component.azure-cosmosdb.multiple-write-regions-enabled",
       "type": "java.lang.Boolean",
-      "description": "Sets the flag to enable writes on any regions for geo-replicated database accounts in the Azure Cosmos DB service. When the value of this property is true, the SDK will direct write operations to available writable regions of geo-replicated database account. Writable regions are ordered by PreferredRegions property. Setting the property value to true has no effect until EnableMultipleWriteRegions in DatabaseAccount is also set to true. DEFAULT value is true indicating that writes are directed to available writable regions of geo-replicated database account.",
+      "description": "Whether the client sends writes to any writable region of a geo-replicated account, in the order of preferredRegions. Has no effect unless multi-region writes are enabled on the account.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.azure-cosmosdb.operation",
       "type": "org.apache.camel.component.azure.cosmosdb.CosmosDbOperationsDefinition",
-      "description": "The CosmosDB operation that can be used with this component on the producer.",
+      "description": "The operation that the producer performs. The operations on a database use databaseName, and the operations on a container or its items also use containerName. The CamelAzureCosmosDbOperation header replaces this option.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration",
       "defaultValue": "listdatabases"
     },
     {
       "name": "camel.component.azure-cosmosdb.preferred-regions",
       "type": "java.lang.String",
-      "description": "Sets the comma separated preferred regions for geo-replicated database accounts. For example, East US as the preferred region. When EnableEndpointDiscovery is true and PreferredRegions is non-empty, the SDK will prefer to use the regions in the container in the order they are specified to perform operations.",
+      "description": "A comma-separated list of the preferred regions of a geo-replicated account, in order of preference, for example East US,West US. The client sends its requests to the first available region of this list.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
     },
     {
       "name": "camel.component.azure-cosmosdb.query",
       "type": "java.lang.String",
-      "description": "An SQL query to execute on a given resources. To learn more about Cosmos SQL API, check this link {link https:\/\/docs.microsoft.com\/en-us\/azure\/cosmos-db\/sql-query-getting-started}",
+      "description": "The SQL query of queryDatabases, queryContainers and queryItems, for example SELECT * FROM c WHERE c.id = '1'. The CamelAzureCosmosDbQuery header replaces it.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
     },
     {
       "name": "camel.component.azure-cosmosdb.query-request-options",
       "type": "com.azure.cosmos.models.CosmosQueryRequestOptions",
-      "description": "Set additional QueryRequestOptions that can be used with queryItems, queryContainers, queryDatabases, listDatabases, listItems, listContainers operations. The option is a com.azure.cosmos.models.CosmosQueryRequestOptions type.",
+      "description": "The com.azure.cosmos.models.CosmosQueryRequestOptions of queryDatabases, listContainers, queryContainers, readAllItems and queryItems, for example to set the maximum number of items per page. The CamelAzureCosmosDbQueryRequestOptions header replaces it. The option is a com.azure.cosmos.models.CosmosQueryRequestOptions type.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
     },
     {
       "name": "camel.component.azure-cosmosdb.read-requests-fallback-enabled",
       "type": "java.lang.Boolean",
-      "description": "Sets whether to allow for reads to go to multiple regions configured on an account of Azure Cosmos DB service. DEFAULT value is true. If this property is not set, the default is true for all Consistency Levels other than Bounded Staleness, The default is false for Bounded Staleness. 1. endpointDiscoveryEnabled is true 2. the Azure Cosmos DB account has more than one region",
+      "description": "Whether the client can send reads to the other regions of the account, for example when a region is not available. Has no effect unless the account has more than one region.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.azure-cosmosdb.throughput-properties",
       "type": "com.azure.cosmos.models.ThroughputProperties",
-      "description": "Sets throughput of the resources in the Azure Cosmos DB service. The option is a com.azure.cosmos.models.ThroughputProperties type.",
+      "description": "The throughput, as a com.azure.cosmos.models.ThroughputProperties, for createDatabase, createContainer, replaceDatabaseThroughput and replaceContainerThroughput, and for the databases and containers that the create*IfNotExists options create, the lease database and lease container included. The CamelAzureCosmosDbThroughputProperties header replaces it for the producer. The option is a com.azure.cosmos.models.ThroughputProperties type.",
       "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-cosmosdb.client-telemetry-enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable client telemetry. Deprecation note: Has no effect: the azure-cosmos SDK ignores this flag, as it can no longer send client telemetry to the service.",
+      "sourceType": "org.apache.camel.component.azure.cosmosdb.springboot.CosmosDbComponentConfiguration",
+      "defaultValue": false,
+      "deprecated": true,
+      "deprecation": {}
     }
   ],
   "hints": [],

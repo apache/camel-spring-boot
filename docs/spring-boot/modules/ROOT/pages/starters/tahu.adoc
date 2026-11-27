@@ -3,7 +3,7 @@
 = Tahu Edge Node / Device
 :artifactid: camel-tahu-starter
 
-Sparkplug B Edge Node and Device support over MQTT using Eclipse Tahu
+Publish the Sparkplug B messages of Edge Nodes and Devices to MQTT servers using Eclipse Tahu.
 
 == What's inside
 
@@ -30,29 +30,29 @@ The starter supports 26 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | camel.component.tahu-edge.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
-| camel.component.tahu-edge.check-client-id-length | MQTT client ID length check enabled | false | Boolean
-| camel.component.tahu-edge.client-id | MQTT client ID to use for all server definitions, rather than specifying the same one for each. Note that if neither the 'clientId' parameter nor an 'MqttClientId' are defined for an MQTT Server, a random MQTT Client ID will be generated automatically, prefaced with 'Camel' |  | String
-| camel.component.tahu-edge.configuration | To use a shared Tahu configuration. The option is a org.apache.camel.component.tahu.TahuConfiguration type. |  | TahuConfiguration
+| camel.component.tahu-edge.check-client-id-length | Whether to fail when an MQTT client ID is longer than 23 characters, the limit of MQTT 3.1.1. A generated client ID is always shorter. | false | Boolean
+| camel.component.tahu-edge.client-id | The MQTT client ID for each server whose definition in the servers option has no client ID. If neither is set, a random client ID that starts with Camel is generated for the server. |  | String
+| camel.component.tahu-edge.configuration | The shared configuration of the endpoints. Each endpoint gets a copy of it, which the options of the endpoint then change. The option is a org.apache.camel.component.tahu.TahuConfiguration type. |  | TahuConfiguration
 | camel.component.tahu-edge.enabled | Whether to enable auto configuration of the tahu-edge component. This is enabled by default. |  | Boolean
 | camel.component.tahu-edge.keep-alive-timeout | MQTT connection keep alive timeout, in seconds | 30 | Integer
 | camel.component.tahu-edge.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.tahu-edge.password | Password for MQTT server authentication |  | String
-| camel.component.tahu-edge.rebirth-debounce-delay | Delay before recurring node rebirth messages will be sent | 5000 | Long
-| camel.component.tahu-edge.servers | MQTT server definitions, given with the following syntax in a comma-separated list: MqttServerName:(MqttClientId:)(tcp/ssl)://hostname(:port),... |  | String
-| camel.component.tahu-edge.ssl-context-parameters | SSL configuration for MQTT server connections. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
-| camel.component.tahu-edge.use-global-ssl-context-parameters | Enable/disable global SSL context parameters use | false | Boolean
+| camel.component.tahu-edge.rebirth-debounce-delay | The time in milliseconds after a birth or rebirth during which the Edge Node ignores further rebirth requests. Only an Edge Node endpoint of tahu-edge uses it, tahu-host does not. | 5000 | Long
+| camel.component.tahu-edge.servers | The MQTT servers, as a comma-separated list of definitions with the syntax name:[clientId:](tcp\|ssl)://host[:port], for example Mqtt:tcp://localhost:1883. The clientId of a definition replaces the clientId option for that server. A tahu-edge Device endpoint does not use it, as its Edge Node endpoint connects to the servers. |  | String
+| camel.component.tahu-edge.ssl-context-parameters | Not supported: Eclipse Tahu creates its MQTT clients without these TLS settings, so the endpoint fails to start when this option is set. An ssl:// server is checked with the default trust store of the JVM, which the javax.net.ssl.* system properties configure. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
+| camel.component.tahu-edge.use-global-ssl-context-parameters | Not supported: when true and a global SSLContextParameters is configured, the endpoints fail to start, as Eclipse Tahu creates its MQTT clients without these TLS settings. An ssl:// server is checked with the default trust store of the JVM, which the javax.net.ssl.* system properties configure. | false | Boolean
 | camel.component.tahu-edge.username | Username for MQTT server authentication |  | String
 | camel.component.tahu-host.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.tahu-host.bridge-error-handler | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
-| camel.component.tahu-host.check-client-id-length | MQTT client ID length check enabled | false | Boolean
-| camel.component.tahu-host.client-id | MQTT client ID to use for all server definitions, rather than specifying the same one for each. Note that if neither the 'clientId' parameter nor an 'MqttClientId' are defined for an MQTT Server, a random MQTT Client ID will be generated automatically, prefaced with 'Camel' |  | String
-| camel.component.tahu-host.configuration | To use a shared Tahu configuration. The option is a org.apache.camel.component.tahu.TahuConfiguration type. |  | TahuConfiguration
+| camel.component.tahu-host.check-client-id-length | Whether to fail when an MQTT client ID is longer than 23 characters, the limit of MQTT 3.1.1. A generated client ID is always shorter. | false | Boolean
+| camel.component.tahu-host.client-id | The MQTT client ID for each server whose definition in the servers option has no client ID. If neither is set, a random client ID that starts with Camel is generated for the server. |  | String
+| camel.component.tahu-host.configuration | The shared configuration of the endpoints. Each endpoint gets a copy of it, which the options of the endpoint then change. The option is a org.apache.camel.component.tahu.TahuConfiguration type. |  | TahuConfiguration
 | camel.component.tahu-host.enabled | Whether to enable auto configuration of the tahu-host component. This is enabled by default. |  | Boolean
 | camel.component.tahu-host.keep-alive-timeout | MQTT connection keep alive timeout, in seconds | 30 | Integer
 | camel.component.tahu-host.password | Password for MQTT server authentication |  | String
-| camel.component.tahu-host.rebirth-debounce-delay | Delay before recurring node rebirth messages will be sent | 5000 | Long
-| camel.component.tahu-host.servers | MQTT server definitions, given with the following syntax in a comma-separated list: MqttServerName:(MqttClientId:)(tcp/ssl)://hostname(:port),... |  | String
-| camel.component.tahu-host.ssl-context-parameters | SSL configuration for MQTT server connections. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
-| camel.component.tahu-host.use-global-ssl-context-parameters | Enable/disable global SSL context parameters use | false | Boolean
+| camel.component.tahu-host.rebirth-debounce-delay | The time in milliseconds after a birth or rebirth during which the Edge Node ignores further rebirth requests. Only an Edge Node endpoint of tahu-edge uses it, tahu-host does not. | 5000 | Long
+| camel.component.tahu-host.servers | The MQTT servers, as a comma-separated list of definitions with the syntax name:[clientId:](tcp\|ssl)://host[:port], for example Mqtt:tcp://localhost:1883. The clientId of a definition replaces the clientId option for that server. A tahu-edge Device endpoint does not use it, as its Edge Node endpoint connects to the servers. |  | String
+| camel.component.tahu-host.ssl-context-parameters | Not supported: Eclipse Tahu creates its MQTT clients without these TLS settings, so the endpoint fails to start when this option is set. An ssl:// server is checked with the default trust store of the JVM, which the javax.net.ssl.* system properties configure. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
+| camel.component.tahu-host.use-global-ssl-context-parameters | Not supported: when true and a global SSLContextParameters is configured, the endpoints fail to start, as Eclipse Tahu creates its MQTT clients without these TLS settings. An ssl:// server is checked with the default trust store of the JVM, which the javax.net.ssl.* system properties configure. | false | Boolean
 | camel.component.tahu-host.username | Username for MQTT server authentication |  | String
 |===

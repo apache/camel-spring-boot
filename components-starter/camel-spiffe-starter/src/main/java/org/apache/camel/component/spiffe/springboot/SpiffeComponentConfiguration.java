@@ -50,7 +50,8 @@ public class SpiffeComponentConfiguration
      */
     private String audience;
     /**
-     * The component configuration. The option is a
+     * The shared configuration of the endpoints. Each endpoint starts from a
+     * copy of it. The option is a
      * org.apache.camel.component.spiffe.SpiffeConfiguration type.
      */
     private SpiffeConfiguration configuration;
@@ -66,15 +67,18 @@ public class SpiffeComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * The operation to perform on the SPIFFE Workload API.
+     * What the producer does on the SPIFFE Workload API: fetchX509Svid fetches
+     * the X.509-SVID of this workload, fetchJwtSvid fetches a JWT-SVID for the
+     * audience, and validateJwtSvid validates the JWT-SVID of the message
+     * against the audience.
      */
     private SpiffeOperation operation = SpiffeOperation.fetchX509Svid;
     /**
-     * Whether validateJwtSvid leaves the application body untouched and
-     * publishes the verified identity through the CamelSpiffeJwtIdentity
-     * exchange property. In this mode the token must be in CamelSpiffeToken or
-     * an Authorization Bearer header: the body is never read as a token. The
-     * default returns the JwtSvid in the body as before.
+     * Whether validateJwtSvid keeps the message body. When false, the token can
+     * also come from the body, and the body is replaced with the validated
+     * JwtSvid. When true, the token must be in the CamelSpiffeToken header or
+     * an Authorization: Bearer header. In both cases the CamelSpiffeJwtIdentity
+     * exchange property holds the verified identity.
      */
     private Boolean preserveBody = false;
     /**
@@ -87,9 +91,10 @@ public class SpiffeComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * An existing WorkloadApiClient to use. When set, the component does not
-     * create or close its own client and spiffeSocketPath is ignored. The
-     * option is a io.spiffe.workloadapi.WorkloadApiClient type.
+     * An existing WorkloadApiClient to use instead of a client that the
+     * endpoint creates. The endpoint does not close it, spiffeSocketPath is
+     * ignored, and the producer registers no health check. The option is a
+     * io.spiffe.workloadapi.WorkloadApiClient type.
      */
     private WorkloadApiClient workloadApiClient;
     /**
@@ -98,11 +103,11 @@ public class SpiffeComponentConfiguration
      */
     private Boolean healthCheckConsumerEnabled = true;
     /**
-     * Minimum remaining X.509-SVID validity, in milliseconds, for the producer
-     * readiness check to report UP. A certificate at or below this threshold
-     * reports DOWN before expiry. Zero requires only an unexpired identity.
-     * Does not apply to JWT-bundle readiness because bundles have no expiry
-     * timestamp. The option is a long type.
+     * The minimum remaining validity, in milliseconds, of the X.509-SVID for
+     * the producer health check to report UP: at or below it, the check reports
+     * DOWN before the SVID expires. Zero only requires an unexpired SVID. Used
+     * only with fetchX509Svid, as for the JWT operations the check watches the
+     * JWT bundles, which have no expiry. The option is a long type.
      */
     private Long healthCheckExpiryThreshold = 60000L;
     /**

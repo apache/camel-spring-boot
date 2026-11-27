@@ -30,7 +30,7 @@
     {
       "name": "camel.component.browse.browse-limit",
       "type": "java.lang.Integer",
-      "description": "Maximum number of messages to keep in memory available for browsing. Use 0 for unlimited.",
+      "description": "The maximum number of messages that each endpoint keeps in memory for browsing, for the endpoints that do not set their own browseLimit. When a new message goes over the limit, the oldest message is removed from the list. Use 0 for no limit.",
       "sourceType": "org.apache.camel.component.browse.springboot.BrowseComponentConfiguration"
     },
     {

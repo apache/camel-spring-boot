@@ -3,7 +3,7 @@
 = JSON Schema Validator
 :artifactid: camel-json-validator-starter
 
-Validate JSON payloads using NetworkNT JSON Schema.
+Validate the JSON in the message body or in a header against a JSON Schema, with the NetworkNT JSON Schema Validator.
 
 == What's inside
 
@@ -29,9 +29,9 @@ The starter supports 6 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | camel.component.json-validator.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
-| camel.component.json-validator.content-cache | Sets whether to use resource content cache or not | true | Boolean
+| camel.component.json-validator.content-cache | The contentCache value that the component sets on each endpoint that it creates. The endpoint loads the schema on the first message and keeps it, whatever this value is. The JMX operation clearContentCache makes the endpoint load the schema again on the next message. | true | Boolean
 | camel.component.json-validator.enabled | Whether to enable auto configuration of the json-validator component. This is enabled by default. |  | Boolean
 | camel.component.json-validator.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.json-validator.object-mapper | Lookup and use the existing Jackson 3 (tools.jackson) ObjectMapper with the given id. |  | String
-| camel.component.json-validator.use-default-object-mapper | Whether to lookup and use the default Jackson 3 (tools.jackson) ObjectMapper from the registry. | true | Boolean
+| camel.component.json-validator.object-mapper | The id of a Jackson 3 (tools.jackson) ObjectMapper in the registry that the endpoints use to parse the JSON to validate. Takes precedence over useDefaultObjectMapper. Creating an endpoint fails when the registry has no ObjectMapper with this id. |  | String
+| camel.component.json-validator.use-default-object-mapper | Whether the endpoints use the Jackson 3 (tools.jackson) ObjectMapper of the registry to parse the JSON to validate, when the registry holds exactly one. The objectMapper option takes precedence. If no mapper is found, the endpoint creates one with the Jackson 2 defaults. | true | Boolean
 |===

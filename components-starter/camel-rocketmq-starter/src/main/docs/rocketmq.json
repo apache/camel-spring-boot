@@ -16,14 +16,14 @@
     {
       "name": "camel.component.rocketmq.access-channel",
       "type": "java.lang.String",
-      "description": "Access channel of RocketMQ cluster. LOCAL or CLOUD, [LOCAL] by default",
+      "description": "The access channel of the RocketMQ client: LOCAL for an Apache RocketMQ cluster, or CLOUD for a RocketMQ service of a cloud provider. With CLOUD the message traces go to a trace topic per region, in the format of the cloud service.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
       "defaultValue": "LOCAL"
     },
     {
       "name": "camel.component.rocketmq.access-key",
       "type": "java.lang.String",
-      "description": "Access key for RocketMQ ACL.",
+      "description": "The access key of the RocketMQ ACL credentials. The producer and the consumer sign their requests only when both accessKey and secretKey are set. The consumer of replyToTopic does not use it.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
     },
     {
@@ -43,7 +43,7 @@
     {
       "name": "camel.component.rocketmq.consumer-group",
       "type": "java.lang.String",
-      "description": "Consumer group name.",
+      "description": "The consumer group of the consumer. The consumers of a group share the messages of the topic, and each message goes to one of them. The consumer fails to start if it is not set.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
     },
     {
@@ -54,7 +54,7 @@
     {
       "name": "camel.component.rocketmq.enable-trace",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable trace.",
+      "description": "Whether the producer and the consumer record message traces, which the RocketMQ client sends to the trace topic RMQ_SYS_TRACE_TOPIC. The consumer of replyToTopic does not record traces.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
       "defaultValue": false
     },
@@ -74,85 +74,85 @@
     {
       "name": "camel.component.rocketmq.message-selector-type",
       "type": "java.lang.String",
-      "description": "Message Selector Type, TAG or SQL [TAG] by default",
+      "description": "How the consumer selects the messages of the topic that it receives: tag uses the subscribeTags option, and sql uses the subscribeSql option.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
       "defaultValue": "tag"
     },
     {
       "name": "camel.component.rocketmq.namespace",
       "type": "java.lang.String",
-      "description": "Namespace of RocketMQ cluster. You need to specify this if you are using serverless version of RocketMQ.",
+      "description": "The namespace of the topics and groups, which the RocketMQ client sends with each request. Set it for a RocketMQ instance that uses namespaces, such as a serverless instance. The consumer of replyToTopic does not use it.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
     },
     {
       "name": "camel.component.rocketmq.namesrv-addr",
       "type": "java.lang.String",
-      "description": "Name server address of RocketMQ cluster.",
+      "description": "The address of the RocketMQ name server, as host:port. Separate several name servers with a semicolon.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
       "defaultValue": "localhost:9876"
     },
     {
       "name": "camel.component.rocketmq.producer-group",
       "type": "java.lang.String",
-      "description": "Producer group name.",
+      "description": "The producer group of the producer. The producer fails to start if it is not set.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
     },
     {
       "name": "camel.component.rocketmq.reply-to-consumer-group",
       "type": "java.lang.String",
-      "description": "Consumer group name used for receiving response.",
+      "description": "The consumer group that receives the replies on replyToTopic, required with replyToTopic. Use a group per producer: in a shared group a reply can reach another producer, which ignores it, and the exchange times out.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
     },
     {
       "name": "camel.component.rocketmq.reply-to-topic",
       "type": "java.lang.String",
-      "description": "Topic used for receiving response when using in-out pattern.",
+      "description": "The topic on which the producer receives the reply of an InOut exchange. The reply must carry the keys of the request, one of which the producer generates to match the reply. If not set, an InOut exchange does not wait for a reply.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
     },
     {
       "name": "camel.component.rocketmq.request-timeout-checker-interval-millis",
       "type": "java.lang.Long",
-      "description": "Check interval milliseconds of request timeout.",
+      "description": "How often, in milliseconds, the producer checks for InOut exchanges whose requestTimeoutMillis has passed. A timeout can be detected up to this interval late.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
       "defaultValue": 1000
     },
     {
       "name": "camel.component.rocketmq.request-timeout-millis",
       "type": "java.lang.Long",
-      "description": "Timeout milliseconds of receiving response when using in-out pattern.",
+      "description": "How long, in milliseconds, the producer waits for the reply of an InOut exchange on replyToTopic before it fails the exchange with an ExchangeTimedOutException. A value of 0 or less waits for Integer.MAX_VALUE milliseconds (about 24 days).",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
       "defaultValue": 10000
     },
     {
       "name": "camel.component.rocketmq.secret-key",
       "type": "java.lang.String",
-      "description": "Secret key for RocketMQ ACL.",
+      "description": "The secret key of the RocketMQ ACL credentials. The producer and the consumer sign their requests only when both accessKey and secretKey are set. The consumer of replyToTopic does not use it.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
     },
     {
       "name": "camel.component.rocketmq.send-tag",
       "type": "java.lang.String",
-      "description": "Each message would be sent with this tag.",
+      "description": "The tag of each message that the producer sends. The CamelRocketMQOverrideTag header replaces it. If not set, the messages are sent with an empty tag.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration"
     },
     {
       "name": "camel.component.rocketmq.subscribe-sql",
       "type": "java.lang.String",
-      "description": "Subscribe SQL of consumer. See https:\/\/rocketmq.apache.org\/docs\/featureBehavior\/07messagefilter\/#attribute-based-sql-filtering for more details.",
+      "description": "The SQL92 expression on the message properties that selects the messages that the consumer receives, when messageSelectorType is sql. The broker must have enablePropertyFilter set to true. The default 1 = 1 receives all messages.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
       "defaultValue": "1 = 1"
     },
     {
       "name": "camel.component.rocketmq.subscribe-tags",
       "type": "java.lang.String",
-      "description": "Subscribe tags of consumer. Multiple tags could be split by ||, such as TagA||TagB",
+      "description": "The tags of the messages that the consumer receives, when messageSelectorType is tag. Separate several tags with ||, for example TagA||TagB. The default * receives all messages.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
       "defaultValue": "*"
     },
     {
       "name": "camel.component.rocketmq.wait-for-send-result",
       "type": "java.lang.Boolean",
-      "description": "Whether waiting for send result before routing to next endpoint. When true, a failed send fails the exchange. When false, an InOnly exchange continues as soon as the message is handed to the RocketMQ client, and a failed send is only logged. An InOut exchange always waits for its reply.",
+      "description": "Whether the producer waits for the send result before the exchange continues. When true, a send that fails, or whose status is not SEND_OK, fails the exchange. When false, an InOnly exchange continues as soon as the message is handed to the RocketMQ client, and a failed send is only logged. An InOut exchange always waits for the send result, and for the reply when replyToTopic is set.",
       "sourceType": "org.apache.camel.component.rocketmq.springboot.RocketMQComponentConfiguration",
       "defaultValue": true
     }

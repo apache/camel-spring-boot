@@ -16,49 +16,49 @@
     {
       "name": "camel.component.ibm-watson-language.analyze-categories",
       "type": "java.lang.Boolean",
-      "description": "Enable category classification",
+      "description": "Whether to request the categories of the content in a hierarchical taxonomy, by default the top three. The CamelIBMWatsonLanguageAnalyzeCategories header replaces this option.",
       "sourceType": "org.apache.camel.component.ibm.watson.language.springboot.WatsonLanguageComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.ibm-watson-language.analyze-concepts",
       "type": "java.lang.Boolean",
-      "description": "Enable concept extraction",
+      "description": "Whether to request the high-level concepts of the content, which can include concepts that the text does not name. The CamelIBMWatsonLanguageAnalyzeConcepts header replaces this option.",
       "sourceType": "org.apache.camel.component.ibm.watson.language.springboot.WatsonLanguageComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.ibm-watson-language.analyze-emotion",
       "type": "java.lang.Boolean",
-      "description": "Enable emotion analysis",
+      "description": "Whether to request the emotions of the whole document: a score from 0 to 1 for anger, disgust, fear, joy and sadness. The service supports it for English only. The CamelIBMWatsonLanguageAnalyzeEmotion header replaces this option.",
       "sourceType": "org.apache.camel.component.ibm.watson.language.springboot.WatsonLanguageComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.ibm-watson-language.analyze-entities",
       "type": "java.lang.Boolean",
-      "description": "Enable entity extraction",
+      "description": "Whether to request the entities, such as people, cities and organizations, that the content mentions. The CamelIBMWatsonLanguageAnalyzeEntities header replaces this option.",
       "sourceType": "org.apache.camel.component.ibm.watson.language.springboot.WatsonLanguageComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.ibm-watson-language.analyze-keywords",
       "type": "java.lang.Boolean",
-      "description": "Enable keyword extraction",
+      "description": "Whether to request the important keywords of the content. The CamelIBMWatsonLanguageAnalyzeKeywords header replaces this option.",
       "sourceType": "org.apache.camel.component.ibm.watson.language.springboot.WatsonLanguageComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.ibm-watson-language.analyze-sentiment",
       "type": "java.lang.Boolean",
-      "description": "Enable sentiment analysis",
+      "description": "Whether to request the sentiment of the whole document. The producer then sets the CamelIBMWatsonLanguageSentimentScore and CamelIBMWatsonLanguageSentimentLabel headers. The CamelIBMWatsonLanguageAnalyzeSentiment header replaces this option.",
       "sourceType": "org.apache.camel.component.ibm.watson.language.springboot.WatsonLanguageComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.ibm-watson-language.api-key",
       "type": "java.lang.String",
-      "description": "The IBM Cloud API key for authentication",
+      "description": "The IBM Cloud API key of the Natural Language Understanding service instance. The IBM Cloud IAM authenticator of the SDK exchanges it for an access token. The endpoint fails to start if it is not set.",
       "sourceType": "org.apache.camel.component.ibm.watson.language.springboot.WatsonLanguageComponentConfiguration"
     },
     {
@@ -71,7 +71,7 @@
     {
       "name": "camel.component.ibm-watson-language.configuration",
       "type": "org.apache.camel.component.ibm.watson.language.WatsonLanguageConfiguration",
-      "description": "Component configuration. The option is a org.apache.camel.component.ibm.watson.language.WatsonLanguageConfiguration type.",
+      "description": "The configuration shared by the endpoints. Each endpoint starts from a copy of it, and its endpoint options replace single values. The option is a org.apache.camel.component.ibm.watson.language.WatsonLanguageConfiguration type.",
       "sourceType": "org.apache.camel.component.ibm.watson.language.springboot.WatsonLanguageComponentConfiguration"
     },
     {
@@ -109,13 +109,13 @@
     {
       "name": "camel.component.ibm-watson-language.operation",
       "type": "org.apache.camel.component.ibm.watson.language.WatsonLanguageOperations",
-      "description": "The operation to perform",
+      "description": "The operation that the producer performs: analyzeText analyzes the given text, and analyzeUrl the web page at the given URL, which the service retrieves. The CamelIBMWatsonLanguageOperation header replaces this option. The producer fails if neither is set.",
       "sourceType": "org.apache.camel.component.ibm.watson.language.springboot.WatsonLanguageComponentConfiguration"
     },
     {
       "name": "camel.component.ibm-watson-language.service-url",
       "type": "java.lang.String",
-      "description": "The service endpoint URL. If not specified, the default URL will be used.",
+      "description": "The URL of the Natural Language Understanding service instance, as given in its service credentials. If not set, the SDK uses https:\/\/api.us-south.natural-language-understanding.watson.cloud.ibm.com (Dallas).",
       "sourceType": "org.apache.camel.component.ibm.watson.language.springboot.WatsonLanguageComponentConfiguration"
     }
   ],

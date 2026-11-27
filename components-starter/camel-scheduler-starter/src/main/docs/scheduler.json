@@ -55,14 +55,14 @@
     {
       "name": "camel.component.scheduler.include-metadata",
       "type": "java.lang.Boolean",
-      "description": "Whether to include metadata in the exchange such as fired time, timer name, timer count etc.",
+      "description": "Whether the consumers add the time when the scheduler fired to each message, as the CamelTimerName and CamelTimerFiredTime exchange properties and the CamelMessageTimestamp header. The default for the includeMetadata option of each endpoint that the component creates.",
       "sourceType": "org.apache.camel.component.scheduler.springboot.SchedulerComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.scheduler.pool-size",
       "type": "java.lang.Integer",
-      "description": "Number of core threads in the thread pool used by the scheduling thread pool. Is by default using a single thread",
+      "description": "The number of core threads of the thread pool that the component creates for each scheduler name. The default for the poolSize option of each endpoint that the component creates.",
       "sourceType": "org.apache.camel.component.scheduler.springboot.SchedulerComponentConfiguration",
       "defaultValue": 1
     }

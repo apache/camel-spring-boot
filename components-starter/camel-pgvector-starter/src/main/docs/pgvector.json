@@ -29,7 +29,7 @@
     {
       "name": "camel.component.pgvector.configuration",
       "type": "org.apache.camel.component.pgvector.PgVectorConfiguration",
-      "description": "The configuration;. The option is a org.apache.camel.component.pgvector.PgVectorConfiguration type.",
+      "description": "The configuration shared by the endpoints of the component. Each endpoint uses a copy of it, which its own options then change. The option is a org.apache.camel.component.pgvector.PgVectorConfiguration type.",
       "sourceType": "org.apache.camel.component.pgvector.springboot.PgVectorComponentConfiguration"
     },
     {
@@ -40,14 +40,14 @@
     {
       "name": "camel.component.pgvector.dimension",
       "type": "java.lang.Integer",
-      "description": "The dimension of the vectors to store.",
+      "description": "The number of dimensions of the embedding column that CREATE_TABLE creates, as vector(n). It must match the size of the vectors of the embedding model, as PostgreSQL rejects a vector of another size. The other actions do not use it.",
       "sourceType": "org.apache.camel.component.pgvector.springboot.PgVectorComponentConfiguration",
       "defaultValue": 384
     },
     {
       "name": "camel.component.pgvector.distance-type",
       "type": "org.apache.camel.component.pgvector.PgVectorDistanceType",
-      "description": "The distance type to use for similarity search.",
+      "description": "The distance function of SIMILARITY_SEARCH and of the HNSW index that CREATE_INDEX creates: COSINE (cosine distance), EUCLIDEAN (L2 distance) or INNER_PRODUCT (the negative inner product, so the closest records have the lowest distance). A search uses the index only when both use the same distance type.",
       "sourceType": "org.apache.camel.component.pgvector.springboot.PgVectorComponentConfiguration",
       "defaultValue": "cosine"
     },

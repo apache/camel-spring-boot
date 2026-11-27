@@ -3,7 +3,7 @@
 = Huawei Distributed Message Service (DMS)
 :artifactid: camel-huaweicloud-dms-starter
 
-To integrate with a fully managed, high-performance message queuing service on Huawei Cloud
+Create, update, query, list and delete Kafka and RabbitMQ instances of Huawei Cloud Distributed Message Service (DMS).
 
 == What's inside
 

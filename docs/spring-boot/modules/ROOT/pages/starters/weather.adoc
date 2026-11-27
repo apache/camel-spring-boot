@@ -3,7 +3,7 @@
 = Weather
 :artifactid: camel-weather-starter
 
-Poll the weather information from Open Weather Map.
+Query the current weather and weather forecasts from OpenWeatherMap.
 
 == What's inside
 

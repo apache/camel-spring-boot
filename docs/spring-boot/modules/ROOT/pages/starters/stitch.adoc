@@ -3,7 +3,7 @@
 = Stitch
 :artifactid: camel-stitch-starter
 
-Stitch is a cloud ETL service that integrates various data sources into a central data warehouse through various integrations.
+Send batches of records to the Stitch Import API, which loads them into a table of the destination data warehouse.
 
 == What's inside
 
@@ -29,14 +29,14 @@ The starter supports 11 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | camel.component.stitch.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
-| camel.component.stitch.configuration | The component configurations. The option is a org.apache.camel.component.stitch.StitchConfiguration type. |  | StitchConfiguration
-| camel.component.stitch.connection-provider | ConnectionProvider contain configuration for the HttpClient like Maximum connection limit .. etc, you can inject this ConnectionProvider and the StitchClient will initialize HttpClient with this ConnectionProvider. The option is a reactor.netty.resources.ConnectionProvider type. |  | ConnectionProvider
+| camel.component.stitch.configuration | The shared configuration of the endpoints. Each endpoint gets a copy, and the options and the table name of the endpoint URI override its values. The option is a org.apache.camel.component.stitch.StitchConfiguration type. |  | StitchConfiguration
+| camel.component.stitch.connection-provider | A Reactor Netty ConnectionProvider, for example a pool with a maximum number of connections, that the endpoint creates its HttpClient with. Not used when httpClient or stitchClient is set. The option is a reactor.netty.resources.ConnectionProvider type. |  | ConnectionProvider
 | camel.component.stitch.enabled | Whether to enable auto configuration of the stitch component. This is enabled by default. |  | Boolean
-| camel.component.stitch.http-client | Reactor Netty HttpClient, you can injected it if you want to have custom HttpClient. The option is a reactor.netty.http.client.HttpClient type. |  | HttpClient
-| camel.component.stitch.key-names | A collection of comma separated strings representing the Primary Key fields in the source table. Stitch use these Primary Keys to de-dupe data during loading If not provided, the table will be loaded in an append-only manner. |  | String
+| camel.component.stitch.http-client | A custom Reactor Netty HttpClient that sends the requests. The endpoint still sets the host of the region and the Authorization and Content-Type headers on it, and does not use connectionProvider. Not used when stitchClient is set. The option is a reactor.netty.http.client.HttpClient type. |  | HttpClient
+| camel.component.stitch.key-names | The Primary Key fields of the source table, as a comma separated list without spaces. Stitch uses them to de-duplicate the records when it loads them, and loads the table append-only when there are none. The CamelStitchKeyNames header overrides it, and the names are added to the key_names of a StitchRequestBody or Map body. |  | String
 | camel.component.stitch.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.stitch.region | Stitch account region, e.g: europe | europe | StitchRegion
-| camel.component.stitch.stitch-client | Set a custom StitchClient that implements org.apache.camel.component.stitch.client.StitchClient interface. The option is a org.apache.camel.component.stitch.client.StitchClient type. |  | StitchClient
-| camel.component.stitch.stitch-schema | A schema that describes the record(s). The option is a org.apache.camel.component.stitch.client.models.StitchSchema type. |  | StitchSchema
-| camel.component.stitch.token | Stitch access token for the Stitch Import API |  | String
+| camel.component.stitch.region | The region of the Stitch account, which selects the host of the Import API: EUROPE (api.eu-central-1.stitchdata.com) or NORTH_AMERICA (api.stitchdata.com). Not used when stitchClient is set. | europe | StitchRegion
+| camel.component.stitch.stitch-client | A custom implementation of the org.apache.camel.component.stitch.client.StitchClient interface that sends the batches. When set, the region, httpClient and connectionProvider options are not used, and the endpoint does not close the client when it stops. The option is a org.apache.camel.component.stitch.client.StitchClient type. |  | StitchClient
+| camel.component.stitch.stitch-schema | The JSON schema that describes the records of the batch; Stitch rejects records that do not conform to it. The CamelStitchSchema header overrides it, and it overrides the schema of a StitchRequestBody or Map body. The option is a org.apache.camel.component.stitch.client.models.StitchSchema type. |  | StitchSchema
+| camel.component.stitch.token | The access token of the Stitch Import API, sent as a Bearer token. It is required, also when stitchClient is set. |  | String
 |===

@@ -3,7 +3,7 @@
 = IBM Watson Speech to Text
 :artifactid: camel-ibm-watson-speech-to-text-starter
 
-Convert speech audio to text using IBM Watson Speech to Text
+Transcribe audio to text with IBM Watson Speech to Text, and list or get its speech models and custom language models.
 
 == What's inside
 
@@ -28,18 +28,18 @@ The starter supports 14 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| camel.component.ibm-watson-speech-to-text.api-key | The IBM Cloud API key for authentication |  | String
+| camel.component.ibm-watson-speech-to-text.api-key | The IBM Cloud API key of the Speech to Text service instance. The client gets IAM access tokens with it. The endpoint fails to start without it. |  | String
 | camel.component.ibm-watson-speech-to-text.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
-| camel.component.ibm-watson-speech-to-text.configuration | Component configuration. The option is a org.apache.camel.component.ibm.watson.stt.WatsonSpeechToTextConfiguration type. |  | WatsonSpeechToTextConfiguration
-| camel.component.ibm-watson-speech-to-text.content-type | The audio format (MIME type). Default is audio/wav. Supported formats: audio/wav, audio/mp3, audio/flac, audio/ogg, audio/webm | audio/wav | String
+| camel.component.ibm-watson-speech-to-text.configuration | The shared configuration of the endpoints. Each endpoint starts from a copy of it, and its endpoint options override the values. The option is a org.apache.camel.component.ibm.watson.stt.WatsonSpeechToTextConfiguration type. |  | WatsonSpeechToTextConfiguration
+| camel.component.ibm-watson-speech-to-text.content-type | The format (MIME type) of the audio for recognize, for example audio/wav, audio/flac, audio/mp3, audio/ogg or audio/webm. audio/l16, audio/alaw and audio/mulaw also need the sampling rate, as in audio/l16;rate=16000, and application/octet-stream lets the service detect the format. The CamelIBMWatsonSTTContentType header replaces this option. | audio/wav | String
 | camel.component.ibm-watson-speech-to-text.enabled | Whether to enable auto configuration of the ibm-watson-speech-to-text component. This is enabled by default. |  | Boolean
 | camel.component.ibm-watson-speech-to-text.health-check-consumer-enabled | Used for enabling or disabling all consumer based health checks from this component | true | Boolean
 | camel.component.ibm-watson-speech-to-text.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
 | camel.component.ibm-watson-speech-to-text.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.ibm-watson-speech-to-text.model | The language model to use for recognition. Default is en-US_BroadbandModel. Examples: en-US_NarrowbandModel, en-GB_BroadbandModel, es-ES_BroadbandModel, fr-FR_BroadbandModel | en-US_BroadbandModel | String
-| camel.component.ibm-watson-speech-to-text.operation | The operation to perform |  | WatsonSpeechToTextOperations
-| camel.component.ibm-watson-speech-to-text.service-url | The service endpoint URL. If not specified, the default URL will be used. |  | String
-| camel.component.ibm-watson-speech-to-text.speaker-labels | Whether to identify different speakers in the audio. Default is false. | false | Boolean
-| camel.component.ibm-watson-speech-to-text.timestamps | Whether to include timestamps for each word in the transcription. Default is false. | false | Boolean
-| camel.component.ibm-watson-speech-to-text.word-confidence | Whether to include confidence scores for each word. Default is false. | false | Boolean
+| camel.component.ibm-watson-speech-to-text.model | The speech model that recognize uses, for example en-US_Multimedia or en-GB_Telephony. The sampling rate of the audio must be at least 16 kHz for a broadband or multimedia model and 8 kHz for a narrowband or telephony model. The CamelIBMWatsonSTTModel header replaces this option. | en-US_BroadbandModel | String
+| camel.component.ibm-watson-speech-to-text.operation | The operation that the producer performs: recognize transcribes audio, listModels and getModel return the speech models, and listCustomModels and getCustomModel the custom language models. The CamelIBMWatsonSTTOperation header replaces this option, and the producer fails if neither is set. |  | WatsonSpeechToTextOperations
+| camel.component.ibm-watson-speech-to-text.service-url | The URL of the Speech to Text service instance, for example https://api.eu-de.speech-to-text.watson.cloud.ibm.com. If not set, the IBM Watson SDK uses https://api.us-south.speech-to-text.watson.cloud.ibm.com, unless its external configuration, such as the SPEECH_TO_TEXT_URL environment variable, gives a URL. |  | String
+| camel.component.ibm-watson-speech-to-text.speaker-labels | Whether recognize returns labels that identify which speaker spoke which words. The service then also returns the timestamps of the words, whatever the timestamps option is. The CamelIBMWatsonSTTSpeakerLabels header replaces this option. | false | Boolean
+| camel.component.ibm-watson-speech-to-text.timestamps | Whether recognize returns the start and end time of each word, in seconds. The CamelIBMWatsonSTTTimestamps header replaces this option. | false | Boolean
+| camel.component.ibm-watson-speech-to-text.word-confidence | Whether recognize returns a confidence score from 0.0 to 1.0 for each word. The CamelIBMWatsonSTTWordConfidence header replaces this option. | false | Boolean
 |===

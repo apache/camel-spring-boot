@@ -16,7 +16,7 @@
     {
       "name": "camel.component.azure-storage-queue.access-key",
       "type": "java.lang.String",
-      "description": "Access key for the associated azure account name to be used for authentication with azure queue services",
+      "description": "The account key of the storage account, which authenticates the client together with accountName when credentialType is SHARED_ACCOUNT_KEY or SHARED_KEY_CREDENTIAL. Not used when the credentials option or the serviceClient option is set.",
       "sourceType": "org.apache.camel.component.azure.storage.queue.springboot.QueueComponentConfiguration"
     },
     {
@@ -36,27 +36,27 @@
     {
       "name": "camel.component.azure-storage-queue.configuration",
       "type": "org.apache.camel.component.azure.storage.queue.QueueConfiguration",
-      "description": "The component configurations. The option is a org.apache.camel.component.azure.storage.queue.QueueConfiguration type.",
+      "description": "The configuration that each endpoint of the component starts from, as a copy. The options of the endpoint replace its values. The option is a org.apache.camel.component.azure.storage.queue.QueueConfiguration type.",
       "sourceType": "org.apache.camel.component.azure.storage.queue.springboot.QueueComponentConfiguration"
     },
     {
       "name": "camel.component.azure-storage-queue.create-queue",
       "type": "java.lang.Boolean",
-      "description": "When is set to true, the queue will be automatically created when sending messages to the queue.",
+      "description": "Whether sendMessage first creates the queue if it does not exist, with the metadata of the CamelAzureStorageQueueMetadata header. The CamelAzureStorageQueueCreateQueue header replaces this option.",
       "sourceType": "org.apache.camel.component.azure.storage.queue.springboot.QueueComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.azure-storage-queue.credential-type",
       "type": "org.apache.camel.component.azure.common.CredentialType",
-      "description": "Determines the credential strategy to adopt",
+      "description": "How the client authenticates when serviceClient is not set. SHARED_ACCOUNT_KEY and SHARED_KEY_CREDENTIAL both use the credentials option if it is set, and otherwise accountName and accessKey. AZURE_IDENTITY uses the DefaultAzureCredential of azure-identity, which takes the identity from environment variables, a managed identity or a developer tool login. If not set, SHARED_KEY_CREDENTIAL is used when credentials is set, and otherwise SHARED_ACCOUNT_KEY.",
       "sourceType": "org.apache.camel.component.azure.storage.queue.springboot.QueueComponentConfiguration",
       "defaultValue": "shared-account-key"
     },
     {
       "name": "camel.component.azure-storage-queue.credentials",
       "type": "com.azure.storage.common.StorageSharedKeyCredential",
-      "description": "StorageSharedKeyCredential can be injected to create the azure client, this holds the important authentication information. The option is a com.azure.storage.common.StorageSharedKeyCredential type.",
+      "description": "To use a com.azure.storage.common.StorageSharedKeyCredential, which holds the account name and an account key of the storage account, when credentialType is SHARED_KEY_CREDENTIAL or SHARED_ACCOUNT_KEY. When it is set, the accountName and accessKey options are not used to authenticate. Not used when serviceClient is set. The option is a com.azure.storage.common.StorageSharedKeyCredential type.",
       "sourceType": "org.apache.camel.component.azure.storage.queue.springboot.QueueComponentConfiguration"
     },
     {
@@ -94,50 +94,50 @@
     {
       "name": "camel.component.azure-storage-queue.max-messages",
       "type": "java.lang.Integer",
-      "description": "Maximum number of messages to get, if there are less messages exist in the queue than requested all the messages will be returned. If left empty only 1 message will be retrieved, the allowed range is 1 to 32 messages.",
+      "description": "The maximum number of messages to receive, from 1 to 32: in each poll of the consumer, and for receiveMessages and peekMessages. The CamelAzureStorageQueueMaxMessages header replaces this option for the producer.",
       "sourceType": "org.apache.camel.component.azure.storage.queue.springboot.QueueComponentConfiguration",
       "defaultValue": 1
     },
     {
       "name": "camel.component.azure-storage-queue.message-id",
       "type": "java.lang.String",
-      "description": "The ID of the message to be deleted or updated.",
+      "description": "The ID of the message that deleteMessage or updateMessage changes. The CamelAzureStorageQueueMessageId header, which the consumer and sendMessage set, replaces this option.",
       "sourceType": "org.apache.camel.component.azure.storage.queue.springboot.QueueComponentConfiguration"
     },
     {
       "name": "camel.component.azure-storage-queue.operation",
       "type": "org.apache.camel.component.azure.storage.queue.QueueOperationDefinition",
-      "description": "Queue service operation hint to the producer",
+      "description": "The operation that the producer performs. The CamelAzureStorageQueueOperation header replaces this option. If neither is set, the producer performs sendMessage.",
       "sourceType": "org.apache.camel.component.azure.storage.queue.springboot.QueueComponentConfiguration"
     },
     {
       "name": "camel.component.azure-storage-queue.pop-receipt",
       "type": "java.lang.String",
-      "description": "Unique identifier that must match for the message to be deleted or updated.",
+      "description": "The pop receipt of the message that deleteMessage or updateMessage changes, which must be the latest pop receipt of that message. The CamelAzureStorageQueuePopReceipt header, which the consumer, sendMessage and updateMessage set to the pop receipt they get, replaces this option.",
       "sourceType": "org.apache.camel.component.azure.storage.queue.springboot.QueueComponentConfiguration"
     },
     {
       "name": "camel.component.azure-storage-queue.service-client",
       "type": "com.azure.storage.queue.QueueServiceClient",
-      "description": "Service client to a storage account to interact with the queue service. This client does not hold any state about a particular storage account but is instead a convenient way of sending off appropriate requests to the resource on the service. This client contains all the operations for interacting with a queue account in Azure Storage. Operations allowed by the client are creating, listing, and deleting queues, retrieving and updating properties of the account, and retrieving statistics of the account. The option is a com.azure.storage.queue.QueueServiceClient type.",
+      "description": "To use a custom com.azure.storage.queue.QueueServiceClient for the requests to the queue service. When this option is set or autowired, the client brings the address and the authentication, and the accountName, credentialType, accessKey and credentials options are not used to connect. The option is a com.azure.storage.queue.QueueServiceClient type.",
       "sourceType": "org.apache.camel.component.azure.storage.queue.springboot.QueueComponentConfiguration"
     },
     {
       "name": "camel.component.azure-storage-queue.time-to-live",
       "type": "java.time.Duration",
-      "description": "How long the message will stay alive in the queue. If unset the value will default to 7 days, if -1 is passed the message will not expire. The time to live must be -1 or any positive number. The format should be in this form: PnDTnHnMn.nS., e.g: PT20.345S -- parses as 20.345 seconds, P2D -- parses as 2 days However, in case you are using EndpointDsl\/ComponentDsl, you can do something like Duration.ofSeconds() since these Java APIs are typesafe.",
+      "description": "How long the message that sendMessage sends stays in the queue, for example P2D or 12h, in whole seconds. If not set, the queue service keeps it for 7 days, and PT-1S keeps it until it is deleted. The CamelAzureStorageQueueTimeToLive header replaces this option.",
       "sourceType": "org.apache.camel.component.azure.storage.queue.springboot.QueueComponentConfiguration"
     },
     {
       "name": "camel.component.azure-storage-queue.timeout",
       "type": "java.time.Duration",
-      "description": "An optional timeout applied to the operation. If a response is not returned before the timeout concludes a RuntimeException will be thrown.",
+      "description": "The time, for example PT10S or 10s, within which each request of the producer and the consumer to the queue service must complete, or it fails with an exception. If not set, only the timeouts of the HTTP client apply. The CamelAzureStorageQueueTimeout header replaces this option for the producer.",
       "sourceType": "org.apache.camel.component.azure.storage.queue.springboot.QueueComponentConfiguration"
     },
     {
       "name": "camel.component.azure-storage-queue.visibility-timeout",
       "type": "java.time.Duration",
-      "description": "The timeout period for how long the message is invisible in the queue. The timeout must be between 1 seconds and 7 days. The format should be in this form: PnDTnHnMn.nS., e.g: PT20.345S -- parses as 20.345 seconds, P2D -- parses as 2 days However, in case you are using EndpointDsl\/ComponentDsl, you can do something like Duration.ofSeconds() since these Java APIs are typesafe.",
+      "description": "How long a message stays invisible in the queue, for example PT30S or 30s, in whole seconds and at most 7 days. sendMessage hides the message it sends for this long, or not at all if not set, and updateMessage, which requires it, hides the message for this long from the update. receiveMessages and the consumer hide each message they receive for this long, or 30 seconds if not set, and the consumer receives a message again after this time if its exchange failed. The CamelAzureStorageQueueVisibilityTimeout header replaces this option for the producer.",
       "sourceType": "org.apache.camel.component.azure.storage.queue.springboot.QueueComponentConfiguration"
     }
   ],

@@ -34,7 +34,7 @@
     {
       "name": "camel.component.log.exchange-formatter",
       "type": "org.apache.camel.spi.ExchangeFormatter",
-      "description": "Sets a custom ExchangeFormatter to convert the Exchange to a String suitable for logging. If not specified, we default to DefaultExchangeFormatter. The option is a org.apache.camel.spi.ExchangeFormatter type.",
+      "description": "A custom org.apache.camel.spi.ExchangeFormatter for all log endpoints of this component. When set, the formatting options of the endpoints are not used. A bean named logFormatter in the registry takes precedence, and the exchangeFormatter option of an endpoint replaces both. The option is a org.apache.camel.spi.ExchangeFormatter type.",
       "sourceType": "org.apache.camel.component.log.springboot.LogComponentConfiguration"
     },
     {
@@ -47,7 +47,7 @@
     {
       "name": "camel.component.log.source-location-logger-name",
       "type": "java.lang.Boolean",
-      "description": "If enabled then the source location of where the log endpoint is used in Camel routes, would be used as logger name, instead of the given name. However, if the source location is disabled or not possible to resolve then the existing logger name will be used.",
+      "description": "Whether the log endpoints use the source location of the endpoint in the route, the file or class name and the line number, as the logger name instead of loggerName. The sourceLocationLoggerName option of an endpoint replaces this option.",
       "sourceType": "org.apache.camel.component.log.springboot.LogComponentConfiguration",
       "defaultValue": false
     }

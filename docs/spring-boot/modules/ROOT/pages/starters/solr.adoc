@@ -3,7 +3,7 @@
 = Solr
 :artifactid: camel-solr-starter
 
-Perform operations against Apache Lucene Solr.
+Index, search and delete documents in Apache Solr.
 
 == What's inside
 
@@ -29,17 +29,17 @@ The starter supports 14 options, which are listed below.
 |===
 | Name | Description | Default | Type
 | camel.component.solr.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
-| camel.component.solr.connection-timeout | The time in ms to wait before connection will time out. | 60000 | Long
-| camel.component.solr.default-collection | Solr default collection name |  | String
-| camel.component.solr.enable-s-s-l | Enable SSL | false | Boolean
+| camel.component.solr.connection-timeout | The time in milliseconds that the clients that Camel creates wait to connect to Solr. The connectionTimeout option of an endpoint replaces it. | 60000 | Long
+| camel.component.solr.default-collection | The name of the collection, for the endpoints that set no collection. |  | String
+| camel.component.solr.enable-s-s-l | Whether the clients that Camel creates connect to Solr with HTTPS instead of HTTP. The enableSSL option of an endpoint replaces it. | false | Boolean
 | camel.component.solr.enabled | Whether to enable auto configuration of the solr component. This is enabled by default. |  | Boolean
-| camel.component.solr.host | The solr instance host name |  | String
+| camel.component.solr.host | The host name of the Solr server, for the endpoints that set their host to default. If not set, these endpoints use localhost. |  | String
 | camel.component.solr.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.solr.password | Password for authenticating |  | String
-| camel.component.solr.port | The solr instance port number |  | Integer
-| camel.component.solr.request-timeout | The timeout in ms to wait before the socket will time out. | 600000 | Long
-| camel.component.solr.solr-client | To use an existing configured solr client, instead of creating a client per endpoint. This allows customizing the client with specific advanced settings. The option is a org.apache.solr.client.solrj.SolrClient type. |  | SolrClient
-| camel.component.solr.ssl-context-parameters | To configure security using SSLContextParameters. When configured, this takes precedence over the certificatePath option. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
-| camel.component.solr.use-global-ssl-context-parameters | Enable usage of global SSL context parameters. | false | Boolean
-| camel.component.solr.username | Basic authenticate user |  | String
+| camel.component.solr.password | The password for HTTP basic authentication with Solr, for all the endpoints. The password option of an endpoint replaces it. |  | String
+| camel.component.solr.port | The port of the Solr server, for the endpoints that set no port. If not set, these endpoints use 8983. |  | Integer
+| camel.component.solr.request-timeout | The time in milliseconds that the clients that Camel creates wait for the response to a request. The requestTimeout option of an endpoint replaces it. | 600000 | Long
+| camel.component.solr.solr-client | To use a custom org.apache.solr.client.solrj.SolrClient for all the endpoints, instead of a client that Camel creates for each endpoint. The solrClient option of an endpoint replaces it. Camel does not close a client that is set or autowired. The option is a org.apache.solr.client.solrj.SolrClient type. |  | SolrClient
+| camel.component.solr.ssl-context-parameters | The TLS configuration (key store, trust store, protocols, cipher suites, named groups) of the clients that Camel creates, for all the endpoints. It is used when the enableSSL option is enabled. The sslContextParameters option of an endpoint replaces it. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
+| camel.component.solr.use-global-ssl-context-parameters | Whether the endpoints use the global SSL context parameters of the CamelContext when neither the component nor the endpoint sets the sslContextParameters option. | false | Boolean
+| camel.component.solr.username | The user name for HTTP basic authentication with Solr, for all the endpoints. The username option of an endpoint replaces it. |  | String
 |===

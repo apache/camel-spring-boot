@@ -3,7 +3,7 @@
 = Hugging Face
 :artifactid: camel-huggingface-starter
 
-Integration with Hugging Face's Model Hub by using the Deep Java Library (DJL) Python bridge
+Run Hugging Face models for tasks such as text classification, summarization, chat and speech recognition, in a Python process of Deep Java Library (DJL).
 
 == What's inside
 
@@ -28,30 +28,30 @@ The starter supports 26 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| camel.component.huggingface.auth-token | HF API token for private models |  | String
-| camel.component.huggingface.auto-select | If true, auto-select the best label (highest score) for zero-shot classification | true | Boolean
+| camel.component.huggingface.auth-token | The Hugging Face user access token, needed to download gated or private models. When the oauthProfile option is set, the token that it obtains replaces this option. |  | String
+| camel.component.huggingface.auto-select | Whether the zero-shot-classification task returns only the label with the highest score, as a String. If false, it returns a DJL Classifications with all the labels and their scores. | true | Boolean
 | camel.component.huggingface.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
-| camel.component.huggingface.configuration | The configuration. The option is a org.apache.camel.component.huggingface.HuggingFaceConfiguration type. |  | HuggingFaceConfiguration
-| camel.component.huggingface.device | Device for inference (cpu, gpu, auto) |  | String
+| camel.component.huggingface.configuration | The configuration that the endpoints of this component start from. Each endpoint uses a copy, in which its own options replace the values. The option is a org.apache.camel.component.huggingface.HuggingFaceConfiguration type. |  | HuggingFaceConfiguration
+| camel.component.huggingface.device | The device to run the model on, such as auto, cpu, cuda or mps. Most tasks give it to the Transformers pipeline as device_map, where auto spreads the model over the available devices. sentence-embeddings uses cuda for auto when it is available, else cpu, and text-to-image moves the pipeline to this device. |  | String
 | camel.component.huggingface.enabled | Whether to enable auto configuration of the huggingface component. This is enabled by default. |  | Boolean
 | camel.component.huggingface.health-check-consumer-enabled | Used for enabling or disabling all consumer based health checks from this component | true | Boolean
 | camel.component.huggingface.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
 | camel.component.huggingface.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.huggingface.max-chat-histories | The maximum number of chat histories, one per memory ID, that the chat task keeps in memory. When there are more, the history that was updated least recently is evicted first. Zero or a negative value keeps them all | 1000 | Integer
 | camel.component.huggingface.max-history-messages | The maximum number of messages that the chat task keeps in a chat history, besides the system prompt. The oldest messages are dropped first, and the kept messages start with a user message, so an odd value keeps one message less. 0 keeps every message. 1 and negative values are rejected, as they would keep no reply | 50 | Integer
-| camel.component.huggingface.max-tokens | Max tokens for generation tasks |  | Integer
-| camel.component.huggingface.memory-id-header | Header name for conversation memory ID (for multi-user chats) | CamelChatMemoryId | String
-| camel.component.huggingface.min-length | Min tokens for summarization tasks |  | Integer
-| camel.component.huggingface.model-id | Hugging Face model ID (e.g., distilbert-base-uncased-finetuned-sst-2-english) |  | String
-| camel.component.huggingface.model-loading-timeout | Model loading timeout in seconds, if negative then use default (240 seconds) |  | Integer
-| camel.component.huggingface.multi-label | Allow multi-label classifications for zero-shot tasks | false | Boolean
+| camel.component.huggingface.max-tokens | The maximum number of new tokens that the model generates, as max_new_tokens, for the text-generation, summarization and chat tasks. |  | Integer
+| camel.component.huggingface.memory-id-header | The name of the header that holds the memory ID for the chat task. Each memory ID has its own chat history, so that several users can chat at the same time. A message without this header uses the memory ID default. | CamelChatMemoryId | String
+| camel.component.huggingface.min-length | The minimum length, in tokens, of the summary that the summarization task generates. |  | Integer
+| camel.component.huggingface.model-id | The ID of the model on the Hugging Face Hub, for example distilbert-base-uncased-finetuned-sst-2-english or Qwen/Qwen2.5-3B-Instruct. The model must support the task. |  | String
+| camel.component.huggingface.model-loading-timeout | The time in seconds that DJL waits for the Python process to start and load the model. With 0 or a negative value, DJL uses the MODEL_LOADING_TIMEOUT environment variable, or else 240 seconds. |  | Integer
+| camel.component.huggingface.multi-label | Whether the zero-shot-classification task scores each candidate label on its own, so that several labels can be true. If false, the scores of all the labels add up to 1. | false | Boolean
 | camel.component.huggingface.oauth-profile | OAuth profile name for obtaining an access token via the OAuth 2.0 Client Credentials grant. When set, the token is acquired from the configured identity provider and used as authToken. Requires camel-oauth on the classpath. |  | String
-| camel.component.huggingface.pooling | Whether to pool the predictor (keep the Python process alive) or create a new one for each request | true | Boolean
-| camel.component.huggingface.predict-timeout | Predict timeout in seconds, if negative then use default (120 seconds) |  | Integer
-| camel.component.huggingface.predictor-bean | Bean name of a custom TaskPredictor implementation (for tasks not covered by built-in predictors) |  | String
-| camel.component.huggingface.revision | Model revision or branch (default: main) |  | String
-| camel.component.huggingface.system-prompt | Initial system prompt for chat tasks (e.g., 'You are a helpful assistant named Alan.') |  | String
-| camel.component.huggingface.temperature | Temperature for sampling (0.0-1.0) |  | Float
-| camel.component.huggingface.top-k | Top-k parameter for classification tasks | 5 | Integer
-| camel.component.huggingface.user-role | Role for user messages in chat history (e.g., 'user' or 'human') | user | String
+| camel.component.huggingface.pooling | Whether all requests share one Python process, which loads the model once and runs one request at a time. If false, each request starts a new Python process, which loads the model again, and stops it afterwards. | true | Boolean
+| camel.component.huggingface.predict-timeout | The time in seconds that DJL waits for the Python process to answer one request. With 0 or a negative value, DJL uses the PREDICT_TIMEOUT environment variable, or else 120 seconds. |  | Integer
+| camel.component.huggingface.predictor-bean | The name of a bean of type org.apache.camel.component.huggingface.tasks.TaskPredictor that runs the task instead of a built-in predictor. It is required for a task that is not built in. The producer fails to start if the registry has no such bean. |  | String
+| camel.component.huggingface.revision | The revision of the model on the Hugging Face Hub: a branch name, a tag name or a commit ID. |  | String
+| camel.component.huggingface.system-prompt | The system message that the chat task puts first in a new chat history, for example You are a helpful assistant named Alan. |  | String
+| camel.component.huggingface.temperature | The sampling temperature for the text-generation, summarization and chat tasks. A higher value gives more random text. A value of 0 or less turns sampling off, so the model picks the most likely token each time. |  | Float
+| camel.component.huggingface.top-k | The number of labels with the highest scores that the text-classification task returns. | 5 | Integer
+| camel.component.huggingface.user-role | The role of the message that the chat task adds to the chat history from the message body. Set it to the role that the chat template of the model expects, for example human. | user | String
 |===

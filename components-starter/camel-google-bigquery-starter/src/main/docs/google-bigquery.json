@@ -34,7 +34,7 @@
     {
       "name": "camel.component.google-bigquery-sql.connection-factory",
       "type": "org.apache.camel.component.google.bigquery.GoogleBigQueryConnectionFactory",
-      "description": "ConnectionFactory to obtain connection to Bigquery Service. If not provided the default one will be used. The option is a org.apache.camel.component.google.bigquery.GoogleBigQueryConnectionFactory type.",
+      "description": "The org.apache.camel.component.google.bigquery.GoogleBigQueryConnectionFactory that provides the BigQuery client for the endpoints that do not set their own connectionFactory. The option is a org.apache.camel.component.google.bigquery.GoogleBigQueryConnectionFactory type.",
       "sourceType": "org.apache.camel.component.google.bigquery.sql.springboot.GoogleBigQuerySQLComponentConfiguration"
     },
     {
@@ -58,7 +58,7 @@
     {
       "name": "camel.component.google-bigquery-sql.project-id",
       "type": "java.lang.String",
-      "description": "Google Cloud Project Id",
+      "description": "The ID of a Google Cloud project. Not used: an endpoint takes the project ID from its URI.",
       "sourceType": "org.apache.camel.component.google.bigquery.sql.springboot.GoogleBigQuerySQLComponentConfiguration"
     },
     {
@@ -71,7 +71,7 @@
     {
       "name": "camel.component.google-bigquery.connection-factory",
       "type": "org.apache.camel.component.google.bigquery.GoogleBigQueryConnectionFactory",
-      "description": "ConnectionFactory to obtain connection to Bigquery Service. If not provided the default one will be used. The option is a org.apache.camel.component.google.bigquery.GoogleBigQueryConnectionFactory type.",
+      "description": "The org.apache.camel.component.google.bigquery.GoogleBigQueryConnectionFactory that provides the BigQuery client for the endpoints that do not set their own connectionFactory. The option is a org.apache.camel.component.google.bigquery.GoogleBigQueryConnectionFactory type.",
       "sourceType": "org.apache.camel.component.google.bigquery.springboot.GoogleBigQueryComponentConfiguration"
     },
     {
@@ -82,7 +82,7 @@
     {
       "name": "camel.component.google-bigquery.dataset-id",
       "type": "java.lang.String",
-      "description": "BigQuery Dataset Id",
+      "description": "The ID of a BigQuery dataset. Not used: an endpoint takes the dataset ID from its URI.",
       "sourceType": "org.apache.camel.component.google.bigquery.springboot.GoogleBigQueryComponentConfiguration"
     },
     {
@@ -101,7 +101,7 @@
     {
       "name": "camel.component.google-bigquery.project-id",
       "type": "java.lang.String",
-      "description": "Google Cloud Project Id",
+      "description": "The ID of a Google Cloud project. Not used: an endpoint takes the project ID from its URI.",
       "sourceType": "org.apache.camel.component.google.bigquery.springboot.GoogleBigQueryComponentConfiguration"
     }
   ],

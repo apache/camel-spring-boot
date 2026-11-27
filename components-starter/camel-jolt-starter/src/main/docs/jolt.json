@@ -16,7 +16,7 @@
     {
       "name": "camel.component.jolt.allow-template-from-header",
       "type": "java.lang.Boolean",
-      "description": "Whether to allow to use resource template from header or not (default false). Enabling this allows to specify dynamic templates via message header. However this can be seen as a potential security vulnerability if the header is coming from a malicious user, so use this with care.",
+      "description": "Whether the endpoints read the CamelJoltResourceUri and CamelJoltContext headers. It is the default of the allowTemplateFromHeader option of each endpoint. Enable it only when the headers come from a trusted source.",
       "sourceType": "org.apache.camel.component.jolt.springboot.JoltComponentConfiguration",
       "defaultValue": false
     },
@@ -30,7 +30,7 @@
     {
       "name": "camel.component.jolt.content-cache",
       "type": "java.lang.Boolean",
-      "description": "Sets whether to use resource content cache or not",
+      "description": "Whether the endpoints keep the content of their spec resource in memory after the first read. It is the default of the contentCache option of each endpoint. Each endpoint builds its JOLT transform from the spec once, at the first exchange, and keeps it, so false does not make it read a changed spec again.",
       "sourceType": "org.apache.camel.component.jolt.springboot.JoltComponentConfiguration",
       "defaultValue": true
     },
@@ -55,7 +55,7 @@
     {
       "name": "camel.component.jolt.transform",
       "type": "io.joltcommunity.jolt.Transform",
-      "description": "Explicitly sets the Transform to use. If not set a Transform specified by the transformDsl will be created. The option is a io.joltcommunity.jolt.Transform type.",
+      "description": "A JOLT Transform that all endpoints of the component use in place of the transform that they build from their spec. When set, the endpoints do not read their spec resource, and transformDsl and the CamelJoltResourceUri header have no effect. To use the CamelJoltContext header, it must also be a ContextualTransform, such as a Chainr. The option is a io.joltcommunity.jolt.Transform type.",
       "sourceType": "org.apache.camel.component.jolt.springboot.JoltComponentConfiguration"
     }
   ],

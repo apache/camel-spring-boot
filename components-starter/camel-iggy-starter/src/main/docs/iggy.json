@@ -16,21 +16,21 @@
     {
       "name": "camel.component.iggy.auto-commit",
       "type": "java.lang.Boolean",
-      "description": "Controls message acknowledgment behavior. When true, messages are automatically marked as processed after consumption. When false, enables manual offset management and allows setting a custom starting offset position",
+      "description": "Whether the server stores the offset of the consumer group when it returns the polled messages, before the route processes them. If false, the consumer polls from startingOffset and keeps the offset in memory only, so it starts again from startingOffset after a restart.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.iggy.auto-create-stream",
       "type": "java.lang.Boolean",
-      "description": "Whether to automatically create stream if it does not exist",
+      "description": "Whether to create the stream if it does not exist. The producer and the consumer check it when they start, and the producer again for each message that has an override header.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.iggy.auto-create-topic",
       "type": "java.lang.Boolean",
-      "description": "Whether to automatically create topic if it does not exist",
+      "description": "Whether to create the topic if it does not exist, with the partitionsCount, compressionAlgorithm, messageExpiry, maxTopicSize and iggyHeaderOptions options. The producer and the consumer check it when they start, and the producer again for each message that has an override header.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
       "defaultValue": true
     },
@@ -51,14 +51,14 @@
     {
       "name": "camel.component.iggy.client-transport",
       "type": "java.lang.String",
-      "description": "Polling strategy",
+      "description": "The transport that the client uses to connect to the Iggy server.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
       "defaultValue": "TCP"
     },
     {
       "name": "camel.component.iggy.compression-algorithm",
       "type": "org.apache.iggy.topic.CompressionAlgorithm",
-      "description": "Compression algorithm for message payload",
+      "description": "The compression algorithm of a topic that autoCreateTopic creates.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
       "defaultValue": "none"
     },
@@ -71,13 +71,13 @@
     {
       "name": "camel.component.iggy.consumer-group-name",
       "type": "java.lang.String",
-      "description": "The name of the consumer group",
+      "description": "The name of the consumer group that the consumer joins, and creates if it does not exist. Required for the consumer.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
     },
     {
       "name": "camel.component.iggy.consumers-count",
       "type": "java.lang.Integer",
-      "description": "Camel Iggy consumers count",
+      "description": "The number of threads of the thread pool of the consumer. The consumer runs one polling task, so one thread polls the topic.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
       "defaultValue": 1
     },
@@ -95,14 +95,14 @@
     {
       "name": "camel.component.iggy.host",
       "type": "java.lang.String",
-      "description": "Iggy server hostname or IP address",
+      "description": "The hostname or IP address of the Iggy server.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
       "defaultValue": "localhost"
     },
     {
       "name": "camel.component.iggy.iggy-header-options",
       "type": "java.util.Map<java.lang.String,java.lang.String>",
-      "description": "Options provided when creating a topic",
+      "description": "Additional options of a topic that autoCreateTopic creates, as key-value pairs that are sent to the server as strings, for example durability.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
     },
     {
@@ -115,67 +115,67 @@
     {
       "name": "camel.component.iggy.max-topic-size",
       "type": "java.lang.Long",
-      "description": "Maximum topic size in bytes (0 means unlimited)",
+      "description": "The maximum size in bytes of a topic that autoCreateTopic creates. With 0 no maximum size is set on the topic.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
       "defaultValue": 0
     },
     {
       "name": "camel.component.iggy.message-expiry",
       "type": "java.lang.Long",
-      "description": "Message expiry time in seconds (0 means no expiry)",
+      "description": "The time in seconds after which the server deletes the messages of a topic that autoCreateTopic creates. With 0 no expiry is set on the topic.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
       "defaultValue": 0
     },
     {
       "name": "camel.component.iggy.partition-id",
       "type": "java.lang.Long",
-      "description": "The consumer partition id",
+      "description": "The ID of the partition that the consumer polls. If not set, the server chooses the partition for the member of the consumer group.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
     },
     {
       "name": "camel.component.iggy.partitioning",
       "type": "org.apache.iggy.message.Partitioning",
-      "description": "Partitioning strategy for message distribution. The option is a org.apache.iggy.message.Partitioning type.",
+      "description": "How the producer chooses the partition of the messages it sends, as an org.apache.iggy.message.Partitioning: balanced() spreads them over the partitions, partitionId(Long) sends to one partition and messagesKey(String) to the partition of a key. The option is a org.apache.iggy.message.Partitioning type.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
     },
     {
       "name": "camel.component.iggy.partitions-count",
       "type": "java.lang.Long",
-      "description": "Number of partitions for the topic",
+      "description": "The number of partitions of a topic that autoCreateTopic creates.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
       "defaultValue": 1
     },
     {
       "name": "camel.component.iggy.password",
       "type": "java.lang.String",
-      "description": "Iggy password",
+      "description": "The password that the client logs in with to the Iggy server. Required, together with the username option: the client fails to connect without them.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
     },
     {
       "name": "camel.component.iggy.poll-batch-size",
       "type": "java.lang.Long",
-      "description": "The consumer poll batch size",
+      "description": "The maximum number of messages that the consumer polls in one request.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
       "defaultValue": 10
     },
     {
       "name": "camel.component.iggy.polling-strategy",
       "type": "java.lang.String",
-      "description": "Polling strategy",
+      "description": "Where the consumer polls from when autoCommit is true: next polls the messages after the offset stored for the consumer group, first the first messages of the partition, and last the last messages of the partition.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
       "defaultValue": "next"
     },
     {
       "name": "camel.component.iggy.port",
       "type": "java.lang.Integer",
-      "description": "Iggy server port number",
+      "description": "The port of the Iggy server. The default 8090 is the default port of the TCP transport of the server, so set the HTTP port of the server when clientTransport is HTTP.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
       "defaultValue": 8090
     },
     {
       "name": "camel.component.iggy.shutdown-timeout",
       "type": "java.lang.Integer",
-      "description": "Camel Iggy shutdown timeout",
+      "description": "The time in milliseconds that the consumer waits for its polling thread to finish when it stops, before it interrupts the thread.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
       "defaultValue": 30000
     },
@@ -188,32 +188,32 @@
     {
       "name": "camel.component.iggy.starting-offset",
       "type": "java.lang.Long",
-      "description": "Defines the initial message offset position when autoCommit is disabled. Use 0 to start from the beginning of the stream, or specify a custom offset to resume from a particular point",
+      "description": "The offset of the first message that the consumer polls when autoCommit is false. 0 is the first message of the partition.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
       "defaultValue": 0
     },
     {
       "name": "camel.component.iggy.stream-id",
       "type": "java.lang.Long",
-      "description": "Stream identifier",
+      "description": "The ID of a stream that autoCreateStream looks up: if no stream has this ID, a stream named streamName is created. The producer and the consumer always address the stream by its name.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
     },
     {
       "name": "camel.component.iggy.stream-name",
       "type": "java.lang.String",
-      "description": "Stream name",
+      "description": "The name of the stream that holds the topic. Required. The CamelIggyStreamOverride header replaces it for the producer.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
     },
     {
       "name": "camel.component.iggy.tls-certificate-path",
       "type": "java.lang.String",
-      "description": "Path to the TLS certificate file for the connection to the Iggy server",
+      "description": "The path to a certificate file in PEM format that the client trusts for the TLS connection to the Iggy server. If not set, the client uses the default trust store of the JVM.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
     },
     {
       "name": "camel.component.iggy.tls-enabled",
       "type": "java.lang.Boolean",
-      "description": "Whether to enable TLS for the connection to the Iggy server",
+      "description": "Whether the client connects to the Iggy server over TLS.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
       "defaultValue": false
     },
@@ -227,7 +227,7 @@
     {
       "name": "camel.component.iggy.username",
       "type": "java.lang.String",
-      "description": "Iggy username",
+      "description": "The username that the client logs in with to the Iggy server. Required, together with the password option: the client fails to connect without them.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
     }
   ],

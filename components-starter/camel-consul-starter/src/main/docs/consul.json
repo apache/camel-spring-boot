@@ -16,7 +16,7 @@
     {
       "name": "camel.component.consul.acl-token",
       "type": "java.lang.String",
-      "description": "Sets the ACL token to be used with Consul",
+      "description": "The ACL token that the client sends with each request to Consul, in the X-Consul-Token header. Not used when a consulClient is set: configure the token on that client instead.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
@@ -35,7 +35,7 @@
     {
       "name": "camel.component.consul.block-seconds",
       "type": "java.lang.Integer",
-      "description": "The second to wait for a watch event, default 10 seconds",
+      "description": "The wait time in seconds of the blocking query with which the kv and event consumers watch: Consul answers when the data changes or when the time is up, and the consumer then queries again. The event consumer also waits this long before each query, and both wait this long (at least one second) before they query again after an error.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration",
       "defaultValue": 10
     },
@@ -49,26 +49,26 @@
     {
       "name": "camel.component.consul.configuration",
       "type": "org.apache.camel.component.consul.ConsulConfiguration",
-      "description": "Consul configuration. The option is a org.apache.camel.component.consul.ConsulConfiguration type.",
+      "description": "The shared configuration of the endpoints that this component creates. Each endpoint gets a copy, and the endpoint options override it. The option is a org.apache.camel.component.consul.ConsulConfiguration type.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
       "name": "camel.component.consul.connect-timeout",
       "type": "java.time.Duration",
-      "description": "Connect timeout",
+      "description": "The connect timeout of the HTTP client. When not set, the default of the OkHttp client applies.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
       "name": "camel.component.consul.consistency-mode",
       "type": "org.kiwiproject.consul.option.ConsistencyMode",
-      "description": "The consistencyMode used for queries, default ConsistencyMode.DEFAULT",
+      "description": "The consistency mode of the catalog and health queries: DEFAULT (the leader answers), STALE (any server answers, possibly with outdated data) or CONSISTENT (the leader first checks with a quorum that it is still the leader). The CamelConsulConsistencyMode header overrides it.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration",
       "defaultValue": "default"
     },
     {
       "name": "camel.component.consul.consul-client",
       "type": "org.kiwiproject.consul.Consul",
-      "description": "The consul client to use. The option is a org.kiwiproject.consul.Consul type.",
+      "description": "The Consul client (org.kiwiproject.consul.Consul) to use instead of creating one. When set, the options that create the client (url, sslContextParameters, aclToken, userName, password, the timeouts and pingInstance) are not used. The option is a org.kiwiproject.consul.Consul type.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
@@ -79,7 +79,7 @@
     {
       "name": "camel.component.consul.datacenter",
       "type": "java.lang.String",
-      "description": "The data center",
+      "description": "The datacenter to query instead of the datacenter of the agent. Used by the catalog and health queries, the agent DEREGISTER action and the coordinates NODES action; the CamelConsulDatacenter header overrides it.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
@@ -91,7 +91,7 @@
     {
       "name": "camel.component.consul.first-index",
       "type": "java.math.BigInteger",
-      "description": "The first index for watch for, default 0. The option is a java.math.BigInteger type.",
+      "description": "The Consul index from which the first blocking query of the kv or event consumer waits for a change. With 0 the first query answers at once, so the consumer receives the current value of the key, or the events that Consul still keeps. The option is a java.math.BigInteger type.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
@@ -110,83 +110,83 @@
     {
       "name": "camel.component.consul.near-node",
       "type": "java.lang.String",
-      "description": "The near node to use for queries.",
+      "description": "The name of a node (or _agent for the node of the agent) from which Consul sorts the results of the catalog and health queries by estimated round trip time. The CamelConsulNearNode header overrides it.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
       "name": "camel.component.consul.node-meta",
       "type": "java.lang.String",
-      "description": "The comma separated node meta-data to use for queries.",
+      "description": "Comma separated node metadata filters, each as key:value, so that the catalog and health queries return only the nodes with that metadata. The CamelConsulNodeMeta header overrides it.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
       "name": "camel.component.consul.password",
       "type": "java.lang.String",
-      "description": "Sets the password to be used for basic authentication",
+      "description": "The password for HTTP basic authentication to the Consul agent. Used only together with userName.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
       "name": "camel.component.consul.ping-instance",
       "type": "java.lang.Boolean",
-      "description": "Configure if the AgentClient should attempt a ping before returning the Consul instance",
+      "description": "Whether the Consul client pings the agent when it is created, so that creating it fails when the agent cannot be reached. The client is created when the consumer starts or when the producer handles its first message.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.consul.read-timeout",
       "type": "java.time.Duration",
-      "description": "Read timeout",
+      "description": "The read timeout of the HTTP client. When not set, the default of the OkHttp client applies; the Consul client extends it for the blocking queries of the consumers.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
       "name": "camel.component.consul.recursive",
       "type": "java.lang.Boolean",
-      "description": "Recursively watch, default false",
+      "description": "Whether the kv consumer watches all the keys under the key (as a prefix) instead of only the key. When one of them changes, the consumer receives a message for each key under the prefix.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.consul.ssl-context-parameters",
       "type": "org.apache.camel.support.jsse.SSLContextParameters",
-      "description": "SSL configuration using an org.apache.camel.support.jsse.SSLContextParameters instance. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
+      "description": "The SSL configuration of the HTTPS connection to the Consul agent. When not set, the global SSL context parameters are used if the component enables useGlobalSslContextParameters. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
       "name": "camel.component.consul.tags",
       "type": "java.lang.String",
-      "description": "Set tags. You can separate multiple tags by comma.",
+      "description": "Comma separated tags. The consul endpoints do not use this option, so setting it has no effect.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
       "name": "camel.component.consul.url",
       "type": "java.lang.String",
-      "description": "The Consul agent URL",
+      "description": "The URL of the Consul agent that the client connects to, such as http:\/\/localhost:8500 (the default of the Consul client when not set). Use an https URL to connect with sslContextParameters.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
       "name": "camel.component.consul.use-global-ssl-context-parameters",
       "type": "java.lang.Boolean",
-      "description": "Enable usage of global SSL context parameters.",
+      "description": "Whether to use the global SSL context parameters of the CamelContext for the endpoints that have no sslContextParameters.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.consul.user-name",
       "type": "java.lang.String",
-      "description": "Sets the username to be used for basic authentication",
+      "description": "The user name for HTTP basic authentication to the Consul agent. Used only together with password.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     },
     {
       "name": "camel.component.consul.value-as-string",
       "type": "java.lang.Boolean",
-      "description": "Default to transform values retrieved from Consul i.e. on KV endpoint to string.",
+      "description": "Whether the values of the kv API are decoded to text: the kv consumer then sets the decoded value as the body instead of the base64 encoded value, and the GET_VALUE and GET_VALUES actions return a String (a List of them) instead of Value objects. In a producer, the CamelConsulValueAsString header overrides it.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.consul.write-timeout",
       "type": "java.time.Duration",
-      "description": "Write timeout",
+      "description": "The write timeout of the HTTP client. When not set, the default of the OkHttp client applies.",
       "sourceType": "org.apache.camel.component.consul.springboot.ConsulComponentConfiguration"
     }
   ],

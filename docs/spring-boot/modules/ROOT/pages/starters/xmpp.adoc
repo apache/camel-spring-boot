@@ -3,7 +3,7 @@
 = XMPP
 :artifactid: camel-xmpp-starter
 
-Send and receive messages to/from an XMPP chat server.
+Send and receive XMPP (Jabber) messages, in private chats and in multi-user chat rooms.
 
 == What's inside
 

@@ -16,20 +16,20 @@
     {
       "name": "camel.component.minio.access-key",
       "type": "java.lang.String",
-      "description": "Amazon AWS Secret Access Key or Minio Access Key. If not set camel will connect to service for anonymous access.",
+      "description": "The access key (user name) for the requests to the server. If accessKey or secretKey is not set, the client sends the requests without credentials. Not used when minioClient is set.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.auto-close-body",
       "type": "java.lang.Boolean",
-      "description": "If this option is true and includeBody is true, then the MinioObject.close() method will be called on exchange completion. This option is strongly related to includeBody option. In case of setting includeBody to true and autoCloseBody to false, it will be up to the caller to close the MinioObject stream. Setting autoCloseBody to true, will close the MinioObject stream automatically.",
+      "description": "Whether the consumer closes the stream that it read the content of the object from, when the exchange is done. Only used when includeBody is true. If false, the consumer does not close the stream.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.minio.auto-create-bucket",
       "type": "java.lang.Boolean",
-      "description": "Setting the autocreation of the bucket if bucket name not exist.",
+      "description": "Whether to create the bucket at startup if it does not exist (skipped when objectName is set), and, for a consumer with moveAfterRead, the destinationBucketName bucket. If false, a missing destination bucket fails the start of the consumer.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration",
       "defaultValue": true
     },
@@ -50,20 +50,20 @@
     {
       "name": "camel.component.minio.bypass-governance-mode",
       "type": "java.lang.Boolean",
-      "description": "Set this flag if you want to bypassGovernanceMode when deleting a particular object.",
+      "description": "Whether the consumer bypasses the governance mode retention of object locking when it deletes an object with deleteAfterRead or moveAfterRead. This needs the s3:BypassGovernanceRetention permission.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.minio.configuration",
       "type": "org.apache.camel.component.minio.MinioConfiguration",
-      "description": "The component configuration. The option is a org.apache.camel.component.minio.MinioConfiguration type.",
+      "description": "The configuration that the endpoints of this component start from. The options set on an endpoint replace its values. The option is a org.apache.camel.component.minio.MinioConfiguration type.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.custom-http-client",
       "type": "okhttp3.OkHttpClient",
-      "description": "Set custom HTTP client for authenticated access. The option is a okhttp3.OkHttpClient type.",
+      "description": "To use a custom okhttp3.OkHttpClient for the requests to the server, for example to configure timeouts, a proxy or the connection pool. Not used when minioClient is set. The option is a okhttp3.OkHttpClient type.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
@@ -74,33 +74,33 @@
     {
       "name": "camel.component.minio.delete-after-read",
       "type": "java.lang.Boolean",
-      "description": "Delete objects from Minio after they have been retrieved. The delete is only performed if the Exchange is committed. If a rollback occurs, the object is not deleted. If this option is false, then the same objects will be retrieve over and over again on the polls. Therefore you need to use the Idempotent Consumer EIP in the route to filter out duplicates. You can filter using the MinioConstants#BUCKET_NAME and MinioConstants#OBJECT_NAME headers, or only the MinioConstants#OBJECT_NAME header.",
+      "description": "Whether the consumer deletes the object from the bucket after the exchange completes successfully. If false, the consumer gets the same objects again in later polls: use the Idempotent Consumer EIP to filter out duplicates, for example by the CamelMinioObjectName header.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.minio.delete-after-write",
       "type": "java.lang.Boolean",
-      "description": "Delete file object after the Minio file has been uploaded.",
+      "description": "Whether the producer deletes the file after it uploaded it, when the body is a java.io.File, for example the file of a file consumer. Other bodies are not affected.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.minio.delimiter",
       "type": "java.lang.String",
-      "description": "The delimiter which is used in the ListObjectsRequest to only consume objects we are interested in.",
+      "description": "The delimiter that the listing requests of the consumer use to group object names into folders. If not set, the listing uses \/. Not used when recursive is true.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.destination-bucket-name",
       "type": "java.lang.String",
-      "description": "Destination bucket name.",
+      "description": "The bucket that the consumer moves the consumed objects to, with moveAfterRead, which requires it. The producer reads the bucket of copyObject from the CamelMinioDestinationBucketName header instead.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.destination-object-name",
       "type": "java.lang.String",
-      "description": "Destination object name.",
+      "description": "The object name that the consumer moves the consumed objects to, in destinationBucketName, with moveAfterRead. If not set, the name of the consumed object. With a fixed name, each moved object replaces the previous one.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
@@ -112,7 +112,7 @@
     {
       "name": "camel.component.minio.endpoint",
       "type": "java.lang.String",
-      "description": "Endpoint can be an URL, domain name, IPv4 address or IPv6 address.",
+      "description": "The MinIO server, or other Amazon S3 compatible service, to connect to: a URL such as http:\/\/localhost:9000, or a host name or IP address, for which the client uses HTTPS on port 443. Required unless minioClient is set.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
@@ -132,35 +132,35 @@
     {
       "name": "camel.component.minio.include-body",
       "type": "java.lang.Boolean",
-      "description": "If it is true, the exchange body will be set to a stream to the contents of the file. If false, the headers will be set with the Minio object metadata, but the body will be null. This option is strongly related to autoCloseBody option. In case of setting includeBody to true and autoCloseBody to false, it will be up to the caller to close the MinioObject stream. Setting autoCloseBody to true, will close the MinioObject stream automatically.",
+      "description": "Whether the consumer reads the content of the object into the body, as a byte array. If false, the body is null and the headers carry the metadata of the object.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration",
       "defaultValue": true
     },
     {
       "name": "camel.component.minio.include-folders",
       "type": "java.lang.Boolean",
-      "description": "The flag which is used in the ListObjectsRequest to set include folders.",
+      "description": "Whether the consumer also creates an exchange for the folder entries of the listing. By default, it skips them.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.minio.include-user-metadata",
       "type": "java.lang.Boolean",
-      "description": "The flag which is used in the ListObjectsRequest to get objects with user meta data.",
+      "description": "Whether the listing requests of the consumer ask for the user metadata of the objects (a MinIO extension of ListObjectsV2). The consumer does not set this metadata on the message. The listing fails if useVersion1 or includeVersions is also true.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.minio.include-versions",
       "type": "java.lang.Boolean",
-      "description": "The flag which is used in the ListObjectsRequest to get objects with versioning.",
+      "description": "Whether the consumer lists all versions of the objects. It still gets each listed object name once per poll, in the version that the versionId option selects, else the current version.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.minio.key-name",
       "type": "java.lang.String",
-      "description": "Setting the key name for an element in the bucket through endpoint parameter.",
+      "description": "The name of the object that the producer uploads, gets, deletes, copies (the source of copyObject) or creates a link for. The CamelMinioObjectName header replaces it.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
@@ -173,171 +173,171 @@
     {
       "name": "camel.component.minio.length",
       "type": "java.lang.Long",
-      "description": "Number of bytes of object data from offset.",
+      "description": "The number of bytes of the object, from offset, that the consumer gets. With moveAfterRead, the consumer copies only these bytes. The default 0 means up to the end of the object.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.match-e-tag",
       "type": "java.lang.String",
-      "description": "Set match ETag parameter for get object(s).",
+      "description": "The consumer gets an object only if its ETag matches this value (the If-Match condition). For an object that does not match, the request fails and the consumer reports an error.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.max-connections",
       "type": "java.lang.Integer",
-      "description": "Set the maxConnections parameter in the minio client configuration",
+      "description": "Not used: the component does not pass this value to the MinIO client. Configure the connection pool of the OkHttpClient of the customHttpClient option instead.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration",
       "defaultValue": 60
     },
     {
       "name": "camel.component.minio.max-messages-per-poll",
       "type": "java.lang.Integer",
-      "description": "Gets the maximum number of messages as a limit to poll at each polling. Gets the maximum number of messages as a limit to poll at each polling. The default value is 10. Use 0 or a negative number to set it as unlimited.",
+      "description": "The maximum number of objects that the consumer lists and consumes in one poll, which is also the page size of its listing requests. Use 0 or a negative number for no limit. Not used when objectName is set.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration",
       "defaultValue": 10
     },
     {
       "name": "camel.component.minio.minio-client",
       "type": "io.minio.MinioClient",
-      "description": "Reference to a Minio Client object in the registry. The option is a io.minio.MinioClient type.",
+      "description": "To use a custom io.minio.MinioClient. When this option is set or autowired, the endpoint, proxyPort, secure, region, accessKey, secretKey and customHttpClient options are not used. The option is a io.minio.MinioClient type.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.modified-since",
       "type": "java.time.ZonedDateTime",
-      "description": "Set modified since parameter for get object(s).",
+      "description": "The consumer gets an object only if it was modified after this time (the If-Modified-Since condition). For another object, the request fails and the consumer reports an error.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.move-after-read",
       "type": "java.lang.Boolean",
-      "description": "Move objects from bucket to a different bucket after they have been retrieved. To accomplish the operation the destinationBucketName option must be set. The copy bucket operation is only performed if the Exchange is committed. If a rollback occurs, the object is not moved.",
+      "description": "Whether the consumer copies the object to destinationBucketName after the exchange completes successfully, and then deletes it from the bucket, also when deleteAfterRead is false.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.minio.not-match-e-tag",
       "type": "java.lang.String",
-      "description": "Set not match ETag parameter for get object(s).",
+      "description": "The consumer gets an object only if its ETag does not match this value (the If-None-Match condition). For an object that matches, the request fails and the consumer reports an error.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.object-lock",
       "type": "java.lang.Boolean",
-      "description": "Set when creating new bucket.",
+      "description": "Whether to enable object locking on the buckets that the component creates (see autoCreateBucket). It does not change an existing bucket.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.minio.object-name",
       "type": "java.lang.String",
-      "description": "To get the object from the bucket with the given object name.",
+      "description": "The name of the one object that the consumer gets in each poll, instead of listing the bucket. When set, the endpoint does not check or create the bucket, and does not set the policy, at startup.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.offset",
       "type": "java.lang.Long",
-      "description": "Start byte position of object data.",
+      "description": "The position of the first byte of the object that the consumer gets. With moveAfterRead, the consumer copies only the bytes from this position. The default 0 is the start of the object.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.operation",
       "type": "org.apache.camel.component.minio.MinioOperations",
-      "description": "The operation to do in case the user don't want to do only an upload.",
+      "description": "The operation that the producer performs. If not set, the producer uploads the body as an object. The CamelMinioOperation header replaces it.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.pojo-request",
       "type": "java.lang.Boolean",
-      "description": "If we want to use a POJO request as body or not.",
+      "description": "Whether the body is the builder of the request of the MinIO Java SDK, such as io.minio.GetObjectArgs.Builder for getObject, instead of the producer building the request from options and headers. deleteObjects works only with true, and listBuckets does not use it.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.minio.policy",
       "type": "java.lang.String",
-      "description": "The policy for this queue to set in the method.",
+      "description": "The bucket policy, as JSON, that the endpoint sets on the bucket at startup. Not applied when objectName is set.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.prefix",
       "type": "java.lang.String",
-      "description": "Object name starts with prefix.",
+      "description": "The prefix of the names of the objects that the consumer lists.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.proxy-port",
       "type": "java.lang.Integer",
-      "description": "TCP\/IP port number. 80 and 443 are used as defaults for HTTP and HTTPS.",
+      "description": "The TCP port of the server. When set, it replaces the port of the endpoint option, and the secure option sets the scheme. Not used when minioClient is set.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.recursive",
       "type": "java.lang.Boolean",
-      "description": "List recursively than directory structure emulation.",
+      "description": "Whether the consumer lists all the objects below the prefix. If false, the listing stops at the delimiter and returns the folders as entries, which the consumer skips unless includeFolders is true.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.minio.region",
       "type": "java.lang.String",
-      "description": "The region in which Minio client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example ap-east-1). You'll need to use the name Region.EU_WEST_1.id()",
+      "description": "The region of the server, for example us-east-1. The client signs its requests for this region, and the component creates buckets in it. If not set, the client asks the server for the region of the bucket.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.secret-key",
       "type": "java.lang.String",
-      "description": "Amazon AWS Access Key Id or Minio Secret Key. If not set camel will connect to service for anonymous access.",
+      "description": "The secret key (password) of the accessKey. If accessKey or secretKey is not set, the client sends the requests without credentials. Not used when minioClient is set.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.secure",
       "type": "java.lang.Boolean",
-      "description": "Flag to indicate to use secure connection to minio service or not.",
+      "description": "Whether the client uses HTTPS (true) or HTTP (false) when proxyPort is set. Without proxyPort, this option is not used and the scheme of the endpoint option applies.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.minio.server-side-encryption",
       "type": "io.minio.ServerSideEncryption",
-      "description": "Server-side encryption. The option is a io.minio.ServerSideEncryption type.",
+      "description": "The server-side encryption, as an io.minio.ServerSideEncryption such as ServerSideEncryption.S3 or ServerSideEncryption.KMS, of the objects that the producer uploads or copies with copyObject, and that the consumer copies with moveAfterRead. The producer fails to start if serverSideEncryptionCustomerKey is also set. The option is a io.minio.ServerSideEncryption type.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.server-side-encryption-customer-key",
       "type": "io.minio.ServerSideEncryption$CustomerKey",
-      "description": "Server-side encryption for source object while copy\/move objects. The option is a io.minio.ServerSideEncryption.CustomerKey type.",
+      "description": "The key for server-side encryption with a customer-provided key (SSE-C), as an io.minio.ServerSideEncryption.CustomerKey. The consumer uses it to get the objects and to copy them with moveAfterRead; the producer to get, upload and copy objects. The producer fails to start if serverSideEncryption is also set. The option is a io.minio.ServerSideEncryption.CustomerKey type.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.start-after",
       "type": "java.lang.String",
-      "description": "list objects in bucket after this object name.",
+      "description": "The object name after which the consumer lists the bucket, at the start of each pass through the bucket. The listing returns only the names that sort after it.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.storage-class",
       "type": "java.lang.String",
-      "description": "The storage class to set in the request.",
+      "description": "The storage class of the objects that the producer uploads, sent as the x-amz-storage-class header, for example STANDARD or REDUCED_REDUNDANCY. The CamelMinioStorageClass header replaces it.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.un-modified-since",
       "type": "java.time.ZonedDateTime",
-      "description": "Set un modified since parameter for get object(s).",
+      "description": "The consumer gets an object only if it was not modified after this time (the If-Unmodified-Since condition). For another object, the request fails and the consumer reports an error.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     },
     {
       "name": "camel.component.minio.use-version1",
       "type": "java.lang.Boolean",
-      "description": "when true, version 1 of REST API is used.",
+      "description": "Whether the consumer lists the bucket with version 1 of the ListObjects API instead of ListObjectsV2.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.minio.version-id",
       "type": "java.lang.String",
-      "description": "Set specific version_ID of a object when deleting the object.",
+      "description": "The version of the objects that the consumer gets, deletes with deleteAfterRead and copies with moveAfterRead. If not set, the current version.",
       "sourceType": "org.apache.camel.component.minio.springboot.MinioComponentConfiguration"
     }
   ],

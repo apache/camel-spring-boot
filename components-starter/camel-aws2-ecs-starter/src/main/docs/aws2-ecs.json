@@ -16,7 +16,7 @@
     {
       "name": "camel.component.aws2-ecs.access-key",
       "type": "java.lang.String",
-      "description": "Amazon AWS Access Key",
+      "description": "The access key ID of the AWS credentials, used together with secretKey. It is required unless ecsClient is set or useDefaultCredentialsProvider, useProfileCredentialsProvider or useSessionCredentials is true.",
       "sourceType": "org.apache.camel.component.aws2.ecs.springboot.ECS2ComponentConfiguration"
     },
     {
@@ -29,7 +29,7 @@
     {
       "name": "camel.component.aws2-ecs.configuration",
       "type": "org.apache.camel.component.aws2.ecs.ECS2Configuration",
-      "description": "Component configuration. The option is a org.apache.camel.component.aws2.ecs.ECS2Configuration type.",
+      "description": "The shared configuration of the component. Each endpoint starts from a copy of it and then applies its own options. The option is a org.apache.camel.component.aws2.ecs.ECS2Configuration type.",
       "sourceType": "org.apache.camel.component.aws2.ecs.springboot.ECS2ComponentConfiguration"
     },
     {
@@ -40,7 +40,7 @@
     {
       "name": "camel.component.aws2-ecs.ecs-client",
       "type": "software.amazon.awssdk.services.ecs.EcsClient",
-      "description": "To use an existing configured AWS ECS client. The option is a software.amazon.awssdk.services.ecs.EcsClient type.",
+      "description": "To use a custom software.amazon.awssdk.services.ecs.EcsClient. When this option is set or autowired, the endpoint does not build a client from the credentials, proxy, region, overrideEndpoint, uriEndpointOverride and trustAllCertificates options, and it does not close the client when it stops. The option is a software.amazon.awssdk.services.ecs.EcsClient type.",
       "sourceType": "org.apache.camel.component.aws2.ecs.springboot.ECS2ComponentConfiguration"
     },
     {
@@ -73,97 +73,97 @@
     {
       "name": "camel.component.aws2-ecs.operation",
       "type": "org.apache.camel.component.aws2.ecs.ECS2Operations",
-      "description": "The operation to perform",
+      "description": "The operation that the producer performs. The CamelAwsECSOperation header replaces this option.",
       "sourceType": "org.apache.camel.component.aws2.ecs.springboot.ECS2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-ecs.override-endpoint",
       "type": "java.lang.Boolean",
-      "description": "Set the need for overriding the endpoint. This option needs to be used in combination with the uriEndpointOverride option",
+      "description": "Whether the ECS client sends its requests to the URI of the uriEndpointOverride option instead of the AWS endpoint of the region. It has no effect when uriEndpointOverride is not set.",
       "sourceType": "org.apache.camel.component.aws2.ecs.springboot.ECS2ComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws2-ecs.pojo-request",
       "type": "java.lang.Boolean",
-      "description": "If we want to use a POJO request as body or not",
+      "description": "Whether the producer takes the request from the message body, as the AWS SDK request class of the operation, for example a ListClustersRequest for listClusters. A body of another type fails. If false, the producer builds the request from the headers.",
       "sourceType": "org.apache.camel.component.aws2.ecs.springboot.ECS2ComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws2-ecs.profile-credentials-name",
       "type": "java.lang.String",
-      "description": "If using a profile credentials provider, this parameter will set the profile name",
+      "description": "The name of the profile that useProfileCredentialsProvider loads. If not set, the AWS SDK uses its default profile: the one of the AWS_PROFILE environment variable, or else default.",
       "sourceType": "org.apache.camel.component.aws2.ecs.springboot.ECS2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-ecs.proxy-host",
       "type": "java.lang.String",
-      "description": "To define a proxy host when instantiating the ECS client",
+      "description": "The host name of the proxy through which the ECS client sends its requests. The proxy is used only when proxyPort is set too.",
       "sourceType": "org.apache.camel.component.aws2.ecs.springboot.ECS2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-ecs.proxy-port",
       "type": "java.lang.Integer",
-      "description": "To define a proxy port when instantiating the ECS client",
+      "description": "The port of the proxy through which the ECS client sends its requests. The proxy is used only when proxyHost is set too.",
       "sourceType": "org.apache.camel.component.aws2.ecs.springboot.ECS2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-ecs.proxy-protocol",
       "type": "software.amazon.awssdk.core.Protocol",
-      "description": "To define a proxy protocol when instantiating the ECS client",
+      "description": "The protocol of the proxy through which the ECS client sends its requests. It is used only when proxyHost and proxyPort are set.",
       "sourceType": "org.apache.camel.component.aws2.ecs.springboot.ECS2ComponentConfiguration",
       "defaultValue": "https"
     },
     {
       "name": "camel.component.aws2-ecs.region",
       "type": "java.lang.String",
-      "description": "The region in which the ECS client needs to work. When using this parameter, the configuration will expect the lowercase name of the region (for example, ap-east-1) You'll need to use the name Region.EU_WEST_1.id()",
+      "description": "The AWS region of the ECS client, as the lowercase region ID, for example eu-west-1 (the value of Region.EU_WEST_1.id()). If not set, the AWS SDK takes the region from its default region provider chain, such as the AWS_REGION environment variable.",
       "sourceType": "org.apache.camel.component.aws2.ecs.springboot.ECS2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-ecs.secret-key",
       "type": "java.lang.String",
-      "description": "Amazon AWS Secret Key",
+      "description": "The secret access key of the AWS credentials, used together with accessKey. It is required unless ecsClient is set or useDefaultCredentialsProvider, useProfileCredentialsProvider or useSessionCredentials is true.",
       "sourceType": "org.apache.camel.component.aws2.ecs.springboot.ECS2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-ecs.session-token",
       "type": "java.lang.String",
-      "description": "Amazon AWS Session Token used when the user needs to assume an IAM role",
+      "description": "The session token of temporary AWS credentials, for example from assuming an IAM role. It is used only when useSessionCredentials is true, together with accessKey and secretKey.",
       "sourceType": "org.apache.camel.component.aws2.ecs.springboot.ECS2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-ecs.trust-all-certificates",
       "type": "java.lang.Boolean",
-      "description": "If we want to trust all certificates in case of overriding the endpoint",
+      "description": "Whether the ECS client accepts any TLS certificate without validating it, for example the self-signed certificate of a test endpoint set with uriEndpointOverride. It applies to every request of the client, not only to an overridden endpoint.",
       "sourceType": "org.apache.camel.component.aws2.ecs.springboot.ECS2ComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws2-ecs.uri-endpoint-override",
       "type": "java.lang.String",
-      "description": "Set the overriding uri endpoint. This option needs to be used in combination with overrideEndpoint option",
+      "description": "The URI of the endpoint that the ECS client uses instead of the AWS endpoint of the region, for example http:\/\/localhost:4566 for LocalStack. It is used only when overrideEndpoint is true.",
       "sourceType": "org.apache.camel.component.aws2.ecs.springboot.ECS2ComponentConfiguration"
     },
     {
       "name": "camel.component.aws2-ecs.use-default-credentials-provider",
       "type": "java.lang.Boolean",
-      "description": "Set whether the ECS client should expect to load credentials through a default credentials provider or to expect static credentials to be passed in.",
+      "description": "Whether the ECS client loads its credentials with the default credentials provider chain of the AWS SDK: system properties, environment variables, the profile files, and the credentials of the container or the EC2 instance. It takes precedence over the other credentials options.",
       "sourceType": "org.apache.camel.component.aws2.ecs.springboot.ECS2ComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws2-ecs.use-profile-credentials-provider",
       "type": "java.lang.Boolean",
-      "description": "Set whether the ECS client should expect to load credentials through a profile credentials provider.",
+      "description": "Whether the ECS client loads its credentials from a profile of the AWS config and credentials files, the one of profileCredentialsName. It is ignored when useDefaultCredentialsProvider is true.",
       "sourceType": "org.apache.camel.component.aws2.ecs.springboot.ECS2ComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.aws2-ecs.use-session-credentials",
       "type": "java.lang.Boolean",
-      "description": "Set whether the ECS client should expect to use Session Credentials. This is useful in a situation in which the user needs to assume an IAM role for doing operations in ECS.",
+      "description": "Whether the ECS client uses the temporary credentials made of accessKey, secretKey and sessionToken, for example after assuming an IAM role. If sessionToken is not set, accessKey and secretKey are used without it. It is ignored when useDefaultCredentialsProvider or useProfileCredentialsProvider is true.",
       "sourceType": "org.apache.camel.component.aws2.ecs.springboot.ECS2ComponentConfiguration",
       "defaultValue": false
     }

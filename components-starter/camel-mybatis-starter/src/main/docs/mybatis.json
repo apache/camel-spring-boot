@@ -34,7 +34,7 @@
     {
       "name": "camel.component.mybatis-bean.configuration-uri",
       "type": "java.lang.String",
-      "description": "Location of MyBatis xml configuration file. The default value is: SqlMapConfig.xml loaded from the classpath",
+      "description": "The location of the MyBatis XML configuration file, which the component reads to build the SqlSessionFactory when the sqlSessionFactory option is not set. It is loaded from the classpath, or prefix it with file: or http: for another location.",
       "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisBeanComponentConfiguration",
       "defaultValue": "SqlMapConfig.xml"
     },
@@ -73,7 +73,7 @@
     {
       "name": "camel.component.mybatis-bean.sql-session-factory",
       "type": "org.apache.ibatis.session.SqlSessionFactory",
-      "description": "To use the SqlSessionFactory. The option is a org.apache.ibatis.session.SqlSessionFactory type.",
+      "description": "The org.apache.ibatis.session.SqlSessionFactory that opens the MyBatis sessions of all the endpoints of this component. If not set or autowired, the component builds one from the file of the configurationUri option. The option is a org.apache.ibatis.session.SqlSessionFactory type.",
       "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisBeanComponentConfiguration"
     },
     {
@@ -93,7 +93,7 @@
     {
       "name": "camel.component.mybatis.configuration-uri",
       "type": "java.lang.String",
-      "description": "Location of MyBatis xml configuration file. The default value is: SqlMapConfig.xml loaded from the classpath",
+      "description": "The location of the MyBatis XML configuration file, which the component reads to build the SqlSessionFactory when the sqlSessionFactory option is not set. It is loaded from the classpath, or prefix it with file: or http: for another location.",
       "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisComponentConfiguration",
       "defaultValue": "SqlMapConfig.xml"
     },
@@ -132,7 +132,7 @@
     {
       "name": "camel.component.mybatis.sql-session-factory",
       "type": "org.apache.ibatis.session.SqlSessionFactory",
-      "description": "To use the SqlSessionFactory. The option is a org.apache.ibatis.session.SqlSessionFactory type.",
+      "description": "The org.apache.ibatis.session.SqlSessionFactory that opens the MyBatis sessions of all the endpoints of this component. If not set or autowired, the component builds one from the file of the configurationUri option. The option is a org.apache.ibatis.session.SqlSessionFactory type.",
       "sourceType": "org.apache.camel.component.mybatis.springboot.MyBatisComponentConfiguration"
     }
   ],

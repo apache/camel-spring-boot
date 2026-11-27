@@ -3,7 +3,7 @@
 = Huawei Simple Message Notification (SMN)
 :artifactid: camel-huaweicloud-smn-starter
 
-To broadcast messages and connect cloud services through notifications on Huawei Cloud
+Publish messages to topics of Huawei Cloud Simple Message Notification (SMN).
 
 == What's inside
 

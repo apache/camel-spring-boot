@@ -3,7 +3,7 @@
 = Milvus
 :artifactid: camel-milvus-starter
 
-Perform operations on the Milvus Vector Database.
+Create collections and indexes, and insert, upsert, delete, search and query entities in the Milvus vector database.
 
 == What's inside
 
@@ -23,18 +23,24 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 9 options, which are listed below.
+The starter supports 15 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
 | camel.component.milvus.action | The action to perform. The CamelMilvusAction header, when set, wins over this option. |  | MilvusAction
 | camel.component.milvus.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
-| camel.component.milvus.configuration | The configuration;. The option is a org.apache.camel.component.milvus.MilvusConfiguration type. |  | MilvusConfiguration
+| camel.component.milvus.ca-pem-path | The path of a PEM file with the certificate authority that the client trusts for mutual TLS. Set it together with clientPemPath and clientKeyPath; for one-way TLS use serverPemPath instead. Not used when a MilvusClient is set with MilvusConfiguration.setClient(). |  | String
+| camel.component.milvus.client-key-path | The path of a PEM file with the private key (PKCS#8) of the client for mutual TLS. Set it together with caPemPath and clientPemPath. Not used when a MilvusClient is set with MilvusConfiguration.setClient(). |  | String
+| camel.component.milvus.client-pem-path | The path of a PEM file with the certificate of the client for mutual TLS. Set it together with caPemPath and clientKeyPath. Not used when a MilvusClient is set with MilvusConfiguration.setClient(). |  | String
+| camel.component.milvus.configuration | The configuration that the endpoints start from. Each endpoint gets a copy, and its options replace the values of the copy. It also holds the MilvusClient that MilvusConfiguration.setClient() sets, which the endpoints share. The option is a org.apache.camel.component.milvus.MilvusConfiguration type. |  | MilvusConfiguration
 | camel.component.milvus.enabled | Whether to enable auto configuration of the milvus component. This is enabled by default. |  | Boolean
-| camel.component.milvus.host | The host to connect to. | localhost | String
+| camel.component.milvus.host | The host name or IP address of the Milvus server. Not used when a MilvusClient is set with MilvusConfiguration.setClient(). | localhost | String
 | camel.component.milvus.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
-| camel.component.milvus.port | The port to connect to. | 19530 | Integer
-| camel.component.milvus.timeout | Sets a default timeout for all requests |  | Long
-| camel.component.milvus.token | Sets the API key to use for authentication |  | String
+| camel.component.milvus.port | The gRPC port of the Milvus server. Not used when a MilvusClient is set with MilvusConfiguration.setClient(). | 19530 | Integer
+| camel.component.milvus.secure | Whether to connect to the Milvus server with TLS. If not set, the connection is plaintext, and the token is sent in clear text, unless serverPemPath, or caPemPath with clientPemPath and clientKeyPath, is set. Without these options, the client trusts the certificate authorities of the JVM. Not used when a MilvusClient is set with MilvusConfiguration.setClient(). | false | Boolean
+| camel.component.milvus.server-name | The name that the client expects in the certificate of the Milvus server (the authority of the gRPC channel), when it differs from the host. Only used with serverPemPath, where the host is used if not set, or with mutual TLS. Not used when a MilvusClient is set with MilvusConfiguration.setClient(). |  | String
+| camel.component.milvus.server-pem-path | The path of a PEM file with the certificate of the Milvus server, or of the certificate authority that signed it, that the client trusts for one-way TLS. Setting it connects with TLS. Not used when a MilvusClient is set with MilvusConfiguration.setClient(). |  | String
+| camel.component.milvus.timeout | The timeout in milliseconds for connecting to the Milvus server, 10000 if not set. The value must be greater than 0. It is not a timeout of each request: the requests have no deadline. Not used when a MilvusClient is set with MilvusConfiguration.setClient(). |  | Long
+| camel.component.milvus.token | The token that the client sends to authenticate with Milvus: a user name and password joined by a colon, or an API key of Zilliz Cloud. If not set, the client sends no credentials. Not used when a MilvusClient is set with MilvusConfiguration.setClient(). |  | String
 |===

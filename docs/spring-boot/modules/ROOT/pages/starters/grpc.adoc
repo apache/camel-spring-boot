@@ -3,7 +3,7 @@
 = gRPC
 :artifactid: camel-grpc-starter
 
-Expose gRPC endpoints and access external gRPC endpoints.
+Expose gRPC services and call remote gRPC services, with Protocol Buffers messages over HTTP/2.
 
 == What's inside
 

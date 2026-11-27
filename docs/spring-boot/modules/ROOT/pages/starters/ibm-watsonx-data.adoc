@@ -3,7 +3,7 @@
 = IBM watsonx.data
 :artifactid: camel-ibm-watsonx-data-starter
 
-Interact with IBM watsonx.data lakehouse for catalog, schema, table, and engine management.
+Manage the catalogs, schemas, tables, engines and storage registrations of an IBM watsonx.data lakehouse.
 
 == What's inside
 
@@ -28,16 +28,16 @@ The starter supports 12 options, which are listed below.
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| camel.component.ibm-watsonx-data.api-key | IBM Cloud API key for authentication, exchanged at IBM Cloud IAM for an access token. Required unless oauthProfile is set. |  | String
-| camel.component.ibm-watsonx-data.auth-instance-id | The watsonx.data instance CRN for API authorization |  | String
+| camel.component.ibm-watsonx-data.api-key | The IBM Cloud API key, exchanged at IBM Cloud IAM for an access token that is sent to watsonx.data. Required unless oauthProfile is set; when both are set, oauthProfile is used. |  | String
+| camel.component.ibm-watsonx-data.auth-instance-id | The ID of the watsonx.data instance (on IBM Cloud, the CRN of the instance), sent in the AuthInstanceId HTTP header of every request. The CamelIBMWatsonxDataAuthInstanceId header overrides it; when neither is set, the request has no AuthInstanceId header. |  | String
 | camel.component.ibm-watsonx-data.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
-| camel.component.ibm-watsonx-data.catalog-name | The catalog name for catalog, schema, and table operations |  | String
-| camel.component.ibm-watsonx-data.configuration | The component configuration. The option is a org.apache.camel.component.ibm.watsonx.data.WatsonxDataConfiguration type. |  | WatsonxDataConfiguration
+| camel.component.ibm-watsonx-data.catalog-name | The name of the catalog for getCatalog, deleteCatalog, getAllColumns and the schema and table operations, except registerTable, which takes the catalog ID header instead. The CamelIBMWatsonxDataCatalogName header overrides it. |  | String
+| camel.component.ibm-watsonx-data.configuration | The configuration that the endpoints share. Each endpoint starts from a copy of it, and its URI options override the copied values. The option is a org.apache.camel.component.ibm.watsonx.data.WatsonxDataConfiguration type. |  | WatsonxDataConfiguration
 | camel.component.ibm-watsonx-data.enabled | Whether to enable auto configuration of the ibm-watsonx-data component. This is enabled by default. |  | Boolean
-| camel.component.ibm-watsonx-data.engine-id | The engine ID for engine operations and schema/table queries |  | String
+| camel.component.ibm-watsonx-data.engine-id | The ID of the engine that the schema and table operations, except registerTable, run on, and of the engine that getPrestoEngine and getPrestissimoEngine return. The CamelIBMWatsonxDataEngineId header overrides it. |  | String
 | camel.component.ibm-watsonx-data.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
 | camel.component.ibm-watsonx-data.oauth-profile | OAuth profile name for obtaining an access token via the OAuth 2.0 Client Credentials grant. When set, the token of the configured identity provider is sent to watsonx.data as a Bearer token instead of an IBM Cloud API key, and obtained again when it expires. Requires camel-oauth on the classpath. |  | String
-| camel.component.ibm-watsonx-data.operation | The operation to perform |  | WatsonxDataOperations
-| camel.component.ibm-watsonx-data.schema-name | The schema name for schema and table operations |  | String
-| camel.component.ibm-watsonx-data.service-url | The watsonx.data service URL (e.g., https://region.lakehouse.cloud.ibm.com/lakehouse/api/v2) |  | String
+| camel.component.ibm-watsonx-data.operation | The operation to perform. The CamelIBMWatsonxDataOperation header overrides it; when neither is set, the exchange fails. |  | WatsonxDataOperations
+| camel.component.ibm-watsonx-data.schema-name | The name of the schema for deleteSchema and the table operations, except registerTable; getAllColumns returns only the columns of this schema. The CamelIBMWatsonxDataSchemaName header overrides it. createSchema ignores this option and takes the name of the new schema from the header only. |  | String
+| camel.component.ibm-watsonx-data.service-url | The base URL of the watsonx.data REST API, to which the IBM SDK appends the resource paths, for example https://us-south.lakehouse.cloud.ibm.com/lakehouse/api/v3. The endpoint does not start without it. |  | String
 |===

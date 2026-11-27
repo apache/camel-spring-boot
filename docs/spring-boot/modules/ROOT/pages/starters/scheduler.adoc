@@ -3,7 +3,7 @@
 = Scheduler
 :artifactid: camel-scheduler-starter
 
-Generate messages in specified intervals using java.util.concurrent.ScheduledExecutorService.
+Generate messages on a schedule, by default at a fixed delay using a java.util.concurrent.ScheduledExecutorService.
 
 == What's inside
 
@@ -33,6 +33,6 @@ The starter supports 7 options, which are listed below.
 | camel.component.scheduler.enabled | Whether to enable auto configuration of the scheduler component. This is enabled by default. |  | Boolean
 | camel.component.scheduler.health-check-consumer-enabled | Used for enabling or disabling all consumer based health checks from this component | true | Boolean
 | camel.component.scheduler.health-check-producer-enabled | Used for enabling or disabling all producer based health checks from this component. Notice: Camel has by default disabled all producer based health-checks. You can turn on producer checks globally by setting camel.health.producersEnabled=true. | true | Boolean
-| camel.component.scheduler.include-metadata | Whether to include metadata in the exchange such as fired time, timer name, timer count etc. | false | Boolean
-| camel.component.scheduler.pool-size | Number of core threads in the thread pool used by the scheduling thread pool. Is by default using a single thread | 1 | Integer
+| camel.component.scheduler.include-metadata | Whether the consumers add the time when the scheduler fired to each message, as the CamelTimerName and CamelTimerFiredTime exchange properties and the CamelMessageTimestamp header. The default for the includeMetadata option of each endpoint that the component creates. | false | Boolean
+| camel.component.scheduler.pool-size | The number of core threads of the thread pool that the component creates for each scheduler name. The default for the poolSize option of each endpoint that the component creates. | 1 | Integer
 |===

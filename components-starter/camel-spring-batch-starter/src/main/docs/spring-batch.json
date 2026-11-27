@@ -34,13 +34,13 @@
     {
       "name": "camel.component.spring-batch.job-launcher",
       "type": "org.springframework.batch.core.launch.JobLauncher",
-      "description": "Explicitly specifies a JobLauncher to be used. The option is a org.springframework.batch.core.launch.JobLauncher type.",
+      "description": "The JobLauncher that runs the jobs of all endpoints, unless an endpoint sets its own. When not set, the component uses the single JobLauncher of the registry, or else the bean named jobLauncher. The option is a org.springframework.batch.core.launch.JobLauncher type.",
       "sourceType": "org.apache.camel.component.spring.batch.springboot.SpringBatchComponentConfiguration"
     },
     {
       "name": "camel.component.spring-batch.job-registry",
       "type": "org.springframework.batch.core.configuration.JobRegistry",
-      "description": "Explicitly specifies a JobRegistry to be used. The option is a org.springframework.batch.core.configuration.JobRegistry type.",
+      "description": "The JobRegistry in which the endpoints look up the job by its name, unless an endpoint sets its own. A job that is not in it, or every job when no JobRegistry is set, is looked up in the Camel registry as a Job bean. The option is a org.springframework.batch.core.configuration.JobRegistry type.",
       "sourceType": "org.apache.camel.component.spring.batch.springboot.SpringBatchComponentConfiguration"
     },
     {

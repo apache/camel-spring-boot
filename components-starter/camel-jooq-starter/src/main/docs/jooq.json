@@ -30,13 +30,13 @@
     {
       "name": "camel.component.jooq.configuration",
       "type": "org.apache.camel.component.jooq.JooqConfiguration",
-      "description": "Component configuration (database connection, database entity type, etc.). The option is a org.apache.camel.component.jooq.JooqConfiguration type.",
+      "description": "The shared configuration of the endpoints. Each endpoint starts from a copy of it, and the options in the endpoint URI override the copied values. The option is a org.apache.camel.component.jooq.JooqConfiguration type.",
       "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration"
     },
     {
       "name": "camel.component.jooq.consume-delete",
       "type": "java.lang.Boolean",
-      "description": "Delete entity after it is consumed",
+      "description": "Whether the consumer deletes a row from the table after its exchange is processed successfully. A row whose exchange failed or was marked rollback only is not deleted and is consumed again in the next poll. If false, every poll consumes all the rows of the table again.",
       "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration",
       "defaultValue": true
     },
@@ -48,7 +48,7 @@
     {
       "name": "camel.component.jooq.database-configuration",
       "type": "org.jooq.Configuration",
-      "description": "To use a specific database configuration. The option is a org.jooq.Configuration type.",
+      "description": "The org.jooq.Configuration that the consumer and the producer use to run their queries. It holds the connection to the database (a connection provider or a data source) and the SQL dialect. The option is a org.jooq.Configuration type.",
       "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration"
     },
     {
@@ -81,14 +81,14 @@
     {
       "name": "camel.component.jooq.operation",
       "type": "org.apache.camel.component.jooq.JooqOperation",
-      "description": "Type of operation to execute on query",
+      "description": "The operation that the producer performs. NONE stores the record of the entityType in the message body (an insert or an update), EXECUTE runs a query, and FETCH runs a select query and sets its org.jooq.Result as the message body.",
       "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration",
       "defaultValue": "none"
     },
     {
       "name": "camel.component.jooq.query",
       "type": "java.lang.String",
-      "description": "To execute plain SQL query",
+      "description": "A plain SQL statement that the producer runs for the EXECUTE and FETCH operations. When set, the message body is not read. The NONE operation does not use it.",
       "sourceType": "org.apache.camel.component.jooq.springboot.JooqComponentConfiguration"
     }
   ],

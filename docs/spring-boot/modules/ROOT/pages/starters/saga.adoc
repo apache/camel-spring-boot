@@ -3,7 +3,7 @@
 = Saga
 :artifactid: camel-saga-starter
 
-Execute custom actions within a route using the Saga EIP.
+Complete or compensate the saga that an exchange takes part in through the Saga EIP.
 
 == What's inside
 

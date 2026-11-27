@@ -48,7 +48,7 @@
     {
       "name": "camel.component.spring-redis.redis-template",
       "type": "org.springframework.data.redis.core.RedisTemplate<java.lang.Object,java.lang.Object>",
-      "description": "Reference to a pre-configured RedisTemplate instance to use. The option is a org.springframework.data.redis.core.RedisTemplate<java.lang.Object, java.lang.Object> type.",
+      "description": "The org.springframework.data.redis.core.RedisTemplate that the producers of the endpoints of this component run the commands with, unless an endpoint sets its own redisTemplate. Autowired from the registry when it has exactly one RedisTemplate. The option is a org.springframework.data.redis.core.RedisTemplate<java.lang.Object, java.lang.Object> type.",
       "sourceType": "org.apache.camel.component.redis.springboot.RedisComponentConfiguration"
     }
   ],

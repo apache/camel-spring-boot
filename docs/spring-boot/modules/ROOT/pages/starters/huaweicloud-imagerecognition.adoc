@@ -3,7 +3,7 @@
 = Huawei Cloud Image Recognition
 :artifactid: camel-huaweicloud-imagerecognition-starter
 
-To identify objects, scenes, and concepts in images on Huawei Cloud
+Recognize celebrities and tag the objects, scenes and concepts in images with Huawei Cloud Image Recognition.
 
 == What's inside
 

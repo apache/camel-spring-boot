@@ -16,7 +16,7 @@
     {
       "name": "camel.component.smpp.address-range",
       "type": "java.lang.String",
-      "description": "You can specify the address range for the SmppConsumer as defined in section 5.2.7 of the SMPP 3.4 specification. The SmppConsumer will receive messages only from SMSC's which target an address (MSISDN or IP address) within this range.",
+      "description": "The address_range of the bind request of the consumer: the SME addresses that this ESME serves, as defined in section 5.2.7 of the SMPP 3.4 specification. The SMSC uses it to select the messages that it delivers to the consumer. Empty by default.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
@@ -29,7 +29,7 @@
     {
       "name": "camel.component.smpp.alphabet",
       "type": "java.lang.Byte",
-      "description": "Defines encoding of data according the SMPP 3.4 specification, section 5.2.19. 0: SMSC Default Alphabet 4: 8 bit Alphabet 8: UCS2 Alphabet",
+      "description": "The alphabet in which the producer encodes and splits the text of the short message for SubmitSm, SubmitMulti and ReplaceSm: 0 (the SMSC default alphabet) encodes it in the charset of the encoding option, 8 (UCS2) in UTF-16BE, and 4 (8-bit) sends a byte array body as it is. It does not set the data_coding that is sent, which comes from the dataCoding option. The CamelSmppAlphabet header replaces it; the default is 0.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
@@ -49,7 +49,7 @@
     {
       "name": "camel.component.smpp.configuration",
       "type": "org.apache.camel.component.smpp.SmppConfiguration",
-      "description": "To use the shared SmppConfiguration as configuration. The option is a org.apache.camel.component.smpp.SmppConfiguration type.",
+      "description": "A shared SmppConfiguration as the base of the endpoints: each endpoint uses a copy of it, which the options of its URI change. The option is a org.apache.camel.component.smpp.SmppConfiguration type.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
@@ -60,26 +60,26 @@
     {
       "name": "camel.component.smpp.data-coding",
       "type": "java.lang.Byte",
-      "description": "Defines the data coding according the SMPP 3.4 specification, section 5.2.19. Example data encodings are: 0: SMSC Default Alphabet 3: Latin 1 (ISO-8859-1) 4: Octet unspecified (8-bit binary) 8: UCS2 (ISO\/IEC-10646) 13: Extended Kanji JIS(X 0212-1990)",
+      "description": "The data_coding that the producer sends with SubmitSm, SubmitMulti and DataSm, as defined in section 5.2.19 of the SMPP 3.4 specification, for example 0 for the SMSC default alphabet, 3 for Latin 1, 4 for 8-bit binary data and 8 for UCS2. An 8-bit value sends a byte array body as it is; the alphabet and encoding options, not this option, select how a text body is encoded. The CamelSmppDataCoding and CamelSmppAlphabet headers replace it; the default is 0.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
       "name": "camel.component.smpp.dest-addr",
       "type": "java.lang.String",
-      "description": "Defines the destination SME address. For mobile terminated messages, this is the directory number of the recipient MS. Only for SubmitSm, SubmitMulti, CancelSm and DataSm.",
+      "description": "The destination address that the producer sends with SubmitSm, SubmitMulti, CancelSm and DataSm, for example the phone number of the recipient of a mobile terminated message. The CamelSmppDestAddr header replaces it, with a list of addresses for SubmitMulti.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
       "defaultValue": "1717"
     },
     {
       "name": "camel.component.smpp.dest-addr-npi",
       "type": "java.lang.Byte",
-      "description": "Defines the type of number (TON) to be used in the SME destination address parameters. Only for SubmitSm, SubmitMulti, CancelSm and DataSm. The following NPI values are defined: 0: Unknown 1: ISDN (E163\/E164) 2: Data (X.121) 3: Telex (F.69) 6: Land Mobile (E.212) 8: National 9: Private 10: ERMES 13: Internet (IP) 18: WAP Client Id (to be defined by WAP Forum)",
+      "description": "The numbering plan indicator (NPI) of the destination address that the producer sends with SubmitSm, SubmitMulti, CancelSm and DataSm, with the values of the sourceAddrNpi option. The CamelSmppDestAddrNpi header replaces it; the default is 0.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
       "name": "camel.component.smpp.dest-addr-ton",
       "type": "java.lang.Byte",
-      "description": "Defines the type of number (TON) to be used in the SME destination address parameters. Only for SubmitSm, SubmitMulti, CancelSm and DataSm. The following TON values are defined: 0: Unknown 1: International 2: National 3: Network Specific 4: Subscriber Number 5: Alphanumeric 6: Abbreviated",
+      "description": "The type of number (TON) of the destination address that the producer sends with SubmitSm, SubmitMulti, CancelSm and DataSm, with the values of the sourceAddrTon option. The CamelSmppDestAddrTon header replaces it; the default is 0.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
@@ -91,14 +91,14 @@
     {
       "name": "camel.component.smpp.encoding",
       "type": "java.lang.String",
-      "description": "Defines the encoding scheme of the short message user data. Only for SubmitSm, ReplaceSm and SubmitMulti.",
+      "description": "The charset in which the producer encodes the text of the short message for SubmitSm, SubmitMulti and ReplaceSm, unless the alphabet is UCS2, and in which the consumer decodes a received message in the SMSC default alphabet. The CamelSmppEncoding header replaces it for the producer.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
       "defaultValue": "ISO-8859-1"
     },
     {
       "name": "camel.component.smpp.enquire-link-timer",
       "type": "java.lang.Integer",
-      "description": "Defines the interval in milliseconds between the confidence checks. The confidence check is used to test the communication path between an ESME and an SMSC.",
+      "description": "The time in milliseconds without data from the SMSC after which the session sends an enquire_link to check the connection, or 0 to send none. Camel also uses it as the timeout to connect to the SMSC or the HTTP proxy, and for the TLS handshake.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
       "defaultValue": 60000
     },
@@ -112,32 +112,32 @@
     {
       "name": "camel.component.smpp.http-proxy-host",
       "type": "java.lang.String",
-      "description": "If you need to tunnel SMPP through a HTTP proxy, set this attribute to the hostname or ip address of your HTTP proxy.",
+      "description": "The host name or IP address of an HTTP proxy through which Camel tunnels the SMPP connection, with an HTTP CONNECT request. When not set, Camel connects to the SMSC directly.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
       "name": "camel.component.smpp.http-proxy-password",
       "type": "java.lang.String",
-      "description": "If your HTTP proxy requires basic authentication, set this attribute to the password required for your HTTP proxy.",
+      "description": "The password for Basic authentication with the HTTP proxy. It is sent only together with the httpProxyUsername option.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
       "name": "camel.component.smpp.http-proxy-port",
       "type": "java.lang.Integer",
-      "description": "If you need to tunnel SMPP through a HTTP proxy, set this attribute to the port of your HTTP proxy.",
+      "description": "The port of the HTTP proxy that the httpProxyHost option sets.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
       "defaultValue": 3128
     },
     {
       "name": "camel.component.smpp.http-proxy-username",
       "type": "java.lang.String",
-      "description": "If your HTTP proxy requires basic authentication, set this attribute to the username required for your HTTP proxy.",
+      "description": "The user name for Basic authentication with the HTTP proxy. It is sent only together with the httpProxyPassword option.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
       "name": "camel.component.smpp.initial-reconnect-delay",
       "type": "java.lang.Long",
-      "description": "Defines the initial delay in milliseconds after the consumer\/producer tries to reconnect to the SMSC, after the connection was lost.",
+      "description": "The delay in milliseconds before the first attempt to reconnect, after the consumer or producer lost its session to the SMSC (the connection was closed, or the SMSC unbound). A failed connect when the consumer or producer starts is not retried.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
       "defaultValue": 5000
     },
@@ -151,7 +151,7 @@
     {
       "name": "camel.component.smpp.lazy-session-creation",
       "type": "java.lang.Boolean",
-      "description": "Sessions can be lazily created to avoid exceptions, if the SMSC is not available when the Camel producer is started. The session is then created when the first exchange is sent, with the systemId and password of the endpoint. See the allowSystemIdAndPasswordFromHeaders option to take them from the message headers instead.",
+      "description": "Whether the producer connects to the SMSC when it sends its first exchange instead of when it starts, so that the route can start while the SMSC is not available. The producer binds with the systemId and password options, or with headers when allowSystemIdAndPasswordFromHeaders is enabled.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
       "defaultValue": false
     },
@@ -165,89 +165,89 @@
     {
       "name": "camel.component.smpp.max-reconnect",
       "type": "java.lang.Integer",
-      "description": "Defines the maximum number of attempts to reconnect to the SMSC, if SMSC returns a negative bind response",
+      "description": "The maximum number of attempts to reconnect after the session to the SMSC was lost. When the last attempt fails, a consumer stays disconnected until it is restarted, and a producer fails its exchanges, unless lazySessionCreation is enabled, which connects again for the next exchange.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
       "defaultValue": 2147483647
     },
     {
       "name": "camel.component.smpp.message-receiver-route-id",
       "type": "java.lang.String",
-      "description": "Set this on producer in order to benefit from transceiver (TRX) binding type. So once set, you don't need to define an 'SMTPP consumer' endpoint anymore. You would set this to a 'Direct consumer' endpoint instead. DISCALIMER: This feature is only tested with 'Direct consumer' endpoint. The behavior with any other consumer type is unknown and not tested.",
+      "description": "The id of a route whose consumer receives the messages that the SMSC sends to this producer. The producer then binds as a transceiver (bind_transceiver) instead of a transmitter, and hands each received deliver_sm, data_sm and alert_notification to that route, so that no SMPP consumer is needed. Only tested with a route that starts from a direct endpoint; the route must exist when Camel starts.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
       "name": "camel.component.smpp.numbering-plan-indicator",
       "type": "java.lang.Byte",
-      "description": "Defines the numeric plan indicator (NPI) to be used in the SME. The following NPI values are defined: 0: Unknown 1: ISDN (E163\/E164) 2: Data (X.121) 3: Telex (F.69) 6: Land Mobile (E.212) 8: National 9: Private 10: ERMES 13: Internet (IP) 18: WAP Client Id (to be defined by WAP Forum)",
+      "description": "The numbering plan indicator (NPI) that the producer sends in the addr_npi field of its bind request, with the values of the sourceAddrNpi option. The consumer binds with 0 (unknown). The default is 0.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
       "name": "camel.component.smpp.password",
       "type": "java.lang.String",
-      "description": "The password for connecting to SMSC server.",
+      "description": "The password with which the consumer or producer binds to the SMSC.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
       "name": "camel.component.smpp.pdu-processor-degree",
       "type": "java.lang.Integer",
-      "description": "Sets the number of threads which can read PDU and process them in parallel.",
+      "description": "The number of threads of the SMPP session that process the received PDUs in parallel.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
       "defaultValue": 3
     },
     {
       "name": "camel.component.smpp.pdu-processor-queue-capacity",
       "type": "java.lang.Integer",
-      "description": "Sets the capacity of the working queue for PDU processing.",
+      "description": "The number of received PDUs that can wait for a free processing thread. When the queue is full, the session answers a received request with the ESME_RTHROTTLED error, so that the SMSC slows down.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
       "defaultValue": 100
     },
     {
       "name": "camel.component.smpp.priority-flag",
       "type": "java.lang.Byte",
-      "description": "Allows the originating SME to assign a priority level to the short message. Only for SubmitSm and SubmitMulti. Four Priority Levels are supported: 0: Level 0 (lowest) priority 1: Level 1 priority 2: Level 2 priority 3: Level 3 (highest) priority",
+      "description": "The priority_flag that the producer sends with SubmitSm and SubmitMulti, from 0 (lowest) to 3 (highest). The CamelSmppPriorityFlag header replaces it; the default is 1.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
       "name": "camel.component.smpp.protocol-id",
       "type": "java.lang.Byte",
-      "description": "The protocol id",
+      "description": "The protocol_id that the producer sends with SubmitSm and SubmitMulti, which for GSM is set as defined in GSM 03.40. The CamelSmppProtocolId header replaces it; the default is 0.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
       "name": "camel.component.smpp.proxy-headers",
       "type": "java.util.Map<java.lang.String,java.lang.String>",
-      "description": "These headers will be passed to the proxy server while establishing the connection.",
+      "description": "Extra HTTP headers that Camel sends to the HTTP proxy with the CONNECT request.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
       "name": "camel.component.smpp.reconnect-delay",
       "type": "java.lang.Long",
-      "description": "Defines the interval in milliseconds between the reconnect attempts, if the connection to the SMSC was lost and the previous was not succeed.",
+      "description": "The delay in milliseconds between two attempts to reconnect to the SMSC, after the first attempt failed.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
       "defaultValue": 5000
     },
     {
       "name": "camel.component.smpp.registered-delivery",
       "type": "java.lang.Byte",
-      "description": "Is used to request an SMSC delivery receipt and\/or SME originated acknowledgements. The following values are defined: 0: No SMSC delivery receipt requested. 1: SMSC delivery receipt requested where final delivery outcome is success or failure. 2: SMSC delivery receipt requested where the final delivery outcome is delivery failure.",
+      "description": "The registered_delivery that the producer sends with SubmitSm, SubmitMulti, ReplaceSm and DataSm: 0 requests no delivery receipt, 1 a delivery receipt for success and for failure, and 2 a delivery receipt for failure only. The CamelSmppRegisteredDelivery header replaces it; the default is 1.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
       "name": "camel.component.smpp.replace-if-present-flag",
       "type": "java.lang.Byte",
-      "description": "Used to request the SMSC to replace a previously submitted message, that is still pending delivery. The SMSC will replace an existing message provided that the source address, destination address and service type match the same fields in the new message. The following replace if present flag values are defined: 0: Don't replace 1: Replace",
+      "description": "The replace_if_present_flag that the producer sends with SubmitSm and SubmitMulti: 1 asks the SMSC to replace a message that is still pending delivery and has the same source address, destination address and service type, 0 does not. The CamelSmppReplaceIfPresentFlag header replaces it; the default is 0.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
       "name": "camel.component.smpp.service-type",
       "type": "java.lang.String",
-      "description": "The service type parameter can be used to indicate the SMS Application service associated with the message. The following generic service_types are defined: CMT: Cellular Messaging CPT: Cellular Paging VMN: Voice Mail Notification VMA: Voice Mail Alerting WAP: Wireless Application Protocol USSD: Unstructured Supplementary Services Data",
+      "description": "The service_type that the producer sends with SubmitSm, SubmitMulti, CancelSm and DataSm: the SMS application service of the message, such as CMT (cellular messaging), CPT (cellular paging), VMN (voice mail notification), VMA (voice mail alerting), WAP or USSD. Empty by default, for the default service of the SMSC. The CamelSmppServiceType header replaces it.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
       "name": "camel.component.smpp.session-state-listener",
       "type": "org.jsmpp.session.SessionStateListener",
-      "description": "You can refer to a org.jsmpp.session.SessionStateListener in the Registry to receive callbacks when the session state changed. The option is a org.jsmpp.session.SessionStateListener type.",
+      "description": "An org.jsmpp.session.SessionStateListener that is notified when the state of the SMPP session of the consumer or producer changes, for example from BOUND_RX to CLOSED. Camel still reconnects a lost session itself. The option is a org.jsmpp.session.SessionStateListener type.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
@@ -260,59 +260,59 @@
     {
       "name": "camel.component.smpp.source-addr",
       "type": "java.lang.String",
-      "description": "Defines the address of SME (Short Message Entity) which originated this message.",
+      "description": "The source address that the producer sends with every command: the address of the SME (Short Message Entity) that sends the message, or, for ReplaceSm, QuerySm and CancelSm, the source address of the original message. The CamelSmppSourceAddr header replaces it.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
       "defaultValue": "1616"
     },
     {
       "name": "camel.component.smpp.source-addr-npi",
       "type": "java.lang.Byte",
-      "description": "Defines the numeric plan indicator (NPI) to be used in the SME originator address parameters. The following NPI values are defined: 0: Unknown 1: ISDN (E163\/E164) 2: Data (X.121) 3: Telex (F.69) 6: Land Mobile (E.212) 8: National 9: Private 10: ERMES 13: Internet (IP) 18: WAP Client Id (to be defined by WAP Forum)",
+      "description": "The numbering plan indicator (NPI) of the source address that the producer sends with every command: 0 unknown, 1 ISDN (E.163\/E.164), 2 data (X.121), 3 telex (F.69), 6 land mobile (E.212), 8 national, 9 private, 10 ERMES, 13 Internet (IP) or 18 WAP client id. The CamelSmppSourceAddrNpi header replaces it; the default is 0.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
       "name": "camel.component.smpp.source-addr-ton",
       "type": "java.lang.Byte",
-      "description": "Defines the type of number (TON) to be used in the SME originator address parameters. The following TON values are defined: 0: Unknown 1: International 2: National 3: Network Specific 4: Subscriber Number 5: Alphanumeric 6: Abbreviated",
+      "description": "The type of number (TON) of the source address that the producer sends with every command: 0 unknown, 1 international, 2 national, 3 network specific, 4 subscriber number, 5 alphanumeric or 6 abbreviated. The CamelSmppSourceAddrTon header replaces it; the default is 0.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
       "name": "camel.component.smpp.splitting-policy",
       "type": "org.apache.camel.component.smpp.SmppSplittingPolicy",
-      "description": "You can specify a policy for handling long messages: ALLOW - the default, long messages are split to 140 bytes per message TRUNCATE - long messages are split and only the first fragment will be sent to the SMSC. Some carriers drop subsequent fragments so this reduces load on the SMPP connection sending parts of a message that will never be delivered. REJECT - if a message would need to be split, it is rejected with an SMPP NegativeResponseException and the reason code signifying the message is too long.",
+      "description": "What the producer does with a SubmitSm or SubmitMulti whose body does not fit in one short message: ALLOW sends it in several segments, TRUNCATE sends only its first part, and REJECT fails the exchange with an SmppException caused by a NegativeResponseException with status 1. Some carriers drop the segments after the first, which TRUNCATE does not send. The CamelSmppSplittingPolicy header replaces it.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
       "defaultValue": "allow"
     },
     {
       "name": "camel.component.smpp.system-id",
       "type": "java.lang.String",
-      "description": "The system id (username) for connecting to SMSC server.",
+      "description": "The system_id with which the consumer or producer binds to the SMSC: the user name that the SMSC authenticates. The user info of the URI, as in smpp:\/\/userhost, sets it too.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
       "defaultValue": "smppclient"
     },
     {
       "name": "camel.component.smpp.system-type",
       "type": "java.lang.String",
-      "description": "This parameter is used to categorize the type of ESME (External Short Message Entity) that is binding to the SMSC (max. 13 characters).",
+      "description": "The system_type of the bind request, which tells the SMSC the type of ESME (External Short Message Entity) that binds. SMPP 3.4 allows at most 13 octets, the NULL terminator included. Empty by default.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
       "name": "camel.component.smpp.transaction-timer",
       "type": "java.lang.Integer",
-      "description": "Defines the maximum period of inactivity allowed after a transaction, after which an SMPP entity may assume that the session is no longer active. This timer may be active on either communicating SMPP entity (i.e. SMSC or ESME).",
+      "description": "The time in milliseconds that the session waits for the response of the SMSC to a request that it sent, such as a submit_sm or an enquire_link, before the request fails. The bind request waits 60 seconds instead.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
       "defaultValue": 10000
     },
     {
       "name": "camel.component.smpp.type-of-number",
       "type": "java.lang.Byte",
-      "description": "Defines the type of number (TON) to be used in the SME. The following TON values are defined: 0: Unknown 1: International 2: National 3: Network Specific 4: Subscriber Number 5: Alphanumeric 6: Abbreviated",
+      "description": "The type of number (TON) that the producer sends in the addr_ton field of its bind request, with the values of the sourceAddrTon option. The consumer binds with 0 (unknown). The default is 0.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration"
     },
     {
       "name": "camel.component.smpp.using-s-s-l",
       "type": "java.lang.Boolean",
-      "description": "Whether using SSL with the smpps protocol",
+      "description": "Whether to connect to the SMSC with TLS, which the smpps scheme enables. The certificate of the SMSC must be trusted by the default SSL socket factory of the JVM. Through an HTTP proxy, TLS runs inside the tunnel.",
       "sourceType": "org.apache.camel.component.smpp.springboot.SmppComponentConfiguration",
       "defaultValue": false
     }

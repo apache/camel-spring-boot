@@ -3,7 +3,7 @@
 = Webhook
 :artifactid: camel-webhook-starter
 
-Expose webhook endpoints to receive push notifications for other Camel components.
+Receive the push notifications of a webhook provider over HTTP for a Camel component that supports webhooks.
 
 == What's inside
 
@@ -30,11 +30,11 @@ The starter supports 9 options, which are listed below.
 | Name | Description | Default | Type
 | camel.component.webhook.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
 | camel.component.webhook.bridge-error-handler | Allows for bridging the consumer to the Camel routing Error Handler, which mean any exceptions (if possible) occurred while the Camel consumer is trying to pickup incoming messages, or the likes, will now be processed as a message and handled by the routing Error Handler. Important: This is only possible if the 3rd party component allows Camel to be alerted if an exception was thrown. Some components handle this internally only, and therefore bridgeErrorHandler is not possible. In other situations we may improve the Camel component to hook into the 3rd party component and make this possible for future releases. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions, that will be logged at WARN or ERROR level and ignored. | false | Boolean
-| camel.component.webhook.configuration | Set the default configuration for the webhook meta-component. The option is a org.apache.camel.component.webhook.WebhookConfiguration type. |  | WebhookConfiguration
+| camel.component.webhook.configuration | The default webhook options of the endpoints that the component creates. Each endpoint starts with a copy of it, which the options of the endpoint then change. The option is a org.apache.camel.component.webhook.WebhookConfiguration type. |  | WebhookConfiguration
 | camel.component.webhook.enabled | Whether to enable auto configuration of the webhook component. This is enabled by default. |  | Boolean
-| camel.component.webhook.webhook-auto-register | Automatically register the webhook at startup and unregister it on shutdown. | true | Boolean
-| camel.component.webhook.webhook-base-path | The first (base) path element where the webhook will be exposed. It's a good practice to set it to a random string, so that it cannot be guessed by unauthorized parties. |  | String
-| camel.component.webhook.webhook-component-name | The Camel Rest component to use for the REST transport, such as netty-http. |  | String
-| camel.component.webhook.webhook-external-url | The URL of the current service as seen by the webhook provider |  | String
-| camel.component.webhook.webhook-path | The path where the webhook endpoint will be exposed (relative to basePath, if any) |  | String
+| camel.component.webhook.webhook-auto-register | Whether the delegate component registers the URL of the webhook at the provider when the endpoint starts, and unregisters it when the endpoint stops, for example with the setWebhook and deleteWebhook calls of the Telegram Bot API. Set it to false when the webhook is registered in another way, for example with a WebhookRoutePolicyFactory, which requires false. The WhatsApp component does not register the webhook. | true | Boolean
+| camel.component.webhook.webhook-base-path | A path put in front of webhookPath in the path of the webhook, for example a random value that is hard to guess, so that only the provider knows the URL. A leading slash is added when missing. If not set, the path of the webhook is webhookPath alone. |  | String
+| camel.component.webhook.webhook-component-name | The name of the REST component that exposes the HTTP endpoint of the webhook, such as platform-http or netty-http. It names a bean in the registry or a component, which must be a RestConsumerFactory. If not set, a component of the CamelContext that is a RestConsumerFactory is used, otherwise the only RestConsumerFactory bean in the registry, otherwise the only one of coap, netty-http, jetty, servlet and undertow on the classpath. |  | String
+| camel.component.webhook.webhook-external-url | The URL at which the webhook provider reaches this service, for example https://camel.example.com, without a trailing slash. The delegate component registers this URL followed by the path of the webhook (the context path of the REST configuration, webhookBasePath and webhookPath) at the provider. If not set, the URL is made from the scheme, host and port of the REST configuration. When that has no host, its hostNameResolver picks one, which is 0.0.0.0 by default and which the provider cannot reach. |  | String
+| camel.component.webhook.webhook-path | The path of the webhook, after webhookBasePath. A leading slash is added when missing. If not set, the path is the SHA-256 hash of the delegate endpoint URI in URL-safe Base64, which stays the same across restarts. The WhatsApp component replaces it with its own webhookPath option. |  | String
 |===

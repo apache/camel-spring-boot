@@ -16,7 +16,7 @@
     {
       "name": "camel.component.telegram.authorization-token",
       "type": "java.lang.String",
-      "description": "The default Telegram authorization token to be used when the information is not provided in the endpoints.",
+      "description": "The token of the bot, used by every endpoint that does not set its own authorizationToken.",
       "sourceType": "org.apache.camel.component.telegram.springboot.TelegramComponentConfiguration"
     },
     {
@@ -29,7 +29,7 @@
     {
       "name": "camel.component.telegram.base-uri",
       "type": "java.lang.String",
-      "description": "Can be used to set an alternative base URI, e.g. when you want to test the component against a mock Telegram API",
+      "description": "The base URI of the Telegram Bot API, for example of a local Bot API server or of a mock in tests. It is used by every endpoint that does not set its own baseUri.",
       "sourceType": "org.apache.camel.component.telegram.springboot.TelegramComponentConfiguration",
       "defaultValue": "https:\/\/api.telegram.org"
     },
@@ -43,7 +43,7 @@
     {
       "name": "camel.component.telegram.client",
       "type": "java.net.http.HttpClient",
-      "description": "To use a custom java.net.http.HttpClient. The option is a java.net.http.HttpClient type.",
+      "description": "To use a custom java.net.http.HttpClient for every endpoint that does not set its own client. The endpoints then do not use the proxy options. The option is a java.net.http.HttpClient type.",
       "sourceType": "org.apache.camel.component.telegram.springboot.TelegramComponentConfiguration"
     },
     {

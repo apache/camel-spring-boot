@@ -29,19 +29,19 @@
     {
       "name": "camel.component.elasticsearch.certificate-path",
       "type": "java.lang.String",
-      "description": "The path of the self-signed certificate to use to access to Elasticsearch.",
+      "description": "The CA certificate, in X.509 format, that the client trusts for HTTPS instead of the default trust store of the JVM. It is loaded from the classpath by default, or with the prefix classpath:, file: or http:. It needs enableSSL, and sslContextParameters takes precedence.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration"
     },
     {
       "name": "camel.component.elasticsearch.client",
       "type": "org.elasticsearch.client.RestClient",
-      "description": "To use an existing configured Elasticsearch client, instead of creating a client per endpoint. This allows customizing the client with specific settings. The option is a org.elasticsearch.client.RestClient type.",
+      "description": "To use an existing org.elasticsearch.client.RestClient, shared by all the endpoints of the component, instead of a client that each producer creates. The hostAddresses, timeout, authentication, SSL, sniffer and disconnect options are then not used, and the producers do not close the client. The option is a org.elasticsearch.client.RestClient type.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration"
     },
     {
       "name": "camel.component.elasticsearch.connection-timeout",
       "type": "java.lang.Integer",
-      "description": "The time in ms to wait before connection will time out.",
+      "description": "The connect timeout in milliseconds: the longest time that the client waits to establish the connection to a node. Not used when the client option is set.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
       "defaultValue": 30000
     },
@@ -53,21 +53,21 @@
     {
       "name": "camel.component.elasticsearch.enable-document-only-mode",
       "type": "java.lang.Boolean",
-      "description": "Indicates whether the body of the message contains only documents. By default, it is set to false to be able to do the same requests as what the Document API supports (see https:\/\/www.elastic.co\/guide\/en\/elasticsearch\/reference\/current\/docs.html for more details). To ease the migration of routes based on the legacy component camel-elasticsearch-rest, you should consider enabling the mode, especially if your routes do update operations.",
+      "description": "Whether the body of Update is only the partial document to merge into the document. If false, the body is the request body of the Update API, such as {doc: {...}} or a script. Only JSON text, bytes, a stream, a file or a Map is read this way. The CamelElasticsearchEnableDocumentOnlyMode header replaces this option.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.elasticsearch.enable-s-s-l",
       "type": "java.lang.Boolean",
-      "description": "Enable SSL",
+      "description": "Whether to connect to the nodes of hostAddresses with HTTPS instead of HTTP. The default SSLContext of the JVM is used unless sslContextParameters or certificatePath is set.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.elasticsearch.enable-sniffer",
       "type": "java.lang.Boolean",
-      "description": "Enable automatically discover nodes from a running Elasticsearch cluster. If this option is used in conjunction with Spring Boot, then it's managed by the Spring Boot configuration (see: Disable Sniffer in Spring Boot).",
+      "description": "Whether to start the Sniffer of the Elasticsearch REST client, which reads the nodes of the cluster from its Nodes Info API at an interval and updates the nodes that the client uses. Not used when the client option is set or autowired, as Spring Boot does.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
       "defaultValue": false
     },
@@ -80,7 +80,7 @@
     {
       "name": "camel.component.elasticsearch.host-addresses",
       "type": "java.lang.String",
-      "description": "Comma separated list with ip:port formatted remote transport addresses to use. The ip and port options must be left blank for hostAddresses to be considered instead.",
+      "description": "The comma-separated list of the nodes to connect to, each as host:port, for example es1:9200,es2:9200. The port is 9200 if not set, and the scheme is https when enableSSL is set. Required unless the client option is set.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration"
     },
     {
@@ -93,53 +93,53 @@
     {
       "name": "camel.component.elasticsearch.password",
       "type": "java.lang.String",
-      "description": "Password for authenticating",
+      "description": "The password for HTTP basic authentication to the nodes, used only together with user. Not used when the client option is set.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration"
     },
     {
       "name": "camel.component.elasticsearch.sniff-after-failure-delay",
       "type": "java.lang.Integer",
-      "description": "The delay of a sniff execution scheduled after a failure (in milliseconds)",
+      "description": "The delay in milliseconds of the read of the nodes that the Sniffer schedules after a failed request, when enableSniffer is set.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
       "defaultValue": 60000
     },
     {
       "name": "camel.component.elasticsearch.sniffer-interval",
       "type": "java.lang.Integer",
-      "description": "The interval between consecutive ordinary sniff executions in milliseconds. Will be honoured when sniffOnFailure is disabled or when there are no failures between consecutive sniff executions",
+      "description": "The interval in milliseconds between two reads of the nodes of the cluster, when enableSniffer is set.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
       "defaultValue": 300000
     },
     {
       "name": "camel.component.elasticsearch.socket-timeout",
       "type": "java.lang.Integer",
-      "description": "The timeout in ms to wait before the socket will time out.",
+      "description": "The socket timeout in milliseconds: the longest time that the client waits for data from a node before the request fails. Not used when the client option is set.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
       "defaultValue": 30000
     },
     {
       "name": "camel.component.elasticsearch.ssl-context-parameters",
       "type": "org.apache.camel.support.jsse.SSLContextParameters",
-      "description": "To configure security using SSLContextParameters. When configured, this takes precedence over the certificatePath option. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
+      "description": "To configure security using SSLContextParameters, which sets the protocols, cipher suites, named groups and signature schemes of the HTTPS connection. It takes precedence over certificatePath, and it needs enableSSL. The option is a org.apache.camel.support.jsse.SSLContextParameters type.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration"
     },
     {
       "name": "camel.component.elasticsearch.use-global-ssl-context-parameters",
       "type": "java.lang.Boolean",
-      "description": "Enable usage of global SSL context parameters.",
+      "description": "Whether to use the global SSLContextParameters of the CamelContext for an endpoint that has no sslContextParameters.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
       "defaultValue": false
     },
     {
       "name": "camel.component.elasticsearch.user",
       "type": "java.lang.String",
-      "description": "Basic authenticate user",
+      "description": "The user name for HTTP basic authentication to the nodes, used only together with password. It cannot be combined with apiKey. Not used when the client option is set.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration"
     },
     {
       "name": "camel.component.elasticsearch.max-retry-timeout",
       "type": "java.lang.Integer",
-      "description": "The time in ms before retry",
+      "description": "Deprecated: this option has no effect. It was used by the old low-level REST client and is ignored by the current client.",
       "sourceType": "org.apache.camel.component.es.springboot.ElasticsearchComponentConfiguration",
       "defaultValue": 30000,
       "deprecated": true,

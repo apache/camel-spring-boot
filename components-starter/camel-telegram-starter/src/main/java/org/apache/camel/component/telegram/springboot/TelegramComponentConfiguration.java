@@ -70,13 +70,15 @@ public class TelegramComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * Can be used to set an alternative base URI, e.g. when you want to test
-     * the component against a mock Telegram API
+     * The base URI of the Telegram Bot API, for example of a local Bot API
+     * server or of a mock in tests. It is used by every endpoint that does not
+     * set its own baseUri.
      */
     private String baseUri = "https://api.telegram.org";
     /**
-     * To use a custom java.net.http.HttpClient. The option is a
-     * java.net.http.HttpClient type.
+     * To use a custom java.net.http.HttpClient for every endpoint that does not
+     * set its own client. The endpoints then do not use the proxy options. The
+     * option is a java.net.http.HttpClient type.
      */
     private HttpClient client;
     /**
@@ -92,8 +94,8 @@ public class TelegramComponentConfiguration
      */
     private Boolean healthCheckProducerEnabled = true;
     /**
-     * The default Telegram authorization token to be used when the information
-     * is not provided in the endpoints.
+     * The token of the bot, used by every endpoint that does not set its own
+     * authorizationToken.
      */
     private String authorizationToken;
 
