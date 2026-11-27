@@ -16,3 +16,4 @@
 ## ---------------------------------------------------------------------------
 
 org.apache.camel.component.azure.key.vault.springboot.KeyVaultComponentAutoConfiguration
+org.apache.camel.component.azure.key.vault.springboot.KeyVaultComponentConverter

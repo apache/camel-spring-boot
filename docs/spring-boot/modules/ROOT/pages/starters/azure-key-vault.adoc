@@ -23,12 +23,19 @@ Please refer to the above links for usage and configuration details.
 
 == Spring Boot Auto-Configuration
 
-The starter supports 3 options, which are listed below.
+The starter supports 10 options, which are listed below.
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
 | camel.component.azure-key-vault.autowired-enabled | Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc. | true | Boolean
+| camel.component.azure-key-vault.client-id | The client ID (application ID) of the Microsoft Entra application for the CLIENT_SECRET credential type. Required for CLIENT_SECRET, the default, unless the secretClient option is set. Not used for AZURE_IDENTITY. |  | String
+| camel.component.azure-key-vault.client-secret | The client secret of the Microsoft Entra application for the CLIENT_SECRET credential type. Required for CLIENT_SECRET, the default, unless the secretClient option is set. Not used for AZURE_IDENTITY. |  | String
+| camel.component.azure-key-vault.configuration | The configuration that each endpoint of the component starts from, as a copy. The options of the endpoint replace its values. The option is a org.apache.camel.component.azure.key.vault.KeyVaultConfiguration type. |  | KeyVaultConfiguration
+| camel.component.azure-key-vault.credential-type | How the endpoint authenticates when it creates the SecretClient. CLIENT_SECRET uses the clientId, clientSecret and tenantId options. AZURE_IDENTITY uses the DefaultAzureCredential of the Azure Identity library, which tries environment variables, workload identity, managed identity and developer tools such as the Azure CLI. Not used when the secretClient option is set. | client-secret | CredentialType
 | camel.component.azure-key-vault.enabled | Whether to enable auto configuration of the azure-key-vault component. This is enabled by default. |  | Boolean
 | camel.component.azure-key-vault.lazy-start-producer | Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing. | false | Boolean
+| camel.component.azure-key-vault.operation | The operation that the producer performs. The CamelAzureKeyVaultProducerOperation header replaces this option. Every operation except updateSecretProperties takes the name of the secret from the CamelAzureKeyVaultSecretName header. | createsecret | KeyVaultOperation
+| camel.component.azure-key-vault.secret-client | To use a custom com.azure.security.keyvault.secrets.SecretClient. When this option is set, the client decides the vault and the credentials, and the vaultName, credentialType, clientId, clientSecret and tenantId options are not used to connect. The option is a com.azure.security.keyvault.secrets.SecretClient type. |  | SecretClient
+| camel.component.azure-key-vault.tenant-id | The ID of the Microsoft Entra tenant (directory) of the application for the CLIENT_SECRET credential type. Required for CLIENT_SECRET, the default, unless the secretClient option is set. Not used for AZURE_IDENTITY. |  | String
 |===

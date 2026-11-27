@@ -16,6 +16,11 @@
  */
 package org.apache.camel.component.azure.key.vault.springboot;
 
+import com.azure.security.keyvault.secrets.SecretClient;
+import org.apache.camel.component.azure.common.CredentialType;
+import org.apache.camel.component.azure.key.vault.KeyVaultComponent;
+import org.apache.camel.component.azure.key.vault.KeyVaultConfiguration;
+import org.apache.camel.component.azure.key.vault.KeyVaultOperation;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -35,6 +40,21 @@ public class KeyVaultComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * The configuration that each endpoint of the component starts from, as a
+     * copy. The options of the endpoint replace its values. The option is a
+     * org.apache.camel.component.azure.key.vault.KeyVaultConfiguration type.
+     */
+    private KeyVaultConfiguration configuration;
+    /**
+     * How the endpoint authenticates when it creates the SecretClient.
+     * CLIENT_SECRET uses the clientId, clientSecret and tenantId options.
+     * AZURE_IDENTITY uses the DefaultAzureCredential of the Azure Identity
+     * library, which tries environment variables, workload identity, managed
+     * identity and developer tools such as the Azure CLI. Not used when the
+     * secretClient option is set.
+     */
+    private CredentialType credentialType = CredentialType.CLIENT_SECRET;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -46,6 +66,21 @@ public class KeyVaultComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * The operation that the producer performs. The
+     * CamelAzureKeyVaultProducerOperation header replaces this option. Every
+     * operation except updateSecretProperties takes the name of the secret from
+     * the CamelAzureKeyVaultSecretName header.
+     */
+    private KeyVaultOperation operation = KeyVaultOperation.createSecret;
+    /**
+     * To use a custom com.azure.security.keyvault.secrets.SecretClient. When
+     * this option is set, the client decides the vault and the credentials, and
+     * the vaultName, credentialType, clientId, clientSecret and tenantId
+     * options are not used to connect. The option is a
+     * com.azure.security.keyvault.secrets.SecretClient type.
+     */
+    private SecretClient secretClient;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -54,6 +89,41 @@ public class KeyVaultComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * The client ID (application ID) of the Microsoft Entra application for the
+     * CLIENT_SECRET credential type. Required for CLIENT_SECRET, the default,
+     * unless the secretClient option is set. Not used for AZURE_IDENTITY.
+     */
+    private String clientId;
+    /**
+     * The client secret of the Microsoft Entra application for the
+     * CLIENT_SECRET credential type. Required for CLIENT_SECRET, the default,
+     * unless the secretClient option is set. Not used for AZURE_IDENTITY.
+     */
+    private String clientSecret;
+    /**
+     * The ID of the Microsoft Entra tenant (directory) of the application for
+     * the CLIENT_SECRET credential type. Required for CLIENT_SECRET, the
+     * default, unless the secretClient option is set. Not used for
+     * AZURE_IDENTITY.
+     */
+    private String tenantId;
+
+    public KeyVaultConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(KeyVaultConfiguration configuration) {
+        this.configuration = configuration;
+    }
+
+    public CredentialType getCredentialType() {
+        return credentialType;
+    }
+
+    public void setCredentialType(CredentialType credentialType) {
+        this.credentialType = credentialType;
+    }
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -63,11 +133,51 @@ public class KeyVaultComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public KeyVaultOperation getOperation() {
+        return operation;
+    }
+
+    public void setOperation(KeyVaultOperation operation) {
+        this.operation = operation;
+    }
+
+    public SecretClient getSecretClient() {
+        return secretClient;
+    }
+
+    public void setSecretClient(SecretClient secretClient) {
+        this.secretClient = secretClient;
+    }
+
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
+    }
+
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
     }
 }

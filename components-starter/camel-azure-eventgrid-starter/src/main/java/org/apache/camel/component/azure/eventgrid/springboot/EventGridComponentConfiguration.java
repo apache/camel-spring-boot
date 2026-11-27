@@ -93,14 +93,19 @@ public class EventGridComponentConfiguration
      * How the producer authenticates: ACCESS_KEY with the azureKeyCredential or
      * accessKey option, TOKEN_CREDENTIAL with the tokenCredential option, or
      * AZURE_IDENTITY with a DefaultAzureCredential of the Azure Identity
-     * library. When one of these credential options is set, the component
-     * chooses the type from it, so set this option only for AZURE_IDENTITY.
+     * library (the tokenCredential option when it is set, otherwise a new one).
+     * With tokenCredential set and this option left at ACCESS_KEY, Camel uses
+     * AZURE_IDENTITY for a DefaultAzureCredential and TOKEN_CREDENTIAL for any
+     * other credential. With only accessKey or azureKeyCredential set, Camel
+     * uses ACCESS_KEY.
      */
     private CredentialType credentialType = CredentialType.ACCESS_KEY;
     /**
      * The com.azure.core.credential.TokenCredential that authenticates the
-     * producer with Microsoft Entra ID. When it is set, the accessKey and
-     * azureKeyCredential options are not used. The option is a
+     * producer with Microsoft Entra ID, such as a DefaultAzureCredential built
+     * with a managed identity client id or a tenant id; this instance is used
+     * as it is, also with credentialType AZURE_IDENTITY. When it is set, the
+     * accessKey and azureKeyCredential options are not used. The option is a
      * com.azure.core.credential.TokenCredential type.
      */
     private TokenCredential tokenCredential;

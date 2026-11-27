@@ -21,6 +21,31 @@
       "defaultValue": true
     },
     {
+      "name": "camel.component.azure-key-vault.client-id",
+      "type": "java.lang.String",
+      "description": "The client ID (application ID) of the Microsoft Entra application for the CLIENT_SECRET credential type. Required for CLIENT_SECRET, the default, unless the secretClient option is set. Not used for AZURE_IDENTITY.",
+      "sourceType": "org.apache.camel.component.azure.key.vault.springboot.KeyVaultComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-key-vault.client-secret",
+      "type": "java.lang.String",
+      "description": "The client secret of the Microsoft Entra application for the CLIENT_SECRET credential type. Required for CLIENT_SECRET, the default, unless the secretClient option is set. Not used for AZURE_IDENTITY.",
+      "sourceType": "org.apache.camel.component.azure.key.vault.springboot.KeyVaultComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-key-vault.configuration",
+      "type": "org.apache.camel.component.azure.key.vault.KeyVaultConfiguration",
+      "description": "The configuration that each endpoint of the component starts from, as a copy. The options of the endpoint replace its values. The option is a org.apache.camel.component.azure.key.vault.KeyVaultConfiguration type.",
+      "sourceType": "org.apache.camel.component.azure.key.vault.springboot.KeyVaultComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-key-vault.credential-type",
+      "type": "org.apache.camel.component.azure.common.CredentialType",
+      "description": "How the endpoint authenticates when it creates the SecretClient. CLIENT_SECRET uses the clientId, clientSecret and tenantId options. AZURE_IDENTITY uses the DefaultAzureCredential of the Azure Identity library, which tries environment variables, workload identity, managed identity and developer tools such as the Azure CLI. Not used when the secretClient option is set.",
+      "sourceType": "org.apache.camel.component.azure.key.vault.springboot.KeyVaultComponentConfiguration",
+      "defaultValue": "client-secret"
+    },
+    {
       "name": "camel.component.azure-key-vault.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
@@ -37,6 +62,25 @@
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
       "sourceType": "org.apache.camel.component.azure.key.vault.springboot.KeyVaultComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.azure-key-vault.operation",
+      "type": "org.apache.camel.component.azure.key.vault.KeyVaultOperation",
+      "description": "The operation that the producer performs. The CamelAzureKeyVaultProducerOperation header replaces this option. Every operation except updateSecretProperties takes the name of the secret from the CamelAzureKeyVaultSecretName header.",
+      "sourceType": "org.apache.camel.component.azure.key.vault.springboot.KeyVaultComponentConfiguration",
+      "defaultValue": "createsecret"
+    },
+    {
+      "name": "camel.component.azure-key-vault.secret-client",
+      "type": "com.azure.security.keyvault.secrets.SecretClient",
+      "description": "To use a custom com.azure.security.keyvault.secrets.SecretClient. When this option is set, the client decides the vault and the credentials, and the vaultName, credentialType, clientId, clientSecret and tenantId options are not used to connect. The option is a com.azure.security.keyvault.secrets.SecretClient type.",
+      "sourceType": "org.apache.camel.component.azure.key.vault.springboot.KeyVaultComponentConfiguration"
+    },
+    {
+      "name": "camel.component.azure-key-vault.tenant-id",
+      "type": "java.lang.String",
+      "description": "The ID of the Microsoft Entra tenant (directory) of the application for the CLIENT_SECRET credential type. Required for CLIENT_SECRET, the default, unless the secretClient option is set. Not used for AZURE_IDENTITY.",
+      "sourceType": "org.apache.camel.component.azure.key.vault.springboot.KeyVaultComponentConfiguration"
     }
   ],
   "hints": [],

@@ -81,8 +81,9 @@ public class MinioComponentConfiguration
     private String policy;
     /**
      * The TCP port of the server. When set, it replaces the port of the
-     * endpoint option, and the secure option sets the scheme. Not used when
-     * minioClient is set.
+     * endpoint option. An endpoint with the http:// or https:// scheme keeps
+     * its scheme; for a host name without a scheme, the secure option sets it.
+     * Not used when minioClient is set.
      */
     private Integer proxyPort;
     /**
@@ -93,8 +94,9 @@ public class MinioComponentConfiguration
     private String region;
     /**
      * Whether the client uses HTTPS (true) or HTTP (false) when proxyPort is
-     * set. Without proxyPort, this option is not used and the scheme of the
-     * endpoint option applies.
+     * set and the endpoint option is a host name without a scheme. When the
+     * endpoint has the http:// or https:// scheme, or proxyPort is not set,
+     * this option is not used and the scheme of the endpoint applies.
      */
     private Boolean secure = false;
     /**
