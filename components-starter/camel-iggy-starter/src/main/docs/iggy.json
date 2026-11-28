@@ -75,13 +75,6 @@
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
     },
     {
-      "name": "camel.component.iggy.consumers-count",
-      "type": "java.lang.Integer",
-      "description": "The number of threads of the thread pool of the consumer. The consumer runs one polling task, so one thread polls the topic.",
-      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
-      "defaultValue": 1
-    },
-    {
       "name": "camel.component.iggy.customizer.enabled",
       "type": "java.lang.Boolean",
       "sourceType": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon$CustomizerProperties"
@@ -135,7 +128,7 @@
     {
       "name": "camel.component.iggy.partitioning",
       "type": "org.apache.iggy.message.Partitioning",
-      "description": "How the producer chooses the partition of the messages it sends, as an org.apache.iggy.message.Partitioning: balanced() spreads them over the partitions, partitionId(Long) sends to one partition and messagesKey(String) to the partition of a key. The option is a org.apache.iggy.message.Partitioning type.",
+      "description": "How the producer chooses the partition of the messages it sends, as an org.apache.iggy.message.Partitioning or as text: balanced() (the text balanced) spreads them over the partitions, partitionId(Long) (for example the text partitionId:2) sends to one partition and messagesKey(String) (for example the text messagesKey:order-1) to the partition of a key. The option is a org.apache.iggy.message.Partitioning type.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
     },
     {
@@ -195,7 +188,7 @@
     {
       "name": "camel.component.iggy.stream-id",
       "type": "java.lang.Long",
-      "description": "The ID of a stream that autoCreateStream looks up: if no stream has this ID, a stream named streamName is created. The producer and the consumer always address the stream by its name.",
+      "description": "The ID of a stream that autoCreateStream looks up for the stream of the endpoint: if no stream has this ID, a stream named streamName is created. The stream of a CamelIggyStreamOverride header is looked up and created by its name. The producer and the consumer always address the stream by its name.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
     },
     {
@@ -229,6 +222,15 @@
       "type": "java.lang.String",
       "description": "The username that the client logs in with to the Iggy server. Required, together with the password option: the client fails to connect without them.",
       "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration"
+    },
+    {
+      "name": "camel.component.iggy.consumers-count",
+      "type": "java.lang.Integer",
+      "description": "The number of threads of the thread pool of the consumer. The consumer runs one polling task, so one thread polls the topic. Deprecation note: The consumer polls the topic with one task, so a value above 1 only adds idle threads",
+      "sourceType": "org.apache.camel.component.iggy.springboot.IggyComponentConfiguration",
+      "defaultValue": 1,
+      "deprecated": true,
+      "deprecation": {}
     }
   ],
   "hints": [],

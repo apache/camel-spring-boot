@@ -24,6 +24,7 @@ import org.apache.camel.support.jsse.SSLContextParameters;
 import org.apache.iggy.message.Partitioning;
 import org.apache.iggy.topic.CompressionAlgorithm;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 
 /**
  * Send messages to and receive messages from topics of the Apache Iggy message
@@ -93,21 +94,17 @@ public class IggyComponentConfiguration
      */
     private Long partitionsCount = 1L;
     /**
-     * The password that the client logs in with to the Iggy server. Required,
-     * together with the username option: the client fails to connect without
-     * them.
-     */
-    private String password;
-    /**
      * The port of the Iggy server. The default 8090 is the default port of the
      * TCP transport of the server, so set the HTTP port of the server when
      * clientTransport is HTTP.
      */
     private Integer port = 8090;
     /**
-     * The ID of a stream that autoCreateStream looks up: if no stream has this
-     * ID, a stream named streamName is created. The producer and the consumer
-     * always address the stream by its name.
+     * The ID of a stream that autoCreateStream looks up for the stream of the
+     * endpoint: if no stream has this ID, a stream named streamName is created.
+     * The stream of a CamelIggyStreamOverride header is looked up and created
+     * by its name. The producer and the consumer always address the stream by
+     * its name.
      */
     private Long streamId;
     /**
@@ -143,8 +140,11 @@ public class IggyComponentConfiguration
     private String consumerGroupName;
     /**
      * The number of threads of the thread pool of the consumer. The consumer
-     * runs one polling task, so one thread polls the topic.
+     * runs one polling task, so one thread polls the topic. Deprecation note:
+     * The consumer polls the topic with one task, so a value above 1 only adds
+     * idle threads
      */
+    @Deprecated
     private Integer consumersCount = 1;
     /**
      * The ID of the partition that the consumer polls. If not set, the server
@@ -184,10 +184,12 @@ public class IggyComponentConfiguration
     private Boolean lazyStartProducer = false;
     /**
      * How the producer chooses the partition of the messages it sends, as an
-     * org.apache.iggy.message.Partitioning: balanced() spreads them over the
-     * partitions, partitionId(Long) sends to one partition and
-     * messagesKey(String) to the partition of a key. The option is a
-     * org.apache.iggy.message.Partitioning type.
+     * org.apache.iggy.message.Partitioning or as text: balanced() (the text
+     * balanced) spreads them over the partitions, partitionId(Long) (for
+     * example the text partitionId:2) sends to one partition and
+     * messagesKey(String) (for example the text messagesKey:order-1) to the
+     * partition of a key. The option is a org.apache.iggy.message.Partitioning
+     * type.
      */
     private Partitioning partitioning;
     /**
@@ -199,6 +201,12 @@ public class IggyComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * The password that the client logs in with to the Iggy server. Required,
+     * together with the username option: the client fails to connect without
+     * them.
+     */
+    private String password;
     /**
      * SSL configuration using an
      * org.apache.camel.support.jsse.SSLContextParameters instance. This takes
@@ -308,14 +316,6 @@ public class IggyComponentConfiguration
         this.partitionsCount = partitionsCount;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Integer getPort() {
         return port;
     }
@@ -364,10 +364,13 @@ public class IggyComponentConfiguration
         this.consumerGroupName = consumerGroupName;
     }
 
+    @Deprecated
+    @DeprecatedConfigurationProperty
     public Integer getConsumersCount() {
         return consumersCount;
     }
 
+    @Deprecated
     public void setConsumersCount(Integer consumersCount) {
         this.consumersCount = consumersCount;
     }
@@ -434,6 +437,14 @@ public class IggyComponentConfiguration
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public SSLContextParameters getSslContextParameters() {

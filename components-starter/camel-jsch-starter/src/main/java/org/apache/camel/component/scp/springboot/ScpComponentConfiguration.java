@@ -46,13 +46,6 @@ public class ScpComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
-     * Whether to log the INFO messages of JSch at INFO level. JSch logs much at
-     * INFO level, so by default the component logs these messages at DEBUG
-     * level. The component passes the JSch log messages, with the [JSCH]
-     * prefix, to its own logger.
-     */
-    private Boolean verboseLogging = false;
-    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -61,6 +54,13 @@ public class ScpComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * Whether to log the INFO messages of JSch at INFO level. JSch logs much at
+     * INFO level, so by default the component logs these messages at DEBUG
+     * level. The component passes the JSch log messages, with the [JSCH]
+     * prefix, to its own logger.
+     */
+    private Boolean verboseLogging = false;
     /**
      * Used for enabling or disabling all consumer based health checks from this
      * component
@@ -82,20 +82,20 @@ public class ScpComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
-    public Boolean getVerboseLogging() {
-        return verboseLogging;
-    }
-
-    public void setVerboseLogging(Boolean verboseLogging) {
-        this.verboseLogging = verboseLogging;
-    }
-
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public Boolean getVerboseLogging() {
+        return verboseLogging;
+    }
+
+    public void setVerboseLogging(Boolean verboseLogging) {
+        this.verboseLogging = verboseLogging;
     }
 
     public Boolean getHealthCheckConsumerEnabled() {

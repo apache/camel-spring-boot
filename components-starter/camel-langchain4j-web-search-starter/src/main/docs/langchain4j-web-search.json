@@ -14,11 +14,23 @@
   ],
   "properties": [
     {
+      "name": "camel.component.langchain4j-web-search.additional-params",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "More parameters for the search engine, as a Map of names to values, such as the parameters of the search API that no option covers. Which names are used depends on the engine, and the Tavily engine ignores them.",
+      "sourceType": "org.apache.camel.component.langchain4j.web.search.springboot.LangChain4jWebSearchComponentConfiguration"
+    },
+    {
       "name": "camel.component.langchain4j-web-search.autowired-enabled",
       "type": "java.lang.Boolean",
       "description": "Whether autowiring is enabled. This is used for automatic autowiring options (the option must be marked as autowired) by looking up in the registry to find if there is a single instance of matching type, which then gets configured on the component. This can be used for automatic configuring JDBC data sources, JMS connection factories, AWS Clients, etc.",
       "sourceType": "org.apache.camel.component.langchain4j.web.search.springboot.LangChain4jWebSearchComponentConfiguration",
       "defaultValue": true
+    },
+    {
+      "name": "camel.component.langchain4j-web-search.configuration",
+      "type": "org.apache.camel.component.langchain4j.web.search.LangChain4jWebSearchConfiguration",
+      "description": "The configuration that each endpoint starts from. Options set on the endpoint override it. The option is a org.apache.camel.component.langchain4j.web.search.LangChain4jWebSearchConfiguration type.",
+      "sourceType": "org.apache.camel.component.langchain4j.web.search.springboot.LangChain4jWebSearchComponentConfiguration"
     },
     {
       "name": "camel.component.langchain4j-web-search.customizer.enabled",
@@ -32,11 +44,67 @@
       "sourceType": "org.apache.camel.component.langchain4j.web.search.springboot.LangChain4jWebSearchComponentConfiguration"
     },
     {
+      "name": "camel.component.langchain4j-web-search.geo-location",
+      "type": "java.lang.String",
+      "description": "The geographic location of the search results, such as a country code, in the format that the search engine expects. The Tavily engine ignores it.",
+      "sourceType": "org.apache.camel.component.langchain4j.web.search.springboot.LangChain4jWebSearchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.langchain4j-web-search.language",
+      "type": "java.lang.String",
+      "description": "The language of the search results, in the format that the search engine expects. The Tavily engine ignores it.",
+      "sourceType": "org.apache.camel.component.langchain4j.web.search.springboot.LangChain4jWebSearchComponentConfiguration"
+    },
+    {
       "name": "camel.component.langchain4j-web-search.lazy-start-producer",
       "type": "java.lang.Boolean",
       "description": "Whether the producer should be started lazy (on the first message). By starting lazy you can use this to allow CamelContext and routes to startup in situations where a producer may otherwise fail during starting and cause the route to fail being started. By deferring this startup to be lazy then the startup failure can be handled during routing messages via Camel's routing error handlers. Beware that when the first message is processed then creating and starting the producer may take a little time and prolong the total processing time of the processing.",
       "sourceType": "org.apache.camel.component.langchain4j.web.search.springboot.LangChain4jWebSearchComponentConfiguration",
       "defaultValue": false
+    },
+    {
+      "name": "camel.component.langchain4j-web-search.max-results",
+      "type": "java.lang.Integer",
+      "description": "The number of results that the producer asks the search engine for. With 1 the body is a single result, otherwise a List. An engine can return fewer results and can have its own maximum.",
+      "sourceType": "org.apache.camel.component.langchain4j.web.search.springboot.LangChain4jWebSearchComponentConfiguration",
+      "defaultValue": 1
+    },
+    {
+      "name": "camel.component.langchain4j-web-search.result-type",
+      "type": "org.apache.camel.component.langchain4j.web.search.LangChain4jWebSearchResultType",
+      "description": "What the producer returns for each result: CONTENT its content as a String, or its snippet when the result has no content (as some engines give none), SNIPPET its snippet, or LANGCHAIN4J_WEB_SEARCH_ORGANIC_RESULT the dev.langchain4j.web.search.WebSearchOrganicResult. The body is a single value when the request asks for one result, otherwise a List, and null when there is no result.",
+      "sourceType": "org.apache.camel.component.langchain4j.web.search.springboot.LangChain4jWebSearchComponentConfiguration",
+      "defaultValue": "content"
+    },
+    {
+      "name": "camel.component.langchain4j-web-search.safe-search",
+      "type": "java.lang.Boolean",
+      "description": "Whether the search engine filters explicit content out of the results. If not set, LangChain4j uses true. The Tavily engine ignores it.",
+      "sourceType": "org.apache.camel.component.langchain4j.web.search.springboot.LangChain4jWebSearchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.langchain4j-web-search.start-index",
+      "type": "java.lang.Integer",
+      "description": "The index of the first search result to return, in the numbering that the search engine uses. The Tavily engine ignores it.",
+      "sourceType": "org.apache.camel.component.langchain4j.web.search.springboot.LangChain4jWebSearchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.langchain4j-web-search.start-page",
+      "type": "java.lang.Integer",
+      "description": "The page number of the search results to return. If not set, LangChain4j uses 1. The Tavily engine ignores it.",
+      "sourceType": "org.apache.camel.component.langchain4j.web.search.springboot.LangChain4jWebSearchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.langchain4j-web-search.web-search-engine",
+      "type": "dev.langchain4j.web.search.WebSearchEngine",
+      "description": "The dev.langchain4j.web.search.WebSearchEngine that runs the search, for example a TavilyWebSearchEngine or a GoogleCustomWebSearchEngine of the LangChain4j web search engine modules. It can be set on the endpoint or on the component. If neither sets it, the single instance in the registry is used, and the producer fails to start when there is none. The option is a dev.langchain4j.web.search.WebSearchEngine type.",
+      "sourceType": "org.apache.camel.component.langchain4j.web.search.springboot.LangChain4jWebSearchComponentConfiguration"
+    },
+    {
+      "name": "camel.component.langchain4j-web-search.web-search-request",
+      "type": "dev.langchain4j.web.search.WebSearchRequest",
+      "description": "A dev.langchain4j.web.search.WebSearchRequest that the producer sends as it is. When set, the producer does not read the message body and does not use the other search options, and only a maxResults of 1 in this request gives a single result instead of a List. The option is a dev.langchain4j.web.search.WebSearchRequest type.",
+      "sourceType": "org.apache.camel.component.langchain4j.web.search.springboot.LangChain4jWebSearchComponentConfiguration"
     }
   ],
   "hints": [],

@@ -37,7 +37,6 @@ The starter supports 32 options, which are listed below.
 | camel.component.iggy.compression-algorithm | The compression algorithm of a topic that autoCreateTopic creates. | none | CompressionAlgorithm
 | camel.component.iggy.configuration | Allows to pre-configure the Iggy component with common options that the endpoints will reuse. The option is a org.apache.camel.component.iggy.IggyConfiguration type. |  | IggyConfiguration
 | camel.component.iggy.consumer-group-name | The name of the consumer group that the consumer joins, and creates if it does not exist. Required for the consumer. |  | String
-| camel.component.iggy.consumers-count | The number of threads of the thread pool of the consumer. The consumer runs one polling task, so one thread polls the topic. | 1 | Integer
 | camel.component.iggy.enabled | Whether to enable auto configuration of the iggy component. This is enabled by default. |  | Boolean
 | camel.component.iggy.host | The hostname or IP address of the Iggy server. | localhost | String
 | camel.component.iggy.iggy-header-options | Additional options of a topic that autoCreateTopic creates, as key-value pairs that are sent to the server as strings, for example durability. |  | String>
@@ -45,7 +44,7 @@ The starter supports 32 options, which are listed below.
 | camel.component.iggy.max-topic-size | The maximum size in bytes of a topic that autoCreateTopic creates. With 0 no maximum size is set on the topic. | 0 | Long
 | camel.component.iggy.message-expiry | The time in seconds after which the server deletes the messages of a topic that autoCreateTopic creates. With 0 no expiry is set on the topic. | 0 | Long
 | camel.component.iggy.partition-id | The ID of the partition that the consumer polls. If not set, the server chooses the partition for the member of the consumer group. |  | Long
-| camel.component.iggy.partitioning | How the producer chooses the partition of the messages it sends, as an org.apache.iggy.message.Partitioning: balanced() spreads them over the partitions, partitionId(Long) sends to one partition and messagesKey(String) to the partition of a key. The option is a org.apache.iggy.message.Partitioning type. |  | Partitioning
+| camel.component.iggy.partitioning | How the producer chooses the partition of the messages it sends, as an org.apache.iggy.message.Partitioning or as text: balanced() (the text balanced) spreads them over the partitions, partitionId(Long) (for example the text partitionId:2) sends to one partition and messagesKey(String) (for example the text messagesKey:order-1) to the partition of a key. The option is a org.apache.iggy.message.Partitioning type. |  | Partitioning
 | camel.component.iggy.partitions-count | The number of partitions of a topic that autoCreateTopic creates. | 1 | Long
 | camel.component.iggy.password | The password that the client logs in with to the Iggy server. Required, together with the username option: the client fails to connect without them. |  | String
 | camel.component.iggy.poll-batch-size | The maximum number of messages that the consumer polls in one request. | 10 | Long
@@ -54,10 +53,11 @@ The starter supports 32 options, which are listed below.
 | camel.component.iggy.shutdown-timeout | The time in milliseconds that the consumer waits for its polling thread to finish when it stops, before it interrupts the thread. | 30000 | Integer
 | camel.component.iggy.ssl-context-parameters | SSL configuration using an org.apache.camel.support.jsse.SSLContextParameters instance. This takes precedence over tlsEnabled and tlsCertificatePath when configured. The option is a org.apache.camel.support.jsse.SSLContextParameters type. |  | SSLContextParameters
 | camel.component.iggy.starting-offset | The offset of the first message that the consumer polls when autoCommit is false. 0 is the first message of the partition. | 0 | Long
-| camel.component.iggy.stream-id | The ID of a stream that autoCreateStream looks up: if no stream has this ID, a stream named streamName is created. The producer and the consumer always address the stream by its name. |  | Long
+| camel.component.iggy.stream-id | The ID of a stream that autoCreateStream looks up for the stream of the endpoint: if no stream has this ID, a stream named streamName is created. The stream of a CamelIggyStreamOverride header is looked up and created by its name. The producer and the consumer always address the stream by its name. |  | Long
 | camel.component.iggy.stream-name | The name of the stream that holds the topic. Required. The CamelIggyStreamOverride header replaces it for the producer. |  | String
 | camel.component.iggy.tls-certificate-path | The path to a certificate file in PEM format that the client trusts for the TLS connection to the Iggy server. If not set, the client uses the default trust store of the JVM. |  | String
 | camel.component.iggy.tls-enabled | Whether the client connects to the Iggy server over TLS. | false | Boolean
 | camel.component.iggy.use-global-ssl-context-parameters | Enable usage of global SSL context parameters. | false | Boolean
 | camel.component.iggy.username | The username that the client logs in with to the Iggy server. Required, together with the password option: the client fails to connect without them. |  | String
+| camel.component.iggy.consumers-count | The number of threads of the thread pool of the consumer. The consumer runs one polling task, so one thread polls the topic. Deprecation note: The consumer polls the topic with one task, so a value above 1 only adds idle threads | 1 | Integer
 |===
