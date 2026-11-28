@@ -55,13 +55,13 @@
     {
       "name": "camel.component.ssh.channel-open-timeout",
       "type": "java.lang.Long",
-      "description": "Sets a channel open timeout of Apache MINA SSHD that applies only to SSH agent forwarding, which this component does not use. The timeout option limits how long the component waits for the channel that runs the command.",
+      "description": "The time in milliseconds that the component waits for the channel that runs the command to open. If 0 or less, the timeout option applies.",
       "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
     },
     {
       "name": "camel.component.ssh.channel-type",
       "type": "java.lang.String",
-      "description": "The type of SSH channel that runs the command: exec runs it as a single command, and shell writes it to an interactive shell and reads the output up to the shellPrompt text. Other values are not supported.",
+      "description": "The type of SSH channel that runs the command: exec runs it as a single command, and shell writes it to an interactive shell and reads the output up to the shellPrompt text. The endpoint fails to start with another value.",
       "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration",
       "defaultValue": "exec"
     },
@@ -142,8 +142,9 @@
     {
       "name": "camel.component.ssh.idle-timeout",
       "type": "java.lang.Long",
-      "description": "The time in milliseconds after which Apache MINA SSHD closes a session without traffic. The session is open while a command runs. If 0 or less, the default of Apache MINA SSHD, 10 minutes, applies.",
-      "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration"
+      "description": "The time in milliseconds after which Apache MINA SSHD closes a session without traffic. The session is open while a command runs. The default, 10 minutes, is the default of Apache MINA SSHD. If 0 or less, the session has no idle timeout.",
+      "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration",
+      "defaultValue": 600000
     },
     {
       "name": "camel.component.ssh.kex",
@@ -216,7 +217,7 @@
     {
       "name": "camel.component.ssh.timeout",
       "type": "java.lang.Long",
-      "description": "The time in milliseconds that the component waits for each step of setting up the session: the connection, the authentication and the opening of the channel. It does not limit how long the command runs.",
+      "description": "The time in milliseconds that the component waits for each step of setting up the session: the connection, the authentication and the opening of the channel, unless channelOpenTimeout is set. It does not limit how long the command runs.",
       "sourceType": "org.apache.camel.component.ssh.springboot.SshComponentConfiguration",
       "defaultValue": 30000
     },

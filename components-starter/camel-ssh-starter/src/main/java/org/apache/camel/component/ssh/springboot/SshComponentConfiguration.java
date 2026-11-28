@@ -40,7 +40,8 @@ public class SshComponentConfiguration
     /**
      * The time in milliseconds that the component waits for each step of
      * setting up the session: the connection, the authentication and the
-     * opening of the channel. It does not limit how long the command runs.
+     * opening of the channel, unless channelOpenTimeout is set. It does not
+     * limit how long the command runs.
      */
     private Long timeout = 30000L;
     /**
@@ -91,16 +92,15 @@ public class SshComponentConfiguration
      */
     private Boolean autowiredEnabled = true;
     /**
-     * Sets a channel open timeout of Apache MINA SSHD that applies only to SSH
-     * agent forwarding, which this component does not use. The timeout option
-     * limits how long the component waits for the channel that runs the
-     * command.
+     * The time in milliseconds that the component waits for the channel that
+     * runs the command to open. If 0 or less, the timeout option applies.
      */
     private Long channelOpenTimeout;
     /**
      * The type of SSH channel that runs the command: exec runs it as a single
      * command, and shell writes it to an interactive shell and reads the output
-     * up to the shellPrompt text. Other values are not supported.
+     * up to the shellPrompt text. The endpoint fails to start with another
+     * value.
      */
     private String channelType = "exec";
     /**
@@ -144,10 +144,11 @@ public class SshComponentConfiguration
     private Integer heartbeatReplyMaxWait;
     /**
      * The time in milliseconds after which Apache MINA SSHD closes a session
-     * without traffic. The session is open while a command runs. If 0 or less,
-     * the default of Apache MINA SSHD, 10 minutes, applies.
+     * without traffic. The session is open while a command runs. The default,
+     * 10 minutes, is the default of Apache MINA SSHD. If 0 or less, the session
+     * has no idle timeout.
      */
-    private Long idleTimeout;
+    private Long idleTimeout = 600000L;
     /**
      * The text that the shell prompt ends with, which channelType=shell needs:
      * the endpoint fails to start without it. The component reads the output of
