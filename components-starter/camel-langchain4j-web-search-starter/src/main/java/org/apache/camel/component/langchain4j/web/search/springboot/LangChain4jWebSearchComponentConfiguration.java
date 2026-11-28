@@ -16,6 +16,12 @@
  */
 package org.apache.camel.component.langchain4j.web.search.springboot;
 
+import java.util.Map;
+import dev.langchain4j.web.search.WebSearchEngine;
+import dev.langchain4j.web.search.WebSearchRequest;
+import org.apache.camel.component.langchain4j.web.search.LangChain4jWebSearchComponent;
+import org.apache.camel.component.langchain4j.web.search.LangChain4jWebSearchConfiguration;
+import org.apache.camel.component.langchain4j.web.search.LangChain4jWebSearchResultType;
 import org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -36,6 +42,28 @@ public class LangChain4jWebSearchComponentConfiguration
      */
     private Boolean enabled;
     /**
+     * More parameters for the search engine, as a Map of names to values, such
+     * as the parameters of the search API that no option covers. Which names
+     * are used depends on the engine, and the Tavily engine ignores them.
+     */
+    private Map<String, Object> additionalParams;
+    /**
+     * The configuration that each endpoint starts from. Options set on the
+     * endpoint override it. The option is a
+     * org.apache.camel.component.langchain4j.web.search.LangChain4jWebSearchConfiguration type.
+     */
+    private LangChain4jWebSearchConfiguration configuration;
+    /**
+     * The geographic location of the search results, such as a country code, in
+     * the format that the search engine expects. The Tavily engine ignores it.
+     */
+    private String geoLocation;
+    /**
+     * The language of the search results, in the format that the search engine
+     * expects. The Tavily engine ignores it.
+     */
+    private String language;
+    /**
      * Whether the producer should be started lazy (on the first message). By
      * starting lazy you can use this to allow CamelContext and routes to
      * startup in situations where a producer may otherwise fail during starting
@@ -47,6 +75,45 @@ public class LangChain4jWebSearchComponentConfiguration
      */
     private Boolean lazyStartProducer = false;
     /**
+     * The number of results that the producer asks the search engine for. With
+     * 1 the body is a single result, otherwise a List. An engine can return
+     * fewer results and can have its own maximum.
+     */
+    private Integer maxResults = 1;
+    /**
+     * What the producer returns for each result: CONTENT its content as a
+     * String, or its snippet when the result has no content (as some engines
+     * give none), SNIPPET its snippet, or LANGCHAIN4J_WEB_SEARCH_ORGANIC_RESULT
+     * the dev.langchain4j.web.search.WebSearchOrganicResult. The body is a
+     * single value when the request asks for one result, otherwise a List, and
+     * null when there is no result.
+     */
+    private LangChain4jWebSearchResultType resultType = LangChain4jWebSearchResultType.CONTENT;
+    /**
+     * Whether the search engine filters explicit content out of the results. If
+     * not set, LangChain4j uses true. The Tavily engine ignores it.
+     */
+    private Boolean safeSearch;
+    /**
+     * The index of the first search result to return, in the numbering that the
+     * search engine uses. The Tavily engine ignores it.
+     */
+    private Integer startIndex;
+    /**
+     * The page number of the search results to return. If not set, LangChain4j
+     * uses 1. The Tavily engine ignores it.
+     */
+    private Integer startPage;
+    /**
+     * The dev.langchain4j.web.search.WebSearchEngine that runs the search, for
+     * example a TavilyWebSearchEngine or a GoogleCustomWebSearchEngine of the
+     * LangChain4j web search engine modules. It can be set on the endpoint or
+     * on the component. If neither sets it, the single instance in the registry
+     * is used, and the producer fails to start when there is none. The option
+     * is a dev.langchain4j.web.search.WebSearchEngine type.
+     */
+    private WebSearchEngine webSearchEngine;
+    /**
      * Whether autowiring is enabled. This is used for automatic autowiring
      * options (the option must be marked as autowired) by looking up in the
      * registry to find if there is a single instance of matching type, which
@@ -55,6 +122,46 @@ public class LangChain4jWebSearchComponentConfiguration
      * etc.
      */
     private Boolean autowiredEnabled = true;
+    /**
+     * A dev.langchain4j.web.search.WebSearchRequest that the producer sends as
+     * it is. When set, the producer does not read the message body and does not
+     * use the other search options, and only a maxResults of 1 in this request
+     * gives a single result instead of a List. The option is a
+     * dev.langchain4j.web.search.WebSearchRequest type.
+     */
+    private WebSearchRequest webSearchRequest;
+
+    public Map<String, Object> getAdditionalParams() {
+        return additionalParams;
+    }
+
+    public void setAdditionalParams(Map<String, Object> additionalParams) {
+        this.additionalParams = additionalParams;
+    }
+
+    public LangChain4jWebSearchConfiguration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(LangChain4jWebSearchConfiguration configuration) {
+        this.configuration = configuration;
+    }
+
+    public String getGeoLocation() {
+        return geoLocation;
+    }
+
+    public void setGeoLocation(String geoLocation) {
+        this.geoLocation = geoLocation;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 
     public Boolean getLazyStartProducer() {
         return lazyStartProducer;
@@ -64,11 +171,67 @@ public class LangChain4jWebSearchComponentConfiguration
         this.lazyStartProducer = lazyStartProducer;
     }
 
+    public Integer getMaxResults() {
+        return maxResults;
+    }
+
+    public void setMaxResults(Integer maxResults) {
+        this.maxResults = maxResults;
+    }
+
+    public LangChain4jWebSearchResultType getResultType() {
+        return resultType;
+    }
+
+    public void setResultType(LangChain4jWebSearchResultType resultType) {
+        this.resultType = resultType;
+    }
+
+    public Boolean getSafeSearch() {
+        return safeSearch;
+    }
+
+    public void setSafeSearch(Boolean safeSearch) {
+        this.safeSearch = safeSearch;
+    }
+
+    public Integer getStartIndex() {
+        return startIndex;
+    }
+
+    public void setStartIndex(Integer startIndex) {
+        this.startIndex = startIndex;
+    }
+
+    public Integer getStartPage() {
+        return startPage;
+    }
+
+    public void setStartPage(Integer startPage) {
+        this.startPage = startPage;
+    }
+
+    public WebSearchEngine getWebSearchEngine() {
+        return webSearchEngine;
+    }
+
+    public void setWebSearchEngine(WebSearchEngine webSearchEngine) {
+        this.webSearchEngine = webSearchEngine;
+    }
+
     public Boolean getAutowiredEnabled() {
         return autowiredEnabled;
     }
 
     public void setAutowiredEnabled(Boolean autowiredEnabled) {
         this.autowiredEnabled = autowiredEnabled;
+    }
+
+    public WebSearchRequest getWebSearchRequest() {
+        return webSearchRequest;
+    }
+
+    public void setWebSearchRequest(WebSearchRequest webSearchRequest) {
+        this.webSearchRequest = webSearchRequest;
     }
 }

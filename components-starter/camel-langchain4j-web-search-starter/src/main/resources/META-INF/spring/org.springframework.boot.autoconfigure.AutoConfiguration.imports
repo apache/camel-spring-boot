@@ -16,3 +16,4 @@
 ## ---------------------------------------------------------------------------
 
 org.apache.camel.component.langchain4j.web.search.springboot.LangChain4jWebSearchComponentAutoConfiguration
+org.apache.camel.component.langchain4j.web.search.springboot.LangChain4jWebSearchComponentConverter

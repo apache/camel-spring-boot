@@ -45,15 +45,6 @@ public class WatsonSpeechToTextComponentConfiguration
      */
     private WatsonSpeechToTextConfiguration configuration;
     /**
-     * The URL of the Speech to Text service instance, for example
-     * https://api.eu-de.speech-to-text.watson.cloud.ibm.com. If not set, the
-     * IBM Watson SDK uses
-     * https://api.us-south.speech-to-text.watson.cloud.ibm.com, unless its
-     * external configuration, such as the SPEECH_TO_TEXT_URL environment
-     * variable, gives a URL.
-     */
-    private String serviceUrl;
-    /**
      * The format (MIME type) of the audio for recognize, for example audio/wav,
      * audio/flac, audio/mp3, audio/ogg or audio/webm. audio/l16, audio/alaw and
      * audio/mulaw also need the sampling rate, as in audio/l16;rate=16000, and
@@ -87,6 +78,15 @@ public class WatsonSpeechToTextComponentConfiguration
      * fails if neither is set.
      */
     private WatsonSpeechToTextOperations operation;
+    /**
+     * The URL of the Speech to Text service instance, for example
+     * https://api.eu-de.speech-to-text.watson.cloud.ibm.com. If not set, the
+     * IBM Watson SDK uses
+     * https://api.us-south.speech-to-text.watson.cloud.ibm.com, unless its
+     * external configuration, such as the SPEECH_TO_TEXT_URL environment
+     * variable, gives a URL.
+     */
+    private String serviceUrl;
     /**
      * Whether recognize returns labels that identify which speaker spoke which
      * words. The service then also returns the timestamps of the words,
@@ -139,14 +139,6 @@ public class WatsonSpeechToTextComponentConfiguration
         this.configuration = configuration;
     }
 
-    public String getServiceUrl() {
-        return serviceUrl;
-    }
-
-    public void setServiceUrl(String serviceUrl) {
-        this.serviceUrl = serviceUrl;
-    }
-
     public String getContentType() {
         return contentType;
     }
@@ -177,6 +169,14 @@ public class WatsonSpeechToTextComponentConfiguration
 
     public void setOperation(WatsonSpeechToTextOperations operation) {
         this.operation = operation;
+    }
+
+    public String getServiceUrl() {
+        return serviceUrl;
+    }
+
+    public void setServiceUrl(String serviceUrl) {
+        this.serviceUrl = serviceUrl;
     }
 
     public Boolean getSpeakerLabels() {
